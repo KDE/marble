@@ -157,7 +157,7 @@ void BookmarkManagerDialogPrivate::addNewFolder()
 
 void BookmarkManagerDialogPrivate::renameFolder()
 {
-    GeoDataFolder *folder = geodata_cast<GeoDataFolder>(selectedFolder());
+    auto folder = geodata_cast<GeoDataFolder>(selectedFolder());
     if (folder) {
         QPointer<NewBookmarkFolderDialog> dialog = new NewBookmarkFolderDialog(m_parent);
         dialog->setFolderName(folder->name());
@@ -172,7 +172,7 @@ void BookmarkManagerDialogPrivate::renameFolder()
 
 void BookmarkManagerDialogPrivate::deleteFolder()
 {
-    GeoDataFolder *folder = geodata_cast<GeoDataFolder>(selectedFolder());
+    auto folder = geodata_cast<GeoDataFolder>(selectedFolder());
     if (folder) {
         if (folder->size() > 0) {
             QString const text =
@@ -197,9 +197,9 @@ void BookmarkManagerDialogPrivate::editBookmark()
     if (selection.size() == 1) {
         QModelIndex index = m_branchFilterModel.mapToSource(selection.first());
         Q_ASSERT(index.isValid());
-        GeoDataObject *object = qvariant_cast<GeoDataObject *>(index.data(MarblePlacemarkModel::ObjectPointerRole));
+        auto object = qvariant_cast<GeoDataObject *>(index.data(MarblePlacemarkModel::ObjectPointerRole));
         Q_ASSERT(object);
-        GeoDataPlacemark *bookmark = geodata_cast<GeoDataPlacemark>(object);
+        auto bookmark = geodata_cast<GeoDataPlacemark>(object);
         // do not try to edit folders
         if (!bookmark) {
             return;
@@ -209,9 +209,9 @@ void BookmarkManagerDialogPrivate::editBookmark()
         Q_ASSERT(treeIndex.isValid());
         QModelIndex folderIndex = treeIndex.parent();
         Q_ASSERT(folderIndex.isValid());
-        GeoDataObject *folderObject = qvariant_cast<GeoDataObject *>(folderIndex.data(MarblePlacemarkModel::ObjectPointerRole));
+        auto folderObject = qvariant_cast<GeoDataObject *>(folderIndex.data(MarblePlacemarkModel::ObjectPointerRole));
         Q_ASSERT(folderObject);
-        GeoDataFolder *folder = geodata_cast<GeoDataFolder>(folderObject);
+        auto folder = geodata_cast<GeoDataFolder>(folderObject);
         Q_ASSERT(folder);
 
         QPointer<EditBookmarkDialog> dialog = new EditBookmarkDialog(m_manager, m_parent);
@@ -234,7 +234,7 @@ void BookmarkManagerDialogPrivate::editBookmark()
                 bookmark->lookAt()->setCoordinates(dialog->coordinates());
                 bookmark->lookAt()->setRange(dialog->range());
             } else if (dialog->range()) {
-                GeoDataLookAt *lookat = new GeoDataLookAt;
+                auto lookat = new GeoDataLookAt;
                 lookat->setCoordinates(dialog->coordinates());
                 lookat->setRange(dialog->range());
                 bookmark->setAbstractView(lookat);
@@ -260,12 +260,12 @@ void BookmarkManagerDialogPrivate::deleteBookmark()
     }
 
     const QModelIndex bookmarkIndex = m_branchFilterModel.mapToSource(selection.first());
-    GeoDataFolder *folder = geodata_cast<GeoDataFolder>(selectedFolder());
+    auto folder = geodata_cast<GeoDataFolder>(selectedFolder());
     if (!folder) {
         return;
     }
 
-    GeoDataPlacemark *bookmark = geodata_cast<GeoDataPlacemark>(folder->child(bookmarkIndex.row()));
+    auto bookmark = geodata_cast<GeoDataPlacemark>(folder->child(bookmarkIndex.row()));
     if (!bookmark) {
         return;
     }
@@ -320,9 +320,9 @@ QModelIndex BookmarkManagerDialogPrivate::folderTreeIndex(const QModelIndex &ind
 GeoDataContainer *BookmarkManagerDialogPrivate::selectedFolder()
 {
     if (m_selectedFolder.isValid()) {
-        GeoDataObject *object = qvariant_cast<GeoDataObject *>(m_selectedFolder.data(MarblePlacemarkModel::ObjectPointerRole));
+        auto object = qvariant_cast<GeoDataObject *>(m_selectedFolder.data(MarblePlacemarkModel::ObjectPointerRole));
         Q_ASSERT(object);
-        GeoDataContainer *container = dynamic_cast<GeoDataContainer *>(object);
+        auto container = dynamic_cast<GeoDataContainer *>(object);
         Q_ASSERT(container);
         return container;
     } else {

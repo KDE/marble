@@ -73,7 +73,7 @@ void WikipediaItem::addDownloadedFile(const QString &url, const QString &type)
 
 bool WikipediaItem::operator<(const AbstractDataPluginItem *other) const
 {
-    WikipediaItem const *otherItem = dynamic_cast<WikipediaItem const *>(other);
+    auto const *otherItem = dynamic_cast<WikipediaItem const *>(other);
     return otherItem ? m_rank > otherItem->m_rank : id() < other->id();
 }
 

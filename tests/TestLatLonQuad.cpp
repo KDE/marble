@@ -42,7 +42,7 @@ void TestLatLonQuad::simpleParseTest()
 
     GeoDataDocument *dataDocument = parseKml(centerContent);
     QCOMPARE(dataDocument->size(), 1);
-    GeoDataGroundOverlay *overlay = dynamic_cast<GeoDataGroundOverlay *>(dataDocument->child(0));
+    auto overlay = dynamic_cast<GeoDataGroundOverlay *>(dataDocument->child(0));
     QVERIFY(overlay != nullptr);
 
     QVERIFY(overlay->latLonBox().isEmpty());

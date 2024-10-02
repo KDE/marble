@@ -64,19 +64,7 @@ public:
         // nothing to do
     }
 
-    GeoDataFeatureExtendedData &operator=(const GeoDataFeatureExtendedData &other)
-    {
-        m_snippet = other.m_snippet;
-        m_description = other.m_description;
-        m_descriptionCDATA = other.m_descriptionCDATA;
-        m_address = other.m_address;
-        m_phoneNumber = other.m_phoneNumber;
-        m_abstractView = other.m_abstractView;
-        m_timeSpan = other.m_timeSpan;
-        m_timeStamp = other.m_timeStamp;
-        m_region = other.m_region;
-        return *this;
-    }
+    GeoDataFeatureExtendedData &operator=(const GeoDataFeatureExtendedData &other) = default;
 
     bool operator==(const GeoDataFeatureExtendedData &other) const
     {

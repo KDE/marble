@@ -7,8 +7,5 @@
 namespace Marble
 {
 
-Blending::~Blending()
-{
-}
-
+Blending::~Blending() = default;
 }

@@ -166,7 +166,7 @@ int MonavRunnerPrivate::retrieveRoute(const Marble::RouteRequest *route,
 
         RoutingInstructions directions = InstructionTransformation::process(waypoints);
         for (int i = 0; i < directions.size(); ++i) {
-            GeoDataPlacemark *placemark = new GeoDataPlacemark(directions[i].instructionText());
+            auto placemark = new GeoDataPlacemark(directions[i].instructionText());
             GeoDataExtendedData extendedData;
             GeoDataData turnType;
             turnType.setName(QStringLiteral("turnType"));
@@ -178,7 +178,7 @@ int MonavRunnerPrivate::retrieveRoute(const Marble::RouteRequest *route,
             extendedData.addValue(roadName);
             placemark->setExtendedData(extendedData);
             Q_ASSERT(!directions[i].points().isEmpty());
-            GeoDataLineString *geometry = new GeoDataLineString;
+            auto geometry = new GeoDataLineString;
             QList<RoutingWaypoint> items = directions[i].points();
             for (int j = 0; j < items.size(); ++j) {
                 RoutingPoint point = items[j].point();
@@ -203,8 +203,8 @@ GeoDataDocument *MonavRunnerPrivate::createDocument(Marble::GeoDataLineString *g
         return nullptr;
     }
 
-    GeoDataDocument *result = new GeoDataDocument;
-    GeoDataPlacemark *routePlacemark = new GeoDataPlacemark;
+    auto result = new GeoDataDocument;
+    auto routePlacemark = new GeoDataPlacemark;
     routePlacemark->setName(QStringLiteral("Route"));
     routePlacemark->setGeometry(geometry);
     routePlacemark->setExtendedData(data);
@@ -234,7 +234,7 @@ void MonavRunner::retrieveRoute(const RouteRequest *route)
 {
     QList<GeoDataPlacemark *> instructions;
     QTime time;
-    GeoDataLineString *waypoints = new GeoDataLineString();
+    auto waypoints = new GeoDataLineString();
     int duration = d->retrieveRoute(route, &instructions, waypoints);
     time = time.addSecs(duration);
     qreal length = waypoints->length(EARTH_RADIUS);

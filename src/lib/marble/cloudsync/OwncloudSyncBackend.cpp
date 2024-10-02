@@ -129,19 +129,19 @@ void OwncloudSyncBackend::uploadRoute(const QString &timestamp)
         return;
     }
 
-    GeoDataDocument *root = dynamic_cast<GeoDataDocument *>(parser.releaseDocument());
+    auto root = dynamic_cast<GeoDataDocument *>(parser.releaseDocument());
     if (!root || root->size() < 2) {
         mDebug() << "[OwncloudSyncBackend] Root document is broken";
         return;
     }
 
-    GeoDataDocument *doc = geodata_cast<GeoDataDocument>(root->child(1));
+    auto doc = geodata_cast<GeoDataDocument>(root->child(1));
     if (!doc || doc->size() < 1) {
         mDebug() << "[OwncloudSyncBackend] Tracking document is broken";
         return;
     }
 
-    GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(doc->child(0));
+    auto placemark = geodata_cast<GeoDataPlacemark>(doc->child(0));
     if (!placemark) {
         mDebug() << "[OwncloudSyncBackend] Placemark is broken";
         return;
@@ -262,7 +262,7 @@ QString OwncloudSyncBackend::routeName(const QString &timestamp) const
 
     QString routeName;
     GeoDocument *geoDoc = parser.releaseDocument();
-    GeoDataDocument *container = dynamic_cast<GeoDataDocument *>(geoDoc);
+    auto container = dynamic_cast<GeoDataDocument *>(geoDoc);
     if (container && container->size() > 0) {
         GeoDataFolder *folder = container->folderList().at(0);
         for (GeoDataPlacemark *placemark : folder->placemarkList()) {
@@ -313,10 +313,10 @@ void OwncloudSyncBackend::checkAuthReply()
         } else {
             d->m_cloudSyncManager->setStatus(tr("The server is not an ownCloud server"), CloudSyncManager::Error);
         }
-    } else if (result == QLatin1StringView("{\"message\":\"Current user is not logged in\"}") && statusCode == 401) {
+    } else if (result == QLatin1StringView(R"({"message":"Current user is not logged in"})") && statusCode == 401) {
         // credentials were incorrect
         d->m_cloudSyncManager->setStatus(tr("Username or password are incorrect"), CloudSyncManager::Error);
-    } else if (result.contains("\"status\":\"success\"") && statusCode == 200) {
+    } else if (result.contains(R"("status":"success")") && statusCode == 200) {
         // credentials were correct
         d->m_cloudSyncManager->setStatus(tr("Login successful"), CloudSyncManager::Success);
     }

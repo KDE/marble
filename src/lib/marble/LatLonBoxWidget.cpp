@@ -43,11 +43,11 @@ LatLonBoxWidget::~LatLonBoxWidget()
 
 GeoDataLatLonBox LatLonBoxWidget::latLonBox() const
 {
-    return GeoDataLatLonBox(d->m_ui.northSpinBox->value(),
-                            d->m_ui.southSpinBox->value(),
-                            d->m_ui.eastSpinBox->value(),
-                            d->m_ui.westSpinBox->value(),
-                            GeoDataCoordinates::Degree);
+    return {d->m_ui.northSpinBox->value(),
+            d->m_ui.southSpinBox->value(),
+            d->m_ui.eastSpinBox->value(),
+            d->m_ui.westSpinBox->value(),
+            GeoDataCoordinates::Degree};
 }
 
 void LatLonBoxWidget::setLatLonBox(GeoDataLatLonBox const &latLonBox)

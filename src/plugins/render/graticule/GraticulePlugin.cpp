@@ -157,9 +157,9 @@ void GraticulePlugin::setSettings(const QHash<QString, QVariant> &settings)
 {
     RenderPlugin::setSettings(settings);
 
-    const QColor gridColor = settings.value(QStringLiteral("gridColor"), QColor(Qt::white)).value<QColor>();
-    const QColor tropicsColor = settings.value(QStringLiteral("tropicsColor"), QColor(Qt::yellow)).value<QColor>();
-    const QColor equatorColor = settings.value(QStringLiteral("equatorColor"), QColor(Qt::yellow)).value<QColor>();
+    const auto gridColor = settings.value(QStringLiteral("gridColor"), QColor(Qt::white)).value<QColor>();
+    const auto tropicsColor = settings.value(QStringLiteral("tropicsColor"), QColor(Qt::yellow)).value<QColor>();
+    const auto equatorColor = settings.value(QStringLiteral("equatorColor"), QColor(Qt::yellow)).value<QColor>();
     bool primaryLabels = settings.value(QStringLiteral("primaryLabels"), true).toBool();
     bool secondaryLabels = settings.value(QStringLiteral("secondaryLabels"), true).toBool();
 

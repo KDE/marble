@@ -71,7 +71,7 @@ AutoNavigation::Private::Private(MarbleModel *model, const ViewportParams *viewp
     , m_viewport(viewport)
     , m_tracking(model->positionTracking())
     , m_recenterMode(AutoNavigation::DontRecenter)
-    , m_adjustZoom(0)
+    , m_adjustZoom(false)
     , m_selfInteraction(false)
 {
     m_lastWidgetInteraction.setInterval(10 * 1000);

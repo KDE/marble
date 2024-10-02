@@ -20,7 +20,7 @@ GeoNode *KmlCreateTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_Create)));
 
-    GeoDataCreate *create = new GeoDataCreate;
+    auto create = new GeoDataCreate;
     KmlObjectTagHandler::parseIdentifiers(parser, create);
     GeoStackItem parentItem = parser.parentElement();
 

@@ -17,9 +17,7 @@ AbstractWeatherService::AbstractWeatherService(const MarbleModel *model, QObject
     Q_ASSERT(m_marbleModel != nullptr);
 }
 
-AbstractWeatherService::~AbstractWeatherService()
-{
-}
+AbstractWeatherService::~AbstractWeatherService() = default;
 
 void AbstractWeatherService::setMarbleWidget(MarbleWidget *widget)
 {

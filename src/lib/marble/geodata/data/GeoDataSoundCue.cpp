@@ -24,9 +24,7 @@ bool GeoDataSoundCue::operator!=(const GeoDataSoundCue &other) const
     return !this->operator==(other);
 }
 
-GeoDataSoundCue::~GeoDataSoundCue()
-{
-}
+GeoDataSoundCue::~GeoDataSoundCue() = default;
 
 const char *GeoDataSoundCue::nodeType() const
 {

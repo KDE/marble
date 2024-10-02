@@ -178,7 +178,7 @@ void RoutingInputWidgetPrivate::adjustText()
 
 void RoutingInputWidgetPrivate::createMenu(RoutingInputWidget *parent)
 {
-    QMenu *result = new QMenu(parent);
+    auto result = new QMenu(parent);
 
     m_centerAction = result->addAction(QIcon(m_route->pixmap(m_index)), QObject::tr("&Center Map here"), parent, SLOT(requestActivity()));
     result->addSeparator();
@@ -198,7 +198,7 @@ void RoutingInputWidgetPrivate::createMenu(RoutingInputWidget *parent)
 
 QMenu *RoutingInputWidgetPrivate::createBookmarkMenu(RoutingInputWidget *parent)
 {
-    QMenu *result = new QMenu(parent);
+    auto result = new QMenu(parent);
     result->addAction(QIcon(QStringLiteral(":/icons/go-home.png")), QObject::tr("&Home"), parent, SLOT(setHomePosition()));
 
     QList<GeoDataFolder *> folders = m_marbleModel->bookmarkManager()->folders();
@@ -225,7 +225,7 @@ void RoutingInputWidgetPrivate::createBookmarkActions(QMenu *menu, GeoDataFolder
     QList<GeoDataPlacemark *>::const_iterator end = bookmarks.constEnd();
 
     for (; i != end; ++i) {
-        QAction *bookmarkAction = new QAction((*i)->name(), parent);
+        auto bookmarkAction = new QAction((*i)->name(), parent);
         bookmarkAction->setData(QVariant::fromValue((*i)->coordinate()));
         menu->addAction(bookmarkAction);
         QObject::connect(menu, SIGNAL(triggered(QAction *)), parent, SLOT(setBookmarkPosition(QAction *)));
@@ -252,7 +252,7 @@ RoutingInputWidget::RoutingInputWidget(MarbleModel *model, int index, QWidget *p
     : QWidget(parent)
     , d(new RoutingInputWidgetPrivate(model, index, this))
 {
-    QHBoxLayout *layout = new QHBoxLayout(this);
+    auto layout = new QHBoxLayout(this);
     layout->setSizeConstraint(QLayout::SetMinimumSize);
     layout->setSpacing(0);
     layout->setContentsMargins({});
@@ -338,7 +338,7 @@ GeoDataCoordinates RoutingInputWidget::targetPosition() const
     if (d->m_index < d->m_route->size()) {
         return d->m_route->at(d->m_index);
     } else {
-        return GeoDataCoordinates();
+        return {};
     }
 }
 

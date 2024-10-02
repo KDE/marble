@@ -111,7 +111,7 @@ QString RouteSyncManager::saveDisplayedToCache() const
 {
     if (!d->m_routingManager) {
         qWarning() << "RoutingManager instance not set in RouteSyncManager. Cannot save current route.";
-        return QString();
+        return {};
     }
 
     d->m_cacheDir.mkpath(d->m_cacheDir.absolutePath());
@@ -146,7 +146,7 @@ QList<RouteItem> RouteSyncManager::cachedRouteList() const
 
         QString routeName;
         GeoDocument *geoDoc = parser.releaseDocument();
-        GeoDataDocument *container = dynamic_cast<GeoDataDocument *>(geoDoc);
+        auto container = dynamic_cast<GeoDataDocument *>(geoDoc);
         if (container && container->size() > 0) {
             GeoDataFolder *folder = container->folderList().at(0);
             for (GeoDataPlacemark *placemark : folder->placemarkList()) {

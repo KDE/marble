@@ -65,7 +65,7 @@ void OsmRelationManagerWidget::addRelation(QAction *relationAction)
             return;
         }
 
-        QTreeWidgetItem *newRelationItem = new QTreeWidgetItem();
+        auto newRelationItem = new QTreeWidgetItem();
         newRelationItem->setText(Column::Name, relationData.tagValue(QStringLiteral("name")));
         newRelationItem->setText(Column::Type, relationData.tagValue(QStringLiteral("type")));
         newRelationItem->setData(Column::Name, Qt::UserRole, relationData.id());
@@ -80,7 +80,7 @@ void OsmRelationManagerWidget::addRelation(QAction *relationAction)
     } else {
         qint64 id = relationAction->data().toLongLong();
         OsmPlacemarkData relationData = d->m_allRelations->value(id);
-        QTreeWidgetItem *newRelationItem = new QTreeWidgetItem();
+        auto newRelationItem = new QTreeWidgetItem();
         newRelationItem->setText(Column::Name, relationData.tagValue(QStringLiteral("name")));
         newRelationItem->setText(Column::Type, relationData.tagValue(QStringLiteral("type")));
         newRelationItem->setData(Column::Name, Qt::UserRole, relationData.id());

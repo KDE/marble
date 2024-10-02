@@ -22,7 +22,7 @@ KmlColorStyleTagWriter::KmlColorStyleTagWriter(const QString &elementName)
 
 bool KmlColorStyleTagWriter::write(const Marble::GeoNode *node, GeoWriter &writer) const
 {
-    GeoDataColorStyle const *colorStyle = static_cast<const GeoDataColorStyle *>(node);
+    auto const *colorStyle = static_cast<const GeoDataColorStyle *>(node);
 
     if (colorStyle->id().isEmpty() && colorStyle->targetId().isEmpty() && colorStyle->color() == defaultColor()
         && colorStyle->colorMode() == GeoDataColorStyle::Normal && isEmpty(node)) {
@@ -53,7 +53,7 @@ QString KmlColorStyleTagWriter::formatColor(const QColor &color)
 
 QColor KmlColorStyleTagWriter::defaultColor() const
 {
-    return QColor(Qt::white);
+    return {Qt::white};
 }
 
 }

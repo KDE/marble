@@ -28,7 +28,7 @@ bool KmlGroundOverlayWriter::writeMid(const GeoNode *node, GeoWriter &writer) co
 {
     KmlOverlayTagWriter::writeMid(node, writer);
 
-    const GeoDataGroundOverlay *ground_overlay = static_cast<const GeoDataGroundOverlay *>(node);
+    const auto ground_overlay = static_cast<const GeoDataGroundOverlay *>(node);
 
     writer.writeOptionalElement(kml::kmlTag_altitude, QString::number(ground_overlay->altitude()), "0");
     KmlGroundOverlayWriter::writeAltitudeMode(writer, ground_overlay->altitudeMode());

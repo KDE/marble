@@ -250,7 +250,7 @@ bool PositionTracking::saveTrack(const QString &fileName)
         return false;
     }
 
-    GeoDataDocument *document = new GeoDataDocument;
+    auto document = new GeoDataDocument;
     QFileInfo fileInfo(fileName);
     QString name = fileInfo.baseName();
     document->setName(name);
@@ -262,7 +262,7 @@ bool PositionTracking::saveTrack(const QString &fileName)
     for (const GeoDataStyleMap &map : styleMaps) {
         document->addStyleMap(map);
     }
-    GeoDataPlacemark *track = new GeoDataPlacemark(*d->m_currentTrackPlacemark);
+    auto track = new GeoDataPlacemark(*d->m_currentTrackPlacemark);
     track->setName(QLatin1StringView("Track ") + name);
     document->append(track);
 
@@ -295,7 +295,7 @@ void PositionTracking::readSettings()
         return;
     }
 
-    GeoDataDocument *doc = dynamic_cast<GeoDataDocument *>(parser.releaseDocument());
+    auto doc = dynamic_cast<GeoDataDocument *>(parser.releaseDocument());
     file.close();
 
     if (!doc) {
@@ -303,7 +303,7 @@ void PositionTracking::readSettings()
         return;
     }
 
-    GeoDataPlacemark *track = dynamic_cast<GeoDataPlacemark *>(doc->child(0));
+    auto track = dynamic_cast<GeoDataPlacemark *>(doc->child(0));
     if (!track) {
         mDebug() << "tracking document doesn't have a placemark";
         delete doc;

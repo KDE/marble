@@ -47,9 +47,7 @@ StereographicProjection::StereographicProjection(StereographicProjectionPrivate 
     setMaxLat(maxValidLat());
 }
 
-StereographicProjection::~StereographicProjection()
-{
-}
+StereographicProjection::~StereographicProjection() = default;
 
 StereographicProjectionPrivate::StereographicProjectionPrivate(StereographicProjection *parent)
     : AzimuthalProjectionPrivate(parent)

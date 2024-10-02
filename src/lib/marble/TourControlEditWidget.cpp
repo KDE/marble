@@ -25,10 +25,10 @@ TourControlEditWidget::TourControlEditWidget(const QModelIndex &index, QWidget *
     , m_radio_pause(new QRadioButton)
     , m_button(new QToolButton)
 {
-    QHBoxLayout *layout = new QHBoxLayout(this);
+    auto layout = new QHBoxLayout(this);
     layout->setSpacing(5);
 
-    QLabel *iconLabel = new QLabel;
+    auto iconLabel = new QLabel;
     iconLabel->setPixmap(QPixmap(QStringLiteral(":/marble/media-playback-pause.png")));
     layout->addWidget(iconLabel);
 
@@ -71,7 +71,7 @@ void TourControlEditWidget::save()
 
 GeoDataTourControl *TourControlEditWidget::tourControlElement()
 {
-    GeoDataObject *object = qvariant_cast<GeoDataObject *>(m_index.data(MarblePlacemarkModel::ObjectPointerRole));
+    auto object = qvariant_cast<GeoDataObject *>(m_index.data(MarblePlacemarkModel::ObjectPointerRole));
     Q_ASSERT(object);
     auto tourControl = geodata_cast<GeoDataTourControl>(object);
     Q_ASSERT(tourControl);

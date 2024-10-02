@@ -22,7 +22,7 @@ GeoNode *KmlGroundOverlayTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_GroundOverlay)));
 
-    GeoDataGroundOverlay *overlay = new GeoDataGroundOverlay;
+    auto overlay = new GeoDataGroundOverlay;
     KmlObjectTagHandler::parseIdentifiers(parser, overlay);
 
     GeoStackItem parentItem = parser.parentElement();

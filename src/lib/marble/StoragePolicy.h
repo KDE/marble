@@ -22,9 +22,7 @@ class StoragePolicy : public QObject
 public:
     explicit StoragePolicy(QObject *parent = nullptr);
 
-    ~StoragePolicy() override
-    {
-    }
+    ~StoragePolicy() override = default;
 
     virtual bool fileExists(const QString &fileName) const = 0;
 

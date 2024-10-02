@@ -27,7 +27,7 @@ GeoNode *GPXtrkptTagHandler::parse(GeoParser &parser) const
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(gpxTag_trkseg)) {
-        GeoDataTrack *track = parentItem.nodeAs<GeoDataTrack>();
+        auto track = parentItem.nodeAs<GeoDataTrack>();
         GeoDataCoordinates coord;
 
         QXmlStreamAttributes attributes = parser.attributes();

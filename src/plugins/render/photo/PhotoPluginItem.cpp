@@ -48,7 +48,7 @@ PhotoPluginItem::PhotoPluginItem(MarbleWidget *widget, QObject *parent)
     m_image.setBorderBrush(QBrush(QColor(Qt::white)));
     m_image.setBorderWidth(2.0);
     m_image.setMargin(5);
-    MarbleGraphicsGridLayout *layout = new MarbleGraphicsGridLayout(1, 1);
+    auto layout = new MarbleGraphicsGridLayout(1, 1);
     layout->addItem(&m_image, 0, 0);
     setLayout(layout);
 }

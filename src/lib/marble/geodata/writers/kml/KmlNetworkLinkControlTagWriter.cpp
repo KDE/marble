@@ -21,7 +21,7 @@ static GeoTagWriterRegistrar s_writerNetworkLinkControl(GeoTagWriter::QualifiedN
 
 bool KmlNetworkLinkControlTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataNetworkLinkControl *networkLinkControl = static_cast<const GeoDataNetworkLinkControl *>(node);
+    const auto networkLinkControl = static_cast<const GeoDataNetworkLinkControl *>(node);
 
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_NetworkLinkControl));
     writer.writeOptionalElement(kml::kmlTag_minRefreshPeriod, QString::number(networkLinkControl->minRefreshPeriod()), "1");

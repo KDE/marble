@@ -54,9 +54,7 @@ MapScaleFloatItem::MapScaleFloatItem(const MarbleModel *marbleModel)
     connect(m_minimizeAction, SIGNAL(triggered()), this, SLOT(toggleMinimized()));
 }
 
-MapScaleFloatItem::~MapScaleFloatItem()
-{
-}
+MapScaleFloatItem::~MapScaleFloatItem() = default;
 
 QStringList MapScaleFloatItem::backendTypes() const
 {

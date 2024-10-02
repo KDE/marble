@@ -46,7 +46,7 @@ void OsmTagEditorWidgetPrivate::populateCurrentTagsList()
 
         // "name" is a standard OSM tag, don't translate
         itemText << "name" << m_placemark->name();
-        QTreeWidgetItem *nameTag = new QTreeWidgetItem(itemText);
+        auto nameTag = new QTreeWidgetItem(itemText);
         nameTag->setDisabled(true);
         m_currentTagsList->addTopLevelItem(nameTag);
     }
@@ -57,7 +57,7 @@ void OsmTagEditorWidgetPrivate::populateCurrentTagsList()
         // "type" is a standard OSM tag, don't translate
         itemText << "type"
                  << "multipolygon";
-        QTreeWidgetItem *typeTag = new QTreeWidgetItem(itemText);
+        auto typeTag = new QTreeWidgetItem(itemText);
         typeTag->setDisabled(true);
         m_currentTagsList->addTopLevelItem(typeTag);
     }
@@ -74,7 +74,7 @@ void OsmTagEditorWidgetPrivate::populateCurrentTagsList()
     }
 
     // Custom tag adder item
-    QTreeWidgetItem *adderItem = new QTreeWidgetItem();
+    auto adderItem = new QTreeWidgetItem();
     adderItem->setText(0, m_customTagAdderText);
     adderItem->setForeground(0, Qt::gray);
     adderItem->setIcon(0, QIcon(QStringLiteral(":marble/list-add.png")));
@@ -100,7 +100,7 @@ QTreeWidgetItem *OsmTagEditorWidgetPrivate::tagWidgetItem(const OsmTag &tag)
     itemText << tag.first;
     itemText << (tag.second.isEmpty() ? QLatin1Char('<') + QObject::tr("value") + QLatin1Char('>') : tag.second);
 
-    QTreeWidgetItem *tagItem = new QTreeWidgetItem(itemText);
+    auto tagItem = new QTreeWidgetItem(itemText);
 
     return tagItem;
 }

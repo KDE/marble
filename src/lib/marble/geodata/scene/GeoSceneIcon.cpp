@@ -16,9 +16,7 @@ GeoSceneIcon::GeoSceneIcon()
 {
 }
 
-GeoSceneIcon::~GeoSceneIcon()
-{
-}
+GeoSceneIcon::~GeoSceneIcon() = default;
 
 QString GeoSceneIcon::pixmap() const
 {

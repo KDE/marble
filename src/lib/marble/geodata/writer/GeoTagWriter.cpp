@@ -13,13 +13,9 @@
 namespace Marble
 {
 
-GeoTagWriter::GeoTagWriter()
-{
-}
+GeoTagWriter::GeoTagWriter() = default;
 
-GeoTagWriter::~GeoTagWriter()
-{
-}
+GeoTagWriter::~GeoTagWriter() = default;
 
 bool GeoTagWriter::writeElement(const GeoNode *object, GeoWriter &writer)
 {

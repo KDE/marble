@@ -38,7 +38,7 @@ private:
     quint64 m_CacheLimit;
     quint64 m_CurrentCacheSize;
 
-    typedef QPair<QDateTime, quint64> Entry;
+    using Entry = QPair<QDateTime, quint64>;
     QMap<QString, Entry> m_Entries;
 };
 

@@ -128,11 +128,11 @@ MarbleWidgetPopupMenu::Private::Private(MarbleWidget *widget, const MarbleModel 
         int const lastIndex = qMax(1, request->size() - 1);
         m_directionsToHereAction->setIcon(QIcon(request->pixmap(lastIndex, 16)));
     }
-    QAction *addBookmark = new QAction(QIcon(QStringLiteral(":/icons/bookmark-new.png")), tr("Add &Bookmark"), parent);
-    QAction *fullscreenAction = new QAction(tr("&Full Screen Mode"), parent);
+    auto addBookmark = new QAction(QIcon(QStringLiteral(":/icons/bookmark-new.png")), tr("Add &Bookmark"), parent);
+    auto fullscreenAction = new QAction(tr("&Full Screen Mode"), parent);
     fullscreenAction->setCheckable(true);
 
-    QAction *aboutDialogAction = new QAction(QIcon(QStringLiteral(":/icons/marble.png")), tr("&About"), parent);
+    auto aboutDialogAction = new QAction(QIcon(QStringLiteral(":/icons/marble.png")), tr("&About"), parent);
 
     QMenu *infoBoxMenu = createInfoBoxMenu(m_widget);
 
@@ -536,7 +536,7 @@ MarbleWidgetPopupMenu::~MarbleWidgetPopupMenu()
 
 QMenu *MarbleWidgetPopupMenu::Private::createInfoBoxMenu(QWidget *parent)
 {
-    QMenu *menu = new QMenu(tr("&Info Boxes"), parent);
+    auto menu = new QMenu(tr("&Info Boxes"), parent);
     QList<AbstractFloatItem *> floatItemList = m_widget->floatItems();
 
     QList<AbstractFloatItem *>::const_iterator iter = floatItemList.constBegin();
@@ -639,7 +639,7 @@ void MarbleWidgetPopupMenu::resetMenu()
 
 void MarbleWidgetPopupMenu::slotInfoDialog()
 {
-    QAction *action = qobject_cast<QAction *>(sender());
+    auto action = qobject_cast<QAction *>(sender());
     if (action == nullptr) {
         mDebug() << "Warning: slotInfoDialog should be called by a QAction signal";
         return;
@@ -648,8 +648,8 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
     int actionidx = action->data().toInt();
 
     if (actionidx > 0) {
-        const GeoDataPlacemark *placemark = dynamic_cast<const GeoDataPlacemark *>(d->m_featurelist.at(actionidx - 1));
-        const GeoDataPhotoOverlay *overlay = dynamic_cast<const GeoDataPhotoOverlay *>(d->m_featurelist.at(actionidx - 1));
+        const auto placemark = dynamic_cast<const GeoDataPlacemark *>(d->m_featurelist.at(actionidx - 1));
+        const auto overlay = dynamic_cast<const GeoDataPhotoOverlay *>(d->m_featurelist.at(actionidx - 1));
         PopupLayer *popup = d->m_widget->popupLayer();
         bool isSatellite = false;
         bool isCity = false;
@@ -790,7 +790,7 @@ void MarbleWidgetPopupMenu::slotCopyCoordinates()
 
         QString positionString = coordinates.toString();
 
-        QMimeData *const myMimeData = new QMimeData();
+        auto const myMimeData = new QMimeData();
         myMimeData->setText(positionString);
         myMimeData->setData(QLatin1StringView("application/vnd.google-earth.kml+xml"), kmlRepresentation.toUtf8());
         myMimeData->setData(QLatin1StringView("application/gpx+xml"), gpxRepresentation.toUtf8());
@@ -807,7 +807,7 @@ void MarbleWidgetPopupMenu::slotCopyGeo()
         const qreal latitude_degrees = coordinates.latitude(GeoDataCoordinates::Degree);
         const qreal longitude_degrees = coordinates.longitude(GeoDataCoordinates::Degree);
 
-        QMimeData *const myMimeData = new QMimeData();
+        auto const myMimeData = new QMimeData();
         QList<QUrl> urls = {QUrl(QStringLiteral("geo:%1,%2").arg(latitude_degrees, 0, 'f', 10).arg(longitude_degrees, 0, 'f', 10))};
         myMimeData->setUrls(urls);
         QClipboard *const clipboard = QApplication::clipboard();
@@ -866,11 +866,11 @@ void MarbleWidgetPopupMenu::directionsToHere()
 GeoDataCoordinates MarbleWidgetPopupMenu::Private::mouseCoordinates(QAction *dataContainer) const
 {
     if (!dataContainer) {
-        return GeoDataCoordinates();
+        return {};
     }
 
     if (!m_featurelist.isEmpty() && geodata_cast<GeoDataPlacemark>(m_featurelist.first())) {
-        const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(m_featurelist.first());
+        const auto placemark = static_cast<const GeoDataPlacemark *>(m_featurelist.first());
         return placemark->coordinate(m_model->clock()->dateTime());
     } else {
         QPoint p = dataContainer->data().toPoint();
@@ -878,11 +878,11 @@ GeoDataCoordinates MarbleWidgetPopupMenu::Private::mouseCoordinates(QAction *dat
 
         const bool valid = m_widget->geoCoordinates(p.x(), p.y(), lon, lat, GeoDataCoordinates::Radian);
         if (valid) {
-            return GeoDataCoordinates(lon, lat);
+            return {lon, lat};
         }
     }
 
-    return GeoDataCoordinates();
+    return {};
 }
 
 void MarbleWidgetPopupMenu::startReverseGeocoding()

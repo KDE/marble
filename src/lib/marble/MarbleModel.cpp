@@ -270,7 +270,7 @@ void MarbleModel::setMapTheme(GeoSceneDocument *document)
 
             // look for documents
             for (GeoSceneAbstractDataset *dataset : layer->datasets()) {
-                GeoSceneGeodata *data = dynamic_cast<GeoSceneGeodata *>(dataset);
+                auto data = dynamic_cast<GeoSceneGeodata *>(dataset);
                 Q_ASSERT(data);
                 currentDatasets << *data;
             }
@@ -321,7 +321,7 @@ void MarbleModel::setMapTheme(GeoSceneDocument *document)
 
         // look for datasets which are different from currentDatasets
         for (const GeoSceneAbstractDataset *dataset : layer->datasets()) {
-            const GeoSceneGeodata *data = dynamic_cast<const GeoSceneGeodata *>(dataset);
+            const auto data = dynamic_cast<const GeoSceneGeodata *>(dataset);
             Q_ASSERT(data);
             bool skip = false;
             GeoDataDocument *doc = nullptr;
@@ -555,8 +555,8 @@ void MarbleModel::clearPersistentTileCache()
         // the name of the layer that has the same name as the theme ID
         QString themeID = d->m_mapTheme->head()->theme();
 
-        const GeoSceneLayer *layer = static_cast<const GeoSceneLayer *>(d->m_mapTheme->map()->layer(themeID));
-        const GeoSceneTileDataset *texture = static_cast<const GeoSceneTileDataset *>(layer->groundDataset());
+        const auto layer = static_cast<const GeoSceneLayer *>(d->m_mapTheme->map()->layer(themeID));
+        const auto texture = static_cast<const GeoSceneTileDataset *>(layer->groundDataset());
 
         QString sourceDir = texture->sourceDir();
         QString installMap = texture->installMap();
@@ -567,7 +567,7 @@ void MarbleModel::clearPersistentTileCache()
                      << "SourceDir: " << sourceDir << "InstallMap:" << installMap;
             MarbleDirs::debug();
 
-            TileCreator *tileCreator = new TileCreator(sourceDir, installMap, (role == QLatin1StringView("dem")) ? "true" : "false");
+            auto tileCreator = new TileCreator(sourceDir, installMap, (role == QLatin1StringView("dem")) ? "true" : "false");
             tileCreator->setTileFormat(texture->fileFormat().toLower());
 
             QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog(tileCreator, nullptr);
@@ -628,11 +628,11 @@ void MarbleModel::addDownloadPolicies(const GeoSceneDocument *mapTheme)
     // As long as we don't have an Layer Management Class we just lookup
     // the name of the layer that has the same name as the theme ID
     const QString themeId = mapTheme->head()->theme();
-    const GeoSceneLayer *const layer = static_cast<const GeoSceneLayer *>(mapTheme->map()->layer(themeId));
+    auto const *layer = static_cast<const GeoSceneLayer *>(mapTheme->map()->layer(themeId));
     if (!layer)
         return;
 
-    const GeoSceneTileDataset *const texture = static_cast<const GeoSceneTileDataset *>(layer->groundDataset());
+    auto const *texture = static_cast<const GeoSceneTileDataset *>(layer->groundDataset());
     if (!texture)
         return;
 

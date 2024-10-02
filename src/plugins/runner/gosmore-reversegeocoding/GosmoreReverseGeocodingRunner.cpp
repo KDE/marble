@@ -51,7 +51,7 @@ QByteArray GosmoreRunnerPrivate::retrieveWaypoints(const QString &query) const
     gosmore.start("gosmore", QStringList() << m_gosmoreMapFile.absoluteFilePath());
     if (!gosmore.waitForStarted(5000)) {
         mDebug() << "Couldn't start gosmore from the current PATH. Install it to retrieve routing results from gosmore.";
-        return QByteArray();
+        return {};
     }
 
     if (gosmore.waitForFinished(15000)) {
@@ -60,7 +60,7 @@ QByteArray GosmoreRunnerPrivate::retrieveWaypoints(const QString &query) const
         mDebug() << "Couldn't stop gosmore";
     }
 
-    return QByteArray();
+    return {};
 }
 
 GosmoreRunner::GosmoreRunner(QObject *parent)

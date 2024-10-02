@@ -187,7 +187,7 @@ RoutingLayerPrivate::RoutingLayerPrivate(RoutingLayer *parent, MarbleWidget *wid
     m_removeViaPointAction = new QAction(QObject::tr("&Remove this Destination"), q);
     QObject::connect(m_removeViaPointAction, SIGNAL(triggered()), q, SLOT(removeViaPoint()));
     m_contextMenu->addAction(Qt::RightButton, m_removeViaPointAction);
-    QAction *exportAction = new QAction(QObject::tr("&Export Route..."), q);
+    auto exportAction = new QAction(QObject::tr("&Export Route..."), q);
     QObject::connect(exportAction, SIGNAL(triggered()), q, SLOT(exportRoute()));
     m_contextMenu->addAction(Qt::RightButton, exportAction);
     if (MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen) {
@@ -217,9 +217,9 @@ void RoutingLayerPrivate::renderPlacemarks(GeoPainter *painter)
         QModelIndex index = m_placemarkModel->index(i, 0);
         QVariant data = index.data(MarblePlacemarkModel::CoordinateRole);
         if (index.isValid() && !data.isNull()) {
-            GeoDataCoordinates pos = data.value<GeoDataCoordinates>();
+            auto pos = data.value<GeoDataCoordinates>();
 
-            QPixmap pixmap = index.data(Qt::DecorationRole).value<QPixmap>();
+            auto pixmap = index.data(Qt::DecorationRole).value<QPixmap>();
             if (!pixmap.isNull() && m_selectionModel->isSelected(index)) {
                 QIcon selected = QIcon(pixmap);
                 QPixmap result = selected.pixmap(m_pixmapSize, QIcon::Selected, QIcon::On);
@@ -329,7 +329,7 @@ void RoutingLayerPrivate::renderRoute(GeoPainter *painter)
 
         for (int i = 0; i < m_routingModel->rowCount(); ++i) {
             QModelIndex index = m_routingModel->index(i, 0);
-            GeoDataCoordinates pos = index.data(MarblePlacemarkModel::CoordinateRole).value<GeoDataCoordinates>();
+            auto pos = index.data(MarblePlacemarkModel::CoordinateRole).value<GeoDataCoordinates>();
 
             if (m_selectionModel && m_selectionModel->selection().contains(index)) {
                 const RouteSegment &segment = m_routingModel->route().at(i);
@@ -370,7 +370,7 @@ void RoutingLayerPrivate::renderAnnotations(GeoPainter *painter) const
 
         if (m_selectionModel->selection().contains(index)) {
             bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-            GeoDataCoordinates pos = index.data(MarblePlacemarkModel::CoordinateRole).value<GeoDataCoordinates>();
+            auto pos = index.data(MarblePlacemarkModel::CoordinateRole).value<GeoDataCoordinates>();
             painter->setPen(QColor(Qt::black));
             painter->setBrush(QBrush(Oxygen::sunYellow6));
             painter->drawAnnotation(pos, index.data().toString(), QSize(smallScreen ? 240 : 120, 0), 10, 30, 5, 5);
@@ -704,17 +704,17 @@ bool RoutingLayer::eventFilter(QObject *obj, QEvent *event)
     }
 
     if (event->type() == QEvent::MouseButtonPress) {
-        QMouseEvent *e = static_cast<QMouseEvent *>(event);
+        auto e = static_cast<QMouseEvent *>(event);
         return d->handleMouseButtonPress(e);
     }
 
     if (event->type() == QEvent::MouseButtonRelease) {
-        QMouseEvent *e = static_cast<QMouseEvent *>(event);
+        auto e = static_cast<QMouseEvent *>(event);
         return d->handleMouseButtonRelease(e);
     }
 
     if (event->type() == QEvent::MouseMove) {
-        QMouseEvent *e = static_cast<QMouseEvent *>(event);
+        auto e = static_cast<QMouseEvent *>(event);
         return d->handleMouseMove(e);
     }
 

@@ -60,7 +60,7 @@ public:
         m_temperatureLabel.setMinimumSize(QSizeF(0, imageSize.height()));
         m_windSpeedLabel.setMinimumSize(QSizeF(0, imageSize.height()));
 
-        QPushButton *button = new QPushButton();
+        auto button = new QPushButton();
         button->setStyleSheet("border-style: outset;");
         button->setIcon(QIcon(QStringLiteral(":/icons/bookmarks.png")));
         button->setFixedSize(22, 22);
@@ -70,11 +70,11 @@ public:
         m_favoriteButton.setWidget(button);
 
         // Layouting the item
-        MarbleGraphicsGridLayout *topLayout = new MarbleGraphicsGridLayout(1, 1);
+        auto topLayout = new MarbleGraphicsGridLayout(1, 1);
         parent->setLayout(topLayout);
         topLayout->addItem(&m_frameItem, 0, 0);
 
-        MarbleGraphicsGridLayout *gridLayout = new MarbleGraphicsGridLayout(2, 3);
+        auto gridLayout = new MarbleGraphicsGridLayout(2, 3);
         gridLayout->setAlignment(Qt::AlignCenter);
         gridLayout->setSpacing(4);
         m_frameItem.setLayout(gridLayout);
@@ -91,9 +91,7 @@ public:
         updateLabels();
     }
 
-    ~WeatherItemPrivate()
-    {
-    }
+    ~WeatherItemPrivate() = default;
 
     void updateToolTip()
     {
@@ -325,7 +323,7 @@ bool WeatherItem::initialized() const
 
 bool WeatherItem::operator<(const AbstractDataPluginItem *other) const
 {
-    const WeatherItem *weatherItem = qobject_cast<const WeatherItem *>(other);
+    const auto weatherItem = qobject_cast<const WeatherItem *>(other);
     if (weatherItem) {
         return (priority() > weatherItem->priority());
     } else {

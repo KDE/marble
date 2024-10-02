@@ -20,7 +20,7 @@ static GeoTagWriterRegistrar s_writerSection(GeoTagWriter::QualifiedName(GeoScen
 
 bool DgmlSectionTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoSceneSection *section = static_cast<const GeoSceneSection *>(node);
+    const auto section = static_cast<const GeoSceneSection *>(node);
 
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Section));
     writer.writeAttribute("name", section->name());

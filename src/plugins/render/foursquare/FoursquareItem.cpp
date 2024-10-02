@@ -22,9 +22,7 @@ FoursquareItem::FoursquareItem(QObject *parent)
     setSize(QSize(0, 0));
 }
 
-FoursquareItem::~FoursquareItem()
-{
-}
+FoursquareItem::~FoursquareItem() = default;
 
 bool FoursquareItem::initialized() const
 {
@@ -34,7 +32,7 @@ bool FoursquareItem::initialized() const
 
 bool FoursquareItem::operator<(const AbstractDataPluginItem *other) const
 {
-    const FoursquareItem *item = dynamic_cast<const FoursquareItem *>(other);
+    const auto item = dynamic_cast<const FoursquareItem *>(other);
     return item && this->usersCount() > item->usersCount();
 }
 

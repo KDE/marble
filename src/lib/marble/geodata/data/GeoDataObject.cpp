@@ -98,7 +98,7 @@ QString GeoDataObject::resolvePath(const QString &relativePath) const
     QUrl const url(relativePath);
     QFileInfo const fileInfo(url.path());
     if (url.isRelative() && fileInfo.isRelative()) {
-        GeoDataDocument const *document = dynamic_cast<GeoDataDocument const *>(this);
+        auto const *document = dynamic_cast<GeoDataDocument const *>(this);
         if (document) {
             QString const baseUri = document->baseUri();
             QFileInfo const documentRoot = QFileInfo(baseUri.isEmpty() ? document->fileName() : baseUri);

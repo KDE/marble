@@ -30,7 +30,7 @@ public:
 
     GeoDataGeometryPrivate *copy() const override
     {
-        GeoDataPolygonPrivate *copy = new GeoDataPolygonPrivate;
+        auto *copy = new GeoDataPolygonPrivate;
         *copy = *this;
         return copy;
     }

@@ -25,9 +25,7 @@ NotesItem::NotesItem(QObject *parent)
     setCacheMode(ItemCoordinateCache);
 }
 
-NotesItem::~NotesItem()
-{
-}
+NotesItem::~NotesItem() = default;
 
 bool NotesItem::initialized() const
 {

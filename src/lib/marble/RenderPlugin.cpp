@@ -35,9 +35,7 @@ public:
     {
     }
 
-    ~Private()
-    {
-    }
+    ~Private() = default;
 
     // const: RenderPlugins should only read the model, not modify it
     const MarbleModel *const m_marbleModel;

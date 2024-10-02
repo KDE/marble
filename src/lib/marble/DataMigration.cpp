@@ -31,9 +31,7 @@ DataMigration::DataMigration(QObject *parent)
 {
 }
 
-DataMigration::~DataMigration()
-{
-}
+DataMigration::~DataMigration() = default;
 
 void DataMigration::exec()
 {

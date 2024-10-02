@@ -19,7 +19,7 @@ static GeoTagWriterRegistrar s_writerMultiGeometry(GeoTagWriter::QualifiedName(G
 
 bool KmlMultiGeometryTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataMultiGeometry *geometry = static_cast<const GeoDataMultiGeometry *>(node);
+    const auto geometry = static_cast<const GeoDataMultiGeometry *>(node);
 
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_MultiGeometry));
     KmlObjectTagWriter::writeIdentifiers(writer, geometry);

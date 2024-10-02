@@ -19,7 +19,7 @@ static GeoTagWriterRegistrar s_writerListStyle(GeoTagWriter::QualifiedName(GeoDa
 
 bool KmlListStyleTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataListStyle *listStyle = static_cast<const GeoDataListStyle *>(node);
+    const auto listStyle = static_cast<const GeoDataListStyle *>(node);
     bool const isEmpty =
         listStyle->listItemType() == GeoDataListStyle::Check && listStyle->backgroundColor() == QColor(Qt::white) && listStyle->itemIconList().isEmpty();
     if (isEmpty) {

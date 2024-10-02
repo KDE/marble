@@ -18,13 +18,9 @@ namespace Marble
 
 GeoTagHandler::TagHash *GeoTagHandler::s_tagHandlerHash = nullptr;
 
-GeoTagHandler::GeoTagHandler()
-{
-}
+GeoTagHandler::GeoTagHandler() = default;
 
-GeoTagHandler::~GeoTagHandler()
-{
-}
+GeoTagHandler::~GeoTagHandler() = default;
 
 GeoTagHandler::TagHash *GeoTagHandler::tagHandlerHash()
 {

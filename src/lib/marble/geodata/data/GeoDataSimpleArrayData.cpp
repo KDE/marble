@@ -16,9 +16,7 @@ namespace Marble
 class GeoDataSimpleArrayDataPrivate
 {
 public:
-    GeoDataSimpleArrayDataPrivate()
-    {
-    }
+    GeoDataSimpleArrayDataPrivate() = default;
 
     QList<QVariant> m_values;
 };

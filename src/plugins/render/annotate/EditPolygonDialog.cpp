@@ -289,7 +289,7 @@ void EditPolygonDialog::restoreInitial(int result)
         return;
     }
 
-    GeoDataPolygon *polygon = static_cast<GeoDataPolygon *>(d->m_placemark->geometry());
+    auto polygon = static_cast<GeoDataPolygon *>(d->m_placemark->geometry());
     GeoDataLinearRing outerBoundary = polygon->outerBoundary();
 
     if (outerBoundary != d->m_initialOuterBoundary) {

@@ -43,9 +43,7 @@ GeoDataThumbnailer::GeoDataThumbnailer()
     });
 }
 
-GeoDataThumbnailer::~GeoDataThumbnailer()
-{
-}
+GeoDataThumbnailer::~GeoDataThumbnailer() = default;
 
 ThumbnailResult GeoDataThumbnailer::create(const ThumbnailRequest &request)
 {

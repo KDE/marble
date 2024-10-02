@@ -261,7 +261,7 @@ GeoDataPlacemark EditBookmarkDialog::bookmark() const
     bookmark.setDescriptionCDATA(true);
     bookmark.setCoordinate(coordinates());
     if (d->m_range) {
-        GeoDataLookAt *lookat = new GeoDataLookAt;
+        auto lookat = new GeoDataLookAt;
         lookat->setCoordinates(coordinates());
         lookat->setRange(range());
         bookmark.setAbstractView(lookat);

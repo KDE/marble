@@ -50,9 +50,7 @@ LayerManager::Private::Private(LayerManager *parent)
 {
 }
 
-LayerManager::Private::~Private()
-{
-}
+LayerManager::Private::~Private() = default;
 
 void LayerManager::Private::updateVisibility(bool visible, const QString &nameId)
 {
@@ -89,7 +87,7 @@ void LayerManager::addRenderPlugin(RenderPlugin *renderPlugin)
     QObject::connect(renderPlugin, SIGNAL(visibilityChanged(bool, QString)), this, SLOT(updateVisibility(bool, QString)));
 
     // get data plugins
-    AbstractDataPlugin *const dataPlugin = qobject_cast<AbstractDataPlugin *>(renderPlugin);
+    auto const dataPlugin = qobject_cast<AbstractDataPlugin *>(renderPlugin);
     if (dataPlugin) {
         d->m_dataPlugins.append(dataPlugin);
     }
@@ -104,7 +102,7 @@ QList<AbstractDataPluginItem *> LayerManager::whichItemAt(const QPoint &curpos) 
 {
     QList<AbstractDataPluginItem *> itemList;
 
-    for (auto *plugin : d->m_dataPlugins) {
+    for (auto plugin : d->m_dataPlugins) {
         itemList.append(plugin->whichItemAt(curpos));
     }
     return itemList;
@@ -131,7 +129,7 @@ void LayerManager::renderLayers(GeoPainter *painter, ViewportParams *viewport)
         QList<LayerInterface *> layers;
 
         // collect all RenderPlugins of current renderPosition
-        for (auto *renderPlugin : d->m_renderPlugins) {
+        for (auto renderPlugin : d->m_renderPlugins) {
             if (renderPlugin && renderPlugin->renderPosition().contains(renderPosition)) {
                 if (renderPlugin->enabled() && renderPlugin->visible()) {
                     if (!renderPlugin->isInitialized()) {
@@ -144,7 +142,7 @@ void LayerManager::renderLayers(GeoPainter *painter, ViewportParams *viewport)
         }
 
         // collect all internal LayerInterfaces of current renderPosition
-        for (auto *layer : d->m_internalLayers) {
+        for (auto layer : d->m_internalLayers) {
             if (layer && layer->renderPosition().contains(renderPosition)) {
                 layers.push_back(layer);
             }
@@ -158,7 +156,7 @@ void LayerManager::renderLayers(GeoPainter *painter, ViewportParams *viewport)
 
         // render the layers of the current renderPosition
         QElapsedTimer timer;
-        for (auto *layer : layers) {
+        for (auto layer : layers) {
             timer.start();
             layer->render(painter, viewport, renderPosition, nullptr);
             d->m_renderState.addChild(layer->renderState());

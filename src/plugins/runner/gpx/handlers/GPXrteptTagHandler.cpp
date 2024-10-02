@@ -28,8 +28,8 @@ GeoNode *GPXrteptTagHandler::parse(GeoParser &parser) const
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(gpxTag_rte)) {
-        GeoDataPlacemark *placemark = parentItem.nodeAs<GeoDataPlacemark>();
-        GeoDataLineString *linestring = static_cast<GeoDataLineString *>(placemark->geometry());
+        auto placemark = parentItem.nodeAs<GeoDataPlacemark>();
+        auto linestring = static_cast<GeoDataLineString *>(placemark->geometry());
         GeoDataCoordinates coord;
 
         QXmlStreamAttributes attributes = parser.attributes();

@@ -39,9 +39,7 @@ Speedometer::Speedometer(const MarbleModel *marbleModel)
     }
 }
 
-Speedometer::~Speedometer()
-{
-}
+Speedometer::~Speedometer() = default;
 
 QStringList Speedometer::backendTypes() const
 {
@@ -91,12 +89,12 @@ QIcon Speedometer::icon() const
 void Speedometer::initialize()
 {
     if (!m_widgetItem) {
-        QWidget *widget = new QWidget;
+        auto widget = new QWidget;
         m_widget.setupUi(widget);
         m_widgetItem = new WidgetGraphicsItem(this);
         m_widgetItem->setWidget(widget);
 
-        MarbleGraphicsGridLayout *layout = new MarbleGraphicsGridLayout(1, 1);
+        auto layout = new MarbleGraphicsGridLayout(1, 1);
         layout->addItem(m_widgetItem, 0, 0);
         setLayout(layout);
         setPadding(0);

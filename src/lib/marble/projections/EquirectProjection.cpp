@@ -24,9 +24,7 @@ EquirectProjection::EquirectProjection()
     setMaxLat(maxValidLat());
 }
 
-EquirectProjection::~EquirectProjection()
-{
-}
+EquirectProjection::~EquirectProjection() = default;
 
 QString EquirectProjection::name() const
 {
@@ -88,8 +86,8 @@ bool EquirectProjection::screenCoordinates(const GeoDataCoordinates &coordinates
 
     // Convenience variables
     int radius = viewport->radius();
-    qreal width = (qreal)(viewport->width());
-    qreal height = (qreal)(viewport->height());
+    auto width = (qreal)(viewport->width());
+    auto height = (qreal)(viewport->height());
 
     // Let (itX, y) be the first guess for one possible position on screen.
     qreal itX;

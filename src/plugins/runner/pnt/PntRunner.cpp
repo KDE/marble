@@ -28,9 +28,7 @@ PntRunner::PntRunner(QObject *parent)
 {
 }
 
-PntRunner::~PntRunner()
-{
-}
+PntRunner::~PntRunner() = default;
 
 GeoDataDocument *PntRunner::parseFile(const QString &fileName, DocumentRole role, QString &errorString)
 {
@@ -52,7 +50,7 @@ GeoDataDocument *PntRunner::parseFile(const QString &fileName, DocumentRole role
     QDataStream stream(&file); // read the data serialized from the file
     stream.setByteOrder(QDataStream::LittleEndian);
 
-    GeoDataDocument *document = new GeoDataDocument();
+    auto document = new GeoDataDocument();
     document->setDocumentRole(role);
     GeoDataPlacemark *placemark = nullptr;
 
@@ -78,7 +76,7 @@ GeoDataDocument *PntRunner::parseFile(const QString &fileName, DocumentRole role
         }
 
         if (header >= 1000 && !document->isEmpty()) {
-            GeoDataLineString *const polyline = static_cast<GeoDataLineString *>(placemark->geometry());
+            auto const polyline = static_cast<GeoDataLineString *>(placemark->geometry());
             if (polyline->size() == 1) {
                 mDebug() << fileName << "contains single-point polygon at" << count << ". Aborting.";
                 error = true;
@@ -166,7 +164,7 @@ GeoDataDocument *PntRunner::parseFile(const QString &fileName, DocumentRole role
             break;
         }
 
-        GeoDataLineString *polyline = static_cast<GeoDataLineString *>(placemark->geometry());
+        auto polyline = static_cast<GeoDataLineString *>(placemark->geometry());
 
         // Transforming Range of Coordinates to iLat [0,ARCMINUTE] , iLon [0,2 * ARCMINUTE]
         polyline->append(GeoDataCoordinates((qreal)(iLon)*INT2RAD,

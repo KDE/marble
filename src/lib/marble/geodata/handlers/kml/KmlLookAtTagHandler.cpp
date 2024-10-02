@@ -23,15 +23,15 @@ GeoNode *KmlLookAtTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_LookAt)));
 
-    GeoDataLookAt *lookAt = new GeoDataLookAt();
+    auto lookAt = new GeoDataLookAt();
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.is<GeoDataFeature>()) {
-        GeoDataFeature *feature = parentItem.nodeAs<GeoDataFeature>();
+        auto feature = parentItem.nodeAs<GeoDataFeature>();
         feature->setAbstractView(lookAt);
         return lookAt;
     }
     if (parentItem.is<GeoDataFlyTo>()) {
-        GeoDataFlyTo *feature = parentItem.nodeAs<GeoDataFlyTo>();
+        auto feature = parentItem.nodeAs<GeoDataFlyTo>();
         feature->setView(lookAt);
         return lookAt;
     } else {

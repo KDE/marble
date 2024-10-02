@@ -24,7 +24,7 @@ KmlIconStyleTagWriter::KmlIconStyleTagWriter()
 
 bool KmlIconStyleTagWriter::writeMid(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataIconStyle *style = static_cast<const GeoDataIconStyle *>(node);
+    const auto style = static_cast<const GeoDataIconStyle *>(node);
 
     if (style->scale() != 1.0) {
         writer.writeElement(kml::kmlTag_scale, QString::number(style->scale(), 'f'));
@@ -72,7 +72,7 @@ bool KmlIconStyleTagWriter::writeMid(const GeoNode *node, GeoWriter &writer) con
 
 bool KmlIconStyleTagWriter::isEmpty(const GeoNode *node) const
 {
-    const GeoDataIconStyle *style = static_cast<const GeoDataIconStyle *>(node);
+    const auto style = static_cast<const GeoDataIconStyle *>(node);
     GeoDataHotSpot::Units xunits, yunits;
     QPointF const hotSpot = style->hotSpot(xunits, yunits);
     return style->iconPath().isEmpty() && hotSpot.x() == 0.5 && hotSpot.y() == 0.5 && xunits == GeoDataHotSpot::Fraction && yunits == GeoDataHotSpot::Fraction;

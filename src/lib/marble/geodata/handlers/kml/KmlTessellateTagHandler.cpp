@@ -32,19 +32,19 @@ GeoNode *KmltessellateTagHandler::parse(GeoParser &parser) const
     QString content = parser.readElementText().trimmed();
 
     if (parentItem.is<GeoDataLineString>()) {
-        GeoDataLineString *lineString = parentItem.nodeAs<GeoDataLineString>();
+        auto lineString = parentItem.nodeAs<GeoDataLineString>();
 
         const bool tesselate = (content == QLatin1StringView("1"));
         lineString->setTessellate(tesselate);
 
     } else if (parentItem.is<GeoDataLinearRing>()) {
-        GeoDataLinearRing *linearRing = parentItem.nodeAs<GeoDataLinearRing>();
+        auto linearRing = parentItem.nodeAs<GeoDataLinearRing>();
 
         const bool tesselate = (content == QLatin1StringView("1"));
         linearRing->setTessellate(tesselate);
 
     } else if (parentItem.is<GeoDataPolygon>()) {
-        GeoDataPolygon *polygon = parentItem.nodeAs<GeoDataPolygon>();
+        auto polygon = parentItem.nodeAs<GeoDataPolygon>();
 
         const bool tesselate = (content == QLatin1StringView("1"));
         polygon->setTessellate(tesselate);

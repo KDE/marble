@@ -23,11 +23,11 @@ QString MapTheme::license() const
 {
     const GeoSceneDocument *const mapTheme = m_map->model()->mapTheme();
     if (!mapTheme)
-        return QString();
+        return {};
 
     const GeoSceneHead *const head = mapTheme->head();
     if (!head)
-        return QString();
+        return {};
 
     const GeoSceneLicense *license = head->license();
     return license->shortLicense();

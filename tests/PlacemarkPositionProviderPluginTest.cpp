@@ -52,7 +52,7 @@ PlacemarkPositionProviderPluginTest::PlacemarkPositionProviderPluginTest()
     qRegisterMetaType<GeoDataAccuracy>("GeoDataAccuracy");
     qRegisterMetaType<PositionProviderStatus>("PositionProviderStatus");
 
-    GeoDataTrack *track = new GeoDataTrack;
+    auto track = new GeoDataTrack;
     track->setInterpolate(true);
     track->addPoint(m_minTime, GeoDataCoordinates());
     track->addPoint(m_maxTime, GeoDataCoordinates());

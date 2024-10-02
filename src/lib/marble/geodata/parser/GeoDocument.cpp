@@ -10,13 +10,9 @@
 namespace Marble
 {
 
-GeoDocument::GeoDocument()
-{
-}
+GeoDocument::GeoDocument() = default;
 
-GeoDocument::~GeoDocument()
-{
-}
+GeoDocument::~GeoDocument() = default;
 
 bool GeoDocument::isGeoDataDocument() const
 {
@@ -28,12 +24,7 @@ bool GeoDocument::isGeoSceneDocument() const
     return false;
 }
 
-GeoNode::GeoNode()
-{
-}
+GeoNode::GeoNode() = default;
 
-GeoNode::~GeoNode()
-{
-}
-
+GeoNode::~GeoNode() = default;
 }

@@ -7,10 +7,6 @@
 
 using namespace Marble;
 
-AbstractMarbleGraphicsLayout::AbstractMarbleGraphicsLayout()
-{
-}
+AbstractMarbleGraphicsLayout::AbstractMarbleGraphicsLayout() = default;
 
-AbstractMarbleGraphicsLayout::~AbstractMarbleGraphicsLayout()
-{
-}
+AbstractMarbleGraphicsLayout::~AbstractMarbleGraphicsLayout() = default;

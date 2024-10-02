@@ -127,12 +127,12 @@ RoutingManagerPrivate::RoutingManagerPrivate(MarbleModel *model, RoutingManager 
 
 GeoDataFolder *RoutingManagerPrivate::createFolderFromRequest(const RouteRequest &request)
 {
-    GeoDataFolder *result = new GeoDataFolder;
+    auto result = new GeoDataFolder;
 
     result->setName(QStringLiteral("Route Request"));
 
     for (int i = 0; i < request.size(); ++i) {
-        GeoDataPlacemark *placemark = new GeoDataPlacemark(request[i]);
+        auto placemark = new GeoDataPlacemark(request[i]);
         result->append(placemark);
     }
 
@@ -205,9 +205,9 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
     file.close();
     bool loaded = false;
 
-    GeoDataDocument *container = dynamic_cast<GeoDataDocument *>(doc);
+    auto container = dynamic_cast<GeoDataDocument *>(doc);
     if (container && !container->isEmpty()) {
-        GeoDataFolder *viaPoints = dynamic_cast<GeoDataFolder *>(&container->first());
+        auto viaPoints = dynamic_cast<GeoDataFolder *>(&container->first());
         if (viaPoints) {
             loaded = true;
             QList<GeoDataPlacemark *> placemarks = viaPoints->placemarkList();
@@ -230,7 +230,7 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
     }
 
     if (container && container->size() == 2) {
-        GeoDataDocument *route = dynamic_cast<GeoDataDocument *>(&container->last());
+        auto route = dynamic_cast<GeoDataDocument *>(&container->last());
         if (route) {
             loaded = true;
             m_alternativeRoutesModel.clear();
@@ -398,7 +398,7 @@ void RoutingManagerPrivate::setCurrentRoute(const GeoDataDocument *document)
 void RoutingManagerPrivate::importPlacemark(RouteSegment &outline, QList<RouteSegment> &segments, const GeoDataPlacemark *placemark)
 {
     const GeoDataGeometry *geometry = placemark->geometry();
-    const GeoDataLineString *lineString = dynamic_cast<const GeoDataLineString *>(geometry);
+    const auto lineString = dynamic_cast<const GeoDataLineString *>(geometry);
     QStringList blacklist = QStringList() << ""
                                           << "Route"
                                           << "Tessellated";
@@ -513,7 +513,7 @@ void RoutingManager::setGuidanceModeEnabled(bool enabled)
                 + QLatin1Char(' ') + tr("Please use common sense while navigating.") + QLatin1StringView("</p>") + QLatin1StringView("<p>")
                 + tr("The Marble development team wishes you a pleasant and safe journey.") + QLatin1StringView("</p>");
             QPointer<QMessageBox> messageBox = new QMessageBox(QMessageBox::Information, tr("Guidance Mode"), text, QMessageBox::Ok);
-            QCheckBox *showAgain = new QCheckBox(tr("Show again"));
+            auto showAgain = new QCheckBox(tr("Show again"));
             showAgain->setChecked(true);
             showAgain->blockSignals(true); // otherwise it'd close the dialog
             messageBox->addButton(showAgain, QMessageBox::ActionRole);

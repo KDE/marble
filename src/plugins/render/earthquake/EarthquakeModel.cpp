@@ -31,9 +31,7 @@ EarthquakeModel::EarthquakeModel(const MarbleModel *marbleModel, QObject *parent
     // nothing to do
 }
 
-EarthquakeModel::~EarthquakeModel()
-{
-}
+EarthquakeModel::~EarthquakeModel() = default;
 
 void EarthquakeModel::setMinMagnitude(double minMagnitude)
 {
@@ -91,7 +89,7 @@ void EarthquakeModel::parseFile(const QByteArray &file)
                 if (!itemExists(eqid)) {
                     // If it does not exists, create it
                     GeoDataCoordinates coordinates(longitude, latitude, 0.0, GeoDataCoordinates::Degree);
-                    EarthquakeItem *item = new EarthquakeItem(this);
+                    auto item = new EarthquakeItem(this);
                     item->setId(eqid);
                     item->setCoordinate(coordinates);
                     item->setMagnitude(magnitude);

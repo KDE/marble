@@ -171,9 +171,7 @@ BBCParser::BBCParser(QObject *parent)
     m_monthNames["Dec"] = 12;
 }
 
-BBCParser::~BBCParser()
-{
-}
+BBCParser::~BBCParser() = default;
 
 BBCParser *BBCParser::instance()
 {
@@ -449,7 +447,7 @@ void BBCParser::readTitle(WeatherData *data)
             QRegExp regExp;
 
             // Condition
-            regExp.setPattern("(^.*)(:\\s*)([\\w ]+)([\\,\\.]\\s*)");
+            regExp.setPattern(R"((^.*)(:\s*)([\w ]+)([\,\.]\s*))");
             int pos = regExp.indexIn(title);
             if (pos > -1) {
                 QString value = regExp.cap(3);
@@ -462,7 +460,7 @@ void BBCParser::readTitle(WeatherData *data)
                 }
 
                 QString dayString = regExp.cap(1);
-                Qt::DayOfWeek dayOfWeek = (Qt::DayOfWeek)0;
+                auto dayOfWeek = (Qt::DayOfWeek)0;
                 if (dayString.contains(QLatin1StringView("Monday"))) {
                     dayOfWeek = Qt::Monday;
                 } else if (dayString.contains(QLatin1StringView("Tuesday"))) {
@@ -510,7 +508,7 @@ void BBCParser::readPubDate(WeatherData *data)
             QString pubDate = text().toString();
             QRegExp regExp;
 
-            regExp.setPattern("([A-Za-z]+,\\s+)(\\d+)(\\s+)([A-Za-z]+)(\\s+)(\\d{4,4})(\\s+)(\\d+)(:)(\\d+)(:)(\\d+)(\\s+)([+-])(\\d{2,2})(\\d{2,2})");
+            regExp.setPattern(R"(([A-Za-z]+,\s+)(\d+)(\s+)([A-Za-z]+)(\s+)(\d{4,4})(\s+)(\d+)(:)(\d+)(:)(\d+)(\s+)([+-])(\d{2,2})(\d{2,2}))");
             int pos = regExp.indexIn(pubDate);
             if (pos > -1) {
                 QDateTime dateTime;

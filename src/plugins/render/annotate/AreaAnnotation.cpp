@@ -137,7 +137,7 @@ void AreaAnnotation::dealWithItemChange(const SceneGraphicsItem *other)
 
 void AreaAnnotation::move(const GeoDataCoordinates &source, const GeoDataCoordinates &destination)
 {
-    GeoDataPolygon *polygon = static_cast<GeoDataPolygon *>(placemark()->geometry());
+    auto polygon = static_cast<GeoDataPolygon *>(placemark()->geometry());
     GeoDataLinearRing outerRing = polygon->outerBoundary();
     QList<GeoDataLinearRing> innerRings = polygon->innerBoundaries();
     OsmPlacemarkData *osmData = nullptr;
@@ -249,7 +249,7 @@ void AreaAnnotation::deleteAllSelectedNodes()
         return;
     }
 
-    GeoDataPolygon *polygon = static_cast<GeoDataPolygon *>(placemark()->geometry());
+    auto polygon = static_cast<GeoDataPolygon *>(placemark()->geometry());
     GeoDataLinearRing &outerRing = polygon->outerBoundary();
     QList<GeoDataLinearRing> &innerRings = polygon->innerBoundaries();
     OsmPlacemarkData *osmData = nullptr;
@@ -321,7 +321,7 @@ void AreaAnnotation::deleteClickedNode()
         return;
     }
 
-    GeoDataPolygon *polygon = static_cast<GeoDataPolygon *>(placemark()->geometry());
+    auto polygon = static_cast<GeoDataPolygon *>(placemark()->geometry());
     GeoDataLinearRing &outerRing = polygon->outerBoundary();
     QList<GeoDataLinearRing> &innerRings = polygon->innerBoundaries();
     OsmPlacemarkData *osmData = nullptr;
@@ -513,7 +513,7 @@ void AreaAnnotation::dealWithStateChange(SceneGraphicsItem::ActionState previous
         m_hoveredNode = QPair<int, int>(-1, -1);
     } else if (previousState == SceneGraphicsItem::AddingPolygonHole) {
         // Check if a polygon hole was being drawn before changing state.
-        GeoDataPolygon *polygon = static_cast<GeoDataPolygon *>(placemark()->geometry());
+        auto polygon = static_cast<GeoDataPolygon *>(placemark()->geometry());
         QList<GeoDataLinearRing> &innerBounds = polygon->innerBoundaries();
 
         if (innerBounds.size() && innerBounds.last().size() <= 2) {
@@ -564,7 +564,7 @@ void AreaAnnotation::dealWithStateChange(SceneGraphicsItem::ActionState previous
         m_hoveredNode = QPair<int, int>(-1, -1);
     } else if (state() == SceneGraphicsItem::AddingPolygonHole) {
         // Nothing to do so far when entering this state.
-        GeoDataPolygon *polygon = static_cast<GeoDataPolygon *>(placemark()->geometry());
+        auto polygon = static_cast<GeoDataPolygon *>(placemark()->geometry());
         QList<GeoDataLinearRing> &innerBounds = polygon->innerBoundaries();
 
         m_innerNodesList.append(QList<PolylineNode>());
@@ -587,7 +587,7 @@ const char *AreaAnnotation::graphicType() const
 
 bool AreaAnnotation::isValidPolygon() const
 {
-    const GeoDataPolygon *poly = static_cast<const GeoDataPolygon *>(placemark()->geometry());
+    const auto poly = static_cast<const GeoDataPolygon *>(placemark()->geometry());
     const QList<GeoDataLinearRing> &innerRings = poly->innerBoundaries();
 
     for (const GeoDataLinearRing &innerRing : innerRings) {
@@ -603,7 +603,7 @@ bool AreaAnnotation::isValidPolygon() const
 
 void AreaAnnotation::setupRegionsLists(GeoPainter *painter)
 {
-    const GeoDataPolygon *polygon = static_cast<const GeoDataPolygon *>(placemark()->geometry());
+    const auto polygon = static_cast<const GeoDataPolygon *>(placemark()->geometry());
     const GeoDataLinearRing &outerRing = polygon->outerBoundary();
     const QList<GeoDataLinearRing> &innerRings = polygon->innerBoundaries();
 
@@ -643,7 +643,7 @@ void AreaAnnotation::updateRegions(GeoPainter *painter)
         return;
     }
 
-    const GeoDataPolygon *polygon = static_cast<const GeoDataPolygon *>(placemark()->geometry());
+    const auto polygon = static_cast<const GeoDataPolygon *>(placemark()->geometry());
     const GeoDataLinearRing &outerRing = polygon->outerBoundary();
     const QList<GeoDataLinearRing> &innerRings = polygon->innerBoundaries();
 
@@ -710,7 +710,7 @@ void AreaAnnotation::drawNodes(GeoPainter *painter)
     static const int d_mergedDim = 20;
     static const int d_hoveredDim = 20;
 
-    const GeoDataPolygon *polygon = static_cast<const GeoDataPolygon *>(placemark()->geometry());
+    const auto polygon = static_cast<const GeoDataPolygon *>(placemark()->geometry());
     const GeoDataLinearRing &outerRing = polygon->outerBoundary();
     const QList<GeoDataLinearRing> &innerRings = polygon->innerBoundaries();
 
@@ -957,7 +957,7 @@ bool AreaAnnotation::processEditingOnMove(QMouseEvent *mouseEvent)
     const qreal deltaLon = lon - m_movedPointCoords.longitude();
 
     if (m_interactingObj == InteractingNode) {
-        GeoDataPolygon *polygon = static_cast<GeoDataPolygon *>(placemark()->geometry());
+        auto polygon = static_cast<GeoDataPolygon *>(placemark()->geometry());
         GeoDataLinearRing &outerRing = polygon->outerBoundary();
         QList<GeoDataLinearRing> &innerRings = polygon->innerBoundaries();
         OsmPlacemarkData *osmData = nullptr;
@@ -984,7 +984,7 @@ bool AreaAnnotation::processEditingOnMove(QMouseEvent *mouseEvent)
 
         return true;
     } else if (m_interactingObj == InteractingPolygon) {
-        GeoDataPolygon *polygon = static_cast<GeoDataPolygon *>(placemark()->geometry());
+        auto polygon = static_cast<GeoDataPolygon *>(placemark()->geometry());
         GeoDataLinearRing outerRing = polygon->outerBoundary();
         QList<GeoDataLinearRing> innerRings = polygon->innerBoundaries();
         OsmPlacemarkData *osmData = nullptr;
@@ -1076,7 +1076,7 @@ bool AreaAnnotation::processAddingHoleOnPress(QMouseEvent *mouseEvent)
     m_viewport->geoCoordinates(mouseEvent->pos().x(), mouseEvent->pos().y(), lon, lat, GeoDataCoordinates::Radian);
     const GeoDataCoordinates newCoords(lon, lat);
 
-    GeoDataPolygon *polygon = static_cast<GeoDataPolygon *>(placemark()->geometry());
+    auto polygon = static_cast<GeoDataPolygon *>(placemark()->geometry());
     QList<GeoDataLinearRing> &innerBounds = polygon->innerBoundaries();
 
     innerBounds.last().append(newCoords);
@@ -1103,7 +1103,7 @@ bool AreaAnnotation::processMergingOnPress(QMouseEvent *mouseEvent)
         return false;
     }
 
-    GeoDataPolygon *polygon = static_cast<GeoDataPolygon *>(placemark()->geometry());
+    auto polygon = static_cast<GeoDataPolygon *>(placemark()->geometry());
     GeoDataLinearRing initialOuterRing = polygon->outerBoundary();
     OsmPlacemarkData *osmData = nullptr;
     OsmPlacemarkData initialOsmData;
@@ -1272,7 +1272,7 @@ bool AreaAnnotation::processAddingNodesOnPress(QMouseEvent *mouseEvent)
         return false;
     }
 
-    GeoDataPolygon *polygon = static_cast<GeoDataPolygon *>(placemark()->geometry());
+    auto polygon = static_cast<GeoDataPolygon *>(placemark()->geometry());
     GeoDataLinearRing &outerRing = polygon->outerBoundary();
     QList<GeoDataLinearRing> &innerRings = polygon->innerBoundaries();
 
@@ -1360,7 +1360,7 @@ bool AreaAnnotation::processAddingNodesOnMove(QMouseEvent *mouseEvent)
         qreal lon, lat;
         m_viewport->geoCoordinates(mouseEvent->pos().x(), mouseEvent->pos().y(), lon, lat, GeoDataCoordinates::Radian);
         const GeoDataCoordinates newCoords(lon, lat);
-        GeoDataPolygon *polygon = static_cast<GeoDataPolygon *>(placemark()->geometry());
+        auto polygon = static_cast<GeoDataPolygon *>(placemark()->geometry());
 
         if (m_adjustedNode == -1) {
             polygon->outerBoundary().last() = newCoords;

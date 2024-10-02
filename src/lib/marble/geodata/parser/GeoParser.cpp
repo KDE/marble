@@ -112,7 +112,7 @@ GeoStackItem GeoParser::parentElement(unsigned int depth) const
     QStack<GeoStackItem>::const_iterator it = m_nodeStack.constEnd() - 1;
 
     if (it - depth < m_nodeStack.constBegin())
-        return GeoStackItem();
+        return {};
 
     return *(it - depth);
 }

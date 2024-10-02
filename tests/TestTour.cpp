@@ -85,9 +85,9 @@ void TestTour::simpleParseTest()
     QCOMPARE(dataDocument->folderList().size(), 1);
     GeoDataFolder *folder = dataDocument->folderList().at(0);
 
-    GeoDataTour *tour_1 = dynamic_cast<GeoDataTour *>(folder->child(0));
-    GeoDataTour *tour_2 = dynamic_cast<GeoDataTour *>(folder->child(1));
-    GeoDataTour *tour_3 = dynamic_cast<GeoDataTour *>(folder->child(2));
+    auto tour_1 = dynamic_cast<GeoDataTour *>(folder->child(0));
+    auto tour_2 = dynamic_cast<GeoDataTour *>(folder->child(1));
+    auto tour_3 = dynamic_cast<GeoDataTour *>(folder->child(2));
 
     QVERIFY(tour_1 != nullptr);
     QVERIFY(tour_2 != nullptr);
@@ -108,7 +108,7 @@ void TestTour::simpleParseTest()
     GeoDataPlaylist *playlist = tour_2->playlist();
     QVERIFY(playlist != nullptr);
 
-    GeoDataTourControl *control = dynamic_cast<GeoDataTourControl *>(playlist->primitive(0));
+    auto control = dynamic_cast<GeoDataTourControl *>(playlist->primitive(0));
     QVERIFY(control != nullptr);
     QCOMPARE(control->id(), QString("space"));
     QCOMPARE(control->playMode(), GeoDataTourControl::Pause);
@@ -116,7 +116,7 @@ void TestTour::simpleParseTest()
     GeoDataPlaylist *playlist2 = tour_3->playlist();
     QVERIFY(playlist2 != nullptr);
 
-    GeoDataAnimatedUpdate *update = dynamic_cast<GeoDataAnimatedUpdate *>(playlist2->primitive(0));
+    auto update = dynamic_cast<GeoDataAnimatedUpdate *>(playlist2->primitive(0));
     QVERIFY(update != nullptr);
     QCOMPARE(update->duration(), 5.0);
     QCOMPARE(update->update()->targetHref(), QString("Whatever.jpg"));

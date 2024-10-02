@@ -50,8 +50,7 @@ private:
     QList<GeoDataBuilding::NamedEntry> extractNamedEntries() const;
 };
 
-typedef QHash<qint64, OsmWay> OsmWays;
-
+using OsmWays = QHash<qint64, OsmWay>;
 }
 
 #endif

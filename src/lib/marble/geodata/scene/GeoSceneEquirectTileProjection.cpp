@@ -11,13 +11,9 @@
 namespace Marble
 {
 
-GeoSceneEquirectTileProjection::GeoSceneEquirectTileProjection()
-{
-}
+GeoSceneEquirectTileProjection::GeoSceneEquirectTileProjection() = default;
 
-GeoSceneEquirectTileProjection::~GeoSceneEquirectTileProjection()
-{
-}
+GeoSceneEquirectTileProjection::~GeoSceneEquirectTileProjection() = default;
 
 GeoSceneAbstractTileProjection::Type GeoSceneEquirectTileProjection::type() const
 {
@@ -27,7 +23,7 @@ GeoSceneAbstractTileProjection::Type GeoSceneEquirectTileProjection::type() cons
 static inline unsigned int lowerBoundTileIndex(qreal baseTileIndex)
 {
     const qreal floorBaseTileIndex = floor(baseTileIndex);
-    unsigned int tileIndex = static_cast<unsigned int>(floorBaseTileIndex);
+    auto tileIndex = static_cast<unsigned int>(floorBaseTileIndex);
     return (baseTileIndex == floorBaseTileIndex) ? tileIndex - 1 : tileIndex;
 }
 
@@ -112,7 +108,7 @@ GeoDataLatLonBox GeoSceneEquirectTileProjection::geoCoordinates(int zoomLevel, i
     const qreal east = ((x + 1) - radiusX) / radiusX * M_PI;
     const qreal south = (radiusY - (y + 1)) / radiusY * M_PI / 2.0;
 
-    return GeoDataLatLonBox(north, south, east, west);
+    return {north, south, east, west};
 }
 
 }

@@ -23,7 +23,7 @@ GeoNode *KmlFlyToTagHandler::parse(GeoParser &parser) const
     GeoStackItem parentItem = parser.parentElement();
 
     if (parentItem.is<GeoDataPlaylist>()) {
-        GeoDataFlyTo *flyTo = new GeoDataFlyTo;
+        auto flyTo = new GeoDataFlyTo;
         KmlObjectTagHandler::parseIdentifiers(parser, flyTo);
         parentItem.nodeAs<GeoDataPlaylist>()->addPrimitive(flyTo);
         return flyTo;

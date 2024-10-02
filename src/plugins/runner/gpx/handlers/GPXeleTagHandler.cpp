@@ -24,7 +24,7 @@ GeoNode *GPXeleTagHandler::parse(GeoParser &parser) const
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(gpxTag_trkpt)) {
-        GeoDataTrack *track = parentItem.nodeAs<GeoDataTrack>();
+        auto track = parentItem.nodeAs<GeoDataTrack>();
         track->appendAltitude(parser.readElementText().trimmed().toDouble());
         return track;
     }

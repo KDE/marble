@@ -147,7 +147,7 @@ GeoDataDocument *OpenRouteServiceRunner::parse(const QByteArray &content) const
 
     QDomElement root = xml.documentElement();
 
-    GeoDataDocument *result = new GeoDataDocument();
+    auto result = new GeoDataDocument();
     result->setName(QStringLiteral("OpenRouteService"));
 
     QDomNodeList errors = root.elementsByTagName(QStringLiteral("xls:Error"));
@@ -163,7 +163,7 @@ GeoDataDocument *OpenRouteServiceRunner::parse(const QByteArray &content) const
             QRegExp regexp = QRegExp("^(.*) Please Check your Position: (-?[0-9]+.[0-9]+) (-?[0-9]+.[0-9]+) !");
             if (regexp.indexIn(errorMessage) == 0) {
                 if (regexp.capturedTexts().size() == 4) {
-                    GeoDataPlacemark *placemark = new GeoDataPlacemark;
+                    auto placemark = new GeoDataPlacemark;
                     placemark->setName(regexp.capturedTexts().at(1));
                     GeoDataCoordinates position;
                     position.setLongitude(regexp.capturedTexts().at(2).toDouble(), GeoDataCoordinates::Degree);
@@ -183,14 +183,14 @@ GeoDataDocument *OpenRouteServiceRunner::parse(const QByteArray &content) const
         }
     }
 
-    GeoDataPlacemark *routePlacemark = new GeoDataPlacemark;
+    auto routePlacemark = new GeoDataPlacemark;
     routePlacemark->setName(QStringLiteral("Route"));
     QTime time;
     QDomNodeList summary = root.elementsByTagName(QStringLiteral("xls:RouteSummary"));
     if (summary.size() > 0) {
         QDomNodeList timeNodeList = summary.item(0).toElement().elementsByTagName(QStringLiteral("xls:TotalTime"));
         if (timeNodeList.size() == 1) {
-            QRegExp regexp = QRegExp("^P(?:(\\d+)D)?T(?:(\\d+)H)?(?:(\\d+)M)?(\\d+)S");
+            QRegExp regexp = QRegExp(R"(^P(?:(\d+)D)?T(?:(\d+)H)?(?:(\d+)M)?(\d+)S)");
             if (regexp.indexIn(timeNodeList.item(0).toElement().text()) == 0) {
                 QStringList matches = regexp.capturedTexts();
                 unsigned int hours(0), minutes(0), seconds(0);
@@ -216,7 +216,7 @@ GeoDataDocument *OpenRouteServiceRunner::parse(const QByteArray &content) const
         }
     }
 
-    GeoDataLineString *routeWaypoints = new GeoDataLineString;
+    auto routeWaypoints = new GeoDataLineString;
     QDomNodeList geometry = root.elementsByTagName(QStringLiteral("xls:RouteGeometry"));
     if (!geometry.isEmpty()) {
         QDomNodeList waypoints = geometry.item(0).toElement().elementsByTagName("gml:pos");
@@ -253,7 +253,7 @@ GeoDataDocument *OpenRouteServiceRunner::parse(const QByteArray &content) const
             if (!textNodes.isEmpty() && !positions.isEmpty()) {
                 const QStringList content = positions.at(0).toElement().text().split(QLatin1Char(' '));
                 if (content.length() == 2) {
-                    GeoDataLineString *lineString = new GeoDataLineString;
+                    auto lineString = new GeoDataLineString;
 
                     for (int i = 0; i < positions.count(); ++i) {
                         const QStringList pointList = positions.at(i).toElement().text().split(QLatin1Char(' '));
@@ -263,7 +263,7 @@ GeoDataDocument *OpenRouteServiceRunner::parse(const QByteArray &content) const
                         lineString->append(position);
                     }
 
-                    GeoDataPlacemark *instruction = new GeoDataPlacemark;
+                    auto instruction = new GeoDataPlacemark;
 
                     QString const text = textNodes.item(0).toElement().text().remove(QRegularExpression("<[^>]*>"));
                     GeoDataExtendedData extendedData;

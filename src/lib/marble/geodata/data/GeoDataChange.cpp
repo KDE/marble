@@ -45,9 +45,7 @@ bool GeoDataChange::operator!=(const GeoDataChange &other) const
     return !this->operator==(other);
 }
 
-GeoDataChange::~GeoDataChange()
-{
-}
+GeoDataChange::~GeoDataChange() = default;
 
 GeoDataFeature *GeoDataChange::clone() const
 {

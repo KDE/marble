@@ -24,9 +24,7 @@ CacheRunner::CacheRunner(QObject *parent)
 {
 }
 
-CacheRunner::~CacheRunner()
-{
-}
+CacheRunner::~CacheRunner() = default;
 
 GeoDataDocument *CacheRunner::parseFile(const QString &fileName, DocumentRole role, QString &error)
 {
@@ -61,7 +59,7 @@ GeoDataDocument *CacheRunner::parseFile(const QString &fileName, DocumentRole ro
       return;
       }
     */
-    GeoDataDocument *document = new GeoDataDocument();
+    auto document = new GeoDataDocument();
     document->setDocumentRole(role);
 
     in.setVersion(QDataStream::Qt_4_2);
@@ -84,7 +82,7 @@ GeoDataDocument *CacheRunner::parseFile(const QString &fileName, DocumentRole ro
     const QString dstId = QStringLiteral("dst");
 
     while (!in.atEnd()) {
-        GeoDataPlacemark *mark = new GeoDataPlacemark;
+        auto mark = new GeoDataPlacemark;
         in >> tmpstr;
         tmpstr = *stringPool.insert(tmpstr);
         mark->setName(tmpstr);

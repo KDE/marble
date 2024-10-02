@@ -49,9 +49,7 @@ SphericalProjection::SphericalProjection(SphericalProjectionPrivate *dd)
     setMaxLat(maxValidLat());
 }
 
-SphericalProjection::~SphericalProjection()
-{
-}
+SphericalProjection::~SphericalProjection() = default;
 
 SphericalProjectionPrivate::SphericalProjectionPrivate(SphericalProjection *parent)
     : AzimuthalProjectionPrivate(parent)

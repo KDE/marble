@@ -26,12 +26,12 @@ GeoNode *GPXrteTagHandler::parse(GeoParser &parser) const
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(gpxTag_gpx)) {
-        GeoDataDocument *doc = parentItem.nodeAs<GeoDataDocument>();
+        auto doc = parentItem.nodeAs<GeoDataDocument>();
 
         // placemark for the linestring
-        GeoDataPlacemark *placemark = new GeoDataPlacemark;
+        auto placemark = new GeoDataPlacemark;
         doc->append(placemark);
-        GeoDataLineString *linestring = new GeoDataLineString;
+        auto linestring = new GeoDataLineString;
         placemark->setGeometry(linestring);
         placemark->setStyleUrl(QStringLiteral("#map-route"));
 

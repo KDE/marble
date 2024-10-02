@@ -13,9 +13,7 @@ TextureMapperInterface::TextureMapperInterface()
 {
 }
 
-TextureMapperInterface::~TextureMapperInterface()
-{
-}
+TextureMapperInterface::~TextureMapperInterface() = default;
 
 void TextureMapperInterface::setRepaintNeeded()
 {

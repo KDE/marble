@@ -126,7 +126,7 @@ TargetModel::TargetModel(MarbleModel *marbleModel, QObject *parent)
 QList<GeoDataPlacemark> TargetModel::viaPoints() const
 {
     if (!m_showRoutingItems) {
-        return QList<GeoDataPlacemark>();
+        return {};
     }
 
     RouteRequest *request = m_marbleModel->routingManager()->routeRequest();
@@ -172,7 +172,7 @@ QVariant TargetModel::currentLocationData(int role) const
         }
     }
 
-    return QVariant();
+    return {};
 }
 
 QVariant TargetModel::routeData(const QList<GeoDataPlacemark> &via, int index, int role) const
@@ -189,7 +189,7 @@ QVariant TargetModel::routeData(const QList<GeoDataPlacemark> &via, int index, i
     }
     }
 
-    return QVariant();
+    return {};
 }
 
 QVariant TargetModel::homeData(int role) const
@@ -208,7 +208,7 @@ QVariant TargetModel::homeData(int role) const
     }
     }
 
-    return QVariant();
+    return {};
 }
 
 QVariant TargetModel::bookmarkData(int index, int role) const
@@ -220,7 +220,7 @@ QVariant TargetModel::bookmarkData(int index, int role) const
         if (folder) {
             return QString(folder->name() + QLatin1StringView(" / ") + m_bookmarks[index]->name());
         }
-        return QVariant();
+        return {};
     }
     case Qt::DecorationRole:
         return QIcon(QStringLiteral(":/icons/bookmarks.png"));
@@ -228,7 +228,7 @@ QVariant TargetModel::bookmarkData(int index, int role) const
         return QVariant::fromValue(m_bookmarks[index]->lookAt()->coordinates());
     }
 
-    return QVariant();
+    return {};
 }
 
 QVariant TargetModel::data(const QModelIndex &index, int role) const
@@ -258,7 +258,7 @@ QVariant TargetModel::data(const QModelIndex &index, int role) const
         }
     }
 
-    return QVariant();
+    return {};
 }
 
 void TargetModel::setShowRoutingItems(bool show)

@@ -63,7 +63,7 @@ public:
 
     enum UserAction { Install, Uninstall };
 
-    typedef QPair<int, UserAction> Action;
+    using Action = QPair<int, UserAction>;
 
     NewstuffModel *m_parent;
 
@@ -160,7 +160,7 @@ QString NewstuffItem::installedVersion() const
         return nodes.at(0).toElement().text();
     }
 
-    return QString();
+    return {};
 }
 
 QString NewstuffItem::installedReleaseDate() const
@@ -170,7 +170,7 @@ QString NewstuffItem::installedReleaseDate() const
         return nodes.at(0).toElement().text();
     }
 
-    return QString();
+    return {};
 }
 
 bool NewstuffItem::isUpgradable() const
@@ -266,7 +266,7 @@ void NewstuffModelPrivate::handleProviderData(QNetworkReply *reply)
 
         QVariant const size = reply->header(QNetworkRequest::ContentLengthHeader);
         if (size.isValid()) {
-            qint64 length = size.value<qint64>();
+            auto length = size.value<qint64>();
             for (int i = 0; i < m_items.size(); ++i) {
                 NewstuffItem &item = m_items[i];
                 if (item.m_payloadUrl == reply->url()) {
@@ -568,7 +568,7 @@ QVariant NewstuffModel::data(const QModelIndex &index, int role) const
         }
     }
 
-    return QVariant();
+    return {};
 }
 
 QHash<int, QByteArray> NewstuffModel::roleNames() const
@@ -633,7 +633,7 @@ void NewstuffModel::setRegistryFile(const QString &filename, IdTag idTag)
         if (!inputFile.exists()) {
             QDir::root().mkpath(inputFile.absolutePath());
             d->m_registryDocument = QDomDocument("khotnewstuff3");
-            QDomProcessingInstruction header = d->m_registryDocument.createProcessingInstruction("xml", "version=\"1.0\" encoding=\"utf-8\"");
+            QDomProcessingInstruction header = d->m_registryDocument.createProcessingInstruction("xml", R"(version="1.0" encoding="utf-8")");
             d->m_registryDocument.appendChild(header);
             d->m_root = d->m_registryDocument.createElement("hotnewstuffregistry");
             d->m_registryDocument.appendChild(d->m_root);
@@ -931,7 +931,7 @@ void NewstuffModelPrivate::processQueue()
         }
     } else {
         // Run in a separate thread to keep the ui responsive
-        QFutureWatcher<void> *watcher = new QFutureWatcher<void>(m_parent);
+        auto watcher = new QFutureWatcher<void>(m_parent);
         QObject::connect(watcher, SIGNAL(finished()), m_parent, SLOT(mapUninstalled()));
         QObject::connect(watcher, SIGNAL(finished()), watcher, SLOT(deleteLater()));
 

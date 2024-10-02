@@ -19,7 +19,7 @@ static GeoTagWriterRegistrar s_writerLatLonQuad(GeoTagWriter::QualifiedName(GeoD
 
 bool KmlLatLonQuadWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataLatLonQuad *latLonQuad = static_cast<const GeoDataLatLonQuad *>(node);
+    const auto latLonQuad = static_cast<const GeoDataLatLonQuad *>(node);
 
     if (latLonQuad->isValid()) {
         writer.writeStartElement(QString::fromUtf8(kml::kmlTag_nameSpaceGx22), QString::fromUtf8(kml::kmlTag_LatLonQuad));

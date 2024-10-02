@@ -170,16 +170,16 @@ void TextureColorizer::drawIndividualDocument(GeoPainter *painter, const GeoData
 
     for (; i != end; ++i) {
         if (const GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(*i)) {
-            if (const GeoDataLineString *child = geodata_cast<GeoDataLineString>(placemark->geometry())) {
+            if (const auto child = geodata_cast<GeoDataLineString>(placemark->geometry())) {
                 const GeoDataLinearRing ring(*child);
                 painter->drawPolygon(ring);
             }
 
-            if (const GeoDataPolygon *child = geodata_cast<GeoDataPolygon>(placemark->geometry())) {
+            if (const auto child = geodata_cast<GeoDataPolygon>(placemark->geometry())) {
                 painter->drawPolygon(*child);
             }
 
-            if (const GeoDataLinearRing *child = geodata_cast<GeoDataLinearRing>(placemark->geometry())) {
+            if (const auto child = geodata_cast<GeoDataLinearRing>(placemark->geometry())) {
                 painter->drawPolygon(*child);
             }
         }

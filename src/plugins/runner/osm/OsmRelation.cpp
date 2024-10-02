@@ -104,7 +104,7 @@ void OsmRelation::createMultipolygon(GeoDataDocument *document, OsmWays &ways, c
     for (int i = 0, n = outer.size(); i < n; ++i) {
         auto const &outerRing = outer[i];
 
-        GeoDataPolygon *polygon = new GeoDataPolygon;
+        auto polygon = new GeoDataPolygon;
         polygon->setOuterBoundary(outerRing.first);
         OsmPlacemarkData osmData = m_osmData;
         osmData.addMemberReference(-1, outerRing.second);
@@ -136,7 +136,7 @@ void OsmRelation::createMultipolygon(GeoDataDocument *document, OsmWays &ways, c
             }
         }
 
-        GeoDataPlacemark *placemark = new GeoDataPlacemark;
+        auto placemark = new GeoDataPlacemark;
         placemark->setName(m_osmData.tagValue(QStringLiteral("name")));
         placemark->setVisualCategory(outerCategory);
         placemark->setOsmData(osmData);
@@ -175,7 +175,7 @@ void OsmRelation::createRelation(GeoDataDocument *document, const QHash<qint64, 
     }
 
     OsmPlacemarkData osmData = m_osmData;
-    GeoDataRelation *relation = new GeoDataRelation;
+    auto relation = new GeoDataRelation;
 
     relation->setName(osmData.tagValue(QStringLiteral("name")));
     if (relation->name().isEmpty()) {
@@ -210,7 +210,7 @@ OsmRelation::rings(const QStringList &roles, const OsmWays &ways, const OsmNodes
         if (roles.contains(member.role)) {
             if (!ways.contains(member.reference)) {
                 // A way is missing. Return nothing.
-                return OsmRings();
+                return {};
             }
             roleMembers << member.reference;
         }
@@ -233,7 +233,7 @@ OsmRelation::rings(const QStringList &roles, const OsmWays &ways, const OsmNodes
         for (auto id : way.references()) {
             if (!nodes.contains(id)) {
                 // A node is missing. Return nothing.
-                return OsmRings();
+                return {};
             }
             const auto &node = nodes[id];
             ring << node.coordinates();
@@ -263,7 +263,7 @@ OsmRelation::rings(const QStringList &roles, const OsmWays &ways, const OsmNodes
                             qint64 id = isReversed ? v.takeLast() : v.takeFirst();
                             if (!nodes.contains(id)) {
                                 // A node is missing. Return nothing.
-                                return OsmRings();
+                                return {};
                             }
                             if (id != lastReference) {
                                 const auto &node = nodes[id];
@@ -285,7 +285,7 @@ OsmRelation::rings(const QStringList &roles, const OsmWays &ways, const OsmNodes
             }
 
             if (lastReference != firstReference) {
-                return OsmRings();
+                return {};
             } else {
                 /** @todo Merge tags common to all rings into the new osm data? */
                 result << OsmRing(GeoDataLinearRing(ring.optimized()), placemarkData);

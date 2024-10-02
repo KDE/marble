@@ -3,9 +3,7 @@
 namespace Marble
 {
 
-TileLayer::TileLayer()
-{
-}
+TileLayer::TileLayer() = default;
 
 QStringList TileLayer::renderPosition() const
 {

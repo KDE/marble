@@ -19,7 +19,7 @@ static GeoTagWriterRegistrar s_writerSettings(GeoTagWriter::QualifiedName(GeoSce
 
 bool DgmlSettingsTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoSceneSettings *settings = static_cast<const GeoSceneSettings *>(node);
+    const auto settings = static_cast<const GeoSceneSettings *>(node);
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Settings));
 
     for (int i = 0; i < settings->allProperties().count(); ++i) {

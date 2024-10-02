@@ -136,7 +136,7 @@ TourWidgetPrivate::TourWidgetPrivate(TourWidget *parent)
     m_addPrimitiveButton->setToolTip(QObject::tr("Add FlyTo"));
     m_addPrimitiveButton->setPopupMode(QToolButton::MenuButtonPopup);
 
-    QMenu *addPrimitiveMenu = new QMenu(q);
+    auto addPrimitiveMenu = new QMenu(q);
 
     m_actionAddFlyTo = new QAction(QIcon(QStringLiteral(":/marble/flag.png")), QObject::tr("Add FlyTo"), addPrimitiveMenu);
     addPrimitiveMenu->addAction(m_actionAddFlyTo);
@@ -220,7 +220,7 @@ bool TourWidget::eventFilter(QObject *watched, QEvent *event)
     }
 
     if (event->type() == QEvent::KeyPress) {
-        QKeyEvent *key = static_cast<QKeyEvent *>(event);
+        auto key = static_cast<QKeyEvent *>(event);
         QModelIndexList selectedIndexes = d->m_tourUi.m_listView->selectionModel()->selectedIndexes();
 
         if (key->key() == Qt::Key_Delete) {
@@ -385,7 +385,7 @@ GeoDataTour *TourWidgetPrivate::findTour(GeoDataFeature *feature) const
         return tour;
     }
 
-    GeoDataContainer *container = dynamic_cast<GeoDataContainer *>(feature);
+    auto container = dynamic_cast<GeoDataContainer *>(feature);
     if (container) {
         QList<GeoDataFeature *>::Iterator end = container->end();
         QList<GeoDataFeature *>::Iterator iter = container->begin();
@@ -403,7 +403,7 @@ void TourWidgetPrivate::mapCenterOn(const QModelIndex &index)
 {
     QVariant coordinatesVariant = m_widget->model()->treeModel()->data(index, MarblePlacemarkModel::CoordinateRole);
     if (!coordinatesVariant.isNull()) {
-        GeoDataCoordinates const coordinates = coordinatesVariant.value<GeoDataCoordinates>();
+        auto const coordinates = coordinatesVariant.value<GeoDataCoordinates>();
         GeoDataLookAt lookat;
         lookat.setCoordinates(coordinates);
         lookat.setRange(coordinates.altitude());
@@ -413,8 +413,8 @@ void TourWidgetPrivate::mapCenterOn(const QModelIndex &index)
 
 void TourWidgetPrivate::addFlyTo()
 {
-    GeoDataFlyTo *flyTo = new GeoDataFlyTo();
-    GeoDataLookAt *lookat = new GeoDataLookAt(m_widget->lookAt());
+    auto flyTo = new GeoDataFlyTo();
+    auto lookat = new GeoDataLookAt(m_widget->lookAt());
     lookat->setAltitude(lookat->range());
     flyTo->setView(lookat);
     bool isMainTrackEmpty = m_playback.mainTrackSize() == 0;
@@ -424,14 +424,14 @@ void TourWidgetPrivate::addFlyTo()
 
 void TourWidgetPrivate::addWait()
 {
-    GeoDataWait *wait = new GeoDataWait();
+    auto wait = new GeoDataWait();
     wait->setDuration(1.0);
     addTourPrimitive(wait);
 }
 
 void TourWidgetPrivate::addSoundCue()
 {
-    GeoDataSoundCue *soundCue = new GeoDataSoundCue();
+    auto soundCue = new GeoDataSoundCue();
     addTourPrimitive(soundCue);
 }
 
@@ -443,7 +443,7 @@ void TourWidgetPrivate::addPlacemark()
     qreal lon = m_widget->focusPoint().longitude();
     GeoDataCoordinates::normalizeLonLat(lon, lat);
 
-    GeoDataDocument *document = new GeoDataDocument;
+    auto document = new GeoDataDocument;
     if (m_document->id().isEmpty()) {
         if (m_document->name().isEmpty()) {
             m_document->setId(QStringLiteral("untitled_tour"));
@@ -453,21 +453,21 @@ void TourWidgetPrivate::addPlacemark()
     }
     document->setTargetId(m_document->id());
 
-    GeoDataPlacemark *placemark = new GeoDataPlacemark;
+    auto placemark = new GeoDataPlacemark;
     placemark->setCoordinate(lon, lat);
     placemark->setVisible(true);
     placemark->setBalloonVisible(true);
-    GeoDataStyle *newStyle = new GeoDataStyle(*placemark->style());
+    auto newStyle = new GeoDataStyle(*placemark->style());
     newStyle->iconStyle().setIconPath(MarbleDirs::path(QStringLiteral("bitmaps/redflag_22.png")));
     placemark->setStyle(GeoDataStyle::Ptr(newStyle));
 
     document->append(placemark);
 
-    GeoDataCreate *create = new GeoDataCreate;
+    auto create = new GeoDataCreate;
     create->append(document);
-    GeoDataUpdate *update = new GeoDataUpdate;
+    auto update = new GeoDataUpdate;
     update->setCreate(create);
-    GeoDataAnimatedUpdate *animatedUpdate = new GeoDataAnimatedUpdate;
+    auto animatedUpdate = new GeoDataAnimatedUpdate;
     animatedUpdate->setUpdate(update);
 
     if (m_delegate->editAnimatedUpdate(animatedUpdate)) {
@@ -480,20 +480,20 @@ void TourWidgetPrivate::addPlacemark()
 
 void TourWidgetPrivate::addRemovePlacemark()
 {
-    GeoDataDelete *deleteItem = new GeoDataDelete;
-    GeoDataPlacemark *placemark = new GeoDataPlacemark;
+    auto deleteItem = new GeoDataDelete;
+    auto placemark = new GeoDataPlacemark;
     placemark->setTargetId(m_delegate->defaultFeatureId());
     deleteItem->append(placemark);
-    GeoDataUpdate *update = new GeoDataUpdate;
+    auto update = new GeoDataUpdate;
     update->setDelete(deleteItem);
-    GeoDataAnimatedUpdate *animatedUpdate = new GeoDataAnimatedUpdate;
+    auto animatedUpdate = new GeoDataAnimatedUpdate;
     animatedUpdate->setUpdate(update);
     addTourPrimitive(animatedUpdate);
 }
 
 void TourWidgetPrivate::addChangePlacemark()
 {
-    GeoDataChange *change = new GeoDataChange;
+    auto change = new GeoDataChange;
     GeoDataPlacemark *placemark = nullptr;
     GeoDataFeature *lastFeature = m_delegate->findFeature(m_delegate->defaultFeatureId());
     if (GeoDataPlacemark *target = (lastFeature != nullptr ? geodata_cast<GeoDataPlacemark>(lastFeature) : nullptr)) {
@@ -504,9 +504,9 @@ void TourWidgetPrivate::addChangePlacemark()
         placemark = new GeoDataPlacemark;
     }
     change->append(placemark);
-    GeoDataUpdate *update = new GeoDataUpdate;
+    auto update = new GeoDataUpdate;
     update->setChange(change);
-    GeoDataAnimatedUpdate *animatedUpdate = new GeoDataAnimatedUpdate;
+    auto animatedUpdate = new GeoDataAnimatedUpdate;
     animatedUpdate->setUpdate(update);
     addTourPrimitive(animatedUpdate);
 }
@@ -766,13 +766,13 @@ GeoDataObject *TourWidgetPrivate::rootIndexObject() const
 void TourWidgetPrivate::createTour()
 {
     if (overrideModifications()) {
-        GeoDataDocument *document = new GeoDataDocument();
+        auto document = new GeoDataDocument();
         document->setDocumentRole(UserDocument);
         document->setName(QStringLiteral("New Tour"));
         document->setId(QStringLiteral("new_tour"));
-        GeoDataTour *tour = new GeoDataTour();
+        auto tour = new GeoDataTour();
         tour->setName(QStringLiteral("New Tour"));
-        GeoDataPlaylist *playlist = new GeoDataPlaylist;
+        auto playlist = new GeoDataPlaylist;
         tour->setPlaylist(playlist);
         document->append(static_cast<GeoDataFeature *>(tour));
         m_playback.setBaseUrl(QUrl::fromLocalFile(MarbleDirs::marbleDataPath()));
@@ -844,7 +844,7 @@ bool TourWidgetPrivate::saveTourAs(const QString &filename)
 
 void TourWidgetPrivate::captureTour()
 {
-    MarbleWidget *widget = new MarbleWidget;
+    auto widget = new MarbleWidget;
     widget->setMapThemeId(m_widget->mapThemeId());
     widget->resize(1280, 720);
 
@@ -852,7 +852,7 @@ void TourWidgetPrivate::captureTour()
     widget->model()->treeModel()->addDocument(m_document);
 
     GeoDataTour *tour = findTour(m_document);
-    TourPlayback *playback = new TourPlayback;
+    auto playback = new TourPlayback;
     playback->setMarbleWidget(widget);
     playback->setTour(tour);
 
@@ -908,14 +908,14 @@ void TourWidgetPrivate::handlePlaybackProgress(const double position)
 void TourWidget::setHighlightedItemIndex(int index)
 {
     GeoDataObject *rootObject = d->rootIndexObject();
-    GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist *>(rootObject);
+    auto playlist = static_cast<GeoDataPlaylist *>(rootObject);
     QModelIndex playlistIndex = d->m_widget->model()->treeModel()->index(playlist);
 
     // Only flyTo and wait items have duration, so the other types have to be skipped.
     int searchedIndex = 0;
     for (int i = 0; i < playlist->size(); i++) {
         QModelIndex currentIndex = d->m_widget->model()->treeModel()->index(i, 0, playlistIndex);
-        GeoDataObject *object = qvariant_cast<GeoDataObject *>(currentIndex.data(MarblePlacemarkModel::ObjectPointerRole));
+        auto object = qvariant_cast<GeoDataObject *>(currentIndex.data(MarblePlacemarkModel::ObjectPointerRole));
 
         if (geodata_cast<GeoDataFlyTo>(object) || geodata_cast<GeoDataWait>(object))
             ++searchedIndex;

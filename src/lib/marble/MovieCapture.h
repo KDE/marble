@@ -21,9 +21,7 @@ class MovieCapturePrivate;
 class MovieFormat
 {
 public:
-    MovieFormat()
-    {
-    }
+    MovieFormat() = default;
     explicit MovieFormat(const QString &type, const QString &name, const QString &extension)
         : m_type(type)
         , m_name(name)

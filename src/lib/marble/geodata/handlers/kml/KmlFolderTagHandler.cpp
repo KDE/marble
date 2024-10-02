@@ -24,10 +24,10 @@ GeoNode *KmlFolderTagHandler::parse(GeoParser &parser) const
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_Folder)));
 
     GeoStackItem parentItem = parser.parentElement();
-    GeoDataFolder *folder = new GeoDataFolder;
+    auto folder = new GeoDataFolder;
     KmlObjectTagHandler::parseIdentifiers(parser, folder);
     if (parentItem.represents(kmlTag_Folder) || parentItem.represents(kmlTag_Document)) {
-        GeoDataContainer *parentPtr = parentItem.nodeAs<GeoDataContainer>();
+        auto parentPtr = parentItem.nodeAs<GeoDataContainer>();
         parentPtr->append(folder);
 
         return folder;

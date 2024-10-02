@@ -30,9 +30,7 @@ class TileCreatorPrivate;
 class MARBLE_EXPORT TileCreatorSource
 {
 public:
-    virtual ~TileCreatorSource()
-    {
-    }
+    virtual ~TileCreatorSource() = default;
 
     /**
      * Must return the full size of the source image

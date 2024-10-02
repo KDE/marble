@@ -29,11 +29,11 @@ OsmRelationEditorDialog::OsmRelationEditorDialog(OsmPlacemarkData *relationData,
     : QDialog(parent)
 {
     m_relationData = relationData;
-    QVBoxLayout *layout = new QVBoxLayout(this);
+    auto layout = new QVBoxLayout(this);
 
     // Name input area
-    QHBoxLayout *nameLayout = new QHBoxLayout();
-    QLabel *nameLabel = new QLabel(tr("Name"), this);
+    auto nameLayout = new QHBoxLayout();
+    auto nameLabel = new QLabel(tr("Name"), this);
     m_nameLineEdit = new QLineEdit(this);
     m_nameLineEdit->setText(relationData->tagValue(QStringLiteral("name")));
     nameLayout->addWidget(nameLabel);

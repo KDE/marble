@@ -21,7 +21,7 @@ static GeoTagWriterRegistrar s_writerTimeStamp(GeoTagWriter::QualifiedName(GeoDa
 
 bool KmlTimeStampTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataTimeStamp *timestamp = static_cast<const GeoDataTimeStamp *>(node);
+    const auto timestamp = static_cast<const GeoDataTimeStamp *>(node);
 
     if (timestamp->when().isValid()) {
         writer.writeStartElement(QString::fromUtf8(kml::kmlTag_TimeStamp));
@@ -50,7 +50,7 @@ QString KmlTimeStampTagWriter::toString(const GeoDataTimeStamp &timestamp)
     }
 
     Q_ASSERT(false && "not reachable");
-    return QString();
+    return {};
 }
 
 }

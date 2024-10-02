@@ -22,7 +22,7 @@ KmlPolyStyleTagWriter::KmlPolyStyleTagWriter()
 
 bool KmlPolyStyleTagWriter::writeMid(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataPolyStyle *style = static_cast<const GeoDataPolyStyle *>(node);
+    const auto style = static_cast<const GeoDataPolyStyle *>(node);
 
     if (!style->fill()) {
         writer.writeElement("fill", "0");
@@ -36,7 +36,7 @@ bool KmlPolyStyleTagWriter::writeMid(const GeoNode *node, GeoWriter &writer) con
 
 bool KmlPolyStyleTagWriter::isEmpty(const GeoNode *node) const
 {
-    const GeoDataPolyStyle *style = static_cast<const GeoDataPolyStyle *>(node);
+    const auto style = static_cast<const GeoDataPolyStyle *>(node);
     return style->fill() && style->outline();
 }
 

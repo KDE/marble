@@ -14,9 +14,7 @@ GpxParser::GpxParser()
 {
 }
 
-GpxParser::~GpxParser()
-{
-}
+GpxParser::~GpxParser() = default;
 
 bool GpxParser::isValidRootElement()
 {

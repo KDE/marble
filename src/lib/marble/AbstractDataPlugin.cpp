@@ -136,7 +136,7 @@ QList<AbstractDataPluginItem *> AbstractDataPlugin::whichItemAt(const QPoint &cu
     if (d->m_model && enabled() && visible()) {
         return d->m_model->whichItemAt(curpos);
     } else {
-        return QList<AbstractDataPluginItem *>();
+        return {};
     }
 }
 

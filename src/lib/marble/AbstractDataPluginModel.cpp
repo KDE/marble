@@ -225,7 +225,7 @@ QVariant FavoritesModel::data(const QModelIndex &index, int role) const
         }
     }
 
-    return QVariant();
+    return {};
 }
 
 void FavoritesModel::reset()
@@ -413,10 +413,10 @@ void AbstractDataPluginModel::addItemsToList(const QList<AbstractDataPluginItem 
         // Insert the item on the right position in the list
         d->m_itemSet.insert(i, item);
 
-        connect(item, SIGNAL(stickyChanged()), this, SLOT(scheduleItemSort()));
-        connect(item, SIGNAL(destroyed(QObject *)), this, SLOT(removeItem(QObject *)));
-        connect(item, SIGNAL(updated()), this, SIGNAL(itemsUpdated()));
-        connect(item, SIGNAL(favoriteChanged(QString, bool)), this, SLOT(favoriteItemChanged(QString, bool)));
+        connect(item, &AbstractDataPluginItem::stickyChanged, this, &AbstractDataPluginModel::scheduleItemSort);
+        connect(item, &QObject::destroyed, this, &AbstractDataPluginModel::removeItem);
+        connect(item, &AbstractDataPluginItem::updated, this, &AbstractDataPluginModel::itemsUpdated);
+        connect(item, &AbstractDataPluginItem::favoriteChanged, this, &AbstractDataPluginModel::favoriteItemChanged);
 
         if (!needsUpdate && item->initialized()) {
             needsUpdate = true;
@@ -606,7 +606,7 @@ void AbstractDataPluginModel::processFinishedJob(const QString &relativeUrlStrin
 
 void AbstractDataPluginModel::removeItem(QObject *item)
 {
-    AbstractDataPluginItem *pluginItem = qobject_cast<AbstractDataPluginItem *>(item);
+    auto pluginItem = qobject_cast<AbstractDataPluginItem *>(item);
     d->m_itemSet.removeAll(pluginItem);
     QHash<QString, AbstractDataPluginItem *>::iterator i;
     for (i = d->m_downloadingItems.begin(); i != d->m_downloadingItems.end(); ++i) {

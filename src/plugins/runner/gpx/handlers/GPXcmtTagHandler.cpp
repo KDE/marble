@@ -26,7 +26,7 @@ GeoNode *GPXcmtTagHandler::parse(GeoParser &parser) const
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(gpxTag_wpt)) {
-        GeoDataPlacemark *placemark = parentItem.nodeAs<GeoDataPlacemark>();
+        auto placemark = parentItem.nodeAs<GeoDataPlacemark>();
 
         QString cmt = parser.readElementText().trimmed();
         if (!cmt.isEmpty()) {

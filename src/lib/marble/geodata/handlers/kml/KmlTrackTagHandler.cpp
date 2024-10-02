@@ -24,7 +24,7 @@ GeoNode *KmlTrackTagHandler::parse(GeoParser &parser) const
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_Track)));
 
     GeoStackItem parentItem = parser.parentElement();
-    GeoDataTrack *track = new GeoDataTrack();
+    auto track = new GeoDataTrack();
     KmlObjectTagHandler::parseIdentifiers(parser, track);
 
     if (parentItem.represents(kmlTag_Placemark)) {

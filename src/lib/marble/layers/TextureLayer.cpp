@@ -547,7 +547,7 @@ RenderState TextureLayer::renderState() const
 QString TextureLayer::addTextureLayer(GeoSceneTextureTileDataset *texture)
 {
     if (!texture)
-        return QString(); // Not a sane call
+        return {}; // Not a sane call
 
     QString sourceDir = texture->sourceDir();
     if (!d->m_customTextures.contains(sourceDir)) { // Add if not present. For update, remove the old texture first.

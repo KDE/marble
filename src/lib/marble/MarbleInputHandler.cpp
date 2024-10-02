@@ -221,9 +221,7 @@ MarbleDefaultInputHandler::Private::Private()
     m_arrowCur[2][2] = QCursor(m_curpmbr, 19, 19);
 }
 
-MarbleDefaultInputHandler::Private::~Private()
-{
-}
+MarbleDefaultInputHandler::Private::~Private() = default;
 
 MarbleDefaultInputHandler::MarbleDefaultInputHandler(MarbleAbstractPresenter *marblePresenter)
     : MarbleInputHandler(marblePresenter)
@@ -296,7 +294,7 @@ void MarbleInputHandler::restoreViewContext()
 void MarbleDefaultInputHandler::hideSelectionIfCtrlReleased(QEvent *e)
 {
     if (selectionRubber()->isVisible() && e->type() == QEvent::MouseMove) {
-        QMouseEvent *event = static_cast<QMouseEvent *>(e);
+        auto event = static_cast<QMouseEvent *>(e);
         if (!(event->modifiers() & Qt::ControlModifier)) {
             selectionRubber()->hide();
         }
@@ -406,7 +404,7 @@ bool MarbleDefaultInputHandler::handlePinch(const QPointF &center, qreal scaleFa
 
 bool MarbleDefaultInputHandler::handleGesture(QGestureEvent *ge)
 {
-    QPinchGesture *pinch = static_cast<QPinchGesture *>(ge->gesture(Qt::PinchGesture));
+    auto pinch = static_cast<QPinchGesture *>(ge->gesture(Qt::PinchGesture));
     if (!pinch) {
         return false;
     }
@@ -676,7 +674,7 @@ QPoint MarbleDefaultInputHandler::mouseMovedOutside(QMouseEvent *event)
         MarbleInputHandler::d->m_marblePresenter->setViewContext(Still);
     }
 
-    return QPoint(dirX, dirY);
+    return {dirX, dirY};
 }
 
 bool MarbleDefaultInputHandler::handleMouseEvent(QMouseEvent *event)
@@ -720,7 +718,7 @@ bool MarbleDefaultInputHandler::handleMouseEvent(QMouseEvent *event)
 
         // Regarding all kinds of mouse moves:
         if (d->m_leftPressed && !selectionRubber()->isVisible()) {
-            qreal radius = (qreal)(MarbleInputHandler::d->m_marblePresenter->radius());
+            auto radius = (qreal)(MarbleInputHandler::d->m_marblePresenter->radius());
             qreal deltax = event->x() - d->m_leftPressedX;
             qreal deltay = event->y() - d->m_leftPressedY;
 

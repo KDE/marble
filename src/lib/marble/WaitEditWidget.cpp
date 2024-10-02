@@ -25,14 +25,14 @@ WaitEditWidget::WaitEditWidget(const QModelIndex &index, QWidget *parent)
     , m_spinBox(new QDoubleSpinBox)
     , m_button(new QToolButton)
 {
-    QHBoxLayout *layout = new QHBoxLayout;
+    auto layout = new QHBoxLayout;
     layout->setSpacing(5);
 
-    QLabel *iconLabel = new QLabel;
+    auto iconLabel = new QLabel;
     iconLabel->setPixmap(QPixmap(QStringLiteral(":/marble/player-time.png")));
     layout->addWidget(iconLabel);
 
-    QLabel *waitLabel = new QLabel;
+    auto waitLabel = new QLabel;
     waitLabel->setText(tr("Wait duration:"));
     layout->addWidget(waitLabel);
 
@@ -65,7 +65,7 @@ void WaitEditWidget::save()
 
 GeoDataWait *WaitEditWidget::waitElement()
 {
-    GeoDataObject *object = qvariant_cast<GeoDataObject *>(m_index.data(MarblePlacemarkModel::ObjectPointerRole));
+    auto object = qvariant_cast<GeoDataObject *>(m_index.data(MarblePlacemarkModel::ObjectPointerRole));
     Q_ASSERT(object);
     auto wait = geodata_cast<GeoDataWait>(object);
     Q_ASSERT(wait);

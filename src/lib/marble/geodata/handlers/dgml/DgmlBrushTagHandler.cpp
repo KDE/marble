@@ -46,7 +46,7 @@ GeoNode *DgmlBrushTagHandler::parse(GeoParser &parser) const
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Vector) || parentItem.represents(dgmlTag_Geodata)) {
-        GeoSceneGeodata *geodata = parentItem.nodeAs<GeoSceneGeodata>();
+        auto geodata = parentItem.nodeAs<GeoSceneGeodata>();
         geodata->setBrush(brush);
         if (!colorMap.isEmpty()) {
             const QStringList colorString = colorMap.split(QLatin1Char(','));

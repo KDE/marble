@@ -22,10 +22,10 @@ class OsmPlacemarkData;
 class OsmConverter
 {
 public:
-    typedef QPair<QString, QString> Tag;
-    typedef QPair<GeoDataCoordinates, OsmPlacemarkData> Node;
-    typedef QPair<const GeoDataLineString *, OsmPlacemarkData> Way;
-    typedef QPair<const GeoDataFeature *, OsmPlacemarkData> Relation;
+    using Tag = QPair<QString, QString>;
+    using Node = QPair<GeoDataCoordinates, OsmPlacemarkData>;
+    using Way = QPair<const GeoDataLineString *, OsmPlacemarkData>;
+    using Relation = QPair<const GeoDataFeature *, OsmPlacemarkData>;
 
     using Nodes = QList<Node>;
     using Tags = QList<Tag>;

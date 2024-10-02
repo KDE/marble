@@ -261,7 +261,7 @@ void PolylineAnnotation::dealWithItemChange(const SceneGraphicsItem *other)
 
 void PolylineAnnotation::move(const GeoDataCoordinates &source, const GeoDataCoordinates &destination)
 {
-    GeoDataLineString *lineString = static_cast<GeoDataLineString *>(placemark()->geometry());
+    auto lineString = static_cast<GeoDataLineString *>(placemark()->geometry());
     GeoDataLineString oldLineString = *lineString;
     OsmPlacemarkData *osmData = nullptr;
     if (placemark()->hasOsmData()) {
@@ -334,7 +334,7 @@ void PolylineAnnotation::deleteAllSelectedNodes()
         return;
     }
 
-    GeoDataLineString *line = static_cast<GeoDataLineString *>(placemark()->geometry());
+    auto line = static_cast<GeoDataLineString *>(placemark()->geometry());
     OsmPlacemarkData *osmData = nullptr;
     if (placemark()->hasOsmData()) {
         osmData = &placemark()->osmData();
@@ -361,7 +361,7 @@ void PolylineAnnotation::deleteClickedNode()
         return;
     }
 
-    GeoDataLineString *line = static_cast<GeoDataLineString *>(placemark()->geometry());
+    auto line = static_cast<GeoDataLineString *>(placemark()->geometry());
     OsmPlacemarkData *osmData = nullptr;
     if (placemark()->hasOsmData()) {
         osmData = &placemark()->osmData();
@@ -568,7 +568,7 @@ bool PolylineAnnotation::processEditingOnMove(QMouseEvent *mouseEvent)
     const GeoDataCoordinates newCoords(lon, lat);
 
     if (m_interactingObj == InteractingNode) {
-        GeoDataLineString *line = static_cast<GeoDataLineString *>(placemark()->geometry());
+        auto line = static_cast<GeoDataLineString *>(placemark()->geometry());
         OsmPlacemarkData *osmData = nullptr;
         if (placemark()->hasOsmData()) {
             osmData = &placemark()->osmData();
@@ -582,7 +582,7 @@ bool PolylineAnnotation::processEditingOnMove(QMouseEvent *mouseEvent)
 
         return true;
     } else if (m_interactingObj == InteractingPolyline) {
-        GeoDataLineString *lineString = static_cast<GeoDataLineString *>(placemark()->geometry());
+        auto lineString = static_cast<GeoDataLineString *>(placemark()->geometry());
         OsmPlacemarkData *osmData = nullptr;
         if (placemark()->hasOsmData()) {
             osmData = &placemark()->osmData();
@@ -703,7 +703,7 @@ bool PolylineAnnotation::processAddingNodesOnPress(QMouseEvent *mouseEvent)
         return false;
     }
 
-    GeoDataLineString *line = static_cast<GeoDataLineString *>(placemark()->geometry());
+    auto line = static_cast<GeoDataLineString *>(placemark()->geometry());
 
     // If a virtual node has just been clicked, add it to the polyline and start 'adjusting'
     // its position.
@@ -744,7 +744,7 @@ bool PolylineAnnotation::processAddingNodesOnMove(QMouseEvent *mouseEvent)
         qreal lon, lat;
         m_viewport->geoCoordinates(mouseEvent->pos().x(), mouseEvent->pos().y(), lon, lat, GeoDataCoordinates::Radian);
         const GeoDataCoordinates newCoords(lon, lat);
-        GeoDataLineString *line = static_cast<GeoDataLineString *>(placemark()->geometry());
+        auto line = static_cast<GeoDataLineString *>(placemark()->geometry());
         line->at(m_adjustedNode) = newCoords;
 
         return true;

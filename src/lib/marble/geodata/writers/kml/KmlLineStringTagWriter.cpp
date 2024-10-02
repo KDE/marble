@@ -21,7 +21,7 @@ static GeoTagWriterRegistrar s_writerLookAt(GeoTagWriter::QualifiedName(GeoDataT
 
 bool KmlLineStringTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataLineString *lineString = static_cast<const GeoDataLineString *>(node);
+    const auto lineString = static_cast<const GeoDataLineString *>(node);
 
     if (lineString->size() > 1) {
         writer.writeStartElement(QString::fromUtf8(kml::kmlTag_LineString));

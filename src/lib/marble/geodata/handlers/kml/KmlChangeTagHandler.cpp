@@ -20,7 +20,7 @@ GeoNode *KmlChangeTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_Change)));
 
-    GeoDataChange *change = new GeoDataChange;
+    auto change = new GeoDataChange;
     KmlObjectTagHandler::parseIdentifiers(parser, change);
     GeoStackItem parentItem = parser.parentElement();
 

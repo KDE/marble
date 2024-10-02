@@ -74,11 +74,11 @@ void PlaybackAnimatedUpdateItem::play()
         for (int index = 0; index < m_animatedUpdate->update()->create()->size(); ++index) {
             GeoDataFeature *child = m_animatedUpdate->update()->create()->child(index);
             if (child && (geodata_cast<GeoDataDocument>(child) || geodata_cast<GeoDataFolder>(child))) {
-                GeoDataContainer *addContainer = static_cast<GeoDataContainer *>(child);
+                auto addContainer = static_cast<GeoDataContainer *>(child);
                 QString targetId = addContainer->targetId();
                 GeoDataFeature *feature = findFeature(m_rootDocument, targetId);
                 if (feature && (geodata_cast<GeoDataDocument>(feature) || geodata_cast<GeoDataFolder>(feature))) {
-                    GeoDataContainer *container = static_cast<GeoDataContainer *>(feature);
+                    auto container = static_cast<GeoDataContainer *>(feature);
                     for (int i = 0; i < addContainer->size(); ++i) {
                         Q_EMIT added(container, addContainer->child(i), -1);
                         if (auto placemark = geodata_cast<GeoDataPlacemark>(addContainer->child(i))) {
@@ -120,7 +120,7 @@ GeoDataFeature *PlaybackAnimatedUpdateItem::findFeature(GeoDataFeature *feature,
         return feature;
     }
 
-    GeoDataContainer *container = dynamic_cast<GeoDataContainer *>(feature);
+    auto container = dynamic_cast<GeoDataContainer *>(feature);
     if (container) {
         QList<GeoDataFeature *>::Iterator end = container->end();
         QList<GeoDataFeature *>::Iterator iter = container->begin();
@@ -137,7 +137,7 @@ GeoDataFeature *PlaybackAnimatedUpdateItem::findFeature(GeoDataFeature *feature,
 GeoDataDocument *PlaybackAnimatedUpdateItem::rootDocument(GeoDataObject *object) const
 {
     if (!object || !object->parent()) {
-        GeoDataDocument *document = dynamic_cast<GeoDataDocument *>(object);
+        auto document = dynamic_cast<GeoDataDocument *>(object);
         return document;
     } else {
         return rootDocument(object->parent());
@@ -186,7 +186,7 @@ void PlaybackAnimatedUpdateItem::stop()
         for (int index = 0; index < m_animatedUpdate->update()->create()->size(); ++index) {
             GeoDataFeature *feature = m_animatedUpdate->update()->create()->child(index);
             if (feature && (geodata_cast<GeoDataDocument>(feature) || geodata_cast<GeoDataFolder>(feature))) {
-                GeoDataContainer *container = static_cast<GeoDataContainer *>(feature);
+                auto container = static_cast<GeoDataContainer *>(feature);
                 for (int i = 0; i < container->size(); ++i) {
                     Q_EMIT removed(container->child(i));
                     if (auto placemark = geodata_cast<GeoDataPlacemark>(container->child(i))) {

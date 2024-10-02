@@ -16,9 +16,7 @@ namespace Marble
 class GeoDataHotSpotPrivate
 {
 public:
-    GeoDataHotSpotPrivate()
-    {
-    }
+    GeoDataHotSpotPrivate() = default;
 
     GeoDataHotSpotPrivate(const QPointF &hotSpot, GeoDataHotSpot::Units xunits, GeoDataHotSpot::Units yunits)
         : m_hotSpot(hotSpot)

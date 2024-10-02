@@ -79,7 +79,7 @@ void GeonamesParser::readEntry()
 {
     Q_ASSERT(isStartElement() && name() == QLatin1StringView("entry"));
 
-    WikipediaItem *item = new WikipediaItem(m_marbleWidget, m_parent);
+    auto item = new WikipediaItem(m_marbleWidget, m_parent);
     m_list->append(item);
 
     while (!atEnd()) {

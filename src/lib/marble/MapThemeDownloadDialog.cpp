@@ -104,7 +104,7 @@ void MapItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &optio
 
     // Draw the map preview icon
     QRect const iconRect = position(Icon, option);
-    QIcon const icon = index.data(Qt::DecorationRole).value<QIcon>();
+    auto const icon = index.data(Qt::DecorationRole).value<QIcon>();
     painter->drawPixmap(iconRect, icon.pixmap(iconRect.size()));
 
     // Draw summary, author, and similar information
@@ -123,7 +123,7 @@ void MapItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &optio
     // Draw buttons and installation progress
     if (index.data(NewstuffModel::IsTransitioning).toBool()) {
         qint64 total = qMax(qint64(1), index.data(NewstuffModel::PayloadSize).value<qint64>());
-        qint64 progress = index.data(NewstuffModel::DownloadedSize).value<qint64>();
+        auto progress = index.data(NewstuffModel::DownloadedSize).value<qint64>();
 
         QStyleOptionProgressBar progressBarOption;
         progressBarOption.rect = position(ProgressReport, option);
@@ -179,13 +179,13 @@ QSize MapItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModel
         return QSize(iconSize.width() + doc.size().width() + buttonWidth(option) + 3 * m_margin, 2 + qMax(iconSize.height(), qRound(doc.size().height())));
     }
 
-    return QSize();
+    return {};
 }
 
 bool MapItemDelegate::editorEvent(QEvent *event, QAbstractItemModel *, const QStyleOptionViewItem &option, const QModelIndex &index)
 {
     if ((event->type() == QEvent::MouseButtonRelease)) {
-        QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
+        auto mouseEvent = static_cast<QMouseEvent *>(event);
         if (index.data(NewstuffModel::IsTransitioning).toBool()) {
             QRect cancelRect = position(CancelButton, option);
             if (cancelRect.contains(mouseEvent->pos())) {
@@ -325,7 +325,7 @@ QRect MapItemDelegate::position(Element element, const QStyleOptionViewItem &opt
     }
 
     Q_ASSERT(false);
-    return QRect();
+    return {};
 }
 
 QString MapItemDelegate::text(const QModelIndex &index)

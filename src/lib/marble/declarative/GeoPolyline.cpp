@@ -16,8 +16,6 @@
 
 #include "MarbleGlobal.h"
 
-using Marble::DEG2RAD;
-using Marble::EARTH_RADIUS;
 using Marble::GeoDataCoordinates;
 
 namespace Marble
@@ -240,13 +238,13 @@ QSGNode *GeoPolyline::updatePaintNode(QSGNode *oldNode, QQuickItem::UpdatePaintN
         for (int i = 0; i < segmentCount; ++i) {
             normals << QVector2D(polygon.at(i + 1) - polygon.at(i)).normalized();
         }
-        QSGGeometryNode *lineNode = new QSGGeometryNode;
+        auto lineNode = new QSGGeometryNode;
 
-        QSGGeometry *lineNodeGeo = new QSGGeometry(QSGGeometry::defaultAttributes_Point2D(), segmentCount * 2);
+        auto lineNodeGeo = new QSGGeometry(QSGGeometry::defaultAttributes_Point2D(), segmentCount * 2);
         lineNodeGeo->setDrawingMode(0x0005);
         lineNodeGeo->allocate((segmentCount + 1) * 2);
 
-        QSGFlatColorMaterial *material = new QSGFlatColorMaterial;
+        auto material = new QSGFlatColorMaterial;
         material->setColor(m_lineColor);
 
         lineNode->setGeometry(lineNodeGeo);

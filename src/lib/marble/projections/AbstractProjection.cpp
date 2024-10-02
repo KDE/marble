@@ -32,9 +32,7 @@ AbstractProjection::AbstractProjection(AbstractProjectionPrivate *dd)
 {
 }
 
-AbstractProjection::~AbstractProjection()
-{
-}
+AbstractProjection::~AbstractProjection() = default;
 
 AbstractProjectionPrivate::AbstractProjectionPrivate(AbstractProjection *parent)
     : m_maxLat(0)

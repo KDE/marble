@@ -28,9 +28,7 @@ AddLinkDialog::Private::Private()
     // nothing to do
 }
 
-AddLinkDialog::Private::~Private()
-{
-}
+AddLinkDialog::Private::~Private() = default;
 
 AddLinkDialog::AddLinkDialog(QWidget *parent)
     : QDialog(parent)

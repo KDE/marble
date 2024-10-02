@@ -19,7 +19,7 @@ static GeoTagWriterRegistrar s_writerHead(GeoTagWriter::QualifiedName(GeoSceneTy
 
 bool DgmlHeadTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoSceneHead *head = static_cast<const GeoSceneHead *>(node);
+    const auto head = static_cast<const GeoSceneHead *>(node);
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Head));
     writer.writeElement("name", head->name());
     writer.writeElement("target", head->target());
@@ -29,12 +29,12 @@ bool DgmlHeadTagWriter::write(const GeoNode *node, GeoWriter &writer) const
     writer.writeCDATA(head->description());
     writer.writeEndElement();
 
-    const GeoSceneIcon &icon = static_cast<const GeoSceneIcon &>(*head->icon());
+    const auto &icon = static_cast<const GeoSceneIcon &>(*head->icon());
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Icon));
     writer.writeAttribute("pixmap", icon.pixmap());
     writer.writeEndElement();
 
-    const GeoSceneZoom &zoom = static_cast<const GeoSceneZoom &>(*head->zoom());
+    const auto &zoom = static_cast<const GeoSceneZoom &>(*head->zoom());
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Zoom));
     writer.writeElement("discrete", zoom.discrete() ? "true" : "false");
     writer.writeTextElement("minimum", QString::number(zoom.minimum()));

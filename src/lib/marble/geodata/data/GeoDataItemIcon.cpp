@@ -100,7 +100,7 @@ QImage GeoDataItemIcon::icon() const
         d->m_icon = QImage(resolvePath(d->m_iconPath));
         return d->m_icon;
     } else {
-        return QImage();
+        return {};
     }
 }
 

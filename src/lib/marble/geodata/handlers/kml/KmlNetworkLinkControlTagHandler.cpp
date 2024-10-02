@@ -21,7 +21,7 @@ GeoNode *KmlNetworkLinkControlTagHandler::parse(GeoParser &parser) const
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_NetworkLinkControl)));
 
     GeoStackItem parentItem = parser.parentElement();
-    GeoDataNetworkLinkControl *networkLinkControl = new GeoDataNetworkLinkControl;
+    auto networkLinkControl = new GeoDataNetworkLinkControl;
 
     if (parentItem.qualifiedName().first == kmlTag_kml) {
         GeoDataDocument *doc = geoDataDoc(parser);

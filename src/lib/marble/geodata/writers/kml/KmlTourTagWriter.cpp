@@ -18,7 +18,7 @@ static GeoTagWriterRegistrar s_writerTour(GeoTagWriter::QualifiedName(GeoDataTyp
 
 bool KmlTourTagWriter::writeMid(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataTour *tour = static_cast<const GeoDataTour *>(node);
+    const auto tour = static_cast<const GeoDataTour *>(node);
     if (tour->playlist()) {
         writeElement(tour->playlist(), writer);
     }

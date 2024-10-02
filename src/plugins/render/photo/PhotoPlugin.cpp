@@ -56,7 +56,7 @@ PhotoPlugin::~PhotoPlugin()
 void PhotoPlugin::initialize()
 {
     mDebug() << "PhotoPlugin: Initialize";
-    PhotoPluginModel *model = new PhotoPluginModel(marbleModel(), this);
+    auto model = new PhotoPluginModel(marbleModel(), this);
     setModel(model);
     updateSettings();
 }
@@ -111,49 +111,49 @@ QDialog *PhotoPlugin::configDialog()
         ui_configWidget->setupUi(m_configDialog);
 
         // add licenses to the list widget
-        QListWidgetItem *ccByNcSa2 = new QListWidgetItem(ui_configWidget->m_licenseListWidget);
+        auto ccByNcSa2 = new QListWidgetItem(ui_configWidget->m_licenseListWidget);
         ccByNcSa2->setText(tr("Attribution-NonCommercial-ShareAlike License"));
         ccByNcSa2->setIcon(QIcon());
         ccByNcSa2->setCheckState(Qt::Checked);
         ccByNcSa2->setData(Qt::UserRole + 1, 1);
         ccByNcSa2->setData(Qt::UserRole + 2, "http://creativecommons.org/licenses/by-nc-sa/2.0/");
         ui_configWidget->m_licenseListWidget->addItem(ccByNcSa2);
-        QListWidgetItem *ccByNc2 = new QListWidgetItem(ui_configWidget->m_licenseListWidget);
+        auto ccByNc2 = new QListWidgetItem(ui_configWidget->m_licenseListWidget);
         ccByNc2->setText(tr("Attribution-NonCommercial License"));
         ccByNc2->setIcon(QIcon());
         ccByNc2->setCheckState(Qt::Checked);
         ccByNc2->setData(Qt::UserRole + 1, 2);
         ccByNc2->setData(Qt::UserRole + 2, "http://creativecommons.org/licenses/by-nc/2.0/");
         ui_configWidget->m_licenseListWidget->addItem(ccByNc2);
-        QListWidgetItem *ccByNcNd2 = new QListWidgetItem(ui_configWidget->m_licenseListWidget);
+        auto ccByNcNd2 = new QListWidgetItem(ui_configWidget->m_licenseListWidget);
         ccByNcNd2->setText(tr("Attribution-NonCommercial-NoDerivs License"));
         ccByNcNd2->setIcon(QIcon());
         ccByNcNd2->setCheckState(Qt::Checked);
         ccByNcNd2->setData(Qt::UserRole + 1, 3);
         ccByNcNd2->setData(Qt::UserRole + 2, "http://creativecommons.org/licenses/by-nc-nd/2.0/");
         ui_configWidget->m_licenseListWidget->addItem(ccByNcNd2);
-        QListWidgetItem *ccBy2 = new QListWidgetItem(ui_configWidget->m_licenseListWidget);
+        auto ccBy2 = new QListWidgetItem(ui_configWidget->m_licenseListWidget);
         ccBy2->setText(tr("Attribution License"));
         ccBy2->setIcon(QIcon());
         ccBy2->setCheckState(Qt::Checked);
         ccBy2->setData(Qt::UserRole + 1, 4);
         ccBy2->setData(Qt::UserRole + 2, "http://creativecommons.org/licenses/by/2.0/");
         ui_configWidget->m_licenseListWidget->addItem(ccBy2);
-        QListWidgetItem *ccBySa2 = new QListWidgetItem(ui_configWidget->m_licenseListWidget);
+        auto ccBySa2 = new QListWidgetItem(ui_configWidget->m_licenseListWidget);
         ccBySa2->setText(tr("Attribution-ShareAlike License"));
         ccBySa2->setIcon(QIcon());
         ccBySa2->setCheckState(Qt::Checked);
         ccBySa2->setData(Qt::UserRole + 1, 5);
         ccBySa2->setData(Qt::UserRole + 2, "http://creativecommons.org/licenses/by-sa/2.0/");
         ui_configWidget->m_licenseListWidget->addItem(ccBySa2);
-        QListWidgetItem *ccByNd2 = new QListWidgetItem(ui_configWidget->m_licenseListWidget);
+        auto ccByNd2 = new QListWidgetItem(ui_configWidget->m_licenseListWidget);
         ccByNd2->setText(tr("Attribution-NoDerivs License"));
         ccByNd2->setIcon(QIcon());
         ccByNd2->setCheckState(Qt::Checked);
         ccByNd2->setData(Qt::UserRole + 1, 6);
         ccByNd2->setData(Qt::UserRole + 2, "http://creativecommons.org/licenses/by-nd/2.0/");
         ui_configWidget->m_licenseListWidget->addItem(ccByNd2);
-        QListWidgetItem *noLicense = new QListWidgetItem(ui_configWidget->m_licenseListWidget);
+        auto noLicense = new QListWidgetItem(ui_configWidget->m_licenseListWidget);
         noLicense->setText(tr("No known copyright restrictions"));
         noLicense->setIcon(QIcon());
         noLicense->setCheckState(Qt::Checked);
@@ -195,9 +195,9 @@ void PhotoPlugin::setSettings(const QHash<QString, QVariant> &settings)
 bool PhotoPlugin::eventFilter(QObject *object, QEvent *event)
 {
     if (isInitialized()) {
-        PhotoPluginModel *photoPluginModel = dynamic_cast<PhotoPluginModel *>(model());
+        auto photoPluginModel = dynamic_cast<PhotoPluginModel *>(model());
         Q_ASSERT(photoPluginModel);
-        MarbleWidget *widget = dynamic_cast<MarbleWidget *>(object);
+        auto widget = dynamic_cast<MarbleWidget *>(object);
         if (widget) {
             photoPluginModel->setMarbleWidget(widget);
         }

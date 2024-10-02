@@ -20,7 +20,7 @@ static GeoTagWriterRegistrar s_writerDocument(GeoTagWriter::QualifiedName("GeoSc
 
 bool DgmlDocumentTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoSceneDocument *document = static_cast<const GeoSceneDocument *>(node);
+    const auto document = static_cast<const GeoSceneDocument *>(node);
 
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Document));
 

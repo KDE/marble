@@ -30,7 +30,7 @@ GeoNode *GPXlinkTagHandler::parse(GeoParser &parser) const
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(gpxTag_wpt)) {
-        GeoDataPlacemark *placemark = parentItem.nodeAs<GeoDataPlacemark>();
+        auto placemark = parentItem.nodeAs<GeoDataPlacemark>();
 
         QXmlStreamAttributes attributes = parser.attributes();
         QString href = attributes.value(QLatin1StringView("href")).toString();

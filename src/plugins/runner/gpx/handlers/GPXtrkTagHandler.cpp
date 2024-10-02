@@ -26,10 +26,10 @@ GeoNode *GPXtrkTagHandler::parse(GeoParser &parser) const
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(gpxTag_gpx)) {
-        GeoDataDocument *doc = parentItem.nodeAs<GeoDataDocument>();
-        GeoDataPlacemark *placemark = new GeoDataPlacemark;
+        auto doc = parentItem.nodeAs<GeoDataDocument>();
+        auto placemark = new GeoDataPlacemark;
         doc->append(placemark);
-        GeoDataMultiGeometry *multigeometry = new GeoDataMultiGeometry;
+        auto multigeometry = new GeoDataMultiGeometry;
         placemark->setGeometry(multigeometry);
         placemark->setStyleUrl(QStringLiteral("#map-track"));
 

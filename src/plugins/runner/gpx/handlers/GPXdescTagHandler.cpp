@@ -25,7 +25,7 @@ GeoNode *GPXdescTagHandler::parse(GeoParser &parser) const
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(gpxTag_wpt) || parentItem.represents(gpxTag_trk) || parentItem.represents(gpxTag_rtept)) {
-        GeoDataPlacemark *placemark = parentItem.nodeAs<GeoDataPlacemark>();
+        auto placemark = parentItem.nodeAs<GeoDataPlacemark>();
 
         QString desc = placemark->description();
         if (!desc.isEmpty()) {
@@ -35,7 +35,7 @@ GeoNode *GPXdescTagHandler::parse(GeoParser &parser) const
         placemark->setDescriptionCDATA(true);
 
     } else if (parentItem.represents(gpxTag_rte)) {
-        GeoDataFeature *route = parentItem.nodeAs<GeoDataFeature>();
+        auto route = parentItem.nodeAs<GeoDataFeature>();
         QString desc = route->description();
         if (!desc.isEmpty()) {
             desc += QLatin1StringView("<br/>");

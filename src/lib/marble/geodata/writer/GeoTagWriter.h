@@ -41,7 +41,7 @@ public:
      * document type will usually correspond with the XML namespace. Use in the
      * order QPair<QString tagName, QString documentType>.
      */
-    typedef QPair<QString, QString> QualifiedName;
+    using QualifiedName = QPair<QString, QString>;
 
 protected:
     GeoTagWriter();
@@ -57,7 +57,7 @@ private:
 
 private:
     // Collect the Tag Writers and provide a singleton like accessor
-    typedef QHash<QualifiedName, const GeoTagWriter *> TagHash;
+    using TagHash = QHash<QualifiedName, const GeoTagWriter *>;
     static TagHash *tagWriterHash();
 
 private:

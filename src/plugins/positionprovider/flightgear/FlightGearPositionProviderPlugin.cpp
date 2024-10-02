@@ -65,7 +65,7 @@ QList<PluginAuthor> FlightGearPositionProviderPlugin::pluginAuthors() const
 
 QIcon FlightGearPositionProviderPlugin::icon() const
 {
-    return QIcon();
+    return {};
 }
 
 void FlightGearPositionProviderPlugin::initialize()
@@ -219,7 +219,7 @@ QDateTime FlightGearPositionProviderPlugin::timestamp() const
 
 QString FlightGearPositionProviderPlugin::error() const
 {
-    return QString();
+    return {};
 }
 
 #include "moc_FlightGearPositionProviderPlugin.cpp"

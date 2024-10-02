@@ -28,7 +28,7 @@ GeoNode *KmlPolygonTagHandler::parse(GeoParser &parser) const
 
     GeoStackItem parentItem = parser.parentElement();
 
-    GeoDataPolygon *polygon = new GeoDataPolygon;
+    auto polygon = new GeoDataPolygon;
     KmlObjectTagHandler::parseIdentifiers(parser, polygon);
 
     if (parentItem.represents(kmlTag_Placemark)) {

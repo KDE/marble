@@ -430,7 +430,7 @@ GeoDataCoordinates ViewportParams::focusPoint() const
         const qreal lon = d->m_centerLongitude;
         const qreal lat = d->m_centerLatitude;
 
-        return GeoDataCoordinates(lon, lat, 0.0, GeoDataCoordinates::Radian);
+        return {lon, lat, 0.0, GeoDataCoordinates::Radian};
     }
 }
 

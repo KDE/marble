@@ -38,9 +38,7 @@ PlacemarkLayer::PlacemarkLayer(QAbstractItemModel *placemarkModel,
     connect(&m_layout, SIGNAL(repaintNeeded()), SIGNAL(repaintNeeded()));
 }
 
-PlacemarkLayer::~PlacemarkLayer()
-{
-}
+PlacemarkLayer::~PlacemarkLayer() = default;
 
 QStringList PlacemarkLayer::renderPosition() const
 {

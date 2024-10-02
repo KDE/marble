@@ -32,7 +32,7 @@ public:
     const OsmPlacemarkData &osmData() const;
 
 private:
-    typedef QPair<GeoDataLinearRing, OsmPlacemarkData> OsmRing;
+    using OsmRing = QPair<GeoDataLinearRing, OsmPlacemarkData>;
     using OsmRings = QList<OsmRing>;
 
     struct OsmMember {
@@ -49,8 +49,7 @@ private:
     QList<OsmMember> m_members;
 };
 
-typedef QHash<qint64, OsmRelation> OsmRelations;
-
+using OsmRelations = QHash<qint64, OsmRelation>;
 }
 
 #endif

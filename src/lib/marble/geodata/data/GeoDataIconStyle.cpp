@@ -42,7 +42,7 @@ public:
 
     RemoteIconLoader *remoteIconLoader() const
     {
-        static RemoteIconLoader *remoteIconLoader = new RemoteIconLoader();
+        static auto remoteIconLoader = new RemoteIconLoader();
         return remoteIconLoader;
     }
 
@@ -58,7 +58,7 @@ public:
             iconSize *= m_scale;
         }
 
-        return QSize(iconSize.width() - iconSize.width() % 2, iconSize.height() - iconSize.height() % 2);
+        return {iconSize.width() - iconSize.width() % 2, iconSize.height() - iconSize.height() % 2};
     }
 
     QImage loadIcon(const QString &path, const QSize &size) const
@@ -90,7 +90,7 @@ public:
         }
 
         mDebug() << "Unable to open style icon at: " << path;
-        return QImage();
+        return {};
     }
 
     float m_scale;
@@ -184,7 +184,7 @@ QImage GeoDataIconStyle::icon() const
         d->m_icon = d->loadIcon(resolvePath(d->m_iconPath), d->m_size);
         return d->m_icon;
     } else
-        return QImage();
+        return {};
 }
 
 void GeoDataIconStyle::setHotSpot(const QPointF &hotSpot, GeoDataHotSpot::Units xunits, GeoDataHotSpot::Units yunits)

@@ -328,7 +328,7 @@ void MarbleQuickItem::updatePlacemarks()
     }
 
     if (!d->m_placemarkItem) {
-        QQmlContext *context = new QQmlContext(qmlContext(d->m_placemarkDelegate));
+        auto context = new QQmlContext(qmlContext(d->m_placemarkDelegate));
         QObject *component = d->m_placemarkDelegate->create(context);
         d->m_placemarkItem = qobject_cast<QQuickItem *>(component);
         if (d->m_placemarkItem) {
@@ -513,7 +513,7 @@ QString MarbleQuickItem::positionProvider() const
         return d->m_model.positionTracking()->positionProviderPlugin()->nameId();
     }
 
-    return QString();
+    return {};
 }
 
 MarbleModel *MarbleQuickItem::model()
@@ -1393,7 +1393,7 @@ void MarbleQuickItemPrivate::changeStyleBuilder(bool invert)
         return;
 
     if (map->hasVectorLayers()) {
-        StyleBuilder *styleBuilder = const_cast<StyleBuilder *>(m_map.styleBuilder());
+        auto styleBuilder = const_cast<StyleBuilder *>(m_map.styleBuilder());
 
         if (invert) {
             styleBuilder->setStyleEffect(InvertedEffect);

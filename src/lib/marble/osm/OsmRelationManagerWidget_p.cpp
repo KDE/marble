@@ -52,7 +52,7 @@ void OsmRelationManagerWidgetPrivate::populateRelationsList()
 
             const OsmPlacemarkData &relationData = m_allRelations->value(it.key().id);
 
-            QTreeWidgetItem *newItem = new QTreeWidgetItem();
+            auto newItem = new QTreeWidgetItem();
             QString name = relationData.tagValue(QStringLiteral("name"));
             QString type = relationData.tagValue(QStringLiteral("type"));
             QString role = it.value();
@@ -86,7 +86,7 @@ void OsmRelationManagerWidgetPrivate::populateDropMenu()
         if (m_placemark->hasOsmData() && m_placemark->osmData().containsRelation(relationData.id())) {
             continue;
         }
-        QAction *newAction = new QAction(m_relationDropMenu);
+        auto newAction = new QAction(m_relationDropMenu);
         newAction->setText(relationText);
         newAction->setData(relationData.id());
         m_relationDropMenu->addAction(newAction);

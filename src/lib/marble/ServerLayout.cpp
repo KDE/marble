@@ -23,9 +23,7 @@ ServerLayout::ServerLayout(GeoSceneTileDataset *textureLayer)
 {
 }
 
-ServerLayout::~ServerLayout()
-{
-}
+ServerLayout::~ServerLayout() = default;
 
 MarbleServerLayout::MarbleServerLayout(GeoSceneTileDataset *textureLayer)
     : ServerLayout(textureLayer)
@@ -169,7 +167,7 @@ QString WmsServerLayout::epsgCode() const
     }
 
     Q_ASSERT(false); // not reached
-    return QString();
+    return {};
 }
 
 WmtsServerLayout::WmtsServerLayout(GeoSceneTileDataset *texture)
@@ -204,7 +202,7 @@ QString WmtsServerLayout::epsgCode() const
     }
 
     Q_ASSERT(false); // not reached
-    return QString();
+    return {};
 }
 
 QuadTreeServerLayout::QuadTreeServerLayout(GeoSceneTileDataset *textureLayer)

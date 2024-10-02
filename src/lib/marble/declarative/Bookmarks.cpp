@@ -69,11 +69,11 @@ bool Bookmarks::isBookmark(qreal longitude, qreal latitude) const
 
 Placemark *Bookmarks::placemark(int row)
 {
-    Placemark *placemark = new Placemark;
+    auto placemark = new Placemark;
 
     QModelIndex index = model()->index(row, 0);
-    GeoDataObject *object = model()->data(index, MarblePlacemarkModel::ObjectPointerRole).value<GeoDataObject *>();
-    if (GeoDataPlacemark *geoDataPlacemark = geodata_cast<GeoDataPlacemark>(object)) {
+    auto object = model()->data(index, MarblePlacemarkModel::ObjectPointerRole).value<GeoDataObject *>();
+    if (auto geoDataPlacemark = geodata_cast<GeoDataPlacemark>(object)) {
         placemark->setGeoDataPlacemark(*geoDataPlacemark);
     }
 
@@ -153,7 +153,7 @@ void Bookmarks::updateBookmarkDocument()
 BookmarksModel *Bookmarks::model()
 {
     if (!m_proxyModel && m_marbleQuickItem && m_marbleQuickItem->model()->bookmarkManager()) {
-        KDescendantsProxyModel *flattener = new KDescendantsProxyModel(this);
+        auto flattener = new KDescendantsProxyModel(this);
         flattener->setSourceModel(&m_treeModel);
 
         m_proxyModel = new BookmarksModel(this);
@@ -183,7 +183,7 @@ qreal BookmarksModel::longitude(int idx) const
 {
     if (idx >= 0 && idx < rowCount()) {
         QVariant const value = data(index(idx, 0), Marble::MarblePlacemarkModel::CoordinateRole);
-        Marble::GeoDataCoordinates const coordinates = value.value<Marble::GeoDataCoordinates>();
+        auto const coordinates = value.value<Marble::GeoDataCoordinates>();
         return coordinates.longitude(Marble::GeoDataCoordinates::Degree);
     }
     return 0.0;
@@ -193,7 +193,7 @@ qreal BookmarksModel::latitude(int idx) const
 {
     if (idx >= 0 && idx < rowCount()) {
         QVariant const value = data(index(idx, 0), Marble::MarblePlacemarkModel::CoordinateRole);
-        Marble::GeoDataCoordinates const coordinates = value.value<Marble::GeoDataCoordinates>();
+        auto const coordinates = value.value<Marble::GeoDataCoordinates>();
         return coordinates.latitude(Marble::GeoDataCoordinates::Degree);
     }
     return 0.0;
@@ -204,7 +204,7 @@ QString BookmarksModel::name(int idx) const
     if (idx >= 0 && idx < rowCount()) {
         return data(index(idx, 0)).toString();
     }
-    return QString();
+    return {};
 }
 
 }

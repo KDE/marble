@@ -21,7 +21,7 @@ static GeoTagWriterRegistrar s_writerUpdate(GeoTagWriter::QualifiedName(GeoDataT
 
 bool KmlUpdateTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataUpdate *update = static_cast<const GeoDataUpdate *>(node);
+    const auto update = static_cast<const GeoDataUpdate *>(node);
     KmlObjectTagWriter::writeIdentifiers(writer, update);
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_Update));
     writer.writeElement(kml::kmlTag_targetHref, update->targetHref());

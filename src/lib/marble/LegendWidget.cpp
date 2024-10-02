@@ -26,9 +26,7 @@ public:
     LegendWidgetPrivate();
 };
 
-LegendWidgetPrivate::LegendWidgetPrivate()
-{
-}
+LegendWidgetPrivate::LegendWidgetPrivate() = default;
 
 LegendWidget::LegendWidget(QWidget *parent, Qt::WindowFlags f)
     : QWidget(parent, f)

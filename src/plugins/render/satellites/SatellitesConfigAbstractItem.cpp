@@ -19,9 +19,7 @@ SatellitesConfigAbstractItem::SatellitesConfigAbstractItem(const QString &name)
 {
 }
 
-SatellitesConfigAbstractItem::~SatellitesConfigAbstractItem()
-{
-}
+SatellitesConfigAbstractItem::~SatellitesConfigAbstractItem() = default;
 
 QString SatellitesConfigAbstractItem::name() const
 {
@@ -55,14 +53,14 @@ void SatellitesConfigAbstractItem::loadSettings(const QHash<QString, QVariant> &
 QVariant SatellitesConfigAbstractItem::data(int column, int role) const
 {
     if (column != 0) {
-        return QVariant();
+        return {};
     }
 
     switch (role) {
     case Qt::DisplayRole:
         return QVariant(name());
     default:
-        return QVariant();
+        return {};
     }
 }
 

@@ -182,24 +182,7 @@ public:
         return string;
     }
 
-    WeatherDataPrivate &operator=(const WeatherDataPrivate &other)
-    {
-        m_pubTime = other.m_pubTime;
-        m_dataDate = other.m_dataDate;
-        m_condition = other.m_condition;
-        m_windDirection = other.m_windDirection;
-        m_windSpeed = other.m_windSpeed;
-        m_temperature = other.m_temperature;
-        m_maxTemperature = other.m_maxTemperature;
-        m_minTemperature = other.m_minTemperature;
-        m_visibility = other.m_visibility;
-        m_pressure = other.m_pressure;
-        m_pressureDevelopment = other.m_pressureDevelopment;
-        m_humidity = other.m_humidity;
-
-        ref = other.ref;
-        return *this;
-    }
+    WeatherDataPrivate &operator=(const WeatherDataPrivate &other) = default;
 
     QDateTime m_pubTime;
     QDate m_dataDate;

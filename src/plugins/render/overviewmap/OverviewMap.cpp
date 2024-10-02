@@ -370,13 +370,13 @@ bool OverviewMap::eventFilter(QObject *object, QEvent *e)
         return false;
     }
 
-    MarbleWidget *widget = dynamic_cast<MarbleWidget *>(object);
+    auto widget = dynamic_cast<MarbleWidget *>(object);
     if (!widget) {
         return AbstractFloatItem::eventFilter(object, e);
     }
 
     if (e->type() == QEvent::MouseButtonDblClick || e->type() == QEvent::MouseMove) {
-        QMouseEvent *event = static_cast<QMouseEvent *>(e);
+        auto event = static_cast<QMouseEvent *>(e);
         QRectF floatItemRect = QRectF(positivePosition(), size());
 
         bool cursorAboveFloatItem(false);
@@ -456,7 +456,7 @@ void OverviewMap::chooseCustomMap()
     if (!path.isNull()) {
         ui_configWidget->m_fileChooserButton->layout()->removeWidget(currentWidget());
         delete currentWidget();
-        QSvgWidget *widget = new QSvgWidget(path);
+        auto widget = new QSvgWidget(path);
         setCurrentWidget(widget);
         ui_configWidget->m_fileChooserButton->layout()->addWidget(widget);
         m_svgPaths[m_planetID[ui_configWidget->m_planetComboBox->currentIndex()]] = path;
@@ -495,7 +495,7 @@ void OverviewMap::useMapSuggestion(int index)
     QString path = ui_configWidget->m_tableWidget->item(index, 1)->text();
     m_svgPaths[m_planetID[ui_configWidget->m_planetComboBox->currentIndex()]] = path;
     delete currentWidget();
-    QSvgWidget *widget = new QSvgWidget(path);
+    auto widget = new QSvgWidget(path);
     setCurrentWidget(widget);
     showCurrentPlanetPreview();
 }

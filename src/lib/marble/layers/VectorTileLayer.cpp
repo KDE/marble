@@ -124,7 +124,7 @@ RenderState VectorTileLayer::renderState() const
 int VectorTileLayer::tileZoomLevel() const
 {
     int level = -1;
-    for (const auto *mapper : std::as_const(d->m_activeTileModels)) {
+    for (const auto mapper : std::as_const(d->m_activeTileModels)) {
         level = qMax(level, mapper->tileZoomLevel());
     }
     return level;
@@ -133,7 +133,7 @@ int VectorTileLayer::tileZoomLevel() const
 QString VectorTileLayer::runtimeTrace() const
 {
     int tiles = 0;
-    for (const auto *mapper : std::as_const(d->m_activeTileModels)) {
+    for (const auto mapper : std::as_const(d->m_activeTileModels)) {
         tiles += mapper->cachedDocuments();
     }
     int const layers = d->m_activeTileModels.size();
@@ -168,7 +168,7 @@ void VectorTileLayer::reload()
 
 QSize VectorTileLayer::tileSize() const
 {
-    return QSize(256, 256);
+    return {256, 256};
 }
 
 const GeoSceneAbstractTileProjection *VectorTileLayer::tileProjection() const

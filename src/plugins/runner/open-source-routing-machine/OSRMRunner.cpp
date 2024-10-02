@@ -111,7 +111,7 @@ void OSRMRunner::append(QString *input, const QString &key, const QString &value
 GeoDataLineString *OSRMRunner::decodePolyline(const QString &geometry)
 {
     // See https://developers.google.com/maps/documentation/utilities/polylinealgorithm
-    GeoDataLineString *lineString = new GeoDataLineString;
+    auto lineString = new GeoDataLineString;
     int coordinates[2] = {0, 0};
     int const length = geometry.length();
     for (int i = 0; i < length; /* increment happens below */) {
@@ -189,7 +189,7 @@ GeoDataDocument *OSRMRunner::parse(const QByteArray &input) const
             if (routeGeometryValue.isString()) {
                 result = new GeoDataDocument();
                 result->setName(QStringLiteral("Open Source Routing Machine"));
-                GeoDataPlacemark *routePlacemark = new GeoDataPlacemark;
+                auto routePlacemark = new GeoDataPlacemark;
                 routePlacemark->setName(QStringLiteral("Route"));
                 routeWaypoints = decodePolyline(routeGeometryValue.toString());
                 routePlacemark->setGeometry(routeWaypoints);

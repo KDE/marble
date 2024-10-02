@@ -77,7 +77,7 @@ void MarbleWidgetSpeedTest::timeTest()
     // required frames per second for test to pass
     // redundant with above really but I leave it in
     // for now...
-    unsigned int fps = (uint)(200.0 * 1000.0 / (double)(t.elapsed()));
+    auto fps = (uint)(200.0 * 1000.0 / (double)(t.elapsed()));
     QVERIFY(fps > 10);
 }
 

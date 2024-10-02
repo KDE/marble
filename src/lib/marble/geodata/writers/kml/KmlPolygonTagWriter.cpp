@@ -20,7 +20,7 @@ static GeoTagWriterRegistrar s_writerLookAt(GeoTagWriter::QualifiedName(GeoDataT
 
 bool KmlPolygonTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataPolygon *polygon = static_cast<const GeoDataPolygon *>(node);
+    const auto polygon = static_cast<const GeoDataPolygon *>(node);
 
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_Polygon));
     KmlObjectTagWriter::writeIdentifiers(writer, polygon);

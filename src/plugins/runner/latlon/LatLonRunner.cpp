@@ -20,9 +20,7 @@ LatLonRunner::LatLonRunner(QObject *parent)
 {
 }
 
-LatLonRunner::~LatLonRunner()
-{
-}
+LatLonRunner::~LatLonRunner() = default;
 
 void LatLonRunner::search(const QString &searchTerm, const GeoDataLatLonBox &)
 {
@@ -32,7 +30,7 @@ void LatLonRunner::search(const QString &searchTerm, const GeoDataLatLonBox &)
     const GeoDataCoordinates coord = GeoDataCoordinates::fromString(searchTerm, successful);
 
     if (successful) {
-        GeoDataPlacemark *placemark = new GeoDataPlacemark;
+        auto placemark = new GeoDataPlacemark;
         placemark->setName(searchTerm);
         qreal lon, lat;
         coord.geoCoordinates(lon, lat);

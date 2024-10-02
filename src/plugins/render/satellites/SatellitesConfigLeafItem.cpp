@@ -19,9 +19,7 @@ SatellitesConfigLeafItem::SatellitesConfigLeafItem(const QString &name, const QS
 {
 }
 
-SatellitesConfigLeafItem::~SatellitesConfigLeafItem()
-{
-}
+SatellitesConfigLeafItem::~SatellitesConfigLeafItem() = default;
 
 void SatellitesConfigLeafItem::loadSettings(const QHash<QString, QVariant> &settings)
 {
@@ -48,13 +46,13 @@ QVariant SatellitesConfigLeafItem::data(int column, int role) const
     case Qt::CheckStateRole:
         switch (column) {
         case 0:
-            return QVariant(m_isChecked ? Qt::Checked : Qt::Unchecked);
+            return {m_isChecked ? Qt::Checked : Qt::Unchecked};
         case 1:
-            return QVariant(m_isOrbitDisplayed ? Qt::Checked : Qt::Unchecked);
+            return {m_isOrbitDisplayed ? Qt::Checked : Qt::Unchecked};
         }
     }
 
-    return QVariant();
+    return {};
 }
 
 bool SatellitesConfigLeafItem::setData(int column, int role, const QVariant &data)

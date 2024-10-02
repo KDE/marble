@@ -24,7 +24,7 @@ GeoNode *KmlScreenOverlayTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_ScreenOverlay)));
 
-    GeoDataScreenOverlay *overlay = new GeoDataScreenOverlay();
+    auto overlay = new GeoDataScreenOverlay();
     KmlObjectTagHandler::parseIdentifiers(parser, overlay);
 
     GeoStackItem parentItem = parser.parentElement();

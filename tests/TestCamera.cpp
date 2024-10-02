@@ -45,7 +45,7 @@ void TestCamera::simpleParseTest()
         "</kml>");
 
     GeoDataDocument *dataDocument = parseKml(kmlContent);
-    GeoDataCamera *camera = dynamic_cast<GeoDataCamera *>(dataDocument->abstractView());
+    auto camera = dynamic_cast<GeoDataCamera *>(dataDocument->abstractView());
 
     QVERIFY(camera != nullptr);
 

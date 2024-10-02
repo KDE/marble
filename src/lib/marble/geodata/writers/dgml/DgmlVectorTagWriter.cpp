@@ -18,7 +18,7 @@ static GeoTagWriterRegistrar s_writerVector(GeoTagWriter::QualifiedName(GeoScene
 
 bool DgmlVectorTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoSceneVector *vector = static_cast<const GeoSceneVector *>(node);
+    const auto vector = static_cast<const GeoSceneVector *>(node);
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Vector));
     writer.writeAttribute("name", vector->name());
     writer.writeAttribute("feature", vector->feature());

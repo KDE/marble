@@ -407,7 +407,7 @@ QRegion GeoPainter::regionFromEllipse(const GeoDataCoordinates &centerPosition, 
 
         // Ensure a valid latitude range:
         if (centerLat + 0.5 * height > 90.0 || centerLat - 0.5 * height < -90.0) {
-            return QRegion();
+            return {};
         }
 
         // Don't show the ellipse if it's too small:
@@ -417,7 +417,7 @@ QRegion GeoPainter::regionFromEllipse(const GeoDataCoordinates &centerPosition, 
                                     centerLon - 0.5 * width,
                                     GeoDataCoordinates::Degree);
         if (!d->m_viewport->viewLatLonAltBox().intersects(ellipseBox) || !d->m_viewport->resolves(ellipseBox))
-            return QRegion();
+            return {};
 
         GeoDataLinearRing ellipse;
 
@@ -697,7 +697,7 @@ QRegion GeoPainter::regionFromPolyline(const GeoDataLineString &lineString, qrea
     // - the size of the object is below the resolution of the viewport
     if (!d->m_viewport->viewLatLonAltBox().intersects(lineString.latLonAltBox()) || !d->m_viewport->resolves(lineString.latLonAltBox())) {
         // mDebug() << "LineString doesn't get displayed on the viewport";
-        return QRegion();
+        return {};
     }
 
     QPainterPath painterPath;
@@ -744,7 +744,7 @@ QRegion GeoPainter::regionFromPolygon(const GeoDataLinearRing &linearRing, Qt::F
     // - the object is not visible in the viewport or if
     // - the size of the object is below the resolution of the viewport
     if (!d->m_viewport->viewLatLonAltBox().intersects(linearRing.latLonAltBox()) || !d->m_viewport->resolves(linearRing.latLonAltBox())) {
-        return QRegion();
+        return {};
     }
 
     QRegion regions;
@@ -852,7 +852,7 @@ QList<QPolygonF *> GeoPainter::createFillPolygons(const QList<QPolygonF *> &oute
     fillPolygons.reserve(outerPolygons.size());
 
     for (const QPolygonF *outerPolygon : outerPolygons) {
-        QPolygonF *fillPolygon = new QPolygonF;
+        auto fillPolygon = new QPolygonF;
         *fillPolygon << *outerPolygon;
         *fillPolygon << outerPolygon->first();
 

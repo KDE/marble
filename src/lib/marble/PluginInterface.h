@@ -24,9 +24,7 @@ namespace Marble
 struct MARBLE_EXPORT PluginAuthor {
     Q_DECLARE_TR_FUNCTIONS(PluginAuthor)
 public:
-    PluginAuthor()
-    {
-    }
+    PluginAuthor() = default;
 
     PluginAuthor(const QString &name_, const QString &email_, const QString &task_ = PluginAuthor::tr("Developer"))
         : name(name_)

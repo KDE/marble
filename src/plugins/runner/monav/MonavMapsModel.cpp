@@ -54,7 +54,7 @@ QVariant MonavMapsModel::headerData(int section, Qt::Orientation orientation, in
         }
     }
 
-    return QVariant();
+    return {};
 }
 
 QVariant MonavMapsModel::data(const QModelIndex &index, int role) const
@@ -93,7 +93,7 @@ QVariant MonavMapsModel::data(const QModelIndex &index, int role) const
             }
     }
 
-    return QVariant();
+    return {};
 }
 
 int MonavMapsModel::rowCount(const QModelIndex &parent) const
@@ -112,7 +112,7 @@ QString MonavMapsModel::payload(int index) const
         return m_data.at(index).payload();
     }
 
-    return QString();
+    return {};
 }
 
 }

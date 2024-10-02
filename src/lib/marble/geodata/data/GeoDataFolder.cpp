@@ -28,9 +28,7 @@ GeoDataFolder::GeoDataFolder(const GeoDataFolder &other)
 {
 }
 
-GeoDataFolder::~GeoDataFolder()
-{
-}
+GeoDataFolder::~GeoDataFolder() = default;
 
 GeoDataFolder &GeoDataFolder::operator=(const GeoDataFolder &other)
 {

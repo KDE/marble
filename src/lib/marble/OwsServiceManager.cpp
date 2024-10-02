@@ -19,17 +19,11 @@
 namespace Marble
 {
 
-OwsMappingCapabilities::OwsMappingCapabilities()
-{
-}
+OwsMappingCapabilities::OwsMappingCapabilities() = default;
 
-WmsCapabilities::WmsCapabilities()
-{
-}
+WmsCapabilities::WmsCapabilities() = default;
 
-WmtsCapabilities::WmtsCapabilities()
-{
-}
+WmtsCapabilities::WmtsCapabilities() = default;
 
 void WmtsCapabilities::setWmtsTileMatrixSets(const QMap<QString, QStringList> &wmtsTileMatrixSets)
 {

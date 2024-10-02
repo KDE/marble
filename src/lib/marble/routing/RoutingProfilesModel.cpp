@@ -20,18 +20,18 @@ RoutingProfilesModel::RoutingProfilesModel(const PluginManager *pluginManager, Q
 QVariant RoutingProfilesModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid()) {
-        return QVariant();
+        return {};
     }
     if (index.parent().isValid()) {
-        return QVariant();
+        return {};
     }
     if (index.row() >= m_profiles.count()) {
-        return QVariant();
+        return {};
     }
     if ((role == Qt::DisplayRole || role == Qt::EditRole) && index.column() == 0) {
         return m_profiles.at(index.row()).name();
     }
-    return QVariant();
+    return {};
 }
 
 int RoutingProfilesModel::rowCount(const QModelIndex &parent) const
@@ -147,7 +147,7 @@ void RoutingProfilesModel::loadDefaultProfiles()
 {
     beginInsertRows(QModelIndex(), m_profiles.count(), m_profiles.count() + int(LastTemplate) - 1);
     for (int i = 0; i < LastTemplate; ++i) {
-        ProfileTemplate tpl = static_cast<ProfileTemplate>(i);
+        auto tpl = static_cast<ProfileTemplate>(i);
         RoutingProfile profile(templateName(tpl));
         bool profileSupportedByAtLeastOnePlugin = false;
         for (RoutingRunnerPlugin *plugin : m_pluginManager->routingRunnerPlugins()) {

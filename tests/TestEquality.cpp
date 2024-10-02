@@ -488,19 +488,19 @@ void TestEquality::tourTest()
 {
     GeoDataTour tour1;
     GeoDataTour tour2;
-    GeoDataPlaylist *playlist1 = new GeoDataPlaylist;
-    GeoDataPlaylist *playlist2 = new GeoDataPlaylist;
+    auto playlist1 = new GeoDataPlaylist;
+    auto playlist2 = new GeoDataPlaylist;
 
-    GeoDataAnimatedUpdate *animatedUpdate1 = new GeoDataAnimatedUpdate;
-    GeoDataAnimatedUpdate *animatedUpdate2 = new GeoDataAnimatedUpdate;
-    GeoDataSoundCue *cue1 = new GeoDataSoundCue;
-    GeoDataSoundCue *cue2 = new GeoDataSoundCue;
-    GeoDataTourControl *control1 = new GeoDataTourControl;
-    GeoDataTourControl *control2 = new GeoDataTourControl;
-    GeoDataWait *wait1 = new GeoDataWait;
-    GeoDataWait *wait2 = new GeoDataWait;
-    GeoDataFlyTo *flyTo1 = new GeoDataFlyTo;
-    GeoDataFlyTo *flyTo2 = new GeoDataFlyTo;
+    auto animatedUpdate1 = new GeoDataAnimatedUpdate;
+    auto animatedUpdate2 = new GeoDataAnimatedUpdate;
+    auto cue1 = new GeoDataSoundCue;
+    auto cue2 = new GeoDataSoundCue;
+    auto control1 = new GeoDataTourControl;
+    auto control2 = new GeoDataTourControl;
+    auto wait1 = new GeoDataWait;
+    auto wait2 = new GeoDataWait;
+    auto flyTo1 = new GeoDataFlyTo;
+    auto flyTo2 = new GeoDataFlyTo;
 
     playlist1->addPrimitive(animatedUpdate1);
     playlist1->addPrimitive(cue1);
@@ -532,7 +532,7 @@ void TestEquality::tourTest()
     tour1.playlist()->swapPrimitives(1, 3);
     QVERIFY(tour1 == tour2);
 
-    GeoDataSoundCue *cue3 = new GeoDataSoundCue;
+    auto cue3 = new GeoDataSoundCue;
     tour1.playlist()->addPrimitive(cue3);
 
     QCOMPARE(tour1, tour1);
@@ -596,7 +596,7 @@ void TestEquality::tourTest()
     listStyle.setListItemType(GeoDataListStyle::Check);
     listStyle.setBackgroundColor(Qt::gray);
     for (int i = 0; i < 5; ++i) {
-        GeoDataItemIcon *icon = new GeoDataItemIcon;
+        auto icon = new GeoDataItemIcon;
         QImage img(20 * (i + 1), 20 * (i + 1), QImage::Format_Mono);
         img.fill(Qt::black);
         icon->setIcon(img);
@@ -1222,7 +1222,7 @@ void TestEquality::listStyleTest()
     listStyle1.setListItemType(GeoDataListStyle::Check);
     listStyle1.setBackgroundColor(Qt::gray);
     for (int i = 0; i < 5; ++i) {
-        GeoDataItemIcon *icon = new GeoDataItemIcon;
+        auto icon = new GeoDataItemIcon;
         QImage img(10 * (i + 1), 10 * (i + 1), QImage::Format_Mono);
         img.fill(Qt::black);
         icon->setIcon(img);
@@ -1234,7 +1234,7 @@ void TestEquality::listStyleTest()
     listStyle2.setListItemType(GeoDataListStyle::Check);
     listStyle2.setBackgroundColor(Qt::gray);
     for (int i = 0; i < 5; ++i) {
-        GeoDataItemIcon *icon = new GeoDataItemIcon;
+        auto icon = new GeoDataItemIcon;
         QImage img(10 * (i + 1), 10 * (i + 1), QImage::Format_Mono);
         img.fill(Qt::black);
         icon->setIcon(img);
@@ -1358,7 +1358,7 @@ void TestEquality::styleTest()
     listStyle.setListItemType(GeoDataListStyle::Check);
     listStyle.setBackgroundColor(Qt::gray);
     for (int i = 0; i < 5; ++i) {
-        GeoDataItemIcon *icon = new GeoDataItemIcon;
+        auto icon = new GeoDataItemIcon;
         QImage img(20 * (i + 1), 20 * (i + 1), QImage::Format_Mono);
         img.fill(Qt::black);
         icon->setIcon(img);
@@ -2167,8 +2167,8 @@ void TestEquality::networkLinkControlTest()
     netLC1.setUpdate(update);
     netLC2.setUpdate(update);
 
-    GeoDataCamera *camera1 = new GeoDataCamera;
-    GeoDataCamera *camera2 = new GeoDataCamera;
+    auto camera1 = new GeoDataCamera;
+    auto camera2 = new GeoDataCamera;
 
     camera1->setAltitudeMode(Marble::ClampToGround);
     camera1->setAltitude(2000);

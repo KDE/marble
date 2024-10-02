@@ -76,7 +76,7 @@ void MarbleLegendBrowser::setMarbleModel(MarbleModel *marbleModel)
 
 QSize MarbleLegendBrowser::sizeHint() const
 {
-    return QSize(320, 320);
+    return {320, 320};
 }
 
 void MarbleLegendBrowser::initTheme()
@@ -148,12 +148,12 @@ void MarbleLegendBrowser::loadLegend()
     QUrl baseUrl = QUrl::fromLocalFile(legendPath);
 
     // Set the html string in the QTextBrowser.
-    MarbleWebPage *page = new MarbleWebPage(this);
+    auto page = new MarbleWebPage(this);
     connect(page, SIGNAL(linkClicked(QUrl)), this, SLOT(openLinkExternally(QUrl)));
     page->setHtml(finalHtml, baseUrl);
     setPage(page);
 
-    QWebChannel *channel = new QWebChannel(page);
+    auto channel = new QWebChannel(page);
     channel->registerObject(QStringLiteral("Marble"), d->m_jsWrapper);
     page->setWebChannel(channel);
 
@@ -202,7 +202,7 @@ void MarbleLegendBrowser::translateHtml(QString &html)
 {
     // must match string extraction in Messages.sh
     QString s = html;
-    QRegularExpression rx("</?\\w+((\\s+\\w+(\\s*=\\s*(?:\".*\"|'.*'|[^'\">\\s]+))?)+\\s*|\\s*)/?>",
+    QRegularExpression rx(R"(</?\w+((\s+\w+(\s*=\s*(?:".*"|'.*'|[^'">\s]+))?)+\s*|\s*)/?>)",
                           QRegularExpression::InvertedGreedinessOption); // PORT_QT6: double check
     /*
         QRegExp rx( "</?\\w+((\\s+\\w+(\\s*=\\s*(?:\".*\"|'.*'|[^'\">\\s]+))?)+\\s*|\\s*)/?>");
@@ -220,7 +220,7 @@ void MarbleLegendBrowser::translateHtml(QString &html)
 
 void MarbleLegendBrowser::injectWebChannel(QString &html)
 {
-    QString webChannelCode = "<script type=\"text/javascript\" src=\"qrc:///qtwebchannel/qwebchannel.js\"></script>";
+    QString webChannelCode = R"(<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>)";
     webChannelCode +=
         "<script> document.addEventListener(\"DOMContentLoaded\", function() {"
         "new QWebChannel(qt.webChannelTransport, function (channel) {"
@@ -254,7 +254,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
     QString customLegendString;
 
     if (d->m_marbleModel == nullptr || d->m_marbleModel->mapTheme() == nullptr)
-        return QString();
+        return {};
 
     const GeoSceneDocument *currentMapTheme = d->m_marbleModel->mapTheme();
 
@@ -342,7 +342,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
             QString html = QLatin1StringView(
                                "<div class=\"legend-entry\">"
                                "  <label>")
-                + checkBoxString + QLatin1StringView("    <img class=\"image-pic\" src=\"") + src + QLatin1StringView("\" style=\"") + styleDiv
+                + checkBoxString + QLatin1StringView(R"(    <img class="image-pic" src=")") + src + QLatin1StringView("\" style=\"") + styleDiv
                 + QLatin1StringView(
                                "\"/>"
                                "    <span class=\"kotation\" >")

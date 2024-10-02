@@ -26,9 +26,7 @@ SunLightBlending::SunLightBlending(const SunLocator *sunLocator)
 {
 }
 
-SunLightBlending::~SunLightBlending()
-{
-}
+SunLightBlending::~SunLightBlending() = default;
 
 void SunLightBlending::blend(QImage *const tileImage, TextureTile const *const top) const
 {

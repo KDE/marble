@@ -101,10 +101,10 @@ void ConflictDialog::prepareLayout()
     qDeleteAll(children());
     m_box = new QDialogButtonBox(QDialogButtonBox::Cancel);
 
-    QPushButton *localButton = new QPushButton(tr("Use local"));
-    QPushButton *cloudButton = new QPushButton(tr("Use cloud"));
-    QPushButton *allLocalButton = new QPushButton(tr("Always use local"));
-    QPushButton *allCloudButton = new QPushButton(tr("Always use cloud"));
+    auto localButton = new QPushButton(tr("Use local"));
+    auto cloudButton = new QPushButton(tr("Use cloud"));
+    auto allLocalButton = new QPushButton(tr("Always use local"));
+    auto allCloudButton = new QPushButton(tr("Always use cloud"));
 
     localButton->setDefault(true);
     localButton->setProperty("ActionRole", ConflictDialog::Local);
@@ -117,7 +117,7 @@ void ConflictDialog::prepareLayout()
     m_box->addButton(allLocalButton, QDialogButtonBox::ActionRole);
     m_box->addButton(allCloudButton, QDialogButtonBox::ActionRole);
 
-    QVBoxLayout *leftLayout = new QVBoxLayout();
+    auto leftLayout = new QVBoxLayout();
     QString localHeaderText = tr("Local placemark");
     QString localDetailText =
         tr("Path: %0 <br /> Name: %1 <br /> Description: %2 <br /> Status: %3").arg(m_mergeItem->pathA(), m_mergeItem->nameA(), m_mergeItem->descriptionA());
@@ -132,12 +132,12 @@ void ConflictDialog::prepareLayout()
         break;
     }
 
-    QLabel *localHeaderLabel = new QLabel(localHeaderText);
-    QLabel *localDetailLabel = new QLabel(localDetailText);
+    auto localHeaderLabel = new QLabel(localHeaderText);
+    auto localDetailLabel = new QLabel(localDetailText);
     leftLayout->addWidget(localHeaderLabel);
     leftLayout->addWidget(localDetailLabel);
 
-    QVBoxLayout *rightLayout = new QVBoxLayout();
+    auto rightLayout = new QVBoxLayout();
     QString cloudHeaderText = tr("Cloud placemark");
     QString cloudDetailText =
         tr("Path: %0 <br /> Name: %1 <br /> Description: %2 <br /> Status: %3").arg(m_mergeItem->pathB(), m_mergeItem->nameB(), m_mergeItem->descriptionB());
@@ -151,23 +151,23 @@ void ConflictDialog::prepareLayout()
     default:
         break;
     }
-    QLabel *cloudHeaderLabel = new QLabel(cloudHeaderText);
-    QLabel *cloudDetailLabel = new QLabel(cloudDetailText);
+    auto cloudHeaderLabel = new QLabel(cloudHeaderText);
+    auto cloudDetailLabel = new QLabel(cloudDetailText);
     rightLayout->addWidget(cloudHeaderLabel);
     rightLayout->addWidget(cloudDetailLabel);
 
-    QHBoxLayout *detailLayout = new QHBoxLayout();
+    auto detailLayout = new QHBoxLayout();
     detailLayout->addLayout(leftLayout);
     detailLayout->addLayout(rightLayout);
 
-    QLabel *descriptionLabel = new QLabel();
+    auto descriptionLabel = new QLabel();
     QString descriptionText =
         tr("A bookmark on this device conflicts "
            "with a cloud bookmark. Which one do "
            "you want to keep?");
     descriptionLabel->setText(descriptionText);
 
-    QVBoxLayout *mainLayout = new QVBoxLayout();
+    auto mainLayout = new QVBoxLayout();
     mainLayout->addWidget(descriptionLabel);
     mainLayout->addLayout(detailLayout);
     mainLayout->addWidget(m_box);

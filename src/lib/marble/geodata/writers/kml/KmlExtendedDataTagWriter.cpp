@@ -22,7 +22,7 @@ static GeoTagWriterRegistrar s_writerExtendedData(GeoTagWriter::QualifiedName(Ge
 
 bool KmlExtendedDataTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataExtendedData *extended = static_cast<const GeoDataExtendedData *>(node);
+    const auto extended = static_cast<const GeoDataExtendedData *>(node);
 
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_ExtendedData));
 

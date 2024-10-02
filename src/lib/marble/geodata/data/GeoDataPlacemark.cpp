@@ -231,7 +231,7 @@ GeoDataCoordinates GeoDataPlacemark::coordinate(const QDateTime &dateTime, bool 
         } else if (const auto lineString = geodata_cast<GeoDataLineString>(d->m_geometry)) {
             auto const size = lineString->size();
             if (size == 0) {
-                return GeoDataCoordinates();
+                return {};
             } else if (size < 3) {
                 // Approximate center if there are just two coordinates
                 return lineString->latLonAltBox().center();
@@ -1009,10 +1009,10 @@ QString GeoDataPlacemark::categoryName() const
     case Unknown:
     case None:
     case LastIndex:
-        return QString();
+        return {};
     }
 
-    return QString();
+    return {};
 }
 
 qreal GeoDataPlacemark::area() const
@@ -1136,27 +1136,27 @@ void GeoDataPlacemark::unpack(QDataStream &stream)
     case InvalidGeometryId:
         break;
     case GeoDataPointId: {
-        GeoDataPoint *point = new GeoDataPoint;
+        auto point = new GeoDataPoint;
         point->unpack(stream);
         geometry = point;
     } break;
     case GeoDataLineStringId: {
-        GeoDataLineString *lineString = new GeoDataLineString;
+        auto lineString = new GeoDataLineString;
         lineString->unpack(stream);
         geometry = lineString;
     } break;
     case GeoDataLinearRingId: {
-        GeoDataLinearRing *linearRing = new GeoDataLinearRing;
+        auto linearRing = new GeoDataLinearRing;
         linearRing->unpack(stream);
         geometry = linearRing;
     } break;
     case GeoDataPolygonId: {
-        GeoDataPolygon *polygon = new GeoDataPolygon;
+        auto polygon = new GeoDataPolygon;
         polygon->unpack(stream);
         geometry = polygon;
     } break;
     case GeoDataMultiGeometryId: {
-        GeoDataMultiGeometry *multiGeometry = new GeoDataMultiGeometry;
+        auto multiGeometry = new GeoDataMultiGeometry;
         multiGeometry->unpack(stream);
         geometry = multiGeometry;
     } break;

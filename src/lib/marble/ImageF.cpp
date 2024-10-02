@@ -7,9 +7,7 @@
 namespace Marble
 {
 
-ImageF::ImageF()
-{
-}
+ImageF::ImageF() = default;
 
 uint ImageF::pixelF(const QImage &image, qreal x, qreal y)
 {

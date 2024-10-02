@@ -150,7 +150,7 @@ void PopupItem::colorize(QImage &img, const QColor &col)
     if (img.depth() <= 8)
         return;
     int pixels = img.width() * img.height();
-    unsigned int *data = (unsigned int *)img.bits();
+    auto data = (unsigned int *)img.bits();
     for (int i = 0; i < pixels; ++i) {
         int val = qGray(data[i]);
         data[i] = qRgba(col.red() * val / 255, col.green() * val / 255, col.blue() * val / 255, qAlpha(data[i]));
@@ -214,7 +214,7 @@ void PopupItem::paint(QPainter *painter)
 
 bool PopupItem::eventFilter(QObject *object, QEvent *e)
 {
-    MarbleWidget *widget = dynamic_cast<MarbleWidget *>(object);
+    auto widget = dynamic_cast<MarbleWidget *>(object);
     if (!widget) {
         return BillboardGraphicsItem::eventFilter(object, e);
     }
@@ -232,7 +232,7 @@ bool PopupItem::eventFilter(QObject *object, QEvent *e)
     if (e->type() == QEvent::MouseButtonDblClick || e->type() == QEvent::MouseMove || e->type() == QEvent::MouseButtonPress
         || e->type() == QEvent::MouseButtonRelease) {
         // Mouse events are forwarded to the underlying widget
-        QMouseEvent *event = static_cast<QMouseEvent *>(e);
+        auto event = static_cast<QMouseEvent *>(e);
         QPoint shiftedPos = event->pos();
         QWidget *child = transform(shiftedPos);
         bool const forcedMouseRelease = m_needMouseRelease && e->type() == QEvent::MouseButtonRelease;
@@ -254,7 +254,7 @@ bool PopupItem::eventFilter(QObject *object, QEvent *e)
         }
     } else if (e->type() == QEvent::Wheel) {
         // Wheel events are forwarded to the underlying widget
-        QWheelEvent *event = static_cast<QWheelEvent *>(e);
+        auto event = static_cast<QWheelEvent *>(e);
         QPoint shiftedPos = event->position().toPoint();
         QWidget *child = transform(shiftedPos);
         if (child) {

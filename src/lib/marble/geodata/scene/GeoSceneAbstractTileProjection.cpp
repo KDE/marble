@@ -33,9 +33,7 @@ GeoSceneAbstractTileProjection::GeoSceneAbstractTileProjection()
 {
 }
 
-GeoSceneAbstractTileProjection::~GeoSceneAbstractTileProjection()
-{
-}
+GeoSceneAbstractTileProjection::~GeoSceneAbstractTileProjection() = default;
 
 int GeoSceneAbstractTileProjection::levelZeroColumns() const
 {

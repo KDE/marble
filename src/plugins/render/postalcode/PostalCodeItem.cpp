@@ -26,9 +26,7 @@ PostalCodeItem::PostalCodeItem(QObject *parent)
     setCacheMode(ItemCoordinateCache);
 }
 
-PostalCodeItem::~PostalCodeItem()
-{
-}
+PostalCodeItem::~PostalCodeItem() = default;
 
 bool PostalCodeItem::initialized() const
 {

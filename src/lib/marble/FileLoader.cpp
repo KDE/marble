@@ -229,7 +229,7 @@ void FileLoaderPrivate::documentParsed(GeoDataDocument *doc, const QString &erro
 
         if (m_renderOrder != 0) {
             for (GeoDataPlacemark *placemark : doc->placemarkList()) {
-                if (GeoDataPolygon *polygon = geodata_cast<GeoDataPolygon>(placemark->geometry())) {
+                if (auto polygon = geodata_cast<GeoDataPolygon>(placemark->geometry())) {
                     polygon->setRenderOrder(m_renderOrder);
                 }
             }

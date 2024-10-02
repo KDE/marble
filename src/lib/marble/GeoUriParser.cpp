@@ -54,7 +54,7 @@ QString GeoUriParser::queryValue(const QUrl &url, const QString &one, const QStr
         return query.queryItemValue(two);
     }
 
-    return QString();
+    return {};
 }
 
 bool GeoUriParser::parse()
@@ -65,7 +65,7 @@ bool GeoUriParser::parse()
 
     QString const floatRegexp = "[-+]?[0-9]*\\.?[0-9]+(?:[eE][-+]?[0-9]+)?";
 
-    QRegExp geoUriRegexp("geo:(" + floatRegexp + "),(" + floatRegexp + "),?(" + floatRegexp + ")?(?:;(crs|u)=([\\w\\d-]+))?(?:;(crs|u)=([\\w\\d-]+))?",
+    QRegExp geoUriRegexp("geo:(" + floatRegexp + "),(" + floatRegexp + "),?(" + floatRegexp + R"()?(?:;(crs|u)=([\w\d-]+))?(?:;(crs|u)=([\w\d-]+))?)",
                          Qt::CaseInsensitive,
                          QRegExp::RegExp2);
 

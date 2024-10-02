@@ -225,7 +225,7 @@ QDateTime BookmarkSyncManager::lastSync() const
 {
     const QString last = d->lastSyncedKmlPath();
     if (last.isEmpty())
-        return QDateTime();
+        return {};
     return QFileInfo(last).metadataChangeTime();
 }
 
@@ -278,7 +278,7 @@ void BookmarkSyncManager::Private::uploadBookmarks()
     request.setHeader(QNetworkRequest::ContentTypeHeader, QStringLiteral("multipart/form-data; boundary=%0").arg(word));
 
     data.append(QString(boundary + lineBreak).toUtf8());
-    data.append("Content-Disposition: form-data; name=\"bookmarks\"; filename=\"bookmarks.kml\"" + lineBreak);
+    data.append(R"(Content-Disposition: form-data; name="bookmarks"; filename="bookmarks.kml")" + lineBreak);
     data.append("Content-Type: application/vnd.google-earth.kml+xml" + lineBreak + lineBreak);
 
     QFile bookmarksFile(m_localBookmarksPath);
@@ -352,7 +352,7 @@ QString BookmarkSyncManager::Private::lastSyncedKmlPath() const
     if (!fileInfoList.isEmpty()) {
         return fileInfoList.last().absoluteFilePath();
     } else {
-        return QString();
+        return {};
     }
 }
 
@@ -482,11 +482,11 @@ QList<DiffItem> BookmarkSyncManager::Private::diff(QIODevice *fileA, QIODevice *
 {
     GeoDataParser parserA(GeoData_KML);
     parserA.read(fileA);
-    GeoDataDocument *documentA = dynamic_cast<GeoDataDocument *>(parserA.releaseDocument());
+    auto documentA = dynamic_cast<GeoDataDocument *>(parserA.releaseDocument());
 
     GeoDataParser parserB(GeoData_KML);
     parserB.read(fileB);
-    GeoDataDocument *documentB = dynamic_cast<GeoDataDocument *>(parserB.releaseDocument());
+    auto documentB = dynamic_cast<GeoDataDocument *>(parserB.releaseDocument());
 
     QList<DiffItem> diffItems = getPlacemarks(documentA, documentB, DiffItem::Destination); // Compare old to new
     diffItems.append(getPlacemarks(documentB, documentA, DiffItem::Source)); // Compare new to old
@@ -549,7 +549,7 @@ void BookmarkSyncManager::Private::merge()
                 m_merged.append(itemA);
             } else if (conflict) {
                 m_conflictItem = other;
-                MergeItem *mergeItem = new MergeItem();
+                auto mergeItem = new MergeItem();
                 mergeItem->setPathA(itemA.m_path);
                 mergeItem->setPathB(other.m_path);
                 mergeItem->setPlacemarkA(itemA.m_placemarkA);
@@ -624,11 +624,11 @@ GeoDataFolder *BookmarkSyncManager::Private::createFolders(GeoDataContainer *con
 
 GeoDataDocument *BookmarkSyncManager::Private::constructDocument(const QList<DiffItem> &mergedList)
 {
-    GeoDataDocument *document = new GeoDataDocument();
+    auto document = new GeoDataDocument();
     document->setName(tr("Bookmarks"));
 
     for (const DiffItem &item : mergedList) {
-        GeoDataPlacemark *placemark = new GeoDataPlacemark(item.m_placemarkA);
+        auto placemark = new GeoDataPlacemark(item.m_placemarkA);
         QStringList splitten = item.m_path.split(QLatin1Char('/'), Qt::SkipEmptyParts);
         GeoDataFolder *folder = createFolders(document, splitten);
         folder->append(placemark);

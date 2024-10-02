@@ -24,8 +24,8 @@ public:
     bool write(QIODevice *device, const GeoDataDocument &document) override;
 
 private:
-    typedef QPair<QString, QString> StringPair;
-    typedef QHash<StringPair, qint32> StringTable;
+    using StringPair = QPair<QString, QString>;
+    using StringTable = QHash<StringPair, qint32>;
 
     void writeHeader(QDataStream &stream) const;
     void writeNodes(const OsmConverter::Nodes &nodes, QDataStream &stream) const;

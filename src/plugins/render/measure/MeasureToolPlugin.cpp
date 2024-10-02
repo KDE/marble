@@ -684,7 +684,7 @@ bool MeasureToolPlugin::eventFilter(QObject *object, QEvent *e)
         return RenderPlugin::eventFilter(object, e);
     }
 
-    MarbleWidget *widget = qobject_cast<MarbleWidget *>(object);
+    auto widget = qobject_cast<MarbleWidget *>(object);
 
     if (widget) {
         m_marbleWidget = widget;

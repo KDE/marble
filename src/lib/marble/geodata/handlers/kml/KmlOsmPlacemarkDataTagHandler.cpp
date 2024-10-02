@@ -47,8 +47,8 @@ GeoNode *KmlOsmPlacemarkDataTagHandler::parse(GeoParser &parser) const
      * ...
      */
     else if (parser.parentElement(1).is<OsmPlacemarkData>() && parser.parentElement().is<GeoDataPoint>()) {
-        OsmPlacemarkData *placemarkOsmData = parser.parentElement(1).nodeAs<OsmPlacemarkData>();
-        GeoDataPoint *point = parser.parentElement().nodeAs<GeoDataPoint>();
+        auto placemarkOsmData = parser.parentElement(1).nodeAs<OsmPlacemarkData>();
+        auto point = parser.parentElement().nodeAs<GeoDataPoint>();
         GeoDataCoordinates coordinates = point->coordinates();
         /* The GeoDataPoint object was only used as GeoNode wrapper for the GeoDataCoordinates
          * and it is no longer needed
@@ -67,10 +67,10 @@ GeoNode *KmlOsmPlacemarkDataTagHandler::parse(GeoParser &parser) const
      */
     else if (parser.parentElement(1).is<OsmPlacemarkData>() && parser.parentElement().is<GeoDataLinearRing>()
              && parser.parentElement(3).is<GeoDataPlacemark>()) {
-        OsmPlacemarkData *placemarkOsmData = parser.parentElement(1).nodeAs<OsmPlacemarkData>();
-        GeoDataPlacemark *placemark = parser.parentElement(3).nodeAs<GeoDataPlacemark>();
+        auto placemarkOsmData = parser.parentElement(1).nodeAs<OsmPlacemarkData>();
+        auto placemark = parser.parentElement(3).nodeAs<GeoDataPlacemark>();
         GeoDataLinearRing &ring = *parser.parentElement().nodeAs<GeoDataLinearRing>();
-        GeoDataPolygon *polygon = geodata_cast<GeoDataPolygon>(placemark->geometry());
+        auto polygon = geodata_cast<GeoDataPolygon>(placemark->geometry());
         if (!polygon) {
             return nullptr;
         }

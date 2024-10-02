@@ -61,7 +61,7 @@ void WeatherPlugin::initialize()
 {
     readSettings();
 
-    WeatherModel *model = new WeatherModel(marbleModel(), this);
+    auto model = new WeatherModel(marbleModel(), this);
 
     setModel(model);
     updateSettings();
@@ -189,9 +189,9 @@ void WeatherPlugin::setSettings(const QHash<QString, QVariant> &settings)
 bool WeatherPlugin::eventFilter(QObject *object, QEvent *event)
 {
     if (isInitialized()) {
-        WeatherModel *weatherModel = qobject_cast<WeatherModel *>(model());
+        auto weatherModel = qobject_cast<WeatherModel *>(model());
         Q_ASSERT(weatherModel);
-        MarbleWidget *widget = qobject_cast<MarbleWidget *>(object);
+        auto widget = qobject_cast<MarbleWidget *>(object);
         if (widget) {
             weatherModel->setMarbleWidget(widget);
         }

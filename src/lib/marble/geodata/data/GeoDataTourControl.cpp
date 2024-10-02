@@ -15,9 +15,7 @@ GeoDataTourControl::GeoDataTourControl()
 {
 }
 
-GeoDataTourControl::~GeoDataTourControl()
-{
-}
+GeoDataTourControl::~GeoDataTourControl() = default;
 
 bool GeoDataTourControl::operator==(const GeoDataTourControl &other) const
 {

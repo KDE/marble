@@ -61,12 +61,12 @@ QString LatLonEditPlugin::name() const
 
 QString LatLonEditPlugin::toolTip() const
 {
-    return QString();
+    return {};
 }
 
 QString LatLonEditPlugin::whatsThis() const
 {
-    return QString();
+    return {};
 }
 
 QWidget *LatLonEditPlugin::createWidget(QWidget *parent)

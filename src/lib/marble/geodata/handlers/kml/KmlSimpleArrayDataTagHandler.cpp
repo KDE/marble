@@ -30,7 +30,7 @@ GeoNode *KmlSimpleArrayDataTagHandler::parse(GeoParser &parser) const
     GeoStackItem parentItem = parser.parentElement();
 
     if (parentItem.is<GeoDataExtendedData>()) {
-        GeoDataSimpleArrayData *arrayData = new GeoDataSimpleArrayData();
+        auto arrayData = new GeoDataSimpleArrayData();
         QString name = parser.attribute("name").trimmed();
         parentItem.nodeAs<GeoDataExtendedData>()->setSimpleArrayData(name, arrayData);
         return arrayData;
@@ -38,7 +38,7 @@ GeoNode *KmlSimpleArrayDataTagHandler::parse(GeoParser &parser) const
 
     if (parentItem.is<GeoDataSchemaData>()) {
         GeoDataExtendedData *extendedData = parentItem.nodeAs<GeoDataSchemaData>()->parent();
-        GeoDataSimpleArrayData *arrayData = new GeoDataSimpleArrayData;
+        auto arrayData = new GeoDataSimpleArrayData;
         const QString name = parser.attribute("name").trimmed();
         extendedData->setSimpleArrayData(name, arrayData);
         return arrayData;

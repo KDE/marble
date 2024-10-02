@@ -42,14 +42,14 @@ GeoNode *KmlLinearRingTagHandler::parse(GeoParser &parser) const
         return &parentItem.nodeAs<GeoDataPolygon>()->innerBoundaries().last();
 
     } else if (parentItem.represents(kmlTag_Placemark)) {
-        GeoDataLinearRing *linearRing = new GeoDataLinearRing;
+        auto linearRing = new GeoDataLinearRing;
         KmlObjectTagHandler::parseIdentifiers(parser, linearRing);
-        GeoDataPlacemark *placemark = parentItem.nodeAs<GeoDataPlacemark>();
+        auto placemark = parentItem.nodeAs<GeoDataPlacemark>();
         placemark->setGeometry(linearRing);
         return placemark->geometry();
 
     } else if (parentItem.is<GeoDataMultiGeometry>()) {
-        GeoDataLinearRing *linearRing = new GeoDataLinearRing;
+        auto linearRing = new GeoDataLinearRing;
         KmlObjectTagHandler::parseIdentifiers(parser, linearRing);
         parentItem.nodeAs<GeoDataMultiGeometry>()->append(linearRing);
         return linearRing;

@@ -123,7 +123,7 @@ QDateTime SatellitesTLEItem::timeAtEpoch() const
 
     int ms = fmod(seconds * 1000.0, 1000.0);
 
-    return QDateTime(QDate(year, month, day), QTime(hours, minutes, (int)seconds, ms), Qt::UTC);
+    return {QDate(year, month, day), QTime(hours, minutes, (int)seconds, ms), Qt::UTC};
 }
 
 double SatellitesTLEItem::period() const
@@ -177,7 +177,7 @@ GeoDataCoordinates SatellitesTLEItem::fromTEME(double x, double y, double z, dou
 
     lat = GeoDataCoordinates::normalizeLat(lat);
 
-    return GeoDataCoordinates(lon, lat, alt * 1000);
+    return {lon, lat, alt * 1000};
 }
 
 double SatellitesTLEItem::gmst(double minutesP) const

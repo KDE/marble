@@ -16,13 +16,11 @@ class GeoDataPointPrivate : public GeoDataGeometryPrivate
 public:
     GeoDataCoordinates m_coordinates;
 
-    GeoDataPointPrivate()
-    {
-    }
+    GeoDataPointPrivate() = default;
 
     GeoDataGeometryPrivate *copy() const override
     {
-        GeoDataPointPrivate *copy = new GeoDataPointPrivate;
+        auto *copy = new GeoDataPointPrivate;
         *copy = *this;
         return copy;
     }

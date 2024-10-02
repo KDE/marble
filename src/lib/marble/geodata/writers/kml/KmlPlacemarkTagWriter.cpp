@@ -26,7 +26,7 @@ static GeoTagWriterRegistrar s_writerPlacemark(GeoTagWriter::QualifiedName(GeoDa
 
 bool KmlPlacemarkTagWriter::writeMid(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(node);
+    const auto placemark = static_cast<const GeoDataPlacemark *>(node);
 
     writer.writeOptionalElement(kml::kmlTag_styleUrl, placemark->styleUrl());
     if (placemark->styleUrl().isEmpty() && placemark->customStyle()) {

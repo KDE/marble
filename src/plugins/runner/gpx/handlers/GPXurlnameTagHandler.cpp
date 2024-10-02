@@ -26,7 +26,7 @@ GeoNode *GPXurlnameTagHandler::parse(GeoParser &parser) const
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(gpxTag_wpt)) {
-        GeoDataPlacemark *placemark = parentItem.nodeAs<GeoDataPlacemark>();
+        auto placemark = parentItem.nodeAs<GeoDataPlacemark>();
         QString text = parser.readElementText().trimmed();
         // no reason to save for now!
         //         GeoDataExtendedData extendedData = placemark->extendedData();

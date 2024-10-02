@@ -81,13 +81,13 @@ void PlasmaRunner::collectMatches(QList<KRunner::QueryMatch> &matches, const QSt
     QList<GeoDataFeature *>::const_iterator end = folder->constEnd();
 
     for (; it != end; ++it) {
-        GeoDataFolder *folder = dynamic_cast<GeoDataFolder *>(*it);
+        auto folder = dynamic_cast<GeoDataFolder *>(*it);
         if (folder) {
             collectMatches(matches, query, folder);
             continue;
         }
 
-        GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark *>(*it);
+        auto placemark = dynamic_cast<GeoDataPlacemark *>(*it);
         if (placemark) {
             // For short query strings only match exactly, to get a sane number of matches
             if (query.length() < minContainsMatchLength) {

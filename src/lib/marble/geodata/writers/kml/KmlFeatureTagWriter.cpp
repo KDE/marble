@@ -36,9 +36,9 @@ KmlFeatureTagWriter::KmlFeatureTagWriter(const QString &elementName)
 
 bool KmlFeatureTagWriter::write(const Marble::GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataFeature *feature = static_cast<const GeoDataFeature *>(node);
+    const auto feature = static_cast<const GeoDataFeature *>(node);
 
-    if (const GeoDataDocument *document = geodata_cast<GeoDataDocument>(feature)) {
+    if (const auto document = geodata_cast<GeoDataDocument>(feature)) {
         // when a document has only one feature and no styling
         // the document tag is excused
         if ((document->id().isEmpty()) && (document->name().isEmpty()) && (document->targetId().isEmpty()) && (document->styles().isEmpty())
@@ -66,11 +66,11 @@ bool KmlFeatureTagWriter::write(const Marble::GeoNode *node, GeoWriter &writer) 
         writer.writeEndElement();
     }
 
-    GeoDataLookAt const *lookAt = dynamic_cast<const GeoDataLookAt *>(feature->abstractView());
+    auto const *lookAt = dynamic_cast<const GeoDataLookAt *>(feature->abstractView());
     if (lookAt) {
         writeElement(lookAt, writer);
     }
-    GeoDataCamera const *camera = dynamic_cast<const GeoDataCamera *>(feature->abstractView());
+    auto const *camera = dynamic_cast<const GeoDataCamera *>(feature->abstractView());
     if (camera) {
         writeElement(camera, writer);
     }

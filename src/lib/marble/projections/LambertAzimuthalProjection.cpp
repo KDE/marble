@@ -47,9 +47,7 @@ LambertAzimuthalProjection::LambertAzimuthalProjection(LambertAzimuthalProjectio
     setMaxLat(maxValidLat());
 }
 
-LambertAzimuthalProjection::~LambertAzimuthalProjection()
-{
-}
+LambertAzimuthalProjection::~LambertAzimuthalProjection() = default;
 
 LambertAzimuthalProjectionPrivate::LambertAzimuthalProjectionPrivate(LambertAzimuthalProjection *parent)
     : AzimuthalProjectionPrivate(parent)

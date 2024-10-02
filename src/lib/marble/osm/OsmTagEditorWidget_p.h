@@ -20,7 +20,7 @@ class OsmTagEditorWidget;
 class OsmTagEditorWidgetPrivate : public Ui::OsmTagEditorWidgetPrivate
 {
 public:
-    typedef QPair<QString, QString> OsmTag;
+    using OsmTag = QPair<QString, QString>;
     OsmTagEditorWidgetPrivate();
     ~OsmTagEditorWidgetPrivate();
     void populatePresetTagsList();

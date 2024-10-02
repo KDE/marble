@@ -63,7 +63,7 @@ QList<PluginAuthor> RouteSimulationPositionProviderPlugin::pluginAuthors() const
 
 QIcon RouteSimulationPositionProviderPlugin::icon() const
 {
-    return QIcon();
+    return {};
 }
 
 PositionProviderPlugin *RouteSimulationPositionProviderPlugin::newInstance() const
@@ -106,9 +106,7 @@ RouteSimulationPositionProviderPlugin::RouteSimulationPositionProviderPlugin(Mar
     connect(&m_updateTimer, &QTimer::timeout, this, &RouteSimulationPositionProviderPlugin::update);
 }
 
-RouteSimulationPositionProviderPlugin::~RouteSimulationPositionProviderPlugin()
-{
-}
+RouteSimulationPositionProviderPlugin::~RouteSimulationPositionProviderPlugin() = default;
 
 void RouteSimulationPositionProviderPlugin::initialize()
 {

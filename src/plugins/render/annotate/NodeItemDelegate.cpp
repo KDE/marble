@@ -24,7 +24,7 @@ QSize NodeItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QMode
 {
     Q_UNUSED(option);
     Q_UNUSED(index);
-    return QSize(25, 25);
+    return {25, 25};
 }
 
 NodeItemDelegate::NodeItemDelegate(GeoDataPlacemark *placemark, QTreeView *view)
@@ -37,14 +37,14 @@ QWidget *NodeItemDelegate::createEditor(QWidget *parent, const QStyleOptionViewI
 {
     Q_UNUSED(option);
     Q_UNUSED(index);
-    LatLonEdit *editor = new LatLonEdit(parent);
+    auto editor = new LatLonEdit(parent);
     connect(this, SIGNAL(closeEditor(QWidget *)), this, SLOT(unsetCurrentEditor(QWidget *)));
     return editor;
 }
 
 void NodeItemDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
-    LatLonEdit *latLonEditWidget = static_cast<LatLonEdit *>(editor);
+    auto latLonEditWidget = static_cast<LatLonEdit *>(editor);
     qreal value = 0;
 
     if (const auto polygon = geodata_cast<GeoDataPolygon>(m_placemark->geometry())) {
@@ -90,7 +90,7 @@ void NodeItemDelegate::previewNodeMove(qreal value)
     if (const auto polygon = geodata_cast<GeoDataPolygon>(m_placemark->geometry())) {
         GeoDataLinearRing outerBoundary = polygon->outerBoundary();
 
-        GeoDataCoordinates *coordinates = new GeoDataCoordinates(outerBoundary[m_indexBeingEdited.row()]);
+        auto coordinates = new GeoDataCoordinates(outerBoundary[m_indexBeingEdited.row()]);
 
         if (m_indexBeingEdited.column() == 1) {
             coordinates->setLongitude(value, GeoDataCoordinates::Degree);
@@ -101,7 +101,7 @@ void NodeItemDelegate::previewNodeMove(qreal value)
         outerBoundary[m_indexBeingEdited.row()] = *coordinates;
         polygon->setOuterBoundary(outerBoundary);
     } else if (const auto lineString = geodata_cast<GeoDataLineString>(m_placemark->geometry())) {
-        GeoDataCoordinates *coordinates = new GeoDataCoordinates(lineString->at(m_indexBeingEdited.row()));
+        auto coordinates = new GeoDataCoordinates(lineString->at(m_indexBeingEdited.row()));
 
         if (m_indexBeingEdited.column() == 1) {
             coordinates->setLongitude(value, GeoDataCoordinates::Degree);

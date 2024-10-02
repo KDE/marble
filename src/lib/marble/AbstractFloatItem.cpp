@@ -170,14 +170,14 @@ bool AbstractFloatItem::eventFilter(QObject *object, QEvent *e)
 
     if (e->type() == QEvent::ContextMenu) {
         QWidget *widget = qobject_cast<QWidget *>(object);
-        QContextMenuEvent *menuEvent = dynamic_cast<QContextMenuEvent *>(e);
+        auto menuEvent = dynamic_cast<QContextMenuEvent *>(e);
         if (widget != nullptr && menuEvent != nullptr && contains(menuEvent->pos())) {
             contextMenuEvent(widget, menuEvent);
             return true;
         }
         return false;
     } else if (e->type() == QEvent::ToolTip) {
-        QHelpEvent *helpEvent = dynamic_cast<QHelpEvent *>(e);
+        auto helpEvent = dynamic_cast<QHelpEvent *>(e);
         if (helpEvent != nullptr && contains(helpEvent->pos())) {
             toolTipEvent(helpEvent);
             return true;

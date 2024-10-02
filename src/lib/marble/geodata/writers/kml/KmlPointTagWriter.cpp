@@ -20,7 +20,7 @@ static GeoTagWriterRegistrar s_writerPoint(GeoTagWriter::QualifiedName(GeoDataTy
 
 bool KmlPointTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataPoint *point = static_cast<const GeoDataPoint *>(node);
+    const auto point = static_cast<const GeoDataPoint *>(node);
 
     if (!point->coordinates().isValid()) {
         return true;

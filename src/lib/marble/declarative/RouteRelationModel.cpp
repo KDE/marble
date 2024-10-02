@@ -65,7 +65,7 @@ int RouteRelationModel::rowCount(const QModelIndex &parent) const
 QVariant RouteRelationModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid() || index.row() < 0 || index.row() >= m_relations.count()) {
-        return QVariant();
+        return {};
     }
 
     if (role == Qt::DisplayRole) {
@@ -154,7 +154,7 @@ QVariant RouteRelationModel::data(const QModelIndex &index, int role) const
         return m_relations.at(index.row())->isVisible();
     }
 
-    return QVariant();
+    return {};
 }
 
 QHash<int, QByteArray> RouteRelationModel::roleNames() const

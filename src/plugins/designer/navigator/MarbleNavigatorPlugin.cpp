@@ -48,12 +48,12 @@ QIcon MarbleNavigatorPlugin::icon() const
 
 QString MarbleNavigatorPlugin::toolTip() const
 {
-    return QString();
+    return {};
 }
 
 QString MarbleNavigatorPlugin::whatsThis() const
 {
-    return QString();
+    return {};
 }
 
 bool MarbleNavigatorPlugin::isContainer() const

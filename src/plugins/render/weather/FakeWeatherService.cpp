@@ -20,16 +20,14 @@ FakeWeatherService::FakeWeatherService(const MarbleModel *model, QObject *parent
 {
 }
 
-FakeWeatherService::~FakeWeatherService()
-{
-}
+FakeWeatherService::~FakeWeatherService() = default;
 
 void FakeWeatherService::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 number)
 {
     Q_UNUSED(box);
     Q_UNUSED(number);
 
-    FakeWeatherItem *item = new FakeWeatherItem(this);
+    auto item = new FakeWeatherItem(this);
     item->setStationName("Fake");
     item->setPriority(0);
     item->setCoordinate(GeoDataCoordinates(1, 1));

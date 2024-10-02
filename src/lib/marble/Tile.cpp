@@ -18,8 +18,5 @@ Tile::Tile(TileId const &tileId)
 {
 }
 
-Tile::~Tile()
-{
-}
-
+Tile::~Tile() = default;
 }

@@ -49,7 +49,7 @@ void BillboardGraphicsItemTest::paintEvent()
     BillboardGraphicsItem item;
     item.setCoordinate(GeoDataCoordinates(0, 0));
 
-    MarbleGraphicsGridLayout *topLayout = new MarbleGraphicsGridLayout(1, 1);
+    auto topLayout = new MarbleGraphicsGridLayout(1, 1);
     item.setLayout(topLayout);
 
     FrameGraphicsItem frameItem(&item);

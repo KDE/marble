@@ -131,7 +131,7 @@ void RoutingRunnerManager::retrieveRoute(const RouteRequest *request)
             continue;
         }
 
-        RoutingTask *task = new RoutingTask(plugin->newRunner(), this, request);
+        auto task = new RoutingTask(plugin->newRunner(), this, request);
         connect(task, SIGNAL(finished(RoutingTask *)), this, SLOT(cleanupRoutingTask(RoutingTask *)));
         mDebug() << "route task" << plugin->nameId() << " " << (quintptr)task;
         d->m_routingTasks << task;

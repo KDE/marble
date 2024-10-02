@@ -26,9 +26,7 @@ LocalDatabaseRunner::LocalDatabaseRunner(QObject *parent)
 {
 }
 
-LocalDatabaseRunner::~LocalDatabaseRunner()
-{
-}
+LocalDatabaseRunner::~LocalDatabaseRunner() = default;
 
 void LocalDatabaseRunner::search(const QString &searchTerm, const GeoDataLatLonBox &preferred)
 {

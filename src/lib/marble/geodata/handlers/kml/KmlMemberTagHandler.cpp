@@ -37,8 +37,8 @@ GeoNode *KmlmemberTagHandler::parse(GeoParser &parser) const
      * ...
      */
     if (parser.parentElement(2).is<GeoDataPlacemark>()) {
-        GeoDataPlacemark *placemark = parser.parentElement(2).nodeAs<GeoDataPlacemark>();
-        GeoDataPolygon *polygon = geodata_cast<GeoDataPolygon>(placemark->geometry());
+        auto placemark = parser.parentElement(2).nodeAs<GeoDataPlacemark>();
+        auto polygon = geodata_cast<GeoDataPolygon>(placemark->geometry());
         if (!polygon) {
             return nullptr;
         }

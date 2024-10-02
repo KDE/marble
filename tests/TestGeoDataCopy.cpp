@@ -266,7 +266,7 @@ void TestGeoDataCopy::copyMultiGeometry()
     linearRing4.append(coord2);
     linearRing4.append(coord3);
 
-    GeoDataPolygon *polygon = new GeoDataPolygon;
+    auto polygon = new GeoDataPolygon;
     polygon->appendInnerBoundary(linearRing1);
     polygon->appendInnerBoundary(linearRing2);
     polygon->appendInnerBoundary(linearRing3);
@@ -337,7 +337,7 @@ void TestGeoDataCopy::copyDocument()
     pl2.setCoordinate(coord2);
     pl3.setCoordinate(coord3);
 
-    GeoDataFolder *folder = new GeoDataFolder;
+    auto folder = new GeoDataFolder;
     folder->append(new GeoDataPlacemark(pl1));
     folder->append(new GeoDataPlacemark(pl2));
     folder->append(new GeoDataPlacemark(pl3));
@@ -355,7 +355,7 @@ void TestGeoDataCopy::copyDocument()
     QCOMPARE(static_cast<GeoDataPlacemark *>(other.child(0))->coordinate(), coord3);
     QCOMPARE(static_cast<GeoDataPlacemark *>(other.child(2))->coordinate(), coord1);
 
-    GeoDataFolder *otherFolder = static_cast<GeoDataFolder *>(other.child(1));
+    auto otherFolder = static_cast<GeoDataFolder *>(other.child(1));
     QCOMPARE(static_cast<GeoDataPlacemark *>(otherFolder->child(0))->coordinate(), coord1);
     QCOMPARE(static_cast<GeoDataPlacemark *>(otherFolder->child(1))->coordinate(), coord2);
     QCOMPARE(static_cast<GeoDataPlacemark *>(otherFolder->child(2))->coordinate(), coord3);
@@ -402,7 +402,7 @@ void TestGeoDataCopy::copyFolder()
 
 void TestGeoDataCopy::copyPlacemark()
 {
-    GeoDataPoint *point = new GeoDataPoint(coord1);
+    auto point = new GeoDataPoint(coord1);
     point->setExtrude(true);
 
     // make sure that the coordinate contains the right values

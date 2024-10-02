@@ -45,9 +45,7 @@ bool GeoDataGroundOverlay::operator!=(const GeoDataGroundOverlay &other) const
     return !this->operator==(other);
 }
 
-GeoDataGroundOverlay::~GeoDataGroundOverlay()
-{
-}
+GeoDataGroundOverlay::~GeoDataGroundOverlay() = default;
 
 GeoDataFeature *GeoDataGroundOverlay::clone() const
 {

@@ -35,7 +35,7 @@ static GeoTagWriterRegistrar s_writerDocument(GeoTagWriter::QualifiedName(GeoDat
 
 bool OsmDocumentTagTranslator::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataDocument *document = static_cast<const GeoDataDocument *>(node);
+    const auto document = static_cast<const GeoDataDocument *>(node);
 
     OsmConverter converter;
     converter.read(document);

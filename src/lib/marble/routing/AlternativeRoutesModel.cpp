@@ -167,7 +167,7 @@ GeoDataCoordinates AlternativeRoutesModel::Private::coordinates(const GeoDataCoo
     qreal lon1 = start.longitude();
     qreal lat2 = asin(sin(lat1) * cos(distance) + cos(lat1) * sin(distance) * cos(bearing));
     qreal lon2 = lon1 + atan2(sin(bearing) * sin(distance) * cos(lat1), cos(distance) - sin(lat1) * sin(lat2));
-    return GeoDataCoordinates(lon2, lat2);
+    return {lon2, lat2};
 }
 
 qreal AlternativeRoutesModel::Private::distance(const GeoDataCoordinates &satellite, const GeoDataCoordinates &lineA, const GeoDataCoordinates &lineB)
@@ -270,7 +270,7 @@ const GeoDataLineString *AlternativeRoutesModel::Private::waypoints(const GeoDat
     for (const GeoDataFolder *folder : std::as_const(folders)) {
         for (const GeoDataPlacemark *placemark : folder->placemarkList()) {
             const GeoDataGeometry *geometry = placemark->geometry();
-            const GeoDataLineString *lineString = dynamic_cast<const GeoDataLineString *>(geometry);
+            const auto lineString = dynamic_cast<const GeoDataLineString *>(geometry);
             if (lineString) {
                 return lineString;
             }
@@ -279,7 +279,7 @@ const GeoDataLineString *AlternativeRoutesModel::Private::waypoints(const GeoDat
 
     for (const GeoDataPlacemark *placemark : document->placemarkList()) {
         const GeoDataGeometry *geometry = placemark->geometry();
-        const GeoDataLineString *lineString = dynamic_cast<const GeoDataLineString *>(geometry);
+        const auto lineString = dynamic_cast<const GeoDataLineString *>(geometry);
         if (lineString) {
             return lineString;
         }
@@ -308,7 +308,7 @@ int AlternativeRoutesModel::rowCount(const QModelIndex &) const
 
 QVariant AlternativeRoutesModel::headerData(int, Qt::Orientation, int) const
 {
-    return QVariant();
+    return {};
 }
 
 QVariant AlternativeRoutesModel::data(const QModelIndex &index, int role) const

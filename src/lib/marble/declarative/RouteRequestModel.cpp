@@ -49,7 +49,7 @@ QVariant RouteRequestModel::headerData(int section, Qt::Orientation orientation,
         return QStringLiteral("Waypoint");
     }
 
-    return QVariant();
+    return {};
 }
 
 QVariant RouteRequestModel::data(const QModelIndex &index, int role) const
@@ -75,7 +75,7 @@ QVariant RouteRequestModel::data(const QModelIndex &index, int role) const
         }
     }
 
-    return QVariant();
+    return {};
 }
 
 Marble::Routing *RouteRequestModel::routing()

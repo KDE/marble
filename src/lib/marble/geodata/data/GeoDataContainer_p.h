@@ -16,9 +16,7 @@ namespace Marble
 class GeoDataContainerPrivate : public GeoDataFeaturePrivate
 {
 public:
-    GeoDataContainerPrivate()
-    {
-    }
+    GeoDataContainerPrivate() = default;
 
     GeoDataContainerPrivate(const GeoDataContainerPrivate &other)
         : GeoDataFeaturePrivate(other)

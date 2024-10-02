@@ -62,8 +62,8 @@ RoutingWaypoints WaypointParser::parse(QTextStream &stream) const
         if (!line.trimmed().isEmpty() && !line.trimmed().startsWith(QLatin1Char('#')) && !line.startsWith(QLatin1StringView("Content-Type: text/plain"))) {
             QStringList entries = line.split(m_fieldSeparator);
             if (entries.size() >= 1 + m_fieldIndices[RoadName]) {
-                qreal lon = readField<qreal>(Longitude, entries);
-                qreal lat = readField<qreal>(Latitude, entries);
+                auto lon = readField<qreal>(Longitude, entries);
+                auto lat = readField<qreal>(Latitude, entries);
                 RoutingPoint point(lon, lat);
                 QString junctionTypeRaw = readField<QString>(JunctionType, entries, QString());
                 RoutingWaypoint::JunctionType junctionType = RoutingWaypoint::Other;

@@ -116,9 +116,7 @@ MapThemeManager::Private::Private(MapThemeManager *parent)
 {
 }
 
-MapThemeManager::Private::~Private()
-{
-}
+MapThemeManager::Private::~Private() = default;
 
 MapThemeManager::MapThemeManager(QObject *parent)
     : QObject(parent)
@@ -228,7 +226,7 @@ GeoSceneDocument *MapThemeManager::Private::loadMapThemeFile(const QString &mapT
     mDebug() << "Map theme file successfully loaded:" << dgmlPath;
 
     // Get result document
-    GeoSceneDocument *document = static_cast<GeoSceneDocument *>(parser.releaseDocument());
+    auto document = static_cast<GeoSceneDocument *>(parser.releaseDocument());
     Q_ASSERT(document);
     return document;
 }
@@ -358,7 +356,7 @@ QList<QStandardItem *> MapThemeManager::Private::createMapThemeRow(QString const
     const QString translatedDescription = QCoreApplication::translate("DGML", mapTheme->head()->description().toUtf8().constData());
     const QString toolTip = QLatin1StringView("<span style=\" max-width: 150 px;\"> ") + translatedDescription + QLatin1StringView(" </span>");
 
-    QStandardItem *item = new QStandardItem(name);
+    auto item = new QStandardItem(name);
     item->setData(QCoreApplication::translate("DGML", name.toUtf8().constData()), Qt::DisplayRole);
     item->setData(mapThemeIcon, Qt::DecorationRole);
     item->setData(toolTip, Qt::ToolTipRole);
@@ -492,7 +490,7 @@ void MapThemeManager::Private::addMapThemePaths(const QString &mapPathName, QStr
 
 GeoSceneDocument *MapThemeManager::createMapThemeFromOverlay(const GeoDataPhotoOverlay *overlayData)
 {
-    GeoSceneDocument *document = new GeoSceneDocument();
+    auto document = new GeoSceneDocument();
     document->head()->setDescription(overlayData->description());
     document->head()->setName(overlayData->name());
     document->head()->setTheme("photo");
@@ -504,10 +502,10 @@ GeoSceneDocument *MapThemeManager::createMapThemeFromOverlay(const GeoDataPhotoO
     document->head()->zoom()->setMinimum(900);
     document->head()->zoom()->setDiscrete(false);
 
-    GeoSceneLayer *layer = new GeoSceneLayer("photo");
+    auto layer = new GeoSceneLayer("photo");
     layer->setBackend("texture");
 
-    GeoSceneTextureTileDataset *texture = new GeoSceneTextureTileDataset("map");
+    auto texture = new GeoSceneTextureTileDataset("map");
     texture->setExpire(std::numeric_limits<int>::max());
 
     QString fileName = overlayData->absoluteIconFile();
@@ -529,22 +527,22 @@ GeoSceneDocument *MapThemeManager::createMapThemeFromOverlay(const GeoDataPhotoO
 
     GeoSceneSettings *settings = document->settings();
 
-    GeoSceneProperty *gridProperty = new GeoSceneProperty("coordinate-grid");
+    auto gridProperty = new GeoSceneProperty("coordinate-grid");
     gridProperty->setValue(false);
     gridProperty->setAvailable(false);
     settings->addProperty(gridProperty);
 
-    GeoSceneProperty *overviewmap = new GeoSceneProperty("overviewmap");
+    auto overviewmap = new GeoSceneProperty("overviewmap");
     overviewmap->setValue(false);
     overviewmap->setAvailable(false);
     settings->addProperty(overviewmap);
 
-    GeoSceneProperty *compass = new GeoSceneProperty("compass");
+    auto compass = new GeoSceneProperty("compass");
     compass->setValue(false);
     compass->setAvailable(false);
     settings->addProperty(compass);
 
-    GeoSceneProperty *scalebar = new GeoSceneProperty("scalebar");
+    auto scalebar = new GeoSceneProperty("scalebar");
     scalebar->setValue(true);
     scalebar->setAvailable(true);
     settings->addProperty(scalebar);

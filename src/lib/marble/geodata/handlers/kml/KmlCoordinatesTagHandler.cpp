@@ -109,7 +109,7 @@ GeoNode *KmlcoordinatesTagHandler::parse(GeoParser &parser) const
                 } else if (parentItem.represents(kmlTag_LinearRing)) {
                     parentItem.nodeAs<GeoDataLinearRing>()->append(coord);
                 } else if (parentItem.represents(kmlTag_MultiGeometry)) {
-                    GeoDataPoint *point = new GeoDataPoint(coord);
+                    auto point = new GeoDataPoint(coord);
                     parentItem.nodeAs<GeoDataMultiGeometry>()->append(point);
                 } else if (parentItem.represents(kmlTag_Model)) {
                     parentItem.nodeAs<GeoDataModel>()->setCoordinates(coord);

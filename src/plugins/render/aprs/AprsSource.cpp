@@ -12,9 +12,7 @@ AprsSource::AprsSource(QIODevice *insocket)
 {
 }
 
-AprsSource::~AprsSource()
-{
-}
+AprsSource::~AprsSource() = default;
 
 QIODevice *AprsSource::socket()
 {

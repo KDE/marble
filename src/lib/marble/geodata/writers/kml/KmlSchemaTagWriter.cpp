@@ -19,7 +19,7 @@ static GeoTagWriterRegistrar s_writerSchema(GeoTagWriter::QualifiedName(GeoDataT
 
 bool KmlSchemaTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataSchema *schema = static_cast<const GeoDataSchema *>(node);
+    const auto schema = static_cast<const GeoDataSchema *>(node);
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_Schema));
     KmlObjectTagWriter::writeIdentifiers(writer, schema);
     QString name = schema->schemaName();

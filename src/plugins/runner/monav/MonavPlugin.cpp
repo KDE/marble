@@ -307,7 +307,7 @@ QString MonavPlugin::mapDirectoryForRequest(const RouteRequest *request) const
         }
     }
 
-    return QString();
+    return {};
 }
 
 QStringList MonavPlugin::mapDirectoriesForRequest(const RouteRequest *request) const

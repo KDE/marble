@@ -8,8 +8,5 @@
 namespace Marble
 {
 
-RenderPluginInterface::~RenderPluginInterface()
-{
-}
-
+RenderPluginInterface::~RenderPluginInterface() = default;
 }

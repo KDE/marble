@@ -33,9 +33,7 @@ public:
     {
     }
 
-    virtual ~GeoDataGeometryPrivate()
-    {
-    }
+    virtual ~GeoDataGeometryPrivate() = default;
 
     GeoDataGeometryPrivate &operator=(const GeoDataGeometryPrivate &other)
     {

@@ -22,9 +22,7 @@ namespace Marble
 class GeoDataMultiGeometryPrivate : public GeoDataGeometryPrivate
 {
 public:
-    GeoDataMultiGeometryPrivate()
-    {
-    }
+    GeoDataMultiGeometryPrivate() = default;
 
     ~GeoDataMultiGeometryPrivate() override
     {
@@ -48,7 +46,7 @@ public:
 
     GeoDataGeometryPrivate *copy() const override
     {
-        GeoDataMultiGeometryPrivate *copy = new GeoDataMultiGeometryPrivate;
+        auto *copy = new GeoDataMultiGeometryPrivate;
         *copy = *this;
         return copy;
     }

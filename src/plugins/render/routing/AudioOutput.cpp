@@ -58,7 +58,7 @@ void AudioOutputPrivate::setupAudio()
 {
     if (!m_output) {
         m_output = new Phonon::MediaObject(q);
-        Phonon::AudioOutput *audioOutput = new Phonon::AudioOutput(Phonon::VideoCategory, q);
+        auto audioOutput = new Phonon::AudioOutput(Phonon::VideoCategory, q);
         Phonon::createPath(m_output, audioOutput);
 
         q->connect(m_output, SIGNAL(finished()), q, SLOT(audioOutputFinished()));

@@ -20,9 +20,7 @@ GeoSceneGeodata::GeoSceneGeodata(const QString &name)
 {
 }
 
-GeoSceneGeodata::~GeoSceneGeodata()
-{
-}
+GeoSceneGeodata::~GeoSceneGeodata() = default;
 
 const char *GeoSceneGeodata::nodeType() const
 {

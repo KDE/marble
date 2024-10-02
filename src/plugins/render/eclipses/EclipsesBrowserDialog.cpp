@@ -55,7 +55,7 @@ void EclipsesBrowserDialog::accept()
     QModelIndex selected = s->currentIndex();
 
     if (selected.isValid()) {
-        EclipsesItem *item = static_cast<EclipsesItem *>(selected.internalPointer());
+        auto item = static_cast<EclipsesItem *>(selected.internalPointer());
         Q_EMIT buttonShowClicked(m_eclModel->year(), item->index());
     }
 

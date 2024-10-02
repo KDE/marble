@@ -22,12 +22,12 @@ static GeoTagWriterRegistrar s_writerAnimatedUpdate(GeoTagWriter::QualifiedName(
 bool KmlAnimatedUpdateTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
     Q_ASSERT(dynamic_cast<const GeoDataAnimatedUpdate *>(node));
-    const GeoDataAnimatedUpdate *animUpdate = static_cast<const GeoDataAnimatedUpdate *>(node);
+    const auto animUpdate = static_cast<const GeoDataAnimatedUpdate *>(node);
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_nameSpaceGx22), QString::fromUtf8(kml::kmlTag_AnimatedUpdate));
     KmlObjectTagWriter::writeIdentifiers(writer, animUpdate);
     writer.writeOptionalElement("gx:duration", animUpdate->duration(), 0.0);
     if (animUpdate->update()) {
-        GeoDataUpdate const *update = dynamic_cast<const GeoDataUpdate *>(animUpdate->update());
+        auto const *update = dynamic_cast<const GeoDataUpdate *>(animUpdate->update());
         if (update) {
             writeElement(update, writer);
         }

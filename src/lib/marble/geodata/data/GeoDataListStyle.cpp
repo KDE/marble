@@ -216,7 +216,7 @@ void GeoDataListStyle::unpack(QDataStream &stream)
     int featureId;
     stream >> featureId;
 
-    GeoDataItemIcon *itemIcon = new GeoDataItemIcon;
+    auto itemIcon = new GeoDataItemIcon;
     itemIcon->unpack(stream);
     d->m_vector.append(itemIcon);
 }

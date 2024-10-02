@@ -33,7 +33,7 @@ int NodeModel::columnCount(const QModelIndex &parent) const
 QVariant NodeModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid()) {
-        return QVariant();
+        return {};
     }
     if (role == Qt::DisplayRole) {
         switch (index.column()) {
@@ -66,10 +66,10 @@ QVariant NodeModel::data(const QModelIndex &index, int role) const
             return convertedAltitude;
         }
         default:
-            return QVariant();
+            return {};
         }
     }
-    return QVariant();
+    return {};
 }
 
 QVariant NodeModel::headerData(int section, Qt::Orientation orientation, int role) const

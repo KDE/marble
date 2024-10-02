@@ -53,9 +53,7 @@ GeoDataContainer::GeoDataContainer(const GeoDataContainer &other)
     d->setParent(this);
 }
 
-GeoDataContainer::~GeoDataContainer()
-{
-}
+GeoDataContainer::~GeoDataContainer() = default;
 
 GeoDataContainer &GeoDataContainer::operator=(const GeoDataContainer &other)
 {
@@ -129,7 +127,7 @@ QList<GeoDataFolder *> GeoDataContainer::folderList() const
     QList<GeoDataFeature *>::const_iterator end = d->m_vector.constEnd();
 
     for (; it != end; ++it) {
-        GeoDataFolder *folder = dynamic_cast<GeoDataFolder *>(*it);
+        auto folder = dynamic_cast<GeoDataFolder *>(*it);
         if (folder) {
             results.append(folder);
         }
@@ -143,7 +141,7 @@ QList<GeoDataPlacemark *> GeoDataContainer::placemarkList() const
     Q_D(const GeoDataContainer);
     QList<GeoDataPlacemark *> results;
     for (auto it = d->m_vector.constBegin(), end = d->m_vector.constEnd(); it != end; ++it) {
-        if (GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(*it)) {
+        if (auto placemark = geodata_cast<GeoDataPlacemark>(*it)) {
             results.append(placemark);
         }
     }
@@ -353,12 +351,12 @@ void GeoDataContainer::unpack(QDataStream &stream)
         case GeoDataDocumentId:
             /* not usable!!!! */ break;
         case GeoDataFolderId: {
-            GeoDataFolder *folder = new GeoDataFolder;
+            auto folder = new GeoDataFolder;
             folder->unpack(stream);
             d->m_vector.append(folder);
         } break;
         case GeoDataPlacemarkId: {
-            GeoDataPlacemark *placemark = new GeoDataPlacemark;
+            auto placemark = new GeoDataPlacemark;
             placemark->unpack(stream);
             d->m_vector.append(placemark);
         } break;

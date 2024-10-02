@@ -47,9 +47,7 @@ GnomonicProjection::GnomonicProjection(GnomonicProjectionPrivate *dd)
     setMaxLat(maxValidLat());
 }
 
-GnomonicProjection::~GnomonicProjection()
-{
-}
+GnomonicProjection::~GnomonicProjection() = default;
 
 GnomonicProjectionPrivate::GnomonicProjectionPrivate(GnomonicProjection *parent)
     : AzimuthalProjectionPrivate(parent)

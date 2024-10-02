@@ -20,7 +20,7 @@ static GeoTagWriterRegistrar s_writerMultiTrack(GeoTagWriter::QualifiedName(GeoD
 
 bool KmlMultiTrackTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataMultiTrack *geometry = static_cast<const GeoDataMultiTrack *>(node);
+    const auto geometry = static_cast<const GeoDataMultiTrack *>(node);
 
     writer.writeStartElement("gx:MultiTrack");
     KmlObjectTagWriter::writeIdentifiers(writer, geometry);

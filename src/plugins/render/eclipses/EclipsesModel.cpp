@@ -99,11 +99,11 @@ QList<EclipsesItem *> EclipsesModel::items() const
 QModelIndex EclipsesModel::index(int row, int column, const QModelIndex &parent) const
 {
     if (!hasIndex(row, column, parent)) {
-        return QModelIndex();
+        return {};
     }
 
     if (row >= m_items.count()) {
-        return QModelIndex();
+        return {};
     }
 
     return createIndex(row, column, m_items.at(row));
@@ -112,7 +112,7 @@ QModelIndex EclipsesModel::index(int row, int column, const QModelIndex &parent)
 QModelIndex EclipsesModel::parent(const QModelIndex &index) const
 {
     Q_UNUSED(index);
-    return QModelIndex(); // no parents
+    return {}; // no parents
 }
 
 int EclipsesModel::rowCount(const QModelIndex &parent) const
@@ -130,12 +130,12 @@ int EclipsesModel::columnCount(const QModelIndex &parent) const
 QVariant EclipsesModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid()) {
-        return QVariant();
+        return {};
     }
 
     Q_ASSERT(index.column() < 4);
 
-    EclipsesItem *item = static_cast<EclipsesItem *>(index.internalPointer());
+    auto item = static_cast<EclipsesItem *>(index.internalPointer());
     if (role == Qt::DisplayRole) {
         switch (index.column()) {
         case 0:
@@ -145,7 +145,7 @@ QVariant EclipsesModel::data(const QModelIndex &index, int role) const
         case 2:
             return QVariant(item->phaseText());
         case 3:
-            return QVariant(item->magnitude());
+            return {item->magnitude()};
         default:
             break; // should never happen
         }
@@ -155,13 +155,13 @@ QVariant EclipsesModel::data(const QModelIndex &index, int role) const
             return QVariant(item->icon());
     }
 
-    return QVariant();
+    return {};
 }
 
 QVariant EclipsesModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (orientation != Qt::Horizontal || role != Qt::DisplayRole) {
-        return QVariant();
+        return {};
     }
 
     switch (section) {
@@ -177,7 +177,7 @@ QVariant EclipsesModel::headerData(int section, Qt::Orientation orientation, int
         break;
     }
 
-    return QVariant();
+    return {};
 }
 
 void EclipsesModel::addItem(EclipsesItem *item)
@@ -203,7 +203,7 @@ void EclipsesModel::update()
 
     int num = m_ecl->getNumberEclYear();
     for (int i = 1; i <= num; ++i) {
-        EclipsesItem *item = new EclipsesItem(m_ecl, i);
+        auto item = new EclipsesItem(m_ecl, i);
         addItem(item);
     }
 

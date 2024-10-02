@@ -28,20 +28,20 @@ FlyToEditWidget::FlyToEditWidget(const QModelIndex &index, MarbleWidget *widget,
     , m_index(index)
     , m_button(new QToolButton)
 {
-    QHBoxLayout *layout = new QHBoxLayout;
+    auto layout = new QHBoxLayout;
     layout->setSpacing(5);
 
-    QLabel *iconLabel = new QLabel;
+    auto iconLabel = new QLabel;
     iconLabel->setPixmap(QPixmap(QStringLiteral(":/marble/flag.png")));
     layout->addWidget(iconLabel);
 
-    QHBoxLayout *pairLayout = new QHBoxLayout;
+    auto pairLayout = new QHBoxLayout;
     pairLayout->setSpacing(10);
 
-    QHBoxLayout *durationLayout = new QHBoxLayout;
+    auto durationLayout = new QHBoxLayout;
     durationLayout->setSpacing(5);
 
-    QLabel *durationLabel = new QLabel;
+    auto durationLabel = new QLabel;
     durationLabel->setText(tr("Duration:"));
     durationLayout->addWidget(durationLabel);
 
@@ -50,10 +50,10 @@ FlyToEditWidget::FlyToEditWidget(const QModelIndex &index, MarbleWidget *widget,
     m_durationSpin->setValue(flyToElement()->duration());
     m_durationSpin->setSuffix(tr(" s", "seconds"));
 
-    QHBoxLayout *modeLayout = new QHBoxLayout;
+    auto modeLayout = new QHBoxLayout;
     modeLayout->addSpacing(5);
 
-    QLabel *modeLabel = new QLabel;
+    auto modeLabel = new QLabel;
     modeLabel->setText(tr("Mode:"));
     modeLayout->addWidget(modeLabel);
 
@@ -75,7 +75,7 @@ FlyToEditWidget::FlyToEditWidget(const QModelIndex &index, MarbleWidget *widget,
 
     layout->addLayout(pairLayout);
 
-    QToolButton *flyToPinCenter = new QToolButton;
+    auto flyToPinCenter = new QToolButton;
     flyToPinCenter->setIcon(QIcon(QStringLiteral(":/marble/places.png")));
     flyToPinCenter->setToolTip(tr("Current map center"));
     connect(flyToPinCenter, &QAbstractButton::clicked, this, &FlyToEditWidget::updateCoordinates);
@@ -139,7 +139,7 @@ void FlyToEditWidget::save()
 
 GeoDataFlyTo *FlyToEditWidget::flyToElement()
 {
-    GeoDataObject *object = qvariant_cast<GeoDataObject *>(m_index.data(MarblePlacemarkModel::ObjectPointerRole));
+    auto object = qvariant_cast<GeoDataObject *>(m_index.data(MarblePlacemarkModel::ObjectPointerRole));
     Q_ASSERT(object);
     auto flyTo = geodata_cast<GeoDataFlyTo>(object);
     Q_ASSERT(flyTo);

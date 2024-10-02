@@ -125,7 +125,7 @@ void FileViewWidgetPrivate::saveFile()
 {
     QModelIndex index = m_fileViewUi.m_treeView->selectionModel()->selectedRows().first();
     const GeoDataObject *object = index.model()->data(index, MarblePlacemarkModel::ObjectPointerRole).value<GeoDataObject *>();
-    const GeoDataDocument *document = geodata_cast<GeoDataDocument>(object);
+    const auto document = geodata_cast<GeoDataDocument>(object);
     if (document && !document->fileName().isEmpty()) {
         const QString saveFileName = QFileDialog::getSaveFileName(q, QObject::tr("Select filename for KML document"));
         GeoDataDocumentWriter::write(saveFileName, *document, kml::kmlTag_nameSpaceOgc22);
@@ -135,8 +135,8 @@ void FileViewWidgetPrivate::saveFile()
 void FileViewWidgetPrivate::closeFile()
 {
     QModelIndex index = m_fileViewUi.m_treeView->selectionModel()->selectedRows().first();
-    GeoDataObject *object = index.model()->data(index, MarblePlacemarkModel::ObjectPointerRole).value<GeoDataObject *>();
-    GeoDataDocument *document = geodata_cast<GeoDataDocument>(object);
+    auto object = index.model()->data(index, MarblePlacemarkModel::ObjectPointerRole).value<GeoDataObject *>();
+    auto document = geodata_cast<GeoDataDocument>(object);
     if (document) {
         m_fileManager->closeFile(document);
     }
@@ -148,7 +148,7 @@ void FileViewWidgetPrivate::enableFileViewActions()
     if (!m_fileViewUi.m_treeView->selectionModel()->selectedRows().isEmpty()) {
         QModelIndex index = m_fileViewUi.m_treeView->selectionModel()->selectedRows().first();
         const GeoDataObject *object = index.model()->data(index, MarblePlacemarkModel::ObjectPointerRole).value<GeoDataObject *>();
-        const GeoDataDocument *document = geodata_cast<GeoDataDocument>(object);
+        const auto document = geodata_cast<GeoDataDocument>(object);
         if (document) {
             isUserDocument = document->documentRole() == Marble::UserDocument;
         }
@@ -163,7 +163,7 @@ void FileViewWidgetPrivate::contextMenu(const QPoint &pt)
     const QAbstractItemModel *model = m_fileViewUi.m_treeView->model();
     if (index.isValid()) {
         const GeoDataObject *obj = model->data(index, MarblePlacemarkModel::ObjectPointerRole).value<GeoDataObject *>();
-        const GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(obj);
+        const auto placemark = geodata_cast<GeoDataPlacemark>(obj);
 
         if (placemark) {
             m_contextMenu->popup(m_fileViewUi.m_treeView->mapToGlobal(pt));
@@ -176,8 +176,8 @@ void FileViewWidgetPrivate::showPlacemarkDialog()
     const QModelIndex index = m_fileViewUi.m_treeView->currentIndex();
     const QAbstractItemModel *model = m_fileViewUi.m_treeView->model();
 
-    GeoDataObject *obj = model->data(index, MarblePlacemarkModel::ObjectPointerRole).value<GeoDataObject *>();
-    GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(obj);
+    auto obj = model->data(index, MarblePlacemarkModel::ObjectPointerRole).value<GeoDataObject *>();
+    auto placemark = geodata_cast<GeoDataPlacemark>(obj);
     if (placemark) {
         QPointer<EditPlacemarkDialog> dialog = new EditPlacemarkDialog(placemark, nullptr, q);
         dialog->setReadOnly(true);
@@ -193,10 +193,10 @@ void FileViewWidget::mapCenterOnTreeViewModel(const QModelIndex &index)
     }
 
     const GeoDataObject *object = index.model()->data(index, MarblePlacemarkModel::ObjectPointerRole).value<GeoDataObject *>();
-    if (const GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(object)) {
+    if (const auto placemark = geodata_cast<GeoDataPlacemark>(object)) {
         d->m_widget->model()->placemarkSelectionModel()->select(index, QItemSelectionModel::ClearAndSelect);
         Q_EMIT centerOn(*placemark, true);
-    } else if (const GeoDataContainer *container = dynamic_cast<const GeoDataContainer *>(object)) {
+    } else if (const auto container = dynamic_cast<const GeoDataContainer *>(object)) {
         const GeoDataLatLonAltBox box = container->latLonAltBox();
         Q_EMIT centerOn(box, true);
     }

@@ -15,9 +15,7 @@ namespace Marble
 class GeoDataMultiTrackPrivate : public GeoDataGeometryPrivate
 {
 public:
-    GeoDataMultiTrackPrivate()
-    {
-    }
+    GeoDataMultiTrackPrivate() = default;
 
     ~GeoDataMultiTrackPrivate() override
     {
@@ -40,7 +38,7 @@ public:
 
     GeoDataGeometryPrivate *copy() const override
     {
-        GeoDataMultiTrackPrivate *copy = new GeoDataMultiTrackPrivate;
+        auto *copy = new GeoDataMultiTrackPrivate;
         *copy = *this;
         return copy;
     }

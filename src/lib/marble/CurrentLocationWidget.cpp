@@ -296,7 +296,7 @@ void CurrentLocationWidgetPrivate::receiveGpsCoordinates(const GeoDataCoordinate
 
 void CurrentLocationWidget::changePositionProvider(int index)
 {
-    QComboBox *const combo = dynamic_cast<QComboBox *>(sender());
+    auto const combo = dynamic_cast<QComboBox *>(sender());
 
     if (!combo)
         return;
@@ -334,7 +334,7 @@ void CurrentLocationWidget::trackPlacemark()
 void CurrentLocationWidget::setRecenterMode(int mode)
 {
     if (mode >= 0 && mode <= AutoNavigation::RecenterOnBorder) {
-        AutoNavigation::CenterMode centerMode = (AutoNavigation::CenterMode)mode;
+        auto centerMode = (AutoNavigation::CenterMode)mode;
         d->m_adjustNavigation->setRecenter(centerMode);
     }
 }

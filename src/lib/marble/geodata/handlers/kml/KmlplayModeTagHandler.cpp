@@ -22,7 +22,7 @@ GeoNode *KmlplayModeTagHandler::parse(GeoParser &parser) const
     GeoStackItem parentItem = parser.parentElement();
 
     if (parentItem.is<GeoDataTourControl>()) {
-        GeoDataTourControl *control = parentItem.nodeAs<GeoDataTourControl>();
+        auto control = parentItem.nodeAs<GeoDataTourControl>();
 
         if (parser.readElementText().trimmed().toLower() == QLatin1StringView("play")) {
             control->setPlayMode(GeoDataTourControl::Play);

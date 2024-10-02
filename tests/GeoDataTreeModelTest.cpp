@@ -59,7 +59,7 @@ void GeoDataTreeModelTest::setRootDocument()
 void GeoDataTreeModelTest::addDocument()
 {
     {
-        GeoDataDocument *document = new GeoDataDocument;
+        auto document = new GeoDataDocument;
 
         GeoDataTreeModel model;
 

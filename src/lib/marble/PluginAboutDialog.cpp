@@ -22,12 +22,8 @@ int dataTabIndex = 2;
 class PluginAboutDialogPrivate
 {
 public:
-    PluginAboutDialogPrivate()
-    {
-    }
-    ~PluginAboutDialogPrivate()
-    {
-    }
+    PluginAboutDialogPrivate() = default;
+    ~PluginAboutDialogPrivate() = default;
 
     Ui::MarbleAboutDialog u_dialog;
 };

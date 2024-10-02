@@ -65,10 +65,10 @@ void RenderPluginModel::setRenderPlugins(const QList<RenderPlugin *> &renderPlug
 QList<PluginAuthor> RenderPluginModel::pluginAuthors(const QModelIndex &index) const
 {
     if (!index.isValid())
-        return QList<PluginAuthor>();
+        return {};
 
     if (index.row() < 0 || index.row() >= d->m_renderPlugins.count())
-        return QList<PluginAuthor>();
+        return {};
 
     return d->m_renderPlugins.at(index.row())->pluginAuthors();
 }

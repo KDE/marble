@@ -102,7 +102,7 @@ void FlickrParser::readPhoto()
     Q_ASSERT(isStartElement() && name() == QLatin1StringView("photo"));
 
     if (attributes().hasAttribute(QLatin1StringView("id"))) {
-        PhotoPluginItem *item = new PhotoPluginItem(m_marbleWidget, m_parent);
+        auto item = new PhotoPluginItem(m_marbleWidget, m_parent);
         item->setId(attributes().value(QLatin1StringView("id")).toString());
         item->setServer(attributes().value(QLatin1StringView("server")).toString());
         item->setFarm(attributes().value(QLatin1StringView("farm")).toString());

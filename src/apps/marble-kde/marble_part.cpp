@@ -883,7 +883,7 @@ void MarblePart::createFolderList()
     QList<GeoDataFolder *>::const_iterator end = folders.constEnd();
 
     for (; i != end; ++i) {
-        QMenu *m_bookmarksListMenu = new QMenu((*i)->name());
+        auto m_bookmarksListMenu = new QMenu((*i)->name());
 
         createBookmarksListMenu(m_bookmarksListMenu, *(*i));
         connect(m_bookmarksListMenu, SIGNAL(triggered(QAction *)), this, SLOT(lookAtBookmark(QAction *)));
@@ -903,7 +903,7 @@ void MarblePart::createBookmarksListMenu(QMenu *m_bookmarksListMenu, const GeoDa
     QList<GeoDataPlacemark *>::const_iterator end = bookmarks.constEnd();
 
     for (; i != end; ++i) {
-        QAction *bookmarkAct = new QAction((*i)->name(), this);
+        auto bookmarkAct = new QAction((*i)->name(), this);
         QVariant var;
         GeoDataLookAt *lookAt = (*i)->lookAt();
         if (!lookAt) {
@@ -1169,7 +1169,7 @@ QLabel *MarblePart::setupStatusBarLabel(const QString &templateString)
 {
     QFontMetrics statusBarFontMetrics(m_statusBarExtension->statusBar()->fontMetrics());
 
-    QLabel *const label = new QLabel(m_statusBarExtension->statusBar());
+    auto const label = new QLabel(m_statusBarExtension->statusBar());
     label->setIndent(5);
     int maxWidth = statusBarFontMetrics.boundingRect(templateString).width() + 2 * label->margin() + 2 * label->indent();
     label->setFixedWidth(maxWidth);
@@ -1293,7 +1293,7 @@ void MarblePart::editSettings()
 
     // view page
     Ui_MarbleViewSettingsWidget ui_viewSettings;
-    QWidget *w_viewSettings = new QWidget(nullptr);
+    auto w_viewSettings = new QWidget(nullptr);
 
     w_viewSettings->setObjectName("view_page");
     ui_viewSettings.setupUi(w_viewSettings);
@@ -1304,7 +1304,7 @@ void MarblePart::editSettings()
 
     // navigation page
     Ui_MarbleNavigationSettingsWidget ui_navigationSettings;
-    QWidget *w_navigationSettings = new QWidget(nullptr);
+    auto w_navigationSettings = new QWidget(nullptr);
 
     w_navigationSettings->setObjectName("navigation_page");
     ui_navigationSettings.setupUi(w_navigationSettings);
@@ -1314,7 +1314,7 @@ void MarblePart::editSettings()
 
     // cache page
     Ui_MarbleCacheSettingsWidget ui_cacheSettings;
-    QWidget *w_cacheSettings = new QWidget(nullptr);
+    auto w_cacheSettings = new QWidget(nullptr);
 
     w_cacheSettings->setObjectName("cache_page");
     ui_cacheSettings.setupUi(w_cacheSettings);
@@ -1324,14 +1324,14 @@ void MarblePart::editSettings()
 
     // time page
     Ui_MarbleTimeSettingsWidget ui_timeSettings;
-    QWidget *w_timeSettings = new QWidget(nullptr);
+    auto w_timeSettings = new QWidget(nullptr);
 
     w_timeSettings->setObjectName("time_page");
     ui_timeSettings.setupUi(w_timeSettings);
     m_configDialog->addPage(w_timeSettings, i18n("Date & Time"), "clock");
 
     // Sync page
-    QWidget *w_cloudSyncSettings = new QWidget(nullptr);
+    auto w_cloudSyncSettings = new QWidget(nullptr);
 
     w_cloudSyncSettings->setObjectName("sync_page");
     m_ui_cloudSyncSettings.setupUi(w_cloudSyncSettings);
@@ -1344,13 +1344,13 @@ void MarblePart::editSettings()
     connect(m_controlView->cloudSyncManager(), SIGNAL(statusChanged(QString)), this, SLOT(updateCloudSyncStatus(QString)));
 
     // routing page
-    RoutingProfilesWidget *w_routingSettings = new RoutingProfilesWidget(m_controlView->marbleModel());
+    auto w_routingSettings = new RoutingProfilesWidget(m_controlView->marbleModel());
     w_routingSettings->setObjectName("routing_page");
     m_configDialog->addPage(w_routingSettings, i18n("Routing"), "flag");
 
     // plugin page
-    MarblePluginSettingsWidget *w_pluginSettings = new MarblePluginSettingsWidget();
-    RenderPluginModel *const pluginModel = new RenderPluginModel(w_pluginSettings);
+    auto w_pluginSettings = new MarblePluginSettingsWidget();
+    auto const pluginModel = new RenderPluginModel(w_pluginSettings);
     pluginModel->setRenderPlugins(m_controlView->marbleWidget()->renderPlugins());
     w_pluginSettings->setModel(pluginModel);
     w_pluginSettings->setObjectName("plugin_page");
@@ -1598,7 +1598,7 @@ void MarblePart::openManageBookmarksDialog()
 
 void MarblePart::lookAtBookmark(QAction *action)
 {
-    GeoDataLookAt temp = qvariant_cast<GeoDataLookAt>(action->data());
+    auto temp = qvariant_cast<GeoDataLookAt>(action->data());
     m_controlView->marbleWidget()->flyTo(temp);
     mDebug() << " looking at bookmark having longitude : " << temp.longitude(GeoDataCoordinates::Degree)
              << " latitude :  " << temp.latitude(GeoDataCoordinates::Degree) << " distance : " << temp.range();

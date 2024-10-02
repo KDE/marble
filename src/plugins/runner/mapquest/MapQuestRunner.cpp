@@ -213,12 +213,12 @@ GeoDataDocument *MapQuestRunner::parse(const QByteArray &content) const
     // mDebug() << xml.toString(2);
     QDomElement root = xml.documentElement();
 
-    GeoDataDocument *result = new GeoDataDocument();
+    auto result = new GeoDataDocument();
     result->setName(QStringLiteral("MapQuest"));
-    GeoDataPlacemark *routePlacemark = new GeoDataPlacemark;
+    auto routePlacemark = new GeoDataPlacemark;
     routePlacemark->setName(QStringLiteral("Route"));
 
-    GeoDataLineString *routeWaypoints = new GeoDataLineString;
+    auto routeWaypoints = new GeoDataLineString;
     QDomNodeList shapePoints = root.elementsByTagName(QStringLiteral("shapePoints"));
     if (shapePoints.size() == 1) {
         QDomNodeList geometry = shapePoints.at(0).toElement().elementsByTagName(QStringLiteral("latLng"));
@@ -264,7 +264,7 @@ GeoDataDocument *MapQuestRunner::parse(const QByteArray &content) const
 
         Q_ASSERT(mapping.contains(i));
         if (textNodes.size() == 1 && maneuver.size() == 1 && points.size() == 1 && mapping.contains(i)) {
-            GeoDataPlacemark *instruction = new GeoDataPlacemark;
+            auto instruction = new GeoDataPlacemark;
             instruction->setName(textNodes.at(0).toElement().text());
 
             GeoDataExtendedData extendedData;
@@ -284,7 +284,7 @@ GeoDataDocument *MapQuestRunner::parse(const QByteArray &content) const
             int const end = mapping.contains(i + 1) ? mapping[i + 1] : routeWaypoints->size() - 1;
             if (start >= 0 && start < routeWaypoints->size() && end < routeWaypoints->size()) {
                 instruction->setName(textNodes.item(0).toElement().text());
-                GeoDataLineString *lineString = new GeoDataLineString;
+                auto lineString = new GeoDataLineString;
                 for (int j = start; j <= end; ++j) {
                     *lineString << GeoDataCoordinates(routeWaypoints->at(j).longitude(), routeWaypoints->at(j).latitude());
                 }

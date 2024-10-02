@@ -20,9 +20,7 @@ class MarbleTest
 {
 public:
     explicit MarbleTest(MarbleWidget *marbleWidget);
-    virtual ~MarbleTest()
-    {
-    }
+    virtual ~MarbleTest() = default;
 
     void timeDemo();
 

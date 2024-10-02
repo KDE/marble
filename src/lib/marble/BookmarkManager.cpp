@@ -48,7 +48,7 @@ void BookmarkManagerPrivate::resetBookmarkDocument()
         delete m_bookmarkDocument;
     }
 
-    GeoDataFolder *folder = new GeoDataFolder;
+    auto folder = new GeoDataFolder;
     folder->setName(QObject::tr("Default"));
 
     m_bookmarkDocument = new GeoDataDocument;
@@ -127,7 +127,7 @@ bool BookmarkManager::loadFile(const QString &relativeFilePath)
 
 void BookmarkManager::addBookmark(GeoDataContainer *container, const GeoDataPlacemark &placemark)
 {
-    GeoDataPlacemark *bookmark = new GeoDataPlacemark(placemark);
+    auto bookmark = new GeoDataPlacemark(placemark);
     bookmark->setVisualCategory(GeoDataPlacemark::Bookmark);
     bookmark->setZoomLevel(1);
     if (bookmark->name().isEmpty()) {
@@ -217,7 +217,7 @@ GeoDataFolder *BookmarkManager::addNewBookmarkFolder(GeoDataContainer *container
         }
     }
 
-    GeoDataFolder *bookmarkFolder = new GeoDataFolder();
+    auto bookmarkFolder = new GeoDataFolder();
     bookmarkFolder->setName(name);
 
     d->m_treeModel->addFeature(container, bookmarkFolder);
@@ -298,7 +298,7 @@ GeoDataDocument *BookmarkManager::openFile(const QString &fileName)
         return nullptr;
     }
 
-    GeoDataDocument *result = dynamic_cast<GeoDataDocument *>(parser.releaseDocument());
+    auto result = dynamic_cast<GeoDataDocument *>(parser.releaseDocument());
     if (!result) {
         return nullptr;
     }

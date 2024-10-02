@@ -100,7 +100,7 @@ QIcon NavigationFloatItem::icon() const
 
 void NavigationFloatItem::initialize()
 {
-    QWidget *navigationParent = new QWidget(nullptr);
+    auto navigationParent = new QWidget(nullptr);
     navigationParent->setAttribute(Qt::WA_NoSystemBackground, true);
 
     m_navigationWidget = new Ui::Navigation;
@@ -109,7 +109,7 @@ void NavigationFloatItem::initialize()
     m_widgetItem = new WidgetGraphicsItem(this);
     m_widgetItem->setWidget(navigationParent);
 
-    MarbleGraphicsGridLayout *layout = new MarbleGraphicsGridLayout(1, 1);
+    auto layout = new MarbleGraphicsGridLayout(1, 1);
     layout->addItem(m_widgetItem, 0, 0);
 
     setLayout(layout);
@@ -143,7 +143,7 @@ bool NavigationFloatItem::eventFilter(QObject *object, QEvent *e)
         return false;
     }
 
-    MarbleWidget *widget = dynamic_cast<MarbleWidget *>(object);
+    auto widget = dynamic_cast<MarbleWidget *>(object);
     if (!widget) {
         return AbstractFloatItem::eventFilter(object, e);
     }

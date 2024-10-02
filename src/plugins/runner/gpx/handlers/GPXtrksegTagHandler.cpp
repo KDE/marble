@@ -26,9 +26,9 @@ GeoNode *GPXtrksegTagHandler::parse(GeoParser &parser) const
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(gpxTag_trk)) {
-        GeoDataPlacemark *placemark = parentItem.nodeAs<GeoDataPlacemark>();
-        GeoDataMultiGeometry *multigeometry = static_cast<GeoDataMultiGeometry *>(placemark->geometry());
-        GeoDataTrack *track = new GeoDataTrack;
+        auto placemark = parentItem.nodeAs<GeoDataPlacemark>();
+        auto multigeometry = static_cast<GeoDataMultiGeometry *>(placemark->geometry());
+        auto track = new GeoDataTrack;
 
         multigeometry->append(track);
         return track;

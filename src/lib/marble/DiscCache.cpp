@@ -169,7 +169,7 @@ QString DiscCache::keyToFileName(const QString &key) const
 void DiscCache::cleanup()
 {
     // Calculate 5% of our current cache limit
-    quint64 fivePercent = quint64(m_CacheLimit * 0.05);
+    auto fivePercent = quint64(m_CacheLimit * 0.05);
 
     while (m_CurrentCacheSize > (m_CacheLimit - fivePercent)) {
         QDateTime oldestDate(QDateTime::currentDateTime());

@@ -24,7 +24,7 @@ static GeoTagWriterRegistrar s_writerLookAt(GeoTagWriter::QualifiedName(GeoDataT
 
 bool KmlLookAtTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataLookAt *lookAt = static_cast<const GeoDataLookAt *>(node);
+    const auto lookAt = static_cast<const GeoDataLookAt *>(node);
 
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_LookAt));
     KmlObjectTagWriter::writeIdentifiers(writer, lookAt);

@@ -19,7 +19,7 @@ static GeoTagWriterRegistrar s_writerLookAt(GeoTagWriter::QualifiedName(GeoDataT
 
 bool KmlLatLonBoxWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataLatLonBox *lat_lon_box = static_cast<const GeoDataLatLonBox *>(node);
+    const auto lat_lon_box = static_cast<const GeoDataLatLonBox *>(node);
 
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_LatLonBox));
     KmlObjectTagWriter::writeIdentifiers(writer, lat_lon_box);

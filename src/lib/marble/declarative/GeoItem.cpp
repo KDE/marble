@@ -9,8 +9,6 @@
 
 #include "MarbleGlobal.h"
 
-using Marble::DEG2RAD;
-using Marble::EARTH_RADIUS;
 using Marble::GeoDataCoordinates;
 
 namespace Marble
@@ -133,7 +131,7 @@ void GeoItem::updateScreenPosition()
 
 void GeoItem::setMapToParentOnInit()
 {
-    MarbleQuickItem *visualParent = qobject_cast<MarbleQuickItem *>(parentItem());
+    auto visualParent = qobject_cast<MarbleQuickItem *>(parentItem());
     if (visualParent) {
         disconnect(this, &QQuickItem::parentChanged, this, &GeoItem::setMapToParentOnInit);
         setMap(visualParent);

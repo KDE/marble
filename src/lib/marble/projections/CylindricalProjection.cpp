@@ -35,9 +35,7 @@ CylindricalProjection::CylindricalProjection(CylindricalProjectionPrivate *dd)
 {
 }
 
-CylindricalProjection::~CylindricalProjection()
-{
-}
+CylindricalProjection::~CylindricalProjection() = default;
 
 CylindricalProjectionPrivate::CylindricalProjectionPrivate(CylindricalProjection *parent)
     : AbstractProjectionPrivate(parent)
@@ -251,7 +249,7 @@ bool CylindricalProjectionPrivate::lineStringToPolygon(const GeoDataLineString &
     int mirrorCount = 0;
     qreal distance = repeatDistance(viewport);
 
-    QPolygonF *polygon = new QPolygonF;
+    auto polygon = new QPolygonF;
     if (!tessellate) {
         polygon->reserve(lineString.size());
     }
@@ -364,7 +362,7 @@ void CylindricalProjectionPrivate::translatePolygons(const QList<QPolygonF *> &p
     QList<QPolygonF *>::const_iterator itEnd = polygons.constEnd();
 
     for (; itPolygon != itEnd; ++itPolygon) {
-        QPolygonF *polygon = new QPolygonF;
+        auto polygon = new QPolygonF;
         *polygon = **itPolygon;
         polygon->translate(xOffset, 0);
         translatedPolygons.append(polygon);

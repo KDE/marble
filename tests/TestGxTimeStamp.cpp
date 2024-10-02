@@ -49,7 +49,7 @@ void TestGxTimeStamp::simpleParseTest()
     GeoDataPlacemark *placemark = dataDocument->placemarkList().at(0);
     GeoDataAbstractView *view = placemark->abstractView();
     QVERIFY(view != nullptr);
-    GeoDataCamera *camera = dynamic_cast<GeoDataCamera *>(view);
+    auto camera = dynamic_cast<GeoDataCamera *>(view);
     QVERIFY(camera != nullptr);
     QCOMPARE(camera->timeStamp().when().toUTC(), QDateTime::fromString("1987-06-05T04:03:02-01:00", Qt::ISODate).toUTC());
 

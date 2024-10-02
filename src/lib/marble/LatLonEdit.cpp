@@ -35,9 +35,7 @@ protected:
     }
 
 public:
-    virtual ~AbstractInputHandler()
-    {
-    }
+    virtual ~AbstractInputHandler() = default;
 
 public: // API to be implemented
     virtual void setupUi() = 0;

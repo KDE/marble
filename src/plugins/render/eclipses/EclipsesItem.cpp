@@ -31,9 +31,7 @@ EclipsesItem::EclipsesItem(EclSolar *ecl, int index, QObject *parent)
     initialize();
 }
 
-EclipsesItem::~EclipsesItem()
-{
-}
+EclipsesItem::~EclipsesItem() = default;
 
 int EclipsesItem::index() const
 {
@@ -70,7 +68,7 @@ QIcon EclipsesItem::icon() const
         return QIcon(QStringLiteral(":res/solar_total.png"));
     }
 
-    return QIcon();
+    return {};
 }
 
 QString EclipsesItem::phaseText() const
@@ -96,7 +94,7 @@ QString EclipsesItem::phaseText() const
         return tr("Sun, Annular/Total");
     }
 
-    return QString();
+    return {};
 }
 
 double EclipsesItem::magnitude() const
@@ -438,13 +436,13 @@ void EclipsesItem::calculate()
     QList<GeoDataLinearRing *> sunBoundaries;
     np = m_ecl->GRSBound(true, lat1, lng1, lat3, lng3);
 
-    GeoDataLinearRing *lowerBoundary = new GeoDataLinearRing(Tessellate);
+    auto lowerBoundary = new GeoDataLinearRing(Tessellate);
     *lowerBoundary << GeoDataCoordinates(GeoDataCoordinates::normalizeLon(lng1, GeoDataCoordinates::Degree),
                                          GeoDataCoordinates::normalizeLat(lat1, GeoDataCoordinates::Degree),
                                          0.,
                                          GeoDataCoordinates::Degree);
 
-    GeoDataLinearRing *upperBoundary = new GeoDataLinearRing(Tessellate);
+    auto upperBoundary = new GeoDataLinearRing(Tessellate);
     *upperBoundary << GeoDataCoordinates(GeoDataCoordinates::normalizeLon(lng3, GeoDataCoordinates::Degree),
                                          GeoDataCoordinates::normalizeLat(lat3, GeoDataCoordinates::Degree),
                                          0.,
@@ -552,7 +550,7 @@ void EclipsesItem::calculate()
                 if (closestEnd == 1) {
                     // TODO: replace this with a GeoDataLinearRing::invert()
                     // method that needs to be added to Marble ...
-                    GeoDataLinearRing *invertedBoundary = new GeoDataLinearRing(Tessellate);
+                    auto invertedBoundary = new GeoDataLinearRing(Tessellate);
                     QList<GeoDataCoordinates>::const_iterator iter = sunBoundaries.at(closestSection)->constEnd();
                     --iter;
                     for (; iter != sunBoundaries.at(closestSection)->constBegin(); --iter) {

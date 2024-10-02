@@ -67,7 +67,7 @@ GeoDataDocument *GpsbabelRunner::parseFile(const QString &fileName, DocumentRole
         kmlFile.open(QIODevice::ReadWrite);
         GeoDataParser parser(GeoData_KML);
         parser.read(&kmlFile);
-        GeoDataDocument *document = dynamic_cast<GeoDataDocument *>(parser.releaseDocument());
+        auto document = dynamic_cast<GeoDataDocument *>(parser.releaseDocument());
         if (!document) {
             error = parser.errorString();
             mDebug() << error;

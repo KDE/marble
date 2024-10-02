@@ -76,7 +76,7 @@ GeoDataPlacemark *OsmWay::create(const OsmNodes &nodes, QSet<qint64> &usedNodes)
 
     OsmObjectManager::registerId(m_osmData.id());
 
-    GeoDataPlacemark *placemark = new GeoDataPlacemark;
+    auto placemark = new GeoDataPlacemark;
     placemark->setGeometry(geometry);
     placemark->setVisualCategory(StyleBuilder::determineVisualCategory(m_osmData));
     placemark->setName(m_osmData.tagValue(QStringLiteral("name")));
@@ -229,7 +229,7 @@ QString OsmWay::extractBuildingName() const
         return tagIter.value();
     }
 
-    return QString();
+    return {};
 }
 
 double OsmWay::extractBuildingHeight() const

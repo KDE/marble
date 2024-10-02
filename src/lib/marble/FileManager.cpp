@@ -80,13 +80,13 @@ void FileManager::addFile(const QString &filepath, const QString &property, cons
     mDebug() << "adding container:" << filepath;
     mDebug() << "Starting placemark loading timer";
     d->m_timer.start();
-    FileLoader *loader = new FileLoader(this, d->m_pluginManager, recenter, filepath, property, style, role, renderOrder);
+    auto loader = new FileLoader(this, d->m_pluginManager, recenter, filepath, property, style, role, renderOrder);
     d->appendLoader(loader);
 }
 
 void FileManager::addData(const QString &name, const QString &data, DocumentRole role)
 {
-    FileLoader *loader = new FileLoader(this, d->m_pluginManager, data, name, role);
+    auto loader = new FileLoader(this, d->m_pluginManager, data, name, role);
     d->appendLoader(loader);
 }
 

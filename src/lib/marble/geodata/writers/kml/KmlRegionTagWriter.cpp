@@ -22,7 +22,7 @@ static GeoTagWriterRegistrar s_writerRegion(GeoTagWriter::QualifiedName(GeoDataT
 
 bool KmlRegionTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataRegion *region = static_cast<const GeoDataRegion *>(node);
+    const auto region = static_cast<const GeoDataRegion *>(node);
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_Region));
     KmlObjectTagWriter::writeIdentifiers(writer, region);
     writeElement(&region->latLonAltBox(), writer);

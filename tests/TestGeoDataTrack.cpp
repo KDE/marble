@@ -109,7 +109,7 @@ void TestGeoDataTrack::simpleParseTest()
     QCOMPARE(folder->placemarkList().size(), 1);
     GeoDataPlacemark *placemark = folder->placemarkList().at(0);
     QCOMPARE(placemark->geometry()->geometryId(), GeoDataTrackId);
-    GeoDataTrack *track = static_cast<GeoDataTrack *>(placemark->geometry());
+    auto track = static_cast<GeoDataTrack *>(placemark->geometry());
     QCOMPARE(track->size(), 7);
     {
         QDateTime when = track->whenList().at(0);
@@ -138,7 +138,7 @@ void TestGeoDataTrack::removeBeforeTest()
     QCOMPARE(folder->placemarkList().size(), 1);
     GeoDataPlacemark *placemark = folder->placemarkList().at(0);
     QCOMPARE(placemark->geometry()->geometryId(), GeoDataTrackId);
-    GeoDataTrack *track = static_cast<GeoDataTrack *>(placemark->geometry());
+    auto track = static_cast<GeoDataTrack *>(placemark->geometry());
     QCOMPARE(track->size(), 7);
     track->removeBefore(QDateTime(QDate(2010, 5, 28), QTime(2, 2, 54), Qt::UTC));
     QCOMPARE(track->size(), 3);
@@ -167,7 +167,7 @@ void TestGeoDataTrack::removeAfterTest()
     QCOMPARE(folder->placemarkList().size(), 1);
     GeoDataPlacemark *placemark = folder->placemarkList().at(0);
     QCOMPARE(placemark->geometry()->geometryId(), GeoDataTrackId);
-    GeoDataTrack *track = static_cast<GeoDataTrack *>(placemark->geometry());
+    auto track = static_cast<GeoDataTrack *>(placemark->geometry());
     QCOMPARE(track->size(), 7);
     track->removeAfter(QDateTime(QDate(2010, 5, 28), QTime(2, 2, 54), Qt::UTC));
     QCOMPARE(track->size(), 5);
@@ -271,7 +271,7 @@ void TestGeoDataTrack::extendedDataParseTest()
     QCOMPARE(folder->placemarkList().size(), 1);
     GeoDataPlacemark *placemark = folder->placemarkList().at(0);
     QCOMPARE(placemark->geometry()->geometryId(), GeoDataTrackId);
-    GeoDataTrack *track = static_cast<GeoDataTrack *>(placemark->geometry());
+    auto track = static_cast<GeoDataTrack *>(placemark->geometry());
     QCOMPARE(track->size(), 7);
 
     {
@@ -330,7 +330,7 @@ void TestGeoDataTrack::withoutTimeTest()
     QCOMPARE(folder->placemarkList().size(), 1);
     GeoDataPlacemark *placemark = folder->placemarkList().at(0);
     QCOMPARE(placemark->geometry()->geometryId(), GeoDataTrackId);
-    GeoDataTrack *track = static_cast<GeoDataTrack *>(placemark->geometry());
+    auto track = static_cast<GeoDataTrack *>(placemark->geometry());
     QCOMPARE(track->size(), 7);
     {
         GeoDataCoordinates coord = track->coordinatesList().at(0);

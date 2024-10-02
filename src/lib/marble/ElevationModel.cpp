@@ -144,7 +144,7 @@ qreal ElevationModel::height(qreal lon, qreal lat) const
         Q_ASSERT(0 <= dx && dx <= 1);
         Q_ASSERT(0 <= dy && dy <= 1);
         unsigned int pixel = image->pixel(x % width, y % height) & 0xffff; // 16 valid bits
-        short int elevation = (short int)pixel; // and signed type, so just cast it
+        auto elevation = (short int)pixel; // and signed type, so just cast it
         // mDebug() << "(1-dx)" << (1-dx) << "(1-dy)" << (1-dy);
         if (pixel != invalidElevationData) { // no data?
             // mDebug() << "got at x" << x % width << "y" << y % height << "a height of" << pixel << "** RGB" << qRed(pixel) << qGreen(pixel) << qBlue(pixel);
@@ -172,7 +172,7 @@ qreal ElevationModel::height(qreal lon, qreal lat) const
 QList<GeoDataCoordinates> ElevationModel::heightProfile(qreal fromLon, qreal fromLat, qreal toLon, qreal toLat) const
 {
     if (!d->m_textureLayer) {
-        return QList<GeoDataCoordinates>();
+        return {};
     }
 
     const int tileZoomLevel = TileLoader::maximumTileLevel(*(d->m_textureLayer));

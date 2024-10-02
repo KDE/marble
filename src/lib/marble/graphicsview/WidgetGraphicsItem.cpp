@@ -38,9 +38,7 @@ WidgetGraphicsItem::WidgetGraphicsItem(MarbleGraphicsItem *parent)
 {
 }
 
-WidgetGraphicsItem::~WidgetGraphicsItem()
-{
-}
+WidgetGraphicsItem::~WidgetGraphicsItem() = default;
 
 void WidgetGraphicsItem::setWidget(QWidget *widget)
 {
@@ -77,7 +75,7 @@ bool WidgetGraphicsItem::eventFilter(QObject *object, QEvent *e)
         return false;
     }
 
-    MarbleWidget *widget = dynamic_cast<MarbleWidget *>(object);
+    auto widget = dynamic_cast<MarbleWidget *>(object);
     if (!widget) {
         return ScreenGraphicsItem::eventFilter(object, e);
     }
@@ -92,7 +90,7 @@ bool WidgetGraphicsItem::eventFilter(QObject *object, QEvent *e)
     if (e->type() == QEvent::MouseButtonDblClick || e->type() == QEvent::MouseMove || e->type() == QEvent::MouseButtonPress
         || e->type() == QEvent::MouseButtonRelease) {
         // Mouse events are forwarded to the underlying widget
-        QMouseEvent *event = static_cast<QMouseEvent *>(e);
+        auto event = static_cast<QMouseEvent *>(e);
 
         const QList<QPointF> widgetPositions = absolutePositions();
         QRectF widgetItemRect;

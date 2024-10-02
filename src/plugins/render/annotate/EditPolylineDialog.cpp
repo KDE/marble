@@ -228,7 +228,7 @@ void EditPolylineDialog::restoreInitial(int result)
         return;
     }
 
-    GeoDataLineString *currentLineString = static_cast<GeoDataLineString *>(d->m_placemark->geometry());
+    auto currentLineString = static_cast<GeoDataLineString *>(d->m_placemark->geometry());
 
     if (*currentLineString != d->m_initialLineString) {
         d->m_placemark->setGeometry(new GeoDataLineString(d->m_initialLineString));

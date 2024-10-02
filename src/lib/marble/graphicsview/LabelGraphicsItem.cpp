@@ -51,9 +51,7 @@ LabelGraphicsItem::LabelGraphicsItem(MarbleGraphicsItem *parent)
 {
 }
 
-LabelGraphicsItem::~LabelGraphicsItem()
-{
-}
+LabelGraphicsItem::~LabelGraphicsItem() = default;
 
 QString LabelGraphicsItem::text() const
 {

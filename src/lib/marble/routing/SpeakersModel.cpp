@@ -174,7 +174,7 @@ QVariant SpeakersModel::data(const QModelIndex &index, int role) const
         }
     }
 
-    return QVariant();
+    return {};
 }
 
 QHash<int, QByteArray> SpeakersModel::roleNames() const
@@ -197,7 +197,7 @@ QString SpeakersModel::path(int index)
     if (index >= 0 && index <= d->m_speakers.size()) {
         return d->m_speakers[index].m_file.absoluteFilePath();
     }
-    return QString();
+    return {};
 }
 
 void SpeakersModel::install(int index)

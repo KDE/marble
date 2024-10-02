@@ -27,7 +27,7 @@ GeoNode *KmlMultiTrackTagHandler::parse(GeoParser &parser) const
 
     GeoStackItem parentItem = parser.parentElement();
 
-    GeoDataMultiTrack *geom = new GeoDataMultiTrack;
+    auto geom = new GeoDataMultiTrack;
     KmlObjectTagHandler::parseIdentifiers(parser, geom);
     if (parentItem.represents(kmlTag_Placemark)) {
         parentItem.nodeAs<GeoDataPlacemark>()->setGeometry(geom);

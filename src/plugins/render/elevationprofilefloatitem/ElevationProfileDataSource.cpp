@@ -109,7 +109,7 @@ qreal ElevationProfileTrackDataSource::getElevation(const GeoDataCoordinates &co
 
 void ElevationProfileTrackDataSource::handleObjectAdded(GeoDataObject *object)
 {
-    const GeoDataDocument *document = dynamic_cast<const GeoDataDocument *>(object);
+    const auto document = dynamic_cast<const GeoDataDocument *>(object);
     if (!document) {
         return; // don't know what to do if not a document
     }
@@ -117,16 +117,16 @@ void ElevationProfileTrackDataSource::handleObjectAdded(GeoDataObject *object)
 
     for (int i = 0; i < document->size(); ++i) {
         const GeoDataFeature *feature = document->child(i);
-        const GeoDataPlacemark *placemark = dynamic_cast<const GeoDataPlacemark *>(feature);
+        const auto placemark = dynamic_cast<const GeoDataPlacemark *>(feature);
         if (!placemark) {
             continue;
         }
-        const GeoDataMultiGeometry *multiGeometry = dynamic_cast<const GeoDataMultiGeometry *>(placemark->geometry());
+        const auto multiGeometry = dynamic_cast<const GeoDataMultiGeometry *>(placemark->geometry());
         if (!multiGeometry) {
             continue;
         }
         for (int i = 0; i < multiGeometry->size(); i++) {
-            const GeoDataTrack *track = dynamic_cast<const GeoDataTrack *>(multiGeometry->child(i));
+            const auto track = dynamic_cast<const GeoDataTrack *>(multiGeometry->child(i));
             if (track && track->size() > 1) {
                 mDebug() << "new GeoDataTrack for ElevationProfile detected";
                 trackList.append(track);
@@ -174,7 +174,7 @@ void ElevationProfileTrackDataSource::handleObjectRemoved(GeoDataObject *object)
         return;
     }
 
-    const GeoDataDocument *topLevelDoc = dynamic_cast<const GeoDataDocument *>(object);
+    const auto topLevelDoc = dynamic_cast<const GeoDataDocument *>(object);
     if (!topLevelDoc) {
         return; // don't know what to do if not a document
     }

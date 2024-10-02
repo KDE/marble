@@ -19,7 +19,7 @@ static GeoTagWriterRegistrar s_writerLegend(GeoTagWriter::QualifiedName(GeoScene
 
 bool DgmlLegendTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoSceneLegend *legend = static_cast<const GeoSceneLegend *>(node);
+    const auto legend = static_cast<const GeoSceneLegend *>(node);
 
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Legend));
     for (int i = 0; i < legend->sections().count(); ++i) {

@@ -26,9 +26,7 @@ ScreenGraphicsItem::ScreenGraphicsItem(ScreenGraphicsItemPrivate *dd)
 {
 }
 
-ScreenGraphicsItem::~ScreenGraphicsItem()
-{
-}
+ScreenGraphicsItem::~ScreenGraphicsItem() = default;
 
 QPointF ScreenGraphicsItem::position() const
 {
@@ -68,7 +66,7 @@ void ScreenGraphicsItem::setFlags(ScreenGraphicsItem::GraphicsItemFlags flags)
 
 bool ScreenGraphicsItem::eventFilter(QObject *object, QEvent *e)
 {
-    MarbleWidget *widget = dynamic_cast<MarbleWidget *>(object);
+    auto widget = dynamic_cast<MarbleWidget *>(object);
     if (!widget) {
         return MarbleGraphicsItem::eventFilter(object, e);
     }
@@ -89,7 +87,7 @@ bool ScreenGraphicsItem::eventFilter(QObject *object, QEvent *e)
 
         // Move ScreenGraphicsItem
         if (e->type() == QEvent::MouseButtonPress) {
-            QMouseEvent *event = static_cast<QMouseEvent *>(e);
+            auto event = static_cast<QMouseEvent *>(e);
 
             // Click and move above a float item triggers moving the float item
             if (contains(event->pos())) {
@@ -105,7 +103,7 @@ bool ScreenGraphicsItem::eventFilter(QObject *object, QEvent *e)
     } else {
         // Move ScreenGraphicsItem
         if (e->type() == QEvent::MouseMove || e->type() == QEvent::MouseButtonPress || e->type() == QEvent::MouseButtonRelease) {
-            QMouseEvent *event = static_cast<QMouseEvent *>(e);
+            auto event = static_cast<QMouseEvent *>(e);
             // The rect the item was painted on before. We add one pixel as antialiasing could
             // result into painting on these pixels to.
             QRectF floatItemRect = QRectF(positivePosition() - QPoint(1, 1), size() + QSize(2, 2));

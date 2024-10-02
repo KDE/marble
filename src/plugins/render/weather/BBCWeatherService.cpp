@@ -33,9 +33,7 @@ BBCWeatherService::BBCWeatherService(const MarbleModel *model, QObject *parent)
     qRegisterMetaType<BBCStation>("BBCStation");
 }
 
-BBCWeatherService::~BBCWeatherService()
-{
-}
+BBCWeatherService::~BBCWeatherService() = default;
 
 void BBCWeatherService::setFavoriteItems(const QStringList &favorite)
 {
@@ -92,7 +90,7 @@ void BBCWeatherService::fetchStationList()
 
 void BBCWeatherService::createItem(const BBCStation &station)
 {
-    BBCWeatherItem *item = new BBCWeatherItem(this);
+    auto item = new BBCWeatherItem(this);
     item->setMarbleWidget(marbleWidget());
     item->setBbcId(station.bbcId());
     item->setCoordinate(station.coordinate());

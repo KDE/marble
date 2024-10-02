@@ -20,7 +20,7 @@ namespace Marble
 
 bool KmlOsmPlacemarkDataTagWriter::write(const GeoDataFeature *feature, GeoWriter &writer)
 {
-    const GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(feature);
+    const auto placemark = geodata_cast<GeoDataPlacemark>(feature);
 
     if (!placemark) {
         return false;
@@ -67,7 +67,7 @@ bool KmlOsmPlacemarkDataTagWriter::writeOsmData(const GeoDataGeometry *geometry,
     }
     if (geometry) {
         // Ways
-        if (const GeoDataLineString *lineString = dynamic_cast<const GeoDataLineString *>(geometry)) {
+        if (const auto lineString = dynamic_cast<const GeoDataLineString *>(geometry)) {
             int ndIndex = 0;
 
             // Writing the component nodes
@@ -82,7 +82,7 @@ bool KmlOsmPlacemarkDataTagWriter::writeOsmData(const GeoDataGeometry *geometry,
             }
         }
         // Polygons
-        else if (const GeoDataPolygon *polygon = geodata_cast<GeoDataPolygon>(geometry)) {
+        else if (const auto polygon = geodata_cast<GeoDataPolygon>(geometry)) {
             int memberIndex = -1;
 
             // Writing the outerBoundary osmData

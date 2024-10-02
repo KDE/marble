@@ -150,9 +150,7 @@ AzimuthalProjection::AzimuthalProjection(AzimuthalProjectionPrivate *dd)
 {
 }
 
-AzimuthalProjection::~AzimuthalProjection()
-{
-}
+AzimuthalProjection::~AzimuthalProjection() = default;
 
 void AzimuthalProjectionPrivate::tessellateLineSegment(const GeoDataCoordinates &aCoords,
                                                        qreal ax,
@@ -281,7 +279,7 @@ void AzimuthalProjectionPrivate::crossHorizon(const GeoDataCoordinates &bCoord,
         *polygons.last() << QPointF(x, y);
     } else {
         if (allowLatePolygonCut && !polygons.last()->isEmpty()) {
-            QPolygonF *path = new QPolygonF;
+            auto path = new QPolygonF;
             polygons.append(path);
         }
     }
@@ -306,7 +304,7 @@ bool AzimuthalProjectionPrivate::lineStringToPolygon(const GeoDataLineString &li
     qreal horizonX = -1.0;
     qreal horizonY = -1.0;
 
-    QPolygonF *polygon = new QPolygonF;
+    auto polygon = new QPolygonF;
     if (!tessellate) {
         polygon->reserve(lineString.size());
     }

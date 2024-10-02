@@ -211,7 +211,7 @@ bool EclipsesPlugin::isInitialized() const
 bool EclipsesPlugin::eventFilter(QObject *object, QEvent *e)
 {
     // delayed initialization of pointer to marble widget
-    MarbleWidget *widget = dynamic_cast<MarbleWidget *>(object);
+    auto widget = dynamic_cast<MarbleWidget *>(object);
     if (widget && m_marbleWidget != widget) {
         connect(widget, SIGNAL(themeChanged(QString)), this, SLOT(updateMenuItemState()));
         m_marbleWidget = widget;

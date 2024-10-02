@@ -23,7 +23,7 @@ static GeoTagWriterRegistrar s_writerBallonStyle(GeoTagWriter::QualifiedName(Geo
 
 bool KmlBalloonStyleTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataBalloonStyle *balloonStyle = static_cast<const GeoDataBalloonStyle *>(node);
+    const auto balloonStyle = static_cast<const GeoDataBalloonStyle *>(node);
     bool const isEmpty = balloonStyle->backgroundColor() == QColor(Qt::white) && balloonStyle->textColor() == QColor(Qt::black)
         && balloonStyle->text().isEmpty() && balloonStyle->displayMode() == GeoDataBalloonStyle::Default;
     if (isEmpty) {

@@ -30,7 +30,7 @@ bool KmlPhotoOverlayWriter::writeMid(const GeoNode *node, GeoWriter &writer) con
 {
     KmlOverlayTagWriter::writeMid(node, writer);
 
-    const GeoDataPhotoOverlay *photo_overlay = static_cast<const GeoDataPhotoOverlay *>(node);
+    const auto photo_overlay = static_cast<const GeoDataPhotoOverlay *>(node);
 
     // rotation
     QString const rotation = QString::number(photo_overlay->rotation(), 'f', 3);

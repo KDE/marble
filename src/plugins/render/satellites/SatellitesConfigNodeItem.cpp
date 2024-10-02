@@ -19,9 +19,7 @@ SatellitesConfigNodeItem::SatellitesConfigNodeItem(const QString &name)
 {
 }
 
-SatellitesConfigNodeItem::~SatellitesConfigNodeItem()
-{
-}
+SatellitesConfigNodeItem::~SatellitesConfigNodeItem() = default;
 
 void SatellitesConfigNodeItem::loadSettings(const QHash<QString, QVariant> &settings)
 {
@@ -76,11 +74,11 @@ QVariant SatellitesConfigNodeItem::data(int column, int role) const
             }
         }
 
-        return QVariant(oneChecked ? Qt::Checked : Qt::Unchecked);
+        return {oneChecked ? Qt::Checked : Qt::Unchecked};
     }
     }
 
-    return QVariant();
+    return {};
 }
 
 bool SatellitesConfigNodeItem::setData(int column, int role, const QVariant &data)

@@ -22,9 +22,7 @@ HostipRunner::HostipRunner(QObject *parent)
     connect(&m_networkAccessManager, SIGNAL(finished(QNetworkReply *)), this, SLOT(slotRequestFinished(QNetworkReply *)), Qt::DirectConnection);
 }
 
-HostipRunner::~HostipRunner()
-{
-}
+HostipRunner::~HostipRunner() = default;
 
 void HostipRunner::slotNoResults()
 {
@@ -93,7 +91,7 @@ void HostipRunner::slotRequestFinished(QNetworkReply *reply)
     QList<GeoDataPlacemark *> placemarks;
 
     if (lon != 0.0 && lat != 0.0) {
-        GeoDataPlacemark *placemark = new GeoDataPlacemark;
+        auto placemark = new GeoDataPlacemark;
 
         placemark->setName(m_hostInfo.hostName());
 

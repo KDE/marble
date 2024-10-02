@@ -22,7 +22,7 @@ KmlOverlayTagWriter::KmlOverlayTagWriter(const QString &elementName)
 
 bool KmlOverlayTagWriter::writeMid(const Marble::GeoNode *node, GeoWriter &writer) const
 {
-    GeoDataOverlay const *overlay = static_cast<const GeoDataOverlay *>(node);
+    auto const *overlay = static_cast<const GeoDataOverlay *>(node);
 
     QString const color = KmlColorStyleTagWriter::formatColor(overlay->color());
     writer.writeOptionalElement(kml::kmlTag_color, color, "ffffffff");

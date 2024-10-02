@@ -197,7 +197,7 @@ void DownloadRegion::setVisibleTileLevel(const int tileLevel)
 QList<TileCoordsPyramid> DownloadRegion::fromPath(const TileLayer *tileLayer, qreal offset, const GeoDataLineString &waypoints) const
 {
     if (!d->m_marbleModel) {
-        return QList<TileCoordsPyramid>();
+        return {};
     }
 
     int tileLevelRangeFirst = d->m_tileLevelRange.first;

@@ -24,7 +24,7 @@ static GeoTagWriterRegistrar s_writerStyle(GeoTagWriter::QualifiedName(GeoDataTy
 
 bool KmlStyleTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataStyle *style = static_cast<const GeoDataStyle *>(node);
+    const auto style = static_cast<const GeoDataStyle *>(node);
 
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_Style));
     KmlObjectTagWriter::writeIdentifiers(writer, style);

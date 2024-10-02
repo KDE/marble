@@ -139,7 +139,7 @@ QImage RemoteIconLoader::load(const QUrl &url)
     else {
         d->initiateDownload(url);
     }
-    return QImage();
+    return {};
 }
 
 void RemoteIconLoader::storeIcon(const QByteArray &data, const QString &fileName)

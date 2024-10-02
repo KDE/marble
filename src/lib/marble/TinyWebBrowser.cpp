@@ -40,7 +40,7 @@ TinyWebBrowser::TinyWebBrowser(QWidget *parent)
     : QWebEngineView(parent)
     , d(nullptr)
 {
-    MarbleWebPage *page = new MarbleWebPage();
+    auto page = new MarbleWebPage();
     setPage(page);
 
     connect(this, SIGNAL(statusBarMessage(QString)), this, SIGNAL(statusMessage(QString)));
@@ -81,7 +81,7 @@ void TinyWebBrowser::print()
 QWebEngineView *TinyWebBrowser::createWindow(QWebEnginePage::WebWindowType type)
 {
     Q_UNUSED(type)
-    TinyWebBrowser *view = new TinyWebBrowser(this);
+    auto view = new TinyWebBrowser(this);
     return view;
 }
 

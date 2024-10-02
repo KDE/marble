@@ -63,11 +63,7 @@ GeoDataModel::GeoDataModel(const GeoDataModel &other)
     // nothing to do
 }
 
-GeoDataModel &GeoDataModel::operator=(const GeoDataModel &other)
-{
-    GeoDataGeometry::operator=(other);
-    return *this;
-}
+GeoDataModel &GeoDataModel::operator=(const GeoDataModel &other) = default;
 
 const char *GeoDataModel::nodeType() const
 {
@@ -99,9 +95,7 @@ bool GeoDataModel::operator!=(const GeoDataModel &other) const
     return !this->operator==(other);
 }
 
-GeoDataModel::~GeoDataModel()
-{
-}
+GeoDataModel::~GeoDataModel() = default;
 
 const GeoDataCoordinates &GeoDataModel::coordinates() const
 {

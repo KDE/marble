@@ -101,9 +101,7 @@ public:
     using right_iterator = _iterator<QMap<int, QPersistentModelIndex>>;
     using right_const_iterator = typename QMap<int, QPersistentModelIndex>::const_iterator;
 
-    inline KBiAssociativeContainer()
-    {
-    }
+    inline KBiAssociativeContainer() = default;
     inline KBiAssociativeContainer(const KBiAssociativeContainer<LeftContainer, RightContainer> &other)
     {
         *this = other;

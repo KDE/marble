@@ -35,7 +35,7 @@ KmlDocumentTagWriter::KmlDocumentTagWriter()
 
 bool KmlDocumentTagWriter::writeMid(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataDocument *document = static_cast<const GeoDataDocument *>(node);
+    const auto document = static_cast<const GeoDataDocument *>(node);
 
     for (const GeoDataStyle::ConstPtr &style : document->styles()) {
         writeElement(style.data(), writer);

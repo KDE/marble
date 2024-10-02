@@ -40,9 +40,9 @@ void OpenLocationCodeSearchRunner::search(const QString &searchTerm, const GeoDa
     if (isValidOLC(searchTerm.toUpper())) {
         GeoDataLatLonBox boundingBox = decodeOLC(searchTerm.toUpper());
         if (!boundingBox.isEmpty()) {
-            GeoDataPlacemark *placemark = new GeoDataPlacemark(searchTerm);
+            auto placemark = new GeoDataPlacemark(searchTerm);
 
-            GeoDataPolygon *geometry = new GeoDataPolygon(polygonFromLatLonBox(boundingBox));
+            auto geometry = new GeoDataPolygon(polygonFromLatLonBox(boundingBox));
             placemark->setGeometry(geometry);
 
             GeoDataStyle::Ptr style = GeoDataStyle::Ptr(new GeoDataStyle());
@@ -87,7 +87,7 @@ GeoDataPolygon OpenLocationCodeSearchRunner::polygonFromLatLonBox(const GeoDataL
 GeoDataLatLonBox OpenLocationCodeSearchRunner::decodeOLC(const QString &olc) const
 {
     if (!isValidOLC(olc)) {
-        return GeoDataLatLonBox();
+        return {};
     }
 
     // remove padding
@@ -115,11 +115,11 @@ GeoDataLatLonBox OpenLocationCodeSearchRunner::decodeOLC(const QString &olc) con
             digit += 1;
         }
     }
-    return GeoDataLatLonBox(southLatitude - 90 + latitudeResolution,
-                            southLatitude - 90,
-                            westLongitude - 180 + longitudeResolution,
-                            westLongitude - 180,
-                            GeoDataCoordinates::Unit::Degree);
+    return {southLatitude - 90 + latitudeResolution,
+            southLatitude - 90,
+            westLongitude - 180 + longitudeResolution,
+            westLongitude - 180,
+            GeoDataCoordinates::Unit::Degree};
 }
 
 bool OpenLocationCodeSearchRunner::isValidOLC(const QString &olc) const

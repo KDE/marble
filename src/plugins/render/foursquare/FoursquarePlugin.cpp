@@ -26,7 +26,7 @@ FoursquarePlugin::FoursquarePlugin(const MarbleModel *marbleModel)
 
 void FoursquarePlugin::initialize()
 {
-    FoursquareModel *model = new FoursquareModel(marbleModel(), this);
+    auto model = new FoursquareModel(marbleModel(), this);
     setModel(model);
     setNumberOfItems(20); // Do we hardcode that?
 }

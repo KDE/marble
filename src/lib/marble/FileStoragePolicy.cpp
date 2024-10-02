@@ -30,9 +30,7 @@ FileStoragePolicy::FileStoragePolicy(const QString &dataDirectory, QObject *pare
         QDir::root().mkpath(m_dataDirectory);
 }
 
-FileStoragePolicy::~FileStoragePolicy()
-{
-}
+FileStoragePolicy::~FileStoragePolicy() = default;
 
 bool FileStoragePolicy::fileExists(const QString &fileName) const
 {

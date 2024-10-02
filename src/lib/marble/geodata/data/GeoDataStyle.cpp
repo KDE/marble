@@ -19,9 +19,7 @@ namespace Marble
 class GeoDataStylePrivate
 {
 public:
-    GeoDataStylePrivate()
-    {
-    }
+    GeoDataStylePrivate() = default;
 
     GeoDataStylePrivate(const QString &iconPath, const QFont &font, const QColor &color)
         : m_iconStyle(iconPath)

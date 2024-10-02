@@ -159,7 +159,7 @@ void AbstractDataPluginModelTest::addItemToList()
     QVERIFY(!model.itemExists("foo"));
     QVERIFY(model.findItem("foo") == nullptr);
 
-    TestDataPluginItem *item = new TestDataPluginItem();
+    auto item = new TestDataPluginItem();
     item->setInitialized(initialized);
     item->setId("foo");
 
@@ -239,7 +239,7 @@ void AbstractDataPluginModelTest::switchMapTheme()
 
     TestDataPluginModel model(&marbleModel);
 
-    TestDataPluginItem *const item = new TestDataPluginItem();
+    auto const item = new TestDataPluginItem();
     item->setId("foo");
     model.addItemToList(item);
 
@@ -271,7 +271,7 @@ void AbstractDataPluginModelTest::setFavoriteItemsOnly()
     QFETCH(bool, itemIsFavorite);
     QFETCH(bool, favoriteItemsOnly);
 
-    TestDataPluginItem *item = new TestDataPluginItem;
+    auto item = new TestDataPluginItem;
     item->setId("foo");
     item->setInitialized(true);
     item->setFavorite(itemIsFavorite);
@@ -299,7 +299,7 @@ void AbstractDataPluginModelTest::itemsVersusInitialized()
 {
     QFETCH(bool, initialized);
 
-    TestDataPluginItem *item = new TestDataPluginItem;
+    auto item = new TestDataPluginItem;
     item->setInitialized(initialized);
 
     TestDataPluginModel model(&m_marbleModel);
@@ -312,7 +312,7 @@ void AbstractDataPluginModelTest::itemsVersusAddedAngularResolution()
 {
     const ViewportParams zoomedViewport(Equirectangular, 0, 0, 10000, QSize(230, 230));
 
-    TestDataPluginItem *item = new TestDataPluginItem;
+    auto item = new TestDataPluginItem;
     item->setInitialized(true);
 
     TestDataPluginModel model(&m_marbleModel);
@@ -326,7 +326,7 @@ void AbstractDataPluginModelTest::itemsVersusSetSticky()
 {
     const ViewportParams zoomedViewport(Equirectangular, 0, 0, 10000, QSize(230, 230));
 
-    TestDataPluginItem *item = new TestDataPluginItem;
+    auto item = new TestDataPluginItem;
     item->setInitialized(true);
     item->setSticky(false);
 

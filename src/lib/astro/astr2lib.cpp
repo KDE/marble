@@ -28,9 +28,7 @@ extern double atan21(double y, double x);
  of the Planets for Equinox of Date given in Julian centuries since J2000.
  ======================================================================
 */
-Plan200::Plan200()
-{
-}
+Plan200::Plan200() = default;
 
 void Plan200::addthe(double c1, double s1, double c2, double s2, double &cc, double &ss)
 {

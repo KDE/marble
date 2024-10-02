@@ -48,7 +48,7 @@ private: // Only our parser is allowed to access tag handlers.
     static const GeoTagHandler *recognizes(const GeoParser::QualifiedName &);
 
 private:
-    typedef QHash<GeoParser::QualifiedName, const GeoTagHandler *> TagHash;
+    using TagHash = QHash<GeoParser::QualifiedName, const GeoTagHandler *>;
 
     static TagHash *tagHandlerHash();
     static TagHash *s_tagHandlerHash;

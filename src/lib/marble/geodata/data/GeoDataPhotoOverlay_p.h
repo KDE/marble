@@ -40,15 +40,8 @@ GeoDataPhotoOverlayPrivate::GeoDataPhotoOverlayPrivate()
 }
 
 GeoDataPhotoOverlayPrivate::GeoDataPhotoOverlayPrivate(const GeoDataPhotoOverlayPrivate &other)
-    : GeoDataOverlayPrivate(other)
-    , m_rotation(other.m_rotation)
-    , m_viewVolume(other.m_viewVolume)
-    , m_imagePyramid(other.m_imagePyramid)
-    , m_point(other.m_point)
-    , m_shape(other.m_shape)
-{
-}
 
+    = default;
 }
 
 #endif

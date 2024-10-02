@@ -72,7 +72,7 @@ void TestModel::simpleParseTest()
 
     GeoDataPlacemark *placemark = dataDocument->placemarkList().at(0);
 
-    GeoDataModel *model = dynamic_cast<GeoDataModel *>(placemark->geometry());
+    auto model = dynamic_cast<GeoDataModel *>(placemark->geometry());
 
     QVERIFY(model != nullptr);
 

@@ -8,13 +8,11 @@
 namespace Marble
 {
 
-PluginInterface::~PluginInterface()
-{
-}
+PluginInterface::~PluginInterface() = default;
 
 QString PluginInterface::aboutDataText() const
 {
-    return QString();
+    return {};
 }
 
 }

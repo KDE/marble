@@ -20,9 +20,7 @@ AprsTCPIP::AprsTCPIP(const QString &hostName, int port)
 {
 }
 
-AprsTCPIP::~AprsTCPIP()
-{
-}
+AprsTCPIP::~AprsTCPIP() = default;
 
 QString AprsTCPIP::sourceName() const
 {
@@ -38,7 +36,7 @@ QIODevice *AprsTCPIP::openSocket()
 {
     m_numErrors = 0;
 
-    QTcpSocket *socket = new QTcpSocket();
+    auto socket = new QTcpSocket();
     mDebug() << "Opening TCPIP socket to " << m_hostName.toLocal8Bit().data() << ":" << m_port;
     socket->connectToHost(m_hostName, m_port);
     socket->waitForReadyRead();

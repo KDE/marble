@@ -19,9 +19,7 @@ AprsFile::AprsFile(const QString &fileName)
 {
 }
 
-AprsFile::~AprsFile()
-{
-}
+AprsFile::~AprsFile() = default;
 
 QString AprsFile::sourceName() const
 {
@@ -35,7 +33,7 @@ bool AprsFile::canDoDirect() const
 
 QIODevice *AprsFile::openSocket()
 {
-    QFile *file = new QFile(m_fileName);
+    auto file = new QFile(m_fileName);
 
     mDebug() << "opening File socket";
     if (!file->open(QFile::ReadOnly)) {

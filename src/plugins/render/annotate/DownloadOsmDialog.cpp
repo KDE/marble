@@ -45,9 +45,7 @@ DownloadOsmDialog::DownloadOsmDialog(MarbleWidget *parent, AnnotatePlugin *annot
     updateCoordinates();
 }
 
-DownloadOsmDialog::~DownloadOsmDialog()
-{
-}
+DownloadOsmDialog::~DownloadOsmDialog() = default;
 
 void DownloadOsmDialog::updateCoordinates()
 {

@@ -17,9 +17,7 @@ NewBookmarkFolderDialog::NewBookmarkFolderDialog(QWidget *parent)
     setupUi(this);
 }
 
-NewBookmarkFolderDialog::~NewBookmarkFolderDialog()
-{
-}
+NewBookmarkFolderDialog::~NewBookmarkFolderDialog() = default;
 
 QString NewBookmarkFolderDialog::folderName() const
 {

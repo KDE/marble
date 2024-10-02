@@ -128,9 +128,9 @@ PreviewDialog::PreviewDialog(QWidget *parent, const QString &mapThemeId)
     : QDialog(parent)
     , m_mapThemeId(mapThemeId)
 {
-    QGridLayout *layout = new QGridLayout();
-    MarbleWidget *widget = new MarbleWidget();
-    MarbleNavigator *navigator = new MarbleNavigator();
+    auto layout = new QGridLayout();
+    auto widget = new MarbleWidget();
+    auto navigator = new MarbleNavigator();
 
     connect(navigator, SIGNAL(goHome()), widget, SLOT(goHome()));
     connect(navigator, SIGNAL(moveUp()), widget, SLOT(moveUp()));
@@ -291,7 +291,7 @@ void MapWizard::processCapabilitiesResults()
 
     for (const auto &layer : owsCapabilities.layers()) {
         if (!layer.isEmpty()) {
-            QStandardItem *item = new QStandardItem(owsCapabilities.title(layer));
+            auto item = new QStandardItem(owsCapabilities.title(layer));
             item->setData(layer, layerIdRole);
             item->setToolTip(owsCapabilities.abstract(layer));
             d->model->appendRow(item);
@@ -408,9 +408,9 @@ void MapWizard::processSelectedLayerInformation()
     // Remove all invalid characters from the theme-String
     // that will make the TileLoader malfunction.
     QString themeString = d->selectedLayers.first();
-    themeString.remove(QRegularExpression("[:\"\\\\/]"));
+    themeString.remove(QRegularExpression(R"([:"\\/])"));
     d->uiWidget.lineEditTheme->setText(themeString);
-    QRegularExpression rx("^[^:\"\\\\/]*$");
+    QRegularExpression rx(R"(^[^:"\\/]*$)");
     QValidator *validator = new QRegularExpressionValidator(rx, this);
     d->uiWidget.lineEditTheme->setValidator(validator);
 
@@ -1004,7 +1004,7 @@ void MapWizard::cleanupPage(int id)
 
 GeoSceneDocument *MapWizard::createDocument()
 {
-    GeoSceneDocument *document = new GeoSceneDocument;
+    auto document = new GeoSceneDocument;
 
     GeoSceneHead *head = document->head();
     head->setName(d->uiWidget.lineEditTitle->text());
@@ -1042,7 +1042,7 @@ GeoSceneDocument *MapWizard::createDocument()
         }
     }
 
-    GeoSceneTileDataset *texture = new GeoSceneTileDataset("map");
+    auto texture = new GeoSceneTileDataset("map");
     texture->setExpire(31536000);
     texture->setSourceDir(QLatin1StringView("earth/") + document->head()->theme());
     if (d->mapProviderType == MapWizardPrivate::WmsMap) {
@@ -1132,35 +1132,35 @@ GeoSceneDocument *MapWizard::createDocument()
         texture->setMaximumTileLevel(maxTileLevel);
     }
 
-    GeoSceneLayer *layer = new GeoSceneLayer(d->uiWidget.lineEditTheme->text());
+    auto layer = new GeoSceneLayer(d->uiWidget.lineEditTheme->text());
     layer->setBackend("texture");
     layer->addDataset(backdropTexture);
     layer->addDataset(texture);
 
-    GeoSceneLayer *secondLayer = new GeoSceneLayer("standardplaces");
+    auto secondLayer = new GeoSceneLayer("standardplaces");
     secondLayer->setBackend("geodata");
 
-    GeoSceneGeodata *cityplacemarks = new GeoSceneGeodata("cityplacemarks");
+    auto cityplacemarks = new GeoSceneGeodata("cityplacemarks");
     cityplacemarks->setSourceFile("cityplacemarks.kml");
     secondLayer->addDataset(cityplacemarks);
 
-    GeoSceneGeodata *baseplacemarks = new GeoSceneGeodata("baseplacemarks");
+    auto baseplacemarks = new GeoSceneGeodata("baseplacemarks");
     baseplacemarks->setSourceFile("baseplacemarks.kml");
     secondLayer->addDataset(baseplacemarks);
 
-    GeoSceneGeodata *elevplacemarks = new GeoSceneGeodata("elevplacemarks");
+    auto elevplacemarks = new GeoSceneGeodata("elevplacemarks");
     elevplacemarks->setSourceFile("elevplacemarks.kml");
     secondLayer->addDataset(elevplacemarks);
 
-    GeoSceneGeodata *observatoryplacemarks = new GeoSceneGeodata("observatoryplacemarks");
+    auto observatoryplacemarks = new GeoSceneGeodata("observatoryplacemarks");
     observatoryplacemarks->setSourceFile("observatoryplacemarks.kml");
     secondLayer->addDataset(observatoryplacemarks);
 
-    GeoSceneGeodata *otherplacemarks = new GeoSceneGeodata("otherplacemarks");
+    auto otherplacemarks = new GeoSceneGeodata("otherplacemarks");
     otherplacemarks->setSourceFile("otherplacemarks.kml");
     secondLayer->addDataset(otherplacemarks);
 
-    GeoSceneGeodata *boundaryplacemarks = new GeoSceneGeodata("boundaryplacemarks");
+    auto boundaryplacemarks = new GeoSceneGeodata("boundaryplacemarks");
     boundaryplacemarks->setSourceFile("boundaryplacemarks.kml");
     secondLayer->addDataset(boundaryplacemarks);
 
@@ -1336,17 +1336,17 @@ GeoSceneDocument *MapWizard::createDocument()
            map->addLayer( mwdbii );
        }
       */
-    GeoSceneProperty *overviewmap = new GeoSceneProperty("overviewmap");
+    auto overviewmap = new GeoSceneProperty("overviewmap");
     overviewmap->setDefaultValue(true);
     overviewmap->setAvailable(true);
     settings->addProperty(overviewmap);
 
-    GeoSceneProperty *compass = new GeoSceneProperty("compass");
+    auto compass = new GeoSceneProperty("compass");
     compass->setDefaultValue(true);
     compass->setAvailable(true);
     settings->addProperty(compass);
 
-    GeoSceneProperty *scalebar = new GeoSceneProperty("scalebar");
+    auto scalebar = new GeoSceneProperty("scalebar");
     scalebar->setDefaultValue(true);
     scalebar->setAvailable(true);
     settings->addProperty(scalebar);

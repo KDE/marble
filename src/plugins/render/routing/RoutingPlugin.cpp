@@ -110,7 +110,7 @@ RoutingPluginPrivate::RoutingPluginPrivate(RoutingPlugin *parent)
 
 QString RoutingPluginPrivate::richText(const QString &source)
 {
-    return QLatin1StringView("<font size=\"+1\" color=\"black\">") + source + QLatin1StringView("</font>");
+    return QLatin1StringView(R"(<font size="+1" color="black">)") + source + QLatin1StringView("</font>");
 }
 
 QString RoutingPluginPrivate::fuzzyDistance(qreal length)
@@ -478,7 +478,7 @@ QIcon RoutingPlugin::icon() const
 
 void RoutingPlugin::initialize()
 {
-    QWidget *widget = new QWidget;
+    auto widget = new QWidget;
     d->m_widget.setupUi(widget);
     d->m_widgetItem = new WidgetGraphicsItem(this);
     d->m_widgetItem->setWidget(widget);
@@ -493,7 +493,7 @@ void RoutingPlugin::initialize()
     d->m_widget.routingButton->setEnabled(false);
     connect(d->m_widget.instructionLabel, SIGNAL(linkActivated(QString)), this, SLOT(reverseRoute()));
 
-    MarbleGraphicsGridLayout *layout = new MarbleGraphicsGridLayout(1, 1);
+    auto layout = new MarbleGraphicsGridLayout(1, 1);
     layout->addItem(d->m_widgetItem, 0, 0);
     setLayout(layout);
     d->updateButtonVisibility();
@@ -510,7 +510,7 @@ bool RoutingPlugin::eventFilter(QObject *object, QEvent *e)
         return AbstractFloatItem::eventFilter(object, e);
     }
 
-    MarbleWidget *widget = dynamic_cast<MarbleWidget *>(object);
+    auto widget = dynamic_cast<MarbleWidget *>(object);
 
     if (widget && !d->m_marbleWidget) {
         d->m_marbleWidget = widget;

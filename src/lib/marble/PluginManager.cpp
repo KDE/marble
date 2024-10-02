@@ -243,7 +243,7 @@ void PluginManagerPrivate::loadPlugins()
             continue;
         }
 #endif
-        QPluginLoader *loader = new QPluginLoader(path, m_parent);
+        auto loader = new QPluginLoader(path, m_parent);
 
         QObject *obj = loader->instance();
 

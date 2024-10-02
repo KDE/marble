@@ -79,7 +79,7 @@ void OpenDesktopModel::parseFile(const QByteArray &file)
             if (!itemExists(personid)) {
                 // If it does not exists, create it
                 GeoDataCoordinates coor(longitude * DEG2RAD, latitude * DEG2RAD);
-                OpenDesktopItem *item = new OpenDesktopItem(this);
+                auto item = new OpenDesktopItem(this);
                 item->setMarbleWidget(m_marbleWidget);
                 item->setId(personid);
                 item->setCoordinate(coor);

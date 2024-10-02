@@ -198,7 +198,7 @@ void AprsGatherer::addObject(const QString &callSign,
         // history item.
         (*m_objects)[callSign]->setLocation(location);
     } else {
-        AprsObject *foundObject = new AprsObject(location, callSign);
+        auto foundObject = new AprsObject(location, callSign);
         foundObject->setPixmapId(m_pixmaps[QPair<QChar, QChar>(symbolTable, symbolCode)]);
         (*m_objects)[callSign] = foundObject;
         mDebug() << "aprs:  new: " << callSign.toLocal8Bit().data();

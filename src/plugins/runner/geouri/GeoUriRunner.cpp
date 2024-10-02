@@ -19,9 +19,7 @@ GeoUriRunner::GeoUriRunner(QObject *parent)
 {
 }
 
-GeoUriRunner::~GeoUriRunner()
-{
-}
+GeoUriRunner::~GeoUriRunner() = default;
 
 void GeoUriRunner::search(const QString &searchTerm, const GeoDataLatLonBox &)
 {
@@ -32,7 +30,7 @@ void GeoUriRunner::search(const QString &searchTerm, const GeoDataLatLonBox &)
     if (success && (uriParser.planet().id() == model()->planet()->id())) {
         const GeoDataCoordinates coordinates = uriParser.coordinates();
 
-        GeoDataPlacemark *placemark = new GeoDataPlacemark;
+        auto placemark = new GeoDataPlacemark;
         placemark->setName(searchTerm);
         placemark->setCoordinate(coordinates);
         placemark->setVisualCategory(GeoDataPlacemark::Coordinate);

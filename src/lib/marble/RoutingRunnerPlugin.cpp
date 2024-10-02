@@ -43,7 +43,7 @@ RoutingRunnerPlugin::~RoutingRunnerPlugin()
 
 QIcon RoutingRunnerPlugin::icon() const
 {
-    return QIcon();
+    return {};
 }
 
 bool RoutingRunnerPlugin::supportsCelestialBody(const QString &celestialBodyId) const
@@ -87,7 +87,7 @@ bool RoutingRunnerPlugin::supportsTemplate(RoutingProfilesModel::ProfileTemplate
 
 QHash<QString, QVariant> RoutingRunnerPlugin::templateSettings(RoutingProfilesModel::ProfileTemplate) const
 {
-    return QHash<QString, QVariant>();
+    return {};
 }
 
 QString RoutingRunnerPlugin::statusMessage() const

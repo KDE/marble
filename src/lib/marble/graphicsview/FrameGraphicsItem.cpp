@@ -34,9 +34,7 @@ FrameGraphicsItem::FrameGraphicsItem(FrameGraphicsItemPrivate *dd)
     d->updateSize();
 }
 
-FrameGraphicsItem::~FrameGraphicsItem()
-{
-}
+FrameGraphicsItem::~FrameGraphicsItem() = default;
 
 FrameGraphicsItem::FrameType FrameGraphicsItem::frame() const
 {

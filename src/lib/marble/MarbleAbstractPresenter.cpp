@@ -35,9 +35,7 @@ MarbleAbstractPresenter::MarbleAbstractPresenter(MarbleMap *map, QObject *parent
 {
 }
 
-MarbleAbstractPresenter::~MarbleAbstractPresenter()
-{
-}
+MarbleAbstractPresenter::~MarbleAbstractPresenter() = default;
 
 qreal MarbleAbstractPresenter::zoom(qreal radius) const
 {

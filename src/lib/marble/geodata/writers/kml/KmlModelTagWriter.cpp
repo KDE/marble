@@ -25,7 +25,7 @@ static GeoTagWriterRegistrar s_writerModel(GeoTagWriter::QualifiedName(GeoDataTy
 
 bool KmlModelTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataModel *model = static_cast<const GeoDataModel *>(node);
+    const auto model = static_cast<const GeoDataModel *>(node);
 
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_Model));
     KmlObjectTagWriter::writeIdentifiers(writer, model);

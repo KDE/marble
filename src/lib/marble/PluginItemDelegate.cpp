@@ -33,9 +33,7 @@ PluginItemDelegate::PluginItemDelegate(QAbstractItemView *view, QObject *parent)
     view->setMouseTracking(true);
 }
 
-PluginItemDelegate::~PluginItemDelegate()
-{
-}
+PluginItemDelegate::~PluginItemDelegate() = default;
 
 void PluginItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
@@ -83,7 +81,7 @@ void PluginItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     }
 
     // Painting the Icon
-    const QIcon icon = index.data(Qt::DecorationRole).value<QIcon>();
+    const auto icon = index.data(Qt::DecorationRole).value<QIcon>();
     const QPixmap iconPixmap = icon.pixmap(16, 16);
 
     nameRect.moveBottom(nameRect.bottom() + 5);
@@ -142,7 +140,7 @@ bool PluginItemDelegate::editorEvent(QEvent *event, QAbstractItemModel *model, c
 
     if ((event->type() == QEvent::MouseButtonRelease) || (event->type() == QEvent::MouseButtonDblClick) || (event->type() == QEvent::MouseButtonPress)
         || (event->type() == QEvent::MouseMove)) {
-        QMouseEvent *me = static_cast<QMouseEvent *>(event);
+        auto me = static_cast<QMouseEvent *>(event);
         QPoint mousePosition = me->pos() - option.rect.topLeft();
 
         if ((event->type() == QEvent::MouseMove) && !(me->buttons() & Qt::LeftButton)) {

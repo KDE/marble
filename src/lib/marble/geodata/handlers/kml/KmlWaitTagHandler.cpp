@@ -24,7 +24,7 @@ GeoNode *KmlWaitTagHandler::parse(GeoParser &parser) const
 
     GeoStackItem parentItem = parser.parentElement();
 
-    GeoDataWait *wait = new GeoDataWait;
+    auto wait = new GeoDataWait;
     KmlObjectTagHandler::parseIdentifiers(parser, wait);
 
     if (parentItem.is<GeoDataPlaylist>()) {

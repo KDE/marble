@@ -45,9 +45,7 @@ SolarSystem::SolarSystem()
     ssinit();
 }
 
-SolarSystem::~SolarSystem()
-{
-}
+SolarSystem::~SolarSystem() = default;
 
 double SolarSystem::atan23(double y, double x)
 {

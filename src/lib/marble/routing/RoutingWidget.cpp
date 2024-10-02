@@ -419,7 +419,7 @@ void RoutingWidget::activateItem(const QModelIndex &index)
     QVariant data = index.data(MarblePlacemarkModel::CoordinateRole);
 
     if (!data.isNull()) {
-        GeoDataCoordinates position = qvariant_cast<GeoDataCoordinates>(data);
+        auto position = qvariant_cast<GeoDataCoordinates>(data);
         d->m_widget->centerOn(position, true);
     }
 
@@ -493,7 +493,7 @@ void RoutingWidget::addInputWidget()
 void RoutingWidget::insertInputWidget(int index)
 {
     if (index >= 0 && index <= d->m_inputWidgets.size()) {
-        RoutingInputWidget *input = new RoutingInputWidget(d->m_widget->model(), index, this);
+        auto input = new RoutingInputWidget(d->m_widget->model(), index, this);
         d->m_inputWidgets.insert(index, input);
         connect(input, SIGNAL(searchFinished(RoutingInputWidget *)), this, SLOT(handleSearchResult(RoutingInputWidget *)));
         connect(input, SIGNAL(removalRequest(RoutingInputWidget *)), this, SLOT(removeInputWidget(RoutingInputWidget *)));
@@ -775,12 +775,12 @@ bool RoutingWidget::eventFilter(QObject *o, QEvent *event)
     Q_ASSERT(d->m_inputWidgets.contains(d->m_inputRequest));
 
     if (event->type() == QEvent::MouseButtonPress) {
-        QMouseEvent *e = static_cast<QMouseEvent *>(event);
+        auto e = static_cast<QMouseEvent *>(event);
         return e->button() == Qt::LeftButton;
     }
 
     if (event->type() == QEvent::MouseButtonRelease) {
-        QMouseEvent *e = static_cast<QMouseEvent *>(event);
+        auto e = static_cast<QMouseEvent *>(event);
         qreal lon(0.0), lat(0.0);
         if (e->button() == Qt::LeftButton && d->m_widget->geoCoordinates(e->pos().x(), e->pos().y(), lon, lat, GeoDataCoordinates::Radian)) {
             retrieveSelectedPoint(GeoDataCoordinates(lon, lat));
@@ -796,7 +796,7 @@ bool RoutingWidget::eventFilter(QObject *o, QEvent *event)
     }
 
     if (event->type() == QEvent::KeyPress) {
-        QKeyEvent *e = static_cast<QKeyEvent *>(event);
+        auto e = static_cast<QKeyEvent *>(event);
         if (e->key() == Qt::Key_Escape) {
             pointSelectionCanceled();
             return true;
@@ -891,13 +891,13 @@ void RoutingWidget::initializeTour()
         }
         last = coordinates;
 
-        GeoDataLookAt *lookat = new GeoDataLookAt;
+        auto lookat = new GeoDataLookAt;
         // Choose a zoom distance of 400, 600 or 800 meters based on the distance to the closest waypoint
         double const range = waypointDistance < 400 ? 400 : (waypointDistance < 2000 ? 600 : 800);
         coordinates.setAltitude(range);
         lookat->setCoordinates(coordinates);
         lookat->setRange(range);
-        GeoDataFlyTo *flyto = new GeoDataFlyTo;
+        auto flyto = new GeoDataFlyTo;
         double const duration = 0.75;
         flyto->setDuration(duration);
         flyto->setView(lookat);
@@ -907,10 +907,10 @@ void RoutingWidget::initializeTour()
         if (!waypoints.empty() && totalDistance > waypoints.first().distance - 100) {
             WaypointInfo const waypoint = waypoints.first();
             waypoints.pop_front();
-            GeoDataAnimatedUpdate *updateCreate = new GeoDataAnimatedUpdate;
+            auto updateCreate = new GeoDataAnimatedUpdate;
             updateCreate->setUpdate(new GeoDataUpdate);
             updateCreate->update()->setCreate(new GeoDataCreate);
-            GeoDataPlacemark *placemarkCreate = new GeoDataPlacemark;
+            auto placemarkCreate = new GeoDataPlacemark;
             QString const waypointId = QStringLiteral("waypoint-%1").arg(i, 0, 10);
             placemarkCreate->setId(waypointId);
             placemarkCreate->setTargetId(d->m_document->id());
@@ -921,11 +921,11 @@ void RoutingWidget::initializeTour()
             updateCreate->update()->create()->append(placemarkCreate);
             d->m_tour->playlist()->addPrimitive(updateCreate);
 
-            GeoDataAnimatedUpdate *updateDelete = new GeoDataAnimatedUpdate;
+            auto updateDelete = new GeoDataAnimatedUpdate;
             updateDelete->setDelayedStart(2);
             updateDelete->setUpdate(new GeoDataUpdate);
             updateDelete->update()->setDelete(new GeoDataDelete);
-            GeoDataPlacemark *placemarkDelete = new GeoDataPlacemark;
+            auto placemarkDelete = new GeoDataPlacemark;
             placemarkDelete->setTargetId(waypointId);
             updateDelete->update()->getDelete()->append(placemarkDelete);
             d->m_tour->playlist()->addPrimitive(updateDelete);

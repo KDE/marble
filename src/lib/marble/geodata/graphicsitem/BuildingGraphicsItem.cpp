@@ -94,10 +94,10 @@ void BuildingGraphicsItem::updatePolygons(const ViewportParams &viewport,
     } else if (ring()) {
         viewport.screenCoordinates(*ring(), outerPolygons);
     }
-    for (auto *polygon : std::as_const(outerPolygons)) {
+    for (auto polygon : std::as_const(outerPolygons)) {
         normalizeWindingOrder(polygon);
     }
-    for (auto *polygon : std::as_const(innerPolygons)) {
+    for (auto polygon : std::as_const(innerPolygons)) {
         normalizeWindingOrder(polygon);
     }
 }
@@ -151,7 +151,7 @@ QPointF BuildingGraphicsItem::buildingOffset(const QPointF &point, const Viewpor
     qreal const shiftX = offsetX * cb / (cc + offsetX);
     qreal const shiftY = offsetY * cb / (cc + offsetY);
 
-    return QPointF(shiftX, shiftY);
+    return {shiftX, shiftY};
 }
 
 void BuildingGraphicsItem::paint(GeoPainter *painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel)
@@ -352,7 +352,7 @@ void BuildingGraphicsItem::paintFrame(GeoPainter *painter, const ViewportParams 
             }
             // draw the building sides
             int const size = outline->size();
-            QPolygonF *outerRoof = new QPolygonF;
+            auto outerRoof = new QPolygonF;
             outerRoof->reserve(outline->size());
             QPointF a = (*outline)[0];
             QPointF shiftA = a + buildingOffset(a, viewport);
@@ -380,7 +380,7 @@ void BuildingGraphicsItem::paintFrame(GeoPainter *painter, const ViewportParams 
             }
             // draw the building sides
             int const size = outline->size();
-            QPolygonF *innerRoof = new QPolygonF;
+            auto innerRoof = new QPolygonF;
             innerRoof->reserve(outline->size());
             QPointF a = (*outline)[0];
             QPointF shiftA = a + buildingOffset(a, viewport);

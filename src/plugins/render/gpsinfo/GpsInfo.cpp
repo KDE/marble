@@ -34,9 +34,7 @@ GpsInfo::GpsInfo(const MarbleModel *marbleModel)
     setVisible(false);
 }
 
-GpsInfo::~GpsInfo()
-{
-}
+GpsInfo::~GpsInfo() = default;
 
 QStringList GpsInfo::backendTypes() const
 {
@@ -86,12 +84,12 @@ QIcon GpsInfo::icon() const
 void GpsInfo::initialize()
 {
     if (!m_widgetItem) {
-        QWidget *widget = new QWidget;
+        auto widget = new QWidget;
         m_widget.setupUi(widget);
         m_widgetItem = new WidgetGraphicsItem(this);
         m_widgetItem->setWidget(widget);
 
-        MarbleGraphicsGridLayout *layout = new MarbleGraphicsGridLayout(1, 1);
+        auto layout = new MarbleGraphicsGridLayout(1, 1);
         layout->addItem(m_widgetItem, 0, 0);
         setLayout(layout);
         setPadding(0);

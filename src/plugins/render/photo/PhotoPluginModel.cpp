@@ -41,7 +41,7 @@ QUrl PhotoPluginModel::generateUrl(const QString &service, const QString &method
     if (service == QLatin1StringView("flickr"))
         url += QLatin1StringView("https://www.flickr.com/services/rest/");
     else
-        return QUrl();
+        return {};
 
     url += QLatin1StringView("?method=") + method + QLatin1StringView("&format=rest") + QLatin1StringView("&api_key=") + flickrApiKey;
 

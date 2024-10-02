@@ -22,9 +22,7 @@ GeoDataPhotoOverlay::GeoDataPhotoOverlay(const GeoDataPhotoOverlay &other)
     // nothing to do
 }
 
-GeoDataPhotoOverlay::~GeoDataPhotoOverlay()
-{
-}
+GeoDataPhotoOverlay::~GeoDataPhotoOverlay() = default;
 
 GeoDataPhotoOverlay &GeoDataPhotoOverlay::operator=(const GeoDataPhotoOverlay &other)
 {

@@ -100,7 +100,7 @@ SearchWidget::SearchWidget(QWidget *parent, Qt::WindowFlags flags)
     d->m_searchResultView->setMinimumSize(0, 0);
     connect(d->m_searchResultView, SIGNAL(activated(QModelIndex)), this, SLOT(centerMapOn(QModelIndex)));
 
-    QVBoxLayout *layout = new QVBoxLayout;
+    auto layout = new QVBoxLayout;
     layout->addWidget(d->m_searchField);
     layout->addWidget(d->m_searchResultView);
     layout->setContentsMargins({});
@@ -173,8 +173,8 @@ void SearchWidgetPrivate::centerMapOn(const QModelIndex &index)
     if (!index.isValid()) {
         return;
     }
-    GeoDataObject *object = index.model()->data(index, MarblePlacemarkModel::ObjectPointerRole).value<GeoDataObject *>();
-    GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark *>(object);
+    auto object = index.model()->data(index, MarblePlacemarkModel::ObjectPointerRole).value<GeoDataObject *>();
+    auto placemark = dynamic_cast<GeoDataPlacemark *>(object);
     if (placemark) {
         m_widget->centerOn(*placemark, true);
         m_widget->model()->placemarkSelectionModel()->select(index, QItemSelectionModel::ClearAndSelect);

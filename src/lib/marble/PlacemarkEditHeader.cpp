@@ -63,9 +63,7 @@ PlacemarkEditHeaderPrivate::PlacemarkEditHeaderPrivate(PlacemarkEditHeader *_q)
 {
 }
 
-PlacemarkEditHeaderPrivate::~PlacemarkEditHeaderPrivate()
-{
-}
+PlacemarkEditHeaderPrivate::~PlacemarkEditHeaderPrivate() = default;
 
 void PlacemarkEditHeaderPrivate::init(QWidget *parent)
 {

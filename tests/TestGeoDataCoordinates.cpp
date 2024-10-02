@@ -991,10 +991,10 @@ QString FromStringRegExpTranslator::translate(const char *context, const char *s
 {
     Q_UNUSED(n);
     if (qstrcmp(context, "GeoDataCoordinates") != 0)
-        return QString();
+        return {};
 
     if (qstrcmp(sourceText, "*") != 0)
-        return QString();
+        return {};
 
     if (qstrcmp(disambiguation, "North direction terms") == 0)
         return north;
@@ -1011,15 +1011,13 @@ QString FromStringRegExpTranslator::translate(const char *context, const char *s
     if (qstrcmp(disambiguation, "Seconds symbol terms") == 0)
         return seconds;
 
-    return QString();
+    return {};
 }
 
 class Sample
 {
 public:
-    Sample()
-    {
-    }
+    Sample() = default;
     Sample(const char *_name, const char *_string, qreal _lon, qreal _lat)
         : name(QString::fromUtf8(_name))
         , string(QString::fromUtf8(_string))
@@ -1036,9 +1034,7 @@ public:
 class Language
 {
 public:
-    Language()
-    {
-    }
+    Language() = default;
     Language(const char *_name,
              const char *_degree,
              const char *_minutes,

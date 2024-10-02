@@ -38,9 +38,7 @@ ElevationProfileMarker::ElevationProfileMarker(const MarbleModel *marbleModel)
     connect(const_cast<MarbleModel *>(marbleModel)->treeModel(), SIGNAL(removed(GeoDataObject *)), this, SLOT(onGeoObjectRemoved(GeoDataObject *)));
 }
 
-ElevationProfileMarker::~ElevationProfileMarker()
-{
-}
+ElevationProfileMarker::~ElevationProfileMarker() = default;
 
 QStringList ElevationProfileMarker::backendTypes() const
 {
@@ -107,7 +105,7 @@ void ElevationProfileMarker::initialize()
 {
     m_markerIcon.setImage(QImage(QStringLiteral(":/flag-red-mirrored.png")));
 
-    MarbleGraphicsGridLayout *topLayout = new MarbleGraphicsGridLayout(1, 2);
+    auto topLayout = new MarbleGraphicsGridLayout(1, 2);
     m_markerItem.setLayout(topLayout);
     topLayout->addItem(&m_markerIcon, 0, 0);
 
@@ -183,7 +181,7 @@ void ElevationProfileMarker::onGeoObjectAdded(GeoDataObject *object)
     if (m_markerPlacemark)
         return;
 
-    GeoDataDocument *document = dynamic_cast<GeoDataDocument *>(object);
+    auto document = dynamic_cast<GeoDataDocument *>(object);
 
     if (!document)
         return;
@@ -201,7 +199,7 @@ void ElevationProfileMarker::onGeoObjectAdded(GeoDataObject *object)
 
 void ElevationProfileMarker::onGeoObjectRemoved(GeoDataObject *object)
 {
-    GeoDataDocument *const document = dynamic_cast<GeoDataDocument *>(object);
+    auto const document = dynamic_cast<GeoDataDocument *>(object);
     if (!document)
         return;
 

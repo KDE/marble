@@ -23,9 +23,7 @@ namespace Marble
 class GeoSceneMapPrivate
 {
 public:
-    GeoSceneMapPrivate()
-    {
-    }
+    GeoSceneMapPrivate() = default;
 
     ~GeoSceneMapPrivate()
     {

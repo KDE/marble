@@ -37,9 +37,7 @@ FileStorageWatcherThread::FileStorageWatcherThread(const QString &dataDirectory,
     connect(this, &FileStorageWatcherThread::variableChanged, this, &FileStorageWatcherThread::ensureCacheSize, Qt::QueuedConnection);
 }
 
-FileStorageWatcherThread::~FileStorageWatcherThread()
-{
-}
+FileStorageWatcherThread::~FileStorageWatcherThread() = default;
 
 quint64 FileStorageWatcherThread::cacheLimit()
 {

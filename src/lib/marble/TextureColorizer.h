@@ -29,9 +29,7 @@ class TextureColorizer
 public:
     TextureColorizer(const QString &seafile, const QString &landfile);
 
-    virtual ~TextureColorizer()
-    {
-    }
+    virtual ~TextureColorizer() = default;
 
     void addSeaDocument(const GeoDataDocument *seaDocument);
 

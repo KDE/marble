@@ -20,7 +20,7 @@ GeoNode *KmlDeleteTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_Delete)));
 
-    GeoDataDelete *dataDelete = new GeoDataDelete;
+    auto dataDelete = new GeoDataDelete;
     KmlObjectTagHandler::parseIdentifiers(parser, dataDelete);
     GeoStackItem parentItem = parser.parentElement();
 

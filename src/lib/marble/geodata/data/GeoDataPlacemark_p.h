@@ -29,14 +29,7 @@ public:
     {
         // nothing to do
     }
-    GeoDataPlacemarkExtendedData &operator=(const GeoDataPlacemarkExtendedData &other)
-    {
-        m_countrycode = other.m_countrycode;
-        m_area = other.m_area;
-        m_state = other.m_state;
-        m_isBalloonVisible = other.m_isBalloonVisible;
-        return *this;
-    }
+    GeoDataPlacemarkExtendedData &operator=(const GeoDataPlacemarkExtendedData &other) = default;
 
     bool operator==(const GeoDataPlacemarkExtendedData &other) const
     {

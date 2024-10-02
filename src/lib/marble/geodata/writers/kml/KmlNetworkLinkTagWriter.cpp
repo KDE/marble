@@ -19,7 +19,7 @@ static GeoTagWriterRegistrar s_writerNetworkLink(GeoTagWriter::QualifiedName(Geo
 
 bool KmlNetworkLinkTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataNetworkLink *networkLink = static_cast<const GeoDataNetworkLink *>(node);
+    const auto networkLink = static_cast<const GeoDataNetworkLink *>(node);
 
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_NetworkLink));
 

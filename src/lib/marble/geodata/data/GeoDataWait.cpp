@@ -15,9 +15,7 @@ GeoDataWait::GeoDataWait()
 {
 }
 
-GeoDataWait::~GeoDataWait()
-{
-}
+GeoDataWait::~GeoDataWait() = default;
 
 bool GeoDataWait::operator==(const GeoDataWait &other) const
 {

@@ -18,9 +18,7 @@
 namespace Marble
 {
 
-MarbleSplashLayer::MarbleSplashLayer()
-{
-}
+MarbleSplashLayer::MarbleSplashLayer() = default;
 
 QStringList MarbleSplashLayer::renderPosition() const
 {

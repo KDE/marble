@@ -46,7 +46,7 @@ bool BranchFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &
 
     // return true for all non folder children of m_branchIndex
     if (sourceParent == m_branchIndex) {
-        GeoDataObject *obj = qvariant_cast<GeoDataObject *>(rowIndex.data(MarblePlacemarkModel::ObjectPointerRole));
+        auto obj = qvariant_cast<GeoDataObject *>(rowIndex.data(MarblePlacemarkModel::ObjectPointerRole));
         return !dynamic_cast<const GeoDataContainer *>(obj);
     }
 

@@ -119,7 +119,7 @@ void ReverseGeocodingRunnerManager::reverseGeocoding(const GeoDataCoordinates &c
 
     QList<const ReverseGeocodingRunnerPlugin *> plugins = d->plugins(d->m_pluginManager->reverseGeocodingRunnerPlugins());
     for (const ReverseGeocodingRunnerPlugin *plugin : std::as_const(plugins)) {
-        ReverseGeocodingTask *task = new ReverseGeocodingTask(plugin->newRunner(), this, d->m_marbleModel, coordinates);
+        auto task = new ReverseGeocodingTask(plugin->newRunner(), this, d->m_marbleModel, coordinates);
         connect(task, SIGNAL(finished(ReverseGeocodingTask *)), this, SLOT(cleanupReverseGeocodingTask(ReverseGeocodingTask *)));
         mDebug() << "reverse task " << plugin->nameId() << " " << (quintptr)task;
         d->m_reverseTasks << task;

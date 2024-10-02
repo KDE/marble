@@ -385,7 +385,7 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createRelationStyle(const StylePar
             return style;
         }
     }
-    return GeoDataStyle::ConstPtr();
+    return {};
 }
 
 GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StyleParameters &parameters)
@@ -731,7 +731,7 @@ GeoDataStyle::Ptr StyleBuilder::Private::createStyle(qreal width,
                                                      const QColor &fontColor,
                                                      const QString &texturePath)
 {
-    GeoDataStyle *style = new GeoDataStyle;
+    auto style = new GeoDataStyle;
     GeoDataLineStyle lineStyle(effectColor(outlineColor));
     lineStyle.setCapStyle(capStyle);
     lineStyle.setPenStyle(penStyle);
@@ -1640,13 +1640,13 @@ QColor StyleBuilder::Private::effectColor(const QColor &color)
     int gray;
     switch (s_styleEffect) {
     case InvertedEffect:
-        return QColor(255 - color.red(), 255 - color.green(), 255 - color.blue());
+        return {255 - color.red(), 255 - color.green(), 255 - color.blue()};
     case GrayscaleEffect:
         gray = qMin(255, static_cast<int>(7 * qGray(color.darker(800).rgb())));
-        return QColor(gray, gray, gray);
+        return {gray, gray, gray};
     case RedModeEffect:
         gray = qMin(255, static_cast<int>(7 * qGray(color.darker(800).rgb())));
-        return QColor(gray, 0, 0);
+        return {gray, 0, 0};
     case NoEffect:
         return color;
     }

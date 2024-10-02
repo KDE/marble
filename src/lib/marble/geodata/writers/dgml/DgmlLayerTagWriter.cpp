@@ -18,7 +18,7 @@ static GeoTagWriterRegistrar s_writerLayer(GeoTagWriter::QualifiedName(GeoSceneT
 
 bool DgmlLayerTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoSceneLayer *layer = static_cast<const GeoSceneLayer *>(node);
+    const auto layer = static_cast<const GeoSceneLayer *>(node);
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Layer));
     writer.writeAttribute("name", layer->name());
     writer.writeAttribute("backend", layer->backend());

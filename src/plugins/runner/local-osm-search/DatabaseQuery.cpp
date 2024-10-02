@@ -34,7 +34,7 @@ DatabaseQuery::DatabaseQuery(const MarbleModel *model, const QString &searchTerm
 
     QStringList terms = m_searchTerm.split(QLatin1Char(','), Qt::SkipEmptyParts);
 
-    QRegExp streetAndHouse("^(.*)\\s+(\\d+\\D?)$");
+    QRegExp streetAndHouse(R"(^(.*)\s+(\d+\D?)$)");
     if (streetAndHouse.indexIn(terms.first()) != -1) {
         if (streetAndHouse.capturedTexts().size() == 3) {
             terms.removeFirst();

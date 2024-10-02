@@ -34,7 +34,7 @@ private Q_SLOTS:
 void TestGeoData::nodeTypeTest()
 {
     /// basic testing of nodeType
-    GeoDataFolder *folder = new GeoDataFolder;
+    auto folder = new GeoDataFolder;
     const char *folderType = GeoDataTypes::GeoDataFolderType;
     QCOMPARE(folder->nodeType(), folderType);
 
@@ -47,11 +47,11 @@ void TestGeoData::nodeTypeTest()
 
 void TestGeoData::parentingTest()
 {
-    GeoDataDocument *document = new GeoDataDocument;
-    GeoDataFolder *folder = new GeoDataFolder;
+    auto document = new GeoDataDocument;
+    auto folder = new GeoDataFolder;
 
     /// simple parenting test
-    GeoDataPlacemark *placemark = new GeoDataPlacemark;
+    auto placemark = new GeoDataPlacemark;
     placemark->setParent(document);
     QCOMPARE(placemark->parent(), document);
 
@@ -62,7 +62,7 @@ void TestGeoData::parentingTest()
     document->append(folder);
     QCOMPARE(document->size(), 2);
 
-    GeoDataPlacemark *placemark2 = new GeoDataPlacemark;
+    auto placemark2 = new GeoDataPlacemark;
     folder->append(placemark2);
     QCOMPARE(folder->size(), 1);
 
@@ -113,7 +113,7 @@ void TestGeoData::parentingTest()
     QCOMPARE(placemark->style()->parent(), placemark); // Parent should be assigned now
 
     /// Set a style map
-    GeoDataStyleMap *styleMap = new GeoDataStyleMap;
+    auto styleMap = new GeoDataStyleMap;
     styleMap->setId("mystylemap");
     styleMap->insert("normal", "#mystyle");
     styleMap->insert("highlight", "#mystyle");

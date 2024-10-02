@@ -222,7 +222,7 @@ bool MarbleWidgetInputHandler::handleTouch(QTouchEvent *event)
 
 bool MarbleWidgetInputHandler::handleGesture(QGestureEvent *e)
 {
-    QPinchGesture *pinch = static_cast<QPinchGesture *>(e->gesture(Qt::PinchGesture));
+    auto pinch = static_cast<QPinchGesture *>(e->gesture(Qt::PinchGesture));
     if (pinch && !d->m_panDetected) {
         d->m_pinchDetected = true;
         handlePinchGesture(pinch);

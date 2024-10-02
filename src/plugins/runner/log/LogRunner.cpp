@@ -19,9 +19,7 @@ LogRunner::LogRunner(QObject *parent)
 {
 }
 
-LogRunner::~LogRunner()
-{
-}
+LogRunner::~LogRunner() = default;
 
 GeoDataDocument *LogRunner::parseFile(const QString &fileName, DocumentRole role, QString &errorString)
 {
@@ -35,12 +33,12 @@ GeoDataDocument *LogRunner::parseFile(const QString &fileName, DocumentRole role
     file.open(QIODevice::ReadOnly);
     QTextStream stream(&file);
 
-    GeoDataLineString *const track = new GeoDataLineString;
+    auto const track = new GeoDataLineString;
 
-    GeoDataPlacemark *const placemark = new GeoDataPlacemark;
+    auto const placemark = new GeoDataPlacemark;
     placemark->setGeometry(track);
 
-    GeoDataDocument *document = new GeoDataDocument();
+    auto document = new GeoDataDocument();
     document->setDocumentRole(role);
     document->append(placemark);
 

@@ -31,9 +31,7 @@ PlanetarySats::PlanetarySats()
     plsatinit();
 }
 
-PlanetarySats::~PlanetarySats()
-{
-}
+PlanetarySats::~PlanetarySats() = default;
 
 double PlanetarySats::atan23(double y, double x)
 {

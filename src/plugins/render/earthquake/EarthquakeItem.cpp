@@ -42,7 +42,7 @@ bool EarthquakeItem::initialized() const
 bool EarthquakeItem::operator<(const AbstractDataPluginItem *other) const
 {
     // Larger magnitude first
-    const EarthquakeItem *item = dynamic_cast<const EarthquakeItem *>(other);
+    const auto item = dynamic_cast<const EarthquakeItem *>(other);
     return item ? magnitude() > item->magnitude() : false;
 }
 

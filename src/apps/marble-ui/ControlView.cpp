@@ -99,7 +99,7 @@ ControlView::ControlView(QWidget *parent)
     }
 #endif
 
-    QVBoxLayout *layout = new QVBoxLayout;
+    auto layout = new QVBoxLayout;
     layout->addWidget(m_marbleWidget);
     layout->setContentsMargins({});
     setLayout(layout);
@@ -180,13 +180,13 @@ QString ControlView::defaultMapThemeId() const
         return installedThemes.constFirst();
     }
 
-    return QString();
+    return {};
 }
 
 void ControlView::printMapScreenShot(const QPointer<QPrintDialog> &printDialog)
 {
 #ifndef QT_NO_PRINTER
-    PrintOptionsWidget *printOptions = new PrintOptionsWidget(this);
+    auto printOptions = new PrintOptionsWidget(this);
     bool const mapCoversViewport = m_marbleWidget->viewport()->mapCoversViewport();
     printOptions->setBackgroundControlsEnabled(!mapCoversViewport);
     bool hasLegend = m_marbleWidget->model()->legend() != nullptr;
@@ -268,14 +268,14 @@ bool ControlView::openGeoUri(const QString &geoUriString)
 
 QActionGroup *ControlView::createViewSizeActionGroup(QObject *parent)
 {
-    QActionGroup *actionGroup = new QActionGroup(parent);
+    auto actionGroup = new QActionGroup(parent);
 
-    QAction *defaultAction = new QAction(tr("Default (Resizable)"), parent);
+    auto defaultAction = new QAction(tr("Default (Resizable)"), parent);
     defaultAction->setCheckable(true);
     defaultAction->setChecked(true);
     actionGroup->addAction(defaultAction);
 
-    QAction *separator = new QAction(parent);
+    auto separator = new QAction(parent);
     separator->setSeparator(true);
     actionGroup->addAction(separator);
 
@@ -352,7 +352,7 @@ void ControlView::printMap(QTextDocument &document, QString &text, QPrinter *pri
 
     QString uri = "marble://screenshot.png";
     document.addResource(QTextDocument::ImageResource, QUrl(uri), QVariant(image));
-    QString img = "<img src=\"%1\" width=\"%2\" align=\"center\">";
+    QString img = R"(<img src="%1" width="%2" align="center">)";
     int width = qRound(printer->pageRect(QPrinter::Point).width());
     text += img.arg(uri).arg(width);
 #endif
@@ -372,7 +372,7 @@ void ControlView::printLegend(QTextDocument &document, QString &text)
         painter.drawRoundedRect(QRect(QPoint(0, 0), size), 5, 5);
         legend->drawContents(&painter);
         document.addResource(QTextDocument::ImageResource, QUrl("marble://legend.png"), QVariant(image));
-        QString img = "<p><img src=\"%1\" align=\"center\"></p>";
+        QString img = R"(<p><img src="%1" align="center"></p>)";
         text += img.arg("marble://legend.png");
     }
 #endif
@@ -437,7 +437,7 @@ void ControlView::printDrivingInstructions(QTextDocument &document, QString &tex
         "<tr><th>No.</th><th>Distance</th><th>Instruction</th></tr>");
     for (int i = 0; i < routingModel->rowCount(); ++i) {
         QModelIndex index = routingModel->index(i, 0);
-        GeoDataCoordinates coordinates = index.data(RoutingModel::CoordinateRole).value<GeoDataCoordinates>();
+        auto coordinates = index.data(RoutingModel::CoordinateRole).value<GeoDataCoordinates>();
         GeoDataLineString accumulator;
         for (int k = 0; k < total.size(); ++k) {
             accumulator << total.at(k);
@@ -447,18 +447,18 @@ void ControlView::printDrivingInstructions(QTextDocument &document, QString &tex
         }
 
         if (i % 2 == 0) {
-            text += QLatin1StringView("<tr bgcolor=\"lightGray\"><td align=\"right\" valign=\"middle\">");
+            text += QLatin1StringView(R"(<tr bgcolor="lightGray"><td align="right" valign="middle">)");
         } else {
-            text += QLatin1StringView("<tr><td align=\"right\" valign=\"middle\">");
+            text += QLatin1StringView(R"(<tr><td align="right" valign="middle">)");
         }
-        text += QString::number(i + 1) + QLatin1StringView("</td><td align=\"right\" valign=\"middle\">");
+        text += QString::number(i + 1) + QLatin1StringView(R"(</td><td align="right" valign="middle">)");
 
         qreal planetRadius = marbleModel()->planet()->radius();
         text += QString::number(accumulator.length(planetRadius) * METER2KM, 'f', 1) +
             /** @todo: support localization */
             QLatin1StringView(" km</td><td valign=\"middle\">");
 
-        QPixmap instructionIcon = index.data(Qt::DecorationRole).value<QPixmap>();
+        auto instructionIcon = index.data(Qt::DecorationRole).value<QPixmap>();
         if (!instructionIcon.isNull()) {
             QString uri = QStringLiteral("marble://turnIcon%1.png").arg(i);
             document.addResource(QTextDocument::ImageResource, QUrl(uri), QVariant(instructionIcon));
@@ -485,7 +485,7 @@ void ControlView::printDrivingInstructionsAdvice(QTextDocument &, QString &text)
 void ControlView::addViewSizeAction(QActionGroup *actionGroup, const QString &nameTemplate, int width, int height)
 {
     QString const name = nameTemplate.arg(width).arg(height);
-    QAction *action = new QAction(name, actionGroup->parent());
+    auto action = new QAction(name, actionGroup->parent());
     action->setCheckable(true);
     action->setData(QSize(width, height));
     actionGroup->addAction(action);
@@ -581,10 +581,10 @@ QList<QAction *> ControlView::setupDockWidgets(QMainWindow *mainWindow)
     mainWindow->setTabPosition(Qt::LeftDockWidgetArea, QTabWidget::North);
     mainWindow->setTabPosition(Qt::RightDockWidgetArea, QTabWidget::North);
 
-    QDockWidget *legendDock = new QDockWidget(tr("Legend"), this);
+    auto legendDock = new QDockWidget(tr("Legend"), this);
     legendDock->setObjectName("legendDock");
     legendDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-    LegendWidget *legendWidget = new LegendWidget(this);
+    auto legendWidget = new LegendWidget(this);
     legendWidget->setMarbleModel(m_marbleWidget->model());
     connect(legendWidget, SIGNAL(tourLinkClicked(QString)), this, SLOT(handleTourLinkClicked(QString)));
     connect(legendWidget, SIGNAL(propertyValueChanged(QString, bool)), marbleWidget(), SLOT(setPropertyValue(QString, bool)));
@@ -597,15 +597,15 @@ QList<QAction *> ControlView::setupDockWidgets(QMainWindow *mainWindow)
         return QList<QAction *>() << legendDock->toggleViewAction();
     }
 
-    QDockWidget *routingDock = new QDockWidget(tr("Routing"), mainWindow);
+    auto routingDock = new QDockWidget(tr("Routing"), mainWindow);
     routingDock->setObjectName("routingDock");
     routingDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-    RoutingWidget *routingWidget = new RoutingWidget(marbleWidget(), mainWindow);
+    auto routingWidget = new RoutingWidget(marbleWidget(), mainWindow);
     routingWidget->setRouteSyncManager(cloudSyncManager()->routeSyncManager());
     routingDock->setWidget(routingWidget);
     mainWindow->addDockWidget(Qt::LeftDockWidgetArea, routingDock);
 
-    QDockWidget *locationDock = new QDockWidget(tr("Location"), this);
+    auto locationDock = new QDockWidget(tr("Location"), this);
     locationDock->setObjectName("locationDock");
     locationDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
     m_locationWidget = new CurrentLocationWidget(this);
@@ -616,7 +616,7 @@ QList<QAction *> ControlView::setupDockWidgets(QMainWindow *mainWindow)
     m_searchDock = new QDockWidget(tr("Search"), this);
     m_searchDock->setObjectName("searchDock");
     m_searchDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-    SearchWidget *searchWidget = new SearchWidget(this);
+    auto searchWidget = new SearchWidget(this);
     searchWidget->setMarbleWidget(marbleWidget());
     m_searchDock->setWidget(searchWidget);
     mainWindow->addDockWidget(Qt::LeftDockWidgetArea, m_searchDock);
@@ -627,29 +627,29 @@ QList<QAction *> ControlView::setupDockWidgets(QMainWindow *mainWindow)
 
     QKeySequence searchSequence(Qt::CTRL | Qt::Key_F);
     searchWidget->setToolTip(tr("Search for cities, addresses, points of interest and more (%1)").arg(searchSequence.toString()));
-    QShortcut *searchShortcut = new QShortcut(mainWindow);
+    auto searchShortcut = new QShortcut(mainWindow);
     connect(searchShortcut, SIGNAL(activated()), this, SLOT(showSearch()));
 
-    QDockWidget *mapViewDock = new QDockWidget(tr("Map View"), this);
+    auto mapViewDock = new QDockWidget(tr("Map View"), this);
     mapViewDock->setObjectName("mapViewDock");
     mapViewDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-    MapViewWidget *mapViewWidget = new MapViewWidget(this);
+    auto mapViewWidget = new MapViewWidget(this);
     mapViewWidget->setMarbleWidget(marbleWidget(), m_mapThemeManager);
     connect(mapViewWidget, SIGNAL(showMapWizard()), this, SIGNAL(showMapWizard()));
     connect(mapViewWidget, SIGNAL(mapThemeDeleted()), this, SIGNAL(mapThemeDeleted()));
     mapViewDock->setWidget(mapViewWidget);
     mainWindow->addDockWidget(Qt::LeftDockWidgetArea, mapViewDock);
 
-    QDockWidget *fileViewDock = new QDockWidget(tr("Files"), this);
+    auto fileViewDock = new QDockWidget(tr("Files"), this);
     fileViewDock->setObjectName("fileViewDock");
     fileViewDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-    FileViewWidget *fileViewWidget = new FileViewWidget(this);
+    auto fileViewWidget = new FileViewWidget(this);
     fileViewWidget->setMarbleWidget(marbleWidget());
     fileViewDock->setWidget(fileViewWidget);
     mainWindow->addDockWidget(Qt::LeftDockWidgetArea, fileViewDock);
     fileViewDock->hide();
 
-    QDockWidget *tourDock = new QDockWidget(tr("Tour"), this);
+    auto tourDock = new QDockWidget(tr("Tour"), this);
     tourDock->setObjectName("tourDock");
     tourDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
     m_tourWidget = new TourWidget(this);
@@ -717,7 +717,7 @@ QList<QAction *> ControlView::setupDockWidgets(QMainWindow *mainWindow)
     connect(m_togglePanelVisibilityAction, SIGNAL(triggered()), this, SLOT(togglePanelVisibility()));
 
     // Include a Separator in the List
-    QAction *panelSeparatorAct = new QAction(this);
+    auto panelSeparatorAct = new QAction(this);
     panelSeparatorAct->setSeparator(true);
 
     // Return a list of panel view actions for Marble Menu including show/hide all
@@ -797,11 +797,11 @@ void ControlView::updateAnnotationDockVisibility()
 void ControlView::updateAnnotationDock()
 {
     const QList<QActionGroup *> *tmp_actionGroups = m_annotationPlugin->actionGroups();
-    QWidget *widget = new QWidget(m_annotationDock);
-    QVBoxLayout *layout = new QVBoxLayout;
-    QToolBar *firstToolbar = new QToolBar(widget);
-    QToolBar *secondToolbar = new QToolBar(widget);
-    QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding);
+    auto widget = new QWidget(m_annotationDock);
+    auto layout = new QVBoxLayout;
+    auto firstToolbar = new QToolBar(widget);
+    auto secondToolbar = new QToolBar(widget);
+    auto spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding);
     if (!tmp_actionGroups->isEmpty()) {
         bool firstToolbarFilled = false;
         for (QAction *action : tmp_actionGroups->first()->actions()) {

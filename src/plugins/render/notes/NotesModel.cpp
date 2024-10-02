@@ -77,7 +77,7 @@ void NotesModel::parseFile(const QByteArray &file)
             QDateTime dateClosed = QDateTime::fromString(noteProperties.value(QStringLiteral("closed_at")).toString(), Qt::ISODate);
             QString noteStatus = noteProperties.value(QStringLiteral("status")).toString();
 
-            NotesItem *item = new NotesItem(this);
+            auto item = new NotesItem(this);
             item->setId(id);
             item->setCoordinate(GeoDataCoordinates(lon, lat, 0.0, GeoDataCoordinates::Degree));
             item->setDateCreated(dateCreated);

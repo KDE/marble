@@ -73,7 +73,7 @@ public:
     {
         if (m_sourceImage.size().width() > 21600 || m_sourceImage.height() > 10800) {
             qDebug("Install map too large!");
-            return QSize();
+            return {};
         }
         return m_sourceImage.size();
     }
@@ -127,7 +127,7 @@ public:
 
         if (row.isNull()) {
             mDebug() << "Read-Error! Null QImage!";
-            return QImage();
+            return {};
         }
 
         QImage tile = row.copy(m * stdImageWidth / mmax, 0, c_defaultTileSize, c_defaultTileSize);

@@ -18,9 +18,7 @@ CacheStoragePolicy::CacheStoragePolicy(const QString &cacheDirectory)
         QDir::root().mkpath(cacheDirectory);
 }
 
-CacheStoragePolicy::~CacheStoragePolicy()
-{
-}
+CacheStoragePolicy::~CacheStoragePolicy() = default;
 
 bool CacheStoragePolicy::fileExists(const QString &fileName) const
 {

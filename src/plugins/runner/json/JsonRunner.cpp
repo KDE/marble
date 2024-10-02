@@ -21,9 +21,7 @@ JsonRunner::JsonRunner(QObject *parent)
 {
 }
 
-JsonRunner::~JsonRunner()
-{
-}
+JsonRunner::~JsonRunner() = default;
 
 GeoDataDocument *JsonRunner::parseFile(const QString &fileName, DocumentRole role, QString &error)
 {

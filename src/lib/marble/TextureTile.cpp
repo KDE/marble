@@ -21,8 +21,5 @@ TextureTile::TextureTile(TileId const &tileId, QImage const &image, const Blendi
     Q_ASSERT(!image.isNull());
 }
 
-TextureTile::~TextureTile()
-{
-}
-
+TextureTile::~TextureTile() = default;
 }

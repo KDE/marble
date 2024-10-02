@@ -81,7 +81,7 @@ GeoDataStyle::ConstPtr GeoGraphicsItem::style() const
     }
 
     if (!d->m_style) {
-        if (const GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(d->m_feature)) {
+        if (const auto placemark = geodata_cast<GeoDataPlacemark>(d->m_feature)) {
             auto styling = StyleParameters(placemark, d->m_renderContext.tileLevel());
             for (auto relation : std::as_const(d->m_relations)) {
                 if (relation->isVisible()) {

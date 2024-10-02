@@ -23,14 +23,14 @@ RemoveItemEditWidget::RemoveItemEditWidget(const QModelIndex &index, QWidget *pa
     , m_button(new QToolButton)
     , m_comboBox(new QComboBox)
 {
-    QHBoxLayout *layout = new QHBoxLayout;
+    auto layout = new QHBoxLayout;
     layout->setSpacing(5);
 
-    QLabel *iconLabel = new QLabel;
+    auto iconLabel = new QLabel;
     iconLabel->setPixmap(QPixmap(QStringLiteral(":/icons/remove.png")));
     layout->addWidget(iconLabel);
 
-    QLabel *comboBoxLabel = new QLabel;
+    auto comboBoxLabel = new QLabel;
     comboBoxLabel->setText(tr("Choose item:"));
     layout->addWidget(comboBoxLabel);
 
@@ -77,7 +77,7 @@ void RemoveItemEditWidget::save()
 
 GeoDataAnimatedUpdate *RemoveItemEditWidget::animatedUpdateElement()
 {
-    GeoDataObject *object = qvariant_cast<GeoDataObject *>(m_index.data(MarblePlacemarkModel::ObjectPointerRole));
+    auto object = qvariant_cast<GeoDataObject *>(m_index.data(MarblePlacemarkModel::ObjectPointerRole));
     Q_ASSERT(object);
     auto animatedUpdate = geodata_cast<GeoDataAnimatedUpdate>(object);
     Q_ASSERT(animatedUpdate);

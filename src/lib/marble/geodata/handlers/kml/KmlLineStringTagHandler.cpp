@@ -28,7 +28,7 @@ GeoNode *KmlLineStringTagHandler::parse(GeoParser &parser) const
 
     GeoStackItem parentItem = parser.parentElement();
 
-    GeoDataLineString *lineString = new GeoDataLineString;
+    auto lineString = new GeoDataLineString;
     KmlObjectTagHandler::parseIdentifiers(parser, lineString);
 
     if (parentItem.represents(kmlTag_Placemark)) {

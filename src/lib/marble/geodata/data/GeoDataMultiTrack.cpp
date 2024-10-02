@@ -29,9 +29,7 @@ GeoDataMultiTrack::GeoDataMultiTrack(const GeoDataGeometry &other)
 {
 }
 
-GeoDataMultiTrack::~GeoDataMultiTrack()
-{
-}
+GeoDataMultiTrack::~GeoDataMultiTrack() = default;
 
 const char *GeoDataMultiTrack::nodeType() const
 {
@@ -251,7 +249,7 @@ GeoDataMultiTrack &GeoDataMultiTrack::operator<<(const GeoDataTrack &value)
     detach();
 
     Q_D(GeoDataMultiTrack);
-    GeoDataTrack *g = new GeoDataTrack(value);
+    auto g = new GeoDataTrack(value);
     g->setParent(this);
     d->m_vector.append(g);
     return *this;
@@ -299,7 +297,7 @@ void GeoDataMultiTrack::unpack(QDataStream &stream)
         case InvalidGeometryId:
             break;
         case GeoDataTrackId: {
-            GeoDataTrack *track = new GeoDataTrack;
+            auto track = new GeoDataTrack;
             track->unpack(stream);
             d->m_vector.append(track);
         } break;

@@ -123,7 +123,7 @@ QByteArray RoutinoRunnerPrivate::retrieveWaypoints(const QStringList &params) co
 
 GeoDataLineString *RoutinoRunnerPrivate::parseRoutinoOutput(const QByteArray &content)
 {
-    GeoDataLineString *routeWaypoints = new GeoDataLineString;
+    auto routeWaypoints = new GeoDataLineString;
 
     const QStringList lines = QString::fromUtf8(content).split(QLatin1Char('\n'));
     mDebug() << lines.count() << "lines";
@@ -152,7 +152,7 @@ QList<GeoDataPlacemark *> RoutinoRunnerPrivate::parseRoutinoInstructions(const Q
 
     RoutingInstructions directions = InstructionTransformation::process(m_parser.parse(stream));
     for (int i = 0; i < directions.size(); ++i) {
-        GeoDataPlacemark *placemark = new GeoDataPlacemark(directions[i].instructionText());
+        auto placemark = new GeoDataPlacemark(directions[i].instructionText());
         GeoDataExtendedData extendedData;
         GeoDataData turnType;
         turnType.setName(QStringLiteral("turnType"));
@@ -164,7 +164,7 @@ QList<GeoDataPlacemark *> RoutinoRunnerPrivate::parseRoutinoInstructions(const Q
         extendedData.addValue(roadName);
         placemark->setExtendedData(extendedData);
         Q_ASSERT(!directions[i].points().isEmpty());
-        GeoDataLineString *geometry = new GeoDataLineString;
+        auto geometry = new GeoDataLineString;
         QList<RoutingWaypoint> items = directions[i].points();
         for (int j = 0; j < items.size(); ++j) {
             RoutingPoint point = items[j].point();
@@ -184,8 +184,8 @@ GeoDataDocument *RoutinoRunnerPrivate::createDocument(GeoDataLineString *routeWa
         return nullptr;
     }
 
-    GeoDataDocument *result = new GeoDataDocument();
-    GeoDataPlacemark *routePlacemark = new GeoDataPlacemark;
+    auto result = new GeoDataDocument();
+    auto routePlacemark = new GeoDataPlacemark;
     routePlacemark->setName("Route");
     routePlacemark->setGeometry(routeWaypoints);
     result->append(routePlacemark);

@@ -62,9 +62,7 @@ bool GeoDataNetworkLinkControl::operator!=(const GeoDataNetworkLinkControl &othe
     return !this->operator==(other);
 }
 
-GeoDataNetworkLinkControl::~GeoDataNetworkLinkControl()
-{
-}
+GeoDataNetworkLinkControl::~GeoDataNetworkLinkControl() = default;
 
 GeoDataFeature *GeoDataNetworkLinkControl::clone() const
 {

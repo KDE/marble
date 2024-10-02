@@ -22,7 +22,7 @@ GeoNode *KmlTourTagHandler::parse(GeoParser &parser) const
 
     GeoStackItem parentItem = parser.parentElement();
 
-    GeoDataTour *tour = new GeoDataTour;
+    auto tour = new GeoDataTour;
     KmlObjectTagHandler::parseIdentifiers(parser, tour);
 
     if (parentItem.represents(kmlTag_Folder) || parentItem.represents(kmlTag_Document)) {

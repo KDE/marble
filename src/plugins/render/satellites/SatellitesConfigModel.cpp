@@ -55,16 +55,16 @@ void SatellitesConfigModel::clear()
 QVariant SatellitesConfigModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid()) {
-        return QVariant();
+        return {};
     }
 
-    SatellitesConfigAbstractItem *item = static_cast<SatellitesConfigAbstractItem *>(index.internalPointer());
+    auto item = static_cast<SatellitesConfigAbstractItem *>(index.internalPointer());
     return item->data(index.column(), role);
 }
 
 bool SatellitesConfigModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    SatellitesConfigAbstractItem *item = static_cast<SatellitesConfigAbstractItem *>(index.internalPointer());
+    auto item = static_cast<SatellitesConfigAbstractItem *>(index.internalPointer());
 
     bool success = item->setData(index.column(), role, value);
 
@@ -102,14 +102,14 @@ int SatellitesConfigModel::rowCount(const QModelIndex &parent) const
 QModelIndex SatellitesConfigModel::parent(const QModelIndex &child) const
 {
     if (!child.isValid()) {
-        return QModelIndex();
+        return {};
     }
 
-    SatellitesConfigAbstractItem *childItem = static_cast<SatellitesConfigAbstractItem *>(child.internalPointer());
+    auto childItem = static_cast<SatellitesConfigAbstractItem *>(child.internalPointer());
     SatellitesConfigAbstractItem *parentItem = childItem->parent();
 
     if (parentItem == m_rootItem) {
-        return QModelIndex();
+        return {};
     }
 
     return createIndex(parentItem->row(), 0, parentItem);
@@ -118,7 +118,7 @@ QModelIndex SatellitesConfigModel::parent(const QModelIndex &child) const
 QModelIndex SatellitesConfigModel::index(int row, int column, const QModelIndex &parent) const
 {
     if (!hasIndex(row, column, parent)) {
-        return QModelIndex();
+        return {};
     }
 
     SatellitesConfigAbstractItem *parentItem = nullptr;
@@ -131,7 +131,7 @@ QModelIndex SatellitesConfigModel::index(int row, int column, const QModelIndex 
     SatellitesConfigAbstractItem *childItem = parentItem->childAt(row);
 
     if (!childItem) {
-        return QModelIndex();
+        return {};
     }
 
     return createIndex(row, column, childItem);
@@ -140,7 +140,7 @@ QModelIndex SatellitesConfigModel::index(int row, int column, const QModelIndex 
 QVariant SatellitesConfigModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (orientation != Qt::Horizontal || role != Qt::DisplayRole) {
-        return QVariant();
+        return {};
     }
 
     switch (section) {
@@ -148,7 +148,7 @@ QVariant SatellitesConfigModel::headerData(int section, Qt::Orientation orientat
         return QVariant(tr("Catalogs"));
     }
     default: {
-        return QVariant();
+        return {};
     }
     }
 }
@@ -156,10 +156,10 @@ QVariant SatellitesConfigModel::headerData(int section, Qt::Orientation orientat
 Qt::ItemFlags SatellitesConfigModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid()) {
-        return Qt::ItemFlags();
+        return {};
     }
 
-    SatellitesConfigAbstractItem *item = static_cast<SatellitesConfigAbstractItem *>(index.internalPointer());
+    auto item = static_cast<SatellitesConfigAbstractItem *>(index.internalPointer());
     return item->flags();
 }
 

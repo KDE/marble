@@ -107,13 +107,13 @@ QSGNode *Routing::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
             for (int i = 0; i < segmentCount; ++i) {
                 normals << QVector2D(polygon[i + 1] - polygon[i]).normalized();
             }
-            QSGGeometryNode *lineNode = new QSGGeometryNode;
+            auto lineNode = new QSGGeometryNode;
 
-            QSGGeometry *lineNodeGeo = new QSGGeometry(QSGGeometry::defaultAttributes_Point2D(), segmentCount * 4);
+            auto lineNodeGeo = new QSGGeometry(QSGGeometry::defaultAttributes_Point2D(), segmentCount * 4);
             lineNodeGeo->setDrawingMode(GL_TRIANGLE_STRIP);
             lineNodeGeo->allocate(segmentCount * 4);
 
-            QSGFlatColorMaterial *material = new QSGFlatColorMaterial;
+            auto material = new QSGFlatColorMaterial;
             material->setColor(standardRouteColor);
 
             lineNode->setGeometry(lineNodeGeo);
@@ -165,7 +165,7 @@ void Routing::updateWaypointItems()
 {
     if (d->m_marbleMap && d->m_routeRequestModel) {
         for (int i = d->m_waypointItems.keys().size(); i < d->m_routeRequestModel->rowCount(); i++) {
-            QQmlContext *context = new QQmlContext(qmlContext(d->m_waypointDelegate));
+            auto context = new QQmlContext(qmlContext(d->m_waypointDelegate));
             QObject *component = d->m_waypointDelegate->create(context);
             QQuickItem *item = qobject_cast<QQuickItem *>(component);
             if (item) {
@@ -222,7 +222,7 @@ int Routing::addSearchResultPlacemark(Placemark *placemark)
                 return i;
             }
         }
-        Placemark *newPlacemark = new Placemark(this);
+        auto newPlacemark = new Placemark(this);
         newPlacemark->setGeoDataPlacemark(placemark->placemark());
         d->m_searchResultPlacemarks.push_back(newPlacemark);
     }
@@ -247,7 +247,7 @@ void Routing::clearSearchResultPlacemarks()
 void Routing::updateSearchResultPlacemarks()
 {
     for (int i = d->m_searchResultItems.keys().size(); i < d->m_searchResultPlacemarks.size(); i++) {
-        QQmlContext *context = new QQmlContext(qmlContext(d->m_waypointDelegate));
+        auto context = new QQmlContext(qmlContext(d->m_waypointDelegate));
         QObject *component = d->m_waypointDelegate->create(context);
         QQuickItem *item = qobject_cast<QQuickItem *>(component);
         if (item) {

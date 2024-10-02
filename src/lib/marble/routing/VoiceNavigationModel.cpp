@@ -121,7 +121,7 @@ QString VoiceNavigationModelPrivate::audioFile(const QString &name) const
         }
     }
 
-    return QString();
+    return {};
 #endif
 }
 
@@ -146,7 +146,7 @@ QString VoiceNavigationModelPrivate::distanceAudioFile(qreal dest) const
         }
     }
 
-    return QString();
+    return {};
 }
 
 QString VoiceNavigationModelPrivate::turnTypeAudioFile(Maneuver::Direction turnType, qreal distance)

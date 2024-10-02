@@ -41,7 +41,7 @@ TileId::TileId()
 TileId TileId::fromCoordinates(const GeoDataCoordinates &coords, int zoomLevel)
 {
     if (zoomLevel < 0) {
-        return TileId();
+        return {};
     }
     const int maxLat = 90 * 1000000;
     const int maxLon = 180 * 1000000;
@@ -62,7 +62,7 @@ TileId TileId::fromCoordinates(const GeoDataCoordinates &coords, int zoomLevel)
             lon += deltaLon;
         }
     }
-    return TileId(0, zoomLevel, x, y);
+    return {0, zoomLevel, x, y};
 }
 
 }

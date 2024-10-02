@@ -26,7 +26,7 @@ GeoNode *KmlDocumentTagHandler::parse(GeoParser &parser) const
         // this happens if there is a parent element to the Document tag. We can work around that and simply expect that
         // the new Document tag works like a Folder
         if (parentItem.represents(kmlTag_Folder) || parentItem.represents(kmlTag_Document) || parentItem.represents(kmlTag_Create)) {
-            GeoDataDocument *document = new GeoDataDocument;
+            auto document = new GeoDataDocument;
             KmlObjectTagHandler::parseIdentifiers(parser, document);
             parentItem.nodeAs<GeoDataContainer>()->append(document);
 

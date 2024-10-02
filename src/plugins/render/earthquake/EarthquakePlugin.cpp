@@ -42,7 +42,7 @@ EarthquakePlugin::EarthquakePlugin(const MarbleModel *marbleModel)
 
 void EarthquakePlugin::initialize()
 {
-    EarthquakeModel *model = new EarthquakeModel(marbleModel(), this);
+    auto model = new EarthquakeModel(marbleModel(), this);
     setModel(model);
     setNumberOfItems(m_numResults);
 
@@ -176,7 +176,7 @@ void EarthquakePlugin::writeSettings()
 void EarthquakePlugin::updateModel()
 {
     if (model()) {
-        EarthquakeModel *const earthquakeModel = static_cast<EarthquakeModel *>(model());
+        auto const earthquakeModel = static_cast<EarthquakeModel *>(model());
         earthquakeModel->setMinMagnitude(m_minMagnitude);
         if (m_timeRangeNPastDays) {
             QDateTime startdate, enddate;

@@ -37,8 +37,7 @@ private:
     GeoDataCoordinates m_coordinates;
 };
 
-typedef QHash<qint64, OsmNode> OsmNodes;
-
+using OsmNodes = QHash<qint64, OsmNode>;
 }
 
 #endif

@@ -47,9 +47,7 @@ SatellitesConfigDialog::SatellitesConfigDialog(QWidget *parent)
     m_translations["Neptune"] = tr("Neptune");
 }
 
-SatellitesConfigDialog::~SatellitesConfigDialog()
-{
-}
+SatellitesConfigDialog::~SatellitesConfigDialog() = default;
 
 void SatellitesConfigDialog::setUserDataSources(const QStringList &sources)
 {
@@ -197,7 +195,7 @@ SatellitesConfigNodeItem *SatellitesConfigDialog::getSatellitesBodyItem(const QS
 {
     QString theBody = translation(body);
 
-    SatellitesConfigModel *model = dynamic_cast<SatellitesConfigModel *>(m_configWidget->treeView->model());
+    auto model = dynamic_cast<SatellitesConfigModel *>(m_configWidget->treeView->model());
     SatellitesConfigNodeItem *rootItem = model->rootItem();
 
     // try to find it
@@ -239,7 +237,7 @@ void SatellitesConfigDialog::addDataSource()
         }
 
         // add item
-        QListWidgetItem *item = new QListWidgetItem(url.toString(), list);
+        auto item = new QListWidgetItem(url.toString(), list);
         item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
         item->setData(IsLoadedRole, QVariant(false));
 
@@ -269,7 +267,7 @@ void SatellitesConfigDialog::openDataSource()
             return; // already in list
         }
 
-        QListWidgetItem *item = new QListWidgetItem(url, list);
+        auto item = new QListWidgetItem(url, list);
         item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
         item->setData(IsLoadedRole, QVariant(false));
 

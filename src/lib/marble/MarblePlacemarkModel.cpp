@@ -32,9 +32,7 @@ public:
     {
     }
 
-    ~Private()
-    {
-    }
+    ~Private() = default;
 
     int m_size;
     QList<GeoDataPlacemark *> *m_placemarkContainer;
@@ -103,10 +101,10 @@ QHash<int, QByteArray> MarblePlacemarkModel::roleNames() const
 QVariant MarblePlacemarkModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid())
-        return QVariant();
+        return {};
 
     if (index.row() >= d->m_placemarkContainer->size())
-        return QVariant();
+        return {};
 
     if (role == Qt::DisplayRole) {
         return d->m_placemarkContainer->at(index.row())->name();
@@ -151,7 +149,7 @@ QVariant MarblePlacemarkModel::data(const QModelIndex &index, int role) const
     } else if (role == LatitudeRole) {
         return QVariant::fromValue(d->m_placemarkContainer->at(index.row())->coordinate().latitude(GeoDataCoordinates::Degree));
     } else
-        return QVariant();
+        return {};
 }
 
 QModelIndexList MarblePlacemarkModel::approxMatch(const QModelIndex &start, int role, const QVariant &value, int hits, Qt::MatchFlags flags) const

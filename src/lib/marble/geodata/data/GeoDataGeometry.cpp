@@ -80,43 +80,43 @@ bool GeoDataGeometry::operator==(const GeoDataGeometry &other) const
     }
 
     if (nodeType() == GeoDataTypes::GeoDataPolygonType) {
-        const GeoDataPolygon &thisPoly = static_cast<const GeoDataPolygon &>(*this);
-        const GeoDataPolygon &otherPoly = static_cast<const GeoDataPolygon &>(other);
+        const auto &thisPoly = static_cast<const GeoDataPolygon &>(*this);
+        const auto &otherPoly = static_cast<const GeoDataPolygon &>(other);
 
         return thisPoly == otherPoly;
     } else if (nodeType() == GeoDataTypes::GeoDataLinearRingType) {
-        const GeoDataLinearRing &thisRing = static_cast<const GeoDataLinearRing &>(*this);
-        const GeoDataLinearRing &otherRing = static_cast<const GeoDataLinearRing &>(other);
+        const auto &thisRing = static_cast<const GeoDataLinearRing &>(*this);
+        const auto &otherRing = static_cast<const GeoDataLinearRing &>(other);
 
         return thisRing == otherRing;
     } else if (nodeType() == GeoDataTypes::GeoDataLineStringType) {
-        const GeoDataLineString &thisLine = static_cast<const GeoDataLineString &>(*this);
-        const GeoDataLineString &otherLine = static_cast<const GeoDataLineString &>(other);
+        const auto &thisLine = static_cast<const GeoDataLineString &>(*this);
+        const auto &otherLine = static_cast<const GeoDataLineString &>(other);
 
         return thisLine == otherLine;
     } else if (nodeType() == GeoDataTypes::GeoDataModelType) {
-        const GeoDataModel &thisModel = static_cast<const GeoDataModel &>(*this);
-        const GeoDataModel &otherModel = static_cast<const GeoDataModel &>(other);
+        const auto &thisModel = static_cast<const GeoDataModel &>(*this);
+        const auto &otherModel = static_cast<const GeoDataModel &>(other);
 
         return thisModel == otherModel;
     } else if (nodeType() == GeoDataTypes::GeoDataMultiGeometryType) {
-        const GeoDataMultiGeometry &thisMG = static_cast<const GeoDataMultiGeometry &>(*this);
-        const GeoDataMultiGeometry &otherMG = static_cast<const GeoDataMultiGeometry &>(other);
+        const auto &thisMG = static_cast<const GeoDataMultiGeometry &>(*this);
+        const auto &otherMG = static_cast<const GeoDataMultiGeometry &>(other);
 
         return thisMG == otherMG;
     } else if (nodeType() == GeoDataTypes::GeoDataTrackType) {
-        const GeoDataTrack &thisTrack = static_cast<const GeoDataTrack &>(*this);
-        const GeoDataTrack &otherTrack = static_cast<const GeoDataTrack &>(other);
+        const auto &thisTrack = static_cast<const GeoDataTrack &>(*this);
+        const auto &otherTrack = static_cast<const GeoDataTrack &>(other);
 
         return thisTrack == otherTrack;
     } else if (nodeType() == GeoDataTypes::GeoDataMultiTrackType) {
-        const GeoDataMultiTrack &thisMT = static_cast<const GeoDataMultiTrack &>(*this);
-        const GeoDataMultiTrack &otherMT = static_cast<const GeoDataMultiTrack &>(other);
+        const auto &thisMT = static_cast<const GeoDataMultiTrack &>(*this);
+        const auto &otherMT = static_cast<const GeoDataMultiTrack &>(other);
 
         return thisMT == otherMT;
     } else if (nodeType() == GeoDataTypes::GeoDataPointType) {
-        const GeoDataPoint &thisPoint = static_cast<const GeoDataPoint &>(*this);
-        const GeoDataPoint &otherPoint = static_cast<const GeoDataPoint &>(other);
+        const auto &thisPoint = static_cast<const GeoDataPoint &>(*this);
+        const auto &otherPoint = static_cast<const GeoDataPoint &>(other);
 
         return thisPoint == otherPoint;
     }

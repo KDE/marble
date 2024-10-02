@@ -140,7 +140,7 @@ GeoDataDocument *YoursRunner::parse(const QByteArray &content)
         mDebug() << "Cannot parse kml data! Input is " << content;
         return nullptr;
     }
-    GeoDataDocument *document = static_cast<GeoDataDocument *>(parser.releaseDocument());
+    auto document = static_cast<GeoDataDocument *>(parser.releaseDocument());
     return document;
 }
 
@@ -151,7 +151,7 @@ qreal YoursRunner::distance(const GeoDataDocument *document)
         for (const GeoDataPlacemark *placemark : folder->placemarkList()) {
             const GeoDataGeometry *geometry = placemark->geometry();
             if (geometry->geometryId() == GeoDataLineStringId) {
-                const GeoDataLineString *lineString = dynamic_cast<const GeoDataLineString *>(geometry);
+                const auto lineString = dynamic_cast<const GeoDataLineString *>(geometry);
                 Q_ASSERT(lineString && "Internal error: geometry ID does not match class type");
                 return lineString->length(EARTH_RADIUS);
             }

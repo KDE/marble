@@ -27,8 +27,8 @@ GeoNode *GPXwptTagHandler::parse(GeoParser &parser) const
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(gpxTag_gpx)) {
-        GeoDataDocument *doc = parentItem.nodeAs<GeoDataDocument>();
-        GeoDataPlacemark *placemark = new GeoDataPlacemark;
+        auto doc = parentItem.nodeAs<GeoDataDocument>();
+        auto placemark = new GeoDataPlacemark;
 
         QXmlStreamAttributes attributes = parser.attributes();
         QStringView tmp;

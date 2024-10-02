@@ -24,7 +24,7 @@ class GeoStackItem;
 class GEODATA_EXPORT GeoParser : public QXmlStreamReader
 {
 public:
-    typedef QPair<QString, QString> QualifiedName; // Tag Name & Namespace pair
+    using QualifiedName = QPair<QString, QString>; // Tag Name & Namespace pair
 
     explicit GeoParser(GeoDataGenericSourceType sourceType);
     virtual ~GeoParser();

@@ -27,10 +27,10 @@ SoundCueEditWidget::SoundCueEditWidget(const QModelIndex &index, QWidget *parent
     , m_button(new QToolButton)
     , m_button2(new QToolButton)
 {
-    QHBoxLayout *layout = new QHBoxLayout;
+    auto layout = new QHBoxLayout;
     layout->setSpacing(5);
 
-    QLabel *iconLabel = new QLabel;
+    auto iconLabel = new QLabel;
     iconLabel->setPixmap(QPixmap(QStringLiteral(":/marble/playback-play.png")));
     layout->addWidget(iconLabel);
 
@@ -73,7 +73,7 @@ void SoundCueEditWidget::open()
 
 GeoDataSoundCue *SoundCueEditWidget::soundCueElement()
 {
-    GeoDataObject *object = qvariant_cast<GeoDataObject *>(m_index.data(MarblePlacemarkModel::ObjectPointerRole));
+    auto object = qvariant_cast<GeoDataObject *>(m_index.data(MarblePlacemarkModel::ObjectPointerRole));
     Q_ASSERT(object);
     auto soundCue = geodata_cast<GeoDataSoundCue>(object);
     Q_ASSERT(soundCue);

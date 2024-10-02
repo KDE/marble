@@ -81,7 +81,7 @@ void TestGeoSceneWriter::initTestCase()
             QVERIFY(file.exists());
 
             // Make the parsers
-            GeoSceneParser *parser = new GeoSceneParser(GeoScene_DGML);
+            auto parser = new GeoSceneParser(GeoScene_DGML);
 
             QSharedPointer<GeoSceneParser> parserPointer(parser);
 
@@ -198,7 +198,7 @@ void TestGeoSceneWriter::saveAndCompare()
 
 void TestGeoSceneWriter::writeHeadTag()
 {
-    GeoSceneDocument *document = new GeoSceneDocument;
+    auto document = new GeoSceneDocument;
 
     GeoSceneHead *head = document->head();
     head->setName("Test Map");
@@ -213,7 +213,7 @@ void TestGeoSceneWriter::writeHeadTag()
     zoom->setMaximum(500);
     zoom->setDiscrete(true);
 
-    GeoSceneTileDataset *texture = new GeoSceneTileDataset("map");
+    auto texture = new GeoSceneTileDataset("map");
     texture->setSourceDir("earth/testmap");
     texture->setFileFormat("png");
     texture->setTileProjection(GeoSceneAbstractTileProjection::Equirectangular);
@@ -225,22 +225,22 @@ void TestGeoSceneWriter::writeHeadTag()
     texture->setLevelZeroColumns(2);
     texture->setLevelZeroRows(2);
 
-    GeoSceneGeodata *geodata = new GeoSceneGeodata("cityplacemarks");
+    auto geodata = new GeoSceneGeodata("cityplacemarks");
     geodata->setSourceFile("baseplacemarks.kml");
 
-    GeoSceneLayer *layer = new GeoSceneLayer("testmap");
+    auto layer = new GeoSceneLayer("testmap");
     layer->setBackend("texture");
     layer->addDataset(texture);
 
-    GeoSceneLayer *secondLayer = new GeoSceneLayer("standardplaces");
+    auto secondLayer = new GeoSceneLayer("standardplaces");
     secondLayer->setBackend("geodata");
     secondLayer->addDataset(geodata);
 
-    GeoSceneLayer *thirdLayer = new GeoSceneLayer("mwdbii");
+    auto thirdLayer = new GeoSceneLayer("mwdbii");
     thirdLayer->setBackend("vector");
     thirdLayer->setRole("polyline");
 
-    GeoSceneVector *vector = new GeoSceneVector("pdiffborder");
+    auto vector = new GeoSceneVector("pdiffborder");
     vector->setFeature("border");
     vector->setFileFormat("PNT");
     vector->setSourceFile("earth/mwdbii/PDIFFBORDER.PNT");
@@ -254,38 +254,38 @@ void TestGeoSceneWriter::writeHeadTag()
 
     GeoSceneSettings *settings = document->settings();
 
-    GeoSceneProperty *coorGrid = new GeoSceneProperty("coordinate-grid");
+    auto coorGrid = new GeoSceneProperty("coordinate-grid");
     coorGrid->setValue(true);
     coorGrid->setAvailable(true);
     settings->addProperty(coorGrid);
 
-    GeoSceneProperty *overviewmap = new GeoSceneProperty("overviewmap");
+    auto overviewmap = new GeoSceneProperty("overviewmap");
     overviewmap->setValue(true);
     overviewmap->setAvailable(true);
     settings->addProperty(overviewmap);
 
-    GeoSceneProperty *compass = new GeoSceneProperty("compass");
+    auto compass = new GeoSceneProperty("compass");
     compass->setValue(true);
     compass->setAvailable(true);
     settings->addProperty(compass);
 
-    GeoSceneProperty *scalebar = new GeoSceneProperty("scalebar");
+    auto scalebar = new GeoSceneProperty("scalebar");
     scalebar->setValue(true);
     scalebar->setAvailable(true);
     settings->addProperty(scalebar);
 
     GeoSceneLegend *legend = document->legend();
-    GeoSceneSection *section = new GeoSceneSection("areas");
+    auto section = new GeoSceneSection("areas");
     section->setHeading("Areas");
     legend->addSection(section);
 
-    GeoSceneItem *sportsPitch = new GeoSceneItem("sports_pitch");
+    auto sportsPitch = new GeoSceneItem("sports_pitch");
     sportsPitch->setText("Sports pitch");
     GeoSceneIcon *sportsPitchIcon = sportsPitch->icon();
     sportsPitchIcon->setPixmap("maps/earth/testmap/legend/sports_pitch.png");
     section->addItem(sportsPitch);
 
-    GeoSceneItem *sportsCentre = new GeoSceneItem("sports_centre");
+    auto sportsCentre = new GeoSceneItem("sports_centre");
     sportsCentre->setText("Sports centre");
     GeoSceneIcon *sportsCentreIcon = sportsCentre->icon();
     sportsCentreIcon->setColor("#00FF00");
@@ -303,7 +303,7 @@ void TestGeoSceneWriter::writeHeadTag()
     tempFile.reset();
     QVERIFY(parser.read(&tempFile));
 
-    GeoSceneDocument *document2 = static_cast<GeoSceneDocument *>(parser.activeDocument());
+    auto document2 = static_cast<GeoSceneDocument *>(parser.activeDocument());
     QTemporaryFile tempFile2;
     tempFile2.open();
     GeoWriter writer2;

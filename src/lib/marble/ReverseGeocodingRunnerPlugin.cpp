@@ -41,7 +41,7 @@ ReverseGeocodingRunnerPlugin::~ReverseGeocodingRunnerPlugin()
 
 QIcon ReverseGeocodingRunnerPlugin::icon() const
 {
-    return QIcon();
+    return {};
 }
 
 bool ReverseGeocodingRunnerPlugin::supportsCelestialBody(const QString &celestialBodyId) const

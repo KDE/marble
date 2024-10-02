@@ -374,31 +374,31 @@ QPointF ClipPainterPrivate::interpolateLabelPoint(const QPointF &previousPoint, 
     qreal m = _m(previousPoint, currentPoint);
     if (previousPoint.x() <= m_labelAreaMargin) {
         if (labelPositionFlags.testFlag(IgnoreXMargin)) {
-            return QPointF(-1.0, -1.0);
+            return {-1.0, -1.0};
         }
-        return QPointF(m_labelAreaMargin, previousPoint.y() + (m_labelAreaMargin - previousPoint.x()) * m);
+        return {m_labelAreaMargin, previousPoint.y() + (m_labelAreaMargin - previousPoint.x()) * m};
     } else if (previousPoint.x() >= q->viewport().width() - m_labelAreaMargin) {
         if (labelPositionFlags.testFlag(IgnoreXMargin)) {
-            return QPointF(-1.0, -1.0);
+            return {-1.0, -1.0};
         }
-        return QPointF(q->viewport().width() - m_labelAreaMargin, previousPoint.y() - (previousPoint.x() - q->viewport().width() + m_labelAreaMargin) * m);
+        return {q->viewport().width() - m_labelAreaMargin, previousPoint.y() - (previousPoint.x() - q->viewport().width() + m_labelAreaMargin) * m};
     }
 
     if (previousPoint.y() <= m_labelAreaMargin) {
         if (labelPositionFlags.testFlag(IgnoreYMargin)) {
-            return QPointF(-1.0, -1.0);
+            return {-1.0, -1.0};
         }
-        return QPointF(previousPoint.x() + (m_labelAreaMargin - previousPoint.y()) / m, m_labelAreaMargin);
+        return {previousPoint.x() + (m_labelAreaMargin - previousPoint.y()) / m, m_labelAreaMargin};
     } else if (previousPoint.y() >= q->viewport().height() - m_labelAreaMargin) {
         if (labelPositionFlags.testFlag(IgnoreYMargin)) {
-            return QPointF(-1.0, -1.0);
+            return {-1.0, -1.0};
         }
-        return QPointF(previousPoint.x() - (previousPoint.y() - q->viewport().height() + m_labelAreaMargin) / m, q->viewport().height() - m_labelAreaMargin);
+        return {previousPoint.x() - (previousPoint.y() - q->viewport().height() + m_labelAreaMargin) / m, q->viewport().height() - m_labelAreaMargin};
     }
 
     //    mDebug() << "Previous and current node position are allowed!";
 
-    return QPointF(-1.0, -1.0);
+    return {-1.0, -1.0};
 }
 
 ClipPainterPrivate::ClipPainterPrivate(ClipPainter *parent)
@@ -444,22 +444,22 @@ qreal ClipPainterPrivate::_m(const QPointF &start, const QPointF &end)
 
 QPointF ClipPainterPrivate::clipTop(qreal m, const QPointF &point) const
 {
-    return QPointF((m_top - point.y()) / m + point.x(), m_top);
+    return {(m_top - point.y()) / m + point.x(), m_top};
 }
 
 QPointF ClipPainterPrivate::clipLeft(qreal m, const QPointF &point) const
 {
-    return QPointF(m_left, (m_left - point.x()) * m + point.y());
+    return {m_left, (m_left - point.x()) * m + point.y()};
 }
 
 QPointF ClipPainterPrivate::clipBottom(qreal m, const QPointF &point) const
 {
-    return QPointF((m_bottom - point.y()) / m + point.x(), m_bottom);
+    return {(m_bottom - point.y()) / m + point.x(), m_bottom};
 }
 
 QPointF ClipPainterPrivate::clipRight(qreal m, const QPointF &point) const
 {
-    return QPointF(m_right, (m_right - point.x()) * m + point.y());
+    return {m_right, (m_right - point.x()) * m + point.y()};
 }
 
 int ClipPainterPrivate::sector(const QPointF &point) const

@@ -46,9 +46,7 @@ EclSolar::EclSolar()
     esinit();
 }
 
-EclSolar::~EclSolar()
-{
-}
+EclSolar::~EclSolar() = default;
 
 double EclSolar::atan23(double y, double x)
 {

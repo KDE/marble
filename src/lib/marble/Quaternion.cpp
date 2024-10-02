@@ -35,7 +35,7 @@ Quaternion Quaternion::fromSpherical(qreal lon, qreal lat)
     const qreal y = sin(lat);
     const qreal z = cos(lat) * cos(lon);
 
-    return Quaternion(w, x, y, z);
+    return {w, x, y, z};
 }
 
 void Quaternion::getSpherical(qreal &lon, qreal &lat) const
@@ -84,7 +84,7 @@ Quaternion Quaternion::log() const
     double const qlen = length();
     double const vlen = sqrt(v[Q_X] * v[Q_X] + v[Q_Y] * v[Q_Y] + v[Q_Z] * v[Q_Z]);
     double const a = acos(v[Q_W] / qlen) / vlen;
-    return Quaternion(std::log(qlen), v[Q_X] * a, v[Q_Y] * a, v[Q_Z] * a);
+    return {std::log(qlen), v[Q_X] * a, v[Q_Y] * a, v[Q_Z] * a};
 }
 
 Quaternion Quaternion::exp() const
@@ -92,7 +92,7 @@ Quaternion Quaternion::exp() const
     double const vlen = sqrt(v[Q_X] * v[Q_X] + v[Q_Y] * v[Q_Y] + v[Q_Z] * v[Q_Z]);
     double const s = std::exp(v[Q_W]);
     double const a = s * sin(vlen) / vlen;
-    return Quaternion(s * cos(vlen), v[Q_X] * a, v[Q_Y] * a, v[Q_Z] * a);
+    return {s * cos(vlen), v[Q_X] * a, v[Q_Y] * a, v[Q_Z] * a};
 }
 
 Quaternion Quaternion::fromEuler(qreal pitch, qreal yaw, qreal roll)
@@ -110,7 +110,7 @@ Quaternion Quaternion::fromEuler(qreal pitch, qreal yaw, qreal roll)
     const qreal y = cPhi * sThe * cPsi + sPhi * cThe * sPsi;
     const qreal z = cPhi * cThe * sPsi - sPhi * sThe * cPsi;
 
-    return Quaternion(w, x, y, z);
+    return {w, x, y, z};
 }
 
 qreal Quaternion::pitch() const // "heading", phi
@@ -159,17 +159,17 @@ Quaternion Quaternion::operator*(const Quaternion &q) const
     const qreal y = v[Q_W] * q.v[Q_Y] - v[Q_X] * q.v[Q_Z] + v[Q_Y] * q.v[Q_W] + v[Q_Z] * q.v[Q_X];
     const qreal z = v[Q_W] * q.v[Q_Z] + v[Q_X] * q.v[Q_Y] - v[Q_Y] * q.v[Q_X] + v[Q_Z] * q.v[Q_W];
 
-    return Quaternion(w, x, y, z);
+    return {w, x, y, z};
 }
 
 Quaternion Quaternion::operator+(const Quaternion &q) const
 {
-    return Quaternion(v[Q_W] + q.v[Q_W], v[Q_X] + q.v[Q_X], v[Q_Y] + q.v[Q_Y], v[Q_Z] + q.v[Q_Z]);
+    return {v[Q_W] + q.v[Q_W], v[Q_X] + q.v[Q_X], v[Q_Y] + q.v[Q_Y], v[Q_Z] + q.v[Q_Z]};
 }
 
 Quaternion Quaternion::operator*(qreal factor) const
 {
-    return Quaternion(v[Q_W] * factor, v[Q_X] * factor, v[Q_Y] * factor, v[Q_Z] * factor);
+    return {v[Q_W] * factor, v[Q_X] * factor, v[Q_Y] * factor, v[Q_Z] * factor};
 }
 
 void Quaternion::rotateAroundAxis(const Quaternion &q)
@@ -206,7 +206,7 @@ Quaternion Quaternion::slerp(const Quaternion &q1, const Quaternion &q2, qreal t
     const qreal y = p1 * q1.v[Q_Y] + p2 * q2.v[Q_Y];
     const qreal z = p1 * q1.v[Q_Z] + p2 * q2.v[Q_Z];
 
-    return Quaternion(w, x, y, z);
+    return {w, x, y, z};
 }
 
 Quaternion Quaternion::nlerp(const Quaternion &q1, const Quaternion &q2, qreal t)

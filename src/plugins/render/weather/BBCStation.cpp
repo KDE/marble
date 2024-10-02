@@ -27,23 +27,10 @@ public:
     }
 
     BBCStationPrivate(const BBCStationPrivate &other)
-        : m_name(other.m_name)
-        , m_coordinate(other.m_coordinate)
-        , m_bbcId(other.m_bbcId)
-        , m_priority(other.m_priority)
-        , ref(other.ref)
-    {
-    }
 
-    BBCStationPrivate &operator=(const BBCStationPrivate &other)
-    {
-        m_name = other.m_name;
-        m_coordinate = other.m_coordinate;
-        m_bbcId = other.m_bbcId;
-        m_priority = other.m_priority;
-        ref = other.ref;
-        return *this;
-    }
+        = default;
+
+    BBCStationPrivate &operator=(const BBCStationPrivate &other) = default;
 
     QString m_name;
     GeoDataCoordinates m_coordinate;

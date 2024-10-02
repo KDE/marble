@@ -8,8 +8,5 @@
 namespace Marble
 {
 
-DialogConfigurationInterface::~DialogConfigurationInterface()
-{
-}
-
+DialogConfigurationInterface::~DialogConfigurationInterface() = default;
 }

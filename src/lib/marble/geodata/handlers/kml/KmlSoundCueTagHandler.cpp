@@ -24,7 +24,7 @@ GeoNode *KmlSoundCueTagHandler::parse(GeoParser &parser) const
     GeoStackItem parentItem = parser.parentElement();
 
     if (parentItem.is<GeoDataPlaylist>()) {
-        GeoDataSoundCue *cue = new GeoDataSoundCue;
+        auto cue = new GeoDataSoundCue;
         KmlObjectTagHandler::parseIdentifiers(parser, cue);
         parentItem.nodeAs<GeoDataPlaylist>()->addPrimitive(cue);
         return cue;

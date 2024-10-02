@@ -19,7 +19,7 @@ static GeoTagWriterRegistrar s_writerStyleMap(GeoTagWriter::QualifiedName(GeoDat
 
 bool KmlStyleMapTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataStyleMap *map = static_cast<const GeoDataStyleMap *>(node);
+    const auto map = static_cast<const GeoDataStyleMap *>(node);
 
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_StyleMap));
     KmlObjectTagWriter::writeIdentifiers(writer, map);

@@ -81,8 +81,8 @@ QtMarbleConfigDialog::QtMarbleConfigDialog(MarbleWidget *marbleWidget, CloudSync
     : QDialog(parent)
     , d(new QtMarbleConfigDialogPrivate(marbleWidget, cloudSyncManager))
 {
-    QTabWidget *tabWidget = new QTabWidget(this);
-    QDialogButtonBox *buttons = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Apply | QDialogButtonBox::Cancel, Qt::Horizontal, this);
+    auto tabWidget = new QTabWidget(this);
+    auto buttons = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Apply | QDialogButtonBox::Cancel, Qt::Horizontal, this);
 
     // Connect the signals of the ButtonBox
     // to the corresponding slots of the dialog.
@@ -93,7 +93,7 @@ QtMarbleConfigDialog::QtMarbleConfigDialog(MarbleWidget *marbleWidget, CloudSync
     connect(this, SIGNAL(accepted()), this, SLOT(writeSettings()));
 
     // view page
-    QWidget *w_viewSettings = new QWidget(this);
+    auto w_viewSettings = new QWidget(this);
 
     d->ui_viewSettings.setupUi(w_viewSettings);
     tabWidget->addTab(w_viewSettings, tr("View"));
@@ -102,7 +102,7 @@ QtMarbleConfigDialog::QtMarbleConfigDialog(MarbleWidget *marbleWidget, CloudSync
     d->ui_viewSettings.label_labelLocalization->hide();
 
     // navigation page
-    QWidget *w_navigationSettings = new QWidget(this);
+    auto w_navigationSettings = new QWidget(this);
 
     d->ui_navigationSettings.setupUi(w_navigationSettings);
     tabWidget->addTab(w_navigationSettings, tr("Navigation"));
@@ -110,7 +110,7 @@ QtMarbleConfigDialog::QtMarbleConfigDialog(MarbleWidget *marbleWidget, CloudSync
     d->ui_navigationSettings.label_dragLocation->hide();
 
     // cache page
-    QWidget *w_cacheSettings = new QWidget(this);
+    auto w_cacheSettings = new QWidget(this);
 
     d->ui_cacheSettings.setupUi(w_cacheSettings);
     tabWidget->addTab(w_cacheSettings, tr("Cache and Proxy"));
@@ -119,7 +119,7 @@ QtMarbleConfigDialog::QtMarbleConfigDialog(MarbleWidget *marbleWidget, CloudSync
     connect(d->ui_cacheSettings.button_clearPersistentCache, SIGNAL(clicked()), SIGNAL(clearPersistentCacheClicked()));
 
     // time page
-    QWidget *w_timeSettings = new QWidget(this);
+    auto w_timeSettings = new QWidget(this);
     d->ui_timeSettings.setupUi(w_timeSettings);
     tabWidget->addTab(w_timeSettings, tr("Date and Time"));
 
@@ -141,7 +141,7 @@ QtMarbleConfigDialog::QtMarbleConfigDialog(MarbleWidget *marbleWidget, CloudSync
     connect(this, SIGNAL(rejected()), &d->m_pluginModel, SLOT(retrievePluginState()));
     connect(this, SIGNAL(accepted()), &d->m_pluginModel, SLOT(applyPluginState()));
 
-    QWidget *w_cloudSyncSettings = new QWidget(this);
+    auto w_cloudSyncSettings = new QWidget(this);
     d->ui_cloudSyncSettings.setupUi(w_cloudSyncSettings);
     tabWidget->addTab(w_cloudSyncSettings, tr("Synchronization"));
     d->ui_cloudSyncSettings.button_syncNow->setEnabled(syncBookmarks());
@@ -158,7 +158,7 @@ QtMarbleConfigDialog::QtMarbleConfigDialog(MarbleWidget *marbleWidget, CloudSync
     }
 
     // Layout
-    QVBoxLayout *layout = new QVBoxLayout(this);
+    auto layout = new QVBoxLayout(this);
     layout->addWidget(tabWidget);
     layout->addWidget(buttons);
 
@@ -223,7 +223,7 @@ void QtMarbleConfigDialog::disableSyncNow()
 
     d->ui_cloudSyncSettings.button_syncNow->setDisabled(true);
 
-    QTimer *timeoutTimer = new QTimer(this);
+    auto timeoutTimer = new QTimer(this);
     connect(timeoutTimer, SIGNAL(timeout()), timeoutTimer, SLOT(stop()));
     connect(timeoutTimer, SIGNAL(timeout()), this, SLOT(enableSyncNow()));
 

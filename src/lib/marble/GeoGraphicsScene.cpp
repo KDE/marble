@@ -36,7 +36,7 @@ public:
         q->clear();
     }
 
-    typedef QHash<const GeoDataFeature *, GeoGraphicsItem *> FeatureItemMap;
+    using FeatureItemMap = QHash<const GeoDataFeature *, GeoGraphicsItem *>;
     QMultiHash<TileId, FeatureItemMap> m_tiledItems;
     QMultiHash<const GeoDataFeature *, TileId> m_features; // multi hash because multi track and multi geometry insert multiple items
 
@@ -58,7 +58,7 @@ GeoDataStyle::Ptr GeoGraphicsScenePrivate::highlightStyle(const GeoDataDocument 
         GeoDataStyle::Ptr highlightStyle(new GeoDataStyle(*document->style(highlightStyleId)));
         return highlightStyle;
     } else {
-        return GeoDataStyle::Ptr();
+        return {};
     }
 }
 
@@ -186,7 +186,7 @@ void GeoGraphicsScene::applyHighlight(const QList<GeoDataPlacemark *> &selectedP
                         const GeoDataObject *parent = placemark->parent();
                         if (parent) {
                             auto item = *iter;
-                            if (const GeoDataDocument *doc = geodata_cast<GeoDataDocument>(parent)) {
+                            if (const auto doc = geodata_cast<GeoDataDocument>(parent)) {
                                 QString styleUrl = placemark->styleUrl();
                                 styleUrl.remove(QLatin1Char('#'));
                                 if (!styleUrl.isEmpty()) {

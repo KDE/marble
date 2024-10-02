@@ -123,7 +123,7 @@ QRectF BillboardGraphicsItem::containsRect(const QPointF &point) const
             return rect;
     }
 
-    return QRectF();
+    return {};
 }
 
 Qt::Alignment BillboardGraphicsItem::alignment() const

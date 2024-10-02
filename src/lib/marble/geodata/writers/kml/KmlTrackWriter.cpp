@@ -20,7 +20,7 @@ static GeoTagWriterRegistrar s_writerPoint(GeoTagWriter::QualifiedName(GeoDataTy
 
 bool KmlTrackWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataTrack *track = static_cast<const GeoDataTrack *>(node);
+    const auto track = static_cast<const GeoDataTrack *>(node);
 
     writer.writeStartElement("gx:Track");
     KmlObjectTagWriter::writeIdentifiers(writer, track);

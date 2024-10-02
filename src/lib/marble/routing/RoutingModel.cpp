@@ -93,7 +93,7 @@ QVariant RoutingModel::headerData(int section, Qt::Orientation orientation, int 
 QVariant RoutingModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid()) {
-        return QVariant();
+        return {};
     }
 
     if (index.row() < d->m_route.turnPoints().size() && index.column() == 0) {
@@ -120,17 +120,17 @@ QVariant RoutingModel::data(const QModelIndex &index, int role) const
         case RoutingModel::CoordinateRole:
             return QVariant::fromValue(segment.maneuver().position());
         case RoutingModel::LongitudeRole:
-            return QVariant(segment.maneuver().position().longitude(GeoDataCoordinates::Degree));
+            return {segment.maneuver().position().longitude(GeoDataCoordinates::Degree)};
         case RoutingModel::LatitudeRole:
-            return QVariant(segment.maneuver().position().latitude(GeoDataCoordinates::Degree));
+            return {segment.maneuver().position().latitude(GeoDataCoordinates::Degree)};
         case RoutingModel::TurnTypeIconRole:
             return segment.maneuver().directionPixmap();
         default:
-            return QVariant();
+            return {};
         }
     }
 
-    return QVariant();
+    return {};
 }
 
 QHash<int, QByteArray> RoutingModel::roleNames() const

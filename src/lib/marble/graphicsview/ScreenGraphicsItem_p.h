@@ -28,9 +28,7 @@ public:
     {
     }
 
-    ~ScreenGraphicsItemPrivate() override
-    {
-    }
+    ~ScreenGraphicsItemPrivate() override = default;
 
     QList<QPointF> positions() const override
     {
@@ -65,9 +63,9 @@ public:
 
         QList<QPointF> parentPositions;
 
-        if (ScreenGraphicsItem *screenItem = dynamic_cast<ScreenGraphicsItem *>(m_parent)) {
+        if (auto *screenItem = dynamic_cast<ScreenGraphicsItem *>(m_parent)) {
             parentPositions = screenItem->absolutePositions();
-        } else if (BillboardGraphicsItem *geoLabelItem = dynamic_cast<BillboardGraphicsItem *>(m_parent)) {
+        } else if (auto *geoLabelItem = dynamic_cast<BillboardGraphicsItem *>(m_parent)) {
             parentPositions = geoLabelItem->positions();
         }
 

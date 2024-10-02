@@ -25,7 +25,7 @@ GeoNode *KmlPlacemarkTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_Placemark)));
 
-    GeoDataPlacemark *placemark = new GeoDataPlacemark;
+    auto placemark = new GeoDataPlacemark;
     KmlObjectTagHandler::parseIdentifiers(parser, placemark);
 
     GeoStackItem parentItem = parser.parentElement();

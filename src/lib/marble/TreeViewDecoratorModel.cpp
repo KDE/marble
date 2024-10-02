@@ -49,12 +49,12 @@ QVariant TreeViewDecoratorModel::data(const QModelIndex &proxyIndex, int role) c
         }
     }
 
-    GeoDataObject *object = qvariant_cast<GeoDataObject *>(QSortFilterProxyModel::data(proxyIndex, MarblePlacemarkModel::ObjectPointerRole));
+    auto object = qvariant_cast<GeoDataObject *>(QSortFilterProxyModel::data(proxyIndex, MarblePlacemarkModel::ObjectPointerRole));
     if (!object) {
         return QSortFilterProxyModel::data(proxyIndex, role);
     }
 
-    GeoDataFolder *folder = dynamic_cast<GeoDataFolder *>(object);
+    auto folder = dynamic_cast<GeoDataFolder *>(object);
 
     if (folder) {
         bool const expandedState = m_expandedRows.contains(QPersistentModelIndex(proxyIndex));

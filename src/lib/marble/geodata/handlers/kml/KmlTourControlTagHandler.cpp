@@ -24,7 +24,7 @@ GeoNode *KmlTourControlTagHandler::parse(GeoParser &parser) const
 
     GeoStackItem parentItem = parser.parentElement();
 
-    GeoDataTourControl *tourControl = new GeoDataTourControl;
+    auto tourControl = new GeoDataTourControl;
     KmlObjectTagHandler::parseIdentifiers(parser, tourControl);
 
     if (parentItem.is<GeoDataPlaylist>()) {

@@ -14,9 +14,7 @@ KmlParser::KmlParser()
 {
 }
 
-KmlParser::~KmlParser()
-{
-}
+KmlParser::~KmlParser() = default;
 
 bool KmlParser::isValidRootElement()
 {

@@ -55,9 +55,7 @@ VerticalPerspectiveProjection::VerticalPerspectiveProjection(VerticalPerspective
     setMaxLat(maxValidLat());
 }
 
-VerticalPerspectiveProjection::~VerticalPerspectiveProjection()
-{
-}
+VerticalPerspectiveProjection::~VerticalPerspectiveProjection() = default;
 
 VerticalPerspectiveProjectionPrivate::VerticalPerspectiveProjectionPrivate(VerticalPerspectiveProjection *parent)
     : AzimuthalProjectionPrivate(parent)

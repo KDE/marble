@@ -13,9 +13,7 @@ FakeWeatherItem::FakeWeatherItem(QObject *parent)
 {
 }
 
-FakeWeatherItem::~FakeWeatherItem()
-{
-}
+FakeWeatherItem::~FakeWeatherItem() = default;
 
 QString FakeWeatherItem::service() const
 {

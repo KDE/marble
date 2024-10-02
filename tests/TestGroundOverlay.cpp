@@ -62,8 +62,8 @@ void TestGroundOverlay::simpleParseTest()
     QCOMPARE(dataDocument->folderList().size(), 1);
     GeoDataFolder *folder = dataDocument->folderList().at(0);
     QCOMPARE(folder->size(), 2);
-    GeoDataGroundOverlay *overlayFirst = dynamic_cast<GeoDataGroundOverlay *>(folder->child(0));
-    GeoDataGroundOverlay *overlaySecond = dynamic_cast<GeoDataGroundOverlay *>(folder->child(1));
+    auto overlayFirst = dynamic_cast<GeoDataGroundOverlay *>(folder->child(0));
+    auto overlaySecond = dynamic_cast<GeoDataGroundOverlay *>(folder->child(1));
     QVERIFY(overlayFirst != nullptr);
     QVERIFY(overlaySecond != nullptr);
 

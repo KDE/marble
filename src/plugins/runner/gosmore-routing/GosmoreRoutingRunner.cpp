@@ -78,7 +78,7 @@ QByteArray GosmoreRunnerPrivate::retrieveWaypoints(const QString &query) const
     gosmore.start("gosmore", QStringList() << m_gosmoreMapFile.absoluteFilePath());
     if (!gosmore.waitForStarted(5000)) {
         mDebug() << "Couldn't start gosmore from the current PATH. Install it to retrieve routing results from gosmore.";
-        return QByteArray();
+        return {};
     }
 
     if (gosmore.waitForFinished(15000)) {
@@ -87,7 +87,7 @@ QByteArray GosmoreRunnerPrivate::retrieveWaypoints(const QString &query) const
         mDebug() << "Couldn't stop gosmore";
     }
 
-    return QByteArray();
+    return {};
 }
 
 GeoDataLineString GosmoreRunnerPrivate::parseGosmoreOutput(const QByteArray &content)
@@ -128,7 +128,7 @@ QList<GeoDataPlacemark *> GosmoreRunnerPrivate::parseGosmoreInstructions(const Q
 
     RoutingInstructions directions = InstructionTransformation::process(m_parser.parse(stream));
     for (int i = 0; i < directions.size(); ++i) {
-        GeoDataPlacemark *placemark = new GeoDataPlacemark(directions[i].instructionText());
+        auto placemark = new GeoDataPlacemark(directions[i].instructionText());
         GeoDataExtendedData extendedData;
         GeoDataData turnType;
         turnType.setName(QStringLiteral("turnType"));
@@ -140,7 +140,7 @@ QList<GeoDataPlacemark *> GosmoreRunnerPrivate::parseGosmoreInstructions(const Q
         extendedData.addValue(roadName);
         placemark->setExtendedData(extendedData);
         Q_ASSERT(!directions[i].points().isEmpty());
-        GeoDataLineString *geometry = new GeoDataLineString;
+        auto geometry = new GeoDataLineString;
         QList<RoutingWaypoint> items = directions[i].points();
         for (int j = 0; j < items.size(); ++j) {
             RoutingPoint point = items[j].point();
@@ -160,8 +160,8 @@ GeoDataDocument *GosmoreRunnerPrivate::createDocument(GeoDataLineString *routeWa
         return nullptr;
     }
 
-    GeoDataDocument *result = new GeoDataDocument();
-    GeoDataPlacemark *routePlacemark = new GeoDataPlacemark;
+    auto result = new GeoDataDocument();
+    auto routePlacemark = new GeoDataPlacemark;
     routePlacemark->setName(QStringLiteral("Route"));
     routePlacemark->setGeometry(routeWaypoints);
     result->append(routePlacemark);
@@ -203,7 +203,7 @@ void GosmoreRunner::retrieveRoute(const RouteRequest *route)
         return;
     }
 
-    GeoDataLineString *wayPoints = new GeoDataLineString;
+    auto wayPoints = new GeoDataLineString;
     QByteArray completeOutput;
 
     for (int i = 0; i < route->size() - 1; ++i) {

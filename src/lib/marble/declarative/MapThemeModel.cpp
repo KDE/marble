@@ -41,7 +41,7 @@ QString MapThemeModel::name(const QString &id) const
             return data(index(i, 0, QModelIndex())).toString();
         }
     }
-    return QString();
+    return {};
 }
 
 int MapThemeModel::indexOf(const QString &id) const

@@ -29,9 +29,7 @@ GeoNamesWeatherService::GeoNamesWeatherService(const MarbleModel *model, QObject
     GeoNamesWeatherService::setupHashes();
 }
 
-GeoNamesWeatherService::~GeoNamesWeatherService()
-{
-}
+GeoNamesWeatherService::~GeoNamesWeatherService() = default;
 
 void GeoNamesWeatherService::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 number)
 {
@@ -161,7 +159,7 @@ AbstractDataPluginItem *GeoNamesWeatherService::parse(const QJsonObject &weather
         id = QLatin1StringView("geonames_") + id;
 
         GeoDataCoordinates coordinates(longitude, latitude, 0.0, GeoDataCoordinates::Degree);
-        GeoNamesWeatherItem *item = new GeoNamesWeatherItem(this);
+        auto item = new GeoNamesWeatherItem(this);
         item->setMarbleWidget(marbleWidget());
         item->setId(id);
         item->setCoordinate(coordinates);

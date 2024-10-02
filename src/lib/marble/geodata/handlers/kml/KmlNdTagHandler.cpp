@@ -39,10 +39,10 @@ GeoNode *KmlndTagHandler::parse(GeoParser &parser) const
      * ...
      */
     if (parser.parentElement().represents(kmlTag_OsmPlacemarkData) && parser.parentElement(2).is<GeoDataPlacemark>()) {
-        GeoDataPlacemark *placemark = parser.parentElement(2).nodeAs<GeoDataPlacemark>();
+        auto placemark = parser.parentElement(2).nodeAs<GeoDataPlacemark>();
         if (auto lineString = geodata_cast<GeoDataLineString>(placemark->geometry())) {
             // Using GeoDataPoint because GeoDataCoordinates is not a GeoNode, so it can't be returned.
-            GeoDataPoint *point = new GeoDataPoint(lineString->at(ndIndex));
+            auto point = new GeoDataPoint(lineString->at(ndIndex));
             return point;
         }
         return nullptr;
@@ -59,10 +59,10 @@ GeoNode *KmlndTagHandler::parse(GeoParser &parser) const
      * ...
      */
     else if (parser.parentElement().represents(kmlTag_OsmPlacemarkData) && parser.parentElement(1).is<GeoDataLinearRing>()) {
-        GeoDataLinearRing *linearRing = parser.parentElement(1).nodeAs<GeoDataLinearRing>();
+        auto linearRing = parser.parentElement(1).nodeAs<GeoDataLinearRing>();
 
         // Using GeoDataPoint because GeoDataCoordinates is not a GeoNode, so it can't be returned.
-        GeoDataPoint *point = new GeoDataPoint(linearRing->at(ndIndex));
+        auto point = new GeoDataPoint(linearRing->at(ndIndex));
         return point;
     }
     return nullptr;

@@ -115,7 +115,7 @@ EditPlacemarkDialog::EditPlacemarkDialog(GeoDataPlacemark *placemark, const QHas
     d->m_header->setIconLink(placemark->style()->iconStyle().iconPath());
     d->m_header->setTargetId(placemark->targetId());
     d->m_initialTargetId = placemark->targetId();
-    MarbleWidget *marbleWidget = dynamic_cast<MarbleWidget *>(parent);
+    auto marbleWidget = dynamic_cast<MarbleWidget *>(parent);
     if (marbleWidget != nullptr) {
         const AngleUnit defaultAngleUnit = marbleWidget->defaultAngleUnit();
         const GeoDataCoordinates::Notation notation = (defaultAngleUnit == DecimalDegree) ? GeoDataCoordinates::Decimal
@@ -152,7 +152,7 @@ EditPlacemarkDialog::EditPlacemarkDialog(GeoDataPlacemark *placemark, const QHas
 
     // Adding the elevation widget tab
     d->m_elevationWidget = new Ui::ElevationWidget;
-    QWidget *elevationTab = new QWidget;
+    auto elevationTab = new QWidget;
     d->m_elevationWidget->setupUi(elevationTab);
     d->tabWidget->addTab(elevationTab, tr("Elevation"));
     qreal altitude = d->m_placemark->coordinate().altitude();

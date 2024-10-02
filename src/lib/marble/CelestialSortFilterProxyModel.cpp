@@ -21,9 +21,7 @@ CelestialSortFilterProxyModel::CelestialSortFilterProxyModel()
     setupDwarfsList();
 }
 
-CelestialSortFilterProxyModel::~CelestialSortFilterProxyModel()
-{
-}
+CelestialSortFilterProxyModel::~CelestialSortFilterProxyModel() = default;
 
 QVariant CelestialSortFilterProxyModel::data(const QModelIndex &index, int role) const
 {

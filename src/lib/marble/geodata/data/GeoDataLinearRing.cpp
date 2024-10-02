@@ -22,9 +22,7 @@ GeoDataLinearRing::GeoDataLinearRing(const GeoDataGeometry &other)
 {
 }
 
-GeoDataLinearRing::~GeoDataLinearRing()
-{
-}
+GeoDataLinearRing::~GeoDataLinearRing() = default;
 
 const char *GeoDataLinearRing::nodeType() const
 {

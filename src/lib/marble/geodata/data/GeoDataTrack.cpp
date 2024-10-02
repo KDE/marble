@@ -59,16 +59,10 @@ GeoDataTrack::GeoDataTrack()
 }
 
 GeoDataTrack::GeoDataTrack(const GeoDataTrack &other)
-    : GeoDataGeometry(other)
-{
-}
 
-GeoDataTrack &GeoDataTrack::operator=(const GeoDataTrack &other)
-{
-    GeoDataGeometry::operator=(other);
+    = default;
 
-    return *this;
-}
+GeoDataTrack &GeoDataTrack::operator=(const GeoDataTrack &other) = default;
 
 const char *GeoDataTrack::nodeType() const
 {
@@ -124,7 +118,7 @@ QDateTime GeoDataTrack::firstWhen() const
     Q_D(const GeoDataTrack);
 
     if (d->m_when.isEmpty()) {
-        return QDateTime();
+        return {};
     }
 
     return d->m_when.first();
@@ -135,7 +129,7 @@ QDateTime GeoDataTrack::lastWhen() const
     Q_D(const GeoDataTrack);
 
     if (d->m_when.isEmpty()) {
-        return QDateTime();
+        return {};
     }
 
     return d->m_when.last();
@@ -158,7 +152,7 @@ GeoDataCoordinates GeoDataTrack::coordinatesAt(const QDateTime &when) const
     Q_D(const GeoDataTrack);
 
     if (d->m_when.isEmpty()) {
-        return GeoDataCoordinates();
+        return {};
     }
 
     if (d->m_when.contains(when)) {
@@ -170,7 +164,7 @@ GeoDataCoordinates GeoDataTrack::coordinatesAt(const QDateTime &when) const
     }
 
     if (!interpolate()) {
-        return GeoDataCoordinates();
+        return {};
     }
 
     typedef QMap<QDateTime, GeoDataCoordinates> PointMap;
@@ -186,12 +180,12 @@ GeoDataCoordinates GeoDataTrack::coordinatesAt(const QDateTime &when) const
     // No tracked point happened before "when"
     if (nextEntry == pointMap.constBegin()) {
         mDebug() << "No tracked point before " << when;
-        return GeoDataCoordinates();
+        return {};
     }
 
     if (nextEntry == pointMap.constEnd()) {
         mDebug() << "No track point after" << when;
-        return GeoDataCoordinates();
+        return {};
     }
 
     QMap<QDateTime, GeoDataCoordinates>::const_iterator previousEntry = nextEntry - 1;

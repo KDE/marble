@@ -30,9 +30,7 @@ GeoDataParser::GeoDataParser(GeoDataSourceType source)
 {
 }
 
-GeoDataParser::~GeoDataParser()
-{
-}
+GeoDataParser::~GeoDataParser() = default;
 
 bool GeoDataParser::isValidRootElement()
 {

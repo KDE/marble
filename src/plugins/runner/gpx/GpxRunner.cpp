@@ -18,9 +18,7 @@ GpxRunner::GpxRunner(QObject *parent)
 {
 }
 
-GpxRunner::~GpxRunner()
-{
-}
+GpxRunner::~GpxRunner() = default;
 
 GeoDataDocument *GpxRunner::parseFile(const QString &fileName, DocumentRole role, QString &error)
 {
@@ -43,7 +41,7 @@ GeoDataDocument *GpxRunner::parseFile(const QString &fileName, DocumentRole role
     }
     GeoDocument *document = parser.releaseDocument();
     Q_ASSERT(document);
-    GeoDataDocument *doc = static_cast<GeoDataDocument *>(document);
+    auto doc = static_cast<GeoDataDocument *>(document);
     doc->setDocumentRole(role);
     doc->setFileName(fileName);
 

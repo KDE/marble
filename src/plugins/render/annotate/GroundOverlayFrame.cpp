@@ -335,7 +335,7 @@ bool GroundOverlayFrame::mouseReleaseEvent(QMouseEvent *event)
 void GroundOverlayFrame::update()
 {
     GeoDataLatLonBox overlayLatLonBox = m_overlay->latLonBox();
-    GeoDataPolygon *poly = dynamic_cast<GeoDataPolygon *>(placemark()->geometry());
+    auto poly = dynamic_cast<GeoDataPolygon *>(placemark()->geometry());
     poly->outerBoundary().clear();
 
     GeoDataCoordinates rotatedCoord;

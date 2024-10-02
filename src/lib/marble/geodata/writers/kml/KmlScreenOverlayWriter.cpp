@@ -26,7 +26,7 @@ bool KmlScreenOverlayWriter::writeMid(const GeoNode *node, GeoWriter &writer) co
 {
     KmlOverlayTagWriter::writeMid(node, writer);
 
-    const GeoDataScreenOverlay *screenOverlay = static_cast<const GeoDataScreenOverlay *>(node);
+    const auto screenOverlay = static_cast<const GeoDataScreenOverlay *>(node);
     writeVec2(kml::kmlTag_overlayXY, screenOverlay->overlayXY(), writer);
     writeVec2(kml::kmlTag_screenXY, screenOverlay->screenXY(), writer);
     writeVec2(kml::kmlTag_rotationXY, screenOverlay->rotationXY(), writer);

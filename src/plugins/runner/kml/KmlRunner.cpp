@@ -21,9 +21,7 @@ KmlRunner::KmlRunner(QObject *parent)
 {
 }
 
-KmlRunner::~KmlRunner()
-{
-}
+KmlRunner::~KmlRunner() = default;
 
 GeoDataDocument *KmlRunner::parseFile(const QString &fileName, DocumentRole role, QString &error)
 {
@@ -71,7 +69,7 @@ GeoDataDocument *KmlRunner::parseFile(const QString &fileName, DocumentRole role
 
     GeoDocument *document = parser.releaseDocument();
     Q_ASSERT(document);
-    GeoDataDocument *doc = static_cast<GeoDataDocument *>(document);
+    auto doc = static_cast<GeoDataDocument *>(document);
     doc->setDocumentRole(role);
     doc->setFileName(fileName);
 

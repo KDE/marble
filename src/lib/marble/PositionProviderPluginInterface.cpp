@@ -22,7 +22,7 @@ QString PositionProviderPluginInterface::error() const
         return QObject::tr("Unknown error");
     }
 
-    return QString();
+    return {};
 }
 
 } // namespace Marble

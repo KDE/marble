@@ -20,7 +20,7 @@ static GeoTagWriterRegistrar s_writerSimpleData(GeoTagWriter::QualifiedName(GeoD
 
 bool KmlSimpleDataTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataSimpleData *simpleData = static_cast<const GeoDataSimpleData *>(node);
+    const auto simpleData = static_cast<const GeoDataSimpleData *>(node);
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_SimpleData));
     writer.writeAttribute("name", simpleData->name());
     writer.writeCharacters(simpleData->data());

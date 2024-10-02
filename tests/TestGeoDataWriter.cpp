@@ -57,7 +57,7 @@ void TestGeoDataWriter::initTestCase()
         QVERIFY(file.exists());
 
         // Create parsers
-        GeoDataParser *parser = new GeoDataParser(GeoData_KML);
+        auto parser = new GeoDataParser(GeoData_KML);
         QSharedPointer<GeoDataParser> parserPointer(parser);
 
         // Open the files and verify
@@ -195,14 +195,14 @@ void TestGeoDataWriter::saveAndCompareEquality()
     // FIXME: a better way to do this?
     writer.setDocumentType(kml::kmlTag_nameSpaceOgc22);
 
-    GeoDataDocument *initialDoc = dynamic_cast<GeoDataDocument *>(parser->activeDocument());
+    auto initialDoc = dynamic_cast<GeoDataDocument *>(parser->activeDocument());
     QVERIFY(writer.write(&buffer, initialDoc));
 
     buffer.reset();
     GeoDataParser otherParser(GeoData_KML);
     QVERIFY(otherParser.read(&buffer));
 
-    GeoDataDocument *otherDoc = dynamic_cast<GeoDataDocument *>(otherParser.activeDocument());
+    auto otherDoc = dynamic_cast<GeoDataDocument *>(otherParser.activeDocument());
     QVERIFY(*initialDoc == *otherDoc);
 }
 

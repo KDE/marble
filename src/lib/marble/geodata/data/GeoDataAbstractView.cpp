@@ -65,13 +65,13 @@ bool GeoDataAbstractView::operator==(const GeoDataAbstractView &other) const
     }
 
     if (nodeType() == GeoDataTypes::GeoDataCameraType) {
-        const GeoDataCamera &thisCam = static_cast<const GeoDataCamera &>(*this);
-        const GeoDataCamera &otherCam = static_cast<const GeoDataCamera &>(other);
+        const auto &thisCam = static_cast<const GeoDataCamera &>(*this);
+        const auto &otherCam = static_cast<const GeoDataCamera &>(other);
 
         return thisCam == otherCam;
     } else if (nodeType() == GeoDataTypes::GeoDataLookAtType) {
-        const GeoDataLookAt &thisLookAt = static_cast<const GeoDataLookAt &>(*this);
-        const GeoDataLookAt &otherLookAt = static_cast<const GeoDataLookAt &>(other);
+        const auto &thisLookAt = static_cast<const GeoDataLookAt &>(*this);
+        const auto &otherLookAt = static_cast<const GeoDataLookAt &>(other);
 
         return thisLookAt == otherLookAt;
     }
@@ -82,17 +82,17 @@ bool GeoDataAbstractView::operator==(const GeoDataAbstractView &other) const
 GeoDataCoordinates GeoDataAbstractView::coordinates() const
 {
     if (nodeType() == GeoDataTypes::GeoDataLookAtType) {
-        const GeoDataLookAt *lookAt = static_cast<const GeoDataLookAt *>(this);
+        const auto lookAt = static_cast<const GeoDataLookAt *>(this);
         if (lookAt) {
             return lookAt->coordinates();
         }
     } else if (nodeType() == GeoDataTypes::GeoDataCameraType) {
-        const GeoDataCamera *camera = static_cast<const GeoDataCamera *>(this);
+        const auto camera = static_cast<const GeoDataCamera *>(this);
         if (camera) {
             return camera->coordinates();
         }
     }
-    return GeoDataCoordinates();
+    return {};
 }
 
 bool GeoDataAbstractView::equals(const GeoDataAbstractView &other) const

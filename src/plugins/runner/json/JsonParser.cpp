@@ -171,7 +171,7 @@ bool JsonParser::parseGeoJsonTopLevel(const QJsonObject &jsonObject)
 
         // Create the placemark for this feature object with appropriate geometry
 
-        GeoDataPlacemark *placemark = new GeoDataPlacemark();
+        auto placemark = new GeoDataPlacemark();
 
         if (geometryList.length() < 1) {
             // No geometries available to add to the placemark
@@ -184,7 +184,7 @@ bool JsonParser::parseGeoJsonTopLevel(const QJsonObject &jsonObject)
         } else {
             // Multiple geometries require a GeoDataMultiGeometry class
 
-            GeoDataMultiGeometry *geom = new GeoDataMultiGeometry();
+            auto geom = new GeoDataMultiGeometry();
             for (int i = 0; i < geometryList.length(); ++i) {
                 geom->append(geometryList[i]);
             }
@@ -254,7 +254,7 @@ bool JsonParser::parseGeoJsonTopLevel(const QJsonObject &jsonObject)
                 // Even though the Simplestyle spec allows colors to omit the leading "#", this
                 // implementation assumes it is always present, as this then allows named colors
                 // understood by QColor as an extension
-                QColor color = QColor(propertyValue);
+                auto color = QColor(propertyValue);
                 if (color.isValid()) {
                     iconStyle.setColor(color); // Currently ignored by Marble
                 } else {
@@ -262,7 +262,7 @@ bool JsonParser::parseGeoJsonTopLevel(const QJsonObject &jsonObject)
                 }
 
             } else if (propertyKey == QStringLiteral("stroke")) {
-                QColor color = QColor(propertyValue); // Assume leading "#" is present
+                auto color = QColor(propertyValue); // Assume leading "#" is present
                 if (color.isValid()) {
                     color.setAlpha(lineStyle.color().alpha());
                     lineStyle.setColor(color);
@@ -291,7 +291,7 @@ bool JsonParser::parseGeoJsonTopLevel(const QJsonObject &jsonObject)
                 }
 
             } else if (propertyKey == QStringLiteral("fill")) {
-                QColor color = QColor(propertyValue); // Assume leading "#" is present
+                auto color = QColor(propertyValue); // Assume leading "#" is present
                 if (color.isValid()) {
                     color.setAlpha(polyStyle.color().alpha());
                     polyStyle.setColor(color);
@@ -368,7 +368,7 @@ bool JsonParser::parseGeoJsonSubLevel(const QJsonObject &jsonObject, QList<GeoDa
     if (jsonObjectType == QStringLiteral("Point")) {
         // A Point object has a single GeoJSON position: an array of at least two values
 
-        GeoDataPoint *geom = new GeoDataPoint();
+        auto geom = new GeoDataPoint();
         const qreal lon = coordinateArray.at(0).toDouble();
         const qreal lat = coordinateArray.at(1).toDouble();
         const qreal alt = coordinateArray.at(2).toDouble(); // If missing, uses 0 as the default
@@ -385,7 +385,7 @@ bool JsonParser::parseGeoJsonSubLevel(const QJsonObject &jsonObject, QList<GeoDa
         for (int positionIndex = 0; positionIndex < coordinateArray.size(); ++positionIndex) {
             const QJsonArray positionArray = coordinateArray[positionIndex].toArray();
 
-            GeoDataPoint *geom = new GeoDataPoint();
+            auto geom = new GeoDataPoint();
             const qreal lon = positionArray.at(0).toDouble();
             const qreal lat = positionArray.at(1).toDouble();
             const qreal alt = positionArray.at(2).toDouble();
@@ -400,7 +400,7 @@ bool JsonParser::parseGeoJsonSubLevel(const QJsonObject &jsonObject, QList<GeoDa
     } else if (jsonObjectType == QStringLiteral("LineString")) {
         // A LineString object has an array of GeoJSON positions (ie, a two-level array)
 
-        GeoDataLineString *geom = new GeoDataLineString(RespectLatitudeCircle | Tessellate);
+        auto geom = new GeoDataLineString(RespectLatitudeCircle | Tessellate);
 
         for (int positionIndex = 0; positionIndex < coordinateArray.size(); ++positionIndex) {
             const QJsonArray positionArray = coordinateArray[positionIndex].toArray();
@@ -421,7 +421,7 @@ bool JsonParser::parseGeoJsonSubLevel(const QJsonObject &jsonObject, QList<GeoDa
         for (int lineStringIndex = 0; lineStringIndex < coordinateArray.size(); ++lineStringIndex) {
             const QJsonArray lineStringArray = coordinateArray[lineStringIndex].toArray();
 
-            GeoDataLineString *geom = new GeoDataLineString(RespectLatitudeCircle | Tessellate);
+            auto geom = new GeoDataLineString(RespectLatitudeCircle | Tessellate);
 
             for (int positionIndex = 0; positionIndex < lineStringArray.size(); ++positionIndex) {
                 const QJsonArray positionArray = lineStringArray[positionIndex].toArray();
@@ -442,7 +442,7 @@ bool JsonParser::parseGeoJsonSubLevel(const QJsonObject &jsonObject, QList<GeoDa
         // top-level Polygon coordinates array is the outer boundary, following arrays are inner
         // holes (if any)
 
-        GeoDataPolygon *geom = new GeoDataPolygon(RespectLatitudeCircle | Tessellate);
+        auto geom = new GeoDataPolygon(RespectLatitudeCircle | Tessellate);
 
         for (int ringIndex = 0; ringIndex < coordinateArray.size(); ++ringIndex) {
             const QJsonArray ringArray = coordinateArray[ringIndex].toArray();
@@ -476,7 +476,7 @@ bool JsonParser::parseGeoJsonSubLevel(const QJsonObject &jsonObject, QList<GeoDa
         for (int polygonIndex = 0; polygonIndex < coordinateArray.size(); ++polygonIndex) {
             const QJsonArray polygonArray = coordinateArray[polygonIndex].toArray();
 
-            GeoDataPolygon *geom = new GeoDataPolygon(RespectLatitudeCircle | Tessellate);
+            auto geom = new GeoDataPolygon(RespectLatitudeCircle | Tessellate);
 
             for (int ringIndex = 0; ringIndex < polygonArray.size(); ++ringIndex) {
                 const QJsonArray ringArray = polygonArray[ringIndex].toArray();

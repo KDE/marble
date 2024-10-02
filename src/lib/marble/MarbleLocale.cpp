@@ -20,9 +20,7 @@ MarbleLocalePrivate::MarbleLocalePrivate()
 {
 }
 
-MarbleLocalePrivate::~MarbleLocalePrivate()
-{
-}
+MarbleLocalePrivate::~MarbleLocalePrivate() = default;
 
 MarbleLocale::MarbleLocale()
     : d(new MarbleLocalePrivate)

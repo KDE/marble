@@ -33,7 +33,7 @@ CloudRoutesDialog::CloudRoutesDialog(CloudRouteModel *model, QWidget *parent)
 {
     d->setupUi(this);
 
-    RouteItemDelegate *delegate = new RouteItemDelegate(d->listView, d->m_model);
+    auto delegate = new RouteItemDelegate(d->listView, d->m_model);
     connect(delegate, SIGNAL(downloadButtonClicked(QString)), this, SIGNAL(downloadButtonClicked(QString)));
     connect(delegate, SIGNAL(openButtonClicked(QString)), this, SIGNAL(openButtonClicked(QString)));
     connect(delegate, SIGNAL(deleteButtonClicked(QString)), this, SIGNAL(deleteButtonClicked(QString)));

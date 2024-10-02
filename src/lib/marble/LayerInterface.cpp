@@ -27,7 +27,7 @@ RenderState LayerInterface::renderState() const
 
 QString LayerInterface::runtimeTrace() const
 {
-    return QString();
+    return {};
 }
 
 } // namespace Marble

@@ -24,7 +24,7 @@ GeoNode *KmlrefreshVisibilityTagHandler::parse(GeoParser &parser) const
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.is<GeoDataNetworkLink>()) {
         QString content = parser.readElementText().trimmed();
-        GeoDataNetworkLink *networkLink = parentItem.nodeAs<GeoDataNetworkLink>();
+        auto networkLink = parentItem.nodeAs<GeoDataNetworkLink>();
         networkLink->setRefreshVisibility(content == QLatin1StringView("1"));
     }
 

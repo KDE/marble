@@ -31,9 +31,7 @@ GeoDataOverlay::GeoDataOverlay(const GeoDataOverlay &other, GeoDataOverlayPrivat
 {
 }
 
-GeoDataOverlay::~GeoDataOverlay()
-{
-}
+GeoDataOverlay::~GeoDataOverlay() = default;
 
 GeoDataOverlay &GeoDataOverlay::operator=(const GeoDataOverlay &other)
 {

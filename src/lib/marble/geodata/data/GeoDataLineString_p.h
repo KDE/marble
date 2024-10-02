@@ -51,7 +51,7 @@ public:
 
     GeoDataGeometryPrivate *copy() const override
     {
-        GeoDataLineStringPrivate *copy = new GeoDataLineStringPrivate;
+        auto *copy = new GeoDataLineStringPrivate;
         *copy = *this;
         return copy;
     }

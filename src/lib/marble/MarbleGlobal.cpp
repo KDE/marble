@@ -18,9 +18,7 @@ MarbleGlobalPrivate::MarbleGlobalPrivate()
 #endif
 }
 
-MarbleGlobalPrivate::~MarbleGlobalPrivate()
-{
-}
+MarbleGlobalPrivate::~MarbleGlobalPrivate() = default;
 
 MarbleGlobal::MarbleGlobal()
     : d(new MarbleGlobalPrivate)

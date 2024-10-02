@@ -37,7 +37,7 @@ GeoDataPlacemark *OsmNode::create() const
         return nullptr;
     }
 
-    GeoDataPlacemark *placemark = new GeoDataPlacemark;
+    auto placemark = new GeoDataPlacemark;
     placemark->setOsmData(m_osmData);
     auto coordinates = m_coordinates;
     coordinates.setAltitude(m_osmData.tagValue("ele").toDouble());

@@ -152,7 +152,7 @@ void OsmNominatimRunner::handleResult(QNetworkReply *reply)
 
         if (!lon.isEmpty() && !lat.isEmpty() && !desc.isEmpty()) {
             QString placemarkName;
-            GeoDataPlacemark *placemark = new GeoDataPlacemark;
+            auto placemark = new GeoDataPlacemark;
             // try to provide 2 fields
             if (!name.isEmpty()) {
                 placemarkName = name;

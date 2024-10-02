@@ -236,7 +236,7 @@ bool MarbleGraphicsItem::eventFilter(QObject *object, QEvent *e)
     }
 
     Q_D(const MarbleGraphicsItem);
-    QMouseEvent *event = static_cast<QMouseEvent *>(e);
+    auto event = static_cast<QMouseEvent *>(e);
 
     if (!d->m_children.isEmpty()) {
         const QList<QPointF> absolutePositions = d->absolutePositions();

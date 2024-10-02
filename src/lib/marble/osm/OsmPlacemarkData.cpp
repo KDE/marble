@@ -26,9 +26,7 @@ OsmPlacemarkData::OsmPlacemarkData()
     // nothing to do
 }
 
-OsmPlacemarkData::~OsmPlacemarkData()
-{
-}
+OsmPlacemarkData::~OsmPlacemarkData() = default;
 
 OsmPlacemarkDataHashRef *OsmPlacemarkData::hRef() const
 {
@@ -308,9 +306,7 @@ const char *OsmPlacemarkData::nodeType() const
 
 // ---------------------------------------------------------------------------------------------------------
 
-OsmPlacemarkDataHashRef::OsmPlacemarkDataHashRef()
-{
-}
+OsmPlacemarkDataHashRef::OsmPlacemarkDataHashRef() = default;
 
 QHash<GeoDataCoordinates, OsmPlacemarkData> &OsmPlacemarkDataHashRef::nodeReferences()
 {

@@ -36,7 +36,7 @@ ParseRunnerPlugin::~ParseRunnerPlugin()
 
 QIcon ParseRunnerPlugin::icon() const
 {
-    return QIcon();
+    return {};
 }
 
 }

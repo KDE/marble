@@ -29,9 +29,7 @@ GeoDataMultiGeometry::GeoDataMultiGeometry(const GeoDataGeometry &other)
 {
 }
 
-GeoDataMultiGeometry::~GeoDataMultiGeometry()
-{
-}
+GeoDataMultiGeometry::~GeoDataMultiGeometry() = default;
 
 const char *GeoDataMultiGeometry::nodeType() const
 {
@@ -280,27 +278,27 @@ void GeoDataMultiGeometry::unpack(QDataStream &stream)
         case InvalidGeometryId:
             break;
         case GeoDataPointId: {
-            GeoDataPoint *point = new GeoDataPoint;
+            auto point = new GeoDataPoint;
             point->unpack(stream);
             d->m_vector.append(point);
         } break;
         case GeoDataLineStringId: {
-            GeoDataLineString *lineString = new GeoDataLineString;
+            auto lineString = new GeoDataLineString;
             lineString->unpack(stream);
             d->m_vector.append(lineString);
         } break;
         case GeoDataLinearRingId: {
-            GeoDataLinearRing *linearRing = new GeoDataLinearRing;
+            auto linearRing = new GeoDataLinearRing;
             linearRing->unpack(stream);
             d->m_vector.append(linearRing);
         } break;
         case GeoDataPolygonId: {
-            GeoDataPolygon *polygon = new GeoDataPolygon;
+            auto polygon = new GeoDataPolygon;
             polygon->unpack(stream);
             d->m_vector.append(polygon);
         } break;
         case GeoDataMultiGeometryId: {
-            GeoDataMultiGeometry *multiGeometry = new GeoDataMultiGeometry;
+            auto multiGeometry = new GeoDataMultiGeometry;
             multiGeometry->unpack(stream);
             d->m_vector.append(multiGeometry);
         } break;

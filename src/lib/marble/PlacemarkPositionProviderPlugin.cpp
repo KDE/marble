@@ -65,7 +65,7 @@ QList<PluginAuthor> PlacemarkPositionProviderPlugin::pluginAuthors() const
 
 QIcon PlacemarkPositionProviderPlugin::icon() const
 {
-    return QIcon();
+    return {};
 }
 
 void PlacemarkPositionProviderPlugin::initialize()

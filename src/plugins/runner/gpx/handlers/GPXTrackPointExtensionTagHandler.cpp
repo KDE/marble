@@ -26,7 +26,7 @@ GeoNode *GPXTrackPointExtensionTagHandler::parse(GeoParser &parser) const
     GeoStackItem parentItem = parser.parentElement();
 
     if (parentItem.is<GeoDataTrack>()) {
-        GeoDataTrack *track = parentItem.nodeAs<GeoDataTrack>();
+        auto track = parentItem.nodeAs<GeoDataTrack>();
         return track;
     }
 

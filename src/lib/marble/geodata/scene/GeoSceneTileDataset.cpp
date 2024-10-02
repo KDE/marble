@@ -318,7 +318,7 @@ QList<const DownloadPolicy *> GeoSceneTileDataset::downloadPolicies() const
 
 void GeoSceneTileDataset::addDownloadPolicy(const DownloadUsage usage, const int maximumConnections)
 {
-    DownloadPolicy *const policy = new DownloadPolicy(DownloadPolicyKey(hostNames(), usage));
+    auto const policy = new DownloadPolicy(DownloadPolicyKey(hostNames(), usage));
     policy->setMaximumConnections(maximumConnections);
     m_downloadPolicies.append(policy);
     mDebug() << "added download policy" << hostNames() << usage << maximumConnections;

@@ -38,7 +38,7 @@ void RouteItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opt
     }
 
     QRect const iconRect = position(Preview, option);
-    QIcon const icon = index.data(Qt::DecorationRole).value<QIcon>();
+    auto const icon = index.data(Qt::DecorationRole).value<QIcon>();
     painter->drawPixmap(iconRect, icon.pixmap(iconRect.size()));
 
     QTextDocument document;
@@ -114,11 +114,11 @@ QSize RouteItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QMod
         doc.setDefaultFont(option.font);
         doc.setTextWidth(qMax(128, m_view->contentsRect().width() - m_previewSize - buttonWidth(option)));
         doc.setHtml(text(index));
-        return QSize(qMax(256, qRound(m_previewSize + buttonWidth(option) + doc.size().width() + m_margin * 2)),
-                     qMax(m_previewSize + m_margin * 2, qRound(doc.size().height())));
+        return {qMax(256, qRound(m_previewSize + buttonWidth(option) + doc.size().width() + m_margin * 2)),
+                qMax(m_previewSize + m_margin * 2, qRound(doc.size().height()))};
     }
 
-    return QSize();
+    return {};
 }
 
 bool RouteItemDelegate::editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index)
@@ -126,7 +126,7 @@ bool RouteItemDelegate::editorEvent(QEvent *event, QAbstractItemModel *model, co
     Q_UNUSED(model);
 
     if ((event->type() == QEvent::MouseButtonRelease)) {
-        QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
+        auto mouseEvent = static_cast<QMouseEvent *>(event);
         QPoint pos = mouseEvent->pos();
 
         bool cached = index.data(CloudRouteModel::IsCached).toBool();
@@ -285,7 +285,7 @@ QRect RouteItemDelegate::position(Element element, const QStyleOptionViewItem &o
     }
     }
 
-    return QRect();
+    return {};
 }
 
 }

@@ -89,7 +89,7 @@ void SatellitesModel::updateVisibility()
     beginUpdateItems();
 
     for (TrackerPluginItem *obj : items()) {
-        SatellitesMSCItem *oItem = dynamic_cast<SatellitesMSCItem *>(obj);
+        auto oItem = dynamic_cast<SatellitesMSCItem *>(obj);
         if (oItem != nullptr) {
             bool enabled = ((oItem->relatedBody().toLower() == m_lcPlanet) && (m_enabledIds.contains(oItem->id())));
             oItem->setEnabled(enabled);
@@ -99,7 +99,7 @@ void SatellitesModel::updateVisibility()
             }
         }
 
-        SatellitesTLEItem *eItem = dynamic_cast<SatellitesTLEItem *>(obj);
+        auto eItem = dynamic_cast<SatellitesTLEItem *>(obj);
         if (eItem != nullptr) {
             // TLE satellites are always earth satellites
             bool enabled = (m_lcPlanet == QLatin1StringView("earth"));
@@ -163,7 +163,7 @@ void SatellitesModel::parseCatalog(const QString &id, const QByteArray &data)
 
         mDebug() << "Loading" << category << name;
 
-        PlanetarySats *planSat = new PlanetarySats();
+        auto planSat = new PlanetarySats();
         planSat->setPlanet(cbody);
 
         planSat->setStateVector(elms[7].toFloat() - 2400000.5,
@@ -184,7 +184,7 @@ void SatellitesModel::parseCatalog(const QString &id, const QByteArray &data)
             missionEnd = QDateTime::fromSecsSinceEpoch(elms[4].toUInt());
         }
 
-        SatellitesMSCItem *item = new SatellitesMSCItem(name, category, body, id, missionStart, missionEnd, index++, planSat, m_clock);
+        auto item = new SatellitesMSCItem(name, category, body, id, missionStart, missionEnd, index++, planSat, m_clock);
         GeoDataStyle::Ptr style(new GeoDataStyle(*item->placemark()->style()));
         style->lineStyle().setPenStyle(Qt::SolidLine);
         style->lineStyle().setColor(nextColor());
@@ -240,7 +240,7 @@ void SatellitesModel::parseTLE(const QString &id, const QByteArray &data)
             return;
         }
 
-        SatellitesTLEItem *item = new SatellitesTLEItem(satelliteName, satrec, m_clock);
+        auto item = new SatellitesTLEItem(satelliteName, satrec, m_clock);
         GeoDataStyle::Ptr style(new GeoDataStyle(*item->placemark()->style()));
         style->lineStyle().setPenStyle(Qt::SolidLine);
         style->lineStyle().setColor(nextColor());

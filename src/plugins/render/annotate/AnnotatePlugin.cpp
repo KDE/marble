@@ -420,29 +420,29 @@ void AnnotatePlugin::openAnnotationFile(const QString &filename)
     const auto features = document->featureList();
     for (GeoDataFeature *feature : features) {
         if (const GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(feature)) {
-            GeoDataPlacemark *newPlacemark = new GeoDataPlacemark(*placemark);
+            auto newPlacemark = new GeoDataPlacemark(*placemark);
 
             if (geodata_cast<GeoDataPoint>(placemark->geometry())) {
-                PlacemarkTextAnnotation *placemark = new PlacemarkTextAnnotation(newPlacemark);
+                auto placemark = new PlacemarkTextAnnotation(newPlacemark);
                 m_graphicsItems.append(placemark);
             } else if (geodata_cast<GeoDataPolygon>(placemark->geometry())) {
                 newPlacemark->setParent(m_annotationDocument);
                 if (!placemark->styleUrl().isEmpty()) {
                     newPlacemark->setStyleUrl(placemark->styleUrl());
                 }
-                AreaAnnotation *polygonAnnotation = new AreaAnnotation(newPlacemark);
+                auto polygonAnnotation = new AreaAnnotation(newPlacemark);
                 m_graphicsItems.append(polygonAnnotation);
             } else if (geodata_cast<GeoDataLineString>(placemark->geometry())) {
                 newPlacemark->setParent(m_annotationDocument);
                 if (!placemark->styleUrl().isEmpty()) {
                     newPlacemark->setStyleUrl(placemark->styleUrl());
                 }
-                PolylineAnnotation *polylineAnnotation = new PolylineAnnotation(newPlacemark);
+                auto polylineAnnotation = new PolylineAnnotation(newPlacemark);
                 m_graphicsItems.append(polylineAnnotation);
             }
             m_marbleWidget->model()->treeModel()->addFeature(m_annotationDocument, newPlacemark);
         } else if (const GeoDataGroundOverlay *overlay = geodata_cast<GeoDataGroundOverlay>(feature)) {
-            GeoDataGroundOverlay *newOverlay = new GeoDataGroundOverlay(*overlay);
+            auto newOverlay = new GeoDataGroundOverlay(*overlay);
             m_marbleWidget->model()->treeModel()->addFeature(m_annotationDocument, newOverlay);
             displayOverlayFrame(newOverlay);
         }
@@ -456,7 +456,7 @@ void AnnotatePlugin::openAnnotationFile(const QString &filename)
 bool AnnotatePlugin::eventFilter(QObject *watched, QEvent *event)
 {
     if (!m_widgetInitialized) {
-        MarbleWidget *marbleWidget = qobject_cast<MarbleWidget *>(watched);
+        auto marbleWidget = qobject_cast<MarbleWidget *>(watched);
 
         if (marbleWidget) {
             m_marbleWidget = marbleWidget;
@@ -488,7 +488,7 @@ bool AnnotatePlugin::eventFilter(QObject *watched, QEvent *event)
 
     // Handle key press events.
     if (event->type() == QEvent::KeyPress || event->type() == QEvent::KeyRelease) {
-        QKeyEvent *const keyEvent = static_cast<QKeyEvent *>(event);
+        auto const keyEvent = static_cast<QKeyEvent *>(event);
         Q_ASSERT(keyEvent);
 
         if (m_focusItem
@@ -529,7 +529,7 @@ bool AnnotatePlugin::eventFilter(QObject *watched, QEvent *event)
     }
 
     // Handle mouse events.
-    QMouseEvent *const mouseEvent = dynamic_cast<QMouseEvent *>(event);
+    auto const mouseEvent = dynamic_cast<QMouseEvent *>(event);
     Q_ASSERT(mouseEvent);
 
     // Get the geocoordinates from mouse pos screen coordinates.
@@ -625,7 +625,7 @@ bool AnnotatePlugin::handleDrawingPolygon(QMouseEvent *mouseEvent)
         return true;
     } else if (mouseEvent->button() == Qt::LeftButton && mouseEvent->type() == QEvent::MouseButtonPress) {
         m_marbleWidget->model()->treeModel()->removeFeature(m_polygonPlacemark);
-        GeoDataPolygon *poly = dynamic_cast<GeoDataPolygon *>(m_polygonPlacemark->geometry());
+        auto poly = dynamic_cast<GeoDataPolygon *>(m_polygonPlacemark->geometry());
         poly->outerBoundary().append(coords);
         m_marbleWidget->model()->treeModel()->addFeature(m_annotationDocument, m_polygonPlacemark);
         Q_EMIT nodeAdded(coords);
@@ -648,7 +648,7 @@ bool AnnotatePlugin::handleDrawingPolyline(QMouseEvent *mouseEvent)
         return true;
     } else if (mouseEvent->button() == Qt::LeftButton && mouseEvent->type() == QEvent::MouseButtonPress) {
         m_marbleWidget->model()->treeModel()->removeFeature(m_polylinePlacemark);
-        GeoDataLineString *line = dynamic_cast<GeoDataLineString *>(m_polylinePlacemark->geometry());
+        auto line = dynamic_cast<GeoDataLineString *>(m_polylinePlacemark->geometry());
         line->append(coords);
         m_marbleWidget->model()->treeModel()->addFeature(m_annotationDocument, m_polylinePlacemark);
         Q_EMIT nodeAdded(coords);
@@ -731,7 +731,7 @@ void AnnotatePlugin::handleSuccessfulReleaseEvent(QMouseEvent *mouseEvent, Scene
 void AnnotatePlugin::handleRequests(QMouseEvent *mouseEvent, SceneGraphicsItem *item)
 {
     if (item->graphicType() == SceneGraphicsTypes::SceneGraphicAreaAnnotation) {
-        AreaAnnotation *const area = static_cast<AreaAnnotation *>(item);
+        auto const area = static_cast<AreaAnnotation *>(item);
 
         if (area->request() == SceneGraphicsItem::ShowPolygonRmbMenu) {
             showPolygonRmbMenu(mouseEvent->pos().x(), mouseEvent->pos().y());
@@ -770,7 +770,7 @@ void AnnotatePlugin::handleRequests(QMouseEvent *mouseEvent, SceneGraphicsItem *
             m_marbleWidget->setCursor(Qt::SizeAllCursor);
         }
     } else if (item->graphicType() == SceneGraphicsTypes::SceneGraphicPolylineAnnotation) {
-        PolylineAnnotation *const polyline = static_cast<PolylineAnnotation *>(item);
+        auto const polyline = static_cast<PolylineAnnotation *>(item);
 
         if (polyline->request() == SceneGraphicsItem::ShowPolylineRmbMenu) {
             showPolylineRmbMenu(mouseEvent->x(), mouseEvent->y());
@@ -793,7 +793,7 @@ void AnnotatePlugin::handleRequests(QMouseEvent *mouseEvent, SceneGraphicsItem *
             m_marbleWidget->setCursor(Qt::SizeAllCursor);
         }
     } else if (item->graphicType() == SceneGraphicsTypes::SceneGraphicTextAnnotation) {
-        PlacemarkTextAnnotation *const textAnnotation = static_cast<PlacemarkTextAnnotation *>(item);
+        auto const textAnnotation = static_cast<PlacemarkTextAnnotation *>(item);
 
         if (textAnnotation->request() == SceneGraphicsItem::ShowPlacemarkRmbMenu) {
             showTextAnnotationRmbMenu(mouseEvent->x(), mouseEvent->y());
@@ -801,7 +801,7 @@ void AnnotatePlugin::handleRequests(QMouseEvent *mouseEvent, SceneGraphicsItem *
             m_marbleWidget->setCursor(Qt::SizeAllCursor);
         }
     } else if (item->graphicType() == SceneGraphicsTypes::SceneGraphicGroundOverlay) {
-        GroundOverlayFrame *const groundOverlay = static_cast<GroundOverlayFrame *>(item);
+        auto const groundOverlay = static_cast<GroundOverlayFrame *>(item);
 
         if (groundOverlay->request() == SceneGraphicsItem::ChangeCursorOverlayVerticalHover) {
             m_marbleWidget->setCursor(Qt::SizeVerCursor);
@@ -857,60 +857,60 @@ void AnnotatePlugin::setupActions(MarbleWidget *widget)
         return;
     }
 
-    QActionGroup *group = new QActionGroup(nullptr);
+    auto group = new QActionGroup(nullptr);
     group->setExclusive(true);
 
-    QAction *selectItem = new QAction(QIcon(QStringLiteral(":/icons/edit-select.png")), tr("Select Item"), this);
+    auto selectItem = new QAction(QIcon(QStringLiteral(":/icons/edit-select.png")), tr("Select Item"), this);
     selectItem->setCheckable(true);
     selectItem->setChecked(true);
 
-    QAction *drawPolygon = new QAction(QIcon(QStringLiteral(":/icons/draw-polygon.png")), tr("Add Polygon"), this);
+    auto drawPolygon = new QAction(QIcon(QStringLiteral(":/icons/draw-polygon.png")), tr("Add Polygon"), this);
     connect(drawPolygon, SIGNAL(triggered()), this, SLOT(addPolygon()));
 
-    QAction *addHole = new QAction(QIcon(QStringLiteral(":/icons/polygon-draw-hole.png")), tr("Add Polygon Hole"), this);
+    auto addHole = new QAction(QIcon(QStringLiteral(":/icons/polygon-draw-hole.png")), tr("Add Polygon Hole"), this);
     addHole->setCheckable(true);
     addHole->setEnabled(false);
     connect(addHole, SIGNAL(toggled(bool)), this, SLOT(setAddingPolygonHole(bool)));
 
-    QAction *addNodes = new QAction(QIcon(QStringLiteral(":/icons/polygon-add-nodes.png")), tr("Add Nodes"), this);
+    auto addNodes = new QAction(QIcon(QStringLiteral(":/icons/polygon-add-nodes.png")), tr("Add Nodes"), this);
     addNodes->setCheckable(true);
     addNodes->setEnabled(false);
     connect(addNodes, SIGNAL(toggled(bool)), this, SLOT(setAddingNodes(bool)));
 
-    QAction *addTextAnnotation = new QAction(QIcon(QStringLiteral(":/icons/add-placemark.png")), tr("Add Placemark"), this);
+    auto addTextAnnotation = new QAction(QIcon(QStringLiteral(":/icons/add-placemark.png")), tr("Add Placemark"), this);
     connect(addTextAnnotation, SIGNAL(triggered()), this, SLOT(addTextAnnotation()));
 
-    QAction *addPath = new QAction(QIcon(QStringLiteral(":/icons/draw-path.png")), tr("Add Path"), this);
+    auto addPath = new QAction(QIcon(QStringLiteral(":/icons/draw-path.png")), tr("Add Path"), this);
     connect(addPath, SIGNAL(triggered()), this, SLOT(addPolyline()));
 
-    QAction *addOverlay = new QAction(QIcon(QStringLiteral(":/icons/draw-overlay.png")), tr("Add Ground Overlay"), this);
+    auto addOverlay = new QAction(QIcon(QStringLiteral(":/icons/draw-overlay.png")), tr("Add Ground Overlay"), this);
     connect(addOverlay, SIGNAL(triggered()), this, SLOT(addOverlay()));
 
-    QAction *removeItem = new QAction(QIcon(QStringLiteral(":/icons/edit-delete-shred.png")), tr("Remove Item"), this);
+    auto removeItem = new QAction(QIcon(QStringLiteral(":/icons/edit-delete-shred.png")), tr("Remove Item"), this);
     removeItem->setEnabled(false);
     connect(removeItem, SIGNAL(triggered()), this, SLOT(askToRemoveFocusItem()));
 
-    QAction *loadAnnotationFile = new QAction(QIcon(QStringLiteral(":/icons/open-for-editing.png")), tr("Load Annotation File"), this);
+    auto loadAnnotationFile = new QAction(QIcon(QStringLiteral(":/icons/open-for-editing.png")), tr("Load Annotation File"), this);
     connect(loadAnnotationFile, SIGNAL(triggered()), this, SLOT(loadAnnotationFile()));
 
-    QAction *saveAnnotationFile = new QAction(QIcon(QStringLiteral(":/icons/document-save-as.png")), tr("Save Annotation File"), this);
+    auto saveAnnotationFile = new QAction(QIcon(QStringLiteral(":/icons/document-save-as.png")), tr("Save Annotation File"), this);
     connect(saveAnnotationFile, SIGNAL(triggered()), this, SLOT(saveAnnotationFile()));
 
-    QAction *clearAnnotations = new QAction(QIcon(QStringLiteral(":/icons/remove.png")), tr("Clear all Annotations"), this);
-    QAction *downloadOsm = new QAction(QIcon(":/icons/download.png"), tr("Download OpenStreetMap Data"), this);
+    auto clearAnnotations = new QAction(QIcon(QStringLiteral(":/icons/remove.png")), tr("Clear all Annotations"), this);
+    auto downloadOsm = new QAction(QIcon(":/icons/download.png"), tr("Download OpenStreetMap Data"), this);
     connect(downloadOsm, SIGNAL(triggered(bool)), this, SLOT(downloadOsm()));
     downloadOsm->setToolTip(tr("Download OpenStreetMap data of the visible region"));
     connect(drawPolygon, SIGNAL(toggled(bool)), clearAnnotations, SLOT(setDisabled(bool)));
     connect(clearAnnotations, SIGNAL(triggered()), this, SLOT(clearAnnotations()));
 
-    QAction *sep1 = new QAction(this);
+    auto sep1 = new QAction(this);
     sep1->setSeparator(true);
-    QAction *sep2 = new QAction(this);
+    auto sep2 = new QAction(this);
     sep2->setSeparator(true);
     sep2->setObjectName("toolbarSeparator");
-    QAction *sep3 = new QAction(this);
+    auto sep3 = new QAction(this);
     sep3->setSeparator(true);
-    QAction *sep4 = new QAction(this);
+    auto sep4 = new QAction(this);
     sep4->setSeparator(true);
 
     group->addAction(loadAnnotationFile);
@@ -982,7 +982,7 @@ void AnnotatePlugin::addContextItems()
     m_pasteGraphicItem->setVisible(false);
     connect(m_pasteGraphicItem, SIGNAL(triggered()), SLOT(pasteItem()));
 
-    QAction *separator = new QAction(this);
+    auto separator = new QAction(this);
     separator->setSeparator(true);
 
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
@@ -997,21 +997,21 @@ void AnnotatePlugin::setupTextAnnotationRmbMenu()
     delete m_textAnnotationRmbMenu;
     m_textAnnotationRmbMenu = new QMenu;
 
-    QAction *cutItem = new QAction(tr("Cut"), m_textAnnotationRmbMenu);
+    auto cutItem = new QAction(tr("Cut"), m_textAnnotationRmbMenu);
     m_textAnnotationRmbMenu->addAction(cutItem);
     connect(cutItem, &QAction::triggered, this, &AnnotatePlugin::cutItem);
 
-    QAction *copyItem = new QAction(tr("Copy"), m_textAnnotationRmbMenu);
+    auto copyItem = new QAction(tr("Copy"), m_textAnnotationRmbMenu);
     m_textAnnotationRmbMenu->addAction(copyItem);
     connect(copyItem, &QAction::triggered, this, &AnnotatePlugin::copyItem);
 
-    QAction *removeItem = new QAction(tr("Remove"), m_textAnnotationRmbMenu);
+    auto removeItem = new QAction(tr("Remove"), m_textAnnotationRmbMenu);
     m_textAnnotationRmbMenu->addAction(removeItem);
     connect(removeItem, &QAction::triggered, this, &AnnotatePlugin::askToRemoveFocusItem);
 
     m_textAnnotationRmbMenu->addSeparator();
 
-    QAction *properties = new QAction(tr("Properties"), m_textAnnotationRmbMenu);
+    auto properties = new QAction(tr("Properties"), m_textAnnotationRmbMenu);
     m_textAnnotationRmbMenu->addAction(properties);
     connect(properties, &QAction::triggered, this, &AnnotatePlugin::editTextAnnotation);
 }
@@ -1047,13 +1047,13 @@ void AnnotatePlugin::addTextAnnotation()
     qreal lon = m_marbleWidget->focusPoint().longitude();
     GeoDataCoordinates::normalizeLonLat(lon, lat);
 
-    GeoDataPlacemark *placemark = new GeoDataPlacemark;
+    auto placemark = new GeoDataPlacemark;
     placemark->setCoordinate(lon, lat);
     placemark->setVisible(true);
     placemark->setBalloonVisible(false);
     m_marbleWidget->model()->treeModel()->addFeature(m_annotationDocument, placemark);
 
-    PlacemarkTextAnnotation *textAnnotation = new PlacemarkTextAnnotation(placemark);
+    auto textAnnotation = new PlacemarkTextAnnotation(placemark);
     textAnnotation->setFocus(true);
     m_graphicsItems.append(textAnnotation);
 
@@ -1111,20 +1111,20 @@ void AnnotatePlugin::setupOverlayRmbMenu()
     delete m_overlayRmbMenu;
     m_overlayRmbMenu = new QMenu;
 
-    QAction *editOverlay = new QAction(tr("Properties"), m_overlayRmbMenu);
+    auto editOverlay = new QAction(tr("Properties"), m_overlayRmbMenu);
     m_overlayRmbMenu->addAction(editOverlay);
     connect(editOverlay, SIGNAL(triggered()), this, SLOT(editOverlay()));
 
     m_overlayRmbMenu->addSeparator();
 
-    QAction *removeOverlay = new QAction(tr("Remove"), m_overlayRmbMenu);
+    auto removeOverlay = new QAction(tr("Remove"), m_overlayRmbMenu);
     m_overlayRmbMenu->addAction(removeOverlay);
     connect(removeOverlay, SIGNAL(triggered()), this, SLOT(removeOverlay()));
 }
 
 void AnnotatePlugin::addOverlay()
 {
-    GeoDataGroundOverlay *overlay = new GeoDataGroundOverlay();
+    auto overlay = new GeoDataGroundOverlay();
     qreal centerLongitude = m_marbleWidget->viewport()->centerLongitude() * RAD2DEG;
     qreal centerLatitude = m_marbleWidget->viewport()->centerLatitude() * RAD2DEG;
     GeoDataLatLonAltBox box = m_marbleWidget->viewport()->viewLatLonAltBox();
@@ -1177,17 +1177,17 @@ void AnnotatePlugin::displayOverlayFrame(GeoDataGroundOverlay *overlay)
         return;
     }
 
-    GeoDataPolygon *polygon = new GeoDataPolygon(Tessellate);
+    auto polygon = new GeoDataPolygon(Tessellate);
     polygon->outerBoundary().setTessellate(true);
 
-    GeoDataPlacemark *rectangle_placemark = new GeoDataPlacemark;
+    auto rectangle_placemark = new GeoDataPlacemark;
     rectangle_placemark->setGeometry(polygon);
     rectangle_placemark->setParent(m_annotationDocument);
     rectangle_placemark->setStyleUrl(QStringLiteral("#polygon"));
 
     m_marbleWidget->model()->treeModel()->addFeature(m_annotationDocument, rectangle_placemark);
 
-    GroundOverlayFrame *frame = new GroundOverlayFrame(rectangle_placemark, overlay, m_marbleWidget->textureLayer());
+    auto frame = new GroundOverlayFrame(rectangle_placemark, overlay, m_marbleWidget->textureLayer());
     m_graphicsItems.append(frame);
     m_groundOverlayFrames.insert(overlay, frame);
 
@@ -1226,31 +1226,31 @@ void AnnotatePlugin::setupPolygonRmbMenu()
     delete m_polygonRmbMenu;
     m_polygonRmbMenu = new QMenu;
 
-    QAction *deselectNodes = new QAction(tr("Deselect All Nodes"), m_polygonRmbMenu);
+    auto deselectNodes = new QAction(tr("Deselect All Nodes"), m_polygonRmbMenu);
     m_polygonRmbMenu->addAction(deselectNodes);
     connect(deselectNodes, SIGNAL(triggered()), this, SLOT(deselectNodes()));
 
-    QAction *deleteAllSelected = new QAction(tr("Delete All Selected Nodes"), m_polygonRmbMenu);
+    auto deleteAllSelected = new QAction(tr("Delete All Selected Nodes"), m_polygonRmbMenu);
     m_polygonRmbMenu->addAction(deleteAllSelected);
     connect(deleteAllSelected, SIGNAL(triggered()), this, SLOT(deleteSelectedNodes()));
 
     m_polygonRmbMenu->addSeparator();
 
-    QAction *cutPolygon = new QAction(tr("Cut"), m_polygonRmbMenu);
+    auto cutPolygon = new QAction(tr("Cut"), m_polygonRmbMenu);
     m_polygonRmbMenu->addAction(cutPolygon);
     connect(cutPolygon, SIGNAL(triggered()), this, SLOT(cutItem()));
 
-    QAction *copyPolygon = new QAction(tr("Copy"), m_polygonRmbMenu);
+    auto copyPolygon = new QAction(tr("Copy"), m_polygonRmbMenu);
     m_polygonRmbMenu->addAction(copyPolygon);
     connect(copyPolygon, SIGNAL(triggered()), this, SLOT(copyItem()));
 
-    QAction *removePolygon = new QAction(tr("Remove"), m_polygonRmbMenu);
+    auto removePolygon = new QAction(tr("Remove"), m_polygonRmbMenu);
     m_polygonRmbMenu->addAction(removePolygon);
     connect(removePolygon, SIGNAL(triggered()), this, SLOT(askToRemoveFocusItem()));
 
     m_polygonRmbMenu->addSeparator();
 
-    QAction *showEditDialog = new QAction(tr("Properties"), m_polygonRmbMenu);
+    auto showEditDialog = new QAction(tr("Properties"), m_polygonRmbMenu);
     m_polygonRmbMenu->addAction(showEditDialog);
     connect(showEditDialog, SIGNAL(triggered()), this, SLOT(editPolygon()));
 }
@@ -1278,7 +1278,7 @@ void AnnotatePlugin::addPolygon()
 {
     m_drawingPolygon = true;
 
-    GeoDataPolygon *poly = new GeoDataPolygon(Tessellate);
+    auto poly = new GeoDataPolygon(Tessellate);
     poly->outerBoundary().setTessellate(true);
 
     m_polygonPlacemark = new GeoDataPlacemark;
@@ -1288,7 +1288,7 @@ void AnnotatePlugin::addPolygon()
 
     m_marbleWidget->model()->treeModel()->addFeature(m_annotationDocument, m_polygonPlacemark);
 
-    AreaAnnotation *polygon = new AreaAnnotation(m_polygonPlacemark);
+    auto polygon = new AreaAnnotation(m_polygonPlacemark);
     polygon->setState(SceneGraphicsItem::DrawingPolygon);
     polygon->setFocus(true);
     m_graphicsItems.append(polygon);
@@ -1340,14 +1340,14 @@ void AnnotatePlugin::stopEditingPolygon(int result)
 void AnnotatePlugin::deselectNodes()
 {
     if (m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicAreaAnnotation) {
-        AreaAnnotation *const area = static_cast<AreaAnnotation *>(m_focusItem);
+        auto const area = static_cast<AreaAnnotation *>(m_focusItem);
         area->deselectAllNodes();
 
         if (area->request() == SceneGraphicsItem::NoRequest) {
             m_marbleWidget->model()->treeModel()->updateFeature(area->placemark());
         }
     } else if (m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicPolylineAnnotation) {
-        PolylineAnnotation *const polyline = static_cast<PolylineAnnotation *>(m_focusItem);
+        auto const polyline = static_cast<PolylineAnnotation *>(m_focusItem);
         polyline->deselectAllNodes();
 
         if (polyline->request() == SceneGraphicsItem::NoRequest) {
@@ -1359,10 +1359,10 @@ void AnnotatePlugin::deselectNodes()
 void AnnotatePlugin::deleteSelectedNodes()
 {
     if (m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicAreaAnnotation) {
-        AreaAnnotation *const area = static_cast<AreaAnnotation *>(m_focusItem);
+        auto const area = static_cast<AreaAnnotation *>(m_focusItem);
         area->deleteAllSelectedNodes();
     } else if (m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicPolylineAnnotation) {
-        PolylineAnnotation *const polyline = static_cast<PolylineAnnotation *>(m_focusItem);
+        auto const polyline = static_cast<PolylineAnnotation *>(m_focusItem);
         polyline->deleteAllSelectedNodes();
     }
 
@@ -1381,7 +1381,7 @@ void AnnotatePlugin::deleteSelectedNodes()
 
 void AnnotatePlugin::editPolygon()
 {
-    EditPolygonDialog *dialog = new EditPolygonDialog(m_focusItem->placemark(), &m_osmRelations, m_marbleWidget);
+    auto dialog = new EditPolygonDialog(m_focusItem->placemark(), &m_osmRelations, m_marbleWidget);
 
     connect(dialog, SIGNAL(polygonUpdated(GeoDataFeature *)), m_marbleWidget->model()->treeModel(), SLOT(updateFeature(GeoDataFeature *)));
     connect(dialog, SIGNAL(finished(int)), this, SLOT(stopEditingPolygon(int)));
@@ -1401,11 +1401,11 @@ void AnnotatePlugin::setupNodeRmbMenu()
     delete m_nodeRmbMenu;
     m_nodeRmbMenu = new QMenu;
 
-    QAction *selectNode = new QAction(tr("Select Node"), m_nodeRmbMenu);
+    auto selectNode = new QAction(tr("Select Node"), m_nodeRmbMenu);
     m_nodeRmbMenu->addAction(selectNode);
     connect(selectNode, &QAction::triggered, this, &AnnotatePlugin::selectNode);
 
-    QAction *deleteNode = new QAction(tr("Delete Node"), m_nodeRmbMenu);
+    auto deleteNode = new QAction(tr("Delete Node"), m_nodeRmbMenu);
     m_nodeRmbMenu->addAction(deleteNode);
     connect(deleteNode, &QAction::triggered, this, &AnnotatePlugin::deleteNode);
 }
@@ -1428,10 +1428,10 @@ void AnnotatePlugin::showNodeRmbMenu(qreal x, qreal y)
 void AnnotatePlugin::selectNode()
 {
     if (m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicAreaAnnotation) {
-        AreaAnnotation *const area = static_cast<AreaAnnotation *>(m_focusItem);
+        auto const area = static_cast<AreaAnnotation *>(m_focusItem);
         area->changeClickedNodeSelection();
     } else if (m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicPolylineAnnotation) {
-        PolylineAnnotation *const polyline = static_cast<PolylineAnnotation *>(m_focusItem);
+        auto const polyline = static_cast<PolylineAnnotation *>(m_focusItem);
         polyline->changeClickedNodeSelection();
     }
 
@@ -1443,10 +1443,10 @@ void AnnotatePlugin::selectNode()
 void AnnotatePlugin::deleteNode()
 {
     if (m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicAreaAnnotation) {
-        AreaAnnotation *area = static_cast<AreaAnnotation *>(m_focusItem);
+        auto area = static_cast<AreaAnnotation *>(m_focusItem);
         area->deleteClickedNode();
     } else if (m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicPolylineAnnotation) {
-        PolylineAnnotation *polyline = static_cast<PolylineAnnotation *>(m_focusItem);
+        auto polyline = static_cast<PolylineAnnotation *>(m_focusItem);
         polyline->deleteClickedNode();
     }
 
@@ -1468,31 +1468,31 @@ void AnnotatePlugin::setupPolylineRmbMenu()
     delete m_polylineRmbMenu;
     m_polylineRmbMenu = new QMenu;
 
-    QAction *deselectNodes = new QAction(tr("Deselect All Nodes"), m_polylineRmbMenu);
+    auto deselectNodes = new QAction(tr("Deselect All Nodes"), m_polylineRmbMenu);
     m_polylineRmbMenu->addAction(deselectNodes);
     connect(deselectNodes, SIGNAL(triggered()), this, SLOT(deselectNodes()));
 
-    QAction *deleteAllSelected = new QAction(tr("Delete All Selected Nodes"), m_polylineRmbMenu);
+    auto deleteAllSelected = new QAction(tr("Delete All Selected Nodes"), m_polylineRmbMenu);
     m_polylineRmbMenu->addAction(deleteAllSelected);
     connect(deleteAllSelected, SIGNAL(triggered()), this, SLOT(deleteSelectedNodes()));
 
     m_polylineRmbMenu->addSeparator();
 
-    QAction *cutItem = new QAction(tr("Cut"), m_polylineRmbMenu);
+    auto cutItem = new QAction(tr("Cut"), m_polylineRmbMenu);
     m_polylineRmbMenu->addAction(cutItem);
     connect(cutItem, SIGNAL(triggered()), this, SLOT(cutItem()));
 
-    QAction *copyItem = new QAction(tr("Copy"), m_polylineRmbMenu);
+    auto copyItem = new QAction(tr("Copy"), m_polylineRmbMenu);
     m_polylineRmbMenu->addAction(copyItem);
     connect(copyItem, SIGNAL(triggered()), this, SLOT(copyItem()));
 
-    QAction *removeItem = new QAction(tr("Remove"), m_polylineRmbMenu);
+    auto removeItem = new QAction(tr("Remove"), m_polylineRmbMenu);
     m_polylineRmbMenu->addAction(removeItem);
     connect(removeItem, SIGNAL(triggered()), this, SLOT(askToRemoveFocusItem()));
 
     m_polylineRmbMenu->addSeparator();
 
-    QAction *properties = new QAction(tr("Properties"), m_polylineRmbMenu);
+    auto properties = new QAction(tr("Properties"), m_polylineRmbMenu);
     m_polylineRmbMenu->addAction(properties);
     connect(properties, SIGNAL(triggered()), this, SLOT(editPolyline()));
 }
@@ -1539,7 +1539,7 @@ void AnnotatePlugin::addPolyline()
 
     m_marbleWidget->model()->treeModel()->addFeature(m_annotationDocument, m_polylinePlacemark);
 
-    PolylineAnnotation *polyline = new PolylineAnnotation(m_polylinePlacemark);
+    auto polyline = new PolylineAnnotation(m_polylinePlacemark);
     polyline->setState(SceneGraphicsItem::DrawingPolyline);
     polyline->setFocus(true);
     m_graphicsItems.append(polyline);
@@ -1641,7 +1641,7 @@ void AnnotatePlugin::copyItem()
     // FIXME: Here is obvious a problem in the case of AreaAnnotation (when copying a
     // placemark which has a GeoDataPolygon geometry?). Later Edit: The same applies for
     // polylines (GeoDataLineString geometries).
-    GeoDataPlacemark *placemark = new GeoDataPlacemark(*m_focusItem->placemark());
+    auto placemark = new GeoDataPlacemark(*m_focusItem->placemark());
     if (m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicAreaAnnotation) {
         m_clipboardItem = new AreaAnnotation(placemark);
     } else if (m_focusItem->graphicType() == SceneGraphicsTypes::SceneGraphicTextAnnotation) {

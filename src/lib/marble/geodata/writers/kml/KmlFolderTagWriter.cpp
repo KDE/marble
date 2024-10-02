@@ -21,7 +21,7 @@ static GeoTagWriterRegistrar s_writerDocument(GeoTagWriter::QualifiedName(GeoDat
 
 bool KmlFolderTagWriter::writeMid(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataFolder *folder = static_cast<const GeoDataFolder *>(node);
+    const auto folder = static_cast<const GeoDataFolder *>(node);
 
     // Write all containing features
     QList<GeoDataFeature *>::ConstIterator it = folder->constBegin();

@@ -54,7 +54,7 @@ WikipediaPlugin::~WikipediaPlugin()
 
 void WikipediaPlugin::initialize()
 {
-    WikipediaModel *model = new WikipediaModel(marbleModel(), this);
+    auto model = new WikipediaModel(marbleModel(), this);
     // Ensure that all settings get forwarded to the model.
     setModel(model);
     updateSettings();
@@ -146,9 +146,9 @@ void WikipediaPlugin::setSettings(const QHash<QString, QVariant> &settings)
 bool WikipediaPlugin::eventFilter(QObject *object, QEvent *event)
 {
     if (isInitialized()) {
-        WikipediaModel *wikipediaModel = dynamic_cast<WikipediaModel *>(model());
+        auto wikipediaModel = dynamic_cast<WikipediaModel *>(model());
         Q_ASSERT(wikipediaModel);
-        MarbleWidget *widget = dynamic_cast<MarbleWidget *>(object);
+        auto widget = dynamic_cast<MarbleWidget *>(object);
         if (widget) {
             wikipediaModel->setMarbleWidget(widget);
         }
@@ -181,7 +181,7 @@ void WikipediaPlugin::updateSettings()
         abstractModel->setItemSettings(settings());
     }
 
-    WikipediaModel *wikipediaModel = qobject_cast<WikipediaModel *>(model());
+    auto wikipediaModel = qobject_cast<WikipediaModel *>(model());
     if (wikipediaModel) {
         wikipediaModel->setShowThumbnail(m_showThumbnails);
     }

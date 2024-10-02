@@ -1389,9 +1389,7 @@ Vec3 QuickSun(double t) // low precision position of the Sun at time t
     of the sun for Equinox of Date given in Julian centuries since J2000.
     ======================================================================
  */
-Sun200::Sun200()
-{
-}
+Sun200::Sun200() = default;
 
 Vec3 Sun200::position(double t) // position of the Sun at time t
 {
@@ -1606,9 +1604,7 @@ void Sun200::pertmoo() // corrections for Earth-Moon center of gravity
  t is the time in Julian centuries since J2000.
 */
 
-Moon200::Moon200()
-{
-}
+Moon200::Moon200() = default;
 
 Vec3 Moon200::position(double t) // position of the Moon at time t
 {

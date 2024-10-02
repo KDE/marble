@@ -29,7 +29,7 @@ bool MarbleWidgetPlugin::isInitialized() const
 
 QWidget *MarbleWidgetPlugin::createWidget(QWidget *parent)
 {
-    Marble::MarbleWidget *marbleWidget = new Marble::MarbleWidget(parent);
+    auto marbleWidget = new Marble::MarbleWidget(parent);
     marbleWidget->setMapThemeId(QStringLiteral("earth/srtm/srtm.dgml"));
 
     return marbleWidget;
@@ -52,12 +52,12 @@ QIcon MarbleWidgetPlugin::icon() const
 
 QString MarbleWidgetPlugin::toolTip() const
 {
-    return QString();
+    return {};
 }
 
 QString MarbleWidgetPlugin::whatsThis() const
 {
-    return QString();
+    return {};
 }
 
 bool MarbleWidgetPlugin::isContainer() const

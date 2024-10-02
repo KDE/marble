@@ -22,7 +22,7 @@ MarbleMapsApplication::MarbleMapsApplication(QObject *parent)
     , m_suspended(false)
     , m_keepScreenOn(false)
 {
-    QGuiApplication *application = qobject_cast<QGuiApplication *>(QGuiApplication::instance());
+    auto application = qobject_cast<QGuiApplication *>(QGuiApplication::instance());
     if (application) {
         connect(application, SIGNAL(applicationStateChanged(Qt::ApplicationState)), this, SLOT(handleApplicationStateChange(Qt::ApplicationState)));
     }

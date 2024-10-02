@@ -37,9 +37,7 @@ WikipediaModel::WikipediaModel(const MarbleModel *marbleModel, QObject *parent)
     m_languageCode = MarbleLocale::languageCode();
 }
 
-WikipediaModel::~WikipediaModel()
-{
-}
+WikipediaModel::~WikipediaModel() = default;
 
 void WikipediaModel::setShowThumbnail(bool show)
 {

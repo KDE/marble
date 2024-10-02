@@ -261,7 +261,7 @@ static QDateTime readMSDosDate(const uchar *src)
     uint tm_min = ((dosDate & 0x7E0) >> 5);
     uint tm_sec = ((dosDate & 0x1f) << 1);
 
-    return QDateTime(QDate(tm_year, tm_mon, tm_mday), QTime(tm_hour, tm_min, tm_sec));
+    return {QDate(tm_year, tm_mon, tm_mday), QTime(tm_hour, tm_min, tm_sec)};
 }
 
 struct LocalFileHeader {
@@ -330,9 +330,7 @@ MarbleZipReader::FileInfo::FileInfo()
 {
 }
 
-MarbleZipReader::FileInfo::~FileInfo()
-{
-}
+MarbleZipReader::FileInfo::~FileInfo() = default;
 
 MarbleZipReader::FileInfo::FileInfo(const FileInfo &other)
 {
@@ -772,7 +770,7 @@ bool MarbleZipReader::isReadable() const
 */
 bool MarbleZipReader::exists() const
 {
-    QFile *f = qobject_cast<QFile *>(d->device);
+    auto f = qobject_cast<QFile *>(d->device);
     if (f == nullptr)
         return true;
     return f->exists();
@@ -830,7 +828,7 @@ QByteArray MarbleZipReader::fileData(const QString &fileName) const
             break;
     }
     if (i == d->fileHeaders.size())
-        return QByteArray();
+        return {};
 
     FileHeader header = d->fileHeaders.at(i);
 
@@ -884,7 +882,7 @@ QByteArray MarbleZipReader::fileData(const QString &fileName) const
         return baunzip;
     }
     qWarning() << "QZip: Unknown compression method";
-    return QByteArray();
+    return {};
 }
 
 /*!
@@ -1052,7 +1050,7 @@ bool MarbleZipWriter::isWritable() const
 */
 bool MarbleZipWriter::exists() const
 {
-    QFile *f = qobject_cast<QFile *>(d->device);
+    auto f = qobject_cast<QFile *>(d->device);
     if (f == nullptr)
         return true;
     return f->exists();

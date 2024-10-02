@@ -190,17 +190,17 @@ bool SatellitesPlugin::eventFilter(QObject *object, QEvent *event)
         return false;
     }
 
-    MarbleWidget *widget = qobject_cast<MarbleWidget *>(object);
+    auto widget = qobject_cast<MarbleWidget *>(object);
     Q_ASSERT(widget);
 
-    QMouseEvent *mouseEvent = dynamic_cast<QMouseEvent *>(event);
+    auto mouseEvent = dynamic_cast<QMouseEvent *>(event);
     Q_ASSERT(mouseEvent);
 
     if (mouseEvent->button() == Qt::LeftButton) {
         m_trackerList.clear();
         QList<const GeoDataFeature *> vector = widget->whichFeatureAt(mouseEvent->pos());
         for (const GeoDataFeature *feature : std::as_const(vector)) {
-            const GeoDataPlacemark *placemark = dynamic_cast<const GeoDataPlacemark *>(feature);
+            const auto placemark = dynamic_cast<const GeoDataPlacemark *>(feature);
             if (placemark) {
                 for (TrackerPluginItem *obj : m_satModel->items()) {
                     if (obj->placemark() == placemark) {
@@ -222,7 +222,7 @@ bool SatellitesPlugin::eventFilter(QObject *object, QEvent *event)
 
 void SatellitesPlugin::showOrbit(bool show)
 {
-    QAction *action = qobject_cast<QAction *>(sender());
+    auto action = qobject_cast<QAction *>(sender());
     Q_ASSERT(action);
 
     int actionIndex = action->data().toInt();
@@ -233,7 +233,7 @@ void SatellitesPlugin::showOrbit(bool show)
 
 void SatellitesPlugin::trackPlacemark()
 {
-    QAction *action = qobject_cast<QAction *>(sender());
+    auto action = qobject_cast<QAction *>(sender());
     Q_ASSERT(action);
 
     int actionIndex = action->data().toInt();
@@ -387,7 +387,7 @@ void SatellitesPlugin::updateDataSourceConfig(const QString &source)
 
     for (TrackerPluginItem *obj : m_satModel->items()) {
         // catalog items
-        SatellitesMSCItem *item = dynamic_cast<SatellitesMSCItem *>(obj);
+        auto item = dynamic_cast<SatellitesMSCItem *>(obj);
         if ((item != nullptr) && (item->catalog() == source)) {
             m_configDialog->addSatelliteItem(item->relatedBody(), item->category(), item->name(), item->id());
         }

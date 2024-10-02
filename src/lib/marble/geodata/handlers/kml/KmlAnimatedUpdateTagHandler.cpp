@@ -23,7 +23,7 @@ GeoNode *KmlAnimatedUpdateTagHandler::parse(GeoParser &parser) const
 
     GeoStackItem parentItem = parser.parentElement();
 
-    GeoDataAnimatedUpdate *animatedUpdate = new GeoDataAnimatedUpdate;
+    auto animatedUpdate = new GeoDataAnimatedUpdate;
     KmlObjectTagHandler::parseIdentifiers(parser, animatedUpdate);
 
     if (parentItem.is<GeoDataPlaylist>()) {

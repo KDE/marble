@@ -317,7 +317,7 @@ QString RoutingInstruction::nextDistanceInstruction() const
     }
 
     if (length == 0) {
-        return QString();
+        return {};
     } else {
         QString text = QObject::tr("Follow the road for %1 %2.");
         return text.arg(length, 0, 'f', precision).arg(distanceUnit);
@@ -409,7 +409,7 @@ QString RoutingInstruction::generateRoadInstruction(RoutingInstruction::TurnType
         case RoundaboutSecondExit:
         case RoundaboutThirdExit:
             Q_ASSERT(false && "Internal error: Unknown/Roundabout should have been handled earlier.");
-            return QString();
+            return {};
         case ExitLeft:
             return QObject::tr("Take the exit to the left.");
         case ExitRight:
@@ -444,7 +444,7 @@ QString RoutingInstruction::generateRoadInstruction(RoutingInstruction::TurnType
         case RoundaboutSecondExit:
         case RoundaboutThirdExit:
             Q_ASSERT(false && "Internal error: Unknown/Roundabout should have been handled earlier.");
-            return QString();
+            return {};
         case ExitLeft:
             return QObject::tr("Take the exit to the left onto %1.").arg(roadName);
         case ExitRight:
@@ -453,7 +453,7 @@ QString RoutingInstruction::generateRoadInstruction(RoutingInstruction::TurnType
     }
 
     Q_ASSERT(false && "Internal error: Switch did not handle all cases.");
-    return QString();
+    return {};
 }
 
 QTextStream &operator<<(QTextStream &stream, const RoutingInstruction &i)

@@ -32,7 +32,7 @@ GeoNode *KmlPointTagHandler::parse(GeoParser &parser) const
         return parentItem.nodeAs<GeoDataPlacemark>();
 
     } else if (parentItem.represents(kmlTag_MultiGeometry)) {
-        GeoDataPoint *point = new GeoDataPoint;
+        auto point = new GeoDataPoint;
         KmlObjectTagHandler::parseIdentifiers(parser, point);
         parentItem.nodeAs<GeoDataMultiGeometry>()->append(point);
         return point;

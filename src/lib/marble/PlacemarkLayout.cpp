@@ -322,7 +322,7 @@ QList<VisiblePlacemark *> PlacemarkLayout::generateLayout(const ViewportParams *
     m_runtimeTrace.clear();
     if (m_placemarkModel->rowCount() <= 0) {
         clearCache();
-        return QList<VisiblePlacemark *>();
+        return {};
     }
 
     if (m_styleResetRequested) {
@@ -331,7 +331,7 @@ QList<VisiblePlacemark *> PlacemarkLayout::generateLayout(const ViewportParams *
 
     if (m_maxLabelHeight == 0) {
         clearCache();
-        return QList<VisiblePlacemark *>();
+        return {};
     }
 
     QList<const GeoDataPlacemark *> placemarkList;
@@ -580,7 +580,7 @@ GeoDataCoordinates PlacemarkLayout::placemarkIconCoordinates(const GeoDataPlacem
         parameters.placemark = placemark;
         auto style = m_styleBuilder->createStyle(parameters);
         if (style->iconStyle().scaledIcon().isNull()) {
-            return GeoDataCoordinates();
+            return {};
         }
     }
 
@@ -649,7 +649,7 @@ QRectF PlacemarkLayout::roomForLabel(const GeoDataStyle::ConstPtr &style,
     }
 
     // At this point there is no space left for the rectangle anymore.
-    return QRectF();
+    return {};
 }
 
 bool PlacemarkLayout::hasRoomForPixmap(const qreal y, const VisiblePlacemark *placemark) const

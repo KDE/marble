@@ -19,13 +19,11 @@ public:
     {
     }
 
-    GeoDataLinearRingPrivate()
-    {
-    }
+    GeoDataLinearRingPrivate() = default;
 
     GeoDataGeometryPrivate *copy() const override
     {
-        GeoDataLinearRingPrivate *copy = new GeoDataLinearRingPrivate;
+        auto *copy = new GeoDataLinearRingPrivate;
         *copy = *this;
         return copy;
     }

@@ -20,9 +20,7 @@ GeoDataScreenOverlay::GeoDataScreenOverlay(const Marble::GeoDataScreenOverlay &o
 {
 }
 
-GeoDataScreenOverlay::~GeoDataScreenOverlay()
-{
-}
+GeoDataScreenOverlay::~GeoDataScreenOverlay() = default;
 
 GeoDataScreenOverlay &GeoDataScreenOverlay::operator=(const GeoDataScreenOverlay &other)
 {

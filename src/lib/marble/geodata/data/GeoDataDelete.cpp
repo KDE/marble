@@ -45,9 +45,7 @@ bool GeoDataDelete::operator!=(const GeoDataDelete &other) const
     return !this->operator==(other);
 }
 
-GeoDataDelete::~GeoDataDelete()
-{
-}
+GeoDataDelete::~GeoDataDelete() = default;
 
 GeoDataFeature *GeoDataDelete::clone() const
 {

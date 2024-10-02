@@ -67,7 +67,7 @@ private Q_SLOTS:
 void TestFeatureDetach::testRelation()
 {
     GeoDataRelation feat1;
-    GeoDataCamera *view1 = new GeoDataCamera();
+    auto view1 = new GeoDataCamera();
     view1->setAltitudeMode(Absolute);
     feat1.setAbstractView(view1);
 
@@ -101,7 +101,7 @@ void TestFeatureDetach::testPlacemark()
     GeoDataPlacemark place2 = place1;
 
     GeoDataCoordinates coords2(60, 60, 0, GeoDataCoordinates::Degree);
-    GeoDataPoint *point = static_cast<GeoDataPoint *>(place2.geometry());
+    auto point = static_cast<GeoDataPoint *>(place2.geometry());
     point->setCoordinates(coords2);
     QVERIFY(place1.coordinate() == coords1);
 
@@ -111,7 +111,7 @@ void TestFeatureDetach::testPlacemark()
 
 void TestFeatureDetach::testTour()
 {
-    GeoDataPlaylist *newPlaylist = new GeoDataPlaylist;
+    auto newPlaylist = new GeoDataPlaylist;
     newPlaylist->setId("Playlist1");
     GeoDataTour tour1;
     tour1.setPlaylist(newPlaylist);

@@ -93,7 +93,7 @@ void GeoDataCoordinates::detach()
         return;
     }
 
-    GeoDataCoordinatesPrivate *new_d = new GeoDataCoordinatesPrivate(*d);
+    auto new_d = new GeoDataCoordinatesPrivate(*d);
 
     if (!d->ref.deref()) {
         delete d;
@@ -370,9 +370,9 @@ GeoDataCoordinates GeoDataCoordinates::fromString(const QString &string, bool &s
     LonLatParser parser;
     successful = parser.parse(string);
     if (successful) {
-        return GeoDataCoordinates(parser.lon(), parser.lat(), 0, GeoDataCoordinates::Degree);
+        return {parser.lon(), parser.lat(), 0, GeoDataCoordinates::Degree};
     } else {
-        return GeoDataCoordinates();
+        return {};
     }
 }
 
@@ -736,7 +736,7 @@ GeoDataCoordinates GeoDataCoordinates::rotateAround(const Quaternion &rotAxis) c
     rotatedQuat.rotateAroundAxis(rotAxis);
     qreal rotatedLon, rotatedLat;
     rotatedQuat.getSpherical(rotatedLon, rotatedLat);
-    return GeoDataCoordinates(rotatedLon, rotatedLat, altitude());
+    return {rotatedLon, rotatedLat, altitude()};
 }
 
 qreal GeoDataCoordinates::bearing(const GeoDataCoordinates &other, Unit unit, BearingType type) const
@@ -756,7 +756,7 @@ GeoDataCoordinates GeoDataCoordinates::moveByBearing(qreal bearing, qreal distan
     qreal newLat = asin(sin(d->m_lat) * cos(distance) + cos(d->m_lat) * sin(distance) * cos(bearing));
     qreal newLon = d->m_lon + atan2(sin(bearing) * sin(distance) * cos(d->m_lat), cos(distance) - sin(d->m_lat) * sin(newLat));
 
-    return GeoDataCoordinates(newLon, newLat);
+    return {newLon, newLat};
 }
 
 const Quaternion &GeoDataCoordinates::quaternion() const
@@ -774,7 +774,7 @@ GeoDataCoordinates GeoDataCoordinates::interpolate(const GeoDataCoordinates &tar
     qreal lon, lat;
     quat.getSpherical(lon, lat);
     double const alt = (1.0 - t) * d->m_altitude + t * target.d->m_altitude;
-    return GeoDataCoordinates(lon, lat, alt);
+    return {lon, lat, alt};
 }
 
 GeoDataCoordinates GeoDataCoordinates::nlerp(const GeoDataCoordinates &target, double t) const
@@ -787,7 +787,7 @@ GeoDataCoordinates GeoDataCoordinates::nlerp(const GeoDataCoordinates &target, d
 
     const qreal altitude = 0.5 * (d->m_altitude + target.altitude());
 
-    return GeoDataCoordinates(lon, lat, altitude);
+    return {lon, lat, altitude};
 }
 
 GeoDataCoordinates
@@ -803,7 +803,7 @@ GeoDataCoordinates::interpolate(const GeoDataCoordinates &before, const GeoDataC
     c.getSpherical(lon, lat);
     // @todo spline interpolation of altitude?
     double const alt = (1.0 - t) * d->m_altitude + t * target.d->m_altitude;
-    return GeoDataCoordinates(lon, lat, alt);
+    return {lon, lat, alt};
 }
 
 bool GeoDataCoordinates::isPole(Pole pole) const
@@ -1012,7 +1012,7 @@ QPointF GeoDataCoordinatesPrivate::mapLonLatToXY(qreal lambda, qreal phi, qreal 
         + (t / 24.0 * N * qPow(qCos(phi), 4.0) * coef4 * qPow(l, 4.0)) + (t / 720.0 * N * qPow(qCos(phi), 6.0) * coef6 * qPow(l, 6.0))
         + (t / 40320.0 * N * qPow(qCos(phi), 8.0) * coef8 * qPow(l, 8.0));
 
-    return QPointF(easting, northing);
+    return {easting, northing};
 }
 
 int GeoDataCoordinatesPrivate::lonLatToZone(qreal lon, qreal lat)

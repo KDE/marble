@@ -60,7 +60,7 @@ GeoNode *DgmlPenTagHandler::parse(GeoParser &parser) const
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Vector) || parentItem.represents(dgmlTag_Geodata)) {
-        GeoSceneGeodata *geodata = parentItem.nodeAs<GeoSceneGeodata>();
+        auto geodata = parentItem.nodeAs<GeoSceneGeodata>();
         geodata->setPen(pen);
     }
 

@@ -14,9 +14,7 @@ GeoAprsCoordinates::GeoAprsCoordinates(qreal lon, qreal lat, int where)
     m_timestamp.start();
 }
 
-GeoAprsCoordinates::~GeoAprsCoordinates()
-{
-}
+GeoAprsCoordinates::~GeoAprsCoordinates() = default;
 
 void GeoAprsCoordinates::addSeenFrom(int where)
 {

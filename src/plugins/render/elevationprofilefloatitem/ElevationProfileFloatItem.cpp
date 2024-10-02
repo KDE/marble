@@ -78,9 +78,7 @@ ElevationProfileFloatItem::ElevationProfileFloatItem(const MarbleModel *marbleMo
     connect(&m_routeDataSource, SIGNAL(sourceCountChanged()), m_contextMenu, SLOT(updateContextMenuEntries()));
 }
 
-ElevationProfileFloatItem::~ElevationProfileFloatItem()
-{
-}
+ElevationProfileFloatItem::~ElevationProfileFloatItem() = default;
 
 QStringList ElevationProfileFloatItem::backendTypes() const
 {
@@ -401,7 +399,7 @@ bool ElevationProfileFloatItem::eventFilter(QObject *object, QEvent *e)
         return false;
     }
 
-    MarbleWidget *widget = dynamic_cast<MarbleWidget *>(object);
+    auto widget = dynamic_cast<MarbleWidget *>(object);
     if (!widget) {
         return AbstractFloatItem::eventFilter(object, e);
     }
@@ -416,7 +414,7 @@ bool ElevationProfileFloatItem::eventFilter(QObject *object, QEvent *e)
     if (e->type() == QEvent::MouseButtonDblClick || e->type() == QEvent::MouseMove) {
         GeoDataTreeModel *const treeModel = const_cast<MarbleModel *>(marbleModel())->treeModel();
 
-        QMouseEvent *event = static_cast<QMouseEvent *>(e);
+        auto event = static_cast<QMouseEvent *>(e);
         QRectF plotRect = QRectF(m_leftGraphMargin, 0, m_eleGraphWidth, contentSize().height());
         plotRect.translate(positivePosition());
         plotRect.translate(padding(), padding());

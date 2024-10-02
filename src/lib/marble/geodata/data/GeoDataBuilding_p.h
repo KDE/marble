@@ -24,7 +24,7 @@ public:
 
     GeoDataGeometryPrivate *copy() const override
     {
-        GeoDataBuildingPrivate *copy = new GeoDataBuildingPrivate;
+        auto *copy = new GeoDataBuildingPrivate;
         *copy = *this;
         return copy;
     }

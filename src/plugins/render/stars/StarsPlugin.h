@@ -35,9 +35,7 @@ namespace Marble
 class StarPoint
 {
 public:
-    StarPoint()
-    {
-    }
+    StarPoint() = default;
     /**
      * @brief create a starpoint from right ascension and declination
      * @param  id identifier
@@ -55,9 +53,7 @@ public:
         m_q = Quaternion::fromSpherical(rect, decl);
     }
 
-    ~StarPoint()
-    {
-    }
+    ~StarPoint() = default;
 
     qreal magnitude() const
     {
@@ -89,9 +85,7 @@ private:
 class DsoPoint
 {
 public:
-    DsoPoint()
-    {
-    }
+    DsoPoint() = default;
     /**
      * @brief create a dsopoint from right ascension and declination
      * @param  id point identifier
@@ -277,9 +271,7 @@ private:
 class Constellation
 {
 public:
-    Constellation()
-    {
-    }
+    Constellation() = default;
     Constellation(StarsPlugin *plugin, const QString &name, const QString &stars)
         : m_plugin(plugin)
         , m_name(name)

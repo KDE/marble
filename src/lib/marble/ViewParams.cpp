@@ -44,9 +44,7 @@ ViewParamsPrivate::ViewParamsPrivate()
 {
 }
 
-ViewParamsPrivate::~ViewParamsPrivate()
-{
-}
+ViewParamsPrivate::~ViewParamsPrivate() = default;
 
 ViewParams::ViewParams()
     : d(new ViewParamsPrivate)

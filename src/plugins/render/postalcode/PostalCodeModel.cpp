@@ -33,9 +33,7 @@ PostalCodeModel::PostalCodeModel(const MarbleModel *marbleModel, QObject *parent
 {
 }
 
-PostalCodeModel::~PostalCodeModel()
-{
-}
+PostalCodeModel::~PostalCodeModel() = default;
 
 void PostalCodeModel::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 number)
 {
@@ -102,7 +100,7 @@ void PostalCodeModel::parseFile(const QByteArray &file)
                     // If it does not exist, create it
                     GeoDataCoordinates coordinates(longitude, latitude, 0.0, GeoDataCoordinates::Degree);
 
-                    PostalCodeItem *item = new PostalCodeItem(this);
+                    auto item = new PostalCodeItem(this);
                     item->setId(id);
                     item->setCoordinate(coordinates);
                     item->setToolTip(tooltip);

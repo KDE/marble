@@ -47,9 +47,7 @@ AzimuthalEquidistantProjection::AzimuthalEquidistantProjection(AzimuthalEquidist
     setMaxLat(maxValidLat());
 }
 
-AzimuthalEquidistantProjection::~AzimuthalEquidistantProjection()
-{
-}
+AzimuthalEquidistantProjection::~AzimuthalEquidistantProjection() = default;
 
 QString AzimuthalEquidistantProjection::name() const
 {

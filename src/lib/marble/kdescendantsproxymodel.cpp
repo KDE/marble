@@ -16,7 +16,7 @@
 namespace Marble
 {
 
-typedef KHash2Map<QPersistentModelIndex, int> Mapping;
+using Mapping = KHash2Map<QPersistentModelIndex, int>;
 
 class KDescendantsProxyModelPrivate
 {
@@ -290,7 +290,7 @@ void KDescendantsProxyModel::setSourceModel(QAbstractItemModel *_sourceModel)
 QModelIndex KDescendantsProxyModel::parent(const QModelIndex &index) const
 {
     Q_UNUSED(index)
-    return QModelIndex();
+    return {};
 }
 
 bool KDescendantsProxyModel::hasChildren(const QModelIndex &parent) const
@@ -316,11 +316,11 @@ int KDescendantsProxyModel::rowCount(const QModelIndex &parent) const
 QModelIndex KDescendantsProxyModel::index(int row, int column, const QModelIndex &parent) const
 {
     if (parent.isValid()) {
-        return QModelIndex();
+        return {};
     }
 
     if (!hasIndex(row, column, parent)) {
-        return QModelIndex();
+        return {};
     }
 
     return createIndex(row, column);
@@ -330,7 +330,7 @@ QModelIndex KDescendantsProxyModel::mapToSource(const QModelIndex &proxyIndex) c
 {
     Q_D(const KDescendantsProxyModel);
     if (d->m_mapping.isEmpty() || !proxyIndex.isValid() || !sourceModel()) {
-        return QModelIndex();
+        return {};
     }
 
     const Mapping::right_const_iterator result = d->m_mapping.rightLowerBound(proxyIndex.row());
@@ -383,7 +383,7 @@ QModelIndex KDescendantsProxyModel::mapToSource(const QModelIndex &proxyIndex) c
         ancestor = ancestor.parent();
     }
     Q_ASSERT(!"Didn't find target row.");
-    return QModelIndex();
+    return {};
 }
 
 QModelIndex KDescendantsProxyModel::mapFromSource(const QModelIndex &sourceIndex) const
@@ -391,11 +391,11 @@ QModelIndex KDescendantsProxyModel::mapFromSource(const QModelIndex &sourceIndex
     Q_D(const KDescendantsProxyModel);
 
     if (!sourceModel()) {
-        return QModelIndex();
+        return {};
     }
 
     if (d->m_mapping.isEmpty()) {
-        return QModelIndex();
+        return {};
     }
 
     {
@@ -440,7 +440,7 @@ QModelIndex KDescendantsProxyModel::mapFromSource(const QModelIndex &sourceIndex
             index = ancestor;
         }
         Q_ASSERT(!"Didn't find valid proxy mapping.");
-        return QModelIndex();
+        return {};
     }
 }
 
@@ -458,7 +458,7 @@ QVariant KDescendantsProxyModel::data(const QModelIndex &index, int role) const
     Q_D(const KDescendantsProxyModel);
 
     if (!sourceModel()) {
-        return QVariant();
+        return {};
     }
 
     if (!index.isValid()) {
@@ -469,7 +469,7 @@ QVariant KDescendantsProxyModel::data(const QModelIndex &index, int role) const
 
     if ((d->m_displayAncestorData) && (role == Qt::DisplayRole)) {
         if (!sourceIndex.isValid()) {
-            return QVariant();
+            return {};
         }
         QString displayData = sourceIndex.data().toString();
         sourceIndex = sourceIndex.parent();
@@ -487,7 +487,7 @@ QVariant KDescendantsProxyModel::data(const QModelIndex &index, int role) const
 QVariant KDescendantsProxyModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (!sourceModel() || columnCount() <= section) {
-        return QVariant();
+        return {};
     }
 
     return QAbstractProxyModel::headerData(section, orientation, role);

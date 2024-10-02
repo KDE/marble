@@ -231,7 +231,7 @@ void StarsPlugin::setSettings(const QHash<QString, QVariant> &settings)
     m_renderMoon = readSetting<bool>(settings, QStringLiteral("renderMoon"), true);
 
     m_renderPlanet.clear();
-    const QString renderPlanet = readSetting<QString>(settings, QStringLiteral("renderPlanet"), QString());
+    const auto renderPlanet = readSetting<QString>(settings, QStringLiteral("renderPlanet"), QString());
     const QStringList renderStates = renderPlanet.split(QLatin1Char('|'));
     for (const QString &state : renderStates) {
         const QStringList stateList = state.split(QLatin1Char(':'));
@@ -276,7 +276,7 @@ QPixmap StarsPlugin::starPixmap(qreal mag, int colorId) const
         return m_pixP7Stars.at(colorId);
     }
 
-    return QPixmap();
+    return {};
 }
 
 void StarsPlugin::prepareNames()
@@ -1367,8 +1367,8 @@ bool StarsPlugin::eventFilter(QObject *object, QEvent *e)
     }
 
     if (e->type() == QEvent::ContextMenu) {
-        MarbleWidget *widget = dynamic_cast<MarbleWidget *>(object);
-        QContextMenuEvent *menuEvent = dynamic_cast<QContextMenuEvent *>(e);
+        auto widget = dynamic_cast<MarbleWidget *>(object);
+        auto menuEvent = dynamic_cast<QContextMenuEvent *>(e);
         if (widget && menuEvent) {
             qreal mouseLon, mouseLat;
             const bool aboveMap = widget->geoCoordinates(menuEvent->x(), menuEvent->y(), mouseLon, mouseLat, GeoDataCoordinates::Radian);

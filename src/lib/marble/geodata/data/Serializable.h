@@ -14,9 +14,7 @@ namespace Marble
 class Serializable
 {
 public:
-    virtual ~Serializable()
-    {
-    }
+    virtual ~Serializable() = default;
     virtual void pack(QDataStream &stream) const = 0;
     virtual void unpack(QDataStream &stream) = 0;
 };

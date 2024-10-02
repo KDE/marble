@@ -160,12 +160,12 @@ GeoDataDocument *CycleStreetsRunner::parse(const QByteArray &content) const
         return nullptr;
     }
 
-    GeoDataDocument *result = new GeoDataDocument();
+    auto result = new GeoDataDocument();
     result->setName(QStringLiteral("CycleStreets"));
-    GeoDataPlacemark *routePlacemark = new GeoDataPlacemark;
+    auto routePlacemark = new GeoDataPlacemark;
     routePlacemark->setName(QStringLiteral("Route"));
 
-    GeoDataLineString *routeWaypoints = new GeoDataLineString;
+    auto routeWaypoints = new GeoDataLineString;
     QJsonArray features = json.object()["marker"].toArray();
 
     if (features.isEmpty()) {
@@ -207,7 +207,7 @@ GeoDataDocument *CycleStreetsRunner::parse(const QByteArray &content) const
         QStringList points = segment["points"].toString().split(QLatin1Char(' '));
         QStringList const elevation = segment["elevations"].toString().split(QLatin1Char(','));
 
-        GeoDataPlacemark *instructions = new GeoDataPlacemark;
+        auto instructions = new GeoDataPlacemark;
         QString instructionName;
         if (!maneuver.isEmpty()) {
             instructionName = maneuver.left(1).toUpper() + maneuver.mid(1);
@@ -226,7 +226,7 @@ GeoDataDocument *CycleStreetsRunner::parse(const QByteArray &content) const
         extendedData.addValue(turnType);
 
         instructions->setExtendedData(extendedData);
-        GeoDataLineString *lineString = new GeoDataLineString;
+        auto lineString = new GeoDataLineString;
         QStringList::iterator iter = points.begin();
         QStringList::iterator end = points.end();
         for (int j = 0; iter != end; ++iter, ++j) {

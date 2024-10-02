@@ -21,9 +21,7 @@ BBCItemGetter::BBCItemGetter(QObject *parent)
 {
 }
 
-BBCItemGetter::~BBCItemGetter()
-{
-}
+BBCItemGetter::~BBCItemGetter() = default;
 
 void BBCItemGetter::setSchedule(const GeoDataLatLonBox &box, qint32 number)
 {
@@ -49,7 +47,7 @@ BBCStation BBCItemGetter::station(const QString &id)
         }
     }
 
-    return BBCStation();
+    return {};
 }
 
 bool BBCItemGetter::workAvailable()

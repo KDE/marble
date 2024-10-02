@@ -61,7 +61,7 @@ void TestGeometryDetach::initTestCase()
 
 void TestGeometryDetach::testMultiGeometry()
 {
-    GeoDataPoint *point = new GeoDataPoint;
+    auto point = new GeoDataPoint;
     point->setCoordinates(m_coords1);
     GeoDataMultiGeometry multiGeom1;
     multiGeom1.append(point);
@@ -76,7 +76,7 @@ void TestGeometryDetach::testMultiGeometry()
 
 void TestGeometryDetach::testMultiTrack()
 {
-    GeoDataTrack *track = new GeoDataTrack();
+    auto track = new GeoDataTrack();
     track->setAltitudeMode(Absolute);
     GeoDataMultiTrack multiTrack1;
     multiTrack1.append(track);

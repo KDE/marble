@@ -56,9 +56,7 @@ KineticModel::KineticModel(QObject *parent)
     d_ptr->ticker.setInterval(KineticModelDefaultUpdateInterval);
 }
 
-KineticModel::~KineticModel()
-{
-}
+KineticModel::~KineticModel() = default;
 
 bool KineticModel::hasVelocity() const
 {

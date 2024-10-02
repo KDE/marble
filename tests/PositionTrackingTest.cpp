@@ -46,7 +46,7 @@ public:
     }
     QIcon icon() const override
     {
-        return QIcon();
+        return {};
     }
     QString copyrightYears() const override
     {
@@ -54,7 +54,7 @@ public:
     }
     QList<Marble::PluginAuthor> pluginAuthors() const override
     {
-        return QList<Marble::PluginAuthor>();
+        return {};
     }
     void initialize() override
     {

@@ -89,9 +89,7 @@ LocalOsmSearchRunner::LocalOsmSearchRunner(const QStringList &databaseFiles, QOb
     }
 }
 
-LocalOsmSearchRunner::~LocalOsmSearchRunner()
-{
-}
+LocalOsmSearchRunner::~LocalOsmSearchRunner() = default;
 
 void LocalOsmSearchRunner::search(const QString &searchTerm, const GeoDataLatLonBox &preferred)
 {
@@ -101,7 +99,7 @@ void LocalOsmSearchRunner::search(const QString &searchTerm, const GeoDataLatLon
 
     QList<GeoDataPlacemark *> result;
     for (const OsmPlacemark &placemark : std::as_const(placemarks)) {
-        GeoDataPlacemark *hit = new GeoDataPlacemark;
+        auto hit = new GeoDataPlacemark;
         hit->setName(placemark.name());
         if (placemark.category() == OsmPlacemark::Address && !placemark.houseNumber().isEmpty()) {
             hit->setName(hit->name() + QLatin1Char(' ') + placemark.houseNumber());

@@ -201,7 +201,7 @@ QString Navigation::nextInstructionImage() const
         return QStringLiteral("qrc:/marble/turn-exit-right.svg");
     case Maneuver::Unknown:
     default:
-        return QString();
+        return {};
     }
 }
 
@@ -254,7 +254,7 @@ QPointF NavigationPrivate::positionOnRoute() const
     if (coordinates.isValid()) {
         m_marbleQuickItem->map()->viewport()->screenCoordinates(coordinates, x, y);
     }
-    return QPointF(x, y);
+    return {x, y};
 }
 
 QPointF NavigationPrivate::currentPosition() const
@@ -263,7 +263,7 @@ QPointF NavigationPrivate::currentPosition() const
     qreal x = 0;
     qreal y = 0;
     m_marbleQuickItem->map()->viewport()->screenCoordinates(coordinates, x, y);
-    return QPointF(x, y);
+    return {x, y};
 }
 
 QPointF Navigation::screenPosition() const

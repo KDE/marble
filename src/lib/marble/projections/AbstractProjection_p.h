@@ -16,7 +16,7 @@ class AbstractProjectionPrivate
 public:
     explicit AbstractProjectionPrivate(AbstractProjection *parent);
 
-    virtual ~AbstractProjectionPrivate() {};
+    virtual ~AbstractProjectionPrivate() = default;
 
     int levelForResolution(qreal resolution) const;
 

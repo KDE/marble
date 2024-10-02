@@ -92,7 +92,7 @@ void RoutingProfileSettingsDialog::editProfile(int profileIndex)
 
     m_servicesModel->clear();
     for (RoutingRunnerPlugin *plugin : m_plugins) {
-        QStandardItem *item = new QStandardItem(plugin->guiString());
+        auto item = new QStandardItem(plugin->guiString());
         item->setCheckable(true);
         if (profiles[profileIndex].pluginSettings().contains(plugin->nameId())) {
             item->setCheckState(Qt::Checked);

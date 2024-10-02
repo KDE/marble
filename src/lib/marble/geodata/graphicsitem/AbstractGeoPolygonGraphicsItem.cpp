@@ -52,9 +52,7 @@ AbstractGeoPolygonGraphicsItem::AbstractGeoPolygonGraphicsItem(const GeoDataPlac
 {
 }
 
-AbstractGeoPolygonGraphicsItem::~AbstractGeoPolygonGraphicsItem()
-{
-}
+AbstractGeoPolygonGraphicsItem::~AbstractGeoPolygonGraphicsItem() = default;
 
 const GeoDataLatLonAltBox &AbstractGeoPolygonGraphicsItem::latLonAltBox() const
 {

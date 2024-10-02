@@ -23,7 +23,7 @@ static GeoTagWriterRegistrar s_writerPlaylist(GeoTagWriter::QualifiedName(GeoDat
 
 bool KmlPlaylistTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataPlaylist *playlist = static_cast<const GeoDataPlaylist *>(node);
+    const auto playlist = static_cast<const GeoDataPlaylist *>(node);
 
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_nameSpaceGx22), QString::fromUtf8(kml::kmlTag_Playlist));
 

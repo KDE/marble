@@ -21,7 +21,7 @@ static GeoTagWriterRegistrar s_writerFlyTo(GeoTagWriter::QualifiedName(GeoDataTy
 
 bool KmlFlyToTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataFlyTo *flyTo = static_cast<const GeoDataFlyTo *>(node);
+    const auto flyTo = static_cast<const GeoDataFlyTo *>(node);
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_nameSpaceGx22), QString::fromUtf8(kml::kmlTag_FlyTo));
     writer.writeElement(kml::kmlTag_nameSpaceGx22, kml::kmlTag_duration, QString::number(flyTo->duration()));
     if (flyTo->flyToMode() == GeoDataFlyTo::Smooth) {
@@ -29,11 +29,11 @@ bool KmlFlyToTagWriter::write(const GeoNode *node, GeoWriter &writer) const
         writer.writeElement(kml::kmlTag_nameSpaceGx22, kml::kmlTag_flyToMode, "smooth");
     }
     if (flyTo->view()) {
-        GeoDataLookAt const *lookAt = dynamic_cast<const GeoDataLookAt *>(flyTo->view());
+        auto const *lookAt = dynamic_cast<const GeoDataLookAt *>(flyTo->view());
         if (lookAt) {
             writeElement(lookAt, writer);
         }
-        GeoDataCamera const *camera = dynamic_cast<const GeoDataCamera *>(flyTo->view());
+        auto const *camera = dynamic_cast<const GeoDataCamera *>(flyTo->view());
         if (camera) {
             writeElement(camera, writer);
         }

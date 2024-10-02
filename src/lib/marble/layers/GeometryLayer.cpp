@@ -59,7 +59,7 @@ class GeometryLayerPrivate
 public:
     using OsmLineStringItems = QList<GeoLineStringGraphicsItem *>;
     using Relations = QSet<const GeoDataRelation *>;
-    typedef QHash<const GeoDataFeature *, Relations> FeatureRelationHash;
+    using FeatureRelationHash = QHash<const GeoDataFeature *, Relations>;
     using GeoGraphicItems = QList<GeoGraphicsItem *>;
 
     struct PaintFragments {
@@ -97,7 +97,7 @@ public:
     bool m_dirty;
     int m_cachedItemCount;
     QHash<QString, GeoGraphicItems> m_cachedPaintFragments;
-    typedef QPair<QString, GeoGraphicsItem *> LayerItem;
+    using LayerItem = QPair<QString, GeoGraphicsItem *>;
     QList<LayerItem> m_cachedDefaultLayer;
     QDateTime m_cachedDateTime;
     GeoDataLatLonBox m_cachedLatLonBox;
@@ -314,12 +314,12 @@ void GeometryLayerPrivate::createGraphicsItems(const GeoDataObject *object, Feat
     }
     if (auto placemark = geodata_cast<GeoDataPlacemark>(object)) {
         createGraphicsItemFromGeometry(placemark->geometry(), placemark, relations.value(placemark));
-    } else if (const GeoDataOverlay *overlay = dynamic_cast<const GeoDataOverlay *>(object)) {
+    } else if (const auto overlay = dynamic_cast<const GeoDataOverlay *>(object)) {
         createGraphicsItemFromOverlay(overlay);
     }
 
     // parse all child objects of the container
-    if (const GeoDataContainer *container = dynamic_cast<const GeoDataContainer *>(object)) {
+    if (const auto container = dynamic_cast<const GeoDataContainer *>(object)) {
         int rowCount = container->size();
         for (int row = 0; row < rowCount; ++row) {
             createGraphicsItems(container->child(row), relations);
@@ -384,7 +384,7 @@ void GeometryLayerPrivate::updateRelationVisibility()
 {
     for (int i = 0; i < m_model->rowCount(); ++i) {
         QVariant const data = m_model->data(m_model->index(i, 0), MarblePlacemarkModel::ObjectPointerRole);
-        GeoDataObject *object = qvariant_cast<GeoDataObject *>(data);
+        auto object = qvariant_cast<GeoDataObject *>(data);
         if (auto doc = geodata_cast<GeoDataDocument>(object)) {
             const auto features = doc->featureList();
             for (auto feature : features) {
@@ -448,11 +448,11 @@ void GeometryLayerPrivate::createGraphicsItemFromOverlay(const GeoDataOverlay *o
 
     GeoGraphicsItem *item = nullptr;
     if (const auto photoOverlay = geodata_cast<GeoDataPhotoOverlay>(overlay)) {
-        GeoPhotoGraphicsItem *photoItem = new GeoPhotoGraphicsItem(overlay);
+        auto photoItem = new GeoPhotoGraphicsItem(overlay);
         photoItem->setPoint(photoOverlay->point());
         item = photoItem;
     } else if (const auto screenOverlay = geodata_cast<GeoDataScreenOverlay>(overlay)) {
-        ScreenOverlayGraphicsItem *screenItem = new ScreenOverlayGraphicsItem(screenOverlay);
+        auto screenItem = new ScreenOverlayGraphicsItem(screenOverlay);
         m_screenOverlays.push_back(screenItem);
     }
 
@@ -518,7 +518,7 @@ void GeometryLayer::removePlacemarks(const QModelIndex &parent, int first, int l
         QModelIndex index = d->m_model->index(i, 0, parent);
         Q_ASSERT(index.isValid());
         const GeoDataObject *object = qvariant_cast<GeoDataObject *>(index.data(MarblePlacemarkModel::ObjectPointerRole));
-        const GeoDataFeature *feature = dynamic_cast<const GeoDataFeature *>(object);
+        const auto feature = dynamic_cast<const GeoDataFeature *>(object);
         if (feature != nullptr) {
             d->removeGraphicsItems(feature);
             isRepaintNeeded = true;
@@ -599,7 +599,7 @@ void GeometryLayer::handleHighlight(qreal lon, qreal lat, GeoDataCoordinates::Un
 
     for (int i = 0; i < d->m_model->rowCount(); ++i) {
         QVariant const data = d->m_model->data(d->m_model->index(i, 0), MarblePlacemarkModel::ObjectPointerRole);
-        GeoDataObject *object = qvariant_cast<GeoDataObject *>(data);
+        auto object = qvariant_cast<GeoDataObject *>(data);
         Q_ASSERT(object);
         if (const auto doc = geodata_cast<GeoDataDocument>(object)) {
             bool isHighlight = false;
@@ -625,7 +625,7 @@ void GeometryLayer::handleHighlight(qreal lon, qreal lat, GeoDataCoordinates::Un
 
                 for (; iter != end; ++iter) {
                     if (auto placemark = geodata_cast<GeoDataPlacemark>(*iter)) {
-                        GeoDataPolygon *polygon = dynamic_cast<GeoDataPolygon *>(placemark->geometry());
+                        auto polygon = dynamic_cast<GeoDataPolygon *>(placemark->geometry());
                         if (polygon && polygon->contains(clickedPoint)) {
                             selectedPlacemarks.push_back(placemark);
                         }
@@ -641,7 +641,7 @@ void GeometryLayer::handleHighlight(qreal lon, qreal lat, GeoDataCoordinates::Un
                             QList<GeoDataGeometry *>::Iterator const multiEnd = multiGeometry->end();
 
                             for (; multiIter != multiEnd; ++multiIter) {
-                                GeoDataPolygon *poly = dynamic_cast<GeoDataPolygon *>(*multiIter);
+                                auto poly = dynamic_cast<GeoDataPolygon *>(*multiIter);
 
                                 if (poly && poly->contains(clickedPoint)) {
                                     selectedPlacemarks.push_back(placemark);

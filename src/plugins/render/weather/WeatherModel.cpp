@@ -39,9 +39,7 @@ WeatherModel::WeatherModel(const MarbleModel *marbleModel, QObject *parent)
     m_timer->start();
 }
 
-WeatherModel::~WeatherModel()
-{
-}
+WeatherModel::~WeatherModel() = default;
 
 void WeatherModel::setFavoriteItems(const QStringList &list)
 {
@@ -64,7 +62,7 @@ void WeatherModel::downloadItemData(const QUrl &url, const QString &type, Abstra
 {
     AbstractDataPluginItem *existingItem = findItem(item->id());
     if (!existingItem) {
-        WeatherItem *weatherItem = qobject_cast<WeatherItem *>(item);
+        auto weatherItem = qobject_cast<WeatherItem *>(item);
         if (weatherItem) {
             weatherItem->request(type);
         }
@@ -75,7 +73,7 @@ void WeatherModel::downloadItemData(const QUrl &url, const QString &type, Abstra
         if (existingItem != item)
             item->deleteLater();
 
-        WeatherItem *existingWeatherItem = qobject_cast<WeatherItem *>(existingItem);
+        auto existingWeatherItem = qobject_cast<WeatherItem *>(existingItem);
         if (existingWeatherItem && existingWeatherItem->request(type)) {
             downloadItem(url, type, existingItem);
             addItemToList(existingItem);

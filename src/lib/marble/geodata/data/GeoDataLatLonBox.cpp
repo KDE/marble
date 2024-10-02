@@ -294,12 +294,12 @@ bool GeoDataLatLonBox::crossesDateLine(qreal east, qreal west)
 GeoDataCoordinates GeoDataLatLonBox::center() const
 {
     if (isEmpty())
-        return GeoDataCoordinates();
+        return {};
 
     if (crossesDateLine())
-        return GeoDataCoordinates(GeoDataCoordinates::normalizeLon(east() + 2 * M_PI - (east() + 2 * M_PI - west()) / 2), north() - (north() - south()) / 2);
+        return {GeoDataCoordinates::normalizeLon(east() + 2 * M_PI - (east() + 2 * M_PI - west()) / 2), north() - (north() - south()) / 2};
     else
-        return GeoDataCoordinates(east() - (east() - west()) / 2, north() - (north() - south()) / 2);
+        return {east() - (east() - west()) / 2, north() - (north() - south()) / 2};
 }
 
 bool GeoDataLatLonBox::containsPole(Pole pole) const
@@ -607,7 +607,7 @@ GeoDataLatLonBox GeoDataLatLonBox::fromLineString(const GeoDataLineString &lineS
 {
     // If the line string is empty return an empty boundingbox
     if (lineString.isEmpty()) {
-        return GeoDataLatLonBox();
+        return {};
     }
 
     qreal lon, lat;
@@ -621,7 +621,7 @@ GeoDataLatLonBox GeoDataLatLonBox::fromLineString(const GeoDataLineString &lineS
 
     // If there's only a single node stored then the boundingbox only contains that point
     if (lineString.size() == 1)
-        return GeoDataLatLonBox(north, south, east, west);
+        return {north, south, east, west};
 
     // Specifies whether the polygon crosses the IDL
     bool idlCrossed = false;
@@ -741,7 +741,7 @@ GeoDataLatLonBox GeoDataLatLonBox::fromLineString(const GeoDataLineString &lineS
         }
     }
 
-    return GeoDataLatLonBox(north, south, east, west);
+    return {north, south, east, west};
 }
 
 bool GeoDataLatLonBox::isNull() const

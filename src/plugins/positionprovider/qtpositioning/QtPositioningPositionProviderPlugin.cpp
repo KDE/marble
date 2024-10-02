@@ -79,7 +79,7 @@ QList<PluginAuthor> QtPositioningPositionProviderPlugin::pluginAuthors() const
 
 QIcon QtPositioningPositionProviderPlugin::icon() const
 {
-    return QIcon();
+    return {};
 }
 
 PositionProviderPlugin *QtPositioningPositionProviderPlugin::newInstance() const
@@ -95,15 +95,15 @@ PositionProviderStatus QtPositioningPositionProviderPlugin::status() const
 GeoDataCoordinates QtPositioningPositionProviderPlugin::position() const
 {
     if (d->m_source == nullptr) {
-        return GeoDataCoordinates();
+        return {};
     }
 
     const QGeoCoordinate p = d->m_lastKnownPosition.coordinate();
     if (!p.isValid()) {
-        return GeoDataCoordinates();
+        return {};
     }
 
-    return GeoDataCoordinates(p.longitude(), p.latitude(), p.altitude(), GeoDataCoordinates::Degree);
+    return {p.longitude(), p.latitude(), p.altitude(), GeoDataCoordinates::Degree};
 }
 
 GeoDataAccuracy QtPositioningPositionProviderPlugin::accuracy() const
@@ -178,7 +178,7 @@ qreal QtPositioningPositionProviderPlugin::direction() const
 QDateTime QtPositioningPositionProviderPlugin::timestamp() const
 {
     if (d->m_source == nullptr) {
-        return QDateTime();
+        return {};
     }
 
     return d->m_lastKnownPosition.timestamp();

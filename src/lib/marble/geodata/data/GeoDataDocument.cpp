@@ -30,9 +30,7 @@ GeoDataDocument::GeoDataDocument(const GeoDataDocument &other)
 {
 }
 
-GeoDataDocument::~GeoDataDocument()
-{
-}
+GeoDataDocument::~GeoDataDocument() = default;
 
 GeoDataDocument &GeoDataDocument::operator=(const GeoDataDocument &other)
 {

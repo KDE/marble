@@ -28,7 +28,7 @@ GeoNode *KmlMarblePlacemarkTagHandler::parse(GeoParser &parser) const
     GeoStackItem parentItem = parser.parentElement();
 
     if (parentItem.represents(kmlTag_Folder) || parentItem.represents(kmlTag_Document)) {
-        GeoDataPlacemark *placemark = new GeoDataPlacemark;
+        auto placemark = new GeoDataPlacemark;
         parentItem.nodeAs<GeoDataContainer>()->append(placemark);
         return placemark;
 

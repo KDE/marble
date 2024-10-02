@@ -24,7 +24,7 @@ static GeoTagWriterRegistrar s_writerCamera(GeoTagWriter::QualifiedName(GeoDataT
 
 bool KmlCameraTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataCamera *camera = static_cast<const GeoDataCamera *>(node);
+    const auto camera = static_cast<const GeoDataCamera *>(node);
 
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_Camera));
     KmlObjectTagWriter::writeIdentifiers(writer, camera);

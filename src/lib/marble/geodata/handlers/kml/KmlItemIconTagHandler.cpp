@@ -25,7 +25,7 @@ GeoNode *KmlItemIconTagHandler::parse(GeoParser &parser) const
     GeoStackItem parentItem = parser.parentElement();
 
     if (parentItem.represents(kmlTag_ListStyle)) {
-        GeoDataItemIcon *itemIcon = new GeoDataItemIcon;
+        auto itemIcon = new GeoDataItemIcon;
         parentItem.nodeAs<GeoDataListStyle>()->append(itemIcon);
         return itemIcon;
     }

@@ -29,9 +29,7 @@ public:
     {
     }
 
-    virtual ~GeoGraphicsItemPrivate()
-    {
-    }
+    virtual ~GeoGraphicsItemPrivate() = default;
 
     qreal m_zValue;
     GeoGraphicsItem::GeoGraphicsItemFlags m_flags;

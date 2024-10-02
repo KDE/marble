@@ -20,7 +20,7 @@ static GeoTagWriterRegistrar s_writerMap(GeoTagWriter::QualifiedName(GeoSceneTyp
 
 bool DgmlMapTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoSceneMap *map = static_cast<const GeoSceneMap *>(node);
+    const auto map = static_cast<const GeoSceneMap *>(node);
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Map));
     writer.writeAttribute("bgcolor", map->backgroundColor().name());
     writer.writeAttribute("labelColor", map->labelColor().name());

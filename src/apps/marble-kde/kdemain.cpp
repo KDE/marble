@@ -43,7 +43,7 @@ static bool loadTranslation(const QString &localeDirName, QApplication &app)
         return false;
     }
 
-    QTranslator *translator = new QTranslator(&app);
+    auto translator = new QTranslator(&app);
     if (!translator->load(fullPath)) {
         delete translator;
         return false;
@@ -293,7 +293,7 @@ int main(int argc, char *argv[])
     MarbleGlobal::getInstance()->setProfiles(profiles);
 
     QString marbleDataPath = parser.value(dataPathOption);
-    MainWindow *window = new MainWindow(marbleDataPath);
+    auto window = new MainWindow(marbleDataPath);
     window->show();
 
     if (parser.isSet(timeOption)) {

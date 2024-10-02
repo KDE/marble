@@ -21,7 +21,7 @@ static GeoTagWriterRegistrar s_writerLookAt(GeoTagWriter::QualifiedName(GeoDataT
 
 bool KmlLinearRingTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataLinearRing *ring = static_cast<const GeoDataLinearRing *>(node);
+    const auto ring = static_cast<const GeoDataLinearRing *>(node);
 
     if (ring->size() > 1) {
         writer.writeStartElement(QString::fromUtf8(kml::kmlTag_LinearRing));

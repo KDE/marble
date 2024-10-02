@@ -8,9 +8,7 @@
 namespace Marble
 {
 
-MergeItem::MergeItem()
-{
-}
+MergeItem::MergeItem() = default;
 
 QString MergeItem::pathA() const
 {

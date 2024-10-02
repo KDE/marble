@@ -19,7 +19,7 @@ static GeoTagWriterRegistrar s_writerItem(GeoTagWriter::QualifiedName(GeoSceneTy
 
 bool DgmlItemTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoSceneItem *item = static_cast<const GeoSceneItem *>(node);
+    const auto item = static_cast<const GeoSceneItem *>(node);
 
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Item));
     writer.writeAttribute("name", item->name());

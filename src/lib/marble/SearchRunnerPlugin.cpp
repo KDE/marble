@@ -41,7 +41,7 @@ SearchRunnerPlugin::~SearchRunnerPlugin()
 
 QIcon SearchRunnerPlugin::icon() const
 {
-    return QIcon();
+    return {};
 }
 
 bool SearchRunnerPlugin::supportsCelestialBody(const QString &celestialBodyId) const

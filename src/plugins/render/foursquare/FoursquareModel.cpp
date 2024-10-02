@@ -28,9 +28,7 @@ FoursquareModel::FoursquareModel(const MarbleModel *marbleModel, QObject *parent
     // Enjoy laziness
 }
 
-FoursquareModel::~FoursquareModel()
-{
-}
+FoursquareModel::~FoursquareModel() = default;
 
 void FoursquareModel::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 number)
 {
@@ -104,7 +102,7 @@ void FoursquareModel::parseFile(const QByteArray &file)
 
             if (!itemExists(id)) {
                 GeoDataCoordinates coordinates(longitude, latitude, 0.0, GeoDataCoordinates::Degree);
-                FoursquareItem *item = new FoursquareItem(this);
+                auto item = new FoursquareItem(this);
                 item->setId(id);
                 item->setCoordinate(coordinates);
                 item->setName(name);

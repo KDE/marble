@@ -114,7 +114,7 @@ GeoDataCoordinates RouteSegment::projected(const GeoDataCoordinates &p, const Ge
         // a + t (b - a);
         qreal const lon = x1 + t * (x2 - x1);
         qreal const lat = y1 + t * (y2 - y1);
-        return GeoDataCoordinates(lon, lat);
+        return {lon, lat};
     }
 }
 

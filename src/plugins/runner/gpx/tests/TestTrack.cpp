@@ -81,11 +81,11 @@ void TestTrack::simpleParseTest()
     }
     GeoDocument *document = parser.releaseDocument();
     QVERIFY(document);
-    GeoDataDocument *dataDocument = static_cast<GeoDataDocument *>(document);
+    auto dataDocument = static_cast<GeoDataDocument *>(document);
     GeoDataPlacemark *placemark = dataDocument->placemarkList().at(0);
     QCOMPARE(placemark->geometry()->geometryId(), GeoDataMultiGeometryId);
-    GeoDataMultiGeometry *multiGeo = static_cast<GeoDataMultiGeometry *>(placemark->geometry());
-    GeoDataTrack *track = static_cast<GeoDataTrack *>(&multiGeo->at(0));
+    auto multiGeo = static_cast<GeoDataMultiGeometry *>(placemark->geometry());
+    auto track = static_cast<GeoDataTrack *>(&multiGeo->at(0));
     QCOMPARE(track->size(), 3);
     {
         QDateTime when = track->whenList().at(0);
@@ -157,11 +157,11 @@ void TestTrack::withoutTimeTest()
     }
     GeoDocument *document = parser.releaseDocument();
     QVERIFY(document);
-    GeoDataDocument *dataDocument = static_cast<GeoDataDocument *>(document);
+    auto dataDocument = static_cast<GeoDataDocument *>(document);
     GeoDataPlacemark *placemark = dataDocument->placemarkList().at(0);
     QCOMPARE(placemark->geometry()->geometryId(), GeoDataMultiGeometryId);
-    GeoDataMultiGeometry *multiGeo = static_cast<GeoDataMultiGeometry *>(placemark->geometry());
-    GeoDataTrack *track = static_cast<GeoDataTrack *>(&multiGeo->at(0));
+    auto multiGeo = static_cast<GeoDataMultiGeometry *>(placemark->geometry());
+    auto track = static_cast<GeoDataTrack *>(&multiGeo->at(0));
     QCOMPARE(track->size(), 3);
     {
         GeoDataCoordinates coord = track->coordinatesAt(0);
@@ -226,11 +226,11 @@ void TestTrack::partialTimeTest()
     }
     GeoDocument *document = parser.releaseDocument();
     QVERIFY(document);
-    GeoDataDocument *dataDocument = static_cast<GeoDataDocument *>(document);
+    auto dataDocument = static_cast<GeoDataDocument *>(document);
     GeoDataPlacemark *placemark = dataDocument->placemarkList().at(0);
     QCOMPARE(placemark->geometry()->geometryId(), GeoDataMultiGeometryId);
-    GeoDataMultiGeometry *multiGeo = static_cast<GeoDataMultiGeometry *>(placemark->geometry());
-    GeoDataTrack *track = static_cast<GeoDataTrack *>(&multiGeo->at(0));
+    auto multiGeo = static_cast<GeoDataMultiGeometry *>(placemark->geometry());
+    auto track = static_cast<GeoDataTrack *>(&multiGeo->at(0));
     QCOMPARE(track->whenList().size(), 3);
     {
         QDateTime when = track->whenList().at(0);
@@ -351,11 +351,11 @@ void TestTrack::extendedDataHeartRateTest()
     }
     GeoDocument *document = parser.releaseDocument();
     QVERIFY(document);
-    GeoDataDocument *dataDocument = static_cast<GeoDataDocument *>(document);
+    auto dataDocument = static_cast<GeoDataDocument *>(document);
     GeoDataPlacemark *placemark = dataDocument->placemarkList().at(0);
     QCOMPARE(placemark->geometry()->geometryId(), GeoDataMultiGeometryId);
-    GeoDataMultiGeometry *multiGeo = static_cast<GeoDataMultiGeometry *>(placemark->geometry());
-    GeoDataTrack *track = static_cast<GeoDataTrack *>(&multiGeo->at(0));
+    auto multiGeo = static_cast<GeoDataMultiGeometry *>(placemark->geometry());
+    auto track = static_cast<GeoDataTrack *>(&multiGeo->at(0));
     QCOMPARE(track->size(), 3);
 
     {

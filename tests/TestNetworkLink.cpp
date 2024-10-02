@@ -55,7 +55,7 @@ void TestNetworkLink::simpleParseTest()
     QCOMPARE(dataDocument->folderList().size(), 1);
     GeoDataFolder *folder = dataDocument->folderList().at(0);
     QCOMPARE(folder->size(), 1);
-    GeoDataNetworkLink *networkLink = dynamic_cast<GeoDataNetworkLink *>(folder->child(0));
+    auto networkLink = dynamic_cast<GeoDataNetworkLink *>(folder->child(0));
     QVERIFY(networkLink != nullptr);
 
     QCOMPARE(networkLink->refreshVisibility(), true);

@@ -126,7 +126,7 @@ void HttpDownloadManager::addDownloadPolicy(const DownloadPolicy &policy)
 {
     if (d->hasDownloadPolicy(policy))
         return;
-    DownloadQueueSet *const queueSet = new DownloadQueueSet(policy, this);
+    auto const queueSet = new DownloadQueueSet(policy, this);
     d->connectQueueSet(queueSet);
     d->m_queueSets.append(QPair<DownloadPolicyKey, DownloadQueueSet *>(queueSet->downloadPolicy().key(), queueSet));
 }
@@ -140,7 +140,7 @@ void HttpDownloadManager::addJob(const QUrl &sourceUrl, const QString &destFileN
 
     DownloadQueueSet *const queueSet = d->findQueues(sourceUrl.host(), usage);
     if (queueSet->canAcceptJob(sourceUrl, destFileName)) {
-        HttpJob *const job = new HttpJob(sourceUrl, destFileName, id, &d->m_networkAccessManager);
+        auto const job = new HttpJob(sourceUrl, destFileName, id, &d->m_networkAccessManager);
         job->setUserAgentPluginId("QNamNetworkPlugin");
         job->setDownloadUsage(usage);
         mDebug() << "adding job " << sourceUrl;

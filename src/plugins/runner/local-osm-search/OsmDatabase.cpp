@@ -72,7 +72,7 @@ OsmDatabase::OsmDatabase(const QStringList &databaseFiles)
 QList<OsmPlacemark> OsmDatabase::find(const DatabaseQuery &userQuery)
 {
     if (m_databaseFiles.isEmpty()) {
-        return QList<OsmPlacemark>();
+        return {};
     }
 
     QSqlDatabase database = QSqlDatabase::addDatabase("QSQLITE", QStringLiteral("marble/local-osm-search-%1").arg(reinterpret_cast<size_t>(this)));

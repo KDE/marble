@@ -17,9 +17,7 @@ namespace Marble
 class TemplateDocumentPrivate
 {
 public:
-    TemplateDocumentPrivate()
-    {
-    }
+    TemplateDocumentPrivate() = default;
     QString templateText;
     QMap<QString, QString> templateEntries;
     static void processTemplateIncludes(QString &input);

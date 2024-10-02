@@ -20,7 +20,7 @@ static GeoTagWriterRegistrar s_writerLatLonAltBox(GeoTagWriter::QualifiedName(Ge
 
 bool KmlLatLonAltBoxWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataLatLonAltBox *latLonAltBox = static_cast<const GeoDataLatLonAltBox *>(node);
+    const auto latLonAltBox = static_cast<const GeoDataLatLonAltBox *>(node);
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_LatLonAltBox));
     KmlObjectTagWriter::writeIdentifiers(writer, latLonAltBox);
     writer.writeTextElement(QString::fromUtf8(kml::kmlTag_north), QString::number(latLonAltBox->north(GeoDataCoordinates::Degree)));

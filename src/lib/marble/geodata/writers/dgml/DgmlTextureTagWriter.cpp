@@ -22,7 +22,7 @@ static GeoTagWriterRegistrar s_writerTexture(GeoTagWriter::QualifiedName(GeoScen
 
 bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoSceneTileDataset *texture = static_cast<const GeoSceneTileDataset *>(node);
+    const auto texture = static_cast<const GeoSceneTileDataset *>(node);
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Texture));
     writer.writeAttribute("name", texture->name());
     writer.writeAttribute("expire", QString::number(texture->expire()));

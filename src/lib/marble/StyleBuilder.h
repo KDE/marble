@@ -37,7 +37,7 @@ enum StyleEffect { NoEffect, InvertedEffect, GrayscaleEffect, RedModeEffect };
 class MARBLE_EXPORT StyleBuilder
 {
 public:
-    typedef QPair<QString, QString> OsmTag;
+    using OsmTag = QPair<QString, QString>;
 
     StyleBuilder();
     ~StyleBuilder();

@@ -17,9 +17,7 @@ GroundLayer::GroundLayer()
 {
 }
 
-GroundLayer::~GroundLayer()
-{
-}
+GroundLayer::~GroundLayer() = default;
 
 QStringList GroundLayer::renderPosition() const
 {

@@ -51,8 +51,8 @@ void SearchBackend::setCompletionPrefix(const QString &prefix)
             Q_EMIT completionModelChanged(m_completionModel);
             return;
         }
-        QList<GeoDataPlacemark *> *container = new QList<GeoDataPlacemark *>();
-        QAbstractProxyModel *model = qobject_cast<QAbstractProxyModel *>(m_completer->completionModel());
+        auto container = new QList<GeoDataPlacemark *>();
+        auto model = qobject_cast<QAbstractProxyModel *>(m_completer->completionModel());
         for (int i = 0; i < m_completer->completionModel()->rowCount(); ++i) {
             QModelIndex index = model->mapToSource(model->index(i, 0));
             QVariant data = m_marbleQuickItem->model()->placemarkModel()->data(index, MarblePlacemarkModel::ObjectPointerRole);
@@ -109,7 +109,7 @@ void SearchBackend::setSelectedPlacemark(int placemarkIndex)
 
 void SearchBackend::setMarbleQuickItem(QObject *marbleQuickItem)
 {
-    MarbleQuickItem *item = qobject_cast<MarbleQuickItem *>(marbleQuickItem);
+    auto item = qobject_cast<MarbleQuickItem *>(marbleQuickItem);
     if (m_marbleQuickItem == item) {
         return;
     }
@@ -143,11 +143,11 @@ GeoDataPlacemark *SearchBackend::placemarkFromQVariant(const QVariant &data)
     if (!data.isValid()) {
         return nullptr;
     }
-    GeoDataObject *object = qvariant_cast<GeoDataObject *>(data);
+    auto object = qvariant_cast<GeoDataObject *>(data);
     if (object == nullptr) {
         return nullptr;
     }
-    GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark *>(object);
+    auto placemark = dynamic_cast<GeoDataPlacemark *>(object);
     if (placemark == nullptr) {
         return nullptr;
     }

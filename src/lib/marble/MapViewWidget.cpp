@@ -247,7 +247,7 @@ MapViewWidget::MapViewWidget(QWidget *parent, Qt::WindowFlags f)
     layout()->setContentsMargins({});
 
     if (MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen) {
-        QGridLayout *layout = new QGridLayout;
+        auto layout = new QGridLayout;
         layout->addItem(d->m_mapViewUi.verticalLayout->takeAt(1), 0, 0);
         layout->addItem(d->m_mapViewUi.verticalLayout->takeAt(1), 0, 1);
         d->m_mapViewUi.line->setVisible(false);
@@ -640,7 +640,7 @@ void MapViewWidget::Private::toggleFavorite()
     } else {
         m_settings.setValue(favoriteKey(index), QDateTime::currentDateTime());
     }
-    QStandardItemModel *sourceModel = qobject_cast<QStandardItemModel *>(m_mapSortProxy.sourceModel());
+    auto sourceModel = qobject_cast<QStandardItemModel *>(m_mapSortProxy.sourceModel());
     const QModelIndex sourceIndex = m_mapSortProxy.mapToSource(index);
     Q_EMIT sourceModel->dataChanged(sourceIndex, sourceIndex);
     index = m_mapViewUi.marbleThemeSelectView->currentIndex();

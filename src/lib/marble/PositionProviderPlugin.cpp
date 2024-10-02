@@ -11,9 +11,7 @@ namespace Marble
 class PositionProviderPluginPrivate
 {
 public:
-    PositionProviderPluginPrivate()
-    {
-    }
+    PositionProviderPluginPrivate() = default;
 };
 
 PositionProviderPlugin::PositionProviderPlugin(QObject *parent)

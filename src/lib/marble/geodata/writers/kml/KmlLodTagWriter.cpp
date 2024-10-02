@@ -18,7 +18,7 @@ static GeoTagWriterRegistrar s_writerLod(GeoTagWriter::QualifiedName(GeoDataType
 
 bool KmlLodTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataLod *lod = static_cast<const GeoDataLod *>(node);
+    const auto lod = static_cast<const GeoDataLod *>(node);
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_Lod));
     KmlObjectTagWriter::writeIdentifiers(writer, lod);
     writer.writeTextElement(QString::fromUtf8(kml::kmlTag_minLodPixels), QString::number(lod->minLodPixels()));

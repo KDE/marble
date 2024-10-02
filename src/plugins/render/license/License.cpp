@@ -83,9 +83,7 @@ License::License(const MarbleModel *marbleModel)
     setFrame(NoFrame);
 }
 
-License::~License()
-{
-}
+License::~License() = default;
 
 QStringList License::backendTypes() const
 {
@@ -144,7 +142,7 @@ void License::initialize()
     m_label->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     m_widgetItem->setWidget(m_label);
 
-    MarbleGraphicsGridLayout *layout = new MarbleGraphicsGridLayout(1, 1);
+    auto layout = new MarbleGraphicsGridLayout(1, 1);
     layout->addItem(m_widgetItem, 0, 0);
     setLayout(layout);
     setPadding(0);
@@ -209,13 +207,13 @@ bool License::eventFilter(QObject *object, QEvent *event)
     if (!enabled() || !visible())
         return false;
 
-    MarbleWidget *widget = dynamic_cast<MarbleWidget *>(object);
+    auto widget = dynamic_cast<MarbleWidget *>(object);
     if (!widget) {
         return AbstractFloatItem::eventFilter(object, event);
     }
 
     if (event->type() == QEvent::MouseMove) {
-        QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
+        auto mouseEvent = static_cast<QMouseEvent *>(event);
         QRectF floatItemRect = QRectF(positivePosition(), size());
         if (floatItemRect.contains(mouseEvent->pos())) {
             widget->setCursor(QCursor(Qt::ArrowCursor));

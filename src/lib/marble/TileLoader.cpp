@@ -299,7 +299,7 @@ QImage TileLoader::scaledLowerLevelTile(const GeoSceneTextureTileDataset *textur
     }
 
     Q_ASSERT_X(false, "scaled image", "level zero image missing"); // not reached
-    return QImage();
+    return {};
 }
 
 GeoDataDocument *TileLoader::openVectorFile(const QString &fileName) const
