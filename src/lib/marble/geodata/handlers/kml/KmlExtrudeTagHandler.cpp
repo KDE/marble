@@ -7,7 +7,6 @@
 
 #include "KmlExtrudeTagHandler.h"
 #include "KmlElementDictionary.h"
-#include "MarbleDebug.h"
 
 #include "GeoDataGeometry.h"
 #include "GeoDataLineString.h"

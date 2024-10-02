@@ -4,15 +4,12 @@
 //
 #include "KmlDurationTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "KmlElementDictionary.h"
 
 #include "GeoDataAnimatedUpdate.h"
 #include "GeoDataFlyTo.h"
 #include "GeoDataWait.h"
 #include "GeoParser.h"
-#include "MarbleGlobal.h"
 
 namespace Marble
 {

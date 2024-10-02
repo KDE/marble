@@ -5,8 +5,6 @@
 
 #include "KmlEndTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "GeoDataTimeSpan.h"
 #include "GeoParser.h"
 #include "KmlElementDictionary.h"

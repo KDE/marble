@@ -6,8 +6,6 @@
 
 #include "KmlDocumentTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "GeoDataDocument.h"
 #include "GeoDataParser.h"
 #include "KmlElementDictionary.h"

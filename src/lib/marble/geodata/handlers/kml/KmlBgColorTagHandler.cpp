@@ -5,11 +5,8 @@
 
 #include "KmlBgColorTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "GeoDataBalloonStyle.h"
 #include "GeoDataListStyle.h"
-#include "GeoDataParser.h"
 #include "KmlColorTagHandler.h"
 #include "KmlElementDictionary.h"
 

@@ -5,8 +5,6 @@
 //
 #include "KmlCameraTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "GeoDataCamera.h"
 #include "GeoDataFeature.h"
 #include "GeoDataFlyTo.h"

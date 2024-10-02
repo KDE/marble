@@ -27,8 +27,8 @@ public:
     QString m_status;
     CloudSyncManager::Status m_status_type;
 
-    RouteSyncManager *m_routeSyncManager;
-    BookmarkSyncManager *m_bookmarkSyncManager;
+    RouteSyncManager *m_routeSyncManager = nullptr;
+    BookmarkSyncManager *m_bookmarkSyncManager = nullptr;
 };
 
 CloudSyncManager::Private::~Private()
@@ -46,8 +46,6 @@ CloudSyncManager::Private::Private()
     , m_owncloudPassword()
     , m_status()
     , m_status_type(CloudSyncManager::Unknown)
-    , m_routeSyncManager(nullptr)
-    , m_bookmarkSyncManager(nullptr)
 {
 }
 
@@ -179,7 +177,7 @@ QString CloudSyncManager::statusDescription() const
 
 QString CloudSyncManager::apiPath() const
 {
-    return "index.php/apps/marble/api/v1";
+    return QStringLiteral("index.php/apps/marble/api/v1");
 }
 
 QUrl CloudSyncManager::apiUrl() const

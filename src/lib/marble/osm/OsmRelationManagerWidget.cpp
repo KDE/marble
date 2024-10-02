@@ -15,7 +15,6 @@
 #include <QTreeWidget>
 
 // Marble
-#include "GeoDataGeometry.h"
 #include "GeoDataPlacemark.h"
 #include "osm/OsmObjectManager.h"
 #include "osm/OsmPlacemarkData.h"

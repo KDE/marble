@@ -5,8 +5,6 @@
 
 #include "KmlGroundOverlayTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "GeoDataContainer.h"
 #include "GeoDataDocument.h"
 #include "GeoDataGroundOverlay.h"

@@ -15,7 +15,6 @@
 #include <QShowEvent>
 
 // Marble
-#include "MarbleDebug.h"
 #include "MarbleWidget.h"
 
 using namespace Marble;

@@ -15,7 +15,6 @@
 // Geodata
 #include "GeoDataDocument.h"
 #include "GeoDocument.h"
-#include "GeoTagHandler.h"
 
 // TODO: GeoRSS support
 // #include "GeoRSSElementDictionary.h"

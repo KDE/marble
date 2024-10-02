@@ -10,8 +10,6 @@
 
 #include "Kml_scaleTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "GeoDataIconStyle.h"
 #include "GeoDataLabelStyle.h"
 #include "GeoParser.h"

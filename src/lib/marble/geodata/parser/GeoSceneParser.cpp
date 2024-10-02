@@ -7,13 +7,9 @@
 // Own
 #include "GeoSceneParser.h"
 
-// Marble
-#include "MarbleDebug.h"
-
 // Geodata
 #include "GeoDocument.h"
 #include "GeoSceneDocument.h"
-#include "GeoTagHandler.h"
 
 // DGML support
 #include "DgmlElementDictionary.h"

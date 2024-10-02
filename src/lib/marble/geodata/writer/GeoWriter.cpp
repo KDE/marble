@@ -5,7 +5,6 @@
 
 #include "GeoWriter.h"
 
-#include "DgmlElementDictionary.h"
 #include "GeoDocument.h"
 #include "GeoTagWriter.h"
 #include "KmlElementDictionary.h"

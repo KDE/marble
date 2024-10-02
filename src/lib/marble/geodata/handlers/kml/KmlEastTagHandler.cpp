@@ -5,8 +5,6 @@
 
 #include "KmlEastTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "GeoDataLatLonAltBox.h"
 #include "GeoParser.h"
 #include "KmlElementDictionary.h"

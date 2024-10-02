@@ -6,8 +6,6 @@
 
 #include "KmlDisplayNameTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "GeoDataData.h"
 #include "GeoDataSimpleField.h"
 #include "GeoParser.h"

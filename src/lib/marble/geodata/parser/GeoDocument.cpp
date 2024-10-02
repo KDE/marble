@@ -5,7 +5,6 @@
 */
 
 #include "GeoDocument.h"
-#include "GeoSceneTypes.h"
 #include <cstdio>
 
 namespace Marble

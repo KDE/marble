@@ -6,7 +6,6 @@
 #include "KmlAliasTagHandler.h"
 
 #include "GeoDataAlias.h"
-#include "GeoDataParser.h"
 #include "GeoDataResourceMap.h"
 #include "KmlElementDictionary.h"
 

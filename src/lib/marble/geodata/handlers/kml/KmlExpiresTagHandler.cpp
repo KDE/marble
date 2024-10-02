@@ -6,7 +6,6 @@
 #include "KmlExpiresTagHandler.h"
 
 #include "GeoDataNetworkLinkControl.h"
-#include "GeoDataParser.h"
 #include "KmlElementDictionary.h"
 
 #include <QDateTime>

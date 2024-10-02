@@ -16,7 +16,6 @@
 #include "GeoDataLocation.h"
 #include "GeoDataLookAt.h"
 #include "GeoParser.h"
-#include "MarbleGlobal.h"
 
 namespace Marble
 {

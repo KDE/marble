@@ -6,8 +6,6 @@
 
 #include "KmlFolderTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "GeoDataContainer.h"
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"

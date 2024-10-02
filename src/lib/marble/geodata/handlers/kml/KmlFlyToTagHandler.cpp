@@ -8,7 +8,6 @@
 #include "GeoParser.h"
 #include "KmlElementDictionary.h"
 #include "KmlObjectTagHandler.h"
-#include "MarbleDebug.h"
 
 namespace Marble
 {

@@ -5,14 +5,11 @@
 
 #include "KmlGxTimeStampTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "GeoDataFeature.h"
 #include "GeoDataTimeStamp.h"
 #include "GeoParser.h"
 #include "KmlElementDictionary.h"
 #include "KmlObjectTagHandler.h"
-#include "KmlTimeStampTagHandler.h"
 #include <GeoDataAbstractView.h>
 
 namespace Marble

@@ -5,10 +5,7 @@
 
 #include "KmlBalloonStyleTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "GeoDataBalloonStyle.h"
-#include "GeoDataParser.h"
 #include "GeoDataStyle.h"
 #include "KmlElementDictionary.h"
 #include "KmlObjectTagHandler.h"

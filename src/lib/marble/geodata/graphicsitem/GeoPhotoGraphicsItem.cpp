@@ -9,7 +9,6 @@
 #include "GeoDataIconStyle.h"
 #include "GeoDataStyle.h"
 #include "GeoPainter.h"
-#include "StyleBuilder.h"
 #include "ViewportParams.h"
 
 #include <QDebug>

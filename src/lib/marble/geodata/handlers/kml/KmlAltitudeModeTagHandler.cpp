@@ -7,8 +7,6 @@
 
 #include "KmlAltitudeModeTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "KmlElementDictionary.h"
 
 #include "GeoDataAbstractView.h"

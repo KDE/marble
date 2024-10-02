@@ -6,8 +6,6 @@
 
 #include "KmlHotSpotTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "GeoDataHotSpot.h"
 #include "GeoDataIconStyle.h"
 #include "GeoParser.h"

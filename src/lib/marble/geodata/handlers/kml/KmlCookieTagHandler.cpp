@@ -6,7 +6,6 @@
 #include "KmlCookieTagHandler.h"
 
 #include "GeoDataNetworkLinkControl.h"
-#include "GeoDataParser.h"
 #include "KmlElementDictionary.h"
 
 namespace Marble

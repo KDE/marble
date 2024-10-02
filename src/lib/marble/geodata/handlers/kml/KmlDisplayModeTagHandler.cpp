@@ -5,10 +5,7 @@
 
 #include "KmlDisplayModeTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "GeoDataBalloonStyle.h"
-#include "GeoDataParser.h"
 #include "KmlElementDictionary.h"
 
 namespace Marble

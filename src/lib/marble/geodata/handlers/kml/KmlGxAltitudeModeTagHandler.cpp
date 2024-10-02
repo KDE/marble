@@ -4,7 +4,6 @@
 //
 
 #include "KmlGxAltitudeModeTagHandler.h"
-#include "KmlAltitudeModeTagHandler.h"
 
 #include "MarbleDebug.h"
 

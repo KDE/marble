@@ -9,7 +9,6 @@
 #include "GeoDataColorStyle.h"
 #include "GeoParser.h"
 #include "KmlElementDictionary.h"
-#include "MarbleDebug.h"
 
 namespace Marble
 {

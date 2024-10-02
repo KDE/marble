@@ -5,8 +5,6 @@
 
 #include "KmlGxTimeSpanTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "GeoDataAbstractView.h"
 #include "GeoDataFeature.h"
 #include "GeoDataTimeSpan.h"

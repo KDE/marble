@@ -6,7 +6,6 @@
 #include "KmlGridOriginTagHandler.h"
 
 #include "GeoDataImagePyramid.h"
-#include "GeoDataParser.h"
 #include "KmlElementDictionary.h"
 
 namespace Marble

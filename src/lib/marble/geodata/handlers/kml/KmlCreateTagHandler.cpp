@@ -6,7 +6,6 @@
 #include "KmlCreateTagHandler.h"
 
 #include "GeoDataCreate.h"
-#include "GeoDataParser.h"
 #include "GeoDataUpdate.h"
 #include "KmlElementDictionary.h"
 #include "KmlObjectTagHandler.h"

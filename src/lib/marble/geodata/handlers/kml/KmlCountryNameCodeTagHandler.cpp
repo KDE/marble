@@ -7,8 +7,6 @@
 #if KML_LAZY_IMP
 #include "KmlCountryNameCodeTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "KmlElementDictionary.h"
 
 #include "GeoDataPlacemark.h"

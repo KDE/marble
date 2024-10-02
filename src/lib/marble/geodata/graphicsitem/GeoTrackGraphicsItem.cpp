@@ -5,10 +5,8 @@
 
 #include "GeoTrackGraphicsItem.h"
 
-#include "GeoDataLineString.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataTrack.h"
-#include "MarbleDebug.h"
 #include "StyleBuilder.h"
 
 using namespace Marble;
