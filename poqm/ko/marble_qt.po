@@ -2301,13 +2301,13 @@ msgctxt "Marble::MainWindow|"
 msgid "Marble - Virtual Globe"
 msgstr "Marble 가상 지구본"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:199
-#: src/apps/marble-qt/QtMainWindow.cpp:748
+#: src/apps/marble-qt/QtMainWindow.cpp:198
+#: src/apps/marble-qt/QtMainWindow.cpp:747
 msgctxt "Marble::MainWindow|"
 msgid "Marble"
 msgstr "Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:200
+#: src/apps/marble-qt/QtMainWindow.cpp:199
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid ""
@@ -2317,88 +2317,88 @@ msgstr ""
 "죄송합니다. '%1'을(를) 열 수 없습니다:\n"
 "'%2'"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:266
+#: src/apps/marble-qt/QtMainWindow.cpp:265
 msgctxt "Marble::MainWindow|"
 msgid "&Open..."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:268
+#: src/apps/marble-qt/QtMainWindow.cpp:267
 msgctxt "Marble::MainWindow|"
 msgid "Open a file for viewing on Marble"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:271
+#: src/apps/marble-qt/QtMainWindow.cpp:270
 msgctxt "Marble::MainWindow|"
 msgid "&Download Maps..."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:274
+#: src/apps/marble-qt/QtMainWindow.cpp:273
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
 msgstr "지도 내보내기(&E)..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:276
+#: src/apps/marble-qt/QtMainWindow.cpp:275
 msgctxt "Marble::MainWindow|"
 msgid "Save a screenshot of the map"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:280
+#: src/apps/marble-qt/QtMainWindow.cpp:279
 msgctxt "Marble::MainWindow|"
 msgid "Download &Region..."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:281
+#: src/apps/marble-qt/QtMainWindow.cpp:280
 msgctxt "Marble::MainWindow|"
 msgid "Download a map region in different zoom levels for offline usage"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:284
+#: src/apps/marble-qt/QtMainWindow.cpp:283
 msgctxt "Marble::MainWindow|"
 msgid "&Print..."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:285
+#: src/apps/marble-qt/QtMainWindow.cpp:284
 msgctxt "Marble::MainWindow|"
 msgid "Ctrl+P"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:286
-#: src/apps/marble-qt/QtMainWindow.cpp:290
+#: src/apps/marble-qt/QtMainWindow.cpp:285
+#: src/apps/marble-qt/QtMainWindow.cpp:289
 msgctxt "Marble::MainWindow|"
 msgid "Print a screenshot of the map"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:289
+#: src/apps/marble-qt/QtMainWindow.cpp:288
 msgctxt "Marble::MainWindow|"
 msgid "Print Previe&w ..."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:293
+#: src/apps/marble-qt/QtMainWindow.cpp:292
 msgctxt "Marble::MainWindow|"
 msgid "&Quit"
 msgstr "끝내기(&Q)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:294
+#: src/apps/marble-qt/QtMainWindow.cpp:293
 msgctxt "Marble::MainWindow|"
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:295
+#: src/apps/marble-qt/QtMainWindow.cpp:294
 msgctxt "Marble::MainWindow|"
 msgid "Quit the Application"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:298
+#: src/apps/marble-qt/QtMainWindow.cpp:297
 msgctxt "Marble::MainWindow|"
 msgid "&Copy Map"
 msgstr "지도 복사(&C)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:300
+#: src/apps/marble-qt/QtMainWindow.cpp:299
 msgctxt "Marble::MainWindow|"
 msgid "Copy a screenshot of the map"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:303
+#: src/apps/marble-qt/QtMainWindow.cpp:302
 #, fuzzy
 #| msgctxt "Marble::MainWindow|"
 #| msgid "&Edit Map"
@@ -2406,185 +2406,185 @@ msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
 msgstr "지도 편집(&E)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:305
+#: src/apps/marble-qt/QtMainWindow.cpp:304
 msgctxt "Marble::MainWindow|"
 msgid "Edit the current map region in an external editor"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:309
+#: src/apps/marble-qt/QtMainWindow.cpp:308
 msgctxt "Marble::MainWindow|"
 msgid "&Record Movie"
 msgstr "녹화 시작(&R)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:310
+#: src/apps/marble-qt/QtMainWindow.cpp:309
 msgctxt "Marble::MainWindow|"
 msgid "Records a movie of the globe"
 msgstr "지구본 동영상 녹화 시작"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:315
+#: src/apps/marble-qt/QtMainWindow.cpp:314
 msgctxt "Marble::MainWindow|"
 msgid "&Stop Recording"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:316
+#: src/apps/marble-qt/QtMainWindow.cpp:315
 msgctxt "Marble::MainWindow|"
 msgid "Stop recording a movie of the globe"
 msgstr "지구본 동영상 녹화 중지"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:321
+#: src/apps/marble-qt/QtMainWindow.cpp:320
 #, fuzzy
 #| msgid "&Configure..."
 msgctxt "Marble::MainWindow|"
 msgid "&Configure Marble"
 msgstr "설정(&C)..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:322
+#: src/apps/marble-qt/QtMainWindow.cpp:321
 msgctxt "Marble::MainWindow|"
 msgid "Show the configuration dialog"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:325
+#: src/apps/marble-qt/QtMainWindow.cpp:324
 msgctxt "Marble::MainWindow|"
 msgid "C&opy Coordinates"
 msgstr "좌표 복사(&O)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:326
+#: src/apps/marble-qt/QtMainWindow.cpp:325
 msgctxt "Marble::MainWindow|"
 msgid "Copy the center coordinates as text"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:329
+#: src/apps/marble-qt/QtMainWindow.cpp:328
 msgctxt "Marble::MainWindow|"
 msgid "&Full Screen Mode"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:332
+#: src/apps/marble-qt/QtMainWindow.cpp:331
 msgctxt "Marble::MainWindow|"
 msgid "Full Screen Mode"
 msgstr "전체 화면 모드"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:335
+#: src/apps/marble-qt/QtMainWindow.cpp:334
 msgctxt "Marble::MainWindow|"
 msgid "&Show Status Bar"
 msgstr "상태 표시줄 표시(&S)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:337
+#: src/apps/marble-qt/QtMainWindow.cpp:336
 msgctxt "Marble::MainWindow|"
 msgid "Show Status Bar"
 msgstr "상태 표시줄 표시"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:340
+#: src/apps/marble-qt/QtMainWindow.cpp:339
 msgctxt "Marble::MainWindow|"
 msgid "Lock Position"
 msgstr "위치 고정"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:342
+#: src/apps/marble-qt/QtMainWindow.cpp:341
 msgctxt "Marble::MainWindow|"
 msgid "Lock Position of Floating Items"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:345
+#: src/apps/marble-qt/QtMainWindow.cpp:344
 msgctxt "Marble::MainWindow|"
 msgid "&Clouds"
 msgstr "구름(&C)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:347
+#: src/apps/marble-qt/QtMainWindow.cpp:346
 msgctxt "Marble::MainWindow|"
 msgid "Show Real Time Cloud Cover"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:350
+#: src/apps/marble-qt/QtMainWindow.cpp:349
 msgctxt "Marble::MainWindow|"
 msgid "Work Off&line"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:354
+#: src/apps/marble-qt/QtMainWindow.cpp:353
 msgctxt "Marble::MainWindow|"
 msgid "&Time Control..."
 msgstr "시간 제어(&T)..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:355
+#: src/apps/marble-qt/QtMainWindow.cpp:354
 msgctxt "Marble::MainWindow|"
 msgid "Configure Time Control "
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:358
+#: src/apps/marble-qt/QtMainWindow.cpp:357
 msgctxt "Marble::MainWindow|"
 msgid "S&un Control..."
 msgstr "태양 제어(&U)..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:359
+#: src/apps/marble-qt/QtMainWindow.cpp:358
 msgctxt "Marble::MainWindow|"
 msgid "Configure Sun Control"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:362
+#: src/apps/marble-qt/QtMainWindow.cpp:361
 msgctxt "Marble::MainWindow|"
 msgid "&Redisplay"
 msgstr "다시 표시(&R)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:364
+#: src/apps/marble-qt/QtMainWindow.cpp:363
 msgctxt "Marble::MainWindow|"
 msgid "Reload Current Map"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:367
+#: src/apps/marble-qt/QtMainWindow.cpp:366
 #, fuzzy
 #| msgid "Marble Virtual Globe"
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe &Handbook"
 msgstr "Marble 가상 지구본"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:369
+#: src/apps/marble-qt/QtMainWindow.cpp:368
 #, fuzzy
 #| msgid "Marble Virtual Globe"
 msgctxt "Marble::MainWindow|"
 msgid "Show the Handbook for Marble Virtual Globe"
 msgstr "Marble 가상 지구본"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:372
+#: src/apps/marble-qt/QtMainWindow.cpp:371
 msgctxt "Marble::MainWindow|"
 msgid "What's &This"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:374
+#: src/apps/marble-qt/QtMainWindow.cpp:373
 msgctxt "Marble::MainWindow|"
 msgid "Show a detailed explanation of the action."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:377
+#: src/apps/marble-qt/QtMainWindow.cpp:376
 msgctxt "Marble::MainWindow|"
 msgid "&Community Forum"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:378
+#: src/apps/marble-qt/QtMainWindow.cpp:377
 msgctxt "Marble::MainWindow|"
 msgid "Visit Marble's Community Forum"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:381
+#: src/apps/marble-qt/QtMainWindow.cpp:380
 #, fuzzy
 #| msgid "Marble Virtual Globe"
 msgctxt "Marble::MainWindow|"
 msgid "&About Marble Virtual Globe"
 msgstr "Marble 가상 지구본"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:382
+#: src/apps/marble-qt/QtMainWindow.cpp:381
 msgctxt "Marble::MainWindow|"
 msgid "Show the application's About Box"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:385
+#: src/apps/marble-qt/QtMainWindow.cpp:384
 msgctxt "Marble::MainWindow|"
 msgid "About &Qt"
 msgstr "Qt 정보(&Q)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:386
+#: src/apps/marble-qt/QtMainWindow.cpp:385
 msgctxt "Marble::MainWindow|"
 msgid "Show the Qt library's About box"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:390
+#: src/apps/marble-qt/QtMainWindow.cpp:389
 #, fuzzy
 #| msgctxt "Marble::MarbleWidgetPopupMenu|"
 #| msgid "Add &Bookmark"
@@ -2592,28 +2592,28 @@ msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
 msgstr "책갈피 추가(&B)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:392
+#: src/apps/marble-qt/QtMainWindow.cpp:391
 msgctxt "Marble::MainWindow|"
 msgid "Add Bookmark"
 msgstr ""
 
+#: src/apps/marble-qt/QtMainWindow.cpp:394
 #: src/apps/marble-qt/QtMainWindow.cpp:395
-#: src/apps/marble-qt/QtMainWindow.cpp:396
 msgctxt "Marble::MainWindow|"
 msgid "&Set Home Location"
 msgstr "집 위치 설정(&S)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:399
+#: src/apps/marble-qt/QtMainWindow.cpp:398
 msgctxt "Marble::MainWindow|"
 msgid "Show &Bookmarks"
 msgstr "책갈피 표시(&B)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:400
+#: src/apps/marble-qt/QtMainWindow.cpp:399
 msgctxt "Marble::MainWindow|"
 msgid "Toggle display of Bookmarks"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:404
+#: src/apps/marble-qt/QtMainWindow.cpp:403
 #, fuzzy
 #| msgctxt "Marble::MainWindow|"
 #| msgid "&Manage Bookmarks"
@@ -2621,174 +2621,174 @@ msgctxt "Marble::MainWindow|"
 msgid "&Manage Bookmarks..."
 msgstr "책갈피 관리(&M)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:405
+#: src/apps/marble-qt/QtMainWindow.cpp:404
 msgctxt "Marble::MainWindow|"
 msgid "Manage Bookmarks"
 msgstr "책갈피 관리"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:409
+#: src/apps/marble-qt/QtMainWindow.cpp:408
 msgctxt "Marble::MainWindow|"
 msgid "&Create a New Map..."
 msgstr "새 지도 만들기(&C)..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:410
+#: src/apps/marble-qt/QtMainWindow.cpp:409
 msgctxt "Marble::MainWindow|"
 msgid "A wizard guides you through the creation of your own map theme."
 msgstr "마법사에서 내 지도 테마를 만드는 것을 도와 줍니다."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:414
+#: src/apps/marble-qt/QtMainWindow.cpp:413
 msgctxt "Marble::MainWindow|"
 msgid "Show Tile Zoom Level"
 msgstr "타일 크기 단계 표시"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:421
+#: src/apps/marble-qt/QtMainWindow.cpp:420
 msgctxt "Marble::MainWindow|"
 msgid "Degree (DMS)"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:426
+#: src/apps/marble-qt/QtMainWindow.cpp:425
 msgctxt "Marble::MainWindow|"
 msgid "Degree (Decimal)"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:431
+#: src/apps/marble-qt/QtMainWindow.cpp:430
 msgctxt "Marble::MainWindow|"
 msgid "Universal Transverse Mercator (UTM)"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:445
+#: src/apps/marble-qt/QtMainWindow.cpp:444
 msgctxt "Marble::MainWindow|"
 msgid "&File"
 msgstr "파일(&F)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:458
+#: src/apps/marble-qt/QtMainWindow.cpp:457
 msgctxt "Marble::MainWindow|"
 msgid "&Edit"
 msgstr "편집(&E)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:466
+#: src/apps/marble-qt/QtMainWindow.cpp:465
 msgctxt "Marble::MainWindow|"
 msgid "&View"
 msgstr "보기(&V)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:467
+#: src/apps/marble-qt/QtMainWindow.cpp:466
 msgctxt "Marble::MainWindow|"
 msgid "&Info Boxes"
 msgstr "정보 상자(&I)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:468
+#: src/apps/marble-qt/QtMainWindow.cpp:467
 msgctxt "Marble::MainWindow|"
 msgid "&Online Services"
 msgstr "온라인 서비스(&O)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:471
+#: src/apps/marble-qt/QtMainWindow.cpp:470
 msgctxt "Marble::MainWindow|"
 msgid "&Bookmarks"
 msgstr "책갈피(&B)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:475
+#: src/apps/marble-qt/QtMainWindow.cpp:474
 msgctxt "Marble::MainWindow|"
 msgid "&Panels"
 msgstr "패널(&P)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:480
+#: src/apps/marble-qt/QtMainWindow.cpp:479
 msgctxt "Marble::MainWindow|"
 msgid "&View Size"
 msgstr "보기 크기(&V)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:483
+#: src/apps/marble-qt/QtMainWindow.cpp:482
 msgctxt "Marble::MainWindow|"
 msgid "&Settings"
 msgstr "설정(&S)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:492
+#: src/apps/marble-qt/QtMainWindow.cpp:491
 msgctxt "Marble::MainWindow|"
 msgid "&Help"
 msgstr "도움말(&H)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:595
+#: src/apps/marble-qt/QtMainWindow.cpp:594
 msgctxt "Marble::MainWindow|"
 msgid "&Home"
 msgstr "홈(&H)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:603
+#: src/apps/marble-qt/QtMainWindow.cpp:602
 msgctxt "Marble::MainWindow|"
 msgid "Default"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:719
+#: src/apps/marble-qt/QtMainWindow.cpp:718
 #, fuzzy
 #| msgid "Ready"
 msgctxt "Marble::MainWindow|"
 msgid "Ready"
 msgstr "준비"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:733
+#: src/apps/marble-qt/QtMainWindow.cpp:732
 msgctxt "Marble::MainWindow|"
 msgid "Export Map"
 msgstr "지도 내보내기"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:735
+#: src/apps/marble-qt/QtMainWindow.cpp:734
 msgctxt "Marble::MainWindow|"
 msgid "Images (*.jpg *.png)"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:749
+#: src/apps/marble-qt/QtMainWindow.cpp:748
 msgctxt "Marble::MainWindow|"
 msgid "An error occurred while trying to save the file.\n"
 msgstr "파일을 저장하는 중 오류가 발생했습니다.\n"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:871
+#: src/apps/marble-qt/QtMainWindow.cpp:870
 #, fuzzy, qt-format
 #| msgid "Marble Virtual Globe"
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe %1"
 msgstr "Marble 가상 지구본"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:922
-#: src/apps/marble-qt/QtMainWindow.cpp:999
+#: src/apps/marble-qt/QtMainWindow.cpp:921
+#: src/apps/marble-qt/QtMainWindow.cpp:998
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Position: %1"
 msgstr "위치: %1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:925
-#: src/apps/marble-qt/QtMainWindow.cpp:1006
+#: src/apps/marble-qt/QtMainWindow.cpp:924
+#: src/apps/marble-qt/QtMainWindow.cpp:1005
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Altitude: %1"
 msgstr "고도: %1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:928
-#: src/apps/marble-qt/QtMainWindow.cpp:1013
+#: src/apps/marble-qt/QtMainWindow.cpp:927
+#: src/apps/marble-qt/QtMainWindow.cpp:1012
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Zoom: %1"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:931
-#: src/apps/marble-qt/QtMainWindow.cpp:1020
+#: src/apps/marble-qt/QtMainWindow.cpp:930
+#: src/apps/marble-qt/QtMainWindow.cpp:1019
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Time: %1"
 msgstr "시간: %1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:963
+#: src/apps/marble-qt/QtMainWindow.cpp:962
 msgctxt "Marble::MainWindow|"
 msgid "All Supported Files"
 msgstr "모든 지원하는 파일"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:969
+#: src/apps/marble-qt/QtMainWindow.cpp:968
 msgctxt "Marble::MainWindow|"
 msgid "Open File"
 msgstr "파일 열기"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:990
+#: src/apps/marble-qt/QtMainWindow.cpp:989
 msgctxt "Marble::MainWindow|"
 msgid "&Angle Display Unit"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:1222
+#: src/apps/marble-qt/QtMainWindow.cpp:1221
 msgctxt "Marble::MainWindow|"
 msgid "Unnamed"
 msgstr "이름 없음"

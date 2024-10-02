@@ -2410,14 +2410,14 @@ msgctxt "Marble::MainWindow|"
 msgid "Marble - Virtual Globe"
 msgstr "‏Marble - גלובוס שולחני"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:199
-#: src/apps/marble-qt/QtMainWindow.cpp:748
+#: src/apps/marble-qt/QtMainWindow.cpp:198
+#: src/apps/marble-qt/QtMainWindow.cpp:747
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Marble"
 msgstr "Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:200
+#: src/apps/marble-qt/QtMainWindow.cpp:199
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid ""
@@ -2425,503 +2425,503 @@ msgid ""
 "'%2'"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:266
+#: src/apps/marble-qt/QtMainWindow.cpp:265
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Open..."
 msgstr "&פתח..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:268
+#: src/apps/marble-qt/QtMainWindow.cpp:267
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Open a file for viewing on Marble"
 msgstr "פתיחת קובץ להצגה ב־Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:271
+#: src/apps/marble-qt/QtMainWindow.cpp:270
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Download Maps..."
 msgstr "&הורד מפות..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:274
+#: src/apps/marble-qt/QtMainWindow.cpp:273
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
 msgstr "&ייצא מפה..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:276
+#: src/apps/marble-qt/QtMainWindow.cpp:275
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Save a screenshot of the map"
 msgstr "שמור תצלום של המפה"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:280
+#: src/apps/marble-qt/QtMainWindow.cpp:279
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Download &Region..."
 msgstr "הורד &איזור..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:281
+#: src/apps/marble-qt/QtMainWindow.cpp:280
 msgctxt "Marble::MainWindow|"
 msgid "Download a map region in different zoom levels for offline usage"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:284
+#: src/apps/marble-qt/QtMainWindow.cpp:283
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Print..."
 msgstr "ה&דפס..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:285
+#: src/apps/marble-qt/QtMainWindow.cpp:284
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:286
-#: src/apps/marble-qt/QtMainWindow.cpp:290
+#: src/apps/marble-qt/QtMainWindow.cpp:285
+#: src/apps/marble-qt/QtMainWindow.cpp:289
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Print a screenshot of the map"
 msgstr "הדפסת תצלום של המפה"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:289
+#: src/apps/marble-qt/QtMainWindow.cpp:288
 msgctxt "Marble::MainWindow|"
 msgid "Print Previe&w ..."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:293
+#: src/apps/marble-qt/QtMainWindow.cpp:292
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Quit"
 msgstr "י&ציאה"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:294
+#: src/apps/marble-qt/QtMainWindow.cpp:293
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:295
+#: src/apps/marble-qt/QtMainWindow.cpp:294
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Quit the Application"
 msgstr "יציאה מהתוכנית"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:298
+#: src/apps/marble-qt/QtMainWindow.cpp:297
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Copy Map"
 msgstr "הע&תק מפה"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:300
+#: src/apps/marble-qt/QtMainWindow.cpp:299
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Copy a screenshot of the map"
 msgstr "העתקת תצלום של המפה"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:303
+#: src/apps/marble-qt/QtMainWindow.cpp:302
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
 msgstr "&עריכה"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:305
+#: src/apps/marble-qt/QtMainWindow.cpp:304
 msgctxt "Marble::MainWindow|"
 msgid "Edit the current map region in an external editor"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:309
+#: src/apps/marble-qt/QtMainWindow.cpp:308
 msgctxt "Marble::MainWindow|"
 msgid "&Record Movie"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:310
+#: src/apps/marble-qt/QtMainWindow.cpp:309
 msgctxt "Marble::MainWindow|"
 msgid "Records a movie of the globe"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:315
+#: src/apps/marble-qt/QtMainWindow.cpp:314
 msgctxt "Marble::MainWindow|"
 msgid "&Stop Recording"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:316
+#: src/apps/marble-qt/QtMainWindow.cpp:315
 msgctxt "Marble::MainWindow|"
 msgid "Stop recording a movie of the globe"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:321
+#: src/apps/marble-qt/QtMainWindow.cpp:320
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Configure Marble"
 msgstr "הגדרת פקד השליטה על השמש"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:322
+#: src/apps/marble-qt/QtMainWindow.cpp:321
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Show the configuration dialog"
 msgstr "הצג סרגל ניווט"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:325
+#: src/apps/marble-qt/QtMainWindow.cpp:324
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "C&opy Coordinates"
 msgstr "הע&תק קואורדינטות"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:326
+#: src/apps/marble-qt/QtMainWindow.cpp:325
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Copy the center coordinates as text"
 msgstr "העתק קואורדינטות בתור טקסט"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:329
+#: src/apps/marble-qt/QtMainWindow.cpp:328
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Full Screen Mode"
 msgstr "&מצב מסך מלא"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:332
+#: src/apps/marble-qt/QtMainWindow.cpp:331
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Full Screen Mode"
 msgstr "מצב מסך מלא"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:335
+#: src/apps/marble-qt/QtMainWindow.cpp:334
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Show Status Bar"
 msgstr "הצג שורת מצב"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:337
+#: src/apps/marble-qt/QtMainWindow.cpp:336
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Show Status Bar"
 msgstr "הצג שורת מצב"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:340
+#: src/apps/marble-qt/QtMainWindow.cpp:339
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Lock Position"
 msgstr "אוכלוסייה:"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:342
+#: src/apps/marble-qt/QtMainWindow.cpp:341
 msgctxt "Marble::MainWindow|"
 msgid "Lock Position of Floating Items"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:345
+#: src/apps/marble-qt/QtMainWindow.cpp:344
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Clouds"
 msgstr "&עננים"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:347
+#: src/apps/marble-qt/QtMainWindow.cpp:346
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Show Real Time Cloud Cover"
 msgstr "הצג את עטיפת העננים בזמן אמת"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:350
+#: src/apps/marble-qt/QtMainWindow.cpp:349
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Work Off&line"
 msgstr "&עבוד באופן לא מקוון"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:354
+#: src/apps/marble-qt/QtMainWindow.cpp:353
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Time Control..."
 msgstr "&שליטה על השמש..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:355
+#: src/apps/marble-qt/QtMainWindow.cpp:354
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Configure Time Control "
 msgstr "הגדרת פקד השליטה על השמש"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:358
+#: src/apps/marble-qt/QtMainWindow.cpp:357
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "S&un Control..."
 msgstr "&שליטה על השמש..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:359
+#: src/apps/marble-qt/QtMainWindow.cpp:358
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Configure Sun Control"
 msgstr "הגדרת פקד השליטה על השמש"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:362
+#: src/apps/marble-qt/QtMainWindow.cpp:361
 msgctxt "Marble::MainWindow|"
 msgid "&Redisplay"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:364
+#: src/apps/marble-qt/QtMainWindow.cpp:363
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Reload Current Map"
 msgstr "מפה רגילה"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:367
+#: src/apps/marble-qt/QtMainWindow.cpp:366
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe &Handbook"
 msgstr "הגלובוס השולחני Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:369
+#: src/apps/marble-qt/QtMainWindow.cpp:368
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Show the Handbook for Marble Virtual Globe"
 msgstr "&אודות הגלובוס השולחני Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:372
+#: src/apps/marble-qt/QtMainWindow.cpp:371
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "What's &This"
 msgstr "מה &זה"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:374
+#: src/apps/marble-qt/QtMainWindow.cpp:373
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Show a detailed explanation of the action."
 msgstr "הצג הסבר מפורט של הפעולה."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:377
+#: src/apps/marble-qt/QtMainWindow.cpp:376
 msgctxt "Marble::MainWindow|"
 msgid "&Community Forum"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:378
+#: src/apps/marble-qt/QtMainWindow.cpp:377
 msgctxt "Marble::MainWindow|"
 msgid "Visit Marble's Community Forum"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:381
+#: src/apps/marble-qt/QtMainWindow.cpp:380
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&About Marble Virtual Globe"
 msgstr "&אודות הגלובוס השולחני Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:382
+#: src/apps/marble-qt/QtMainWindow.cpp:381
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Show the application's About Box"
 msgstr "הצג את תיבות האודות של התוכנית"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:385
+#: src/apps/marble-qt/QtMainWindow.cpp:384
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "About &Qt"
 msgstr "אודות &Qt"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:386
+#: src/apps/marble-qt/QtMainWindow.cpp:385
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Show the Qt library's About box"
 msgstr "הצג את תיבת האודות של ספריית Qt"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:390
+#: src/apps/marble-qt/QtMainWindow.cpp:389
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
 msgstr "ייצא מפה"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:392
+#: src/apps/marble-qt/QtMainWindow.cpp:391
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Add Bookmark"
 msgstr "ייצא מפה"
 
+#: src/apps/marble-qt/QtMainWindow.cpp:394
 #: src/apps/marble-qt/QtMainWindow.cpp:395
-#: src/apps/marble-qt/QtMainWindow.cpp:396
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Set Home Location"
 msgstr "קבע &מיקום בית"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:399
+#: src/apps/marble-qt/QtMainWindow.cpp:398
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Show &Bookmarks"
 msgstr "ייצא מפה"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:400
+#: src/apps/marble-qt/QtMainWindow.cpp:399
 msgctxt "Marble::MainWindow|"
 msgid "Toggle display of Bookmarks"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:404
+#: src/apps/marble-qt/QtMainWindow.cpp:403
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Manage Bookmarks..."
 msgstr "ייצא מפה"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:405
+#: src/apps/marble-qt/QtMainWindow.cpp:404
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Manage Bookmarks"
 msgstr "ייצא מפה"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:409
+#: src/apps/marble-qt/QtMainWindow.cpp:408
 msgctxt "Marble::MainWindow|"
 msgid "&Create a New Map..."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:410
+#: src/apps/marble-qt/QtMainWindow.cpp:409
 msgctxt "Marble::MainWindow|"
 msgid "A wizard guides you through the creation of your own map theme."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:414
+#: src/apps/marble-qt/QtMainWindow.cpp:413
 msgctxt "Marble::MainWindow|"
 msgid "Show Tile Zoom Level"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:421
+#: src/apps/marble-qt/QtMainWindow.cpp:420
 msgctxt "Marble::MainWindow|"
 msgid "Degree (DMS)"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:426
+#: src/apps/marble-qt/QtMainWindow.cpp:425
 msgctxt "Marble::MainWindow|"
 msgid "Degree (Decimal)"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:431
+#: src/apps/marble-qt/QtMainWindow.cpp:430
 msgctxt "Marble::MainWindow|"
 msgid "Universal Transverse Mercator (UTM)"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:445
+#: src/apps/marble-qt/QtMainWindow.cpp:444
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&File"
 msgstr "&קובץ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:458
+#: src/apps/marble-qt/QtMainWindow.cpp:457
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Edit"
 msgstr "&עריכה"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:466
+#: src/apps/marble-qt/QtMainWindow.cpp:465
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&View"
 msgstr "&תצוגה"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:467
+#: src/apps/marble-qt/QtMainWindow.cpp:466
 msgctxt "Marble::MainWindow|"
 msgid "&Info Boxes"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:468
+#: src/apps/marble-qt/QtMainWindow.cpp:467
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Online Services"
 msgstr "ייצא מפה"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:471
+#: src/apps/marble-qt/QtMainWindow.cpp:470
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Bookmarks"
 msgstr "ייצא מפה"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:475
+#: src/apps/marble-qt/QtMainWindow.cpp:474
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Panels"
 msgstr "הצג מיקומים"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:480
+#: src/apps/marble-qt/QtMainWindow.cpp:479
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&View Size"
 msgstr "&תצוגה"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:483
+#: src/apps/marble-qt/QtMainWindow.cpp:482
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Settings"
 msgstr "&הגדרות"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:492
+#: src/apps/marble-qt/QtMainWindow.cpp:491
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Help"
 msgstr "ע&זרה"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:595
+#: src/apps/marble-qt/QtMainWindow.cpp:594
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Home"
 msgstr "בית"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:603
+#: src/apps/marble-qt/QtMainWindow.cpp:602
 msgctxt "Marble::MainWindow|"
 msgid "Default"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:719
+#: src/apps/marble-qt/QtMainWindow.cpp:718
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Ready"
 msgstr "מוכן"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:733
+#: src/apps/marble-qt/QtMainWindow.cpp:732
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Export Map"
 msgstr "ייצא מפה"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:735
+#: src/apps/marble-qt/QtMainWindow.cpp:734
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Images (*.jpg *.png)"
 msgstr "תמונות ‎(*.jpg *.png)‎"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:749
+#: src/apps/marble-qt/QtMainWindow.cpp:748
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "An error occurred while trying to save the file.\n"
 msgstr "אירעה שגיאה במהלך הניסיון לשמור את הקובץ.\n"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:871
+#: src/apps/marble-qt/QtMainWindow.cpp:870
 #, fuzzy, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe %1"
 msgstr "‏Marble - גלובוס שולחני"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:922
-#: src/apps/marble-qt/QtMainWindow.cpp:999
+#: src/apps/marble-qt/QtMainWindow.cpp:921
+#: src/apps/marble-qt/QtMainWindow.cpp:998
 #, fuzzy, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Position: %1"
 msgstr "אוכלוסייה:"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:925
-#: src/apps/marble-qt/QtMainWindow.cpp:1006
+#: src/apps/marble-qt/QtMainWindow.cpp:924
+#: src/apps/marble-qt/QtMainWindow.cpp:1005
 #, fuzzy, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Altitude: %1"
 msgstr "קו &רוחב"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:928
-#: src/apps/marble-qt/QtMainWindow.cpp:1013
+#: src/apps/marble-qt/QtMainWindow.cpp:927
+#: src/apps/marble-qt/QtMainWindow.cpp:1012
 #, fuzzy, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Zoom: %1"
 msgstr "התקרבות: %1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:931
-#: src/apps/marble-qt/QtMainWindow.cpp:1020
+#: src/apps/marble-qt/QtMainWindow.cpp:930
+#: src/apps/marble-qt/QtMainWindow.cpp:1019
 #, fuzzy, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Time: %1"
 msgstr "ער&כת נושא"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:963
+#: src/apps/marble-qt/QtMainWindow.cpp:962
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "All Supported Files"
@@ -2929,18 +2929,18 @@ msgstr ""
 "כל הקבצים הנתמכים (‎*.gpx *.kml);;מידע של ‏GPS‏ (‎*.gpx);;Google Earth KML‏ (‎*."
 "kml)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:969
+#: src/apps/marble-qt/QtMainWindow.cpp:968
 #, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Open File"
 msgstr "פתח קובץ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:990
+#: src/apps/marble-qt/QtMainWindow.cpp:989
 msgctxt "Marble::MainWindow|"
 msgid "&Angle Display Unit"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:1222
+#: src/apps/marble-qt/QtMainWindow.cpp:1221
 msgctxt "Marble::MainWindow|"
 msgid "Unnamed"
 msgstr ""

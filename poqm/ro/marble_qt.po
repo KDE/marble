@@ -2473,15 +2473,15 @@ msgctxt "Marble::MainWindow|"
 msgid "Marble - Virtual Globe"
 msgstr "Marble - Glob de birou"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:199
-#: src/apps/marble-qt/QtMainWindow.cpp:748
+#: src/apps/marble-qt/QtMainWindow.cpp:198
+#: src/apps/marble-qt/QtMainWindow.cpp:747
 #, fuzzy
 #| msgid "Marble"
 msgctxt "Marble::MainWindow|"
 msgid "Marble"
 msgstr "Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:200
+#: src/apps/marble-qt/QtMainWindow.cpp:199
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid ""
@@ -2489,566 +2489,566 @@ msgid ""
 "'%2'"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:266
+#: src/apps/marble-qt/QtMainWindow.cpp:265
 #, fuzzy
 #| msgid "&Open Map..."
 msgctxt "Marble::MainWindow|"
 msgid "&Open..."
 msgstr "&Deschide harta..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:268
+#: src/apps/marble-qt/QtMainWindow.cpp:267
 #, fuzzy
 #| msgid "Open a file for viewing on Marble"
 msgctxt "Marble::MainWindow|"
 msgid "Open a file for viewing on Marble"
 msgstr "Deschide un fișier pentru vizualizare în Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:271
+#: src/apps/marble-qt/QtMainWindow.cpp:270
 #, fuzzy
 #| msgid "Downloading data..."
 msgctxt "Marble::MainWindow|"
 msgid "&Download Maps..."
 msgstr "Datele se descarcă..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:274
+#: src/apps/marble-qt/QtMainWindow.cpp:273
 #, fuzzy
 #| msgid "&Export Map..."
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
 msgstr "&Exportă harta..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:276
+#: src/apps/marble-qt/QtMainWindow.cpp:275
 #, fuzzy
 #| msgid "Save a screenshot of the map"
 msgctxt "Marble::MainWindow|"
 msgid "Save a screenshot of the map"
 msgstr "Salvează o captură de ecran a hărții"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:280
+#: src/apps/marble-qt/QtMainWindow.cpp:279
 #, fuzzy
 #| msgid "Download finished."
 msgctxt "Marble::MainWindow|"
 msgid "Download &Region..."
 msgstr "Descărcarea completă."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:281
+#: src/apps/marble-qt/QtMainWindow.cpp:280
 msgctxt "Marble::MainWindow|"
 msgid "Download a map region in different zoom levels for offline usage"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:284
+#: src/apps/marble-qt/QtMainWindow.cpp:283
 #, fuzzy
 #| msgid "&Print..."
 msgctxt "Marble::MainWindow|"
 msgid "&Print..."
 msgstr "&Tipărește..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:285
+#: src/apps/marble-qt/QtMainWindow.cpp:284
 #, fuzzy
 #| msgid "Ctrl+P"
 msgctxt "Marble::MainWindow|"
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:286
-#: src/apps/marble-qt/QtMainWindow.cpp:290
+#: src/apps/marble-qt/QtMainWindow.cpp:285
+#: src/apps/marble-qt/QtMainWindow.cpp:289
 #, fuzzy
 #| msgid "Print a screenshot of the map"
 msgctxt "Marble::MainWindow|"
 msgid "Print a screenshot of the map"
 msgstr "Tipărește o captură de ecran a hărții"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:289
+#: src/apps/marble-qt/QtMainWindow.cpp:288
 msgctxt "Marble::MainWindow|"
 msgid "Print Previe&w ..."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:293
+#: src/apps/marble-qt/QtMainWindow.cpp:292
 #, fuzzy
 #| msgid "&Quit"
 msgctxt "Marble::MainWindow|"
 msgid "&Quit"
 msgstr "I&eși"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:294
+#: src/apps/marble-qt/QtMainWindow.cpp:293
 #, fuzzy
 #| msgid "Ctrl+Q"
 msgctxt "Marble::MainWindow|"
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:295
+#: src/apps/marble-qt/QtMainWindow.cpp:294
 #, fuzzy
 #| msgid "Quit the Application"
 msgctxt "Marble::MainWindow|"
 msgid "Quit the Application"
 msgstr "Termină aplicația"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:298
+#: src/apps/marble-qt/QtMainWindow.cpp:297
 #, fuzzy
 #| msgid "&Copy Map"
 msgctxt "Marble::MainWindow|"
 msgid "&Copy Map"
 msgstr "&Copiază harta"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:300
+#: src/apps/marble-qt/QtMainWindow.cpp:299
 #, fuzzy
 #| msgid "Copy a screenshot of the map"
 msgctxt "Marble::MainWindow|"
 msgid "Copy a screenshot of the map"
 msgstr "Copiază o captură de ecran a hărții"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:303
+#: src/apps/marble-qt/QtMainWindow.cpp:302
 #, fuzzy
 #| msgid "&Edit"
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
 msgstr "&Editare"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:305
+#: src/apps/marble-qt/QtMainWindow.cpp:304
 msgctxt "Marble::MainWindow|"
 msgid "Edit the current map region in an external editor"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:309
+#: src/apps/marble-qt/QtMainWindow.cpp:308
 msgctxt "Marble::MainWindow|"
 msgid "&Record Movie"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:310
+#: src/apps/marble-qt/QtMainWindow.cpp:309
 msgctxt "Marble::MainWindow|"
 msgid "Records a movie of the globe"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:315
+#: src/apps/marble-qt/QtMainWindow.cpp:314
 msgctxt "Marble::MainWindow|"
 msgid "&Stop Recording"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:316
+#: src/apps/marble-qt/QtMainWindow.cpp:315
 msgctxt "Marble::MainWindow|"
 msgid "Stop recording a movie of the globe"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:321
+#: src/apps/marble-qt/QtMainWindow.cpp:320
 #, fuzzy
 #| msgid "Navigation Control"
 msgctxt "Marble::MainWindow|"
 msgid "&Configure Marble"
 msgstr "Control al navigării"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:322
+#: src/apps/marble-qt/QtMainWindow.cpp:321
 #, fuzzy
 #| msgid "Show Navigation Panel"
 msgctxt "Marble::MainWindow|"
 msgid "Show the configuration dialog"
 msgstr "Afișează panoul de navigare"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:325
+#: src/apps/marble-qt/QtMainWindow.cpp:324
 #, fuzzy
 #| msgid "C&opy Coordinates"
 msgctxt "Marble::MainWindow|"
 msgid "C&opy Coordinates"
 msgstr "C&opiază coordonatele"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:326
+#: src/apps/marble-qt/QtMainWindow.cpp:325
 #, fuzzy
 #| msgid "Copy the center coordinates as text"
 msgctxt "Marble::MainWindow|"
 msgid "Copy the center coordinates as text"
 msgstr "Copiază coordonatele centrului ca text"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:329
+#: src/apps/marble-qt/QtMainWindow.cpp:328
 #, fuzzy
 #| msgid "&Full Screen Mode"
 msgctxt "Marble::MainWindow|"
 msgid "&Full Screen Mode"
 msgstr "Regim &ecran complet"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:332
+#: src/apps/marble-qt/QtMainWindow.cpp:331
 #, fuzzy
 #| msgid "Full Screen Mode"
 msgctxt "Marble::MainWindow|"
 msgid "Full Screen Mode"
 msgstr "Pe tot ecranul"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:335
+#: src/apps/marble-qt/QtMainWindow.cpp:334
 #, fuzzy
 #| msgid "Show Status Bar"
 msgctxt "Marble::MainWindow|"
 msgid "&Show Status Bar"
 msgstr "Afișează bara de stare"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:337
+#: src/apps/marble-qt/QtMainWindow.cpp:336
 #, fuzzy
 #| msgid "Show Status Bar"
 msgctxt "Marble::MainWindow|"
 msgid "Show Status Bar"
 msgstr "Afișează bara de stare"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:340
+#: src/apps/marble-qt/QtMainWindow.cpp:339
 #, fuzzy
 #| msgid "Position: %1"
 msgctxt "Marble::MainWindow|"
 msgid "Lock Position"
 msgstr "Poziția: %1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:342
+#: src/apps/marble-qt/QtMainWindow.cpp:341
 msgctxt "Marble::MainWindow|"
 msgid "Lock Position of Floating Items"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:345
+#: src/apps/marble-qt/QtMainWindow.cpp:344
 #, fuzzy
 #| msgid "&Clouds"
 msgctxt "Marble::MainWindow|"
 msgid "&Clouds"
 msgstr "N&ori"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:347
+#: src/apps/marble-qt/QtMainWindow.cpp:346
 msgctxt "Marble::MainWindow|"
 msgid "Show Real Time Cloud Cover"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:350
+#: src/apps/marble-qt/QtMainWindow.cpp:349
 #, fuzzy
 #| msgid "&Work Offline"
 msgctxt "Marble::MainWindow|"
 msgid "Work Off&line"
 msgstr "L&ucrează deconectat"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:354
+#: src/apps/marble-qt/QtMainWindow.cpp:353
 #, fuzzy
 #| msgid "Navigation Control"
 msgctxt "Marble::MainWindow|"
 msgid "&Time Control..."
 msgstr "Control al navigării"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:355
+#: src/apps/marble-qt/QtMainWindow.cpp:354
 #, fuzzy
 #| msgid "Navigation Control"
 msgctxt "Marble::MainWindow|"
 msgid "Configure Time Control "
 msgstr "Control al navigării"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:358
+#: src/apps/marble-qt/QtMainWindow.cpp:357
 #, fuzzy
 #| msgid "Navigation Control"
 msgctxt "Marble::MainWindow|"
 msgid "S&un Control..."
 msgstr "Control al navigării"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:359
+#: src/apps/marble-qt/QtMainWindow.cpp:358
 #, fuzzy
 #| msgid "Navigation Control"
 msgctxt "Marble::MainWindow|"
 msgid "Configure Sun Control"
 msgstr "Control al navigării"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:362
+#: src/apps/marble-qt/QtMainWindow.cpp:361
 msgctxt "Marble::MainWindow|"
 msgid "&Redisplay"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:364
+#: src/apps/marble-qt/QtMainWindow.cpp:363
 #, fuzzy
 #| msgid "Flat Map"
 msgctxt "Marble::MainWindow|"
 msgid "Reload Current Map"
 msgstr "Hartă plană"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:367
+#: src/apps/marble-qt/QtMainWindow.cpp:366
 #, fuzzy
 #| msgid "Marble Desktop Globe"
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe &Handbook"
 msgstr "Globul terestru pentru desktop Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:369
+#: src/apps/marble-qt/QtMainWindow.cpp:368
 #, fuzzy
 #| msgid "&About Marble Desktop Globe"
 msgctxt "Marble::MainWindow|"
 msgid "Show the Handbook for Marble Virtual Globe"
 msgstr "&Despre globul de birou Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:372
+#: src/apps/marble-qt/QtMainWindow.cpp:371
 #, fuzzy
 #| msgid "What's &This"
 msgctxt "Marble::MainWindow|"
 msgid "What's &This"
 msgstr "Ce înseamnă &aceasta"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:374
+#: src/apps/marble-qt/QtMainWindow.cpp:373
 #, fuzzy
 #| msgid "Show a detailed explanation of the action."
 msgctxt "Marble::MainWindow|"
 msgid "Show a detailed explanation of the action."
 msgstr "Afișează o explicație detailată a acțiunii."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:377
+#: src/apps/marble-qt/QtMainWindow.cpp:376
 msgctxt "Marble::MainWindow|"
 msgid "&Community Forum"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:378
+#: src/apps/marble-qt/QtMainWindow.cpp:377
 msgctxt "Marble::MainWindow|"
 msgid "Visit Marble's Community Forum"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:381
+#: src/apps/marble-qt/QtMainWindow.cpp:380
 #, fuzzy
 #| msgid "&About Marble Desktop Globe"
 msgctxt "Marble::MainWindow|"
 msgid "&About Marble Virtual Globe"
 msgstr "&Despre globul de birou Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:382
+#: src/apps/marble-qt/QtMainWindow.cpp:381
 #, fuzzy
 #| msgid "Show the application's About Box"
 msgctxt "Marble::MainWindow|"
 msgid "Show the application's About Box"
 msgstr "Afișează informațiile despre aplicație"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:385
+#: src/apps/marble-qt/QtMainWindow.cpp:384
 #, fuzzy
 #| msgid "About &Qt"
 msgctxt "Marble::MainWindow|"
 msgid "About &Qt"
 msgstr "Despre &Qt"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:386
+#: src/apps/marble-qt/QtMainWindow.cpp:385
 #, fuzzy
 #| msgid "Show the Qt library's About box"
 msgctxt "Marble::MainWindow|"
 msgid "Show the Qt library's About box"
 msgstr "Afișează informațiile despre biblioteca Qt"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:390
+#: src/apps/marble-qt/QtMainWindow.cpp:389
 #, fuzzy
 #| msgid "Search line"
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
 msgstr "Linie de căutare"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:392
+#: src/apps/marble-qt/QtMainWindow.cpp:391
 #, fuzzy
 #| msgid "Search line"
 msgctxt "Marble::MainWindow|"
 msgid "Add Bookmark"
 msgstr "Linie de căutare"
 
+#: src/apps/marble-qt/QtMainWindow.cpp:394
 #: src/apps/marble-qt/QtMainWindow.cpp:395
-#: src/apps/marble-qt/QtMainWindow.cpp:396
 #, fuzzy
 #| msgid "&Set Home Location"
 msgctxt "Marble::MainWindow|"
 msgid "&Set Home Location"
 msgstr "&Stabilește locația „acasă”"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:399
+#: src/apps/marble-qt/QtMainWindow.cpp:398
 #, fuzzy
 #| msgid "Search line"
 msgctxt "Marble::MainWindow|"
 msgid "Show &Bookmarks"
 msgstr "Linie de căutare"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:400
+#: src/apps/marble-qt/QtMainWindow.cpp:399
 msgctxt "Marble::MainWindow|"
 msgid "Toggle display of Bookmarks"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:404
+#: src/apps/marble-qt/QtMainWindow.cpp:403
 #, fuzzy
 #| msgid "Search line"
 msgctxt "Marble::MainWindow|"
 msgid "&Manage Bookmarks..."
 msgstr "Linie de căutare"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:405
+#: src/apps/marble-qt/QtMainWindow.cpp:404
 #, fuzzy
 #| msgid "Search line"
 msgctxt "Marble::MainWindow|"
 msgid "Manage Bookmarks"
 msgstr "Linie de căutare"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:409
+#: src/apps/marble-qt/QtMainWindow.cpp:408
 msgctxt "Marble::MainWindow|"
 msgid "&Create a New Map..."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:410
+#: src/apps/marble-qt/QtMainWindow.cpp:409
 msgctxt "Marble::MainWindow|"
 msgid "A wizard guides you through the creation of your own map theme."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:414
+#: src/apps/marble-qt/QtMainWindow.cpp:413
 msgctxt "Marble::MainWindow|"
 msgid "Show Tile Zoom Level"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:421
+#: src/apps/marble-qt/QtMainWindow.cpp:420
 msgctxt "Marble::MainWindow|"
 msgid "Degree (DMS)"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:426
+#: src/apps/marble-qt/QtMainWindow.cpp:425
 msgctxt "Marble::MainWindow|"
 msgid "Degree (Decimal)"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:431
+#: src/apps/marble-qt/QtMainWindow.cpp:430
 msgctxt "Marble::MainWindow|"
 msgid "Universal Transverse Mercator (UTM)"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:445
+#: src/apps/marble-qt/QtMainWindow.cpp:444
 #, fuzzy
 #| msgid "&File"
 msgctxt "Marble::MainWindow|"
 msgid "&File"
 msgstr "&Fișier"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:458
+#: src/apps/marble-qt/QtMainWindow.cpp:457
 #, fuzzy
 #| msgid "&Edit"
 msgctxt "Marble::MainWindow|"
 msgid "&Edit"
 msgstr "&Editare"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:466
+#: src/apps/marble-qt/QtMainWindow.cpp:465
 #, fuzzy
 #| msgid "&View"
 msgctxt "Marble::MainWindow|"
 msgid "&View"
 msgstr "&Vizualizare"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:467
+#: src/apps/marble-qt/QtMainWindow.cpp:466
 msgctxt "Marble::MainWindow|"
 msgid "&Info Boxes"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:468
+#: src/apps/marble-qt/QtMainWindow.cpp:467
 #, fuzzy
 #| msgid "Export Map"
 msgctxt "Marble::MainWindow|"
 msgid "&Online Services"
 msgstr "Exportă harta"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:471
+#: src/apps/marble-qt/QtMainWindow.cpp:470
 #, fuzzy
 #| msgid "Search line"
 msgctxt "Marble::MainWindow|"
 msgid "&Bookmarks"
 msgstr "Linie de căutare"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:475
+#: src/apps/marble-qt/QtMainWindow.cpp:474
 #, fuzzy
 #| msgid "Show places"
 msgctxt "Marble::MainWindow|"
 msgid "&Panels"
 msgstr "Arată localități"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:480
+#: src/apps/marble-qt/QtMainWindow.cpp:479
 #, fuzzy
 #| msgid "&View"
 msgctxt "Marble::MainWindow|"
 msgid "&View Size"
 msgstr "&Vizualizare"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:483
+#: src/apps/marble-qt/QtMainWindow.cpp:482
 #, fuzzy
 #| msgid "&Settings"
 msgctxt "Marble::MainWindow|"
 msgid "&Settings"
 msgstr "&Configurări"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:492
+#: src/apps/marble-qt/QtMainWindow.cpp:491
 #, fuzzy
 #| msgid "&Help"
 msgctxt "Marble::MainWindow|"
 msgid "&Help"
 msgstr "&Ajutor"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:595
+#: src/apps/marble-qt/QtMainWindow.cpp:594
 #, fuzzy
 #| msgid "Home"
 msgctxt "Marble::MainWindow|"
 msgid "&Home"
 msgstr "Acasă"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:603
+#: src/apps/marble-qt/QtMainWindow.cpp:602
 msgctxt "Marble::MainWindow|"
 msgid "Default"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:719
+#: src/apps/marble-qt/QtMainWindow.cpp:718
 #, fuzzy
 #| msgid "Ready"
 msgctxt "Marble::MainWindow|"
 msgid "Ready"
 msgstr "Gata"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:733
+#: src/apps/marble-qt/QtMainWindow.cpp:732
 #, fuzzy
 #| msgid "Export Map"
 msgctxt "Marble::MainWindow|"
 msgid "Export Map"
 msgstr "Exportă harta"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:735
+#: src/apps/marble-qt/QtMainWindow.cpp:734
 #, fuzzy
 #| msgid "Images (*.jpg *.png)"
 msgctxt "Marble::MainWindow|"
 msgid "Images (*.jpg *.png)"
 msgstr "Imagini (*.jpg *.png)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:749
+#: src/apps/marble-qt/QtMainWindow.cpp:748
 #, fuzzy
 #| msgid "An error occurred while trying to save the file.\n"
 msgctxt "Marble::MainWindow|"
 msgid "An error occurred while trying to save the file.\n"
 msgstr "A apărut o eroare la salvarea fișierului.\n"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:871
+#: src/apps/marble-qt/QtMainWindow.cpp:870
 #, fuzzy, qt-format
 #| msgid "Marble - Desktop Globe"
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe %1"
 msgstr "Marble - Glob de birou"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:922
-#: src/apps/marble-qt/QtMainWindow.cpp:999
+#: src/apps/marble-qt/QtMainWindow.cpp:921
+#: src/apps/marble-qt/QtMainWindow.cpp:998
 #, fuzzy, qt-format
 #| msgid "Position: %1"
 msgctxt "Marble::MainWindow|"
 msgid "Position: %1"
 msgstr "Poziția: %1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:925
-#: src/apps/marble-qt/QtMainWindow.cpp:1006
+#: src/apps/marble-qt/QtMainWindow.cpp:924
+#: src/apps/marble-qt/QtMainWindow.cpp:1005
 #, fuzzy, qt-format
 #| msgid "Altitude: %1"
 msgctxt "Marble::MainWindow|"
 msgid "Altitude: %1"
 msgstr "Altitudinea: %1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:928
-#: src/apps/marble-qt/QtMainWindow.cpp:1013
+#: src/apps/marble-qt/QtMainWindow.cpp:927
+#: src/apps/marble-qt/QtMainWindow.cpp:1012
 #, fuzzy, qt-format
 #| msgid "Zoom In"
 msgctxt "Marble::MainWindow|"
 msgid "Zoom: %1"
 msgstr "Apropie"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:931
-#: src/apps/marble-qt/QtMainWindow.cpp:1020
+#: src/apps/marble-qt/QtMainWindow.cpp:930
+#: src/apps/marble-qt/QtMainWindow.cpp:1019
 #, fuzzy, qt-format
 #| msgid "&Theme"
 msgctxt "Marble::MainWindow|"
 msgid "Time: %1"
 msgstr "&Temă"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:963
+#: src/apps/marble-qt/QtMainWindow.cpp:962
 #, fuzzy
 #| msgid ""
 #| "All Supported Files (*.gpx *.kml);;GPS Data (*.gpx);;Google Earth KML (*."
@@ -3059,19 +3059,19 @@ msgstr ""
 "Toate fișierele acceptate (*.gpx *.kml);;Informații GPS (*.gpx);;Google "
 "Earth KML (*.kml)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:969
+#: src/apps/marble-qt/QtMainWindow.cpp:968
 #, fuzzy
 #| msgid "Open File"
 msgctxt "Marble::MainWindow|"
 msgid "Open File"
 msgstr "Deschide fișier"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:990
+#: src/apps/marble-qt/QtMainWindow.cpp:989
 msgctxt "Marble::MainWindow|"
 msgid "&Angle Display Unit"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:1222
+#: src/apps/marble-qt/QtMainWindow.cpp:1221
 msgctxt "Marble::MainWindow|"
 msgid "Unnamed"
 msgstr ""

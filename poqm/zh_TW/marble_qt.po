@@ -2338,13 +2338,13 @@ msgctxt "Marble::MainWindow|"
 msgid "Marble - Virtual Globe"
 msgstr "Marble - 虛擬地球儀"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:199
-#: src/apps/marble-qt/QtMainWindow.cpp:748
+#: src/apps/marble-qt/QtMainWindow.cpp:198
+#: src/apps/marble-qt/QtMainWindow.cpp:747
 msgctxt "Marble::MainWindow|"
 msgid "Marble"
 msgstr "大理石"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:200
+#: src/apps/marble-qt/QtMainWindow.cpp:199
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid ""
@@ -2352,88 +2352,88 @@ msgid ""
 "'%2'"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:266
+#: src/apps/marble-qt/QtMainWindow.cpp:265
 msgctxt "Marble::MainWindow|"
 msgid "&Open..."
 msgstr "開啟(&O)..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:268
+#: src/apps/marble-qt/QtMainWindow.cpp:267
 msgctxt "Marble::MainWindow|"
 msgid "Open a file for viewing on Marble"
 msgstr "開啟檔案於 Marble 中檢視"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:271
+#: src/apps/marble-qt/QtMainWindow.cpp:270
 msgctxt "Marble::MainWindow|"
 msgid "&Download Maps..."
 msgstr "下載地圖中(&D)..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:274
+#: src/apps/marble-qt/QtMainWindow.cpp:273
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
 msgstr "匯出地圖(&E)..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:276
+#: src/apps/marble-qt/QtMainWindow.cpp:275
 msgctxt "Marble::MainWindow|"
 msgid "Save a screenshot of the map"
 msgstr "儲存地圖的快照"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:280
+#: src/apps/marble-qt/QtMainWindow.cpp:279
 msgctxt "Marble::MainWindow|"
 msgid "Download &Region..."
 msgstr "下載區域(&R)..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:281
+#: src/apps/marble-qt/QtMainWindow.cpp:280
 msgctxt "Marble::MainWindow|"
 msgid "Download a map region in different zoom levels for offline usage"
 msgstr "下載不同縮放等級的地圖區域，以便離線使用"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:284
+#: src/apps/marble-qt/QtMainWindow.cpp:283
 msgctxt "Marble::MainWindow|"
 msgid "&Print..."
 msgstr "列印(&P)..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:285
+#: src/apps/marble-qt/QtMainWindow.cpp:284
 msgctxt "Marble::MainWindow|"
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:286
-#: src/apps/marble-qt/QtMainWindow.cpp:290
+#: src/apps/marble-qt/QtMainWindow.cpp:285
+#: src/apps/marble-qt/QtMainWindow.cpp:289
 msgctxt "Marble::MainWindow|"
 msgid "Print a screenshot of the map"
 msgstr "列印地圖的快照"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:289
+#: src/apps/marble-qt/QtMainWindow.cpp:288
 msgctxt "Marble::MainWindow|"
 msgid "Print Previe&w ..."
 msgstr "預覽列印(&W)..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:293
+#: src/apps/marble-qt/QtMainWindow.cpp:292
 msgctxt "Marble::MainWindow|"
 msgid "&Quit"
 msgstr "離開(&Q)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:294
+#: src/apps/marble-qt/QtMainWindow.cpp:293
 msgctxt "Marble::MainWindow|"
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:295
+#: src/apps/marble-qt/QtMainWindow.cpp:294
 msgctxt "Marble::MainWindow|"
 msgid "Quit the Application"
 msgstr "離開應用程式"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:298
+#: src/apps/marble-qt/QtMainWindow.cpp:297
 msgctxt "Marble::MainWindow|"
 msgid "&Copy Map"
 msgstr "複製地圖(&C)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:300
+#: src/apps/marble-qt/QtMainWindow.cpp:299
 msgctxt "Marble::MainWindow|"
 msgid "Copy a screenshot of the map"
 msgstr "複製地圖的快照"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:303
+#: src/apps/marble-qt/QtMainWindow.cpp:302
 #, fuzzy
 #| msgctxt "Marble::MainWindow|"
 #| msgid "&Edit Map"
@@ -2441,376 +2441,376 @@ msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
 msgstr "編輯地圖(&E)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:305
+#: src/apps/marble-qt/QtMainWindow.cpp:304
 msgctxt "Marble::MainWindow|"
 msgid "Edit the current map region in an external editor"
 msgstr "在外部編輯器中編輯目前的地圖區域"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:309
+#: src/apps/marble-qt/QtMainWindow.cpp:308
 msgctxt "Marble::MainWindow|"
 msgid "&Record Movie"
 msgstr "錄製電影(&R)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:310
+#: src/apps/marble-qt/QtMainWindow.cpp:309
 msgctxt "Marble::MainWindow|"
 msgid "Records a movie of the globe"
 msgstr "錄製地球的影片"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:315
+#: src/apps/marble-qt/QtMainWindow.cpp:314
 #, fuzzy
 #| msgid "&Stop recording"
 msgctxt "Marble::MainWindow|"
 msgid "&Stop Recording"
 msgstr "停止錄製(&S)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:316
+#: src/apps/marble-qt/QtMainWindow.cpp:315
 msgctxt "Marble::MainWindow|"
 msgid "Stop recording a movie of the globe"
 msgstr "停止錄製地球的影片"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:321
+#: src/apps/marble-qt/QtMainWindow.cpp:320
 msgctxt "Marble::MainWindow|"
 msgid "&Configure Marble"
 msgstr "設定 Marble(&C)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:322
+#: src/apps/marble-qt/QtMainWindow.cpp:321
 msgctxt "Marble::MainWindow|"
 msgid "Show the configuration dialog"
 msgstr "顯示設定對話框"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:325
+#: src/apps/marble-qt/QtMainWindow.cpp:324
 msgctxt "Marble::MainWindow|"
 msgid "C&opy Coordinates"
 msgstr "複製座標(&O)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:326
+#: src/apps/marble-qt/QtMainWindow.cpp:325
 msgctxt "Marble::MainWindow|"
 msgid "Copy the center coordinates as text"
 msgstr "將中心座標複製為文字"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:329
+#: src/apps/marble-qt/QtMainWindow.cpp:328
 msgctxt "Marble::MainWindow|"
 msgid "&Full Screen Mode"
 msgstr "全螢幕模式(&F)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:332
+#: src/apps/marble-qt/QtMainWindow.cpp:331
 msgctxt "Marble::MainWindow|"
 msgid "Full Screen Mode"
 msgstr "全螢幕模式"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:335
+#: src/apps/marble-qt/QtMainWindow.cpp:334
 msgctxt "Marble::MainWindow|"
 msgid "&Show Status Bar"
 msgstr "顯示狀態列(&S)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:337
+#: src/apps/marble-qt/QtMainWindow.cpp:336
 msgctxt "Marble::MainWindow|"
 msgid "Show Status Bar"
 msgstr "顯示狀態列"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:340
+#: src/apps/marble-qt/QtMainWindow.cpp:339
 msgctxt "Marble::MainWindow|"
 msgid "Lock Position"
 msgstr "鎖定位置"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:342
+#: src/apps/marble-qt/QtMainWindow.cpp:341
 msgctxt "Marble::MainWindow|"
 msgid "Lock Position of Floating Items"
 msgstr "鎖定浮動項目的位置"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:345
+#: src/apps/marble-qt/QtMainWindow.cpp:344
 msgctxt "Marble::MainWindow|"
 msgid "&Clouds"
 msgstr "雲層(&C)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:347
+#: src/apps/marble-qt/QtMainWindow.cpp:346
 msgctxt "Marble::MainWindow|"
 msgid "Show Real Time Cloud Cover"
 msgstr "顯示即時雲層分布"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:350
+#: src/apps/marble-qt/QtMainWindow.cpp:349
 msgctxt "Marble::MainWindow|"
 msgid "Work Off&line"
 msgstr "離線工作(&L)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:354
+#: src/apps/marble-qt/QtMainWindow.cpp:353
 msgctxt "Marble::MainWindow|"
 msgid "&Time Control..."
 msgstr "時間控制(&T)..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:355
+#: src/apps/marble-qt/QtMainWindow.cpp:354
 msgctxt "Marble::MainWindow|"
 msgid "Configure Time Control "
 msgstr "設定時間控制"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:358
+#: src/apps/marble-qt/QtMainWindow.cpp:357
 msgctxt "Marble::MainWindow|"
 msgid "S&un Control..."
 msgstr "太陽控制(&U)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:359
+#: src/apps/marble-qt/QtMainWindow.cpp:358
 msgctxt "Marble::MainWindow|"
 msgid "Configure Sun Control"
 msgstr "設定太陽控制"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:362
+#: src/apps/marble-qt/QtMainWindow.cpp:361
 msgctxt "Marble::MainWindow|"
 msgid "&Redisplay"
 msgstr "重新顯示(&R)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:364
+#: src/apps/marble-qt/QtMainWindow.cpp:363
 msgctxt "Marble::MainWindow|"
 msgid "Reload Current Map"
 msgstr "重新載入目前的地圖"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:367
+#: src/apps/marble-qt/QtMainWindow.cpp:366
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe &Handbook"
 msgstr "Marble 虛擬地球儀手冊(&H)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:369
+#: src/apps/marble-qt/QtMainWindow.cpp:368
 msgctxt "Marble::MainWindow|"
 msgid "Show the Handbook for Marble Virtual Globe"
 msgstr "顯示 Marble 虛擬地球儀手冊"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:372
+#: src/apps/marble-qt/QtMainWindow.cpp:371
 msgctxt "Marble::MainWindow|"
 msgid "What's &This"
 msgstr "這是什麼(&T)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:374
+#: src/apps/marble-qt/QtMainWindow.cpp:373
 msgctxt "Marble::MainWindow|"
 msgid "Show a detailed explanation of the action."
 msgstr "顯示此動作的詳細解釋。"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:377
+#: src/apps/marble-qt/QtMainWindow.cpp:376
 msgctxt "Marble::MainWindow|"
 msgid "&Community Forum"
 msgstr "社群論壇(&C)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:378
+#: src/apps/marble-qt/QtMainWindow.cpp:377
 msgctxt "Marble::MainWindow|"
 msgid "Visit Marble's Community Forum"
 msgstr "造訪 Marble 的社群論壇"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:381
+#: src/apps/marble-qt/QtMainWindow.cpp:380
 msgctxt "Marble::MainWindow|"
 msgid "&About Marble Virtual Globe"
 msgstr "關於 Marble 虛擬地球儀(&A)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:382
+#: src/apps/marble-qt/QtMainWindow.cpp:381
 msgctxt "Marble::MainWindow|"
 msgid "Show the application's About Box"
 msgstr "顯示應用程式的「關於」資訊盒"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:385
+#: src/apps/marble-qt/QtMainWindow.cpp:384
 msgctxt "Marble::MainWindow|"
 msgid "About &Qt"
 msgstr "關於 &Qt"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:386
+#: src/apps/marble-qt/QtMainWindow.cpp:385
 msgctxt "Marble::MainWindow|"
 msgid "Show the Qt library's About box"
 msgstr "顯示 Qt 函式庫的「關於」資訊盒"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:390
+#: src/apps/marble-qt/QtMainWindow.cpp:389
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
 msgstr "加入書籤(&B)…"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:392
+#: src/apps/marble-qt/QtMainWindow.cpp:391
 msgctxt "Marble::MainWindow|"
 msgid "Add Bookmark"
 msgstr "加入書籤"
 
+#: src/apps/marble-qt/QtMainWindow.cpp:394
 #: src/apps/marble-qt/QtMainWindow.cpp:395
-#: src/apps/marble-qt/QtMainWindow.cpp:396
 msgctxt "Marble::MainWindow|"
 msgid "&Set Home Location"
 msgstr "設定家位置(&S)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:399
+#: src/apps/marble-qt/QtMainWindow.cpp:398
 msgctxt "Marble::MainWindow|"
 msgid "Show &Bookmarks"
 msgstr "顯示書籤(&B)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:400
+#: src/apps/marble-qt/QtMainWindow.cpp:399
 msgctxt "Marble::MainWindow|"
 msgid "Toggle display of Bookmarks"
 msgstr "切換書籤顯示"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:404
+#: src/apps/marble-qt/QtMainWindow.cpp:403
 msgctxt "Marble::MainWindow|"
 msgid "&Manage Bookmarks..."
 msgstr "管理書籤(&M)…"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:405
+#: src/apps/marble-qt/QtMainWindow.cpp:404
 msgctxt "Marble::MainWindow|"
 msgid "Manage Bookmarks"
 msgstr "管理書籤"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:409
+#: src/apps/marble-qt/QtMainWindow.cpp:408
 msgctxt "Marble::MainWindow|"
 msgid "&Create a New Map..."
 msgstr "建立新地圖(&C)..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:410
+#: src/apps/marble-qt/QtMainWindow.cpp:409
 msgctxt "Marble::MainWindow|"
 msgid "A wizard guides you through the creation of your own map theme."
 msgstr "啟動精靈協助您建立您自己的地圖主題。"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:414
+#: src/apps/marble-qt/QtMainWindow.cpp:413
 msgctxt "Marble::MainWindow|"
 msgid "Show Tile Zoom Level"
 msgstr "顯示鋪排縮放等級"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:421
+#: src/apps/marble-qt/QtMainWindow.cpp:420
 msgctxt "Marble::MainWindow|"
 msgid "Degree (DMS)"
 msgstr "度（度─分─秒）"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:426
+#: src/apps/marble-qt/QtMainWindow.cpp:425
 msgctxt "Marble::MainWindow|"
 msgid "Degree (Decimal)"
 msgstr "度（十進位）"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:431
+#: src/apps/marble-qt/QtMainWindow.cpp:430
 msgctxt "Marble::MainWindow|"
 msgid "Universal Transverse Mercator (UTM)"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:445
+#: src/apps/marble-qt/QtMainWindow.cpp:444
 msgctxt "Marble::MainWindow|"
 msgid "&File"
 msgstr "檔案(&F)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:458
+#: src/apps/marble-qt/QtMainWindow.cpp:457
 msgctxt "Marble::MainWindow|"
 msgid "&Edit"
 msgstr "編輯(&E)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:466
+#: src/apps/marble-qt/QtMainWindow.cpp:465
 msgctxt "Marble::MainWindow|"
 msgid "&View"
 msgstr "檢視(&V)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:467
+#: src/apps/marble-qt/QtMainWindow.cpp:466
 msgctxt "Marble::MainWindow|"
 msgid "&Info Boxes"
 msgstr "資訊盒(&I)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:468
+#: src/apps/marble-qt/QtMainWindow.cpp:467
 msgctxt "Marble::MainWindow|"
 msgid "&Online Services"
 msgstr "線上服務(&O)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:471
+#: src/apps/marble-qt/QtMainWindow.cpp:470
 msgctxt "Marble::MainWindow|"
 msgid "&Bookmarks"
 msgstr "書籤(&B)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:475
+#: src/apps/marble-qt/QtMainWindow.cpp:474
 msgctxt "Marble::MainWindow|"
 msgid "&Panels"
 msgstr "面板(&P)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:480
+#: src/apps/marble-qt/QtMainWindow.cpp:479
 msgctxt "Marble::MainWindow|"
 msgid "&View Size"
 msgstr "檢視大小(&V)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:483
+#: src/apps/marble-qt/QtMainWindow.cpp:482
 msgctxt "Marble::MainWindow|"
 msgid "&Settings"
 msgstr "設定(&S)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:492
+#: src/apps/marble-qt/QtMainWindow.cpp:491
 msgctxt "Marble::MainWindow|"
 msgid "&Help"
 msgstr "說明(&H)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:595
+#: src/apps/marble-qt/QtMainWindow.cpp:594
 msgctxt "Marble::MainWindow|"
 msgid "&Home"
 msgstr "家(&H)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:603
+#: src/apps/marble-qt/QtMainWindow.cpp:602
 msgctxt "Marble::MainWindow|"
 msgid "Default"
 msgstr "預設"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:719
+#: src/apps/marble-qt/QtMainWindow.cpp:718
 msgctxt "Marble::MainWindow|"
 msgid "Ready"
 msgstr "就緒"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:733
+#: src/apps/marble-qt/QtMainWindow.cpp:732
 msgctxt "Marble::MainWindow|"
 msgid "Export Map"
 msgstr "匯出地圖"
 
 # 括號副檔名的括號必須沿用半形掛號
 # --Kisaragi
-#: src/apps/marble-qt/QtMainWindow.cpp:735
+#: src/apps/marble-qt/QtMainWindow.cpp:734
 msgctxt "Marble::MainWindow|"
 msgid "Images (*.jpg *.png)"
 msgstr "影像 (*.jpg *.png)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:749
+#: src/apps/marble-qt/QtMainWindow.cpp:748
 msgctxt "Marble::MainWindow|"
 msgid "An error occurred while trying to save the file.\n"
 msgstr "儲存此檔時發生錯誤。\n"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:871
+#: src/apps/marble-qt/QtMainWindow.cpp:870
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe %1"
 msgstr "Marble - 虛擬地球儀 %1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:922
-#: src/apps/marble-qt/QtMainWindow.cpp:999
+#: src/apps/marble-qt/QtMainWindow.cpp:921
+#: src/apps/marble-qt/QtMainWindow.cpp:998
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Position: %1"
 msgstr "位置：%1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:925
-#: src/apps/marble-qt/QtMainWindow.cpp:1006
+#: src/apps/marble-qt/QtMainWindow.cpp:924
+#: src/apps/marble-qt/QtMainWindow.cpp:1005
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Altitude: %1"
 msgstr "高度：%1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:928
-#: src/apps/marble-qt/QtMainWindow.cpp:1013
+#: src/apps/marble-qt/QtMainWindow.cpp:927
+#: src/apps/marble-qt/QtMainWindow.cpp:1012
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Zoom: %1"
 msgstr "縮放：%1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:931
-#: src/apps/marble-qt/QtMainWindow.cpp:1020
+#: src/apps/marble-qt/QtMainWindow.cpp:930
+#: src/apps/marble-qt/QtMainWindow.cpp:1019
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Time: %1"
 msgstr "時間：%1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:963
+#: src/apps/marble-qt/QtMainWindow.cpp:962
 msgctxt "Marble::MainWindow|"
 msgid "All Supported Files"
 msgstr "所有支援的檔案"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:969
+#: src/apps/marble-qt/QtMainWindow.cpp:968
 msgctxt "Marble::MainWindow|"
 msgid "Open File"
 msgstr "開啟檔案"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:990
+#: src/apps/marble-qt/QtMainWindow.cpp:989
 msgctxt "Marble::MainWindow|"
 msgid "&Angle Display Unit"
 msgstr "角度顯示單位(&A)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:1222
+#: src/apps/marble-qt/QtMainWindow.cpp:1221
 msgctxt "Marble::MainWindow|"
 msgid "Unnamed"
 msgstr "未命名"
