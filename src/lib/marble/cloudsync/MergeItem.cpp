@@ -80,7 +80,7 @@ QString MergeItem::descriptionB() const
     return m_placemarkB.description();
 }
 
-MergeItem::Action MergeItem::actionA()
+MergeItem::Action MergeItem::actionA() const
 {
     return m_actionA;
 }

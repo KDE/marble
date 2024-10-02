@@ -55,7 +55,7 @@ public:
     QString descriptionA() const;
     QString descriptionB() const;
 
-    MergeItem::Action actionA();
+    MergeItem::Action actionA() const;
     void setActionA(MergeItem::Action action);
 
     MergeItem::Action actionB() const;
