@@ -9,7 +9,6 @@
 #include "GeoUriParser.h"
 #include "MarbleModel.h"
 
-#include "MarbleDebug.h"
 #include <QList>
 
 namespace Marble
