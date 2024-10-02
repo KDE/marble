@@ -68,6 +68,5 @@ ki18n_install(${CMAKE_SOURCE_DIR}/po)
 macro_optional_find_package(KF6 ${REQUIRED_KF6_MIN_VERSION} QUIET COMPONENTS DocTools)
 
 if (KF6DocTools_FOUND)
-    # Disabled for now
     kdoctools_install(${CMAKE_SOURCE_DIR}/po)
 endif()
