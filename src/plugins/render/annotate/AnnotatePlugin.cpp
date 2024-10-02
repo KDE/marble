@@ -999,21 +999,21 @@ void AnnotatePlugin::setupTextAnnotationRmbMenu()
 
     QAction *cutItem = new QAction(tr("Cut"), m_textAnnotationRmbMenu);
     m_textAnnotationRmbMenu->addAction(cutItem);
-    connect(cutItem, SIGNAL(triggered()), this, SLOT(cutItem()));
+    connect(cutItem, &QAction::triggered, this, &AnnotatePlugin::cutItem);
 
     QAction *copyItem = new QAction(tr("Copy"), m_textAnnotationRmbMenu);
     m_textAnnotationRmbMenu->addAction(copyItem);
-    connect(copyItem, SIGNAL(triggered()), this, SLOT(copyItem()));
+    connect(copyItem, &QAction::triggered, this, &AnnotatePlugin::copyItem);
 
     QAction *removeItem = new QAction(tr("Remove"), m_textAnnotationRmbMenu);
     m_textAnnotationRmbMenu->addAction(removeItem);
-    connect(removeItem, SIGNAL(triggered()), this, SLOT(askToRemoveFocusItem()));
+    connect(removeItem, &QAction::triggered, this, &AnnotatePlugin::askToRemoveFocusItem);
 
     m_textAnnotationRmbMenu->addSeparator();
 
     QAction *properties = new QAction(tr("Properties"), m_textAnnotationRmbMenu);
     m_textAnnotationRmbMenu->addAction(properties);
-    connect(properties, SIGNAL(triggered()), this, SLOT(editTextAnnotation()));
+    connect(properties, &QAction::triggered, this, &AnnotatePlugin::editTextAnnotation);
 }
 
 void AnnotatePlugin::showTextAnnotationRmbMenu(qreal x, qreal y)
@@ -1403,11 +1403,11 @@ void AnnotatePlugin::setupNodeRmbMenu()
 
     QAction *selectNode = new QAction(tr("Select Node"), m_nodeRmbMenu);
     m_nodeRmbMenu->addAction(selectNode);
-    connect(selectNode, SIGNAL(triggered()), this, SLOT(selectNode()));
+    connect(selectNode, &QAction::triggered, this, &AnnotatePlugin::selectNode);
 
     QAction *deleteNode = new QAction(tr("Delete Node"), m_nodeRmbMenu);
     m_nodeRmbMenu->addAction(deleteNode);
-    connect(deleteNode, SIGNAL(triggered()), this, SLOT(deleteNode()));
+    connect(deleteNode, &QAction::triggered, this, &AnnotatePlugin::deleteNode);
 }
 
 void AnnotatePlugin::showNodeRmbMenu(qreal x, qreal y)

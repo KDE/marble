@@ -73,7 +73,7 @@ FormattedTextWidget::FormattedTextWidget(QWidget *parent)
     connect(d->m_actionUnderlined, SIGNAL(toggled(bool)), this, SLOT(setTextCursorUnderlined(bool)));
     connect(d->m_actionAddImage, SIGNAL(triggered()), this, SLOT(addImageToDescription()));
     connect(d->m_actionAddLink, SIGNAL(triggered()), this, SLOT(addLinkToDescription()));
-    connect(d->m_description, SIGNAL(cursorPositionChanged()), this, SLOT(updateDescriptionEditButtons()));
+    connect(d->m_description, &QTextEdit::cursorPositionChanged, this, &FormattedTextWidget::updateDescriptionEditButtons);
 }
 
 FormattedTextWidget::~FormattedTextWidget()

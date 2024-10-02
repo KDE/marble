@@ -46,13 +46,13 @@ PopupItem::PopupItem(QObject *parent)
 
     m_ui.setupUi(m_widget);
     m_ui.goBackButton->setVisible(false);
-    connect(m_ui.goBackButton, SIGNAL(clicked()), this, SLOT(goBack()));
+    connect(m_ui.goBackButton, &QAbstractButton::clicked, this, &PopupItem::goBack);
 
 #ifdef QT_NO_PRINTER
     m_ui.printButton->setVisible(false);
 #else
     m_ui.printButton->setVisible(true);
-    connect(m_ui.printButton, SIGNAL(clicked()), this, SLOT(printContent()));
+    connect(m_ui.printButton, &QAbstractButton::clicked, this, &PopupItem::printContent);
 #endif
 
     m_widget->setVisible(true);

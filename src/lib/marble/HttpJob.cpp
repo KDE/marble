@@ -130,9 +130,9 @@ void HttpJob::execute()
     request.setRawHeader("User-Agent", userAgent());
     d->m_networkReply = d->m_networkAccessManager->get(request);
 
-    connect(d->m_networkReply, SIGNAL(downloadProgress(qint64, qint64)), SLOT(downloadProgress(qint64, qint64)));
+    connect(d->m_networkReply, &QNetworkReply::downloadProgress, this, &HttpJob::downloadProgress);
     connect(d->m_networkReply, &QNetworkReply::errorOccurred, this, &HttpJob::error);
-    connect(d->m_networkReply, SIGNAL(finished()), SLOT(finished()));
+    connect(d->m_networkReply, &QNetworkReply::finished, this, &HttpJob::finished);
 }
 void HttpJob::downloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 {

@@ -229,7 +229,7 @@ QMenu *AbstractFloatItem::contextMenu()
 
         if (!(flags() & ItemIsHideable)) {
             QAction *hideAction = d->m_contextMenu->addAction(tr("&Hide"));
-            connect(hideAction, SIGNAL(triggered()), this, SLOT(hide()));
+            connect(hideAction, &QAction::triggered, this, &AbstractFloatItem::hide);
         }
 
         DialogConfigurationInterface *configInterface = qobject_cast<DialogConfigurationInterface *>(this);
@@ -237,7 +237,7 @@ QMenu *AbstractFloatItem::contextMenu()
         if (dialog) {
             d->m_contextMenu->addSeparator();
             QAction *configAction = d->m_contextMenu->addAction(QIcon(QStringLiteral(":/icons/settings-configure.png")), tr("&Configure..."));
-            connect(configAction, SIGNAL(triggered()), dialog, SLOT(exec()));
+            connect(configAction, &QAction::triggered, dialog, &QDialog::exec);
         }
     }
 

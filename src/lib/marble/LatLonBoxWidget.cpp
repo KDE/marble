@@ -25,15 +25,15 @@ LatLonBoxWidget::LatLonBoxWidget(QWidget *const parent, Qt::WindowFlags const f)
     , d(new Private(this))
 {
     // used for updating tiles count in DownloadRegionDialog
-    connect(d->m_ui.northSpinBox, SIGNAL(valueChanged(double)), SIGNAL(valueChanged()));
-    connect(d->m_ui.southSpinBox, SIGNAL(valueChanged(double)), SIGNAL(valueChanged()));
-    connect(d->m_ui.eastSpinBox, SIGNAL(valueChanged(double)), SIGNAL(valueChanged()));
-    connect(d->m_ui.westSpinBox, SIGNAL(valueChanged(double)), SIGNAL(valueChanged()));
+    connect(d->m_ui.northSpinBox, &QDoubleSpinBox::valueChanged, this, &LatLonBoxWidget::valueChanged);
+    connect(d->m_ui.southSpinBox, &QDoubleSpinBox::valueChanged, this, &LatLonBoxWidget::valueChanged);
+    connect(d->m_ui.eastSpinBox, &QDoubleSpinBox::valueChanged, this, &LatLonBoxWidget::valueChanged);
+    connect(d->m_ui.westSpinBox, &QDoubleSpinBox::valueChanged, this, &LatLonBoxWidget::valueChanged);
     // used for adjusting single step values
-    connect(d->m_ui.northSpinBox, SIGNAL(valueChanged(double)), SLOT(updateLatSingleStep()));
-    connect(d->m_ui.southSpinBox, SIGNAL(valueChanged(double)), SLOT(updateLatSingleStep()));
-    connect(d->m_ui.eastSpinBox, SIGNAL(valueChanged(double)), SLOT(updateLonSingleStep()));
-    connect(d->m_ui.westSpinBox, SIGNAL(valueChanged(double)), SLOT(updateLonSingleStep()));
+    connect(d->m_ui.northSpinBox, &QDoubleSpinBox::valueChanged, this, &LatLonBoxWidget::updateLatSingleStep);
+    connect(d->m_ui.southSpinBox, &QDoubleSpinBox::valueChanged, this, &LatLonBoxWidget::updateLatSingleStep);
+    connect(d->m_ui.eastSpinBox, &QDoubleSpinBox::valueChanged, this, &LatLonBoxWidget::updateLonSingleStep);
+    connect(d->m_ui.westSpinBox, &QDoubleSpinBox::valueChanged, this, &LatLonBoxWidget::updateLonSingleStep);
 }
 
 LatLonBoxWidget::~LatLonBoxWidget()

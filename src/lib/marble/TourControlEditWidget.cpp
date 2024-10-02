@@ -45,7 +45,7 @@ TourControlEditWidget::TourControlEditWidget(const QModelIndex &index, QWidget *
     }
 
     m_button->setIcon(QIcon(QStringLiteral(":/marble/document-save.png")));
-    connect(m_button, SIGNAL(clicked()), this, SLOT(save()));
+    connect(m_button, &QAbstractButton::clicked, this, &TourControlEditWidget::save);
     layout->addWidget(m_button);
 
     setLayout(layout);

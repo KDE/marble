@@ -96,8 +96,8 @@ MarbleLineEdit::MarbleLineEdit(QWidget *parent)
     updateClearButton();
 
     setDecorator(d->m_decoratorPixmap);
-    connect(this, SIGNAL(textChanged(QString)), SLOT(updateClearButtonIcon(QString)));
-    connect(&d->m_progressTimer, SIGNAL(timeout()), this, SLOT(updateProgress()));
+    connect(this, &QLineEdit::textChanged, this, &MarbleLineEdit::updateClearButtonIcon);
+    connect(&d->m_progressTimer, &QTimer::timeout, this, &MarbleLineEdit::updateProgress);
 }
 
 MarbleLineEdit::~MarbleLineEdit()

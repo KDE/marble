@@ -39,11 +39,11 @@ SoundCueEditWidget::SoundCueEditWidget(const QModelIndex &index, QWidget *parent
     layout->addWidget(m_lineEdit);
 
     m_button2->setIcon(QIcon(QStringLiteral(":/marble/document-open.png")));
-    connect(m_button2, SIGNAL(clicked()), this, SLOT(open()));
+    connect(m_button2, &QAbstractButton::clicked, this, &SoundCueEditWidget::open);
     layout->addWidget(m_button2);
 
     m_button->setIcon(QIcon(QStringLiteral(":/marble/document-save.png")));
-    connect(m_button, SIGNAL(clicked()), this, SLOT(save()));
+    connect(m_button, &QAbstractButton::clicked, this, &SoundCueEditWidget::save);
     layout->addWidget(m_button);
 
     setLayout(layout);

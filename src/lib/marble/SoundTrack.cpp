@@ -16,7 +16,7 @@ SoundTrack::SoundTrack(PlaybackSoundCueItem *item)
     m_progress = 0;
     m_delayBeforeTrackStarts = 0;
     m_paused = true;
-    connect(&m_timer, SIGNAL(timeout()), this, SLOT(playSlot()));
+    connect(&m_timer, &QTimer::timeout, this, &SoundTrack::playSlot);
 }
 
 void SoundTrack::setDelayBeforeTrackStarts(double delay)

@@ -103,7 +103,7 @@ RouteSimulationPositionProviderPlugin::RouteSimulationPositionProviderPlugin(Mar
     , m_direction(0.0)
     , m_directionWithNoise(0.0)
 {
-    connect(&m_updateTimer, SIGNAL(timeout()), this, SLOT(update()));
+    connect(&m_updateTimer, &QTimer::timeout, this, &RouteSimulationPositionProviderPlugin::update);
 }
 
 RouteSimulationPositionProviderPlugin::~RouteSimulationPositionProviderPlugin()
