@@ -72,7 +72,7 @@ void HostipRunner::slotLookupFinished(const QHostInfo &info)
 void HostipRunner::get()
 {
     QNetworkReply *reply = m_networkAccessManager.get(m_request);
-    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(slotNoResults()), Qt::DirectConnection);
+    connect(reply, &QNetworkReply::errorOccurred, this, &HostipRunner::slotNoResults, Qt::DirectConnection);
 }
 
 void HostipRunner::slotRequestFinished(QNetworkReply *reply)

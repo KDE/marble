@@ -117,7 +117,7 @@ void CycleStreetsRunner::retrieveRoute(const RouteRequest *route)
 void CycleStreetsRunner::get()
 {
     QNetworkReply *reply = m_networkAccessManager.get(m_request);
-    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(handleError(QNetworkReply::NetworkError)), Qt::DirectConnection);
+    connect(reply, &QNetworkReply::errorOccurred, this, &CycleStreetsRunner::handleError, Qt::DirectConnection);
 }
 
 void CycleStreetsRunner::retrieveData(QNetworkReply *reply)

@@ -73,7 +73,7 @@ void OsmNominatimRunner::search(const QString &searchTerm, const GeoDataLatLonBo
 void OsmNominatimRunner::startSearch()
 {
     QNetworkReply *reply = m_manager.get(m_request);
-    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(returnNoResults()));
+    connect(reply, &QNetworkReply::errorOccurred, this, &OsmNominatimRunner::returnNoResults);
 }
 
 GeoDataExtendedData OsmNominatimRunner::extractChildren(const QDomNode &node)

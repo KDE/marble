@@ -126,7 +126,7 @@ void MapQuestRunner::retrieveRoute(const RouteRequest *route)
 void MapQuestRunner::get()
 {
     QNetworkReply *reply = m_networkAccessManager.get(m_request);
-    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(handleError(QNetworkReply::NetworkError)), Qt::DirectConnection);
+    connect(reply, &QNetworkReply::errorOccurred, this, &MapQuestRunner::handleError, Qt::DirectConnection);
 }
 
 void MapQuestRunner::retrieveData(QNetworkReply *reply)

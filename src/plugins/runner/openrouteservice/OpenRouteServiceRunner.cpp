@@ -106,7 +106,7 @@ void OpenRouteServiceRunner::retrieveRoute(const RouteRequest *route)
 void OpenRouteServiceRunner::get()
 {
     QNetworkReply *reply = m_networkAccessManager.get(m_request);
-    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(handleError(QNetworkReply::NetworkError)), Qt::DirectConnection);
+    connect(reply, &QNetworkReply::errorOccurred, this, &OpenRouteServiceRunner::handleError, Qt::DirectConnection);
 }
 
 QString OpenRouteServiceRunner::formatCoordinates(const GeoDataCoordinates &coordinates)

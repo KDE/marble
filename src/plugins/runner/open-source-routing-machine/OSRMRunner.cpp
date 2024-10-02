@@ -100,7 +100,7 @@ void OSRMRunner::handleError(QNetworkReply::NetworkError error)
 void OSRMRunner::get()
 {
     QNetworkReply *reply = m_networkAccessManager.get(m_request);
-    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(handleError(QNetworkReply::NetworkError)), Qt::DirectConnection);
+    connect(reply, &QNetworkReply::errorOccurred, this, &OSRMRunner::handleError, Qt::DirectConnection);
 }
 
 void OSRMRunner::append(QString *input, const QString &key, const QString &value)

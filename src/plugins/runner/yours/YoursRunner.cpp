@@ -93,7 +93,7 @@ void YoursRunner::retrieveRoute(const RouteRequest *route)
 void YoursRunner::get()
 {
     QNetworkReply *reply = m_networkAccessManager.get(m_request);
-    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(handleError(QNetworkReply::NetworkError)));
+    connect(reply, &QNetworkReply::errorOccurred, this, &YoursRunner::handleError);
 }
 
 void YoursRunner::retrieveData(QNetworkReply *reply)

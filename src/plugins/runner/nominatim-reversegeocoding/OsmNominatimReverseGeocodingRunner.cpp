@@ -25,7 +25,7 @@ OsmNominatimRunner::OsmNominatimRunner(QObject *parent)
     : ReverseGeocodingRunner(parent)
     , m_manager(this)
 {
-    connect(&m_manager, SIGNAL(finished(QNetworkReply *)), this, SLOT(handleResult(QNetworkReply *)));
+    connect(&m_manager, &QNetworkAccessManager::finished, this, &OsmNominatimRunner::handleResult);
 }
 
 OsmNominatimRunner::~OsmNominatimRunner()
@@ -57,8 +57,8 @@ void OsmNominatimRunner::reverseGeocoding(const GeoDataCoordinates &coordinates)
     timer.setSingleShot(true);
     timer.setInterval(15000);
 
-    connect(&timer, SIGNAL(timeout()), &eventLoop, SLOT(quit()));
-    connect(this, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates, GeoDataPlacemark)), &eventLoop, SLOT(quit()));
+    connect(&timer, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
+    connect(this, &ReverseGeocodingRunner::reverseGeocodingFinished, &eventLoop, &QEventLoop::quit);
 
     // @todo FIXME Must currently be done in the main thread, see bug 257376
     QTimer::singleShot(0, this, SLOT(startReverseGeocoding()));
@@ -70,7 +70,7 @@ void OsmNominatimRunner::reverseGeocoding(const GeoDataCoordinates &coordinates)
 void OsmNominatimRunner::startReverseGeocoding()
 {
     QNetworkReply *reply = m_manager.get(m_request);
-    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(returnNoReverseGeocodingResult()));
+    connect(reply, &QNetworkReply::errorOccurred, this, &OsmNominatimRunner::returnNoReverseGeocodingResult);
 }
 
 void OsmNominatimRunner::handleResult(QNetworkReply *reply)
