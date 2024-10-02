@@ -25,7 +25,7 @@ TourControlEditWidget::TourControlEditWidget(const QModelIndex &index, QWidget *
     , m_radio_pause(new QRadioButton)
     , m_button(new QToolButton)
 {
-    QHBoxLayout *layout = new QHBoxLayout;
+    QHBoxLayout *layout = new QHBoxLayout(this);
     layout->setSpacing(5);
 
     QLabel *iconLabel = new QLabel;
@@ -47,8 +47,6 @@ TourControlEditWidget::TourControlEditWidget(const QModelIndex &index, QWidget *
     m_button->setIcon(QIcon(QStringLiteral(":/marble/document-save.png")));
     connect(m_button, &QAbstractButton::clicked, this, &TourControlEditWidget::save);
     layout->addWidget(m_button);
-
-    setLayout(layout);
 }
 
 bool TourControlEditWidget::editable() const
