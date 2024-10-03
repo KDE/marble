@@ -40,8 +40,8 @@ Q_SIGNALS:
     void started();
 
 private:
-    Ui::MovieCaptureDialog *ui;
-    MovieCapture *m_recorder;
+    Ui::MovieCaptureDialog *const ui;
+    MovieCapture *const m_recorder;
 };
 
 } // namespace Marble

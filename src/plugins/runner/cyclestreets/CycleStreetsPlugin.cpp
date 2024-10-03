@@ -24,7 +24,7 @@ public:
     QHash<QString, QVariant> settings() const override;
 
 private:
-    Ui::CycleStreetsConfigWidget *ui_configWidget;
+    Ui::CycleStreetsConfigWidget *const ui_configWidget;
 };
 
 CycleStreetsConfigWidget::CycleStreetsConfigWidget()

@@ -62,9 +62,9 @@ protected:
 
     void showEvent(QShowEvent *event) override;
 
-    Ui::TimeControlWidget *m_uiWidget;
+    Ui::TimeControlWidget *const m_uiWidget;
 
-    MarbleClock *m_clock;
+    MarbleClock *const m_clock;
     QDateTime m_lastDateTime;
 };
 

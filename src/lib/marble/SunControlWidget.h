@@ -43,7 +43,7 @@ protected:
 
     void showEvent(QShowEvent *event) override;
 
-    Ui::SunControlWidget *m_uiWidget;
+    Ui::SunControlWidget *const m_uiWidget;
     MarbleWidget *const m_marbleWidget;
     QString m_shadow;
 };
