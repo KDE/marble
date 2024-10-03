@@ -359,7 +359,8 @@ QString BookmarkSyncManager::Private::lastSyncedKmlPath() const
 QList<DiffItem> BookmarkSyncManager::Private::getPlacemarks(GeoDataDocument *document, GeoDataDocument *other, DiffItem::Status diffDirection)
 {
     QList<DiffItem> diffItems;
-    for (GeoDataFolder *folder : document->folderList()) {
+    const auto folders = document->folderList();
+    for (GeoDataFolder *folder : folders) {
         QString path = QStringLiteral("/%0").arg(folder->name());
         diffItems.append(getPlacemarks(folder, path, other, diffDirection));
     }
@@ -370,12 +371,14 @@ QList<DiffItem> BookmarkSyncManager::Private::getPlacemarks(GeoDataDocument *doc
 QList<DiffItem> BookmarkSyncManager::Private::getPlacemarks(GeoDataFolder *folder, QString &path, GeoDataDocument *other, DiffItem::Status diffDirection)
 {
     QList<DiffItem> diffItems;
-    for (GeoDataFolder *subFolder : folder->folderList()) {
+    const auto folders = folder->folderList();
+    for (GeoDataFolder *subFolder : folders) {
         QString newPath = QStringLiteral("%0/%1").arg(path, subFolder->name());
         diffItems.append(getPlacemarks(subFolder, newPath, other, diffDirection));
     }
 
-    for (GeoDataPlacemark *placemark : folder->placemarkList()) {
+    const auto placemarks = folder->placemarkList();
+    for (GeoDataPlacemark *placemark : placemarks) {
         DiffItem diffItem;
         diffItem.m_path = path;
         diffItem.m_placemarkA = *placemark;
@@ -403,13 +406,15 @@ QList<DiffItem> BookmarkSyncManager::Private::getPlacemarks(GeoDataFolder *folde
 
 const GeoDataPlacemark *BookmarkSyncManager::Private::findPlacemark(GeoDataContainer *container, const GeoDataPlacemark &bookmark) const
 {
-    for (GeoDataPlacemark *placemark : container->placemarkList()) {
+    const auto placemarks = container->placemarkList();
+    for (GeoDataPlacemark *placemark : placemarks) {
         if (EARTH_RADIUS * placemark->coordinate().sphericalDistanceTo(bookmark.coordinate()) <= 1) {
             return placemark;
         }
     }
 
-    for (GeoDataFolder *folder : container->folderList()) {
+    const auto folders = container->folderList();
+    for (GeoDataFolder *folder : folders) {
         const GeoDataPlacemark *placemark = findPlacemark(folder, bookmark);
         if (placemark) {
             return placemark;
@@ -600,9 +605,10 @@ GeoDataFolder *BookmarkSyncManager::Private::createFolders(GeoDataContainer *con
 {
     GeoDataFolder *folder = nullptr;
     if (pathList.count() > 0) {
-        QString name = pathList.takeFirst();
+        const QString name = pathList.takeFirst();
 
-        for (GeoDataFolder *otherFolder : container->folderList()) {
+        const auto otherFolders = container->folderList();
+        for (GeoDataFolder *otherFolder : otherFolders) {
             if (otherFolder->name() == name) {
                 folder = otherFolder;
             }
