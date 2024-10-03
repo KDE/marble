@@ -85,12 +85,12 @@ EditPolygonDialog::EditPolygonDialog(GeoDataPlacemark *placemark, const QHash<qi
         // Adding the osm tag editor widget tab
         d->m_osmTagEditorWidget = new OsmTagEditorWidget(placemark, this);
         d->tabWidget->addTab(d->m_osmTagEditorWidget, tr("Tags"));
-        QObject::connect(d->m_osmTagEditorWidget, SIGNAL(placemarkChanged(GeoDataFeature *)), this, SLOT(updatePolygon()));
+        connect(d->m_osmTagEditorWidget, SIGNAL(placemarkChanged(GeoDataFeature *)), this, SLOT(updatePolygon()));
 
         // Adding the osm relation editor widget tab
         d->m_osmRelationManagerWidget = new OsmRelationManagerWidget(placemark, relations, this);
         d->tabWidget->addTab(d->m_osmRelationManagerWidget, tr("Relations"));
-        QObject::connect(d->m_osmRelationManagerWidget, SIGNAL(relationCreated(OsmPlacemarkData)), this, SIGNAL(relationCreated(OsmPlacemarkData)));
+        connect(d->m_osmRelationManagerWidget, SIGNAL(relationCreated(OsmPlacemarkData)), this, SIGNAL(relationCreated(OsmPlacemarkData)));
 
         adjustSize();
     }

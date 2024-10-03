@@ -82,9 +82,9 @@ void LayerManager::addRenderPlugin(RenderPlugin *renderPlugin)
 {
     d->m_renderPlugins.append(renderPlugin);
 
-    QObject::connect(renderPlugin, SIGNAL(settingsChanged(QString)), this, SIGNAL(pluginSettingsChanged()));
-    QObject::connect(renderPlugin, SIGNAL(repaintNeeded(QRegion)), this, SIGNAL(repaintNeeded(QRegion)));
-    QObject::connect(renderPlugin, SIGNAL(visibilityChanged(bool, QString)), this, SLOT(updateVisibility(bool, QString)));
+    connect(renderPlugin, SIGNAL(settingsChanged(QString)), this, SIGNAL(pluginSettingsChanged()));
+    connect(renderPlugin, SIGNAL(repaintNeeded(QRegion)), this, SIGNAL(repaintNeeded(QRegion)));
+    connect(renderPlugin, SIGNAL(visibilityChanged(bool, QString)), this, SLOT(updateVisibility(bool, QString)));
 
     // get data plugins
     auto const dataPlugin = qobject_cast<AbstractDataPlugin *>(renderPlugin);

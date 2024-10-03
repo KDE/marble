@@ -674,9 +674,9 @@ QList<QAction *> ControlView::setupDockWidgets(QMainWindow *mainWindow)
     for (; i != end; ++i) {
         if ((*i)->nameId() == QLatin1StringView("annotation")) {
             m_annotationPlugin = *i;
-            QObject::connect(m_annotationPlugin, SIGNAL(enabledChanged(bool)), this, SLOT(updateAnnotationDockVisibility()));
-            QObject::connect(m_annotationPlugin, SIGNAL(visibilityChanged(bool, QString)), this, SLOT(updateAnnotationDockVisibility()));
-            QObject::connect(m_annotationPlugin, SIGNAL(actionGroupsChanged()), this, SLOT(updateAnnotationDock()));
+            connect(m_annotationPlugin, SIGNAL(enabledChanged(bool)), this, SLOT(updateAnnotationDockVisibility()));
+            connect(m_annotationPlugin, SIGNAL(visibilityChanged(bool, QString)), this, SLOT(updateAnnotationDockVisibility()));
+            connect(m_annotationPlugin, SIGNAL(actionGroupsChanged()), this, SLOT(updateAnnotationDock()));
             updateAnnotationDock();
             updateAnnotationDockVisibility();
             mainWindow->addDockWidget(Qt::LeftDockWidgetArea, m_annotationDock);

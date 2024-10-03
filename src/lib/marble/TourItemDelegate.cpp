@@ -47,7 +47,7 @@ TourItemDelegate::TourItemDelegate(QListView *view, MarbleWidget *widget, TourWi
     , m_editable(true)
     , m_tourWidget(tour)
 {
-    QObject::connect(this, SIGNAL(editingChanged(QModelIndex)), m_listView, SLOT(update(QModelIndex)));
+    connect(this, SIGNAL(editingChanged(QModelIndex)), m_listView, SLOT(update(QModelIndex)));
     m_listView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 

@@ -61,7 +61,7 @@ RoutingModel::RoutingModel(RouteRequest *request, PositionTracking *positionTrac
     : QAbstractListModel(parent)
     , d(new RoutingModelPrivate(positionTracking, request))
 {
-    QObject::connect(d->m_positionTracking, SIGNAL(gpsLocation(GeoDataCoordinates, qreal)), this, SLOT(updatePosition(GeoDataCoordinates, qreal)));
+    connect(d->m_positionTracking, SIGNAL(gpsLocation(GeoDataCoordinates, qreal)), this, SLOT(updatePosition(GeoDataCoordinates, qreal)));
 
     QHash<int, QByteArray> roles;
     roles.insert(Qt::DisplayRole, "display");

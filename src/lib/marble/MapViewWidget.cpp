@@ -172,16 +172,16 @@ public:
         m_toolBar->setIconSize(QSize(16, 16));
         m_mapViewUi.toolBarLayout->insertWidget(0, m_toolBar);
 
-        QObject::connect(m_globeViewButton, SIGNAL(clicked()), q, SLOT(globeViewRequested()));
-        QObject::connect(m_mercatorViewButton, SIGNAL(clicked()), q, SLOT(mercatorViewRequested()));
-        QObject::connect(m_mercatorViewAction, SIGNAL(triggered()), q, SLOT(mercatorViewRequested()));
-        QObject::connect(m_flatViewAction, SIGNAL(triggered()), q, SLOT(flatViewRequested()));
-        QObject::connect(m_gnomonicViewAction, SIGNAL(triggered()), q, SLOT(gnomonicViewRequested()));
-        QObject::connect(m_stereographicViewAction, SIGNAL(triggered()), q, SLOT(stereographicViewRequested()));
-        QObject::connect(m_lambertAzimuthalViewAction, SIGNAL(triggered()), q, SLOT(lambertAzimuthalViewRequested()));
-        QObject::connect(m_azimuthalEquidistantViewAction, SIGNAL(triggered()), q, SLOT(azimuthalEquidistantViewRequested()));
-        QObject::connect(m_verticalPerspectiveViewAction, SIGNAL(triggered()), q, SLOT(verticalPerspectiveViewRequested()));
-        QObject::connect(m_globeViewAction, SIGNAL(triggered()), q, SLOT(globeViewRequested()));
+        connect(m_globeViewButton, SIGNAL(clicked()), q, SLOT(globeViewRequested()));
+        connect(m_mercatorViewButton, SIGNAL(clicked()), q, SLOT(mercatorViewRequested()));
+        connect(m_mercatorViewAction, SIGNAL(triggered()), q, SLOT(mercatorViewRequested()));
+        connect(m_flatViewAction, SIGNAL(triggered()), q, SLOT(flatViewRequested()));
+        connect(m_gnomonicViewAction, SIGNAL(triggered()), q, SLOT(gnomonicViewRequested()));
+        connect(m_stereographicViewAction, SIGNAL(triggered()), q, SLOT(stereographicViewRequested()));
+        connect(m_lambertAzimuthalViewAction, SIGNAL(triggered()), q, SLOT(lambertAzimuthalViewRequested()));
+        connect(m_azimuthalEquidistantViewAction, SIGNAL(triggered()), q, SLOT(azimuthalEquidistantViewRequested()));
+        connect(m_verticalPerspectiveViewAction, SIGNAL(triggered()), q, SLOT(verticalPerspectiveViewRequested()));
+        connect(m_globeViewAction, SIGNAL(triggered()), q, SLOT(globeViewRequested()));
 
         applyReducedLayout();
     }

@@ -57,7 +57,7 @@ OsmRelationEditorDialog::OsmRelationEditorDialog(OsmPlacemarkData *relationData,
     m_buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
     layout->addWidget(m_buttonBox);
 
-    QObject::connect(m_buttonBox, SIGNAL(accepted()), this, SLOT(checkFields()));
+    connect(m_buttonBox, &QDialogButtonBox::accepted, this, &OsmRelationEditorDialog::checkFields);
     connect(m_buttonBox, SIGNAL(rejected()), SLOT(reject()));
 }
 

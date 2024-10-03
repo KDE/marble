@@ -40,10 +40,10 @@ OsmRelationManagerWidget::OsmRelationManagerWidget(GeoDataPlacemark *placemark, 
     d->m_addRelation->setMenu(d->m_relationDropMenu);
     d->populateDropMenu();
 
-    QObject::connect(d->m_currentRelations, SIGNAL(itemDoubleClicked(QTreeWidgetItem *, int)), this, SLOT(handleDoubleClick(QTreeWidgetItem *, int)));
-    QObject::connect(d->m_currentRelations, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(handleRelationContextMenuRequest(QPoint)));
-    QObject::connect(d->m_relationDropMenu, SIGNAL(triggered(QAction *)), this, SLOT(addRelation(QAction *)));
-    QObject::connect(d->m_currentRelations, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(handleItemChange(QTreeWidgetItem *, int)));
+    connect(d->m_currentRelations, SIGNAL(itemDoubleClicked(QTreeWidgetItem *, int)), this, SLOT(handleDoubleClick(QTreeWidgetItem *, int)));
+    connect(d->m_currentRelations, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(handleRelationContextMenuRequest(QPoint)));
+    connect(d->m_relationDropMenu, SIGNAL(triggered(QAction *)), this, SLOT(addRelation(QAction *)));
+    connect(d->m_currentRelations, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(handleItemChange(QTreeWidgetItem *, int)));
 }
 
 OsmRelationManagerWidget::~OsmRelationManagerWidget()
