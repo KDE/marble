@@ -87,6 +87,7 @@ void RoutingRunnerManager::Private::addRoutingResult(GeoDataDocument *route)
     if (route) {
         mDebug() << "route retrieved";
         m_routingResult.push_back(route);
+        qWarning() << route;
         Q_EMIT q->routeRetrieved(route);
     }
 }

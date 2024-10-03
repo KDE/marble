@@ -35,6 +35,7 @@ public:
         Downloading, // A new route is downloaded in the background
         Retrieved // No download in progress
     };
+    Q_ENUM(State);
 
     /** Constructor */
     explicit RoutingManager(MarbleModel *marbleModel, QObject *parent = nullptr);

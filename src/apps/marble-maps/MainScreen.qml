@@ -162,17 +162,18 @@ Kirigami.ApplicationWindow {
                         marbleMaps: marbleMaps
                     })
                 }
-            }/*,
+            },
             Kirigami.Action {
                 text: i18n("Routing")
-                icon.source: "images/directions.svg"
+                icon.source: Qt.resolvedUrl("images/directions.svg")
                 onTriggered: {
                     app.state = "route"
-                    app.pageStack.layers.push(Qt.createComponent("org.kde.marble.maps", "RoutingPage"), {
-                        marbleMaps: marbleMaps
+                    app.pageStack.layers.push(Qt.createComponent("org.kde.marble.maps", "RouteEditorPage"), {
+                        routingManager: routingManager,
+                        marbleMaps: marbleMaps,
                     })
                 }
-            }*/
+            }
         ]
     }
 
@@ -214,58 +215,33 @@ Kirigami.ApplicationWindow {
             }
         }
 
-        Marble.SearchBackend {
-            id: backend
 
-            marbleQuickItem: marbleMaps
-            onSearchResultChanged: {
-                searchResults.model = model;
-                searchResultPopup.visible = true;
-            }
-        }
-
-        ScrollView {
+        SearchResultView {
             id: searchResultPopup
 
             anchors.fill: parent
 
             visible: false
-            z: 2
+            searchBackend: Marble.SearchBackend {
+                id: backend
+                marbleQuickItem: marbleMaps
+                onSearchResultChanged: {
+                    searchResultPopup.searchResults.model = model;
+                    searchResultPopup.visible = true;
+                }
+            }
 
             background: Rectangle {
                 Kirigami.Theme.colorSet: Kirigami.Theme.View
                 Kirigami.Theme.inherit: false
             }
 
-            contentItem: ListView {
-                id: searchResults
+            z: 2
 
-                clip: true
-
-                delegate: Delegates.RoundedItemDelegate {
-                    id: searchDelegate
-
-                    required property int index
-                    required property string name
-                    required property string description
-                    required property string iconPath
-
-                    text: name
-                    icon.source: iconPath.substr(0,1) === '/' ? "file://" + iconPath : iconPath
-
-                    onClicked: {
-                        backend.setSelectedPlacemark(index);
-                        searchResultPopup.visible = false;
-
-                        if (routingManager) {
-                            routingManager.addSearchResultAsPlacemark(backend.selectedPlacemark);
-                        }
-                        app.selectedPlacemark = backend.selectedPlacemark;
-                        app.state = "place"
-                    }
-                }
-
-                model: backend.completionModel
+            onClicked: (placemark) => {
+                searchResultPopup.visible = false;
+                app.selectedPlacemark = placemark;
+                app.state = "place"
             }
         }
 
@@ -401,6 +377,16 @@ Kirigami.ApplicationWindow {
                         anchors.fill: parent
                         marbleItem: marbleMaps
                         visible: hasRoute
+
+                        routingProfile: switch (Config.profile) {
+                        case Config.Car:
+                            return Marble.Routing.Motorcar;
+                        case Config.Bicycle:
+                            return Marble.Routing.Bicycle;
+                        case Config.Pedestrian:
+                            return Marble.Routing.Pedestrian;
+                        }
+
 
                         function addToRoute() {
                             ensureRouteHasDeparture()

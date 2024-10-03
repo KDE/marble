@@ -36,7 +36,7 @@ qt_add_qml_module(marble-maps
         DeveloperDialog.qml
         ProfileSelectorMenu.qml
         FloatingMenuButton.qml
-        RouteEditor.qml
+        RouteEditorPage.qml
         RoutesItem.qml
         MenuIcon.qml
         NavigationInfoBar.qml
@@ -48,6 +48,7 @@ qt_add_qml_module(marble-maps
         Bookmarks.qml
         MarbleScrollBar.qml
         ThemeConfigPage.qml
+        SearchResultView.qml
     RESOURCES
         images/directions.svg
         images/transport-mode-bus.svg

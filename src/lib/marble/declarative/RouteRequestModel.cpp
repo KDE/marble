@@ -123,11 +123,18 @@ void RouteRequestModel::updateAfterAddition(int idx)
     endInsertRows();
 }
 
-void RouteRequestModel::setPosition(int index, qreal longitude, qreal latitude)
+void RouteRequestModel::setPosition(int index, qreal longitude, qreal latitude, const QString &name)
 {
     if (index >= 0 && index < m_request->size()) {
-        m_request->setPosition(index, Marble::GeoDataCoordinates(longitude, latitude, 0.0, Marble::GeoDataCoordinates::Degree));
+        m_request->setPosition(index, Marble::GeoDataCoordinates(longitude, latitude, 0.0, Marble::GeoDataCoordinates::Degree), name);
     }
+}
+
+void RouteRequestModel::reverse()
+{
+    beginResetModel();
+    m_request->reverse();
+    endResetModel();
 }
 
 #include "moc_RouteRequestModel.cpp"

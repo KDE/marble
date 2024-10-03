@@ -47,6 +47,8 @@ public:
     /** Overload of QAbstractListModel */
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
+    QHash<int, QByteArray> roleNames() const override;
+
     const GeoDataDocument *route(int index) const;
 
     // Model data filling

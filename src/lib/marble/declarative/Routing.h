@@ -6,6 +6,7 @@
 #ifndef MARBLE_DECLARATIVE_ROUTING_H
 #define MARBLE_DECLARATIVE_ROUTING_H
 
+#include "routing/AlternativeRoutesModel.h"
 #include <QQuickItem>
 
 #include <Placemark.h>
@@ -29,7 +30,8 @@ class Routing : public QQuickItem
     Q_PROPERTY(bool hasWaypoints READ hasWaypoints NOTIFY hasWaypointsChanged)
     Q_PROPERTY(RoutingModel *routingModel READ routingModel NOTIFY routingModelChanged)
     Q_PROPERTY(QQmlComponent *waypointDelegate READ waypointDelegate WRITE setWaypointDelegate NOTIFY waypointDelegateChanged)
-    Q_PROPERTY(RouteRequestModel *routeRequestModel READ routeRequestModel NOTIFY routeRequestModelChanged)
+    Q_PROPERTY(RouteRequestModel *routeRequestModel READ routeRequestModel CONSTANT)
+    Q_PROPERTY(AlternativeRoutesModel *alternativeRoutesModel READ alternativeRoutesModel NOTIFY marbleMapChanged)
 
 public:
     enum RoutingProfile {
@@ -61,7 +63,9 @@ public:
 
     Q_INVOKABLE int waypointCount() const;
 
-    RouteRequestModel *routeRequestModel();
+    RouteRequestModel *routeRequestModel() const;
+
+    AlternativeRoutesModel *alternativeRoutesModel() const;
 
 public Q_SLOTS:
     void addVia(qreal lon, qreal lat);

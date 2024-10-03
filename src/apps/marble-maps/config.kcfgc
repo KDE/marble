@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
 File=config.kcfg
 ClassName=Config
+GlobalEnums=true
 Mutators=true
 DefaultValueGetters=true
 GenerateProperties=true

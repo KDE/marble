@@ -311,15 +311,20 @@ QVariant AlternativeRoutesModel::headerData(int, Qt::Orientation, int) const
     return {};
 }
 
+QHash<int, QByteArray> AlternativeRoutesModel::roleNames() const
+{
+    return {
+        {Qt::DisplayRole, "routeName"},
+    };
+}
+
 QVariant AlternativeRoutesModel::data(const QModelIndex &index, int role) const
 {
-    QVariant result;
-
     if (role == Qt::DisplayRole && index.column() == 0 && index.row() >= 0 && index.row() < d->m_routes.size()) {
-        result = d->m_routes.at(index.row())->name();
+        return d->m_routes.at(index.row())->name();
     }
 
-    return result;
+    return {};
 }
 
 const GeoDataDocument *AlternativeRoutesModel::route(int index) const

@@ -50,7 +50,9 @@ public:
 public Q_SLOTS:
     void setRouting(Marble::Routing *routing);
 
-    void setPosition(int index, qreal longitude, qreal latitude);
+    void setPosition(int index, qreal longitude, qreal latitude, const QString &name);
+
+    void reverse();
 
 Q_SIGNALS:
     void routingChanged();

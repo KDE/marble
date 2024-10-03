@@ -15,4 +15,21 @@ SPDX-License-Identifier: LGPL-2.1-or-later
       <default>earth/vectorosm/vectorosm.dgml</default>
     </entry>
   </group>
+  <group name="Routing">
+    <entry name="Profile" type="Enum">
+      <label>Routing profile</label>
+      <choices>
+        <choice name="Car">
+          <label>Car</label>
+        </choice>
+        <choice name="Bicycle">
+          <label>Bicycle</label>
+        </choice>
+        <choice name="Pedestrian">
+          <label>Pedestrian</label>
+        </choice>
+      </choices>
+      <default>Bicycle</default>
+    </entry>
+  </group>
 </kcfg>

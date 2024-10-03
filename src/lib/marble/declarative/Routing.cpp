@@ -62,8 +62,6 @@ Routing::Routing(QQuickItem *parent)
     connect(d->m_routeRequestModel, SIGNAL(rowsInserted(QModelIndex, int, int)), this, SLOT(updateWaypointItems()));
     connect(d->m_routeRequestModel, SIGNAL(rowsMoved(QModelIndex, int, int, QModelIndex, int)), this, SLOT(updateWaypointItems()));
     connect(d->m_routeRequestModel, SIGNAL(rowsRemoved(QModelIndex, int, int)), this, SLOT(updateWaypointItems()));
-
-    Q_EMIT routeRequestModelChanged(d->m_routeRequestModel);
 }
 
 Routing::~Routing()
@@ -350,6 +348,8 @@ void Routing::setRoutingProfile(Routing::RoutingProfile profile)
 
 bool Routing::hasRoute() const
 {
+    if (d->m_marbleMap)
+        qWarning() << d->m_marbleMap << !d->m_marbleMap->model()->routingManager()->routingModel()->route().path().isEmpty();
     return d->m_marbleMap && !d->m_marbleMap->model()->routingManager()->routingModel()->route().path().isEmpty();
 }
 
@@ -373,9 +373,18 @@ int Routing::waypointCount() const
     return d->m_routeRequestModel ? d->m_routeRequestModel->rowCount() : 0;
 }
 
-RouteRequestModel *Routing::routeRequestModel()
+RouteRequestModel *Routing::routeRequestModel() const
 {
     return d->m_routeRequestModel;
+}
+
+AlternativeRoutesModel *Routing::alternativeRoutesModel() const
+{
+    if (d->m_marbleMap) {
+        Marble::RoutingManager *const routingManager = d->m_marbleMap->model()->routingManager();
+        return routingManager->alternativeRoutesModel();
+    }
+    return nullptr;
 }
 
 void Routing::addVia(qreal lon, qreal lat)
