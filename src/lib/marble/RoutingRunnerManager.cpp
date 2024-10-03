@@ -152,8 +152,8 @@ QList<GeoDataDocument *> RoutingRunnerManager::searchRoute(const RouteRequest *r
     QEventLoop localEventLoop;
     QTimer watchdog;
     watchdog.setSingleShot(true);
-    connect(&watchdog, SIGNAL(timeout()), &localEventLoop, SLOT(quit()));
-    connect(this, SIGNAL(routingFinished()), &localEventLoop, SLOT(quit()), Qt::QueuedConnection);
+    connect(&watchdog, &QTimer::timeout, &localEventLoop, &QEventLoop::quit);
+    connect(this, &RoutingRunnerManager::routingFinished, &localEventLoop, &QEventLoop::quit, Qt::QueuedConnection);
 
     watchdog.start(timeout);
     retrieveRoute(request);

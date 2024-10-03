@@ -45,8 +45,8 @@ TinyWebBrowser::TinyWebBrowser(QWidget *parent)
 
     connect(this, SIGNAL(statusBarMessage(QString)), this, SIGNAL(statusMessage(QString)));
 
-    connect(page, SIGNAL(linkClicked(QUrl)), this, SLOT(openExternalLink(QUrl)));
-    connect(this, SIGNAL(titleChanged(QString)), this, SLOT(setWindowTitle(QString)));
+    connect(page, &MarbleWebPage::linkClicked, this, &TinyWebBrowser::openExternalLink);
+    connect(this, &QWebEngineView::titleChanged, this, &QWidget::setWindowTitle);
 
     pageAction(QWebEnginePage::OpenLinkInNewWindow)->setEnabled(false);
     pageAction(QWebEnginePage::OpenLinkInNewWindow)->setVisible(false);

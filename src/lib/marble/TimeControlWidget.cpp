@@ -26,14 +26,14 @@ TimeControlWidget::TimeControlWidget(MarbleClock *clock, QWidget *parent)
 {
     m_uiWidget->setupUi(this);
 
-    connect(m_uiWidget->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(updateSpeedLabel(int)));
-    connect(m_uiWidget->nowToolButton, SIGNAL(clicked()), this, SLOT(nowClicked()));
+    connect(m_uiWidget->speedSlider, &QAbstractSlider::valueChanged, this, &TimeControlWidget::updateSpeedLabel);
+    connect(m_uiWidget->nowToolButton, &QAbstractButton::clicked, this, &TimeControlWidget::nowClicked);
     connect(m_uiWidget->buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked()), this, SLOT(apply()));
-    connect(m_uiWidget->buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    connect(m_uiWidget->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()), this, SLOT(apply()));
-    connect(m_uiWidget->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()), this, SLOT(accept()));
-    connect(m_clock, SIGNAL(timeChanged()), this, SLOT(updateDateTime()));
-    connect(m_clock, SIGNAL(updateIntervalChanged(int)), this, SLOT(updateRefreshRate(int)));
+    connect(m_uiWidget->buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
+    connect(m_uiWidget->buttonBox->button(QDialogButtonBox::Ok), &QAbstractButton::clicked, this, &TimeControlWidget::apply);
+    connect(m_uiWidget->buttonBox->button(QDialogButtonBox::Ok), &QAbstractButton::clicked, this, &QDialog::accept);
+    connect(m_clock, &MarbleClock::timeChanged, this, &TimeControlWidget::updateDateTime);
+    connect(m_clock, &MarbleClock::updateIntervalChanged, this, &TimeControlWidget::updateRefreshRate);
 
     setModal(false);
 }
