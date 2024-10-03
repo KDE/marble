@@ -78,9 +78,9 @@ CurrentLocationWidget::CurrentLocationWidget(QWidget *parent, Qt::WindowFlags f)
     d->m_currentLocationUi.setupUi(this);
     layout()->setContentsMargins({});
 
-    connect(d->m_currentLocationUi.recenterComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setRecenterMode(int)));
+    connect(d->m_currentLocationUi.recenterComboBox, &QComboBox::currentIndexChanged, this, &CurrentLocationWidget::setRecenterMode);
 
-    connect(d->m_currentLocationUi.autoZoomCheckBox, SIGNAL(clicked(bool)), this, SLOT(setAutoZoom(bool)));
+    connect(d->m_currentLocationUi.autoZoomCheckBox, &QAbstractButton::clicked, this, &CurrentLocationWidget::setAutoZoom);
 
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     d->m_currentLocationUi.positionTrackingComboBox->setVisible(!smallScreen);

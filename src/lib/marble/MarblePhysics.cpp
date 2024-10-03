@@ -82,8 +82,8 @@ MarblePhysics::MarblePhysics(MarbleAbstractPresenter *presenter)
     : QObject(presenter)
     , d(new MarblePhysicsPrivate(presenter))
 {
-    connect(&d->m_timeline, SIGNAL(valueChanged(qreal)), this, SLOT(updateProgress(qreal)));
-    connect(&d->m_timeline, SIGNAL(finished()), this, SLOT(startStillMode()));
+    connect(&d->m_timeline, &QTimeLine::valueChanged, this, &MarblePhysics::updateProgress);
+    connect(&d->m_timeline, &QTimeLine::finished, this, &MarblePhysics::startStillMode);
 }
 
 MarblePhysics::~MarblePhysics()

@@ -24,17 +24,17 @@ MovieCaptureDialog::MovieCaptureDialog(MarbleWidget *widget, QWidget *parent)
     m_recorder->setSnapshotMethod(MovieCapture::TimeDriven);
     QPushButton *startButton = ui->buttonBox->addButton(tr("&Start", "Start recording a movie"), QDialogButtonBox::ActionRole);
 
-    connect(ui->fpsSlider, SIGNAL(valueChanged(int)), ui->fpsSpin, SLOT(setValue(int)));
+    connect(ui->fpsSlider, &QAbstractSlider::valueChanged, ui->fpsSpin, &QSpinBox::setValue);
 
-    connect(ui->fpsSpin, SIGNAL(valueChanged(int)), ui->fpsSlider, SLOT(setValue(int)));
+    connect(ui->fpsSpin, &QSpinBox::valueChanged, ui->fpsSlider, &QAbstractSlider::setValue);
 
-    connect(ui->fpsSlider, SIGNAL(valueChanged(int)), m_recorder, SLOT(setFps(int)));
+    connect(ui->fpsSlider, &QAbstractSlider::valueChanged, m_recorder, &MovieCapture::setFps);
 
-    connect(ui->buttonBox, SIGNAL(rejected()), this, SLOT(close()));
+    connect(ui->buttonBox, &QDialogButtonBox::rejected, this, &QWidget::close);
 
-    connect(startButton, SIGNAL(clicked()), this, SLOT(startRecording()));
+    connect(startButton, &QAbstractButton::clicked, this, &MovieCaptureDialog::startRecording);
 
-    connect(ui->openButton, SIGNAL(clicked()), this, SLOT(loadDestinationFile()));
+    connect(ui->openButton, &QAbstractButton::clicked, this, &MovieCaptureDialog::loadDestinationFile);
 }
 
 MovieCaptureDialog::~MovieCaptureDialog()

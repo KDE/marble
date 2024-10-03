@@ -142,12 +142,12 @@ EditPlacemarkDialog::EditPlacemarkDialog(GeoDataPlacemark *placemark, const QHas
         // Adding the osm tag editor widget tab
         d->m_osmTagEditorWidget = new OsmTagEditorWidget(placemark, this);
         d->tabWidget->addTab(d->m_osmTagEditorWidget, tr("Tags"));
-        connect(d->m_osmTagEditorWidget, SIGNAL(placemarkChanged(GeoDataFeature *)), this, SLOT(updateTextAnnotation()));
+        connect(d->m_osmTagEditorWidget, &OsmTagEditorWidget::placemarkChanged, this, &EditPlacemarkDialog::updateTextAnnotation);
 
         // Adding the osm relation editor widget tab
         d->m_osmRelationManagerWidget = new OsmRelationManagerWidget(placemark, relations, this);
         d->tabWidget->addTab(d->m_osmRelationManagerWidget, tr("Relations"));
-        connect(d->m_osmRelationManagerWidget, SIGNAL(relationCreated(OsmPlacemarkData)), this, SIGNAL(relationCreated(OsmPlacemarkData)));
+        connect(d->m_osmRelationManagerWidget, &OsmRelationManagerWidget::relationCreated, this, &EditPlacemarkDialog::relationCreated);
     }
 
     // Adding the elevation widget tab
@@ -181,10 +181,10 @@ EditPlacemarkDialog::EditPlacemarkDialog(GeoDataPlacemark *placemark, const QHas
 
     // Adjust icon and label scales.
     d->m_iconScale->setValue(placemark->style()->iconStyle().scale());
-    connect(d->m_iconScale, SIGNAL(valueChanged(double)), this, SLOT(updateTextAnnotation()));
+    connect(d->m_iconScale, &QDoubleSpinBox::valueChanged, this, &EditPlacemarkDialog::updateTextAnnotation);
 
     d->m_labelScale->setValue(placemark->style()->labelStyle().scale());
-    connect(d->m_labelScale, SIGNAL(valueChanged(double)), this, SLOT(updateTextAnnotation()));
+    connect(d->m_labelScale, &QDoubleSpinBox::valueChanged, this, &EditPlacemarkDialog::updateTextAnnotation);
 
     // Adjust the current color of the two push buttons' pixmap to resemble the label and icon colors.
     const GeoDataLabelStyle labelStyle = placemark->style()->labelStyle();
@@ -202,14 +202,14 @@ EditPlacemarkDialog::EditPlacemarkDialog(GeoDataPlacemark *placemark, const QHas
     d->m_labelColorDialog = new QColorDialog(this);
     d->m_labelColorDialog->setOption(QColorDialog::ShowAlphaChannel);
     d->m_labelColorDialog->setCurrentColor(labelStyle.color());
-    connect(d->m_labelButton, SIGNAL(clicked()), d->m_labelColorDialog, SLOT(exec()));
+    connect(d->m_labelButton, &QAbstractButton::clicked, d->m_labelColorDialog, &QDialog::exec);
     connect(d->m_labelColorDialog, &QColorDialog::colorSelected, this, &EditPlacemarkDialog::updateLabelDialog);
     connect(d->m_labelColorDialog, &QColorDialog::colorSelected, this, &EditPlacemarkDialog::updateTextAnnotation);
 
     d->m_iconColorDialog = new QColorDialog(this);
     d->m_iconColorDialog->setOption(QColorDialog::ShowAlphaChannel);
     d->m_iconColorDialog->setCurrentColor(iconStyle.color());
-    connect(d->m_iconButton, SIGNAL(clicked()), d->m_iconColorDialog, SLOT(exec()));
+    connect(d->m_iconButton, &QAbstractButton::clicked, d->m_iconColorDialog, &QDialog::exec);
     connect(d->m_iconColorDialog, &QColorDialog::colorSelected, this, &EditPlacemarkDialog::updateIconDialog);
     connect(d->m_iconColorDialog, &QColorDialog::colorSelected, this, &EditPlacemarkDialog::updateTextAnnotation);
 

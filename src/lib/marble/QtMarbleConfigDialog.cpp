@@ -163,7 +163,7 @@ QtMarbleConfigDialog::QtMarbleConfigDialog(MarbleWidget *marbleWidget, CloudSync
     layout->addWidget(buttons);
 
     // When the settings have been changed, write to disk.
-    connect(this, SIGNAL(settingsChanged()), this, SLOT(syncSettings()));
+    connect(this, &QtMarbleConfigDialog::settingsChanged, this, &QtMarbleConfigDialog::syncSettings);
 
     initializeCustomTimezone();
 }
@@ -222,8 +222,8 @@ void QtMarbleConfigDialog::disableSyncNow()
     d->ui_cloudSyncSettings.button_syncNow->setDisabled(true);
 
     auto timeoutTimer = new QTimer(this);
-    connect(timeoutTimer, SIGNAL(timeout()), timeoutTimer, SLOT(stop()));
-    connect(timeoutTimer, SIGNAL(timeout()), this, SLOT(enableSyncNow()));
+    connect(timeoutTimer, &QTimer::timeout, timeoutTimer, &QTimer::stop);
+    connect(timeoutTimer, &QTimer::timeout, this, &QtMarbleConfigDialog::enableSyncNow);
 
     connect(d->m_syncManager, SIGNAL(syncComplete()), this, SLOT(enableSyncNow()));
     connect(d->m_syncManager, SIGNAL(syncComplete()), timeoutTimer, SLOT(stop()));
