@@ -128,7 +128,7 @@ PreviewDialog::PreviewDialog(QWidget *parent, const QString &mapThemeId)
     : QDialog(parent)
     , m_mapThemeId(mapThemeId)
 {
-    auto layout = new QGridLayout();
+    auto layout = new QGridLayout(this);
     auto widget = new MarbleWidget();
     auto navigator = new MarbleNavigator();
 
@@ -149,7 +149,6 @@ PreviewDialog::PreviewDialog(QWidget *parent, const QString &mapThemeId)
     layout->setContentsMargins({});
     layout->setSpacing(0);
 
-    this->setLayout(layout);
     this->setMinimumSize(640, 480);
     this->setWindowTitle(tr("Preview Map"));
 }

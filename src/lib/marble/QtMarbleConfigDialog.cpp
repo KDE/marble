@@ -162,8 +162,6 @@ QtMarbleConfigDialog::QtMarbleConfigDialog(MarbleWidget *marbleWidget, CloudSync
     layout->addWidget(tabWidget);
     layout->addWidget(buttons);
 
-    this->setLayout(layout);
-
     // When the settings have been changed, write to disk.
     connect(this, SIGNAL(settingsChanged()), this, SLOT(syncSettings()));
 

@@ -25,7 +25,7 @@ WaitEditWidget::WaitEditWidget(const QModelIndex &index, QWidget *parent)
     , m_spinBox(new QDoubleSpinBox)
     , m_button(new QToolButton)
 {
-    auto layout = new QHBoxLayout;
+    auto layout = new QHBoxLayout(this);
     layout->setSpacing(5);
 
     auto iconLabel = new QLabel;
@@ -43,8 +43,6 @@ WaitEditWidget::WaitEditWidget(const QModelIndex &index, QWidget *parent)
     m_button->setIcon(QIcon(QStringLiteral(":/marble/document-save.png")));
     connect(m_button, &QAbstractButton::clicked, this, &WaitEditWidget::save);
     layout->addWidget(m_button);
-
-    setLayout(layout);
 }
 
 bool WaitEditWidget::editable() const

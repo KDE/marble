@@ -23,7 +23,7 @@ RemoveItemEditWidget::RemoveItemEditWidget(const QModelIndex &index, QWidget *pa
     , m_button(new QToolButton)
     , m_comboBox(new QComboBox)
 {
-    auto layout = new QHBoxLayout;
+    auto layout = new QHBoxLayout(this);
     layout->setSpacing(5);
 
     auto iconLabel = new QLabel;
@@ -39,8 +39,6 @@ RemoveItemEditWidget::RemoveItemEditWidget(const QModelIndex &index, QWidget *pa
     m_button->setIcon(QIcon(QStringLiteral(":/marble/document-save.png")));
     connect(m_button, &QAbstractButton::clicked, this, &RemoveItemEditWidget::save);
     layout->addWidget(m_button);
-
-    setLayout(layout);
 }
 
 bool RemoveItemEditWidget::editable() const

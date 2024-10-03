@@ -28,7 +28,7 @@ FlyToEditWidget::FlyToEditWidget(const QModelIndex &index, MarbleWidget *widget,
     , m_index(index)
     , m_button(new QToolButton)
 {
-    auto layout = new QHBoxLayout;
+    auto layout = new QHBoxLayout(this);
     layout->setSpacing(5);
 
     auto iconLabel = new QLabel;
@@ -84,8 +84,6 @@ FlyToEditWidget::FlyToEditWidget(const QModelIndex &index, MarbleWidget *widget,
     m_button->setIcon(QIcon(QStringLiteral(":/marble/document-save.png")));
     connect(m_button, &QAbstractButton::clicked, this, &FlyToEditWidget::save);
     layout->addWidget(m_button);
-
-    setLayout(layout);
 }
 
 bool FlyToEditWidget::editable() const

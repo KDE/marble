@@ -27,7 +27,7 @@ SoundCueEditWidget::SoundCueEditWidget(const QModelIndex &index, QWidget *parent
     , m_button(new QToolButton)
     , m_button2(new QToolButton)
 {
-    auto layout = new QHBoxLayout;
+    auto layout = new QHBoxLayout(this);
     layout->setSpacing(5);
 
     auto iconLabel = new QLabel;
@@ -45,8 +45,6 @@ SoundCueEditWidget::SoundCueEditWidget(const QModelIndex &index, QWidget *parent
     m_button->setIcon(QIcon(QStringLiteral(":/marble/document-save.png")));
     connect(m_button, &QAbstractButton::clicked, this, &SoundCueEditWidget::save);
     layout->addWidget(m_button);
-
-    setLayout(layout);
 }
 
 bool SoundCueEditWidget::editable() const

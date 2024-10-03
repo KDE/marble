@@ -100,11 +100,10 @@ SearchWidget::SearchWidget(QWidget *parent, Qt::WindowFlags flags)
     d->m_searchResultView->setMinimumSize(0, 0);
     connect(d->m_searchResultView, SIGNAL(activated(QModelIndex)), this, SLOT(centerMapOn(QModelIndex)));
 
-    auto layout = new QVBoxLayout;
+    auto layout = new QVBoxLayout(this);
     layout->addWidget(d->m_searchField);
     layout->addWidget(d->m_searchResultView);
     layout->setContentsMargins({});
-    setLayout(layout);
 }
 
 SearchWidget::~SearchWidget()
