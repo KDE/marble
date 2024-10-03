@@ -287,6 +287,238 @@ set(marblewidget_SRCS
     cloudsync/BookmarkSyncManager.cpp
     cloudsync/MergeItem.cpp
     cloudsync/ConflictDialog.cpp
+
+    blendings/Blending.h
+    blendings/BlendingAlgorithms.h
+    blendings/BlendingFactory.h
+    blendings/SunLightBlending.h
+    DownloadRegion.h
+    DownloadRegionDialog.h
+    LatLonBoxWidget.h
+    MarbleWidget.h
+    MarbleAbstractPresenter.h
+    MarbleModel.h
+    MarbleMap.h
+    MarbleColors.h
+    MapViewWidget.h
+    CelestialSortFilterProxyModel.h
+    FileViewWidget.h
+    TourWidget.h
+    FlyToEditWidget.h
+    TourControlEditWidget.h
+    WaitEditWidget.h
+    SoundCueEditWidget.h
+    RemoveItemEditWidget.h
+    TourItemDelegate.h
+    MapViewItemDelegate.h
+    TourPlayback.h
+    LegendWidget.h
+    PlaybackItem.h
+    PlaybackAnimatedUpdateItem.h
+    PlaybackFlyToItem.h
+    PlaybackSoundCueItem.h
+    PlaybackTourControlItem.h
+    PlaybackWaitItem.h
+    SerialTrack.h
+    SoundTrack.h
+    AnimatedUpdateTrack.h
+    CurrentLocationWidget.h
+    MarbleNavigator.h
+    MarbleLegendBrowser.h
+    MarbleAboutDialog.h
+    MarbleInputHandler.h
+    MarbleWidgetInputHandler.h
+    MarbleWidgetPopupMenu.h
+    MarblePlacemarkModel.h
+    GeoDataTreeModel.h
+    GeoUriParser.h
+    kdescendantsproxymodel.h
+    BranchFilterProxyModel.h
+    TreeViewDecoratorModel.h
+    MarbleDebug.h
+    Tile.h
+    TextureTile.h
+    TileCoordsPyramid.h
+    TileLevelRangeWidget.h
+    TileLoader.h
+    QtMarbleConfigDialog.h
+    ClipPainter.h
+    DownloadPolicy.h
+    DownloadQueueSet.h
+    GeoPainter.h
+    HttpDownloadManager.h
+    HttpJob.h
+    RemoteIconLoader.h
+    LayerManager.h
+    PluginManager.h
+    TimeControlWidget.h
+    AbstractFloatItem.h
+    PopupItem.h
+    MarbleGlobal.h
+    MarbleDirs.h
+    MarbleLocale.h
+    MarblePhysics.h
+    TileCreatorDialog.h
+    MapThemeManager.h
+    ViewportParams.h
+    ViewParams.h
+    projections/AbstractProjection.h
+    projections/CylindricalProjection.h
+    projections/AzimuthalProjection.h
+    projections/SphericalProjection.h
+    projections/EquirectProjection.h
+    projections/MercatorProjection.h
+    projections/GnomonicProjection.h
+    projections/StereographicProjection.h
+    projections/LambertAzimuthalProjection.h
+    projections/AzimuthalEquidistantProjection.h
+    projections/VerticalPerspectiveProjection.h
+    VisiblePlacemark.h
+    PlacemarkLayout.h
+    Planet.h
+    PlanetFactory.h
+    Quaternion.h
+    TextureColorizer.h
+    TextureMapperInterface.h
+    ScanlineTextureMapperContext.h
+    SphericalScanlineTextureMapper.h
+    EquirectScanlineTextureMapper.h
+    MercatorScanlineTextureMapper.h
+    TileScalingTextureMapper.h
+    GenericScanlineTextureMapper.h
+    VectorTileModel.h
+    DiscCache.h
+    ServerLayout.h
+    StoragePolicy.h
+    CacheStoragePolicy.h
+    FileStoragePolicy.h
+    FileStorageWatcher.h
+    StackedTile.h
+    TileId.h
+    StackedTileLoader.h
+    TileLoaderHelper.h
+    TileCreator.h
+    #jsonparser.h
+    FileLoader.h
+    FileManager.h
+    PositionTracking.h
+    DataMigration.h
+    ImageF.h
+    MovieCapture.h
+    MovieCaptureDialog.h
+    TourCaptureDialog.h
+    EditPlacemarkDialog.h
+    AddLinkDialog.h
+    FormattedTextWidget.h
+
+    AbstractDataPlugin.h
+    AbstractDataPluginModel.h
+    AbstractDataPluginItem.h
+    AbstractWorkerThread.h
+
+    PluginInterface.h
+    DialogConfigurationInterface.h
+    LayerInterface.h
+    RenderState.h
+    RenderPlugin.h
+    RenderPluginInterface.h
+    PositionProviderPlugin.h
+    PositionProviderPluginInterface.h
+    PlacemarkPositionProviderPlugin.h
+    RouteSimulationPositionProviderPlugin.h
+    MarblePluginSettingsWidget.h
+    RenderPluginModel.h
+    PluginAboutDialog.h
+    PluginItemDelegate.h
+
+    SunLocator.h
+    MarbleClock.h
+    SunControlWidget.h
+    MergedLayerDecorator.h
+
+    MathHelper.h
+
+    LatLonEdit.h
+    PlacemarkEditHeader.h
+
+    MapThemeSortFilterProxyModel.h
+
+    TemplateDocument.h
+
+    routing/AlternativeRoutesModel.h
+    routing/Maneuver.h
+    routing/Route.h
+    routing/RouteRequest.h
+    routing/RouteSegment.h
+    routing/RoutingModel.h
+    routing/RoutingProfile.h
+    routing/RoutingManager.h
+    routing/RoutingLayer.h
+    routing/RoutingInputWidget.h
+    routing/RoutingWidget.h
+    routing/RoutingProfilesWidget.h
+    routing/RoutingProfilesModel.h
+    routing/RoutingProfileSettingsDialog.h
+    routing/SpeakersModel.h
+    routing/VoiceNavigationModel.h
+    routing/instructions/InstructionTransformation.h
+    routing/instructions/RoutingInstruction.h
+    routing/instructions/RoutingPoint.h
+    routing/instructions/RoutingWaypoint.h
+    routing/instructions/WaypointParser.h
+
+    ParsingRunnerManager.h
+    ReverseGeocodingRunnerManager.h
+    RoutingRunnerManager.h
+    SearchRunnerManager.h
+
+    AutoNavigation.h
+
+    SearchRunnerPlugin.h
+    ReverseGeocodingRunnerPlugin.h
+    RoutingRunnerPlugin.h
+    ParseRunnerPlugin.h
+    SearchRunner.h
+    ReverseGeocodingRunner.h
+    RoutingRunner.h
+    ParsingRunner.h
+    RunnerTask.h
+
+    BookmarkManager.h
+    EditBookmarkDialog.h
+    BookmarkManagerDialog.h
+    NewBookmarkFolderDialog.h
+
+    PrintOptionsWidget.h
+    ExternalEditorDialog.h
+    GoToDialog.h
+
+    MapWizard.h
+    OwsServiceManager.h
+    MapThemeDownloadDialog.h
+    GeoGraphicsScene.h
+    ElevationModel.h
+    MarbleLineEdit.h
+    SearchInputWidget.h
+    SearchWidget.h
+    kineticmodel.h
+    NewstuffModel.h
+
+    OsmcSymbol.h
+
+    StyleBuilder.h
+
+    cloudsync/CloudSyncManager.h
+    cloudsync/RouteSyncManager.h
+    cloudsync/OwncloudSyncBackend.h
+    cloudsync/CloudRouteModel.h
+    cloudsync/CloudRoutesDialog.h
+    cloudsync/RouteItem.h
+    cloudsync/RouteItemDelegate.h
+    cloudsync/BookmarkSyncManager.h
+    cloudsync/MergeItem.h
+    cloudsync/ConflictDialog.h
+
 )
 
 
@@ -299,12 +531,15 @@ else()
     LIST(APPEND marblewidget_SRCS
         MarbleWebView.cpp
         TinyWebBrowser.cpp
+        MarbleWebView.h
+        TinyWebBrowser.h
         )
 endif()
 
 if (NOT MARBLE_NO_DBUS)
     LIST(APPEND marblewidget_SRCS
         MarbleDBusInterface.cpp
+        MarbleDBusInterface.h
         )
 endif()
 
