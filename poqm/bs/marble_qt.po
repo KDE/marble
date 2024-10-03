@@ -3503,28 +3503,28 @@ msgctxt "Marble::AbstractFloatItem|"
 msgid "&Configure..."
 msgstr "&Podesi..."
 
-#: src/lib/marble/AddLinkDialog.cpp:64
+#: src/lib/marble/AddLinkDialog.cpp:62
 #, fuzzy
 #| msgid "No URL specified"
 msgctxt "Marble::AddLinkDialog|"
 msgid "No URL specified"
 msgstr "Nije zadat URL."
 
-#: src/lib/marble/AddLinkDialog.cpp:64
+#: src/lib/marble/AddLinkDialog.cpp:62
 #, fuzzy
 #| msgid "Please specify a URL for this link."
 msgctxt "Marble::AddLinkDialog|"
 msgid "Please specify a URL for this link."
 msgstr "Molim navedite URL za ovaj link."
 
-#: src/lib/marble/AddLinkDialog.cpp:66
+#: src/lib/marble/AddLinkDialog.cpp:64
 #, fuzzy
 #| msgid "No name specified"
 msgctxt "Marble::AddLinkDialog|"
 msgid "No name specified"
 msgstr "Ime nije navedeno"
 
-#: src/lib/marble/AddLinkDialog.cpp:66
+#: src/lib/marble/AddLinkDialog.cpp:64
 #, fuzzy
 #| msgid "Please specify a name for this link."
 msgctxt "Marble::AddLinkDialog|"
@@ -3766,29 +3766,29 @@ msgctxt "UiBookmarkManagerDialog|"
 msgid "Edit"
 msgstr "&Izmijeni"
 
-#: src/lib/marble/CacheStoragePolicy.cpp:33
+#: src/lib/marble/CacheStoragePolicy.cpp:31
 #, fuzzy
 #| msgid "Unable to insert data into cache"
 msgctxt "QObject|"
 msgid "Unable to insert data into cache"
 msgstr "Nije moguće umetanje podataka u keš"
 
-#: src/lib/marble/CelestialSortFilterProxyModel.cpp:33
-#: src/lib/marble/CelestialSortFilterProxyModel.cpp:34
+#: src/lib/marble/CelestialSortFilterProxyModel.cpp:31
+#: src/lib/marble/CelestialSortFilterProxyModel.cpp:32
 #, fuzzy
 #| msgid "Moon"
 msgctxt "Marble::CelestialSortFilterProxyModel|"
 msgid "Moon"
 msgstr "Mjesec"
 
-#: src/lib/marble/CelestialSortFilterProxyModel.cpp:36
+#: src/lib/marble/CelestialSortFilterProxyModel.cpp:34
 #, fuzzy
 #| msgid "moon"
 msgctxt "Marble::CelestialSortFilterProxyModel|"
 msgid "moon"
 msgstr "mjesec"
 
-#: src/lib/marble/CelestialSortFilterProxyModel.cpp:38
+#: src/lib/marble/CelestialSortFilterProxyModel.cpp:36
 #, fuzzy
 #| msgid "dwarf planet"
 msgctxt "Marble::CelestialSortFilterProxyModel|"
@@ -3998,7 +3998,7 @@ msgid "Error when determining current location: "
 msgstr "Greška u utvrđivanju trenutne lokacije: "
 
 #: src/lib/marble/CurrentLocationWidget.cpp:253
-#: src/plugins/render/weather/WeatherData.cpp:541
+#: src/plugins/render/weather/WeatherData.cpp:524
 #, fuzzy
 #| msgid "km/h"
 msgctxt "QObject|"
@@ -4185,14 +4185,14 @@ msgctxt "CurrentLocationWidget|"
 msgid "Auto Zoom"
 msgstr ""
 
-#: src/lib/marble/DataMigration.cpp:92
+#: src/lib/marble/DataMigration.cpp:90
 #, fuzzy
 #| msgid "Marble data conversion"
 msgctxt "Marble::DataMigration|"
 msgid "Marble data conversion"
 msgstr "Marble konverzija podataka"
 
-#: src/lib/marble/DataMigration.cpp:93
+#: src/lib/marble/DataMigration.cpp:91
 #, fuzzy
 #| msgid "Converting data ..."
 msgctxt "Marble::DataMigration|"
@@ -8713,47 +8713,47 @@ msgctxt "LatLonBoxWidget|"
 msgid "&S"
 msgstr "J"
 
-#: src/lib/marble/LatLonEdit.cpp:141
+#: src/lib/marble/LatLonEdit.cpp:139
 msgctxt "Marble::LatLonEdit|"
 msgid "°"
 msgstr ""
 
-#: src/lib/marble/LatLonEdit.cpp:191 src/lib/marble/LatLonEdit.cpp:350
+#: src/lib/marble/LatLonEdit.cpp:189 src/lib/marble/LatLonEdit.cpp:348
 #, fuzzy
 #| msgid "'"
 msgctxt "Marble::LatLonEdit|"
 msgid "'"
 msgstr "'"
 
-#: src/lib/marble/LatLonEdit.cpp:192
+#: src/lib/marble/LatLonEdit.cpp:190
 #, fuzzy
 #| msgid "\""
 msgctxt "Marble::LatLonEdit|"
 msgid "\""
 msgstr "\""
 
-#: src/lib/marble/LatLonEdit.cpp:540
+#: src/lib/marble/LatLonEdit.cpp:538
 #, fuzzy
 #| msgid "E"
 msgctxt "Marble::LatLonEdit|East, the direction"
 msgid "E"
 msgstr "I"
 
-#: src/lib/marble/LatLonEdit.cpp:541
+#: src/lib/marble/LatLonEdit.cpp:539
 #, fuzzy
 #| msgid "W"
 msgctxt "Marble::LatLonEdit|West, the direction"
 msgid "W"
 msgstr "Z"
 
-#: src/lib/marble/LatLonEdit.cpp:544
+#: src/lib/marble/LatLonEdit.cpp:542
 #, fuzzy
 #| msgid "N"
 msgctxt "Marble::LatLonEdit|North, the direction"
 msgid "N"
 msgstr "S"
 
-#: src/lib/marble/LatLonEdit.cpp:545
+#: src/lib/marble/LatLonEdit.cpp:543
 #, fuzzy
 #| msgid "S"
 msgctxt "Marble::LatLonEdit|South, the direction"
@@ -8839,7 +8839,7 @@ msgctxt "MapThemeDownloadDialog|"
 msgid "Install Maps"
 msgstr "Instaliraj"
 
-#: src/lib/marble/MapThemeManager.cpp:378
+#: src/lib/marble/MapThemeManager.cpp:376
 #, fuzzy
 #| msgid "Name"
 msgctxt "QObject|"
@@ -11688,14 +11688,14 @@ msgctxt "QObject|"
 msgid "Clear"
 msgstr "Očisti"
 
-#: src/lib/marble/MarbleLocale.cpp:117
+#: src/lib/marble/MarbleLocale.cpp:115
 #, fuzzy
 #| msgid "m"
 msgctxt "QObject|means meter"
 msgid "m"
 msgstr "m"
 
-#: src/lib/marble/MarbleLocale.cpp:119
+#: src/lib/marble/MarbleLocale.cpp:117
 #, fuzzy
 #| msgctxt "means milimeters"
 #| msgid "mm"
@@ -11703,14 +11703,14 @@ msgctxt "QObject|means milimeters"
 msgid "mm"
 msgstr "mm"
 
-#: src/lib/marble/MarbleLocale.cpp:121
+#: src/lib/marble/MarbleLocale.cpp:119
 #, fuzzy
 #| msgid "km"
 msgctxt "QObject|means kilometers"
 msgid "km"
 msgstr "km"
 
-#: src/lib/marble/MarbleLocale.cpp:123
+#: src/lib/marble/MarbleLocale.cpp:121
 #, fuzzy
 #| msgctxt "means centimeters"
 #| msgid "cm"
@@ -11718,14 +11718,14 @@ msgctxt "QObject|means centimeters"
 msgid "cm"
 msgstr "cm"
 
-#: src/lib/marble/MarbleLocale.cpp:125
+#: src/lib/marble/MarbleLocale.cpp:123
 #, fuzzy
 #| msgid "ft"
 msgctxt "QObject|means feet"
 msgid "ft"
 msgstr "ft"
 
-#: src/lib/marble/MarbleLocale.cpp:127
+#: src/lib/marble/MarbleLocale.cpp:125
 #, fuzzy
 #| msgctxt "means inches"
 #| msgid "in"
@@ -11733,7 +11733,7 @@ msgctxt "QObject|means inches"
 msgid "in"
 msgstr "in"
 
-#: src/lib/marble/MarbleLocale.cpp:129
+#: src/lib/marble/MarbleLocale.cpp:127
 #, fuzzy
 #| msgctxt "means yards"
 #| msgid "yd"
@@ -11741,14 +11741,14 @@ msgctxt "QObject|means yards"
 msgid "yd"
 msgstr "yd"
 
-#: src/lib/marble/MarbleLocale.cpp:131
+#: src/lib/marble/MarbleLocale.cpp:129
 #, fuzzy
 #| msgid "mi"
 msgctxt "QObject|means miles"
 msgid "mi"
 msgstr "mi"
 
-#: src/lib/marble/MarbleLocale.cpp:133
+#: src/lib/marble/MarbleLocale.cpp:131
 #, fuzzy
 #| msgid "nm"
 msgctxt "QObject|means nautical miles"
@@ -12839,23 +12839,23 @@ msgctxt "Marble::OsmRelationEditorDialog|"
 msgid "Please add a type tag for this relation."
 msgstr "Molim navedite URL za ovaj link."
 
-#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:60
+#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:59
 #, fuzzy
 #| msgid "Elevation"
 msgctxt "Marble::OsmRelationManagerWidget|"
 msgid "New Relation"
 msgstr "Visina"
 
-#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:133
-#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:140
+#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:132
+#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:139
 #, fuzzy
 #| msgid "Remove"
 msgctxt "Marble::OsmRelationManagerWidget|"
 msgid "Remove"
 msgstr "Ukloni"
 
-#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:134
-#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:143
+#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:133
+#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:142
 #, fuzzy
 #| msgid "&Edit"
 msgctxt "Marble::OsmRelationManagerWidget|"
@@ -12951,14 +12951,14 @@ msgctxt "QObject|"
 msgid "value"
 msgstr ""
 
-#: src/lib/marble/PlacemarkEditHeader.cpp:208
+#: src/lib/marble/PlacemarkEditHeader.cpp:206
 #, fuzzy
 #| msgid "Open File"
 msgctxt "QObject|"
 msgid "Open File"
 msgstr "Otvori datoteku"
 
-#: src/lib/marble/PlacemarkEditHeader.cpp:208
+#: src/lib/marble/PlacemarkEditHeader.cpp:206
 #, fuzzy
 #| msgid "All Supported Files (*.png)"
 msgctxt "QObject|"
@@ -13115,42 +13115,42 @@ msgctxt "QObject|a planet without data"
 msgid "Unknown Planet"
 msgstr "Nepoznata planeta"
 
-#: src/lib/marble/PluginAboutDialog.cpp:55
+#: src/lib/marble/PluginAboutDialog.cpp:51
 #, fuzzy, qt-format
 #| msgid "About %1"
 msgctxt "Marble::PluginAboutDialog|"
 msgid "About %1"
 msgstr "O %1"
 
-#: src/lib/marble/PluginAboutDialog.cpp:60
+#: src/lib/marble/PluginAboutDialog.cpp:56
 #, fuzzy, qt-format
 #| msgid "Version %1"
 msgctxt "Marble::PluginAboutDialog|"
 msgid "Version %1"
 msgstr "Verzija %1"
 
-#: src/lib/marble/PluginAboutDialog.cpp:93
+#: src/lib/marble/PluginAboutDialog.cpp:89
 #, fuzzy
 #| msgid "Data"
 msgctxt "Marble::PluginAboutDialog|"
 msgid "Data"
 msgstr "Podaci"
 
-#: src/lib/marble/PluginInterface.h:31
+#: src/lib/marble/PluginInterface.h:29
 #, fuzzy
 #| msgid "<b>Developers</b>"
 msgctxt "PluginAuthor|"
 msgid "Developer"
 msgstr "<b>Programeri</b>"
 
-#: src/lib/marble/PluginItemDelegate.cpp:303
+#: src/lib/marble/PluginItemDelegate.cpp:301
 #, fuzzy
 #| msgid "About"
 msgctxt "Marble::PluginItemDelegate|"
 msgid "About"
 msgstr "O programu"
 
-#: src/lib/marble/PluginItemDelegate.cpp:316
+#: src/lib/marble/PluginItemDelegate.cpp:314
 #, fuzzy
 #| msgid "Configure"
 msgctxt "Marble::PluginItemDelegate|"
@@ -13219,14 +13219,14 @@ msgctxt "PrintOptions|"
 msgid "Footer"
 msgstr ""
 
-#: src/lib/marble/projections/AzimuthalEquidistantProjection.cpp:56
+#: src/lib/marble/projections/AzimuthalEquidistantProjection.cpp:54
 #, fuzzy
 #| msgid "Azimuthal Equidistant"
 msgctxt "QObject|"
 msgid "Azimuthal Equidistant"
 msgstr "Azimutalni ekvidistant"
 
-#: src/lib/marble/projections/AzimuthalEquidistantProjection.cpp:61
+#: src/lib/marble/projections/AzimuthalEquidistantProjection.cpp:59
 #, fuzzy
 #| msgid ""
 #| "<p><b>Azimuthal Equidistant Projection</b> (\"fish eye\")</"
@@ -13242,14 +13242,14 @@ msgstr ""
 "p><p>Primjene: Prikaz sizmičnih i radio podataka i za korištenje u "
 "digitalnim planetarijumima.</p>"
 
-#: src/lib/marble/projections/EquirectProjection.cpp:33
+#: src/lib/marble/projections/EquirectProjection.cpp:31
 #, fuzzy
 #| msgid "Flat Map"
 msgctxt "QObject|"
 msgid "Flat Map"
 msgstr "Ravna karta"
 
-#: src/lib/marble/projections/EquirectProjection.cpp:38
+#: src/lib/marble/projections/EquirectProjection.cpp:36
 #, fuzzy
 #| msgid ""
 #| "<p><b>Equirectangular Projection</b> (\"Plate carrée\")</"
@@ -13264,14 +13264,14 @@ msgstr ""
 "facto standard za globalne setove teksturnih podataka za kompjuterske "
 "programe.</p>"
 
-#: src/lib/marble/projections/GnomonicProjection.cpp:61
+#: src/lib/marble/projections/GnomonicProjection.cpp:59
 #, fuzzy
 #| msgid "Gnomonic"
 msgctxt "QObject|"
 msgid "Gnomonic"
 msgstr "Gnomonička metoda"
 
-#: src/lib/marble/projections/GnomonicProjection.cpp:66
+#: src/lib/marble/projections/GnomonicProjection.cpp:64
 #, fuzzy
 #| msgid ""
 #| "<p><b>Gnomonic Projection</b> (\"rectilinear\")</p><p>Applications: Used "
@@ -13287,14 +13287,14 @@ msgstr ""
 "za prikaz panoramskih fotografija. Takođe se koristi za navigaciju, radio i "
 "sizmičke aktivnosti.</p>"
 
-#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:61
+#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:59
 #, fuzzy
 #| msgid "Lambert Azimuthal Equal-Area"
 msgctxt "QObject|"
 msgid "Lambert Azimuthal Equal-Area"
 msgstr "Lambert Azimutalni Jednako-prostorni"
 
-#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:66
+#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:64
 #, fuzzy
 #| msgid ""
 #| "<p><b>Lambert Azimuthal Equal-Area Projection</b></p><p>Applications: "
@@ -13308,14 +13308,14 @@ msgstr ""
 "Koristi se u strukturalnoj geologiji za nanošenje podataka o pravcima na "
 "kartama.</p>"
 
-#: src/lib/marble/projections/MercatorProjection.cpp:39
+#: src/lib/marble/projections/MercatorProjection.cpp:37
 #, fuzzy
 #| msgid "Mercator"
 msgctxt "QObject|"
 msgid "Mercator"
 msgstr "Merkatorova"
 
-#: src/lib/marble/projections/MercatorProjection.cpp:44
+#: src/lib/marble/projections/MercatorProjection.cpp:42
 #, fuzzy
 #| msgid ""
 #| "<p><b>Mercator Projection</b></p><p>Applications: popular standard map "
@@ -13328,14 +13328,14 @@ msgstr ""
 "<p><b>Merkatorova Projekcija</b></p><p>Primjene: popularna standardna "
 "projekcija mape za navgaciju.</p>"
 
-#: src/lib/marble/projections/SphericalProjection.cpp:63
+#: src/lib/marble/projections/SphericalProjection.cpp:61
 #, fuzzy
 #| msgid "Globe"
 msgctxt "QObject|"
 msgid "Globe"
 msgstr "Globus"
 
-#: src/lib/marble/projections/SphericalProjection.cpp:68
+#: src/lib/marble/projections/SphericalProjection.cpp:66
 #, fuzzy
 #| msgid ""
 #| "<p><b>Orthographic Projection</b> (\"orthogonal\")</p><p>Applications: A "
@@ -13351,14 +13351,14 @@ msgstr ""
 "Perspektivna projekcija koja se koristi za prikaz hemisfere globusa onako "
 "kako se vidi iz svemira.</p>"
 
-#: src/lib/marble/projections/StereographicProjection.cpp:61
+#: src/lib/marble/projections/StereographicProjection.cpp:59
 #, fuzzy
 #| msgid "Stereographic"
 msgctxt "QObject|"
 msgid "Stereographic"
 msgstr "Stereografska"
 
-#: src/lib/marble/projections/StereographicProjection.cpp:66
+#: src/lib/marble/projections/StereographicProjection.cpp:64
 #, fuzzy
 #| msgid ""
 #| "<p><b>Stereographic Projection</b> (\"orthogonal\")</p><p>Applications: "
@@ -13371,14 +13371,14 @@ msgstr ""
 "<p><b>Stereografska Projekcija</b> (\"ortogonalna\")</p><p>Primjene: Koristi "
 "se za planetarnu kartografiju, geologiju i panoramsku fotografiju.</p>"
 
-#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:74
+#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:72
 #, fuzzy
 #| msgid "Vertical Perspective Projection"
 msgctxt "QObject|"
 msgid "Vertical Perspective Projection"
 msgstr "Projekcija Vertikalne Perspektive"
 
-#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:79
+#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:77
 #, fuzzy
 #| msgid ""
 #| "<p><b>Vertical Perspective Projection</b> (\"orthogonal\")</p><p> Shows "
@@ -15378,32 +15378,32 @@ msgctxt "Marble::DownloadOsmDialog|"
 msgid "Download"
 msgstr "Preuzmi rutu"
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:72
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:117
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:122
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:128
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:70
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:115
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:120
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:126
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "ERROR"
 msgstr ""
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:72
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:70
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "Unable to create temporary file to download OSM data to."
 msgstr ""
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:117
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:115
 msgctxt "Marble::DownloadOsmDialog|"
 msgid ""
 "The selected region contains too much data. Please select a smaller region "
 "and try again."
 msgstr ""
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:122
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:120
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "The bandwidth limit exceeded. Please try again later."
 msgstr ""
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:129
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:127
 msgctxt "Marble::DownloadOsmDialog|"
 msgid ""
 "Sorry, a network error occurred. Please check your internet connection or "
@@ -16289,63 +16289,63 @@ msgctxt "EclipsesConfigDialog|"
 msgid "Remind about eclipse events"
 msgstr ""
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:80
+#: src/plugins/render/eclipses/EclipsesItem.cpp:78
 #, fuzzy
 #| msgid "Moon, Total"
 msgctxt "Marble::EclipsesItem|"
 msgid "Moon, Total"
 msgstr "Mjesec, Potpuno"
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:82
+#: src/plugins/render/eclipses/EclipsesItem.cpp:80
 #, fuzzy
 #| msgid "Moon, Partial"
 msgctxt "Marble::EclipsesItem|"
 msgid "Moon, Partial"
 msgstr "Mjesec, Djelimično"
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:84
+#: src/plugins/render/eclipses/EclipsesItem.cpp:82
 #, fuzzy
 #| msgid "Moon, Penumbral"
 msgctxt "Marble::EclipsesItem|"
 msgid "Moon, Penumbral"
 msgstr "Mjesec, Polusjenovito"
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:86
+#: src/plugins/render/eclipses/EclipsesItem.cpp:84
 #, fuzzy
 #| msgid "Sun, Partial"
 msgctxt "Marble::EclipsesItem|"
 msgid "Sun, Partial"
 msgstr "Sunce, Djelomično"
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:88
+#: src/plugins/render/eclipses/EclipsesItem.cpp:86
 #, fuzzy
 #| msgid "Sun, non-central, Annular"
 msgctxt "Marble::EclipsesItem|"
 msgid "Sun, non-central, Annular"
 msgstr "Sunce, ne-centralno, Godišnje"
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:90
+#: src/plugins/render/eclipses/EclipsesItem.cpp:88
 #, fuzzy
 #| msgid "Sun, non-central, Total"
 msgctxt "Marble::EclipsesItem|"
 msgid "Sun, non-central, Total"
 msgstr "Sunce, ne-centralno, Potpuno"
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:92
+#: src/plugins/render/eclipses/EclipsesItem.cpp:90
 #, fuzzy
 #| msgid "Sun, Annular"
 msgctxt "Marble::EclipsesItem|"
 msgid "Sun, Annular"
 msgstr "Sunce, Godišnje"
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:94
+#: src/plugins/render/eclipses/EclipsesItem.cpp:92
 #, fuzzy
 #| msgid "Sun, Total"
 msgctxt "Marble::EclipsesItem|"
 msgid "Sun, Total"
 msgstr "SUnce, Potpuno"
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:96
+#: src/plugins/render/eclipses/EclipsesItem.cpp:94
 #, fuzzy
 #| msgid "Sun, Annular/Total"
 msgctxt "Marble::EclipsesItem|"
@@ -16494,28 +16494,28 @@ msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
 "Kreiraj rutu ili pusti snimak iz datoteke da vidiš njegog profil povišenja."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:97
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:95
 #, fuzzy
 #| msgid "Elevation Profile"
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Elevation Profile"
 msgstr "Elevacijski profil"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:102
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:100
 #, fuzzy
 #| msgid "&Elevation Profile"
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "&Elevation Profile"
 msgstr "&Elevacijski profil"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:117
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:115
 #, fuzzy
 #| msgid "A float item that shows the elevation profile of the current route."
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "A float item that shows the elevation profile of the current route."
 msgstr "Plutajući predmet koji pokazuje elevacijski profil trenutne rute."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:190
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:188
 #, fuzzy
 #| msgid ""
 #| "Create a route or load a track from file to view its elevation profile."
@@ -16524,7 +16524,7 @@ msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
 "Kreiraj rutu ili pusti snimak iz datoteke da vidiš njegog profil povišenja."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:197
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:195
 #, fuzzy
 #| msgid ""
 #| "Not enough points in the current viewport.\n"
@@ -16537,7 +16537,7 @@ msgstr ""
 "Nedovoljno bodova u trenutnom prikaznom polju.\n"
 "Pokušajte onemogućiti 'Zumiraj u prikazno područje'."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:280
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:278
 #, fuzzy, qt-format
 #| msgid "Difference: %1 %2"
 msgctxt "Marble::ElevationProfileFloatItem|"
@@ -16579,36 +16579,36 @@ msgctxt "Marble::ElevationProfilePlotAxis|"
 msgid "nm"
 msgstr "nm"
 
-#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:67
+#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:65
 #, fuzzy
 #| msgid "Elevation Profile Marker"
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "Elevation Profile Marker"
 msgstr "Elevacijski označivač profila"
 
-#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:72
+#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:70
 #, fuzzy
 #| msgid "&Elevation Profile Marker"
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "&Elevation Profile Marker"
 msgstr "&Elevacijski označivač profila"
 
-#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:87
+#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:85
 #, fuzzy
 #| msgid "Marks the current elevation of the elevation profile on the map."
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "Marks the current elevation of the elevation profile on the map."
 msgstr "Označuje trenutnu elevaciju elevacijskog profila na mapi."
 
-#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:136
+#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:134
 #, fuzzy
 #| msgid "m"
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "m"
 msgstr "m"
 
-#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:144
-#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:148
+#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:142
+#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:146
 #, fuzzy
 #| msgid "ft"
 msgctxt "Marble::ElevationProfileMarker|"
@@ -16691,63 +16691,63 @@ msgctxt "Marble::FoursquarePlugin|"
 msgid "Displays trending Foursquare places"
 msgstr "Prikazuje trend Foursquare mjesta"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:48
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:46
 #, fuzzy
 #| msgid "GpsInfo"
 msgctxt "Marble::GpsInfo|"
 msgid "GpsInfo"
 msgstr "GpsInfo"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:53
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:51
 #, fuzzy
 #| msgid "&GpsInfo"
 msgctxt "Marble::GpsInfo|"
 msgid "&GpsInfo"
 msgstr "&GpsInfo"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:68
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:66
 #, fuzzy
 #| msgid "This is a float item that provides Gps Information."
 msgctxt "Marble::GpsInfo|"
 msgid "This is a float item that provides Gps Information."
 msgstr "Plutajući predmet koji pruža Gps Informacije."
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:122
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:120
 #, fuzzy
 #| msgid "mph"
 msgctxt "Marble::GpsInfo|"
 msgid "mph"
 msgstr "mph"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:124
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:122
 #, fuzzy
 #| msgid "ft"
 msgctxt "Marble::GpsInfo|"
 msgid "ft"
 msgstr "ft"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:131
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:129
 #, fuzzy
 #| msgid "km/h"
 msgctxt "Marble::GpsInfo|"
 msgid "km/h"
 msgstr "km/h"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:133
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:131
 #, fuzzy
 #| msgid "m"
 msgctxt "Marble::GpsInfo|"
 msgid "m"
 msgstr "m"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:138
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:136
 #, fuzzy
 #| msgid "kt"
 msgctxt "Marble::GpsInfo|"
 msgid "kt"
 msgstr "kt"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:140
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:138
 #, fuzzy
 #| msgid "nm"
 msgctxt "Marble::GpsInfo|"
@@ -16948,35 +16948,35 @@ msgctxt "Marble::GraticulePlugin|"
 msgid "Antarctic Circle"
 msgstr "Antarktički polarni krug"
 
-#: src/plugins/render/license/License.cpp:97
+#: src/plugins/render/license/License.cpp:95
 #, fuzzy
 #| msgid "License"
 msgctxt "Marble::License|"
 msgid "License"
 msgstr "Licenca"
 
-#: src/plugins/render/license/License.cpp:102
+#: src/plugins/render/license/License.cpp:100
 #, fuzzy
 #| msgid "&License"
 msgctxt "Marble::License|"
 msgid "&License"
 msgstr "&Licenca"
 
-#: src/plugins/render/license/License.cpp:117
+#: src/plugins/render/license/License.cpp:115
 #, fuzzy
 #| msgid "This is a float item that provides copyright information."
 msgctxt "Marble::License|"
 msgid "This is a float item that provides copyright information."
 msgstr "Plutajući predmet koji pruža Informacije o autorskim pravima."
 
-#: src/plugins/render/license/License.cpp:234
+#: src/plugins/render/license/License.cpp:232
 #, fuzzy
 #| msgid "&Full License"
 msgctxt "Marble::License|"
 msgid "&Full License"
 msgstr "&Puna licenca"
 
-#: src/plugins/render/license/License.cpp:238
+#: src/plugins/render/license/License.cpp:236
 #, fuzzy
 #| msgid "&Show Details"
 msgctxt "Marble::License|"
@@ -17011,71 +17011,71 @@ msgctxt "Marble::MapScaleFloatItem|"
 msgid "Minimize"
 msgstr "Mnimiziraj"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:68
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:66
 #, fuzzy
 #| msgid "Scale Bar"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "Scale Bar"
 msgstr "Traka sa skalom"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:73
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:71
 #, fuzzy
 #| msgid "&Scale Bar"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Scale Bar"
 msgstr "&Traka sa skalom"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:88
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:86
 #, fuzzy
 #| msgid "This is a float item that provides a map scale."
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "This is a float item that provides a map scale."
 msgstr "Ovo je plutajući predmet koji obezbjeđuje skalu mape."
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:98
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:96
 #, fuzzy
 #| msgid "Original Developer"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "Original Developer"
 msgstr "Originalni Developer"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:224
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:228
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:222
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:226
 #, fuzzy
 #| msgid "km"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "km"
 msgstr "km"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:231
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:229
 #, fuzzy
 #| msgid "m"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "m"
 msgstr "m"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:236
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:234
 #, fuzzy
 #| msgid "mi"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "mi"
 msgstr "mi"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:246
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:244
 #, fuzzy
 #| msgid "nm"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "nm"
 msgstr "nm"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:352
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:350
 #, fuzzy
 #| msgid "&Configure..."
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Configure..."
 msgstr "&Podesi..."
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:358
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:356
 #, fuzzy
 #| msgid "&Ratio Scale"
 msgctxt "Marble::MapScaleFloatItem|"
@@ -17354,7 +17354,7 @@ msgctxt "Marble::NavigationFloatItem|"
 msgid "Home Button"
 msgstr "Početno dugme"
 
-#: src/plugins/render/notes/NotesItem.cpp:99
+#: src/plugins/render/notes/NotesItem.cpp:97
 msgctxt "Marble::NotesItem|The author name is not known"
 msgid "anonymous"
 msgstr ""
@@ -18257,98 +18257,98 @@ msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Neptune"
 msgstr "Neptun"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:128
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:126
 #, fuzzy
 #| msgid "&Satellites"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Satellites"
 msgstr "&Sateliti"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:129
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:127
 #, fuzzy
 #| msgid "&Data Sources"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Data Sources"
 msgstr "&izvori podataka"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:131
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:129
 #, fuzzy
 #| msgid "&Activate Plugin"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Activate Plugin"
 msgstr "&Aktiviraj priključak"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:231
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:229
 #, fuzzy
 #| msgid "Add Data Source"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Add Data Source"
 msgstr "Dodaj izvor podataka"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:231
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:229
 #, fuzzy
 #| msgid "URL or File path:"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "URL or File path:"
 msgstr "Put do datoteke ili URL:"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:237
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:235
 #, fuzzy
 #| msgid "Invalid data source input"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Invalid data source input"
 msgstr "Pogrešan ulaz izvora podataka"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:237
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:235
 #, fuzzy
 #| msgid "Please enter a valid URL or file path!"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Please enter a valid URL or file path!"
 msgstr "Molim, unesite važeći URL ili putanju do datoteke."
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
 #, fuzzy
 #| msgid "All Supported Files (*.txt *.msc)"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Supported Files (*.txt *.msc)"
 msgstr "Sve podržane datoteke (*.txt *.msc)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
 #, fuzzy
 #| msgid "Marble Satellite Catalog (*.msc)"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Marble Satellite Catalog (*.msc)"
 msgstr "Marble satelitski katalog (*.msc)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
 #, fuzzy
 #| msgid "Two Line Element Set (*.txt)"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Two Line Element Set (*.txt)"
 msgstr "Dvolinijski skup elemenata (*.txt)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
 #, fuzzy
 #| msgid "All Files (*.*)"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Files (*.*)"
 msgstr "Sve datoteke (*.*)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:262
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
 #, fuzzy
 #| msgid "Open Satellite Data File"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Open Satellite Data File"
 msgstr "Otvori datoteku s satelitima"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:289
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:287
 #, fuzzy
 #| msgid "Delete selected data source"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Delete selected data source"
 msgstr "Obriši izabrani izvor podataka"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:290
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:288
 #, fuzzy
 #| msgid "Do you really want to delete the selected data source?"
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -18875,42 +18875,42 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "CubeSats"
 msgstr "CubeSats"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:53
+#: src/plugins/render/speedometer/Speedometer.cpp:51
 #, fuzzy
 #| msgid "Speedometer"
 msgctxt "Marble::Speedometer|"
 msgid "Speedometer"
 msgstr "Brzinomjer"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:58
+#: src/plugins/render/speedometer/Speedometer.cpp:56
 #, fuzzy
 #| msgid "&Speedometer"
 msgctxt "Marble::Speedometer|"
 msgid "&Speedometer"
 msgstr "&Brzinomjer"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:73
+#: src/plugins/render/speedometer/Speedometer.cpp:71
 #, fuzzy
 #| msgid "Display the current cruising speed."
 msgctxt "Marble::Speedometer|"
 msgid "Display the current cruising speed."
 msgstr "Prikaži trenutnu brzinu krstarenja."
 
-#: src/plugins/render/speedometer/Speedometer.cpp:124
+#: src/plugins/render/speedometer/Speedometer.cpp:122
 #, fuzzy
 #| msgid "mph"
 msgctxt "Marble::Speedometer|"
 msgid "mph"
 msgstr "mph"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:130
+#: src/plugins/render/speedometer/Speedometer.cpp:128
 #, fuzzy
 #| msgid "km/h"
 msgctxt "Marble::Speedometer|"
 msgid "km/h"
 msgstr "km/h"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:135
+#: src/plugins/render/speedometer/Speedometer.cpp:133
 #, fuzzy
 #| msgid "kt"
 msgctxt "Marble::Speedometer|"
@@ -19265,14 +19265,14 @@ msgctxt "Marble::twitterPlugin|"
 msgid "show public twitts in their places"
 msgstr "prikaži javne twitt podatke na njihovim mjestima"
 
-#: src/plugins/render/weather/BBCParser.cpp:240
+#: src/plugins/render/weather/BBCParser.cpp:238
 #, fuzzy
 #| msgid "The file is not a valid BBC answer."
 msgctxt "QObject|"
 msgid "The file is not a valid BBC answer."
 msgstr "Ova datoteka nije valjana BBC odgovor."
 
-#: src/plugins/render/weather/BBCWeatherItem.cpp:82
+#: src/plugins/render/weather/BBCWeatherItem.cpp:80
 #, fuzzy
 #| msgid ""
 #| "Supported by <a href=\"http://backstage.bbc.co.uk\" target=\"_BLANK"
@@ -19285,7 +19285,7 @@ msgstr ""
 "Podržalo <a href=\"http://backstage.bbc.co.uk\" target=\"_BLANK\">backstage."
 "bbc.co.uk</a>.<br>Podaci o vremenu iz UK MET ureda"
 
-#: src/plugins/render/weather/GeoNamesWeatherItem.cpp:32
+#: src/plugins/render/weather/GeoNamesWeatherItem.cpp:30
 #, fuzzy
 #| msgid ""
 #| "Supported by <a href=\"http://www.geonames.org/export/JSON-webservices."
@@ -19531,308 +19531,308 @@ msgctxt "WeatherConfigWidget|"
 msgid " hours"
 msgstr "Vaš"
 
-#: src/plugins/render/weather/WeatherData.cpp:314
+#: src/plugins/render/weather/WeatherData.cpp:297
 #, fuzzy
 #| msgid "sunny"
 msgctxt "WeatherData|"
 msgid "sunny"
 msgstr "sunčano"
 
-#: src/plugins/render/weather/WeatherData.cpp:316
+#: src/plugins/render/weather/WeatherData.cpp:299
 #, fuzzy
 #| msgid "clear"
 msgctxt "WeatherData|"
 msgid "clear"
 msgstr "vedro"
 
-#: src/plugins/render/weather/WeatherData.cpp:319
+#: src/plugins/render/weather/WeatherData.cpp:302
 #, fuzzy
 #| msgid "few clouds"
 msgctxt "WeatherData|"
 msgid "few clouds"
 msgstr "rijetki oblaci"
 
-#: src/plugins/render/weather/WeatherData.cpp:322
+#: src/plugins/render/weather/WeatherData.cpp:305
 #, fuzzy
 #| msgid "partly cloudy"
 msgctxt "WeatherData|"
 msgid "partly cloudy"
 msgstr "djelimično oblačno"
 
-#: src/plugins/render/weather/WeatherData.cpp:324
+#: src/plugins/render/weather/WeatherData.cpp:307
 #, fuzzy
 #| msgid "overcast"
 msgctxt "WeatherData|"
 msgid "overcast"
 msgstr "tmurno"
 
-#: src/plugins/render/weather/WeatherData.cpp:327
+#: src/plugins/render/weather/WeatherData.cpp:310
 #, fuzzy
 #| msgid "light showers"
 msgctxt "WeatherData|"
 msgid "light showers"
 msgstr "slabi pljuskovi"
 
-#: src/plugins/render/weather/WeatherData.cpp:330
+#: src/plugins/render/weather/WeatherData.cpp:313
 #, fuzzy
 #| msgid "showers"
 msgctxt "WeatherData|"
 msgid "showers"
 msgstr "pljuskovi"
 
-#: src/plugins/render/weather/WeatherData.cpp:332
+#: src/plugins/render/weather/WeatherData.cpp:315
 #, fuzzy
 #| msgid "light rain"
 msgctxt "WeatherData|"
 msgid "light rain"
 msgstr "slaba kiša"
 
-#: src/plugins/render/weather/WeatherData.cpp:334
+#: src/plugins/render/weather/WeatherData.cpp:317
 #, fuzzy
 #| msgid "rain"
 msgctxt "WeatherData|"
 msgid "rain"
 msgstr "kiša"
 
-#: src/plugins/render/weather/WeatherData.cpp:337
+#: src/plugins/render/weather/WeatherData.cpp:320
 #, fuzzy
 #| msgid "occasionally thunderstorm"
 msgctxt "WeatherData|"
 msgid "occasionally thunderstorm"
 msgstr "povremena grmljavina"
 
-#: src/plugins/render/weather/WeatherData.cpp:339
+#: src/plugins/render/weather/WeatherData.cpp:322
 #, fuzzy
 #| msgid "thunderstorm"
 msgctxt "WeatherData|"
 msgid "thunderstorm"
 msgstr "grmljavina"
 
-#: src/plugins/render/weather/WeatherData.cpp:341
+#: src/plugins/render/weather/WeatherData.cpp:324
 #, fuzzy
 #| msgid "hail"
 msgctxt "WeatherData|"
 msgid "hail"
 msgstr "grad"
 
-#: src/plugins/render/weather/WeatherData.cpp:344
+#: src/plugins/render/weather/WeatherData.cpp:327
 #, fuzzy
 #| msgid "occasionally snow"
 msgctxt "WeatherData|"
 msgid "occasionally snow"
 msgstr "povremeni snijeg"
 
-#: src/plugins/render/weather/WeatherData.cpp:346
+#: src/plugins/render/weather/WeatherData.cpp:329
 #, fuzzy
 #| msgid "light snow"
 msgctxt "WeatherData|"
 msgid "light snow"
 msgstr "slab snijeg"
 
-#: src/plugins/render/weather/WeatherData.cpp:348
+#: src/plugins/render/weather/WeatherData.cpp:331
 #, fuzzy
 #| msgid "snow"
 msgctxt "WeatherData|"
 msgid "snow"
 msgstr "snijeg"
 
-#: src/plugins/render/weather/WeatherData.cpp:350
+#: src/plugins/render/weather/WeatherData.cpp:333
 #, fuzzy
 #| msgid "rain and snow"
 msgctxt "WeatherData|"
 msgid "rain and snow"
 msgstr "kiša i snijeg"
 
-#: src/plugins/render/weather/WeatherData.cpp:352
+#: src/plugins/render/weather/WeatherData.cpp:335
 #, fuzzy
 #| msgid "mist"
 msgctxt "WeatherData|"
 msgid "mist"
 msgstr "izmaglica"
 
-#: src/plugins/render/weather/WeatherData.cpp:354
+#: src/plugins/render/weather/WeatherData.cpp:337
 #, fuzzy
 #| msgid "sandstorm"
 msgctxt "WeatherData|"
 msgid "sandstorm"
 msgstr "pješčana oluja"
 
-#: src/plugins/render/weather/WeatherData.cpp:403
+#: src/plugins/render/weather/WeatherData.cpp:386
 #, fuzzy
 #| msgid "N"
 msgctxt "WeatherData|"
 msgid "N"
 msgstr "S"
 
-#: src/plugins/render/weather/WeatherData.cpp:405
+#: src/plugins/render/weather/WeatherData.cpp:388
 #, fuzzy
 #| msgid "NNE"
 msgctxt "WeatherData|"
 msgid "NNE"
 msgstr "SSI"
 
-#: src/plugins/render/weather/WeatherData.cpp:407
+#: src/plugins/render/weather/WeatherData.cpp:390
 #, fuzzy
 #| msgid "NE"
 msgctxt "WeatherData|"
 msgid "NE"
 msgstr "SI"
 
-#: src/plugins/render/weather/WeatherData.cpp:409
+#: src/plugins/render/weather/WeatherData.cpp:392
 #, fuzzy
 #| msgid "ENE"
 msgctxt "WeatherData|"
 msgid "ENE"
 msgstr "ISI"
 
-#: src/plugins/render/weather/WeatherData.cpp:411
+#: src/plugins/render/weather/WeatherData.cpp:394
 #, fuzzy
 #| msgid "E"
 msgctxt "WeatherData|"
 msgid "E"
 msgstr "I"
 
-#: src/plugins/render/weather/WeatherData.cpp:413
+#: src/plugins/render/weather/WeatherData.cpp:396
 #, fuzzy
 #| msgid "SSE"
 msgctxt "WeatherData|"
 msgid "SSE"
 msgstr "JJI"
 
-#: src/plugins/render/weather/WeatherData.cpp:415
+#: src/plugins/render/weather/WeatherData.cpp:398
 #, fuzzy
 #| msgid "SE"
 msgctxt "WeatherData|"
 msgid "SE"
 msgstr "JI"
 
-#: src/plugins/render/weather/WeatherData.cpp:417
+#: src/plugins/render/weather/WeatherData.cpp:400
 #, fuzzy
 #| msgid "ESE"
 msgctxt "WeatherData|"
 msgid "ESE"
 msgstr "IJI"
 
-#: src/plugins/render/weather/WeatherData.cpp:419
+#: src/plugins/render/weather/WeatherData.cpp:402
 #, fuzzy
 #| msgid "S"
 msgctxt "WeatherData|"
 msgid "S"
 msgstr "J"
 
-#: src/plugins/render/weather/WeatherData.cpp:421
+#: src/plugins/render/weather/WeatherData.cpp:404
 #, fuzzy
 #| msgid "NNW"
 msgctxt "WeatherData|"
 msgid "NNW"
 msgstr "SSZ"
 
-#: src/plugins/render/weather/WeatherData.cpp:423
+#: src/plugins/render/weather/WeatherData.cpp:406
 #, fuzzy
 #| msgid "NW"
 msgctxt "WeatherData|"
 msgid "NW"
 msgstr "SZ"
 
-#: src/plugins/render/weather/WeatherData.cpp:425
+#: src/plugins/render/weather/WeatherData.cpp:408
 #, fuzzy
 #| msgid "WNW"
 msgctxt "WeatherData|"
 msgid "WNW"
 msgstr "ZSZ"
 
-#: src/plugins/render/weather/WeatherData.cpp:427
+#: src/plugins/render/weather/WeatherData.cpp:410
 #, fuzzy
 #| msgid "W"
 msgctxt "WeatherData|"
 msgid "W"
 msgstr "Z"
 
-#: src/plugins/render/weather/WeatherData.cpp:429
+#: src/plugins/render/weather/WeatherData.cpp:412
 #, fuzzy
 #| msgid "SSW"
 msgctxt "WeatherData|"
 msgid "SSW"
 msgstr "JJZ"
 
-#: src/plugins/render/weather/WeatherData.cpp:431
+#: src/plugins/render/weather/WeatherData.cpp:414
 #, fuzzy
 #| msgid "SW"
 msgctxt "WeatherData|"
 msgid "SW"
 msgstr "JZ"
 
-#: src/plugins/render/weather/WeatherData.cpp:433
+#: src/plugins/render/weather/WeatherData.cpp:416
 #, fuzzy
 #| msgid "WSW"
 msgctxt "WeatherData|"
 msgid "WSW"
 msgstr "ZJZ"
 
-#: src/plugins/render/weather/WeatherData.cpp:544
+#: src/plugins/render/weather/WeatherData.cpp:527
 #, fuzzy
 #| msgid "mph"
 msgctxt "QObject|"
 msgid "mph"
 msgstr "mph"
 
-#: src/plugins/render/weather/WeatherData.cpp:547
+#: src/plugins/render/weather/WeatherData.cpp:530
 #, fuzzy
 #| msgid "m/s"
 msgctxt "QObject|"
 msgid "m/s"
 msgstr "m/s"
 
-#: src/plugins/render/weather/WeatherData.cpp:550
+#: src/plugins/render/weather/WeatherData.cpp:533
 #, fuzzy
 #| msgid "knots"
 msgctxt "QObject|"
 msgid "knots"
 msgstr "čvorova"
 
-#: src/plugins/render/weather/WeatherData.cpp:553
+#: src/plugins/render/weather/WeatherData.cpp:536
 #, fuzzy
 #| msgid "Beaufort"
 msgctxt "QObject|"
 msgid "Beaufort"
 msgstr "Bofor"
 
-#: src/plugins/render/weather/WeatherData.cpp:687
+#: src/plugins/render/weather/WeatherData.cpp:670
 #, fuzzy
 #| msgid "hPa"
 msgctxt "WeatherData|"
 msgid "hPa"
 msgstr "hPa"
 
-#: src/plugins/render/weather/WeatherData.cpp:690
+#: src/plugins/render/weather/WeatherData.cpp:673
 #, fuzzy
 #| msgid "kPa"
 msgctxt "WeatherData|"
 msgid "kPa"
 msgstr "kPa"
 
-#: src/plugins/render/weather/WeatherData.cpp:693
+#: src/plugins/render/weather/WeatherData.cpp:676
 #, fuzzy
 #| msgid "Bar"
 msgctxt "WeatherData|"
 msgid "Bar"
 msgstr "Bar"
 
-#: src/plugins/render/weather/WeatherData.cpp:696
+#: src/plugins/render/weather/WeatherData.cpp:679
 #, fuzzy
 #| msgid "mmHg"
 msgctxt "WeatherData|"
 msgid "mmHg"
 msgstr "mmHg"
 
-#: src/plugins/render/weather/WeatherData.cpp:699
+#: src/plugins/render/weather/WeatherData.cpp:682
 #, fuzzy
 #| msgid "inch Hg"
 msgctxt "WeatherData|"
 msgid "inch Hg"
 msgstr "inch Hg"
 
-#: src/plugins/render/weather/WeatherData.cpp:725
+#: src/plugins/render/weather/WeatherData.cpp:708
 #, fuzzy
 #| msgctxt "air pressure is rising"
 #| msgid "rising"
@@ -19840,7 +19840,7 @@ msgctxt "WeatherData|air pressure is rising"
 msgid "rising"
 msgstr "u porastu"
 
-#: src/plugins/render/weather/WeatherData.cpp:727
+#: src/plugins/render/weather/WeatherData.cpp:710
 #, fuzzy
 #| msgctxt "air pressure has no change"
 #| msgid "steady"
@@ -19848,7 +19848,7 @@ msgctxt "WeatherData|air pressure has no change"
 msgid "steady"
 msgstr "ustaljen"
 
-#: src/plugins/render/weather/WeatherData.cpp:729
+#: src/plugins/render/weather/WeatherData.cpp:712
 #, fuzzy
 #| msgctxt "air pressure falls"
 #| msgid "falling"
@@ -19856,70 +19856,70 @@ msgctxt "WeatherData|air pressure falls"
 msgid "falling"
 msgstr "u opadanju"
 
-#: src/plugins/render/weather/WeatherData.cpp:760
+#: src/plugins/render/weather/WeatherData.cpp:743
 #, fuzzy, qt-format
 #| msgid "Publishing time: %1<br>"
 msgctxt "WeatherData|"
 msgid "Publishing time: %1<br>"
 msgstr "Vrijeme objavljivanja: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:763
+#: src/plugins/render/weather/WeatherData.cpp:746
 #, fuzzy, qt-format
 #| msgid "Condition: %1<br>"
 msgctxt "WeatherData|"
 msgid "Condition: %1<br>"
 msgstr "Stanje: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:766
+#: src/plugins/render/weather/WeatherData.cpp:749
 #, fuzzy, qt-format
 #| msgid "Temperature: %1<br>"
 msgctxt "WeatherData|"
 msgid "Temperature: %1<br>"
 msgstr "Temperatura: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:769
+#: src/plugins/render/weather/WeatherData.cpp:752
 #, fuzzy, qt-format
 #| msgid "Max temperature: %1<br>"
 msgctxt "WeatherData|"
 msgid "Max temperature: %1<br>"
 msgstr "Maksimalna temperatura: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:772
+#: src/plugins/render/weather/WeatherData.cpp:755
 #, fuzzy, qt-format
 #| msgid "Min temperature: %1<br>"
 msgctxt "WeatherData|"
 msgid "Min temperature: %1<br>"
 msgstr "Minimalna temperatura: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:775
+#: src/plugins/render/weather/WeatherData.cpp:758
 #, fuzzy, qt-format
 #| msgid "Wind direction: %1<br>"
 msgctxt "WeatherData|"
 msgid "Wind direction: %1<br>"
 msgstr "Pravac vjetra: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:778
+#: src/plugins/render/weather/WeatherData.cpp:761
 #, fuzzy, qt-format
 #| msgid "Wind speed: %1<br>"
 msgctxt "WeatherData|"
 msgid "Wind speed: %1<br>"
 msgstr "Brzina vjetra: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:781
+#: src/plugins/render/weather/WeatherData.cpp:764
 #, fuzzy, qt-format
 #| msgid "Pressure: %1<br>"
 msgctxt "WeatherData|"
 msgid "Pressure: %1<br>"
 msgstr "Pritisak: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:784
+#: src/plugins/render/weather/WeatherData.cpp:767
 #, fuzzy, qt-format
 #| msgid "Pressure development: %1<br>"
 msgctxt "WeatherData|"
 msgid "Pressure development: %1<br>"
 msgstr "Razvoj pritiska: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:787
+#: src/plugins/render/weather/WeatherData.cpp:770
 #, fuzzy, qt-format
 #| msgid "Humidity: %1<br>"
 msgctxt "WeatherData|"
@@ -19933,14 +19933,14 @@ msgctxt "WeatherItemPrivate|"
 msgid "Weather"
 msgstr "Vrijeme"
 
-#: src/plugins/render/weather/WeatherItem.cpp:102
+#: src/plugins/render/weather/WeatherItem.cpp:100
 #, fuzzy, qt-format
 #| msgid "Station: %1\n"
 msgctxt "WeatherItemPrivate|"
 msgid "Station: %1\n"
 msgstr "Stanica: %1\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:111
+#: src/plugins/render/weather/WeatherItem.cpp:109
 #, fuzzy, qt-format
 #| msgctxt "Wind: WindSpeed, WindDirection"
 #| msgid "Wind: %4, %5\n"
@@ -19948,7 +19948,7 @@ msgctxt "WeatherItemPrivate|Wind: WindSpeed, WindDirection"
 msgid "Wind: %4, %5\n"
 msgstr "Vjetar: %4, %5\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:113
+#: src/plugins/render/weather/WeatherItem.cpp:111
 #, fuzzy, qt-format
 #| msgctxt "Wind: WindSpeed"
 #| msgid "Wind: %4\n"
@@ -19956,7 +19956,7 @@ msgctxt "WeatherItemPrivate|Wind: WindSpeed"
 msgid "Wind: %4\n"
 msgstr "Vjetar: %4\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:115
+#: src/plugins/render/weather/WeatherItem.cpp:113
 #, fuzzy, qt-format
 #| msgctxt "Wind: WindSpeed"
 #| msgid "Wind: %4\n"
@@ -19964,7 +19964,7 @@ msgctxt "WeatherItemPrivate|Wind: WindDirection"
 msgid "Wind: %4\n"
 msgstr "Vjetar: %4\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:118
+#: src/plugins/render/weather/WeatherItem.cpp:116
 #, fuzzy, qt-format
 #| msgctxt "Pressure: Pressure, Development"
 #| msgid "Pressure: %6, %7"
@@ -19972,7 +19972,7 @@ msgctxt "WeatherItemPrivate|Pressure: Pressure, Development"
 msgid "Pressure: %6, %7"
 msgstr "Pritisak: %6, %7"
 
-#: src/plugins/render/weather/WeatherItem.cpp:120
+#: src/plugins/render/weather/WeatherItem.cpp:118
 #, fuzzy, qt-format
 #| msgctxt "Pressure: Pressure"
 #| msgid "Pressure: %6"
@@ -19980,7 +19980,7 @@ msgctxt "WeatherItemPrivate|Pressure: Pressure"
 msgid "Pressure: %6"
 msgstr "Pritisak: %6"
 
-#: src/plugins/render/weather/WeatherItem.cpp:122
+#: src/plugins/render/weather/WeatherItem.cpp:120
 #, fuzzy, qt-format
 #| msgctxt "Pressure Development"
 #| msgid "Pressure %7"
@@ -19988,7 +19988,7 @@ msgctxt "WeatherItemPrivate|Pressure Development"
 msgid "Pressure %7"
 msgstr "Pritisak %7"
 
-#: src/plugins/render/weather/WeatherItem.cpp:132
+#: src/plugins/render/weather/WeatherItem.cpp:130
 #, fuzzy, qt-format
 #| msgctxt "DayOfWeek: Condition, MinTemp to MaxTemp"
 #| msgid "%1: %2, %3 to %4"
@@ -19996,14 +19996,14 @@ msgctxt "WeatherItemPrivate|DayOfWeek: Condition, MinTemp to MaxTemp"
 msgid "%1: %2, %3 to %4"
 msgstr "%1: %2, %3 do %4"
 
-#: src/plugins/render/weather/WeatherItem.cpp:196
+#: src/plugins/render/weather/WeatherItem.cpp:194
 #, fuzzy
 #| msgid "Remove from Favorites"
 msgctxt "WeatherItemPrivate|"
 msgid "Remove from Favorites"
 msgstr "Ukloni iz omiljenih"
 
-#: src/plugins/render/weather/WeatherItem.cpp:196
+#: src/plugins/render/weather/WeatherItem.cpp:194
 #, fuzzy
 #| msgid "Add to Favorites"
 msgctxt "WeatherItemPrivate|"
@@ -20153,91 +20153,91 @@ msgctxt "CycleStreetsConfigWidget|"
 msgid "Speed:"
 msgstr ""
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:35
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:36
 #, fuzzy
 #| msgid "balanced"
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "balanced"
 msgstr "balansiran"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:36
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:37
 #, fuzzy
 #| msgid "fastest"
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "fastest"
 msgstr "najbrže"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:37
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:38
 #, fuzzy
 #| msgid "quietest"
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "quietest"
 msgstr "najtiši"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:40
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:41
 #, fuzzy
 #| msgid "slow (16 km/h)"
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "slow (16 km/h)"
 msgstr "sporo (16 km/h)"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:41
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:42
 #, fuzzy
 #| msgid "normal (20 km/h)"
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "normal (20 km/h)"
 msgstr "normalno (20 km/h)"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:42
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:43
 #, fuzzy
 #| msgid "fast (24 km/h)"
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "fast (24 km/h)"
 msgstr "brzo (24 km/h)"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:44
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:45
 #, fuzzy
 #| msgid "slow (10 mph)"
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "slow (10 mph)"
 msgstr "sporo (10 mph)"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:45
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:46
 #, fuzzy
 #| msgid "normal (12 mph)"
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "normal (12 mph)"
 msgstr "normalno (12 mph)"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:46
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:47
 #, fuzzy
 #| msgid "fast (15 mph)"
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "fast (15 mph)"
 msgstr "brzo (15 mph)"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:78
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:84
 #, fuzzy
 #| msgid "This service requires an Internet connection."
 msgctxt "Marble::CycleStreetsPlugin|"
 msgid "This service requires an Internet connection."
 msgstr "Ovaj servis zahtjeva internet konekciju."
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:83
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:89
 #, fuzzy
 #| msgid "CycleStreets Routing"
 msgctxt "Marble::CycleStreetsPlugin|"
 msgid "CycleStreets Routing"
 msgstr "Rute staza za bicikle"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:88
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:94
 #, fuzzy
 #| msgid "CycleStreets"
 msgctxt "Marble::CycleStreetsPlugin|"
 msgid "CycleStreets"
 msgstr "Staze za bicikle"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:103
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:109
 #, fuzzy
 #| msgid "Bicycle routing for the United Kingdom using cyclestreets.net"
 msgctxt "Marble::CycleStreetsPlugin|"

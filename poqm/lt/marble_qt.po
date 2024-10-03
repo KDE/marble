@@ -2999,24 +2999,24 @@ msgctxt "Marble::AbstractFloatItem|"
 msgid "&Configure..."
 msgstr "&Konfigūruoti..."
 
-#: src/lib/marble/AddLinkDialog.cpp:64
+#: src/lib/marble/AddLinkDialog.cpp:62
 msgctxt "Marble::AddLinkDialog|"
 msgid "No URL specified"
 msgstr "Nenurodytas URL adresas"
 
-#: src/lib/marble/AddLinkDialog.cpp:64
+#: src/lib/marble/AddLinkDialog.cpp:62
 #, fuzzy
 #| msgid "Please specify a map title."
 msgctxt "Marble::AddLinkDialog|"
 msgid "Please specify a URL for this link."
 msgstr "Prašome nurodyti žemėlapio antraštę."
 
-#: src/lib/marble/AddLinkDialog.cpp:66
+#: src/lib/marble/AddLinkDialog.cpp:64
 msgctxt "Marble::AddLinkDialog|"
 msgid "No name specified"
 msgstr "Nenurodytas pavadinimas"
 
-#: src/lib/marble/AddLinkDialog.cpp:66
+#: src/lib/marble/AddLinkDialog.cpp:64
 #, fuzzy
 #| msgid "Please specify a map title."
 msgctxt "Marble::AddLinkDialog|"
@@ -3203,25 +3203,25 @@ msgctxt "UiBookmarkManagerDialog|"
 msgid "Edit"
 msgstr "Keisti"
 
-#: src/lib/marble/CacheStoragePolicy.cpp:33
+#: src/lib/marble/CacheStoragePolicy.cpp:31
 #, fuzzy
 #| msgid "Unable to insert data into cache"
 msgctxt "QObject|"
 msgid "Unable to insert data into cache"
 msgstr "Į podėlį neina įterpti duomenų"
 
-#: src/lib/marble/CelestialSortFilterProxyModel.cpp:33
-#: src/lib/marble/CelestialSortFilterProxyModel.cpp:34
+#: src/lib/marble/CelestialSortFilterProxyModel.cpp:31
+#: src/lib/marble/CelestialSortFilterProxyModel.cpp:32
 msgctxt "Marble::CelestialSortFilterProxyModel|"
 msgid "Moon"
 msgstr "Mėnulis"
 
-#: src/lib/marble/CelestialSortFilterProxyModel.cpp:36
+#: src/lib/marble/CelestialSortFilterProxyModel.cpp:34
 msgctxt "Marble::CelestialSortFilterProxyModel|"
 msgid "moon"
 msgstr "mėnulis"
 
-#: src/lib/marble/CelestialSortFilterProxyModel.cpp:38
+#: src/lib/marble/CelestialSortFilterProxyModel.cpp:36
 #, fuzzy
 msgctxt "Marble::CelestialSortFilterProxyModel|"
 msgid "dwarf planet"
@@ -3390,7 +3390,7 @@ msgid "Error when determining current location: "
 msgstr "Klaida nustatant dabartinę vietą"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:253
-#: src/plugins/render/weather/WeatherData.cpp:541
+#: src/plugins/render/weather/WeatherData.cpp:524
 msgctxt "QObject|"
 msgid "km/h"
 msgstr "km/val."
@@ -3537,12 +3537,12 @@ msgctxt "CurrentLocationWidget|"
 msgid "Auto Zoom"
 msgstr "Automatinis mastelis"
 
-#: src/lib/marble/DataMigration.cpp:92
+#: src/lib/marble/DataMigration.cpp:90
 msgctxt "Marble::DataMigration|"
 msgid "Marble data conversion"
 msgstr "Marble duomenų konvertavimas"
 
-#: src/lib/marble/DataMigration.cpp:93
+#: src/lib/marble/DataMigration.cpp:91
 msgctxt "Marble::DataMigration|"
 msgid "Converting data ..."
 msgstr "Konvertuojami duomenys ..."
@@ -7772,37 +7772,37 @@ msgctxt "LatLonBoxWidget|"
 msgid "&S"
 msgstr "P"
 
-#: src/lib/marble/LatLonEdit.cpp:141
+#: src/lib/marble/LatLonEdit.cpp:139
 msgctxt "Marble::LatLonEdit|"
 msgid "°"
 msgstr "°"
 
-#: src/lib/marble/LatLonEdit.cpp:191 src/lib/marble/LatLonEdit.cpp:350
+#: src/lib/marble/LatLonEdit.cpp:189 src/lib/marble/LatLonEdit.cpp:348
 msgctxt "Marble::LatLonEdit|"
 msgid "'"
 msgstr "'"
 
-#: src/lib/marble/LatLonEdit.cpp:192
+#: src/lib/marble/LatLonEdit.cpp:190
 msgctxt "Marble::LatLonEdit|"
 msgid "\""
 msgstr "\""
 
-#: src/lib/marble/LatLonEdit.cpp:540
+#: src/lib/marble/LatLonEdit.cpp:538
 msgctxt "Marble::LatLonEdit|East, the direction"
 msgid "E"
 msgstr "R"
 
-#: src/lib/marble/LatLonEdit.cpp:541
+#: src/lib/marble/LatLonEdit.cpp:539
 msgctxt "Marble::LatLonEdit|West, the direction"
 msgid "W"
 msgstr "V"
 
-#: src/lib/marble/LatLonEdit.cpp:544
+#: src/lib/marble/LatLonEdit.cpp:542
 msgctxt "Marble::LatLonEdit|North, the direction"
 msgid "N"
 msgstr "Š"
 
-#: src/lib/marble/LatLonEdit.cpp:545
+#: src/lib/marble/LatLonEdit.cpp:543
 msgctxt "Marble::LatLonEdit|South, the direction"
 msgid "S"
 msgstr "P"
@@ -7870,7 +7870,7 @@ msgctxt "MapThemeDownloadDialog|"
 msgid "Install Maps"
 msgstr "Įdiegti žemėlapį"
 
-#: src/lib/marble/MapThemeManager.cpp:378
+#: src/lib/marble/MapThemeManager.cpp:376
 msgctxt "QObject|"
 msgid "Name"
 msgstr "Pavadinimas"
@@ -10656,47 +10656,47 @@ msgctxt "QObject|"
 msgid "Clear"
 msgstr "Išvalyti"
 
-#: src/lib/marble/MarbleLocale.cpp:117
+#: src/lib/marble/MarbleLocale.cpp:115
 msgctxt "QObject|means meter"
 msgid "m"
 msgstr "m"
 
-#: src/lib/marble/MarbleLocale.cpp:119
+#: src/lib/marble/MarbleLocale.cpp:117
 msgctxt "QObject|means milimeters"
 msgid "mm"
 msgstr "mm"
 
-#: src/lib/marble/MarbleLocale.cpp:121
+#: src/lib/marble/MarbleLocale.cpp:119
 msgctxt "QObject|means kilometers"
 msgid "km"
 msgstr "km"
 
-#: src/lib/marble/MarbleLocale.cpp:123
+#: src/lib/marble/MarbleLocale.cpp:121
 msgctxt "QObject|means centimeters"
 msgid "cm"
 msgstr "cm"
 
-#: src/lib/marble/MarbleLocale.cpp:125
+#: src/lib/marble/MarbleLocale.cpp:123
 msgctxt "QObject|means feet"
 msgid "ft"
 msgstr "pėdos"
 
-#: src/lib/marble/MarbleLocale.cpp:127
+#: src/lib/marble/MarbleLocale.cpp:125
 msgctxt "QObject|means inches"
 msgid "in"
 msgstr "col."
 
-#: src/lib/marble/MarbleLocale.cpp:129
+#: src/lib/marble/MarbleLocale.cpp:127
 msgctxt "QObject|means yards"
 msgid "yd"
 msgstr ""
 
-#: src/lib/marble/MarbleLocale.cpp:131
+#: src/lib/marble/MarbleLocale.cpp:129
 msgctxt "QObject|means miles"
 msgid "mi"
 msgstr "mi"
 
-#: src/lib/marble/MarbleLocale.cpp:133
+#: src/lib/marble/MarbleLocale.cpp:131
 msgctxt "QObject|means nautical miles"
 msgid "nm"
 msgstr "jūrm."
@@ -11690,19 +11690,19 @@ msgctxt "Marble::OsmRelationEditorDialog|"
 msgid "Please add a type tag for this relation."
 msgstr "Prašome nurodyti žemėlapio antraštę."
 
-#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:60
+#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:59
 msgctxt "Marble::OsmRelationManagerWidget|"
 msgid "New Relation"
 msgstr "Naujas ryšys"
 
-#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:133
-#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:140
+#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:132
+#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:139
 msgctxt "Marble::OsmRelationManagerWidget|"
 msgid "Remove"
 msgstr "Pašalinti"
 
-#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:134
-#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:143
+#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:133
+#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:142
 msgctxt "Marble::OsmRelationManagerWidget|"
 msgid "Edit"
 msgstr "Keisti"
@@ -11792,12 +11792,12 @@ msgctxt "QObject|"
 msgid "value"
 msgstr "reikšmė"
 
-#: src/lib/marble/PlacemarkEditHeader.cpp:208
+#: src/lib/marble/PlacemarkEditHeader.cpp:206
 msgctxt "QObject|"
 msgid "Open File"
 msgstr "Atverti failą"
 
-#: src/lib/marble/PlacemarkEditHeader.cpp:208
+#: src/lib/marble/PlacemarkEditHeader.cpp:206
 msgctxt "QObject|"
 msgid "All Supported Files (*.png)"
 msgstr "Visi palaikomi failai (*.png)"
@@ -11918,34 +11918,34 @@ msgctxt "QObject|a planet without data"
 msgid "Unknown Planet"
 msgstr "Nežinoma planeta"
 
-#: src/lib/marble/PluginAboutDialog.cpp:55
+#: src/lib/marble/PluginAboutDialog.cpp:51
 #, qt-format
 msgctxt "Marble::PluginAboutDialog|"
 msgid "About %1"
 msgstr "Apie %1"
 
-#: src/lib/marble/PluginAboutDialog.cpp:60
+#: src/lib/marble/PluginAboutDialog.cpp:56
 #, qt-format
 msgctxt "Marble::PluginAboutDialog|"
 msgid "Version %1"
 msgstr "Versija %1"
 
-#: src/lib/marble/PluginAboutDialog.cpp:93
+#: src/lib/marble/PluginAboutDialog.cpp:89
 msgctxt "Marble::PluginAboutDialog|"
 msgid "Data"
 msgstr "Duomenys"
 
-#: src/lib/marble/PluginInterface.h:31
+#: src/lib/marble/PluginInterface.h:29
 msgctxt "PluginAuthor|"
 msgid "Developer"
 msgstr "Programuotojas"
 
-#: src/lib/marble/PluginItemDelegate.cpp:303
+#: src/lib/marble/PluginItemDelegate.cpp:301
 msgctxt "Marble::PluginItemDelegate|"
 msgid "About"
 msgstr "Apie"
 
-#: src/lib/marble/PluginItemDelegate.cpp:316
+#: src/lib/marble/PluginItemDelegate.cpp:314
 msgctxt "Marble::PluginItemDelegate|"
 msgid "Configure"
 msgstr "Konfigūruoti"
@@ -12002,12 +12002,12 @@ msgctxt "PrintOptions|"
 msgid "Footer"
 msgstr "Poraštė"
 
-#: src/lib/marble/projections/AzimuthalEquidistantProjection.cpp:56
+#: src/lib/marble/projections/AzimuthalEquidistantProjection.cpp:54
 msgctxt "QObject|"
 msgid "Azimuthal Equidistant"
 msgstr "Azimutinė lygiatarpė"
 
-#: src/lib/marble/projections/AzimuthalEquidistantProjection.cpp:61
+#: src/lib/marble/projections/AzimuthalEquidistantProjection.cpp:59
 msgctxt "QObject|"
 msgid ""
 "<p><b>Azimuthal Equidistant Projection</b> (\"fish eye\")</"
@@ -12015,24 +12015,24 @@ msgid ""
 "planetariums.</p>"
 msgstr ""
 
-#: src/lib/marble/projections/EquirectProjection.cpp:33
+#: src/lib/marble/projections/EquirectProjection.cpp:31
 msgctxt "QObject|"
 msgid "Flat Map"
 msgstr ""
 
-#: src/lib/marble/projections/EquirectProjection.cpp:38
+#: src/lib/marble/projections/EquirectProjection.cpp:36
 msgctxt "QObject|"
 msgid ""
 "<p><b>Equirectangular Projection</b> (\"Plate carrée\")</p><p>Applications: "
 "De facto standard for global texture data sets for computer software.</p>"
 msgstr ""
 
-#: src/lib/marble/projections/GnomonicProjection.cpp:61
+#: src/lib/marble/projections/GnomonicProjection.cpp:59
 msgctxt "QObject|"
 msgid "Gnomonic"
 msgstr "Gnominė"
 
-#: src/lib/marble/projections/GnomonicProjection.cpp:66
+#: src/lib/marble/projections/GnomonicProjection.cpp:64
 msgctxt "QObject|"
 msgid ""
 "<p><b>Gnomonic Projection</b> (\"rectilinear\")</p><p>Applications: Used for "
@@ -12040,36 +12040,36 @@ msgid ""
 "work.</p>"
 msgstr ""
 
-#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:61
+#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:59
 msgctxt "QObject|"
 msgid "Lambert Azimuthal Equal-Area"
 msgstr "Lamberto azimutinė lygiaplotė"
 
-#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:66
+#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:64
 msgctxt "QObject|"
 msgid ""
 "<p><b>Lambert Azimuthal Equal-Area Projection</b></p><p>Applications: Used "
 "in structural geology to plot directional data.</p>"
 msgstr ""
 
-#: src/lib/marble/projections/MercatorProjection.cpp:39
+#: src/lib/marble/projections/MercatorProjection.cpp:37
 msgctxt "QObject|"
 msgid "Mercator"
 msgstr "Merkatorius"
 
-#: src/lib/marble/projections/MercatorProjection.cpp:44
+#: src/lib/marble/projections/MercatorProjection.cpp:42
 msgctxt "QObject|"
 msgid ""
 "<p><b>Mercator Projection</b></p><p>Applications: popular standard map "
 "projection for navigation.</p>"
 msgstr ""
 
-#: src/lib/marble/projections/SphericalProjection.cpp:63
+#: src/lib/marble/projections/SphericalProjection.cpp:61
 msgctxt "QObject|"
 msgid "Globe"
 msgstr "Gaublys"
 
-#: src/lib/marble/projections/SphericalProjection.cpp:68
+#: src/lib/marble/projections/SphericalProjection.cpp:66
 msgctxt "QObject|"
 msgid ""
 "<p><b>Orthographic Projection</b> (\"orthogonal\")</p><p>Applications: A "
@@ -12077,24 +12077,24 @@ msgid ""
 "it appears from outer space.</p>"
 msgstr ""
 
-#: src/lib/marble/projections/StereographicProjection.cpp:61
+#: src/lib/marble/projections/StereographicProjection.cpp:59
 msgctxt "QObject|"
 msgid "Stereographic"
 msgstr "Stereografinė"
 
-#: src/lib/marble/projections/StereographicProjection.cpp:66
+#: src/lib/marble/projections/StereographicProjection.cpp:64
 msgctxt "QObject|"
 msgid ""
 "<p><b>Stereographic Projection</b> (\"orthogonal\")</p><p>Applications: Used "
 "for planetary cartography, geology and panorama photography.</p>"
 msgstr ""
 
-#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:74
+#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:72
 msgctxt "QObject|"
 msgid "Vertical Perspective Projection"
 msgstr ""
 
-#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:79
+#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:77
 msgctxt "QObject|"
 msgid ""
 "<p><b>Vertical Perspective Projection</b> (\"orthogonal\")</p><p> Shows the "
@@ -13791,32 +13791,32 @@ msgctxt "Marble::DownloadOsmDialog|"
 msgid "Download"
 msgstr "Atsisiųsti"
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:72
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:117
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:122
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:128
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:70
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:115
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:120
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:126
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "ERROR"
 msgstr "Klaida"
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:72
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:70
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "Unable to create temporary file to download OSM data to."
 msgstr ""
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:117
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:115
 msgctxt "Marble::DownloadOsmDialog|"
 msgid ""
 "The selected region contains too much data. Please select a smaller region "
 "and try again."
 msgstr ""
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:122
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:120
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "The bandwidth limit exceeded. Please try again later."
 msgstr ""
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:129
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:127
 msgctxt "Marble::DownloadOsmDialog|"
 msgid ""
 "Sorry, a network error occurred. Please check your internet connection or "
@@ -14565,47 +14565,47 @@ msgctxt "EclipsesConfigDialog|"
 msgid "Remind about eclipse events"
 msgstr ""
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:80
+#: src/plugins/render/eclipses/EclipsesItem.cpp:78
 msgctxt "Marble::EclipsesItem|"
 msgid "Moon, Total"
 msgstr "Mėnulio, visiškas"
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:82
+#: src/plugins/render/eclipses/EclipsesItem.cpp:80
 msgctxt "Marble::EclipsesItem|"
 msgid "Moon, Partial"
 msgstr "Mėnulio, dalinis"
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:84
+#: src/plugins/render/eclipses/EclipsesItem.cpp:82
 msgctxt "Marble::EclipsesItem|"
 msgid "Moon, Penumbral"
 msgstr ""
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:86
+#: src/plugins/render/eclipses/EclipsesItem.cpp:84
 msgctxt "Marble::EclipsesItem|"
 msgid "Sun, Partial"
 msgstr "Saulės, dalinis"
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:88
+#: src/plugins/render/eclipses/EclipsesItem.cpp:86
 msgctxt "Marble::EclipsesItem|"
 msgid "Sun, non-central, Annular"
 msgstr ""
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:90
+#: src/plugins/render/eclipses/EclipsesItem.cpp:88
 msgctxt "Marble::EclipsesItem|"
 msgid "Sun, non-central, Total"
 msgstr ""
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:92
+#: src/plugins/render/eclipses/EclipsesItem.cpp:90
 msgctxt "Marble::EclipsesItem|"
 msgid "Sun, Annular"
 msgstr ""
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:94
+#: src/plugins/render/eclipses/EclipsesItem.cpp:92
 msgctxt "Marble::EclipsesItem|"
 msgid "Sun, Total"
 msgstr "Saulės, visiškas"
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:96
+#: src/plugins/render/eclipses/EclipsesItem.cpp:94
 msgctxt "Marble::EclipsesItem|"
 msgid "Sun, Annular/Total"
 msgstr ""
@@ -14719,17 +14719,17 @@ msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr "Parinkite maršrutą, kad gautumėte instrukcijas."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:97
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:95
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Elevation Profile"
 msgstr "Aukščio kitimo vaizdavimas"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:102
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:100
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "&Elevation Profile"
 msgstr "&Aukščio kitimo vaizdavimas"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:117
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:115
 #, fuzzy
 #| msgid "This is a float item that provides an overview map."
 msgctxt "Marble::ElevationProfileFloatItem|"
@@ -14737,21 +14737,21 @@ msgid "A float item that shows the elevation profile of the current route."
 msgstr ""
 "Langelyje rodomas apžvalginis žemėlapis, kurį galima perkelti į norimą vietą."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:190
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:188
 #, fuzzy
 #| msgid "Calculate a route to get directions."
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr "Parinkite maršrutą, kad gautumėte instrukcijas."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:197
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:195
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid ""
 "Not enough points in the current viewport.\n"
 "Try to disable 'Zoom to viewport'."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:280
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:278
 #, qt-format
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Difference: %1 %2"
@@ -14782,17 +14782,17 @@ msgctxt "Marble::ElevationProfilePlotAxis|"
 msgid "nm"
 msgstr "jūrm."
 
-#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:67
+#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:65
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "Elevation Profile Marker"
 msgstr "Aukščio žymeklis"
 
-#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:72
+#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:70
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "&Elevation Profile Marker"
 msgstr "Aukščio žy&meklis"
 
-#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:87
+#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:85
 #, fuzzy
 #| msgid "This is a float item that provides an overview map."
 msgctxt "Marble::ElevationProfileMarker|"
@@ -14800,13 +14800,13 @@ msgid "Marks the current elevation of the elevation profile on the map."
 msgstr ""
 "Langelyje rodomas apžvalginis žemėlapis, kurį galima perkelti į norimą vietą."
 
-#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:136
+#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:134
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "m"
 msgstr "m"
 
-#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:144
-#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:148
+#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:142
+#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:146
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "ft"
 msgstr "pėdos"
@@ -14867,49 +14867,49 @@ msgctxt "Marble::FoursquarePlugin|"
 msgid "Displays trending Foursquare places"
 msgstr ""
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:48
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:46
 msgctxt "Marble::GpsInfo|"
 msgid "GpsInfo"
 msgstr "GpsInfo"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:53
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:51
 msgctxt "Marble::GpsInfo|"
 msgid "&GpsInfo"
 msgstr "&GpsInfo"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:68
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:66
 #, fuzzy
 #| msgid "This is a float item that provides a compass."
 msgctxt "Marble::GpsInfo|"
 msgid "This is a float item that provides Gps Information."
 msgstr "Langelyje rodomas kompasas, kurį galima perkelti į norimą vietą."
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:122
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:120
 msgctxt "Marble::GpsInfo|"
 msgid "mph"
 msgstr "mph"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:124
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:122
 msgctxt "Marble::GpsInfo|"
 msgid "ft"
 msgstr "pėdos"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:131
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:129
 msgctxt "Marble::GpsInfo|"
 msgid "km/h"
 msgstr "km/h"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:133
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:131
 msgctxt "Marble::GpsInfo|"
 msgid "m"
 msgstr "m"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:138
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:136
 msgctxt "Marble::GpsInfo|"
 msgid "kt"
 msgstr "mazgai"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:140
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:138
 msgctxt "Marble::GpsInfo|"
 msgid "nm"
 msgstr "jūrm."
@@ -15080,31 +15080,31 @@ msgctxt "Marble::GraticulePlugin|"
 msgid "Antarctic Circle"
 msgstr "Pietų poliaratis"
 
-#: src/plugins/render/license/License.cpp:97
+#: src/plugins/render/license/License.cpp:95
 msgctxt "Marble::License|"
 msgid "License"
 msgstr "Licencija"
 
-#: src/plugins/render/license/License.cpp:102
+#: src/plugins/render/license/License.cpp:100
 msgctxt "Marble::License|"
 msgid "&License"
 msgstr "&Licencija"
 
-#: src/plugins/render/license/License.cpp:117
+#: src/plugins/render/license/License.cpp:115
 #, fuzzy
 #| msgid "This is a float item that provides a compass."
 msgctxt "Marble::License|"
 msgid "This is a float item that provides copyright information."
 msgstr "Langelyje rodomas kompasas, kurį galima perkelti į norimą vietą."
 
-#: src/plugins/render/license/License.cpp:234
+#: src/plugins/render/license/License.cpp:232
 #, fuzzy
 #| msgid "&Full Screen Mode"
 msgctxt "Marble::License|"
 msgid "&Full License"
 msgstr "Viso &ekrano veiksena"
 
-#: src/plugins/render/license/License.cpp:238
+#: src/plugins/render/license/License.cpp:236
 msgctxt "Marble::License|"
 msgid "&Show Details"
 msgstr "&Rodyti išsamiau"
@@ -15131,21 +15131,21 @@ msgctxt "Marble::MapScaleFloatItem|"
 msgid "Minimize"
 msgstr "Sumažinti"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:68
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:66
 #, fuzzy
 #| msgid "Scale Bar"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "Scale Bar"
 msgstr "Mastelio juosta"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:73
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:71
 #, fuzzy
 #| msgid "&Scale Bar"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Scale Bar"
 msgstr "&Mastelio juosta"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:88
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:86
 #, fuzzy
 #| msgid "This is a float item that provides a map scale."
 msgctxt "Marble::MapScaleFloatItem|"
@@ -15154,40 +15154,40 @@ msgstr ""
 "Langelyje pateikiamas žemėlapio mastelis, kurį galima perkelti į norimą "
 "vietą."
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:98
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:96
 #, fuzzy
 #| msgid "Original Developer"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "Original Developer"
 msgstr "Pradinis programuotojas"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:224
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:228
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:222
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:226
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "km"
 msgstr "km"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:231
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:229
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "m"
 msgstr "m"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:236
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:234
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "mi"
 msgstr "mi"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:246
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:244
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "nm"
 msgstr "jūrm."
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:352
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:350
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Configure..."
 msgstr "&Konfigūruoti..."
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:358
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:356
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Ratio Scale"
 msgstr ""
@@ -15400,7 +15400,7 @@ msgctxt "Marble::NavigationFloatItem|"
 msgid "Home Button"
 msgstr "Pradžios mygtukas"
 
-#: src/plugins/render/notes/NotesItem.cpp:99
+#: src/plugins/render/notes/NotesItem.cpp:97
 msgctxt "Marble::NotesItem|The author name is not known"
 msgid "anonymous"
 msgstr "anoniminis"
@@ -16161,82 +16161,82 @@ msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Neptune"
 msgstr "Neptūnas"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:128
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:126
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Satellites"
 msgstr "&Palydovai"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:129
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:127
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Data Sources"
 msgstr "&Duomenų šaltiniai"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:131
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:129
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Activate Plugin"
 msgstr "&Aktyvuoti papildinį"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:231
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:229
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Add Data Source"
 msgstr "Pridėti duomenų šaltinį"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:231
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:229
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "URL or File path:"
 msgstr "URL arba failo kelias:"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:237
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:235
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Invalid data source input"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:237
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:235
 #, fuzzy
 #| msgid "Please specify a map title."
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Please enter a valid URL or file path!"
 msgstr "Prašome nurodyti žemėlapio antraštę."
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
 #, fuzzy
 #| msgid "All Supported Files (*.txt *.msc)"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Supported Files (*.txt *.msc)"
 msgstr "Visi palaikomi failai (*.txt *.msc)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Marble Satellite Catalog (*.msc)"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Two Line Element Set (*.txt)"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
 #, fuzzy
 #| msgid "All Files (*.*)"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Files (*.*)"
 msgstr "Visi failai"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:262
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
 #, fuzzy
 #| msgid "OpenStreetMap Nominatim Search"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Open Satellite Data File"
 msgstr "OpenStreetMap Nominatim paieška"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:289
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:287
 #, fuzzy
 #| msgid "Are you sure you want to delete this map from the system?"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Delete selected data source"
 msgstr "Ar tikrai norite ištrinti šį žemėlapį iš jūsų sistemos?"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:290
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:288
 #, fuzzy
 #| msgid "Are you sure you want to delete this map from the system?"
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -16641,36 +16641,36 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "CubeSats"
 msgstr ""
 
-#: src/plugins/render/speedometer/Speedometer.cpp:53
+#: src/plugins/render/speedometer/Speedometer.cpp:51
 #, fuzzy
 #| msgid "speed camera"
 msgctxt "Marble::Speedometer|"
 msgid "Speedometer"
 msgstr "greičio kamera"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:58
+#: src/plugins/render/speedometer/Speedometer.cpp:56
 #, fuzzy
 #| msgid "speed camera"
 msgctxt "Marble::Speedometer|"
 msgid "&Speedometer"
 msgstr "greičio kamera"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:73
+#: src/plugins/render/speedometer/Speedometer.cpp:71
 msgctxt "Marble::Speedometer|"
 msgid "Display the current cruising speed."
 msgstr ""
 
-#: src/plugins/render/speedometer/Speedometer.cpp:124
+#: src/plugins/render/speedometer/Speedometer.cpp:122
 msgctxt "Marble::Speedometer|"
 msgid "mph"
 msgstr "myl./val."
 
-#: src/plugins/render/speedometer/Speedometer.cpp:130
+#: src/plugins/render/speedometer/Speedometer.cpp:128
 msgctxt "Marble::Speedometer|"
 msgid "km/h"
 msgstr "km/val."
 
-#: src/plugins/render/speedometer/Speedometer.cpp:135
+#: src/plugins/render/speedometer/Speedometer.cpp:133
 msgctxt "Marble::Speedometer|"
 msgid "kt"
 msgstr "mazgai"
@@ -16954,14 +16954,14 @@ msgctxt "Marble::twitterPlugin|"
 msgid "show public twitts in their places"
 msgstr "Rodo viešąsias žinutes"
 
-#: src/plugins/render/weather/BBCParser.cpp:240
+#: src/plugins/render/weather/BBCParser.cpp:238
 #, fuzzy
 #| msgid "The file is not a valid BBC answer."
 msgctxt "QObject|"
 msgid "The file is not a valid BBC answer."
 msgstr "Failas nėra tinkamas BBC atsakymas."
 
-#: src/plugins/render/weather/BBCWeatherItem.cpp:82
+#: src/plugins/render/weather/BBCWeatherItem.cpp:80
 #, fuzzy
 #| msgid ""
 #| "Supported by <a href=\"http://backstage.bbc.co.uk\" target=\"_BLANK"
@@ -16974,7 +16974,7 @@ msgstr ""
 "Palaikoma <a href=\"http://backstage.bbc.co.uk\" target=\"_BLANK\">backstage."
 "bbc.co.uk</a>.<br>Orų duomenys iš UK MET Office"
 
-#: src/plugins/render/weather/GeoNamesWeatherItem.cpp:32
+#: src/plugins/render/weather/GeoNamesWeatherItem.cpp:30
 msgctxt "Marble::GeoNamesWeatherItem|"
 msgid ""
 "Supported by <a href=\"https://www.geonames.org/export/JSON-webservices.html"
@@ -17194,298 +17194,298 @@ msgctxt "WeatherConfigWidget|"
 msgid " hours"
 msgstr " val."
 
-#: src/plugins/render/weather/WeatherData.cpp:314
+#: src/plugins/render/weather/WeatherData.cpp:297
 msgctxt "WeatherData|"
 msgid "sunny"
 msgstr "saulėta"
 
-#: src/plugins/render/weather/WeatherData.cpp:316
+#: src/plugins/render/weather/WeatherData.cpp:299
 msgctxt "WeatherData|"
 msgid "clear"
 msgstr "giedra"
 
-#: src/plugins/render/weather/WeatherData.cpp:319
+#: src/plugins/render/weather/WeatherData.cpp:302
 msgctxt "WeatherData|"
 msgid "few clouds"
 msgstr "mažai debesuota"
 
-#: src/plugins/render/weather/WeatherData.cpp:322
+#: src/plugins/render/weather/WeatherData.cpp:305
 msgctxt "WeatherData|"
 msgid "partly cloudy"
 msgstr "šiek tiek debesuota"
 
-#: src/plugins/render/weather/WeatherData.cpp:324
+#: src/plugins/render/weather/WeatherData.cpp:307
 msgctxt "WeatherData|"
 msgid "overcast"
 msgstr "apsiniaukę"
 
-#: src/plugins/render/weather/WeatherData.cpp:327
+#: src/plugins/render/weather/WeatherData.cpp:310
 msgctxt "WeatherData|"
 msgid "light showers"
 msgstr "silpnos liūtys"
 
-#: src/plugins/render/weather/WeatherData.cpp:330
+#: src/plugins/render/weather/WeatherData.cpp:313
 msgctxt "WeatherData|"
 msgid "showers"
 msgstr "liūtys"
 
-#: src/plugins/render/weather/WeatherData.cpp:332
+#: src/plugins/render/weather/WeatherData.cpp:315
 msgctxt "WeatherData|"
 msgid "light rain"
 msgstr "silpnas lietus"
 
-#: src/plugins/render/weather/WeatherData.cpp:334
+#: src/plugins/render/weather/WeatherData.cpp:317
 msgctxt "WeatherData|"
 msgid "rain"
 msgstr "lietus"
 
-#: src/plugins/render/weather/WeatherData.cpp:337
+#: src/plugins/render/weather/WeatherData.cpp:320
 msgctxt "WeatherData|"
 msgid "occasionally thunderstorm"
 msgstr "vietomis perkūnija"
 
-#: src/plugins/render/weather/WeatherData.cpp:339
+#: src/plugins/render/weather/WeatherData.cpp:322
 msgctxt "WeatherData|"
 msgid "thunderstorm"
 msgstr "perkūnija"
 
-#: src/plugins/render/weather/WeatherData.cpp:341
+#: src/plugins/render/weather/WeatherData.cpp:324
 msgctxt "WeatherData|"
 msgid "hail"
 msgstr "kruša"
 
-#: src/plugins/render/weather/WeatherData.cpp:344
+#: src/plugins/render/weather/WeatherData.cpp:327
 msgctxt "WeatherData|"
 msgid "occasionally snow"
 msgstr "vietomis sniegas"
 
-#: src/plugins/render/weather/WeatherData.cpp:346
+#: src/plugins/render/weather/WeatherData.cpp:329
 msgctxt "WeatherData|"
 msgid "light snow"
 msgstr "silpnai sninga"
 
-#: src/plugins/render/weather/WeatherData.cpp:348
+#: src/plugins/render/weather/WeatherData.cpp:331
 msgctxt "WeatherData|"
 msgid "snow"
 msgstr "sninga"
 
-#: src/plugins/render/weather/WeatherData.cpp:350
+#: src/plugins/render/weather/WeatherData.cpp:333
 msgctxt "WeatherData|"
 msgid "rain and snow"
 msgstr "lietus ir sniegas"
 
-#: src/plugins/render/weather/WeatherData.cpp:352
+#: src/plugins/render/weather/WeatherData.cpp:335
 msgctxt "WeatherData|"
 msgid "mist"
 msgstr "migla"
 
-#: src/plugins/render/weather/WeatherData.cpp:354
+#: src/plugins/render/weather/WeatherData.cpp:337
 msgctxt "WeatherData|"
 msgid "sandstorm"
 msgstr "smėlio audra"
 
-#: src/plugins/render/weather/WeatherData.cpp:403
+#: src/plugins/render/weather/WeatherData.cpp:386
 msgctxt "WeatherData|"
 msgid "N"
 msgstr "Š"
 
-#: src/plugins/render/weather/WeatherData.cpp:405
+#: src/plugins/render/weather/WeatherData.cpp:388
 msgctxt "WeatherData|"
 msgid "NNE"
 msgstr "ŠŠR"
 
-#: src/plugins/render/weather/WeatherData.cpp:407
+#: src/plugins/render/weather/WeatherData.cpp:390
 msgctxt "WeatherData|"
 msgid "NE"
 msgstr "ŠR"
 
-#: src/plugins/render/weather/WeatherData.cpp:409
+#: src/plugins/render/weather/WeatherData.cpp:392
 msgctxt "WeatherData|"
 msgid "ENE"
 msgstr "RŠR"
 
-#: src/plugins/render/weather/WeatherData.cpp:411
+#: src/plugins/render/weather/WeatherData.cpp:394
 msgctxt "WeatherData|"
 msgid "E"
 msgstr "R"
 
-#: src/plugins/render/weather/WeatherData.cpp:413
+#: src/plugins/render/weather/WeatherData.cpp:396
 msgctxt "WeatherData|"
 msgid "SSE"
 msgstr "PPR"
 
-#: src/plugins/render/weather/WeatherData.cpp:415
+#: src/plugins/render/weather/WeatherData.cpp:398
 msgctxt "WeatherData|"
 msgid "SE"
 msgstr "PR"
 
-#: src/plugins/render/weather/WeatherData.cpp:417
+#: src/plugins/render/weather/WeatherData.cpp:400
 msgctxt "WeatherData|"
 msgid "ESE"
 msgstr "RPR"
 
-#: src/plugins/render/weather/WeatherData.cpp:419
+#: src/plugins/render/weather/WeatherData.cpp:402
 msgctxt "WeatherData|"
 msgid "S"
 msgstr "P"
 
-#: src/plugins/render/weather/WeatherData.cpp:421
+#: src/plugins/render/weather/WeatherData.cpp:404
 msgctxt "WeatherData|"
 msgid "NNW"
 msgstr "ŠŠV"
 
-#: src/plugins/render/weather/WeatherData.cpp:423
+#: src/plugins/render/weather/WeatherData.cpp:406
 msgctxt "WeatherData|"
 msgid "NW"
 msgstr "ŠV"
 
-#: src/plugins/render/weather/WeatherData.cpp:425
+#: src/plugins/render/weather/WeatherData.cpp:408
 msgctxt "WeatherData|"
 msgid "WNW"
 msgstr "VŠV"
 
-#: src/plugins/render/weather/WeatherData.cpp:427
+#: src/plugins/render/weather/WeatherData.cpp:410
 msgctxt "WeatherData|"
 msgid "W"
 msgstr "V"
 
-#: src/plugins/render/weather/WeatherData.cpp:429
+#: src/plugins/render/weather/WeatherData.cpp:412
 msgctxt "WeatherData|"
 msgid "SSW"
 msgstr "PPV"
 
-#: src/plugins/render/weather/WeatherData.cpp:431
+#: src/plugins/render/weather/WeatherData.cpp:414
 msgctxt "WeatherData|"
 msgid "SW"
 msgstr "PV"
 
-#: src/plugins/render/weather/WeatherData.cpp:433
+#: src/plugins/render/weather/WeatherData.cpp:416
 msgctxt "WeatherData|"
 msgid "WSW"
 msgstr "VPV"
 
-#: src/plugins/render/weather/WeatherData.cpp:544
+#: src/plugins/render/weather/WeatherData.cpp:527
 msgctxt "QObject|"
 msgid "mph"
 msgstr "myl./val."
 
-#: src/plugins/render/weather/WeatherData.cpp:547
+#: src/plugins/render/weather/WeatherData.cpp:530
 msgctxt "QObject|"
 msgid "m/s"
 msgstr "m/s"
 
-#: src/plugins/render/weather/WeatherData.cpp:550
+#: src/plugins/render/weather/WeatherData.cpp:533
 msgctxt "QObject|"
 msgid "knots"
 msgstr "mazgai"
 
-#: src/plugins/render/weather/WeatherData.cpp:553
+#: src/plugins/render/weather/WeatherData.cpp:536
 #, fuzzy
 #| msgid "Beaufort"
 msgctxt "QObject|"
 msgid "Beaufort"
 msgstr "Baufortas"
 
-#: src/plugins/render/weather/WeatherData.cpp:687
+#: src/plugins/render/weather/WeatherData.cpp:670
 msgctxt "WeatherData|"
 msgid "hPa"
 msgstr "hPa"
 
-#: src/plugins/render/weather/WeatherData.cpp:690
+#: src/plugins/render/weather/WeatherData.cpp:673
 msgctxt "WeatherData|"
 msgid "kPa"
 msgstr "kPa"
 
-#: src/plugins/render/weather/WeatherData.cpp:693
+#: src/plugins/render/weather/WeatherData.cpp:676
 #, fuzzy
 #| msgid "bar"
 msgctxt "WeatherData|"
 msgid "Bar"
 msgstr "Baras"
 
-#: src/plugins/render/weather/WeatherData.cpp:696
+#: src/plugins/render/weather/WeatherData.cpp:679
 msgctxt "WeatherData|"
 msgid "mmHg"
 msgstr "mmHg"
 
-#: src/plugins/render/weather/WeatherData.cpp:699
+#: src/plugins/render/weather/WeatherData.cpp:682
 #, fuzzy
 #| msgid "inch Hg"
 msgctxt "WeatherData|"
 msgid "inch Hg"
 msgstr "colio Hg"
 
-#: src/plugins/render/weather/WeatherData.cpp:725
+#: src/plugins/render/weather/WeatherData.cpp:708
 msgctxt "WeatherData|air pressure is rising"
 msgid "rising"
 msgstr "kyla"
 
-#: src/plugins/render/weather/WeatherData.cpp:727
+#: src/plugins/render/weather/WeatherData.cpp:710
 msgctxt "WeatherData|air pressure has no change"
 msgid "steady"
 msgstr "stabilus"
 
-#: src/plugins/render/weather/WeatherData.cpp:729
+#: src/plugins/render/weather/WeatherData.cpp:712
 msgctxt "WeatherData|air pressure falls"
 msgid "falling"
 msgstr "krenta"
 
-#: src/plugins/render/weather/WeatherData.cpp:760
+#: src/plugins/render/weather/WeatherData.cpp:743
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Publishing time: %1<br>"
 msgstr "Paskelbta: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:763
+#: src/plugins/render/weather/WeatherData.cpp:746
 #, fuzzy, qt-format
 #| msgid "Condition: %1<br>"
 msgctxt "WeatherData|"
 msgid "Condition: %1<br>"
 msgstr "Sąlygos"
 
-#: src/plugins/render/weather/WeatherData.cpp:766
+#: src/plugins/render/weather/WeatherData.cpp:749
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Temperature: %1<br>"
 msgstr "Temperatūra: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:769
+#: src/plugins/render/weather/WeatherData.cpp:752
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Max temperature: %1<br>"
 msgstr "Didžiausia temperatūra: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:772
+#: src/plugins/render/weather/WeatherData.cpp:755
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Min temperature: %1<br>"
 msgstr "Mažiausia temperatūra: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:775
+#: src/plugins/render/weather/WeatherData.cpp:758
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Wind direction: %1<br>"
 msgstr "Vėjo kryptis: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:778
+#: src/plugins/render/weather/WeatherData.cpp:761
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Wind speed: %1<br>"
 msgstr "Vėjo greitis: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:781
+#: src/plugins/render/weather/WeatherData.cpp:764
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Pressure: %1<br>"
 msgstr "Slėgis: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:784
+#: src/plugins/render/weather/WeatherData.cpp:767
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Pressure development: %1<br>"
 msgstr "Slėgio kitimas: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:787
+#: src/plugins/render/weather/WeatherData.cpp:770
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Humidity: %1<br>"
@@ -17496,60 +17496,60 @@ msgctxt "WeatherItemPrivate|"
 msgid "Weather"
 msgstr "Orai"
 
-#: src/plugins/render/weather/WeatherItem.cpp:102
+#: src/plugins/render/weather/WeatherItem.cpp:100
 #, qt-format
 msgctxt "WeatherItemPrivate|"
 msgid "Station: %1\n"
 msgstr "Stotis: %1\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:111
+#: src/plugins/render/weather/WeatherItem.cpp:109
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindSpeed, WindDirection"
 msgid "Wind: %4, %5\n"
 msgstr "Vėjas: %4, %5\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:113
+#: src/plugins/render/weather/WeatherItem.cpp:111
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindSpeed"
 msgid "Wind: %4\n"
 msgstr "Vėjas: %4\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:115
+#: src/plugins/render/weather/WeatherItem.cpp:113
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindDirection"
 msgid "Wind: %4\n"
 msgstr "Vėjas: %4\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:118
+#: src/plugins/render/weather/WeatherItem.cpp:116
 #, qt-format
 msgctxt "WeatherItemPrivate|Pressure: Pressure, Development"
 msgid "Pressure: %6, %7"
 msgstr "Slėgis: %6, %7"
 
-#: src/plugins/render/weather/WeatherItem.cpp:120
+#: src/plugins/render/weather/WeatherItem.cpp:118
 #, qt-format
 msgctxt "WeatherItemPrivate|Pressure: Pressure"
 msgid "Pressure: %6"
 msgstr "Slėgis: %6"
 
-#: src/plugins/render/weather/WeatherItem.cpp:122
+#: src/plugins/render/weather/WeatherItem.cpp:120
 #, qt-format
 msgctxt "WeatherItemPrivate|Pressure Development"
 msgid "Pressure %7"
 msgstr "Slėgis %7"
 
-#: src/plugins/render/weather/WeatherItem.cpp:132
+#: src/plugins/render/weather/WeatherItem.cpp:130
 #, qt-format
 msgctxt "WeatherItemPrivate|DayOfWeek: Condition, MinTemp to MaxTemp"
 msgid "%1: %2, %3 to %4"
 msgstr "%1: %2, %3 -> %4"
 
-#: src/plugins/render/weather/WeatherItem.cpp:196
+#: src/plugins/render/weather/WeatherItem.cpp:194
 msgctxt "WeatherItemPrivate|"
 msgid "Remove from Favorites"
 msgstr "Pašalinti iš žymelių"
 
-#: src/plugins/render/weather/WeatherItem.cpp:196
+#: src/plugins/render/weather/WeatherItem.cpp:194
 #, fuzzy
 #| msgid "&Favorite"
 msgctxt "WeatherItemPrivate|"
@@ -17682,73 +17682,73 @@ msgctxt "CycleStreetsConfigWidget|"
 msgid "Speed:"
 msgstr "Greitis:"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:35
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:36
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "balanced"
 msgstr "vidutinis"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:36
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:37
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "fastest"
 msgstr "greičiausias"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:37
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:38
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "quietest"
 msgstr "ramiausias"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:40
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:41
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "slow (16 km/h)"
 msgstr "lėtas (16 km/val.)"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:41
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:42
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "normal (20 km/h)"
 msgstr "vidutinis (20 km/val.)"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:42
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:43
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "fast (24 km/h)"
 msgstr "greitas (24 km/val.)"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:44
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:45
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "slow (10 mph)"
 msgstr "lėtas (10 myl./val.)"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:45
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:46
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "normal (12 mph)"
 msgstr "vidutinis (12 myl./val.)"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:46
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:47
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "fast (15 mph)"
 msgstr "greitas (15 myl./val.)"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:78
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:84
 #, fuzzy
 #| msgid "This service requires an Internet connection."
 msgctxt "Marble::CycleStreetsPlugin|"
 msgid "This service requires an Internet connection."
 msgstr "Šiai tarnybai reikia interneto ryšio."
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:83
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:89
 #, fuzzy
 #| msgid "Yours Routing"
 msgctxt "Marble::CycleStreetsPlugin|"
 msgid "CycleStreets Routing"
 msgstr "Yours maršrutizavimas"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:88
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:94
 #, fuzzy
 #| msgid "Yours Routing"
 msgctxt "Marble::CycleStreetsPlugin|"
 msgid "CycleStreets"
 msgstr "Yours maršrutizavimas"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:103
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:109
 msgctxt "Marble::CycleStreetsPlugin|"
 msgid "Bicycle routing for the United Kingdom using cyclestreets.net"
 msgstr ""

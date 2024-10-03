@@ -2981,22 +2981,22 @@ msgctxt "Marble::AbstractFloatItem|"
 msgid "&Configure..."
 msgstr "A&gordi..."
 
-#: src/lib/marble/AddLinkDialog.cpp:64
+#: src/lib/marble/AddLinkDialog.cpp:62
 msgctxt "Marble::AddLinkDialog|"
 msgid "No URL specified"
 msgstr "Neniu URL difinita"
 
-#: src/lib/marble/AddLinkDialog.cpp:64
+#: src/lib/marble/AddLinkDialog.cpp:62
 msgctxt "Marble::AddLinkDialog|"
 msgid "Please specify a URL for this link."
 msgstr "Bonvolu difini URL por ĉi ligilo."
 
-#: src/lib/marble/AddLinkDialog.cpp:66
+#: src/lib/marble/AddLinkDialog.cpp:64
 msgctxt "Marble::AddLinkDialog|"
 msgid "No name specified"
 msgstr "Neniu nomo difinita"
 
-#: src/lib/marble/AddLinkDialog.cpp:66
+#: src/lib/marble/AddLinkDialog.cpp:64
 msgctxt "Marble::AddLinkDialog|"
 msgid "Please specify a name for this link."
 msgstr "Bonvolu difini nomon por tiu ligilo"
@@ -3174,23 +3174,23 @@ msgctxt "UiBookmarkManagerDialog|"
 msgid "Edit"
 msgstr "Redakti"
 
-#: src/lib/marble/CacheStoragePolicy.cpp:33
+#: src/lib/marble/CacheStoragePolicy.cpp:31
 msgctxt "QObject|"
 msgid "Unable to insert data into cache"
 msgstr "Ne eblas enmeti datumojn en la kaŝmemoron"
 
-#: src/lib/marble/CelestialSortFilterProxyModel.cpp:33
-#: src/lib/marble/CelestialSortFilterProxyModel.cpp:34
+#: src/lib/marble/CelestialSortFilterProxyModel.cpp:31
+#: src/lib/marble/CelestialSortFilterProxyModel.cpp:32
 msgctxt "Marble::CelestialSortFilterProxyModel|"
 msgid "Moon"
 msgstr "Luno"
 
-#: src/lib/marble/CelestialSortFilterProxyModel.cpp:36
+#: src/lib/marble/CelestialSortFilterProxyModel.cpp:34
 msgctxt "Marble::CelestialSortFilterProxyModel|"
 msgid "moon"
 msgstr "luno"
 
-#: src/lib/marble/CelestialSortFilterProxyModel.cpp:38
+#: src/lib/marble/CelestialSortFilterProxyModel.cpp:36
 msgctxt "Marble::CelestialSortFilterProxyModel|"
 msgid "dwarf planet"
 msgstr "nanoplanedo"
@@ -3344,7 +3344,7 @@ msgid "Error when determining current location: "
 msgstr "Eraro provante trovi la aktualan lokon: "
 
 #: src/lib/marble/CurrentLocationWidget.cpp:253
-#: src/plugins/render/weather/WeatherData.cpp:541
+#: src/plugins/render/weather/WeatherData.cpp:524
 msgctxt "QObject|"
 msgid "km/h"
 msgstr "km/h"
@@ -3487,12 +3487,12 @@ msgctxt "CurrentLocationWidget|"
 msgid "Auto Zoom"
 msgstr "Aŭtomata Zomo"
 
-#: src/lib/marble/DataMigration.cpp:92
+#: src/lib/marble/DataMigration.cpp:90
 msgctxt "Marble::DataMigration|"
 msgid "Marble data conversion"
 msgstr "Marble datumkonverto"
 
-#: src/lib/marble/DataMigration.cpp:93
+#: src/lib/marble/DataMigration.cpp:91
 msgctxt "Marble::DataMigration|"
 msgid "Converting data ..."
 msgstr "Konvertas datumojn..."
@@ -7431,37 +7431,37 @@ msgctxt "LatLonBoxWidget|"
 msgid "&S"
 msgstr "&S"
 
-#: src/lib/marble/LatLonEdit.cpp:141
+#: src/lib/marble/LatLonEdit.cpp:139
 msgctxt "Marble::LatLonEdit|"
 msgid "°"
 msgstr "°"
 
-#: src/lib/marble/LatLonEdit.cpp:191 src/lib/marble/LatLonEdit.cpp:350
+#: src/lib/marble/LatLonEdit.cpp:189 src/lib/marble/LatLonEdit.cpp:348
 msgctxt "Marble::LatLonEdit|"
 msgid "'"
 msgstr "'"
 
-#: src/lib/marble/LatLonEdit.cpp:192
+#: src/lib/marble/LatLonEdit.cpp:190
 msgctxt "Marble::LatLonEdit|"
 msgid "\""
 msgstr "\""
 
-#: src/lib/marble/LatLonEdit.cpp:540
+#: src/lib/marble/LatLonEdit.cpp:538
 msgctxt "Marble::LatLonEdit|East, the direction"
 msgid "E"
 msgstr "Or"
 
-#: src/lib/marble/LatLonEdit.cpp:541
+#: src/lib/marble/LatLonEdit.cpp:539
 msgctxt "Marble::LatLonEdit|West, the direction"
 msgid "W"
 msgstr "Ok"
 
-#: src/lib/marble/LatLonEdit.cpp:544
+#: src/lib/marble/LatLonEdit.cpp:542
 msgctxt "Marble::LatLonEdit|North, the direction"
 msgid "N"
 msgstr "N"
 
-#: src/lib/marble/LatLonEdit.cpp:545
+#: src/lib/marble/LatLonEdit.cpp:543
 msgctxt "Marble::LatLonEdit|South, the direction"
 msgid "S"
 msgstr "S"
@@ -7529,7 +7529,7 @@ msgctxt "MapThemeDownloadDialog|"
 msgid "Install Maps"
 msgstr "Instali Mapojn"
 
-#: src/lib/marble/MapThemeManager.cpp:378
+#: src/lib/marble/MapThemeManager.cpp:376
 msgctxt "QObject|"
 msgid "Name"
 msgstr "Nomo"
@@ -9926,47 +9926,47 @@ msgctxt "QObject|"
 msgid "Clear"
 msgstr "Forviŝi"
 
-#: src/lib/marble/MarbleLocale.cpp:117
+#: src/lib/marble/MarbleLocale.cpp:115
 msgctxt "QObject|means meter"
 msgid "m"
 msgstr "m"
 
-#: src/lib/marble/MarbleLocale.cpp:119
+#: src/lib/marble/MarbleLocale.cpp:117
 msgctxt "QObject|means milimeters"
 msgid "mm"
 msgstr "mm"
 
-#: src/lib/marble/MarbleLocale.cpp:121
+#: src/lib/marble/MarbleLocale.cpp:119
 msgctxt "QObject|means kilometers"
 msgid "km"
 msgstr "km"
 
-#: src/lib/marble/MarbleLocale.cpp:123
+#: src/lib/marble/MarbleLocale.cpp:121
 msgctxt "QObject|means centimeters"
 msgid "cm"
 msgstr "cm"
 
-#: src/lib/marble/MarbleLocale.cpp:125
+#: src/lib/marble/MarbleLocale.cpp:123
 msgctxt "QObject|means feet"
 msgid "ft"
 msgstr "ft"
 
-#: src/lib/marble/MarbleLocale.cpp:127
+#: src/lib/marble/MarbleLocale.cpp:125
 msgctxt "QObject|means inches"
 msgid "in"
 msgstr "in"
 
-#: src/lib/marble/MarbleLocale.cpp:129
+#: src/lib/marble/MarbleLocale.cpp:127
 msgctxt "QObject|means yards"
 msgid "yd"
 msgstr "yd"
 
-#: src/lib/marble/MarbleLocale.cpp:131
+#: src/lib/marble/MarbleLocale.cpp:129
 msgctxt "QObject|means miles"
 msgid "mi"
 msgstr "mi"
 
-#: src/lib/marble/MarbleLocale.cpp:133
+#: src/lib/marble/MarbleLocale.cpp:131
 msgctxt "QObject|means nautical miles"
 msgid "nm"
 msgstr "nm"
@@ -11018,19 +11018,19 @@ msgctxt "Marble::OsmRelationEditorDialog|"
 msgid "Please add a type tag for this relation."
 msgstr "Bonvolu aldoni tipetikedon por ĉi tiu rilato."
 
-#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:60
+#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:59
 msgctxt "Marble::OsmRelationManagerWidget|"
 msgid "New Relation"
 msgstr "Nova Rilato"
 
-#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:133
-#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:140
+#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:132
+#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:139
 msgctxt "Marble::OsmRelationManagerWidget|"
 msgid "Remove"
 msgstr "Forigi"
 
-#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:134
-#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:143
+#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:133
+#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:142
 msgctxt "Marble::OsmRelationManagerWidget|"
 msgid "Edit"
 msgstr "Redakti"
@@ -11112,12 +11112,12 @@ msgctxt "QObject|"
 msgid "value"
 msgstr "valoro"
 
-#: src/lib/marble/PlacemarkEditHeader.cpp:208
+#: src/lib/marble/PlacemarkEditHeader.cpp:206
 msgctxt "QObject|"
 msgid "Open File"
 msgstr "Malfermi dosieron"
 
-#: src/lib/marble/PlacemarkEditHeader.cpp:208
+#: src/lib/marble/PlacemarkEditHeader.cpp:206
 msgctxt "QObject|"
 msgid "All Supported Files (*.png)"
 msgstr "Ĉiuj subtenataj Dosieroj (*.png)"
@@ -11232,34 +11232,34 @@ msgctxt "QObject|a planet without data"
 msgid "Unknown Planet"
 msgstr "Nekonata Planedo"
 
-#: src/lib/marble/PluginAboutDialog.cpp:55
+#: src/lib/marble/PluginAboutDialog.cpp:51
 #, qt-format
 msgctxt "Marble::PluginAboutDialog|"
 msgid "About %1"
 msgstr "Pri %1"
 
-#: src/lib/marble/PluginAboutDialog.cpp:60
+#: src/lib/marble/PluginAboutDialog.cpp:56
 #, qt-format
 msgctxt "Marble::PluginAboutDialog|"
 msgid "Version %1"
 msgstr "Versio %1"
 
-#: src/lib/marble/PluginAboutDialog.cpp:93
+#: src/lib/marble/PluginAboutDialog.cpp:89
 msgctxt "Marble::PluginAboutDialog|"
 msgid "Data"
 msgstr "Datumo"
 
-#: src/lib/marble/PluginInterface.h:31
+#: src/lib/marble/PluginInterface.h:29
 msgctxt "PluginAuthor|"
 msgid "Developer"
 msgstr "Ellaboranto"
 
-#: src/lib/marble/PluginItemDelegate.cpp:303
+#: src/lib/marble/PluginItemDelegate.cpp:301
 msgctxt "Marble::PluginItemDelegate|"
 msgid "About"
 msgstr "Pri"
 
-#: src/lib/marble/PluginItemDelegate.cpp:316
+#: src/lib/marble/PluginItemDelegate.cpp:314
 msgctxt "Marble::PluginItemDelegate|"
 msgid "Configure"
 msgstr "Agordi"
@@ -11314,12 +11314,12 @@ msgctxt "PrintOptions|"
 msgid "Footer"
 msgstr "Piedo"
 
-#: src/lib/marble/projections/AzimuthalEquidistantProjection.cpp:56
+#: src/lib/marble/projections/AzimuthalEquidistantProjection.cpp:54
 msgctxt "QObject|"
 msgid "Azimuthal Equidistant"
 msgstr "Azimuta Samdistanca"
 
-#: src/lib/marble/projections/AzimuthalEquidistantProjection.cpp:61
+#: src/lib/marble/projections/AzimuthalEquidistantProjection.cpp:59
 msgctxt "QObject|"
 msgid ""
 "<p><b>Azimuthal Equidistant Projection</b> (\"fish eye\")</"
@@ -11329,12 +11329,12 @@ msgstr ""
 "<p><b>Azimutala Ekvidista Projekcio</b> (\"fiŝokulo\")</p><p>Aplikoj: "
 "Montrado de sismaj kaj radiodatenoj kaj por uzo en ciferecaj planetarioj.</p>"
 
-#: src/lib/marble/projections/EquirectProjection.cpp:33
+#: src/lib/marble/projections/EquirectProjection.cpp:31
 msgctxt "QObject|"
 msgid "Flat Map"
 msgstr "Plata Mapo"
 
-#: src/lib/marble/projections/EquirectProjection.cpp:38
+#: src/lib/marble/projections/EquirectProjection.cpp:36
 msgctxt "QObject|"
 msgid ""
 "<p><b>Equirectangular Projection</b> (\"Plate carrée\")</p><p>Applications: "
@@ -11343,12 +11343,12 @@ msgstr ""
 "<p><b>Ekvirektangula Projekcio</b> (\"Plate carrée\")</p><p>Aplikoj: Fakta "
 "normo por tutmondaj teksturaj datumaroj por komputila programaro.</p>"
 
-#: src/lib/marble/projections/GnomonicProjection.cpp:61
+#: src/lib/marble/projections/GnomonicProjection.cpp:59
 msgctxt "QObject|"
 msgid "Gnomonic"
 msgstr "Gnomonika"
 
-#: src/lib/marble/projections/GnomonicProjection.cpp:66
+#: src/lib/marble/projections/GnomonicProjection.cpp:64
 msgctxt "QObject|"
 msgid ""
 "<p><b>Gnomonic Projection</b> (\"rectilinear\")</p><p>Applications: Used for "
@@ -11358,12 +11358,12 @@ msgstr ""
 "<p><b>Gnomona Projekcio</b> (\"rektlinia\")</p><p>Aplikoj: Uzata por montri "
 "panorama fotado. Ankaŭ uzata por navigado, radio kaj sisma laboro.</p>"
 
-#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:61
+#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:59
 msgctxt "QObject|"
 msgid "Lambert Azimuthal Equal-Area"
 msgstr "Azimuta Sam-Zona de Lambert"
 
-#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:66
+#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:64
 msgctxt "QObject|"
 msgid ""
 "<p><b>Lambert Azimuthal Equal-Area Projection</b></p><p>Applications: Used "
@@ -11372,12 +11372,12 @@ msgstr ""
 "<p><b>Lambert Azimutala Egala-Area Projekcio</b></p><p>Aplikoj: Uzite en "
 "struktura geologio por grafiki direktajn datumojn.</p>"
 
-#: src/lib/marble/projections/MercatorProjection.cpp:39
+#: src/lib/marble/projections/MercatorProjection.cpp:37
 msgctxt "QObject|"
 msgid "Mercator"
 msgstr "Merkatora"
 
-#: src/lib/marble/projections/MercatorProjection.cpp:44
+#: src/lib/marble/projections/MercatorProjection.cpp:42
 msgctxt "QObject|"
 msgid ""
 "<p><b>Mercator Projection</b></p><p>Applications: popular standard map "
@@ -11386,12 +11386,12 @@ msgstr ""
 "<p><b>Mercator Projection</b></p><p>Aplikoj: populara norma mapprojekcio por "
 "navigado.</p>"
 
-#: src/lib/marble/projections/SphericalProjection.cpp:63
+#: src/lib/marble/projections/SphericalProjection.cpp:61
 msgctxt "QObject|"
 msgid "Globe"
 msgstr "Globuso"
 
-#: src/lib/marble/projections/SphericalProjection.cpp:68
+#: src/lib/marble/projections/SphericalProjection.cpp:66
 msgctxt "QObject|"
 msgid ""
 "<p><b>Orthographic Projection</b> (\"orthogonal\")</p><p>Applications: A "
@@ -11402,12 +11402,12 @@ msgstr ""
 "projekcio, kiu estas uzata por montri la hemisferon de globo kiel ĝi aperas "
 "el la kosma spaco.</p> p>"
 
-#: src/lib/marble/projections/StereographicProjection.cpp:61
+#: src/lib/marble/projections/StereographicProjection.cpp:59
 msgctxt "QObject|"
 msgid "Stereographic"
 msgstr "Rektlinia Sfero"
 
-#: src/lib/marble/projections/StereographicProjection.cpp:66
+#: src/lib/marble/projections/StereographicProjection.cpp:64
 msgctxt "QObject|"
 msgid ""
 "<p><b>Stereographic Projection</b> (\"orthogonal\")</p><p>Applications: Used "
@@ -11416,12 +11416,12 @@ msgstr ""
 "<p><b>Stereografia Projekcio</b> (\"ortogonala\")</p><p>Aplikoj: Uzite por "
 "planeda kartografio, geologio kaj panorama fotado.</p>"
 
-#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:74
+#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:72
 msgctxt "QObject|"
 msgid "Vertical Perspective Projection"
 msgstr "Vertikala Perspektiva Projekcio"
 
-#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:79
+#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:77
 msgctxt "QObject|"
 msgid ""
 "<p><b>Vertical Perspective Projection</b> (\"orthogonal\")</p><p> Shows the "
@@ -12975,20 +12975,20 @@ msgctxt "Marble::DownloadOsmDialog|"
 msgid "Download"
 msgstr "Elŝuti"
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:72
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:117
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:122
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:128
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:70
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:115
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:120
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:126
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "ERROR"
 msgstr "ERARO"
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:72
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:70
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "Unable to create temporary file to download OSM data to."
 msgstr "Ne eblas krei provizoran dosieron por elŝuti OSM-datumojn."
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:117
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:115
 msgctxt "Marble::DownloadOsmDialog|"
 msgid ""
 "The selected region contains too much data. Please select a smaller region "
@@ -12997,12 +12997,12 @@ msgstr ""
 "La elektita regiono enhavas tro da datumoj. Bonvolu elekti pli malgrandan "
 "regionon kaj provi denove."
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:122
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:120
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "The bandwidth limit exceeded. Please try again later."
 msgstr "La limo de larĝa bando superis. Bonvolu reprovi poste."
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:129
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:127
 msgctxt "Marble::DownloadOsmDialog|"
 msgid ""
 "Sorry, a network error occurred. Please check your internet connection or "
@@ -13720,47 +13720,47 @@ msgctxt "EclipsesConfigDialog|"
 msgid "Remind about eclipse events"
 msgstr "Rememorigi pri eklipso-eventoj"
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:80
+#: src/plugins/render/eclipses/EclipsesItem.cpp:78
 msgctxt "Marble::EclipsesItem|"
 msgid "Moon, Total"
 msgstr "Luno, Entuta"
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:82
+#: src/plugins/render/eclipses/EclipsesItem.cpp:80
 msgctxt "Marble::EclipsesItem|"
 msgid "Moon, Partial"
 msgstr "Luno, Parta"
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:84
+#: src/plugins/render/eclipses/EclipsesItem.cpp:82
 msgctxt "Marble::EclipsesItem|"
 msgid "Moon, Penumbral"
 msgstr "Luna, Penumbra"
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:86
+#: src/plugins/render/eclipses/EclipsesItem.cpp:84
 msgctxt "Marble::EclipsesItem|"
 msgid "Sun, Partial"
 msgstr "Suno, Parta"
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:88
+#: src/plugins/render/eclipses/EclipsesItem.cpp:86
 msgctxt "Marble::EclipsesItem|"
 msgid "Sun, non-central, Annular"
 msgstr "Suno, ne-centra, Ringa"
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:90
+#: src/plugins/render/eclipses/EclipsesItem.cpp:88
 msgctxt "Marble::EclipsesItem|"
 msgid "Sun, non-central, Total"
 msgstr "Suno, ne-centra, Entuta"
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:92
+#: src/plugins/render/eclipses/EclipsesItem.cpp:90
 msgctxt "Marble::EclipsesItem|"
 msgid "Sun, Annular"
 msgstr "Suno, Ringa"
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:94
+#: src/plugins/render/eclipses/EclipsesItem.cpp:92
 msgctxt "Marble::EclipsesItem|"
 msgid "Sun, Total"
 msgstr "Suno, Entuta"
 
-#: src/plugins/render/eclipses/EclipsesItem.cpp:96
+#: src/plugins/render/eclipses/EclipsesItem.cpp:94
 msgctxt "Marble::EclipsesItem|"
 msgid "Sun, Annular/Total"
 msgstr "Suno, Jara/Entuta"
@@ -13874,27 +13874,27 @@ msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr "Krei itineron aŭ ŝargi trakon de dosiero por vidi ĝian altprofilon."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:97
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:95
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Elevation Profile"
 msgstr "Profilo de Alteco"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:102
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:100
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "&Elevation Profile"
 msgstr "Profilo de Alt&eco"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:117
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:115
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "A float item that shows the elevation profile of the current route."
 msgstr "Glitero kiu montras la profilon de alteco de la aktuala vojo."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:190
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:188
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr "Krei itineron aŭ ŝargi trakon de dosiero por vidi ĝian altprofilon."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:197
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:195
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid ""
 "Not enough points in the current viewport.\n"
@@ -13903,7 +13903,7 @@ msgstr ""
 "Ne sufiĉe da punktoj en la nuna vidfenestro.\n"
 "Provu malŝalti 'Zomi al vidfenestro'."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:280
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:278
 #, qt-format
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Difference: %1 %2"
@@ -13934,28 +13934,28 @@ msgctxt "Marble::ElevationProfilePlotAxis|"
 msgid "nm"
 msgstr "nm"
 
-#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:67
+#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:65
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "Elevation Profile Marker"
 msgstr "Marko de Profilo de Alteco"
 
-#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:72
+#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:70
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "&Elevation Profile Marker"
 msgstr "Profilmarkilo de Alt&eco"
 
-#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:87
+#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:85
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "Marks the current elevation of the elevation profile on the map."
 msgstr "Marki la aktualan altecon sur la altecprofilo de la mapo."
 
-#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:136
+#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:134
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "m"
 msgstr "m"
 
-#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:144
-#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:148
+#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:142
+#: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:146
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "ft"
 msgstr "ft"
@@ -14014,47 +14014,47 @@ msgctxt "Marble::FoursquarePlugin|"
 msgid "Displays trending Foursquare places"
 msgstr "Montri furorajn lokojn el Foursquare"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:48
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:46
 msgctxt "Marble::GpsInfo|"
 msgid "GpsInfo"
 msgstr "GpsInfo"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:53
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:51
 msgctxt "Marble::GpsInfo|"
 msgid "&GpsInfo"
 msgstr "&GpsInfo"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:68
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:66
 msgctxt "Marble::GpsInfo|"
 msgid "This is a float item that provides Gps Information."
 msgstr "Tio estas glitero kiu provizas GPS informojn."
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:122
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:120
 msgctxt "Marble::GpsInfo|"
 msgid "mph"
 msgstr "mph"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:124
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:122
 msgctxt "Marble::GpsInfo|"
 msgid "ft"
 msgstr "ft"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:131
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:129
 msgctxt "Marble::GpsInfo|"
 msgid "km/h"
 msgstr "km/h"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:133
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:131
 msgctxt "Marble::GpsInfo|"
 msgid "m"
 msgstr "m"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:138
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:136
 msgctxt "Marble::GpsInfo|"
 msgid "kt"
 msgstr "kt"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:140
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:138
 msgctxt "Marble::GpsInfo|"
 msgid "nm"
 msgstr "nm"
@@ -14209,27 +14209,27 @@ msgctxt "Marble::GraticulePlugin|"
 msgid "Antarctic Circle"
 msgstr "Norda Polusa cirklo"
 
-#: src/plugins/render/license/License.cpp:97
+#: src/plugins/render/license/License.cpp:95
 msgctxt "Marble::License|"
 msgid "License"
 msgstr "Permesilo"
 
-#: src/plugins/render/license/License.cpp:102
+#: src/plugins/render/license/License.cpp:100
 msgctxt "Marble::License|"
 msgid "&License"
 msgstr "Permesi&lo"
 
-#: src/plugins/render/license/License.cpp:117
+#: src/plugins/render/license/License.cpp:115
 msgctxt "Marble::License|"
 msgid "This is a float item that provides copyright information."
 msgstr "Tio estas glitero kiu provizas kopirajtajn informojn."
 
-#: src/plugins/render/license/License.cpp:234
+#: src/plugins/render/license/License.cpp:232
 msgctxt "Marble::License|"
 msgid "&Full License"
 msgstr "Plena Permesilo (&F)"
 
-#: src/plugins/render/license/License.cpp:238
+#: src/plugins/render/license/License.cpp:236
 msgctxt "Marble::License|"
 msgid "&Show Details"
 msgstr "Montri detalojn (&S)"
@@ -14254,53 +14254,53 @@ msgctxt "Marble::MapScaleFloatItem|"
 msgid "Minimize"
 msgstr "Minimumigi"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:68
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:66
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "Scale Bar"
 msgstr "Skalbreto"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:73
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:71
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Scale Bar"
 msgstr "&Skalbreto"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:88
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:86
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "This is a float item that provides a map scale."
 msgstr "Tiu glitero provizas mapan skalon."
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:98
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:96
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "Original Developer"
 msgstr "Originala Programisto"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:224
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:228
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:222
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:226
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "km"
 msgstr "km"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:231
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:229
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "m"
 msgstr "m"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:236
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:234
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "mi"
 msgstr "mi"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:246
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:244
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "nm"
 msgstr "nm"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:352
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:350
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Configure..."
 msgstr "A&gordi..."
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:358
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:356
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Ratio Scale"
 msgstr "P&roporcia skalo"
@@ -14505,7 +14505,7 @@ msgctxt "Marble::NavigationFloatItem|"
 msgid "Home Button"
 msgstr "Hejam Butono"
 
-#: src/plugins/render/notes/NotesItem.cpp:99
+#: src/plugins/render/notes/NotesItem.cpp:97
 msgctxt "Marble::NotesItem|The author name is not known"
 msgid "anonymous"
 msgstr "anonima"
@@ -15206,72 +15206,72 @@ msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Neptune"
 msgstr "Neptuno"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:128
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:126
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Satellites"
 msgstr "&Satelitoj"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:129
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:127
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Data Sources"
 msgstr "&Datumaj Fontoj"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:131
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:129
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Activate Plugin"
 msgstr "&Aktivigi Kromprogramon"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:231
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:229
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Add Data Source"
 msgstr "Aldoni Datuman Fonton"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:231
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:229
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "URL or File path:"
 msgstr "Retadreso aŭ Dosiervojo:"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:237
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:235
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Invalid data source input"
 msgstr "Nevalida datuma fonta enigo"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:237
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:235
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Please enter a valid URL or file path!"
 msgstr "Bonvolu specifi validan retadreson aŭ dosiervojon."
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Supported Files (*.txt *.msc)"
 msgstr "Ĉiuj subtenataj Dosieroj (*.txt *.msc)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Marble Satellite Catalog (*.msc)"
 msgstr "Katalogo de Marble Satellitoj (*.msc)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Two Line Element Set (*.txt)"
 msgstr "Du-linia elementaro (*.txt)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Files (*.*)"
 msgstr "Ĉiuj dosieroj (*.*)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:262
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Open Satellite Data File"
 msgstr "Dosiero de OpenStreetMap Satelitaj Datumoj"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:289
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:287
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Delete selected data source"
 msgstr "forigi la elektan datumfonton"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:290
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:288
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Do you really want to delete the selected data source?"
 msgstr "Ĉu vi certe volas forigi la elektan datumfonton?"
@@ -15645,32 +15645,32 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "CubeSats"
 msgstr "CubeSats"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:53
+#: src/plugins/render/speedometer/Speedometer.cpp:51
 msgctxt "Marble::Speedometer|"
 msgid "Speedometer"
 msgstr "Rapidmezurilo"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:58
+#: src/plugins/render/speedometer/Speedometer.cpp:56
 msgctxt "Marble::Speedometer|"
 msgid "&Speedometer"
 msgstr "Rapidmezurilo (&S)"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:73
+#: src/plugins/render/speedometer/Speedometer.cpp:71
 msgctxt "Marble::Speedometer|"
 msgid "Display the current cruising speed."
 msgstr "Montri la aktualan rapidecon."
 
-#: src/plugins/render/speedometer/Speedometer.cpp:124
+#: src/plugins/render/speedometer/Speedometer.cpp:122
 msgctxt "Marble::Speedometer|"
 msgid "mph"
 msgstr "mph"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:130
+#: src/plugins/render/speedometer/Speedometer.cpp:128
 msgctxt "Marble::Speedometer|"
 msgid "km/h"
 msgstr "km/h"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:135
+#: src/plugins/render/speedometer/Speedometer.cpp:133
 msgctxt "Marble::Speedometer|"
 msgid "kt"
 msgstr "kt"
@@ -15937,12 +15937,12 @@ msgctxt "Marble::twitterPlugin|"
 msgid "show public twitts in their places"
 msgstr "Montri publikajn pepaĵojn ĉe iliaj lokoj "
 
-#: src/plugins/render/weather/BBCParser.cpp:240
+#: src/plugins/render/weather/BBCParser.cpp:238
 msgctxt "QObject|"
 msgid "The file is not a valid BBC answer."
 msgstr "La dosiero ne estas valida BBC-respondo."
 
-#: src/plugins/render/weather/BBCWeatherItem.cpp:82
+#: src/plugins/render/weather/BBCWeatherItem.cpp:80
 msgctxt "Marble::BBCWeatherItem|"
 msgid ""
 "Supported by <a href=\"https://www.bbc.co.uk/blogs/bbcbackstage\" target="
@@ -15951,7 +15951,7 @@ msgstr ""
 "Subtenata de <a href=\"https://www.bbc.co.uk/blogs/bbcbackstage\" target="
 "\"_BLANK\">backstage.bbc.co.uk</a>.<br>Veterdatumoj de UK MET-Oficejo"
 
-#: src/plugins/render/weather/GeoNamesWeatherItem.cpp:32
+#: src/plugins/render/weather/GeoNamesWeatherItem.cpp:30
 msgctxt "Marble::GeoNamesWeatherItem|"
 msgid ""
 "Supported by <a href=\"https://www.geonames.org/export/JSON-webservices.html"
@@ -16216,291 +16216,291 @@ msgctxt "WeatherConfigWidget|"
 msgid " hours"
 msgstr "horoj"
 
-#: src/plugins/render/weather/WeatherData.cpp:314
+#: src/plugins/render/weather/WeatherData.cpp:297
 msgctxt "WeatherData|"
 msgid "sunny"
 msgstr "suna"
 
-#: src/plugins/render/weather/WeatherData.cpp:316
+#: src/plugins/render/weather/WeatherData.cpp:299
 msgctxt "WeatherData|"
 msgid "clear"
 msgstr "sennuba"
 
-#: src/plugins/render/weather/WeatherData.cpp:319
+#: src/plugins/render/weather/WeatherData.cpp:302
 msgctxt "WeatherData|"
 msgid "few clouds"
 msgstr "nubeta"
 
-#: src/plugins/render/weather/WeatherData.cpp:322
+#: src/plugins/render/weather/WeatherData.cpp:305
 msgctxt "WeatherData|"
 msgid "partly cloudy"
 msgstr "parte nuba"
 
-#: src/plugins/render/weather/WeatherData.cpp:324
+#: src/plugins/render/weather/WeatherData.cpp:307
 msgctxt "WeatherData|"
 msgid "overcast"
 msgstr "nubega"
 
-#: src/plugins/render/weather/WeatherData.cpp:327
+#: src/plugins/render/weather/WeatherData.cpp:310
 msgctxt "WeatherData|"
 msgid "light showers"
 msgstr "pluvoverŝeta"
 
-#: src/plugins/render/weather/WeatherData.cpp:330
+#: src/plugins/render/weather/WeatherData.cpp:313
 msgctxt "WeatherData|"
 msgid "showers"
 msgstr "pluvoverŝa"
 
-#: src/plugins/render/weather/WeatherData.cpp:332
+#: src/plugins/render/weather/WeatherData.cpp:315
 msgctxt "WeatherData|"
 msgid "light rain"
 msgstr "pluveta"
 
-#: src/plugins/render/weather/WeatherData.cpp:334
+#: src/plugins/render/weather/WeatherData.cpp:317
 msgctxt "WeatherData|"
 msgid "rain"
 msgstr "pluva"
 
-#: src/plugins/render/weather/WeatherData.cpp:337
+#: src/plugins/render/weather/WeatherData.cpp:320
 msgctxt "WeatherData|"
 msgid "occasionally thunderstorm"
 msgstr "okaze fulmotondra"
 
-#: src/plugins/render/weather/WeatherData.cpp:339
+#: src/plugins/render/weather/WeatherData.cpp:322
 msgctxt "WeatherData|"
 msgid "thunderstorm"
 msgstr "fulmotondra"
 
-#: src/plugins/render/weather/WeatherData.cpp:341
+#: src/plugins/render/weather/WeatherData.cpp:324
 msgctxt "WeatherData|"
 msgid "hail"
 msgstr "hajla"
 
-#: src/plugins/render/weather/WeatherData.cpp:344
+#: src/plugins/render/weather/WeatherData.cpp:327
 msgctxt "WeatherData|"
 msgid "occasionally snow"
 msgstr "okaze neĝa"
 
-#: src/plugins/render/weather/WeatherData.cpp:346
+#: src/plugins/render/weather/WeatherData.cpp:329
 msgctxt "WeatherData|"
 msgid "light snow"
 msgstr "neĝeta"
 
-#: src/plugins/render/weather/WeatherData.cpp:348
+#: src/plugins/render/weather/WeatherData.cpp:331
 msgctxt "WeatherData|"
 msgid "snow"
 msgstr "neĝa"
 
-#: src/plugins/render/weather/WeatherData.cpp:350
+#: src/plugins/render/weather/WeatherData.cpp:333
 msgctxt "WeatherData|"
 msgid "rain and snow"
 msgstr "pluva kaj neĝa"
 
-#: src/plugins/render/weather/WeatherData.cpp:352
+#: src/plugins/render/weather/WeatherData.cpp:335
 msgctxt "WeatherData|"
 msgid "mist"
 msgstr "bruma"
 
-#: src/plugins/render/weather/WeatherData.cpp:354
+#: src/plugins/render/weather/WeatherData.cpp:337
 msgctxt "WeatherData|"
 msgid "sandstorm"
 msgstr "sabloŝtormo"
 
-#: src/plugins/render/weather/WeatherData.cpp:403
+#: src/plugins/render/weather/WeatherData.cpp:386
 msgctxt "WeatherData|"
 msgid "N"
 msgstr "N"
 
-#: src/plugins/render/weather/WeatherData.cpp:405
+#: src/plugins/render/weather/WeatherData.cpp:388
 msgctxt "WeatherData|"
 msgid "NNE"
 msgstr "NNOr"
 
-#: src/plugins/render/weather/WeatherData.cpp:407
+#: src/plugins/render/weather/WeatherData.cpp:390
 msgctxt "WeatherData|"
 msgid "NE"
 msgstr "NOr"
 
-#: src/plugins/render/weather/WeatherData.cpp:409
+#: src/plugins/render/weather/WeatherData.cpp:392
 msgctxt "WeatherData|"
 msgid "ENE"
 msgstr "OrNOr"
 
-#: src/plugins/render/weather/WeatherData.cpp:411
+#: src/plugins/render/weather/WeatherData.cpp:394
 msgctxt "WeatherData|"
 msgid "E"
 msgstr "Or"
 
-#: src/plugins/render/weather/WeatherData.cpp:413
+#: src/plugins/render/weather/WeatherData.cpp:396
 msgctxt "WeatherData|"
 msgid "SSE"
 msgstr "SSOr"
 
-#: src/plugins/render/weather/WeatherData.cpp:415
+#: src/plugins/render/weather/WeatherData.cpp:398
 msgctxt "WeatherData|"
 msgid "SE"
 msgstr "SOr"
 
-#: src/plugins/render/weather/WeatherData.cpp:417
+#: src/plugins/render/weather/WeatherData.cpp:400
 msgctxt "WeatherData|"
 msgid "ESE"
 msgstr "OrSOr"
 
-#: src/plugins/render/weather/WeatherData.cpp:419
+#: src/plugins/render/weather/WeatherData.cpp:402
 msgctxt "WeatherData|"
 msgid "S"
 msgstr "S"
 
-#: src/plugins/render/weather/WeatherData.cpp:421
+#: src/plugins/render/weather/WeatherData.cpp:404
 msgctxt "WeatherData|"
 msgid "NNW"
 msgstr "NNOk"
 
-#: src/plugins/render/weather/WeatherData.cpp:423
+#: src/plugins/render/weather/WeatherData.cpp:406
 msgctxt "WeatherData|"
 msgid "NW"
 msgstr "NOk"
 
-#: src/plugins/render/weather/WeatherData.cpp:425
+#: src/plugins/render/weather/WeatherData.cpp:408
 msgctxt "WeatherData|"
 msgid "WNW"
 msgstr "OkNOk"
 
-#: src/plugins/render/weather/WeatherData.cpp:427
+#: src/plugins/render/weather/WeatherData.cpp:410
 msgctxt "WeatherData|"
 msgid "W"
 msgstr "Ok"
 
-#: src/plugins/render/weather/WeatherData.cpp:429
+#: src/plugins/render/weather/WeatherData.cpp:412
 msgctxt "WeatherData|"
 msgid "SSW"
 msgstr "SSOk"
 
-#: src/plugins/render/weather/WeatherData.cpp:431
+#: src/plugins/render/weather/WeatherData.cpp:414
 msgctxt "WeatherData|"
 msgid "SW"
 msgstr "SOk"
 
-#: src/plugins/render/weather/WeatherData.cpp:433
+#: src/plugins/render/weather/WeatherData.cpp:416
 msgctxt "WeatherData|"
 msgid "WSW"
 msgstr "OkSOk"
 
-#: src/plugins/render/weather/WeatherData.cpp:544
+#: src/plugins/render/weather/WeatherData.cpp:527
 msgctxt "QObject|"
 msgid "mph"
 msgstr "mph"
 
-#: src/plugins/render/weather/WeatherData.cpp:547
+#: src/plugins/render/weather/WeatherData.cpp:530
 msgctxt "QObject|"
 msgid "m/s"
 msgstr "m/s"
 
-#: src/plugins/render/weather/WeatherData.cpp:550
+#: src/plugins/render/weather/WeatherData.cpp:533
 msgctxt "QObject|"
 msgid "knots"
 msgstr "knotoj"
 
-#: src/plugins/render/weather/WeatherData.cpp:553
+#: src/plugins/render/weather/WeatherData.cpp:536
 msgctxt "QObject|"
 msgid "Beaufort"
 msgstr "Beaufort"
 
-#: src/plugins/render/weather/WeatherData.cpp:687
+#: src/plugins/render/weather/WeatherData.cpp:670
 msgctxt "WeatherData|"
 msgid "hPa"
 msgstr "hPa"
 
-#: src/plugins/render/weather/WeatherData.cpp:690
+#: src/plugins/render/weather/WeatherData.cpp:673
 msgctxt "WeatherData|"
 msgid "kPa"
 msgstr "kPa"
 
-#: src/plugins/render/weather/WeatherData.cpp:693
+#: src/plugins/render/weather/WeatherData.cpp:676
 msgctxt "WeatherData|"
 msgid "Bar"
 msgstr "Baro"
 
-#: src/plugins/render/weather/WeatherData.cpp:696
+#: src/plugins/render/weather/WeatherData.cpp:679
 msgctxt "WeatherData|"
 msgid "mmHg"
 msgstr "mmHg"
 
-#: src/plugins/render/weather/WeatherData.cpp:699
+#: src/plugins/render/weather/WeatherData.cpp:682
 msgctxt "WeatherData|"
 msgid "inch Hg"
 msgstr "Hg colo"
 
-#: src/plugins/render/weather/WeatherData.cpp:725
+#: src/plugins/render/weather/WeatherData.cpp:708
 msgctxt "WeatherData|air pressure is rising"
 msgid "rising"
 msgstr "leviĝanta"
 
-#: src/plugins/render/weather/WeatherData.cpp:727
+#: src/plugins/render/weather/WeatherData.cpp:710
 msgctxt "WeatherData|air pressure has no change"
 msgid "steady"
 msgstr "stabila"
 
-#: src/plugins/render/weather/WeatherData.cpp:729
+#: src/plugins/render/weather/WeatherData.cpp:712
 msgctxt "WeatherData|air pressure falls"
 msgid "falling"
 msgstr "falanta"
 
-#: src/plugins/render/weather/WeatherData.cpp:760
+#: src/plugins/render/weather/WeatherData.cpp:743
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Publishing time: %1<br>"
 msgstr "Publikiga horo: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:763
+#: src/plugins/render/weather/WeatherData.cpp:746
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Condition: %1<br>"
 msgstr "Kondiĉoj: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:766
+#: src/plugins/render/weather/WeatherData.cpp:749
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Temperature: %1<br>"
 msgstr "Temperaturo: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:769
+#: src/plugins/render/weather/WeatherData.cpp:752
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Max temperature: %1<br>"
 msgstr "Maksimuma temperaturo: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:772
+#: src/plugins/render/weather/WeatherData.cpp:755
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Min temperature: %1<br>"
 msgstr "Minimuma temperaturo: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:775
+#: src/plugins/render/weather/WeatherData.cpp:758
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Wind direction: %1<br>"
 msgstr "Venta direkto: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:778
+#: src/plugins/render/weather/WeatherData.cpp:761
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Wind speed: %1<br>"
 msgstr "Venta rapido: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:781
+#: src/plugins/render/weather/WeatherData.cpp:764
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Pressure: %1<br>"
 msgstr "Premo: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:784
+#: src/plugins/render/weather/WeatherData.cpp:767
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Pressure development: %1<br>"
 msgstr "Prema disvolviĝo: %1<br>"
 
-#: src/plugins/render/weather/WeatherData.cpp:787
+#: src/plugins/render/weather/WeatherData.cpp:770
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Humidity: %1<br>"
@@ -16511,60 +16511,60 @@ msgctxt "WeatherItemPrivate|"
 msgid "Weather"
 msgstr "Vetero"
 
-#: src/plugins/render/weather/WeatherItem.cpp:102
+#: src/plugins/render/weather/WeatherItem.cpp:100
 #, qt-format
 msgctxt "WeatherItemPrivate|"
 msgid "Station: %1\n"
 msgstr "Stacio: %1\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:111
+#: src/plugins/render/weather/WeatherItem.cpp:109
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindSpeed, WindDirection"
 msgid "Wind: %4, %5\n"
 msgstr "Vento: %4, %5\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:113
+#: src/plugins/render/weather/WeatherItem.cpp:111
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindSpeed"
 msgid "Wind: %4\n"
 msgstr "Vento: %4\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:115
+#: src/plugins/render/weather/WeatherItem.cpp:113
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindDirection"
 msgid "Wind: %4\n"
 msgstr "Vento: %4\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:118
+#: src/plugins/render/weather/WeatherItem.cpp:116
 #, qt-format
 msgctxt "WeatherItemPrivate|Pressure: Pressure, Development"
 msgid "Pressure: %6, %7"
 msgstr "Premo: %6, %7"
 
-#: src/plugins/render/weather/WeatherItem.cpp:120
+#: src/plugins/render/weather/WeatherItem.cpp:118
 #, qt-format
 msgctxt "WeatherItemPrivate|Pressure: Pressure"
 msgid "Pressure: %6"
 msgstr "Premo: %6"
 
-#: src/plugins/render/weather/WeatherItem.cpp:122
+#: src/plugins/render/weather/WeatherItem.cpp:120
 #, qt-format
 msgctxt "WeatherItemPrivate|Pressure Development"
 msgid "Pressure %7"
 msgstr "Premo %7"
 
-#: src/plugins/render/weather/WeatherItem.cpp:132
+#: src/plugins/render/weather/WeatherItem.cpp:130
 #, qt-format
 msgctxt "WeatherItemPrivate|DayOfWeek: Condition, MinTemp to MaxTemp"
 msgid "%1: %2, %3 to %4"
 msgstr "%1: %2, %3 al %4"
 
-#: src/plugins/render/weather/WeatherItem.cpp:196
+#: src/plugins/render/weather/WeatherItem.cpp:194
 msgctxt "WeatherItemPrivate|"
 msgid "Remove from Favorites"
 msgstr "Forigi el preferaĵoj"
 
-#: src/plugins/render/weather/WeatherItem.cpp:196
+#: src/plugins/render/weather/WeatherItem.cpp:194
 msgctxt "WeatherItemPrivate|"
 msgid "Add to Favorites"
 msgstr "Aldoni al preferaĵoj"
@@ -16675,67 +16675,67 @@ msgctxt "CycleStreetsConfigWidget|"
 msgid "Speed:"
 msgstr "Rapido:"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:35
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:36
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "balanced"
 msgstr "meza"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:36
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:37
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "fastest"
 msgstr "plej rapida"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:37
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:38
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "quietest"
 msgstr "plej kvieta"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:40
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:41
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "slow (16 km/h)"
 msgstr "malrapide (16 km/h)"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:41
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:42
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "normal (20 km/h)"
 msgstr "normala (20 km/h)"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:42
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:43
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "fast (24 km/h)"
 msgstr "rapida (24 km/h)"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:44
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:45
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "slow (10 mph)"
 msgstr "malrapide (10 mph)"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:45
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:46
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "normal (12 mph)"
 msgstr "normala (12 mph)"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:46
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:47
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "fast (15 mph)"
 msgstr "rapida (15 mph)"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:78
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:84
 msgctxt "Marble::CycleStreetsPlugin|"
 msgid "This service requires an Internet connection."
 msgstr "Tiu servo postulas retkonekton."
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:83
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:89
 msgctxt "Marble::CycleStreetsPlugin|"
 msgid "CycleStreets Routing"
 msgstr "CycleStreets Navigado"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:88
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:94
 msgctxt "Marble::CycleStreetsPlugin|"
 msgid "CycleStreets"
 msgstr "CycleStreets"
 
-#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:103
+#: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:109
 msgctxt "Marble::CycleStreetsPlugin|"
 msgid "Bicycle routing for the United Kingdom using cyclestreets.net"
 msgstr "Bicikla navigado por Britio per cyclestreets.net"
