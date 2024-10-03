@@ -63,7 +63,7 @@ Kirigami.ApplicationWindow {
                 }
             }
 
-            Kirigami.ScrollablePage {
+            FormCard.FormCardPage {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
@@ -76,14 +76,12 @@ Kirigami.ApplicationWindow {
                     id: mapGroup
                 }
 
-                ColumnLayout {
-                    spacing: 0
+                FormCard.FormHeader {
+                    title: i18nc("@title:group", "Globe Settings")
+                    Layout.fillWidth: true
+                }
 
-                    FormCard.FormHeader {
-                        title: i18nc("@title:group", "Globe Settings")
-                        Layout.fillWidth: true
-                    }
-
+                FormCard.FormCard {
                     FormCard.FormCheckDelegate {
                         text: i18nc("@option:check", "Show Behaim places")
                         onCheckedChanged: marbleMaps.setPropertyEnabled("cities", checked)
@@ -98,12 +96,15 @@ Kirigami.ApplicationWindow {
                         text: i18nc("@option:check", "Show the accurate coastline")
                         onCheckedChanged: marbleMaps.setPropertyEnabled("coastlines", checked)
                     }
+                }
 
-                    FormCard.FormHeader {
-                        title: i18nc("@title:group", "Globe Variant")
-                        Layout.fillWidth: true
-                    }
+                FormCard.FormHeader {
+                    title: i18nc("@title:group", "Globe Variant")
+                    Layout.fillWidth: true
+                }
 
+
+                FormCard.FormCard {
                     FormCard.FormRadioDelegate {
                         Controls.ButtonGroup.group: mapGroup
 
