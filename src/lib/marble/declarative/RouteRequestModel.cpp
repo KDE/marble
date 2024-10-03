@@ -17,17 +17,9 @@ RouteRequestModel::RouteRequestModel(QObject *parent)
     , m_request(nullptr)
     , m_routing(nullptr)
 {
-    QHash<int, QByteArray> roles;
-    roles[Qt::DisplayRole] = "name";
-    roles[LongitudeRole] = "longitude";
-    roles[LatitudeRole] = "latitude";
-    m_roleNames = roles;
 }
 
-RouteRequestModel::~RouteRequestModel()
-{
-    // nothing to do
-}
+RouteRequestModel::~RouteRequestModel() = default;
 
 int RouteRequestModel::rowCount(const QModelIndex &parent) const
 {
@@ -40,7 +32,11 @@ int RouteRequestModel::rowCount(const QModelIndex &parent) const
 
 QHash<int, QByteArray> RouteRequestModel::roleNames() const
 {
-    return m_roleNames;
+    return {
+        {Qt::DisplayRole, "name"},
+        {LongitudeRole, "longitude"},
+        {LatitudeRole, "latitude"},
+    };
 }
 
 QVariant RouteRequestModel::headerData(int section, Qt::Orientation orientation, int role) const
@@ -54,28 +50,28 @@ QVariant RouteRequestModel::headerData(int section, Qt::Orientation orientation,
 
 QVariant RouteRequestModel::data(const QModelIndex &index, int role) const
 {
-    if (index.isValid() && m_request && index.row() >= 0 && index.row() < m_request->size()) {
-        switch (role) {
-        case Qt::DisplayRole: {
-            Marble::GeoDataPlacemark const &placemark = (*m_request)[index.row()];
-            if (!placemark.name().isEmpty()) {
-                return placemark.name();
-            }
+    Q_ASSERT(checkIndex(index, QAbstractItemModel::CheckIndexOption::IndexIsValid));
 
-            if (!placemark.address().isEmpty()) {
-                return placemark.address();
-            }
+    switch (role) {
+    case Qt::DisplayRole: {
+        Marble::GeoDataPlacemark const &placemark = (*m_request)[index.row()];
+        if (!placemark.name().isEmpty()) {
+            return placemark.name();
+        }
 
-            return placemark.coordinate().toString(Marble::GeoDataCoordinates::Decimal).trimmed();
+        if (!placemark.address().isEmpty()) {
+            return placemark.address();
         }
-        case LongitudeRole:
-            return m_request->at(index.row()).longitude(Marble::GeoDataCoordinates::Degree);
-        case LatitudeRole:
-            return m_request->at(index.row()).latitude(Marble::GeoDataCoordinates::Degree);
-        }
+
+        return placemark.coordinate().toString(Marble::GeoDataCoordinates::Decimal).trimmed();
     }
-
-    return {};
+    case LongitudeRole:
+        return m_request->at(index.row()).longitude(Marble::GeoDataCoordinates::Degree);
+    case LatitudeRole:
+        return m_request->at(index.row()).latitude(Marble::GeoDataCoordinates::Degree);
+    default:
+        return {};
+    }
 }
 
 Marble::Routing *RouteRequestModel::routing()
@@ -85,12 +81,13 @@ Marble::Routing *RouteRequestModel::routing()
 
 void RouteRequestModel::setRouting(Marble::Routing *routing)
 {
-    if (routing != m_routing) {
-        m_routing = routing;
-        updateMap();
-        connect(m_routing, SIGNAL(marbleMapChanged()), this, SLOT(updateMap()));
-        Q_EMIT routingChanged();
+    if (routing == m_routing) {
+        return;
     }
+    m_routing = routing;
+    updateMap();
+    connect(m_routing, &Marble::Routing::marbleMapChanged, this, &RouteRequestModel::updateMap);
+    Q_EMIT routingChanged();
 }
 
 void RouteRequestModel::updateMap()
@@ -98,9 +95,9 @@ void RouteRequestModel::updateMap()
     if (m_routing && m_routing->marbleMap()) {
         m_request = m_routing->marbleMap()->model()->routingManager()->routeRequest();
 
-        connect(m_request, SIGNAL(positionChanged(int, GeoDataCoordinates)), this, SLOT(updateData(int)), Qt::UniqueConnection);
-        connect(m_request, SIGNAL(positionAdded(int)), this, SLOT(updateAfterAddition(int)), Qt::UniqueConnection);
-        connect(m_request, SIGNAL(positionRemoved(int)), this, SLOT(updateAfterRemoval(int)), Qt::UniqueConnection);
+        connect(m_request, &Marble::RouteRequest::positionChanged, this, &RouteRequestModel::updateData, Qt::UniqueConnection);
+        connect(m_request, &Marble::RouteRequest::positionAdded, this, &RouteRequestModel::updateAfterAddition, Qt::UniqueConnection);
+        connect(m_request, &Marble::RouteRequest::positionRemoved, this, &RouteRequestModel::updateAfterRemoval, Qt::UniqueConnection);
 
         Q_EMIT layoutChanged();
     }
@@ -117,7 +114,6 @@ void RouteRequestModel::updateAfterRemoval(int idx)
     beginRemoveRows(QModelIndex(), idx, idx);
     removeRow(idx);
     endRemoveRows();
-    Q_EMIT rowCountChanged();
 }
 
 void RouteRequestModel::updateAfterAddition(int idx)
@@ -125,7 +121,6 @@ void RouteRequestModel::updateAfterAddition(int idx)
     beginInsertRows(QModelIndex(), idx, idx);
     insertRow(idx);
     endInsertRows();
-    Q_EMIT rowCountChanged();
 }
 
 void RouteRequestModel::setPosition(int index, qreal longitude, qreal latitude)
