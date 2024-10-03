@@ -24,10 +24,10 @@ MarbleWebView::MarbleWebView(QWidget *parent)
     setContextMenuPolicy(Qt::DefaultContextMenu);
 }
 
-void MarbleWebView::contextMenuEvent(QContextMenuEvent *event)
+void MarbleWebView::contextMenuEvent(QContextMenuEvent *)
 {
     m_copyAction->setEnabled(!selectedText().isEmpty());
-    m_contextMenu->exec(event->globalPos());
+    m_contextMenu->exec(QCursor::pos());
 }
 
 void MarbleWebView::copySelectedText()
