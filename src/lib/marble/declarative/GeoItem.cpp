@@ -4,10 +4,7 @@
 //
 
 #include "GeoItem.h"
-#include "Coordinate.h"
 #include "MarbleQuickItem.h"
-
-#include "MarbleGlobal.h"
 
 using Marble::GeoDataCoordinates;
 

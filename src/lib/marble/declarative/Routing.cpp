@@ -5,7 +5,6 @@
 
 #include "Routing.h"
 
-#include "MarbleDirs.h"
 #include "routing/AlternativeRoutesModel.h"
 #include "routing/RouteRequest.h"
 #include "routing/RoutingManager.h"

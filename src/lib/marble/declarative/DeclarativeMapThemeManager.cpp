@@ -5,7 +5,6 @@
 
 #include "DeclarativeMapThemeManager.h"
 
-#include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 
 #include <QDebug>

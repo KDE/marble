@@ -7,7 +7,6 @@
 
 #include "BookmarkManager.h"
 #include "GeoDataDocument.h"
-#include "GeoDataExtendedData.h"
 #include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataTreeModel.h"
@@ -17,7 +16,6 @@
 #include "MarbleQuickItem.h"
 #include "Planet.h"
 #include "kdescendantsproxymodel.h"
-#include "osm/OsmPlacemarkData.h"
 
 namespace Marble
 {

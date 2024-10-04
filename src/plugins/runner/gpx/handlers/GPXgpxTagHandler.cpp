@@ -6,8 +6,6 @@
 
 #include "GPXgpxTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "GPXElementDictionary.h"
 #include "GeoDataParser.h"
 
@@ -20,7 +18,6 @@
 #include "GeoDataStyleMap.h"
 #include "MarbleColors.h"
 #include "MarbleDirs.h"
-#include "MarbleGlobal.h"
 
 namespace Marble
 {

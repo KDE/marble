@@ -5,7 +5,6 @@
 
 #include "SearchBackend.h"
 
-#include "Coordinate.h"
 #include "MarbleModel.h"
 #include "SearchRunnerManager.h"
 

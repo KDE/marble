@@ -12,8 +12,6 @@
 #include <QRegularExpression>
 
 #include "GeoDataDocument.h"
-#include "GeoDataIconStyle.h"
-#include "GeoDataStyle.h"
 #include <osm/OsmPlacemarkData.h>
 
 namespace Marble

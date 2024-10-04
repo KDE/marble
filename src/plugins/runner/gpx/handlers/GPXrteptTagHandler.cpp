@@ -7,13 +7,10 @@
 
 #include <QStringView>
 
-#include "MarbleDebug.h"
-
 #include "GPXElementDictionary.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
 #include "GeoDataPlacemark.h"
-#include "GeoDataStyle.h"
 #include "GeoParser.h"
 
 namespace Marble

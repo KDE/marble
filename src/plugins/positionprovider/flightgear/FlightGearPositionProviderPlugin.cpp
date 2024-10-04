@@ -5,7 +5,6 @@
 
 #include "FlightGearPositionProviderPlugin.h"
 
-#include "MarbleDebug.h"
 #include <cmath>
 
 #include <QIcon>

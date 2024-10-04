@@ -6,9 +6,9 @@
 #include "RouteRelationModel.h"
 
 #include "GeoDataColorStyle.h"
-#include "MarbleColors.h"
 #include "MarbleDirs.h"
 #include "osm/OsmPlacemarkData.h"
+#include <QColor>
 
 namespace Marble
 {

@@ -4,7 +4,6 @@
 //
 
 #include "GeoPolyline.h"
-#include "Coordinate.h"
 #include "MarbleQuickItem.h"
 
 #include <QPolygonF>
@@ -13,8 +12,6 @@
 #include <QSGSimpleTextureNode>
 #include <QSGTexture>
 #include <QtMath>
-
-#include "MarbleGlobal.h"
 
 using Marble::GeoDataCoordinates;
 

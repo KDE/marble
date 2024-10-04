@@ -7,8 +7,6 @@
 
 #include <QVariant>
 
-#include "MarbleDebug.h"
-
 #include "GPXElementDictionary.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataSimpleArrayData.h"
