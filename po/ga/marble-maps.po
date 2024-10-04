@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeedu/marble.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2007-06-27 10:27-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -36,6 +36,33 @@ msgstr ""
 msgid "The marble theme id"
 msgstr ""
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgid "Elevation Profile Marker"
+msgid "Routing profile"
+msgstr "Marcóir i bPróifíl Airde"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgid "Clear"
+msgid "Car"
+msgstr "Glan"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+#| msgid "Bicycle"
+msgid "Bicycle"
+msgstr "Rothar"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, kde-format
+msgid "Pedestrian"
+msgstr ""
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgid "Current Location"
@@ -43,7 +70,7 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Suíomh Reatha"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgid "Manage Bookmarks"
 msgid "Marble Maps"
@@ -131,7 +158,13 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "Próifíl Nua"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgid "Routing"
+msgid "Routing"
+msgstr "Ródú"
+
+#: MainScreen.qml:457
 #, fuzzy, kde-format
 #| msgid "%1 km"
 msgid "%1 km"
@@ -263,26 +296,42 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr ""
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 #| msgid "Car (fastest)"
 msgid "Car (fastest)"
 msgstr "Carr (is tapúla)"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-#| msgid "Bicycle"
-msgid "Bicycle"
-msgstr "Rothar"
+#| msgid "Routing"
+msgctxt "@title"
+msgid "Routing"
+msgstr "Ródú"
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
+#, fuzzy, kde-format
+#| msgid "Temperature (July)"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "Teocht (Iúil)"
+
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Pedestrian"
+msgctxt "@label:textbox"
+msgid "Arrival:"
 msgstr ""
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:106
 #, kde-format
-msgid "Search for places to integrate them into a route."
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Alternatives:"
 msgstr ""
 
 #: SettingsDialog.qml:48
@@ -389,12 +438,6 @@ msgstr "&Téama"
 #~ msgctxt "DGML|"
 #~ msgid "Boundaries"
 #~ msgstr "Teorainneacha"
-
-#, fuzzy
-#~| msgid "Temperature (July)"
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
-#~ msgstr "Teocht (Iúil)"
 
 #, fuzzy
 #~| msgid "Mountain"
@@ -900,12 +943,6 @@ msgstr "&Téama"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "Leabharmharcanna"
-
-#, fuzzy
-#~| msgid "Clear"
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "Glan"
 
 #, fuzzy
 #~| msgid "OpenStreetMap Data"
@@ -1624,12 +1661,6 @@ msgstr "&Téama"
 #~ msgctxt "Marble::ControlView|"
 #~ msgid "Legend"
 #~ msgstr "Eochair eolais"
-
-#, fuzzy
-#~| msgid "Routing"
-#~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "Ródú"
 
 #, fuzzy
 #~| msgid "Location"
@@ -9931,12 +9962,6 @@ msgstr "&Téama"
 #~ msgctxt "GeoDataPlacemark|"
 #~ msgid "Book"
 #~ msgstr "Leabharmharcanna"
-
-#, fuzzy
-#~| msgid "Elevation Profile Marker"
-#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
-#~ msgid "Routing Profile - Marble"
-#~ msgstr "Marcóir i bPróifíl Airde"
 
 #, fuzzy
 #~| msgid "Directions - Marble"

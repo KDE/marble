@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2014-01-22 22:32+0100\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -37,6 +37,34 @@ msgstr ""
 msgid "The marble theme id"
 msgstr ""
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgid "Routing Profile - Marble"
+msgid "Routing profile"
+msgstr "Útválasztás profil - Marble"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgid "Clear"
+msgid "Car"
+msgstr "Törlés"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+#| msgid "Bicycle"
+msgid "Bicycle"
+msgstr "Kerékpár"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, fuzzy, kde-format
+#| msgid "Pedestrian"
+msgid "Pedestrian"
+msgstr "Gyalog"
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgid "Current Location"
@@ -44,7 +72,7 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Jelenlegi hely"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgid "Manage Bookmarks"
 msgid "Marble Maps"
@@ -131,7 +159,13 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "Új profil"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgid "Routing"
+msgid "Routing"
+msgstr "Útválasztás"
+
+#: MainScreen.qml:457
 #, fuzzy, kde-format
 #| msgid "%1 km"
 msgid "%1 km"
@@ -263,27 +297,42 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "Címkék:"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 #| msgid "Car (fastest)"
 msgid "Car (fastest)"
 msgstr "Autó (leggyorsabb)"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-#| msgid "Bicycle"
-msgid "Bicycle"
-msgstr "Kerékpár"
+#| msgid "Routing"
+msgctxt "@title"
+msgid "Routing"
+msgstr "Útválasztás"
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
 #, fuzzy, kde-format
-#| msgid "Pedestrian"
-msgid "Pedestrian"
-msgstr "Gyalog"
+#| msgid "Temperature: %1<br>"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "Hőmérséklet: %1<br>"
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Search for places to integrate them into a route."
+msgctxt "@label:textbox"
+msgid "Arrival:"
+msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Alternatives:"
 msgstr ""
 
 #: SettingsDialog.qml:48
@@ -364,12 +413,6 @@ msgstr "vidámpark"
 #~ msgctxt "DGML|"
 #~ msgid "Terrain"
 #~ msgstr "Terep"
-
-#, fuzzy
-#~| msgid "Temperature: %1<br>"
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
-#~ msgstr "Hőmérséklet: %1<br>"
 
 #, fuzzy
 #~| msgid "Mountain"
@@ -679,12 +722,6 @@ msgstr "vidámpark"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "Könyvjelzők"
-
-#, fuzzy
-#~| msgid "Clear"
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "Törlés"
 
 #, fuzzy
 #~| msgid "OpenStreetMap Data"
@@ -1891,12 +1928,6 @@ msgstr "vidámpark"
 #~ msgctxt "Marble::ControlView|"
 #~ msgid "Legend"
 #~ msgstr "Jelmagyarázat"
-
-#, fuzzy
-#~| msgid "Routing"
-#~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "Útválasztás"
 
 #, fuzzy
 #~| msgid "Location"
@@ -12684,12 +12715,6 @@ msgstr "vidámpark"
 #~ msgctxt "GeoDataPlacemark|"
 #~ msgid "Book"
 #~ msgstr "Könyvjelzők"
-
-#, fuzzy
-#~| msgid "Routing Profile - Marble"
-#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
-#~ msgid "Routing Profile - Marble"
-#~ msgstr "Útválasztás profil - Marble"
 
 #, fuzzy
 #~| msgid "Directions - Marble"

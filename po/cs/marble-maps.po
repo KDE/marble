@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2024-09-27 11:49+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -36,13 +36,37 @@ msgstr ""
 msgid "The marble theme id"
 msgstr ""
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, kde-format
+msgid "Routing profile"
+msgstr ""
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, kde-format
+msgid "Car"
+msgstr ""
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, kde-format
+msgid "Bicycle"
+msgstr "Kolo"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, kde-format
+msgid "Pedestrian"
+msgstr "Chodec"
+
 #: CurrentPosition.qml:54
 #, kde-format
 msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr ""
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, kde-format
 msgid "Marble Maps"
 msgstr "Mapy Marble"
@@ -119,7 +143,12 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr ""
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, kde-format
+msgid "Routing"
+msgstr ""
+
+#: MainScreen.qml:457
 #, kde-format
 msgid "%1 km"
 msgstr "%1 km"
@@ -237,24 +266,39 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "Značky:"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, kde-format
 msgid "Car (fastest)"
 msgstr "Auto (nejrychlejší)"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, kde-format
-msgid "Bicycle"
-msgstr "Kolo"
+msgctxt "@title"
+msgid "Routing"
+msgstr ""
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
 #, kde-format
-msgid "Pedestrian"
-msgstr "Chodec"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr ""
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Search for places to integrate them into a route."
+msgctxt "@label:textbox"
+msgid "Arrival:"
+msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Alternatives:"
 msgstr ""
 
 #: SettingsDialog.qml:48

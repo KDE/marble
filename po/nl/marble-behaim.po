@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-30 00:36+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2024-09-27 13:52+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -124,77 +124,77 @@ msgctxt "@title"
 msgid "Marble"
 msgstr "Marble"
 
-#: MainScreen.qml:83
+#: MainScreen.qml:80
 #, kde-format
 msgctxt "@title:group"
 msgid "Globe Settings"
 msgstr "Instellingen voor globe"
 
-#: MainScreen.qml:88
+#: MainScreen.qml:86
 #, kde-format
 msgctxt "@option:check"
 msgid "Show Behaim places"
 msgstr "Behaim plaatsen tonen"
 
-#: MainScreen.qml:93
+#: MainScreen.qml:91
 #, kde-format
 msgctxt "@option:check"
 msgid "Show texts and illustrations"
 msgstr "Teksten en illustraties tonen"
 
-#: MainScreen.qml:98
+#: MainScreen.qml:96
 #, kde-format
 msgctxt "@option:check"
 msgid "Show the accurate coastline"
 msgstr "De nauwkeurige kustlijn tonen"
 
-#: MainScreen.qml:103
+#: MainScreen.qml:102
 #, kde-format
 msgctxt "@title:group"
 msgid "Globe Variant"
 msgstr "Variant van globe"
 
-#: MainScreen.qml:110
+#: MainScreen.qml:111
 #, kde-format
 msgctxt "@option:radio"
 msgid "Original (1492)"
 msgstr "Origineel (1492)"
 
-#: MainScreen.qml:112
+#: MainScreen.qml:113
 #, kde-format
 msgid "Digital imagery taken directly from the original Behaim globe."
 msgstr ""
 "Digitaal beeldmateriaal direct genomen van de originele globe van Behaim."
 
-#: MainScreen.qml:123
+#: MainScreen.qml:124
 #, kde-format
 msgctxt "@option:radio"
 msgid "Ghillany (1853)"
 msgstr "Ghillany (1853)"
 
-#: MainScreen.qml:124
+#: MainScreen.qml:125
 #, kde-format
 msgid "A (rough) facsimile created by Friedrich Wilhelm Ghillany in 1853."
 msgstr "Een (ruwe) facsimile gemaakt door Friedrich Wilhelm Ghillany in 1853."
 
-#: MainScreen.qml:135
+#: MainScreen.qml:136
 #, kde-format
 msgctxt "@option:radio"
 msgid "Ravenstein (1908)"
 msgstr "Ravenstein (1908)"
 
-#: MainScreen.qml:136
+#: MainScreen.qml:137
 #, kde-format
 msgid "A (rough) facsimile created by Ernest George Ravenstein in 1908."
 msgstr "Een (ruwe) facsimile gemaakt door Ernest George Ravenstein in 1908."
 
-#: MainScreen.qml:151
+#: MainScreen.qml:152
 #, kde-format
 msgctxt "@title:window"
 msgid "Behaim Globe"
 msgstr "Globe van Behaim"
 
-#: MainScreen.qml:159
+#: MainScreen.qml:160
 #, kde-format
 msgctxt "@action:button"
 msgid "Information"

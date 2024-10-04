@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2013-03-06 13:32+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -35,13 +35,38 @@ msgstr ""
 msgid "The marble theme id"
 msgstr ""
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgid "&Open..."
+msgid "Routing profile"
+msgstr "उघडा (&O)..."
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+msgid "Car"
+msgstr "पुसून टाका"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+msgid "Bicycle"
+msgstr "पुसून टाका"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, kde-format
+msgid "Pedestrian"
+msgstr ""
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "स्थान"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 msgid "Marble Maps"
 msgstr "प्रतिष्ठापन करत आहे"
@@ -121,7 +146,13 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "नवीन रूपरेषा"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgid "&Open..."
+msgid "Routing"
+msgstr "उघडा (&O)..."
+
+#: MainScreen.qml:457
 #, kde-format
 msgid "%1 km"
 msgstr ""
@@ -244,24 +275,40 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "टॅग्स :"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, kde-format
 msgid "Car (fastest)"
 msgstr ""
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-msgid "Bicycle"
-msgstr "पुसून टाका"
+#| msgid "&Open..."
+msgctxt "@title"
+msgid "Routing"
+msgstr "उघडा (&O)..."
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
+#, fuzzy, kde-format
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "तापमान"
+
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Pedestrian"
+msgctxt "@label:textbox"
+msgid "Arrival:"
 msgstr ""
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:106
 #, kde-format
-msgid "Search for places to integrate them into a route."
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Alternatives:"
 msgstr ""
 
 #: SettingsDialog.qml:48
@@ -291,11 +338,6 @@ msgstr ""
 #, fuzzy
 #~ msgctxt "DGML|"
 #~ msgid "Temperature (July)"
-#~ msgstr "तापमान"
-
-#, fuzzy
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
 #~ msgstr "तापमान"
 
 #, fuzzy
@@ -368,11 +410,6 @@ msgstr ""
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "ओळखचिन्ह"
-
-#, fuzzy
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "पुसून टाका"
 
 #, fuzzy
 #~ msgctxt "DGML|"
@@ -3645,12 +3682,6 @@ msgstr ""
 #~ msgctxt "MainScreen|"
 #~ msgid "Bookmarks"
 #~ msgstr "ओळखचिन्ह"
-
-#, fuzzy
-#~| msgid "&Open..."
-#~ msgctxt "MainScreen|"
-#~ msgid "Routing"
-#~ msgstr "उघडा (&O)..."
 
 #, fuzzy
 #~ msgctxt "SearchField|"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2014-09-18 16:28+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -39,6 +39,34 @@ msgstr ""
 msgid "The marble theme id"
 msgstr ""
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgid "Routing Profile - Marble"
+msgid "Routing profile"
+msgstr "Weegplanen - Marble"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgid "Clear"
+msgid "Car"
+msgstr "Leddig maken"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+#| msgid "Bicycle"
+msgid "Bicycle"
+msgstr "Fohrrad"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, fuzzy, kde-format
+#| msgid "Pedestrian"
+msgid "Pedestrian"
+msgstr "To Foot"
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgid "Current Location"
@@ -46,7 +74,7 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Aktuell Oort"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgid "Manage Bookmarks"
 msgid "Marble Maps"
@@ -133,7 +161,13 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "Egenschappen"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgid "Routing"
+msgid "Routing"
+msgstr "Weegplanen"
+
+#: MainScreen.qml:457
 #, fuzzy, kde-format
 #| msgid "%1 km"
 msgid "%1 km"
@@ -267,28 +301,44 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "Slötelwöör:"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 #| msgid "Car (fastest)"
 msgid "Car (fastest)"
 msgstr "Auto (gauest)"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-#| msgid "Bicycle"
-msgid "Bicycle"
-msgstr "Fohrrad"
+#| msgid "Routing"
+msgctxt "@title"
+msgid "Routing"
+msgstr "Weegplanen"
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
 #, fuzzy, kde-format
-#| msgid "Pedestrian"
-msgid "Pedestrian"
-msgstr "To Foot"
+#| msgid "Temperature (July)"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "Temperatuur (Juli)"
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Search for places to integrate them into a route."
+msgctxt "@label:textbox"
+msgid "Arrival:"
 msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, fuzzy, kde-format
+#| msgid "Alternative Name"
+msgctxt "@label:listbox"
+msgid "Alternatives:"
+msgstr "Anner Naam"
 
 #: SettingsDialog.qml:48
 #, fuzzy, kde-format
@@ -450,12 +500,6 @@ msgstr "&Muster"
 #~ msgctxt "DGML|"
 #~ msgid "Water Bodies"
 #~ msgstr "Water"
-
-#, fuzzy
-#~| msgid "Temperature (July)"
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
-#~ msgstr "Temperatuur (Juli)"
 
 #, fuzzy
 #~| msgid "Mountain"
@@ -1260,12 +1304,6 @@ msgstr "&Muster"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "Leestekens"
-
-#, fuzzy
-#~| msgid "Clear"
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "Leddig maken"
 
 #, fuzzy
 #~| msgid "OpenStreetMap Data"
@@ -2747,12 +2785,6 @@ msgstr "&Muster"
 #~ msgctxt "Marble::ControlView|"
 #~ msgid "Legend"
 #~ msgstr "Legenn"
-
-#, fuzzy
-#~| msgid "Routing"
-#~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "Weegplanen"
 
 #, fuzzy
 #~| msgid "Location"
@@ -17062,12 +17094,6 @@ msgstr "&Muster"
 #~ msgstr "Leestekens"
 
 #, fuzzy
-#~| msgid "Routing Profile - Marble"
-#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
-#~ msgid "Routing Profile - Marble"
-#~ msgstr "Weegplanen - Marble"
-
-#, fuzzy
 #~| msgid "Directions - Marble"
 #~ msgctxt "Marble::RoutingWidget|"
 #~ msgid "Directions - Marble"
@@ -18540,9 +18566,6 @@ msgstr "&Muster"
 
 #~ msgid "Alternative name of the location."
 #~ msgstr "Anner Naam vun den Oort"
-
-#~ msgid "Alternative Name"
-#~ msgstr "Anner Naam"
 
 #~ msgid "Short Description:"
 #~ msgstr "Korte Beschrieven:"

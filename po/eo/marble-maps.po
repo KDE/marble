@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2024-04-23 21:12+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -44,6 +44,38 @@ msgstr "Viaj legosignoj aperos ĉi tie."
 msgid "The marble theme id"
 msgstr "La minuskla map-etosa id."
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgctxt "RoutingProfileSettingsDialog|"
+#| msgid "Configure Routing Profile"
+msgid "Routing profile"
+msgstr "Agordi Vojan Profilon"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Car"
+msgid "Car"
+msgstr "Aŭto"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfilesModel|"
+#| msgid "Bicycle"
+msgid "Bicycle"
+msgstr "Bicikle"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfilesModel|"
+#| msgid "Pedestrian"
+msgid "Pedestrian"
+msgstr "Piede"
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgctxt "CurrentPosition|"
@@ -52,7 +84,7 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Sekvi Nunan Pozicion"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Marble Maps"
@@ -153,7 +185,14 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "Tavolaj Ebloj"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgid "Routing"
+msgstr "Naviganta"
+
+#: MainScreen.qml:457
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "%1 km"
@@ -311,33 +350,48 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "Etikedoj"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 #| msgctxt "Marble::RoutingProfilesModel|"
 #| msgid "Car (fastest)"
 msgid "Car (fastest)"
 msgstr "Aŭte (plej rapida)"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Bicycle"
-msgid "Bicycle"
-msgstr "Bicikle"
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgctxt "@title"
+msgid "Routing"
+msgstr "Naviganta"
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
 #, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Pedestrian"
-msgid "Pedestrian"
-msgstr "Piede"
+#| msgctxt "DGML|"
+#| msgid "Temperature"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "Temperaturo"
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Arrival:"
+msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
 #, fuzzy, kde-format
-#| msgctxt "RouteEditor|"
-#| msgid "Search for places to integrate them into a route."
-msgid "Search for places to integrate them into a route."
-msgstr "Serĉi lokojn por integri ilin en itineron."
+#| msgctxt "Marble::Placemark|"
+#| msgid "Alternative medicine"
+msgctxt "@label:listbox"
+msgid "Alternatives:"
+msgstr "Alternativa medicino"
 
 #: SettingsDialog.qml:48
 #, fuzzy, kde-format
@@ -360,6 +414,12 @@ msgstr "Elŝuti Mapojn nur per WLAN"
 msgctxt "@title:window"
 msgid "Themes"
 msgstr "Etoso"
+
+#, fuzzy
+#~| msgctxt "RouteEditor|"
+#~| msgid "Search for places to integrate them into a route."
+#~ msgid "Search for places to integrate them into a route."
+#~ msgstr "Serĉi lokojn por integri ilin en itineron."
 
 #~ msgctxt "DGML|"
 #~ msgid "Moon"
@@ -467,10 +527,6 @@ msgstr "Etoso"
 #~ msgctxt "DGML|"
 #~ msgid "Water Bodies"
 #~ msgstr "Akvokorpoj"
-
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
-#~ msgstr "Temperaturo"
 
 #~ msgctxt "DGML|"
 #~ msgid "Mountain"
@@ -1122,10 +1178,6 @@ msgstr "Etoso"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "Libroj"
-
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "Aŭto"
 
 #~ msgctxt "DGML|"
 #~ msgid "Clothes"
@@ -2230,10 +2282,6 @@ msgstr "Etoso"
 #~ msgstr "Klarigeto"
 
 #~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "Naviganta"
-
-#~ msgctxt "Marble::ControlView|"
 #~ msgid "Location"
 #~ msgstr "Loko"
 
@@ -3017,10 +3065,6 @@ msgstr "Etoso"
 #~ msgctxt "Marble::Placemark|A scoria cone volcano."
 #~ msgid "Scoria cone"
 #~ msgstr "Scoria konuso"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Alternative medicine"
-#~ msgstr "Alternativa medicino"
 
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Audiologist"
@@ -9462,10 +9506,6 @@ msgstr "Etoso"
 #~ msgctxt "Marble::RoutingManager|"
 #~ msgid "Show again"
 #~ msgstr "Montri denove"
-
-#~ msgctxt "RoutingProfileSettingsDialog|"
-#~ msgid "Configure Routing Profile"
-#~ msgstr "Agordi Vojan Profilon"
 
 #~ msgctxt "RoutingProfileSettingsDialog|"
 #~ msgid "Name:"

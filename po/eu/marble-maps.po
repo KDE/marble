@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2023-02-03 23:56+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -42,6 +42,38 @@ msgstr "Zure laster-markak hemen agertuko dira."
 msgid "The marble theme id"
 msgstr ""
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgid "Routing profile"
+msgstr "Ibilbidea"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Car"
+msgid "Car"
+msgstr "Autoa"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfilesModel|"
+#| msgid "Bicycle"
+msgid "Bicycle"
+msgstr "Bizikleta"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfilesModel|"
+#| msgid "Pedestrian"
+msgid "Pedestrian"
+msgstr "Oinezkoa"
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgctxt "CurrentPosition|"
@@ -50,7 +82,7 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Jarraitu uneko kokapena"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Marble Maps"
@@ -151,7 +183,14 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "Geruzen aukerak"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgid "Routing"
+msgstr "Ibilbidea"
+
+#: MainScreen.qml:457
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "%1 km"
@@ -297,31 +336,48 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "Etiketak"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 #| msgctxt "Marble::RoutingProfilesModel|"
 #| msgid "Car (fastest)"
 msgid "Car (fastest)"
 msgstr "Autoa (azkarrena)"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Bicycle"
-msgid "Bicycle"
-msgstr "Bizikleta"
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgctxt "@title"
+msgid "Routing"
+msgstr "Ibilbidea"
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
 #, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Pedestrian"
-msgid "Pedestrian"
-msgstr "Oinezkoa"
+#| msgctxt "DGML|"
+#| msgid "Temperature"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "Tenperatura"
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Search for places to integrate them into a route."
+msgctxt "@label:textbox"
+msgid "Arrival:"
 msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, fuzzy, kde-format
+#| msgctxt "Marble::Placemark|"
+#| msgid "Alternative medicine"
+msgctxt "@label:listbox"
+msgid "Alternatives:"
+msgstr "Medikuntza alternatiboa"
 
 #: SettingsDialog.qml:48
 #, fuzzy, kde-format
@@ -450,10 +506,6 @@ msgstr "Gaia"
 #~ msgctxt "DGML|"
 #~ msgid "Water Bodies"
 #~ msgstr "Ur-masak"
-
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
-#~ msgstr "Tenperatura"
 
 #~ msgctxt "DGML|"
 #~ msgid "Mountain"
@@ -1101,10 +1153,6 @@ msgstr "Gaia"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "Liburuak"
-
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "Autoa"
 
 #~ msgctxt "DGML|"
 #~ msgid "Clothes"
@@ -2277,10 +2325,6 @@ msgstr "Gaia"
 #~ msgstr "Legenda"
 
 #~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "Ibilbidea"
-
-#~ msgctxt "Marble::ControlView|"
 #~ msgid "Location"
 #~ msgstr "Kokalekua"
 
@@ -3070,10 +3114,6 @@ msgstr "Gaia"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Stratovolcano"
 #~ msgstr "Geruza-sumendi"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Alternative medicine"
-#~ msgstr "Medikuntza alternatiboa"
 
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Blood bank"

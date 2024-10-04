@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2013-09-08 07:05+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -36,6 +36,34 @@ msgstr ""
 msgid "The marble theme id"
 msgstr ""
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgid "&Clouds"
+msgid "Routing profile"
+msgstr "بۇلۇتلار(&C)"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgid "Clear"
+msgid "Car"
+msgstr "تازىلا"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+#| msgid "Bicycle"
+msgid "Bicycle"
+msgstr "ۋېلىسىپىت"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, fuzzy, kde-format
+#| msgid "Pedestrian"
+msgid "Pedestrian"
+msgstr "پىيادە"
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgid "Current Location"
@@ -43,7 +71,7 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "نۆۋەتتىكى ئورۇن"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgid "&Manage Bookmarks"
 msgid "Marble Maps"
@@ -130,7 +158,13 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "يېڭى سەپلىمە ھۆججەت"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgid "&Clouds"
+msgid "Routing"
+msgstr "بۇلۇتلار(&C)"
+
+#: MainScreen.qml:457
 #, fuzzy, kde-format
 #| msgid "%1 km"
 msgid "%1 km"
@@ -259,27 +293,41 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "خەتكۈچلەر:"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 #| msgid "Car (fastest)"
 msgid "Car (fastest)"
 msgstr "ماشىنا(تېزرەك)"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-#| msgid "Bicycle"
-msgid "Bicycle"
-msgstr "ۋېلىسىپىت"
+#| msgid "&Clouds"
+msgctxt "@title"
+msgid "Routing"
+msgstr "بۇلۇتلار(&C)"
 
-#: ProfileSelectorMenu.qml:49
-#, fuzzy, kde-format
-#| msgid "Pedestrian"
-msgid "Pedestrian"
-msgstr "پىيادە"
-
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:102
 #, kde-format
-msgid "Search for places to integrate them into a route."
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr ""
+
+#: RouteEditorPage.qml:104
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Arrival:"
+msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Alternatives:"
 msgstr ""
 
 #: SettingsDialog.qml:48
@@ -446,12 +494,6 @@ msgstr ""
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "خەتكۈشلەر"
-
-#, fuzzy
-#~| msgid "Clear"
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "تازىلا"
 
 #, fuzzy
 #~| msgid "Places"
@@ -6000,12 +6042,6 @@ msgstr ""
 #~ msgctxt "MainScreen|"
 #~ msgid "Bookmarks"
 #~ msgstr "خەتكۈشلەر"
-
-#, fuzzy
-#~| msgid "&Clouds"
-#~ msgctxt "MainScreen|"
-#~ msgid "Routing"
-#~ msgstr "بۇلۇتلار(&C)"
 
 #, fuzzy
 #~| msgid "%1 km"

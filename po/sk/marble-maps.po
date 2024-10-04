@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2023-12-06 19:04+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -43,6 +43,38 @@ msgstr "Tu sa zobrazia vaše záložky."
 msgid "The marble theme id"
 msgstr "Názov id mapovej témy (malými písmenami)"
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfileSettingsDialog|"
+#| msgid "Routing Profile - Marble"
+msgid "Routing profile"
+msgstr "Profil navigácie - Marble"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Car"
+msgid "Car"
+msgstr "Auto"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfilesModel|"
+#| msgid "Bicycle"
+msgid "Bicycle"
+msgstr "Bicyklom"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfilesModel|"
+#| msgid "Pedestrian"
+msgid "Pedestrian"
+msgstr "Pešo"
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgctxt "CurrentPosition|"
@@ -51,7 +83,7 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Sledovať aktuálnu polohu"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Marble Maps"
@@ -152,7 +184,14 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "Možnosti vrstiev"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgid "Routing"
+msgstr "Navigácia"
+
+#: MainScreen.qml:457
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "%1 km"
@@ -310,33 +349,48 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "Značky:"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 #| msgctxt "Marble::RoutingProfilesModel|"
 #| msgid "Car (fastest)"
 msgid "Car (fastest)"
 msgstr "Autom (najrýchlejšie)"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Bicycle"
-msgid "Bicycle"
-msgstr "Bicyklom"
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgctxt "@title"
+msgid "Routing"
+msgstr "Navigácia"
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
 #, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Pedestrian"
-msgid "Pedestrian"
-msgstr "Pešo"
+#| msgctxt "DGML|"
+#| msgid "Temperature"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "Teplota"
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Arrival:"
+msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
 #, fuzzy, kde-format
-#| msgctxt "RouteEditor|"
-#| msgid "Search for places to integrate them into a route."
-msgid "Search for places to integrate them into a route."
-msgstr "Hľadanie miest na integráciu do trasy."
+#| msgctxt "Marble::Placemark|"
+#| msgid "Alternative medicine"
+msgctxt "@label:listbox"
+msgid "Alternatives:"
+msgstr "Alternatívna medicína"
 
 #: SettingsDialog.qml:48
 #, fuzzy, kde-format
@@ -359,6 +413,12 @@ msgstr "Prevziať mapy iba cez WLAN"
 msgctxt "@title:window"
 msgid "Themes"
 msgstr "Téma"
+
+#, fuzzy
+#~| msgctxt "RouteEditor|"
+#~| msgid "Search for places to integrate them into a route."
+#~ msgid "Search for places to integrate them into a route."
+#~ msgstr "Hľadanie miest na integráciu do trasy."
 
 #~ msgctxt "DGML|"
 #~ msgid "Moon"
@@ -467,10 +527,6 @@ msgstr "Téma"
 #~ msgctxt "DGML|"
 #~ msgid "Water Bodies"
 #~ msgstr "Vodstvo"
-
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
-#~ msgstr "Teplota"
 
 #~ msgctxt "DGML|"
 #~ msgid "Mountain"
@@ -1120,10 +1176,6 @@ msgstr "Téma"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "Knihy"
-
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "Auto"
 
 #~ msgctxt "DGML|"
 #~ msgid "Clothes"
@@ -2226,10 +2278,6 @@ msgstr "Téma"
 #~ msgstr "Vysvetlivky"
 
 #~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "Navigácia"
-
-#~ msgctxt "Marble::ControlView|"
 #~ msgid "Location"
 #~ msgstr "Umiestnenie"
 
@@ -3013,10 +3061,6 @@ msgstr "Téma"
 #~ msgctxt "Marble::Placemark|A scoria cone volcano."
 #~ msgid "Scoria cone"
 #~ msgstr "Škvárový kužeľ"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Alternative medicine"
-#~ msgstr "Alternatívna medicína"
 
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Audiologist"
@@ -14904,10 +14948,6 @@ msgstr "Téma"
 #~ msgctxt "GeoDataPlacemark|"
 #~ msgid "Toys"
 #~ msgstr "Hračky"
-
-#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
-#~ msgid "Routing Profile - Marble"
-#~ msgstr "Profil navigácie - Marble"
 
 #~ msgctxt "Marble::RoutingWidget|"
 #~ msgid "Directions - Marble"

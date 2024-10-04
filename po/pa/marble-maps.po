@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2021-01-02 16:08-0800\n"
 "Last-Translator: A S Alam <aalam.yellow@gmail.com>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
@@ -39,6 +39,36 @@ msgstr ""
 msgid "The marble theme id"
 msgstr ""
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgid "Routing Profile - Marble"
+msgid "Routing profile"
+msgstr "ਰੂਟਿੰਗ ਪ੍ਰੋਫਾਇਲ - ਮਾਰਬਲ"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Car"
+msgid "Car"
+msgstr "ਕਾਰ"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+#| msgid "Bicycle"
+msgid "Bicycle"
+msgstr "ਸਾਈਕਲ"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutinoConfigWidget|"
+#| msgid "Pedestrian"
+msgid "Pedestrian"
+msgstr "ਪੈਦਲ"
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgid "Current Location"
@@ -46,7 +76,7 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "ਮੌਜੂਦਾ ਟਿਕਾਣਾ"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Marble Maps"
@@ -144,7 +174,14 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "ਪਰਤ ਚੋਣਾਂ"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgid "Routing"
+msgstr "ਰੂਟ"
+
+#: MainScreen.qml:457
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "%1 km"
@@ -298,28 +335,44 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "ਟੈਗ"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 #| msgid "Car (fastest)"
 msgid "Car (fastest)"
 msgstr "ਕਾਰ (ਸਭ ਤੋਂ ਤੇਜ਼)"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-#| msgid "Bicycle"
-msgid "Bicycle"
-msgstr "ਸਾਈਕਲ"
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgctxt "@title"
+msgid "Routing"
+msgstr "ਰੂਟ"
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
 #, fuzzy, kde-format
-#| msgctxt "Marble::RoutinoConfigWidget|"
-#| msgid "Pedestrian"
-msgid "Pedestrian"
-msgstr "ਪੈਦਲ"
+#| msgctxt "DGML|"
+#| msgid "Temperature"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "ਤਾਪਮਾਨ"
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Search for places to integrate them into a route."
+msgctxt "@label:textbox"
+msgid "Arrival:"
+msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Alternatives:"
 msgstr ""
 
 #: SettingsDialog.qml:48
@@ -411,10 +464,6 @@ msgstr "ਥੀਮ"
 #~ msgctxt "DGML|"
 #~ msgid "Boundaries"
 #~ msgstr "ਹੱਦਾਂ"
-
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
-#~ msgstr "ਤਾਪਮਾਨ"
 
 #~ msgctxt "DGML|"
 #~ msgid "Mountain"
@@ -932,10 +981,6 @@ msgstr "ਥੀਮ"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "ਕਿਤਾਬਾਂ"
-
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "ਕਾਰ"
 
 #~ msgctxt "DGML|"
 #~ msgid "Clothes"
@@ -1597,10 +1642,6 @@ msgstr "ਥੀਮ"
 #~ msgctxt "Marble::ControlView|"
 #~ msgid "Legend"
 #~ msgstr "ਸੰਕੇਤ"
-
-#~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "ਰੂਟ"
 
 #~ msgctxt "Marble::ControlView|"
 #~ msgid "Location"
@@ -10397,12 +10438,6 @@ msgstr "ਥੀਮ"
 #~ msgctxt "GeoDataPlacemark|"
 #~ msgid "Book"
 #~ msgstr "ਬੁੱਕਮਾਰਕ"
-
-#, fuzzy
-#~| msgid "Routing Profile - Marble"
-#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
-#~ msgid "Routing Profile - Marble"
-#~ msgstr "ਰੂਟਿੰਗ ਪ੍ਰੋਫਾਇਲ - ਮਾਰਬਲ"
 
 #, fuzzy
 #~| msgid "Directions - Marble"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2020-01-03 20:31+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -42,6 +42,38 @@ msgstr "Siin näed oma järjehoidjaid."
 msgid "The marble theme id"
 msgstr "Väiketähtedega kaarditeema ID."
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfileSettingsDialog|"
+#| msgid "Routing Profile - Marble"
+msgid "Routing profile"
+msgstr "Marsruudi profiil - Marble"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Car"
+msgid "Car"
+msgstr "Auto"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfilesModel|"
+#| msgid "Bicycle"
+msgid "Bicycle"
+msgstr "Jalgratas"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfilesModel|"
+#| msgid "Pedestrian"
+msgid "Pedestrian"
+msgstr "Jalgsi"
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgctxt "CurrentPosition|"
@@ -50,7 +82,7 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Praeguse asukoha järgimine"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Marble Maps"
@@ -151,7 +183,14 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "Kihivalikud"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgid "Routing"
+msgstr "Marsruudid"
+
+#: MainScreen.qml:457
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "%1 km"
@@ -309,33 +348,48 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "Sildid:"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 #| msgctxt "Marble::RoutingProfilesModel|"
 #| msgid "Car (fastest)"
 msgid "Car (fastest)"
 msgstr "Auto (kiireim)"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Bicycle"
-msgid "Bicycle"
-msgstr "Jalgratas"
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgctxt "@title"
+msgid "Routing"
+msgstr "Marsruudid"
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
 #, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Pedestrian"
-msgid "Pedestrian"
-msgstr "Jalgsi"
+#| msgctxt "DGML|"
+#| msgid "Temperature"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "Temperatuur"
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Arrival:"
+msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
 #, fuzzy, kde-format
-#| msgctxt "RouteEditor|"
-#| msgid "Search for places to integrate them into a route."
-msgid "Search for places to integrate them into a route."
-msgstr "Kohtade otsimine nende asetamiseks marsruudile."
+#| msgctxt "Marble::Placemark|"
+#| msgid "Alternative medicine"
+msgctxt "@label:listbox"
+msgid "Alternatives:"
+msgstr "Alternatiivmeditsiin"
 
 #: SettingsDialog.qml:48
 #, fuzzy, kde-format
@@ -358,6 +412,12 @@ msgstr "Kaartide allalaadimine ainult WLAN-i vahendusel"
 msgctxt "@title:window"
 msgid "Themes"
 msgstr "Teema"
+
+#, fuzzy
+#~| msgctxt "RouteEditor|"
+#~| msgid "Search for places to integrate them into a route."
+#~ msgid "Search for places to integrate them into a route."
+#~ msgstr "Kohtade otsimine nende asetamiseks marsruudile."
 
 #~ msgctxt "DGML|"
 #~ msgid "Moon"
@@ -465,10 +525,6 @@ msgstr "Teema"
 #~ msgctxt "DGML|"
 #~ msgid "Water Bodies"
 #~ msgstr "Veekogud"
-
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
-#~ msgstr "Temperatuur"
 
 #~ msgctxt "DGML|"
 #~ msgid "Mountain"
@@ -1120,10 +1176,6 @@ msgstr "Teema"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "Raamatud"
-
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "Auto"
 
 #~ msgctxt "DGML|"
 #~ msgid "Clothes"
@@ -2229,10 +2281,6 @@ msgstr "Teema"
 #~ msgstr "Legend"
 
 #~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "Marsruudid"
-
-#~ msgctxt "Marble::ControlView|"
 #~ msgid "Location"
 #~ msgstr "Asukoht"
 
@@ -3014,10 +3062,6 @@ msgstr "Teema"
 #~ msgctxt "Marble::Placemark|A scoria cone volcano."
 #~ msgid "Scoria cone"
 #~ msgstr "Šlakikoonus"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Alternative medicine"
-#~ msgstr "Alternatiivmeditsiin"
 
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Audiologist"
@@ -14883,10 +14927,6 @@ msgstr "Teema"
 #~ msgctxt "GeoDataPlacemark|"
 #~ msgid "Toys"
 #~ msgstr "Mänguasjad"
-
-#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
-#~ msgid "Routing Profile - Marble"
-#~ msgstr "Marsruudi profiil - Marble"
 
 #~ msgctxt "Marble::RoutingWidget|"
 #~ msgid "Directions - Marble"

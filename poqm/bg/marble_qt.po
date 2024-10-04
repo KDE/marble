@@ -3204,7 +3204,7 @@ msgctxt "Marble::CelestialSortFilterProxyModel|"
 msgid "dwarf planet"
 msgstr "планета джудже"
 
-#: src/lib/marble/cloudsync/BookmarkSyncManager.cpp:628
+#: src/lib/marble/cloudsync/BookmarkSyncManager.cpp:634
 msgctxt "Marble::BookmarkSyncManager|"
 msgid "Bookmarks"
 msgstr "Отметки"
@@ -7697,82 +7697,82 @@ msgstr ""
 "Тук можете да изберете предпочитания изглед на картата с различни тематични "
 "акценти."
 
-#: src/lib/marble/MapWizard.cpp:154
+#: src/lib/marble/MapWizard.cpp:153
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr "Преглед на карта"
 
-#: src/lib/marble/MapWizard.cpp:273 src/lib/marble/MapWizard.cpp:277
+#: src/lib/marble/MapWizard.cpp:272 src/lib/marble/MapWizard.cpp:276
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr "Грешка при парсване"
 
-#: src/lib/marble/MapWizard.cpp:273
+#: src/lib/marble/MapWizard.cpp:272
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr "Съветникът не може да анализира отговора на сървъра"
 
-#: src/lib/marble/MapWizard.cpp:277
+#: src/lib/marble/MapWizard.cpp:276
 msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
 msgstr "Сървърът не е OWS сървър."
 
-#: src/lib/marble/MapWizard.cpp:367 src/lib/marble/MapWizard.cpp:384
-#: src/lib/marble/MapWizard.cpp:1071
+#: src/lib/marble/MapWizard.cpp:366 src/lib/marble/MapWizard.cpp:383
+#: src/lib/marble/MapWizard.cpp:1070
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr "Web Mercator (EPSG: 3857)"
 
-#: src/lib/marble/MapWizard.cpp:368 src/lib/marble/MapWizard.cpp:796
-#: src/lib/marble/MapWizard.cpp:916
+#: src/lib/marble/MapWizard.cpp:367 src/lib/marble/MapWizard.cpp:795
+#: src/lib/marble/MapWizard.cpp:915
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr "Еквидистантна (epsg:4326)"
 
-#: src/lib/marble/MapWizard.cpp:369 src/lib/marble/MapWizard.cpp:798
-#: src/lib/marble/MapWizard.cpp:918
+#: src/lib/marble/MapWizard.cpp:368 src/lib/marble/MapWizard.cpp:797
+#: src/lib/marble/MapWizard.cpp:917
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (crs:84)"
 msgstr "Еквидистантна (crs:84)"
 
-#: src/lib/marble/MapWizard.cpp:380
+#: src/lib/marble/MapWizard.cpp:379
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
 msgstr "Проекция на секторите:"
 
-#: src/lib/marble/MapWizard.cpp:396
+#: src/lib/marble/MapWizard.cpp:395
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
 msgstr "Набор от секторни матрици:"
 
-#: src/lib/marble/MapWizard.cpp:439 src/lib/marble/MapWizard.cpp:908
+#: src/lib/marble/MapWizard.cpp:438 src/lib/marble/MapWizard.cpp:907
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "Преглед на изображение"
 
-#: src/lib/marble/MapWizard.cpp:443
+#: src/lib/marble/MapWizard.cpp:442
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "Базов сектор"
 
-#: src/lib/marble/MapWizard.cpp:447
+#: src/lib/marble/MapWizard.cpp:446
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
 msgstr "Изображение на легенда"
 
-#: src/lib/marble/MapWizard.cpp:453 src/lib/marble/MapWizard.cpp:463
+#: src/lib/marble/MapWizard.cpp:452 src/lib/marble/MapWizard.cpp:462
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "%1"
 msgstr "%1"
 
-#: src/lib/marble/MapWizard.cpp:453
+#: src/lib/marble/MapWizard.cpp:452
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
 msgstr " %1 не може да бъде изтеглен."
 
-#: src/lib/marble/MapWizard.cpp:464
+#: src/lib/marble/MapWizard.cpp:463
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -7784,40 +7784,40 @@ msgstr ""
 "\n"
 "%2"
 
-#: src/lib/marble/MapWizard.cpp:543 src/lib/marble/MapWizard.cpp:1460
-#: src/lib/marble/MapWizard.cpp:1461 src/lib/marble/MapWizard.cpp:1470
-#: src/lib/marble/MapWizard.cpp:1471
+#: src/lib/marble/MapWizard.cpp:542 src/lib/marble/MapWizard.cpp:1459
+#: src/lib/marble/MapWizard.cpp:1460 src/lib/marble/MapWizard.cpp:1469
+#: src/lib/marble/MapWizard.cpp:1470
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "Потребителски"
 
-#: src/lib/marble/MapWizard.cpp:752 src/lib/marble/MapWizard.cpp:755
+#: src/lib/marble/MapWizard.cpp:751 src/lib/marble/MapWizard.cpp:754
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "Архивирането се провали"
 
-#: src/lib/marble/MapWizard.cpp:752
+#: src/lib/marble/MapWizard.cpp:751
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "Процесът на архивиране не може да бъде стартиран."
 
-#: src/lib/marble/MapWizard.cpp:755
+#: src/lib/marble/MapWizard.cpp:754
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "Процесът на архивиране се срина."
 
-#: src/lib/marble/MapWizard.cpp:842 src/lib/marble/MapWizard.cpp:848
-#: src/lib/marble/MapWizard.cpp:856
+#: src/lib/marble/MapWizard.cpp:841 src/lib/marble/MapWizard.cpp:847
+#: src/lib/marble/MapWizard.cpp:855
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Изходно изображение"
 
-#: src/lib/marble/MapWizard.cpp:842
+#: src/lib/marble/MapWizard.cpp:841
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Моля, посочете изходно изображение."
 
-#: src/lib/marble/MapWizard.cpp:848
+#: src/lib/marble/MapWizard.cpp:847
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
@@ -7826,7 +7826,7 @@ msgstr ""
 "Изходното изображение, което сте посочили, не съществува. Моля, посочете "
 "друго."
 
-#: src/lib/marble/MapWizard.cpp:857
+#: src/lib/marble/MapWizard.cpp:856
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
@@ -7835,27 +7835,27 @@ msgstr ""
 "Изходното изображение, което сте посочили, изглежда не е изображение. Моля, "
 "посочете друг файл с изображения."
 
-#: src/lib/marble/MapWizard.cpp:887
+#: src/lib/marble/MapWizard.cpp:886
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Заглавие на картата"
 
-#: src/lib/marble/MapWizard.cpp:887
+#: src/lib/marble/MapWizard.cpp:886
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Моля, посочете заглавие на картата."
 
-#: src/lib/marble/MapWizard.cpp:894 src/lib/marble/MapWizard.cpp:901
+#: src/lib/marble/MapWizard.cpp:893 src/lib/marble/MapWizard.cpp:900
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Име на картата"
 
-#: src/lib/marble/MapWizard.cpp:894
+#: src/lib/marble/MapWizard.cpp:893
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Моля, посочете име на карта."
 
-#: src/lib/marble/MapWizard.cpp:901
+#: src/lib/marble/MapWizard.cpp:900
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -7863,27 +7863,27 @@ msgid ""
 msgstr ""
 "Моля, посочете друго име на картата, тъй като вече има карта с име \"%1\"."
 
-#: src/lib/marble/MapWizard.cpp:908
+#: src/lib/marble/MapWizard.cpp:907
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Моля, посочете изображение за предварителен преглед."
 
-#: src/lib/marble/MapWizard.cpp:1404
+#: src/lib/marble/MapWizard.cpp:1403
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "Проблем при създаването на файлове"
 
-#: src/lib/marble/MapWizard.cpp:1404
+#: src/lib/marble/MapWizard.cpp:1403
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "Проверете дали има тема със същото име."
 
-#: src/lib/marble/MapWizard.cpp:1455
+#: src/lib/marble/MapWizard.cpp:1454
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
 msgstr "Сървър WMS"
 
-#: src/lib/marble/MapWizard.cpp:1457
+#: src/lib/marble/MapWizard.cpp:1456
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
@@ -7893,12 +7893,12 @@ msgstr ""
 "Web_Map_Service\">WMS</a> сървър или въведете персонализиран URL адрес на "
 "сървър."
 
-#: src/lib/marble/MapWizard.cpp:1464
+#: src/lib/marble/MapWizard.cpp:1463
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
 msgstr "Сървър WMTS"
 
-#: src/lib/marble/MapWizard.cpp:1466
+#: src/lib/marble/MapWizard.cpp:1465
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
@@ -11523,12 +11523,12 @@ msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Synchronization"
 msgstr "Синхронизация"
 
-#: src/lib/marble/QtMarbleConfigDialog.cpp:253
+#: src/lib/marble/QtMarbleConfigDialog.cpp:251
 msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Never synchronized."
 msgstr "Никога не е синхронизирано."
 
-#: src/lib/marble/QtMarbleConfigDialog.cpp:257
+#: src/lib/marble/QtMarbleConfigDialog.cpp:255
 #, qt-format
 msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Last synchronization: %1"
@@ -12159,12 +12159,12 @@ msgctxt "QObject|"
 msgid "Search for '%1'"
 msgstr "Търсене за \"%1 \""
 
-#: src/lib/marble/SoundCueEditWidget.cpp:69
+#: src/lib/marble/SoundCueEditWidget.cpp:67
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Select sound files..."
 msgstr "Изберете звукови файлове..."
 
-#: src/lib/marble/SoundCueEditWidget.cpp:69
+#: src/lib/marble/SoundCueEditWidget.cpp:67
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Supported Sound Files (*.mp3 *.ogg *.wav)"
 msgstr "Поддържани звукови файлове ( *.mp3 *.ogg *.wav)"

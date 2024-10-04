@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
-"PO-Revision-Date: 2024-09-26 08:34+0200\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
+"PO-Revision-Date: 2024-10-02 09:10+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -46,11 +46,36 @@ msgstr "Vos signets apparaîtront ici."
 
 #. i18n: ectx: label, entry (MapThemeId), group (General)
 #: config.kcfg:14
-#, fuzzy, kde-format
-#| msgctxt "MapWizard|"
-#| msgid "The lowercase map theme id."
+#, kde-format
 msgid "The marble theme id"
-msgstr "L'identifiant de thème de carte en lettres minuscules."
+msgstr "L'identifiant du thème pour Marble"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgid "Routing Profile - Marble"
+msgid "Routing profile"
+msgstr "Profile de trajet - Marble"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Car"
+msgid "Car"
+msgstr "Voiture"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, kde-format
+msgid "Bicycle"
+msgstr "Vélo"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, kde-format
+msgid "Pedestrian"
+msgstr "Piéton"
 
 #: CurrentPosition.qml:54
 #, kde-format
@@ -58,7 +83,7 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Suivre la position actuelle"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, kde-format
 msgid "Marble Maps"
 msgstr "Cartes de Marble"
@@ -130,14 +155,19 @@ msgid "Layer Options"
 msgstr "Options de calques"
 
 #: MainScreen.qml:156
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Layer Options"
+#, kde-format
 msgctxt "@action:button"
 msgid "Theme Options"
-msgstr "Options de calques"
+msgstr "Options de thème"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgid "Routing"
+msgstr "Itinéraire"
+
+#: MainScreen.qml:457
 #, kde-format
 msgid "%1 km"
 msgstr "%1 km"
@@ -255,25 +285,46 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "Étiquettes :"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, kde-format
 msgid "Car (fastest)"
 msgstr "Voiture (Le plus rapide)"
 
-#: ProfileSelectorMenu.qml:40
-#, kde-format
-msgid "Bicycle"
-msgstr "Vélo"
+#: RouteEditorPage.qml:19
+#, fuzzy, kde-format
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgctxt "@title"
+msgid "Routing"
+msgstr "Itinéraire"
 
-#: ProfileSelectorMenu.qml:49
-#, kde-format
-msgid "Pedestrian"
-msgstr "Piéton"
+#: RouteEditorPage.qml:102
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Temperature"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "Température"
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Search for places to integrate them into a route."
-msgstr "Rechercher des emplacements pour les intégrer à un itinéraire."
+msgctxt "@label:textbox"
+msgid "Arrival:"
+msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, fuzzy, kde-format
+#| msgctxt "Marble::Placemark|"
+#| msgid "Alternative medicine"
+msgctxt "@label:listbox"
+msgid "Alternatives:"
+msgstr "Médecine alternative"
 
 #: SettingsDialog.qml:48
 #, kde-format
@@ -286,12 +337,13 @@ msgid "Download Maps via WLAN only"
 msgstr "Télécharger les cartes uniquement par Wifi"
 
 #: ThemeConfigPage.qml:19
-#, fuzzy, kde-format
-#| msgctxt "CompassConfigWidget|"
-#| msgid "Theme"
+#, kde-format
 msgctxt "@title:window"
 msgid "Themes"
-msgstr "Thème"
+msgstr "Thèmes"
+
+#~ msgid "Search for places to integrate them into a route."
+#~ msgstr "Rechercher des emplacements pour les intégrer à un itinéraire."
 
 #~ msgctxt "DGML|"
 #~ msgid "Moon"
@@ -401,10 +453,6 @@ msgstr "Thème"
 #~ msgctxt "DGML|"
 #~ msgid "Water Bodies"
 #~ msgstr "Plans d'eau"
-
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
-#~ msgstr "Température"
 
 #~ msgctxt "DGML|"
 #~ msgid "Mountain"
@@ -1056,10 +1104,6 @@ msgstr "Thème"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "Livres"
-
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "Voiture"
 
 #~ msgctxt "DGML|"
 #~ msgid "Clothes"
@@ -2176,10 +2220,6 @@ msgstr "Thème"
 #~ msgstr "Légende"
 
 #~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "Itinéraire"
-
-#~ msgctxt "Marble::ControlView|"
 #~ msgid "Location"
 #~ msgstr "Emplacement"
 
@@ -2966,10 +3006,6 @@ msgstr "Thème"
 #~ msgctxt "Marble::Placemark|A scoria cone volcano."
 #~ msgid "Scoria cone"
 #~ msgstr "Cône de scorie"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Alternative medicine"
-#~ msgstr "Médecine alternative"
 
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Audiologist"
@@ -15072,12 +15108,6 @@ msgstr "Thème"
 #~ msgctxt "GeoDataPlacemark|"
 #~ msgid "Book"
 #~ msgstr "Signets"
-
-#, fuzzy
-#~| msgid "Routing Profile - Marble"
-#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
-#~ msgid "Routing Profile - Marble"
-#~ msgstr "Profile de trajet - Marble"
 
 #, fuzzy
 #~| msgid "Directions - Marble"

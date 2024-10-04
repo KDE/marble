@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeedu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2015-02-25 23:33+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -39,6 +39,34 @@ msgstr ""
 msgid "The marble theme id"
 msgstr ""
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgid "Routing Profile - Marble"
+msgid "Routing profile"
+msgstr "Usmjeravanje Profila - Marble"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgid "Clear"
+msgid "Car"
+msgstr "Očisti"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+#| msgid "Bicycle"
+msgid "Bicycle"
+msgstr "Bicikl"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, fuzzy, kde-format
+#| msgid "Pedestrian"
+msgid "Pedestrian"
+msgstr "Pješice"
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgid "Current Location"
@@ -46,7 +74,7 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Trenutna lokacija"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgid "Manage Bookmarks"
 msgid "Marble Maps"
@@ -133,7 +161,13 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "Pregled svojstva"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgid "Routing"
+msgid "Routing"
+msgstr "Usmjeravanje"
+
+#: MainScreen.qml:457
 #, fuzzy, kde-format
 #| msgid "%1 km"
 msgid "%1 km"
@@ -265,27 +299,42 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "Oznake:"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 #| msgid "Car (fastest)"
 msgid "Car (fastest)"
 msgstr "Automobil (najbrže)"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-#| msgid "Bicycle"
-msgid "Bicycle"
-msgstr "Bicikl"
+#| msgid "Routing"
+msgctxt "@title"
+msgid "Routing"
+msgstr "Usmjeravanje"
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
 #, fuzzy, kde-format
-#| msgid "Pedestrian"
-msgid "Pedestrian"
-msgstr "Pješice"
+#| msgid "Temperature: %1<br>"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "Temperatura: %1<br>"
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Search for places to integrate them into a route."
+msgctxt "@label:textbox"
+msgid "Arrival:"
+msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Alternatives:"
 msgstr ""
 
 #: SettingsDialog.qml:48
@@ -354,12 +403,6 @@ msgstr "zabavni park"
 #~ msgctxt "DGML|"
 #~ msgid "Terrain"
 #~ msgstr "Teren:"
-
-#, fuzzy
-#~| msgid "Temperature: %1<br>"
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
-#~ msgstr "Temperatura: %1<br>"
 
 #, fuzzy
 #~| msgid "Mountain"
@@ -673,12 +716,6 @@ msgstr "zabavni park"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "Obilježivači"
-
-#, fuzzy
-#~| msgid "Clear"
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "Očisti"
 
 #, fuzzy
 #~| msgid "OpenStreetMap Data"
@@ -1919,12 +1956,6 @@ msgstr "zabavni park"
 #~ msgctxt "Marble::ControlView|"
 #~ msgid "Legend"
 #~ msgstr "Legenda"
-
-#, fuzzy
-#~| msgid "Routing"
-#~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "Usmjeravanje"
 
 #, fuzzy
 #~| msgid "Location"
@@ -14148,12 +14179,6 @@ msgstr "zabavni park"
 #~ msgctxt "GeoDataPlacemark|"
 #~ msgid "Book"
 #~ msgstr "Obilježivači"
-
-#, fuzzy
-#~| msgid "Routing Profile - Marble"
-#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
-#~ msgid "Routing Profile - Marble"
-#~ msgstr "Usmjeravanje Profila - Marble"
 
 #, fuzzy
 #~| msgid "Directions - Marble"

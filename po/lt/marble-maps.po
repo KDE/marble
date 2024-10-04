@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2017-06-28 16:53+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -41,6 +41,37 @@ msgstr ""
 msgid "The marble theme id"
 msgstr ""
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgid "Routing Profile - Marble"
+msgid "Routing profile"
+msgstr "Maršrutizavimo profilis – Marble"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Car"
+msgid "Car"
+msgstr "Automobiliai"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfilesModel|"
+#| msgid "Bicycle"
+msgid "Bicycle"
+msgstr "Dviračiu"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfilesModel|"
+#| msgid "Pedestrian"
+msgid "Pedestrian"
+msgstr "Pėsčia"
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgctxt "CurrentLocationWidget|"
@@ -49,7 +80,7 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Dabartinė vieta"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Marble Maps"
@@ -147,7 +178,14 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "&Rodymo parinktys"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgid "Routing"
+msgstr "Maršruto parinkimas"
+
+#: MainScreen.qml:457
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "%1 km"
@@ -296,30 +334,45 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "Gairės:"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 #| msgctxt "Marble::RoutingProfilesModel|"
 #| msgid "Car (fastest)"
 msgid "Car (fastest)"
 msgstr "Automobiliu (greičiausias)"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Bicycle"
-msgid "Bicycle"
-msgstr "Dviračiu"
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgctxt "@title"
+msgid "Routing"
+msgstr "Maršruto parinkimas"
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
 #, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Pedestrian"
-msgid "Pedestrian"
-msgstr "Pėsčia"
+#| msgctxt "DGML|"
+#| msgid "Temperature"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "Temperatūra"
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Search for places to integrate them into a route."
+msgctxt "@label:textbox"
+msgid "Arrival:"
+msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Alternatives:"
 msgstr ""
 
 #: SettingsDialog.qml:48
@@ -394,10 +447,6 @@ msgstr "Apipavidalinimas"
 #~ msgctxt "DGML|"
 #~ msgid "Boundaries"
 #~ msgstr "Ribos"
-
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
-#~ msgstr "Temperatūra"
 
 #~ msgctxt "DGML|"
 #~ msgid "Mountain"
@@ -842,10 +891,6 @@ msgstr "Apipavidalinimas"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "Knygos"
-
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "Automobiliai"
 
 #~ msgctxt "DGML|"
 #~ msgid "Clothes"
@@ -1792,10 +1837,6 @@ msgstr "Apipavidalinimas"
 #~ msgctxt "Marble::ControlView|"
 #~ msgid "Legend"
 #~ msgstr "Legenda"
-
-#~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "Maršruto parinkimas"
 
 #~ msgctxt "Marble::ControlView|"
 #~ msgid "Location"
@@ -11863,12 +11904,6 @@ msgstr "Apipavidalinimas"
 #~ msgctxt "GeoDataPlacemark|"
 #~ msgid "Book"
 #~ msgstr "Žymelės"
-
-#, fuzzy
-#~| msgid "Routing Profile - Marble"
-#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
-#~ msgid "Routing Profile - Marble"
-#~ msgstr "Maršrutizavimo profilis – Marble"
 
 #, fuzzy
 #~| msgid "Directions - Marble"

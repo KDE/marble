@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-09-23 15:20+0300\n"
+"PO-Revision-Date: 2024-10-04 01:20+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -1782,9 +1782,9 @@ msgid ""
 "\"Blue Marble Next Generation\" pictures. Credits: NASA's Earth Observatory</"
 "p>"
 msgstr ""
-"<p>Dünya'nın Uzay'dan görünümü.</p><p>Harita NASA'nın güzel \"Blue Bilye "
-"Next Generation\" görsellerine dayanmaktadır. Emeği Geçenler: NASA'nın Dünya "
-"Gözlemevi</p>"
+"<p>Dünya’nın Uzay’dan görünümü.</p><p>Harita NASA’nın güzel “Blue Bilye Next "
+"Generation” görsellerine dayanmaktadır. Emeği Geçenler: NASA’nın Dünya "
+"Gözlemevi</p"
 
 #. file data/maps/earth/bluemarble/bluemarble.dgml:252
 msgctxt "DGML|"
@@ -3198,7 +3198,7 @@ msgctxt "Marble::CelestialSortFilterProxyModel|"
 msgid "dwarf planet"
 msgstr "cüce gezegen"
 
-#: src/lib/marble/cloudsync/BookmarkSyncManager.cpp:628
+#: src/lib/marble/cloudsync/BookmarkSyncManager.cpp:634
 msgctxt "Marble::BookmarkSyncManager|"
 msgid "Bookmarks"
 msgstr "Yer İmleri"
@@ -7375,7 +7375,7 @@ msgid ""
 "Marble/Search\">Details...</a>"
 msgstr ""
 "Arama ifadesi girin ve Giriş düğmesine basın. <a href=\"https://userbase.kde."
-"org/Bilye/Search\">Ayrıntılar...</a>"
+"org/Bilye/Search\">Ayrıntılar…</a>"
 
 #: src/lib/marble/GoToDialog.ui:93
 msgctxt "GoTo|"
@@ -7446,12 +7446,12 @@ msgstr "°"
 #: src/lib/marble/LatLonEdit.cpp:189 src/lib/marble/LatLonEdit.cpp:348
 msgctxt "Marble::LatLonEdit|"
 msgid "'"
-msgstr "'"
+msgstr "’"
 
 #: src/lib/marble/LatLonEdit.cpp:190
 msgctxt "Marble::LatLonEdit|"
 msgid "\""
-msgstr "\""
+msgstr "”"
 
 #: src/lib/marble/LatLonEdit.cpp:538
 msgctxt "Marble::LatLonEdit|East, the direction"
@@ -7615,7 +7615,7 @@ msgstr "Bilye"
 #, qt-format
 msgctxt "Marble::MapViewWidget|"
 msgid "Are you sure that you want to delete \"%1\"?"
-msgstr "\"%1\" ögesini silmek istediğinizden emin misiniz?"
+msgstr "“%1” ögesini silmek istediğinizden emin misiniz?"
 
 #: src/lib/marble/MapViewWidget.ui:14
 msgctxt "MapViewWidget|"
@@ -7682,82 +7682,82 @@ msgctxt "MapViewWidget|"
 msgid "Here you can choose the preferred map view from different topics."
 msgstr "Burada, farklı konuardan tercih edilmiş haritaları seçebilirsiniz."
 
-#: src/lib/marble/MapWizard.cpp:154
+#: src/lib/marble/MapWizard.cpp:153
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr "Harita Önizleme"
 
-#: src/lib/marble/MapWizard.cpp:273 src/lib/marble/MapWizard.cpp:277
+#: src/lib/marble/MapWizard.cpp:272 src/lib/marble/MapWizard.cpp:276
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr "Ayrıştırılırken hata oluştu"
 
-#: src/lib/marble/MapWizard.cpp:273
+#: src/lib/marble/MapWizard.cpp:272
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr "Sihirbaz, sunucudan gelen yanıtı ayrıştıramadı"
 
-#: src/lib/marble/MapWizard.cpp:277
+#: src/lib/marble/MapWizard.cpp:276
 msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
 msgstr "Sunucu, bir OWS Sunucusu değil."
 
-#: src/lib/marble/MapWizard.cpp:367 src/lib/marble/MapWizard.cpp:384
-#: src/lib/marble/MapWizard.cpp:1071
+#: src/lib/marble/MapWizard.cpp:366 src/lib/marble/MapWizard.cpp:383
+#: src/lib/marble/MapWizard.cpp:1070
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr "Web Mercator'u (epsg:3857)"
 
-#: src/lib/marble/MapWizard.cpp:368 src/lib/marble/MapWizard.cpp:796
-#: src/lib/marble/MapWizard.cpp:916
+#: src/lib/marble/MapWizard.cpp:367 src/lib/marble/MapWizard.cpp:795
+#: src/lib/marble/MapWizard.cpp:915
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr "Eşdikdörtgen (epsg:4326)"
 
-#: src/lib/marble/MapWizard.cpp:369 src/lib/marble/MapWizard.cpp:798
-#: src/lib/marble/MapWizard.cpp:918
+#: src/lib/marble/MapWizard.cpp:368 src/lib/marble/MapWizard.cpp:797
+#: src/lib/marble/MapWizard.cpp:917
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (crs:84)"
 msgstr "Eşdikdörtgen (crs:84)"
 
-#: src/lib/marble/MapWizard.cpp:380
+#: src/lib/marble/MapWizard.cpp:379
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
 msgstr "Karo Projeksiyonu:"
 
-#: src/lib/marble/MapWizard.cpp:396
+#: src/lib/marble/MapWizard.cpp:395
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
 msgstr "Matris Kümesi:"
 
-#: src/lib/marble/MapWizard.cpp:439 src/lib/marble/MapWizard.cpp:908
+#: src/lib/marble/MapWizard.cpp:438 src/lib/marble/MapWizard.cpp:907
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "Görseli Önizle"
 
-#: src/lib/marble/MapWizard.cpp:443
+#: src/lib/marble/MapWizard.cpp:442
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "Taban Karosu"
 
-#: src/lib/marble/MapWizard.cpp:447
+#: src/lib/marble/MapWizard.cpp:446
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
 msgstr "Gösterge Görseli"
 
-#: src/lib/marble/MapWizard.cpp:453 src/lib/marble/MapWizard.cpp:463
+#: src/lib/marble/MapWizard.cpp:452 src/lib/marble/MapWizard.cpp:462
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "%1"
 msgstr "%1"
 
-#: src/lib/marble/MapWizard.cpp:453
+#: src/lib/marble/MapWizard.cpp:452
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
 msgstr "%1 indirilemedi."
 
-#: src/lib/marble/MapWizard.cpp:464
+#: src/lib/marble/MapWizard.cpp:463
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -7769,47 +7769,47 @@ msgstr ""
 "\n"
 "%2"
 
-#: src/lib/marble/MapWizard.cpp:543 src/lib/marble/MapWizard.cpp:1460
-#: src/lib/marble/MapWizard.cpp:1461 src/lib/marble/MapWizard.cpp:1470
-#: src/lib/marble/MapWizard.cpp:1471
+#: src/lib/marble/MapWizard.cpp:542 src/lib/marble/MapWizard.cpp:1459
+#: src/lib/marble/MapWizard.cpp:1460 src/lib/marble/MapWizard.cpp:1469
+#: src/lib/marble/MapWizard.cpp:1470
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "Özel"
 
-#: src/lib/marble/MapWizard.cpp:752 src/lib/marble/MapWizard.cpp:755
+#: src/lib/marble/MapWizard.cpp:751 src/lib/marble/MapWizard.cpp:754
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "Arşivleme başarısız oldu"
 
-#: src/lib/marble/MapWizard.cpp:752
+#: src/lib/marble/MapWizard.cpp:751
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "Arşivleme süreci başlatılamadı."
 
-#: src/lib/marble/MapWizard.cpp:755
+#: src/lib/marble/MapWizard.cpp:754
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "Arşivleme süreci çöktü."
 
-#: src/lib/marble/MapWizard.cpp:842 src/lib/marble/MapWizard.cpp:848
-#: src/lib/marble/MapWizard.cpp:856
+#: src/lib/marble/MapWizard.cpp:841 src/lib/marble/MapWizard.cpp:847
+#: src/lib/marble/MapWizard.cpp:855
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Kaynak Görsel"
 
-#: src/lib/marble/MapWizard.cpp:842
+#: src/lib/marble/MapWizard.cpp:841
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Lütfen bir kaynak görsel belirtin."
 
-#: src/lib/marble/MapWizard.cpp:848
+#: src/lib/marble/MapWizard.cpp:847
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
 "one."
 msgstr "Belirttiğiniz kaynak görsel yok. Lütfen başka bir tane belirtin."
 
-#: src/lib/marble/MapWizard.cpp:857
+#: src/lib/marble/MapWizard.cpp:856
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
@@ -7818,77 +7818,76 @@ msgstr ""
 "Belirttiğiniz kaynak görsel, bir görsel dosyası değil gibi görünüyor. Lütfen "
 "başka bir görsel dosyası belirtin."
 
-#: src/lib/marble/MapWizard.cpp:887
+#: src/lib/marble/MapWizard.cpp:886
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Harita Başlığı"
 
-#: src/lib/marble/MapWizard.cpp:887
+#: src/lib/marble/MapWizard.cpp:886
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Lütfen bir harita başlığı belirtin."
 
-#: src/lib/marble/MapWizard.cpp:894 src/lib/marble/MapWizard.cpp:901
+#: src/lib/marble/MapWizard.cpp:893 src/lib/marble/MapWizard.cpp:900
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Harita Adı"
 
-#: src/lib/marble/MapWizard.cpp:894
+#: src/lib/marble/MapWizard.cpp:893
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Lütfen bir harita adı belirtin."
 
-#: src/lib/marble/MapWizard.cpp:901
+#: src/lib/marble/MapWizard.cpp:900
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "Please specify another map name, since there is already a map named \"%1\"."
 msgstr ""
-"Lütfen başka bir harita adı belirtin, \"%1\" adında bir harita halihazırda "
-"var."
+"Lütfen başka bir harita adı belirtin, “%1” adında bir harita halihazırda var."
 
-#: src/lib/marble/MapWizard.cpp:908
+#: src/lib/marble/MapWizard.cpp:907
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Lütfen bir önizleme görseli belirtin."
 
-#: src/lib/marble/MapWizard.cpp:1404
+#: src/lib/marble/MapWizard.cpp:1403
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "Dosyalar oluşturulurken problem oluştu"
 
-#: src/lib/marble/MapWizard.cpp:1404
+#: src/lib/marble/MapWizard.cpp:1403
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "Aynı adda bir tema oldup olmadığını denetle."
 
-#: src/lib/marble/MapWizard.cpp:1455
+#: src/lib/marble/MapWizard.cpp:1454
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
 msgstr "WMS Sunucusu"
 
-#: src/lib/marble/MapWizard.cpp:1457
+#: src/lib/marble/MapWizard.cpp:1456
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
 "<h4>WMS Sunucusu</h4>Lütfen bir <a href=\"https://en.wikipedia.org/wiki/"
-"Web_Map_Service\">WMS</a> sunucusu seçin veya özel bir sunucu URL'si girin."
+"Web_Map_Service\">WMS</a> sunucusu seçin veya özel bir sunucu URL’si girin."
 
-#: src/lib/marble/MapWizard.cpp:1464
+#: src/lib/marble/MapWizard.cpp:1463
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
 msgstr "WMTS Sunucusu"
 
-#: src/lib/marble/MapWizard.cpp:1466
+#: src/lib/marble/MapWizard.cpp:1465
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
 "Web_Map_Tile_Service\">WMTS</a> server or enter a custom server URL."
 msgstr ""
 "<h4>WMTS Sunucusu</h4>Lütfen bir <a href=\"https://de.wikipedia.org/wiki/"
-"Web_Map_Tile_Service\">WMTS</a> sunucusu seçin veya özel bir sunucu URL'si "
+"Web_Map_Tile_Service\">WMTS</a> sunucusu seçin veya özel bir sunucu URL’si "
 "girin."
 
 #: src/lib/marble/MapWizard.ui:20
@@ -7932,7 +7931,7 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"weight:600;\">Harita Oluşturma Sihirbazı'na Hoşgeldiniz!</span></p>\n"
+"weight:600;\">Harita Oluşturma Sihirbazı’na Hoşgeldiniz!</span></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
 "p>\n"
@@ -8026,7 +8025,7 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose a <a href="
 "\"https://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
 "decoration: underline; color:#0057ae;\">WMS</span></a> sunucusu veya özel "
-"bir sunucu URL'si girin.</p></body></html>"
+"bir sunucu URL’si girin.</p></body></html>"
 
 #: src/lib/marble/MapWizard.ui:134
 msgctxt "MapWizard|"
@@ -8504,7 +8503,7 @@ msgid ""
 "tu-berlin.de</a><br /><i>WMS Support, Mobile, Performance</i></p>"
 msgstr ""
 "<p>Bernhard Beschow <a href=\"mailto:bbeschow@cs.tu-berlin.de\">bbeschow@cs."
-"tu-berlin.de</a><br /><i>WMS Destek, Mobil, Performans</i></p>"
+"tu-berlin.de</a><br /><i>WMS Destek, taşınabilir, başarım</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:81
 msgctxt "QObject|"
@@ -8513,7 +8512,7 @@ msgid ""
 "\">kossebau@kde.org</a><br /><i>Plasma Integration, Bugfixes</i></p>"
 msgstr ""
 "<p>Friedrich W. H. Kossebau, <a href=\"mailto:kossebau@kde.org"
-"\">kossebau@kde.org</a><br /><i>Plasma Bütünleştirme, Hata Düzeltme</i></p>"
+"\">kossebau@kde.org</a><br /><i>Plasma tümleştirmesi, hata düzeltme</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:83
 msgctxt "QObject|"
@@ -8522,7 +8521,7 @@ msgid ""
 "><i>Geodata</i></p>"
 msgstr ""
 "<p>Thibaut Gridel <a href=\"mailto:tgridel@free.fr\">tgridel@free.fr</a><br /"
-"><i>Geodata</i></p>"
+"><i>Coğrafi veri</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:85
 msgctxt "QObject|"
@@ -8626,7 +8625,7 @@ msgid ""
 "itbhu@googlemail.com</a><br /><i>Planet Filter, Bugfixes</i></p>"
 msgstr ""
 "<p>Harshit Jain <a href=\"mailto:sonu.itbhu@googlemail.com\">sonu."
-"itbhu@googlemail.com</a><br /><i>Gezegen Süzgeci, Hata Düzeltme</i></p>"
+"itbhu@googlemail.com</a><br /><i>Gezegen süzgeci, hata üzeltme</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:108
 msgctxt "QObject|"
@@ -10589,7 +10588,7 @@ msgstr ""
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Açıların koordinatlarla "
 "gösterilmesini belirtir: Öntanımlı olarak Derece-Dakika-Saniye gösterimi "
-"(ör. 54°30'00\") kullanılır. Alternatif olarak ondalık derece (ör. 54.5°) "
+"(örn. 54° 30’ 00”) kullanılır. Alternatif olarak ondalık derece (örn. 54,5°) "
 "seçebilirsiniz.</p></body></html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:105
@@ -11482,12 +11481,12 @@ msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Synchronization"
 msgstr "Eşitleme"
 
-#: src/lib/marble/QtMarbleConfigDialog.cpp:253
+#: src/lib/marble/QtMarbleConfigDialog.cpp:251
 msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Never synchronized."
 msgstr "Hiçbir zaman eşitlenmemiş."
 
-#: src/lib/marble/QtMarbleConfigDialog.cpp:257
+#: src/lib/marble/QtMarbleConfigDialog.cpp:255
 #, qt-format
 msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Last synchronization: %1"
@@ -12116,12 +12115,12 @@ msgctxt "QObject|"
 msgid "Search for '%1'"
 msgstr "'%1' için ara"
 
-#: src/lib/marble/SoundCueEditWidget.cpp:69
+#: src/lib/marble/SoundCueEditWidget.cpp:67
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Select sound files..."
 msgstr "Ses dosyaları seç..."
 
-#: src/lib/marble/SoundCueEditWidget.cpp:69
+#: src/lib/marble/SoundCueEditWidget.cpp:67
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Supported Sound Files (*.mp3 *.ogg *.wav)"
 msgstr "Desteklenen Ses Dosyaları (*mp3 *.ogg *.wav)"
@@ -17275,8 +17274,7 @@ msgid ""
 "business_edition_free/register\">here</a>."
 msgstr ""
 "MapQuest rotalamanın çalışması için bir AppKey gereklidir. <a href=\"https://"
-"developer.mapquest.com/web/products/open\">Şurası</a> üzerinden kayıt "
-"olabilirsiniz."
+"developer.mapquest.com/web/products/open\">Şuradan</a> kayıt olabilirsiniz."
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:19
 msgctxt "Marble::MapQuestPlugin|"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2024-07-18 03:10+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -45,6 +45,37 @@ msgstr "您的書籤會出現於此。"
 msgid "The marble theme id"
 msgstr ""
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgid "Configure Sun Control"
+msgid "Routing profile"
+msgstr "設定太陽控制"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Car"
+msgid "Car"
+msgstr "汽車"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfilesModel|"
+#| msgid "Bicycle"
+msgid "Bicycle"
+msgstr "腳踏車"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfilesModel|"
+#| msgid "Pedestrian"
+msgid "Pedestrian"
+msgstr "人行道"
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgid "Current Location"
@@ -52,7 +83,7 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "目前位置"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgid "Manage Bookmarks"
 msgid "Marble Maps"
@@ -147,7 +178,14 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "檢視屬性"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgid "Routing"
+msgstr "路徑"
+
+#: MainScreen.qml:457
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "%1 km"
@@ -290,31 +328,47 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "標籤"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 #| msgctxt "Marble::RoutingProfilesModel|"
 #| msgid "Car (fastest)"
 msgid "Car (fastest)"
 msgstr "汽車（最快）"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Bicycle"
-msgid "Bicycle"
-msgstr "腳踏車"
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgctxt "@title"
+msgid "Routing"
+msgstr "路徑"
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
 #, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Pedestrian"
-msgid "Pedestrian"
-msgstr "人行道"
+#| msgctxt "DGML|"
+#| msgid "Temperature"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "溫度"
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Search for places to integrate them into a route."
+msgctxt "@label:textbox"
+msgid "Arrival:"
 msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, fuzzy, kde-format
+#| msgid "Alternative name"
+msgctxt "@label:listbox"
+msgid "Alternatives:"
+msgstr "別名"
 
 #: SettingsDialog.qml:48
 #, fuzzy, kde-format
@@ -433,10 +487,6 @@ msgstr "主題(&T)"
 #~ msgctxt "DGML|"
 #~ msgid "Water Bodies"
 #~ msgstr "水體"
-
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
-#~ msgstr "溫度"
 
 #~ msgctxt "DGML|"
 #~ msgid "Mountain"
@@ -1080,10 +1130,6 @@ msgstr "主題(&T)"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "書局"
-
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "汽車"
 
 #~ msgctxt "DGML|"
 #~ msgid "Clothes"
@@ -2116,10 +2162,6 @@ msgstr "主題(&T)"
 #~ msgstr "圖例"
 
 #~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "路徑"
-
-#~ msgctxt "Marble::ControlView|"
 #~ msgid "Location"
 #~ msgstr "位置"
 
@@ -2755,12 +2797,6 @@ msgstr "主題(&T)"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Stratovolcano"
 #~ msgstr "火山"
-
-#, fuzzy
-#~| msgid "Alternative name"
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Alternative medicine"
-#~ msgstr "別名"
 
 #, fuzzy
 #~| msgid "Marble Infocenter"
@@ -8417,12 +8453,6 @@ msgstr "主題(&T)"
 #~ msgctxt "Marble::RoutingManager|"
 #~ msgid "Show again"
 #~ msgstr "再次顯示"
-
-#, fuzzy
-#~| msgid "Configure Sun Control"
-#~ msgctxt "RoutingProfileSettingsDialog|"
-#~ msgid "Configure Routing Profile"
-#~ msgstr "設定太陽控制"
 
 #, fuzzy
 #~| msgid "Name"

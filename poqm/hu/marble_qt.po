@@ -3,25 +3,24 @@
 #
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2012.
 # Balázs Úr <urbalazs@gmail.com>, 2012, 2013, 2014.
+# SPDX-FileCopyrightText: 2024 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2014-01-22 22:32+0100\n"
-"Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
+"PO-Revision-Date: 2024-10-03 21:47+0200\n"
+"Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Lokalize 24.08.0\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
-#, fuzzy
-#| msgid "Moon"
 msgctxt "DGML|"
 msgid "Moon"
 msgstr "Hold"
@@ -3778,7 +3777,7 @@ msgctxt "Marble::CelestialSortFilterProxyModel|"
 msgid "dwarf planet"
 msgstr "törpebolygó"
 
-#: src/lib/marble/cloudsync/BookmarkSyncManager.cpp:628
+#: src/lib/marble/cloudsync/BookmarkSyncManager.cpp:634
 #, fuzzy
 #| msgid "Bookmarks"
 msgctxt "Marble::BookmarkSyncManager|"
@@ -8956,100 +8955,100 @@ msgctxt "MapViewWidget|"
 msgid "Here you can choose the preferred map view from different topics."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:154
+#: src/lib/marble/MapWizard.cpp:153
 #, fuzzy
 #| msgid "Preview Map"
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr "Térkép előnézete"
 
-#: src/lib/marble/MapWizard.cpp:273 src/lib/marble/MapWizard.cpp:277
+#: src/lib/marble/MapWizard.cpp:272 src/lib/marble/MapWizard.cpp:276
 #, fuzzy
 #| msgid "Error while parsing"
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr "Hiba a feldolgozás során"
 
-#: src/lib/marble/MapWizard.cpp:273
+#: src/lib/marble/MapWizard.cpp:272
 #, fuzzy
 #| msgid "Wizard cannot parse server's response"
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr "A varázsló nem tudta feldolgozni a kiszolgáló válaszát"
 
-#: src/lib/marble/MapWizard.cpp:277
+#: src/lib/marble/MapWizard.cpp:276
 #, fuzzy
 #| msgid "Server is not a Web Map Server."
 msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
 msgstr "A kiszolgáló nem Webtérkép kiszolgáló."
 
-#: src/lib/marble/MapWizard.cpp:367 src/lib/marble/MapWizard.cpp:384
-#: src/lib/marble/MapWizard.cpp:1071
+#: src/lib/marble/MapWizard.cpp:366 src/lib/marble/MapWizard.cpp:383
+#: src/lib/marble/MapWizard.cpp:1070
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:368 src/lib/marble/MapWizard.cpp:796
-#: src/lib/marble/MapWizard.cpp:916
+#: src/lib/marble/MapWizard.cpp:367 src/lib/marble/MapWizard.cpp:795
+#: src/lib/marble/MapWizard.cpp:915
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:369 src/lib/marble/MapWizard.cpp:798
-#: src/lib/marble/MapWizard.cpp:918
+#: src/lib/marble/MapWizard.cpp:368 src/lib/marble/MapWizard.cpp:797
+#: src/lib/marble/MapWizard.cpp:917
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (crs:84)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:380
+#: src/lib/marble/MapWizard.cpp:379
 #, fuzzy
 #| msgid "Location"
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
 msgstr "Hely"
 
-#: src/lib/marble/MapWizard.cpp:396
+#: src/lib/marble/MapWizard.cpp:395
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:439 src/lib/marble/MapWizard.cpp:908
+#: src/lib/marble/MapWizard.cpp:438 src/lib/marble/MapWizard.cpp:907
 #, fuzzy
 #| msgid "Preview Image"
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "Előnézeti kép"
 
-#: src/lib/marble/MapWizard.cpp:443
+#: src/lib/marble/MapWizard.cpp:442
 #, fuzzy
 #| msgid "Base Tile"
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "Alapcsempe"
 
-#: src/lib/marble/MapWizard.cpp:447
+#: src/lib/marble/MapWizard.cpp:446
 #, fuzzy
 #| msgid "Legend"
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
 msgstr "Jelmagyarázat"
 
-#: src/lib/marble/MapWizard.cpp:453 src/lib/marble/MapWizard.cpp:463
+#: src/lib/marble/MapWizard.cpp:452 src/lib/marble/MapWizard.cpp:462
 #, fuzzy, qt-format
 #| msgid "%1 m"
 msgctxt "Marble::MapWizard|"
 msgid "%1"
 msgstr "%1 m"
 
-#: src/lib/marble/MapWizard.cpp:453
+#: src/lib/marble/MapWizard.cpp:452
 #, fuzzy, qt-format
 #| msgid "The base tile could not be downloaded."
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
 msgstr "Az alapcsempét nem sikerült letölteni."
 
-#: src/lib/marble/MapWizard.cpp:464
+#: src/lib/marble/MapWizard.cpp:463
 #, fuzzy, qt-format
 #| msgid ""
 #| "The base tile could not be downloaded successfully. The server replied:\n"
@@ -9065,52 +9064,52 @@ msgstr ""
 "\n"
 "%1"
 
-#: src/lib/marble/MapWizard.cpp:543 src/lib/marble/MapWizard.cpp:1460
-#: src/lib/marble/MapWizard.cpp:1461 src/lib/marble/MapWizard.cpp:1470
-#: src/lib/marble/MapWizard.cpp:1471
+#: src/lib/marble/MapWizard.cpp:542 src/lib/marble/MapWizard.cpp:1459
+#: src/lib/marble/MapWizard.cpp:1460 src/lib/marble/MapWizard.cpp:1469
+#: src/lib/marble/MapWizard.cpp:1470
 #, fuzzy
 #| msgid "Custom"
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "Egyéni"
 
-#: src/lib/marble/MapWizard.cpp:752 src/lib/marble/MapWizard.cpp:755
+#: src/lib/marble/MapWizard.cpp:751 src/lib/marble/MapWizard.cpp:754
 #, fuzzy
 #| msgid "Archiving failed"
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "Sikertelen archiválás"
 
-#: src/lib/marble/MapWizard.cpp:752
+#: src/lib/marble/MapWizard.cpp:751
 #, fuzzy
 #| msgid "Archiving process cannot be started."
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "Az archiválási folyamat elindítása nem sikerült."
 
-#: src/lib/marble/MapWizard.cpp:755
+#: src/lib/marble/MapWizard.cpp:754
 #, fuzzy
 #| msgid "Archiving process crashed."
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "Az archiválási folyamat összeomlott."
 
-#: src/lib/marble/MapWizard.cpp:842 src/lib/marble/MapWizard.cpp:848
-#: src/lib/marble/MapWizard.cpp:856
+#: src/lib/marble/MapWizard.cpp:841 src/lib/marble/MapWizard.cpp:847
+#: src/lib/marble/MapWizard.cpp:855
 #, fuzzy
 #| msgid "Source Image"
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Forrás kép"
 
-#: src/lib/marble/MapWizard.cpp:842
+#: src/lib/marble/MapWizard.cpp:841
 #, fuzzy
 #| msgid "Please specify a source image."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Adjon meg egy forrás képet."
 
-#: src/lib/marble/MapWizard.cpp:848
+#: src/lib/marble/MapWizard.cpp:847
 #, fuzzy
 #| msgid ""
 #| "The source image you specified does not exist. Please specify a different "
@@ -9121,7 +9120,7 @@ msgid ""
 "one."
 msgstr "A megadott forrás kép nem létezik. Adjon meg egy másikat."
 
-#: src/lib/marble/MapWizard.cpp:857
+#: src/lib/marble/MapWizard.cpp:856
 #, fuzzy
 #| msgid ""
 #| "The source image you specified does not seem to be an image. Please "
@@ -9132,35 +9131,35 @@ msgid ""
 "a different image file."
 msgstr "A megadott forrás kép nem tűnik képnek. Adjon meg egy másik képfájlt."
 
-#: src/lib/marble/MapWizard.cpp:887
+#: src/lib/marble/MapWizard.cpp:886
 #, fuzzy
 #| msgid "Map Title"
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Térkép címe"
 
-#: src/lib/marble/MapWizard.cpp:887
+#: src/lib/marble/MapWizard.cpp:886
 #, fuzzy
 #| msgid "Please specify a map title."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Adjon meg egy térkép címet."
 
-#: src/lib/marble/MapWizard.cpp:894 src/lib/marble/MapWizard.cpp:901
+#: src/lib/marble/MapWizard.cpp:893 src/lib/marble/MapWizard.cpp:900
 #, fuzzy
 #| msgid "Map Name"
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Térkép neve"
 
-#: src/lib/marble/MapWizard.cpp:894
+#: src/lib/marble/MapWizard.cpp:893
 #, fuzzy
 #| msgid "Please specify a map name."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Adjon meg egy térkép nevet."
 
-#: src/lib/marble/MapWizard.cpp:901
+#: src/lib/marble/MapWizard.cpp:900
 #, fuzzy, qt-format
 #| msgid ""
 #| "Please specify another map name, since there is already a map named "
@@ -9171,45 +9170,45 @@ msgid ""
 msgstr ""
 "Adjon meg egy másik térkép nevet, mert már létezik egy „%1” nevű térkép."
 
-#: src/lib/marble/MapWizard.cpp:908
+#: src/lib/marble/MapWizard.cpp:907
 #, fuzzy
 #| msgid "Please specify a preview image."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Adjon meg egy előnézeti képet."
 
-#: src/lib/marble/MapWizard.cpp:1404
+#: src/lib/marble/MapWizard.cpp:1403
 #, fuzzy
 #| msgid "Problem while creating files"
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "Hiba a fájlok létrehozása során"
 
-#: src/lib/marble/MapWizard.cpp:1404
+#: src/lib/marble/MapWizard.cpp:1403
 #, fuzzy
 #| msgid "Check if a theme with the same name exists."
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "Ellenőrizze, hogy létezik-e ugyanilyen nevű téma."
 
-#: src/lib/marble/MapWizard.cpp:1455
+#: src/lib/marble/MapWizard.cpp:1454
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1457
+#: src/lib/marble/MapWizard.cpp:1456
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1464
+#: src/lib/marble/MapWizard.cpp:1463
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1466
+#: src/lib/marble/MapWizard.cpp:1465
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
@@ -13115,14 +13114,14 @@ msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Synchronization"
 msgstr "Szinkronizáció"
 
-#: src/lib/marble/QtMarbleConfigDialog.cpp:253
+#: src/lib/marble/QtMarbleConfigDialog.cpp:251
 #, fuzzy
 #| msgid "Never synchronized."
 msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Never synchronized."
 msgstr "Sosem volt szinkronizálva."
 
-#: src/lib/marble/QtMarbleConfigDialog.cpp:257
+#: src/lib/marble/QtMarbleConfigDialog.cpp:255
 #, fuzzy, qt-format
 #| msgid "Last synchronization: %1"
 msgctxt "Marble::QtMarbleConfigDialog|"
@@ -13919,14 +13918,14 @@ msgctxt "QObject|"
 msgid "Search for '%1'"
 msgstr "Keresés erre: „%1”"
 
-#: src/lib/marble/SoundCueEditWidget.cpp:69
+#: src/lib/marble/SoundCueEditWidget.cpp:67
 #, fuzzy
 #| msgid "Selection Method"
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Select sound files..."
 msgstr "Kijelölési módszer"
 
-#: src/lib/marble/SoundCueEditWidget.cpp:69
+#: src/lib/marble/SoundCueEditWidget.cpp:67
 #, fuzzy
 #| msgid "All Supported Files (*.txt *.msc)"
 msgctxt "Marble::SoundCueEditWidget|"

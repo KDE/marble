@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2017-09-22 19:28+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -45,13 +45,40 @@ msgstr "Οι σελιδοδείκτες σας θα εμφανιστούν εδ�
 msgid "The marble theme id"
 msgstr "Η ταυτότητα του θέματος χάρτη με πεζά."
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgid "Routing Profile - Marble"
+msgid "Routing profile"
+msgstr "Προφίλ δρομολόγησης - Marble"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Car"
+msgid "Car"
+msgstr "Αυτοκίνητο"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, kde-format
+msgid "Bicycle"
+msgstr "Ποδήλατο"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, kde-format
+msgid "Pedestrian"
+msgstr "Πεζή"
+
 #: CurrentPosition.qml:54
 #, kde-format
 msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Ακολουθήστε την τρέχουσα θέση"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, kde-format
 msgid "Marble Maps"
 msgstr "Marble Maps"
@@ -139,7 +166,14 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "<h3>Επιλογές επιπέδων</h3>"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgid "Routing"
+msgstr "Δρομολόγηση"
+
+#: MainScreen.qml:457
 #, kde-format
 msgid "%1 km"
 msgstr "%1 km"
@@ -265,25 +299,46 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "Ετικέτες:"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, kde-format
 msgid "Car (fastest)"
 msgstr "Αυτοκίνητο (ταχύτερη)"
 
-#: ProfileSelectorMenu.qml:40
-#, kde-format
-msgid "Bicycle"
-msgstr "Ποδήλατο"
+#: RouteEditorPage.qml:19
+#, fuzzy, kde-format
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgctxt "@title"
+msgid "Routing"
+msgstr "Δρομολόγηση"
 
-#: ProfileSelectorMenu.qml:49
-#, kde-format
-msgid "Pedestrian"
-msgstr "Πεζή"
+#: RouteEditorPage.qml:102
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Temperature"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "Θερμοκρασία"
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Search for places to integrate them into a route."
-msgstr "Αναζητήστε τοποθεσίες για να τις ενσωματώσετε σε μια διαδρομή."
+msgctxt "@label:textbox"
+msgid "Arrival:"
+msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, fuzzy, kde-format
+#| msgctxt "Marble::Placemark|"
+#| msgid "Alternative medicine"
+msgctxt "@label:listbox"
+msgid "Alternatives:"
+msgstr "Εναλλακτική ιατρική"
 
 #: SettingsDialog.qml:48
 #, fuzzy, kde-format
@@ -304,6 +359,9 @@ msgstr "Λήψη περιοχής"
 msgctxt "@title:window"
 msgid "Themes"
 msgstr "Θέμα"
+
+#~ msgid "Search for places to integrate them into a route."
+#~ msgstr "Αναζητήστε τοποθεσίες για να τις ενσωματώσετε σε μια διαδρομή."
 
 #~ msgctxt "DGML|"
 #~ msgid "Moon"
@@ -412,10 +470,6 @@ msgstr "Θέμα"
 #~ msgctxt "DGML|"
 #~ msgid "Water Bodies"
 #~ msgstr "Υδάτινες οντότητες"
-
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
-#~ msgstr "Θερμοκρασία"
 
 #~ msgctxt "DGML|"
 #~ msgid "Mountain"
@@ -1073,10 +1127,6 @@ msgstr "Θέμα"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "Βιβλία"
-
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "Αυτοκίνητο"
 
 #~ msgctxt "DGML|"
 #~ msgid "Clothes"
@@ -2178,10 +2228,6 @@ msgstr "Θέμα"
 #~ msgstr "Υπόμνημα"
 
 #~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "Δρομολόγηση"
-
-#~ msgctxt "Marble::ControlView|"
 #~ msgid "Location"
 #~ msgstr "Τοποθεσία"
 
@@ -2965,10 +3011,6 @@ msgstr "Θέμα"
 #~ msgctxt "Marble::Placemark|A scoria cone volcano."
 #~ msgid "Scoria cone"
 #~ msgstr "Κώνος στάχτης"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Alternative medicine"
-#~ msgstr "Εναλλακτική ιατρική"
 
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Audiologist"
@@ -14635,12 +14677,6 @@ msgstr "Θέμα"
 #~ msgctxt "GeoDataPlacemark|"
 #~ msgid "Book"
 #~ msgstr "Σελιδοδείκτες"
-
-#, fuzzy
-#~| msgid "Routing Profile - Marble"
-#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
-#~ msgid "Routing Profile - Marble"
-#~ msgstr "Προφίλ δρομολόγησης - Marble"
 
 #, fuzzy
 #~| msgid "Directions - Marble"

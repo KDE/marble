@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2008-12-02 15:23+0700\n"
 "Last-Translator: Eng Vannak <evannak@khmeros.info>\n"
 "Language-Team: km <support@khmeros.info>\n"
@@ -39,6 +39,34 @@ msgstr ""
 msgid "The marble theme id"
 msgstr ""
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgid "Routing Profile - Marble"
+msgid "Routing profile"
+msgstr "ទម្រង់​នាំផ្លូវ - Marble"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgid "Clear"
+msgid "Car"
+msgstr "សម្អាត"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+#| msgid "Bicycle"
+msgid "Bicycle"
+msgstr "កង់"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, fuzzy, kde-format
+#| msgid "Pedestrian"
+msgid "Pedestrian"
+msgstr "ថ្មើរជើង"
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgid "Current Location"
@@ -46,7 +74,7 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "ទីតាំង​បច្ចុប្បន្ន"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgid "Manage Bookmarks"
 msgid "Marble Maps"
@@ -137,7 +165,13 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "ទម្រង់​ថ្មី"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgid "Routing"
+msgid "Routing"
+msgstr "នាំ​ផ្លូវ"
+
+#: MainScreen.qml:457
 #, fuzzy, kde-format
 #| msgid "%1 km"
 msgid "%1 km"
@@ -268,27 +302,42 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr ""
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 #| msgid "Car (fastest)"
 msgid "Car (fastest)"
 msgstr "រថយន្ត (លឿន​បំផុត)"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-#| msgid "Bicycle"
-msgid "Bicycle"
-msgstr "កង់"
+#| msgid "Routing"
+msgctxt "@title"
+msgid "Routing"
+msgstr "នាំ​ផ្លូវ"
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
 #, fuzzy, kde-format
-#| msgid "Pedestrian"
-msgid "Pedestrian"
-msgstr "ថ្មើរជើង"
+#| msgid "Temperature: %1<br>"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "សីតុណ្ហភាព ៖ %1<br>"
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Search for places to integrate them into a route."
+msgctxt "@label:textbox"
+msgid "Arrival:"
+msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Alternatives:"
 msgstr ""
 
 #: SettingsDialog.qml:48
@@ -380,12 +429,6 @@ msgstr "ស្បែក"
 #~ msgctxt "DGML|"
 #~ msgid "Terrain"
 #~ msgstr "ភ្លៀង"
-
-#, fuzzy
-#~| msgid "Temperature: %1<br>"
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
-#~ msgstr "សីតុណ្ហភាព ៖ %1<br>"
 
 #, fuzzy
 #~| msgid "Mountain"
@@ -673,12 +716,6 @@ msgstr "ស្បែក"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "ចំណាំ"
-
-#, fuzzy
-#~| msgid "Clear"
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "សម្អាត"
 
 #, fuzzy
 #~| msgid "OpenStreetMap Data"
@@ -1343,12 +1380,6 @@ msgstr "ស្បែក"
 #~ msgctxt "Marble::ControlView|"
 #~ msgid "Legend"
 #~ msgstr "កំណត់​សម្គាល់"
-
-#, fuzzy
-#~| msgid "Routing"
-#~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "នាំ​ផ្លូវ"
 
 #, fuzzy
 #~| msgid "Location"
@@ -11990,12 +12021,6 @@ msgstr "ស្បែក"
 #~ msgctxt "GeoDataPlacemark|"
 #~ msgid "Book"
 #~ msgstr "ចំណាំ"
-
-#, fuzzy
-#~| msgid "Routing Profile - Marble"
-#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
-#~ msgid "Routing Profile - Marble"
-#~ msgstr "ទម្រង់​នាំផ្លូវ - Marble"
 
 #, fuzzy
 #~| msgid "Directions - Marble"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2019-12-01 18:32+0000\n"
 "Last-Translator: Subin Siby <subins2000@gmail.com>\n"
 "Language-Team: Swathanthra|സ്വതന്ത്ര Malayalam|മലയാളം Computing|കമ്പ്യൂട്ടിങ്ങ് <smc-"
@@ -36,13 +36,37 @@ msgstr ""
 msgid "The marble theme id"
 msgstr ""
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+msgid "Routing profile"
+msgstr "പര്‍വതം"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+msgid "Car"
+msgstr "&വെടിപ്പാക്കുക"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+msgid "Bicycle"
+msgstr "ട്രാക്ക്"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, kde-format
+msgid "Pedestrian"
+msgstr ""
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "ഇപ്പോളെവിടെ"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 msgid "Marble Maps"
 msgstr "സ്ഥലം &ചേര്‍ക്കുക"
@@ -121,7 +145,12 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr ""
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+msgid "Routing"
+msgstr "പര്‍വതം"
+
+#: MainScreen.qml:457
 #, fuzzy, kde-format
 msgid "%1 km"
 msgstr "%1 മി"
@@ -239,25 +268,41 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr ""
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 msgid "Car (fastest)"
 msgstr "ജലം"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-msgid "Bicycle"
-msgstr "ട്രാക്ക്"
+msgctxt "@title"
+msgid "Routing"
+msgstr "പര്‍വതം"
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
+#, fuzzy, kde-format
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "താപനല (‍ജൂലൈ)"
+
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Pedestrian"
+msgctxt "@label:textbox"
+msgid "Arrival:"
 msgstr ""
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:106
 #, kde-format
-msgid "Search for places to integrate them into a route."
+msgctxt "@label:textbox"
+msgid "Waypoint:"
 msgstr ""
+
+#: RouteEditorPage.qml:194
+#, fuzzy, kde-format
+#| msgid "Alternative Name"
+msgctxt "@label:listbox"
+msgid "Alternatives:"
+msgstr "മറ്റൊരു പേരു്"
 
 #: SettingsDialog.qml:48
 #, fuzzy, kde-format
@@ -319,11 +364,6 @@ msgstr "&പ്രമേയം"
 #~ msgctxt "DGML|"
 #~ msgid "Water Bodies"
 #~ msgstr "ജലാശയങ്ങള്‍"
-
-#, fuzzy
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
-#~ msgstr "താപനല (‍ജൂലൈ)"
 
 #, fuzzy
 #~ msgctxt "DGML|"
@@ -659,11 +699,6 @@ msgstr "&പ്രമേയം"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "സ്ഥലം &ചേര്‍ക്കുക"
-
-#, fuzzy
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "&വെടിപ്പാക്കുക"
 
 #, fuzzy
 #~ msgctxt "DGML|"
@@ -1197,11 +1232,6 @@ msgstr "&പ്രമേയം"
 #~ msgctxt "Marble::ControlView|"
 #~ msgid "Marble - Virtual Globe"
 #~ msgstr "മാര്‍ബിള്‍ - ഡസ്ക്ടോപ്പ് ഗ്ലോബ്"
-
-#, fuzzy
-#~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "പര്‍വതം"
 
 #, fuzzy
 #~ msgctxt "Marble::ControlView|"
@@ -7201,11 +7231,6 @@ msgstr "&പ്രമേയം"
 #~ msgstr "സ്ഥലം &ചേര്‍ക്കുക"
 
 #, fuzzy
-#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
-#~ msgid "Routing Profile - Marble"
-#~ msgstr "പര്‍വതം"
-
-#, fuzzy
 #~ msgctxt "Marble::RoutingWidget|"
 #~ msgid "Directions - Marble"
 #~ msgstr "പര്‍വതം"
@@ -7873,9 +7898,6 @@ msgstr "&പ്രമേയം"
 #~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 #~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 #~ "size:14pt; font-weight:600;\">പേരു്</span></p></body></html>"
-
-#~ msgid "Alternative Name"
-#~ msgstr "മറ്റൊരു പേരു്"
 
 #~ msgid ""
 #~ "000° 00' 00\" N\n"

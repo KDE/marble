@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2020-08-01 10:42+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -43,6 +43,38 @@ msgstr ""
 msgid "The marble theme id"
 msgstr "Korttema-id med små bogstaver."
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfileSettingsDialog|"
+#| msgid "Routing Profile - Marble"
+msgid "Routing profile"
+msgstr "Ruteplanlægningsprofil - Marble"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Car"
+msgid "Car"
+msgstr "Bil"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfilesModel|"
+#| msgid "Bicycle"
+msgid "Bicycle"
+msgstr "Cykel"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfilesModel|"
+#| msgid "Pedestrian"
+msgid "Pedestrian"
+msgstr "Fodgænger"
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgctxt "CurrentLocationWidget|"
@@ -51,7 +83,7 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Nuværende sted"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Marble Maps"
@@ -152,7 +184,14 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "Visningsin&dstillinger"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgid "Routing"
+msgstr "Ruteplanlægning"
+
+#: MainScreen.qml:457
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "%1 km"
@@ -306,31 +345,48 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "Tags:"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 #| msgctxt "Marble::RoutingProfilesModel|"
 #| msgid "Car (fastest)"
 msgid "Car (fastest)"
 msgstr "Bil (hurtigst)"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Bicycle"
-msgid "Bicycle"
-msgstr "Cykel"
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgctxt "@title"
+msgid "Routing"
+msgstr "Ruteplanlægning"
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
 #, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Pedestrian"
-msgid "Pedestrian"
-msgstr "Fodgænger"
+#| msgctxt "DGML|"
+#| msgid "Temperature"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "Temperatur"
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Search for places to integrate them into a route."
+msgctxt "@label:textbox"
+msgid "Arrival:"
 msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, fuzzy, kde-format
+#| msgctxt "Marble::Placemark|"
+#| msgid "Alternative medicine"
+msgctxt "@label:listbox"
+msgid "Alternatives:"
+msgstr "Alternativ medicin"
 
 #: SettingsDialog.qml:48
 #, fuzzy, kde-format
@@ -461,10 +517,6 @@ msgstr "Tema"
 #~ msgctxt "DGML|"
 #~ msgid "Water Bodies"
 #~ msgstr "Vandlegemer"
-
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
-#~ msgstr "Temperatur"
 
 #~ msgctxt "DGML|"
 #~ msgid "Mountain"
@@ -1117,10 +1169,6 @@ msgstr "Tema"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "Boghandel"
-
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "Bil"
 
 #~ msgctxt "DGML|"
 #~ msgid "Clothes"
@@ -2173,10 +2221,6 @@ msgstr "Tema"
 #~ msgstr "Tekstforklaring"
 
 #~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "Ruteplanlægning"
-
-#~ msgctxt "Marble::ControlView|"
 #~ msgid "Location"
 #~ msgstr "Sted"
 
@@ -2805,10 +2849,6 @@ msgstr "Tema"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Stratovolcano"
 #~ msgstr "Vulkan"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Alternative medicine"
-#~ msgstr "Alternativ medicin"
 
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Audiologist"
@@ -14148,10 +14188,6 @@ msgstr "Tema"
 #~ msgctxt "GeoDataPlacemark|"
 #~ msgid "Book"
 #~ msgstr "Bogmærker"
-
-#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
-#~ msgid "Routing Profile - Marble"
-#~ msgstr "Ruteplanlægningsprofil - Marble"
 
 #~ msgctxt "Marble::RoutingWidget|"
 #~ msgid "Directions - Marble"

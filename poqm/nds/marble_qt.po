@@ -4088,7 +4088,7 @@ msgctxt "Marble::CelestialSortFilterProxyModel|"
 msgid "dwarf planet"
 msgstr "Dwargplanet"
 
-#: src/lib/marble/cloudsync/BookmarkSyncManager.cpp:628
+#: src/lib/marble/cloudsync/BookmarkSyncManager.cpp:634
 #, fuzzy
 #| msgid "Bookmarks"
 msgctxt "Marble::BookmarkSyncManager|"
@@ -9489,104 +9489,104 @@ msgctxt "MapViewWidget|"
 msgid "Here you can choose the preferred map view from different topics."
 msgstr "Hier kannst Du Dien vörtrocken Koortansicht utsöken."
 
-#: src/lib/marble/MapWizard.cpp:154
+#: src/lib/marble/MapWizard.cpp:153
 #, fuzzy
 #| msgid "Preview Map"
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr "Koortvöransicht"
 
-#: src/lib/marble/MapWizard.cpp:273 src/lib/marble/MapWizard.cpp:277
+#: src/lib/marble/MapWizard.cpp:272 src/lib/marble/MapWizard.cpp:276
 #, fuzzy
 #| msgid "Error while parsing"
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr "Fehler bi't Inlesen"
 
-#: src/lib/marble/MapWizard.cpp:273
+#: src/lib/marble/MapWizard.cpp:272
 #, fuzzy
 #| msgid "Wizard cannot parse server's response"
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr "Hölper kann de Serverantwoort nich inlesen."
 
-#: src/lib/marble/MapWizard.cpp:277
+#: src/lib/marble/MapWizard.cpp:276
 #, fuzzy
 #| msgid "Server is not a Web Map Server."
 msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
 msgstr "Server is keen Nettkoort-Server"
 
-#: src/lib/marble/MapWizard.cpp:367 src/lib/marble/MapWizard.cpp:384
-#: src/lib/marble/MapWizard.cpp:1071
+#: src/lib/marble/MapWizard.cpp:366 src/lib/marble/MapWizard.cpp:383
+#: src/lib/marble/MapWizard.cpp:1070
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:368 src/lib/marble/MapWizard.cpp:796
-#: src/lib/marble/MapWizard.cpp:916
+#: src/lib/marble/MapWizard.cpp:367 src/lib/marble/MapWizard.cpp:795
+#: src/lib/marble/MapWizard.cpp:915
 #, fuzzy
 #| msgid "Equirectangular"
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr "Längdenliek Zylinnerprojizeren"
 
-#: src/lib/marble/MapWizard.cpp:369 src/lib/marble/MapWizard.cpp:798
-#: src/lib/marble/MapWizard.cpp:918
+#: src/lib/marble/MapWizard.cpp:368 src/lib/marble/MapWizard.cpp:797
+#: src/lib/marble/MapWizard.cpp:917
 #, fuzzy
 #| msgid "Equirectangular"
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (crs:84)"
 msgstr "Längdenliek Zylinnerprojizeren"
 
-#: src/lib/marble/MapWizard.cpp:380
+#: src/lib/marble/MapWizard.cpp:379
 #, fuzzy
 #| msgid "&Projection"
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
 msgstr "&Projekschoon"
 
-#: src/lib/marble/MapWizard.cpp:396
+#: src/lib/marble/MapWizard.cpp:395
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:439 src/lib/marble/MapWizard.cpp:908
+#: src/lib/marble/MapWizard.cpp:438 src/lib/marble/MapWizard.cpp:907
 #, fuzzy
 #| msgid "Preview Image"
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "Bildvöransicht"
 
-#: src/lib/marble/MapWizard.cpp:443
+#: src/lib/marble/MapWizard.cpp:442
 #, fuzzy
 #| msgid "Base Tile"
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "Basiskachel"
 
-#: src/lib/marble/MapWizard.cpp:447
+#: src/lib/marble/MapWizard.cpp:446
 #, fuzzy
 #| msgid "Legend"
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
 msgstr "Legenn"
 
-#: src/lib/marble/MapWizard.cpp:453 src/lib/marble/MapWizard.cpp:463
+#: src/lib/marble/MapWizard.cpp:452 src/lib/marble/MapWizard.cpp:462
 #, fuzzy, qt-format
 #| msgid "%1 m"
 msgctxt "Marble::MapWizard|"
 msgid "%1"
 msgstr "%1 m"
 
-#: src/lib/marble/MapWizard.cpp:453
+#: src/lib/marble/MapWizard.cpp:452
 #, fuzzy, qt-format
 #| msgid "The base tile could not be downloaded."
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
 msgstr "De Basiskachel lett sik nich daalladen."
 
-#: src/lib/marble/MapWizard.cpp:464
+#: src/lib/marble/MapWizard.cpp:463
 #, fuzzy, qt-format
 #| msgid ""
 #| "The base tile could not be downloaded successfully. The server replied:\n"
@@ -9602,52 +9602,52 @@ msgstr ""
 "\n"
 "%1"
 
-#: src/lib/marble/MapWizard.cpp:543 src/lib/marble/MapWizard.cpp:1460
-#: src/lib/marble/MapWizard.cpp:1461 src/lib/marble/MapWizard.cpp:1470
-#: src/lib/marble/MapWizard.cpp:1471
+#: src/lib/marble/MapWizard.cpp:542 src/lib/marble/MapWizard.cpp:1459
+#: src/lib/marble/MapWizard.cpp:1460 src/lib/marble/MapWizard.cpp:1469
+#: src/lib/marble/MapWizard.cpp:1470
 #, fuzzy
 #| msgid "Custom"
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "Topasst"
 
-#: src/lib/marble/MapWizard.cpp:752 src/lib/marble/MapWizard.cpp:755
+#: src/lib/marble/MapWizard.cpp:751 src/lib/marble/MapWizard.cpp:754
 #, fuzzy
 #| msgid "Archiving failed"
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "Archiveren fehlslaan"
 
-#: src/lib/marble/MapWizard.cpp:752
+#: src/lib/marble/MapWizard.cpp:751
 #, fuzzy
 #| msgid "Archiving process cannot be started."
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "Archiverenperzess lett sik nich starten"
 
-#: src/lib/marble/MapWizard.cpp:755
+#: src/lib/marble/MapWizard.cpp:754
 #, fuzzy
 #| msgid "Archiving process crashed."
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "Archiverenperzess afstört"
 
-#: src/lib/marble/MapWizard.cpp:842 src/lib/marble/MapWizard.cpp:848
-#: src/lib/marble/MapWizard.cpp:856
+#: src/lib/marble/MapWizard.cpp:841 src/lib/marble/MapWizard.cpp:847
+#: src/lib/marble/MapWizard.cpp:855
 #, fuzzy
 #| msgid "Source Image"
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Bornbild"
 
-#: src/lib/marble/MapWizard.cpp:842
+#: src/lib/marble/MapWizard.cpp:841
 #, fuzzy
 #| msgid "Please specify a source image."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Bitte en Bornbild angeven"
 
-#: src/lib/marble/MapWizard.cpp:848
+#: src/lib/marble/MapWizard.cpp:847
 #, fuzzy
 #| msgid ""
 #| "The source image you specified does not exist. Please specify a different "
@@ -9658,7 +9658,7 @@ msgid ""
 "one."
 msgstr "Dat angeven Bornbild gifft dat nich. Bitte giff en anner Bild an."
 
-#: src/lib/marble/MapWizard.cpp:857
+#: src/lib/marble/MapWizard.cpp:856
 #, fuzzy
 #| msgid ""
 #| "The source image you specified does not seem to be an image. Please "
@@ -9671,35 +9671,35 @@ msgstr ""
 "As't lett is dat angeven Bornbild gor keen Bild. Bitte giff en anner "
 "Bilddatei an."
 
-#: src/lib/marble/MapWizard.cpp:887
+#: src/lib/marble/MapWizard.cpp:886
 #, fuzzy
 #| msgid "Map Title"
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Titel vun de Koort"
 
-#: src/lib/marble/MapWizard.cpp:887
+#: src/lib/marble/MapWizard.cpp:886
 #, fuzzy
 #| msgid "Please specify a map title."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Bitte en Titel för de Koort angeven"
 
-#: src/lib/marble/MapWizard.cpp:894 src/lib/marble/MapWizard.cpp:901
+#: src/lib/marble/MapWizard.cpp:893 src/lib/marble/MapWizard.cpp:900
 #, fuzzy
 #| msgid "Map Name"
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Naam vun de Koort"
 
-#: src/lib/marble/MapWizard.cpp:894
+#: src/lib/marble/MapWizard.cpp:893
 #, fuzzy
 #| msgid "Please specify a map name."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Bitte en Naam för de Koort angeven"
 
-#: src/lib/marble/MapWizard.cpp:901
+#: src/lib/marble/MapWizard.cpp:900
 #, fuzzy, qt-format
 #| msgid ""
 #| "Please specify another map name, since there is already a map named "
@@ -9711,45 +9711,45 @@ msgstr ""
 "Bitte en anner Naam för de Koort ingeven. - Dat gifft al en Koort mit den "
 "Naam \"%1\"."
 
-#: src/lib/marble/MapWizard.cpp:908
+#: src/lib/marble/MapWizard.cpp:907
 #, fuzzy
 #| msgid "Please specify a preview image."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Bitte en Vöransichtbild angeven"
 
-#: src/lib/marble/MapWizard.cpp:1404
+#: src/lib/marble/MapWizard.cpp:1403
 #, fuzzy
 #| msgid "Problem while creating files"
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "Problem bi't Opstellen vun Dateien"
 
-#: src/lib/marble/MapWizard.cpp:1404
+#: src/lib/marble/MapWizard.cpp:1403
 #, fuzzy
 #| msgid "Check if a theme with the same name exists."
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "Kiek na, wat dat al en Muster mit den sülven Naam gifft."
 
-#: src/lib/marble/MapWizard.cpp:1455
+#: src/lib/marble/MapWizard.cpp:1454
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1457
+#: src/lib/marble/MapWizard.cpp:1456
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1464
+#: src/lib/marble/MapWizard.cpp:1463
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1466
+#: src/lib/marble/MapWizard.cpp:1465
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
@@ -14481,14 +14481,14 @@ msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Synchronization"
 msgstr "Synkroniseren"
 
-#: src/lib/marble/QtMarbleConfigDialog.cpp:253
+#: src/lib/marble/QtMarbleConfigDialog.cpp:251
 #, fuzzy
 #| msgid "Never synchronized."
 msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Never synchronized."
 msgstr "Nienich synkroniseert"
 
-#: src/lib/marble/QtMarbleConfigDialog.cpp:257
+#: src/lib/marble/QtMarbleConfigDialog.cpp:255
 #, fuzzy, qt-format
 #| msgid "Last synchronization: %1"
 msgctxt "Marble::QtMarbleConfigDialog|"
@@ -15324,14 +15324,14 @@ msgctxt "QObject|"
 msgid "Search for '%1'"
 msgstr "Söök na „%1“"
 
-#: src/lib/marble/SoundCueEditWidget.cpp:69
+#: src/lib/marble/SoundCueEditWidget.cpp:67
 #, fuzzy
 #| msgid "Select Node"
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Select sound files..."
 msgstr "Knütten utsöken"
 
-#: src/lib/marble/SoundCueEditWidget.cpp:69
+#: src/lib/marble/SoundCueEditWidget.cpp:67
 #, fuzzy
 #| msgid "All Supported Files (*.jpg *.png)"
 msgctxt "Marble::SoundCueEditWidget|"

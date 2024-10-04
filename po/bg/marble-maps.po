@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2024-09-29 14:44+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -37,13 +37,37 @@ msgstr "Вашите отметки ще се появят тук."
 msgid "The marble theme id"
 msgstr "Идент. номер на тема на marble"
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, kde-format
+msgid "Routing profile"
+msgstr ""
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, kde-format
+msgid "Car"
+msgstr ""
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, kde-format
+msgid "Bicycle"
+msgstr "Велосипед"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, kde-format
+msgid "Pedestrian"
+msgstr "Пешеходец"
+
 #: CurrentPosition.qml:54
 #, kde-format
 msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Следване на текущо местоположение"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, kde-format
 msgid "Marble Maps"
 msgstr "Карти Marble"
@@ -120,7 +144,12 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "Параметри на темата"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, kde-format
+msgid "Routing"
+msgstr ""
+
+#: MainScreen.qml:457
 #, kde-format
 msgid "%1 km"
 msgstr "%1 км"
@@ -238,25 +267,40 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "Етикети:"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, kde-format
 msgid "Car (fastest)"
 msgstr "Автомобил (най-бърз)"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, kde-format
-msgid "Bicycle"
-msgstr "Велосипед"
+msgctxt "@title"
+msgid "Routing"
+msgstr ""
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
 #, kde-format
-msgid "Pedestrian"
-msgstr "Пешеходец"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr ""
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Search for places to integrate them into a route."
-msgstr "Търсене за места, които да бъдат интегрирани в маршрута."
+msgctxt "@label:textbox"
+msgid "Arrival:"
+msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Alternatives:"
+msgstr ""
 
 #: SettingsDialog.qml:48
 #, kde-format
@@ -273,3 +317,6 @@ msgstr "Изтегляне на карти само през WLAN"
 msgctxt "@title:window"
 msgid "Themes"
 msgstr "Теми"
+
+#~ msgid "Search for places to integrate them into a route."
+#~ msgstr "Търсене за места, които да бъдат интегрирани в маршрута."

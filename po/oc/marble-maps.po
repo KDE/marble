@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2008-08-05 22:27+0200\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan (lengadocian) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
@@ -36,6 +36,33 @@ msgstr ""
 msgid "The marble theme id"
 msgstr ""
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgid "Navigation"
+msgid "Routing profile"
+msgstr "Navegacion"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgid "&Search"
+msgid "Car"
+msgstr "&Recercar"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+#| msgid "Back"
+msgid "Bicycle"
+msgstr "Pista"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, kde-format
+msgid "Pedestrian"
+msgstr ""
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgid "Location"
@@ -43,7 +70,7 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Emplaçament"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgid "&About"
 msgid "Marble Maps"
@@ -126,7 +153,13 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr ""
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgid "Open File"
+msgid "Routing"
+msgstr "Dobrir un fichièr"
+
+#: MainScreen.qml:457
 #, fuzzy, kde-format
 #| msgid "10 mm"
 msgid "%1 km"
@@ -251,26 +284,42 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr ""
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 #| msgid "State"
 msgid "Car (fastest)"
 msgstr "Aiga"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-#| msgid "Back"
-msgid "Bicycle"
-msgstr "Pista"
+#| msgid "Open File"
+msgctxt "@title"
+msgid "Routing"
+msgstr "Dobrir un fichièr"
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
+#, fuzzy, kde-format
+#| msgid "Temperature"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "Temperatura"
+
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Pedestrian"
+msgctxt "@label:textbox"
+msgid "Arrival:"
 msgstr ""
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:106
 #, kde-format
-msgid "Search for places to integrate them into a route."
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Alternatives:"
 msgstr ""
 
 #: SettingsDialog.qml:48
@@ -314,12 +363,6 @@ msgstr "Nom"
 #~| msgid "Temperature"
 #~ msgctxt "DGML|"
 #~ msgid "Temperature (July)"
-#~ msgstr "Temperatura"
-
-#, fuzzy
-#~| msgid "Temperature"
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
 #~ msgstr "Temperatura"
 
 #, fuzzy
@@ -501,12 +544,6 @@ msgstr "Nom"
 #~ msgctxt "DGML|"
 #~ msgid "Fire station"
 #~ msgstr "Internacional"
-
-#, fuzzy
-#~| msgid "&Search"
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "&Recercar"
 
 #, fuzzy
 #~| msgid "International"
@@ -789,12 +826,6 @@ msgstr "Nom"
 #~ msgctxt "Marble::ControlView|"
 #~ msgid "Legend"
 #~ msgstr "Legenda"
-
-#, fuzzy
-#~| msgid "Open File"
-#~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "Dobrir un fichièr"
 
 #, fuzzy
 #~| msgid "Location"
@@ -4754,12 +4785,6 @@ msgstr "Nom"
 #~ msgctxt "GeoDataPlacemark|"
 #~ msgid "Car"
 #~ msgstr "&Recercar"
-
-#, fuzzy
-#~| msgid "Navigation"
-#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
-#~ msgid "Routing Profile - Marble"
-#~ msgstr "Navegacion"
 
 #, fuzzy
 #~| msgid "Zoom Out"

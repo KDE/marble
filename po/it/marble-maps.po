@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2024-09-30 19:05+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -38,13 +38,41 @@ msgstr "I tuoi segnalibri appariranno qui."
 msgid "The marble theme id"
 msgstr "L'ID del tema di marble"
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfileSettingsDialog|"
+#| msgid "Routing Profile - Marble"
+msgid "Routing profile"
+msgstr "Profilo d'itinerario – Marble"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Car"
+msgid "Car"
+msgstr "Negozio per auto"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, kde-format
+msgid "Bicycle"
+msgstr "Bicicletta"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, kde-format
+msgid "Pedestrian"
+msgstr "A piedi"
+
 #: CurrentPosition.qml:54
 #, kde-format
 msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Segui la località corrente"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, kde-format
 msgid "Marble Maps"
 msgstr "Marble Maps"
@@ -121,7 +149,14 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "Opzioni dei temi"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgid "Routing"
+msgstr "Itinerario"
+
+#: MainScreen.qml:457
 #, kde-format
 msgid "%1 km"
 msgstr "%1 km"
@@ -239,25 +274,45 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "Etichette:"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, kde-format
 msgid "Car (fastest)"
 msgstr "Automobile (più veloce)"
 
-#: ProfileSelectorMenu.qml:40
-#, kde-format
-msgid "Bicycle"
-msgstr "Bicicletta"
+#: RouteEditorPage.qml:19
+#, fuzzy, kde-format
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgctxt "@title"
+msgid "Routing"
+msgstr "Itinerario"
 
-#: ProfileSelectorMenu.qml:49
-#, kde-format
-msgid "Pedestrian"
-msgstr "A piedi"
+#: RouteEditorPage.qml:102
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Temperature"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "Temperatura"
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Search for places to integrate them into a route."
-msgstr "Cerca luoghi da integrare in un itinerario."
+msgctxt "@label:textbox"
+msgid "Arrival:"
+msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, fuzzy, kde-format
+#| msgid "Alternative Name"
+msgctxt "@label:listbox"
+msgid "Alternatives:"
+msgstr "Nome alternativo"
 
 #: SettingsDialog.qml:48
 #, kde-format
@@ -274,6 +329,9 @@ msgstr "Scarica mappe solo via WLAN"
 msgctxt "@title:window"
 msgid "Themes"
 msgstr "Temi"
+
+#~ msgid "Search for places to integrate them into a route."
+#~ msgstr "Cerca luoghi da integrare in un itinerario."
 
 #~ msgctxt "DGML|"
 #~ msgid "Moon"
@@ -382,10 +440,6 @@ msgstr "Temi"
 #~ msgctxt "DGML|"
 #~ msgid "Water Bodies"
 #~ msgstr "Corpi idrici"
-
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
-#~ msgstr "Temperatura"
 
 #~ msgctxt "DGML|"
 #~ msgid "Mountain"
@@ -1039,10 +1093,6 @@ msgstr "Temi"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "Libreria"
-
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "Negozio per auto"
 
 #~ msgctxt "DGML|"
 #~ msgid "Clothes"
@@ -2155,10 +2205,6 @@ msgstr "Temi"
 #~ msgctxt "Marble::ControlView|"
 #~ msgid "Legend"
 #~ msgstr "Legenda"
-
-#~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "Itinerario"
 
 #~ msgctxt "Marble::ControlView|"
 #~ msgid "Location"
@@ -14986,10 +15032,6 @@ msgstr "Temi"
 #~ msgid "Toys"
 #~ msgstr "Giocattoli"
 
-#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
-#~ msgid "Routing Profile - Marble"
-#~ msgstr "Profilo d'itinerario – Marble"
-
 #~ msgctxt "Marble::RoutingWidget|"
 #~ msgid "Directions - Marble"
 #~ msgstr "Direzioni  - Marble"
@@ -16320,9 +16362,6 @@ msgstr "Temi"
 
 #~ msgid "Alternative name of the location."
 #~ msgstr "Nome alternativo della località."
-
-#~ msgid "Alternative Name"
-#~ msgstr "Nome alternativo"
 
 #~ msgid "Short Description:"
 #~ msgstr "Breve descrizione:"

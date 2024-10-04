@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2009-12-03 16:55+0000\n"
 "Last-Translator: Sveinn í Felli <sveinki@nett.is>\n"
 "Language-Team: Icelandic <kde-isl@molar.is>\n"
@@ -36,13 +36,37 @@ msgstr ""
 msgid "The marble theme id"
 msgstr ""
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+msgid "Routing profile"
+msgstr "Mountain"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+msgid "Car"
+msgstr "bjart"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+msgid "Bicycle"
+msgstr "stígandi"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, kde-format
+msgid "Pedestrian"
+msgstr ""
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Staðsetning"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 msgid "Marble Maps"
 msgstr "Marmari"
@@ -119,7 +143,12 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr ""
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+msgid "Routing"
+msgstr "Mountain"
+
+#: MainScreen.qml:457
 #, fuzzy, kde-format
 msgid "%1 km"
 msgstr "km/klst"
@@ -237,24 +266,39 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr ""
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 msgid "Car (fastest)"
 msgstr "Bikarinn"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-msgid "Bicycle"
-msgstr "stígandi"
+msgctxt "@title"
+msgid "Routing"
+msgstr "Mountain"
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
 #, kde-format
-msgid "Pedestrian"
+msgctxt "@label:textbox"
+msgid "Departure:"
 msgstr ""
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Search for places to integrate them into a route."
+msgctxt "@label:textbox"
+msgid "Arrival:"
+msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Alternatives:"
 msgstr ""
 
 #: SettingsDialog.qml:48
@@ -387,11 +431,6 @@ msgstr "Nafn"
 #~ msgctxt "DGML|"
 #~ msgid "Bar"
 #~ msgstr "Slá"
-
-#, fuzzy
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "bjart"
 
 #, fuzzy
 #~ msgctxt "DGML|"
@@ -642,11 +681,6 @@ msgstr "Nafn"
 #~ msgctxt "Marble::ControlView|"
 #~ msgid "Legend"
 #~ msgstr "Skýring"
-
-#, fuzzy
-#~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "Mountain"
 
 #, fuzzy
 #~ msgctxt "Marble::ControlView|"
@@ -3984,11 +4018,6 @@ msgstr "Nafn"
 #~ msgctxt "GeoDataPlacemark|"
 #~ msgid "Car"
 #~ msgstr "bjart"
-
-#, fuzzy
-#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
-#~ msgid "Routing Profile - Marble"
-#~ msgstr "Mountain"
 
 #, fuzzy
 #~ msgctxt "Marble::RoutingWidget|"

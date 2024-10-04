@@ -3220,7 +3220,7 @@ msgctxt "Marble::CelestialSortFilterProxyModel|"
 msgid "dwarf planet"
 msgstr "πλανήτης νάνος"
 
-#: src/lib/marble/cloudsync/BookmarkSyncManager.cpp:628
+#: src/lib/marble/cloudsync/BookmarkSyncManager.cpp:634
 msgctxt "Marble::BookmarkSyncManager|"
 msgid "Bookmarks"
 msgstr "Σελιδοδείκτες"
@@ -7744,22 +7744,22 @@ msgstr ""
 "Εδώ μπορείτε να επιλέξετε την προτιμώμενη προβολή χάρτη μέσα από διάφορα "
 "θέματα."
 
-#: src/lib/marble/MapWizard.cpp:154
+#: src/lib/marble/MapWizard.cpp:153
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr "Προεπισκόπηση χάρτη"
 
-#: src/lib/marble/MapWizard.cpp:273 src/lib/marble/MapWizard.cpp:277
+#: src/lib/marble/MapWizard.cpp:272 src/lib/marble/MapWizard.cpp:276
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr "Σφάλμα συντακτικής ανάλυσης"
 
-#: src/lib/marble/MapWizard.cpp:273
+#: src/lib/marble/MapWizard.cpp:272
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr "Ο οδηγός δεν μπορεί να αναλύσει την απάντηση του διακομιστή"
 
-#: src/lib/marble/MapWizard.cpp:277
+#: src/lib/marble/MapWizard.cpp:276
 #, fuzzy
 #| msgctxt "Marble::MapWizard|"
 #| msgid "Server is not a Web Map Server."
@@ -7769,25 +7769,25 @@ msgstr ""
 "Ο διακομιστής δεν αποτελεί έναν διακομιστή διαδικτυακών χαρτών (Web Map "
 "Server)."
 
-#: src/lib/marble/MapWizard.cpp:367 src/lib/marble/MapWizard.cpp:384
-#: src/lib/marble/MapWizard.cpp:1071
+#: src/lib/marble/MapWizard.cpp:366 src/lib/marble/MapWizard.cpp:383
+#: src/lib/marble/MapWizard.cpp:1070
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:368 src/lib/marble/MapWizard.cpp:796
-#: src/lib/marble/MapWizard.cpp:916
+#: src/lib/marble/MapWizard.cpp:367 src/lib/marble/MapWizard.cpp:795
+#: src/lib/marble/MapWizard.cpp:915
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:369 src/lib/marble/MapWizard.cpp:798
-#: src/lib/marble/MapWizard.cpp:918
+#: src/lib/marble/MapWizard.cpp:368 src/lib/marble/MapWizard.cpp:797
+#: src/lib/marble/MapWizard.cpp:917
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (crs:84)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:380
+#: src/lib/marble/MapWizard.cpp:379
 #, fuzzy
 #| msgctxt "MapViewWidget|"
 #| msgid "&Projection"
@@ -7795,27 +7795,27 @@ msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
 msgstr "&Προβολή"
 
-#: src/lib/marble/MapWizard.cpp:396
+#: src/lib/marble/MapWizard.cpp:395
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:439 src/lib/marble/MapWizard.cpp:908
+#: src/lib/marble/MapWizard.cpp:438 src/lib/marble/MapWizard.cpp:907
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "Εικόνα προεπισκόπησης"
 
-#: src/lib/marble/MapWizard.cpp:443
+#: src/lib/marble/MapWizard.cpp:442
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "Πλακίδιο βάσης"
 
-#: src/lib/marble/MapWizard.cpp:447
+#: src/lib/marble/MapWizard.cpp:446
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
 msgstr "Εικόνα υπομνήματος"
 
-#: src/lib/marble/MapWizard.cpp:453 src/lib/marble/MapWizard.cpp:463
+#: src/lib/marble/MapWizard.cpp:452 src/lib/marble/MapWizard.cpp:462
 #, fuzzy, qt-format
 #| msgctxt "NavigationInfoBar|"
 #| msgid "%1 m"
@@ -7823,7 +7823,7 @@ msgctxt "Marble::MapWizard|"
 msgid "%1"
 msgstr "%1 m"
 
-#: src/lib/marble/MapWizard.cpp:453
+#: src/lib/marble/MapWizard.cpp:452
 #, fuzzy, qt-format
 #| msgctxt "Marble::MapWizard|"
 #| msgid "The base tile could not be downloaded."
@@ -7831,7 +7831,7 @@ msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
 msgstr "Αδυναμία λήψης του πλακιδίου βάσης."
 
-#: src/lib/marble/MapWizard.cpp:464
+#: src/lib/marble/MapWizard.cpp:463
 #, fuzzy, qt-format
 #| msgctxt "Marble::MapWizard|"
 #| msgid ""
@@ -7848,40 +7848,40 @@ msgstr ""
 "\n"
 "%1"
 
-#: src/lib/marble/MapWizard.cpp:543 src/lib/marble/MapWizard.cpp:1460
-#: src/lib/marble/MapWizard.cpp:1461 src/lib/marble/MapWizard.cpp:1470
-#: src/lib/marble/MapWizard.cpp:1471
+#: src/lib/marble/MapWizard.cpp:542 src/lib/marble/MapWizard.cpp:1459
+#: src/lib/marble/MapWizard.cpp:1460 src/lib/marble/MapWizard.cpp:1469
+#: src/lib/marble/MapWizard.cpp:1470
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "Προσαρμοσμένος"
 
-#: src/lib/marble/MapWizard.cpp:752 src/lib/marble/MapWizard.cpp:755
+#: src/lib/marble/MapWizard.cpp:751 src/lib/marble/MapWizard.cpp:754
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "Η αρχειοθέτηση απέτυχε"
 
-#: src/lib/marble/MapWizard.cpp:752
+#: src/lib/marble/MapWizard.cpp:751
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "Αδυναμία εκκίνησης της διαδικασίας αρχειοθέτησης."
 
-#: src/lib/marble/MapWizard.cpp:755
+#: src/lib/marble/MapWizard.cpp:754
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "Η διαδικασία αρχειοθέτησης κατέρρευσε."
 
-#: src/lib/marble/MapWizard.cpp:842 src/lib/marble/MapWizard.cpp:848
-#: src/lib/marble/MapWizard.cpp:856
+#: src/lib/marble/MapWizard.cpp:841 src/lib/marble/MapWizard.cpp:847
+#: src/lib/marble/MapWizard.cpp:855
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Πηγαία εικόνα"
 
-#: src/lib/marble/MapWizard.cpp:842
+#: src/lib/marble/MapWizard.cpp:841
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Παρακαλώ καθορίστε μια πηγαία εικόνα."
 
-#: src/lib/marble/MapWizard.cpp:848
+#: src/lib/marble/MapWizard.cpp:847
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
@@ -7890,7 +7890,7 @@ msgstr ""
 "Η πηγαία εικόνα που καθορίσατε δεν υπάρχει. Παρακαλώ καθορίστε μια άλλη "
 "εικόνα."
 
-#: src/lib/marble/MapWizard.cpp:857
+#: src/lib/marble/MapWizard.cpp:856
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
@@ -7899,27 +7899,27 @@ msgstr ""
 "Η πηγαία εικόνα που καθορίσατε δε φαίνεται να αποτελεί όντως εικόνα. "
 "Παρακαλώ καθορίστε ένα άλλο αρχείο εικόνας."
 
-#: src/lib/marble/MapWizard.cpp:887
+#: src/lib/marble/MapWizard.cpp:886
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Τίτλος χάρτη"
 
-#: src/lib/marble/MapWizard.cpp:887
+#: src/lib/marble/MapWizard.cpp:886
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Παρακαλώ καθορίστε έναν τίτλο για τον χάρτη."
 
-#: src/lib/marble/MapWizard.cpp:894 src/lib/marble/MapWizard.cpp:901
+#: src/lib/marble/MapWizard.cpp:893 src/lib/marble/MapWizard.cpp:900
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Όνομα χάρτη"
 
-#: src/lib/marble/MapWizard.cpp:894
+#: src/lib/marble/MapWizard.cpp:893
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Παρακαλώ καθορίστε ένα όνομα για τον χάρτη."
 
-#: src/lib/marble/MapWizard.cpp:901
+#: src/lib/marble/MapWizard.cpp:900
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -7928,34 +7928,34 @@ msgstr ""
 "Παρακαλώ καθορίστε ένα άλλο όνομα για τον χάρτη, αφού υπάρχει ήδη χάρτης με "
 "το όνομα \"%1\"."
 
-#: src/lib/marble/MapWizard.cpp:908
+#: src/lib/marble/MapWizard.cpp:907
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Παρακαλώ καθορίστε μια εικόνα προεπισκόπησης."
 
-#: src/lib/marble/MapWizard.cpp:1404
+#: src/lib/marble/MapWizard.cpp:1403
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "Πρόβλημα κατά τη δημιουργία των αρχείων"
 
-#: src/lib/marble/MapWizard.cpp:1404
+#: src/lib/marble/MapWizard.cpp:1403
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "Ελέγξτε αν υπάρχει θέμα με το ίδιο όνομα."
 
-#: src/lib/marble/MapWizard.cpp:1455
+#: src/lib/marble/MapWizard.cpp:1454
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
 msgstr "WMS διακομιστής"
 
-#: src/lib/marble/MapWizard.cpp:1457
+#: src/lib/marble/MapWizard.cpp:1456
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1464
+#: src/lib/marble/MapWizard.cpp:1463
 #, fuzzy
 #| msgctxt "MapWizard|"
 #| msgid "WMS Server:"
@@ -7963,7 +7963,7 @@ msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
 msgstr "WMS διακομιστής:"
 
-#: src/lib/marble/MapWizard.cpp:1466
+#: src/lib/marble/MapWizard.cpp:1465
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
@@ -11875,12 +11875,12 @@ msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Synchronization"
 msgstr ""
 
-#: src/lib/marble/QtMarbleConfigDialog.cpp:253
+#: src/lib/marble/QtMarbleConfigDialog.cpp:251
 msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Never synchronized."
 msgstr ""
 
-#: src/lib/marble/QtMarbleConfigDialog.cpp:257
+#: src/lib/marble/QtMarbleConfigDialog.cpp:255
 #, qt-format
 msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Last synchronization: %1"
@@ -12537,14 +12537,14 @@ msgctxt "QObject|"
 msgid "Search for '%1'"
 msgstr "Αναζήτηση για '%1'"
 
-#: src/lib/marble/SoundCueEditWidget.cpp:69
+#: src/lib/marble/SoundCueEditWidget.cpp:67
 #, fuzzy
 #| msgid "Selection Method"
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Select sound files..."
 msgstr "Μέθοδος επιλογής"
 
-#: src/lib/marble/SoundCueEditWidget.cpp:69
+#: src/lib/marble/SoundCueEditWidget.cpp:67
 #, fuzzy
 #| msgid "All Supported Files (*.txt *.msc)"
 msgctxt "Marble::SoundCueEditWidget|"

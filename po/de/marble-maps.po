@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2024-07-17 21:30+0200\n"
 "Last-Translator: Flori G <Renner03@protonmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -51,6 +51,38 @@ msgstr "Hier werden Ihre Lesezeichen erscheinen."
 msgid "The marble theme id"
 msgstr "Die kleingeschriebene ID des Kartendesigns"
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfileSettingsDialog|"
+#| msgid "Routing Profile - Marble"
+msgid "Routing profile"
+msgstr "Routenprofile -- Marble"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Car"
+msgid "Car"
+msgstr "Auto"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfilesModel|"
+#| msgid "Bicycle"
+msgid "Bicycle"
+msgstr "Fahrrad"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfilesModel|"
+#| msgid "Pedestrian"
+msgid "Pedestrian"
+msgstr "Fußgänger"
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgctxt "CurrentPosition|"
@@ -59,7 +91,7 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Aktuellem Standort folgen"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Marble Maps"
@@ -158,7 +190,14 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "Ansichts&einstellungen"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgid "Routing"
+msgstr "Routenplaner"
+
+#: MainScreen.qml:457
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "%1 km"
@@ -312,33 +351,47 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "Stichwörter:"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 #| msgctxt "Marble::RoutingProfilesModel|"
 #| msgid "Car (fastest)"
 msgid "Car (fastest)"
 msgstr "Auto (schnellste)"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Bicycle"
-msgid "Bicycle"
-msgstr "Fahrrad"
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgctxt "@title"
+msgid "Routing"
+msgstr "Routenplaner"
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
 #, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Pedestrian"
-msgid "Pedestrian"
-msgstr "Fußgänger"
+#| msgctxt "DGML|"
+#| msgid "Temperature"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "Temperatur"
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Arrival:"
+msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
 #, fuzzy, kde-format
-#| msgctxt "RouteEditor|"
-#| msgid "Search for places to integrate them into a route."
-msgid "Search for places to integrate them into a route."
-msgstr "Nach Orten suchen, um sie in die Route einzubinden."
+#| msgid "Alternative Name"
+msgctxt "@label:listbox"
+msgid "Alternatives:"
+msgstr "Alternativer Name"
 
 #: SettingsDialog.qml:48
 #, fuzzy, kde-format
@@ -361,6 +414,12 @@ msgstr "Karten nur über WLAN herunterladen"
 msgctxt "@title:window"
 msgid "Themes"
 msgstr "Design"
+
+#, fuzzy
+#~| msgctxt "RouteEditor|"
+#~| msgid "Search for places to integrate them into a route."
+#~ msgid "Search for places to integrate them into a route."
+#~ msgstr "Nach Orten suchen, um sie in die Route einzubinden."
 
 #~ msgctxt "DGML|"
 #~ msgid "Moon"
@@ -469,10 +528,6 @@ msgstr "Design"
 #~ msgctxt "DGML|"
 #~ msgid "Water Bodies"
 #~ msgstr "Wasserflächen"
-
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
-#~ msgstr "Temperatur"
 
 #~ msgctxt "DGML|"
 #~ msgid "Mountain"
@@ -1121,10 +1176,6 @@ msgstr "Design"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "Bücher"
-
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "Auto"
 
 #~ msgctxt "DGML|"
 #~ msgid "Clothes"
@@ -2247,10 +2298,6 @@ msgstr "Design"
 #~ msgctxt "Marble::ControlView|"
 #~ msgid "Legend"
 #~ msgstr "Legende"
-
-#~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "Routenplaner"
 
 #~ msgctxt "Marble::ControlView|"
 #~ msgid "Location"
@@ -14669,10 +14716,6 @@ msgstr "Design"
 #~ msgid "Toys"
 #~ msgstr "Spielwarengeschäft"
 
-#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
-#~ msgid "Routing Profile - Marble"
-#~ msgstr "Routenprofile -- Marble"
-
 #~ msgctxt "Marble::RoutingWidget|"
 #~ msgid "Directions - Marble"
 #~ msgstr "Richtungen - Marble"
@@ -16335,9 +16378,6 @@ msgstr "Design"
 
 #~ msgid "Alternative name of the location."
 #~ msgstr "Alternativer Name des Ortes."
-
-#~ msgid "Alternative Name"
-#~ msgstr "Alternativer Name"
 
 #~ msgid "Short Description:"
 #~ msgstr "Kurzbeschreibung:"

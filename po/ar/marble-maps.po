@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2024-09-19 09:48+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "X-Generator: Lokalize 23.08.5\n"
 
 #: Bookmarks.qml:20
@@ -40,6 +40,36 @@ msgstr "ستظهر مفضلاتك هناك"
 msgid "The marble theme id"
 msgstr ""
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+msgid "Routing profile"
+msgstr "حول رخامي"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Car"
+msgid "Car"
+msgstr "سيارة"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfilesModel|"
+#| msgid "Bicycle"
+msgid "Bicycle"
+msgstr "درّاجة هوائيّة"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfilesModel|"
+#| msgid "Pedestrian"
+msgid "Pedestrian"
+msgstr "ماشي"
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgctxt "CurrentPosition|"
@@ -48,7 +78,7 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "اتبع الموقع الحالي"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Marble Maps"
@@ -145,7 +175,14 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "خيارات الطبقات"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgid "Routing"
+msgstr "التوجيه"
+
+#: MainScreen.qml:457
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "%1 km"
@@ -299,29 +336,44 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "الوسوم"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 msgid "Car (fastest)"
 msgstr "m ماء"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Bicycle"
-msgid "Bicycle"
-msgstr "درّاجة هوائيّة"
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgctxt "@title"
+msgid "Routing"
+msgstr "التوجيه"
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
 #, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Pedestrian"
-msgid "Pedestrian"
-msgstr "ماشي"
+#| msgctxt "DGML|"
+#| msgid "Temperature"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "درجة الحرارة"
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Search for places to integrate them into a route."
+msgctxt "@label:textbox"
+msgid "Arrival:"
 msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, fuzzy, kde-format
+msgctxt "@label:listbox"
+msgid "Alternatives:"
+msgstr "بديل الاسم"
 
 #: SettingsDialog.qml:48
 #, fuzzy, kde-format
@@ -429,10 +481,6 @@ msgstr "السمة"
 #~ msgctxt "DGML|"
 #~ msgid "Water Bodies"
 #~ msgstr "تجمعات مائية"
-
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
-#~ msgstr "درجة الحرارة"
 
 #~ msgctxt "DGML|"
 #~ msgid "Mountain"
@@ -976,10 +1024,6 @@ msgstr "السمة"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "كتب"
-
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "سيارة"
 
 #~ msgctxt "DGML|"
 #~ msgid "Clothes"
@@ -1882,10 +1926,6 @@ msgstr "السمة"
 #~ msgctxt "Marble::ControlView|"
 #~ msgid "Legend"
 #~ msgstr "المفتاح"
-
-#~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "التوجيه"
 
 #~ msgctxt "Marble::ControlView|"
 #~ msgid "Location"
@@ -10215,11 +10255,6 @@ msgstr "السمة"
 #~ msgstr "ابحث سطر"
 
 #, fuzzy
-#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
-#~ msgid "Routing Profile - Marble"
-#~ msgstr "حول رخامي"
-
-#, fuzzy
 #~ msgctxt "Marble::RoutingWidget|"
 #~ msgid "Directions - Marble"
 #~ msgstr "حول رخامي"
@@ -10867,10 +10902,6 @@ msgstr "السمة"
 #~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 #~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 #~ "style:italic;\"> الدّور</span></p></body></html>"
-
-#, fuzzy
-#~ msgid "Alternative Name"
-#~ msgstr "بديل الاسم"
 
 #, fuzzy
 #~ msgid ""

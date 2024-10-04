@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2024-09-25 09:12+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -36,13 +36,37 @@ msgstr "Ací apareixeran les vostres adreces d'interés."
 msgid "The marble theme id"
 msgstr ""
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, kde-format
+msgid "Routing profile"
+msgstr ""
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, kde-format
+msgid "Car"
+msgstr ""
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, kde-format
+msgid "Bicycle"
+msgstr "Bicicleta"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, kde-format
+msgid "Pedestrian"
+msgstr "Vianant"
+
 #: CurrentPosition.qml:54
 #, kde-format
 msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Seguix la posició actual"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, kde-format
 msgid "Marble Maps"
 msgstr "Mapes de Marble"
@@ -121,7 +145,12 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "Opcions de la capa"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, kde-format
+msgid "Routing"
+msgstr ""
+
+#: MainScreen.qml:457
 #, kde-format
 msgid "%1 km"
 msgstr "%1 km"
@@ -239,25 +268,40 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "Etiquetes:"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, kde-format
 msgid "Car (fastest)"
 msgstr "Cotxe (més ràpida)"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, kde-format
-msgid "Bicycle"
-msgstr "Bicicleta"
+msgctxt "@title"
+msgid "Routing"
+msgstr ""
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
 #, kde-format
-msgid "Pedestrian"
-msgstr "Vianant"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr ""
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Search for places to integrate them into a route."
-msgstr "Busca llocs per a integrar-los a la ruta."
+msgctxt "@label:textbox"
+msgid "Arrival:"
+msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Alternatives:"
+msgstr ""
 
 #: SettingsDialog.qml:48
 #, kde-format
@@ -274,3 +318,6 @@ msgstr "Descarrega mapes només via WLAN"
 msgctxt "@title:window"
 msgid "Themes"
 msgstr ""
+
+#~ msgid "Search for places to integrate them into a route."
+#~ msgstr "Busca llocs per a integrar-los a la ruta."

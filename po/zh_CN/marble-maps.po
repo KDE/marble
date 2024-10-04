@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -40,6 +40,38 @@ msgstr "您的书签将显示在这里。"
 msgid "The marble theme id"
 msgstr "小写地图主题 ID。"
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgctxt "RoutingProfileSettingsDialog|"
+#| msgid "Configure Routing Profile"
+msgid "Routing profile"
+msgstr "配置路线规划插件"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Car"
+msgid "Car"
+msgstr "汽车"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfilesModel|"
+#| msgid "Bicycle"
+msgid "Bicycle"
+msgstr "自行车"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfilesModel|"
+#| msgid "Pedestrian"
+msgid "Pedestrian"
+msgstr "步行"
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgctxt "CurrentPosition|"
@@ -48,7 +80,7 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "跟随当前位置"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Marble Maps"
@@ -149,7 +181,14 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "图层选项"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgid "Routing"
+msgstr "路线规划"
+
+#: MainScreen.qml:457
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "%1 km"
@@ -307,33 +346,48 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "标签"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 #| msgctxt "Marble::RoutingProfilesModel|"
 #| msgid "Car (fastest)"
 msgid "Car (fastest)"
 msgstr "汽车 (用时最短)"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Bicycle"
-msgid "Bicycle"
-msgstr "自行车"
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgctxt "@title"
+msgid "Routing"
+msgstr "路线规划"
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
 #, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Pedestrian"
-msgid "Pedestrian"
-msgstr "步行"
+#| msgctxt "DGML|"
+#| msgid "Temperature"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "温度"
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Arrival:"
+msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
 #, fuzzy, kde-format
-#| msgctxt "RouteEditor|"
-#| msgid "Search for places to integrate them into a route."
-msgid "Search for places to integrate them into a route."
-msgstr "搜索地点以将它们加入途径路线。"
+#| msgctxt "Marble::Placemark|"
+#| msgid "Alternative medicine"
+msgctxt "@label:listbox"
+msgid "Alternatives:"
+msgstr "替代药物"
 
 #: SettingsDialog.qml:48
 #, fuzzy, kde-format
@@ -356,6 +410,12 @@ msgstr "仅通过 WLAN 下载地图"
 msgctxt "@title:window"
 msgid "Themes"
 msgstr "主题"
+
+#, fuzzy
+#~| msgctxt "RouteEditor|"
+#~| msgid "Search for places to integrate them into a route."
+#~ msgid "Search for places to integrate them into a route."
+#~ msgstr "搜索地点以将它们加入途径路线。"
 
 #~ msgctxt "DGML|"
 #~ msgid "Moon"
@@ -461,10 +521,6 @@ msgstr "主题"
 #~ msgctxt "DGML|"
 #~ msgid "Water Bodies"
 #~ msgstr "水体"
-
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
-#~ msgstr "温度"
 
 #~ msgctxt "DGML|"
 #~ msgid "Mountain"
@@ -1111,10 +1167,6 @@ msgstr "主题"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "书刊"
-
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "汽车"
 
 #~ msgctxt "DGML|"
 #~ msgid "Clothes"
@@ -2206,10 +2258,6 @@ msgstr "主题"
 #~ msgstr "图例"
 
 #~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "路线规划"
-
-#~ msgctxt "Marble::ControlView|"
 #~ msgid "Location"
 #~ msgstr "位置"
 
@@ -2984,10 +3032,6 @@ msgstr "主题"
 #~ msgctxt "Marble::Placemark|A scoria cone volcano."
 #~ msgid "Scoria cone"
 #~ msgstr "火山渣锥"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Alternative medicine"
-#~ msgstr "替代药物"
 
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Audiologist"
@@ -9349,10 +9393,6 @@ msgstr "主题"
 #~ msgctxt "Marble::RoutingManager|"
 #~ msgid "Show again"
 #~ msgstr "再次显示"
-
-#~ msgctxt "RoutingProfileSettingsDialog|"
-#~ msgid "Configure Routing Profile"
-#~ msgstr "配置路线规划插件"
 
 #~ msgctxt "RoutingProfileSettingsDialog|"
 #~ msgid "Name:"

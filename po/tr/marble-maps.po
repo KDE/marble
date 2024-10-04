@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2024-09-29 22:00+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -41,13 +41,41 @@ msgstr "Yer imleriniz burada görünecektir."
 msgid "The marble theme id"
 msgstr "Bilye teması kimliği"
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgctxt "RoutingProfileSettingsDialog|"
+#| msgid "Configure Routing Profile"
+msgid "Routing profile"
+msgstr "Rota Profilini Yapılandır"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Car"
+msgid "Car"
+msgstr "Araba"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, kde-format
+msgid "Bicycle"
+msgstr "Bisiklet"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, kde-format
+msgid "Pedestrian"
+msgstr "Yaya"
+
 #: CurrentPosition.qml:54
 #, kde-format
 msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Geçerli konumu izle"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, kde-format
 msgid "Marble Maps"
 msgstr "Bilye Haritaları"
@@ -124,7 +152,14 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "Tema Seçenekleri"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgid "Routing"
+msgstr "Rotalama"
+
+#: MainScreen.qml:457
 #, kde-format
 msgid "%1 km"
 msgstr "%1 km"
@@ -242,25 +277,46 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "Künyeler:"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, kde-format
 msgid "Car (fastest)"
 msgstr "Araba (en hızlı)"
 
-#: ProfileSelectorMenu.qml:40
-#, kde-format
-msgid "Bicycle"
-msgstr "Bisiklet"
+#: RouteEditorPage.qml:19
+#, fuzzy, kde-format
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgctxt "@title"
+msgid "Routing"
+msgstr "Rotalama"
 
-#: ProfileSelectorMenu.qml:49
-#, kde-format
-msgid "Pedestrian"
-msgstr "Yaya"
+#: RouteEditorPage.qml:102
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Temperature"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "Sıcaklık"
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Search for places to integrate them into a route."
-msgstr "Bir rota ile bütünleştirmek için konumları arayın."
+msgctxt "@label:textbox"
+msgid "Arrival:"
+msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, fuzzy, kde-format
+#| msgctxt "Marble::Placemark|"
+#| msgid "Alternative medicine"
+msgctxt "@label:listbox"
+msgid "Alternatives:"
+msgstr "Alternatif Tıp"
 
 #: SettingsDialog.qml:48
 #, kde-format
@@ -277,6 +333,9 @@ msgstr "Haritaları yalnızca Wi-Fi ile indir"
 msgctxt "@title:window"
 msgid "Themes"
 msgstr "Temalar"
+
+#~ msgid "Search for places to integrate them into a route."
+#~ msgstr "Bir rota ile bütünleştirmek için konumları arayın."
 
 #~ msgctxt "DGML|"
 #~ msgid "Moon"
@@ -384,10 +443,6 @@ msgstr "Temalar"
 #~ msgctxt "DGML|"
 #~ msgid "Water Bodies"
 #~ msgstr "Su Kütleleri"
-
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
-#~ msgstr "Sıcaklık"
 
 #~ msgctxt "DGML|"
 #~ msgid "Mountain"
@@ -1039,10 +1094,6 @@ msgstr "Temalar"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "Kitap"
-
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "Araba"
 
 #~ msgctxt "DGML|"
 #~ msgid "Clothes"
@@ -2147,10 +2198,6 @@ msgstr "Temalar"
 #~ msgstr "Gösterge"
 
 #~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "Rotalama"
-
-#~ msgctxt "Marble::ControlView|"
 #~ msgid "Location"
 #~ msgstr "Konum"
 
@@ -2933,10 +2980,6 @@ msgstr "Temalar"
 #~ msgctxt "Marble::Placemark|A scoria cone volcano."
 #~ msgid "Scoria cone"
 #~ msgstr "Sinder Konisi"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Alternative medicine"
-#~ msgstr "Alternatif Tıp"
 
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Audiologist"
@@ -9385,10 +9428,6 @@ msgstr "Temalar"
 #~ msgctxt "Marble::RoutingManager|"
 #~ msgid "Show again"
 #~ msgstr "Tekrar göster"
-
-#~ msgctxt "RoutingProfileSettingsDialog|"
-#~ msgid "Configure Routing Profile"
-#~ msgstr "Rota Profilini Yapılandır"
 
 #~ msgctxt "RoutingProfileSettingsDialog|"
 #~ msgid "Name:"

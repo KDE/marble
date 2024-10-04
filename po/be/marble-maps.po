@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2007-06-22 20:09+0300\n"
 "Last-Translator: Darafei Praliaskouski <komzpa@licei2.com>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
@@ -38,6 +38,33 @@ msgstr ""
 msgid "The marble theme id"
 msgstr ""
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgid "Show scale bar"
+msgid "Routing profile"
+msgstr "Паказваць паласу маштабу"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgid "Show scale bar"
+msgid "Car"
+msgstr "Паказваць паласу маштабу"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+#| msgid "Show scale bar"
+msgid "Bicycle"
+msgstr "Паказваць паласу маштабу"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, kde-format
+msgid "Pedestrian"
+msgstr ""
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgid "Show scale bar"
@@ -45,7 +72,7 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Паказваць паласу маштабу"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgid "Marble"
 msgid "Marble Maps"
@@ -126,7 +153,13 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr ""
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgid "Show scale bar"
+msgid "Routing"
+msgstr "Паказваць паласу маштабу"
+
+#: MainScreen.qml:457
 #, kde-format
 msgid "%1 km"
 msgstr ""
@@ -247,26 +280,41 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr ""
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 #| msgid "Coordinates: "
 msgid "Car (fastest)"
 msgstr "Каардынаты: "
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
 #| msgid "Show scale bar"
-msgid "Bicycle"
+msgctxt "@title"
+msgid "Routing"
 msgstr "Паказваць паласу маштабу"
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
 #, kde-format
-msgid "Pedestrian"
+msgctxt "@label:textbox"
+msgid "Departure:"
 msgstr ""
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Search for places to integrate them into a route."
+msgctxt "@label:textbox"
+msgid "Arrival:"
+msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Alternatives:"
 msgstr ""
 
 #: SettingsDialog.qml:48
@@ -370,12 +418,6 @@ msgstr ""
 #~ msgstr "Marble"
 
 #, fuzzy
-#~| msgid "Show scale bar"
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "Паказваць паласу маштабу"
-
-#, fuzzy
 #~| msgid "&Print"
 #~ msgctxt "DGML|"
 #~ msgid "Plain Map"
@@ -469,12 +511,6 @@ msgstr ""
 #~| msgid "Show scale bar"
 #~ msgctxt "Marble::MainWindow|"
 #~ msgid "Position: %1"
-#~ msgstr "Паказваць паласу маштабу"
-
-#, fuzzy
-#~| msgid "Show scale bar"
-#~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
 #~ msgstr "Паказваць паласу маштабу"
 
 #, fuzzy

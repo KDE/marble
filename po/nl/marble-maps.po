@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2024-09-29 14:35+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -42,13 +42,41 @@ msgstr "Uw bladwijzers komen hier."
 msgid "The marble theme id"
 msgstr "Het thema-id van van marble"
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfileSettingsDialog|"
+#| msgid "Routing Profile - Marble"
+msgid "Routing profile"
+msgstr "Routeprofiel - Marble"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Car"
+msgid "Car"
+msgstr "Auto"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, kde-format
+msgid "Bicycle"
+msgstr "Fiets"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, kde-format
+msgid "Pedestrian"
+msgstr "Voetganger"
+
 #: CurrentPosition.qml:54
 #, kde-format
 msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Volg huidige locatie"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, kde-format
 msgid "Marble Maps"
 msgstr "Kaarten van Marble"
@@ -125,7 +153,14 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr "Thema-opties"
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgid "Routing"
+msgstr "Route bepalen"
+
+#: MainScreen.qml:457
 #, kde-format
 msgid "%1 km"
 msgstr "%1 km"
@@ -243,25 +278,46 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr "Tags:"
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, kde-format
 msgid "Car (fastest)"
 msgstr "Auto (snelste)"
 
-#: ProfileSelectorMenu.qml:40
-#, kde-format
-msgid "Bicycle"
-msgstr "Fiets"
+#: RouteEditorPage.qml:19
+#, fuzzy, kde-format
+#| msgctxt "Marble::ControlView|"
+#| msgid "Routing"
+msgctxt "@title"
+msgid "Routing"
+msgstr "Route bepalen"
 
-#: ProfileSelectorMenu.qml:49
-#, kde-format
-msgid "Pedestrian"
-msgstr "Voetganger"
+#: RouteEditorPage.qml:102
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Temperature"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "Temperatuur"
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Search for places to integrate them into a route."
-msgstr "Zoek naar in de route op te nemen plaatsen."
+msgctxt "@label:textbox"
+msgid "Arrival:"
+msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, fuzzy, kde-format
+#| msgctxt "Marble::Placemark|"
+#| msgid "Alternative medicine"
+msgctxt "@label:listbox"
+msgid "Alternatives:"
+msgstr "Alternatieve medicijnen"
 
 #: SettingsDialog.qml:48
 #, kde-format
@@ -278,6 +334,9 @@ msgstr "Kaarten alleen via WLAN ophalen"
 msgctxt "@title:window"
 msgid "Themes"
 msgstr "Thema's"
+
+#~ msgid "Search for places to integrate them into a route."
+#~ msgstr "Zoek naar in de route op te nemen plaatsen."
 
 #~ msgctxt "DGML|"
 #~ msgid "Moon"
@@ -386,10 +445,6 @@ msgstr "Thema's"
 #~ msgctxt "DGML|"
 #~ msgid "Water Bodies"
 #~ msgstr "Wateren"
-
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
-#~ msgstr "Temperatuur"
 
 #~ msgctxt "DGML|"
 #~ msgid "Mountain"
@@ -1041,10 +1096,6 @@ msgstr "Thema's"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "Boeken"
-
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "Auto"
 
 #~ msgctxt "DGML|"
 #~ msgid "Clothes"
@@ -2157,10 +2208,6 @@ msgstr "Thema's"
 #~ msgstr "Legenda"
 
 #~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "Route bepalen"
-
-#~ msgctxt "Marble::ControlView|"
 #~ msgid "Location"
 #~ msgstr "Locatie"
 
@@ -2947,10 +2994,6 @@ msgstr "Thema's"
 #~ msgctxt "Marble::Placemark|A scoria cone volcano."
 #~ msgid "Scoria cone"
 #~ msgstr "Askegel"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Alternative medicine"
-#~ msgstr "Alternatieve medicijnen"
 
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Audiologist"
@@ -14921,10 +14964,6 @@ msgstr "Thema's"
 #~ msgctxt "Marble::InhibitScreensaverPlugin|"
 #~ msgid "Inhibits the screensaver during turn-by-turn navigation"
 #~ msgstr "Zet de screensaver uit bij navigatie van afslag tot afslag."
-
-#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
-#~ msgid "Routing Profile - Marble"
-#~ msgstr "Routeprofiel - Marble"
 
 #~ msgctxt "Marble::RoutingWidget|"
 #~ msgid "Directions - Marble"

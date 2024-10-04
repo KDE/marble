@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2020-09-29 22:35+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -40,6 +40,33 @@ msgstr ""
 msgid "The marble theme id"
 msgstr ""
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgid "About Marble"
+msgid "Routing profile"
+msgstr "Despre Marble"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgid "&Search"
+msgid "Car"
+msgstr "&Caută"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+#| msgid "Back"
+msgid "Bicycle"
+msgstr "Înapoi"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, kde-format
+msgid "Pedestrian"
+msgstr ""
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgid "Current Location"
@@ -47,7 +74,7 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Poziția curentă pe hartă"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgid "Search line"
 msgid "Marble Maps"
@@ -132,7 +159,13 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr ""
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgid "Mountain"
+msgid "Routing"
+msgstr "Munte"
+
+#: MainScreen.qml:457
 #, fuzzy, kde-format
 #| msgid "%1 m"
 msgid "%1 km"
@@ -261,27 +294,43 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr ""
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 #| msgid "0 m (Water)"
 msgid "Car (fastest)"
 msgstr "0m (nivelul mării)"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-#| msgid "Back"
-msgid "Bicycle"
-msgstr "Înapoi"
+#| msgid "Mountain"
+msgctxt "@title"
+msgid "Routing"
+msgstr "Munte"
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
 #, kde-format
-msgid "Pedestrian"
+msgctxt "@label:textbox"
+msgid "Departure:"
 msgstr ""
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Search for places to integrate them into a route."
+msgctxt "@label:textbox"
+msgid "Arrival:"
 msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, fuzzy, kde-format
+#| msgid "Alternative Name"
+msgctxt "@label:listbox"
+msgid "Alternatives:"
+msgstr "Nume alternativ"
 
 #: SettingsDialog.qml:48
 #, fuzzy, kde-format
@@ -618,12 +667,6 @@ msgstr "&Temă"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "Linie de căutare"
-
-#, fuzzy
-#~| msgid "&Search"
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "&Caută"
 
 #, fuzzy
 #~| msgid "&Open Map..."
@@ -1211,12 +1254,6 @@ msgstr "&Temă"
 #~ msgctxt "Marble::ControlView|"
 #~ msgid "Legend"
 #~ msgstr "Legendă"
-
-#, fuzzy
-#~| msgid "Mountain"
-#~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "Munte"
 
 #, fuzzy
 #~| msgid "Location"
@@ -8462,12 +8499,6 @@ msgstr "&Temă"
 
 #, fuzzy
 #~| msgid "About Marble"
-#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
-#~ msgid "Routing Profile - Marble"
-#~ msgstr "Despre Marble"
-
-#, fuzzy
-#~| msgid "About Marble"
 #~ msgctxt "Marble::RoutingWidget|"
 #~ msgid "Directions - Marble"
 #~ msgstr "Despre Marble"
@@ -9190,9 +9221,6 @@ msgstr "&Temă"
 #~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 #~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 #~ "style:italic;\">Rol</span></p></body></html>"
-
-#~ msgid "Alternative Name"
-#~ msgstr "Nume alternativ"
 
 #~ msgid "Move backwards one step in the browsing history."
 #~ msgstr "Un pas înapoi în desfășurarea navigării."

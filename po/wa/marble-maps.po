@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2011-01-14 10:24+0100\n"
 "Last-Translator: Jean Cayron <jean.cayron@gmail.com>\n"
 "Language-Team: Walloon <linux@walon.org>\n"
@@ -37,6 +37,31 @@ msgstr ""
 msgid "The marble theme id"
 msgstr ""
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgid "Mountain"
+msgid "Routing profile"
+msgstr "Montinne"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+msgid "Car"
+msgstr "Båre di schåle"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+msgid "Bicycle"
+msgstr "Nåcion"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, kde-format
+msgid "Pedestrian"
+msgstr ""
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgid "Current Location"
@@ -44,7 +69,7 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Eplaeçmint do moumint"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgid "&Bookmarks"
 msgid "Marble Maps"
@@ -126,7 +151,13 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr ""
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgid "Mountain"
+msgid "Routing"
+msgstr "Montinne"
+
+#: MainScreen.qml:457
 #, fuzzy, kde-format
 #| msgid "%1 km"
 msgid "%1 km"
@@ -253,25 +284,42 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr ""
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 #| msgid "Crater"
 msgid "Car (fastest)"
 msgstr "Traitoe"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-msgid "Bicycle"
-msgstr "Nåcion"
+#| msgid "Mountain"
+msgctxt "@title"
+msgid "Routing"
+msgstr "Montinne"
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
+#, fuzzy, kde-format
+#| msgid "FITemplate"
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "ModeleCF"
+
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Pedestrian"
+msgctxt "@label:textbox"
+msgid "Arrival:"
 msgstr ""
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:106
 #, kde-format
-msgid "Search for places to integrate them into a route."
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Alternatives:"
 msgstr ""
 
 #: SettingsDialog.qml:48
@@ -357,12 +405,6 @@ msgstr "No"
 #~ msgctxt "DGML|"
 #~ msgid "Terrain"
 #~ msgstr "Nåcion"
-
-#, fuzzy
-#~| msgid "FITemplate"
-#~ msgctxt "DGML|"
-#~ msgid "Temperature"
-#~ msgstr "ModeleCF"
 
 #, fuzzy
 #~| msgid "Mountain"
@@ -515,11 +557,6 @@ msgstr "No"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "&Rimarkes"
-
-#, fuzzy
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "Båre di schåle"
 
 #, fuzzy
 #~| msgid "OpenStreetMap"
@@ -1036,12 +1073,6 @@ msgstr "No"
 #~ msgctxt "Marble::ControlView|"
 #~ msgid "Legend"
 #~ msgstr "Ledjinde"
-
-#, fuzzy
-#~| msgid "Mountain"
-#~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "Montinne"
 
 #, fuzzy
 #~| msgid "Location"
@@ -6575,12 +6606,6 @@ msgstr "No"
 #~ msgctxt "GeoDataPlacemark|"
 #~ msgid "Book"
 #~ msgstr "&Rimarkes"
-
-#, fuzzy
-#~| msgid "Mountain"
-#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
-#~ msgid "Routing Profile - Marble"
-#~ msgstr "Montinne"
 
 #, fuzzy
 #~| msgid "Mountain"

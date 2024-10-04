@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:37+0000\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2021-07-10 10:57+0530\n"
 "Last-Translator: Raghavendra Kamath <raghu@raghukamath.com>\n"
 "Language-Team: kde-hindi\n"
@@ -38,6 +38,33 @@ msgstr ""
 msgid "The marble theme id"
 msgstr ""
 
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, fuzzy, kde-format
+#| msgid "About Marble"
+msgid "Routing profile"
+msgstr "मारबल के बारे में"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, fuzzy, kde-format
+#| msgid "&Search"
+msgid "Car"
+msgstr "ढूंढें (&S)"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, fuzzy, kde-format
+#| msgid "Track Gps"
+msgid "Bicycle"
+msgstr "ट्रैक जीपीएस"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, kde-format
+msgid "Pedestrian"
+msgstr ""
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgid "Current Location"
@@ -45,7 +72,7 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "मौज़ूदा स्थान"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgid "Search line"
 msgid "Marble Maps"
@@ -130,7 +157,13 @@ msgctxt "@action:button"
 msgid "Theme Options"
 msgstr ""
 
-#: MainScreen.qml:471
+#: MainScreen.qml:167
+#, fuzzy, kde-format
+#| msgid "Mountain"
+msgid "Routing"
+msgstr "पर्वत"
+
+#: MainScreen.qml:457
 #, fuzzy, kde-format
 #| msgid "%1 m"
 msgid "%1 km"
@@ -259,27 +292,43 @@ msgctxt "@title:group"
 msgid "Tags:"
 msgstr ""
 
-#: ProfileSelectorMenu.qml:29
+#: ProfileSelectorMenu.qml:124
 #, fuzzy, kde-format
 #| msgid "0 m (Water)"
 msgid "Car (fastest)"
 msgstr "0 मी (पानी)"
 
-#: ProfileSelectorMenu.qml:40
+#: RouteEditorPage.qml:19
 #, fuzzy, kde-format
-#| msgid "Track Gps"
-msgid "Bicycle"
-msgstr "ट्रैक जीपीएस"
+#| msgid "Mountain"
+msgctxt "@title"
+msgid "Routing"
+msgstr "पर्वत"
 
-#: ProfileSelectorMenu.qml:49
+#: RouteEditorPage.qml:102
 #, kde-format
-msgid "Pedestrian"
+msgctxt "@label:textbox"
+msgid "Departure:"
 msgstr ""
 
-#: RouteEditor.qml:62
+#: RouteEditorPage.qml:104
 #, kde-format
-msgid "Search for places to integrate them into a route."
+msgctxt "@label:textbox"
+msgid "Arrival:"
 msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, fuzzy, kde-format
+#| msgid "Alternative Name"
+msgctxt "@label:listbox"
+msgid "Alternatives:"
+msgstr "वैकल्पिक नाम"
 
 #: SettingsDialog.qml:48
 #, fuzzy, kde-format
@@ -677,12 +726,6 @@ msgstr "प्रसंग (&T)"
 #~ msgctxt "DGML|"
 #~ msgid "Books"
 #~ msgstr "ढूंढें पंक्ति"
-
-#, fuzzy
-#~| msgid "&Search"
-#~ msgctxt "DGML|"
-#~ msgid "Car"
-#~ msgstr "ढूंढें (&S)"
 
 #, fuzzy
 #~| msgid "&Open Map..."
@@ -1311,12 +1354,6 @@ msgstr "प्रसंग (&T)"
 #~ msgctxt "Marble::ControlView|"
 #~ msgid "Legend"
 #~ msgstr "लीजैंड"
-
-#, fuzzy
-#~| msgid "Mountain"
-#~ msgctxt "Marble::ControlView|"
-#~ msgid "Routing"
-#~ msgstr "पर्वत"
 
 #, fuzzy
 #~| msgid "Location"
@@ -8540,12 +8577,6 @@ msgstr "प्रसंग (&T)"
 
 #, fuzzy
 #~| msgid "About Marble"
-#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
-#~ msgid "Routing Profile - Marble"
-#~ msgstr "मारबल के बारे में"
-
-#, fuzzy
-#~| msgid "About Marble"
 #~ msgctxt "Marble::RoutingWidget|"
 #~ msgid "Directions - Marble"
 #~ msgstr "मारबल के बारे में"
@@ -9330,9 +9361,6 @@ msgstr "प्रसंग (&T)"
 #~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 #~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 #~ "style:italic;\">कार्य</span></p></body></html>"
-
-#~ msgid "Alternative Name"
-#~ msgstr "वैकल्पिक नाम"
 
 #~ msgid ""
 #~ "000° 00' 00\" N\n"
