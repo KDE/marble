@@ -5,12 +5,9 @@
 
 #include "GPXtrksegTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "GPXElementDictionary.h"
 #include "GeoDataMultiGeometry.h"
 #include "GeoDataPlacemark.h"
-#include "GeoDataPoint.h"
 #include "GeoDataTrack.h"
 #include "GeoParser.h"
 

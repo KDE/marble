@@ -11,12 +11,10 @@
 
 // Marble
 #include "GeoDataLineString.h"
-#include "GeoDataPoint.h"
 #include "GeoWriter.h"
 #include "OsmElementDictionary.h"
 #include "OsmObjectAttributeWriter.h"
 #include "OsmTagTagWriter.h"
-#include "osm/OsmObjectManager.h"
 #include "osm/OsmPlacemarkData.h"
 
 namespace Marble

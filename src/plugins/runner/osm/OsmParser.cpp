@@ -8,7 +8,6 @@
 
 #include "OsmParser.h"
 #include "GeoDataDocument.h"
-#include "GeoDataPoint.h"
 #include "GeoDataPolyStyle.h"
 #include "GeoDataStyle.h"
 #include "OsmElementDictionary.h"

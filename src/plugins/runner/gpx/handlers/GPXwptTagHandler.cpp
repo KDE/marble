@@ -5,14 +5,11 @@
 
 #include "GPXwptTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include <QStringView>
 
 #include "GPXElementDictionary.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
-#include "GeoDataPoint.h"
 #include "GeoParser.h"
 
 namespace Marble

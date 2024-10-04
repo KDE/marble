@@ -5,7 +5,6 @@
 #include "OsmRunner.h"
 
 #include "GeoDataDocument.h"
-#include "MarbleDebug.h"
 #include "OsmParser.h"
 
 namespace Marble

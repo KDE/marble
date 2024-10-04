@@ -13,7 +13,6 @@
 #include "OsmElementDictionary.h"
 #include "OsmObjectAttributeWriter.h"
 #include "OsmTagTagWriter.h"
-#include "osm/OsmObjectManager.h"
 #include "osm/OsmPlacemarkData.h"
 
 namespace Marble

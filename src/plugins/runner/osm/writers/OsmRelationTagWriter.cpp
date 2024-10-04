@@ -8,7 +8,6 @@
 
 // Marble
 #include "GeoDataCoordinates.h"
-#include "GeoDataLineString.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPolygon.h"
 #include "GeoWriter.h"
