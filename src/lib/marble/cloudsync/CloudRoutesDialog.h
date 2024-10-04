@@ -34,7 +34,7 @@ Q_SIGNALS:
 
 private:
     class Private;
-    Private *d;
+    Private *const d;
 
 private Q_SLOTS:
     void updateNoRouteLabel();
