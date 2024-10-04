@@ -25,10 +25,10 @@ OfflineDataModel::OfflineDataModel(QObject *parent)
     sort(0);
     setDynamicSortFilter(true);
 
-    connect(&m_newstuffModel, SIGNAL(installationProgressed(int, qreal)), this, SLOT(handleInstallationProgress(int, qreal)));
-    connect(&m_newstuffModel, SIGNAL(installationFinished(int)), this, SLOT(handleInstallationFinished(int)));
-    connect(&m_newstuffModel, SIGNAL(installationFailed(int, QString)), this, SLOT(handleInstallationFailed(int, QString)));
-    connect(&m_newstuffModel, SIGNAL(uninstallationFinished(int)), this, SLOT(handleUninstallationFinished(int)));
+    connect(&m_newstuffModel, &Marble::NewstuffModel::installationProgressed, this, &OfflineDataModel::handleInstallationProgress);
+    connect(&m_newstuffModel, &Marble::NewstuffModel::installationFinished, this, &OfflineDataModel::handleInstallationFinished);
+    connect(&m_newstuffModel, &Marble::NewstuffModel::installationFailed, this, &OfflineDataModel::handleInstallationFailed);
+    connect(&m_newstuffModel, &Marble::NewstuffModel::uninstallationFinished, this, &OfflineDataModel::handleUninstallationFinished);
 }
 
 int OfflineDataModel::count() const

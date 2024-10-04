@@ -25,8 +25,8 @@ Tracking::Tracking(QObject *parent)
     , m_autoNavigation(nullptr)
     , m_positionMarkerType(None)
 {
-    connect(&m_lastKnownPosition, SIGNAL(longitudeChanged()), this, SLOT(setHasLastKnownPosition()));
-    connect(&m_lastKnownPosition, SIGNAL(latitudeChanged()), this, SLOT(setHasLastKnownPosition()));
+    connect(&m_lastKnownPosition, &Coordinate::longitudeChanged, this, &Tracking::setHasLastKnownPosition);
+    connect(&m_lastKnownPosition, &Coordinate::latitudeChanged, this, &Tracking::setHasLastKnownPosition);
 }
 
 bool Tracking::showTrack() const
