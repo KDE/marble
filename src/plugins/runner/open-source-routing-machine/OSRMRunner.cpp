@@ -44,7 +44,7 @@ void OSRMRunner::retrieveRoute(const RouteRequest *route)
         return;
     }
 
-    QString url = "http://router.project-osrm.org/route/v1/driving/";
+    QString url = QStringLiteral("http://router.project-osrm.org/route/v1/driving/");
     GeoDataCoordinates::Unit const degree = GeoDataCoordinates::Degree;
     for (int i = 0; i < route->size(); ++i) {
         GeoDataCoordinates const coordinates = route->at(i);

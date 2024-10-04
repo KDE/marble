@@ -42,10 +42,10 @@ void OpenRouteServiceRunner::retrieveRoute(const RouteRequest *route)
     QHash<QString, QVariant> settings = route->routingProfile().pluginSettings()["openrouteservice"];
 
     QUrlQuery queries;
-    queries.addQueryItem("api_key", "ee0b8233adff52ce9fd6afc2a2859a28");
+    queries.addQueryItem(QStringLiteral("api_key"), QStringLiteral("ee0b8233adff52ce9fd6afc2a2859a28"));
 
-    QString unit = "KM";
-    QString preference = "Fastest";
+    QString unit = QStringLiteral("KM");
+    QString preference = QStringLiteral("Fastest");
     if (settings.contains(QStringLiteral("preference"))) {
         preference = settings[QStringLiteral("preference")].toString();
     }
@@ -219,7 +219,7 @@ GeoDataDocument *OpenRouteServiceRunner::parse(const QByteArray &content) const
     auto routeWaypoints = new GeoDataLineString;
     QDomNodeList geometry = root.elementsByTagName(QStringLiteral("xls:RouteGeometry"));
     if (!geometry.isEmpty()) {
-        QDomNodeList waypoints = geometry.item(0).toElement().elementsByTagName("gml:pos");
+        QDomNodeList waypoints = geometry.item(0).toElement().elementsByTagName(QStringLiteral("gml:pos"));
         for (int i = 0; i < waypoints.length(); ++i) {
             QDomNode node = waypoints.item(i);
             const QStringList content = node.toElement().text().split(QLatin1Char(' '));

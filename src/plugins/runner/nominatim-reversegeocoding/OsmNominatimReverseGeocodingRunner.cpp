@@ -49,7 +49,7 @@ void OsmNominatimRunner::reverseGeocoding(const GeoDataCoordinates &coordinates)
     QString url = QString(base + query).arg(lon).arg(lat).arg(MarbleLocale::languageCode());
 
     m_request.setUrl(QUrl(url));
-    m_request.setRawHeader("User-Agent", HttpDownloadManager::userAgent("Browser", "OsmNominatimRunner"));
+    m_request.setRawHeader("User-Agent", HttpDownloadManager::userAgent(QStringLiteral("Browser"), QStringLiteral("OsmNominatimRunner")));
 
     QEventLoop eventLoop;
 
@@ -108,14 +108,14 @@ void OsmNominatimRunner::handleResult(QNetworkReply *reply)
 void OsmNominatimRunner::extractChildren(const QDomNode &node, GeoDataPlacemark &placemark)
 {
     QMap<QString, QString> tagTranslator;
-    tagTranslator["house_number"] = "addr:housenumber";
-    tagTranslator["road"] = "addr:street";
-    tagTranslator["suburb"] = "addr:suburb";
-    tagTranslator["city"] = "addr:city";
-    tagTranslator["state_district"] = "addr:district";
-    tagTranslator["state"] = "addr:state";
-    tagTranslator["postcode"] = "addr:postcode";
-    tagTranslator["country_code"] = "addr:country"; // correct mapping
+    tagTranslator[QStringLiteral("house_number")] = QStringLiteral("addr:housenumber");
+    tagTranslator[QStringLiteral("road")] = QStringLiteral("addr:street");
+    tagTranslator[QStringLiteral("suburb")] = QStringLiteral("addr:suburb");
+    tagTranslator[QStringLiteral("city")] = QStringLiteral("addr:city");
+    tagTranslator[QStringLiteral("state_district")] = QStringLiteral("addr:district");
+    tagTranslator[QStringLiteral("state")] = QStringLiteral("addr:state");
+    tagTranslator[QStringLiteral("postcode")] = QStringLiteral("addr:postcode");
+    tagTranslator[QStringLiteral("country_code")] = QStringLiteral("addr:country"); // correct mapping
     // @todo Find a proper mapping for those
     // tagTranslator["village"] = "";
     // tagTranslator["town"] = "";

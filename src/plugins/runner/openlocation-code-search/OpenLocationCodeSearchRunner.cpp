@@ -25,7 +25,7 @@ OpenLocationCodeSearchRunner::OpenLocationCodeSearchRunner(QObject *parent)
     : SearchRunner(parent)
 {
     // initialize the charIndex map
-    QString const acceptedChars = "23456789CFGHJMPQRVWX";
+    QString const acceptedChars = QStringLiteral("23456789CFGHJMPQRVWX");
     for (int index = 0; index < acceptedChars.size(); index++) {
         charIndex[acceptedChars[index]] = index;
     }

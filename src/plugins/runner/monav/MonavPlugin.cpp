@@ -80,7 +80,7 @@ private:
 
 MonavPluginPrivate::MonavPluginPrivate()
     : m_ownsServer(false)
-    , m_monavDaemonProcess("monav-daemon")
+    , m_monavDaemonProcess(QStringLiteral("monav-daemon"))
     , m_monavVersion(MonavPlugin::Monav_0_3)
     , m_initialized(false)
 {
@@ -102,8 +102,7 @@ bool MonavPluginPrivate::isDaemonRunning()
 bool MonavPluginPrivate::isDaemonInstalled()
 {
     QString path = QProcessEnvironment::systemEnvironment().value(QStringLiteral("PATH"), QStringLiteral("/usr/local/bin:/usr/bin:/bin"));
-    auto const applications = QStringList() << "monav-daemon"
-                                            << "MoNavD";
+    auto const applications = QStringList() << QStringLiteral("monav-daemon") << QStringLiteral("MoNavD");
     for (const QString &application : applications) {
         for (const QString &dir : path.split(QLatin1Char(':'))) {
             QFileInfo executable(QDir(dir), application);
@@ -122,9 +121,9 @@ bool MonavPluginPrivate::startDaemon()
         if (QProcess::startDetached(m_monavDaemonProcess, QStringList())) {
             m_ownsServer = true;
         } else {
-            if (QProcess::startDetached("MoNavD", QStringList())) {
+            if (QProcess::startDetached(QStringLiteral("MoNavD"), QStringList())) {
                 m_ownsServer = true;
-                m_monavDaemonProcess = "MoNavD";
+                m_monavDaemonProcess = QStringLiteral("MoNavD");
                 m_monavVersion = MonavPlugin::Monav_0_2;
             } else {
                 return false;
@@ -374,18 +373,18 @@ QHash<QString, QVariant> MonavPlugin::templateSettings(RoutingProfilesModel::Pro
     QHash<QString, QVariant> result;
     switch (profileTemplate) {
     case RoutingProfilesModel::CarFastestTemplate:
-        result["transport"] = "Motorcar";
+        result[QStringLiteral("transport")] = QStringLiteral("Motorcar");
         break;
     case RoutingProfilesModel::CarShortestTemplate:
-        result["transport"] = "Motorcar";
+        result[QStringLiteral("transport")] = QStringLiteral("Motorcar");
         break;
     case RoutingProfilesModel::CarEcologicalTemplate:
         break;
     case RoutingProfilesModel::BicycleTemplate:
-        result["transport"] = "Bicycle";
+        result[QStringLiteral("transport")] = QStringLiteral("Bicycle");
         break;
     case RoutingProfilesModel::PedestrianTemplate:
-        result["transport"] = "Pedestrian";
+        result[QStringLiteral("transport")] = QStringLiteral("Pedestrian");
         break;
     case RoutingProfilesModel::LastTemplate:
         Q_ASSERT(false);
