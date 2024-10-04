@@ -60,8 +60,8 @@ void OsmNominatimRunner::search(const QString &searchTerm, const GeoDataLatLonBo
     timer.setSingleShot(true);
     timer.setInterval(15000);
 
-    connect(&timer, SIGNAL(timeout()), &eventLoop, SLOT(quit()));
-    connect(this, SIGNAL(searchFinished(QList<GeoDataPlacemark *>)), &eventLoop, SLOT(quit()));
+    connect(&timer, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
+    connect(this, &SearchRunner::searchFinished, &eventLoop, &QEventLoop::quit);
 
     // @todo FIXME Must currently be done in the main thread, see bug 257376
     QTimer::singleShot(0, this, SLOT(startSearch()));
