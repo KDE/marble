@@ -180,8 +180,8 @@ EditPolygonDialog::EditPolygonDialog(GeoDataPlacemark *placemark, const QHash<qi
     d->buttonBox->button(QDialogButtonBox::Ok)->setDefault(true);
 
     connect(d->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(pressed()), this, SLOT(checkFields()));
-    connect(this, SIGNAL(accepted()), SLOT(updatePolygon()));
-    connect(this, SIGNAL(finished(int)), SLOT(restoreInitial(int)));
+    connect(this, &QDialog::accepted, this, &EditPolygonDialog::updatePolygon);
+    connect(this, &QDialog::finished, this, &EditPolygonDialog::restoreInitial);
 
     // Ensure that the dialog gets deleted when closing it (either when clicking OK or
     // Close).

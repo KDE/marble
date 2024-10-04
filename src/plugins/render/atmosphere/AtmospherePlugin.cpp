@@ -31,7 +31,7 @@ AtmospherePlugin::AtmospherePlugin(const MarbleModel *marbleModel)
     : RenderPlugin(marbleModel)
     , m_renderRadius(-1)
 {
-    connect(marbleModel, SIGNAL(themeChanged(QString)), this, SLOT(updateTheme()));
+    connect(marbleModel, &MarbleModel::themeChanged, this, &AtmospherePlugin::updateTheme);
 }
 
 QStringList AtmospherePlugin::backendTypes() const

@@ -37,8 +37,8 @@ DownloadOsmDialog::DownloadOsmDialog(MarbleWidget *parent, AnnotatePlugin *annot
 
     buttonBox->addButton(m_downloadButton, QDialogButtonBox::ActionRole);
 
-    connect(m_downloadButton, SIGNAL(clicked(bool)), this, SLOT(downloadFile()));
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(close()));
+    connect(m_downloadButton, &QAbstractButton::clicked, this, &DownloadOsmDialog::downloadFile);
+    connect(buttonBox, &QDialogButtonBox::rejected, this, &QWidget::close);
     connect(this, SIGNAL(openFile(QString)), annotatePlugin, SLOT(openAnnotationFile(QString)));
 
     progressBar->hide();

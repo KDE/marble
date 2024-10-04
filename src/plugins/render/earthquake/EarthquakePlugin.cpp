@@ -37,7 +37,7 @@ EarthquakePlugin::EarthquakePlugin(const MarbleModel *marbleModel)
 {
     setEnabled(true); // Plugin is enabled by default
     setVisible(false); // Plugin is invisible by default
-    connect(this, SIGNAL(settingsChanged(QString)), this, SLOT(updateModel()));
+    connect(this, &RenderPlugin::settingsChanged, this, &EarthquakePlugin::updateModel);
 }
 
 void EarthquakePlugin::initialize()

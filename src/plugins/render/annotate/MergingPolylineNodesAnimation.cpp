@@ -21,9 +21,7 @@ MergingPolylineNodesAnimation::MergingPolylineNodesAnimation(PolylineAnnotation 
     // To avoid long lines and repeated code
     m_firstNodeIndex(polyline->m_firstMergedNode)
     , m_secondNodeIndex(polyline->m_secondMergedNode)
-    ,
-
-    m_lineString(static_cast<GeoDataLineString *>(polyline->placemark()->geometry()))
+    , m_lineString(static_cast<GeoDataLineString *>(polyline->placemark()->geometry()))
     , m_firstInitialCoords(m_lineString->at(polyline->m_firstMergedNode))
     , m_secondInitialCoords(m_lineString->at(polyline->m_secondMergedNode))
 {
