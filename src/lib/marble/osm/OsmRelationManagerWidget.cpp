@@ -128,12 +128,15 @@ void OsmRelationManagerWidget::handleItemChange(QTreeWidgetItem *item, int colum
 
 void OsmRelationManagerWidget::handleRelationContextMenuRequest(const QPoint &point)
 {
+    QTreeWidgetItem *requestedItem = d->m_currentRelations->itemAt(point);
+    if (!requestedItem) {
+        return;
+    }
     QMenu relationEditMenu;
     relationEditMenu.addAction(tr("Remove"));
     relationEditMenu.addAction(tr("Edit"));
     QAction *selectedItem = relationEditMenu.exec(d->m_currentRelations->mapToGlobal(point));
     if (selectedItem) {
-        QTreeWidgetItem *requestedItem = d->m_currentRelations->itemAt(point);
         qint64 id = requestedItem->data(Column::Name, Qt::UserRole).toLongLong();
 
         if (selectedItem->text() == tr("Remove")) {
