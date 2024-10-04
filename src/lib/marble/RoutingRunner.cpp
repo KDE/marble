@@ -72,7 +72,7 @@ const QString RoutingRunner::durationString(const QTime &duration) const
 
 const QString RoutingRunner::nameString(const QString &name, qreal length, const QTime &duration) const
 {
-    const QString result = "%1; %2 (%3)";
+    const QString result = QStringLiteral("%1; %2 (%3)");
     return result.arg(lengthString(length), durationString(duration), name);
 }
 

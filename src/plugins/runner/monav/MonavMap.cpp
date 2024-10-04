@@ -20,7 +20,7 @@ namespace Marble
 void MonavMap::setDirectory(const QDir &dir)
 {
     m_directory = dir;
-    QFileInfo boundingBox(dir, "marble.kml");
+    QFileInfo boundingBox(dir, QStringLiteral("marble.kml"));
     if (boundingBox.exists()) {
         parseBoundingBox(boundingBox);
     } else {

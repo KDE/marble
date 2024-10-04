@@ -5,14 +5,12 @@
 
 #include "OSRMRunner.h"
 
-#include "GeoDataData.h"
 #include "GeoDataDocument.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataLineString.h"
 #include "GeoDataPlacemark.h"
 #include "HttpDownloadManager.h"
 #include "MarbleDebug.h"
-#include "routing/Maneuver.h"
 #include "routing/RouteRequest.h"
 
 #include <QJsonArray>

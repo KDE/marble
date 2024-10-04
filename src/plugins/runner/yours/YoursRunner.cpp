@@ -104,7 +104,7 @@ void YoursRunner::retrieveData(QNetworkReply *reply)
         // mDebug() << "Download completed: " << data;
         GeoDataDocument *result = parse(data);
         if (result) {
-            QString name = "%1 %2 (Yours)";
+            QString name = QStringLiteral("%1 %2 (Yours)");
             QString unit = QLatin1StringView("m");
             qreal length = distance(result);
             if (length == 0.0) {

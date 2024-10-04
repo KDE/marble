@@ -238,7 +238,7 @@ void MonavRunner::retrieveRoute(const RouteRequest *route)
     int duration = d->retrieveRoute(route, &instructions, waypoints);
     time = time.addSecs(duration);
     qreal length = waypoints->length(EARTH_RADIUS);
-    const QString name = nameString("Monav", length, time);
+    const QString name = nameString(QStringLiteral("Monav"), length, time);
     const GeoDataExtendedData data = routeData(length, time);
     GeoDataDocument *result = d->createDocument(waypoints, instructions, name, data);
     Q_EMIT routeCalculated(result);

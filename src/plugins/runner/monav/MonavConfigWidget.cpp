@@ -482,7 +482,7 @@ void MonavConfigWidgetPrivate::install()
         m_currentFile.setFileName(localFile);
         if (m_currentFile.open(QFile::WriteOnly)) {
             QFileInfo file(m_currentFile);
-            QString message = QObject::tr("Downloading %1").arg(file.fileName());
+            const QString message = QObject::tr("Downloading %1").arg(file.fileName());
             setBusy(true, message);
             m_currentReply = m_networkAccessManager.get(QNetworkRequest(QUrl(m_currentDownload)));
             QObject::connect(m_currentReply, SIGNAL(readyRead()), m_parent, SLOT(retrieveData()));
@@ -530,7 +530,7 @@ void MonavConfigWidget::updateProgressBar(qint64 bytesReceived, qint64 bytesTota
     // finer Kb resolution for the progress values to see changes easily
     m_progressBar->setMaximum(bytesTotal / 1024);
     m_progressBar->setValue(bytesReceived / 1024);
-    QString progress = "%1/%2 MB";
+    QString progress = tr("%1/%2 MB");
     m_progressBar->setFormat(progress.arg(bytesReceived / 1024 / 1024).arg(bytesTotal / 1024 / 1024));
 }
 
