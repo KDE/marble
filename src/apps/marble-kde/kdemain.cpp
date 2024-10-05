@@ -20,9 +20,7 @@
 #include <QTranslator>
 
 #include "ControlView.h"
-#include "GeoUriParser.h"
 #include "KdeMainWindow.h"
-#include "MapThemeManager.h"
 #include "MarbleDebug.h"
 
 #include "MarbleTest.h"

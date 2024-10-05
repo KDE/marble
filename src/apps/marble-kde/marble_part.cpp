@@ -51,7 +51,6 @@
 #include "FileManager.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataFolder.h"
-#include "GeoDataLatLonAltBox.h"
 #include "GeoDataLookAt.h"
 #include "GeoDataPlacemark.h"
 #include "HttpDownloadManager.h"
@@ -65,9 +64,7 @@
 #include "MarblePluginSettingsWidget.h"
 #include "MarbleWidgetInputHandler.h"
 #include "MovieCaptureDialog.h"
-#include "NewBookmarkFolderDialog.h"
 #include "ParseRunnerPlugin.h"
-#include "Planet.h"
 #include "PluginManager.h"
 #include "PositionProviderPlugin.h"
 #include "PositionTracking.h"
@@ -147,9 +144,9 @@ MarblePart::MarblePart(QWidget *parentWidget, QObject *parent, const KPluginMeta
     migrateNewstuffConfigFiles();
 
     m_externalEditorMapping[0] = "";
-    m_externalEditorMapping[1] = "potlatch";
-    m_externalEditorMapping[2] = "josm";
-    m_externalEditorMapping[3] = "merkaartor";
+    m_externalEditorMapping[1] = QStringLiteral("potlatch");
+    m_externalEditorMapping[2] = QStringLiteral("josm");
+    m_externalEditorMapping[3] = QStringLiteral("merkaartor");
 
     m_controlView = new ControlView(parentWidget);
 
@@ -167,7 +164,7 @@ MarblePart::MarblePart(QWidget *parentWidget, QObject *parent, const KPluginMeta
     });
 
     // Load bookmark file. If it does not exist, a default one will be used.
-    m_controlView->marbleModel()->bookmarkManager()->loadFile("bookmarks/bookmarks.kml");
+    m_controlView->marbleModel()->bookmarkManager()->loadFile(QStringLiteral("bookmarks/bookmarks.kml"));
 
     initializeCustomTimezone();
 
@@ -189,8 +186,8 @@ MarblePart::MarblePart(QWidget *parentWidget, QObject *parent, const KPluginMeta
         break;
     }
 
-    connect(m_controlView, SIGNAL(showMapWizard()), this, SLOT(showMapWizard()));
-    connect(m_controlView, SIGNAL(mapThemeDeleted()), this, SLOT(fallBackToDefaultTheme()));
+    connect(m_controlView, &ControlView::showMapWizard, this, &MarblePart::showMapWizard);
+    connect(m_controlView, &ControlView::mapThemeDeleted, this, &MarblePart::fallBackToDefaultTheme);
 }
 
 MarblePart::~MarblePart()
@@ -460,7 +457,7 @@ void MarblePart::readSettings()
         KConfigGroup profilesGroup = sharedConfig->group("Routing Profiles");
         int numProfiles = profilesGroup.readEntry("Num", 0);
         for (int i = 0; i < numProfiles; ++i) {
-            KConfigGroup profileGroup = profilesGroup.group(QStringLiteral("Profile %0").arg(i));
+            KConfigGroup profileGroup = profilesGroup.group(QStringLiteral("Profile %1").arg(i));
             QString name = profileGroup.readEntry("Name", i18n("Unnamed"));
             RoutingProfile profile(name);
             for (const QString &pluginName : profileGroup.groupList()) {
@@ -644,7 +641,7 @@ void MarblePart::writeSettings()
 
     // Store recent files
     KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig();
-    m_recentFilesAction->saveEntries(sharedConfig->group("RecentFiles"));
+    m_recentFilesAction->saveEntries(sharedConfig->group(QStringLiteral("RecentFiles")));
 
     // Store current route settings
     RoutingManager *routingManager = m_controlView->marbleWidget()->model()->routingManager();
@@ -677,13 +674,13 @@ void MarblePart::setupActions()
     // Action: Recent Files
     m_recentFilesAction = KStandardAction::openRecent(this, SLOT(openUrl(QUrl)), actionCollection());
     KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig();
-    m_recentFilesAction->loadEntries(sharedConfig->group("RecentFiles"));
+    m_recentFilesAction->loadEntries(sharedConfig->group(QStringLiteral("RecentFiles")));
 
     // Action: Download Region
     m_downloadRegionAction = new QAction(this);
     m_downloadRegionAction->setText(i18nc("Action for downloading an entire region of a map", "Download Region..."));
     actionCollection()->addAction("file_download_region", m_downloadRegionAction);
-    connect(m_downloadRegionAction, SIGNAL(triggered()), SLOT(showDownloadRegionDialog()));
+    connect(m_downloadRegionAction, &QAction::triggered, this, &MarblePart::showDownloadRegionDialog);
 
     // Action: Print Map
     m_printMapAction = KStandardAction::print(this, SLOT(printMapScreenShot()), actionCollection());
@@ -696,7 +693,7 @@ void MarblePart::setupActions()
     m_exportMapAction->setText(i18nc("Action for saving the map to a file", "&Export Map..."));
     m_exportMapAction->setIcon(QIcon::fromTheme("document-save-as"));
     actionCollection()->setDefaultShortcut(m_exportMapAction, Qt::CTRL | Qt::Key_S);
-    connect(m_exportMapAction, SIGNAL(triggered(bool)), this, SLOT(exportMapScreenShot()));
+    connect(m_exportMapAction, &QAction::triggered, this, &MarblePart::exportMapScreenShot);
 
     // Action: Work Offline
     m_workOfflineAction = new QAction(this);
@@ -743,7 +740,7 @@ void MarblePart::setupActions()
     KStandardAction::showStatusbar(this, SLOT(showStatusBar(bool)), actionCollection());
 
     m_fullScreenAct = KStandardAction::fullScreen(nullptr, nullptr, widget(), actionCollection());
-    connect(m_fullScreenAct, SIGNAL(triggered(bool)), this, SLOT(showFullScreen(bool)));
+    connect(m_fullScreenAct, &QAction::triggered, this, &MarblePart::showFullScreen);
 
     // Action: Show Crosshairs option
     QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
@@ -757,7 +754,7 @@ void MarblePart::setupActions()
 
     // Action: Show Clouds option
     m_showCloudsAction = new QAction(this);
-    actionCollection()->addAction("show_clouds", m_showCloudsAction);
+    actionCollection()->addAction(QStringLiteral("show_clouds"), m_showCloudsAction);
     m_showCloudsAction->setCheckable(true);
     m_showCloudsAction->setChecked(true);
     m_showCloudsAction->setIcon(QIcon(QStringLiteral(":/icons/clouds.png")));
@@ -774,14 +771,14 @@ void MarblePart::setupActions()
 
     // Action: Show Time options
     m_controlTimeAction = new QAction(this);
-    actionCollection()->addAction("control_time", m_controlTimeAction);
+    actionCollection()->addAction(QStringLiteral("control_time"), m_controlTimeAction);
     m_controlTimeAction->setIcon(QIcon(QStringLiteral(":/icons/clock.png")));
     m_controlTimeAction->setText(i18nc("Action for time control dialog", "&Time Control..."));
     connect(m_controlTimeAction, &QAction::triggered, this, &MarblePart::controlTime);
 
     // Action: Lock float items
     m_lockFloatItemsAct = new QAction(this);
-    actionCollection()->addAction("options_lock_floatitems", m_lockFloatItemsAct);
+    actionCollection()->addAction(QStringLiteral("options_lock_floatitems"), m_lockFloatItemsAct);
     m_lockFloatItemsAct->setText(i18nc("Action for locking float items on the map", "Lock Position"));
     m_lockFloatItemsAct->setIcon(QIcon(QStringLiteral(":/icons/unlock.png")));
     m_lockFloatItemsAct->setCheckable(true);
@@ -793,7 +790,7 @@ void MarblePart::setupActions()
     // Toggle Action: Show sun shadow
     m_showShadow = new KToggleAction(i18n("Show Shadow"), this);
     //     m_showShadow->setIcon(QIcon(QStringLiteral("")));        // Fixme: Add Icon
-    actionCollection()->addAction("sun_shadow", m_showShadow);
+    actionCollection()->addAction(QStringLiteral("sun_shadow"), m_showShadow);
     m_showShadow->setCheckedState(KGuiItem(i18n("Hide Shadow")));
     m_showShadow->setToolTip(i18n("Shows and hides the shadow of the sun"));
     connect(m_showShadow, SIGNAL(triggered(bool)), this, SLOT(showSun(bool)));
@@ -803,14 +800,14 @@ void MarblePart::setupActions()
     actionCollection()->addAction("show_icon_on_subsolarpoint", m_setSubSolarPointIconVisible);
     m_setSubSolarPointIconVisible->setCheckedState(KGuiItem(i18n("Hide sun icon on the Sub-Solar Point")));
     m_setSubSolarPointIconVisible->setToolTip(i18n("Show sun icon on the sub-solar point"));
-    connect(m_setSubSolarPointIconVisible, SIGNAL(triggered(bool)), this, SLOT(setSubSolarPointIconVisible(bool)));
+    connect(m_setSubSolarPointIconVisible, &QAction::triggered, this, &MarblePart::setSubSolarPointIconVisible);
 
     // Toggle Action: Lock globe to the Sub-Solar Point
     m_lockToSubSolarPoint = new KToggleAction(i18n("Lock Globe to the Sub-Solar Point"), this);
     actionCollection()->addAction("lock_to_subsolarpoint", m_lockToSubSolarPoint);
     m_lockToSubSolarPoint->setCheckedState(KGuiItem(i18n("Unlock Globe to the Sub-Solar Point")));
     m_lockToSubSolarPoint->setToolTip(i18n("Lock globe to the sub-solar point"));
-    connect(m_lockToSubSolarPoint, SIGNAL(triggered(bool)), this, SLOT(lockToSubSolarPoint(bool)));
+    connect(m_lockToSubSolarPoint, &QAction::triggered, this, &MarblePart::lockToSubSolarPoint);
 
     //    FIXME: Discuss if this is the best place to put this
     QList<RenderPlugin *>::const_iterator it = pluginList.constBegin();
@@ -822,7 +819,7 @@ void MarblePart::setupActions()
     }
 
     m_addBookmarkAction = new QAction(this);
-    actionCollection()->addAction("add_bookmark", m_addBookmarkAction);
+    actionCollection()->addAction(QStringLiteral("add_bookmark"), m_addBookmarkAction);
     m_addBookmarkAction->setText(i18nc("Add Bookmark", "Add &Bookmark..."));
     m_addBookmarkAction->setIcon(QIcon(QStringLiteral(":/icons/bookmark-new.png")));
     actionCollection()->setDefaultShortcut(m_addBookmarkAction, Qt::CTRL | Qt::Key_B);
@@ -834,19 +831,19 @@ void MarblePart::setupActions()
     m_toggleBookmarkDisplayAction->setStatusTip(i18n("Show or hide bookmarks in the map"));
     m_toggleBookmarkDisplayAction->setCheckable(true);
     m_toggleBookmarkDisplayAction->setChecked(m_controlView->marbleModel()->bookmarkManager()->showBookmarks());
-    connect(m_toggleBookmarkDisplayAction, SIGNAL(toggled(bool)), m_controlView->marbleModel()->bookmarkManager(), SLOT(setShowBookmarks(bool)));
+    connect(m_toggleBookmarkDisplayAction, &QAction::toggled, m_controlView->marbleModel()->bookmarkManager(), &BookmarkManager::setShowBookmarks);
 
     m_setHomeAction = new QAction(this);
-    actionCollection()->addAction("set_home", m_setHomeAction);
+    actionCollection()->addAction(QStringLiteral("set_home"), m_setHomeAction);
     m_setHomeAction->setText(i18n("&Set Home Location"));
     m_setHomeAction->setIcon(QIcon::fromTheme("go-home"));
-    connect(m_setHomeAction, SIGNAL(triggered()), this, SLOT(setHome()));
+    connect(m_setHomeAction, &QAction::triggered, this, &MarblePart::setHome);
 
     m_manageBookmarksAction = new QAction(this);
     actionCollection()->addAction("manage_bookmarks", m_manageBookmarksAction);
     m_manageBookmarksAction->setText(i18nc("Manage Bookmarks", "&Manage Bookmarks..."));
     m_manageBookmarksAction->setIcon(QIcon(QStringLiteral(":/icons/bookmarks-organize.png")));
-    connect(m_manageBookmarksAction, SIGNAL(triggered()), this, SLOT(openManageBookmarksDialog()));
+    connect(m_manageBookmarksAction, &QAction::triggered, this, &MarblePart::openManageBookmarksDialog);
 
     createFolderList();
     connect(m_controlView->marbleModel()->bookmarkManager(), SIGNAL(bookmarksChanged()), this, SLOT(createFolderList()));
@@ -856,11 +853,11 @@ void MarblePart::setupActions()
     m_externalMapEditorAction->setText(i18nc("Edit the map in an external application", "&Edit Map..."));
     m_externalMapEditorAction->setIcon(QIcon(QStringLiteral(":/icons/edit-map.png")));
     actionCollection()->setDefaultShortcut(m_externalMapEditorAction, Qt::CTRL | Qt::Key_E);
-    connect(m_externalMapEditorAction, SIGNAL(triggered()), m_controlView, SLOT(launchExternalMapEditor()));
+    connect(m_externalMapEditorAction, &QAction::triggered, m_controlView, &ControlView::launchExternalMapEditor);
     connect(m_controlView->marbleWidget(), &MarbleWidget::themeChanged, this, &MarblePart::updateMapEditButtonVisibility);
 
     m_recordMovieAction = new QAction(i18n("&Record Movie"), this);
-    actionCollection()->addAction("record_movie", m_recordMovieAction);
+    actionCollection()->addAction(QStringLiteral("record_movie"), m_recordMovieAction);
     m_recordMovieAction->setStatusTip(i18n("Records a movie of the globe"));
     actionCollection()->setDefaultShortcut(m_recordMovieAction, Qt::CTRL | Qt::SHIFT | Qt::Key_R);
     m_recordMovieAction->setIcon(QIcon(QStringLiteral(":/icons/animator.png")));
@@ -890,8 +887,8 @@ void MarblePart::createFolderList()
 
         actionList.append(m_bookmarksListMenu->menuAction());
     }
-    unplugActionList("folders");
-    plugActionList("folders", actionList);
+    unplugActionList(QStringLiteral("folders"));
+    plugActionList(QStringLiteral("folders"), actionList);
 }
 
 void MarblePart::createBookmarksListMenu(QMenu *m_bookmarksListMenu, const GeoDataFolder &folder)
@@ -930,8 +927,8 @@ void MarblePart::createInfoBoxesMenu()
         actionList.append((*i)->action());
     }
 
-    unplugActionList("infobox_actionlist");
-    plugActionList("infobox_actionlist", actionList);
+    unplugActionList(QStringLiteral("infobox_actionlist"));
+    plugActionList(QStringLiteral("infobox_actionlist"), actionList);
 }
 
 void MarblePart::createOnlineServicesMenu()
@@ -950,8 +947,8 @@ void MarblePart::createOnlineServicesMenu()
         }
     }
 
-    unplugActionList("onlineservices_actionlist");
-    plugActionList("onlineservices_actionlist", actionList);
+    unplugActionList(QStringLiteral("onlineservices_actionlist"));
+    plugActionList(QStringLiteral("onlineservices_actionlist"), actionList);
 }
 
 void MarblePart::createRenderPluginActions()
@@ -968,8 +965,8 @@ void MarblePart::createRenderPluginActions()
         }
     }
 
-    unplugActionList("themerender_actionlist");
-    plugActionList("themerender_actionlist", actionList);
+    unplugActionList(QStringLiteral("themerender_actionlist"));
+    plugActionList(QStringLiteral("themerender_actionlist"), actionList);
 }
 
 void MarblePart::showDateTime()
@@ -1003,8 +1000,8 @@ void MarblePart::mapThemeChanged(const QString &newMapTheme)
 
 void MarblePart::createPluginMenus()
 {
-    unplugActionList("plugins_actionlist");
-    unplugActionList("plugins_menuactionlist");
+    unplugActionList(QStringLiteral("plugins_actionlist"));
+    unplugActionList(QStringLiteral("plugins_menuactionlist"));
 
     QList<RenderPlugin *> renderPluginList = m_controlView->marbleWidget()->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = renderPluginList.constBegin();
@@ -1015,7 +1012,7 @@ void MarblePart::createPluginMenus()
         const QList<QActionGroup *> *tmp_actionGroups = (*i)->actionGroups();
         if ((*i)->enabled() && tmp_actionGroups) {
             for (QActionGroup *ag : *tmp_actionGroups) {
-                plugActionList("plugins_menuactionlist", ag->actions());
+                plugActionList(QStringLiteral("plugins_menuactionlist"), ag->actions());
             }
         }
 
@@ -1023,7 +1020,7 @@ void MarblePart::createPluginMenus()
         const QList<QActionGroup *> *tmp_toolbarActionGroups = (*i)->toolbarActionGroups();
         if ((*i)->enabled() && tmp_toolbarActionGroups) {
             for (QActionGroup *ag : *tmp_toolbarActionGroups) {
-                plugActionList("plugins_actionlist", ag->actions());
+                plugActionList(QStringLiteral("plugins_actionlist"), ag->actions());
             }
         }
     }
@@ -1069,8 +1066,8 @@ void MarblePart::migrateNewstuffConfigFiles()
 
             QDomNodeList items = xml.elementsByTagName("stuff");
             for (int i = 0; i < items.length(); ++i) {
-                repairNode(items.item(i), QString("summary"));
-                repairNode(items.item(i), QString("author"));
+                repairNode(items.item(i), QStringLiteral("summary"));
+                repairNode(items.item(i), QStringLiteral("author"));
             }
 
             QFile output(target.absoluteFilePath());
@@ -1101,13 +1098,13 @@ void MarblePart::updateCloudSyncStatus(const QString &status)
     m_ui_cloudSyncSettings.cloudSyncStatus->setText(status);
     switch (m_controlView->cloudSyncManager()->status()) {
     case CloudSyncManager::Success:
-        m_ui_cloudSyncSettings.cloudSyncStatus->setStyleSheet("QLabel { color : green; }");
+        m_ui_cloudSyncSettings.cloudSyncStatus->setStyleSheet(QStringLiteral("QLabel { color : green; }"));
         break;
     case CloudSyncManager::Error:
-        m_ui_cloudSyncSettings.cloudSyncStatus->setStyleSheet("QLabel { color : red; }");
+        m_ui_cloudSyncSettings.cloudSyncStatus->setStyleSheet(QStringLiteral("QLabel { color : red; }"));
         break;
     case CloudSyncManager::Unknown:
-        m_ui_cloudSyncSettings.cloudSyncStatus->setStyleSheet("QLabel { color : grey; }");
+        m_ui_cloudSyncSettings.cloudSyncStatus->setStyleSheet(QStringLiteral("QLabel { color : grey; }"));
         break;
     }
 }
@@ -1153,11 +1150,11 @@ void MarblePart::setupStatusBar()
     const QString templateTileZoomLevelString = TILEZOOMLEVEL_STRING.subs(m_tileZoomLevel).toString();
     m_tileZoomLevelLabel = setupStatusBarLabel(templateTileZoomLevelString);
 
-    connect(m_controlView->marbleWidget(), SIGNAL(mouseMoveGeoPosition(QString)), this, SLOT(showPosition(QString)));
-    connect(m_controlView->marbleWidget(), SIGNAL(distanceChanged(QString)), this, SLOT(updateStatusBar()));
-    connect(m_controlView->marbleWidget(), SIGNAL(tileLevelChanged(int)), SLOT(showZoomLevel(int)));
-    connect(m_controlView->marbleWidget(), SIGNAL(themeChanged(QString)), this, SLOT(mapThemeChanged(QString)), Qt::QueuedConnection);
-    connect(m_controlView->marbleModel()->clock(), SIGNAL(timeChanged()), this, SLOT(showDateTime()));
+    connect(m_controlView->marbleWidget(), &MarbleWidget::mouseMoveGeoPosition, this, &MarblePart::showPosition);
+    connect(m_controlView->marbleWidget(), &MarbleWidget::distanceChanged, this, &MarblePart::updateStatusBar);
+    connect(m_controlView->marbleWidget(), &MarbleWidget::tileLevelChanged, this, &MarblePart::showZoomLevel);
+    connect(m_controlView->marbleWidget(), &MarbleWidget::themeChanged, this, &MarblePart::mapThemeChanged, Qt::QueuedConnection);
+    connect(m_controlView->marbleModel()->clock(), &MarbleClock::timeChanged, this, &MarblePart::showDateTime);
 
     setupDownloadProgressBar();
 
@@ -1189,8 +1186,8 @@ void MarblePart::setupDownloadProgressBar()
 
     HttpDownloadManager *const downloadManager = m_controlView->marbleModel()->downloadManager();
     Q_ASSERT(downloadManager);
-    connect(downloadManager, SIGNAL(progressChanged(int, int)), SLOT(handleProgress(int, int)));
-    connect(downloadManager, SIGNAL(jobRemoved()), SLOT(removeProgressItem()));
+    connect(downloadManager, &HttpDownloadManager::progressChanged, this, &MarblePart::handleProgress);
+    connect(downloadManager, &HttpDownloadManager::jobRemoved, this, &MarblePart::removeProgressItem);
 }
 
 void MarblePart::setupStatusBarActions()

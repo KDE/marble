@@ -44,7 +44,7 @@ MainWindow::MainWindow(const QString &marbleDataPath, QWidget *parent)
 
     insertChildClient(m_part);
 
-    setupGUI(Default, "marbleui.rc");
+    setupGUI(Default, QStringLiteral("marbleui.rc"));
     setStandardToolBarMenuEnabled(true);
 
     QList<QAction *> panelActions = m_part->controlView()->setupDockWidgets(this);
@@ -56,7 +56,7 @@ MainWindow::MainWindow(const QString &marbleDataPath, QWidget *parent)
 
     // View size actions
     m_viewSizeActsGroup = ControlView::createViewSizeActionGroup(this);
-    connect(m_viewSizeActsGroup, SIGNAL(triggered(QAction *)), this, SLOT(changeViewSize(QAction *)));
+    connect(m_viewSizeActsGroup, &QActionGroup::triggered, this, &MainWindow::changeViewSize);
 
     m_part->plugActionList("viewSize_actionlist", m_viewSizeActsGroup->actions());
 
@@ -68,8 +68,8 @@ MainWindow::MainWindow(const QString &marbleDataPath, QWidget *parent)
 
     setAutoSaveSettings();
 
-    connect(marbleWidget(), SIGNAL(themeChanged(QString)), this, SLOT(updateWindowTitle()));
-    connect(marbleWidget(), SIGNAL(themeChanged(QString)), this, SLOT(updateCenterFromTheme()));
+    connect(marbleWidget(), &MarbleWidget::themeChanged, this, &MainWindow::updateWindowTitle);
+    connect(marbleWidget(), &MarbleWidget::themeChanged, this, &MainWindow::updateCenterFromTheme);
     updateWindowTitle();
 }
 
