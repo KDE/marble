@@ -6,7 +6,7 @@ set(marble_kde_SRCS
   marble_part.h
 )
 
-set(marblepart_SRCS marble_part.cpp)
+set(marblepart_SRCS marble_part.cpp  marble_part.h)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../marble-ui)
 kconfig_add_kcfg_files(marblepart_SRCS settings.kcfgc)
 add_library(marble_part ${marblepart_SRCS})
