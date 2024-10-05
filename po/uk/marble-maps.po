@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-04 00:36+0000\n"
-"PO-Revision-Date: 2024-09-29 09:10+0300\n"
+"PO-Revision-Date: 2024-10-04 07:17+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -39,13 +39,13 @@ msgstr "Ідентифікатор теми Marble"
 #: config.kcfg:20
 #, kde-format
 msgid "Routing profile"
-msgstr ""
+msgstr "Профіль маршруту"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:23
 #, kde-format
 msgid "Car"
-msgstr ""
+msgstr "Авто"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:26 ProfileSelectorMenu.qml:134
@@ -145,7 +145,7 @@ msgstr "Параметри теми"
 #: MainScreen.qml:167
 #, kde-format
 msgid "Routing"
-msgstr ""
+msgstr "Маршрути"
 
 #: MainScreen.qml:457
 #, kde-format
@@ -274,31 +274,31 @@ msgstr "Автомобілем (найшвидший)"
 #, kde-format
 msgctxt "@title"
 msgid "Routing"
-msgstr ""
+msgstr "Маршрути"
 
 #: RouteEditorPage.qml:102
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Departure:"
-msgstr ""
+msgstr "Відправлення:"
 
 #: RouteEditorPage.qml:104
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Arrival:"
-msgstr ""
+msgstr "Прибуття:"
 
 #: RouteEditorPage.qml:106
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Waypoint:"
-msgstr ""
+msgstr "Проміжна точка:"
 
 #: RouteEditorPage.qml:194
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Alternatives:"
-msgstr ""
+msgstr "Альтернативи:"
 
 #: SettingsDialog.qml:48
 #, kde-format

@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-10-04 01:20+0300\n"
+"PO-Revision-Date: 2024-10-05 01:15+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -489,75 +489,75 @@ msgstr "Nehir"
 #. file data/maps/earth/temp-dec/temp-dec.dgml:232
 msgctxt "DGML|"
 msgid "42&deg;C"
-msgstr "42&deg;C"
+msgstr "42 &deg;C"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:237
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:236
 msgctxt "DGML|"
 msgid "32&deg;C"
-msgstr "32&deg;C"
+msgstr "32 &deg;C"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:241
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:240
 msgctxt "DGML|"
 msgid "23&deg;C"
-msgstr "23&deg;C"
+msgstr "23 &deg;C"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:245
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:244
 msgctxt "DGML|"
 msgid "12&deg;C"
-msgstr "12&deg;C"
+msgstr "12 &deg;C"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:249
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:248
 msgctxt "DGML|"
 msgid "1&deg;C"
-msgstr "1&deg;C"
+msgstr "1 &deg;C"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:253
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:252
 msgctxt "DGML|"
 msgid "-10&deg;C"
-msgstr "-10&deg;C"
+msgstr "−10 &deg;C"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:257
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:256
 msgctxt "DGML|"
 msgid "-21&deg;C"
-msgstr "-21&deg;C"
+msgstr "−21 &deg;C"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:261
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:260
 msgctxt "DGML|"
 msgid "-32&deg;C"
-msgstr "-32&deg;C"
+msgstr "−32 &deg;C"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:265
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:264
 msgctxt "DGML|"
 msgid "-41&deg;C"
-msgstr "-41&deg;C"
+msgstr "−41 &deg;C"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:269
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:268
 msgctxt "DGML|"
 msgid "-69&deg;C"
-msgstr "-69&deg;C"
+msgstr "−69 &deg;C"
 
 #. file data/maps/earth/citylights/citylights.dgml:11
 msgctxt "DGML|"
 msgid "Earth at Night"
-msgstr "Dünya'nın Gece Görünümü"
+msgstr "Dünya’nın Gece Görünümü"
 
 #. file data/maps/earth/citylights/citylights.dgml:21
 msgctxt "DGML|"
@@ -566,7 +566,7 @@ msgid ""
 "Defense Meteorological Satellite Program (DMSP) Operational Linescan System "
 "(OLS)."
 msgstr ""
-"<i>Dünya'nın şehir ışıkları</i> görüntüsü, Savunma Meteoroloji Uydu Programı "
+"<i>Dünya’nın şehir ışıkları</i> görüntüsü, Savunma Meteoroloji Uydu Programı "
 "(DMSP) Operasyonel Hatlar Sistemi (OLS) verisi ile oluşturulmuştur."
 
 #. file data/maps/earth/citylights/citylights.dgml:154
@@ -743,32 +743,32 @@ msgstr "0 m (Su)"
 #. file data/maps/earth/srtm/srtm.dgml:350
 msgctxt "DGML|"
 msgid "-50 m"
-msgstr "-50 m"
+msgstr "−50 m"
 
 #. file data/maps/earth/srtm/srtm.dgml:354
 msgctxt "DGML|"
 msgid "-200 m"
-msgstr "-200 m"
+msgstr "−200 m"
 
 #. file data/maps/earth/srtm/srtm.dgml:358
 msgctxt "DGML|"
 msgid "-2000 m"
-msgstr "-2000 m"
+msgstr "−2000 m"
 
 #. file data/maps/earth/srtm/srtm.dgml:362
 msgctxt "DGML|"
 msgid "-4000 m"
-msgstr "-4000 m"
+msgstr "−4000 m"
 
 #. file data/maps/earth/srtm/srtm.dgml:366
 msgctxt "DGML|"
 msgid "-6500 m"
-msgstr "-6500 m"
+msgstr "−6500 m"
 
 #. file data/maps/earth/srtm/srtm.dgml:370
 msgctxt "DGML|"
 msgid "-11000 m"
-msgstr "-11000 m"
+msgstr "−11000 m"
 
 #. file data/maps/earth/vectorosm-dev/vectorosm-dev.dgml:12
 msgctxt "DGML|"
@@ -792,7 +792,7 @@ msgstr ""
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:112
 msgctxt "DGML|"
 msgid "Explore the Earth"
-msgstr "Dünya'yı Keşfet"
+msgstr "Dünya’yı Keşfet"
 
 #. file data/maps/earth/vectorosm-dev/vectorosm-dev.dgml:87
 #. ----------
@@ -1573,7 +1573,7 @@ msgid ""
 "Earth. <i>Credits: Germanisches Nationalmuseum, Nuremberg, License: CC BY-SA "
 "3.0.</i></p>"
 msgstr ""
-"<p> Martin Behaim'in <i>Erdapfel'i</i> Dünya'nın var olan en eski küresidir. "
+"<p> Martin Behaim’in <i>Erdapfel’i</i> Dünya’nın var olan en eski küresidir. "
 "<i>Emeği Geçenler: Alman Ulusal Müzesi, Nürnberg, Lisans: License: CC BY-SA "
 "3.0.</i></p>"
 
@@ -1628,7 +1628,7 @@ msgstr "Yağış (Temmuz)"
 msgctxt "DGML|"
 msgid ""
 "A map which shows the average precipitation (rain/snow/hail/etc) in July."
-msgstr "Temmuz'daki ortalam yağışı gösteren bir harita (yağmur/kar/dolu/vb)."
+msgstr "Temmuz’daki ortalam yağışı gösteren bir harita (yağmur/kar/dolu/vb)."
 
 #. file data/maps/earth/precip-july/precip-july.dgml:229
 #. ----------
@@ -1722,7 +1722,7 @@ msgid ""
 "Amsterdam."
 msgstr ""
 "<i>Tarihi dünya haritası</i>, 1689 yılında, van Schagen tarafından, "
-"Amsterdam'da oluşturulmuştur."
+"Amsterdam’da oluşturulmuştur."
 
 #. file data/maps/earth/schagen1689/schagen1689.dgml:148
 msgctxt "DGML|"
@@ -1758,7 +1758,7 @@ msgstr "Sentinel2 Uydu Haritası"
 #. file data/maps/earth/sentinel2/sentinel2.dgml:11
 msgctxt "DGML|"
 msgid "<p>A <i>satellite map</i> based on ESA's Sentinel 2 mission.</p>"
-msgstr "<p><i>uydu haritası</i> ESA'nın Sentinel 2 görevi temellidir.</p>"
+msgstr "<p>ESA’nın Sentinel 2 görevi temelli bir <i>uydu haritası</i>.</p>"
 
 #. file data/maps/earth/temp-dec/temp-dec.dgml:11
 msgctxt "DGML|"
@@ -2013,7 +2013,7 @@ msgstr "Güvercin"
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Coma Berenices"
-msgstr "Berenis'in Saçı"
+msgstr "Berenis’in Saçı"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
@@ -2333,7 +2333,7 @@ msgstr "Tilkicik"
 #: src/apps/marble-qt/qtmain.cpp:89
 msgctxt "Marble::MainWindow|"
 msgid "Marble - Virtual Globe"
-msgstr "Bilye - Masaüstünde Dünya"
+msgstr "Bilye — Masaüstünde Dünya"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:198
 #: src/apps/marble-qt/QtMainWindow.cpp:747
@@ -2348,13 +2348,13 @@ msgid ""
 "Sorry, unable to open '%1':\n"
 "'%2'"
 msgstr ""
-"Üzgünüm, '%1' açılamıyor:\n"
-"'%2'"
+"Üzgünüm, “%1” açılamıyor:\n"
+"“%2”"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:265
 msgctxt "Marble::MainWindow|"
 msgid "&Open..."
-msgstr "&Aç..."
+msgstr "&Aç…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:267
 msgctxt "Marble::MainWindow|"
@@ -2364,12 +2364,12 @@ msgstr "Marbe üzerinde görüntülemek için bir dosya aç"
 #: src/apps/marble-qt/QtMainWindow.cpp:270
 msgctxt "Marble::MainWindow|"
 msgid "&Download Maps..."
-msgstr "Haritaları &İndir..."
+msgstr "Haritalar &İndir…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:273
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
-msgstr "Haritayı &Dışa Aktar..."
+msgstr "Haritayı &Dışa Aktar…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:275
 msgctxt "Marble::MainWindow|"
@@ -2379,7 +2379,7 @@ msgstr "Haritanın bir ekran görüntüsünü kaydet"
 #: src/apps/marble-qt/QtMainWindow.cpp:279
 msgctxt "Marble::MainWindow|"
 msgid "Download &Region..."
-msgstr "&Bölge İndir..."
+msgstr "&Bölge İndir…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:280
 msgctxt "Marble::MainWindow|"
@@ -2391,7 +2391,7 @@ msgstr ""
 #: src/apps/marble-qt/QtMainWindow.cpp:283
 msgctxt "Marble::MainWindow|"
 msgid "&Print..."
-msgstr "&Yazdır..."
+msgstr "&Yazdır…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:284
 msgctxt "Marble::MainWindow|"
@@ -2407,7 +2407,7 @@ msgstr "Haritanın ekran görüntüsünü yazdır"
 #: src/apps/marble-qt/QtMainWindow.cpp:288
 msgctxt "Marble::MainWindow|"
 msgid "Print Previe&w ..."
-msgstr "Yazdırma &Önizleme..."
+msgstr "Yazdırma &Önizleme…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:292
 msgctxt "Marble::MainWindow|"
@@ -2437,7 +2437,7 @@ msgstr "Haritanın ekran görüntüsünü kopyala"
 #: src/apps/marble-qt/QtMainWindow.cpp:302
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
-msgstr "Haritayı Dü&zenle..."
+msgstr "Haritayı Dü&zenle…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:304
 msgctxt "Marble::MainWindow|"
@@ -2467,7 +2467,7 @@ msgstr "Dünyanın videosunu kaydetmeyi durdur"
 #: src/apps/marble-qt/QtMainWindow.cpp:320
 msgctxt "Marble::MainWindow|"
 msgid "&Configure Marble"
-msgstr "Bilye'yi &Yapılandır"
+msgstr "Bilye’yi &Yapılandır"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:321
 msgctxt "Marble::MainWindow|"
@@ -2532,7 +2532,7 @@ msgstr "Çevrim&dışı Çalış"
 #: src/apps/marble-qt/QtMainWindow.cpp:353
 msgctxt "Marble::MainWindow|"
 msgid "&Time Control..."
-msgstr "&Zaman Denetimi..."
+msgstr "&Zaman Denetimi…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:354
 msgctxt "Marble::MainWindow|"
@@ -2542,7 +2542,7 @@ msgstr "Zaman Denetimini Yapılandır "
 #: src/apps/marble-qt/QtMainWindow.cpp:357
 msgctxt "Marble::MainWindow|"
 msgid "S&un Control..."
-msgstr "&Güneş Denetimi..."
+msgstr "&Güneş Denetimi…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:358
 msgctxt "Marble::MainWindow|"
@@ -2612,7 +2612,7 @@ msgstr "Qt Kitaplığının Hakkında Kutusunu Göster"
 #: src/apps/marble-qt/QtMainWindow.cpp:389
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
-msgstr "Y&er İmi Ekle..."
+msgstr "Y&er İmi Koy…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:391
 msgctxt "Marble::MainWindow|"
@@ -2638,7 +2638,7 @@ msgstr "Yer İmlerini Aç/Kapat"
 #: src/apps/marble-qt/QtMainWindow.cpp:403
 msgctxt "Marble::MainWindow|"
 msgid "&Manage Bookmarks..."
-msgstr "Yer İmlerini &Yönet..."
+msgstr "Yer İmlerini &Yönet…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:404
 msgctxt "Marble::MainWindow|"
@@ -2648,7 +2648,7 @@ msgstr "Yer İmlerini Yönet"
 #: src/apps/marble-qt/QtMainWindow.cpp:408
 msgctxt "Marble::MainWindow|"
 msgid "&Create a New Map..."
-msgstr "&Yeni bir Harita Oluştur..."
+msgstr "&Yeni bir Harita Oluştur…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:409
 msgctxt "Marble::MainWindow|"
@@ -2812,7 +2812,7 @@ msgstr "Adsız"
 #: src/apps/marble-ui/ControlView.cpp:85
 msgctxt "Marble::ControlView|"
 msgid "Marble - Virtual Globe"
-msgstr "Bilye - Masaüstünde Dünya"
+msgstr "Bilye — Masaüstünde Dünya"
 
 #: src/apps/marble-ui/ControlView.cpp:273
 msgctxt "Marble::ControlView|"
@@ -2982,7 +2982,7 @@ msgstr "&Gizle"
 #: src/lib/marble/AbstractFloatItem.cpp:239
 msgctxt "Marble::AbstractFloatItem|"
 msgid "&Configure..."
-msgstr "&Yapılandır..."
+msgstr "&Yapılandır…"
 
 #: src/lib/marble/AddLinkDialog.cpp:62
 msgctxt "Marble::AddLinkDialog|"
@@ -3078,7 +3078,7 @@ msgstr "Yer İmi İçe Aktarma"
 #: src/lib/marble/BookmarkManagerDialog.cpp:424
 msgctxt "Marble::BookmarkManagerDialog|"
 msgid "KML Files (*.kml)"
-msgstr "KML Dosyaları (*.kml)"
+msgstr "KML dosyaları (*.kml)"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:431
 #, qt-format
@@ -3094,7 +3094,7 @@ msgstr "Yer imi İçe Aktarma"
 #: src/lib/marble/BookmarkManagerDialog.cpp:465
 msgctxt "BookmarkManagerDialogPrivate|"
 msgid "The file contains a bookmark that already exists among your Bookmarks."
-msgstr "Dosya, zaten Yer İmleri'nde bulunan bir yer imi içeriyor."
+msgstr "Dosya, halihazırda Yer İmleri’nde bulunan bir yer imini içeriyor."
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:466
 msgctxt "BookmarkManagerDialogPrivate|"
@@ -3139,12 +3139,12 @@ msgstr "Yer İmi Yöneticisi"
 #: src/lib/marble/BookmarkManagerDialog.ui:25
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Import Bookmarks..."
-msgstr "Yer İmlerini İçe Aktar..."
+msgstr "Yer İmleri İçe Aktar…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Export Bookmarks..."
-msgstr "Yer İmlerini Dışa Aktar..."
+msgstr "Yer İmlerini Dışa Aktar…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
@@ -3154,12 +3154,12 @@ msgstr "Klasörler"
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
 msgid "New..."
-msgstr "Yeni..."
+msgstr "Yeni…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Rename..."
-msgstr "Yeniden Adlandır..."
+msgstr "Yeniden Adlandır…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
 #: src/lib/marble/BookmarkManagerDialog.ui:151
@@ -3280,7 +3280,7 @@ msgstr "Eşitleme Çakışması"
 #, qt-format
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "Server '%1' could not be reached"
-msgstr "'%1' sunucusuna ulaşılamadı"
+msgstr "“%1” sunucusuna ulaşılamadı"
 
 #: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:312
 msgctxt "Marble::OwncloudSyncBackend|"
@@ -3339,7 +3339,7 @@ msgstr "Kullanılabilir konum yok."
 #: src/lib/marble/CurrentLocationWidget.cpp:186
 msgctxt "QObject|"
 msgid "Waiting for current location information..."
-msgstr "Geçerli konum bilgisi bekleniyor..."
+msgstr "Geçerli konum bilgisi bekleniyor…"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:192
 msgctxt "QObject|"
@@ -3399,7 +3399,7 @@ msgstr "Yolu Kaydet"
 #: src/lib/marble/CurrentLocationWidget.cpp:387
 msgctxt "QObject|"
 msgid "KML File (*.kml)"
-msgstr "KML Dosyası (*.kml)"
+msgstr "KML dosyası (*.kml)"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:385
 msgctxt "QObject|"
@@ -3445,7 +3445,7 @@ msgstr "Yolu Temizle"
 #: src/lib/marble/CurrentLocationWidget.ui:91
 msgctxt "CurrentLocationWidget|"
 msgid "..."
-msgstr "..."
+msgstr "…"
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
 msgctxt "CurrentLocationWidget|"
@@ -3498,7 +3498,7 @@ msgstr "Bilye veri dönüştürme"
 #: src/lib/marble/DataMigration.cpp:91
 msgctxt "Marble::DataMigration|"
 msgid "Converting data ..."
-msgstr "Veri dönüştürülüyor ..."
+msgstr "Veri dönüştürülüyor …"
 
 #: src/lib/marble/DataMigrationWidget.ui:20
 msgctxt "DataMigrationWidget|"
@@ -3521,7 +3521,7 @@ msgctxt "QObject|"
 msgid "Current Location"
 msgstr "Geçerli Konum"
 
-#: src/lib/marble/declarative/Placemark.cpp:97
+#: src/lib/marble/declarative/Placemark.cpp:95
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%n rooms"
@@ -3529,7 +3529,7 @@ msgid_plural "%n rooms"
 msgstr[0] "%n oda"
 msgstr[1] "%n oda"
 
-#: src/lib/marble/declarative/Placemark.cpp:103
+#: src/lib/marble/declarative/Placemark.cpp:101
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%n beds"
@@ -3537,466 +3537,466 @@ msgid_plural "%n beds"
 msgstr[0] "%n yatak"
 msgstr[1] "%n yatak"
 
-#: src/lib/marble/declarative/Placemark.cpp:109
+#: src/lib/marble/declarative/Placemark.cpp:107
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 parking spaces"
 msgstr "%1 park alanı"
 
-#: src/lib/marble/declarative/Placemark.cpp:110
+#: src/lib/marble/declarative/Placemark.cpp:108
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Maximum parking time %1"
 msgstr "Azami park zamanı %1"
 
-#: src/lib/marble/declarative/Placemark.cpp:148
+#: src/lib/marble/declarative/Placemark.cpp:146
 msgctxt "Marble::Placemark|A copy shop provides computers for customer use"
 msgid "Computers available"
 msgstr "Bilgisayarlar kullanılabilir"
 
-#: src/lib/marble/declarative/Placemark.cpp:152
+#: src/lib/marble/declarative/Placemark.cpp:150
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide computers for customer use"
 msgid "No computers available"
 msgstr "Kullanılabilir bilgisyar yok."
 
-#: src/lib/marble/declarative/Placemark.cpp:156
+#: src/lib/marble/declarative/Placemark.cpp:154
 msgctxt "Marble::Placemark|A copy shop provides photocopying service"
 msgid "Photocopying service"
 msgstr "Fotokopi hizmeti"
 
-#: src/lib/marble/declarative/Placemark.cpp:160
+#: src/lib/marble/declarative/Placemark.cpp:158
 msgctxt "Marble::Placemark|A copy shop does not provide photocopying service"
 msgid "No photocopying service"
 msgstr "Fotokopi hizmeti yok"
 
-#: src/lib/marble/declarative/Placemark.cpp:164
+#: src/lib/marble/declarative/Placemark.cpp:162
 msgctxt ""
 "Marble::Placemark|A copy shop provides a service for scanning documents into "
 "digital files"
 msgid "Digital scanning"
 msgstr "Sayısal tarama"
 
-#: src/lib/marble/declarative/Placemark.cpp:168
+#: src/lib/marble/declarative/Placemark.cpp:166
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a service for scanning "
 "documents into digital files"
 msgid "No digital scanning"
 msgstr "Sayısal tarama yok"
 
-#: src/lib/marble/declarative/Placemark.cpp:172
+#: src/lib/marble/declarative/Placemark.cpp:170
 msgctxt ""
 "Marble::Placemark|A copy shop provides a service to send documents through "
 "fax"
 msgid "Fax service"
 msgstr "Faks hizmeti"
 
-#: src/lib/marble/declarative/Placemark.cpp:176
+#: src/lib/marble/declarative/Placemark.cpp:174
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a service to send documents "
 "through fax"
 msgid "No fax service"
 msgstr "Faks hizmeti yok"
 
-#: src/lib/marble/declarative/Placemark.cpp:180
+#: src/lib/marble/declarative/Placemark.cpp:178
 msgctxt ""
 "Marble::Placemark|A copy shop provides a paid service to make phone calls"
 msgid "Phone service"
 msgstr "Telefon hizmeti"
 
-#: src/lib/marble/declarative/Placemark.cpp:184
+#: src/lib/marble/declarative/Placemark.cpp:182
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a paid service to make phone "
 "calls"
 msgid "No phone service"
 msgstr "Telefon hizmeti yok"
 
-#: src/lib/marble/declarative/Placemark.cpp:188
+#: src/lib/marble/declarative/Placemark.cpp:186
 msgctxt ""
 "Marble::Placemark|A copy shop provides services to print paper documents "
 "from digital files"
 msgid "Digital printing"
 msgstr "Sayısal yazdırma"
 
-#: src/lib/marble/declarative/Placemark.cpp:192
+#: src/lib/marble/declarative/Placemark.cpp:190
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide services to print paper "
 "documents from digital files"
 msgid "No digital printing"
 msgstr "Sayısal yazdırma yok"
 
-#: src/lib/marble/declarative/Placemark.cpp:196
+#: src/lib/marble/declarative/Placemark.cpp:194
 msgctxt ""
 "Marble::Placemark|A copy shop provides a professional service to print a "
 "large number of copies of a document"
 msgid "Press printing service"
 msgstr "Baskı hizmeti"
 
-#: src/lib/marble/declarative/Placemark.cpp:201
+#: src/lib/marble/declarative/Placemark.cpp:199
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a professional service to "
 "print a large number of copies of a document"
 msgid "No press printing service"
 msgstr "Baskı makinesi hizmeti yok"
 
-#: src/lib/marble/declarative/Placemark.cpp:205
+#: src/lib/marble/declarative/Placemark.cpp:203
 msgctxt ""
 "Marble::Placemark|A copy shop provides help with preparing special printing "
 "techniques"
 msgid "Press printing assistance"
 msgstr "Baskı makinesi hizmeti yardımı"
 
-#: src/lib/marble/declarative/Placemark.cpp:209
+#: src/lib/marble/declarative/Placemark.cpp:207
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide help with preparing special "
 "printing techniques"
 msgid "No press printing assistance"
 msgstr "Baskı makinesi asistanı yok"
 
-#: src/lib/marble/declarative/Placemark.cpp:213
+#: src/lib/marble/declarative/Placemark.cpp:211
 msgctxt ""
 "Marble::Placemark|A copy shop provides individual copy machines for self-"
 "service"
 msgid "Self service"
 msgstr "Self Servis"
 
-#: src/lib/marble/declarative/Placemark.cpp:217
+#: src/lib/marble/declarative/Placemark.cpp:215
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide individual machines for self-"
 "service"
 msgid " No self service"
 msgstr "Self Servis yok"
 
-#: src/lib/marble/declarative/Placemark.cpp:219
+#: src/lib/marble/declarative/Placemark.cpp:217
 msgctxt "Marble::Placemark|A deli that sells organic food"
 msgid "Sells organic food"
 msgstr "Organik yiyecekler satılır"
 
-#: src/lib/marble/declarative/Placemark.cpp:223
+#: src/lib/marble/declarative/Placemark.cpp:221
 msgctxt "Marble::Placemark|A deli that does not sell organic food"
 msgid "Does not sell organic food"
 msgstr "Organik yiyecekler satılmaz"
 
-#: src/lib/marble/declarative/Placemark.cpp:227
+#: src/lib/marble/declarative/Placemark.cpp:225
 msgctxt "Marble::Placemark|A deli that only sells organic food"
 msgid "Only sells organic food"
 msgstr "Yalnızca organik yiyecekler satılır"
 
-#: src/lib/marble/declarative/Placemark.cpp:232
+#: src/lib/marble/declarative/Placemark.cpp:230
 msgctxt "Marble::Placemark|A deli that sells gluten free food"
 msgid "Sells gluten free food"
 msgstr "Glutensiz yiyecekler satılır"
 
-#: src/lib/marble/declarative/Placemark.cpp:236
+#: src/lib/marble/declarative/Placemark.cpp:234
 msgctxt "Marble::Placemark|A deli that does not sell gluten free food"
 msgid "Does not sell gluten free food"
 msgstr "Glutensiz yiyecekler satılmaz"
 
-#: src/lib/marble/declarative/Placemark.cpp:240
+#: src/lib/marble/declarative/Placemark.cpp:238
 msgctxt "Marble::Placemark|A deli that only sells gluten free food"
 msgid "Only sells gluten free food"
 msgstr "Yalnızca glutensiz yiyecekler satılır"
 
-#: src/lib/marble/declarative/Placemark.cpp:245
+#: src/lib/marble/declarative/Placemark.cpp:243
 msgctxt "Marble::Placemark|A deli that sells lactose free food"
 msgid "Sells lactose free food"
 msgstr "Laktoz içermeyen yiyecekler satılır"
 
-#: src/lib/marble/declarative/Placemark.cpp:249
+#: src/lib/marble/declarative/Placemark.cpp:247
 msgctxt "Marble::Placemark|A deli that does not sell lactose free food"
 msgid "Does not sell lactose free food"
 msgstr "Laktoz içermeyen yiyecekler satılmaz"
 
-#: src/lib/marble/declarative/Placemark.cpp:253
+#: src/lib/marble/declarative/Placemark.cpp:251
 msgctxt "Marble::Placemark|A deli that only sells lactose free food"
 msgid "Only sells lactose free food"
 msgstr "Yalnızca laktoz içermeyen yiyecekler satılır"
 
-#: src/lib/marble/declarative/Placemark.cpp:258
+#: src/lib/marble/declarative/Placemark.cpp:256
 msgctxt "Marble::Placemark|A tobacco shop that also sells lottery tickets"
 msgid "Sells lottery tickets"
 msgstr "Piyango bileti satılır"
 
-#: src/lib/marble/declarative/Placemark.cpp:262
+#: src/lib/marble/declarative/Placemark.cpp:260
 msgctxt "Marble::Placemark|A tobacco shop that also sells revenue stamps"
 msgid "Sells revenue stamps"
 msgstr "Damga vergisi satılır"
 
-#: src/lib/marble/declarative/Placemark.cpp:263
+#: src/lib/marble/declarative/Placemark.cpp:261
 msgctxt "Marble::Placemark|A tobacco shop that also sells salt"
 msgid "Sells salt"
 msgstr "Tuz satılır"
 
-#: src/lib/marble/declarative/Placemark.cpp:282
+#: src/lib/marble/declarative/Placemark.cpp:280
 msgctxt "Marble::Placemark|"
 msgid "Diesel"
 msgstr "Dizel"
 
-#: src/lib/marble/declarative/Placemark.cpp:283
+#: src/lib/marble/declarative/Placemark.cpp:281
 msgctxt "Marble::Placemark|"
 msgid "Biodiesel"
 msgstr "Biyodizel"
 
-#: src/lib/marble/declarative/Placemark.cpp:284
+#: src/lib/marble/declarative/Placemark.cpp:282
 msgctxt "Marble::Placemark|"
 msgid "Octane 91"
 msgstr "91 Oktan"
 
-#: src/lib/marble/declarative/Placemark.cpp:285
+#: src/lib/marble/declarative/Placemark.cpp:283
 msgctxt "Marble::Placemark|"
 msgid "Octane 95"
 msgstr "95 Oktan"
 
-#: src/lib/marble/declarative/Placemark.cpp:286
+#: src/lib/marble/declarative/Placemark.cpp:284
 msgctxt "Marble::Placemark|"
 msgid "Octane 98"
 msgstr "98 Oktan"
 
-#: src/lib/marble/declarative/Placemark.cpp:287
+#: src/lib/marble/declarative/Placemark.cpp:285
 msgctxt "Marble::Placemark|"
 msgid "Octane 100"
 msgstr "100 Oktan"
 
-#: src/lib/marble/declarative/Placemark.cpp:288
+#: src/lib/marble/declarative/Placemark.cpp:286
 msgctxt "Marble::Placemark|"
 msgid "E10"
 msgstr "E10"
 
-#: src/lib/marble/declarative/Placemark.cpp:289
+#: src/lib/marble/declarative/Placemark.cpp:287
 msgctxt "Marble::Placemark|"
 msgid "LPG"
 msgstr "LPG"
 
-#: src/lib/marble/declarative/Placemark.cpp:297
+#: src/lib/marble/declarative/Placemark.cpp:295
 msgctxt "Marble::Placemark|"
 msgid "Batteries"
 msgstr "Bataryalar"
 
-#: src/lib/marble/declarative/Placemark.cpp:298
+#: src/lib/marble/declarative/Placemark.cpp:296
 msgctxt "Marble::Placemark|"
 msgid "Clothes"
 msgstr "Giysiler"
 
-#: src/lib/marble/declarative/Placemark.cpp:299
+#: src/lib/marble/declarative/Placemark.cpp:297
 msgctxt "Marble::Placemark|"
 msgid "Glass"
 msgstr "Cam"
 
-#: src/lib/marble/declarative/Placemark.cpp:300
+#: src/lib/marble/declarative/Placemark.cpp:298
 msgctxt "Marble::Placemark|"
 msgid "Glass bottles"
 msgstr "Cam şişeler"
 
-#: src/lib/marble/declarative/Placemark.cpp:301
+#: src/lib/marble/declarative/Placemark.cpp:299
 msgctxt "Marble::Placemark|"
 msgid "Green waste"
 msgstr "Yeşil atık"
 
-#: src/lib/marble/declarative/Placemark.cpp:302
+#: src/lib/marble/declarative/Placemark.cpp:300
 msgctxt "Marble::Placemark|"
 msgid "Garden waste"
 msgstr "Bahçe atığı"
 
-#: src/lib/marble/declarative/Placemark.cpp:303
+#: src/lib/marble/declarative/Placemark.cpp:301
 msgctxt "Marble::Placemark|"
 msgid "Electrical items"
 msgstr "Elektrikli ürünler"
 
-#: src/lib/marble/declarative/Placemark.cpp:304
+#: src/lib/marble/declarative/Placemark.cpp:302
 msgctxt "Marble::Placemark|"
 msgid "Metal"
 msgstr "Metal"
 
-#: src/lib/marble/declarative/Placemark.cpp:305
+#: src/lib/marble/declarative/Placemark.cpp:303
 msgctxt "Marble::Placemark|"
 msgid "Mobile phones"
 msgstr "Cep telefonları"
 
-#: src/lib/marble/declarative/Placemark.cpp:306
+#: src/lib/marble/declarative/Placemark.cpp:304
 msgctxt "Marble::Placemark|"
 msgid "Newspaper"
 msgstr "Gazete"
 
-#: src/lib/marble/declarative/Placemark.cpp:307
+#: src/lib/marble/declarative/Placemark.cpp:305
 msgctxt "Marble::Placemark|"
 msgid "Paint"
 msgstr "Boya"
 
-#: src/lib/marble/declarative/Placemark.cpp:308
+#: src/lib/marble/declarative/Placemark.cpp:306
 msgctxt "Marble::Placemark|"
 msgid "Paper"
 msgstr "Kağıt"
 
-#: src/lib/marble/declarative/Placemark.cpp:309
+#: src/lib/marble/declarative/Placemark.cpp:307
 msgctxt "Marble::Placemark|"
 msgid "Paper packaging"
 msgstr "Kağıt ambalaj"
 
-#: src/lib/marble/declarative/Placemark.cpp:310
+#: src/lib/marble/declarative/Placemark.cpp:308
 msgctxt "Marble::Placemark|"
 msgid "PET"
 msgstr "Evcil Hayvan"
 
-#: src/lib/marble/declarative/Placemark.cpp:311
+#: src/lib/marble/declarative/Placemark.cpp:309
 msgctxt "Marble::Placemark|"
 msgid "Plastic"
 msgstr "Plastik"
 
-#: src/lib/marble/declarative/Placemark.cpp:312
+#: src/lib/marble/declarative/Placemark.cpp:310
 msgctxt "Marble::Placemark|"
 msgid "Plastic bags"
 msgstr "Plastik poşetler"
 
-#: src/lib/marble/declarative/Placemark.cpp:313
+#: src/lib/marble/declarative/Placemark.cpp:311
 msgctxt "Marble::Placemark|"
 msgid "Plastic bottles"
 msgstr "Plastik şişeler"
 
-#: src/lib/marble/declarative/Placemark.cpp:314
+#: src/lib/marble/declarative/Placemark.cpp:312
 msgctxt "Marble::Placemark|"
 msgid "Plastic packaging"
 msgstr "Plastik ambalaj"
 
-#: src/lib/marble/declarative/Placemark.cpp:315
+#: src/lib/marble/declarative/Placemark.cpp:313
 msgctxt "Marble::Placemark|"
 msgid "Polyester"
 msgstr "Polyester"
 
-#: src/lib/marble/declarative/Placemark.cpp:316
+#: src/lib/marble/declarative/Placemark.cpp:314
 msgctxt "Marble::Placemark|"
 msgid "Tyres"
 msgstr "Lastikler"
 
-#: src/lib/marble/declarative/Placemark.cpp:317
+#: src/lib/marble/declarative/Placemark.cpp:315
 msgctxt "Marble::Placemark|"
 msgid "Waste"
 msgstr "Atık"
 
-#: src/lib/marble/declarative/Placemark.cpp:318
+#: src/lib/marble/declarative/Placemark.cpp:316
 msgctxt "Marble::Placemark|"
 msgid "White goods"
 msgstr "Beyaz eşya"
 
-#: src/lib/marble/declarative/Placemark.cpp:319
+#: src/lib/marble/declarative/Placemark.cpp:317
 msgctxt "Marble::Placemark|"
 msgid "Wood"
 msgstr "Ahşap"
 
-#: src/lib/marble/declarative/Placemark.cpp:321
+#: src/lib/marble/declarative/Placemark.cpp:319
 msgctxt "Marble::Placemark|An active volcano"
 msgid "Active"
 msgstr "Hareketli"
 
-#: src/lib/marble/declarative/Placemark.cpp:325
+#: src/lib/marble/declarative/Placemark.cpp:323
 msgctxt ""
 "Marble::Placemark|A dormant volcano that will erupt at some point in the "
 "future."
 msgid "Dormant"
 msgstr "Hareketsiz"
 
-#: src/lib/marble/declarative/Placemark.cpp:329
+#: src/lib/marble/declarative/Placemark.cpp:327
 msgctxt ""
 "Marble::Placemark|A volcano considered extinct, it has not erupted within "
 "the last 10000 years and likely never will again."
 msgid "Extinct"
 msgstr "Sönmüş"
 
-#: src/lib/marble/declarative/Placemark.cpp:330
+#: src/lib/marble/declarative/Placemark.cpp:328
 msgctxt "Marble::Placemark|"
 msgid "Stratovolcano"
 msgstr "Stratovolkan"
 
-#: src/lib/marble/declarative/Placemark.cpp:331
+#: src/lib/marble/declarative/Placemark.cpp:329
 msgctxt "Marble::Placemark|"
 msgid "Shield volcano"
 msgstr "Kalkan volkan"
 
-#: src/lib/marble/declarative/Placemark.cpp:332
+#: src/lib/marble/declarative/Placemark.cpp:330
 msgctxt "Marble::Placemark|A scoria cone volcano."
 msgid "Scoria cone"
 msgstr "Sinder Konisi"
 
-#: src/lib/marble/declarative/Placemark.cpp:334
+#: src/lib/marble/declarative/Placemark.cpp:332
 msgctxt "Marble::Placemark|"
 msgid "Alternative medicine"
 msgstr "Alternatif Tıp"
 
-#: src/lib/marble/declarative/Placemark.cpp:335
+#: src/lib/marble/declarative/Placemark.cpp:333
 msgctxt "Marble::Placemark|"
 msgid "Audiologist"
 msgstr "Odyolog"
 
-#: src/lib/marble/declarative/Placemark.cpp:336
+#: src/lib/marble/declarative/Placemark.cpp:334
 msgctxt "Marble::Placemark|"
 msgid "Blood bank"
 msgstr "Kan bankası"
 
-#: src/lib/marble/declarative/Placemark.cpp:337
+#: src/lib/marble/declarative/Placemark.cpp:335
 msgctxt "Marble::Placemark|"
 msgid "Blood donation"
 msgstr "Kan bağışı"
 
-#: src/lib/marble/declarative/Placemark.cpp:338
+#: src/lib/marble/declarative/Placemark.cpp:336
 msgctxt "Marble::Placemark|"
 msgid "Medical center"
 msgstr "Sağlık Merkezi"
 
-#: src/lib/marble/declarative/Placemark.cpp:339
+#: src/lib/marble/declarative/Placemark.cpp:337
 msgctxt "Marble::Placemark|"
 msgid "Clinic"
 msgstr "Klinik"
 
-#: src/lib/marble/declarative/Placemark.cpp:340
+#: src/lib/marble/declarative/Placemark.cpp:338
 msgctxt "Marble::Placemark|"
 msgid "Dentist"
 msgstr "Dişçi"
 
-#: src/lib/marble/declarative/Placemark.cpp:341
+#: src/lib/marble/declarative/Placemark.cpp:339
 msgctxt "Marble::Placemark|"
 msgid "Medical practitioner"
 msgstr "Pratisyen hekim"
 
-#: src/lib/marble/declarative/Placemark.cpp:342
+#: src/lib/marble/declarative/Placemark.cpp:340
 msgctxt "Marble::Placemark|"
 msgid "Hospital"
 msgstr "Hastane"
 
-#: src/lib/marble/declarative/Placemark.cpp:343
+#: src/lib/marble/declarative/Placemark.cpp:341
 msgctxt "Marble::Placemark|"
 msgid "Midwife"
 msgstr "Ebe"
 
-#: src/lib/marble/declarative/Placemark.cpp:344
+#: src/lib/marble/declarative/Placemark.cpp:342
 msgctxt "Marble::Placemark|"
 msgid "Optometrist"
 msgstr "Göz Doktoru"
 
-#: src/lib/marble/declarative/Placemark.cpp:345
+#: src/lib/marble/declarative/Placemark.cpp:343
 msgctxt "Marble::Placemark|"
 msgid "Physiotherapist"
 msgstr "Fizyoterapist"
 
-#: src/lib/marble/declarative/Placemark.cpp:346
+#: src/lib/marble/declarative/Placemark.cpp:344
 msgctxt "Marble::Placemark|"
 msgid "Podiatrist"
 msgstr "Ayak hastalıkları uzmanı"
 
-#: src/lib/marble/declarative/Placemark.cpp:347
+#: src/lib/marble/declarative/Placemark.cpp:345
 msgctxt "Marble::Placemark|"
 msgid "Psychotherapist"
 msgstr "Psikoterapist"
 
-#: src/lib/marble/declarative/Placemark.cpp:348
+#: src/lib/marble/declarative/Placemark.cpp:346
 msgctxt "Marble::Placemark|"
 msgid "Rehabilitation"
 msgstr "Rehabilitasyon"
 
-#: src/lib/marble/declarative/Placemark.cpp:349
+#: src/lib/marble/declarative/Placemark.cpp:347
 msgctxt "Marble::Placemark|"
 msgid "Speech therapist"
 msgstr "Konuşma terapisti"
 
-#: src/lib/marble/declarative/Placemark.cpp:356
+#: src/lib/marble/declarative/Placemark.cpp:354
 #, qt-format
 msgctxt "Marble::Placemark|number of seats a bench provides"
 msgid "%n seats"
@@ -4004,768 +4004,768 @@ msgid_plural "%n seats"
 msgstr[0] "%n koltuk"
 msgstr[1] "%n koltuk"
 
-#: src/lib/marble/declarative/Placemark.cpp:362
+#: src/lib/marble/declarative/Placemark.cpp:360
 msgctxt "Marble::Placemark|A bench provides a backrest to lean against"
 msgid "Has backrest"
 msgstr "Sırtlık var"
 
-#: src/lib/marble/declarative/Placemark.cpp:366
+#: src/lib/marble/declarative/Placemark.cpp:364
 msgctxt "Marble::Placemark|A bench provides no backrest to lean against"
 msgid "No backrest"
 msgstr "Sırtlık yok"
 
-#: src/lib/marble/declarative/Placemark.cpp:370
+#: src/lib/marble/declarative/Placemark.cpp:368
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 km/h"
 msgstr "%1 km/s"
 
-#: src/lib/marble/declarative/Placemark.cpp:376
+#: src/lib/marble/declarative/Placemark.cpp:374
 msgctxt "Marble::Placemark|Parking spaces are supervised by guards"
 msgid "Is supervised"
 msgstr "Denetleniyor"
 
-#: src/lib/marble/declarative/Placemark.cpp:380
+#: src/lib/marble/declarative/Placemark.cpp:378
 msgctxt "Marble::Placemark|Parking spaces are not supervised by guards"
 msgid "Not supervised"
 msgstr "Denetlenmiyor"
 
-#: src/lib/marble/declarative/Placemark.cpp:384
+#: src/lib/marble/declarative/Placemark.cpp:382
 #, qt-format
 msgctxt "Marble::Placemark|Parking spaces"
 msgid "%1 disabled spaces"
 msgstr "%1 engelli alanı"
 
-#: src/lib/marble/declarative/Placemark.cpp:388
+#: src/lib/marble/declarative/Placemark.cpp:386
 #, qt-format
 msgctxt "Marble::Placemark|Parking spaces"
 msgid "%1 women spaces"
 msgstr "%1 kadın alanı"
 
-#: src/lib/marble/declarative/Placemark.cpp:392
+#: src/lib/marble/declarative/Placemark.cpp:390
 #, qt-format
 msgctxt "Marble::Placemark|Parking spaces"
 msgid "%1 parent and child spaces"
 msgstr "%1 ebeveyn ve çocuk alanı"
 
-#: src/lib/marble/declarative/Placemark.cpp:396
+#: src/lib/marble/declarative/Placemark.cpp:394
 #, qt-format
 msgctxt "Marble::Placemark|Parking spaces"
 msgid "%1 spaces with electric chargers"
 msgstr "%1 elektrik şarj alanı"
 
-#: src/lib/marble/declarative/Placemark.cpp:402
+#: src/lib/marble/declarative/Placemark.cpp:400
 msgctxt "Marble::Placemark|A parking space has outdoor surveillance"
 msgid "Has outdoor surveillance"
 msgstr "Dış alan kamerası var"
 
-#: src/lib/marble/declarative/Placemark.cpp:406
+#: src/lib/marble/declarative/Placemark.cpp:404
 msgctxt "Marble::Placemark|A parking space has indoor surveillance"
 msgid "Has indoor surveillance"
 msgstr "İç alan kamerası var"
 
-#: src/lib/marble/declarative/Placemark.cpp:410
+#: src/lib/marble/declarative/Placemark.cpp:408
 msgctxt "Marble::Placemark|A parking space has public surveillance"
 msgid "Has public surveillance"
 msgstr "Açık kamera var"
 
-#: src/lib/marble/declarative/Placemark.cpp:412
+#: src/lib/marble/declarative/Placemark.cpp:410
 msgctxt "Marble::Placemark|A hut provides showers inside or aside"
 msgid "Has shower"
 msgstr "Duş var"
 
-#: src/lib/marble/declarative/Placemark.cpp:416
+#: src/lib/marble/declarative/Placemark.cpp:414
 msgctxt "Marble::Placemark|A hut does not provide showers inside or aside"
 msgid "Has no shower"
 msgstr "Duş yok"
 
-#: src/lib/marble/declarative/Placemark.cpp:417
+#: src/lib/marble/declarative/Placemark.cpp:415
 msgctxt "Marble::Placemark|A hut provides mattress"
 msgid "Has mattress"
 msgstr "Yatak var"
 
-#: src/lib/marble/declarative/Placemark.cpp:418
+#: src/lib/marble/declarative/Placemark.cpp:416
 msgctxt "Marble::Placemark|A hut does not provide mattress"
 msgid "Has no mattress"
 msgstr "Yatak yok"
 
-#: src/lib/marble/declarative/Placemark.cpp:419
+#: src/lib/marble/declarative/Placemark.cpp:417
 msgctxt "Marble::Placemark|Water is available inside or aside"
 msgid "Has water"
 msgstr "Su var"
 
-#: src/lib/marble/declarative/Placemark.cpp:423
+#: src/lib/marble/declarative/Placemark.cpp:421
 msgctxt "Marble::Placemark|Water is not available inside nor aside"
 msgid "Has no water"
 msgstr "Su yok"
 
-#: src/lib/marble/declarative/Placemark.cpp:424
+#: src/lib/marble/declarative/Placemark.cpp:422
 msgctxt "Marble::Placemark|A hut provides toilets"
 msgid "Has toilets"
 msgstr "Tuvalet var"
 
-#: src/lib/marble/declarative/Placemark.cpp:425
+#: src/lib/marble/declarative/Placemark.cpp:423
 msgctxt "Marble::Placemark|A hut does not provide toilets"
 msgid "Has no toilets"
 msgstr "Tuvalet yok"
 
-#: src/lib/marble/declarative/Placemark.cpp:426
+#: src/lib/marble/declarative/Placemark.cpp:424
 msgctxt "Marble::Placemark|"
 msgid "Reservation is possible"
 msgstr "Rezervasyon mümkün"
 
-#: src/lib/marble/declarative/Placemark.cpp:427
+#: src/lib/marble/declarative/Placemark.cpp:425
 msgctxt "Marble::Placemark|"
 msgid "No reservation possible"
 msgstr "Rezervasyon mümkün değil"
 
-#: src/lib/marble/declarative/Placemark.cpp:428
+#: src/lib/marble/declarative/Placemark.cpp:426
 msgctxt "Marble::Placemark|"
 msgid "Reservation is required"
 msgstr "Rezervasyon mümkün gerekli"
 
-#: src/lib/marble/declarative/Placemark.cpp:432
+#: src/lib/marble/declarative/Placemark.cpp:430
 msgctxt "Marble::Placemark|You should make reservation"
 msgid "Reservation is recommended"
 msgstr "Rezervasyon mümkün tavsiye ediliyor"
 
-#: src/lib/marble/declarative/Placemark.cpp:436
+#: src/lib/marble/declarative/Placemark.cpp:434
 msgctxt ""
 "Marble::Placemark|Reservation is only possible for members of the "
 "organisation running the hut"
 msgid "Only for members"
 msgstr "Yalnızca üyeler için"
 
-#: src/lib/marble/declarative/Placemark.cpp:438
+#: src/lib/marble/declarative/Placemark.cpp:436
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "By %1"
 msgstr "%1 tarafından"
 
-#: src/lib/marble/declarative/Placemark.cpp:440
+#: src/lib/marble/declarative/Placemark.cpp:438
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 vehicles"
 msgstr "%1 araçlar"
 
-#: src/lib/marble/declarative/Placemark.cpp:441
+#: src/lib/marble/declarative/Placemark.cpp:439
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 ampere"
 msgstr "%1 amper"
 
-#: src/lib/marble/declarative/Placemark.cpp:442
+#: src/lib/marble/declarative/Placemark.cpp:440
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 volt"
 msgstr "%1 volt"
 
-#: src/lib/marble/declarative/Placemark.cpp:444
+#: src/lib/marble/declarative/Placemark.cpp:442
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 blue CEE sockets"
 msgstr "%1 mavi CEE prizi"
 
-#: src/lib/marble/declarative/Placemark.cpp:445
+#: src/lib/marble/declarative/Placemark.cpp:443
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 red CEE sockets (16 A)"
 msgstr "%1 kırmızı CEE prizi (16 A)"
 
-#: src/lib/marble/declarative/Placemark.cpp:446
+#: src/lib/marble/declarative/Placemark.cpp:444
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 red CEE sockets (32 A)"
 msgstr "%1 kırmızı CEE prizi (32 A)"
 
-#: src/lib/marble/declarative/Placemark.cpp:447
+#: src/lib/marble/declarative/Placemark.cpp:445
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 red CEE sockets (64 A)"
 msgstr "%1 kırmızı CEE prizi (64 A)"
 
-#: src/lib/marble/declarative/Placemark.cpp:448
+#: src/lib/marble/declarative/Placemark.cpp:446
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 red CEE sockets (125 A)"
 msgstr "%1 kırmızı CEE prizi (125 A)"
 
-#: src/lib/marble/declarative/Placemark.cpp:449
-#: src/lib/marble/declarative/Placemark.cpp:450
+#: src/lib/marble/declarative/Placemark.cpp:447
+#: src/lib/marble/declarative/Placemark.cpp:448
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 NEMA-5-15P plugs"
 msgstr "%1 NEMA-5-15P fişi"
 
-#: src/lib/marble/declarative/Placemark.cpp:451
+#: src/lib/marble/declarative/Placemark.cpp:449
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 NEMA-5-20P plugs"
 msgstr "%1 NEMA-5-20P fişi"
 
-#: src/lib/marble/declarative/Placemark.cpp:452
+#: src/lib/marble/declarative/Placemark.cpp:450
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 NEMA 14-30 sockets"
 msgstr "%1 NEMA 14-30 soketi"
 
-#: src/lib/marble/declarative/Placemark.cpp:453
+#: src/lib/marble/declarative/Placemark.cpp:451
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 NEMA 14-50 sockets"
 msgstr "%1 NEMA 14-50 soketi"
 
-#: src/lib/marble/declarative/Placemark.cpp:454
+#: src/lib/marble/declarative/Placemark.cpp:452
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Schuko sockets"
 msgstr "%1 Schuko soketi"
 
-#: src/lib/marble/declarative/Placemark.cpp:455
+#: src/lib/marble/declarative/Placemark.cpp:453
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 BS 1363 sockets"
 msgstr "%1 BS 1363 soketi"
 
-#: src/lib/marble/declarative/Placemark.cpp:456
+#: src/lib/marble/declarative/Placemark.cpp:454
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Type 1 plugs"
 msgstr "%1 Tür 1 fişi"
 
-#: src/lib/marble/declarative/Placemark.cpp:457
+#: src/lib/marble/declarative/Placemark.cpp:455
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Type 1 combo plugs"
 msgstr "%1 Tür 1 kombo fişi"
 
-#: src/lib/marble/declarative/Placemark.cpp:458
+#: src/lib/marble/declarative/Placemark.cpp:456
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Type 2 sockets"
 msgstr "%1 Tür 2 soketi"
 
-#: src/lib/marble/declarative/Placemark.cpp:459
+#: src/lib/marble/declarative/Placemark.cpp:457
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Type 2 combo sockets"
 msgstr "%1 Tür 3 kombo soketi"
 
-#: src/lib/marble/declarative/Placemark.cpp:460
+#: src/lib/marble/declarative/Placemark.cpp:458
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Type 3 sockets"
 msgstr "%1 Tür 3 soketi"
 
-#: src/lib/marble/declarative/Placemark.cpp:461
+#: src/lib/marble/declarative/Placemark.cpp:459
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 CHAdeMO plugs"
 msgstr "%1 CHAdeMO fişi"
 
-#: src/lib/marble/declarative/Placemark.cpp:462
+#: src/lib/marble/declarative/Placemark.cpp:460
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Magne Charge plugs"
 msgstr "%1 Magne Şarj fişi"
 
-#: src/lib/marble/declarative/Placemark.cpp:463
+#: src/lib/marble/declarative/Placemark.cpp:461
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Tesla standard plugs"
 msgstr "%1 tesla standart fişi"
 
-#: src/lib/marble/declarative/Placemark.cpp:464
+#: src/lib/marble/declarative/Placemark.cpp:462
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Tesla standard plugs (Supercharger)"
 msgstr "%1 Tesla standart fişi (Hızlı şarj)"
 
-#: src/lib/marble/declarative/Placemark.cpp:465
+#: src/lib/marble/declarative/Placemark.cpp:463
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Tesla roadster plugs"
 msgstr "%1 Tesla bisiklet fişi"
 
-#: src/lib/marble/declarative/Placemark.cpp:467
+#: src/lib/marble/declarative/Placemark.cpp:465
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Maximum vehicle width: %1"
 msgstr "Azami araç genişliği: %1"
 
-#: src/lib/marble/declarative/Placemark.cpp:468
+#: src/lib/marble/declarative/Placemark.cpp:466
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Maximum vehicle height: %1"
 msgstr "Azami araç yüksekliği: %1"
 
-#: src/lib/marble/declarative/Placemark.cpp:470
+#: src/lib/marble/declarative/Placemark.cpp:468
 msgctxt "Marble::Placemark|"
 msgid "Self-service"
 msgstr "Self Servis"
 
-#: src/lib/marble/declarative/Placemark.cpp:471
+#: src/lib/marble/declarative/Placemark.cpp:469
 msgctxt "Marble::Placemark|"
 msgid "No self-service"
 msgstr "Self Servis yok"
 
-#: src/lib/marble/declarative/Placemark.cpp:472
+#: src/lib/marble/declarative/Placemark.cpp:470
 msgctxt "Marble::Placemark|"
 msgid "Automated"
 msgstr "Otomatik"
 
-#: src/lib/marble/declarative/Placemark.cpp:473
+#: src/lib/marble/declarative/Placemark.cpp:471
 msgctxt "Marble::Placemark|"
 msgid "Manual"
 msgstr "Elle"
 
-#: src/lib/marble/declarative/Placemark.cpp:475
+#: src/lib/marble/declarative/Placemark.cpp:473
 msgctxt "Marble::Placemark|"
 msgid "Group home"
 msgstr "Toplu ev"
 
-#: src/lib/marble/declarative/Placemark.cpp:476
+#: src/lib/marble/declarative/Placemark.cpp:474
 msgctxt "Marble::Placemark|"
 msgid "Nursing home"
 msgstr "Bakım Evi"
 
-#: src/lib/marble/declarative/Placemark.cpp:480
+#: src/lib/marble/declarative/Placemark.cpp:478
 msgctxt ""
 "Marble::Placemark|Like group home but for more independent people, e.g. who "
 "have flats"
 msgid "Assisted living"
 msgstr "Destekli yaşam"
 
-#: src/lib/marble/declarative/Placemark.cpp:481
+#: src/lib/marble/declarative/Placemark.cpp:479
 msgctxt "Marble::Placemark|"
 msgid "Nursing services on a daily basis"
 msgstr "Günlük bakım hizmetleri"
 
-#: src/lib/marble/declarative/Placemark.cpp:482
+#: src/lib/marble/declarative/Placemark.cpp:480
 msgctxt "Marble::Placemark|"
 msgid "Shelter"
 msgstr "Barınak"
 
-#: src/lib/marble/declarative/Placemark.cpp:483
+#: src/lib/marble/declarative/Placemark.cpp:481
 msgctxt "Marble::Placemark|"
 msgid "Ambulatory care"
 msgstr "Ayakta tedavi"
 
-#: src/lib/marble/declarative/Placemark.cpp:484
+#: src/lib/marble/declarative/Placemark.cpp:482
 msgctxt "Marble::Placemark|"
 msgid "Social welfare services"
 msgstr "Sosyal refah hizmetleri"
 
-#: src/lib/marble/declarative/Placemark.cpp:488
+#: src/lib/marble/declarative/Placemark.cpp:486
 msgctxt "Marble::Placemark|"
 msgid "Employment and workshops for offenders and people with disabilities"
 msgstr "Suçlular için istihdam ve atölye çalışmaları"
 
-#: src/lib/marble/declarative/Placemark.cpp:492
+#: src/lib/marble/declarative/Placemark.cpp:490
 msgctxt "Marble::Placemark|"
 msgid "Pre-packaged food for free or below market price"
 msgstr "Ücretsiz veya piyasa fiyatının altında amblajlanmış gıdalar"
 
-#: src/lib/marble/declarative/Placemark.cpp:496
+#: src/lib/marble/declarative/Placemark.cpp:494
 msgctxt "Marble::Placemark|"
 msgid "Prepared meals for free or below market price"
 msgstr "Ücretsiz veya piyasa fiyatının altında hazır yemekler"
 
-#: src/lib/marble/declarative/Placemark.cpp:500
+#: src/lib/marble/declarative/Placemark.cpp:498
 msgctxt "Marble::Placemark|"
 msgid "Free dairy food (subject to local regulations)"
 msgstr "Ücretsiz günlük yemek (yerel düzenlemelere tabidir)"
 
-#: src/lib/marble/declarative/Placemark.cpp:502
+#: src/lib/marble/declarative/Placemark.cpp:500
 msgctxt "Marble::Placemark|"
 msgid "For abused"
 msgstr "İstismara uğrayanlar için"
 
-#: src/lib/marble/declarative/Placemark.cpp:503
+#: src/lib/marble/declarative/Placemark.cpp:501
 msgctxt "Marble::Placemark|"
 msgid "For children"
 msgstr "Çocuklar için"
 
-#: src/lib/marble/declarative/Placemark.cpp:504
+#: src/lib/marble/declarative/Placemark.cpp:502
 msgctxt "Marble::Placemark|"
 msgid "For people with physical disabilities"
 msgstr "Fiziksel engelli insanlar için"
 
-#: src/lib/marble/declarative/Placemark.cpp:505
+#: src/lib/marble/declarative/Placemark.cpp:503
 msgctxt "Marble::Placemark|"
 msgid "For those who suffer of a disease"
 msgstr "Hastalıklı insanlar için"
 
-#: src/lib/marble/declarative/Placemark.cpp:506
+#: src/lib/marble/declarative/Placemark.cpp:504
 msgctxt "Marble::Placemark|"
 msgid "For drug-addicted"
 msgstr "Uyuşturucu bağımlıları için"
 
-#: src/lib/marble/declarative/Placemark.cpp:507
+#: src/lib/marble/declarative/Placemark.cpp:505
 msgctxt "Marble::Placemark|"
 msgid "For homeless"
 msgstr "Evsizler için"
 
-#: src/lib/marble/declarative/Placemark.cpp:508
+#: src/lib/marble/declarative/Placemark.cpp:506
 msgctxt "Marble::Placemark|"
 msgid "For juvenile"
 msgstr "Gençler için"
 
-#: src/lib/marble/declarative/Placemark.cpp:512
+#: src/lib/marble/declarative/Placemark.cpp:510
 msgctxt "Marble::Placemark|"
 msgid "For those with mental/psychological problems"
 msgstr "Zihinsel/Psikolojik sorunlu olanlar için"
 
-#: src/lib/marble/declarative/Placemark.cpp:513
+#: src/lib/marble/declarative/Placemark.cpp:511
 msgctxt "Marble::Placemark|"
 msgid "For migrants"
 msgstr "Göçmenler için"
 
-#: src/lib/marble/declarative/Placemark.cpp:514
+#: src/lib/marble/declarative/Placemark.cpp:512
 msgctxt "Marble::Placemark|"
 msgid "For orphans"
 msgstr "Yetimler için"
 
-#: src/lib/marble/declarative/Placemark.cpp:515
+#: src/lib/marble/declarative/Placemark.cpp:513
 msgctxt "Marble::Placemark|"
 msgid "For elder people"
 msgstr "Yaşlılar için"
 
-#: src/lib/marble/declarative/Placemark.cpp:516
+#: src/lib/marble/declarative/Placemark.cpp:514
 msgctxt "Marble::Placemark|"
 msgid "For poor or disadvantaged people"
 msgstr "Fakir ve ezilenler için"
 
-#: src/lib/marble/declarative/Placemark.cpp:517
+#: src/lib/marble/declarative/Placemark.cpp:515
 msgctxt "Marble::Placemark|"
 msgid "For unemployed"
 msgstr "İşsizler için"
 
-#: src/lib/marble/declarative/Placemark.cpp:518
+#: src/lib/marble/declarative/Placemark.cpp:516
 msgctxt "Marble::Placemark|"
 msgid "For victims of crimes"
 msgstr "Suç mağdurları için"
 
-#: src/lib/marble/declarative/Placemark.cpp:520
+#: src/lib/marble/declarative/Placemark.cpp:518
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Inscription: %1"
 msgstr "Yazıt: %1"
 
-#: src/lib/marble/declarative/Placemark.cpp:522
+#: src/lib/marble/declarative/Placemark.cpp:520
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 places per carriage"
 msgstr "Taşıma başına %1"
 
-#: src/lib/marble/declarative/Placemark.cpp:523
+#: src/lib/marble/declarative/Placemark.cpp:521
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 people per hour"
 msgstr "Saatte kişi başına %1"
 
-#: src/lib/marble/declarative/Placemark.cpp:524
+#: src/lib/marble/declarative/Placemark.cpp:522
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 minutes"
 msgstr "%1 dakika"
 
-#: src/lib/marble/declarative/Placemark.cpp:529
+#: src/lib/marble/declarative/Placemark.cpp:527
 msgctxt "Marble::Placemark|A carriage is protected from the weather"
 msgid "Has weather protection"
 msgstr "Hava koşulları korumas var"
 
-#: src/lib/marble/declarative/Placemark.cpp:533
+#: src/lib/marble/declarative/Placemark.cpp:531
 msgctxt "Marble::Placemark|A carriage is not protected from the weather"
 msgid "No weather protection"
 msgstr "Hava koşulları koruması yok"
 
-#: src/lib/marble/declarative/Placemark.cpp:534
+#: src/lib/marble/declarative/Placemark.cpp:532
 msgctxt "Marble::Placemark|A carriage is heated"
 msgid "Is heated"
 msgstr "Isıtılmış"
 
-#: src/lib/marble/declarative/Placemark.cpp:535
+#: src/lib/marble/declarative/Placemark.cpp:533
 msgctxt "Marble::Placemark|A carriage is not heated"
 msgid "Not heated"
 msgstr "Isıtılmamış"
 
-#: src/lib/marble/declarative/Placemark.cpp:539
+#: src/lib/marble/declarative/Placemark.cpp:537
 msgctxt "Marble::Placemark|Bicycles can be transported"
 msgid "Bicycle transportation possible"
 msgstr "Bisiklet taşıma mümkün"
 
-#: src/lib/marble/declarative/Placemark.cpp:543
+#: src/lib/marble/declarative/Placemark.cpp:541
 msgctxt "Marble::Placemark|Bicycles can only be transported in summer"
 msgid "Bicycle transportation only in summer"
 msgstr "Bisiklet taşıma yalnızca yazın mümkün"
 
-#: src/lib/marble/declarative/Placemark.cpp:547
+#: src/lib/marble/declarative/Placemark.cpp:545
 msgctxt "Marble::Placemark|Bicyles cannot be transported"
 msgid "Bicycle transportation impossible"
 msgstr "Bisiklet taşıma mümkün değil"
 
-#: src/lib/marble/declarative/Placemark.cpp:549
+#: src/lib/marble/declarative/Placemark.cpp:547
 msgctxt "Marble::Placemark|"
 msgid "Lit at night"
 msgstr "Gece aydınlatma"
 
-#: src/lib/marble/declarative/Placemark.cpp:550
+#: src/lib/marble/declarative/Placemark.cpp:548
 msgctxt "Marble::Placemark|"
 msgid "Lit in winter"
 msgstr "Kışın aydınlatma"
 
-#: src/lib/marble/declarative/Placemark.cpp:551
+#: src/lib/marble/declarative/Placemark.cpp:549
 msgctxt "Marble::Placemark|A ski piste with trees (gladed)"
 msgid "Contains trees"
 msgstr "Ağaçlar bulunur"
 
-#: src/lib/marble/declarative/Placemark.cpp:552
+#: src/lib/marble/declarative/Placemark.cpp:550
 msgctxt "Marble::Placemark|"
 msgid "Not patrolled"
 msgstr "Devriye yok"
 
-#: src/lib/marble/declarative/Placemark.cpp:557
+#: src/lib/marble/declarative/Placemark.cpp:555
 msgctxt "Marble::Placemark|"
 msgid "Groomed for classic style nordic or downhill skiing"
 msgstr "Klasik stilde nordik veya yokuş aşağı kayak için bakımlı"
 
-#: src/lib/marble/declarative/Placemark.cpp:558
+#: src/lib/marble/declarative/Placemark.cpp:556
 msgctxt "Marble::Placemark|"
 msgid "Mogul piste"
 msgstr "Moğol pistleri"
 
-#: src/lib/marble/declarative/Placemark.cpp:559
+#: src/lib/marble/declarative/Placemark.cpp:557
 msgctxt "Marble::Placemark|"
 msgid "Groomed for free style or skating"
 msgstr "Serbest stil veya paten için bakımlı"
 
-#: src/lib/marble/declarative/Placemark.cpp:563
-#: src/lib/marble/declarative/Placemark.cpp:567
+#: src/lib/marble/declarative/Placemark.cpp:561
+#: src/lib/marble/declarative/Placemark.cpp:565
 msgctxt "Marble::Placemark|"
 msgid "Groomed for classic and free style skiing"
 msgstr "Klasik ve serbest stil için bakımlı"
 
-#: src/lib/marble/declarative/Placemark.cpp:568
+#: src/lib/marble/declarative/Placemark.cpp:566
 msgctxt "Marble::Placemark|"
 msgid "Groomed by a smaller snowmobile"
 msgstr "Küçük kar arabası için bakımlı"
 
-#: src/lib/marble/declarative/Placemark.cpp:569
+#: src/lib/marble/declarative/Placemark.cpp:567
 msgctxt "Marble::Placemark|"
 msgid "Unmarked piste (backcountry touring)"
 msgstr "İşaretsiz kayak pisti (uzak bölge turu)"
 
-#: src/lib/marble/declarative/Placemark.cpp:573
+#: src/lib/marble/declarative/Placemark.cpp:571
 msgctxt "Marble::Placemark|A parking space is covered"
 msgid "Is covered"
 msgstr "Kapalı"
 
-#: src/lib/marble/declarative/Placemark.cpp:574
+#: src/lib/marble/declarative/Placemark.cpp:572
 msgctxt "Marble::Placemark|A parking space is not covered"
 msgid "Not covered"
 msgstr "Kapalı değil"
 
-#: src/lib/marble/declarative/Placemark.cpp:578
+#: src/lib/marble/declarative/Placemark.cpp:576
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Collection times %1"
 msgstr "Toplama saatleri %1"
 
-#: src/lib/marble/declarative/Placemark.cpp:582
+#: src/lib/marble/declarative/Placemark.cpp:580
 msgctxt "Marble::Placemark|Entry station of an aerialway"
 msgid "Entry"
 msgstr "Giriş"
 
-#: src/lib/marble/declarative/Placemark.cpp:583
+#: src/lib/marble/declarative/Placemark.cpp:581
 msgctxt "Marble::Placemark|Exit station of an aerialway"
 msgid "Exit"
 msgstr "Çıkış"
 
-#: src/lib/marble/declarative/Placemark.cpp:584
+#: src/lib/marble/declarative/Placemark.cpp:582
 msgctxt "Marble::Placemark|Entry and exit station of an aerialway"
 msgid "Entry and exit"
 msgstr "Giriş ve çıkış"
 
-#: src/lib/marble/declarative/Placemark.cpp:585
+#: src/lib/marble/declarative/Placemark.cpp:583
 msgctxt "Marble::Placemark|Transit only station of an aerialway"
 msgid "No entry or exit"
 msgstr "Giriş veya çıkış yok"
 
-#: src/lib/marble/declarative/Placemark.cpp:586
+#: src/lib/marble/declarative/Placemark.cpp:584
 msgctxt "Marble::Placemark|Entry station of an aerialway during summer"
 msgid "Entry during summer"
 msgstr "Yaz aylarında giriş"
 
-#: src/lib/marble/declarative/Placemark.cpp:587
+#: src/lib/marble/declarative/Placemark.cpp:585
 msgctxt "Marble::Placemark|Exit station of an aerialway during summer"
 msgid "Exit during summer"
 msgstr "Yaz aylarında çıkış"
 
-#: src/lib/marble/declarative/Placemark.cpp:591
+#: src/lib/marble/declarative/Placemark.cpp:589
 msgctxt ""
 "Marble::Placemark|Entry and exit station of an aerialway during summer"
 msgid "Entry and exit during summer"
 msgstr "Yaz aylarında giriş ve çıkış"
 
-#: src/lib/marble/declarative/Placemark.cpp:595
+#: src/lib/marble/declarative/Placemark.cpp:593
 msgctxt "Marble::Placemark|Transit only station of an aerialway during summer"
 msgid "No entry or exit during summer"
 msgstr "Yaz aylarında giriş veya çıkış yok"
 
-#: src/lib/marble/declarative/Placemark.cpp:599
+#: src/lib/marble/declarative/Placemark.cpp:597
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Elevation: %1 m"
 msgstr "Yükseklik: %1 m"
 
-#: src/lib/marble/declarative/Placemark.cpp:602
+#: src/lib/marble/declarative/Placemark.cpp:600
 msgctxt "Marble::Placemark|"
 msgid "Customers only"
 msgstr "Yanlızca müşteriler"
 
-#: src/lib/marble/declarative/Placemark.cpp:606
+#: src/lib/marble/declarative/Placemark.cpp:604
 msgctxt ""
 "Marble::Placemark|The public has an official, legally-enshrined right of "
 "access; i.e., it's a right of way"
 msgid "Accessible by anyone"
 msgstr "Herkes için açık"
 
-#: src/lib/marble/declarative/Placemark.cpp:610
+#: src/lib/marble/declarative/Placemark.cpp:608
 msgctxt ""
 "Marble::Placemark|Only with permission of the owner on an individual basis."
 msgid "Private"
 msgstr "Özel"
 
-#: src/lib/marble/declarative/Placemark.cpp:614
+#: src/lib/marble/declarative/Placemark.cpp:612
 msgctxt ""
 "Marble::Placemark|Open to general traffic but permission can be revoked by "
 "the owner"
 msgid "Open to general traffic"
 msgstr "Genel trafiğe açık"
 
-#: src/lib/marble/declarative/Placemark.cpp:615
+#: src/lib/marble/declarative/Placemark.cpp:613
 msgctxt "Marble::Placemark|No access for the general public"
 msgid "No access"
 msgstr "Erşim yok"
 
-#: src/lib/marble/declarative/Placemark.cpp:617
+#: src/lib/marble/declarative/Placemark.cpp:615
 msgctxt "Marble::Placemark|"
 msgid "no fee"
 msgstr "Ücretsiz"
 
-#: src/lib/marble/declarative/Placemark.cpp:619
+#: src/lib/marble/declarative/Placemark.cpp:617
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "formerly <i>%1</i>"
 msgstr "eskiden <i>%1</i>"
 
-#: src/lib/marble/declarative/Placemark.cpp:623
+#: src/lib/marble/declarative/Placemark.cpp:621
 #, qt-format
 msgctxt "Marble::Placemark|Positive floor level"
 msgid "Floor %1"
 msgstr "Kat %1"
 
-#: src/lib/marble/declarative/Placemark.cpp:625
+#: src/lib/marble/declarative/Placemark.cpp:623
 #, qt-format
 msgctxt "Marble::Placemark|Negative floor level"
 msgid "Basement %1"
 msgstr "Bodrum %1"
 
-#: src/lib/marble/declarative/Placemark.cpp:627
+#: src/lib/marble/declarative/Placemark.cpp:625
 msgctxt "Marble::Placemark|Floor level 2, two levels above ground level"
 msgid "Floor 2"
 msgstr "Kat 2"
 
-#: src/lib/marble/declarative/Placemark.cpp:628
+#: src/lib/marble/declarative/Placemark.cpp:626
 msgctxt "Marble::Placemark|Floor level 1, one level above ground level"
 msgid "Floor 1"
 msgstr "Kat 1"
 
-#: src/lib/marble/declarative/Placemark.cpp:629
+#: src/lib/marble/declarative/Placemark.cpp:627
 msgctxt "Marble::Placemark|Floor level 0"
 msgid "Ground floor"
 msgstr "Zemin kat"
 
-#: src/lib/marble/declarative/Placemark.cpp:630
+#: src/lib/marble/declarative/Placemark.cpp:628
 msgctxt "Marble::Placemark|Floor level -1, one level below ground level"
 msgid "Basement 1"
 msgstr "Bodrum 1"
 
-#: src/lib/marble/declarative/Placemark.cpp:631
+#: src/lib/marble/declarative/Placemark.cpp:629
 msgctxt "Marble::Placemark|Floor level -2, two levels below ground level"
 msgid "Basement 2"
 msgstr "Bodrum 2"
 
-#: src/lib/marble/declarative/Placemark.cpp:725
+#: src/lib/marble/declarative/Placemark.cpp:723
 msgctxt "Marble::Placemark|"
 msgid "Wheelchair accessible"
 msgstr "Tekerlekli sandalye kullanımına uygun"
 
-#: src/lib/marble/declarative/Placemark.cpp:726
+#: src/lib/marble/declarative/Placemark.cpp:724
 msgctxt "Marble::Placemark|"
 msgid "Wheelchair inaccessible"
 msgstr "Tekerlekli sandalye kullanımına uygun değil"
 
-#: src/lib/marble/declarative/Placemark.cpp:727
+#: src/lib/marble/declarative/Placemark.cpp:725
 msgctxt "Marble::Placemark|"
 msgid "Limited wheelchair accessibility"
 msgstr "Sınırlı tekerlekli sandalye kullanımına uygunluk"
 
-#: src/lib/marble/declarative/Placemark.cpp:728
+#: src/lib/marble/declarative/Placemark.cpp:726
 msgctxt "Marble::Placemark|"
 msgid "Designated wheelchair access"
 msgstr "Tekerlekli sandalye erişimi için tasarlanmış"
 
-#: src/lib/marble/declarative/Placemark.cpp:761
+#: src/lib/marble/declarative/Placemark.cpp:759
 msgctxt ""
 "Marble::Placemark|This location does not provide public Internet access"
 msgid "No public Internet access"
 msgstr "Açık İnternet erişimi yok"
 
-#: src/lib/marble/declarative/Placemark.cpp:765
+#: src/lib/marble/declarative/Placemark.cpp:763
 msgctxt ""
 "Marble::Placemark|This location provides an unknown type of public Internet "
 "access."
 msgid "Public Internet access available"
 msgstr "Açık İnternet erişimi var"
 
-#: src/lib/marble/declarative/Placemark.cpp:771
+#: src/lib/marble/declarative/Placemark.cpp:769
 msgctxt ""
 "Marble::Placemark|Public wireless Internet access is available here for a "
 "fee."
 msgid "Charged public wifi available"
 msgstr "Ücretli kablosuz bağlantı var"
 
-#: src/lib/marble/declarative/Placemark.cpp:776
+#: src/lib/marble/declarative/Placemark.cpp:774
 msgctxt ""
 "Marble::Placemark|Public wireless Internet access is available here for no "
 "cost."
 msgid "Free public wifi available"
 msgstr "Ücretsiz kablosuz bağlantı var"
 
-#: src/lib/marble/declarative/Placemark.cpp:781
+#: src/lib/marble/declarative/Placemark.cpp:779
 msgctxt "Marble::Placemark|Public wireless Internet access is available here."
 msgid "Public wifi available"
 msgstr "Kablosuz bağlantı var"
 
-#: src/lib/marble/declarative/Placemark.cpp:785
+#: src/lib/marble/declarative/Placemark.cpp:783
 msgctxt "Marble::Placemark|Public wifi is not available here."
 msgid "No public wifi"
 msgstr "Kablosuz bağlantı yok"
 
-#: src/lib/marble/declarative/Placemark.cpp:789
+#: src/lib/marble/declarative/Placemark.cpp:787
 msgctxt "Marble::Placemark|Public wireless Internet is available here."
 msgid "Public wifi available"
 msgstr "Kablosuz bağlantı var"
 
-#: src/lib/marble/declarative/Placemark.cpp:793
+#: src/lib/marble/declarative/Placemark.cpp:791
 msgctxt ""
 "Marble::Placemark|Public wireless Internet is available here for no cost."
 msgid "Free public wifi available"
 msgstr "Ücretsiz kablosuz bağlantı var"
 
-#: src/lib/marble/declarative/Placemark.cpp:900
+#: src/lib/marble/declarative/Placemark.cpp:898
 #, qt-format
 msgctxt ""
 "Marble::Placemark|House number (first argument) and street name (second "
@@ -5003,7 +5003,7 @@ msgstr "&Klasör:"
 #: src/lib/marble/EditBookmarkDialog.ui:79
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Add Folder..."
-msgstr "Klasör &Ekle..."
+msgstr "Klasör &Ekle…"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -5202,10 +5202,10 @@ msgid ""
 "future. If you want to alter the default map editor later, you can do so in "
 "the Marble Settings."
 msgstr ""
-"Bir dahakine harita düzenleyici seçimini tekrar devre dışı bırakın. Aksi "
-"takdirde seçiminiz anımsanır ve ileride otomatik olarak kullanılacaktır. "
+"Bir dahakine harita düzenleyicisi seçimini yeniden devre dışı bırakın. Aksi "
+"takdirde seçiminiz anımsanır ve ileride kendiliğinden kullanılacaktır. "
 "Öntanımlı harita düzenleyicisini daha sonra değiştirmek isterseniz Bilye "
-"Ayarları'nda bunu yapabilirsiniz."
+"Ayarları’nda bunu yapabilirsiniz."
 
 #: src/lib/marble/ExternalEditor.ui:51
 msgctxt "ExternalEditor|"
@@ -5268,8 +5268,8 @@ msgid ""
 "iD is a very easy to use OpenStreetMap editor, though lacks the power of "
 "Merkaartor and JOSM. It runs on all platforms with a web browser."
 msgstr ""
-"iD'yi OpenStreetMap düzenleyicisi olarak kullanmak çok kolaydır; ancak "
-"Merkaartor ve JOSM'nin gücünden yoksundur. Tüm platformlarda bir web "
+"iD’yi OpenStreetMap düzenleyicisi olarak kullanmak çok kolaydır; ancak "
+"Merkaartor ve JOSM’nin gücünden yoksundur. Tüm platformlarda bir web "
 "tarayıcısı ile çalışır."
 
 #: src/lib/marble/FileViewWidget.cpp:69
@@ -5335,7 +5335,7 @@ msgstr "Görsel seç"
 #: src/lib/marble/FormattedTextWidget.cpp:180
 msgctxt "Marble::FormattedTextWidget|"
 msgid "All Supported Files (*.png *.jpg *.jpeg)"
-msgstr "Tüm Desteklenen Dosyalar (*.png *.jpg *.jpeg)"
+msgstr "Tüm desteklenen dosyalar (*.png *.jpg *.jpeg)"
 
 #: src/lib/marble/FormattedTextWidget.ui:46
 msgctxt "FormattedTextWidget|"
@@ -6937,12 +6937,12 @@ msgstr "Kayak Teleferiği"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:916
 msgctxt "GeoDataPlacemark|"
 msgid "T-Bar"
-msgstr "T-Bar"
+msgstr "T Çubuğu"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:918
 msgctxt "GeoDataPlacemark|"
 msgid "J-Bar"
-msgstr "J-Bar"
+msgstr "J Çubuğu"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:920
 msgctxt "GeoDataPlacemark|"
@@ -7282,13 +7282,15 @@ msgstr "Kızak İzi"
 #, qt-format
 msgctxt "QObject|"
 msgid "Could not convert <maximum> child text content to integer. Was: '%1'"
-msgstr "<maximum> alt kademe yazı içeriği tamsayıya çevirilemedi. İçerik: '%1'"
+msgstr ""
+"<maximum>, alt kademe yazı içeriği tamsayıya çevirilemedi. İçerik: “%1”"
 
 #: src/lib/marble/geodata/handlers/dgml/DgmlMinimumTagHandler.cpp:35
 #, qt-format
 msgctxt "QObject|"
 msgid "Could not convert <minimum> child text content to integer. Was: '%1'"
-msgstr "<minimum> alt kademe yazı içeriği tamsayıya çevirilemedi. İçerik: '%1'"
+msgstr ""
+"<minimum>, alt kademe yazı içeriği tamsayıya çevirilemedi. İçerik: “%1”"
 
 #: src/lib/marble/geodata/parser/GeoParser.cpp:86
 #, qt-format
@@ -7366,7 +7368,7 @@ msgstr[1] "%n sonuç bulunamadı."
 #: src/lib/marble/GoToDialog.ui:14
 msgctxt "GoTo|"
 msgid "Go To..."
-msgstr "Git..."
+msgstr "Git…"
 
 #: src/lib/marble/GoToDialog.ui:78
 msgctxt "GoTo|"
@@ -7574,7 +7576,7 @@ msgstr "Stereografik görünüm"
 #: src/lib/marble/MapViewWidget.cpp:147
 msgctxt "Marble::MapViewWidget|"
 msgid "Lambert Azimuthal Equal-Area view"
-msgstr "Lambert Güneyaçısal Eşdeğer-Alan görünümü"
+msgstr "Lambert Güneyaçısal Eşdeğer Alan görünümü"
 
 #: src/lib/marble/MapViewWidget.cpp:151
 msgctxt "Marble::MapViewWidget|"
@@ -7599,7 +7601,7 @@ msgstr "&Favori"
 #: src/lib/marble/MapViewWidget.cpp:619
 msgctxt "Marble::MapViewWidget|"
 msgid "&Create a New Map..."
-msgstr "&Yeni bir Harita Oluştur..."
+msgstr "&Yeni bir Harita Oluştur…"
 
 #: src/lib/marble/MapViewWidget.cpp:621
 msgctxt "Marble::MapViewWidget|"
@@ -7655,7 +7657,7 @@ msgstr "Selenografik"
 #: src/lib/marble/MapViewWidget.ui:86
 msgctxt "MapViewWidget|"
 msgid "Lambert Azimuthal Equal Area"
-msgstr "Lambert Güneyaçısal Eşdeğer-Alan"
+msgstr "Lambert Güneyaçısal Eşdeğer Alan"
 
 #: src/lib/marble/MapViewWidget.ui:95
 msgctxt "MapViewWidget|"
@@ -7706,7 +7708,7 @@ msgstr "Sunucu, bir OWS Sunucusu değil."
 #: src/lib/marble/MapWizard.cpp:1070
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
-msgstr "Web Mercator'u (epsg:3857)"
+msgstr "Web Merkatör’u (epsg:3857)"
 
 #: src/lib/marble/MapWizard.cpp:367 src/lib/marble/MapWizard.cpp:795
 #: src/lib/marble/MapWizard.cpp:915
@@ -8048,7 +8050,7 @@ msgid ""
 "Enter the base Url of the WMS service (e.g. <i>https://www.wms.nrw.de/"
 "geobasis/wms_nw_dop_overlay</i>)"
 msgstr ""
-"WMS hizmetinin taban URL'sini girin (örn. <i>https://www.wms.nrw.de/geobasis/"
+"WMS hizmetinin taban URL’sini girin (örn. <i>https://www.wms.nrw.de/geobasis/"
 "wms_nw_dop_overlay</i>)"
 
 #: src/lib/marble/MapWizard.ui:166 src/lib/marble/MapWizard.ui:465
@@ -8059,7 +8061,7 @@ msgstr "https://"
 #: src/lib/marble/MapWizard.ui:218
 msgctxt "MapWizard|"
 msgid "Wms-Service:"
-msgstr "Wms-Hizmeti:"
+msgstr "Wms hizmeti:"
 
 #: src/lib/marble/MapWizard.ui:232
 msgctxt "MapWizard|"
@@ -8092,7 +8094,7 @@ msgid ""
 "Ctrl, Ctrl+A, ...)"
 msgstr ""
 "Klavye kısayolları olmadan birden çok katmanı seçmek için bunu etkinleştirin "
-"(Üst Karakter, Kontrol, Kontrol+A, ...)"
+"(Üst Karakter, Kontrol, Kontrol+A, …)"
 
 #: src/lib/marble/MapWizard.ui:300
 msgctxt "MapWizard|"
@@ -8152,7 +8154,7 @@ msgstr "OpenStreetMap"
 #: src/lib/marble/MapWizard.ui:452
 msgctxt "MapWizard|"
 msgid "XYZ Server Url"
-msgstr "XYZ Sunucu URL'si"
+msgstr "XYZ Sunucusu URL’si"
 
 #: src/lib/marble/MapWizard.ui:462
 msgctxt "MapWizard|"
@@ -8220,9 +8222,9 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Tek bir resim dosyasında "
 "(JPG, PNG, vb.) depolanmış olan dünya haritasının konumunu seçin. <a href="
 "\"httpb://en.wikipedia.org/wiki/Equirectangular_projection\"><span style=\" "
-"text-decoration: underline; color:#0057ae;\">Equirectangular şeklinde "
-"sunulmalı,</span></a>, böylece şekil şu şekilde gözükecektir (ölçek: 2:1):</"
-"p>\n"
+"text-decoration: underline; color:#0057ae;\">Eşkenar dikdörtgen şeklinde "
+"sunulmalıdır;</span></a>, böylece şekil şu şekilde gözükecektir (ölçek: 2:1):"
+"</p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
 "worldmap.svg\" width=\"150\" /></p></body></html>"
@@ -8235,7 +8237,7 @@ msgstr "Kaynak Görsel:"
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
 msgctxt "MapWizard|"
 msgid "..."
-msgstr "..."
+msgstr "…"
 
 #: src/lib/marble/MapWizard.ui:615
 msgctxt "MapWizard|"
@@ -8322,7 +8324,7 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 "family:'Sans Serif';\">Lütfen yeni haritanız için bir başlık, bir ad ve bir "
 "simge belirtin. Kullanıcıların haritanızın ne hakkında olduğunu bildirmek "
-"için bir açıklama ekleyin. </span></p></body></html>"
+"için bir açıklama ekleyin.</span></p></body></html>"
 
 #: src/lib/marble/MapWizard.ui:707
 msgctxt "MapWizard|"
@@ -8382,7 +8384,7 @@ msgstr "önizleme görseli"
 #: src/lib/marble/MapWizard.ui:825
 msgctxt "MapWizard|"
 msgid "Change..."
-msgstr "Değiştir..."
+msgstr "Değiştir…"
 
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
@@ -8433,8 +8435,7 @@ msgstr ""
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Tebrikler! Harita temanızı "
 "oluşturmak için gerekli tüm verileri girdiniz. Aşağıdaki özeti dikkatle "
-"denetleyin ve temayı yaratmak için &quot;Bitir&quot; düğmesine tıklayın. </"
-"p>\n"
+"denetleyin ve temayı yaratmak için “Bitir” düğmesine tıklayın.</p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Lütfen lisans ve kullanım "
 "şartları buna izin veriyorsa harita temasını Bilye topluluğuna katkıda "
@@ -8503,7 +8504,7 @@ msgid ""
 "tu-berlin.de</a><br /><i>WMS Support, Mobile, Performance</i></p>"
 msgstr ""
 "<p>Bernhard Beschow <a href=\"mailto:bbeschow@cs.tu-berlin.de\">bbeschow@cs."
-"tu-berlin.de</a><br /><i>WMS Destek, taşınabilir, başarım</i></p>"
+"tu-berlin.de</a><br /><i>WMS desteği, taşınabilir, başarım</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:81
 msgctxt "QObject|"
@@ -8530,7 +8531,7 @@ msgid ""
 "a><br /><i>OpenStreetMap Support, Download Management</i></p>"
 msgstr ""
 "<p>Jens-Michael Hoffmann <a href=\"mailto:jensmh@gmx.de\">jensmh@gmx.de</"
-"a><br /><i>OpenStreetMap Destek, İndirme Yönetimi</i></p>"
+"a><br /><i>OpenStreetMap desteği, indirme yönetimi</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:87
 msgctxt "QObject|"
@@ -8539,7 +8540,7 @@ msgid ""
 "aachen.de</a><br /><i>Elevation Profile</i></p>"
 msgstr ""
 "<p>Florian E&szlig;er <a href=\"mailto:f.esser@rwth-aachen.de\">f.esser@rwth-"
-"aachen.de</a><br /><i>Yükseklik Profili</i></p>"
+"aachen.de</a><br /><i>Yükselti profili</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:89
 msgctxt "QObject|"
@@ -8625,7 +8626,7 @@ msgid ""
 "itbhu@googlemail.com</a><br /><i>Planet Filter, Bugfixes</i></p>"
 msgstr ""
 "<p>Harshit Jain <a href=\"mailto:sonu.itbhu@googlemail.com\">sonu."
-"itbhu@googlemail.com</a><br /><i>Gezegen süzgeci, hata üzeltme</i></p>"
+"itbhu@googlemail.com</a><br /><i>Gezegen süzgeci, hata düzeltme</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:108
 msgctxt "QObject|"
@@ -8634,7 +8635,7 @@ msgid ""
 "com</a><br /><i>Proxy Support</i></p>"
 msgstr ""
 "<p>Andrew Manson <a href=\"mailto:g.real.ate@gmail.com\">g.real.ate@gmail."
-"com</a><br /><i>Vekil Sunucu Desteği</i></p>"
+"com</a><br /><i>Vekil sunucu desteği</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:110
 msgctxt "QObject|"
@@ -8652,7 +8653,7 @@ msgid ""
 "com</a><br /><i>Marble Runners, World-Clock Plasmoid</i></p>"
 msgstr ""
 "<p>Henry de Valence <a href=\"mailto:hdevalence@gmail.com\">hdevalence@gmail."
-"com</a><br /><i>Bilye Çalıştırıcıları, Dünya Saati Plasmoid</i></p>"
+"com</a><br /><i>Bilye çalıştırıcıları, dünya saati Plasmoid’i</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:114
 msgctxt "QObject|"
@@ -8666,7 +8667,7 @@ msgid ""
 "a><br /><i>Original Co-Maintainer</i></p>"
 msgstr ""
 "<p>Inge Wallin <a href=\"mailto:inge@lysator.liu.se\">inge@lysator.liu.se</"
-"a><br /><i>Asıl Yardımcı Proje Yürütücüsü</i></p>"
+"a><br /><i>Özgün yardımcı proje bakımcısı</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:117
 msgctxt "QObject|"
@@ -8677,7 +8678,7 @@ msgid ""
 "Frederik Gladhorn, Fredrik H&ouml;glund, Albert Astals Cid, Thomas Zander, "
 "Joseph Wenninger, Kris Thomsen, Daniel Molkentin  </p>"
 msgstr ""
-"<p><i>Geliştirme &amp; Yamaları:</i> Simon Schmeisser, Claudiu Covaci, David "
+"<p><i>Geliştirme ve yamalar:</i> Simon Schmeisser, Claudiu Covaci, David "
 "Roberts, Nikolas Zimmermann, Jan Becker, Stefan Asserh&auml;ll, Laurent "
 "Montel, Prashanth Udupa, Anne-Marie Mahfouf, Josef Spillner, Frerich Raabe, "
 "Frederik Gladhorn, Fredrik H&ouml;glund, Albert Astals Cid, Thomas Zander, "
@@ -8710,13 +8711,13 @@ msgid ""
 "<p>You can reach the developers of the Marble Project at <a href=\"mailto:"
 "marble-devel@kde.org\">marble-devel@kde.org</a></p>"
 msgstr ""
-"<p>Bilye Projesinin geliştiricilerine <a href=\"mailto:marble-devel@kde.org"
+"<p>Bilye projesinin geliştiricilerine <a href=\"mailto:marble-devel@kde.org"
 "\">marble-devel@kde.org</a> adresinden ulaşabilirsiniz.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:126
 msgctxt "QObject|"
 msgid "<b>ESA - Summer of Code in Space</b>"
-msgstr "<b>ESA - Summer of Code in Space</b>"
+msgstr "<b>ESA — Summer of Code in Space</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:127
 msgctxt "QObject|"
@@ -8742,7 +8743,7 @@ msgid ""
 msgstr ""
 "<p>Judit Bartha, <a href=\"mailto:bartha.m.judit@gmail.com\"> bartha.m."
 "judit@gmail.com </a><br /><i>Proje: Sentinel-2 görev verisini kullanarak "
-"Bilye Uydu haritalarını geliştirme</i></p>"
+"Bilye uydu haritalarını geliştirme</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:132
 #: src/lib/marble/MarbleAboutDialog.cpp:186
@@ -8776,8 +8777,8 @@ msgid ""
 "celestial bodies in Marble   </i></p>"
 msgstr ""
 "<p>G&#xE1;bor P&#xE9;terffy, <a href=\"mailto:peterffy95@gmail.com\"> "
-"peterffy95@gmail.com </a><br /><i>Project: Bilye içindeki Gök Cisimleri için "
-"Panoramik Görsel Desteği   </i></p>"
+"peterffy95@gmail.com </a><br /><i>Proje: Bilye içindeki gök nesneleri için "
+"panoramik görsel desteği</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:138
 #: src/lib/marble/MarbleAboutDialog.cpp:158
@@ -8794,8 +8795,8 @@ msgid ""
 "Marble </i></p>"
 msgstr ""
 "<p>Marek Hakala, <a href=\"mailto:hakala.marek@gmail.com\">hakala."
-"marek@gmail.com</a><br /><i>Proje: Bilye içindeki Güneş/Ay Tutulmalarını "
-"Görüntüleme </i></p>"
+"marek@gmail.com</a><br /><i>Proje: Bilye içinde Güneş/Ay tutulmalarını "
+"görüntüleme</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:141
 #: src/lib/marble/MarbleAboutDialog.cpp:163
@@ -8812,8 +8813,8 @@ msgid ""
 "satellites</i></p>"
 msgstr ""
 "<p>Ren&#xE9; K&#xFC;ttner, <a href=\"mailto:rene@bitkanal.net"
-"\">rene@bitkanal.net</a><br /><i>Project: Gezegen uydularının görsellenmesi</"
-"i></p>"
+"\">rene@bitkanal.net</a><br /><i>Proje: Gezegen uydularının "
+"görselleştirilmesi</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:144
 #: src/lib/marble/MarbleAboutDialog.cpp:167
@@ -8829,7 +8830,7 @@ msgid ""
 "com</a><br /><i>Project: Visualization of Satellite Orbits</i></p>"
 msgstr ""
 "<p>Guillaume Martres, <a href=\"mailto:smarter@ubuntu.com\">smarter@ubuntu."
-"com</a><br /><i>Proje: Uydu Yörüngelerinin Görselleştirilmesi</i></p>"
+"com</a><br /><i>Proje: Uydu yörüngelerinin görselleştirilmesi</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:149
 msgctxt "QObject|"
@@ -8842,8 +8843,8 @@ msgid ""
 "<p> The Marble Team would like to thank its members who participated in the "
 "Google Code-in for their successful work on Marble:</p>"
 msgstr ""
-"<p> The Bilye Ekibi Google Code-in'de gösterdikleri başarıdan dolayı "
-"katılımcı üyelerine teşekkür eder:</p>"
+"<p>Bilye Ekibi, Google Code-in’de gösterdikleri başarıdan dolayı katılımcı "
+"üyelerine teşekkür eder:</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:153
 #: src/lib/marble/MarbleAboutDialog.cpp:159
@@ -8931,8 +8932,8 @@ msgid ""
 "<p>Utku Ayd&#x131;n <a href=\"mailto:utkuaydin34@gmail.com"
 "\">utkuaydin34@gmail.com</a><br />"
 msgstr ""
-"<p>Utku Ayd&#x131;n <a href=\"mailto:utkuaydin34@gmail.com"
-"\">utkuaydin34@gmail.com</a><br />"
+"<p>Utku Aydın <a href=\"mailto:utkuaydin34@gmail.com\">utkuaydin34@gmail."
+"com</a><br />"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:169
 msgctxt "QObject|"
@@ -8958,8 +8959,8 @@ msgid ""
 "Furkan &Uuml;z&uuml;mc&uuml; <a href=\"mailto:furkanuzumcu@gmail.com"
 "\">furkanuzumcu@gmail.com</a></p>"
 msgstr ""
-"Furkan &Uuml;z&uuml;mc&uuml; <a href=\"mailto:furkanuzumcu@gmail.com"
-"\">furkanuzumcu@gmail.com</a></p>"
+"Furkan Üzümcü <a href=\"mailto:furkanuzumcu@gmail.com\">furkanuzumcu@gmail."
+"com</a></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:173
 msgctxt "QObject|"
@@ -8972,7 +8973,7 @@ msgid ""
 "<p> The Marble Team would like to thank its members who participated in the "
 "Google Summer of Code for their successful work on Marble:</p>"
 msgstr ""
-"<p> The Bilye Ekibi Google Summer of Code'da gösterdikleri başarıdan dolayı "
+"<p>Bilye Ekibi, Google Summer of Code’da gösterdikleri başarıdan dolayı "
 "katılımcı üyelerine teşekkür eder:</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:176
@@ -8987,7 +8988,7 @@ msgid ""
 "technocool@gmail.com</a><br /><i>Project: Marble Indoor Maps</i></p>"
 msgstr ""
 "<p>Mohammed Nafees <a href=\"mailto:nafees.technocool@gmail.com\">nafees."
-"technocool@gmail.com</a><br /><i>Proje: Bilye İç Haritalar</i></p>"
+"technocool@gmail.com</a><br /><i>Proje: Bilye iç mekan haritaları</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:179
 msgctxt "QObject|"
@@ -8996,7 +8997,7 @@ msgid ""
 "judit@gmail.com</a><br /><i>Project: Marble Material Maps</i></p>"
 msgstr ""
 "<p>Judit Bartha <a href=\"mailto:bartha.m.judit@gmail.com\">bartha.m."
-"judit@gmail.com</a><br /><i>Proje: Bilye Materyal Haritalar</i></p>"
+"judit@gmail.com</a><br /><i>Proje: Bilye materyal haritaları</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:182
 msgctxt "QObject|"
@@ -9017,7 +9018,7 @@ msgid ""
 "tile levels in the OSM Vector Map of Marble</i></p>"
 msgstr ""
 "<p>Akshat Tandon <a href=\"akshat.tandon@research.iiit.ac.in\">akshat."
-"tandon@research.iiit.ac.in</a><br /><i>Proje: Bilye OSM Vektör Haritası'nda "
+"tandon@research.iiit.ac.in</a><br /><i>Proje: Bilye OSM Vektör Haritası’nda "
 "orta ve düşük karo düzeyleri için destek</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:187
@@ -9027,7 +9028,7 @@ msgid ""
 "a><br /><i>Project: Improve Marble's OSM vector rendering support</i></p>"
 msgstr ""
 "<p>Dávid Kolozsvári <a href=\"freedawson@gmail.com\">freedawson@gmail.com</"
-"a><br /><i>Proje: Bilye'nin OSM vektör sunum desteğini geliştirme</i></p>"
+"a><br /><i>Proje: Bilye’nin OSM vektör sunum desteğini geliştirme</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:189
 msgctxt "QObject|"
@@ -9036,7 +9037,7 @@ msgid ""
 "com</a><br /><i>Project: Porting Marble to Android platform</i></p>"
 msgstr ""
 "<p>Gábor Péterffy <a href=\"gabor.peterffy@gmail.com\">gabor.peterffy@gmail."
-"com</a><br /><i>Proje: Bilye'yi Android platformuna taşımak</i></p>"
+"com</a><br /><i>Proje: Bilye’yi Android platformuna taşımak</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:191
 msgctxt "QObject|"
@@ -9047,7 +9048,7 @@ msgid ""
 msgstr ""
 "<p>Marius Valeriu Stanciu <a href=\"stanciumarius94@gmail.com"
 "\">stanciumarius94@gmail.com</a><br /><i>Proje: OpenStreetMap desteği ve "
-"Bilye için Düzenleme Kipi'ni geliştirme</i></p>"
+"Bilye için Düzenleme Kipi’ni geliştirme</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:194
 msgctxt "QObject|"
@@ -9056,7 +9057,7 @@ msgid ""
 "><i>Project: Marble Game</i></p>"
 msgstr ""
 "<p>Abhinav Gangwar <a href=\"abhgang@gmail.com\">abhgang@gmail.com</a><br /"
-"><i>Proje: Bilye Oyunu</i></p>"
+"><i>Proje: Bilye oyunu</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:196
 msgctxt "QObject|"
@@ -9066,8 +9067,8 @@ msgid ""
 "Polygons</i></p>"
 msgstr ""
 "<p>Calin Cruceru <a href=\"crucerucalincristian@gmail.com"
-"\">crucerucalincristian@gmail.com</a><br /><i>Proje: Çokgenler için Düzeltme "
-"Kipi</i></p>"
+"\">crucerucalincristian@gmail.com</a><br /><i>Proje: Çokgenler için "
+"düzenleme kipi</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:198
 msgctxt "QObject|"
@@ -9076,7 +9077,7 @@ msgid ""
 "com</a><br /><i>Project: Interactive Tours </i></p>"
 msgstr ""
 "<p>Sanjiban Bairagya <a href=\"sanjiban22393@gmail.com\">sanjiban22393@gmail."
-"com</a><br /><i>Proje: Etkileşimli Turlar </i></p>"
+"com</a><br /><i>Proje: Etkileşimli turlar</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:201
 msgctxt "QObject|"
@@ -9085,7 +9086,7 @@ msgid ""
 "b@gmail.com</a><br /><i>Project: Marble KML Map Editor</i></p>"
 msgstr ""
 "<p>Adrian Draghici <a href=\"draghici.adrian.b@gmail.com\">draghici.adrian."
-"b@gmail.com</a><br /><i>Proje: Bilye KML Harita Düzenleyici</i></p>"
+"b@gmail.com</a><br /><i>Proje: Bilye KML haritası düzenleyicisi</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:203
 msgctxt "QObject|"
@@ -9102,8 +9103,8 @@ msgid ""
 "<p>Utku Ayd&#x131;n <a href=\"utkuaydin34@gmail.com\">utkuaydin34@gmail.com</"
 "a><br /><i>Project: ownCloud storage and synchronization for Marble </i></p>"
 msgstr ""
-"<p>Utku Ayd&#x131;n <a href=\"utkuaydin34@gmail.com\">utkuaydin34@gmail.com</"
-"a><br /><i>Proje: Bilye için ownCloud depolama ve eşzamanlama </i></p>"
+"<p>Utku Aydın <a href=\"utkuaydin34@gmail.com\">utkuaydin34@gmail.com</"
+"a><br /><i>Proje: Bilye için ownCloud ile depolama ve eşzamanlama </i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:207
 msgctxt "QObject|"
@@ -9112,7 +9113,7 @@ msgid ""
 "a><br /><i>Project: OpenGL SceneGraph</i></p>"
 msgstr ""
 "<p>Ren&#xE9; K&#xFC;ttner <a href=\"rene@bitkanal.net\">rene@bitkanal.net</"
-"a><br /><i>Project: OpenGL SceneGraph</i></p>"
+"a><br /><i>Proje: OpenGL SceneGraph</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:210
 msgctxt "QObject|"
@@ -9121,7 +9122,7 @@ msgid ""
 "a><br /><i>Project: OpenStreetMap Vector Rendering</i></p>"
 msgstr ""
 "<p>Ander Pijoan <a href=\"ander.pijoan@deusto.es\">ander.pijoan@deusto.es</"
-"a><br /><i>Proje: OpenStreetMap Vektör Sunumu</i></p>"
+"a><br /><i>Proje: OpenStreetMap vektör sunumu</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:212
 msgctxt "QObject|"
@@ -9130,7 +9131,7 @@ msgid ""
 "><i>Project: Natural Earth Vector Map</i></p>"
 msgstr ""
 "<p>Cezar Mocan <a href=\"mocancezar@gmail.com\">mocancezar@gmail.com</a><br /"
-"><i>Proje: Doğal Dünya Vektör Haritası</i></p>"
+"><i>Proje: Doğal Dünya vektör haritası</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:214
 msgctxt "QObject|"
@@ -9139,7 +9140,7 @@ msgid ""
 "berlin.de</a><br /><i>Project: OpenGL Mode for Marble</i></p>"
 msgstr ""
 "<p>Bernhard Beschow <a href=\"bbeschow@cs.tu-berlin.de\">bbeschow@cs.tu-"
-"berlin.de</a><br /><i>Proje: Bilye için OpenGL Kipi</i></p>"
+"berlin.de</a><br /><i>Proje: Bilye için OpenGL kipi</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:217
 msgctxt "QObject|"
@@ -9149,7 +9150,7 @@ msgid ""
 "i></p>"
 msgstr ""
 "<p>Konstantin Oblaukhov <a href=\"oblaukhov.konstantin@gmail.com\">oblaukhov."
-"konstantin@gmail.com</a><br /><i>Proje: OpenStreetMap Vektör Sunumu</i></p>"
+"konstantin@gmail.com</a><br /><i>Proje: OpenStreetMap vektör sunumu</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:219
 msgctxt "QObject|"
@@ -9158,7 +9159,7 @@ msgid ""
 "><i>Project: Marble Touch on MeeGo</i></p>"
 msgstr ""
 "<p>Daniel Marth <a href=\"danielmarth@gmx.at\">danielmarth@gmx.at</a><br /"
-"><i>Proje: Meego üstünde Bilye Touch</i></p>"
+"><i>Proje: Meego üstünde Bilye Dokunmatik</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:221
 msgctxt "QObject|"
@@ -9172,7 +9173,7 @@ msgid ""
 "com</a><br /><i>Project: Bookmarks</i></p>"
 msgstr ""
 "<p>Gaurav Gupta <a href=\"mailto:1989.gaurav@gmail.com\">1989.gaurav@gmail."
-"com</a><br /><i>Proje: Yer İmleri</i></p>"
+"com</a><br /><i>Proje: Yer imleri</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:224
 msgctxt "QObject|"
@@ -9181,7 +9182,7 @@ msgid ""
 "com</a><br /><i>Project: Time Support</i></p>"
 msgstr ""
 "<p>Harshit Jain <a href=\"mailto:hjain.itbhu@gmail.com\">hjain.itbhu@gmail."
-"com</a><br /><i>Proje: Zaman Desteği</i></p>"
+"com</a><br /><i>Proje: Zaman desteği</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:226
 msgctxt "QObject|"
@@ -9190,7 +9191,7 @@ msgid ""
 "\">akssps011@gmail.com</a><br /><i>Project: Turn-by-turn Navigation</i></p>"
 msgstr ""
 "<p>Siddharth Srivastava <a href=\"mailto:akssps011@gmail.com"
-"\">akssps011@gmail.com</a><br /><i>Proje: Adım Adım Dolaşım</i></p>"
+"\">akssps011@gmail.com</a><br /><i>Proje: Adım adım dolaşım</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:228
 msgctxt "QObject|"
@@ -9204,7 +9205,7 @@ msgid ""
 "com</a><br /><i>Project: OSM Annotation</i></p>"
 msgstr ""
 "<p>Andrew Manson <a href=\"mailto:g.real.ate@gmail.com\">g.real.ate@gmail."
-"com</a><br /><i>Proje: OSM Bilgi Notu</i></p>"
+"com</a><br /><i>Proje: OSM bilgi notu</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:231
 msgctxt "QObject|"
@@ -9213,7 +9214,7 @@ msgid ""
 "a><br /><i>Project: Online Services</i></p>"
 msgstr ""
 "<p>Bastian Holst <a href=\"mailto:bastianholst@gmx.de\">bastianholst@gmx.de</"
-"a><br /><i>Proje: Çevrimiçi Hizmetler</i></p>"
+"a><br /><i>Proje: Çevrimiçi hizmetler</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:233
 msgctxt "QObject|"
@@ -9227,7 +9228,7 @@ msgid ""
 "a><br /><i>Project: Vector Tiles for Marble</i></p>"
 msgstr ""
 "<p>Patrick Spendrin <a href=\"pspendrin@gmail.com\">pspendrin@gmail.com</"
-"a><br /><i>Proje: Bilye için Vektör Karoları</i></p>"
+"a><br /><i>Proje: Bilye için vektör karolar</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:236
 msgctxt "QObject|"
@@ -9237,8 +9238,8 @@ msgid ""
 "for Marble</i></p>"
 msgstr ""
 "<p>Shashank Singh <a href=\"mailto:shashank.personal@gmail.com\">shashank."
-"personal@gmail.com</a><br /><i>Proje: Panoramio / Bilye için Vikipedi -"
-"fotograf desteği</i></p>"
+"personal@gmail.com</a><br /><i>Proje: Panoramio/Bilye için Vikipedi "
+"fotoğrafları desteği</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:238
 msgctxt "QObject|"
@@ -9253,8 +9254,8 @@ msgid ""
 "\")</i></p>"
 msgstr ""
 "<p>Carlos Licea <a href=\"mailto:carlos.licea@kdemail.net\">carlos."
-"licea@kdemail.net</a><br /><i>Proje: Eşitkenar Dikdörtgen Yansıtma (\"Düz "
-"Harita\")</i></p>"
+"licea@kdemail.net</a><br /><i>Proje: Eşitkenar dikdörtgen yansıtma (“Düz "
+"Harita”)</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:241
 msgctxt "QObject|"
@@ -9263,7 +9264,7 @@ msgid ""
 "com</a><br /><i>Project: GPS Support for Marble</i></p>"
 msgstr ""
 "<p>Andrew Manson <a href=\"mailto:g.real.ate@gmail.com\">g.real.ate@gmail."
-"com</a><br /><i>Proje: Bilye için GPS Desteği</i></p>"
+"com</a><br /><i>Proje: Bilye için GPS desteği</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:243
 msgctxt "QObject|"
@@ -9272,7 +9273,7 @@ msgid ""
 "a><br /><i>Project: KML Support for Marble</i></p>"
 msgstr ""
 "<p>Murad Tagirov <a href=\"mailto:tmurad@gmail.com\">tmurad@gmail.com</"
-"a><br /><i>Proje: Bilye için KML Desteği</i></p>"
+"a><br /><i>Proje: Bilye için KML desteği</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:245
 msgctxt "QObject|"
@@ -9280,8 +9281,8 @@ msgid ""
 "<p>... and of course we'd like to thank the people at Google Inc. for making "
 "these projects possible.</p>"
 msgstr ""
-"<p>... ve tabiki Google Inc.'teki insanlara, bu projelerin "
-"gerçekleştirilmesi için sağladıkları imkanlar için teşekkür ederiz.</p>"
+"<p>… ve tabiki Google Inc.’teki insanlara, bu projelerin gerçekleştirilmesi "
+"için sağladıkları olanaklar için teşekkür ederiz.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:246
 msgctxt "QObject|"
@@ -9305,7 +9306,7 @@ msgid ""
 "<p> We'd especially like to thank John Layt who provided an important source "
 "of inspiration by creating Marble's predecessor \"Kartographer\".</p>"
 msgstr ""
-"<p> Özellikle John Layt'a, Bilye'nin atası olan \"Kartographer\"ı yaratarak "
+"<p> Özellikle John Layt’a, Bilye’nin atası olan “Kartographer”ı yaratarak "
 "önemli bir ilham kaynağı olmasından dolayı teşekkür ederiz.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:259
@@ -9321,9 +9322,9 @@ msgid ""
 "gov/Newsroom/BlueMarble/\">http://earthobservatory.nasa.gov/Newsroom/"
 "BlueMarble/</a></p>"
 msgstr ""
-"<p><i>Sonraki Nesil Mavi Bilye (500 m / pixel)</i><br />NASA Goddard Uzay "
-"Uçuş Merkezi ve Dünya Gözlemevi <a href=\"http://earthobservatory.nasa.gov/"
-"Newsroom/BlueBilye/\">http://earthobservatory.nasa.gov/Newsroom/BlueBilye/</"
+"<p><i>Sonraki Nesil Mavi Bilye (500 m/pks)</i><br />NASA Goddard Uzay Uçuş "
+"Merkezi ve Dünya Gözlemevi <a href=\"http://earthobservatory.nasa.gov/"
+"Newsroom/BlueBilye/\">http://earthobservatory.nasa.gov/Newsroom/BlueMarble/</"
 "a></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:264
@@ -9333,7 +9334,7 @@ msgid ""
 "and Christopher Elvidge of NOAA NGDC. Image by Craig Mayhew and Robert "
 "Simmon, NASA GSFC.</p>"
 msgstr ""
-"<p><i>Dünya'nın Gece Işıkları</i><br />NASA GSFC'den Marc Imhoff ve NOAA "
+"<p><i>Dünya’nın Gece Işıkları</i><br />NASA GSFC’den Marc Imhoff ve NOAA "
 "NGDC'den Christopher Elvidge izniyle. Görseller, Craig Mayhew ve Robert "
 "Simmon, NASA GSFC.</p>"
 
@@ -9344,9 +9345,9 @@ msgid ""
 "Jet Propulsion Laboratory <a href=\"https://www2.jpl.nasa.gov/srtm/"
 "\">https://www2.jpl.nasa.gov/srtm/</a></p>"
 msgstr ""
-"<p><i>Uzay Mekiği Radar Topografi Görevi (SRTM30, 1 km / piksel )</i><br /"
-">NASA Jet Yürütme Laboratuvarı <a href=\"http://www2.jpl.nasa.gov/srtm/"
-"\">https://www2.jpl.nasa.gov/srtm/</a></p>"
+"<p><i>Uzay Mekiği Radar Topografi Görevi (SRTM30, 1 km/pks)</i><br />NASA "
+"Jet Yürütme Laboratuvarı <a href=\"http://www2.jpl.nasa.gov/srtm/\">https://"
+"www2.jpl.nasa.gov/srtm/</a></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:270
 msgctxt "QObject|"
@@ -9354,8 +9355,8 @@ msgid ""
 "<p><i>Micro World Data Bank in Polygons (\"MWDB-POLY / MWDBII\")</i><br /"
 ">CIA ; Global Associates, Ltd.; Fred Pospeschil and Antonio Rivera</p>"
 msgstr ""
-"<p><i>Çokgen içinde Mikro Dünya Veri Bankası (\"MWDB-POLY / MWDBII\")</"
-"i><br />CIA ; Global Associates, Ltd.; Fred Pospeschil ve Antonio Rivera</p>"
+"<p><i>Çokgen içinde Mikro Dünya Veri Bankası (“MWDB-POLY/MWDBII”)</i><br /"
+">CIA; Global Associates, Ltd.; Fred Pospeschil ve Antonio Rivera</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:272
 msgctxt "QObject|"
@@ -9375,7 +9376,7 @@ msgstr ""
 "<p>İki veri kümesinin birleştirilmesiyle oluşturulan <i>Sıcaklık ve Yağış "
 "Haritaları(Temmuz ve Aralık)</i><br />:<ul><li>Legates, D.R. and Willmott, C."
 "J. 1989. Aylık ortalama yüzey sıcaklık ve yağış miktarı. 0.5 derecelik "
-"Coğrafik (enlem/boylam) 361 × 721'lik ızgarada sayısal tarama örüntüsü "
+"Coğrafik (enlem/boylam) 361 × 721’lik ızgarada sayısal tarama örüntüsü "
 "verisi. Boulder CO: National Center for Atmospheric Research. <a href="
 "\"https://www.ngdc.noaa.gov/ecosys/cdroms/ged_iia/datasets/a04/lw.htm"
 "\">http://www.ngdc.noaa.gov/ecosys/cdroms/ged_iia/datasets/a04/lw.htm</a></"
@@ -9401,7 +9402,7 @@ msgid ""
 "a>.</p>"
 msgstr ""
 "<p><i>OpenStreetMap</i><br /><a href=\"http://www.openstreetmap.org"
-"\">OpenStreetMap</a> Projesi (\"OSM\") üzerinden indirilen ve Bilye ile "
+"\">OpenStreetMap</a> Projesi (“OSM”) üzerinden indirilen ve Bilye ile "
 "kullanılan sokak haritaları. OSM, düzenlenebilir haritalar oluşturan bir "
 "açık topluluktur.<br /><i>Lisans</i>: OpenStreetMap verisi <a href=\"https://"
 "wiki.openstreetmap.org/index.php/OpenStreetMap_License\">Creative Commons "
@@ -9448,7 +9449,7 @@ msgid ""
 msgstr ""
 "<p><i>OpenRouteService</i><br />İndirilerek Bilye içinde kullanılan "
 "rotaların bazıları, <a href=\"http://www.openrouteservice.org"
-"\">OpenRouteService</a> Projesi (\"ORS\") tarafından sağlanmıştır. <br /"
+"\">OpenRouteService</a> Projesi (“ORS”) tarafından sağlanmıştır. <br /"
 "><i>Lisans</i>: OpenRouteService verisi, <a href=\"https://wiki."
 "openstreetmap.org/index.php/OpenStreetMap_License\">Creative Commons "
 "Attribution-ShareAlike 2.0 license</a> altında özgürce kullanılabilir.</p>"
@@ -9465,7 +9466,7 @@ msgid ""
 msgstr ""
 "<p><i>Open Source Routing Machine</i><br />İndirilerek Bilye içinde "
 "kullanılan rotaların bazıları, <a href=\"http://project-osrm.org\">Open "
-"Source Routing Machine</a> Projesi (\"OSRM\") tarafından sağlanmıştır. <br /"
+"Source Routing Machine</a> Projesi (“OSRM”) tarafından sağlanmıştır. <br /"
 "><i>Lisans</i>: Open Source Routing Machine verisi, <a href=\"https://wiki."
 "openstreetmap.org/index.php/OpenStreetMap_License\">Creative Commons "
 "Attribution-ShareAlike 2.0 license</a> altında özgürce kullanılabilir.</p>"
@@ -9484,8 +9485,8 @@ msgid ""
 msgstr ""
 "<p><i>MapQuest</i><br />İndirilerek Bilye içinde kullanılan rotaların "
 "bazıları, <a href=\"http://www.mapquest.com/\">MapQuest</a> ve onun Open "
-"Data Map API leri ve web hizmetleri tarafından sağlanmıştır.<br /"
-">OpenStreetMap verisi üstünde çalışan MapQuest 'in yol tarifleri  <a href="
+"Data Map API’leri ve web hizmetleri tarafından sağlanmıştır.<br /"
+">OpenStreetMap verisi üstünde çalışan MapQuest’in yol tarifleri <a href="
 "\"http://wiki.openstreetmap.org/index.php/OpenStreetMap_License\">Creative "
 "Commons Attribution-ShareAlike 2.0 license</a> altında özgürce "
 "kullanılabilir. MapQuest rota hizmetini kullanımı <a href=\"https://info."
@@ -9578,7 +9579,7 @@ msgid ""
 "<br />(c) 2007-%1 by the authors of Marble Virtual Globe<br /><br /><a href="
 "\"https://edu.kde.org/marble\">https://edu.kde.org/marble</a>"
 msgstr ""
-"<br />© 2007-%1 Bilye Masaüstünde Dünya'nın yazarları<br /><br /><a href="
+"<br />© 2007–%1 Bilye Masaüstünde Dünya’nın yazarları<br /><br /><a href="
 "\"https://edu.kde.org/marble\">https://edu.kde.org/marble</a>"
 
 #: src/lib/marble/MarbleAboutDialog.ui:14
@@ -9605,7 +9606,7 @@ msgstr ""
 "weight:400; font-style:normal; text-decoration:none;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"weight:600;\">Bilye Masaüstünde Dünya</span></p></body></html>"
+"weight:600;\">Bilye Sanal Küre</span></p></body></html>"
 
 #: src/lib/marble/MarbleAboutDialog.ui:59
 msgctxt "MarbleAboutDialog|"
@@ -9752,10 +9753,10 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Bilye için kullanılan iki "
 "önbellek vardır: Harita verilerini bilgisayarın belleğinde tutmak için "
 "gereken fiziksel bellek. Değeri artırmak, uygulamanın daha hızlı tepki "
-"verecektir. Sabit disk önbellekleri, İnternet'ten içeriği indirerek "
+"verecektir. Sabit disk önbellekleri, İnternet’ten içeriği indirerek "
 "kullanılır (ör. Vikipedi verileri veya harita verileri). Sabit diskte yerden "
-"tasarruf etmek istiyorsanız ve İnternet'in yüksek kullanımı bir sorun "
-"değilse, bu değeri azaltın. </p></body></html>"
+"tasarruf etmek istiyorsanız ve İnternet’in yüksek kullanımı bir sorun "
+"değilse bu değeri azaltın.</p></body></html>"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:23
 msgctxt "MarbleCacheSettingsWidget|"
@@ -10021,8 +10022,8 @@ msgstr ""
 "altındaki konum tam olarak imleci takip edecektir: Sonuç olarak; Kuzey kutbu "
 "üstte kalmayacaktır. Bu karışıklığa neden olabilir. Öntanımlı olarak Bilye, "
 "kuzeyin daima yukarıya gelmesini sağlar ve bunun sonucunda fare "
-"işaretçisinin altındaki konumun imlecin hafifçe \"ayrıldığı\" bir "
-"sürükleyici davranış ortaya çıkar. </p></body></html>"
+"işaretçisinin altındaki konumun imlecin hafifçe “ayrıldığı” bir sürükleyici "
+"davranış ortaya çıkar.</p></body></html>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:58
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10066,7 +10067,7 @@ msgstr ""
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Bir yer ararken Bilye "
 "anında yeni konuma taşınabilir veya bir önceki yerden yeni yerine seyahat "
-"animasyonu gösterebilir.</p></body></html>"
+"canlandırması gösterebilir.</p></body></html>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:89
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10110,8 +10111,8 @@ msgstr ""
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Öntanımlı olarak Bilye, "
 "uygulama başladıktan hemen sonra ev konumunu görüntüler. Alternatif olarak, "
-"kullanıcı uygulamadan çıktığında etkin olan son konumu da gösterebilir. </"
-"p></body></html>"
+"kullanıcı uygulamadan çıktığında etkin olan son konumu da gösterebilir.</p></"
+"body></html>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:159
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10136,9 +10137,9 @@ msgid ""
 "josm or merkaartor, make sure that the respective application is installed.</"
 "p>"
 msgstr ""
-"<p>Haritaları düzenlemek için başlatılan uygulama. Potlatch (varsayılan), "
-"flash desteği olan bir web tarayıcısının gereksinimi duyar. Josm veya "
-"merkaartor'ı seçerken, ilgili uygulamanın kurulu olduğundan emin olun.</p>"
+"<p>Haritaları düzenlemek için başlatılan uygulama. Potlatch (öntanımlı), "
+"flash desteği olan bir web tarayıcısına gereksinim duyar. Josm veya "
+"Mercator’ü seçerken, ilgili uygulamanın kurulu olduğundan emin olun.</p>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:198
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10168,7 +10169,7 @@ msgstr "Yukarı"
 #: src/lib/marble/MarbleNavigator.ui:65
 msgctxt "MarbleNavigator|"
 msgid "Tilts the globe's axis towards the user."
-msgstr "Küre'nin eksenini kullanıcıya doğru yatır."
+msgstr "Küre’nin eksenini kullanıcıya doğru yatırır."
 
 #: src/lib/marble/MarbleNavigator.ui:68 src/lib/marble/MarbleNavigator.ui:84
 #: src/lib/marble/MarbleNavigator.ui:103 src/lib/marble/MarbleNavigator.ui:122
@@ -10176,7 +10177,7 @@ msgstr "Küre'nin eksenini kullanıcıya doğru yatır."
 #: src/lib/marble/MarbleNavigator.ui:215
 msgctxt "MarbleNavigator|"
 msgid "..."
-msgstr "..."
+msgstr "…"
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
 msgctxt "MarbleNavigator|"
@@ -10186,7 +10187,7 @@ msgstr "Sol"
 #: src/lib/marble/MarbleNavigator.ui:81
 msgctxt "MarbleNavigator|"
 msgid "Rotates the globe counterclockwise around its axis."
-msgstr "Küre'yi ekseni etrafında saat yönünün tersine döndürür."
+msgstr "Küre’yi ekseni etrafında saat yönünün tersine döndürür."
 
 #: src/lib/marble/MarbleNavigator.ui:97
 msgctxt "MarbleNavigator|"
@@ -10223,7 +10224,7 @@ msgstr "Aşağı"
 #: src/lib/marble/MarbleNavigator.ui:138
 msgctxt "MarbleNavigator|"
 msgid "Tilts the globe's axis away from the user."
-msgstr "Küre'nin eksenini kullanıcıdan uzaklaşacak şekilde eğer."
+msgstr "Küre’nin eksenini kullanıcıdan uzaklaşacak şekilde yatırır."
 
 #: src/lib/marble/MarbleNavigator.ui:151
 msgctxt "MarbleNavigator|"
@@ -10308,9 +10309,9 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"family:'Sans Serif';\">Bilye'nin ileri düzey kullanıcılar için makine "
-"odasıdır. Burada, eklentilerle sağlanan işlevselliği seçebilir veya seçimini "
-"kaldırabilirsiniz. </span></p>\n"
+"family:'Sans Serif';\">Bilye’nin ileri düzey kullanıcılar için makine "
+"dairesidir. Burada, eklentilerle sağlanan işlevselliği seçebilir veya "
+"seçimini kaldırabilirsiniz. </span></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 "family:'Sans Serif';\">Bir eklentinin seçimini kaldırmak, işlevleri "
@@ -10543,8 +10544,9 @@ msgstr ""
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Rakımı, uzunlukları ve "
-"mesafeleri ölçmek için kullanılan birim (ör. km, mi, ft).</p></body></html>"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Yüksekliği, uzunlukları ve "
+"mesafeleri ölçmek için kullanılan birim (örneğin; km, mi, ft).</p></body></"
+"html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:61
 msgctxt "MarbleViewSettingsWidget|"
@@ -10702,8 +10704,8 @@ msgstr ""
 "sürüklerken). </p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Özellikle yavaş "
-"makinelerde bu seçeneği daha düşük hızda, \"düşük kalite\" olarak "
-"ayarlamanız önerilir.</p></body></html>"
+"makinelerde bu seçeneği daha düşük hızda, “düşük kalite” olarak ayarlamanız "
+"önerilir.</p></body></html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:266
 msgctxt "MarbleViewSettingsWidget|"
@@ -10738,7 +10740,7 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Yerler farklı dillerde "
 "farklı adlara sahiptir. Harita üzerindeki etiket, kullanıcının dilindeki adı "
 "gösterebilir. Alternatif olarak, adı resmi dilde ve o yerin gliflerinde "
-"görüntüleyebilir. </p></body></html>"
+"görüntüleyebilir.</p></body></html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:306
 msgctxt "MarbleViewSettingsWidget|"
@@ -10799,7 +10801,7 @@ msgstr "Koordinatları Kopyala"
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:114
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Copy geo: URL"
-msgstr "geo: URL'sini Kopyala"
+msgstr "geo: URL’sini Kopyala"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:123
 msgctxt "Marble::MarbleWidgetPopupMenu|"
@@ -10983,7 +10985,7 @@ msgstr "Hedef video:"
 #: src/lib/marble/MovieCaptureDialog.ui:36
 msgctxt "MovieCaptureDialog|"
 msgid "Open..."
-msgstr "Aç..."
+msgstr "Aç…"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -11035,14 +11037,14 @@ msgctxt "Marble::OsmRelationManagerWidget|"
 msgid "New Relation"
 msgstr "Yeni İlişki"
 
-#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:132
-#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:139
+#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:136
+#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:142
 msgctxt "Marble::OsmRelationManagerWidget|"
 msgid "Remove"
 msgstr "Kaldır"
 
-#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:133
-#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:142
+#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:137
+#: src/lib/marble/osm/OsmRelationManagerWidget.cpp:145
 msgctxt "Marble::OsmRelationManagerWidget|"
 msgid "Edit"
 msgstr "Düzenle"
@@ -11102,12 +11104,12 @@ msgstr "Değer"
 #: src/lib/marble/osm/OsmTagEditorWidget.ui:56
 msgctxt "OsmTagEditorWidgetPrivate|"
 msgid "<<"
-msgstr "<<"
+msgstr "≪"
 
 #: src/lib/marble/osm/OsmTagEditorWidget.ui:69
 msgctxt "OsmTagEditorWidgetPrivate|"
 msgid ">>"
-msgstr ">>"
+msgstr "≫"
 
 #: src/lib/marble/osm/OsmTagEditorWidget.ui:80
 msgctxt "OsmTagEditorWidgetPrivate|"
@@ -11117,7 +11119,7 @@ msgstr "İlişkili Etiketler"
 #: src/lib/marble/osm/OsmTagEditorWidget_p.cpp:30
 msgctxt "QObject|"
 msgid "Add custom tag..."
-msgstr "Özel etiket ekle..."
+msgstr "Özel etiket ekle…"
 
 #: src/lib/marble/osm/OsmTagEditorWidget_p.cpp:101
 msgctxt "QObject|"
@@ -11132,12 +11134,12 @@ msgstr "Dosya Aç"
 #: src/lib/marble/PlacemarkEditHeader.cpp:206
 msgctxt "QObject|"
 msgid "All Supported Files (*.png)"
-msgstr "Tüm Desteklenen Dosyalar (*.png)"
+msgstr "Tüm desteklenen dosyalar (*.png)"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Browse..."
-msgstr "Göz At..."
+msgstr "Göz At…"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -11152,12 +11154,12 @@ msgstr "Simge bağlantısı:"
 #: src/lib/marble/PlacemarkEditHeader.ui:91
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "ID:"
-msgstr "ID:"
+msgstr "Kimlik:"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:104
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Target ID:"
-msgstr "Hedef ID:"
+msgstr "Hedef kimliği:"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:115
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -11338,7 +11340,7 @@ msgid ""
 "p><p>Applications: Display of seismic and radio data and for use in digital "
 "planetariums.</p>"
 msgstr ""
-"<p><b>Güneyaçısal Eşituzaklık Yansıması</b> (\"balık gözü\")</"
+"<p><b>Güneyaçısal Eşituzaklık Yansıması</b> (“balık gözü”)</"
 "p><p>Uygulamalar: Sismik, radyo verilenin görüntüleri ve bunu kullanacak "
 "sayısal gökevi.</p>"
 
@@ -11353,8 +11355,8 @@ msgid ""
 "<p><b>Equirectangular Projection</b> (\"Plate carrée\")</p><p>Applications: "
 "De facto standard for global texture data sets for computer software.</p>"
 msgstr ""
-"<p><b>Eşitkenar Dikdörtgen Yansıması</b> (\"Düz köşeli\")</p><p>Uygulamalar: "
-"Bilgisayar yazılımı için evrensel doku veri setleri için fiili bir standart."
+"<p><b>Eşitkenar Dikdörtgen Yansıması</b> (“Düz köşeli”)</p><p>Uygulamalar: "
+"Bilgisayar yazılımı için evrensel doku veri kümeleri için fiili bir standart."
 "</p>"
 
 #: src/lib/marble/projections/GnomonicProjection.cpp:59
@@ -11369,7 +11371,7 @@ msgid ""
 "displaying panorama photography. Also used for navigation, radio and seismic "
 "work.</p>"
 msgstr ""
-"<p><b>Nomonik Yansıma</b> (\"düz çizgili\")</p><p>Uygulamalar: Panaroma "
+"<p><b>Nomonik Yansıma</b> (“düz çizgili”)</p><p>Uygulamalar: Panoroma "
 "fotoğrafları görüntülemek için kullanılır. Ayrıca gezinme, radyo ve sismik "
 "çalışmalar için de kullanılmaktadır.</p>"
 
@@ -11413,7 +11415,7 @@ msgid ""
 "perspective projection that is used to display the hemisphere of a globe as "
 "it appears from outer space.</p>"
 msgstr ""
-"<p><b>Dikey Yansıma</b> (\"dikey\")</p><p>Uygulamalar: Dünyanın, uzaydan "
+"<p><b>Dikey Yansıma</b> (“dikey”)</p><p>Uygulamalar: Dünyanın, uzaydan "
 "görüldüğü şekilde bir yarım küreyi görüntülemek için kullanılan yansıma.</p>"
 
 #: src/lib/marble/projections/StereographicProjection.cpp:59
@@ -11427,7 +11429,7 @@ msgid ""
 "<p><b>Stereographic Projection</b> (\"orthogonal\")</p><p>Applications: Used "
 "for planetary cartography, geology and panorama photography.</p>"
 msgstr ""
-"<p><b>Selenografik Yansıma</b> (\"dikey\")</p><p>Uygulamalar: Gezegen "
+"<p><b>Selenografik Yansıma</b> (“dikey”)</p><p>Uygulamalar: Gezegen "
 "haritacılığı, jeoloji ve panorama fotoğrafçılığında kullanılır.</p>"
 
 #: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:72
@@ -11442,9 +11444,9 @@ msgid ""
 "earth as it appears from a relatively short distance above the surface. "
 "Applications: Used for Virtual Globes.</p>"
 msgstr ""
-"<p><b>Dikey Persfektifli Yansıma</b> (\"dikey\")</p><p> Bir yüzeyi nispeten "
-"daha yakın bir mesafeden görülüyormuş gibi gösterir. Uygulamalar: Sanal Küre "
-"için kullanılır.</p>"
+"<p><b>Dikey Persfektifli Yansıma</b> (“dikey”)</p><p> Bir yüzeyi nispeten "
+"daha yakın bir uzaklıktan görülüyormuş gibi gösterir. Uygulamalar: Sanal "
+"Küre için kullanılır.</p>"
 
 #: src/lib/marble/QtMarbleConfigDialog.cpp:99
 msgctxt "Marble::QtMarbleConfigDialog|"
@@ -11715,7 +11717,7 @@ msgstr "%2, %3"
 #: src/lib/marble/routing/RoutingInputWidget.cpp:135
 msgctxt "QObject|"
 msgid "Address or search term..."
-msgstr "Adres veya arama ifadesi..."
+msgstr "Adres veya arama ifadesi…"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:166
 msgctxt "QObject|"
@@ -11735,7 +11737,7 @@ msgstr "Geçerli &Konum"
 #: src/lib/marble/routing/RoutingInputWidget.cpp:189
 msgctxt "QObject|"
 msgid "From &Map..."
-msgstr "&Haritadan..."
+msgstr "&Haritadan…"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:193
 msgctxt "QObject|"
@@ -11765,7 +11767,7 @@ msgstr "Bu Hedefi &Kaldır"
 #: src/lib/marble/routing/RoutingLayer.cpp:190
 msgctxt "QObject|"
 msgid "&Export Route..."
-msgstr "Rotayı &Dışa Aktar..."
+msgstr "Rotayı &Dışa Aktar…"
 
 #: src/lib/marble/routing/RoutingLayer.cpp:754
 msgctxt "Marble::RoutingLayer|"
@@ -11885,12 +11887,12 @@ msgstr "Yeni Profil"
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
 msgid "&Add..."
-msgstr "&Ekle..."
+msgstr "&Ekle…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
 msgctxt "RoutingSettingsWidget|"
 msgid "&Configure..."
-msgstr "&Yapılandır..."
+msgstr "&Yapılandır…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 msgctxt "RoutingSettingsWidget|"
@@ -12004,7 +12006,7 @@ msgstr "Rota Aç"
 #: src/lib/marble/routing/RoutingWidget.cpp:660
 msgctxt "Marble::RoutingWidget|"
 msgid "KML Files (*.kml)"
-msgstr "KML Dosyaları (*.kml)"
+msgstr "KML dosyaları (*.kml)"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:692
 msgctxt "Marble::RoutingWidget|"
@@ -12019,7 +12021,7 @@ msgstr "KML dosyaları (*.kml)"
 #: src/lib/marble/routing/RoutingWidget.cpp:712
 msgctxt "Marble::RoutingWidget|"
 msgid "Uploading route..."
-msgstr "Rota yükleniyor..."
+msgstr "Rota yükleniyor…"
 
 #: src/lib/marble/routing/RoutingWidget.ui:46
 msgctxt "RoutingWidget|"
@@ -12113,17 +12115,17 @@ msgstr "Arama Sonuçları"
 #, qt-format
 msgctxt "QObject|"
 msgid "Search for '%1'"
-msgstr "'%1' için ara"
+msgstr "Ara: “%1”"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:67
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Select sound files..."
-msgstr "Ses dosyaları seç..."
+msgstr "Ses dosyaları seç…"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:67
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Supported Sound Files (*.mp3 *.ogg *.wav)"
-msgstr "Desteklenen Ses Dosyaları (*mp3 *.ogg *.wav)"
+msgstr "Desteklenen ses dosyaları (*mp3 *.ogg *.wav)"
 
 #: src/lib/marble/SunControlWidget.ui:20
 msgctxt "SunControlWidget|"
@@ -12157,7 +12159,7 @@ msgid ""
 "Point</a> icon"
 msgstr ""
 "<a href=\"http://en.wikipedia.org/wiki/Subsolar_point\">Alt Güneş Noktası</"
-"a>'nın simgesini göster"
+"a>’nın simgesini görüntüleyin."
 
 #: src/lib/marble/SunControlWidget.ui:131
 msgctxt "SunControlWidget|"
@@ -12166,7 +12168,7 @@ msgid ""
 "Subsolar_point\">Subsolar Point</a>."
 msgstr ""
 "Harita görünümünü <a href=\"https://en.wikipedia.org/wiki/Subsolar_point"
-"\">Alt Güneş Noktası</a>'na sabitle."
+"\">Alt Güneş Noktası</a>’na sabitleyin."
 
 #: src/lib/marble/SunControlWidget.ui:205
 msgctxt "SunControlWidget|"
@@ -12198,8 +12200,8 @@ msgstr ""
 "weight:600;\">Dikkat: Harita kaydırma şuan devre dışı! </span></p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">&quot; Harita görünümünü "
-"Alt Güneş Noktası'na kilitle&quot; Seçenek, dünyadaki farklı bir yeri tekrar "
-"izlemenize olanak tanır.</p></body></html>"
+"Alt Güneş Noktası’na kilitle&quot; Seçenek, dünyadaki farklı bir yeri "
+"yeniden izlemenize olanak tanır.</p></body></html>"
 
 #: src/lib/marble/TileCreatorDialog.ui:20
 msgctxt "TileCreatorDialog|"
@@ -12226,9 +12228,8 @@ msgstr ""
 "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Uydu Görnümü</"
 "span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
 "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Uzaydan görüldüğü "
-"gibi Dünya. Harita, NASA'nın güzel \"Blue Bilye Next Generation\" "
-"resimlerine dayanmaktadır. Emeği Geçenler: NASA'nın Dünya Gözlemevi</p></"
-"body></html>"
+"gibi Dünya. Harita, NASA’nın güzel “Blue Marble Next Generation” resimlerine "
+"dayanmaktadır. Emeği Geçenler: NASA’nın Dünya Gözlemevi</p></body></html>"
 
 #: src/lib/marble/TileCreatorDialog.ui:517
 msgctxt "TileCreatorDialog|"
@@ -12236,7 +12237,7 @@ msgid ""
 "Marble needs to create this map. This only needs to be done once and may "
 "take a few seconds."
 msgstr ""
-"Bilye'nin bu haritayı oluşturması gerekiyor. Bu işlem yalnızca bir defa "
+"Bilye’nin bu haritayı oluşturması gerekiyor. Bu işlem yalnızca bir defa "
 "gerçekleştirilir ve yalnızca birkaç saniye sürer."
 
 #: src/lib/marble/TileLevelRangeWidget.ui:29
@@ -12315,7 +12316,7 @@ msgid ""
 "Supported codecs are not found. (ffmpeg/avconv needs to be installed and in "
 "PATH.)"
 msgstr ""
-"Desteklenen kod çözücü bulunamadı. (ffmpeg/avconv kurulmalı ve PATH'a "
+"Desteklenen kod çözücü bulunamadı. (ffmpeg/avconv kurulmalı ve PATH’a "
 "eklenmeli.)"
 
 #: src/lib/marble/TourCaptureDialog.cpp:67
@@ -12383,7 +12384,7 @@ msgstr "Hedef video"
 #: src/lib/marble/TourCaptureDialog.ui:81
 msgctxt "TourCaptureDialog|"
 msgid "Open..."
-msgstr "Aç..."
+msgstr "Aç…"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
@@ -12632,17 +12633,17 @@ msgctxt "Marble::WaitEditWidget|seconds"
 msgid " s"
 msgstr " s"
 
-#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:33
+#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:32
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
 msgid "FlightGear position provider Plugin"
 msgstr "FligtGear konumu sağlayıcısı Eklentisi"
 
-#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:43
+#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:42
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
 msgid "FlightGear"
 msgstr "FlightGear"
 
-#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:53
+#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:52
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
 msgid "Reports the position of running flightgear application."
 msgstr "Çalışan flightgear uygulamasının konumunu raporlar."
@@ -13376,7 +13377,7 @@ msgstr "Bilgiler seri porttan alınsın mı?"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:187
 msgctxt "AprsConfigWidget|"
 msgid "Collect data from a serial TNC (In Text Mode)"
-msgstr "Veriyi seri TNC(Metin Kipinde)'den topla"
+msgstr "Veriyi seri TNC (Metin Kipinde)’den topla"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:202
 msgctxt "AprsConfigWidget|"
@@ -13643,7 +13644,7 @@ msgstr "Şu yıldaki tutulmaları göster:"
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
 msgctxt "EclipsesBrowserDialog|"
 msgid "&Settings..."
-msgstr "Ayar&lar..."
+msgstr "Ayar&lar…"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 msgctxt "EclipsesBrowserDialog|"
@@ -13818,7 +13819,7 @@ msgstr "Bu eklenti, güneş tutulmalarını görseller."
 #: src/plugins/render/eclipses/EclipsesPlugin.cpp:188
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Browse Ecli&pses..."
-msgstr "&Tutulmalara Göz At..."
+msgstr "&Tutulmalara Göz At…"
 
 #: src/plugins/render/eclipses/EclipsesPlugin.cpp:330
 msgctxt "Marble::EclipsesPlugin|"
@@ -13845,8 +13846,8 @@ msgid ""
 "body></html>"
 msgstr ""
 "<html><head/><body><p>Bilye, yakın gelecekte aşağıdaki <span style=\" font-"
-"weight:600;\">tutulma olayları</span> bulunduğunu tespit etti. Belli bir "
-"olay hakkında daha fazla bilgi istiyorsanız, seçin ve Tamam'ı tıklayın.</p></"
+"weight:600;\">tutulma olaylarının</span> bulunduğunu algıladı. Belirli bir "
+"olay hakkında daha fazla bilgi istiyorsanız seçin ve Tamam’a tıklayın.</p></"
 "body></html>"
 
 #: src/plugins/render/eclipses/EclipsesReminderDialog.ui:33
@@ -13867,7 +13868,7 @@ msgstr "Görüş alanına yakınlaştır"
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:33
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Configure..."
-msgstr "&Yapılandır..."
+msgstr "&Yapılandır…"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:39
 msgctxt "Marble::ElevationProfileContextMenu|"
@@ -13920,7 +13921,7 @@ msgid ""
 "Try to disable 'Zoom to viewport'."
 msgstr ""
 "Geçerli görüş alanı içinde yeterli nokta yok.\n"
-"'Görüş alanına yakınlaştır' seçeneğini kaldırmayı deneyin."
+"“Görüş alanına yakınlaştır” seçeneğinin işaretini kaldırmayı deneyin."
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:278
 #, qt-format
@@ -13997,7 +13998,7 @@ msgstr "Şu anda açık olan dosyaların bir listesi"
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:201
 msgctxt "Marble::FileViewFloatItem|"
 msgid "Open file..."
-msgstr "Dosya aç..."
+msgstr "Dosya aç…"
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:202
 msgctxt "Marble::FileViewFloatItem|"
@@ -14015,8 +14016,8 @@ msgid ""
 "All Supported Files (*.gpx *.kml *.pnt);;GPS Data (*.gpx);;Google Earth KML "
 "(*.kml);PNT Data (*.pnt)"
 msgstr ""
-"Tüm Desteklenen Dosyalar (*.gpx *.kml *.pnt);;GPS Verisi (*.gpx);;Google "
-"Earth KML (*.kml);PNT Data (*.pnt)"
+"Tüm desteklenen dosyalar (*.gpx *.kml *.pnt);;GPS verisi (*.gpx);;Google "
+"Earth KML (*.kml);PNT verisi (*.pnt)"
 
 #: src/plugins/render/foursquare/FoursquarePlugin.cpp:36
 msgctxt "Marble::FoursquarePlugin|"
@@ -14136,7 +14137,7 @@ msgstr "&Ekvator:"
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1379
 msgctxt "GraticuleConfigWidget|"
 msgid "Color of the equator."
-msgstr "Ekvator'un rengi."
+msgstr "Ekvator’un rengi."
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1392
 msgctxt "GraticuleConfigWidget|"
@@ -14317,7 +14318,7 @@ msgstr "nm"
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:350
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Configure..."
-msgstr "&Yapılandır..."
+msgstr "&Yapılandır…"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:356
 msgctxt "Marble::MapScaleFloatItem|"
@@ -14692,7 +14693,7 @@ msgstr "<tr><td align=\"right\">Kullanıcı adı</td><td>"
 #: src/plugins/render/opencaching/OpenCachingItem.cpp:177
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Date hidden</td><td>"
-msgstr "<tr><td align=\"right\">Gizli tarih</td><td>"
+msgstr "<tr><td align=\"right\">Gizlendiği tarih</td><td>"
 
 #: src/plugins/render/opencaching/OpenCachingItem.cpp:179
 msgctxt "Marble::OpenCachingItem|"
@@ -14851,7 +14852,7 @@ msgstr "Sorgu başarısız oldu"
 #: src/plugins/render/photo/FlickrParser.cpp:39
 msgctxt "QObject|"
 msgid "The file is not a valid Flickr answer."
-msgstr "Dosya geçerli bir Flickr cevabı değil."
+msgstr "Dosya, geçerli bir Flickr yanıtı değil."
 
 #: src/plugins/render/photo/PhotoConfigWidget.ui:14
 msgctxt "PhotoConfigWidget|"
@@ -15073,7 +15074,7 @@ msgstr ""
 #: src/plugins/render/routing/RoutingPlugin.cpp:235
 msgctxt "QObject|"
 msgid "Starting guidance mode, please wait..."
-msgstr "Kılavuz kipi başlatılıyor, lütfen bekleyin..."
+msgstr "Kılavuz kipi başlatılıyor, lütfen bekleyin…"
 
 #: src/plugins/render/routing/RoutingPlugin.cpp:289
 msgctxt "QObject|"
@@ -15265,7 +15266,7 @@ msgstr "Lütfen geçerli bir URL veya dosya yolu girin!"
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Supported Files (*.txt *.msc)"
-msgstr "Tüm Desteklenen Dosyalar (*.txt *.msc)"
+msgstr "Tüm desteklenen dosyalar (*.txt *.msc)"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -15280,12 +15281,12 @@ msgstr "İki Satırlı Öge Kümesi (*.txt)"
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Files (*.*)"
-msgstr "Tüm Dosyalar (*.*)"
+msgstr "Tüm dosyalar (*.*)"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Open Satellite Data File"
-msgstr "Uydu Veri Dosyası Aç"
+msgstr "Uydu Verisi Dosyası Aç"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:287
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -15360,7 +15361,7 @@ msgstr "Seçili veri kaynağını sil."
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
 msgctxt "SatellitesConfigDialog|"
 msgid "..."
-msgstr "..."
+msgstr "…"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
 msgctxt "SatellitesConfigDialog|"
@@ -15377,12 +15378,12 @@ msgid ""
 "decoration: underline; color:#0000ff;\">Two-Line-Element Set</span></a></p></"
 "body></html>"
 msgstr ""
-"<html><head/><body><p>Supported formats: <a href=\"http://techbase.kde.org/"
-"Projects/Bilye/SatelliteCatalogFormat\"><span style=\" text-decoration: "
+"<html><head/><body><p>Desteklenen biçimler: <a href=\"http://techbase.kde."
+"org/Projects/Bilye/SatelliteCatalogFormat\"><span style=\" text-decoration: "
 "underline; color:#0000ff;\">Bilye Uydu Kataloğu</span></a>, <a href="
 "\"https://en.wikipedia.org/wiki/Two-line_element_set\"><span style=\" text-"
-"decoration: underline; color:#0000ff;\">Two-Line-Element Kümesi</span></a></"
-"p></body></html>"
+"decoration: underline; color:#0000ff;\">İki Çizgili Element Kümesi</span></"
+"a></p></body></html>"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:255
 msgctxt "SatellitesConfigDialog|"
@@ -15445,7 +15446,7 @@ msgid ""
 "orbital elements from <ul><li><a href=\"https://ssd.jpl.nasa.gov/?horizons"
 "\">JPL Horizons</a></li></ul>"
 msgstr ""
-"Şuradan Dünya-Uyduları yörünge ögeleri <ul><li><a href=\"http://www."
+"Şuradan Dünya uyduları yörünge ögeleri <ul><li><a href=\"http://www."
 "celestrak.com\">http://www.celestrak.com</a></li></ul>Gezegensel Dünya-"
 "Uyduları yörünge ögeleri <ul><li><a href=\"http://tasc.esa.int/\">ESA TASC "
 "hizmeti</a></li><li><a href=\"https://ssd.jpl.nasa.gov/?horizons\">JPL "
@@ -15454,7 +15455,7 @@ msgstr ""
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:420
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Special-Interest Satellites"
-msgstr "Özel-İlgili Uyduları"
+msgstr "Özel İlgi Uyduları"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:422
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
@@ -15931,7 +15932,7 @@ msgstr "&Uzak Gök Nesnelerini Göster"
 #: src/plugins/render/stars/StarsPlugin.cpp:1400
 msgctxt "Marble::StarsPlugin|"
 msgid "&Configure..."
-msgstr "&Yapılandır..."
+msgstr "&Yapılandır…"
 
 #: src/plugins/render/sun/SunPlugin.cpp:48
 #: src/plugins/render/sun/SunPlugin.cpp:53
@@ -15962,7 +15963,7 @@ msgstr "halka açık twitleri kendi konumlarında göster"
 #: src/plugins/render/weather/BBCParser.cpp:238
 msgctxt "QObject|"
 msgid "The file is not a valid BBC answer."
-msgstr "Dosya, BBC cevabı için geçerli değil."
+msgstr "Dosya, geçerli bir BBC yanıtı değil."
 
 #: src/plugins/render/weather/BBCWeatherItem.cpp:80
 msgctxt "Marble::BBCWeatherItem|"
@@ -15971,7 +15972,7 @@ msgid ""
 "\"_BLANK\">backstage.bbc.co.uk</a>.<br>Weather data from UK MET Office"
 msgstr ""
 "Destekleyen <a href=\"https://backstage.bbc.co.uk\" target=\"_BLANK"
-"\">backstage.bbc.co.uk</a>.<br>Hava Durumu Verileri UK MET Ofisi'nden"
+"\">backstage.bbc.co.uk</a>.<br>Hava Durumu Verileri UK MET Ofisi’ndendir."
 
 #: src/plugins/render/weather/GeoNamesWeatherItem.cpp:30
 msgctxt "Marble::GeoNamesWeatherItem|"
@@ -16579,7 +16580,7 @@ msgstr "Basınç %7"
 #, qt-format
 msgctxt "WeatherItemPrivate|DayOfWeek: Condition, MinTemp to MaxTemp"
 msgid "%1: %2, %3 to %4"
-msgstr "%1: %2, %3 - %4"
+msgstr "%1: %2, %3 — %4"
 
 #: src/plugins/render/weather/WeatherItem.cpp:194
 msgctxt "WeatherItemPrivate|"
@@ -16620,7 +16621,7 @@ msgstr ""
 #: src/plugins/render/wikipedia/GeonamesParser.cpp:37
 msgctxt "QObject|"
 msgid "The file is not a valid Geonames answer."
-msgstr "Bu dosya, Geonames cevabı için geçerli değil."
+msgstr "Dosya, geçerli bir Geonames yanıtı değil."
 
 #: src/plugins/render/wikipedia/WikipediaConfigWidget.ui:14
 msgctxt "WikipediaConfigWidget|"
@@ -17169,7 +17170,7 @@ msgstr "kuzey"
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:269
 msgctxt "QObject|"
 msgid "north-west"
-msgstr "kuzey-batı"
+msgstr "kuzeybatı"
 
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:271
 msgctxt "QObject|"
@@ -17179,7 +17180,7 @@ msgstr "batı"
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:273
 msgctxt "QObject|"
 msgid "south-west"
-msgstr "güney-batı"
+msgstr "güneybatı"
 
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:275
 msgctxt "QObject|"
@@ -17189,7 +17190,7 @@ msgstr "güney"
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:277
 msgctxt "QObject|"
 msgid "south-east"
-msgstr "güney-doğu"
+msgstr "güneydoğu"
 
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:279
 msgctxt "QObject|"
@@ -17199,7 +17200,7 @@ msgstr "doğu"
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:281
 msgctxt "QObject|"
 msgid "north-east"
-msgstr "kuzey-batı"
+msgstr "kuzeybatı"
 
 #: src/plugins/runner/localdatabase/LocalDatabasePlugin.cpp:19
 msgctxt "Marble::LocalDatabasePlugin|"
@@ -17351,6 +17352,12 @@ msgctxt "QObject|"
 msgid "Installing %1"
 msgstr "%1 Kuruluyor"
 
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:533
+#, qt-format
+msgctxt "Marble::MonavConfigWidget|"
+msgid "%1/%2 MB"
+msgstr ""
+
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:612
 msgctxt "QObject|"
 msgid "An update is available. Click to install it."
@@ -17471,27 +17478,27 @@ msgctxt "Marble::MonavMapsModel|"
 msgid "Date"
 msgstr "Tarih"
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:220
+#: src/plugins/runner/monav/MonavPlugin.cpp:219
 msgctxt "Marble::MonavPlugin|"
 msgid "No offline maps installed yet."
 msgstr "Henüz bir çevrimdışı harita kurulmamış."
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:223
+#: src/plugins/runner/monav/MonavPlugin.cpp:222
 msgctxt "Marble::MonavPlugin|"
 msgid "The monav routing daemon does not seem to be installed on your system."
 msgstr "Monav rotalama ardalan süreci, sisteminizde kurulu görünmüyor."
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:236
+#: src/plugins/runner/monav/MonavPlugin.cpp:235
 msgctxt "Marble::MonavPlugin|"
 msgid "Monav Routing"
 msgstr "Monav Rotalama"
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:241
+#: src/plugins/runner/monav/MonavPlugin.cpp:240
 msgctxt "Marble::MonavPlugin|"
 msgid "Monav"
 msgstr "Monav"
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:256
+#: src/plugins/runner/monav/MonavPlugin.cpp:255
 msgctxt "Marble::MonavPlugin|"
 msgid "Offline routing using the monav daemon"
 msgstr "Monav ardalan sürecini kullanarak çevrimdışı rotalama"
@@ -17560,7 +17567,7 @@ msgctxt "Marble::OpenLocationCodeSearchPlugin|"
 msgid ""
 "Decodes an Open Location Code and creates a placemark with the respective "
 "coordinates"
-msgstr "Konum Kodu'nu çözer ve o koordinatlarda bir yer işaretçisi oluşturur."
+msgstr "Konum Kodu’nu çözer ve o koordinatlarda bir yer işaretçisi oluşturur."
 
 #: src/plugins/runner/openrouteservice/OpenRouteServiceConfigWidget.ui:17
 msgctxt "OpenRouteServiceConfigWidget|"
@@ -17600,7 +17607,7 @@ msgstr "OpenRouteService"
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:44
 msgctxt "Marble::OpenRouteServicePlugin|"
 msgid "Routing in Europe using openrouteservice.org"
-msgstr "openrouteservice.org kullanan Avrupa'da rotalama"
+msgstr "openrouteservice.org kullanan Avrupa’da rotalama"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:73
 msgctxt "Marble::OpenRouteServiceConfigWidget|"

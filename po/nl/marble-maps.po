@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-04 00:36+0000\n"
-"PO-Revision-Date: 2024-09-29 14:35+0200\n"
+"PO-Revision-Date: 2024-10-04 11:03+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -44,17 +44,13 @@ msgstr "Het thema-id van van marble"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:20
-#, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfileSettingsDialog|"
-#| msgid "Routing Profile - Marble"
+#, kde-format
 msgid "Routing profile"
-msgstr "Routeprofiel - Marble"
+msgstr "Profiel voor routes"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:23
-#, fuzzy, kde-format
-#| msgctxt "DGML|"
-#| msgid "Car"
+#, kde-format
 msgid "Car"
 msgstr "Auto"
 
@@ -154,9 +150,7 @@ msgid "Theme Options"
 msgstr "Thema-opties"
 
 #: MainScreen.qml:167
-#, fuzzy, kde-format
-#| msgctxt "Marble::ControlView|"
-#| msgid "Routing"
+#, kde-format
 msgid "Routing"
 msgstr "Route bepalen"
 
@@ -284,40 +278,34 @@ msgid "Car (fastest)"
 msgstr "Auto (snelste)"
 
 #: RouteEditorPage.qml:19
-#, fuzzy, kde-format
-#| msgctxt "Marble::ControlView|"
-#| msgid "Routing"
+#, kde-format
 msgctxt "@title"
 msgid "Routing"
 msgstr "Route bepalen"
 
 #: RouteEditorPage.qml:102
-#, fuzzy, kde-format
-#| msgctxt "DGML|"
-#| msgid "Temperature"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Departure:"
-msgstr "Temperatuur"
+msgstr "Vertrek:"
 
 #: RouteEditorPage.qml:104
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Arrival:"
-msgstr ""
+msgstr "Aankomst:"
 
 #: RouteEditorPage.qml:106
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Waypoint:"
-msgstr ""
+msgstr "Tussenpunt:"
 
 #: RouteEditorPage.qml:194
-#, fuzzy, kde-format
-#| msgctxt "Marble::Placemark|"
-#| msgid "Alternative medicine"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Alternatives:"
-msgstr "Alternatieve medicijnen"
+msgstr "Alternatieven:"
 
 #: SettingsDialog.qml:48
 #, kde-format

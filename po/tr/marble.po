@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kdeedu-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-20 00:37+0000\n"
-"PO-Revision-Date: 2024-09-23 15:21+0300\n"
+"PO-Revision-Date: 2024-10-05 01:26+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -59,7 +59,7 @@ msgstr "Torsten Rahn"
 #: kdemain.cpp:95
 #, kde-format
 msgid "Developer and Original Author"
-msgstr "Geliştirici ve Özgün Yazar"
+msgstr "Geliştirici ve özgün yazar"
 
 #: kdemain.cpp:96
 #, kde-format
@@ -69,7 +69,7 @@ msgstr "Bernhard Beschow"
 #: kdemain.cpp:96
 #, kde-format
 msgid "WMS Support, Mobile, Performance"
-msgstr "WMS Desteği, Taşınabilir, Başarım"
+msgstr "WMS desteği, taşınabilir, başarım"
 
 #: kdemain.cpp:97
 #, kde-format
@@ -79,17 +79,17 @@ msgstr "Thibaut Gridel"
 #: kdemain.cpp:97
 #, kde-format
 msgid "Geodata"
-msgstr "Geodata"
+msgstr "Coğrafi veri"
 
 #: kdemain.cpp:98
 #, kde-format
 msgid "Jens-Michael Hoffmann"
-msgstr "Jens-Michael Hoffmann"
+msgstr "Jens–Michael Hoffmann"
 
 #: kdemain.cpp:98
 #, kde-format
 msgid "OpenStreetMap Integration, OSM Namefinder, Download Management"
-msgstr "OpenStreetMap entegrasyonu, OSM Namefinder, İndirme Yönetimi"
+msgstr "OpenStreetMap tümleştirmesi, OSM Namefinder, indirme yönetimi"
 
 #: kdemain.cpp:99
 #, kde-format
@@ -99,7 +99,7 @@ msgstr "Florian E&szlig;er"
 #: kdemain.cpp:99
 #, kde-format
 msgid "Elevation Profile"
-msgstr "Yükseklik Profili"
+msgstr "Yükselti profili"
 
 #: kdemain.cpp:100
 #, kde-format
@@ -109,7 +109,7 @@ msgstr "Wes Hardaker"
 #: kdemain.cpp:100
 #, kde-format
 msgid "APRS Plugin"
-msgstr "APRS Eklentisi"
+msgstr "APRS eklentisi"
 
 #: kdemain.cpp:101 kdemain.cpp:155
 #, kde-format
@@ -119,7 +119,7 @@ msgstr "Bastian Holst"
 #: kdemain.cpp:101
 #, kde-format
 msgid "Online Services support"
-msgstr "Çevrimiçi Hizmetler Desteği"
+msgstr "Çevrimiçi hizmetler desteği"
 
 #: kdemain.cpp:102 kdemain.cpp:125
 #, kde-format
@@ -139,7 +139,7 @@ msgstr "Rene Kuettner"
 #: kdemain.cpp:103
 #, kde-format
 msgid "Satellites, Eclipses"
-msgstr "Uydular, Tutulmalar"
+msgstr "Uydular, tutulmalar"
 
 #: kdemain.cpp:104
 #, kde-format
@@ -149,7 +149,7 @@ msgstr "Friedrich W. H. Kossebau"
 #: kdemain.cpp:104
 #, kde-format
 msgid "Plasma Integration, Bugfixes"
-msgstr "Plasma bütünleşmesi, Hata düzeltmeler"
+msgstr "Plasma tümleştirmesi, hata düzeltmeleri"
 
 #: kdemain.cpp:105
 #, kde-format
@@ -159,7 +159,7 @@ msgstr "Dennis Nienhüser"
 #: kdemain.cpp:105
 #, kde-format
 msgid "Routing, Navigation, Mobile"
-msgstr "Yönlendirme, Dolaşım, Taşınabilir"
+msgstr "Yönlendirme, dolaşım, taşınabilir"
 
 #: kdemain.cpp:106
 #, kde-format
@@ -169,7 +169,7 @@ msgstr "Niko Sams"
 #: kdemain.cpp:106
 #, kde-format
 msgid "Routing, Elevation Profile"
-msgstr "Yönlendirme, Yükseklik Profili"
+msgstr "Yönlendirme, yükselti profili"
 
 #: kdemain.cpp:107 kdemain.cpp:159
 #, kde-format
@@ -179,7 +179,7 @@ msgstr "Patrick Spendrin"
 #: kdemain.cpp:107
 #, kde-format
 msgid "Core Developer: KML and Windows support"
-msgstr "Çekirdek Geliştirici: KML ve Windows desteği"
+msgstr "Çekirdek geliştirici: KML ve Windows desteği"
 
 #: kdemain.cpp:108
 #, kde-format
@@ -199,7 +199,7 @@ msgstr "Inge Wallin"
 #: kdemain.cpp:112
 #, kde-format
 msgid "Core Developer and Co-Maintainer"
-msgstr "Asıl Yazar, Geliştirici ve Projeyi Yürütenin Yardımcısı"
+msgstr "Çekirdek geliştirici ve yardımcı bakımcı"
 
 #: kdemain.cpp:113
 #, kde-format
@@ -209,7 +209,7 @@ msgstr "Henry de Valence"
 #: kdemain.cpp:113
 #, kde-format
 msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
-msgstr "Çekirdek Geliştirici: Bilye Runners, Dünya Saatleri Plasmoid'i"
+msgstr "Çekirdek geliştirici: Bilye çalıştırıcıları, dünya saatleri Plasmoid”i"
 
 #: kdemain.cpp:114
 #, kde-format
@@ -229,7 +229,7 @@ msgstr "Harshit Jain"
 #: kdemain.cpp:115
 #, kde-format
 msgid "Planet filter"
-msgstr "Gezegen filtresi"
+msgstr "Gezegen süzgeci"
 
 #: kdemain.cpp:116
 #, kde-format
@@ -239,7 +239,7 @@ msgstr "Simon Edwards"
 #: kdemain.cpp:116
 #, kde-format
 msgid "Marble Python Bindings"
-msgstr "Bilye Python Bağıntıları"
+msgstr "Bilye Python bağıntıları"
 
 #: kdemain.cpp:117
 #, kde-format
@@ -249,7 +249,7 @@ msgstr "Magnus Valle"
 #: kdemain.cpp:117
 #, kde-format
 msgid "Historical Maps"
-msgstr "Tarihi Haritalar"
+msgstr "Tarihi haritalar"
 
 #: kdemain.cpp:118
 #, kde-format
@@ -259,7 +259,7 @@ msgstr "Médéric Boquien"
 #: kdemain.cpp:118
 #, kde-format
 msgid "Astronomical Observatories"
-msgstr "Gökbilimsel Gözlem Evleri"
+msgstr "Gökbilimsel gözlemevleri"
 
 #: kdemain.cpp:122
 #, kde-format
@@ -267,26 +267,26 @@ msgid ""
 "ESA Summer of Code in Space 2012 Project: Visualization of planetary "
 "satellites"
 msgstr ""
-"ESA Summer of Code in Space 2012 Project: Gezegen Uydularının "
-"Görselleştirilmesi"
+"ESA Summer of Code in Space 2012 Projesi: Gezegen uydularının "
+"görselleştirilmesi"
 
 #: kdemain.cpp:126
 #, kde-format
 msgid ""
 "ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
 msgstr ""
-"ESA Summer of Code in Space 2011 Project: Uydu Yörüngelerinin "
-"Görselleştirilmesi"
+"ESA Summer of Code in Space 2011 Projesi: Uydu yörüngelerinin "
+"görselleştirilmesi"
 
 #: kdemain.cpp:131
 #, kde-format
 msgid "Konstantin Oblaukhov"
-msgstr "Konstantin Oblaukhov"
+msgstr "Konstantin Oblauhov"
 
 #: kdemain.cpp:132
 #, kde-format
 msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
-msgstr "Google Summer of Code 2011 Project: OpenStreetMap Vektör Sunumu"
+msgstr "Google Summer of Code 2011 Projesi: OpenStreetMap vektör sunumu"
 
 #: kdemain.cpp:135
 #, kde-format
@@ -296,7 +296,7 @@ msgstr "Daniel Marth"
 #: kdemain.cpp:136
 #, kde-format
 msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
-msgstr "Google Summer of Code 2011 Project: Meego üzerinde Bilye Touch"
+msgstr "Google Summer of Code 2011 Projesi: Meego üzerinde Bilye Dokunmatik"
 
 #: kdemain.cpp:139
 #, kde-format
@@ -306,17 +306,17 @@ msgstr "Gaurav Gupta"
 #: kdemain.cpp:140
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Bookmarks"
-msgstr "Google Summer of Code 2010 Projesi: Yerimleri"
+msgstr "Google Summer of Code 2010 Projesi: Yer imleri"
 
 #: kdemain.cpp:143
 #, kde-format
 msgid "Harshit Jain "
-msgstr "Harshit Jain "
+msgstr "Harşit Jain"
 
 #: kdemain.cpp:144
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Time Support"
-msgstr "Google Summer of Code 2010 Projesi: Zaman Desteği"
+msgstr "Google Summer of Code 2010 Projesi: Zaman desteği"
 
 #: kdemain.cpp:147
 #, kde-format
@@ -326,7 +326,7 @@ msgstr "Siddharth Srivastava"
 #: kdemain.cpp:148
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
-msgstr "Google Summer of Code 2010 Project: Adım Adım Gezinme"
+msgstr "Google Summer of Code 2010 Projesi: Adım adım dolaşma"
 
 #: kdemain.cpp:151 kdemain.cpp:171
 #, kde-format
@@ -336,17 +336,17 @@ msgstr "Andrew Manson"
 #: kdemain.cpp:152
 #, kde-format
 msgid "Google Summer of Code 2009 Project: OSM Annotation"
-msgstr "Google Summer of Code 2009 Projesi: OSM Açıklama Ekleme"
+msgstr "Google Summer of Code 2009 Projesi: OSM bilgi notu"
 
 #: kdemain.cpp:156
 #, kde-format
 msgid "Google Summer of Code 2009 Project: Online Services"
-msgstr "Google Summer of Code 2009 Projesi: Çevrimiçi Hizmetler"
+msgstr "Google Summer of Code 2009 Projesi: Çevrimiçi hizmetler"
 
 #: kdemain.cpp:160
 #, kde-format
 msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
-msgstr "Google Summer of Code 2008 Projesi: Bilye için Vektör Döşemeleri"
+msgstr "Google Summer of Code 2008 Projesi: Bilye için vektör karolar"
 
 #: kdemain.cpp:163
 #, kde-format
@@ -359,8 +359,8 @@ msgid ""
 "Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
 "Marble"
 msgstr ""
-"Google Summer of Code 2008 Projesi: Panoramio / Wikipedia - Bilye için "
-"fotoğraf desteği"
+"Google Summer of Code 2008 Projesi: Panoramio/Vikipedi — Bilye için fotoğraf "
+"desteği"
 
 #: kdemain.cpp:167
 #, kde-format
@@ -372,13 +372,12 @@ msgstr "Carlos Licea"
 msgid ""
 "Google Summer of Code 2007 Project: Equirectangular Projection (\"Flat Map\")"
 msgstr ""
-"Google Summer of Code 2007 Projesi: Eşdörtegensel Projeksiyon (\"Düz Harita"
-"\")"
+"Google Summer of Code 2007 Projesi: Eşdörtgensel projeksiyon (“Düz Harita”)"
 
 #: kdemain.cpp:172
 #, kde-format
 msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
-msgstr "Google Summer of Code 2007 Projesi: Bilye için GPS Desteği"
+msgstr "Google Summer of Code 2007 Projesi: Bilye için GPS desteği"
 
 #: kdemain.cpp:175
 #, kde-format
@@ -388,7 +387,7 @@ msgstr "Murad Tagirov"
 #: kdemain.cpp:176
 #, kde-format
 msgid "Google Summer of Code 2007 Project: KML Support for Marble"
-msgstr "Google Summer of Code 2007 Projesi: Bilye için KML Desteği"
+msgstr "Google Summer of Code 2007 Projesi: Bilye için KML desteği"
 
 #: kdemain.cpp:181
 #, kde-format
@@ -402,7 +401,7 @@ msgstr "Simon Schmeisser"
 #: kdemain.cpp:197 kdemain.cpp:198 kdemain.cpp:199
 #, kde-format
 msgid "Development & Patches"
-msgstr "Geliştirme & Yamalar"
+msgstr "Geliştirme ve yamalar"
 
 #: kdemain.cpp:182
 #, kde-format
@@ -447,7 +446,7 @@ msgstr "Prashanth Udupa"
 #: kdemain.cpp:190
 #, kde-format
 msgid "Anne-Marie Mahfouf"
-msgstr "Anne-Marie Mahfouf"
+msgstr "Anne–Marie Mahfouf"
 
 #: kdemain.cpp:191
 #, kde-format
@@ -566,7 +565,7 @@ msgstr "Luis Silva"
 #: kdemain.cpp:221 kdemain.cpp:222
 #, kde-format
 msgid "Various Suggestions & Testing"
-msgstr "Çeşitli Öneriler ve Testler"
+msgstr "Çeşitli öneriler ve sınamalar"
 
 #: kdemain.cpp:214
 #, kde-format
@@ -624,7 +623,7 @@ msgid ""
 "Special thanks for providing an important source of inspiration by creating "
 "Marble's predecessor \"Kartographer\"."
 msgstr ""
-"Bilye'nin öncülü \"Kartographer\" uygulamasını yaratarak önemli bir ilham "
+"Bilye’nin öncülü “Kartographer” uygulamasını yaratarak önemli bir ilham "
 "kaynağı olmasından dolayı özel teşekkürler."
 
 #: kdemain.cpp:240
@@ -650,7 +649,7 @@ msgstr "Kare hızını göster"
 #: kdemain.cpp:249
 #, kde-format
 msgid "Show tile IDs"
-msgstr "Döşeme IDlerini göster"
+msgstr "Karo kimliklerini göster"
 
 #: kdemain.cpp:251
 #, kde-format
@@ -700,8 +699,7 @@ msgstr "Dünyayı gözleyenin uzaklığını ayarla (km cinsinden)"
 #: kdemain.cpp:267
 #, kde-format
 msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
-msgstr ""
-"Harita <kimlik> kullan (örn. \"earth/openstreetmap/openstreetmap.dgml\")"
+msgstr "Harita <kimlik> kullan (örn. ”earth/openstreetmap/openstreetmap.dgml”)"
 
 #: kdemain.cpp:269
 #, kde-format
@@ -760,7 +758,7 @@ msgstr "Harita üzerinde genel yazıtipini kullan."
 #: marble.kcfg:159
 #, kde-format
 msgid "The last directory that was opened by File->Open."
-msgstr "Dosya->Aç ile açılmış son dizin."
+msgstr "“Dosya → Aç” ile açılmış son dizin."
 
 #. i18n: ectx: label, entry, group (Navigation)
 #: marble.kcfg:179
@@ -802,7 +800,7 @@ msgstr "Döşemelerin depolanacağı sabit disk için azami alan."
 #: marble.kcfg:223
 #, kde-format
 msgid "URL for the proxy server."
-msgstr "Vekil sunucunun URL'si."
+msgstr "Vekil sunucunun URL’si."
 
 #. i18n: ectx: label, entry, group (Cache)
 #: marble.kcfg:227
@@ -854,12 +852,12 @@ msgstr "Konum: %1"
 #: marble_part.cpp:105
 #, kde-format
 msgid "Altitude: %1"
-msgstr "Rakım: %1"
+msgstr "Yükseklik: %1"
 
 #: marble_part.cpp:106
 #, kde-format
 msgid "Tile Zoom Level: %1"
-msgstr "Yakınlaştırma Düzeyi: %1"
+msgstr "Yakınlaştırma düzeyi: %1"
 
 #: marble_part.cpp:107
 #, kde-format
@@ -872,8 +870,8 @@ msgid ""
 "Sorry, unable to open '%1':\n"
 "'%2'"
 msgstr ""
-"Üzgünüm, '%1' açılamıyor:\n"
-"'%2'"
+"Üzgünüm, “%1” açılamıyor:\n"
+"“%2”"
 
 #: marble_part.cpp:166
 #, kde-format
@@ -888,7 +886,7 @@ msgstr "Masaüstünde Dünya"
 #: marble_part.cpp:227
 #, kde-format
 msgid "Sorry, unable to open '%1'. The file is not accessible."
-msgstr "Üzgünüm, '%1' açılamadı. Dosya erişilebilir değil."
+msgstr "Üzgünüm, “%1” açılamadı. Dosya erişilebilir değil."
 
 #: marble_part.cpp:227
 #, kde-format
@@ -915,7 +913,7 @@ msgstr "Haritayı Dışa Aktar"
 #: marble_part.cpp:270
 #, kde-format
 msgid "Images *.jpg *.png"
-msgstr "Görseller *.jpg *.png"
+msgstr "Görseller (*.jpg *.png)"
 
 #: marble_part.cpp:282
 #, kde-format
@@ -937,13 +935,13 @@ msgstr "Adsız"
 #, kde-format
 msgctxt "Action for downloading an entire region of a map"
 msgid "Download Region..."
-msgstr "Bölge İndir..."
+msgstr "Bölge İndir…"
 
 #: marble_part.cpp:696
 #, kde-format
 msgctxt "Action for saving the map to a file"
 msgid "&Export Map..."
-msgstr "&Haritayı Dışa Aktar..."
+msgstr "&Haritayı Dışa Aktar…"
 
 #: marble_part.cpp:704
 #, kde-format
@@ -967,13 +965,13 @@ msgstr "Koordinatları Ko&pyala"
 #, kde-format
 msgctxt "Action for opening a file"
 msgid "&Open..."
-msgstr "&Aç..."
+msgstr "&Aç…"
 
 #: marble_part.cpp:729
 #, kde-format
 msgctxt "Action for downloading maps (GHNS)"
 msgid "Download Maps..."
-msgstr "Harita İndir..."
+msgstr "Harita İndir…"
 
 #: marble_part.cpp:732
 #, kde-format
@@ -985,7 +983,7 @@ msgstr "Yeni haritalar indir"
 #, kde-format
 msgctxt "Action for creating new maps"
 msgid "&Create a New Map..."
-msgstr "&Yeni bir Harita Oluştur..."
+msgstr "&Yeni Bir Harita Oluştur…"
 
 #: marble_part.cpp:740
 #, kde-format
@@ -1003,13 +1001,13 @@ msgstr "&Bulutlar"
 #, kde-format
 msgctxt "Action for sun control dialog"
 msgid "S&un Control..."
-msgstr "&Güneş Denetimi..."
+msgstr "&Güneş Denetimi…"
 
 #: marble_part.cpp:779
 #, kde-format
 msgctxt "Action for time control dialog"
 msgid "&Time Control..."
-msgstr "&Zaman Denetimi..."
+msgstr "&Zaman Denetimi…"
 
 #: marble_part.cpp:785
 #, kde-format
@@ -1066,7 +1064,7 @@ msgstr "Dünyayı alt solar noktaya sabitle"
 #, kde-format
 msgctxt "Add Bookmark"
 msgid "Add &Bookmark..."
-msgstr "Yer İmi &Ekle..."
+msgstr "Yer İmi &Koy…"
 
 #: marble_part.cpp:833
 #, kde-format
@@ -1088,13 +1086,13 @@ msgstr "Ev Konumunu &Ayarla"
 #, kde-format
 msgctxt "Manage Bookmarks"
 msgid "&Manage Bookmarks..."
-msgstr "Yer İ&mlerini Yönet..."
+msgstr "Yer İ&mlerini Yönet…"
 
 #: marble_part.cpp:856
 #, kde-format
 msgctxt "Edit the map in an external application"
 msgid "&Edit Map..."
-msgstr "Haritayı Dü&zenle..."
+msgstr "Haritayı Dü&zenle…"
 
 #: marble_part.cpp:862
 #, kde-format

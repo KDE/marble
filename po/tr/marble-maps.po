@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-04 00:36+0000\n"
-"PO-Revision-Date: 2024-09-29 22:00+0300\n"
+"PO-Revision-Date: 2024-10-05 01:16+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -43,17 +43,13 @@ msgstr "Bilye teması kimliği"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:20
-#, fuzzy, kde-format
-#| msgctxt "RoutingProfileSettingsDialog|"
-#| msgid "Configure Routing Profile"
+#, kde-format
 msgid "Routing profile"
-msgstr "Rota Profilini Yapılandır"
+msgstr "Rota profili"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:23
-#, fuzzy, kde-format
-#| msgctxt "DGML|"
-#| msgid "Car"
+#, kde-format
 msgid "Car"
 msgstr "Araba"
 
@@ -153,11 +149,9 @@ msgid "Theme Options"
 msgstr "Tema Seçenekleri"
 
 #: MainScreen.qml:167
-#, fuzzy, kde-format
-#| msgctxt "Marble::ControlView|"
-#| msgid "Routing"
+#, kde-format
 msgid "Routing"
-msgstr "Rotalama"
+msgstr "Rota"
 
 #: MainScreen.qml:457
 #, kde-format
@@ -283,40 +277,34 @@ msgid "Car (fastest)"
 msgstr "Araba (en hızlı)"
 
 #: RouteEditorPage.qml:19
-#, fuzzy, kde-format
-#| msgctxt "Marble::ControlView|"
-#| msgid "Routing"
+#, kde-format
 msgctxt "@title"
 msgid "Routing"
-msgstr "Rotalama"
+msgstr "Rota"
 
 #: RouteEditorPage.qml:102
-#, fuzzy, kde-format
-#| msgctxt "DGML|"
-#| msgid "Temperature"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Departure:"
-msgstr "Sıcaklık"
+msgstr "Kalkış:"
 
 #: RouteEditorPage.qml:104
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Arrival:"
-msgstr ""
+msgstr "Varış:"
 
 #: RouteEditorPage.qml:106
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Waypoint:"
-msgstr ""
+msgstr "Ara nokta:"
 
 #: RouteEditorPage.qml:194
-#, fuzzy, kde-format
-#| msgctxt "Marble::Placemark|"
-#| msgid "Alternative medicine"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Alternatives:"
-msgstr "Alternatif Tıp"
+msgstr "Alternatifler:"
 
 #: SettingsDialog.qml:48
 #, kde-format

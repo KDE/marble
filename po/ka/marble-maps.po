@@ -33,17 +33,13 @@ msgstr "Marble-ის თემის id"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:20
-#, fuzzy, kde-format
-#| msgctxt "RoutingProfileSettingsDialog|"
-#| msgid "Configure Routing Profile"
+#, kde-format
 msgid "Routing profile"
-msgstr "გზის პროფილის მორგება"
+msgstr "გზის პროფილი"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:23
-#, fuzzy, kde-format
-#| msgctxt "DGML|"
-#| msgid "Car"
+#, kde-format
 msgid "Car"
 msgstr "მანქანა"
 
@@ -143,11 +139,9 @@ msgid "Theme Options"
 msgstr "თემის მორგება"
 
 #: MainScreen.qml:167
-#, fuzzy, kde-format
-#| msgctxt "Marble::ControlView|"
-#| msgid "Routing"
+#, kde-format
 msgid "Routing"
-msgstr "რაუტინგი"
+msgstr "გზები"
 
 #: MainScreen.qml:457
 #, kde-format
@@ -273,40 +267,34 @@ msgid "Car (fastest)"
 msgstr "მანქანა (უსწრაფესი)"
 
 #: RouteEditorPage.qml:19
-#, fuzzy, kde-format
-#| msgctxt "Marble::ControlView|"
-#| msgid "Routing"
+#, kde-format
 msgctxt "@title"
 msgid "Routing"
-msgstr "რაუტინგი"
+msgstr "გზები"
 
 #: RouteEditorPage.qml:102
-#, fuzzy, kde-format
-#| msgctxt "DGML|"
-#| msgid "Temperature"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Departure:"
-msgstr "ტემპერატურა"
+msgstr "გამგზავრება:"
 
 #: RouteEditorPage.qml:104
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Arrival:"
-msgstr ""
+msgstr "ჩამოსვლა:"
 
 #: RouteEditorPage.qml:106
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Waypoint:"
-msgstr ""
+msgstr "გზის წერტილი:"
 
 #: RouteEditorPage.qml:194
-#, fuzzy, kde-format
-#| msgctxt "Marble::Placemark|"
-#| msgid "Alternative medicine"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Alternatives:"
-msgstr "ალტერნატიული მედიცინა"
+msgstr "ალტერნატივები:"
 
 #: SettingsDialog.qml:48
 #, kde-format

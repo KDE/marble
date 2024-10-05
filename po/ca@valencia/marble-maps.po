@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-04 00:36+0000\n"
-"PO-Revision-Date: 2024-09-25 09:12+0200\n"
+"PO-Revision-Date: 2024-10-04 10:41+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -34,19 +34,19 @@ msgstr "Ací apareixeran les vostres adreces d'interés."
 #: config.kcfg:14
 #, kde-format
 msgid "The marble theme id"
-msgstr ""
+msgstr "L'ID del tema de Marble"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:20
 #, kde-format
 msgid "Routing profile"
-msgstr ""
+msgstr "Perfil d'itineraris"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:23
 #, kde-format
 msgid "Car"
-msgstr ""
+msgstr "Cotxe"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:26 ProfileSelectorMenu.qml:134
@@ -138,17 +138,15 @@ msgid "Layer Options"
 msgstr "Opcions de la capa"
 
 #: MainScreen.qml:156
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Layer Options"
+#, kde-format
 msgctxt "@action:button"
 msgid "Theme Options"
-msgstr "Opcions de la capa"
+msgstr "Opcions del tema"
 
 #: MainScreen.qml:167
 #, kde-format
 msgid "Routing"
-msgstr ""
+msgstr "Itineraris"
 
 #: MainScreen.qml:457
 #, kde-format
@@ -277,31 +275,31 @@ msgstr "Cotxe (més ràpida)"
 #, kde-format
 msgctxt "@title"
 msgid "Routing"
-msgstr ""
+msgstr "Itineraris"
 
 #: RouteEditorPage.qml:102
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Departure:"
-msgstr ""
+msgstr "Eixida:"
 
 #: RouteEditorPage.qml:104
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Arrival:"
-msgstr ""
+msgstr "Arribada:"
 
 #: RouteEditorPage.qml:106
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Waypoint:"
-msgstr ""
+msgstr "Punt de pas:"
 
 #: RouteEditorPage.qml:194
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Alternatives:"
-msgstr ""
+msgstr "Alternatives:"
 
 #: SettingsDialog.qml:48
 #, kde-format
@@ -317,7 +315,4 @@ msgstr "Descarrega mapes només via WLAN"
 #, kde-format
 msgctxt "@title:window"
 msgid "Themes"
-msgstr ""
-
-#~ msgid "Search for places to integrate them into a route."
-#~ msgstr "Busca llocs per a integrar-los a la ruta."
+msgstr "Temes"
