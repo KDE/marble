@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-04 00:36+0000\n"
-"PO-Revision-Date: 2024-09-29 09:35+0200\n"
+"PO-Revision-Date: 2024-10-05 13:15+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -31,25 +31,19 @@ msgstr "Twoje zakładki pojawią się tutaj."
 
 #. i18n: ectx: label, entry (MapThemeId), group (General)
 #: config.kcfg:14
-#, fuzzy, kde-format
-#| msgctxt "MapWizard|"
-#| msgid "The lowercase map theme id."
+#, kde-format
 msgid "The marble theme id"
-msgstr "Identyfikator mapy tematycznej pisany małymi literami."
+msgstr "ID wyglądu Marble"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:20
-#, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfileSettingsDialog|"
-#| msgid "Routing Profile - Marble"
+#, kde-format
 msgid "Routing profile"
-msgstr "Profil wyznaczania trasy - Marble"
+msgstr "Profil wyznaczania trasy"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:23
-#, fuzzy, kde-format
-#| msgctxt "DGML|"
-#| msgid "Car"
+#, kde-format
 msgid "Car"
 msgstr "Samochód"
 
@@ -143,17 +137,13 @@ msgid "Layer Options"
 msgstr "Ustawienia warstwy"
 
 #: MainScreen.qml:156
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
+#, kde-format
 msgctxt "@action:button"
 msgid "Theme Options"
-msgstr "Opcje warstwy"
+msgstr "Ustawienia wyglądu"
 
 #: MainScreen.qml:167
-#, fuzzy, kde-format
-#| msgctxt "Marble::ControlView|"
-#| msgid "Routing"
+#, kde-format
 msgid "Routing"
 msgstr "Wyznaczanie trasy"
 
@@ -281,39 +271,34 @@ msgid "Car (fastest)"
 msgstr "Samochód (najszybsza)"
 
 #: RouteEditorPage.qml:19
-#, fuzzy, kde-format
-#| msgctxt "Marble::ControlView|"
-#| msgid "Routing"
+#, kde-format
 msgctxt "@title"
 msgid "Routing"
 msgstr "Wyznaczanie trasy"
 
 #: RouteEditorPage.qml:102
-#, fuzzy, kde-format
-#| msgctxt "DGML|"
-#| msgid "Temperature"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Departure:"
-msgstr "Temperatura"
+msgstr "Odjazd:"
 
 #: RouteEditorPage.qml:104
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Arrival:"
-msgstr ""
+msgstr "Przyjazd:"
 
 #: RouteEditorPage.qml:106
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Waypoint:"
-msgstr ""
+msgstr "Punkt pośredni:"
 
 #: RouteEditorPage.qml:194
-#, fuzzy, kde-format
-#| msgid "Alternative Name"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Alternatives:"
-msgstr "Alternatywna nazwa"
+msgstr "Alternatywy:"
 
 #: SettingsDialog.qml:48
 #, kde-format
@@ -326,12 +311,10 @@ msgid "Download Maps via WLAN only"
 msgstr "Pobieraj mapy tylko przez sieć bezprzewodową"
 
 #: ThemeConfigPage.qml:19
-#, fuzzy, kde-format
-#| msgctxt "CompassConfigWidget|"
-#| msgid "Theme"
+#, kde-format
 msgctxt "@title:window"
 msgid "Themes"
-msgstr "Wystrój"
+msgstr "Wyglądy"
 
 #~ msgid "Search for places to integrate them into a route."
 #~ msgstr "Wyszukaj miejsc do włączenia ich w trasę."

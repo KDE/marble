@@ -1,4 +1,4 @@
-# Translation of marble_qt to Northern Sami
+# Translation of marble-maps to Northern Sami
 #
 msgid ""
 msgstr ""
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
-"X-Text-Markup: qtrich\n"
+"X-Text-Markup: kde4\n"
 "X-Qt-Contexts: true\n"
 
 #: Bookmarks.qml:20

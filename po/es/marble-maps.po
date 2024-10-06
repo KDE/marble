@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: marble-maps\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-04 00:36+0000\n"
-"PO-Revision-Date: 2024-09-30 02:30+0200\n"
+"PO-Revision-Date: 2024-10-06 01:37+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -37,13 +37,13 @@ msgstr "Id. del tema de Marble"
 #: config.kcfg:20
 #, kde-format
 msgid "Routing profile"
-msgstr ""
+msgstr "Perfil de enrutamiento"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:23
 #, kde-format
 msgid "Car"
-msgstr ""
+msgstr "Automóvil"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:26 ProfileSelectorMenu.qml:134
@@ -143,7 +143,7 @@ msgstr "Opciones del tema"
 #: MainScreen.qml:167
 #, kde-format
 msgid "Routing"
-msgstr ""
+msgstr "Enrutamiento"
 
 #: MainScreen.qml:457
 #, kde-format
@@ -272,31 +272,31 @@ msgstr "Coche (la más rápida)"
 #, kde-format
 msgctxt "@title"
 msgid "Routing"
-msgstr ""
+msgstr "Enrutamiento"
 
 #: RouteEditorPage.qml:102
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Departure:"
-msgstr ""
+msgstr "Salida:"
 
 #: RouteEditorPage.qml:104
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Arrival:"
-msgstr ""
+msgstr "Llegada:"
 
 #: RouteEditorPage.qml:106
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Waypoint:"
-msgstr ""
+msgstr "Parada:"
 
 #: RouteEditorPage.qml:194
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Alternatives:"
-msgstr ""
+msgstr "Alternativas:"
 
 #: SettingsDialog.qml:48
 #, kde-format

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-04 00:36+0000\n"
-"PO-Revision-Date: 2024-09-29 08:18+0200\n"
+"PO-Revision-Date: 2024-10-05 08:06+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -40,17 +40,13 @@ msgstr "Marbles temaidentifikation"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:20
-#, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfileSettingsDialog|"
-#| msgid "Routing Profile - Marble"
+#, kde-format
 msgid "Routing profile"
-msgstr "Vägbeskrivningsprofil - Marble"
+msgstr "Vägbeskrivningsprofil"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:23
-#, fuzzy, kde-format
-#| msgctxt "DGML|"
-#| msgid "Car"
+#, kde-format
 msgid "Car"
 msgstr "Bil"
 
@@ -150,9 +146,7 @@ msgid "Theme Options"
 msgstr "Temainställningar"
 
 #: MainScreen.qml:167
-#, fuzzy, kde-format
-#| msgctxt "Marble::ControlView|"
-#| msgid "Routing"
+#, kde-format
 msgid "Routing"
 msgstr "Vägbeskrivning"
 
@@ -280,40 +274,34 @@ msgid "Car (fastest)"
 msgstr "Bil (snabbast)"
 
 #: RouteEditorPage.qml:19
-#, fuzzy, kde-format
-#| msgctxt "Marble::ControlView|"
-#| msgid "Routing"
+#, kde-format
 msgctxt "@title"
 msgid "Routing"
 msgstr "Vägbeskrivning"
 
 #: RouteEditorPage.qml:102
-#, fuzzy, kde-format
-#| msgctxt "DGML|"
-#| msgid "Temperature"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Departure:"
-msgstr "Temperatur"
+msgstr "Avgång:"
 
 #: RouteEditorPage.qml:104
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Arrival:"
-msgstr ""
+msgstr "Ankomst:"
 
 #: RouteEditorPage.qml:106
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Waypoint:"
-msgstr ""
+msgstr "Vägpunkt:"
 
 #: RouteEditorPage.qml:194
-#, fuzzy, kde-format
-#| msgctxt "Marble::Placemark|"
-#| msgid "Alternative medicine"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Alternatives:"
-msgstr "Alternativ medicin"
+msgstr "Alternativ:"
 
 #: SettingsDialog.qml:48
 #, kde-format

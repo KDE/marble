@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-04 00:36+0000\n"
-"PO-Revision-Date: 2024-09-29 14:44+0200\n"
+"PO-Revision-Date: 2024-10-05 13:43+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -41,13 +41,13 @@ msgstr "Идент. номер на тема на marble"
 #: config.kcfg:20
 #, kde-format
 msgid "Routing profile"
-msgstr ""
+msgstr "Профил на маршрута"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:23
 #, kde-format
 msgid "Car"
-msgstr ""
+msgstr "Автомобил"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:26 ProfileSelectorMenu.qml:134
@@ -147,7 +147,7 @@ msgstr "Параметри на темата"
 #: MainScreen.qml:167
 #, kde-format
 msgid "Routing"
-msgstr ""
+msgstr "Планиране на маршрут"
 
 #: MainScreen.qml:457
 #, kde-format
@@ -276,31 +276,31 @@ msgstr "Автомобил (най-бърз)"
 #, kde-format
 msgctxt "@title"
 msgid "Routing"
-msgstr ""
+msgstr "Планиране на маршрут"
 
 #: RouteEditorPage.qml:102
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Departure:"
-msgstr ""
+msgstr "Тръгване:"
 
 #: RouteEditorPage.qml:104
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Arrival:"
-msgstr ""
+msgstr "Пристигане:"
 
 #: RouteEditorPage.qml:106
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Waypoint:"
-msgstr ""
+msgstr "Междинни точки:"
 
 #: RouteEditorPage.qml:194
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Alternatives:"
-msgstr ""
+msgstr "Алтернативи:"
 
 #: SettingsDialog.qml:48
 #, kde-format

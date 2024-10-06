@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-20 00:37+0000\n"
+"POT-Creation-Date: 2024-10-06 00:37+0000\n"
 "PO-Revision-Date: 2012-07-20 10:58+0700\n"
 "Last-Translator: Sok Sophea <sophea@khmeros.info>\n"
 "Language-Team: Khmer <>\n"
@@ -31,235 +31,235 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "khoemsokhem@khmeros.info,​​evannak@khmeros.info,piseth_dv@khmeros.info"
 
-#: kdemain.cpp:86
+#: kdemain.cpp:84
 #, kde-format
 msgid "Marble Virtual Globe"
 msgstr "Marble Virtual Globe"
 
-#: kdemain.cpp:88
+#: kdemain.cpp:86
 #, kde-format
 msgid "A World Atlas."
 msgstr "A World Atlas."
 
-#: kdemain.cpp:90
+#: kdemain.cpp:88
 #, fuzzy, kde-format
 #| msgid "(c) 2007-2012"
 msgid "(c) 2007-%1"
 msgstr "រក្សាសិទ្ធិ​ឆ្នាំ ២០០៧-២០១២"
 
-#: kdemain.cpp:95 kdemain.cpp:210
+#: kdemain.cpp:93 kdemain.cpp:208
 #, kde-format
 msgid "Torsten Rahn"
 msgstr "Torsten Rahn"
 
-#: kdemain.cpp:95
+#: kdemain.cpp:93
 #, kde-format
 msgid "Developer and Original Author"
 msgstr "អ្នក​អភិវឌ្ឍន៍ និង​អ្នកនិពន្ធ​ដើម"
 
-#: kdemain.cpp:96
+#: kdemain.cpp:94
 #, kde-format
 msgid "Bernhard Beschow"
 msgstr "Bernhard Beschow"
 
-#: kdemain.cpp:96
+#: kdemain.cpp:94
 #, kde-format
 msgid "WMS Support, Mobile, Performance"
 msgstr "គាំទ្រ WMS ចល័ត ការ​អនុវត្ត"
 
-#: kdemain.cpp:97
+#: kdemain.cpp:95
 #, kde-format
 msgid "Thibaut Gridel"
 msgstr "Thibaut Gridel"
 
-#: kdemain.cpp:97
+#: kdemain.cpp:95
 #, kde-format
 msgid "Geodata"
 msgstr "Geodata"
 
-#: kdemain.cpp:98
+#: kdemain.cpp:96
 #, kde-format
 msgid "Jens-Michael Hoffmann"
 msgstr "Jens-Michael Hoffmann"
 
-#: kdemain.cpp:98
+#: kdemain.cpp:96
 #, kde-format
 msgid "OpenStreetMap Integration, OSM Namefinder, Download Management"
 msgstr "ការ​រួម​បញ្ចូល OpenStreetMap ឧបករណ៍​រក​ឈ្មោះ OSM គ្រប់គ្រង​កា​រទាញ​យក"
 
-#: kdemain.cpp:99
+#: kdemain.cpp:97
 #, kde-format
 msgid "Florian E&szlig;er"
 msgstr "Florian E&szlig;er"
 
-#: kdemain.cpp:99
+#: kdemain.cpp:97
 #, kde-format
 msgid "Elevation Profile"
 msgstr "ទម្រង់​ល្បើក"
 
-#: kdemain.cpp:100
+#: kdemain.cpp:98
 #, kde-format
 msgid "Wes Hardaker"
 msgstr "Wes Hardaker"
 
-#: kdemain.cpp:100
+#: kdemain.cpp:98
 #, kde-format
 msgid "APRS Plugin"
 msgstr "កម្មវិធី​ជំនួយ APRS"
 
-#: kdemain.cpp:101 kdemain.cpp:155
+#: kdemain.cpp:99 kdemain.cpp:153
 #, kde-format
 msgid "Bastian Holst"
 msgstr "Bastian Holst"
 
-#: kdemain.cpp:101
+#: kdemain.cpp:99
 #, kde-format
 msgid "Online Services support"
 msgstr "គាំទ្រ​សេវា​លើ​បណ្ដាញ"
 
-#: kdemain.cpp:102 kdemain.cpp:125
+#: kdemain.cpp:100 kdemain.cpp:123
 #, kde-format
 msgid "Guillaume Martres"
 msgstr "Guillaume Martres"
 
-#: kdemain.cpp:102
+#: kdemain.cpp:100
 #, fuzzy, kde-format
 #| msgid " Satellites"
 msgid "Satellites"
 msgstr "ផ្កាយរណប"
 
-#: kdemain.cpp:103 kdemain.cpp:121
+#: kdemain.cpp:101 kdemain.cpp:119
 #, kde-format
 msgid "Rene Kuettner"
 msgstr ""
 
-#: kdemain.cpp:103
+#: kdemain.cpp:101
 #, fuzzy, kde-format
 #| msgid " Satellites"
 msgid "Satellites, Eclipses"
 msgstr "ផ្កាយរណប"
 
-#: kdemain.cpp:104
+#: kdemain.cpp:102
 #, kde-format
 msgid "Friedrich W. H. Kossebau"
 msgstr "Friedrich W. H. Kossebau"
 
-#: kdemain.cpp:104
+#: kdemain.cpp:102
 #, kde-format
 msgid "Plasma Integration, Bugfixes"
 msgstr "ការ​បញ្ចូល​ប្លាស្មា​ចូលគ្នា កែ​កំហុស"
 
-#: kdemain.cpp:105
+#: kdemain.cpp:103
 #, kde-format
 msgid "Dennis Nienhüser"
 msgstr "Dennis Nienhüser"
 
-#: kdemain.cpp:105
+#: kdemain.cpp:103
 #, kde-format
 msgid "Routing, Navigation, Mobile"
 msgstr "ការ​នាំ​ផ្លូវ ការ​រុករក ចល័ត"
 
-#: kdemain.cpp:106
+#: kdemain.cpp:104
 #, kde-format
 msgid "Niko Sams"
 msgstr "Niko Sams"
 
-#: kdemain.cpp:106
+#: kdemain.cpp:104
 #, kde-format
 msgid "Routing, Elevation Profile"
 msgstr "ការ​នាំ​ផ្លូវ ទម្រង់​ល្បើក"
 
-#: kdemain.cpp:107 kdemain.cpp:159
+#: kdemain.cpp:105 kdemain.cpp:157
 #, kde-format
 msgid "Patrick Spendrin"
 msgstr "Patrick Spendrin"
 
-#: kdemain.cpp:107
+#: kdemain.cpp:105
 #, kde-format
 msgid "Core Developer: KML and Windows support"
 msgstr "អ្នក​និពន្ធ​សំខាន់ ៖ KML និង​ការ​គាំទ្រ​វីនដូ"
 
-#: kdemain.cpp:108
+#: kdemain.cpp:106
 #, kde-format
 msgid "Eckhart Wörner"
 msgstr "Eckhart Wörner"
 
-#: kdemain.cpp:108
+#: kdemain.cpp:106
 #, kde-format
 msgid "Bugfixes"
 msgstr "ការ​កែកំហុស"
 
-#: kdemain.cpp:112
+#: kdemain.cpp:110
 #, kde-format
 msgid "Inge Wallin"
 msgstr "Inge Wallin"
 
-#: kdemain.cpp:112
+#: kdemain.cpp:110
 #, kde-format
 msgid "Core Developer and Co-Maintainer"
 msgstr "អ្នក​និពន្ធ អ្នក​អភិវឌ្ឍ​ន៍​ដើម"
 
-#: kdemain.cpp:113
+#: kdemain.cpp:111
 #, kde-format
 msgid "Henry de Valence"
 msgstr "Henry de Valence"
 
-#: kdemain.cpp:113
+#: kdemain.cpp:111
 #, kde-format
 msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
 msgstr "អ្នកអភិវឌ្ឍន៍​សំខាន់ ៖ កម្មវិធី​រត់ Marble ប្លាស្មាយ​នាឡិកា​ពិភពលោក"
 
-#: kdemain.cpp:114
+#: kdemain.cpp:112
 #, kde-format
 msgid "Pino Toscano"
 msgstr "Pino Toscano"
 
-#: kdemain.cpp:114
+#: kdemain.cpp:112
 #, kde-format
 msgid "Network plugins"
 msgstr "កម្មវិធី​ជំនួយ​បណ្ដាញ"
 
-#: kdemain.cpp:115
+#: kdemain.cpp:113
 #, kde-format
 msgid "Harshit Jain"
 msgstr "Harshit Jain"
 
-#: kdemain.cpp:115
+#: kdemain.cpp:113
 #, kde-format
 msgid "Planet filter"
 msgstr "តម្រង​ពិភព"
 
-#: kdemain.cpp:116
+#: kdemain.cpp:114
 #, kde-format
 msgid "Simon Edwards"
 msgstr "Simon Edwards"
 
-#: kdemain.cpp:116
+#: kdemain.cpp:114
 #, kde-format
 msgid "Marble Python Bindings"
 msgstr "ការ​ចង Marble Python"
 
-#: kdemain.cpp:117
+#: kdemain.cpp:115
 #, kde-format
 msgid "Magnus Valle"
 msgstr "Magnus Valle"
 
-#: kdemain.cpp:117
+#: kdemain.cpp:115
 #, kde-format
 msgid "Historical Maps"
 msgstr "ផែនទី​ប្រវត្តិ​សាស្ត្រ"
 
-#: kdemain.cpp:118
+#: kdemain.cpp:116
 #, kde-format
 msgid "Médéric Boquien"
 msgstr "Médéric Boquien"
 
-#: kdemain.cpp:118
+#: kdemain.cpp:116
 #, kde-format
 msgid "Astronomical Observatories"
 msgstr "កន្លែង​មើល​តារា"
 
-#: kdemain.cpp:122
+#: kdemain.cpp:120
 #, fuzzy, kde-format
 #| msgid ""
 #| "ESA Summer of Code in Space  2011 Project: Visualisation of Satellite "
@@ -269,7 +269,7 @@ msgid ""
 "satellites"
 msgstr "គម្រោង ESA Summer of Code in Space  ២០១១ ៖  រូបភាព​របស់​គន្លង​ផ្កាយរណប"
 
-#: kdemain.cpp:126
+#: kdemain.cpp:124
 #, fuzzy, kde-format
 #| msgid ""
 #| "ESA Summer of Code in Space  2011 Project: Visualisation of Satellite "
@@ -278,82 +278,82 @@ msgid ""
 "ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
 msgstr "គម្រោង ESA Summer of Code in Space  ២០១១ ៖  រូបភាព​របស់​គន្លង​ផ្កាយរណប"
 
-#: kdemain.cpp:131
+#: kdemain.cpp:129
 #, kde-format
 msgid "Konstantin Oblaukhov"
 msgstr "Konstantin Oblaukhov"
 
-#: kdemain.cpp:132
+#: kdemain.cpp:130
 #, kde-format
 msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
 msgstr "គម្រោង Google Summer of Code ២០១១ ៖ ការ​បង្ហាញ​វ៉ិចទ័រ OpenStreetMap"
 
-#: kdemain.cpp:135
+#: kdemain.cpp:133
 #, kde-format
 msgid "Daniel Marth"
 msgstr "Daniel Marth"
 
-#: kdemain.cpp:136
+#: kdemain.cpp:134
 #, kde-format
 msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
 msgstr "គម្រោង Google Summer of Code ២០១១ ៖ Marble Touch on MeeGo"
 
-#: kdemain.cpp:139
+#: kdemain.cpp:137
 #, kde-format
 msgid "Gaurav Gupta"
 msgstr "Gaurav Gupta"
 
-#: kdemain.cpp:140
+#: kdemain.cpp:138
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Bookmarks"
 msgstr "គម្រោង Google Summer of Code ២០១០ ៖ ចំណាំ"
 
-#: kdemain.cpp:143
+#: kdemain.cpp:141
 #, kde-format
 msgid "Harshit Jain "
 msgstr "Harshit Jain "
 
-#: kdemain.cpp:144
+#: kdemain.cpp:142
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Time Support"
 msgstr "គម្រោង Google Summer of Code ២០១០ ៖ គាំទ្រ​ពេលវេលា"
 
-#: kdemain.cpp:147
+#: kdemain.cpp:145
 #, kde-format
 msgid "Siddharth Srivastava"
 msgstr "Siddharth Srivastava"
 
-#: kdemain.cpp:148
+#: kdemain.cpp:146
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
 msgstr "គម្រោង Google Summer of Code ២០១០ ៖ ការ​រុករក​ម្ដង​មួយ​វេន"
 
-#: kdemain.cpp:151 kdemain.cpp:171
+#: kdemain.cpp:149 kdemain.cpp:169
 #, kde-format
 msgid "Andrew Manson"
 msgstr "Andrew Manson"
 
-#: kdemain.cpp:152
+#: kdemain.cpp:150
 #, kde-format
 msgid "Google Summer of Code 2009 Project: OSM Annotation"
 msgstr "គម្រោង Google Summer of Code ២០០៩ ៖ ចំណារ​ពន្យល់ OSM"
 
-#: kdemain.cpp:156
+#: kdemain.cpp:154
 #, kde-format
 msgid "Google Summer of Code 2009 Project: Online Services"
 msgstr "គម្រោង Google Summer of Code ២០០៩ ៖ សេវាកម្ម​លើ​បណ្ដាញ"
 
-#: kdemain.cpp:160
+#: kdemain.cpp:158
 #, kde-format
 msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
 msgstr "គម្រោង Google Summer of Code 2008 ៖ ក្រឡា​វ៉ិចទ័រ​សម្រាប់ Marble"
 
-#: kdemain.cpp:163
+#: kdemain.cpp:161
 #, kde-format
 msgid "Shashank Singh"
 msgstr "Shashank Singh"
 
-#: kdemain.cpp:164
+#: kdemain.cpp:162
 #, kde-format
 msgid ""
 "Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
@@ -362,262 +362,262 @@ msgstr ""
 "គម្រោង Google Summer of Code 2008 ៖ គាំទ្រ​រូបថត Panoramio / Wikipedia សម្រាប់ "
 "Marble"
 
-#: kdemain.cpp:167
+#: kdemain.cpp:165
 #, kde-format
 msgid "Carlos Licea"
 msgstr "Carlos Licea"
 
-#: kdemain.cpp:168
+#: kdemain.cpp:166
 #, kde-format
 msgid ""
 "Google Summer of Code 2007 Project: Equirectangular Projection (\"Flat Map\")"
 msgstr ""
 "គម្រោង Google Summer of Code 2007 ៖ កា​របញ្ចាំង Equirectangular (\"ផែនទី​រាបស្មើ\")"
 
-#: kdemain.cpp:172
+#: kdemain.cpp:170
 #, kde-format
 msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
 msgstr "គម្រោង Google Summer of Code 2007 ៖ ការ​គាំទ្រ GPS សម្រាប់ Marble"
 
-#: kdemain.cpp:175
+#: kdemain.cpp:173
 #, kde-format
 msgid "Murad Tagirov"
 msgstr "Murad Tagirov"
 
-#: kdemain.cpp:176
+#: kdemain.cpp:174
 #, kde-format
 msgid "Google Summer of Code 2007 Project: KML Support for Marble"
 msgstr "គម្រោង Google Summer of Code 2007 ៖ការ​គាំទ្រ KML សម្រាប់ Marble"
 
-#: kdemain.cpp:181
+#: kdemain.cpp:179
 #, kde-format
 msgid "Simon Schmeisser"
 msgstr "Simon Schmeisser"
 
-#: kdemain.cpp:181 kdemain.cpp:182 kdemain.cpp:183 kdemain.cpp:184
-#: kdemain.cpp:185 kdemain.cpp:186 kdemain.cpp:187 kdemain.cpp:188
-#: kdemain.cpp:189 kdemain.cpp:190 kdemain.cpp:191 kdemain.cpp:192
-#: kdemain.cpp:193 kdemain.cpp:194 kdemain.cpp:195 kdemain.cpp:196
-#: kdemain.cpp:197 kdemain.cpp:198 kdemain.cpp:199
+#: kdemain.cpp:179 kdemain.cpp:180 kdemain.cpp:181 kdemain.cpp:182
+#: kdemain.cpp:183 kdemain.cpp:184 kdemain.cpp:185 kdemain.cpp:186
+#: kdemain.cpp:187 kdemain.cpp:188 kdemain.cpp:189 kdemain.cpp:190
+#: kdemain.cpp:191 kdemain.cpp:192 kdemain.cpp:193 kdemain.cpp:194
+#: kdemain.cpp:195 kdemain.cpp:196 kdemain.cpp:197
 #, kde-format
 msgid "Development & Patches"
 msgstr "ការ​អភិវឌ្ឍន៍​ និង​បំណះ"
 
-#: kdemain.cpp:182
+#: kdemain.cpp:180
 #, kde-format
 msgid "Claudiu Covaci"
 msgstr "Claudiu Covaci"
 
-#: kdemain.cpp:183
+#: kdemain.cpp:181
 #, kde-format
 msgid "David Roberts"
 msgstr "David Roberts"
 
-#: kdemain.cpp:184
+#: kdemain.cpp:182
 #, kde-format
 msgid "Nikolas Zimmermann"
 msgstr "Nikolas Zimmermann"
 
-#: kdemain.cpp:185
+#: kdemain.cpp:183
 #, kde-format
 msgid "Jan Becker"
 msgstr "Jan Becker"
 
-#: kdemain.cpp:186
+#: kdemain.cpp:184
 #, kde-format
 msgid "Stefan Asserhäll"
 msgstr "Stefan Asserhäll"
 
-#: kdemain.cpp:187
+#: kdemain.cpp:185
 #, kde-format
 msgid "Laurent Montel"
 msgstr "Laurent Montel"
 
-#: kdemain.cpp:188
+#: kdemain.cpp:186
 #, kde-format
 msgid "Mayank Madan"
 msgstr ""
 
-#: kdemain.cpp:189
+#: kdemain.cpp:187
 #, kde-format
 msgid "Prashanth Udupa"
 msgstr "Prashanth Udupa"
 
-#: kdemain.cpp:190
+#: kdemain.cpp:188
 #, kde-format
 msgid "Anne-Marie Mahfouf"
 msgstr "Anne-Marie Mahfouf"
 
-#: kdemain.cpp:191
+#: kdemain.cpp:189
 #, kde-format
 msgid "Josef Spillner"
 msgstr "Josef Spillner"
 
-#: kdemain.cpp:192
+#: kdemain.cpp:190
 #, kde-format
 msgid "Frerich Raabe"
 msgstr "Frerich Raabe"
 
-#: kdemain.cpp:193
+#: kdemain.cpp:191
 #, kde-format
 msgid "Frederik Gladhorn"
 msgstr "Frederik Gladhorn"
 
-#: kdemain.cpp:194
+#: kdemain.cpp:192
 #, kde-format
 msgid "Fredrik Höglund"
 msgstr "Fredrik Höglund"
 
-#: kdemain.cpp:195
+#: kdemain.cpp:193
 #, kde-format
 msgid "Albert Astals Cid"
 msgstr "Albert Astals Cid"
 
-#: kdemain.cpp:196
+#: kdemain.cpp:194
 #, kde-format
 msgid "Thomas Zander"
 msgstr "Thomas Zander"
 
-#: kdemain.cpp:197
+#: kdemain.cpp:195
 #, kde-format
 msgid "Joseph Wenninger"
 msgstr "Joseph Wenninger"
 
-#: kdemain.cpp:198
+#: kdemain.cpp:196
 #, kde-format
 msgid "Kris Thomsen"
 msgstr "Kris Thomsen"
 
-#: kdemain.cpp:199
+#: kdemain.cpp:197
 #, kde-format
 msgid "Daniel Molkentin"
 msgstr "Daniel Molkentin"
 
-#: kdemain.cpp:200
+#: kdemain.cpp:198
 #, kde-format
 msgid "Christophe Leske"
 msgstr "Christophe Leske"
 
-#: kdemain.cpp:200 kdemain.cpp:201 kdemain.cpp:202 kdemain.cpp:203
-#: kdemain.cpp:204 kdemain.cpp:205 kdemain.cpp:206 kdemain.cpp:207
-#: kdemain.cpp:208
+#: kdemain.cpp:198 kdemain.cpp:199 kdemain.cpp:200 kdemain.cpp:201
+#: kdemain.cpp:202 kdemain.cpp:203 kdemain.cpp:204 kdemain.cpp:205
+#: kdemain.cpp:206
 #, kde-format
 msgid "Platforms & Distributions"
 msgstr "វេទិកា និង​ការ​ចែកចាយ"
 
-#: kdemain.cpp:201
+#: kdemain.cpp:199
 #, kde-format
 msgid "Sebastian Wiedenroth"
 msgstr "Sebastian Wiedenroth"
 
-#: kdemain.cpp:202
+#: kdemain.cpp:200
 #, kde-format
 msgid "Tim Sutton"
 msgstr "Tim Sutton"
 
-#: kdemain.cpp:203
+#: kdemain.cpp:201
 #, kde-format
 msgid "Christian Ehrlicher"
 msgstr "Christian Ehrlicher"
 
-#: kdemain.cpp:204
+#: kdemain.cpp:202
 #, kde-format
 msgid "Ralf Habacker"
 msgstr "Ralf Habacker"
 
-#: kdemain.cpp:205
+#: kdemain.cpp:203
 #, kde-format
 msgid "Steffen Joeris"
 msgstr "Steffen Joeris"
 
-#: kdemain.cpp:206
+#: kdemain.cpp:204
 #, kde-format
 msgid "Marcus Czeslinski"
 msgstr "Marcus Czeslinski"
 
-#: kdemain.cpp:207
+#: kdemain.cpp:205
 #, kde-format
 msgid "Marcus D. Hanwell"
 msgstr "Marcus D. Hanwell"
 
-#: kdemain.cpp:208
+#: kdemain.cpp:206
 #, kde-format
 msgid "Chitlesh Goorah"
 msgstr "Chitlesh Goorah"
 
-#: kdemain.cpp:209
+#: kdemain.cpp:207
 #, kde-format
 msgid "Nuno Pinheiro"
 msgstr "Nuno Pinheiro"
 
-#: kdemain.cpp:209 kdemain.cpp:210
+#: kdemain.cpp:207 kdemain.cpp:208
 #, kde-format
 msgid "Artwork"
 msgstr "សិល្បៈ"
 
-#: kdemain.cpp:213
+#: kdemain.cpp:211
 #, kde-format
 msgid "Luis Silva"
 msgstr "Luis Silva"
 
-#: kdemain.cpp:213 kdemain.cpp:214 kdemain.cpp:215 kdemain.cpp:216
-#: kdemain.cpp:217 kdemain.cpp:218 kdemain.cpp:219 kdemain.cpp:220
-#: kdemain.cpp:221 kdemain.cpp:222
+#: kdemain.cpp:211 kdemain.cpp:212 kdemain.cpp:213 kdemain.cpp:214
+#: kdemain.cpp:215 kdemain.cpp:216 kdemain.cpp:217 kdemain.cpp:218
+#: kdemain.cpp:219 kdemain.cpp:220
 #, kde-format
 msgid "Various Suggestions & Testing"
 msgstr "ការ​សាកល្បង និង​សំណើ​ផ្សេងៗ"
 
-#: kdemain.cpp:214
+#: kdemain.cpp:212
 #, kde-format
 msgid "Stefan Jordan"
 msgstr "Stefan Jordan"
 
-#: kdemain.cpp:215
+#: kdemain.cpp:213
 #, kde-format
 msgid "Robert Scott"
 msgstr "Robert Scott"
 
-#: kdemain.cpp:216
+#: kdemain.cpp:214
 #, kde-format
 msgid "Lubos Petrovic"
 msgstr "Lubos Petrovic"
 
-#: kdemain.cpp:217
+#: kdemain.cpp:215
 #, kde-format
 msgid "Benoit Sigoure"
 msgstr "Benoit Sigoure"
 
-#: kdemain.cpp:218
+#: kdemain.cpp:216
 #, kde-format
 msgid "Martin Konold"
 msgstr "Martin Konold"
 
-#: kdemain.cpp:219
+#: kdemain.cpp:217
 #, kde-format
 msgid "Matthias Welwarsky"
 msgstr "Matthias Welwarsky"
 
-#: kdemain.cpp:220
+#: kdemain.cpp:218
 #, kde-format
 msgid "Rainer Endres"
 msgstr "Rainer Endres"
 
-#: kdemain.cpp:221
+#: kdemain.cpp:219
 #, kde-format
 msgid "Ralf Gesellensetter"
 msgstr "Ralf Gesellensetter"
 
-#: kdemain.cpp:222
+#: kdemain.cpp:220
 #, kde-format
 msgid "Tim Alder"
 msgstr "Tim Alder"
 
-#: kdemain.cpp:223
+#: kdemain.cpp:221
 #, kde-format
 msgid "John Layt"
 msgstr "John Layt"
 
-#: kdemain.cpp:224
+#: kdemain.cpp:222
 #, kde-format
 msgid ""
 "Special thanks for providing an important source of inspiration by creating "
@@ -626,86 +626,86 @@ msgstr ""
 "សូម​អរគុណ​ជា​ពិសេស​ចំពោះ​កា​រផ្ដល់​នូវ​ប្រភព​​បំផុស​គំនិត​ ដោយ​បង្កើត​ជនាន់​ក្រោយ​របស់​Marble​ \"Kartographer"
 "\" ។"
 
-#: kdemain.cpp:240
+#: kdemain.cpp:238
 #, kde-format
 msgid "Enable debug output"
 msgstr "បើក​លទ្ធផល​បំបាត់​កំហុស"
 
-#: kdemain.cpp:243
+#: kdemain.cpp:241
 #, kde-format
 msgid "Display OSM placemarks according to the level selected"
 msgstr ""
 
-#: kdemain.cpp:245
+#: kdemain.cpp:243
 #, kde-format
 msgid "Make a time measurement to check performance"
 msgstr "ធ្វើការ​វាស់​ពេលវេលា​ដើម្បី​ពិនិត្យ​មើល​ដំណើរការ"
 
-#: kdemain.cpp:247
+#: kdemain.cpp:245
 #, kde-format
 msgid "Show frame rate"
 msgstr "បង្ហាញ​អត្រា​ស៊ុម"
 
-#: kdemain.cpp:249
+#: kdemain.cpp:247
 #, kde-format
 msgid "Show tile IDs"
 msgstr "បង្ហាញ​លេខ​សម្គាល់​ក្រឡា​ក្បឿង"
 
-#: kdemain.cpp:251
+#: kdemain.cpp:249
 #, kde-format
 msgid "Show time spent in each layer"
 msgstr ""
 
-#: kdemain.cpp:253
+#: kdemain.cpp:251
 #, fuzzy, kde-format
 #| msgid "Use a different directory which contains map data"
 msgid "Use a different directory <directory> which contains map data."
 msgstr "ប្រើ​ថត​ផ្សេងគ្នា​ដែល​មាន​ទិន្នន័យ​ផែនទី"
 
-#: kdemain.cpp:255
+#: kdemain.cpp:253
 #, kde-format
 msgid "Do not use the interface optimized for small screens"
 msgstr "កុំ​ប្រើ​ចំណុចប្រទាក់​គុណភាព​ខ្ពស់​សម្រាប់​អេក្រង់​តូច"
 
-#: kdemain.cpp:256
+#: kdemain.cpp:254
 #, kde-format
 msgid "Use the interface optimized for small screens"
 msgstr "​ប្រើ​ចំណុចប្រទាក់​គុណភាព​ខ្ពស់​សម្រាប់​អេក្រង់​តូច"
 
-#: kdemain.cpp:258
+#: kdemain.cpp:256
 #, kde-format
 msgid "Do not use the interface optimized for high resolutions"
 msgstr "កុំ​​ប្រើ​ចំណុចប្រទាក់​គុណភាព​ខ្ពស់​សម្រាប់​គុណភាព​បង្ហាញ​ខ្ពស់"
 
-#: kdemain.cpp:259
+#: kdemain.cpp:257
 #, kde-format
 msgid "Use the interface optimized for high resolutions"
 msgstr "ប្រើ​ចំណុចប្រទាក់​គុណភាព​ខ្ពស់​សម្រាប់​គុណភាព​បង្ហាញ​ខ្ពស់"
 
-#: kdemain.cpp:261
+#: kdemain.cpp:259
 #, fuzzy, kde-format
 #| msgid "Show map at given lat lon coordinates"
 msgid "Show map at given lat lon <coordinates>"
 msgstr "បង្ហាញ​ផែនទី​នៅ​កូអរដោណេ​រយៈទទឹង​ និង​រយៈបណ្ដោយ"
 
-#: kdemain.cpp:263
+#: kdemain.cpp:261
 #, fuzzy, kde-format
 #| msgid "Show map at given lat lon coordinates"
 msgid "Show map at given geo <uri>"
 msgstr "បង្ហាញ​ផែនទី​នៅ​កូអរដោណេ​រយៈទទឹង​ និង​រយៈបណ្ដោយ"
 
-#: kdemain.cpp:265
+#: kdemain.cpp:263
 #, kde-format
 msgid "Set the distance of the observer to the globe (in km)"
 msgstr "កំណត់​ចម្ងាយ​របស់​អ្នក​សង្កេតការណ៍​ទៅ​សាកល (គិតជា​គ.ម.)"
 
-#: kdemain.cpp:267
+#: kdemain.cpp:265
 #, fuzzy, kde-format
 #| msgid "Use map id (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgstr "ប្រើ​លេខ​សម្គាល់​ផែនទី (ឧ. \"earth/openstreetmap/openstreetmap.dgml\")"
 
-#: kdemain.cpp:269
+#: kdemain.cpp:267
 #, kde-format
 msgid "One or more placemark files to be opened"
 msgstr "ឯកសារ​សញ្ញា​សម្គាល់​កន្លែង​មួយ ឬ​ច្រើន​ដែល​ត្រូវ​បើក"
@@ -848,224 +848,224 @@ msgstr "ប្រូកស៊ី​ត្រូវការ​ផ្ទៀងផ
 msgid "The position tracking plugin used to determine the current location"
 msgstr "កម្មវិធី​​ជំនួយ​តាមដាន​ទីតាំង​ដែល​បាន​ប្រើ​សម្រាប់​កំណត់​ទីតាំង​បច្ចុប្បន្ន"
 
-#: marble_part.cpp:104
+#: marble_part.cpp:101
 #, kde-format
 msgid "Position: %1"
 msgstr "ទីតាំង ៖ %1"
 
-#: marble_part.cpp:105
+#: marble_part.cpp:102
 #, kde-format
 msgid "Altitude: %1"
 msgstr "រយៈកម្ពស់ ៖ %1"
 
-#: marble_part.cpp:106
+#: marble_part.cpp:103
 #, kde-format
 msgid "Tile Zoom Level: %1"
 msgstr "កម្រិត​ពង្រីក​ក្រឡាក្បឿង ៖ %1"
 
-#: marble_part.cpp:107
+#: marble_part.cpp:104
 #, kde-format
 msgid "Time: %1"
 msgstr "ពេលវេលា ៖ %1"
 
-#: marble_part.cpp:166
+#: marble_part.cpp:163
 #, kde-format
 msgid ""
 "Sorry, unable to open '%1':\n"
 "'%2'"
 msgstr ""
 
-#: marble_part.cpp:166
+#: marble_part.cpp:163
 #, kde-format
 msgid "File not readable"
 msgstr ""
 
-#: marble_part.cpp:214
+#: marble_part.cpp:211
 #, kde-format
 msgid "A Virtual Globe"
 msgstr "A Virtual Globe"
 
-#: marble_part.cpp:227
+#: marble_part.cpp:224
 #, kde-format
 msgid "Sorry, unable to open '%1'. The file is not accessible."
 msgstr ""
 
-#: marble_part.cpp:227
+#: marble_part.cpp:224
 #, kde-format
 msgid "File not accessible"
 msgstr ""
 
-#: marble_part.cpp:248
+#: marble_part.cpp:245
 #, kde-format
 msgid "All Supported Files"
 msgstr "ឯកសារ​គាំទ្រ​ទាំងអស់"
 
-#: marble_part.cpp:254
+#: marble_part.cpp:251
 #, fuzzy, kde-format
 #| msgid "Open File"
 msgctxt "@title:window"
 msgid "Open File"
 msgstr "បើក​ឯកសារ"
 
-#: marble_part.cpp:270
+#: marble_part.cpp:267
 #, fuzzy, kde-format
 #| msgid "Export Map"
 msgctxt "@title:window"
 msgid "Export Map"
 msgstr "នាំចេញ​ផែនទី"
 
-#: marble_part.cpp:270
+#: marble_part.cpp:267
 #, kde-format
 msgid "Images *.jpg *.png"
 msgstr "រូបភាព *.jpg *.png"
 
-#: marble_part.cpp:282
+#: marble_part.cpp:279
 #, kde-format
 msgctxt "Application name"
 msgid "Marble"
 msgstr "ថ្មម៉ាប"
 
-#: marble_part.cpp:282
+#: marble_part.cpp:279
 #, kde-format
 msgid "An error occurred while trying to save the file.\n"
 msgstr "មាន​កំហុស​កើតឡើង​នៅពេល​រក្សាទុក​ឯកសារ ។\n"
 
-#: marble_part.cpp:464
+#: marble_part.cpp:461
 #, fuzzy, kde-format
 #| msgid "U&sername:"
 msgid "Unnamed"
 msgstr "ឈ្មោះ​អ្នក​ប្រើ ៖"
 
-#: marble_part.cpp:684
+#: marble_part.cpp:681
 #, kde-format
 msgctxt "Action for downloading an entire region of a map"
 msgid "Download Region..."
 msgstr "ទាញ​យក​តំបន់...."
 
-#: marble_part.cpp:696
+#: marble_part.cpp:693
 #, kde-format
 msgctxt "Action for saving the map to a file"
 msgid "&Export Map..."
 msgstr "នាំ​ផែនទី​ចេញ..."
 
-#: marble_part.cpp:704
+#: marble_part.cpp:701
 #, kde-format
 msgctxt "Action for toggling offline mode"
 msgid "&Work Offline"
 msgstr "ធ្វើការ​នៅ​ក្រៅ​បណ្ដាញ"
 
-#: marble_part.cpp:712
+#: marble_part.cpp:709
 #, kde-format
 msgctxt "Action for copying the map to the clipboard"
 msgid "&Copy Map"
 msgstr "ចម្លង​ផែនទី"
 
-#: marble_part.cpp:717
+#: marble_part.cpp:714
 #, kde-format
 msgctxt "Action for copying the coordinates to the clipboard"
 msgid "C&opy Coordinates"
 msgstr "ចម្លង​កូអរដោណេ"
 
-#: marble_part.cpp:723
+#: marble_part.cpp:720
 #, kde-format
 msgctxt "Action for opening a file"
 msgid "&Open..."
 msgstr "បើក..."
 
-#: marble_part.cpp:729
+#: marble_part.cpp:726
 #, kde-format
 msgctxt "Action for downloading maps (GHNS)"
 msgid "Download Maps..."
 msgstr "ទាញ​យក​ផែនទី...."
 
-#: marble_part.cpp:732
+#: marble_part.cpp:729
 #, kde-format
 msgctxt "Status tip"
 msgid "Download new maps"
 msgstr "ទាញយក​ផែនទី​ថ្មី"
 
-#: marble_part.cpp:737
+#: marble_part.cpp:734
 #, kde-format
 msgctxt "Action for creating new maps"
 msgid "&Create a New Map..."
 msgstr "បង្កើត​ផែនទី​ថ្មី..."
 
-#: marble_part.cpp:740
+#: marble_part.cpp:737
 #, kde-format
 msgctxt "Status tip"
 msgid "A wizard guides you through the creation of your own map theme."
 msgstr "អ្នកជំនួយការ​នេះ​នឹង​ជួយ​អ្នក​ក្នុង​ការ​បង្កើត​រូបរាង​ផែនទី​ផ្ទាល់ខ្លួន​របស់​អ្នក ។"
 
-#: marble_part.cpp:764
+#: marble_part.cpp:761
 #, kde-format
 msgctxt "Action for toggling clouds"
 msgid "&Clouds"
 msgstr "ពពក"
 
-#: marble_part.cpp:770
+#: marble_part.cpp:767
 #, kde-format
 msgctxt "Action for sun control dialog"
 msgid "S&un Control..."
 msgstr "គ្រប់គ្រង​ព្រះអាទិត្យ..."
 
-#: marble_part.cpp:779
+#: marble_part.cpp:776
 #, kde-format
 msgctxt "Action for time control dialog"
 msgid "&Time Control..."
 msgstr "ការ​គ្រប់គ្រង​ពេលវេលា..."
 
-#: marble_part.cpp:785
+#: marble_part.cpp:782
 #, kde-format
 msgctxt "Action for locking float items on the map"
 msgid "Lock Position"
 msgstr "ចាក់សោ​ទីតាំង"
 
-#: marble_part.cpp:794
+#: marble_part.cpp:791
 #, kde-format
 msgid "Show Shadow"
 msgstr "បង្ហាញ​ស្រមោល"
 
-#: marble_part.cpp:797
+#: marble_part.cpp:794
 #, kde-format
 msgid "Hide Shadow"
 msgstr "លាក់​ស្រមោល"
 
-#: marble_part.cpp:798
+#: marble_part.cpp:795
 #, kde-format
 msgid "Shows and hides the shadow of the sun"
 msgstr "បង្ហាញ និង​លាក់​ស្រមោល​ព្រះអាទិត្យ"
 
-#: marble_part.cpp:802
+#: marble_part.cpp:799
 #, kde-format
 msgid "Show sun icon on the Sub-Solar Point"
 msgstr ""
 
-#: marble_part.cpp:804
+#: marble_part.cpp:801
 #, kde-format
 msgid "Hide sun icon on the Sub-Solar Point"
 msgstr ""
 
-#: marble_part.cpp:805
+#: marble_part.cpp:802
 #, kde-format
 msgid "Show sun icon on the sub-solar point"
 msgstr ""
 
-#: marble_part.cpp:809
+#: marble_part.cpp:806
 #, kde-format
 msgid "Lock Globe to the Sub-Solar Point"
 msgstr ""
 
-#: marble_part.cpp:811
+#: marble_part.cpp:808
 #, kde-format
 msgid "Unlock Globe to the Sub-Solar Point"
 msgstr ""
 
-#: marble_part.cpp:812
+#: marble_part.cpp:809
 #, kde-format
 msgid "Lock globe to the sub-solar point"
 msgstr ""
 
-#: marble_part.cpp:826
+#: marble_part.cpp:823
 #, fuzzy, kde-format
 #| msgctxt "Add Bookmark"
 #| msgid "&Add Bookmark"
@@ -1073,24 +1073,24 @@ msgctxt "Add Bookmark"
 msgid "Add &Bookmark..."
 msgstr "បន្ថែម​ចំណាំ"
 
-#: marble_part.cpp:833
+#: marble_part.cpp:830
 #, kde-format
 msgctxt "Show Bookmarks"
 msgid "Show &Bookmarks"
 msgstr "បង្ហាញ​ចំណាំ"
 
-#: marble_part.cpp:834
+#: marble_part.cpp:831
 #, kde-format
 msgid "Show or hide bookmarks in the map"
 msgstr ""
 
-#: marble_part.cpp:841
+#: marble_part.cpp:838
 #, fuzzy, kde-format
 #| msgid "Show Home Location"
 msgid "&Set Home Location"
 msgstr "បង្ហាញ​ទីតាំង​ផ្ទះ"
 
-#: marble_part.cpp:847
+#: marble_part.cpp:844
 #, fuzzy, kde-format
 #| msgctxt "Manage Bookmarks"
 #| msgid "&Manage Bookmarks"
@@ -1098,7 +1098,7 @@ msgctxt "Manage Bookmarks"
 msgid "&Manage Bookmarks..."
 msgstr "គ្រប់គ្រង​ចំណាំ"
 
-#: marble_part.cpp:856
+#: marble_part.cpp:853
 #, fuzzy, kde-format
 #| msgctxt "Edit the map in an external application"
 #| msgid "&Edit Map"
@@ -1106,88 +1106,88 @@ msgctxt "Edit the map in an external application"
 msgid "&Edit Map..."
 msgstr "កែសម្រួល​ផែនទី"
 
-#: marble_part.cpp:862
+#: marble_part.cpp:859
 #, kde-format
 msgid "&Record Movie"
 msgstr ""
 
-#: marble_part.cpp:864
+#: marble_part.cpp:861
 #, kde-format
 msgid "Records a movie of the globe"
 msgstr ""
 
-#: marble_part.cpp:869
+#: marble_part.cpp:866
 #, kde-format
 msgid "&Stop Recording"
 msgstr ""
 
-#: marble_part.cpp:871
+#: marble_part.cpp:868
 #, kde-format
 msgid "Stop recording a movie of the globe"
 msgstr ""
 
-#: marble_part.cpp:1205
+#: marble_part.cpp:1202
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Position"
 msgstr "បង្ហាញ​ទីតាំង"
 
-#: marble_part.cpp:1206
+#: marble_part.cpp:1203
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Date and Time"
 msgstr "បង្ហាញ​ពេលវេលា និង​កាលបរិច្ឆេទ"
 
-#: marble_part.cpp:1207
+#: marble_part.cpp:1204
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Altitude"
 msgstr "បង្ហាញ​រយៈ​កម្ពស់"
 
-#: marble_part.cpp:1208
+#: marble_part.cpp:1205
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Tile Zoom Level"
 msgstr "បង្ហាញ​កម្រិត​ពង្រីក​ក្រឡាក្បឿង"
 
-#: marble_part.cpp:1209
+#: marble_part.cpp:1206
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Download Progress Bar"
 msgstr "បង្ហាញ​របារ​វឌ្ឍភាព​ទាញយក"
 
-#: marble_part.cpp:1300
+#: marble_part.cpp:1297
 #, kde-format
 msgid "View"
 msgstr "មើល"
 
-#: marble_part.cpp:1311
+#: marble_part.cpp:1308
 #, kde-format
 msgid "Navigation"
 msgstr "ការ​រុករក"
 
-#: marble_part.cpp:1321
+#: marble_part.cpp:1318
 #, kde-format
 msgid "Cache & Proxy"
 msgstr "ឃ្លាំង​សម្ងាត់ និង​ប្រូកស៊ី"
 
-#: marble_part.cpp:1331
+#: marble_part.cpp:1328
 #, kde-format
 msgid "Date & Time"
 msgstr "ពេលវេលា និង​កាលបរច្ឆេទ"
 
-#: marble_part.cpp:1339
+#: marble_part.cpp:1336
 #, kde-format
 msgid "Synchronization"
 msgstr ""
 
-#: marble_part.cpp:1349
+#: marble_part.cpp:1346
 #, fuzzy, kde-format
 #| msgid "Route"
 msgid "Routing"
 msgstr "ផ្លូវ"
 
-#: marble_part.cpp:1357
+#: marble_part.cpp:1354
 #, kde-format
 msgid "Plugins"
 msgstr "កម្មវិធី​ជំនួយ"
