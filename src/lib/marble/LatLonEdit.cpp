@@ -480,11 +480,11 @@ LatLonEdit::LatLonEdit(QWidget *parent, LatLonEdit::Dimension dimension, GeoData
     setDimension(dimension);
     setNotation(notation);
 
-    connect(d->m_intValueEditor, SIGNAL(valueChanged(int)), this, SLOT(checkIntValueOverflow()));
-    connect(d->m_uintValueEditor, SIGNAL(valueChanged(int)), this, SLOT(checkUIntValueOverflow()));
-    connect(d->m_floatValueEditor, SIGNAL(valueChanged(double)), this, SLOT(checkFloatValueOverflow()));
+    connect(d->m_intValueEditor, &QSpinBox::valueChanged, this, &LatLonEdit::checkIntValueOverflow);
+    connect(d->m_uintValueEditor, &QSpinBox::valueChanged, this, &LatLonEdit::checkUIntValueOverflow);
+    connect(d->m_floatValueEditor, &QDoubleSpinBox::valueChanged, this, &LatLonEdit::checkFloatValueOverflow);
 
-    connect(d->m_sign, SIGNAL(currentIndexChanged(int)), this, SLOT(onSignChanged()));
+    connect(d->m_sign, &QComboBox::currentIndexChanged, this, &LatLonEdit::onSignChanged);
 }
 
 LatLonEdit::~LatLonEdit()

@@ -43,7 +43,7 @@ public:
     virtual bool canDoDirect() const = 0;
 
 private:
-    QIODevice *m_socket;
+    QIODevice *m_socket = nullptr;
 };
 
 }

@@ -29,7 +29,6 @@ WikipediaItem::WikipediaItem(MarbleWidget *widget, QObject *parent)
     : AbstractDataPluginItem(parent)
     , m_marbleWidget(widget)
     , m_rank(0.0)
-    , m_browser(nullptr)
     , m_wikiIcon()
     , m_showThumbnail(false)
 {

@@ -245,8 +245,8 @@ void FileStorageWatcher::run()
 
         m_thread->getCurrentCacheSize();
 
-        connect(this, SIGNAL(sizeChanged(qint64)), m_thread, SLOT(addToCurrentSize(qint64)));
-        connect(this, SIGNAL(cleared()), m_thread, SLOT(resetCurrentSize()));
+        connect(this, &FileStorageWatcher::sizeChanged, m_thread, &FileStorageWatcherThread::addToCurrentSize);
+        connect(this, &FileStorageWatcher::cleared, m_thread, &FileStorageWatcherThread::resetCurrentSize);
 
         // Make sure that we don't want to stop process.
         // The thread wouldn't exit from event loop.

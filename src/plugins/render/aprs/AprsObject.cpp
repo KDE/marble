@@ -18,7 +18,6 @@ AprsObject::AprsObject(const GeoAprsCoordinates &at, const QString &name)
     , m_seenFrom(at.seenFrom())
     , m_havePixmap(false)
     , m_pixmapFilename()
-    , m_pixmap(nullptr)
 {
     m_history.push_back(at);
 }

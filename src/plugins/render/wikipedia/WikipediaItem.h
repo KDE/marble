@@ -86,8 +86,8 @@ private:
     QUrl m_thumbnailImageUrl;
     QString m_summary;
     double m_rank;
-    TinyWebBrowser *m_browser;
-    QAction *m_action;
+    TinyWebBrowser *m_browser = nullptr;
+    QAction *m_action = nullptr;
 
     QPixmap m_thumbnail;
     QIcon m_wikiIcon;

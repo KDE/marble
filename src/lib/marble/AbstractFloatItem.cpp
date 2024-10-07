@@ -225,7 +225,7 @@ QMenu *AbstractFloatItem::contextMenu()
         QAction *lockAction = d->m_contextMenu->addAction(QIcon(QStringLiteral(":/icons/unlock.png")), tr("&Lock"));
         lockAction->setCheckable(true);
         lockAction->setChecked(positionLocked());
-        connect(lockAction, SIGNAL(triggered(bool)), this, SLOT(setPositionLocked(bool)));
+        connect(lockAction, &QAction::triggered, this, &AbstractFloatItem::setPositionLocked);
 
         if (!(flags() & ItemIsHideable)) {
             QAction *hideAction = d->m_contextMenu->addAction(tr("&Hide"));

@@ -65,8 +65,8 @@ PopupLayer::PopupLayer(MarbleWidget *marbleWidget, QObject *parent)
         }
     }
 
-    connect(d->m_popupItem, SIGNAL(repaintNeeded()), this, SIGNAL(repaintNeeded()));
-    connect(d->m_popupItem, SIGNAL(hide()), this, SLOT(hidePopupItem()));
+    connect(d->m_popupItem, &PopupItem::repaintNeeded, this, &PopupLayer::repaintNeeded);
+    connect(d->m_popupItem, &PopupItem::hide, this, &PopupLayer::hidePopupItem);
 }
 
 PopupLayer::~PopupLayer()

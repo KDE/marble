@@ -7,8 +7,6 @@
 #include "CompassFloatItem.h"
 #include "ui_CompassConfigWidget.h"
 
-#include "MarbleDebug.h"
-#include "MarbleDirs.h"
 #include "ViewportParams.h"
 
 #include <QColor>
@@ -183,10 +181,10 @@ QDialog *CompassFloatItem::configDialog()
         m_uiConfigWidget = new Ui::CompassConfigWidget;
         m_uiConfigWidget->setupUi(m_configDialog);
         readSettings();
-        connect(m_uiConfigWidget->m_buttonBox, SIGNAL(accepted()), SLOT(writeSettings()));
-        connect(m_uiConfigWidget->m_buttonBox, SIGNAL(rejected()), SLOT(readSettings()));
+        connect(m_uiConfigWidget->m_buttonBox, &QDialogButtonBox::accepted, this, &CompassFloatItem::writeSettings);
+        connect(m_uiConfigWidget->m_buttonBox, &QDialogButtonBox::rejected, this, &CompassFloatItem::readSettings);
         QPushButton *applyButton = m_uiConfigWidget->m_buttonBox->button(QDialogButtonBox::Apply);
-        connect(applyButton, SIGNAL(clicked()), this, SLOT(writeSettings()));
+        connect(applyButton, &QAbstractButton::clicked, this, &CompassFloatItem::writeSettings);
     }
 
     return m_configDialog;

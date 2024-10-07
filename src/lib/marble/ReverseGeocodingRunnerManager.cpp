@@ -142,7 +142,7 @@ QString ReverseGeocodingRunnerManager::searchReverseGeocoding(const GeoDataCoord
     QEventLoop localEventLoop;
     QTimer watchdog;
     watchdog.setSingleShot(true);
-    connect(&watchdog, SIGNAL(timeout()), &localEventLoop, SLOT(quit()));
+    connect(&watchdog, &QTimer::timeout, &localEventLoop, &QEventLoop::quit);
     connect(this, SIGNAL(reverseGeocodingFinished()), &localEventLoop, SLOT(quit()), Qt::QueuedConnection);
 
     watchdog.start(timeout);

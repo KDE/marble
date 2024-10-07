@@ -24,7 +24,6 @@
 #include "ParseRunnerPlugin.h"
 #include "ParsingRunner.h"
 #include "TileId.h"
-#include "TileLoaderHelper.h"
 
 Q_DECLARE_METATYPE(Marble::DownloadUsage)
 

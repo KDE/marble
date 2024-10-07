@@ -36,7 +36,7 @@ private:
     int m_seenFrom;
     bool m_havePixmap;
     QString m_pixmapFilename;
-    QPixmap *m_pixmap;
+    QPixmap *m_pixmap = nullptr;
 };
 
 }
