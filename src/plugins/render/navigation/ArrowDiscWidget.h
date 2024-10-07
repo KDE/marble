@@ -47,7 +47,7 @@ private:
     Qt::ArrowType m_arrowPressed;
     int m_repetitions;
 
-    MarbleWidget *m_marbleWidget;
+    MarbleWidget *m_marbleWidget = nullptr;
     QString m_imagePath;
 };
 

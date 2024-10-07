@@ -5,11 +5,9 @@
 
 #include "FoursquareModel.h"
 #include "FoursquareItem.h"
-#include "FoursquarePlugin.h"
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
-#include "MarbleDebug.h"
 #include "MarbleGlobal.h"
 #include "MarbleMath.h"
 #include "MarbleModel.h"

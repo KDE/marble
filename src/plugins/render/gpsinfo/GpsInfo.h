@@ -68,9 +68,9 @@ private Q_SLOTS:
     void updateLocation(const GeoDataCoordinates &coordinates, qreal speed);
 
 private:
-    MarbleLocale *m_locale;
+    MarbleLocale *m_locale = nullptr;
     Ui::GpsInfoPlugin m_widget;
-    WidgetGraphicsItem *m_widgetItem;
+    WidgetGraphicsItem *m_widgetItem = nullptr;
 };
 
 }

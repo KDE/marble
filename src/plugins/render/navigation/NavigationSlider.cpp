@@ -19,17 +19,17 @@ const int handleImageHeight = 32;
 
 NavigationSlider::NavigationSlider(QWidget *parent)
     : QAbstractSlider(parent)
-    , m_handleImagePath("marble/navigation/navigational_slider_handle")
+    , m_handleImagePath(QStringLiteral("marble/navigation/navigational_slider_handle"))
 {
     setMouseTracking(true);
 }
 
 NavigationSlider::~NavigationSlider()
 {
-    QPixmapCache::remove("marble/navigation/navigational_slider_groove");
-    QPixmapCache::remove("marble/navigation/navigational_slider_handle");
-    QPixmapCache::remove("marble/navigation/navigational_slider_handle_hover");
-    QPixmapCache::remove("marble/navigation/navigational_slider_handle_press");
+    QPixmapCache::remove(QStringLiteral("marble/navigation/navigational_slider_groove"));
+    QPixmapCache::remove(QStringLiteral("marble/navigation/navigational_slider_handle"));
+    QPixmapCache::remove(QStringLiteral("marble/navigation/navigational_slider_handle_hover"));
+    QPixmapCache::remove(QStringLiteral("marble/navigation/navigational_slider_handle_press"));
 }
 
 QPixmap NavigationSlider::pixmap(const QString &id)

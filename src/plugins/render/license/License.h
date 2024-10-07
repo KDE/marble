@@ -53,10 +53,10 @@ protected:
     void contextMenuEvent(QWidget *w, QContextMenuEvent *e) override;
 
 private:
-    WidgetGraphicsItem *m_widgetItem;
-    QLabel *m_label;
+    WidgetGraphicsItem *m_widgetItem = nullptr;
+    QLabel *m_label = nullptr;
     bool m_showFullLicense;
-    QMenu *m_contextMenu;
+    QMenu *m_contextMenu = nullptr;
 };
 
 }

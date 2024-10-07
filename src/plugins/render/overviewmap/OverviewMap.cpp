@@ -14,14 +14,11 @@
 #include <QRect>
 #include <QStringList>
 
-#include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
 #include "ui_OverviewMapConfigWidget.h"
 
-#include "GeoDataPoint.h"
 #include "MarbleWidget.h"
-#include "Planet.h"
 #include "PlanetFactory.h"
 #include "ViewportParams.h"
 
@@ -49,7 +46,7 @@ OverviewMap::OverviewMap(const MarbleModel *marbleModel)
     // (1) the SVG overview map is already rendered and stored in m_worldmap pixmap
     // (2) bounding box and location dot keep changing during navigation
     setCacheMode(NoCache);
-    connect(this, SIGNAL(settingsChanged(QString)), this, SLOT(updateSettings()));
+    connect(this, &RenderPlugin::settingsChanged, this, &OverviewMap::updateSettings);
 
     restoreDefaultSettings();
 }
@@ -121,17 +118,17 @@ QDialog *OverviewMap::configDialog()
         ui_configWidget->m_planetComboBox->setCurrentIndex(2);
         readSettings();
         loadMapSuggestions();
-        connect(ui_configWidget->m_buttonBox, SIGNAL(accepted()), SLOT(writeSettings()));
-        connect(ui_configWidget->m_buttonBox, SIGNAL(rejected()), SLOT(readSettings()));
+        connect(ui_configWidget->m_buttonBox, &QDialogButtonBox::accepted, this, &OverviewMap::writeSettings);
+        connect(ui_configWidget->m_buttonBox, &QDialogButtonBox::rejected, this, &OverviewMap::readSettings);
         connect(ui_configWidget->m_buttonBox->button(QDialogButtonBox::Reset), SIGNAL(clicked()), SLOT(restoreDefaultSettings()));
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button(QDialogButtonBox::Apply);
-        connect(applyButton, SIGNAL(clicked()), SLOT(writeSettings()));
-        connect(ui_configWidget->m_fileChooserButton, SIGNAL(clicked()), SLOT(chooseCustomMap()));
-        connect(ui_configWidget->m_widthBox, SIGNAL(valueChanged(int)), SLOT(synchronizeSpinboxes()));
-        connect(ui_configWidget->m_heightBox, SIGNAL(valueChanged(int)), SLOT(synchronizeSpinboxes()));
-        connect(ui_configWidget->m_planetComboBox, SIGNAL(currentIndexChanged(int)), SLOT(showCurrentPlanetPreview()));
-        connect(ui_configWidget->m_colorChooserButton, SIGNAL(clicked()), SLOT(choosePositionIndicatorColor()));
-        connect(ui_configWidget->m_tableWidget, SIGNAL(cellClicked(int, int)), SLOT(useMapSuggestion(int)));
+        connect(applyButton, &QAbstractButton::clicked, this, &OverviewMap::writeSettings);
+        connect(ui_configWidget->m_fileChooserButton, &QAbstractButton::clicked, this, &OverviewMap::chooseCustomMap);
+        connect(ui_configWidget->m_widthBox, &QSpinBox::valueChanged, this, &OverviewMap::synchronizeSpinboxes);
+        connect(ui_configWidget->m_heightBox, &QSpinBox::valueChanged, this, &OverviewMap::synchronizeSpinboxes);
+        connect(ui_configWidget->m_planetComboBox, &QComboBox::currentIndexChanged, this, &OverviewMap::showCurrentPlanetPreview);
+        connect(ui_configWidget->m_colorChooserButton, &QAbstractButton::clicked, this, &OverviewMap::choosePositionIndicatorColor);
+        connect(ui_configWidget->m_tableWidget, &QTableWidget::cellClicked, this, &OverviewMap::useMapSuggestion);
     }
     return m_configDialog;
 }

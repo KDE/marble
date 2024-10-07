@@ -105,7 +105,7 @@ private:
     QColor m_posColor;
     QSizeF m_defaultSize;
 
-    Ui::OverviewMapConfigWidget *ui_configWidget;
+    Ui::OverviewMapConfigWidget *ui_configWidget = nullptr;
     QDialog *m_configDialog;
 
     GeoDataLatLonAltBox m_latLonAltBox;

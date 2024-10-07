@@ -72,10 +72,7 @@ public:
 
 License::License(const MarbleModel *marbleModel)
     : AbstractFloatItem(marbleModel, QPointF(-10.0, -5.0), QSizeF(150.0, 20.0))
-    , m_widgetItem(nullptr)
-    , m_label(nullptr)
     , m_showFullLicense(false)
-    , m_contextMenu(nullptr)
 {
     setEnabled(true);
     setVisible(true);

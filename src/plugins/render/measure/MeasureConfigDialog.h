@@ -47,7 +47,7 @@ Q_SIGNALS:
     void applied();
 
 private:
-    Ui::MeasureConfigDialog *ui;
+    Ui::MeasureConfigDialog *const ui;
 };
 
 } // namespace Marble

@@ -8,11 +8,8 @@
 
 #include "GeoDataLineString.h"
 #include "GeoPainter.h"
-#include "MarbleDebug.h"
-#include "MarbleDirs.h"
 #include "MarbleModel.h"
 #include "Planet.h"
-#include "PluginAboutDialog.h"
 
 #include "ViewportParams.h"
 
@@ -125,14 +122,14 @@ QDialog *GraticulePlugin::configDialog()
         ui_configWidget = new Ui::GraticuleConfigWidget;
         ui_configWidget->setupUi(m_configDialog);
 
-        connect(ui_configWidget->gridPushButton, SIGNAL(clicked()), this, SLOT(gridGetColor()));
-        connect(ui_configWidget->tropicsPushButton, SIGNAL(clicked()), this, SLOT(tropicsGetColor()));
-        connect(ui_configWidget->equatorPushButton, SIGNAL(clicked()), this, SLOT(equatorGetColor()));
+        connect(ui_configWidget->gridPushButton, &QAbstractButton::clicked, this, &GraticulePlugin::gridGetColor);
+        connect(ui_configWidget->tropicsPushButton, &QAbstractButton::clicked, this, &GraticulePlugin::tropicsGetColor);
+        connect(ui_configWidget->equatorPushButton, &QAbstractButton::clicked, this, &GraticulePlugin::equatorGetColor);
 
-        connect(ui_configWidget->m_buttonBox, SIGNAL(accepted()), this, SLOT(writeSettings()));
-        connect(ui_configWidget->m_buttonBox->button(QDialogButtonBox::Reset), SIGNAL(clicked()), SLOT(restoreDefaultSettings()));
+        connect(ui_configWidget->m_buttonBox, &QDialogButtonBox::accepted, this, &GraticulePlugin::writeSettings);
+        connect(ui_configWidget->m_buttonBox->button(QDialogButtonBox::Reset), &QAbstractButton::clicked, this, &RenderPlugin::restoreDefaultSettings);
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button(QDialogButtonBox::Apply);
-        connect(applyButton, SIGNAL(clicked()), this, SLOT(writeSettings()));
+        connect(applyButton, &QAbstractButton::clicked, this, &GraticulePlugin::writeSettings);
     }
 
     readSettings();

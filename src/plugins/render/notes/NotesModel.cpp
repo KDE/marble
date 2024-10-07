@@ -8,9 +8,7 @@
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
-#include "MarbleGlobal.h"
 #include "MarbleModel.h"
-#include "Planet.h"
 
 #include <QJsonArray>
 #include <QJsonDocument>

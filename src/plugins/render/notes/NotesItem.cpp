@@ -17,8 +17,8 @@ const int NotesItem::s_labelOutlineWidth = 5;
 
 NotesItem::NotesItem(QObject *parent)
     : AbstractDataPluginItem(parent)
-    , m_pixmap_open(QPixmap(MarbleDirs::path("bitmaps/notes_open.png")))
-    , m_pixmap_closed(QPixmap(MarbleDirs::path("bitmaps/notes_closed.png")))
+    , m_pixmap_open(QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/notes_open.png"))))
+    , m_pixmap_closed(QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/notes_closed.png"))))
 {
     setSize(m_pixmap_open.size());
     setAlignment(Qt::AlignHCenter | Qt::AlignTop);

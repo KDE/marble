@@ -5,7 +5,6 @@
 //
 
 #include "OpenDesktopItem.h"
-#include "ViewportParams.h"
 #include "layers/PopupLayer.h"
 #include <QPainter>
 
@@ -17,7 +16,7 @@ OpenDesktopItem::OpenDesktopItem(QObject *parent)
     : AbstractDataPluginItem(parent)
 {
     m_action = new QAction(this);
-    connect(m_action, SIGNAL(triggered()), this, SLOT(openBrowser()));
+    connect(m_action, &QAction::triggered, this, &OpenDesktopItem::openBrowser);
     setCacheMode(ItemCoordinateCache);
 }
 

@@ -61,7 +61,7 @@ public Q_SLOTS:
     void openBrowser();
 
 private:
-    MarbleWidget *m_marbleWidget;
+    MarbleWidget *m_marbleWidget = nullptr;
     QString m_fullName;
     QString m_location;
     QString m_role;

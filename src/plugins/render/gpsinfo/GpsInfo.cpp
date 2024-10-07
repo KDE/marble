@@ -8,7 +8,6 @@
 #include <QIcon>
 
 #include "GeoDataAccuracy.h"
-#include "MarbleDebug.h"
 #include "MarbleGraphicsGridLayout.h"
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
@@ -21,15 +20,11 @@ namespace Marble
 
 GpsInfo::GpsInfo()
     : AbstractFloatItem(nullptr)
-    , m_locale(nullptr)
-    , m_widgetItem(nullptr)
 {
 }
 
 GpsInfo::GpsInfo(const MarbleModel *marbleModel)
     : AbstractFloatItem(marbleModel, QPointF(10.5, 110), QSizeF(135.0, 80.0))
-    , m_locale(nullptr)
-    , m_widgetItem(nullptr)
 {
     setVisible(false);
 }
