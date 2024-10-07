@@ -49,7 +49,7 @@ protected:
 private:
     const MarbleModel *const m_marbleModel;
     QStringList m_favoriteItems;
-    MarbleWidget *m_marbleWidget;
+    MarbleWidget *m_marbleWidget = nullptr;
 };
 
 } // namespace Marble

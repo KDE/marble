@@ -48,7 +48,7 @@ protected:
 
 private:
     QString m_name;
-    SatellitesConfigAbstractItem *m_parent;
+    SatellitesConfigAbstractItem *m_parent = nullptr;
     Qt::ItemFlags m_flags;
 };
 

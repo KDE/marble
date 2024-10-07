@@ -12,7 +12,6 @@
 #include <QUrl>
 
 #include "MarbleDebug.h"
-#include "MarbleGlobal.h"
 #include "SatellitesConfigLeafItem.h"
 #include "SatellitesConfigModel.h"
 #include "SatellitesConfigNodeItem.h"

@@ -167,7 +167,7 @@ public:
     void detach();
 
 private:
-    WeatherDataPrivate *d;
+    WeatherDataPrivate *d = nullptr;
 };
 
 } // namespace Marble

@@ -15,7 +15,6 @@
 #include "BBCWeatherService.h"
 #include "FakeWeatherService.h"
 #include "GeoNamesWeatherService.h"
-#include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "WeatherItem.h"
 
@@ -30,8 +29,8 @@ WeatherModel::WeatherModel(const MarbleModel *marbleModel, QObject *parent)
     addService(new BBCWeatherService(marbleModel, this));
     addService(new GeoNamesWeatherService(marbleModel, this));
 
-    m_timer = new QTimer();
-    connect(m_timer, SIGNAL(timeout()), SLOT(clear()));
+    m_timer = new QTimer(this);
+    connect(m_timer, &QTimer::timeout, this, &AbstractDataPluginModel::clear);
 
     // Default interval = 3 hours
     setUpdateInterval(3);

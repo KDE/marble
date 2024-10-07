@@ -81,7 +81,7 @@ private:
     void updateToolTip();
     bool showThumbnail() const;
 
-    MarbleWidget *m_marbleWidget;
+    MarbleWidget *const m_marbleWidget;
     QUrl m_url;
     QUrl m_thumbnailImageUrl;
     QString m_summary;

@@ -94,7 +94,7 @@ Q_SIGNALS:
     void fileParsed(const QString &id);
 
 private:
-    TrackerPluginModelPrivate *d;
+    TrackerPluginModelPrivate *const d;
     Q_PRIVATE_SLOT(d, void downloaded(const QString &, const QString &))
     Q_PRIVATE_SLOT(d, void update())
 };

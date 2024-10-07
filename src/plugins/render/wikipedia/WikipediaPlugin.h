@@ -77,8 +77,8 @@ private Q_SLOTS:
 
 private:
     const QIcon m_icon;
-    Ui::WikipediaConfigWidget *ui_configWidget;
-    QDialog *m_configDialog;
+    Ui::WikipediaConfigWidget *ui_configWidget = nullptr;
+    QDialog *m_configDialog = nullptr;
     bool m_showThumbnails;
 };
 

@@ -17,7 +17,6 @@
 
 #include "GeoDataLatLonAltBox.h"
 #include "MarbleColors.h"
-#include "MarbleDebug.h"
 #include "MarbleGlobal.h"
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
@@ -51,7 +50,7 @@ MapScaleFloatItem::MapScaleFloatItem(const MarbleModel *marbleModel)
     m_minimizeAction = new QAction(tr("Minimize"), this);
     m_minimizeAction->setCheckable(true);
     m_minimizeAction->setChecked(m_minimized);
-    connect(m_minimizeAction, SIGNAL(triggered()), this, SLOT(toggleMinimized()));
+    connect(m_minimizeAction, &QAction::triggered, this, &MapScaleFloatItem::toggleMinimized);
 }
 
 MapScaleFloatItem::~MapScaleFloatItem() = default;

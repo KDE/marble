@@ -79,14 +79,14 @@ protected:
     void addBuiltInDataSources();
 
 private:
-    SatellitesModel *m_satModel;
-    SatellitesConfigModel *m_configModel;
+    SatellitesModel *m_satModel = nullptr;
+    SatellitesConfigModel *m_configModel = nullptr;
 
     bool m_isInitialized;
     QHash<QString, QVariant> m_settings;
     QStringList m_newDataSources;
 
-    SatellitesConfigDialog *m_configDialog;
+    SatellitesConfigDialog *m_configDialog = nullptr;
 
     QAction *m_showOrbitAction;
     QAction *m_trackPlacemarkAction;

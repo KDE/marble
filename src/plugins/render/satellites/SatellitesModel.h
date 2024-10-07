@@ -50,7 +50,7 @@ private:
     QColor nextColor();
 
 private:
-    const MarbleClock *m_clock;
+    const MarbleClock *const m_clock;
     QStringList m_enabledIds;
     QString m_lcPlanet;
     QList<QColor> m_colorList;

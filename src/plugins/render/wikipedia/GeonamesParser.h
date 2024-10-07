@@ -37,9 +37,9 @@ private:
     void readThumbnailImage(WikipediaItem *item);
     void readRank(WikipediaItem *item);
 
-    MarbleWidget *m_marbleWidget;
-    QList<WikipediaItem *> *m_list;
-    QObject *m_parent;
+    MarbleWidget *const m_marbleWidget;
+    QList<WikipediaItem *> *const m_list;
+    QObject *const m_parent;
 };
 
 } // Marble namespace

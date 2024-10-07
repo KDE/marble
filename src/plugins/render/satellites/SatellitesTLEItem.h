@@ -35,9 +35,9 @@ private:
     double m_earthSemiMajorAxis; // in km
     elsetrec m_satrec;
 
-    GeoDataTrack *m_track;
+    GeoDataTrack *m_track = nullptr;
 
-    const MarbleClock *m_clock;
+    const MarbleClock *const m_clock;
 
     void setDescription();
 

@@ -11,13 +11,10 @@
 #include <QPainter>
 
 // Marble
-#include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
-#include "PluginManager.h"
 #include "RenderPlugin.h"
 #include "TinyWebBrowser.h"
-#include "ViewportParams.h"
 #include "layers/PopupLayer.h"
 
 using namespace Marble;

@@ -44,7 +44,7 @@ protected:
     void parseFile(const QByteArray &file) override;
 
 private:
-    MarbleWidget *m_marbleWidget;
+    MarbleWidget *m_marbleWidget = nullptr;
     QIcon m_wikipediaIcon;
     QString m_languageCode;
 

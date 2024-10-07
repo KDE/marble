@@ -70,7 +70,7 @@ private:
     QString translation(const QString &from) const;
 
     QStringList m_userDataSources;
-    Ui::SatellitesConfigDialog *m_configWidget;
+    Ui::SatellitesConfigDialog *m_configWidget = nullptr;
     QMap<QString, QString> m_translations;
 };
 

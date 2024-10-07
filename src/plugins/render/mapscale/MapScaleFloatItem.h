@@ -75,8 +75,8 @@ private:
     void calcScaleBar();
 
 private:
-    QDialog *m_configDialog;
-    Ui::MapScaleConfigWidget *ui_configWidget;
+    QDialog *m_configDialog = nullptr;
+    Ui::MapScaleConfigWidget *ui_configWidget = nullptr;
 
     int m_radius;
 

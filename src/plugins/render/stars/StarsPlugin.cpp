@@ -164,20 +164,20 @@ QDialog *StarsPlugin::configDialog()
 
         readSettings();
 
-        connect(ui_configWidget->m_buttonBox, SIGNAL(accepted()), SLOT(writeSettings()));
-        connect(ui_configWidget->m_buttonBox, SIGNAL(rejected()), SLOT(readSettings()));
+        connect(ui_configWidget->m_buttonBox, &QDialogButtonBox::accepted, this, &StarsPlugin::writeSettings);
+        connect(ui_configWidget->m_buttonBox, &QDialogButtonBox::rejected, this, &StarsPlugin::readSettings);
 
-        connect(ui_configWidget->m_constellationColorButton, SIGNAL(clicked()), this, SLOT(constellationGetColor()));
+        connect(ui_configWidget->m_constellationColorButton, &QAbstractButton::clicked, this, &StarsPlugin::constellationGetColor);
 
-        connect(ui_configWidget->m_constellationLabelColorButton, SIGNAL(clicked()), this, SLOT(constellationLabelGetColor()));
+        connect(ui_configWidget->m_constellationLabelColorButton, &QAbstractButton::clicked, this, &StarsPlugin::constellationLabelGetColor);
 
-        connect(ui_configWidget->m_dsoLabelColorButton, SIGNAL(clicked()), this, SLOT(dsoLabelGetColor()));
+        connect(ui_configWidget->m_dsoLabelColorButton, &QAbstractButton::clicked, this, &StarsPlugin::dsoLabelGetColor);
 
-        connect(ui_configWidget->m_eclipticColorButton, SIGNAL(clicked()), this, SLOT(eclipticGetColor()));
+        connect(ui_configWidget->m_eclipticColorButton, &QAbstractButton::clicked, this, &StarsPlugin::eclipticGetColor);
 
-        connect(ui_configWidget->m_celestialEquatorColorButton, SIGNAL(clicked()), this, SLOT(celestialEquatorGetColor()));
+        connect(ui_configWidget->m_celestialEquatorColorButton, &QAbstractButton::clicked, this, &StarsPlugin::celestialEquatorGetColor);
 
-        connect(ui_configWidget->m_celestialPoleColorButton, SIGNAL(clicked()), this, SLOT(celestialPoleGetColor()));
+        connect(ui_configWidget->m_celestialPoleColorButton, &QAbstractButton::clicked, this, &StarsPlugin::celestialPoleGetColor);
     }
 
     return m_configDialog;

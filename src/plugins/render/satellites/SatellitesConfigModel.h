@@ -40,7 +40,7 @@ public:
     SatellitesConfigNodeItem *rootItem() const;
 
 protected:
-    SatellitesConfigNodeItem *m_rootItem;
+    SatellitesConfigNodeItem *const m_rootItem;
 };
 
 } // namespace Marble

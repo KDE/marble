@@ -215,7 +215,7 @@ private:
     void loadConstellations();
     void loadDsos();
     QPointer<QDialog> m_configDialog;
-    Ui::StarsConfigWidget *ui_configWidget;
+    Ui::StarsConfigWidget *ui_configWidget = nullptr;
     bool m_renderStars;
     bool m_renderConstellationLines;
     bool m_renderConstellationLabels;
@@ -260,10 +260,10 @@ private:
 
     /* Context menu */
     QPointer<QMenu> m_contextMenu;
-    QAction *m_constellationsAction;
-    QAction *m_sunMoonAction;
-    QAction *m_planetsAction;
-    QAction *m_dsoAction;
+    QAction *m_constellationsAction = nullptr;
+    QAction *m_sunMoonAction = nullptr;
+    QAction *m_planetsAction = nullptr;
+    QAction *m_dsoAction = nullptr;
 
     bool m_doRender;
 };
@@ -304,7 +304,7 @@ public:
     }
 
 private:
-    StarsPlugin *m_plugin;
+    StarsPlugin *m_plugin = nullptr;
     QString m_name;
     QList<int> m_stars;
 };

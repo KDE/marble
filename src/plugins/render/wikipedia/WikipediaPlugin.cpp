@@ -40,8 +40,8 @@ WikipediaPlugin::WikipediaPlugin(const MarbleModel *marbleModel)
     // Plugin is not visible by default
     setVisible(false);
 
-    connect(this, SIGNAL(settingsChanged(QString)), this, SLOT(updateSettings()));
-    connect(this, SIGNAL(changedNumberOfItems(quint32)), this, SLOT(checkNumberOfItems(quint32)));
+    connect(this, &RenderPlugin::settingsChanged, this, &WikipediaPlugin::updateSettings);
+    connect(this, &AbstractDataPlugin::changedNumberOfItems, this, &WikipediaPlugin::checkNumberOfItems);
 
     setSettings(QHash<QString, QVariant>());
 }
@@ -114,10 +114,10 @@ QDialog *WikipediaPlugin::configDialog()
         ui_configWidget->setupUi(m_configDialog);
         readSettings();
         ui_configWidget->m_itemNumberSpinBox->setRange(0, maximumNumberOfItems);
-        connect(ui_configWidget->m_buttonBox, SIGNAL(accepted()), SLOT(writeSettings()));
-        connect(ui_configWidget->m_buttonBox, SIGNAL(rejected()), SLOT(readSettings()));
+        connect(ui_configWidget->m_buttonBox, &QDialogButtonBox::accepted, this, &WikipediaPlugin::writeSettings);
+        connect(ui_configWidget->m_buttonBox, &QDialogButtonBox::rejected, this, &WikipediaPlugin::readSettings);
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button(QDialogButtonBox::Apply);
-        connect(applyButton, SIGNAL(clicked()), this, SLOT(writeSettings()));
+        connect(applyButton, &QAbstractButton::clicked, this, &WikipediaPlugin::writeSettings);
     }
     return m_configDialog;
 }

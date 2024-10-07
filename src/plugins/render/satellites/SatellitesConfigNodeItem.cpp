@@ -9,8 +9,6 @@
 #include <QStringList>
 #include <QVariant>
 
-#include "MarbleDebug.h"
-
 namespace Marble
 {
 

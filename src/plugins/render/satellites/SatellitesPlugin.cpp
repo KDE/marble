@@ -33,9 +33,9 @@ SatellitesPlugin::SatellitesPlugin(const MarbleModel *marbleModel)
     , m_isInitialized(false)
     , m_configDialog(nullptr)
 {
-    connect(this, SIGNAL(settingsChanged(QString)), SLOT(updateSettings()));
-    connect(this, SIGNAL(enabledChanged(bool)), SLOT(enableModel(bool)));
-    connect(this, SIGNAL(visibilityChanged(bool, QString)), SLOT(visibleModel(bool)));
+    connect(this, &RenderPlugin::settingsChanged, this, &SatellitesPlugin::updateSettings);
+    connect(this, &RenderPlugin::enabledChanged, this, &SatellitesPlugin::enableModel);
+    connect(this, &RenderPlugin::visibilityChanged, this, &SatellitesPlugin::visibleModel);
 
     setVisible(false);
     setSettings(QHash<QString, QVariant>());
@@ -46,8 +46,8 @@ SatellitesPlugin::SatellitesPlugin(const MarbleModel *marbleModel)
 
     m_trackPlacemarkAction = new QAction(tr("Keep centered"), this);
     m_trackPlacemarkAction->setData(0);
-    connect(m_showOrbitAction, SIGNAL(triggered(bool)), SLOT(showOrbit(bool)));
-    connect(m_trackPlacemarkAction, SIGNAL(triggered(bool)), SLOT(trackPlacemark()));
+    connect(m_showOrbitAction, &QAction::triggered, this, &SatellitesPlugin::showOrbit);
+    connect(m_trackPlacemarkAction, &QAction::triggered, this, &SatellitesPlugin::trackPlacemark);
 }
 
 SatellitesPlugin::~SatellitesPlugin()

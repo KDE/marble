@@ -67,12 +67,12 @@ public:
         }
     }
 
-    TrackerPluginModel *m_parent;
+    TrackerPluginModel *const m_parent;
     bool m_enabled;
-    GeoDataTreeModel *m_treeModel;
-    GeoDataDocument *m_document;
+    GeoDataTreeModel *const m_treeModel;
+    GeoDataDocument *const m_document;
     CacheStoragePolicy m_storagePolicy;
-    HttpDownloadManager *m_downloadManager;
+    HttpDownloadManager *m_downloadManager = nullptr;
     QList<TrackerPluginItem *> m_itemVector;
 };
 

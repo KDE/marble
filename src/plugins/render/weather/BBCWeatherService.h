@@ -40,8 +40,8 @@ private Q_SLOTS:
 private:
     QList<BBCStation> m_stationList;
     bool m_parsingStarted;
-    StationListParser *m_parser;
-    BBCItemGetter *m_itemGetter;
+    StationListParser *m_parser = nullptr;
+    BBCItemGetter *m_itemGetter = nullptr;
 };
 
 } // namespace Marble

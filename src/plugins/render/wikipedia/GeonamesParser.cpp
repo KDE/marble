@@ -7,7 +7,6 @@
 #include "GeonamesParser.h"
 
 // Marble
-#include "MarbleDebug.h"
 #include "MarbleGlobal.h"
 #include "WikipediaItem.h"
 

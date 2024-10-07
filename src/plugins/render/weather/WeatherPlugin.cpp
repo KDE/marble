@@ -46,7 +46,7 @@ WeatherPlugin::WeatherPlugin(const MarbleModel *marbleModel)
     // Plugin is not visible by default
     setVisible(false);
 
-    connect(this, SIGNAL(settingsChanged(QString)), this, SLOT(updateItemSettings()));
+    connect(this, &RenderPlugin::settingsChanged, this, &WeatherPlugin::updateItemSettings);
 
     setSettings(QHash<QString, QVariant>());
 }

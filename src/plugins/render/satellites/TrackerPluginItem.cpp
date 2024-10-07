@@ -5,7 +5,6 @@
 
 #include "TrackerPluginItem.h"
 #include "GeoDataPlacemark.h"
-#include "MarbleDebug.h"
 
 namespace Marble
 {
@@ -16,15 +15,13 @@ public:
     TrackerPluginItemPrivate(const QString &name, GeoDataPlacemark *placemark)
         : m_name(name)
         , m_placemark(placemark)
-        , m_enabled(false)
-        , m_trackVisible(false)
     {
     }
 
-    QString m_name;
-    GeoDataPlacemark *m_placemark;
-    bool m_enabled;
-    bool m_trackVisible;
+    const QString m_name;
+    GeoDataPlacemark *const m_placemark;
+    bool m_enabled = false;
+    bool m_trackVisible = false;
 };
 
 TrackerPluginItem::TrackerPluginItem(const QString &name)

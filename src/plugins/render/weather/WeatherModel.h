@@ -62,7 +62,7 @@ private:
     void addService(AbstractWeatherService *service);
 
     QList<AbstractWeatherService *> m_services;
-    QTimer *m_timer;
+    QTimer *m_timer = nullptr;
 };
 
 } // namespace Marble

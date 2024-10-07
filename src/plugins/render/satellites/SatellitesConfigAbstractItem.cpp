@@ -5,8 +5,6 @@
 
 #include "SatellitesConfigAbstractItem.h"
 
-#include "MarbleDebug.h"
-
 #include <QVariant>
 
 namespace Marble
@@ -14,7 +12,6 @@ namespace Marble
 
 SatellitesConfigAbstractItem::SatellitesConfigAbstractItem(const QString &name)
     : m_name(name)
-    , m_parent(nullptr)
     , m_flags(Qt::ItemIsEnabled | Qt::ItemIsUserCheckable)
 {
 }

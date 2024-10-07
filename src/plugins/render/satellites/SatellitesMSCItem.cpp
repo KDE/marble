@@ -15,7 +15,6 @@
 #include "GeoDataTrack.h"
 #include "GeoPainter.h"
 #include "MarbleClock.h"
-#include "MarbleDebug.h"
 #include "MarbleGlobal.h"
 
 namespace Marble
