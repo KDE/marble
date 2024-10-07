@@ -24,7 +24,7 @@ namespace Marble
 DownloadOsmDialog::DownloadOsmDialog(MarbleWidget *parent, AnnotatePlugin *annotatePlugin)
     : QDialog(parent)
     , m_marbleWidget(parent)
-    , m_latLonBoxWidget(new LatLonBoxWidget)
+    , m_latLonBoxWidget(new LatLonBoxWidget(this))
 {
     setupUi(this);
     horizontalLayout->addWidget(m_latLonBoxWidget);
