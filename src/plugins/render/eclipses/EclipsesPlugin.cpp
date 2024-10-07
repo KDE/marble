@@ -8,7 +8,6 @@
 #include "GeoPainter.h"
 #include "MarbleClock.h"
 #include "MarbleColors.h"
-#include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
 #include "ViewportParams.h"

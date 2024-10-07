@@ -8,7 +8,6 @@
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
-#include "MarbleDebug.h"
 #include "MarbleGlobal.h"
 #include "MarbleModel.h"
 

@@ -17,7 +17,6 @@
 #include "AprsTCPIP.h"
 #include "GeoDataCoordinates.h"
 #include "GeoPainter.h"
-#include "MarbleDirs.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
 #include "ViewportParams.h"

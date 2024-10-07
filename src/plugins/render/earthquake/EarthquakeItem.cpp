@@ -6,7 +6,6 @@
 #include "EarthquakeItem.h"
 
 #include "MarbleColors.h"
-#include "ViewportParams.h"
 
 #include <QFontMetrics>
 #include <QLocale>

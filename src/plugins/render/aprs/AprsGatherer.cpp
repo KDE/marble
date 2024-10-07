@@ -6,8 +6,8 @@
 #include "AprsGatherer.h"
 
 #include "MarbleDebug.h"
-#include "MarbleDirs.h"
 
+#include <QIODevice>
 #include <QMutex>
 #include <QRegExp>
 

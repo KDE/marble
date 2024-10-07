@@ -10,7 +10,6 @@
 
 #include "ElevationProfileDataSource.h"
 #include "ElevationProfileFloatItem.h"
-#include "MarbleDebug.h"
 
 namespace Marble
 {
