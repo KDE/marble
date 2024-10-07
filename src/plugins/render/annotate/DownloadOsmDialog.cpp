@@ -17,7 +17,6 @@
 #include "GeoDataLatLonBox.h"
 #include "MarbleGlobal.h"
 #include "MarbleWidget.h"
-#include "ViewParams.h"
 #include "ViewportParams.h"
 
 namespace Marble

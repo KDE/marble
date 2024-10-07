@@ -41,7 +41,6 @@
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 #include "MarbleDebug.h"
-#include "MarbleDirs.h"
 #include "MarbleModel.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleWidget.h"
