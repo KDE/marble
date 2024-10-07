@@ -31,7 +31,7 @@ private:
 
     void readLocation();
 
-    GeoDataCoordinates *m_coordinates;
+    GeoDataCoordinates *const m_coordinates;
 };
 
 } // Marble namespace

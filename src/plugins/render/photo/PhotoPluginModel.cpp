@@ -15,7 +15,6 @@
 // Marble
 #include "AbstractDataPluginItem.h"
 #include "GeoDataLatLonAltBox.h"
-#include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
 

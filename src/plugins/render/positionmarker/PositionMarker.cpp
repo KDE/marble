@@ -128,15 +128,18 @@ QDialog *PositionMarker::configDialog()
         ui_configWidget->setupUi(m_configDialog);
         ui_configWidget->m_resizeSlider->setMaximum(sm_numResizeSteps - 1);
         readSettings();
-        connect(ui_configWidget->m_buttonBox, SIGNAL(accepted()), SLOT(writeSettings()));
-        connect(ui_configWidget->m_buttonBox, SIGNAL(rejected()), SLOT(readSettings()));
-        connect(ui_configWidget->m_buttonBox->button(QDialogButtonBox::RestoreDefaults), SIGNAL(clicked()), SLOT(restoreDefaultSettings()));
+        connect(ui_configWidget->m_buttonBox, &QDialogButtonBox::accepted, this, &PositionMarker::writeSettings);
+        connect(ui_configWidget->m_buttonBox, &QDialogButtonBox::rejected, this, &PositionMarker::readSettings);
+        connect(ui_configWidget->m_buttonBox->button(QDialogButtonBox::RestoreDefaults),
+                &QAbstractButton::clicked,
+                this,
+                &RenderPlugin::restoreDefaultSettings);
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button(QDialogButtonBox::Apply);
-        connect(applyButton, SIGNAL(clicked()), SLOT(writeSettings()));
-        connect(ui_configWidget->m_fileChooserButton, SIGNAL(clicked()), SLOT(chooseCustomCursor()));
-        connect(ui_configWidget->m_resizeSlider, SIGNAL(valueChanged(int)), SLOT(resizeCursor(int)));
-        connect(ui_configWidget->m_acColorChooserButton, SIGNAL(clicked()), SLOT(chooseColor()));
-        connect(ui_configWidget->m_trailColorChooserButton, SIGNAL(clicked()), SLOT(chooseColor()));
+        connect(applyButton, &QAbstractButton::clicked, this, &PositionMarker::writeSettings);
+        connect(ui_configWidget->m_fileChooserButton, &QAbstractButton::clicked, this, &PositionMarker::chooseCustomCursor);
+        connect(ui_configWidget->m_resizeSlider, &QAbstractSlider::valueChanged, this, &PositionMarker::resizeCursor);
+        connect(ui_configWidget->m_acColorChooserButton, &QAbstractButton::clicked, this, &PositionMarker::chooseColor);
+        connect(ui_configWidget->m_trailColorChooserButton, &QAbstractButton::clicked, this, &PositionMarker::chooseColor);
     }
     return m_configDialog;
 }
@@ -144,7 +147,7 @@ QDialog *PositionMarker::configDialog()
 void PositionMarker::initialize()
 {
     if (marbleModel()) {
-        connect(marbleModel()->positionTracking(), SIGNAL(gpsLocation(GeoDataCoordinates, qreal)), this, SLOT(setPosition(GeoDataCoordinates)));
+        connect(marbleModel()->positionTracking(), &PositionTracking::gpsLocation, this, &PositionMarker::setPosition);
         connect(marbleModel()->positionTracking(), SIGNAL(statusChanged(PositionProviderStatus)), this, SIGNAL(repaintNeeded()));
         m_isInitialized = true;
     }
@@ -340,10 +343,7 @@ void PositionMarker::writeSettings()
     }
 
     m_useCustomCursor = ui_configWidget->m_customCursor->isChecked();
-    m_cursorPath = m_cursorPath;
     m_cursorSize = sm_resizeSteps[ui_configWidget->m_resizeSlider->value()];
-    m_accuracyColor = m_accuracyColor;
-    m_trailColor = m_trailColor;
     m_showTrail = ui_configWidget->m_trailCheckBox->isChecked();
 
     Q_EMIT settingsChanged(nameId());

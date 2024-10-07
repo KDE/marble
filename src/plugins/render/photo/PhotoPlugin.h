@@ -75,8 +75,8 @@ private Q_SLOTS:
     void checkNumberOfItems(quint32 number);
 
 private:
-    Ui::PhotoConfigWidget *ui_configWidget;
-    QDialog *m_configDialog;
+    Ui::PhotoConfigWidget *ui_configWidget = nullptr;
+    QDialog *m_configDialog = nullptr;
 
     QStringList m_checkStateList;
 };

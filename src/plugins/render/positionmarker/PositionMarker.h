@@ -106,8 +106,8 @@ private:
     GeoDataCoordinates m_currentPosition;
     GeoDataCoordinates m_previousPosition;
 
-    Ui::PositionMarkerConfigWidget *ui_configWidget;
-    QDialog *m_configDialog;
+    Ui::PositionMarkerConfigWidget *ui_configWidget = nullptr;
+    QDialog *m_configDialog = nullptr;
     QString m_cursorPath;
 
     QPolygonF m_arrow;

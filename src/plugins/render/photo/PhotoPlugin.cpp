@@ -26,23 +26,19 @@ const quint32 maximumNumberOfItems = 99;
 
 PhotoPlugin::PhotoPlugin()
     : AbstractDataPlugin(nullptr)
-    , ui_configWidget(nullptr)
-    , m_configDialog(nullptr)
 {
 }
 
 PhotoPlugin::PhotoPlugin(const MarbleModel *marbleModel)
     : AbstractDataPlugin(marbleModel)
-    , ui_configWidget(nullptr)
-    , m_configDialog(nullptr)
 {
     // Plugin is enabled by default
     setEnabled(true);
     // Plugin is not visible by default
     setVisible(false);
 
-    connect(this, SIGNAL(settingsChanged(QString)), this, SLOT(updateSettings()));
-    connect(this, SIGNAL(changedNumberOfItems(quint32)), this, SLOT(checkNumberOfItems(quint32)));
+    connect(this, &RenderPlugin::settingsChanged, this, &PhotoPlugin::updateSettings);
+    connect(this, &AbstractDataPlugin::changedNumberOfItems, this, &PhotoPlugin::checkNumberOfItems);
 
     setSettings(QHash<QString, QVariant>());
 }

@@ -14,14 +14,11 @@
 // Marble
 #include "GeoDataCoordinates.h"
 #include "GeoPainter.h"
-#include "MarbleDebug.h"
 #include "MarbleGraphicsGridLayout.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
-#include "PluginManager.h"
 #include "RenderPlugin.h"
 #include "TinyWebBrowser.h"
-#include "ViewportParams.h"
 #include "layers/PopupLayer.h"
 
 // Qt
@@ -41,7 +38,7 @@ PhotoPluginItem::PhotoPluginItem(MarbleWidget *widget, QObject *parent)
     , m_browser(nullptr)
 {
     m_action = new QAction(this);
-    connect(m_action, SIGNAL(triggered()), this, SLOT(openBrowser()));
+    connect(m_action, &QAction::triggered, this, &PhotoPluginItem::openBrowser);
     setCacheMode(ItemCoordinateCache);
 
     m_image.setFrame(FrameGraphicsItem::ShadowFrame);
