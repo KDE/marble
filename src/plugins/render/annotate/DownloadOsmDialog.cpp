@@ -84,8 +84,8 @@ void DownloadOsmDialog::downloadFile()
 
     m_reply = m_qnam.get(QNetworkRequest(QUrl(url)));
 
-    connect(m_reply, SIGNAL(finished()), this, SLOT(httpFinished()));
-    connect(m_reply, SIGNAL(readyRead()), this, SLOT(httpReadyRead()));
+    connect(m_reply, &QNetworkReply::finished, this, &DownloadOsmDialog::httpFinished);
+    connect(m_reply, &QIODevice::readyRead, this, &DownloadOsmDialog::httpReadyRead);
 
     progressBar->show();
     progressBar->setMinimum(0);

@@ -25,7 +25,7 @@ MergingPolylineNodesAnimation::MergingPolylineNodesAnimation(PolylineAnnotation 
     , m_firstInitialCoords(m_lineString->at(polyline->m_firstMergedNode))
     , m_secondInitialCoords(m_lineString->at(polyline->m_secondMergedNode))
 {
-    connect(m_timer, SIGNAL(timeout()), this, SLOT(updateNodes()));
+    connect(m_timer, &QTimer::timeout, this, &MergingPolylineNodesAnimation::updateNodes);
 }
 
 MergingPolylineNodesAnimation::~MergingPolylineNodesAnimation()
