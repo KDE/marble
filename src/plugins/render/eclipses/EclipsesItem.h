@@ -232,7 +232,7 @@ private:
      */
     void calculate();
 
-    EclSolar *m_ecl;
+    EclSolar *const m_ecl;
     int m_index;
     bool m_calculationsNeedUpdate;
     bool m_isTotal;

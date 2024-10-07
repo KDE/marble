@@ -166,8 +166,8 @@ private:
      */
     void clear();
 
-    const MarbleModel *m_marbleModel;
-    EclSolar *m_ecl;
+    const MarbleModel *const m_marbleModel;
+    EclSolar *m_ecl = nullptr;
     QList<EclipsesItem *> m_items;
     int m_currentYear;
     bool m_withLunarEclipses;

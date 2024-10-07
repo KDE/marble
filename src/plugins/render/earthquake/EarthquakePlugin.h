@@ -70,8 +70,8 @@ public Q_SLOTS:
     void updateModel();
 
 private:
-    Ui::EarthquakeConfigWidget *m_ui;
-    QDialog *m_configDialog;
+    Ui::EarthquakeConfigWidget *m_ui = nullptr;
+    QDialog *m_configDialog = nullptr;
     qreal m_minMagnitude;
     QDateTime m_startDate;
     QDateTime m_endDate;

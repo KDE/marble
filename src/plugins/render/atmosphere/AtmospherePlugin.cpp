@@ -162,7 +162,7 @@ void AtmospherePlugin::repaintPixmap(const ViewportParams *viewParams)
 
     QPainter renderPainter(&m_renderPixmap);
 
-    QColor color = marbleModel()->planet()->atmosphereColor();
+    const QColor color = marbleModel()->planet()->atmosphereColor();
 
     // Recalculate the atmosphere effect and paint it to canvasImage.
     QRadialGradient grad(QPointF(imageHalfWidth, imageHalfHeight), 1.05 * viewParams->radius());

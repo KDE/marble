@@ -17,16 +17,12 @@ namespace Marble
 
 EarthquakePlugin::EarthquakePlugin()
     : AbstractDataPlugin(nullptr)
-    , m_ui(nullptr)
-    , m_configDialog(nullptr)
     , m_maximumNumberOfItems(100)
 {
 }
 
 EarthquakePlugin::EarthquakePlugin(const MarbleModel *marbleModel)
     : AbstractDataPlugin(marbleModel)
-    , m_ui(nullptr)
-    , m_configDialog(nullptr)
     , m_minMagnitude(0.0)
     , m_startDate(QDateTime::fromString("2006-02-04", "yyyy-MM-dd"))
     , m_endDate(marbleModel->clockDateTime())
