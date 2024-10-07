@@ -86,7 +86,7 @@ void ElevationProfileContextMenu::updateContextMenuEntries()
             m_selectionActions.append(track);
             m_trackMapper->setMapping(track, i);
         }
-        connect(m_trackMapper, SIGNAL(mapped(int)), m_floatItem, SLOT(switchToTrackDataSource(int)));
+        connect(m_trackMapper, &QSignalMapper::mappedInt, m_floatItem, &ElevationProfileFloatItem::switchToTrackDataSource);
     }
 
     // no route or track available, add disabled action to inform user about it
