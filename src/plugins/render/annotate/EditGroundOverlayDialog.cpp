@@ -23,8 +23,8 @@ namespace Marble
 class Q_DECL_HIDDEN EditGroundOverlayDialog::Private : public Ui::UiEditGroundOverlayDialog
 {
 public:
-    GeoDataGroundOverlay *m_overlay;
-    TextureLayer *m_textureLayer;
+    GeoDataGroundOverlay *const m_overlay;
+    TextureLayer *const m_textureLayer;
 
     Private(GeoDataGroundOverlay *overlay, TextureLayer *textureLayer);
     ~Private();

@@ -39,7 +39,7 @@ private:
     QNetworkAccessManager m_qnam;
     QNetworkReply *m_reply;
     QTemporaryFile *m_file;
-    LatLonBoxWidget *m_latLonBoxWidget;
+    LatLonBoxWidget *const m_latLonBoxWidget;
     bool m_isDownloadSuccess;
 
 private Q_SLOTS:

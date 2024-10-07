@@ -39,7 +39,7 @@ private:
     qreal nodesDistance();
     GeoDataCoordinates newCoords();
 
-    QTimer *m_timer;
+    QTimer *const m_timer;
 
     const int m_firstNodeIndex;
     const int m_secondNodeIndex;

@@ -47,10 +47,10 @@ public:
     OsmPlacemarkData m_initialOsmData;
     bool m_hadInitialOsmData;
 
-    NodeModel *m_nodeModel;
-    NodeItemDelegate *m_delegate;
-    OsmTagEditorWidget *m_osmTagEditorWidget;
-    OsmRelationManagerWidget *m_osmRelationManagerWidget;
+    NodeModel *const m_nodeModel;
+    NodeItemDelegate *m_delegate = nullptr;
+    OsmTagEditorWidget *m_osmTagEditorWidget = nullptr;
+    OsmRelationManagerWidget *m_osmRelationManagerWidget = nullptr;
 };
 
 EditPolygonDialog::Private::Private(GeoDataPlacemark *placemark)

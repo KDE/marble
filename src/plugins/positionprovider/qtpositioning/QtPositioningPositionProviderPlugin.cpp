@@ -25,7 +25,7 @@ public:
 
     QGeoPositionInfoSource *m_source;
     PositionProviderStatus m_status;
-    QTimer *m_updateChecker;
+    QTimer *const m_updateChecker;
 
     QGeoPositionInfo m_lastKnownPosition;
 };

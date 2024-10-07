@@ -47,7 +47,7 @@ public:
     bool m_hadInitialOsmData;
 
     NodeItemDelegate *m_delegate;
-    NodeModel *m_nodeModel;
+    NodeModel *const m_nodeModel;
 };
 
 EditPolylineDialog::Private::Private(GeoDataPlacemark *placemark)

@@ -46,7 +46,7 @@ private:
     const int second_i;
     const int second_j;
 
-    QTimer *m_timer;
+    QTimer *const m_timer;
     NodesBoundary m_boundary;
 
     GeoDataLinearRing &outerRing;
