@@ -77,6 +77,85 @@ SET ( geodata_data_SRCS
         geodata/data/GeoDataSchemaData.cpp
         geodata/data/GeoDataSimpleData.cpp
         geodata/data/GeoDataBuilding.cpp
+
+
+        geodata/data/GeoDataRegion.h
+        geodata/data/GeoDataUpdate.h
+        geodata/data/GeoDataViewVolume.h
+        geodata/data/GeoDataHotSpot.h
+        geodata/data/GeoDataAlias.h
+        geodata/data/GeoDataImagePyramid.h
+        geodata/data/GeoDataGeometry.h
+        geodata/data/GeoDataPoint.h
+        geodata/data/GeoDataPhotoOverlay.h
+        geodata/data/GeoDataTimePrimitive.h
+        geodata/data/GeoDataVec2.h
+        geodata/data/GeoDataBalloonStyle.h
+        geodata/data/GeoDataNetworkLink.h
+        geodata/data/GeoDataLineStyle.h
+        geodata/data/GeoDataScreenOverlay.h
+        geodata/data/GeoDataContainer.h
+        geodata/data/GeoDataItemIcon.h
+        geodata/data/GeoDataTour.h
+        geodata/data/GeoDataTourPrimitive.h
+        geodata/data/GeoDataOverlay.h
+        geodata/data/GeoDataListStyle.h
+        geodata/data/GeoDataFlyTo.h
+        geodata/data/GeoDataMultiTrack.h
+        geodata/data/GeoDataSnippet.h
+        geodata/data/GeoDataStyle.h
+        geodata/data/GeoDataLinearRing.h
+        geodata/data/GeoDataFolder.h
+        geodata/data/GeoDataDocument.h
+        geodata/data/GeoDataLatLonAltBox.h
+        geodata/data/GeoDataStyleSelector.h
+        geodata/data/GeoDataLod.h
+        geodata/data/GeoDataColorStyle.h
+        geodata/data/GeoDataData.h
+        geodata/data/GeoDataLocation.h
+        geodata/data/GeoDataPolygon.h
+        geodata/data/GeoDataLineString.h
+        geodata/data/GeoDataOrientation.h
+        geodata/data/GeoDataLookAt.h
+        geodata/data/GeoDataPlacemark.h
+        geodata/data/GeoDataPlaylist.h
+        geodata/data/GeoDataPolyStyle.h
+        geodata/data/GeoDataModel.h
+        geodata/data/GeoDataLink.h
+        geodata/data/GeoDataIconStyle.h
+        geodata/data/GeoDataAbstractView.h
+        geodata/data/GeoDataStyleMap.h
+        geodata/data/GeoDataExtendedData.h
+        geodata/data/GeoDataLabelStyle.h
+        geodata/data/GeoDataTimeSpan.h
+        geodata/data/GeoDataMultiGeometry.h
+        geodata/data/GeoDataRelation.h
+        geodata/data/GeoDataSimpleArrayData.h
+        geodata/data/GeoDataObject.h
+        geodata/data/GeoDataLatLonQuad.h
+        geodata/data/GeoDataCoordinates.h
+        geodata/data/GeoDataTrack.h
+        geodata/data/GeoDataNetworkLinkControl.h
+        geodata/data/GeoDataFeature.h
+        geodata/data/GeoDataCamera.h
+        geodata/data/GeoDataTimeStamp.h
+        geodata/data/GeoDataGroundOverlay.h
+        geodata/data/GeoDataLatLonBox.h
+        geodata/data/GeoDataScale.h
+        geodata/data/GeoDataResourceMap.h
+        geodata/data/GeoDataTourControl.h
+        geodata/data/GeoDataAccuracy.h
+        geodata/data/GeoDataWait.h
+        geodata/data/GeoDataSoundCue.h
+        geodata/data/GeoDataAnimatedUpdate.h
+        geodata/data/GeoDataSchema.h
+        geodata/data/GeoDataSimpleField.h
+        geodata/data/GeoDataChange.h
+        geodata/data/GeoDataCreate.h
+        geodata/data/GeoDataDelete.h
+        geodata/data/GeoDataSchemaData.h
+        geodata/data/GeoDataSimpleData.h
+        geodata/data/GeoDataBuilding.h
 )
 
 SET ( geodata_scene_SRCS
@@ -104,6 +183,31 @@ SET ( geodata_scene_SRCS
         geodata/scene/GeoSceneProperty.cpp
         geodata/scene/GeoSceneLayer.cpp
         geodata/scene/GeoScenePalette.cpp
+
+        geodata/scene/GeoSceneAbstractTileProjection.h
+        geodata/scene/GeoSceneMercatorTileProjection.h
+        geodata/scene/GeoSceneEquirectTileProjection.h
+        geodata/scene/GeoSceneIcon.h
+        geodata/scene/GeoSceneTileDataset.h
+        geodata/scene/GeoSceneVectorTileDataset.h
+        geodata/scene/GeoSceneGeodata.h
+        geodata/scene/GeoSceneGroup.h
+        geodata/scene/GeoSceneZoom.h
+        geodata/scene/GeoSceneLegend.h
+        geodata/scene/GeoSceneTextureTileDataset.h
+        geodata/scene/GeoSceneAbstractDataset.h
+        geodata/scene/GeoSceneItem.h
+        geodata/scene/GeoSceneLicense.h
+        geodata/scene/GeoSceneSection.h
+        geodata/scene/GeoSceneFilter.h
+        geodata/scene/GeoSceneHead.h
+        geodata/scene/GeoSceneVector.h
+        geodata/scene/GeoSceneSettings.h
+        geodata/scene/GeoSceneDocument.h
+        geodata/scene/GeoSceneMap.h
+        geodata/scene/GeoSceneProperty.h
+        geodata/scene/GeoSceneLayer.h
+        geodata/scene/GeoScenePalette.h
 )
 
 # handlers and writers sources 
@@ -239,6 +343,14 @@ SET( geodata_graphicsitem_SRCS
     geodata/graphicsitem/BuildingGraphicsItem.cpp
     geodata/graphicsitem/GeoTrackGraphicsItem.cpp
     geodata/graphicsitem/ScreenOverlayGraphicsItem.cpp
+
+    geodata/graphicsitem/GeoLineStringGraphicsItem.h
+    geodata/graphicsitem/GeoPhotoGraphicsItem.h
+    geodata/graphicsitem/GeoPolygonGraphicsItem.h
+    geodata/graphicsitem/AbstractGeoPolygonGraphicsItem.h
+    geodata/graphicsitem/BuildingGraphicsItem.h
+    geodata/graphicsitem/GeoTrackGraphicsItem.h
+    geodata/graphicsitem/ScreenOverlayGraphicsItem.h
 )
 
 SET ( geodata_handlers_kml_SRCS
@@ -413,6 +525,179 @@ geodata/handlers/kml/KmlOsmPlacemarkDataTagHandler.cpp
 geodata/handlers/kml/KmlTagTagHandler.cpp
 geodata/handlers/kml/KmlMemberTagHandler.cpp
 geodata/handlers/kml/KmlNdTagHandler.cpp
+
+
+geodata/handlers/kml/KmlAddressTagHandler.h
+geodata/handlers/kml/KmlAltitudeModeTagHandler.h
+geodata/handlers/kml/KmlAltitudeTagHandler.h
+geodata/handlers/kml/KmlAnimatedUpdateTagHandler.h
+geodata/handlers/kml/KmlAreaTagHandler.h
+geodata/handlers/kml/KmlBalloonStyleTagHandler.h
+geodata/handlers/kml/KmlBeginTagHandler.h
+geodata/handlers/kml/KmlBgColorTagHandler.h
+geodata/handlers/kml/KmlCameraTagHandler.h
+geodata/handlers/kml/KmlChangeTagHandler.h
+geodata/handlers/kml/KmlColorModeTagHandler.h
+geodata/handlers/kml/KmlColorTagHandler.h
+geodata/handlers/kml/KmlCoordinatesTagHandler.h
+geodata/handlers/kml/KmlCountrycodeTagHandler.h
+geodata/handlers/kml/KmlCountryNameCodeTagHandler.h
+geodata/handlers/kml/KmlDataTagHandler.h
+geodata/handlers/kml/KmlDescriptionTagHandler.h
+geodata/handlers/kml/KmlDisplayModeTagHandler.h
+geodata/handlers/kml/KmlDisplayNameTagHandler.h
+geodata/handlers/kml/KmlDocumentTagHandler.h
+geodata/handlers/kml/KmlDurationTagHandler.h
+geodata/handlers/kml/KmldrawOrderTagHandler.h
+geodata/handlers/kml/KmlEastTagHandler.h
+geodata/handlers/kml/KmlElementDictionary.h
+geodata/handlers/kml/KmlEndTagHandler.h
+geodata/handlers/kml/KmlExtendedDataTagHandler.h
+geodata/handlers/kml/KmlExtrudeTagHandler.h
+geodata/handlers/kml/KmlFillTagHandler.h
+geodata/handlers/kml/KmlFlyToModeTagHandler.h
+geodata/handlers/kml/KmlFlyToTagHandler.h
+geodata/handlers/kml/KmlFlyToViewTagHandler.h
+geodata/handlers/kml/KmlFolderTagHandler.h
+geodata/handlers/kml/KmlGroundOverlayTagHandler.h
+geodata/handlers/kml/KmlGxAltitudeModeTagHandler.h
+geodata/handlers/kml/KmlGxTimeSpanTagHandler.h
+geodata/handlers/kml/KmlGxTimeStampTagHandler.h
+geodata/handlers/kml/KmlHeadingTagHandler.h
+geodata/handlers/kml/KmlHotSpotTagHandler.h
+geodata/handlers/kml/KmlHrefTagHandler.h
+geodata/handlers/kml/KmlHttpQueryTagHandler.h
+geodata/handlers/kml/KmlIconStyleTagHandler.h
+geodata/handlers/kml/KmlIconTagHandler.h
+geodata/handlers/kml/KmlInnerBoundaryIsTagHandler.h
+geodata/handlers/kml/KmlItemIconTagHandler.h
+geodata/handlers/kml/KmlKeyTagHandler.h
+geodata/handlers/kml/KmlLabelStyleTagHandler.h
+geodata/handlers/kml/KmlLatitudeTagHandler.h
+geodata/handlers/kml/KmlLatLonAltBoxTagHandler.h
+geodata/handlers/kml/KmlLatLonBoxTagHandler.h
+geodata/handlers/kml/KmlLatLonQuadTagHandler.h
+geodata/handlers/kml/KmlLinearRingTagHandler.h
+geodata/handlers/kml/KmlLineStringTagHandler.h
+geodata/handlers/kml/KmlLineStyleTagHandler.h
+geodata/handlers/kml/KmlLinkTagHandler.h
+geodata/handlers/kml/KmlListItemTypeTagHandler.h
+geodata/handlers/kml/KmlListStyleTagHandler.h
+geodata/handlers/kml/KmlLodTagHandler.h
+geodata/handlers/kml/KmlLongitudeTagHandler.h
+geodata/handlers/kml/KmlLookAtTagHandler.h
+geodata/handlers/kml/KmlMarblePlacemarkTagHandler.h
+geodata/handlers/kml/KmlMaxAltitudeTagHandler.h
+geodata/handlers/kml/KmlMaxFadeExtentTagHandler.h
+geodata/handlers/kml/KmlMaxLodPixelsTagHandler.h
+geodata/handlers/kml/KmlMinAltitudeTagHandler.h
+geodata/handlers/kml/KmlMinFadeExtentTagHandler.h
+geodata/handlers/kml/KmlMinLodPixelsTagHandler.h
+geodata/handlers/kml/KmlModelTagHandler.h
+geodata/handlers/kml/KmlMultiGeometryTagHandler.h
+geodata/handlers/kml/KmlMultiTrackTagHandler.h
+geodata/handlers/kml/KmlMxSizeTagHandler.h
+geodata/handlers/kml/KmlNameTagHandler.h
+geodata/handlers/kml/KmlNetworkLinkTagHandler.h
+geodata/handlers/kml/KmlNorthTagHandler.h
+geodata/handlers/kml/KmlObjectTagHandler.h
+geodata/handlers/kml/KmlOpenTagHandler.h
+geodata/handlers/kml/KmlOuterBoundaryIsTagHandler.h
+geodata/handlers/kml/KmlOutlineTagHandler.h
+geodata/handlers/kml/KmlOverlayXYTagHandler.h
+geodata/handlers/kml/KmlPairTagHandler.h
+geodata/handlers/kml/KmlPhotoOverlayTagHandler.h
+geodata/handlers/kml/KmlPlacemarkTagHandler.h
+geodata/handlers/kml/KmlPlaylistTagHandler.h
+geodata/handlers/kml/KmlPointTagHandler.h
+geodata/handlers/kml/KmlPolygonTagHandler.h
+geodata/handlers/kml/KmlPolyStyleTagHandler.h
+geodata/handlers/kml/KmlPopTagHandler.h
+geodata/handlers/kml/KmlRangeTagHandler.h
+geodata/handlers/kml/KmlRefreshIntervalTagHandler.h
+geodata/handlers/kml/KmlRefreshModeTagHandler.h
+geodata/handlers/kml/KmlRefreshVisibilityTagHandler.h
+geodata/handlers/kml/KmlRegionTagHandler.h
+geodata/handlers/kml/KmlRoleTagHandler.h
+geodata/handlers/kml/KmlRollTagHandler.h
+geodata/handlers/kml/KmlRotationTagHandler.h
+geodata/handlers/kml/KmlRotationXYTagHandler.h
+geodata/handlers/kml/Kml_scaleTagHandler.h
+geodata/handlers/kml/KmlSchemaDataTagHandler.h
+geodata/handlers/kml/KmlSchemaTagHandler.h
+geodata/handlers/kml/KmlScreenOverlayTagHandler.h
+geodata/handlers/kml/KmlScreenXYTagHandler.h
+geodata/handlers/kml/KmlSimpleArrayDataTagHandler.h
+geodata/handlers/kml/KmlSimpleDataTagHandler.h
+geodata/handlers/kml/KmlSimpleFieldTagHandler.h
+geodata/handlers/kml/KmlSizeTagHandler.h
+geodata/handlers/kml/KmlSouthTagHandler.h
+geodata/handlers/kml/KmlStateTagHandler.h
+geodata/handlers/kml/KmlStyleMapTagHandler.h
+geodata/handlers/kml/KmlStyleTagHandler.h
+geodata/handlers/kml/KmlStyleUrlTagHandler.h
+geodata/handlers/kml/KmlTessellateTagHandler.h
+geodata/handlers/kml/KmlTextColorTagHandler.h
+geodata/handlers/kml/KmlTextTagHandler.h
+geodata/handlers/kml/KmlTiltTagHandler.h
+geodata/handlers/kml/KmlTimeSpanTagHandler.h
+geodata/handlers/kml/KmlTimeStampTagHandler.h
+geodata/handlers/kml/KmlTourTagHandler.h
+geodata/handlers/kml/KmlTourControlTagHandler.h
+geodata/handlers/kml/KmlTrackTagHandler.h
+geodata/handlers/kml/KmlValueTagHandler.h
+geodata/handlers/kml/KmlViewBoundScaleTagHandler.h
+geodata/handlers/kml/KmlVisibilityTagHandler.h
+geodata/handlers/kml/KmlWaitTagHandler.h
+geodata/handlers/kml/KmlWestTagHandler.h
+geodata/handlers/kml/KmlWhenTagHandler.h
+geodata/handlers/kml/KmlWidthTagHandler.h
+geodata/handlers/kml/KmlViewFormatTagHandler.h
+geodata/handlers/kml/KmlViewRefreshModeTagHandler.h
+geodata/handlers/kml/KmlViewRefreshTimeTagHandler.h
+geodata/handlers/kml/KmlViewVolumeTagHandler.h
+geodata/handlers/kml/KmlLeftFovTagHandler.h
+geodata/handlers/kml/KmlRightFovTagHandler.h
+geodata/handlers/kml/KmlBottomFovTagHandler.h
+geodata/handlers/kml/KmlTopFovTagHandler.h
+geodata/handlers/kml/KmlNearTagHandler.h
+geodata/handlers/kml/KmlImagePyramidTagHandler.h
+geodata/handlers/kml/KmlTileSizeTagHandler.h
+geodata/handlers/kml/KmlMaxHeightTagHandler.h
+geodata/handlers/kml/KmlMaxWidthTagHandler.h
+geodata/handlers/kml/KmlGridOriginTagHandler.h
+geodata/handlers/kml/KmlShapeTagHandler.h
+geodata/handlers/kml/KmlMinRefreshPeriodTagHandler.h
+geodata/handlers/kml/KmlMaxSessionLengthTagHandler.h
+geodata/handlers/kml/KmlCookieTagHandler.h
+geodata/handlers/kml/KmlMessageTagHandler.h
+geodata/handlers/kml/KmlLinkNameTagHandler.h
+geodata/handlers/kml/KmlLinkDescriptionTagHandler.h
+geodata/handlers/kml/KmlLinkSnippetTagHandler.h
+geodata/handlers/kml/KmlSnippetTagHandler.h
+geodata/handlers/kml/KmlExpiresTagHandler.h
+geodata/handlers/kml/KmlUpdateTagHandler.h
+geodata/handlers/kml/KmlNetworkLinkControlTagHandler.h
+geodata/handlers/kml/KmlplayModeTagHandler.h
+geodata/handlers/kml/KmlOrientationTagHandler.h
+geodata/handlers/kml/KmlScaleTagHandler.h
+geodata/handlers/kml/KmlXTagHandler.h
+geodata/handlers/kml/KmlYTagHandler.h
+geodata/handlers/kml/KmlZTagHandler.h
+geodata/handlers/kml/KmlLocationTagHandler.h
+geodata/handlers/kml/KmlResourceMapTagHandler.h
+geodata/handlers/kml/KmlAliasTagHandler.h
+geodata/handlers/kml/KmlSourceHrefTagHandler.h
+geodata/handlers/kml/KmlTargetHrefTagHandler.h
+geodata/handlers/kml/KmlSoundCueTagHandler.h
+geodata/handlers/kml/KmldelayedStartTagHandler.h
+geodata/handlers/kml/KmlBalloonVisibilityTagHandler.h
+geodata/handlers/kml/KmlCreateTagHandler.h
+geodata/handlers/kml/KmlDeleteTagHandler.h
+geodata/handlers/kml/KmlOsmPlacemarkDataTagHandler.h
+geodata/handlers/kml/KmlTagTagHandler.h
+geodata/handlers/kml/KmlMemberTagHandler.h
+geodata/handlers/kml/KmlNdTagHandler.h
 )
 
 SET ( geodata_writers_kml_SRCS
@@ -467,6 +752,58 @@ geodata/writers/kml/KmlTourTagWriter.cpp
 geodata/writers/kml/KmlTrackWriter.cpp
 geodata/writers/kml/KmlUpdateTagWriter.cpp
 geodata/writers/kml/KmlOsmPlacemarkDataTagWriter.cpp
+
+geodata/writers/kml/KmlAnimatedUpdateTagWriter.h
+geodata/writers/kml/KmlBalloonStyleTagWriter.h
+geodata/writers/kml/KmlCameraTagWriter.h
+geodata/writers/kml/KmlColorStyleTagWriter.h
+geodata/writers/kml/KmlDataTagWriter.h
+geodata/writers/kml/KmlDocumentTagWriter.h
+geodata/writers/kml/KmlExtendedDataTagWriter.h
+geodata/writers/kml/KmlFeatureTagWriter.h
+geodata/writers/kml/KmlFolderTagWriter.h
+geodata/writers/kml/KmlFlyToTagWriter.h
+geodata/writers/kml/KmlGroundOverlayWriter.h
+geodata/writers/kml/KmlIconStyleTagWriter.h
+geodata/writers/kml/KmlLatLonAltBoxWriter.h
+geodata/writers/kml/KmlLatLonBoxWriter.h
+geodata/writers/kml/KmlLatLonQuadWriter.h
+geodata/writers/kml/KmlLabelStyleTagWriter.h
+geodata/writers/kml/KmlLinearRingTagWriter.h
+geodata/writers/kml/KmlLineStringTagWriter.h
+geodata/writers/kml/KmlLineStyleTagWriter.h
+geodata/writers/kml/KmlLinkTagWriter.h
+geodata/writers/kml/KmlListStyleTagWriter.h
+geodata/writers/kml/KmlLodTagWriter.h
+geodata/writers/kml/KmlLookAtTagWriter.h
+geodata/writers/kml/KmlModelTagWriter.h
+geodata/writers/kml/KmlMultiGeometryTagWriter.h
+geodata/writers/kml/KmlMultiTrackTagWriter.h
+geodata/writers/kml/KmlNetworkLinkTagWriter.h
+geodata/writers/kml/KmlNetworkLinkControlTagWriter.h
+geodata/writers/kml/KmlObjectTagWriter.h
+geodata/writers/kml/KmlOverlayTagWriter.h
+geodata/writers/kml/KmlPhotoOverlayWriter.h
+geodata/writers/kml/KmlPlacemarkTagWriter.h
+geodata/writers/kml/KmlPlaylistTagWriter.h
+geodata/writers/kml/KmlPointTagWriter.h
+geodata/writers/kml/KmlPolygonTagWriter.h
+geodata/writers/kml/KmlPolyStyleTagWriter.h
+geodata/writers/kml/KmlRegionTagWriter.h
+geodata/writers/kml/KmlSchemaTagWriter.h
+geodata/writers/kml/KmlSchemaDataTagWriter.h
+geodata/writers/kml/KmlSimpleDataTagWriter.h
+geodata/writers/kml/KmlSimpleFieldTagWriter.h
+geodata/writers/kml/KmlScreenOverlayWriter.h
+geodata/writers/kml/KmlStyleMapTagWriter.h
+geodata/writers/kml/KmlStyleTagWriter.h
+geodata/writers/kml/KmlTagWriter.h
+geodata/writers/kml/KmlTimeSpanWriter.h
+geodata/writers/kml/KmlTimeStampTagWriter.h
+geodata/writers/kml/KmlTourTagWriter.h
+geodata/writers/kml/KmlTrackWriter.h
+geodata/writers/kml/KmlUpdateTagWriter.h
+geodata/writers/kml/KmlOsmPlacemarkDataTagWriter.h
 )
 
 # writer and the parser sources 
@@ -478,6 +815,14 @@ SET ( geodata_parser_SRCS
         geodata/parser/GeoSceneParser.cpp
         geodata/parser/GeoSceneTypes.cpp
         geodata/parser/GeoTagHandler.cpp
+
+        geodata/parser/GeoDataParser.h
+        geodata/parser/GeoDataTypes.h
+        geodata/parser/GeoDocument.h
+        geodata/parser/GeoParser.h
+        geodata/parser/GeoSceneParser.h
+        geodata/parser/GeoSceneTypes.h
+        geodata/parser/GeoTagHandler.h
    )
 
 SET( geodata_writer_SRCS
@@ -485,6 +830,11 @@ SET( geodata_writer_SRCS
         geodata/writer/GeoWriter.cpp
         geodata/writer/GeoWriterBackend.cpp
         geodata/writer/GeoDataDocumentWriter.cpp
+
+        geodata/writer/GeoTagWriter.h
+        geodata/writer/GeoWriter.h
+        geodata/writer/GeoWriterBackend.h
+        geodata/writer/GeoDataDocumentWriter.h
    )
 
 SET( geodata_SRCS
