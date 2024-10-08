@@ -43,11 +43,11 @@ public:
 
     QDir m_cacheDir;
     QNetworkAccessManager m_network;
-    QNetworkReply *m_routeUploadReply;
-    QNetworkReply *m_routeListReply;
-    QNetworkReply *m_routeDownloadReply;
-    QNetworkReply *m_routeDeleteReply;
-    QNetworkReply *m_authReply;
+    QNetworkReply *m_routeUploadReply = nullptr;
+    QNetworkReply *m_routeListReply = nullptr;
+    QNetworkReply *m_routeDownloadReply = nullptr;
+    QNetworkReply *m_routeDeleteReply = nullptr;
+    QNetworkReply *m_authReply = nullptr;
 
     QList<RouteItem> m_routeList;
 

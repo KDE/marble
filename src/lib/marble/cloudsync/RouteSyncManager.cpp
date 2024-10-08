@@ -37,9 +37,9 @@ public:
     ~Private();
 
     bool m_routeSyncEnabled;
-    CloudSyncManager *m_cloudSyncManager;
-    RoutingManager *m_routingManager;
-    CloudRouteModel *m_model;
+    CloudSyncManager *const m_cloudSyncManager;
+    RoutingManager *m_routingManager = nullptr;
+    CloudRouteModel *const m_model;
 
     QDir m_cacheDir;
     OwncloudSyncBackend m_owncloudBackend;
@@ -49,7 +49,6 @@ public:
 RouteSyncManager::Private::Private(CloudSyncManager *cloudSyncManager)
     : m_routeSyncEnabled(false)
     , m_cloudSyncManager(cloudSyncManager)
-    , m_routingManager(nullptr)
     , m_model(new CloudRouteModel())
     , m_owncloudBackend(cloudSyncManager)
 {

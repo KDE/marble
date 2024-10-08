@@ -43,8 +43,8 @@ private Q_SLOTS:
 private:
     void prepareLayout();
 
-    MergeItem *m_mergeItem;
-    QDialogButtonBox *m_box;
+    MergeItem *m_mergeItem = nullptr;
+    QDialogButtonBox *m_box = nullptr;
     ConflictDialog::ResolveAction m_resolveAction;
 };
 
