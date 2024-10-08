@@ -28,7 +28,7 @@ OpenRouteServiceRunner::OpenRouteServiceRunner(QObject *parent)
     : RoutingRunner(parent)
     , m_networkAccessManager()
 {
-    connect(&m_networkAccessManager, SIGNAL(finished(QNetworkReply *)), this, SLOT(retrieveData(QNetworkReply *)));
+    connect(&m_networkAccessManager, &QNetworkAccessManager::finished, this, &OpenRouteServiceRunner::retrieveData);
 }
 
 void OpenRouteServiceRunner::retrieveRoute(const RouteRequest *route)

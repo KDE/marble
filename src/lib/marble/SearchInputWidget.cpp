@@ -27,7 +27,7 @@ SearchInputWidget::SearchInputWidget(QWidget *parent)
 
     connect(this, SIGNAL(clearButtonClicked()), this, SLOT(search()));
     connect(this, SIGNAL(returnPressed()), this, SLOT(search()));
-    connect(this, SIGNAL(decoratorButtonClicked()), this, SLOT(showDropDownMenu()));
+    connect(this, &MarbleLineEdit::decoratorButtonClicked, this, &SearchInputWidget::showDropDownMenu);
 
     m_sortFilter.setSortRole(MarblePlacemarkModel::PopularityIndexRole);
     m_sortFilter.sort(0, Qt::AscendingOrder);

@@ -107,7 +107,7 @@ GeoDataDocument *ParsingRunnerManager::openFile(const QString &fileName, Documen
     QEventLoop localEventLoop;
     QTimer watchdog;
     watchdog.setSingleShot(true);
-    connect(&watchdog, SIGNAL(timeout()), &localEventLoop, SLOT(quit()));
+    connect(&watchdog, &QTimer::timeout, &localEventLoop, &QEventLoop::quit);
     connect(this, SIGNAL(parsingFinished()), &localEventLoop, SLOT(quit()), Qt::QueuedConnection);
 
     watchdog.start(timeout);

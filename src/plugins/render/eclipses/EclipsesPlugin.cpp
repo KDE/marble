@@ -57,7 +57,7 @@ EclipsesPlugin::EclipsesPlugin(const MarbleModel *marbleModel)
     , m_reminderDialog(nullptr)
     , m_reminderWidget(nullptr)
 {
-    connect(this, SIGNAL(settingsChanged(QString)), SLOT(updateSettings()));
+    connect(this, &RenderPlugin::settingsChanged, this, &EclipsesPlugin::updateSettings);
 }
 
 EclipsesPlugin::~EclipsesPlugin()
@@ -167,8 +167,8 @@ void EclipsesPlugin::initialize()
     connect(m_configWidget->buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked()), this, SLOT(updateEclipses()));
 
     m_browserDialog = new EclipsesBrowserDialog(marbleModel());
-    connect(m_browserDialog, SIGNAL(buttonShowClicked(int, int)), this, SLOT(showEclipse(int, int)));
-    connect(m_browserDialog, SIGNAL(buttonSettingsClicked()), m_configDialog, SLOT(show()));
+    connect(m_browserDialog, &EclipsesBrowserDialog::buttonShowClicked, this, &EclipsesPlugin::showEclipse);
+    connect(m_browserDialog, &EclipsesBrowserDialog::buttonSettingsClicked, m_configDialog, &QWidget::show);
 
     delete m_reminderDialog;
     m_reminderDialog = new QDialog();

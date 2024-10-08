@@ -159,8 +159,8 @@ QDialog *PhotoPlugin::configDialog()
 
         readSettings();
         ui_configWidget->m_itemNumberSpinBox->setRange(0, maximumNumberOfItems);
-        connect(ui_configWidget->m_buttonBox, SIGNAL(accepted()), SLOT(writeSettings()));
-        connect(ui_configWidget->m_buttonBox, SIGNAL(rejected()), SLOT(readSettings()));
+        connect(ui_configWidget->m_buttonBox, &QDialogButtonBox::accepted, this, &PhotoPlugin::writeSettings);
+        connect(ui_configWidget->m_buttonBox, &QDialogButtonBox::rejected, this, &PhotoPlugin::readSettings);
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button(QDialogButtonBox::Apply);
         connect(applyButton, SIGNAL(clicked()), this, SLOT(writeSettings()));
     }

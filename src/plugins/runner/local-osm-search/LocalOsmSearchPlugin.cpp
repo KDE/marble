@@ -29,8 +29,8 @@ LocalOsmSearchPlugin::LocalOsmSearchPlugin(QObject *parent)
     if (pathInfo.exists()) {
         m_watcher.addPath(path);
     }
-    connect(&m_watcher, SIGNAL(directoryChanged(QString)), this, SLOT(updateDirectory(QString)));
-    connect(&m_watcher, SIGNAL(fileChanged(QString)), this, SLOT(updateFile(QString)));
+    connect(&m_watcher, &QFileSystemWatcher::directoryChanged, this, &LocalOsmSearchPlugin::updateDirectory);
+    connect(&m_watcher, &QFileSystemWatcher::fileChanged, this, &LocalOsmSearchPlugin::updateFile);
 
     updateDatabase();
 }

@@ -331,11 +331,11 @@ MonavConfigWidget::MonavConfigWidget(MonavPlugin *plugin)
 
     updateComboBoxes();
 
-    connect(m_continentComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateStates()));
-    connect(m_transportTypeComboBox, SIGNAL(currentTextChanged(QString)), this, SLOT(updateTransportTypeFilter(QString)));
-    connect(m_stateComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateRegions()));
-    connect(m_installButton, SIGNAL(clicked()), this, SLOT(downloadMap()));
-    connect(m_cancelButton, SIGNAL(clicked()), this, SLOT(cancelOperation()));
+    connect(m_continentComboBox, &QComboBox::currentIndexChanged, this, &MonavConfigWidget::updateStates);
+    connect(m_transportTypeComboBox, &QComboBox::currentTextChanged, this, &MonavConfigWidget::updateTransportTypeFilter);
+    connect(m_stateComboBox, &QComboBox::currentIndexChanged, this, &MonavConfigWidget::updateRegions);
+    connect(m_installButton, &QAbstractButton::clicked, this, &MonavConfigWidget::downloadMap);
+    connect(m_cancelButton, &QAbstractButton::clicked, this, &MonavConfigWidget::cancelOperation);
     connect(&d->m_removeMapSignalMapper, &QSignalMapper::mappedInt, this, &MonavConfigWidget::removeMap);
     connect(&d->m_upgradeMapSignalMapper, &QSignalMapper::mappedInt, this, &MonavConfigWidget::upgradeMap);
     connect(&d->m_networkAccessManager, &QNetworkAccessManager::finished, this, &MonavConfigWidget::retrieveMapList);

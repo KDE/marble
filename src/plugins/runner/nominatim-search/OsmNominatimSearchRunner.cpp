@@ -26,9 +26,8 @@ namespace Marble
 
 OsmNominatimRunner::OsmNominatimRunner(QObject *parent)
     : SearchRunner(parent)
-    , m_manager()
 {
-    connect(&m_manager, SIGNAL(finished(QNetworkReply *)), this, SLOT(handleResult(QNetworkReply *)));
+    connect(&m_manager, &QNetworkAccessManager::finished, this, &OsmNominatimRunner::handleResult);
 }
 
 OsmNominatimRunner::~OsmNominatimRunner()

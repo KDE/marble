@@ -142,8 +142,8 @@ QDialog *MeasureToolPlugin::configDialog()
 {
     if (!m_configDialog) {
         m_configDialog = new MeasureConfigDialog(m_configDialog);
-        connect(m_configDialog, SIGNAL(accepted()), SLOT(writeSettings()));
-        connect(m_configDialog, SIGNAL(applied()), this, SLOT(writeSettings()));
+        connect(m_configDialog, &QDialog::accepted, this, &MeasureToolPlugin::writeSettings);
+        connect(m_configDialog, &MeasureConfigDialog::applied, this, &MeasureToolPlugin::writeSettings);
     }
 
     m_configDialog->setShowDistanceLabels(m_showDistanceLabel);

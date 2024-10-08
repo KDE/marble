@@ -557,9 +557,9 @@ QDialog *RoutingPlugin::configDialog()
         d->m_configUi.setupUi(d->m_configDialog);
         d->readSettings();
 
-        connect(d->m_configDialog, SIGNAL(accepted()), this, SLOT(writeSettings()));
+        connect(d->m_configDialog, &QDialog::accepted, this, &RoutingPlugin::writeSettings);
         connect(d->m_configDialog, SIGNAL(rejected()), this, SLOT(readSettings()));
-        connect(d->m_configUi.buttonBox->button(QDialogButtonBox::Reset), SIGNAL(clicked()), SLOT(restoreDefaultSettings()));
+        connect(d->m_configUi.buttonBox->button(QDialogButtonBox::Reset), &QAbstractButton::clicked, this, &RenderPlugin::restoreDefaultSettings);
     }
 
     return d->m_configDialog;
