@@ -57,22 +57,14 @@ public:
     QString m_routeDeleteEndpoint;
     QString m_routePreviewEndpoint;
 
-    CloudSyncManager *m_cloudSyncManager;
+    CloudSyncManager *m_cloudSyncManager = nullptr;
     QUrl m_apiUrl;
 };
 
 OwncloudSyncBackend::Private::Private(CloudSyncManager *cloudSyncManager)
     : m_cacheDir(MarbleDirs::localPath() + QLatin1StringView("/cloudsync/cache/routes/"))
-    , m_network()
-    , m_routeUploadReply()
-    , m_routeListReply()
-    , m_routeDownloadReply()
-    , m_routeDeleteReply()
-    , m_authReply()
-    , m_routeList()
-    ,
     // Route API endpoints
-    m_routeUploadEndpoint("routes/create")
+    , m_routeUploadEndpoint("routes/create")
     , m_routeListEndpoint("routes")
     , m_routeDownloadEndpoint("routes")
     , m_routeDeleteEndpoint("routes/delete")
@@ -84,7 +76,7 @@ OwncloudSyncBackend::Private::Private(CloudSyncManager *cloudSyncManager)
 OwncloudSyncBackend::OwncloudSyncBackend(CloudSyncManager *cloudSyncManager)
     : d(new Private(cloudSyncManager))
 {
-    connect(d->m_cloudSyncManager, SIGNAL(apiUrlChanged(QUrl)), this, SLOT(validateSettings()));
+    connect(d->m_cloudSyncManager, &CloudSyncManager::apiUrlChanged, this, &OwncloudSyncBackend::validateSettings);
 }
 
 OwncloudSyncBackend::~OwncloudSyncBackend()
