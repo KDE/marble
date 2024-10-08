@@ -70,8 +70,8 @@ Q_SIGNALS:
     void modelChanged();
 
 private:
-    MarbleQuickItem *m_marbleQuickItem;
-    BookmarksModel *m_proxyModel;
+    MarbleQuickItem *m_marbleQuickItem = nullptr;
+    BookmarksModel *m_proxyModel = nullptr;
     GeoDataTreeModel m_treeModel;
 };
 

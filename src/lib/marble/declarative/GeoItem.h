@@ -108,7 +108,7 @@ Q_SIGNALS:
 
 private:
     Marble::GeoDataCoordinates m_coordinate;
-    MarbleQuickItem *m_map;
+    MarbleQuickItem *m_map = nullptr;
     bool m_observable;
     bool m_visible;
     qreal m_x;

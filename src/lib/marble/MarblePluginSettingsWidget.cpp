@@ -40,7 +40,7 @@ public:
     void showPluginConfigDialog(const QModelIndex &index);
 
     Marble::MarblePluginSettingsWidget *const q;
-    PluginItemDelegate *m_itemDelegate;
+    PluginItemDelegate *m_itemDelegate = nullptr;
     QPointer<RenderPluginModel> m_pluginModel;
 };
 

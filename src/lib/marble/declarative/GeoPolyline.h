@@ -96,7 +96,7 @@ protected:
     QSGNode *updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) override;
 
 private:
-    MarbleQuickItem *m_map;
+    MarbleQuickItem *m_map = nullptr;
     bool m_observable;
     GeoDataLineString m_lineString;
     QVariantList m_geoCoordinates;

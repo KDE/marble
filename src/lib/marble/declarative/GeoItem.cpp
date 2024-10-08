@@ -12,7 +12,6 @@ namespace Marble
 {
 GeoItem::GeoItem(QQuickItem *parent)
     : QQuickItem(parent)
-    , m_map(nullptr)
     , m_observable(false)
     , m_visible(true)
 {

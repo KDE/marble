@@ -43,7 +43,7 @@ Q_SIGNALS:
     void licenseChanged();
 
 private:
-    MarbleQuickItem *m_map;
+    MarbleQuickItem *m_map = nullptr;
 };
 }
 

@@ -21,14 +21,14 @@ namespace Marble
 TourControlEditWidget::TourControlEditWidget(const QModelIndex &index, QWidget *parent)
     : QWidget(parent)
     , m_index(index)
-    , m_radio_play(new QRadioButton)
-    , m_radio_pause(new QRadioButton)
-    , m_button(new QToolButton)
+    , m_radio_play(new QRadioButton(this))
+    , m_radio_pause(new QRadioButton(this))
+    , m_button(new QToolButton(this))
 {
     auto layout = new QHBoxLayout(this);
     layout->setSpacing(5);
 
-    auto iconLabel = new QLabel;
+    auto iconLabel = new QLabel(this);
     iconLabel->setPixmap(QPixmap(QStringLiteral(":/marble/media-playback-pause.png")));
     layout->addWidget(iconLabel);
 

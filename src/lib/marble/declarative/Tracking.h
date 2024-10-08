@@ -118,17 +118,17 @@ private:
 
     bool m_showTrack;
 
-    PositionSource *m_positionSource;
+    PositionSource *m_positionSource = nullptr;
 
-    QObject *m_positionMarker;
+    QObject *m_positionMarker = nullptr;
 
-    MarbleQuickItem *m_marbleQuickItem;
+    MarbleQuickItem *m_marbleQuickItem = nullptr;
 
     bool m_hasLastKnownPosition;
 
     Coordinate m_lastKnownPosition;
 
-    Marble::AutoNavigation *m_autoNavigation;
+    Marble::AutoNavigation *m_autoNavigation = nullptr;
 
     PositionMarkerType m_positionMarkerType;
 };

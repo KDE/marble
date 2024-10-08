@@ -14,8 +14,6 @@
 
 RouteRequestModel::RouteRequestModel(QObject *parent)
     : QAbstractListModel(parent)
-    , m_request(nullptr)
-    , m_routing(nullptr)
 {
 }
 

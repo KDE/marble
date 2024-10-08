@@ -23,14 +23,14 @@ namespace Marble
 SoundCueEditWidget::SoundCueEditWidget(const QModelIndex &index, QWidget *parent)
     : QWidget(parent)
     , m_index(index)
-    , m_lineEdit(new QLineEdit)
-    , m_button(new QToolButton)
-    , m_button2(new QToolButton)
+    , m_lineEdit(new QLineEdit(this))
+    , m_button(new QToolButton(this))
+    , m_button2(new QToolButton(this))
 {
     auto layout = new QHBoxLayout(this);
     layout->setSpacing(5);
 
-    auto iconLabel = new QLabel;
+    auto iconLabel = new QLabel(this);
     iconLabel->setPixmap(QPixmap(QStringLiteral(":/marble/playback-play.png")));
     layout->addWidget(iconLabel);
 

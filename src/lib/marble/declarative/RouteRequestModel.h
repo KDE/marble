@@ -67,8 +67,8 @@ private Q_SLOTS:
     void updateAfterAddition(int index);
 
 private:
-    Marble::RouteRequest *m_request;
-    Marble::Routing *m_routing;
+    Marble::RouteRequest *m_request = nullptr;
+    Marble::Routing *m_routing = nullptr;
 };
 
 #endif // MARBLE_ROUTEREQUESTMODEL_H

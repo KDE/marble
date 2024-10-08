@@ -14,10 +14,6 @@ using namespace Marble;
 
 SearchBackend::SearchBackend(QObject *parent)
     : QObject(parent)
-    , m_searchManager(nullptr)
-    , m_marbleQuickItem(nullptr)
-    , m_placemarkModel(nullptr)
-    , m_completer(nullptr)
     , m_completionModel(new MarblePlacemarkModel)
     , m_completionContainer(new QList<GeoDataPlacemark *>())
     , m_selectedPlacemark()

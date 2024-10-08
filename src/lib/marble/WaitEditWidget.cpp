@@ -22,17 +22,17 @@ namespace Marble
 WaitEditWidget::WaitEditWidget(const QModelIndex &index, QWidget *parent)
     : QWidget(parent)
     , m_index(index)
-    , m_spinBox(new QDoubleSpinBox)
-    , m_button(new QToolButton)
+    , m_spinBox(new QDoubleSpinBox(this))
+    , m_button(new QToolButton(this))
 {
     auto layout = new QHBoxLayout(this);
     layout->setSpacing(5);
 
-    auto iconLabel = new QLabel;
+    auto iconLabel = new QLabel(this);
     iconLabel->setPixmap(QPixmap(QStringLiteral(":/marble/player-time.png")));
     layout->addWidget(iconLabel);
 
-    auto waitLabel = new QLabel;
+    auto waitLabel = new QLabel(this);
     waitLabel->setText(tr("Wait duration:"));
     layout->addWidget(waitLabel);
 

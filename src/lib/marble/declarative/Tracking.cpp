@@ -18,11 +18,7 @@ namespace Marble
 Tracking::Tracking(QObject *parent)
     : QObject(parent)
     , m_showTrack(true)
-    , m_positionSource(nullptr)
-    , m_positionMarker(nullptr)
-    , m_marbleQuickItem(nullptr)
     , m_hasLastKnownPosition(false)
-    , m_autoNavigation(nullptr)
     , m_positionMarkerType(None)
 {
     connect(&m_lastKnownPosition, &Coordinate::longitudeChanged, this, &Tracking::setHasLastKnownPosition);

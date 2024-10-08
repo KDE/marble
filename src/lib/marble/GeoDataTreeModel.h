@@ -79,7 +79,7 @@ public Q_SLOTS:
 
     Q_INVOKABLE int addFeature(GeoDataContainer *parent, GeoDataFeature *feature, int row = -1);
 
-    Q_INVOKABLE bool removeFeature(Marble::GeoDataContainer *parent, int index);
+    Q_INVOKABLE bool removeFeatureRow(Marble::GeoDataContainer *parent, int index);
 
     Q_INVOKABLE int removeFeature(GeoDataFeature *feature);
 

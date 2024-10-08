@@ -21,7 +21,6 @@
 #include "GeoDataTourControl.h"
 #include "GeoDataTreeModel.h"
 #include "GeoDataWait.h"
-#include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
 #include "PlaybackAnimatedUpdateItem.h"
@@ -42,7 +41,7 @@ public:
     TourPlaybackPrivate();
     ~TourPlaybackPrivate();
 
-    GeoDataTour *m_tour;
+    GeoDataTour *m_tour = nullptr;
     bool m_pause;
     SerialTrack m_mainTrack;
     QList<SoundTrack *> m_soundTracks;
@@ -71,10 +70,10 @@ TourPlayback::TourPlayback(QObject *parent)
     : QObject(parent)
     , d(new TourPlaybackPrivate())
 {
-    connect(&d->m_mainTrack, SIGNAL(centerOn(GeoDataCoordinates)), this, SLOT(centerOn(GeoDataCoordinates)));
-    connect(&d->m_mainTrack, SIGNAL(progressChanged(double)), this, SIGNAL(progressChanged(double)));
-    connect(&d->m_mainTrack, SIGNAL(finished()), this, SLOT(stopTour()));
-    connect(&d->m_mainTrack, SIGNAL(itemFinished(int)), this, SLOT(handleFinishedItem(int)));
+    connect(&d->m_mainTrack, &SerialTrack::centerOn, this, &TourPlayback::centerOn);
+    connect(&d->m_mainTrack, &SerialTrack::progressChanged, this, &TourPlayback::progressChanged);
+    connect(&d->m_mainTrack, &SerialTrack::finished, this, &TourPlayback::stopTour);
+    connect(&d->m_mainTrack, &SerialTrack::itemFinished, this, &TourPlayback::handleFinishedItem);
 }
 
 TourPlayback::~TourPlayback()
@@ -126,12 +125,9 @@ void TourPlayback::setMarbleWidget(MarbleWidget *widget)
 {
     d->m_widget = widget;
 
-    connect(this,
-            SIGNAL(added(GeoDataContainer *, GeoDataFeature *, int)),
-            d->m_widget->model()->treeModel(),
-            SLOT(addFeature(GeoDataContainer *, GeoDataFeature *, int)));
+    connect(this, &TourPlayback::added, d->m_widget->model()->treeModel(), &GeoDataTreeModel::addFeature);
     connect(this, SIGNAL(removed(GeoDataFeature *)), d->m_widget->model()->treeModel(), SLOT(removeFeature(GeoDataFeature *)));
-    connect(this, SIGNAL(updated(GeoDataFeature *)), d->m_widget->model()->treeModel(), SLOT(updateFeature(GeoDataFeature *)));
+    connect(this, &TourPlayback::updated, d->m_widget->model()->treeModel(), &GeoDataTreeModel::updateFeature);
 }
 
 void TourPlayback::setBaseUrl(const QUrl &baseUrl)
@@ -251,11 +247,11 @@ void TourPlayback::updateTracks()
             auto track = new AnimatedUpdateTrack(item);
             track->setDelayBeforeTrackStarts(delay + animatedUpdate->delayedStart());
             d->m_animatedUpdateTracks.append(track);
-            connect(track, SIGNAL(balloonHidden()), this, SLOT(hideBalloon()));
-            connect(track, SIGNAL(balloonShown(GeoDataPlacemark *)), this, SLOT(showBalloon(GeoDataPlacemark *)));
-            connect(track, SIGNAL(updated(GeoDataFeature *)), this, SIGNAL(updated(GeoDataFeature *)));
-            connect(track, SIGNAL(added(GeoDataContainer *, GeoDataFeature *, int)), this, SIGNAL(added(GeoDataContainer *, GeoDataFeature *, int)));
-            connect(track, SIGNAL(removed(const GeoDataFeature *)), this, SIGNAL(removed(const GeoDataFeature *)));
+            connect(track, &AnimatedUpdateTrack::balloonHidden, this, &TourPlayback::hideBalloon);
+            connect(track, &AnimatedUpdateTrack::balloonShown, this, &TourPlayback::showBalloon);
+            connect(track, &AnimatedUpdateTrack::updated, this, &TourPlayback::updated);
+            connect(track, &AnimatedUpdateTrack::added, this, &TourPlayback::added);
+            connect(track, &AnimatedUpdateTrack::removed, this, &TourPlayback::removed);
         }
     }
     Q_ASSERT(d->m_widget);

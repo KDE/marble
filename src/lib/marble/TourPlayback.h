@@ -78,7 +78,7 @@ Q_SIGNALS:
     void progressChanged(double);
     void updated(GeoDataFeature *);
     void added(GeoDataContainer *parent, GeoDataFeature *feature, int row);
-    void removed(GeoDataFeature *feature);
+    void removed(const GeoDataFeature *feature);
     void itemFinished(int index);
 
 private Q_SLOTS:

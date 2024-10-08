@@ -685,7 +685,7 @@ int GeoDataTreeModel::addDocument(GeoDataDocument *document)
     return addFeature(d->m_rootDocument, document);
 }
 
-bool GeoDataTreeModel::removeFeature(GeoDataContainer *parent, int row)
+bool GeoDataTreeModel::removeFeatureRow(GeoDataContainer *parent, int row)
 {
     if (row < parent->size()) {
         beginRemoveRows(index(parent), row, row);
@@ -708,12 +708,12 @@ int GeoDataTreeModel::removeFeature(GeoDataFeature *feature)
         // We check to see we are not removing the
         // top level element m_rootDocument
 
-        auto parent = static_cast<GeoDataObject *>(feature->parent());
+        auto parent = static_cast<const GeoDataObject *>(feature->parent());
 
         if (dynamic_cast<const GeoDataContainer *>(parent)) {
-            int row = static_cast<GeoDataContainer *>(feature->parent())->childPosition(feature);
+            int row = static_cast<const GeoDataContainer *>(feature->parent())->childPosition(feature);
             if (row != -1) {
-                bool removed = removeFeature(static_cast<GeoDataContainer *>(feature->parent()), row);
+                bool removed = removeFeatureRow(static_cast<GeoDataContainer *>(feature->parent()), row);
                 if (removed) {
                     return row;
                 }
@@ -734,7 +734,7 @@ void GeoDataTreeModel::updateFeature(GeoDataFeature *feature)
 
 void GeoDataTreeModel::removeDocument(int index)
 {
-    removeFeature(d->m_rootDocument, index);
+    removeFeatureRow(d->m_rootDocument, index);
 }
 
 void GeoDataTreeModel::removeDocument(GeoDataDocument *document)

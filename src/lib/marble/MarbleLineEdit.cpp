@@ -25,9 +25,9 @@ namespace Marble
 class MarbleLineEditPrivate
 {
 public:
-    QLabel *m_clearButton;
+    QLabel *const m_clearButton;
 
-    QLabel *m_decoratorButton;
+    QLabel *const m_decoratorButton;
 
     QPixmap m_clearPixmap;
 

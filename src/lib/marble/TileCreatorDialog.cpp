@@ -25,7 +25,7 @@ class TileCreatorDialogPrivate
 public:
     Ui::TileCreatorDialog uiWidget;
 
-    TileCreator *m_creator;
+    TileCreator *m_creator = nullptr;
 };
 
 TileCreatorDialog::TileCreatorDialog(TileCreator *creator, QWidget *parent)

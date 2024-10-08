@@ -22,8 +22,6 @@ namespace Marble
 
 Bookmarks::Bookmarks(QObject *parent)
     : QObject(parent)
-    , m_marbleQuickItem(nullptr)
-    , m_proxyModel(nullptr)
 {
     // nothing to do
 }

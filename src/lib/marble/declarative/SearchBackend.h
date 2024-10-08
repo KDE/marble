@@ -53,12 +53,12 @@ public Q_SLOTS:
 private:
     static GeoDataPlacemark *placemarkFromQVariant(const QVariant &data);
     QSortFilterProxyModel m_model;
-    SearchRunnerManager *m_searchManager;
-    MarbleQuickItem *m_marbleQuickItem;
-    MarblePlacemarkModel *m_placemarkModel;
-    QCompleter *m_completer;
-    MarblePlacemarkModel *m_completionModel;
-    QList<GeoDataPlacemark *> *m_completionContainer;
+    SearchRunnerManager *m_searchManager = nullptr;
+    MarbleQuickItem *m_marbleQuickItem = nullptr;
+    MarblePlacemarkModel *m_placemarkModel = nullptr;
+    QCompleter *m_completer = nullptr;
+    MarblePlacemarkModel *const m_completionModel;
+    QList<GeoDataPlacemark *> *m_completionContainer = nullptr;
     Placemark m_selectedPlacemark;
     QString m_lastSuccessfulCompletion;
 };
