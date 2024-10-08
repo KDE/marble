@@ -2802,76 +2802,76 @@ msgctxt "Marble::MainWindow|"
 msgid "Unnamed"
 msgstr "უსახელო"
 
-#: src/apps/marble-ui/ControlView.cpp:85
+#: src/apps/marble-ui/ControlView.cpp:83
 msgctxt "Marble::ControlView|"
 msgid "Marble - Virtual Globe"
 msgstr "Marble - ვირტუალური გლობუსი"
 
-#: src/apps/marble-ui/ControlView.cpp:273
+#: src/apps/marble-ui/ControlView.cpp:271
 msgctxt "Marble::ControlView|"
 msgid "Default (Resizable)"
 msgstr "ნაგულისხმევი (ცვლადი ზომით)"
 
-#: src/apps/marble-ui/ControlView.cpp:282
+#: src/apps/marble-ui/ControlView.cpp:280
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC (%1x%2)"
 msgstr "NTSC (%1x%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:283
+#: src/apps/marble-ui/ControlView.cpp:281
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL (%1x%2)"
 msgstr "PAL (%1x%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:284
+#: src/apps/marble-ui/ControlView.cpp:282
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC 16:9 (%1x%2)"
 msgstr "NTSC 16:9 (%1x%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:285
+#: src/apps/marble-ui/ControlView.cpp:283
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL 16:9 (%1x%2)"
 msgstr "PAL 16:9 (%1x%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:287
+#: src/apps/marble-ui/ControlView.cpp:285
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "DVD (%1x%2p)"
 msgstr "DVD (%1x%2p)"
 
-#: src/apps/marble-ui/ControlView.cpp:289
+#: src/apps/marble-ui/ControlView.cpp:287
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "HD (%1x%2p)"
 msgstr "HD (%1x%2p)"
 
-#: src/apps/marble-ui/ControlView.cpp:291
+#: src/apps/marble-ui/ControlView.cpp:289
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Full HD (%1x%2p)"
 msgstr "Full HD (%1x%2p)"
 
-#: src/apps/marble-ui/ControlView.cpp:292
+#: src/apps/marble-ui/ControlView.cpp:290
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Digital Cinema (%1x%2)"
 msgstr "ციფრული კინოთეატრი (%1x%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:477
+#: src/apps/marble-ui/ControlView.cpp:475
 msgctxt "Marble::ControlView|"
 msgid "The Marble development team wishes you a pleasant and safe journey."
 msgstr ""
 "Marble-ის პროგრამისტების გუნდი სასიამოვნო და უსაფრთხო მოგზაურობას გისურვებთ."
 
-#: src/apps/marble-ui/ControlView.cpp:478
+#: src/apps/marble-ui/ControlView.cpp:476
 msgctxt "Marble::ControlView|"
 msgid "Caution: Driving instructions may be incomplete or inaccurate."
 msgstr "გაფრთხილება: მართვის ინსტრუქცია, შეიძლება, არასრული ან არაზუსტი იყოს."
 
-#: src/apps/marble-ui/ControlView.cpp:479
+#: src/apps/marble-ui/ControlView.cpp:477
 msgctxt "Marble::ControlView|"
 msgid ""
 "Road construction, weather and other unforeseen variables can result in this "
@@ -2882,12 +2882,12 @@ msgstr ""
 "გამოიწვიოს, რომ შემოთავაზებული მარშრუტი არ იქნება თქვენი დანიშნულების "
 "წერტილამდე ყველაზე შესაფერისი ან უსაფრთხო."
 
-#: src/apps/marble-ui/ControlView.cpp:481
+#: src/apps/marble-ui/ControlView.cpp:479
 msgctxt "Marble::ControlView|"
 msgid "Please use common sense while navigating."
 msgstr "ნავიგაციის დროს, გთხოვთ, გამოიყენეთ საღი აზრი."
 
-#: src/apps/marble-ui/ControlView.cpp:565
+#: src/apps/marble-ui/ControlView.cpp:563
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid ""
@@ -2897,69 +2897,69 @@ msgstr ""
 "გარე რედაქტორის გაშვება შეუძლებელია. შეამოწმეთ, დაყენებულია, თუ არა %1 ან "
 "აირჩიეთ სხვა გარე რედაქტორი მორგების დიალოგში."
 
-#: src/apps/marble-ui/ControlView.cpp:567
+#: src/apps/marble-ui/ControlView.cpp:565
 msgctxt "Marble::ControlView|"
 msgid "Cannot start external editor"
 msgstr "გარე რედაქტორის გაშვება შეუძლებელია"
 
-#: src/apps/marble-ui/ControlView.cpp:584
+#: src/apps/marble-ui/ControlView.cpp:582
 msgctxt "Marble::ControlView|"
 msgid "Legend"
 msgstr "შინაარსი"
 
-#: src/apps/marble-ui/ControlView.cpp:600
+#: src/apps/marble-ui/ControlView.cpp:598
 msgctxt "Marble::ControlView|"
 msgid "Routing"
 msgstr "რაუტინგი"
 
-#: src/apps/marble-ui/ControlView.cpp:608
+#: src/apps/marble-ui/ControlView.cpp:606
 msgctxt "Marble::ControlView|"
 msgid "Location"
 msgstr "მდებარეობა"
 
-#: src/apps/marble-ui/ControlView.cpp:616
+#: src/apps/marble-ui/ControlView.cpp:614
 msgctxt "Marble::ControlView|"
 msgid "Search"
 msgstr "ძებნა"
 
-#: src/apps/marble-ui/ControlView.cpp:629
+#: src/apps/marble-ui/ControlView.cpp:627
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Search for cities, addresses, points of interest and more (%1)"
 msgstr "მოძებნეთ ქალაქები, მისამართები, საინტერესო ადგილები და სხვა (%1)"
 
-#: src/apps/marble-ui/ControlView.cpp:633
+#: src/apps/marble-ui/ControlView.cpp:631
 msgctxt "Marble::ControlView|"
 msgid "Map View"
 msgstr "რუკის ხედი"
 
-#: src/apps/marble-ui/ControlView.cpp:643
+#: src/apps/marble-ui/ControlView.cpp:641
 msgctxt "Marble::ControlView|"
 msgid "Files"
 msgstr "ფაილები"
 
-#: src/apps/marble-ui/ControlView.cpp:652
+#: src/apps/marble-ui/ControlView.cpp:650
 msgctxt "Marble::ControlView|"
 msgid "Tour"
 msgstr "ტური"
 
-#: src/apps/marble-ui/ControlView.cpp:665
+#: src/apps/marble-ui/ControlView.cpp:663
 msgctxt "QObject|"
 msgid "Edit Maps"
 msgstr "რუკების ჩასწორება"
 
-#: src/apps/marble-ui/ControlView.cpp:714
-#: src/apps/marble-ui/ControlView.cpp:852
+#: src/apps/marble-ui/ControlView.cpp:712
+#: src/apps/marble-ui/ControlView.cpp:850
 msgctxt "Marble::ControlView|"
 msgid "Hide &All Panels"
 msgstr "&ყველა პანელის დამალვა"
 
-#: src/apps/marble-ui/ControlView.cpp:716
+#: src/apps/marble-ui/ControlView.cpp:714
 msgctxt "Marble::ControlView|"
 msgid "Show or hide all panels."
 msgstr "პანელების ჩვენება ან დამალვა."
 
-#: src/apps/marble-ui/ControlView.cpp:841
+#: src/apps/marble-ui/ControlView.cpp:839
 msgctxt "Marble::ControlView|"
 msgid "Show &All Panels"
 msgstr "&ყველა პანელის დამალვა"
@@ -12747,53 +12747,53 @@ msgstr ""
 "მოგაწვდით მიმდინარე მდებარეობას ახლომახლო WLAN მიერთების წერტილის სახელების "
 "მიხედვით"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:126
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:125
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Annotation"
 msgstr "ანოტაცია"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:131
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:130
 msgctxt "Marble::AnnotatePlugin|"
 msgid "&Annotation"
 msgstr "&ანოტაცია"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:141
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:140
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Draws annotations on maps with placemarks or polygons."
 msgstr "ხატავს ანოტაციებს რუკაზე ადგილის ნიშნებით ან მრავალკუთხედებით."
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:184
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:183
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Annotations"
 msgstr "ანოტაციები"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:306
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:305
 msgctxt "QObject|"
 msgid "Remove current item"
 msgstr "მიმდინარე ელემენტის წაშლა"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:307
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:306
 msgctxt "QObject|"
 msgid "Are you sure you want to remove the current item?"
 msgstr "დარწმუნებული ხართ, რომ გსურთ მიმდინარე ელემენტის წაშლა?"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:343
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:342
 msgctxt "QObject|"
 msgid "Clear all annotations"
 msgstr "ყველა ანოტაციის გასუფთავება"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:344
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:343
 msgctxt "QObject|"
 msgid "Are you sure you want to clear all annotations?"
 msgstr "დარწმუნებული ხართ, რომ გსურთ ყველა ანოტაციის გასუფთავება?"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:363
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:896
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:362
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:895
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Save Annotation File"
 msgstr "ანოტაციის ფაილის შენახვა"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:365
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:364
 msgctxt "Marble::AnnotatePlugin|"
 msgid ""
 "All Supported Files (*.kml *.osm);;KML file (*.kml);;Open Street Map file (*."
@@ -12802,12 +12802,12 @@ msgstr ""
 "ყველა მხარდაჭერილი ფაილი (*.kml *.osm);; KML ფაილი (*.kml);; Open Street Map "
 "ფაილი (*.osm)"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:391
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:390
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Open Annotation File"
 msgstr "ანოტაციის ფაილის გახსნა"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:393
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:392
 msgctxt "Marble::AnnotatePlugin|"
 msgid ""
 "All Supported Files (*.kml *.osm);;Kml Annotation file (*.kml);;Open Street "
@@ -12816,16 +12816,16 @@ msgstr ""
 "ყველა მხარდაჭერილი ფაილი (*.kml *.osm);; kml ანოტაციის ფაილი (*.kml);; Open "
 "Street Map-ის ფაილი (*.osm)"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:751
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:756
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:761
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1375
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1459
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:750
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:755
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:760
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1374
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1458
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Operation not permitted"
 msgstr "ოპერაცია ნებადაურთველია"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:752
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:751
 msgctxt "Marble::AnnotatePlugin|"
 msgid ""
 "Cannot merge a node from polygon's outer boundary with a node from one of "
@@ -12833,12 +12833,12 @@ msgid ""
 msgstr ""
 "ვერ შერწყმა კვანძის პოლიგონის გარე საზღვარი კვანძის ერთი მისი შიდა საზღვრები."
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:757
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:756
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Cannot merge two nodes from two different inner boundaries."
 msgstr "ორი სხვადასხვა შიდა საზღვრის მქონე ორი კვანძის შერწყმა შეუძლებელია."
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:762
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:761
 msgctxt "Marble::AnnotatePlugin|"
 msgid ""
 "Cannot merge the selected nodes. Most probably this would make the polygon's "
@@ -12847,121 +12847,121 @@ msgstr ""
 "მონიშნული კვანძების შერწყმა შეუძლებელია. სავარაუდოდ, ის პოლიგონის გარე "
 "საზღვარს ისე შეცვლის, რომ არ შეიცავს მის შიდა სასაზღვრო კვანძებს."
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:863
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:941
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:862
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:940
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Select Item"
 msgstr "ელემენტის მონიშვნა"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:867
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:866
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Polygon"
 msgstr "მრავალკუთხედის დამატება"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:870
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:869
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Polygon Hole"
 msgstr "ნახვრეტის დამატება"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:875
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:874
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Nodes"
 msgstr "კვანძების დამატება"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:880
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:879
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Placemark"
 msgstr "ადგილის მაჩვენებლის დამატება"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:883
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:882
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Path"
 msgstr "კონტურის დამატება"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:886
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:885
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Ground Overlay"
 msgstr "ფონის დადების დამატება"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:889
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:888
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Remove Item"
 msgstr "ჩანაწერისწაშლა"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:893
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:892
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Load Annotation File"
 msgstr "ანოტაციის ფაილის ჩატვირთვა"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:899
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:898
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Clear all Annotations"
 msgstr "ყველა ანოტაციის გასუფთავება"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:900
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:899
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Download OpenStreetMap Data"
 msgstr "OpenStreetMap-ის მონაცემების გადმოწერა"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:902
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:901
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Download OpenStreetMap data of the visible region"
 msgstr "OpenStreetMap-ის მონაცემების გადმოწერა ხილული რეგიონისთვის"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:981
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:980
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Paste"
 msgstr "ჩასმა"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1000
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1239
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1481
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:999
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1238
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1480
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Cut"
 msgstr "ამოჭრა"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1004
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1243
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1485
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1003
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1242
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1484
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Copy"
 msgstr "კოპირება"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1008
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1120
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1247
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1489
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1007
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1119
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1246
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1488
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Remove"
 msgstr "წაშლა"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1014
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1114
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1253
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1495
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1013
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1113
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1252
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1494
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Properties"
 msgstr "პარამეტრები"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1139
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1138
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Untitled Ground Overlay"
 msgstr "უსათაურო ფონის დადება"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1229
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1471
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1228
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1470
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Deselect All Nodes"
 msgstr "ყველა კვანძის მონიშვნის მოხსნა"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1233
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1475
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1232
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1474
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Delete All Selected Nodes"
 msgstr "ყველა მონიშნული კვანძის წაშლა"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1376
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1460
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1375
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1459
 msgctxt "Marble::AnnotatePlugin|"
 msgid ""
 "Cannot delete one of the selected nodes. Most probably this would make the "
@@ -12970,42 +12970,42 @@ msgstr ""
 "ვერ წაშლის ერთ-ერთ არჩეულ კვანძს. სავარაუდოდ, ეს გახდის პოლიგონის გარე "
 "საზღვარს, რომელიც არ შეიცავს მის შიდა სასაზღვრო კვანძებს."
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1404
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1424
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1403
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1423
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Select Node"
 msgstr "კვანძის მონიშვნა"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1408
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1407
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Delete Node"
 msgstr "კვანძის წაშლა"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1424
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1423
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Deselect Node"
 msgstr "კვანძის მონიშვნის მოხსნა"
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:32
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:35
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:31
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:34
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "Download"
 msgstr "ჩამოტვირთვა"
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:70
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:115
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:120
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:126
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:69
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:114
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:119
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:125
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "ERROR"
 msgstr "შეცდომა"
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:70
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:69
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "Unable to create temporary file to download OSM data to."
 msgstr "OSM მონაცემების გადმოსაწერად დროებითი ფაილის შექმნა შეუძლებელია."
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:115
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:114
 msgctxt "Marble::DownloadOsmDialog|"
 msgid ""
 "The selected region contains too much data. Please select a smaller region "
@@ -13014,12 +13014,12 @@ msgstr ""
 "არჩეული რეგიონი მეტისმეტად ბევრ მონაცემებს შეიცავს. აირჩიეთ უფრო პატარა "
 "რეგიონი და თავიდან სცადეთ."
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:120
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:119
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "The bandwidth limit exceeded. Please try again later."
 msgstr "გადაჭარბებულია გამტარობის ზღვარი. მოგვიანებით სცადეთ."
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:127
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:126
 msgctxt "Marble::DownloadOsmDialog|"
 msgid ""
 "Sorry, a network error occurred. Please check your internet connection or "
@@ -13417,17 +13417,17 @@ msgctxt "AprsConfigWidget|"
 msgid "Dump file records to the debug stream"
 msgstr "ფაილის ჩანაწერების ჩაყრა გამართვის ნაკადში"
 
-#: src/plugins/render/aprs/AprsPlugin.cpp:117
+#: src/plugins/render/aprs/AprsPlugin.cpp:116
 msgctxt "Marble::AprsPlugin|"
 msgid "Amateur Radio Aprs Plugin"
 msgstr "დამატება სამოყვარულო რადიოსთვის ARPS"
 
-#: src/plugins/render/aprs/AprsPlugin.cpp:122
+#: src/plugins/render/aprs/AprsPlugin.cpp:121
 msgctxt "Marble::AprsPlugin|"
 msgid "Amateur Radio &Aprs Plugin"
 msgstr "დამატება სამოყვარულო რადიოსთვის &ARPS"
 
-#: src/plugins/render/aprs/AprsPlugin.cpp:137
+#: src/plugins/render/aprs/AprsPlugin.cpp:136
 msgctxt "Marble::AprsPlugin|"
 msgid ""
 "This plugin displays APRS data gleaned from the Internet.  APRS is an "
@@ -13482,27 +13482,27 @@ msgctxt "CompassConfigWidget|"
 msgid "Magnet"
 msgstr "მაგნიტი"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:58
+#: src/plugins/render/compass/CompassFloatItem.cpp:56
 msgctxt "Marble::CompassFloatItem|"
 msgid "Compass"
 msgstr "კომპასი"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:63
+#: src/plugins/render/compass/CompassFloatItem.cpp:61
 msgctxt "Marble::CompassFloatItem|"
 msgid "&Compass"
 msgstr "&კომპასი"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:78
+#: src/plugins/render/compass/CompassFloatItem.cpp:76
 msgctxt "Marble::CompassFloatItem|"
 msgid "This is a float item that provides a compass."
 msgstr "ეს მცურავმძიმიანი ჩანაწერია, რომელიც GPS ინფორმაციას შეიცავს."
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:138
+#: src/plugins/render/compass/CompassFloatItem.cpp:136
 msgctxt "Marble::CompassFloatItem|"
 msgid "N"
 msgstr "ჩ"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:139
+#: src/plugins/render/compass/CompassFloatItem.cpp:137
 msgctxt "Marble::CompassFloatItem|"
 msgid "S"
 msgstr "შაბ"
@@ -13602,32 +13602,32 @@ msgctxt "EarthquakeConfigWidget|"
 msgid "to"
 msgstr "სადამდე"
 
-#: src/plugins/render/earthquake/EarthquakeItem.cpp:128
+#: src/plugins/render/earthquake/EarthquakeItem.cpp:127
 msgctxt "Marble::EarthquakeItem|"
 msgid "Date:"
 msgstr "თარიღი:"
 
-#: src/plugins/render/earthquake/EarthquakeItem.cpp:131
+#: src/plugins/render/earthquake/EarthquakeItem.cpp:130
 msgctxt "Marble::EarthquakeItem|"
 msgid "Magnitude:"
 msgstr "ვარსკვლავური სიდიდე:"
 
-#: src/plugins/render/earthquake/EarthquakeItem.cpp:132
+#: src/plugins/render/earthquake/EarthquakeItem.cpp:131
 msgctxt "Marble::EarthquakeItem|"
 msgid "Depth:"
 msgstr "სიღრმე:"
 
-#: src/plugins/render/earthquake/EarthquakePlugin.cpp:54
+#: src/plugins/render/earthquake/EarthquakePlugin.cpp:50
 msgctxt "Marble::EarthquakePlugin|"
 msgid "Earthquakes"
 msgstr "მიწისძვრები"
 
-#: src/plugins/render/earthquake/EarthquakePlugin.cpp:59
+#: src/plugins/render/earthquake/EarthquakePlugin.cpp:55
 msgctxt "Marble::EarthquakePlugin|"
 msgid "&Earthquakes"
 msgstr "&მიწისძვრები"
 
-#: src/plugins/render/earthquake/EarthquakePlugin.cpp:74
+#: src/plugins/render/earthquake/EarthquakePlugin.cpp:70
 msgctxt "Marble::EarthquakePlugin|"
 msgid "Shows earthquakes on the map."
 msgstr "აჩვენებს მიწისძვრებს რუკაზე."
@@ -13802,32 +13802,32 @@ msgctxt "Marble::EclipsesModel|"
 msgid "Magnitude"
 msgstr "ვარსკვლავური სიდიდე"
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:95
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:94
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Eclipses"
 msgstr "ოვალები"
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:105
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:104
 msgctxt "Marble::EclipsesPlugin|"
 msgid "E&clipses"
 msgstr "&დაბნელებები"
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:115
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:114
 msgctxt "Marble::EclipsesPlugin|"
 msgid "This plugin visualizes solar eclipses."
 msgstr "ეს დამატება მზის დაბნელებების ვიზუალიზაციას ახდენს."
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:188
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:187
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Browse Ecli&pses..."
 msgstr "დაბნელებების &დათვალიერება..."
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:330
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:329
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Maximum of Eclipse"
 msgstr "დაბნელებების მაქსიმუმი"
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:412
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:411
 #, qt-format
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Eclipses in %1"
@@ -13866,27 +13866,27 @@ msgctxt "ElevationProfileConfigWidget|"
 msgid "Zoom to viewport"
 msgstr "ხედის წერტილის გადიდება"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:33
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:32
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Configure..."
 msgstr "&მორგება..."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:39
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:38
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Zoom to viewport"
 msgstr "&ხედის წერტილის გადიდება"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:69
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:68
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Route"
 msgstr "გზა"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:81
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:80
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Track: "
 msgstr "ტრეკი: "
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:94
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:93
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
@@ -14034,47 +14034,47 @@ msgctxt "Marble::FoursquarePlugin|"
 msgid "Displays trending Foursquare places"
 msgstr "აჩვენებს ტენდენციურ Foursquare ადგილებს"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:46
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:41
 msgctxt "Marble::GpsInfo|"
 msgid "GpsInfo"
 msgstr "GpsInfo"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:51
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:46
 msgctxt "Marble::GpsInfo|"
 msgid "&GpsInfo"
 msgstr "&GpsInfo"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:66
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:61
 msgctxt "Marble::GpsInfo|"
 msgid "This is a float item that provides Gps Information."
 msgstr "ეს მცურავმძიმიანი ჩანაწერია, რომელიც GPS ინფორმაციას შეიცავს."
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:120
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:115
 msgctxt "Marble::GpsInfo|"
 msgid "mph"
 msgstr "მ/სთ"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:122
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:117
 msgctxt "Marble::GpsInfo|"
 msgid "ft"
 msgstr "ფტ"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:129
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:124
 msgctxt "Marble::GpsInfo|"
 msgid "km/h"
 msgstr "კმ/სთ"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:131
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:126
 msgctxt "Marble::GpsInfo|"
 msgid "m"
 msgstr "წთ"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:136
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:131
 msgctxt "Marble::GpsInfo|"
 msgid "kt"
 msgstr "კტ"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:138
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:133
 msgctxt "Marble::GpsInfo|"
 msgid "nm"
 msgstr "ნმ"
@@ -14165,94 +14165,94 @@ msgctxt "GraticuleConfigWidget|"
 msgid "Show numerical Labels."
 msgstr "რიცხვითი ჭდეების ჩვენება."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:69
+#: src/plugins/render/graticule/GraticulePlugin.cpp:66
 msgctxt "Marble::GraticulePlugin|"
 msgid "Coordinate Grid"
 msgstr "კოორდინატების ბადე"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:74
+#: src/plugins/render/graticule/GraticulePlugin.cpp:71
 msgctxt "Marble::GraticulePlugin|"
 msgid "Coordinate &Grid"
 msgstr "კოორდინატების &ბადე"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:89
+#: src/plugins/render/graticule/GraticulePlugin.cpp:86
 msgctxt "Marble::GraticulePlugin|"
 msgid "A plugin that shows a coordinate grid."
 msgstr "დამატება, რომელიც აჩვენებს კოორდინატები ბადეს."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:198
+#: src/plugins/render/graticule/GraticulePlugin.cpp:195
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the coordinate grid."
 msgstr "აირჩიეთ ფერი კოორდინატების ბადისთვის."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:209
+#: src/plugins/render/graticule/GraticulePlugin.cpp:206
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the tropic circles."
 msgstr "აირჩიეთ ფერი ტროპიკული წრეებისთვის."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:220
+#: src/plugins/render/graticule/GraticulePlugin.cpp:217
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the equator."
 msgstr "აირჩიეთ ფერი ეკვატორისთვის."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:291
+#: src/plugins/render/graticule/GraticulePlugin.cpp:288
 msgctxt "Marble::GraticulePlugin|"
 msgid "Equator"
 msgstr "ეკვატორი"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:296
+#: src/plugins/render/graticule/GraticulePlugin.cpp:293
 msgctxt "Marble::GraticulePlugin|"
 msgid "Prime Meridian"
 msgstr "მთავარი მერიდიანი"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:297
+#: src/plugins/render/graticule/GraticulePlugin.cpp:294
 msgctxt "Marble::GraticulePlugin|"
 msgid "Antimeridian"
 msgstr "180-ე მერიდიანი"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:363
+#: src/plugins/render/graticule/GraticulePlugin.cpp:360
 msgctxt "Marble::GraticulePlugin|"
 msgid "Tropic of Cancer"
 msgstr "კიბოს ტროპიკი"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:364
+#: src/plugins/render/graticule/GraticulePlugin.cpp:361
 msgctxt "Marble::GraticulePlugin|"
 msgid "Tropic of Capricorn"
 msgstr "თხის რქის ტროპიკი"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:367
+#: src/plugins/render/graticule/GraticulePlugin.cpp:364
 msgctxt "Marble::GraticulePlugin|"
 msgid "Arctic Circle"
 msgstr "არქტიკული წრე"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:368
+#: src/plugins/render/graticule/GraticulePlugin.cpp:365
 msgctxt "Marble::GraticulePlugin|"
 msgid "Antarctic Circle"
 msgstr "ანტარქტიკის წრე"
 
-#: src/plugins/render/license/License.cpp:95
+#: src/plugins/render/license/License.cpp:92
 msgctxt "Marble::License|"
 msgid "License"
 msgstr "ლიცენზია"
 
-#: src/plugins/render/license/License.cpp:100
+#: src/plugins/render/license/License.cpp:97
 msgctxt "Marble::License|"
 msgid "&License"
 msgstr "&ლიცენზია"
 
-#: src/plugins/render/license/License.cpp:115
+#: src/plugins/render/license/License.cpp:112
 msgctxt "Marble::License|"
 msgid "This is a float item that provides copyright information."
 msgstr ""
 "ეს მცურავი ელემენტია, რომელიც საავტორო უფლებების შესახებ ინფორმაციას "
 "გაჩვენებთ."
 
-#: src/plugins/render/license/License.cpp:232
+#: src/plugins/render/license/License.cpp:229
 msgctxt "Marble::License|"
 msgid "&Full License"
 msgstr "&სრული ლიცენზია"
 
-#: src/plugins/render/license/License.cpp:236
+#: src/plugins/render/license/License.cpp:233
 msgctxt "Marble::License|"
 msgid "&Show Details"
 msgstr "&დეტალების ჩვენება"
@@ -14272,58 +14272,58 @@ msgctxt "MapScaleConfigWidget|"
 msgid "Minimize"
 msgstr "ჩაკეცვა"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:51
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:50
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "Minimize"
 msgstr "ჩაკეცვა"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:66
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:65
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "Scale Bar"
 msgstr "მასშტაბის ზოლი"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:71
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:70
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Scale Bar"
 msgstr "&მასშტაბის ზოლი"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:86
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:85
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "This is a float item that provides a map scale."
 msgstr "ეს მცურავმძიმიანი ჩანაწერია, რომელიც რუკის მასშტაბს შეიცავს."
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:96
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:95
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "Original Developer"
 msgstr "საწყისი ავტორი"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:222
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:226
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:221
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:225
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "km"
 msgstr "კმ"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:229
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:228
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "m"
 msgstr "წთ"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:234
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:233
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "mi"
 msgstr "მი"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:244
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:243
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "nm"
 msgstr "ნმ"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:350
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:349
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Configure..."
 msgstr "&მორგება..."
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:356
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:355
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Ratio Scale"
 msgstr "&მასშტაბის კოეფიციენტი"
@@ -14396,23 +14396,23 @@ msgctxt "MeasureConfigDialog|"
 msgid "Circumference"
 msgstr "წრეწირის სიგრძე"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:87
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:86
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Measure Tool"
 msgstr "მანძილმზომი"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:92
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:91
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "&Measure Tool"
 msgstr "&მანძილმზომი"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:107
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:106
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Measure distances between two or more points."
 msgstr "მანძილის გაზომვა ორ წერტილ შორის."
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:361
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:478
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:360
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:477
 #, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid ""
@@ -14422,7 +14422,7 @@ msgstr ""
 "ფართობი:\n"
 "%1"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:381
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:380
 #, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid ""
@@ -14432,7 +14432,7 @@ msgstr ""
 "წრეწირი:\n"
 "%1"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:498
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:497
 #, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid ""
@@ -14442,58 +14442,58 @@ msgstr ""
 "პერიმენტრი:\n"
 "%1"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:555
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:554
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Polygon Ruler"
 msgstr "მრავალკუთხედი სახაზავი"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:557
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:556
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Circle Ruler"
 msgstr "წრიული სახაზავი"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:560
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:559
 #, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Total Distance: %1<br/>\n"
 msgstr "სრული მანძილი: %1<br/>\n"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:562
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:571
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:561
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:570
 #, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Area: %1<br/>\n"
 msgstr "ფართობი: %1<br/>\n"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:564
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:563
 #, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Perimeter: %1<br/>\n"
 msgstr "პერიმეტრი: %1<br/>\n"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:567
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:566
 #, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Radius: %1<br/>\n"
 msgstr "რადიუსი: %1<br/>\n"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:569
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:568
 #, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Circumference: %1<br/>\n"
 msgstr "წრეწირის: %1<br/>\n"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:618
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:617
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Add &Measure Point"
 msgstr "&გასაზომი წერტილის დამატება"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:619
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:618
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Remove &Last Measure Point"
 msgstr "&ბოლო გაზომილი წერტილის წაშლა"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:621
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:620
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "&Remove Measure Points"
 msgstr "&გაზომვის წერტილების წაშლა"
@@ -14757,27 +14757,27 @@ msgstr ""
 "აჩვენებს OpenDesktop მომხმარებლების ავატარებს და მათ შესახებ დამატებით "
 "ინფორმაციას რუკაზე."
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:73
+#: src/plugins/render/overviewmap/OverviewMap.cpp:70
 msgctxt "Marble::OverviewMap|"
 msgid "Overview Map"
 msgstr "მიმოხილვის რუკა"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:78
+#: src/plugins/render/overviewmap/OverviewMap.cpp:75
 msgctxt "Marble::OverviewMap|"
 msgid "&Overview Map"
 msgstr "&მიმოხილვის რუკა"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:93
+#: src/plugins/render/overviewmap/OverviewMap.cpp:90
 msgctxt "Marble::OverviewMap|"
 msgid "This is a float item that provides an overview map."
 msgstr "ეს მცურავმძიმიანი ჩანაწერია, რომელიც მიმოხილვის რუკას შეიცავს."
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:455
+#: src/plugins/render/overviewmap/OverviewMap.cpp:452
 msgctxt "Marble::OverviewMap|"
 msgid "Choose Overview Map"
 msgstr "აირჩიეთ მიმოხილვის რუკა"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:484
+#: src/plugins/render/overviewmap/OverviewMap.cpp:481
 msgctxt "Marble::OverviewMap|"
 msgid "Please choose the color for the position indicator"
 msgstr "აირჩიეთ ფერი მდებარეობის მაჩვენებლისთვის"
@@ -14872,17 +14872,17 @@ msgctxt "PhotoConfigWidget|"
 msgid "Number of items on the screen"
 msgstr "ელემენტების რაოდენობა ეკრანზე"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:66
+#: src/plugins/render/photo/PhotoPlugin.cpp:62
 msgctxt "Marble::PhotoPlugin|"
 msgid "Photos"
 msgstr "ფოტოები"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:71
+#: src/plugins/render/photo/PhotoPlugin.cpp:67
 msgctxt "Marble::PhotoPlugin|"
 msgid "&Photos"
 msgstr "&ფოტოები"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:86
+#: src/plugins/render/photo/PhotoPlugin.cpp:82
 msgctxt "Marble::PhotoPlugin|"
 msgid ""
 "Automatically downloads images from around the world in preference to their "
@@ -14890,37 +14890,37 @@ msgid ""
 msgstr ""
 "ავტომატურად გადმოწერს სურათეს მთელი მსოფლიოდან მათი პოპულარობის მიხედვით"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:115
+#: src/plugins/render/photo/PhotoPlugin.cpp:111
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NonCommercial-ShareAlike License"
 msgstr "Attribution-NonCommercial-ShareAlike License"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:122
+#: src/plugins/render/photo/PhotoPlugin.cpp:118
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NonCommercial License"
 msgstr "Attribution-NonCommercial License"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:129
+#: src/plugins/render/photo/PhotoPlugin.cpp:125
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NonCommercial-NoDerivs License"
 msgstr "Attribution-NonCommercial-NoDerivs License"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:136
+#: src/plugins/render/photo/PhotoPlugin.cpp:132
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution License"
 msgstr "Attribution License"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:143
+#: src/plugins/render/photo/PhotoPlugin.cpp:139
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-ShareAlike License"
 msgstr "Attribution-ShareAlike License"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:150
+#: src/plugins/render/photo/PhotoPlugin.cpp:146
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NoDerivs License"
 msgstr "Attribution-NoDerivs License"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:157
+#: src/plugins/render/photo/PhotoPlugin.cpp:153
 msgctxt "Marble::PhotoPlugin|"
 msgid "No known copyright restrictions"
 msgstr "საავტორო ფულებებით შეზღუდული არაა"
@@ -14940,7 +14940,7 @@ msgctxt "Marble::PositionMarker|"
 msgid "draws a marker at the current position"
 msgstr "ხატავს მარკერს მიმდინარე მდებარეობაზე"
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:326
+#: src/plugins/render/positionmarker/PositionMarker.cpp:329
 #: src/plugins/render/positionmarker/PositionMarker.cpp:430
 #, qt-format
 msgctxt "Marble::PositionMarker|"
@@ -15158,147 +15158,147 @@ msgctxt "RoutingPlugin|"
 msgid "total time remaining"
 msgstr "სულ დარჩენილი დრო"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:32
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:31
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Comets"
 msgstr "კომეტები"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:33
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:32
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Moons"
 msgstr "მთვარეები"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:34
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:33
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Other"
 msgstr "სხვები"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:35
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:34
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Spacecrafts"
 msgstr "კოსმოსური ხომალდები"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:36
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:35
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Spaceprobes"
 msgstr "კოსმოსური ზონდები"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:38
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:37
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Moon"
 msgstr "მთვარის"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:39
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:38
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Sun"
 msgstr "კვი"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:40
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:39
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Mercury"
 msgstr "მერკური"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:41
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:40
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Venus"
 msgstr "ვენერა"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:42
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:41
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Earth"
 msgstr "დედამიწა"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:43
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:42
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Mars"
 msgstr "მარსი"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:44
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:43
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Jupiter"
 msgstr "იუპიტერი"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:45
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:44
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Saturn"
 msgstr "სატურნი"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:46
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:45
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Uranus"
 msgstr "ურანი"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:47
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:46
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Neptune"
 msgstr "ნეპტუნი"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:126
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:125
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Satellites"
 msgstr "&თანამგზავრები"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:127
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:126
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Data Sources"
 msgstr "&მონაცემების წყაროები"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:129
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:128
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Activate Plugin"
 msgstr "&დამატების აქტივაცია"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:229
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:228
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Add Data Source"
 msgstr "მონაცემების წყაროს დამატება"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:229
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:228
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "URL or File path:"
 msgstr "URL ან ფაილის ბილიკი:"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:235
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:234
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Invalid data source input"
 msgstr "არასწორი მონაცემების წყარო შეყვანა"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:235
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:234
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Please enter a valid URL or file path!"
 msgstr "გთხოვთ შეიყვანოთ სწორი URL ან ფაილის ბილიკი!"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Supported Files (*.txt *.msc)"
 msgstr "ყველა მხარდაჭერილი ფაილი (*.txt *.msc)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Marble Satellite Catalog (*.msc)"
 msgstr "Marble-ის თანამგზავრების კატალოგი (*.msc)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Two Line Element Set (*.txt)"
 msgstr "ორი ხაზის ელემენტების ნაკრები (*.txt)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Files (*.*)"
 msgstr "ყველა ფაილი (*.*)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:259
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Open Satellite Data File"
 msgstr "თანამგზავრების მონაცემების ფაილის გახსნა"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:287
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:286
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Delete selected data source"
 msgstr "მონიშნული მონაცემების წყაროს წაშლა"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:288
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:287
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Do you really want to delete the selected data source?"
 msgstr "ნამდვილად გსურთ არჩეული მონაცემების წყაროს წაშლა?"
@@ -15414,7 +15414,7 @@ msgctxt "Marble::SatellitesConfigModel|"
 msgid "Catalogs"
 msgstr "კატალოგები"
 
-#: src/plugins/render/satellites/SatellitesMSCItem.cpp:113
+#: src/plugins/render/satellites/SatellitesMSCItem.cpp:112
 #: src/plugins/render/satellites/SatellitesTLEItem.cpp:53
 msgctxt "QObject|"
 msgid "No info available."
@@ -16625,7 +16625,7 @@ msgstr ""
 "მხარს უჭერს backstage.bbc.co.uk.\n"
 "ამინდის მონაცემები დიდი ბრიტანეთის MET ოფისიდან"
 
-#: src/plugins/render/wikipedia/GeonamesParser.cpp:37
+#: src/plugins/render/wikipedia/GeonamesParser.cpp:36
 msgctxt "QObject|"
 msgid "The file is not a valid Geonames answer."
 msgstr "ეს ფაილი სწორი Geonames-ის პასუხი არაა."
@@ -16645,7 +16645,7 @@ msgctxt "WikipediaConfigWidget|"
 msgid "Number of items on the screen"
 msgstr "ელემენტების რაოდენობა ეკრანზე"
 
-#: src/plugins/render/wikipedia/WikipediaItem.cpp:227
+#: src/plugins/render/wikipedia/WikipediaItem.cpp:223
 #, qt-format
 msgctxt ""
 "Marble::WikipediaItem|Title:\n"

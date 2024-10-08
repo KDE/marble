@@ -2821,75 +2821,75 @@ msgctxt "Marble::MainWindow|"
 msgid "Unnamed"
 msgstr "Безымянный"
 
-#: src/apps/marble-ui/ControlView.cpp:85
+#: src/apps/marble-ui/ControlView.cpp:83
 msgctxt "Marble::ControlView|"
 msgid "Marble - Virtual Globe"
 msgstr "Marble — Виртуальный глобус"
 
-#: src/apps/marble-ui/ControlView.cpp:273
+#: src/apps/marble-ui/ControlView.cpp:271
 msgctxt "Marble::ControlView|"
 msgid "Default (Resizable)"
 msgstr "По умолчанию (изменяемый)"
 
-#: src/apps/marble-ui/ControlView.cpp:282
+#: src/apps/marble-ui/ControlView.cpp:280
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC (%1x%2)"
 msgstr "NTSC (%1⨯%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:283
+#: src/apps/marble-ui/ControlView.cpp:281
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL (%1x%2)"
 msgstr "PAL (%1⨯%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:284
+#: src/apps/marble-ui/ControlView.cpp:282
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC 16:9 (%1x%2)"
 msgstr "NTSC 16:9 (%1⨯%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:285
+#: src/apps/marble-ui/ControlView.cpp:283
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL 16:9 (%1x%2)"
 msgstr "PAL 16:9 (%1⨯%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:287
+#: src/apps/marble-ui/ControlView.cpp:285
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "DVD (%1x%2p)"
 msgstr "DVD (%1⨯%2p)"
 
-#: src/apps/marble-ui/ControlView.cpp:289
+#: src/apps/marble-ui/ControlView.cpp:287
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "HD (%1x%2p)"
 msgstr "HD (%1⨯%2p)"
 
-#: src/apps/marble-ui/ControlView.cpp:291
+#: src/apps/marble-ui/ControlView.cpp:289
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Full HD (%1x%2p)"
 msgstr "Full HD (%1⨯%2p)"
 
-#: src/apps/marble-ui/ControlView.cpp:292
+#: src/apps/marble-ui/ControlView.cpp:290
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Digital Cinema (%1x%2)"
 msgstr "Цифровое кино (%1×%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:477
+#: src/apps/marble-ui/ControlView.cpp:475
 msgctxt "Marble::ControlView|"
 msgid "The Marble development team wishes you a pleasant and safe journey."
 msgstr "Команда разработчиков Marble желает вам приятной и безопасной поездки."
 
-#: src/apps/marble-ui/ControlView.cpp:478
+#: src/apps/marble-ui/ControlView.cpp:476
 msgctxt "Marble::ControlView|"
 msgid "Caution: Driving instructions may be incomplete or inaccurate."
 msgstr "Внимание: подсказки могут быть неполными или неправильными."
 
-#: src/apps/marble-ui/ControlView.cpp:479
+#: src/apps/marble-ui/ControlView.cpp:477
 msgctxt "Marble::ControlView|"
 msgid ""
 "Road construction, weather and other unforeseen variables can result in this "
@@ -2899,12 +2899,12 @@ msgstr ""
 "Строительство дороги, погодные условия и другие непредсказуемые условия "
 "могут сделать ваш маршрут не самым ожидаемым или безопасным."
 
-#: src/apps/marble-ui/ControlView.cpp:481
+#: src/apps/marble-ui/ControlView.cpp:479
 msgctxt "Marble::ControlView|"
 msgid "Please use common sense while navigating."
 msgstr "Пожалуйста, используйте здравый смысл во время навигации."
 
-#: src/apps/marble-ui/ControlView.cpp:565
+#: src/apps/marble-ui/ControlView.cpp:563
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid ""
@@ -2914,69 +2914,69 @@ msgstr ""
 "Не удается запустить внешний редактор. Проверьте, что %1 установлен или "
 "укажите другой внешний редактор в диалоге настроек."
 
-#: src/apps/marble-ui/ControlView.cpp:567
+#: src/apps/marble-ui/ControlView.cpp:565
 msgctxt "Marble::ControlView|"
 msgid "Cannot start external editor"
 msgstr "Не удается запустить внешний редактор"
 
-#: src/apps/marble-ui/ControlView.cpp:584
+#: src/apps/marble-ui/ControlView.cpp:582
 msgctxt "Marble::ControlView|"
 msgid "Legend"
 msgstr "Легенда"
 
-#: src/apps/marble-ui/ControlView.cpp:600
+#: src/apps/marble-ui/ControlView.cpp:598
 msgctxt "Marble::ControlView|"
 msgid "Routing"
 msgstr "Маршрут"
 
-#: src/apps/marble-ui/ControlView.cpp:608
+#: src/apps/marble-ui/ControlView.cpp:606
 msgctxt "Marble::ControlView|"
 msgid "Location"
 msgstr "Расположение"
 
-#: src/apps/marble-ui/ControlView.cpp:616
+#: src/apps/marble-ui/ControlView.cpp:614
 msgctxt "Marble::ControlView|"
 msgid "Search"
 msgstr "Поиск"
 
-#: src/apps/marble-ui/ControlView.cpp:629
+#: src/apps/marble-ui/ControlView.cpp:627
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Search for cities, addresses, points of interest and more (%1)"
 msgstr "Ищет города, адреса, достопримечательности и многое другое (%1)"
 
-#: src/apps/marble-ui/ControlView.cpp:633
+#: src/apps/marble-ui/ControlView.cpp:631
 msgctxt "Marble::ControlView|"
 msgid "Map View"
 msgstr "Карта"
 
-#: src/apps/marble-ui/ControlView.cpp:643
+#: src/apps/marble-ui/ControlView.cpp:641
 msgctxt "Marble::ControlView|"
 msgid "Files"
 msgstr "Файлы"
 
-#: src/apps/marble-ui/ControlView.cpp:652
+#: src/apps/marble-ui/ControlView.cpp:650
 msgctxt "Marble::ControlView|"
 msgid "Tour"
 msgstr "Экскурсия"
 
-#: src/apps/marble-ui/ControlView.cpp:665
+#: src/apps/marble-ui/ControlView.cpp:663
 msgctxt "QObject|"
 msgid "Edit Maps"
 msgstr "Правка карты"
 
-#: src/apps/marble-ui/ControlView.cpp:714
-#: src/apps/marble-ui/ControlView.cpp:852
+#: src/apps/marble-ui/ControlView.cpp:712
+#: src/apps/marble-ui/ControlView.cpp:850
 msgctxt "Marble::ControlView|"
 msgid "Hide &All Panels"
 msgstr "Скрыть &все панели"
 
-#: src/apps/marble-ui/ControlView.cpp:716
+#: src/apps/marble-ui/ControlView.cpp:714
 msgctxt "Marble::ControlView|"
 msgid "Show or hide all panels."
 msgstr "Показать или скрыть все панели."
 
-#: src/apps/marble-ui/ControlView.cpp:841
+#: src/apps/marble-ui/ControlView.cpp:839
 msgctxt "Marble::ControlView|"
 msgid "Show &All Panels"
 msgstr "Показать &все панели"
@@ -12782,53 +12782,53 @@ msgstr ""
 "Сообщает о текущем местоположении на основе данных с ближайших точек доступа "
 "WLAN."
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:126
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:125
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Annotation"
 msgstr "Аннотация"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:131
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:130
 msgctxt "Marble::AnnotatePlugin|"
 msgid "&Annotation"
 msgstr "&Аннотация"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:141
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:140
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Draws annotations on maps with placemarks or polygons."
 msgstr "Отрисовка аннотаций на карте с метками или многоугольниками"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:184
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:183
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Annotations"
 msgstr "Аннотация"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:306
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:305
 msgctxt "QObject|"
 msgid "Remove current item"
 msgstr "Удалить текущий элемент"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:307
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:306
 msgctxt "QObject|"
 msgid "Are you sure you want to remove the current item?"
 msgstr "Действительно удалить текущий элемент?"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:343
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:342
 msgctxt "QObject|"
 msgid "Clear all annotations"
 msgstr "Очистить все аннотации"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:344
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:343
 msgctxt "QObject|"
 msgid "Are you sure you want to clear all annotations?"
 msgstr "Действительно очистить все аннотации?"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:363
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:896
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:362
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:895
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Save Annotation File"
 msgstr "Сохранить файл аннотаций"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:365
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:364
 msgctxt "Marble::AnnotatePlugin|"
 msgid ""
 "All Supported Files (*.kml *.osm);;KML file (*.kml);;Open Street Map file (*."
@@ -12837,12 +12837,12 @@ msgstr ""
 "Все поддерживаемые файлы (*.kml *.osm);;Файлы KML (*.kml);;Файлы Open Street "
 "Map (*.osm)"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:391
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:390
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Open Annotation File"
 msgstr "Открытие файла аннотаций"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:393
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:392
 msgctxt "Marble::AnnotatePlugin|"
 msgid ""
 "All Supported Files (*.kml *.osm);;Kml Annotation file (*.kml);;Open Street "
@@ -12851,16 +12851,16 @@ msgstr ""
 "Все поддерживаемые файлы (*.kml *.osm);;файлы примечаний KML (*.kml);;файлы "
 "Open Street Map (*.osm)"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:751
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:756
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:761
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1375
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1459
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:750
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:755
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:760
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1374
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1458
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Operation not permitted"
 msgstr "Операция не разрешена"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:752
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:751
 msgctxt "Marble::AnnotatePlugin|"
 msgid ""
 "Cannot merge a node from polygon's outer boundary with a node from one of "
@@ -12869,12 +12869,12 @@ msgstr ""
 "Невозможно объединить узел из внешней границы многоугольника с узлом из "
 "одной из его внутренних границ."
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:757
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:756
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Cannot merge two nodes from two different inner boundaries."
 msgstr "Невозможно объединить два узла из двух разных внутренних границ."
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:762
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:761
 msgctxt "Marble::AnnotatePlugin|"
 msgid ""
 "Cannot merge the selected nodes. Most probably this would make the polygon's "
@@ -12884,121 +12884,121 @@ msgstr ""
 "что внешняя граница многоугольника не содержала бы всех его внутренних "
 "граничных узлов."
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:863
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:941
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:862
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:940
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Select Item"
 msgstr "Выбрать элемент"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:867
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:866
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Polygon"
 msgstr "Добавить многоугольник"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:870
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:869
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Polygon Hole"
 msgstr "Добавить отверстие"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:875
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:874
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Nodes"
 msgstr "Добавить узлы"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:880
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:879
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Placemark"
 msgstr "Добавить метку"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:883
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:882
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Path"
 msgstr "Добавить контур"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:886
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:885
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Ground Overlay"
 msgstr "Добавить наложение фона"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:889
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:888
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Remove Item"
 msgstr "Удалить объект"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:893
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:892
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Load Annotation File"
 msgstr "Загрузить файл примечаний"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:899
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:898
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Clear all Annotations"
 msgstr "Очистить все аннотации"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:900
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:899
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Download OpenStreetMap Data"
 msgstr "Загрузить данные OpenStreetMap"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:902
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:901
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Download OpenStreetMap data of the visible region"
 msgstr "Загрузить данные OpenStreetMap для видимой области"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:981
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:980
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Paste"
 msgstr "Вставить"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1000
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1239
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1481
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:999
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1238
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1480
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Cut"
 msgstr "Вырезать"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1004
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1243
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1485
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1003
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1242
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1484
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Copy"
 msgstr "Копировать"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1008
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1120
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1247
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1489
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1007
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1119
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1246
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1488
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Remove"
 msgstr "Удалить"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1014
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1114
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1253
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1495
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1013
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1113
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1252
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1494
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Properties"
 msgstr "Свойства"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1139
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1138
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Untitled Ground Overlay"
 msgstr "Наложение фона без названия"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1229
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1471
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1228
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1470
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Deselect All Nodes"
 msgstr "Отменить выбор всех узлов"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1233
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1475
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1232
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1474
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Delete All Selected Nodes"
 msgstr "Удалить все выделенные узлы"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1376
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1460
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1375
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1459
 msgctxt "Marble::AnnotatePlugin|"
 msgid ""
 "Cannot delete one of the selected nodes. Most probably this would make the "
@@ -13008,42 +13008,42 @@ msgstr ""
 "тому, что внешняя граница многоугольника не содержала бы всех его внутренних "
 "граничных узлов."
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1404
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1424
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1403
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1423
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Select Node"
 msgstr "Выбрать узел"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1408
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1407
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Delete Node"
 msgstr "Удалить узел"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1424
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1423
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Deselect Node"
 msgstr "Отменить выбор узла"
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:32
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:35
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:31
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:34
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "Download"
 msgstr "Загрузить"
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:70
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:115
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:120
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:126
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:69
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:114
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:119
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:125
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "ERROR"
 msgstr "ОШИБКА"
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:70
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:69
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "Unable to create temporary file to download OSM data to."
 msgstr "Не удалось создать временный файл для загрузки в него данных OSM."
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:115
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:114
 msgctxt "Marble::DownloadOsmDialog|"
 msgid ""
 "The selected region contains too much data. Please select a smaller region "
@@ -13052,12 +13052,12 @@ msgstr ""
 "Выделенная область содержит слишком много данных. Уменьшите область "
 "выделения и повторите попытку."
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:120
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:119
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "The bandwidth limit exceeded. Please try again later."
 msgstr "Превышена предельная пропускная способность. Повторите попытку позже."
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:127
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:126
 msgctxt "Marble::DownloadOsmDialog|"
 msgid ""
 "Sorry, a network error occurred. Please check your internet connection or "
@@ -13455,17 +13455,17 @@ msgctxt "AprsConfigWidget|"
 msgid "Dump file records to the debug stream"
 msgstr "Выгружать записи из файла в поток отладки"
 
-#: src/plugins/render/aprs/AprsPlugin.cpp:117
+#: src/plugins/render/aprs/AprsPlugin.cpp:116
 msgctxt "Marble::AprsPlugin|"
 msgid "Amateur Radio Aprs Plugin"
 msgstr "Модуль любительского радио Arps"
 
-#: src/plugins/render/aprs/AprsPlugin.cpp:122
+#: src/plugins/render/aprs/AprsPlugin.cpp:121
 msgctxt "Marble::AprsPlugin|"
 msgid "Amateur Radio &Aprs Plugin"
 msgstr "Модуль любительского &радио Arps"
 
-#: src/plugins/render/aprs/AprsPlugin.cpp:137
+#: src/plugins/render/aprs/AprsPlugin.cpp:136
 msgctxt "Marble::AprsPlugin|"
 msgid ""
 "This plugin displays APRS data gleaned from the Internet.  APRS is an "
@@ -13520,27 +13520,27 @@ msgctxt "CompassConfigWidget|"
 msgid "Magnet"
 msgstr "Магнит"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:58
+#: src/plugins/render/compass/CompassFloatItem.cpp:56
 msgctxt "Marble::CompassFloatItem|"
 msgid "Compass"
 msgstr "Компас"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:63
+#: src/plugins/render/compass/CompassFloatItem.cpp:61
 msgctxt "Marble::CompassFloatItem|"
 msgid "&Compass"
 msgstr "&Компас"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:78
+#: src/plugins/render/compass/CompassFloatItem.cpp:76
 msgctxt "Marble::CompassFloatItem|"
 msgid "This is a float item that provides a compass."
 msgstr "Плавающая панель с компасом"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:138
+#: src/plugins/render/compass/CompassFloatItem.cpp:136
 msgctxt "Marble::CompassFloatItem|"
 msgid "N"
 msgstr "С"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:139
+#: src/plugins/render/compass/CompassFloatItem.cpp:137
 msgctxt "Marble::CompassFloatItem|"
 msgid "S"
 msgstr "Ю"
@@ -13640,32 +13640,32 @@ msgctxt "EarthquakeConfigWidget|"
 msgid "to"
 msgstr "до"
 
-#: src/plugins/render/earthquake/EarthquakeItem.cpp:128
+#: src/plugins/render/earthquake/EarthquakeItem.cpp:127
 msgctxt "Marble::EarthquakeItem|"
 msgid "Date:"
 msgstr "Дата:"
 
-#: src/plugins/render/earthquake/EarthquakeItem.cpp:131
+#: src/plugins/render/earthquake/EarthquakeItem.cpp:130
 msgctxt "Marble::EarthquakeItem|"
 msgid "Magnitude:"
 msgstr "Магнитуда:"
 
-#: src/plugins/render/earthquake/EarthquakeItem.cpp:132
+#: src/plugins/render/earthquake/EarthquakeItem.cpp:131
 msgctxt "Marble::EarthquakeItem|"
 msgid "Depth:"
 msgstr "Глубина очага:"
 
-#: src/plugins/render/earthquake/EarthquakePlugin.cpp:54
+#: src/plugins/render/earthquake/EarthquakePlugin.cpp:50
 msgctxt "Marble::EarthquakePlugin|"
 msgid "Earthquakes"
 msgstr "Землетрясения"
 
-#: src/plugins/render/earthquake/EarthquakePlugin.cpp:59
+#: src/plugins/render/earthquake/EarthquakePlugin.cpp:55
 msgctxt "Marble::EarthquakePlugin|"
 msgid "&Earthquakes"
 msgstr "Землетрясения"
 
-#: src/plugins/render/earthquake/EarthquakePlugin.cpp:74
+#: src/plugins/render/earthquake/EarthquakePlugin.cpp:70
 msgctxt "Marble::EarthquakePlugin|"
 msgid "Shows earthquakes on the map."
 msgstr "Показывает землетрясения на карте."
@@ -13840,32 +13840,32 @@ msgctxt "Marble::EclipsesModel|"
 msgid "Magnitude"
 msgstr "Магнитуда"
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:95
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:94
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Eclipses"
 msgstr "Затмения"
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:105
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:104
 msgctxt "Marble::EclipsesPlugin|"
 msgid "E&clipses"
 msgstr "З&атмения"
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:115
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:114
 msgctxt "Marble::EclipsesPlugin|"
 msgid "This plugin visualizes solar eclipses."
 msgstr "Данный модуль визуализирует солнечные затмения."
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:188
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:187
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Browse Ecli&pses..."
 msgstr "С&писок затмений..."
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:330
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:329
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Maximum of Eclipse"
 msgstr "Максимальная фаза затмения"
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:412
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:411
 #, qt-format
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Eclipses in %1"
@@ -13903,27 +13903,27 @@ msgctxt "ElevationProfileConfigWidget|"
 msgid "Zoom to viewport"
 msgstr "Масштабировать область просмотра"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:33
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:32
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Configure..."
 msgstr "&Настроить..."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:39
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:38
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Zoom to viewport"
 msgstr "&Масштабировать область просмотра"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:69
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:68
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Route"
 msgstr "Маршрут"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:81
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:80
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Track: "
 msgstr "Маршрут: "
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:94
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:93
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr "Создать или загрузить маршрут для просмотра его высотного профиля."
@@ -14070,47 +14070,47 @@ msgstr ""
 "Показывает места, где на данный момент присутствует наибольшее количество "
 "пользователей Foursquare"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:46
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:41
 msgctxt "Marble::GpsInfo|"
 msgid "GpsInfo"
 msgstr "GpsInfo"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:51
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:46
 msgctxt "Marble::GpsInfo|"
 msgid "&GpsInfo"
 msgstr "&GpsInfo"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:66
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:61
 msgctxt "Marble::GpsInfo|"
 msgid "This is a float item that provides Gps Information."
 msgstr "Плавающая панель с информацией GPS."
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:120
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:115
 msgctxt "Marble::GpsInfo|"
 msgid "mph"
 msgstr "миль/ч"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:122
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:117
 msgctxt "Marble::GpsInfo|"
 msgid "ft"
 msgstr "футов"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:129
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:124
 msgctxt "Marble::GpsInfo|"
 msgid "km/h"
 msgstr "км/ч"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:131
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:126
 msgctxt "Marble::GpsInfo|"
 msgid "m"
 msgstr "м"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:136
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:131
 msgctxt "Marble::GpsInfo|"
 msgid "kt"
 msgstr "узлов"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:138
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:133
 msgctxt "Marble::GpsInfo|"
 msgid "nm"
 msgstr "морских миль"
@@ -14201,92 +14201,92 @@ msgctxt "GraticuleConfigWidget|"
 msgid "Show numerical Labels."
 msgstr "Показывать числовые метки."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:69
+#: src/plugins/render/graticule/GraticulePlugin.cpp:66
 msgctxt "Marble::GraticulePlugin|"
 msgid "Coordinate Grid"
 msgstr "Координатная сетка"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:74
+#: src/plugins/render/graticule/GraticulePlugin.cpp:71
 msgctxt "Marble::GraticulePlugin|"
 msgid "Coordinate &Grid"
 msgstr "Координатная &сетка"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:89
+#: src/plugins/render/graticule/GraticulePlugin.cpp:86
 msgctxt "Marble::GraticulePlugin|"
 msgid "A plugin that shows a coordinate grid."
 msgstr "Модуль отображения координатной сетки."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:198
+#: src/plugins/render/graticule/GraticulePlugin.cpp:195
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the coordinate grid."
 msgstr "Выберите цвет для координатной сетки"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:209
+#: src/plugins/render/graticule/GraticulePlugin.cpp:206
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the tropic circles."
 msgstr "Выберите цвет для тропических кругов."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:220
+#: src/plugins/render/graticule/GraticulePlugin.cpp:217
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the equator."
 msgstr "Выберите цвет для экватора."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:291
+#: src/plugins/render/graticule/GraticulePlugin.cpp:288
 msgctxt "Marble::GraticulePlugin|"
 msgid "Equator"
 msgstr "Экватор"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:296
+#: src/plugins/render/graticule/GraticulePlugin.cpp:293
 msgctxt "Marble::GraticulePlugin|"
 msgid "Prime Meridian"
 msgstr "Начальный меридиан"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:297
+#: src/plugins/render/graticule/GraticulePlugin.cpp:294
 msgctxt "Marble::GraticulePlugin|"
 msgid "Antimeridian"
 msgstr "Дополуденный"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:363
+#: src/plugins/render/graticule/GraticulePlugin.cpp:360
 msgctxt "Marble::GraticulePlugin|"
 msgid "Tropic of Cancer"
 msgstr "Тропик Рака"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:364
+#: src/plugins/render/graticule/GraticulePlugin.cpp:361
 msgctxt "Marble::GraticulePlugin|"
 msgid "Tropic of Capricorn"
 msgstr "Тропик Козерога"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:367
+#: src/plugins/render/graticule/GraticulePlugin.cpp:364
 msgctxt "Marble::GraticulePlugin|"
 msgid "Arctic Circle"
 msgstr "Арктический полярный круг"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:368
+#: src/plugins/render/graticule/GraticulePlugin.cpp:365
 msgctxt "Marble::GraticulePlugin|"
 msgid "Antarctic Circle"
 msgstr "Антарктический полярный круг"
 
-#: src/plugins/render/license/License.cpp:95
+#: src/plugins/render/license/License.cpp:92
 msgctxt "Marble::License|"
 msgid "License"
 msgstr "Лицензия"
 
-#: src/plugins/render/license/License.cpp:100
+#: src/plugins/render/license/License.cpp:97
 msgctxt "Marble::License|"
 msgid "&License"
 msgstr "&Лицензия"
 
-#: src/plugins/render/license/License.cpp:115
+#: src/plugins/render/license/License.cpp:112
 msgctxt "Marble::License|"
 msgid "This is a float item that provides copyright information."
 msgstr "Плавающий элемент, показывающий информацию об авторских правах"
 
-#: src/plugins/render/license/License.cpp:232
+#: src/plugins/render/license/License.cpp:229
 msgctxt "Marble::License|"
 msgid "&Full License"
 msgstr "&Полный текст лицензии"
 
-#: src/plugins/render/license/License.cpp:236
+#: src/plugins/render/license/License.cpp:233
 msgctxt "Marble::License|"
 msgid "&Show Details"
 msgstr "&Показать подробности"
@@ -14306,58 +14306,58 @@ msgctxt "MapScaleConfigWidget|"
 msgid "Minimize"
 msgstr "Свернуть"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:51
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:50
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "Minimize"
 msgstr "Свернуть"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:66
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:65
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "Scale Bar"
 msgstr "Масштабная линейка"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:71
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:70
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Scale Bar"
 msgstr "&Масштабная линейка"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:86
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:85
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "This is a float item that provides a map scale."
 msgstr "Плавающая панель масштаба"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:96
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:95
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "Original Developer"
 msgstr "Разработчик"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:222
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:226
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:221
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:225
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "km"
 msgstr "км"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:229
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:228
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "m"
 msgstr "м"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:234
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:233
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "mi"
 msgstr "мили"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:244
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:243
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "nm"
 msgstr "нм"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:350
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:349
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Configure..."
 msgstr "&Настроить..."
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:356
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:355
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Ratio Scale"
 msgstr "&Шкала пропорции"
@@ -14430,23 +14430,23 @@ msgctxt "MeasureConfigDialog|"
 msgid "Circumference"
 msgstr "Длина окружности"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:87
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:86
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Measure Tool"
 msgstr "Измерительный инструмент"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:92
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:91
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "&Measure Tool"
 msgstr "&Измерительный инструмент"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:107
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:106
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Measure distances between two or more points."
 msgstr "Измерение расстояния между двумя или более точками"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:361
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:478
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:360
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:477
 #, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid ""
@@ -14456,7 +14456,7 @@ msgstr ""
 "Площадь:\n"
 "%1"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:381
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:380
 #, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid ""
@@ -14466,7 +14466,7 @@ msgstr ""
 "Длина окружности:\n"
 "%1"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:498
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:497
 #, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid ""
@@ -14476,58 +14476,58 @@ msgstr ""
 "Периметр:\n"
 "%1"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:555
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:554
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Polygon Ruler"
 msgstr "Многоугольная линейка"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:557
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:556
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Circle Ruler"
 msgstr "Круглая линейка"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:560
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:559
 #, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Total Distance: %1<br/>\n"
 msgstr "Общее расстояние: %1<br/>\n"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:562
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:571
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:561
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:570
 #, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Area: %1<br/>\n"
 msgstr "Площадь: %1<br/>\n"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:564
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:563
 #, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Perimeter: %1<br/>\n"
 msgstr "Периметр: %1<br/>\n"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:567
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:566
 #, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Radius: %1<br/>\n"
 msgstr "Радиус: %1<br/>\n"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:569
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:568
 #, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Circumference: %1<br/>\n"
 msgstr "Длина окружности: %1<br/>\n"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:618
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:617
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Add &Measure Point"
 msgstr "Добавить &точку измерения"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:619
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:618
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Remove &Last Measure Point"
 msgstr "Удалить &последнюю точку измерения"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:621
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:620
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "&Remove Measure Points"
 msgstr "&Удалить точки измерения"
@@ -14791,27 +14791,27 @@ msgid ""
 "the map."
 msgstr "Показывает аватары и информацию о пользователях OpenDesktop на карте"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:73
+#: src/plugins/render/overviewmap/OverviewMap.cpp:70
 msgctxt "Marble::OverviewMap|"
 msgid "Overview Map"
 msgstr "Обзор карты"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:78
+#: src/plugins/render/overviewmap/OverviewMap.cpp:75
 msgctxt "Marble::OverviewMap|"
 msgid "&Overview Map"
 msgstr "&Обзор карты"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:93
+#: src/plugins/render/overviewmap/OverviewMap.cpp:90
 msgctxt "Marble::OverviewMap|"
 msgid "This is a float item that provides an overview map."
 msgstr "Это - плавающий элемент, показывающий обзор карты."
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:455
+#: src/plugins/render/overviewmap/OverviewMap.cpp:452
 msgctxt "Marble::OverviewMap|"
 msgid "Choose Overview Map"
 msgstr "Обзор карты"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:484
+#: src/plugins/render/overviewmap/OverviewMap.cpp:481
 msgctxt "Marble::OverviewMap|"
 msgid "Please choose the color for the position indicator"
 msgstr "Выберите цвет для индикатора местоположения"
@@ -14905,62 +14905,62 @@ msgctxt "PhotoConfigWidget|"
 msgid "Number of items on the screen"
 msgstr "Число объектов на экране"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:66
+#: src/plugins/render/photo/PhotoPlugin.cpp:62
 msgctxt "Marble::PhotoPlugin|"
 msgid "Photos"
 msgstr "Фотографии"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:71
+#: src/plugins/render/photo/PhotoPlugin.cpp:67
 msgctxt "Marble::PhotoPlugin|"
 msgid "&Photos"
 msgstr "&Фотографии"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:86
+#: src/plugins/render/photo/PhotoPlugin.cpp:82
 msgctxt "Marble::PhotoPlugin|"
 msgid ""
 "Automatically downloads images from around the world in preference to their "
 "popularity"
 msgstr "Автоматическая загрузка изображений со всего света"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:115
+#: src/plugins/render/photo/PhotoPlugin.cpp:111
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NonCommercial-ShareAlike License"
 msgstr ""
 "Лицензия Attribution-NonCommercial-ShareAlike («С указанием авторства — "
 "Некоммерческая — С сохранением условий»)"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:122
+#: src/plugins/render/photo/PhotoPlugin.cpp:118
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NonCommercial License"
 msgstr ""
 "Лицензия Attribution-NonCommercial («С указанием авторства — Некоммерческая»)"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:129
+#: src/plugins/render/photo/PhotoPlugin.cpp:125
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NonCommercial-NoDerivs License"
 msgstr ""
 "Лицензия Attribution-NonCommercial-NoDerivs («С указанием авторства — "
 "Некоммерческая — Без производных»)"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:136
+#: src/plugins/render/photo/PhotoPlugin.cpp:132
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution License"
 msgstr "Лицензия Attribution («С указанием авторства»)"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:143
+#: src/plugins/render/photo/PhotoPlugin.cpp:139
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-ShareAlike License"
 msgstr ""
 "Лицензия Attribution-ShareAlike («С указанием авторства — С сохранением "
 "условий»)"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:150
+#: src/plugins/render/photo/PhotoPlugin.cpp:146
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NoDerivs License"
 msgstr ""
 "Лицензия Attribution-NoDerivs («С указанием авторства — Без производных»)"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:157
+#: src/plugins/render/photo/PhotoPlugin.cpp:153
 msgctxt "Marble::PhotoPlugin|"
 msgid "No known copyright restrictions"
 msgstr "Нет известных ограничений авторского права"
@@ -14980,7 +14980,7 @@ msgctxt "Marble::PositionMarker|"
 msgid "draws a marker at the current position"
 msgstr "рисует метку на текущем местоположении"
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:326
+#: src/plugins/render/positionmarker/PositionMarker.cpp:329
 #: src/plugins/render/positionmarker/PositionMarker.cpp:430
 #, qt-format
 msgctxt "Marble::PositionMarker|"
@@ -15198,147 +15198,147 @@ msgctxt "RoutingPlugin|"
 msgid "total time remaining"
 msgstr "Общее оставшееся время"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:32
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:31
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Comets"
 msgstr "Кометы"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:33
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:32
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Moons"
 msgstr "Спутники"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:34
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:33
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Other"
 msgstr "Другое"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:35
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:34
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Spacecrafts"
 msgstr "Космические аппараты"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:36
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:35
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Spaceprobes"
 msgstr "Межпланетные станции"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:38
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:37
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Moon"
 msgstr "Луна"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:39
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:38
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Sun"
 msgstr "Солнце"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:40
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:39
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Mercury"
 msgstr "Меркурий"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:41
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:40
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Venus"
 msgstr "Венера"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:42
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:41
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Earth"
 msgstr "Земля"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:43
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:42
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Mars"
 msgstr "Марс"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:44
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:43
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Jupiter"
 msgstr "Юпитер"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:45
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:44
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Saturn"
 msgstr "Сатурн"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:46
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:45
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Uranus"
 msgstr "Уран"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:47
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:46
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Neptune"
 msgstr "Нептун"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:126
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:125
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Satellites"
 msgstr "&Спутники"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:127
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:126
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Data Sources"
 msgstr "&Источники данных"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:129
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:128
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Activate Plugin"
 msgstr "&Активировать модуль"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:229
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:228
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Add Data Source"
 msgstr "Добавить источник данных"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:229
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:228
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "URL or File path:"
 msgstr "Адрес URL или путь до файла:"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:235
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:234
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Invalid data source input"
 msgstr "Неверный ввод источника данных"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:235
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:234
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Please enter a valid URL or file path!"
 msgstr "Введите корректный адрес URL или путь до файла"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Supported Files (*.txt *.msc)"
 msgstr "Все поддерживаемые файлы (*.txt *.msc)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Marble Satellite Catalog (*.msc)"
 msgstr "Каталог спутников Marble (*.msc)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Two Line Element Set (*.txt)"
 msgstr "Двухстрочный набор элементов (*.txt)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Files (*.*)"
 msgstr "Все файлы (*.*)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:259
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Open Satellite Data File"
 msgstr "Файл данных Open Satellite"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:287
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:286
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Delete selected data source"
 msgstr "Удалить выделенный источник данных"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:288
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:287
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Do you really want to delete the selected data source?"
 msgstr "Удалить выделенный источник данных?"
@@ -15453,7 +15453,7 @@ msgctxt "Marble::SatellitesConfigModel|"
 msgid "Catalogs"
 msgstr "Каталоги"
 
-#: src/plugins/render/satellites/SatellitesMSCItem.cpp:113
+#: src/plugins/render/satellites/SatellitesMSCItem.cpp:112
 #: src/plugins/render/satellites/SatellitesTLEItem.cpp:53
 msgctxt "QObject|"
 msgid "No info available."
@@ -16664,7 +16664,7 @@ msgstr ""
 "Получено с backstage.bbc.co.uk.\n"
 "Сведения о погоде от UK MET Office"
 
-#: src/plugins/render/wikipedia/GeonamesParser.cpp:37
+#: src/plugins/render/wikipedia/GeonamesParser.cpp:36
 msgctxt "QObject|"
 msgid "The file is not a valid Geonames answer."
 msgstr "Указанный файл не является корректным ответом Geonames."
@@ -16684,7 +16684,7 @@ msgctxt "WikipediaConfigWidget|"
 msgid "Number of items on the screen"
 msgstr "Число объектов на экране"
 
-#: src/plugins/render/wikipedia/WikipediaItem.cpp:227
+#: src/plugins/render/wikipedia/WikipediaItem.cpp:223
 #, qt-format
 msgctxt ""
 "Marble::WikipediaItem|Title:\n"

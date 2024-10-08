@@ -3260,74 +3260,74 @@ msgctxt "Marble::MainWindow|"
 msgid "Unnamed"
 msgstr "Аталмаған"
 
-#: src/apps/marble-ui/ControlView.cpp:85
+#: src/apps/marble-ui/ControlView.cpp:83
 #, fuzzy
 #| msgid "Marble - Virtual Globe"
 msgctxt "Marble::ControlView|"
 msgid "Marble - Virtual Globe"
 msgstr "Marble - виртуалды глобус"
 
-#: src/apps/marble-ui/ControlView.cpp:273
+#: src/apps/marble-ui/ControlView.cpp:271
 msgctxt "Marble::ControlView|"
 msgid "Default (Resizable)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:282
+#: src/apps/marble-ui/ControlView.cpp:280
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC (%1x%2)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:283
+#: src/apps/marble-ui/ControlView.cpp:281
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL (%1x%2)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:284
+#: src/apps/marble-ui/ControlView.cpp:282
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC 16:9 (%1x%2)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:285
+#: src/apps/marble-ui/ControlView.cpp:283
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL 16:9 (%1x%2)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:287
+#: src/apps/marble-ui/ControlView.cpp:285
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "DVD (%1x%2p)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:289
+#: src/apps/marble-ui/ControlView.cpp:287
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "HD (%1x%2p)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:291
+#: src/apps/marble-ui/ControlView.cpp:289
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Full HD (%1x%2p)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:292
+#: src/apps/marble-ui/ControlView.cpp:290
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Digital Cinema (%1x%2)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:477
+#: src/apps/marble-ui/ControlView.cpp:475
 #, fuzzy
 #| msgid "The Marble development team wishes you a pleasant and safe journey."
 msgctxt "Marble::ControlView|"
 msgid "The Marble development team wishes you a pleasant and safe journey."
 msgstr "Marble тобы Сізге жолыңыз болсын дейді."
 
-#: src/apps/marble-ui/ControlView.cpp:478
+#: src/apps/marble-ui/ControlView.cpp:476
 #, fuzzy
 #| msgid "Caution: Driving instructions may be incomplete or inaccurate."
 msgctxt "Marble::ControlView|"
@@ -3336,7 +3336,7 @@ msgstr ""
 "Абайлаңыз: Жүргізушіге берілетін нұсқаулары толық және нақты емес болуы "
 "мүмкін."
 
-#: src/apps/marble-ui/ControlView.cpp:479
+#: src/apps/marble-ui/ControlView.cpp:477
 #, fuzzy
 #| msgid ""
 #| "Road construction, weather and other unforeseen variables can result in "
@@ -3351,14 +3351,14 @@ msgstr ""
 "Жол жөндеу жұмыстары, ауа райы және т.б. болжауға келмейтін жағдайлар "
 "ұсынылған маршрут лайықты не қауіпсіз еместігіне апарып соғуға мүмкін."
 
-#: src/apps/marble-ui/ControlView.cpp:481
+#: src/apps/marble-ui/ControlView.cpp:479
 #, fuzzy
 #| msgid "Please use common sense while navigating."
 msgctxt "Marble::ControlView|"
 msgid "Please use common sense while navigating."
 msgstr "Багдарлау нұсқауларын ақылға салып, сыншыл көзбен қараңыз."
 
-#: src/apps/marble-ui/ControlView.cpp:565
+#: src/apps/marble-ui/ControlView.cpp:563
 #, fuzzy, qt-format
 #| msgid ""
 #| "Unable to start the external editor. Check that %1 is installed or choose "
@@ -3371,92 +3371,92 @@ msgstr ""
 "Сыртқы өңдегіш жегілмеді. %1 деген орнатылғанын тексеріңіз, немесе  баптау "
 "диалологында басқа өңдегішті таңдаңыз."
 
-#: src/apps/marble-ui/ControlView.cpp:567
+#: src/apps/marble-ui/ControlView.cpp:565
 #, fuzzy
 #| msgid "Cannot start external editor"
 msgctxt "Marble::ControlView|"
 msgid "Cannot start external editor"
 msgstr "Сыртқы өңдегіші жегілмеді"
 
-#: src/apps/marble-ui/ControlView.cpp:584
+#: src/apps/marble-ui/ControlView.cpp:582
 #, fuzzy
 #| msgid "Legend"
 msgctxt "Marble::ControlView|"
 msgid "Legend"
 msgstr "Түсініндірме"
 
-#: src/apps/marble-ui/ControlView.cpp:600
+#: src/apps/marble-ui/ControlView.cpp:598
 #, fuzzy
 #| msgid "Routing"
 msgctxt "Marble::ControlView|"
 msgid "Routing"
 msgstr "Жол салу"
 
-#: src/apps/marble-ui/ControlView.cpp:608
+#: src/apps/marble-ui/ControlView.cpp:606
 #, fuzzy
 #| msgid "Location"
 msgctxt "Marble::ControlView|"
 msgid "Location"
 msgstr "Жер-жай"
 
-#: src/apps/marble-ui/ControlView.cpp:616
+#: src/apps/marble-ui/ControlView.cpp:614
 #, fuzzy
 #| msgid "Search"
 msgctxt "Marble::ControlView|"
 msgid "Search"
 msgstr "Іздеу"
 
-#: src/apps/marble-ui/ControlView.cpp:629
+#: src/apps/marble-ui/ControlView.cpp:627
 #, fuzzy, qt-format
 #| msgid "Search for cities, addresses, points of interest and more (%1)"
 msgctxt "Marble::ControlView|"
 msgid "Search for cities, addresses, points of interest and more (%1)"
 msgstr "Қала, адресті, керек орынды, тағы басқаларды (%1) іздеу"
 
-#: src/apps/marble-ui/ControlView.cpp:633
+#: src/apps/marble-ui/ControlView.cpp:631
 #, fuzzy
 #| msgid "Map View"
 msgctxt "Marble::ControlView|"
 msgid "Map View"
 msgstr "Карта көрінісі"
 
-#: src/apps/marble-ui/ControlView.cpp:643
+#: src/apps/marble-ui/ControlView.cpp:641
 #, fuzzy
 #| msgid "Files"
 msgctxt "Marble::ControlView|"
 msgid "Files"
 msgstr "Файлдар"
 
-#: src/apps/marble-ui/ControlView.cpp:652
+#: src/apps/marble-ui/ControlView.cpp:650
 #, fuzzy
 #| msgid "Open Track"
 msgctxt "Marble::ControlView|"
 msgid "Tour"
 msgstr "Ізін ашу"
 
-#: src/apps/marble-ui/ControlView.cpp:665
+#: src/apps/marble-ui/ControlView.cpp:663
 #, fuzzy
 #| msgid "&Edit Map"
 msgctxt "QObject|"
 msgid "Edit Maps"
 msgstr "Картаны &өңдеу"
 
-#: src/apps/marble-ui/ControlView.cpp:714
-#: src/apps/marble-ui/ControlView.cpp:852
+#: src/apps/marble-ui/ControlView.cpp:712
+#: src/apps/marble-ui/ControlView.cpp:850
 #, fuzzy
 #| msgid "Show &Navigation Panel"
 msgctxt "Marble::ControlView|"
 msgid "Hide &All Panels"
 msgstr "&Шарлау панелін көрсету"
 
-#: src/apps/marble-ui/ControlView.cpp:716
+#: src/apps/marble-ui/ControlView.cpp:714
 #, fuzzy
 #| msgid "Show &Navigation Panel"
 msgctxt "Marble::ControlView|"
 msgid "Show or hide all panels."
 msgstr "&Шарлау панелін көрсету"
 
-#: src/apps/marble-ui/ControlView.cpp:841
+#: src/apps/marble-ui/ControlView.cpp:839
 #, fuzzy
 #| msgid "Show &Navigation Panel"
 msgctxt "Marble::ControlView|"
@@ -14829,71 +14829,71 @@ msgctxt "Marble::WlocatePositionProviderPlugin|"
 msgid "Reports the current position based on nearby WLAN access points"
 msgstr "WLAN қатынау түкте төңірегіндегі қазіргі орының анықтап береді"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:126
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:125
 #, fuzzy
 #| msgid "Annotation"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Annotation"
 msgstr "Аңдатпасы"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:131
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:130
 #, fuzzy
 #| msgid "&Annotation"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "&Annotation"
 msgstr "&Аңдатпа"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:141
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:140
 #, fuzzy
 #| msgid "Draws annotations on maps with placemarks or polygons."
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Draws annotations on maps with placemarks or polygons."
 msgstr "Орын белгілерімен не көпбұрышпен аңдатпаларды картаға салу."
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:184
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:183
 #, fuzzy
 #| msgid "Annotations"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Annotations"
 msgstr "Аңдатпалары"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:306
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:305
 #, fuzzy
 #| msgid "Remove current item"
 msgctxt "QObject|"
 msgid "Remove current item"
 msgstr "Назардағы аталымды өшіру"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:307
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:306
 #, fuzzy
 #| msgid "Are you sure you want to remove the current item?"
 msgctxt "QObject|"
 msgid "Are you sure you want to remove the current item?"
 msgstr "Назардағы аталымды тазаламақсыз ба?"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:343
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:342
 #, fuzzy
 #| msgid "Clear all annotations"
 msgctxt "QObject|"
 msgid "Clear all annotations"
 msgstr "Бүкіл аңдатпаларды тазалау"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:344
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:343
 #, fuzzy
 #| msgid "Are you sure you want to clear all annotations?"
 msgctxt "QObject|"
 msgid "Are you sure you want to clear all annotations?"
 msgstr "Бүкіл аңдатпаларды тазаламақсыз ба?"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:363
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:896
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:362
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:895
 #, fuzzy
 #| msgid "Save Annotation File"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Save Annotation File"
 msgstr "Аңдатпа файлды сақтау"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:365
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:364
 #, fuzzy
 #| msgid "All Supported Files (*.kml);;Kml Annotation file (*.kml)"
 msgctxt "Marble::AnnotatePlugin|"
@@ -14902,14 +14902,14 @@ msgid ""
 "osm)"
 msgstr "Бүкіл танитын файлдар (*.kml);;Kml аңдатпа файлы (*.kml)"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:391
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:390
 #, fuzzy
 #| msgid "Open Annotation File"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Open Annotation File"
 msgstr "Аңдатпа файлды ашу"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:393
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:392
 #, fuzzy
 #| msgid "All Supported Files (*.kml);;Kml Annotation file (*.kml)"
 msgctxt "Marble::AnnotatePlugin|"
@@ -14918,237 +14918,237 @@ msgid ""
 "Map file (*.osm)"
 msgstr "Бүкіл танитын файлдар (*.kml);;Kml аңдатпа файлы (*.kml)"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:751
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:756
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:761
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1375
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1459
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:750
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:755
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:760
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1374
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1458
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Operation not permitted"
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:752
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:751
 msgctxt "Marble::AnnotatePlugin|"
 msgid ""
 "Cannot merge a node from polygon's outer boundary with a node from one of "
 "its inner boundaries."
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:757
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:756
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Cannot merge two nodes from two different inner boundaries."
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:762
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:761
 msgctxt "Marble::AnnotatePlugin|"
 msgid ""
 "Cannot merge the selected nodes. Most probably this would make the polygon's "
 "outer boundary not contain all its inner boundary nodes."
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:863
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:941
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:862
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:940
 #, fuzzy
 #| msgid "Selection Method"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Select Item"
 msgstr "Таңдау әдісі"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:867
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:866
 #, fuzzy
 #| msgid "Add Polygon"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Polygon"
 msgstr "Көпбұрышты қосу"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:870
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:869
 #, fuzzy
 #| msgid "Add Polygon"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Polygon Hole"
 msgstr "Көпбұрышты қосу"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:875
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:874
 #, fuzzy
 #| msgid "Deleted"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Nodes"
 msgstr "Өшірілді"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:880
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:879
 #, fuzzy
 #| msgid "Add Placemark"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Placemark"
 msgstr "Орын белгісін қосу"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:883
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:882
 #, fuzzy
 #| msgid "Add Via"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Path"
 msgstr "Не арқылы"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:886
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:885
 #, fuzzy
 #| msgid "Remove from device"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Ground Overlay"
 msgstr "Құрылғыдан өшіру"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:889
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:888
 #, fuzzy
 #| msgid "Remove Item"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Remove Item"
 msgstr "Аталымды өшіру"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:893
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:892
 #, fuzzy
 #| msgid "Load Annotation File"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Load Annotation File"
 msgstr "Аңдатпа файлын жүктеу"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:899
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:898
 #, fuzzy
 #| msgid "Clear all Annotations"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Clear all Annotations"
 msgstr "Бүкіл аңдатпаларды тазалау"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:900
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:899
 #, fuzzy
 #| msgid "OpenStreetMap Data"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Download OpenStreetMap Data"
 msgstr "OpenStreetMap дерегі"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:902
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:901
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Download OpenStreetMap data of the visible region"
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:981
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:980
 #, fuzzy
 #| msgid "Car (fastest)"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Paste"
 msgstr "Автомобильмен (ең тезі)"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1000
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1239
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1481
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:999
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1238
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1480
 #, fuzzy
 #| msgid "Custom"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Cut"
 msgstr "Өзгеше"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1004
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1243
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1485
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1003
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1242
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1484
 #, fuzzy
 #| msgid "Copy"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Copy"
 msgstr "Көшіріп алу"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1008
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1120
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1247
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1489
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1007
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1119
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1246
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1488
 #, fuzzy
 #| msgid "Remove"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Remove"
 msgstr "Өшіру"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1014
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1114
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1253
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1495
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1013
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1113
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1252
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1494
 #, fuzzy
 #| msgid "New Profile"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Properties"
 msgstr "Жаңа іс-әлпеті"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1139
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1138
 #, fuzzy
 #| msgid "Remove from device"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Untitled Ground Overlay"
 msgstr "Құрылғыдан өшіру"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1229
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1471
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1228
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1470
 #, fuzzy
 #| msgid "Delete selected data source"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Deselect All Nodes"
 msgstr "Таңдалған дерек көзін өшіру"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1233
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1475
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1232
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1474
 #, fuzzy
 #| msgid "Delete selected data source"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Delete All Selected Nodes"
 msgstr "Таңдалған дерек көзін өшіру"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1376
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1460
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1375
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1459
 msgctxt "Marble::AnnotatePlugin|"
 msgid ""
 "Cannot delete one of the selected nodes. Most probably this would make the "
 "polygon's outer boundary not contain all its inner boundary nodes."
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1404
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1424
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1403
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1423
 #, fuzzy
 #| msgid "Selection Method"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Select Node"
 msgstr "Таңдау әдісі"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1408
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1407
 #, fuzzy
 #| msgid "Deleted"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Delete Node"
 msgstr "Өшірілді"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1424
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1423
 #, fuzzy
 #| msgid "Selection Method"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Deselect Node"
 msgstr "Таңдау әдісі"
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:32
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:35
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:31
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:34
 #, fuzzy
 #| msgid "Download Route"
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "Download"
 msgstr "Маршрутты жүктеп алу"
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:70
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:115
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:120
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:126
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:69
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:114
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:119
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:125
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "ERROR"
 msgstr ""
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:70
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:69
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "Unable to create temporary file to download OSM data to."
 msgstr ""
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:115
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:114
 #, fuzzy
 #| msgid ""
 #| "One of the selection points is not on the Globe. Please only select a "
@@ -15159,12 +15159,12 @@ msgid ""
 "and try again."
 msgstr "Таңдаған нүктенің біреуі глобуста жоқ. Аумақты глобуста таңдаңыз."
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:120
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:119
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "The bandwidth limit exceeded. Please try again later."
 msgstr ""
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:127
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:126
 msgctxt "Marble::DownloadOsmDialog|"
 msgid ""
 "Sorry, a network error occurred. Please check your internet connection or "
@@ -15632,21 +15632,21 @@ msgctxt "AprsConfigWidget|"
 msgid "Dump file records to the debug stream"
 msgstr ""
 
-#: src/plugins/render/aprs/AprsPlugin.cpp:117
+#: src/plugins/render/aprs/AprsPlugin.cpp:116
 #, fuzzy
 #| msgid "Amateur Radio Aprs Plugin"
 msgctxt "Marble::AprsPlugin|"
 msgid "Amateur Radio Aprs Plugin"
 msgstr "Әуесқойлық APRS радио плагині"
 
-#: src/plugins/render/aprs/AprsPlugin.cpp:122
+#: src/plugins/render/aprs/AprsPlugin.cpp:121
 #, fuzzy
 #| msgid "Amateur Radio &Aprs Plugin"
 msgctxt "Marble::AprsPlugin|"
 msgid "Amateur Radio &Aprs Plugin"
 msgstr "Әуесқой &APRS радио плагині"
 
-#: src/plugins/render/aprs/AprsPlugin.cpp:137
+#: src/plugins/render/aprs/AprsPlugin.cpp:136
 #, fuzzy
 #| msgid ""
 #| "This plugin displays APRS data gleaned from the Internet.  APRS is an "
@@ -15716,35 +15716,35 @@ msgctxt "CompassConfigWidget|"
 msgid "Magnet"
 msgstr "Магниттік полюс"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:58
+#: src/plugins/render/compass/CompassFloatItem.cpp:56
 #, fuzzy
 #| msgid "Compass"
 msgctxt "Marble::CompassFloatItem|"
 msgid "Compass"
 msgstr "Компас"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:63
+#: src/plugins/render/compass/CompassFloatItem.cpp:61
 #, fuzzy
 #| msgid "&Compass"
 msgctxt "Marble::CompassFloatItem|"
 msgid "&Compass"
 msgstr "&Компас"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:78
+#: src/plugins/render/compass/CompassFloatItem.cpp:76
 #, fuzzy
 #| msgid "This is a float item that provides a compass."
 msgctxt "Marble::CompassFloatItem|"
 msgid "This is a float item that provides a compass."
 msgstr "Қалқымалы компас."
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:138
+#: src/plugins/render/compass/CompassFloatItem.cpp:136
 #, fuzzy
 #| msgid "N"
 msgctxt "Marble::CompassFloatItem|"
 msgid "N"
 msgstr "С"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:139
+#: src/plugins/render/compass/CompassFloatItem.cpp:137
 #, fuzzy
 #| msgid "S"
 msgctxt "Marble::CompassFloatItem|"
@@ -15862,40 +15862,40 @@ msgctxt "EarthquakeConfigWidget|"
 msgid "to"
 msgstr ""
 
-#: src/plugins/render/earthquake/EarthquakeItem.cpp:128
+#: src/plugins/render/earthquake/EarthquakeItem.cpp:127
 #, fuzzy
 #| msgid "Date: "
 msgctxt "Marble::EarthquakeItem|"
 msgid "Date:"
 msgstr "Күні: "
 
-#: src/plugins/render/earthquake/EarthquakeItem.cpp:131
+#: src/plugins/render/earthquake/EarthquakeItem.cpp:130
 #, fuzzy
 #| msgid "Magnetic Pole"
 msgctxt "Marble::EarthquakeItem|"
 msgid "Magnitude:"
 msgstr "Магниттік полюс"
 
-#: src/plugins/render/earthquake/EarthquakeItem.cpp:132
+#: src/plugins/render/earthquake/EarthquakeItem.cpp:131
 msgctxt "Marble::EarthquakeItem|"
 msgid "Depth:"
 msgstr ""
 
-#: src/plugins/render/earthquake/EarthquakePlugin.cpp:54
+#: src/plugins/render/earthquake/EarthquakePlugin.cpp:50
 #, fuzzy
 #| msgid "Earthquakes"
 msgctxt "Marble::EarthquakePlugin|"
 msgid "Earthquakes"
 msgstr "Жер сілкіністер"
 
-#: src/plugins/render/earthquake/EarthquakePlugin.cpp:59
+#: src/plugins/render/earthquake/EarthquakePlugin.cpp:55
 #, fuzzy
 #| msgid "&Earthquakes"
 msgctxt "Marble::EarthquakePlugin|"
 msgid "&Earthquakes"
 msgstr "&Жер сілкіністер"
 
-#: src/plugins/render/earthquake/EarthquakePlugin.cpp:74
+#: src/plugins/render/earthquake/EarthquakePlugin.cpp:70
 #, fuzzy
 #| msgid "Shows earthquakes on the map."
 msgctxt "Marble::EarthquakePlugin|"
@@ -16086,32 +16086,32 @@ msgctxt "Marble::EclipsesModel|"
 msgid "Magnitude"
 msgstr ""
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:95
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:94
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Eclipses"
 msgstr ""
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:105
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:104
 msgctxt "Marble::EclipsesPlugin|"
 msgid "E&clipses"
 msgstr ""
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:115
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:114
 msgctxt "Marble::EclipsesPlugin|"
 msgid "This plugin visualizes solar eclipses."
 msgstr ""
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:188
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:187
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Browse Ecli&pses..."
 msgstr ""
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:330
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:329
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Maximum of Eclipse"
 msgstr ""
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:412
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:411
 #, qt-format
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Eclipses in %1"
@@ -16150,35 +16150,35 @@ msgctxt "ElevationProfileConfigWidget|"
 msgid "Zoom to viewport"
 msgstr "&Масштабын қарау өрісіне келтіру"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:33
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:32
 #, fuzzy
 #| msgid "&Configure..."
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Configure..."
 msgstr "&Баптау..."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:39
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:38
 #, fuzzy
 #| msgid "&Zoom to viewport"
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Zoom to viewport"
 msgstr "&Масштабын қарау өрісіне келтіру"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:69
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:68
 #, fuzzy
 #| msgid "Open Route"
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Route"
 msgstr "Маршрутты ашу"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:81
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:80
 #, fuzzy
 #| msgid "Tracking"
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Track: "
 msgstr "Маршруттау"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:94
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:93
 #, fuzzy
 #| msgid "Create a route to view its elevation profile."
 msgctxt "Marble::ElevationProfileContextMenu|"
@@ -16380,61 +16380,61 @@ msgctxt "Marble::FoursquarePlugin|"
 msgid "Displays trending Foursquare places"
 msgstr "Foursquare негізінде елеулі орындарды көрсету"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:46
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:41
 #, fuzzy
 #| msgid "GpsInfo"
 msgctxt "Marble::GpsInfo|"
 msgid "GpsInfo"
 msgstr "Gps ақпары"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:51
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:46
 #, fuzzy
 #| msgid "&GpsInfo"
 msgctxt "Marble::GpsInfo|"
 msgid "&GpsInfo"
 msgstr "&Gps ақпары"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:66
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:61
 #, fuzzy
 #| msgid "This is a float item that provides Gps Information."
 msgctxt "Marble::GpsInfo|"
 msgid "This is a float item that provides Gps Information."
 msgstr "Қалқымалы Gps мәліметі."
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:120
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:115
 #, fuzzy
 #| msgid "mph"
 msgctxt "Marble::GpsInfo|"
 msgid "mph"
 msgstr "миля/сағ"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:122
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:117
 #, fuzzy
 #| msgid "ft"
 msgctxt "Marble::GpsInfo|"
 msgid "ft"
 msgstr "фут"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:129
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:124
 #, fuzzy
 #| msgid "km/h"
 msgctxt "Marble::GpsInfo|"
 msgid "km/h"
 msgstr "км/сағ"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:131
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:126
 #, fuzzy
 #| msgid "m"
 msgctxt "Marble::GpsInfo|"
 msgid "m"
 msgstr "м"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:136
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:131
 msgctxt "Marble::GpsInfo|"
 msgid "kt"
 msgstr ""
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:138
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:133
 #, fuzzy
 #| msgid "m"
 msgctxt "Marble::GpsInfo|"
@@ -16542,126 +16542,126 @@ msgctxt "GraticuleConfigWidget|"
 msgid "Show numerical Labels."
 msgstr "Шоқжұлдыз жарлықтары болсын"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:69
+#: src/plugins/render/graticule/GraticulePlugin.cpp:66
 #, fuzzy
 #| msgid "Coordinate Grid"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Coordinate Grid"
 msgstr "Координат торы"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:74
+#: src/plugins/render/graticule/GraticulePlugin.cpp:71
 #, fuzzy
 #| msgid "Coordinate &Grid"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Coordinate &Grid"
 msgstr "Координат &торы"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:89
+#: src/plugins/render/graticule/GraticulePlugin.cpp:86
 #, fuzzy
 #| msgid "A plugin that shows a coordinate grid."
 msgctxt "Marble::GraticulePlugin|"
 msgid "A plugin that shows a coordinate grid."
 msgstr "Координат торын көрсететін плагині."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:198
+#: src/plugins/render/graticule/GraticulePlugin.cpp:195
 #, fuzzy
 #| msgid "Please choose the color for the coordinate grid."
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the coordinate grid."
 msgstr "Координаттар торының түсін таңдаңыз."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:209
+#: src/plugins/render/graticule/GraticulePlugin.cpp:206
 #, fuzzy
 #| msgid "Please choose the color for the tropic circles."
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the tropic circles."
 msgstr "Тропик шеңберлерінің түсін таңдаңыз."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:220
+#: src/plugins/render/graticule/GraticulePlugin.cpp:217
 #, fuzzy
 #| msgid "Please choose the color for the equator."
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the equator."
 msgstr "Экватор сызығының түсін таңдаңыз."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:291
+#: src/plugins/render/graticule/GraticulePlugin.cpp:288
 #, fuzzy
 #| msgid "Equator"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Equator"
 msgstr "Экватор"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:296
+#: src/plugins/render/graticule/GraticulePlugin.cpp:293
 #, fuzzy
 #| msgid "Prime Meridian"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Prime Meridian"
 msgstr "Бастапқы меридиан"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:297
+#: src/plugins/render/graticule/GraticulePlugin.cpp:294
 #, fuzzy
 #| msgid "Antimeridian"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Antimeridian"
 msgstr "Антимеридиан"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:363
+#: src/plugins/render/graticule/GraticulePlugin.cpp:360
 #, fuzzy
 #| msgid "Tropic of Cancer"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Tropic of Cancer"
 msgstr "Шаян тропигі"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:364
+#: src/plugins/render/graticule/GraticulePlugin.cpp:361
 #, fuzzy
 #| msgid "Tropic of Capricorn"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Tropic of Capricorn"
 msgstr "Тауешкі тропигі"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:367
+#: src/plugins/render/graticule/GraticulePlugin.cpp:364
 #, fuzzy
 #| msgid "Arctic Circle"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Arctic Circle"
 msgstr "Солтүстік поляр шеңбері"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:368
+#: src/plugins/render/graticule/GraticulePlugin.cpp:365
 #, fuzzy
 #| msgid "Antarctic Circle"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Antarctic Circle"
 msgstr "Оңтүстік поляр шеңбері"
 
-#: src/plugins/render/license/License.cpp:95
+#: src/plugins/render/license/License.cpp:92
 #, fuzzy
 #| msgid "License"
 msgctxt "Marble::License|"
 msgid "License"
 msgstr "Лицензия"
 
-#: src/plugins/render/license/License.cpp:100
+#: src/plugins/render/license/License.cpp:97
 #, fuzzy
 #| msgid "&License"
 msgctxt "Marble::License|"
 msgid "&License"
 msgstr "&Лицензия"
 
-#: src/plugins/render/license/License.cpp:115
+#: src/plugins/render/license/License.cpp:112
 #, fuzzy
 #| msgid "This is a float item that provides copyright information."
 msgctxt "Marble::License|"
 msgid "This is a float item that provides copyright information."
 msgstr "Құқықты мәліметті білдіретін қалқымалы аталым."
 
-#: src/plugins/render/license/License.cpp:232
+#: src/plugins/render/license/License.cpp:229
 #, fuzzy
 #| msgid "&Full License"
 msgctxt "Marble::License|"
 msgid "&Full License"
 msgstr "&Толық лицензиясы"
 
-#: src/plugins/render/license/License.cpp:236
+#: src/plugins/render/license/License.cpp:233
 #, fuzzy
 #| msgid "&Show Details"
 msgctxt "Marble::License|"
@@ -16689,78 +16689,78 @@ msgctxt "MapScaleConfigWidget|"
 msgid "Minimize"
 msgstr "Түю"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:51
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:50
 #, fuzzy
 #| msgid "Minimize"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "Minimize"
 msgstr "Түю"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:66
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:65
 #, fuzzy
 #| msgid "Scale Bar"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "Scale Bar"
 msgstr "Масштаб жолағы"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:71
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:70
 #, fuzzy
 #| msgid "&Scale Bar"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Scale Bar"
 msgstr "&Масштаб жолағы"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:86
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:85
 #, fuzzy
 #| msgid "This is a float item that provides a map scale."
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "This is a float item that provides a map scale."
 msgstr "Қалқымалы карта масштабының жолағы."
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:96
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:95
 #, fuzzy
 #| msgid "Original Developer"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "Original Developer"
 msgstr "Бастапқы құрастырушысы"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:222
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:226
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:221
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:225
 #, fuzzy
 #| msgid "km"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "km"
 msgstr "км"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:229
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:228
 #, fuzzy
 #| msgid "m"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "m"
 msgstr "м"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:234
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:233
 #, fuzzy
 #| msgid "mi"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "mi"
 msgstr "миля"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:244
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:243
 #, fuzzy
 #| msgid "m"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "nm"
 msgstr "м"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:350
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:349
 #, fuzzy
 #| msgid "&Configure..."
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Configure..."
 msgstr "&Баптау..."
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:356
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:355
 #, fuzzy
 #| msgid "&Ratio Scale"
 msgctxt "Marble::MapScaleFloatItem|"
@@ -16849,29 +16849,29 @@ msgctxt "MeasureConfigDialog|"
 msgid "Circumference"
 msgstr "Айырылымы: %1 %2"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:87
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:86
 #, fuzzy
 #| msgid "Measure Tool"
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Measure Tool"
 msgstr "Өлшеу құралы"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:92
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:91
 #, fuzzy
 #| msgid "&Measure Tool"
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "&Measure Tool"
 msgstr "&Өлшеу құралы"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:107
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:106
 #, fuzzy
 #| msgid "Measure distances between two or more points."
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Measure distances between two or more points."
 msgstr "Екі не одан көп нүкте аралығын өлшеу."
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:361
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:478
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:360
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:477
 #, fuzzy, qt-format
 #| msgid "Pressure: %1<br>"
 msgctxt "Marble::MeasureToolPlugin|"
@@ -16880,7 +16880,7 @@ msgid ""
 "%1"
 msgstr "Ауа қысымы: %1<br>"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:381
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:380
 #, fuzzy, qt-format
 #| msgid "Difference: %1 %2"
 msgctxt "Marble::MeasureToolPlugin|"
@@ -16889,7 +16889,7 @@ msgid ""
 "%1"
 msgstr "Айырылымы: %1 %2"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:498
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:497
 #, fuzzy, qt-format
 #| msgid "Pressure: %1<br>"
 msgctxt "Marble::MeasureToolPlugin|"
@@ -16898,69 +16898,69 @@ msgid ""
 "%1"
 msgstr "Ауа қысымы: %1<br>"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:555
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:554
 #, fuzzy
 #| msgid "Add Polygon"
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Polygon Ruler"
 msgstr "Көпбұрышты қосу"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:557
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:556
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Circle Ruler"
 msgstr ""
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:560
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:559
 #, fuzzy, qt-format
 #| msgid "Total Distance: %1 m"
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Total Distance: %1<br/>\n"
 msgstr "Жалпы қашықтық: %1 м"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:562
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:571
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:561
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:570
 #, fuzzy, qt-format
 #| msgid "Pressure: %1<br>"
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Area: %1<br/>\n"
 msgstr "Ауа қысымы: %1<br>"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:564
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:563
 #, fuzzy, qt-format
 #| msgid "Pressure: %1<br>"
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Perimeter: %1<br/>\n"
 msgstr "Ауа қысымы: %1<br>"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:567
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:566
 #, fuzzy, qt-format
 #| msgid "Humidity: %1<br>"
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Radius: %1<br/>\n"
 msgstr "Ылғалдылығы: %1<br>"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:569
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:568
 #, fuzzy, qt-format
 #| msgid "Pressure: %1<br>"
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Circumference: %1<br/>\n"
 msgstr "Ауа қысымы: %1<br>"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:618
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:617
 #, fuzzy
 #| msgid "Add &Measure Point"
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Add &Measure Point"
 msgstr "&Өлшем нүктесін қосу"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:619
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:618
 #, fuzzy
 #| msgid "Remove &Last Measure Point"
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Remove &Last Measure Point"
 msgstr "&Соңғы өлшем нүктесін өшіру"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:621
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:620
 #, fuzzy
 #| msgid "&Remove Measure Points"
 msgctxt "Marble::MeasureToolPlugin|"
@@ -17298,35 +17298,35 @@ msgstr ""
 "OpenDesktop пайдаланушылардың аватарларын және басқа да ақпататтарын картаға "
 "шығарады."
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:73
+#: src/plugins/render/overviewmap/OverviewMap.cpp:70
 #, fuzzy
 #| msgid "Overview Map"
 msgctxt "Marble::OverviewMap|"
 msgid "Overview Map"
 msgstr "Шолу картасы"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:78
+#: src/plugins/render/overviewmap/OverviewMap.cpp:75
 #, fuzzy
 #| msgid "&Overview Map"
 msgctxt "Marble::OverviewMap|"
 msgid "&Overview Map"
 msgstr "&Шолу картасы"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:93
+#: src/plugins/render/overviewmap/OverviewMap.cpp:90
 #, fuzzy
 #| msgid "This is a float item that provides an overview map."
 msgctxt "Marble::OverviewMap|"
 msgid "This is a float item that provides an overview map."
 msgstr "Қалқымалы шолу картасы"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:455
+#: src/plugins/render/overviewmap/OverviewMap.cpp:452
 #, fuzzy
 #| msgid "Choose Overview Map"
 msgctxt "Marble::OverviewMap|"
 msgid "Choose Overview Map"
 msgstr "Шолу картасын таңдау"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:484
+#: src/plugins/render/overviewmap/OverviewMap.cpp:481
 #, fuzzy
 #| msgid "Please choose the color for the position indicator"
 msgctxt "Marble::OverviewMap|"
@@ -17452,21 +17452,21 @@ msgctxt "PhotoConfigWidget|"
 msgid "Number of items on the screen"
 msgstr ""
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:66
+#: src/plugins/render/photo/PhotoPlugin.cpp:62
 #, fuzzy
 #| msgid "Photos"
 msgctxt "Marble::PhotoPlugin|"
 msgid "Photos"
 msgstr "Фотолар"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:71
+#: src/plugins/render/photo/PhotoPlugin.cpp:67
 #, fuzzy
 #| msgid "&Photos"
 msgctxt "Marble::PhotoPlugin|"
 msgid "&Photos"
 msgstr "&Фотолар"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:86
+#: src/plugins/render/photo/PhotoPlugin.cpp:82
 #, fuzzy
 #| msgid ""
 #| "Automatically downloads images from around the world in preference to "
@@ -17477,49 +17477,49 @@ msgid ""
 "popularity"
 msgstr "Әлемдің түпкір-түпкірінің әйгілі фотосуреттерін автоматты түрде жүктеу"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:115
+#: src/plugins/render/photo/PhotoPlugin.cpp:111
 #, fuzzy
 #| msgid "Attribution-NonCommercial-ShareAlike License"
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NonCommercial-ShareAlike License"
 msgstr "Attribution-NonCommercial-ShareAlike лицензиясы"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:122
+#: src/plugins/render/photo/PhotoPlugin.cpp:118
 #, fuzzy
 #| msgid "Attribution-NonCommercial License"
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NonCommercial License"
 msgstr "Attribution-NonCommercial лицензиясы"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:129
+#: src/plugins/render/photo/PhotoPlugin.cpp:125
 #, fuzzy
 #| msgid "Attribution-NonCommercial-NoDerivs License"
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NonCommercial-NoDerivs License"
 msgstr "Attribution-NonCommercial-NoDerivs лицензиясы"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:136
+#: src/plugins/render/photo/PhotoPlugin.cpp:132
 #, fuzzy
 #| msgid "Attribution License"
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution License"
 msgstr "Attribution лицензиясы"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:143
+#: src/plugins/render/photo/PhotoPlugin.cpp:139
 #, fuzzy
 #| msgid "Attribution-ShareAlike License"
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-ShareAlike License"
 msgstr "Attribution--ShareAlike лицензиясы"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:150
+#: src/plugins/render/photo/PhotoPlugin.cpp:146
 #, fuzzy
 #| msgid "Attribution-NoDerivs License"
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NoDerivs License"
 msgstr "Attribution-NoDerivs лицензиясы"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:157
+#: src/plugins/render/photo/PhotoPlugin.cpp:153
 #, fuzzy
 #| msgid "No known copyright restrictions"
 msgctxt "Marble::PhotoPlugin|"
@@ -17547,7 +17547,7 @@ msgctxt "Marble::PositionMarker|"
 msgid "draws a marker at the current position"
 msgstr "назардағы орында маркерді салады"
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:326
+#: src/plugins/render/positionmarker/PositionMarker.cpp:329
 #: src/plugins/render/positionmarker/PositionMarker.cpp:430
 #, fuzzy, qt-format
 #| msgid "Cursor Size: %1"
@@ -17808,203 +17808,203 @@ msgctxt "RoutingPlugin|"
 msgid "total time remaining"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:32
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:31
 #, fuzzy
 #| msgid "Comets"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Comets"
 msgstr "Кометалар"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:33
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:32
 #, fuzzy
 #| msgid "Moons"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Moons"
 msgstr "Серіктері"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:34
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:33
 #, fuzzy
 #| msgid "Other"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Other"
 msgstr "Басқа"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:35
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:34
 #, fuzzy
 #| msgid "Spacecrafts"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Spacecrafts"
 msgstr "Ғарыш кемелері"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:36
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:35
 #, fuzzy
 #| msgid "Spaceprobes"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Spaceprobes"
 msgstr "Ғарыш зондтары"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:38
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:37
 #, fuzzy
 #| msgid "Moon"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Moon"
 msgstr "Ай"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:39
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:38
 #, fuzzy
 #| msgid "Sun"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Sun"
 msgstr "Күннің көзі"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:40
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:39
 #, fuzzy
 #| msgid "Mercury"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Mercury"
 msgstr "Меркурий"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:41
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:40
 #, fuzzy
 #| msgid "Venus"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Venus"
 msgstr "Шолпан"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:42
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:41
 #, fuzzy
 #| msgid "Earth"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Earth"
 msgstr "Жер"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:43
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:42
 #, fuzzy
 #| msgid "Mars"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Mars"
 msgstr "Марс"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:44
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:43
 #, fuzzy
 #| msgid "Jupiter"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Jupiter"
 msgstr "Юпитер"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:45
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:44
 #, fuzzy
 #| msgid "Saturn"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Saturn"
 msgstr "Сатурн"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:46
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:45
 #, fuzzy
 #| msgid "Uranus"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Uranus"
 msgstr "Уран"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:47
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:46
 #, fuzzy
 #| msgid "Neptune"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Neptune"
 msgstr "Нептун"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:126
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:125
 #, fuzzy
 #| msgid "&Satellites"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Satellites"
 msgstr "&Жерсеріктер"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:127
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:126
 #, fuzzy
 #| msgid "&Data Sources"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Data Sources"
 msgstr "&Деректер көзі"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:129
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:128
 #, fuzzy
 #| msgid "&Activate Plugin"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Activate Plugin"
 msgstr "Плагинді &белсендету"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:229
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:228
 #, fuzzy
 #| msgid "Add Data Source"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Add Data Source"
 msgstr "Дерек көзін қосу"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:229
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:228
 #, fuzzy
 #| msgid "URL or File path:"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "URL or File path:"
 msgstr "URL не файл жолы:"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:235
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:234
 #, fuzzy
 #| msgid "Invalid data source input"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Invalid data source input"
 msgstr "Жарамсыз дерек көзінің кірісі"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:235
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:234
 #, fuzzy
 #| msgid "Please enter a valid URL or file path!"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Please enter a valid URL or file path!"
 msgstr "URL не файл жолын дұрыс келтіріңіз!"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
 #, fuzzy
 #| msgid "All Supported Files (*.txt *.msc)"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Supported Files (*.txt *.msc)"
 msgstr "Бүкіл танитын файлдар (*.txt *.msc)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
 #, fuzzy
 #| msgid "Marble Satellite Catalogue (*.msc)"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Marble Satellite Catalog (*.msc)"
 msgstr "Marble серіктер каталогы (*.msc)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
 #, fuzzy
 #| msgid "Two Line Element Set (*.txt)"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Two Line Element Set (*.txt)"
 msgstr "Екіжолды эллементтер жиыны (*.txt)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
 #, fuzzy
 #| msgid "All Files (*.*)"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Files (*.*)"
 msgstr "Бүкіл файлдар (*.*)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:259
 #, fuzzy
 #| msgid "Open Satellite Data File"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Open Satellite Data File"
 msgstr "Жерсерік дерегінің файлын ашу"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:287
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:286
 #, fuzzy
 #| msgid "Delete selected data source"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Delete selected data source"
 msgstr "Таңдалған дерек көзін өшіру"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:288
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:287
 #, fuzzy
 #| msgid "Do you really want to delete the selected data source?"
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -18132,7 +18132,7 @@ msgctxt "Marble::SatellitesConfigModel|"
 msgid "Catalogs"
 msgstr "Каталогтар"
 
-#: src/plugins/render/satellites/SatellitesMSCItem.cpp:113
+#: src/plugins/render/satellites/SatellitesMSCItem.cpp:112
 #: src/plugins/render/satellites/SatellitesTLEItem.cpp:53
 #, fuzzy
 #| msgid "No info available."
@@ -19699,7 +19699,7 @@ msgstr ""
 "Supported by backstage.bbc.co.uk.\n"
 "Weather data from UK MET Office"
 
-#: src/plugins/render/wikipedia/GeonamesParser.cpp:37
+#: src/plugins/render/wikipedia/GeonamesParser.cpp:36
 #, fuzzy
 #| msgid "The file is not a valid Geonames answer."
 msgctxt "QObject|"
@@ -19723,7 +19723,7 @@ msgctxt "WikipediaConfigWidget|"
 msgid "Number of items on the screen"
 msgstr ""
 
-#: src/plugins/render/wikipedia/WikipediaItem.cpp:227
+#: src/plugins/render/wikipedia/WikipediaItem.cpp:223
 #, fuzzy, qt-format
 #| msgctxt ""
 #| "Title:\n"

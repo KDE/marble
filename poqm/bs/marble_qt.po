@@ -3271,91 +3271,91 @@ msgctxt "Marble::MainWindow|"
 msgid "Unnamed"
 msgstr "Neimenovano"
 
-#: src/apps/marble-ui/ControlView.cpp:85
+#: src/apps/marble-ui/ControlView.cpp:83
 #, fuzzy
 #| msgid "Marble - Virtual Globe"
 msgctxt "Marble::ControlView|"
 msgid "Marble - Virtual Globe"
 msgstr "Marble - virtualni globus"
 
-#: src/apps/marble-ui/ControlView.cpp:273
+#: src/apps/marble-ui/ControlView.cpp:271
 #, fuzzy
 #| msgid "Default (Resizable)"
 msgctxt "Marble::ControlView|"
 msgid "Default (Resizable)"
 msgstr "Default (promjenljive veličine)"
 
-#: src/apps/marble-ui/ControlView.cpp:282
+#: src/apps/marble-ui/ControlView.cpp:280
 #, fuzzy, qt-format
 #| msgid "NTSC (720x486)"
 msgctxt "Marble::ControlView|"
 msgid "NTSC (%1x%2)"
 msgstr "NTSC (720x486)"
 
-#: src/apps/marble-ui/ControlView.cpp:283
+#: src/apps/marble-ui/ControlView.cpp:281
 #, fuzzy, qt-format
 #| msgid "PAL 16:9 (1024x576)"
 msgctxt "Marble::ControlView|"
 msgid "PAL (%1x%2)"
 msgstr "PAL 16:9 (1024x576)"
 
-#: src/apps/marble-ui/ControlView.cpp:284
+#: src/apps/marble-ui/ControlView.cpp:282
 #, fuzzy, qt-format
 #| msgid "NTSC 16:9 (864x486)"
 msgctxt "Marble::ControlView|"
 msgid "NTSC 16:9 (%1x%2)"
 msgstr "NTSC 16:9 (864x486)"
 
-#: src/apps/marble-ui/ControlView.cpp:285
+#: src/apps/marble-ui/ControlView.cpp:283
 #, fuzzy, qt-format
 #| msgid "PAL 16:9 (1024x576)"
 msgctxt "Marble::ControlView|"
 msgid "PAL 16:9 (%1x%2)"
 msgstr "PAL 16:9 (1024x576)"
 
-#: src/apps/marble-ui/ControlView.cpp:287
+#: src/apps/marble-ui/ControlView.cpp:285
 #, fuzzy, qt-format
 #| msgid "DVD (852x480p)"
 msgctxt "Marble::ControlView|"
 msgid "DVD (%1x%2p)"
 msgstr "DVD (852x480p)"
 
-#: src/apps/marble-ui/ControlView.cpp:289
+#: src/apps/marble-ui/ControlView.cpp:287
 #, fuzzy, qt-format
 #| msgid "HD (1280x720p)"
 msgctxt "Marble::ControlView|"
 msgid "HD (%1x%2p)"
 msgstr "HD (1280x720p)"
 
-#: src/apps/marble-ui/ControlView.cpp:291
+#: src/apps/marble-ui/ControlView.cpp:289
 #, fuzzy, qt-format
 #| msgid "Full HD (1920x1080p)"
 msgctxt "Marble::ControlView|"
 msgid "Full HD (%1x%2p)"
 msgstr "Full HD (1920x1080p)"
 
-#: src/apps/marble-ui/ControlView.cpp:292
+#: src/apps/marble-ui/ControlView.cpp:290
 #, fuzzy, qt-format
 #| msgid "Digital Cinema (2048x1536)"
 msgctxt "Marble::ControlView|"
 msgid "Digital Cinema (%1x%2)"
 msgstr "Digital Cinema (2048x1536)"
 
-#: src/apps/marble-ui/ControlView.cpp:477
+#: src/apps/marble-ui/ControlView.cpp:475
 #, fuzzy
 #| msgid "The Marble development team wishes you a pleasant and safe journey."
 msgctxt "Marble::ControlView|"
 msgid "The Marble development team wishes you a pleasant and safe journey."
 msgstr "Marble-ov razvojni tim želi vam ugodno i sigurno putovanje."
 
-#: src/apps/marble-ui/ControlView.cpp:478
+#: src/apps/marble-ui/ControlView.cpp:476
 #, fuzzy
 #| msgid "Caution: Driving instructions may be incomplete or inaccurate."
 msgctxt "Marble::ControlView|"
 msgid "Caution: Driving instructions may be incomplete or inaccurate."
 msgstr "Oprez: Upute za vožnju mogu biti nepotpune ili pogešne."
 
-#: src/apps/marble-ui/ControlView.cpp:479
+#: src/apps/marble-ui/ControlView.cpp:477
 #, fuzzy
 #| msgid ""
 #| "Road construction, weather and other unforeseen variables can result in "
@@ -3370,14 +3370,14 @@ msgstr ""
 "Konstrukcija puta, vrijeme i ostale nepredviđene promjenljive mogu učiniti "
 "da preporučena ruti nije najbrži ili najsigurniji put ka Vašoj destinaciju."
 
-#: src/apps/marble-ui/ControlView.cpp:481
+#: src/apps/marble-ui/ControlView.cpp:479
 #, fuzzy
 #| msgid "Please use common sense while navigating."
 msgctxt "Marble::ControlView|"
 msgid "Please use common sense while navigating."
 msgstr "Molimo koristite zdrav razum tokom navigacije."
 
-#: src/apps/marble-ui/ControlView.cpp:565
+#: src/apps/marble-ui/ControlView.cpp:563
 #, fuzzy, qt-format
 #| msgid ""
 #| "Unable to start the external editor. Check that %1 is installed or choose "
@@ -3390,92 +3390,92 @@ msgstr ""
 "Ne mogu pokrenuti spoljnji uređivač. Provjerite da li je %1 instaliran ili "
 "odaberite drugi spoljnji uređivač  u dijalogu  postavki."
 
-#: src/apps/marble-ui/ControlView.cpp:567
+#: src/apps/marble-ui/ControlView.cpp:565
 #, fuzzy
 #| msgid "Cannot start external editor"
 msgctxt "Marble::ControlView|"
 msgid "Cannot start external editor"
 msgstr "Ne mogu pokrenuti eksteri uređivač"
 
-#: src/apps/marble-ui/ControlView.cpp:584
+#: src/apps/marble-ui/ControlView.cpp:582
 #, fuzzy
 #| msgid "Legend"
 msgctxt "Marble::ControlView|"
 msgid "Legend"
 msgstr "Legenda"
 
-#: src/apps/marble-ui/ControlView.cpp:600
+#: src/apps/marble-ui/ControlView.cpp:598
 #, fuzzy
 #| msgid "Routing"
 msgctxt "Marble::ControlView|"
 msgid "Routing"
 msgstr "Usmjeravanje"
 
-#: src/apps/marble-ui/ControlView.cpp:608
+#: src/apps/marble-ui/ControlView.cpp:606
 #, fuzzy
 #| msgid "Location"
 msgctxt "Marble::ControlView|"
 msgid "Location"
 msgstr "Lokacija"
 
-#: src/apps/marble-ui/ControlView.cpp:616
+#: src/apps/marble-ui/ControlView.cpp:614
 #, fuzzy
 #| msgid "Search"
 msgctxt "Marble::ControlView|"
 msgid "Search"
 msgstr "Traži"
 
-#: src/apps/marble-ui/ControlView.cpp:629
+#: src/apps/marble-ui/ControlView.cpp:627
 #, fuzzy, qt-format
 #| msgid "Search for cities, addresses, points of interest and more (%1)"
 msgctxt "Marble::ControlView|"
 msgid "Search for cities, addresses, points of interest and more (%1)"
 msgstr "Traži gradove, adrese, tačke interesa i drugo (%1)."
 
-#: src/apps/marble-ui/ControlView.cpp:633
+#: src/apps/marble-ui/ControlView.cpp:631
 #, fuzzy
 #| msgid "Map View"
 msgctxt "Marble::ControlView|"
 msgid "Map View"
 msgstr "Pregled mape"
 
-#: src/apps/marble-ui/ControlView.cpp:643
+#: src/apps/marble-ui/ControlView.cpp:641
 #, fuzzy
 #| msgid "Files"
 msgctxt "Marble::ControlView|"
 msgid "Files"
 msgstr "Datoteke"
 
-#: src/apps/marble-ui/ControlView.cpp:652
+#: src/apps/marble-ui/ControlView.cpp:650
 #, fuzzy
 #| msgid "Tour"
 msgctxt "Marble::ControlView|"
 msgid "Tour"
 msgstr "Put"
 
-#: src/apps/marble-ui/ControlView.cpp:665
+#: src/apps/marble-ui/ControlView.cpp:663
 #, fuzzy
 #| msgid "Edit Maps"
 msgctxt "QObject|"
 msgid "Edit Maps"
 msgstr "Izmijeni mapu"
 
-#: src/apps/marble-ui/ControlView.cpp:714
-#: src/apps/marble-ui/ControlView.cpp:852
+#: src/apps/marble-ui/ControlView.cpp:712
+#: src/apps/marble-ui/ControlView.cpp:850
 #, fuzzy
 #| msgid "Hide &All Panels"
 msgctxt "Marble::ControlView|"
 msgid "Hide &All Panels"
 msgstr "Sakrij &Sve panele"
 
-#: src/apps/marble-ui/ControlView.cpp:716
+#: src/apps/marble-ui/ControlView.cpp:714
 #, fuzzy
 #| msgid "Show or hide all panels."
 msgctxt "Marble::ControlView|"
 msgid "Show or hide all panels."
 msgstr "Prikaži ili sakrij sve panele."
 
-#: src/apps/marble-ui/ControlView.cpp:841
+#: src/apps/marble-ui/ControlView.cpp:839
 #, fuzzy
 #| msgid "Show &All Panels"
 msgctxt "Marble::ControlView|"
@@ -15042,71 +15042,71 @@ msgid "Reports the current position based on nearby WLAN access points"
 msgstr ""
 "Javlja trenutnu poziciju na bazi susjednih pristupnih tačaka bežične mreže"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:126
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:125
 #, fuzzy
 #| msgid "Annotation"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Annotation"
 msgstr "Pribilješka"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:131
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:130
 #, fuzzy
 #| msgid "&Annotation"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "&Annotation"
 msgstr "&Pribilješke"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:141
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:140
 #, fuzzy
 #| msgid "Draws annotations on maps with placemarks or polygons."
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Draws annotations on maps with placemarks or polygons."
 msgstr "Crta pribilješke na mapama s mjestima ili poligonima."
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:184
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:183
 #, fuzzy
 #| msgid "Annotations"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Annotations"
 msgstr "Pribilješke"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:306
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:305
 #, fuzzy
 #| msgid "Remove current item"
 msgctxt "QObject|"
 msgid "Remove current item"
 msgstr "Ukloni trenutni element"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:307
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:306
 #, fuzzy
 #| msgid "Are you sure you want to remove the current item?"
 msgctxt "QObject|"
 msgid "Are you sure you want to remove the current item?"
 msgstr "Da li ste sigurni da želite obrisati trenutni element?"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:343
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:342
 #, fuzzy
 #| msgid "Clear all annotations"
 msgctxt "QObject|"
 msgid "Clear all annotations"
 msgstr "Očisti sve zabilješle"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:344
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:343
 #, fuzzy
 #| msgid "Are you sure you want to clear all annotations?"
 msgctxt "QObject|"
 msgid "Are you sure you want to clear all annotations?"
 msgstr "Da li ste sigurni da želite obrisati sve pribilješke?"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:363
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:896
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:362
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:895
 #, fuzzy
 #| msgid "Save Annotation File"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Save Annotation File"
 msgstr "Sačuvaj datoteku s pribilješkama"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:365
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:364
 #, fuzzy
 #| msgid ""
 #| "All Supported Files (*.kml *.osm);;KML file (*.kml);;Open Street Map file "
@@ -15119,14 +15119,14 @@ msgstr ""
 "Sve podržane datoteke (*.kml *.osm);;KML datoteka (*.kml);; Otvorena "
 "datoteka Mapa Ulica (*.osm)"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:391
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:390
 #, fuzzy
 #| msgid "Open Annotation File"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Open Annotation File"
 msgstr "Otvori datoteku s pribilješkama"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:393
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:392
 #, fuzzy
 #| msgid ""
 #| "All Supported Files (*.kml *.osm);;Kml Annotation file (*.kml);;Open "
@@ -15139,18 +15139,18 @@ msgstr ""
 "Sve podržane datoteke (*.kml *.osm);;Kml datoteka bilješki (*.kml);;Otvorena "
 "datoteka Mapa Ulica (*.osm)"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:751
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:756
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:761
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1375
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1459
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:750
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:755
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:760
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1374
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1458
 #, fuzzy
 #| msgid "Operation not permitted"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Operation not permitted"
 msgstr "Operacija nije dopuštena"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:752
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:751
 #, fuzzy
 #| msgid ""
 #| "Cannot merge a node from polygon's outer boundary with a node from one of "
@@ -15163,14 +15163,14 @@ msgstr ""
 "Ne može se spojiti čvor iz vanjske granice poligona sa čvorom iz jedne od "
 "svojih unutrašnjih granica."
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:757
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:756
 #, fuzzy
 #| msgid "Cannot merge two nodes from two different inner boundaries."
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Cannot merge two nodes from two different inner boundaries."
 msgstr "Ne mogu se spojiti dva čvora iz dva različita unutrašnje granice."
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:762
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:761
 #, fuzzy
 #| msgid ""
 #| "Cannot merge the selected nodes. Most probably this would make the "
@@ -15183,159 +15183,159 @@ msgstr ""
 "Ne mogu spojiti odabrane čvorove. Vjerojatno bi to učinilo da vanjske "
 "granice poligona ne sadrže sve svoje unutrašnje granične čvorove."
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:863
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:941
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:862
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:940
 #, fuzzy
 #| msgid "Select Item"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Select Item"
 msgstr "Odaberi stavku"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:867
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:866
 #, fuzzy
 #| msgid "Add Polygon"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Polygon"
 msgstr "Dodaj mnogougao"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:870
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:869
 #, fuzzy
 #| msgid "Add Polygon Hole"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Polygon Hole"
 msgstr "Dodaj poligonsku rupu"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:875
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:874
 #, fuzzy
 #| msgid "Add Nodes"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Nodes"
 msgstr "Dodaj čvorove"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:880
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:879
 #, fuzzy
 #| msgid "Add Placemark"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Placemark"
 msgstr "Dodaj oznaku"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:883
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:882
 #, fuzzy
 #| msgid "Add Path"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Path"
 msgstr "Dodaj putanju"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:886
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:885
 #, fuzzy
 #| msgid "Add Ground Overlay"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Ground Overlay"
 msgstr "Dodaj sloj tla"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:889
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:888
 #, fuzzy
 #| msgid "Remove Item"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Remove Item"
 msgstr "Ukloni element"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:893
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:892
 #, fuzzy
 #| msgid "Load Annotation File"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Load Annotation File"
 msgstr "Učitaj datoteku s pribilješkama"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:899
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:898
 #, fuzzy
 #| msgid "Clear all Annotations"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Clear all Annotations"
 msgstr "Očisti sve pribilješke"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:900
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:899
 #, fuzzy
 #| msgid "OpenStreetMap Data"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Download OpenStreetMap Data"
 msgstr "OpenStreetMap podaci"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:902
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:901
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Download OpenStreetMap data of the visible region"
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:981
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:980
 #, fuzzy
 #| msgid "fastest"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Paste"
 msgstr "najbrže"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1000
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1239
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1481
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:999
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1238
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1480
 #, fuzzy
 #| msgid "Cut"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Cut"
 msgstr "Isjeci"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1004
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1243
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1485
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1003
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1242
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1484
 #, fuzzy
 #| msgid "Copy"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Copy"
 msgstr "Kopiraj"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1008
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1120
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1247
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1489
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1007
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1119
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1246
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1488
 #, fuzzy
 #| msgid "Remove"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Remove"
 msgstr "Ukloni"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1014
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1114
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1253
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1495
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1013
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1113
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1252
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1494
 #, fuzzy
 #| msgid "Properties"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Properties"
 msgstr "Osobine"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1139
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1138
 #, fuzzy
 #| msgid "Untitled Ground Overlay"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Untitled Ground Overlay"
 msgstr "Nenaslovljeni zemaljski prekrival"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1229
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1471
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1228
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1470
 #, fuzzy
 #| msgid "Deselect All Nodes"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Deselect All Nodes"
 msgstr "Poništi izbor svih čvorova"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1233
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1475
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1232
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1474
 #, fuzzy
 #| msgid "Delete All Selected Nodes"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Delete All Selected Nodes"
 msgstr "Obriši sve izabrane čvorove"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1376
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1460
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1375
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1459
 #, fuzzy
 #| msgid ""
 #| "Cannot delete one of the selected nodes. Most probably this would make "
@@ -15348,62 +15348,62 @@ msgstr ""
 "Ne mogu obrisati jedan od odabranih čvorova. Vjerojatno bi to učinilo da "
 "vanjske granice poligona ne sadrže sve svoje unutrašnje granične čvorove."
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1404
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1424
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1403
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1423
 #, fuzzy
 #| msgid "Select Node"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Select Node"
 msgstr "Odaberi čvor"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1408
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1407
 #, fuzzy
 #| msgid "Delete Node"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Delete Node"
 msgstr "Obriši čvor"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1424
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1423
 #, fuzzy
 #| msgid "Deselect Node"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Deselect Node"
 msgstr "Poništi izbor čvora"
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:32
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:35
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:31
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:34
 #, fuzzy
 #| msgid "Download Route"
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "Download"
 msgstr "Preuzmi rutu"
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:70
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:115
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:120
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:126
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:69
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:114
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:119
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:125
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "ERROR"
 msgstr ""
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:70
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:69
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "Unable to create temporary file to download OSM data to."
 msgstr ""
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:115
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:114
 msgctxt "Marble::DownloadOsmDialog|"
 msgid ""
 "The selected region contains too much data. Please select a smaller region "
 "and try again."
 msgstr ""
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:120
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:119
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "The bandwidth limit exceeded. Please try again later."
 msgstr ""
 
-#: src/plugins/render/annotate/DownloadOsmDialog.cpp:127
+#: src/plugins/render/annotate/DownloadOsmDialog.cpp:126
 msgctxt "Marble::DownloadOsmDialog|"
 msgid ""
 "Sorry, a network error occurred. Please check your internet connection or "
@@ -15896,21 +15896,21 @@ msgctxt "AprsConfigWidget|"
 msgid "Dump file records to the debug stream"
 msgstr ""
 
-#: src/plugins/render/aprs/AprsPlugin.cpp:117
+#: src/plugins/render/aprs/AprsPlugin.cpp:116
 #, fuzzy
 #| msgid "Amateur Radio Aprs Plugin"
 msgctxt "Marble::AprsPlugin|"
 msgid "Amateur Radio Aprs Plugin"
 msgstr "Amaterski Radio Aprs dodatak"
 
-#: src/plugins/render/aprs/AprsPlugin.cpp:122
+#: src/plugins/render/aprs/AprsPlugin.cpp:121
 #, fuzzy
 #| msgid "Amateur Radio &Aprs Plugin"
 msgctxt "Marble::AprsPlugin|"
 msgid "Amateur Radio &Aprs Plugin"
 msgstr "Amaterski Radio &Aprs dodatak"
 
-#: src/plugins/render/aprs/AprsPlugin.cpp:137
+#: src/plugins/render/aprs/AprsPlugin.cpp:136
 #, fuzzy
 #| msgid ""
 #| "This plugin displays APRS data gleaned from the Internet.  APRS is an "
@@ -15978,35 +15978,35 @@ msgctxt "CompassConfigWidget|"
 msgid "Magnet"
 msgstr "Intezitet"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:58
+#: src/plugins/render/compass/CompassFloatItem.cpp:56
 #, fuzzy
 #| msgid "Compass"
 msgctxt "Marble::CompassFloatItem|"
 msgid "Compass"
 msgstr "Kompas"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:63
+#: src/plugins/render/compass/CompassFloatItem.cpp:61
 #, fuzzy
 #| msgid "&Compass"
 msgctxt "Marble::CompassFloatItem|"
 msgid "&Compass"
 msgstr "&Kompas"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:78
+#: src/plugins/render/compass/CompassFloatItem.cpp:76
 #, fuzzy
 #| msgid "This is a float item that provides a compass."
 msgctxt "Marble::CompassFloatItem|"
 msgid "This is a float item that provides a compass."
 msgstr "Ovo je plutajući predmet koji obezbjeđuje kompas."
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:138
+#: src/plugins/render/compass/CompassFloatItem.cpp:136
 #, fuzzy
 #| msgid "N"
 msgctxt "Marble::CompassFloatItem|"
 msgid "N"
 msgstr "S"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:139
+#: src/plugins/render/compass/CompassFloatItem.cpp:137
 #, fuzzy
 #| msgid "S"
 msgctxt "Marble::CompassFloatItem|"
@@ -16124,40 +16124,40 @@ msgctxt "EarthquakeConfigWidget|"
 msgid "to"
 msgstr ""
 
-#: src/plugins/render/earthquake/EarthquakeItem.cpp:128
+#: src/plugins/render/earthquake/EarthquakeItem.cpp:127
 #, fuzzy
 #| msgid "Date: "
 msgctxt "Marble::EarthquakeItem|"
 msgid "Date:"
 msgstr "Datum: "
 
-#: src/plugins/render/earthquake/EarthquakeItem.cpp:131
+#: src/plugins/render/earthquake/EarthquakeItem.cpp:130
 #, fuzzy
 #| msgid "Magnitude"
 msgctxt "Marble::EarthquakeItem|"
 msgid "Magnitude:"
 msgstr "Intezitet"
 
-#: src/plugins/render/earthquake/EarthquakeItem.cpp:132
+#: src/plugins/render/earthquake/EarthquakeItem.cpp:131
 msgctxt "Marble::EarthquakeItem|"
 msgid "Depth:"
 msgstr ""
 
-#: src/plugins/render/earthquake/EarthquakePlugin.cpp:54
+#: src/plugins/render/earthquake/EarthquakePlugin.cpp:50
 #, fuzzy
 #| msgid "Earthquakes"
 msgctxt "Marble::EarthquakePlugin|"
 msgid "Earthquakes"
 msgstr "Zemljotresi"
 
-#: src/plugins/render/earthquake/EarthquakePlugin.cpp:59
+#: src/plugins/render/earthquake/EarthquakePlugin.cpp:55
 #, fuzzy
 #| msgid "&Earthquakes"
 msgctxt "Marble::EarthquakePlugin|"
 msgid "&Earthquakes"
 msgstr "&Zemljotresi"
 
-#: src/plugins/render/earthquake/EarthquakePlugin.cpp:74
+#: src/plugins/render/earthquake/EarthquakePlugin.cpp:70
 #, fuzzy
 #| msgid "Shows earthquakes on the map."
 msgctxt "Marble::EarthquakePlugin|"
@@ -16380,42 +16380,42 @@ msgctxt "Marble::EclipsesModel|"
 msgid "Magnitude"
 msgstr "Intezitet"
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:95
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:94
 #, fuzzy
 #| msgid "Eclipses"
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Eclipses"
 msgstr "Eklipse"
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:105
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:104
 #, fuzzy
 #| msgid "E&clipses"
 msgctxt "Marble::EclipsesPlugin|"
 msgid "E&clipses"
 msgstr "E&klipse"
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:115
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:114
 #, fuzzy
 #| msgid "This plugin visualizes solar eclipses."
 msgctxt "Marble::EclipsesPlugin|"
 msgid "This plugin visualizes solar eclipses."
 msgstr "Ovaj dodatak prikazuje sunčanu eklipsu."
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:188
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:187
 #, fuzzy
 #| msgid "Browse Ecli&pses..."
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Browse Ecli&pses..."
 msgstr "Pretraži &Pomračenja..."
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:330
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:329
 #, fuzzy
 #| msgid "Maximum of Eclipse"
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Maximum of Eclipse"
 msgstr "Maksimum eklipse"
 
-#: src/plugins/render/eclipses/EclipsesPlugin.cpp:412
+#: src/plugins/render/eclipses/EclipsesPlugin.cpp:411
 #, fuzzy, qt-format
 #| msgid "Eclipses in %1"
 msgctxt "Marble::EclipsesPlugin|"
@@ -16457,35 +16457,35 @@ msgctxt "ElevationProfileConfigWidget|"
 msgid "Zoom to viewport"
 msgstr "&Zumiraj u područje"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:33
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:32
 #, fuzzy
 #| msgid "&Configure..."
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Configure..."
 msgstr "&Podesi..."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:39
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:38
 #, fuzzy
 #| msgid "&Zoom to viewport"
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Zoom to viewport"
 msgstr "&Zumiraj u područje"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:69
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:68
 #, fuzzy
 #| msgid "Route"
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Route"
 msgstr "Put"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:81
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:80
 #, fuzzy
 #| msgid "Track: "
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Track: "
 msgstr "Snimak: "
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:94
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:93
 #, fuzzy
 #| msgid ""
 #| "Create a route or load a track from file to view its elevation profile."
@@ -16691,63 +16691,63 @@ msgctxt "Marble::FoursquarePlugin|"
 msgid "Displays trending Foursquare places"
 msgstr "Prikazuje trend Foursquare mjesta"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:46
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:41
 #, fuzzy
 #| msgid "GpsInfo"
 msgctxt "Marble::GpsInfo|"
 msgid "GpsInfo"
 msgstr "GpsInfo"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:51
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:46
 #, fuzzy
 #| msgid "&GpsInfo"
 msgctxt "Marble::GpsInfo|"
 msgid "&GpsInfo"
 msgstr "&GpsInfo"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:66
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:61
 #, fuzzy
 #| msgid "This is a float item that provides Gps Information."
 msgctxt "Marble::GpsInfo|"
 msgid "This is a float item that provides Gps Information."
 msgstr "Plutajući predmet koji pruža Gps Informacije."
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:120
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:115
 #, fuzzy
 #| msgid "mph"
 msgctxt "Marble::GpsInfo|"
 msgid "mph"
 msgstr "mph"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:122
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:117
 #, fuzzy
 #| msgid "ft"
 msgctxt "Marble::GpsInfo|"
 msgid "ft"
 msgstr "ft"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:129
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:124
 #, fuzzy
 #| msgid "km/h"
 msgctxt "Marble::GpsInfo|"
 msgid "km/h"
 msgstr "km/h"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:131
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:126
 #, fuzzy
 #| msgid "m"
 msgctxt "Marble::GpsInfo|"
 msgid "m"
 msgstr "m"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:136
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:131
 #, fuzzy
 #| msgid "kt"
 msgctxt "Marble::GpsInfo|"
 msgid "kt"
 msgstr "kt"
 
-#: src/plugins/render/gpsinfo/GpsInfo.cpp:138
+#: src/plugins/render/gpsinfo/GpsInfo.cpp:133
 #, fuzzy
 #| msgid "nm"
 msgctxt "Marble::GpsInfo|"
@@ -16857,126 +16857,126 @@ msgctxt "GraticuleConfigWidget|"
 msgid "Show numerical Labels."
 msgstr "Prikaži ili sakrij sve panele."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:69
+#: src/plugins/render/graticule/GraticulePlugin.cpp:66
 #, fuzzy
 #| msgid "Coordinate Grid"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Coordinate Grid"
 msgstr "Koordinatna mreža"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:74
+#: src/plugins/render/graticule/GraticulePlugin.cpp:71
 #, fuzzy
 #| msgid "Coordinate &Grid"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Coordinate &Grid"
 msgstr "Koordinatna &mreža"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:89
+#: src/plugins/render/graticule/GraticulePlugin.cpp:86
 #, fuzzy
 #| msgid "A plugin that shows a coordinate grid."
 msgctxt "Marble::GraticulePlugin|"
 msgid "A plugin that shows a coordinate grid."
 msgstr "Dodatak koji prikazuje mrežu koordinata."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:198
+#: src/plugins/render/graticule/GraticulePlugin.cpp:195
 #, fuzzy
 #| msgid "Please choose the color for the coordinate grid."
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the coordinate grid."
 msgstr "Molimo odaberite boju za koordinaciju mreže."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:209
+#: src/plugins/render/graticule/GraticulePlugin.cpp:206
 #, fuzzy
 #| msgid "Please choose the color for the tropic circles."
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the tropic circles."
 msgstr "Molimo odaberite boju za tropske krugove."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:220
+#: src/plugins/render/graticule/GraticulePlugin.cpp:217
 #, fuzzy
 #| msgid "Please choose the color for the equator."
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the equator."
 msgstr "Molimo odaberitu boju za ekvator."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:291
+#: src/plugins/render/graticule/GraticulePlugin.cpp:288
 #, fuzzy
 #| msgid "Equator"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Equator"
 msgstr "Ekvator"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:296
+#: src/plugins/render/graticule/GraticulePlugin.cpp:293
 #, fuzzy
 #| msgid "Prime Meridian"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Prime Meridian"
 msgstr "Početni meridijan"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:297
+#: src/plugins/render/graticule/GraticulePlugin.cpp:294
 #, fuzzy
 #| msgid "Antimeridian"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Antimeridian"
 msgstr "Antimeridijan"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:363
+#: src/plugins/render/graticule/GraticulePlugin.cpp:360
 #, fuzzy
 #| msgid "Tropic of Cancer"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Tropic of Cancer"
 msgstr "Sjeverni povratnik"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:364
+#: src/plugins/render/graticule/GraticulePlugin.cpp:361
 #, fuzzy
 #| msgid "Tropic of Capricorn"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Tropic of Capricorn"
 msgstr "Južni povratnik"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:367
+#: src/plugins/render/graticule/GraticulePlugin.cpp:364
 #, fuzzy
 #| msgid "Arctic Circle"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Arctic Circle"
 msgstr "Arktički polarni krug"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:368
+#: src/plugins/render/graticule/GraticulePlugin.cpp:365
 #, fuzzy
 #| msgid "Antarctic Circle"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Antarctic Circle"
 msgstr "Antarktički polarni krug"
 
-#: src/plugins/render/license/License.cpp:95
+#: src/plugins/render/license/License.cpp:92
 #, fuzzy
 #| msgid "License"
 msgctxt "Marble::License|"
 msgid "License"
 msgstr "Licenca"
 
-#: src/plugins/render/license/License.cpp:100
+#: src/plugins/render/license/License.cpp:97
 #, fuzzy
 #| msgid "&License"
 msgctxt "Marble::License|"
 msgid "&License"
 msgstr "&Licenca"
 
-#: src/plugins/render/license/License.cpp:115
+#: src/plugins/render/license/License.cpp:112
 #, fuzzy
 #| msgid "This is a float item that provides copyright information."
 msgctxt "Marble::License|"
 msgid "This is a float item that provides copyright information."
 msgstr "Plutajući predmet koji pruža Informacije o autorskim pravima."
 
-#: src/plugins/render/license/License.cpp:232
+#: src/plugins/render/license/License.cpp:229
 #, fuzzy
 #| msgid "&Full License"
 msgctxt "Marble::License|"
 msgid "&Full License"
 msgstr "&Puna licenca"
 
-#: src/plugins/render/license/License.cpp:236
+#: src/plugins/render/license/License.cpp:233
 #, fuzzy
 #| msgid "&Show Details"
 msgctxt "Marble::License|"
@@ -17004,78 +17004,78 @@ msgctxt "MapScaleConfigWidget|"
 msgid "Minimize"
 msgstr "Mnimiziraj"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:51
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:50
 #, fuzzy
 #| msgid "Minimize"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "Minimize"
 msgstr "Mnimiziraj"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:66
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:65
 #, fuzzy
 #| msgid "Scale Bar"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "Scale Bar"
 msgstr "Traka sa skalom"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:71
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:70
 #, fuzzy
 #| msgid "&Scale Bar"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Scale Bar"
 msgstr "&Traka sa skalom"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:86
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:85
 #, fuzzy
 #| msgid "This is a float item that provides a map scale."
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "This is a float item that provides a map scale."
 msgstr "Ovo je plutajući predmet koji obezbjeđuje skalu mape."
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:96
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:95
 #, fuzzy
 #| msgid "Original Developer"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "Original Developer"
 msgstr "Originalni Developer"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:222
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:226
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:221
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:225
 #, fuzzy
 #| msgid "km"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "km"
 msgstr "km"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:229
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:228
 #, fuzzy
 #| msgid "m"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "m"
 msgstr "m"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:234
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:233
 #, fuzzy
 #| msgid "mi"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "mi"
 msgstr "mi"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:244
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:243
 #, fuzzy
 #| msgid "nm"
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "nm"
 msgstr "nm"
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:350
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:349
 #, fuzzy
 #| msgid "&Configure..."
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Configure..."
 msgstr "&Podesi..."
 
-#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:356
+#: src/plugins/render/mapscale/MapScaleFloatItem.cpp:355
 #, fuzzy
 #| msgid "&Ratio Scale"
 msgctxt "Marble::MapScaleFloatItem|"
@@ -17180,29 +17180,29 @@ msgstr ""
 "Obim:\n"
 "%1"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:87
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:86
 #, fuzzy
 #| msgid "Measure Tool"
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Measure Tool"
 msgstr "Alat za mjerenje"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:92
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:91
 #, fuzzy
 #| msgid "&Measure Tool"
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "&Measure Tool"
 msgstr "&Alat za mjerenje"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:107
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:106
 #, fuzzy
 #| msgid "Measure distances between two or more points."
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Measure distances between two or more points."
 msgstr "Izmjeri udaljenost između dvije ili više tačaka."
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:361
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:478
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:360
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:477
 #, fuzzy, qt-format
 #| msgid ""
 #| "Area:\n"
@@ -17215,7 +17215,7 @@ msgstr ""
 "Površina:\n"
 "%1"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:381
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:380
 #, fuzzy, qt-format
 #| msgid ""
 #| "Circumference:\n"
@@ -17228,7 +17228,7 @@ msgstr ""
 "Obim:\n"
 "%1"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:498
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:497
 #, fuzzy, qt-format
 #| msgid ""
 #| "Perimeter:\n"
@@ -17241,71 +17241,71 @@ msgstr ""
 "Prečnik:\n"
 "%1"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:555
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:554
 #, fuzzy
 #| msgid "Polygon Ruler"
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Polygon Ruler"
 msgstr "Poligonski lenjir"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:557
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:556
 #, fuzzy
 #| msgid "Circle Ruler"
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Circle Ruler"
 msgstr "Kružni linijar"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:560
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:559
 #, fuzzy, qt-format
 #| msgid "Total Distance: %1<br/>\n"
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Total Distance: %1<br/>\n"
 msgstr "Ukupna udaljenost: %1<br/>\n"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:562
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:571
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:561
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:570
 #, fuzzy, qt-format
 #| msgid "Area: %1<br/>\n"
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Area: %1<br/>\n"
 msgstr "Površina: %1<br/>\n"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:564
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:563
 #, fuzzy, qt-format
 #| msgid "Perimeter: %1<br/>\n"
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Perimeter: %1<br/>\n"
 msgstr "Prečnik: %1<br/>\n"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:567
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:566
 #, fuzzy, qt-format
 #| msgid "Radius: %1<br/>\n"
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Radius: %1<br/>\n"
 msgstr "Poluprečnik: %1<br/>\n"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:569
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:568
 #, fuzzy, qt-format
 #| msgid "Circumference: %1<br/>\n"
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Circumference: %1<br/>\n"
 msgstr "Obim: %1<br/>\n"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:618
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:617
 #, fuzzy
 #| msgid "Add &Measure Point"
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Add &Measure Point"
 msgstr "Dodaj &Mjernu tačku"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:619
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:618
 #, fuzzy
 #| msgid "Remove &Last Measure Point"
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Remove &Last Measure Point"
 msgstr "Ukloni &posljednju mjernu tačku"
 
-#: src/plugins/render/measure/MeasureToolPlugin.cpp:621
+#: src/plugins/render/measure/MeasureToolPlugin.cpp:620
 #, fuzzy
 #| msgid "&Remove Measure Points"
 msgctxt "Marble::MeasureToolPlugin|"
@@ -17645,35 +17645,35 @@ msgstr ""
 "Prikazivanje OpenDesktop korisničkih avatara i nekih dodatnih informacija o "
 "njima na mapi."
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:73
+#: src/plugins/render/overviewmap/OverviewMap.cpp:70
 #, fuzzy
 #| msgid "Overview Map"
 msgctxt "Marble::OverviewMap|"
 msgid "Overview Map"
 msgstr "Pregled mape"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:78
+#: src/plugins/render/overviewmap/OverviewMap.cpp:75
 #, fuzzy
 #| msgid "&Overview Map"
 msgctxt "Marble::OverviewMap|"
 msgid "&Overview Map"
 msgstr "&Pregled mape"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:93
+#: src/plugins/render/overviewmap/OverviewMap.cpp:90
 #, fuzzy
 #| msgid "This is a float item that provides an overview map."
 msgctxt "Marble::OverviewMap|"
 msgid "This is a float item that provides an overview map."
 msgstr "Ovo je plutajući predmet koji omogućava prikaz mape."
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:455
+#: src/plugins/render/overviewmap/OverviewMap.cpp:452
 #, fuzzy
 #| msgid "Choose Overview Map"
 msgctxt "Marble::OverviewMap|"
 msgid "Choose Overview Map"
 msgstr "Izabrati Pregled Mape"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:484
+#: src/plugins/render/overviewmap/OverviewMap.cpp:481
 #, fuzzy
 #| msgid "Please choose the color for the position indicator"
 msgctxt "Marble::OverviewMap|"
@@ -17799,21 +17799,21 @@ msgctxt "PhotoConfigWidget|"
 msgid "Number of items on the screen"
 msgstr ""
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:66
+#: src/plugins/render/photo/PhotoPlugin.cpp:62
 #, fuzzy
 #| msgid "Photos"
 msgctxt "Marble::PhotoPlugin|"
 msgid "Photos"
 msgstr "Fotografije"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:71
+#: src/plugins/render/photo/PhotoPlugin.cpp:67
 #, fuzzy
 #| msgid "&Photos"
 msgctxt "Marble::PhotoPlugin|"
 msgid "&Photos"
 msgstr "&Fotografije"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:86
+#: src/plugins/render/photo/PhotoPlugin.cpp:82
 #, fuzzy
 #| msgid ""
 #| "Automatically downloads images from around the world in preference to "
@@ -17824,49 +17824,49 @@ msgid ""
 "popularity"
 msgstr "Automatski preuzima slike širom svijeta prema njihovoj popularnosti"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:115
+#: src/plugins/render/photo/PhotoPlugin.cpp:111
 #, fuzzy
 #| msgid "Attribution-NonCommercial-ShareAlike License"
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NonCommercial-ShareAlike License"
 msgstr "Zaslužna nekomercijalna dijeljena licenca"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:122
+#: src/plugins/render/photo/PhotoPlugin.cpp:118
 #, fuzzy
 #| msgid "Attribution-NonCommercial License"
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NonCommercial License"
 msgstr "Zaslužna nekomercijalna licenca"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:129
+#: src/plugins/render/photo/PhotoPlugin.cpp:125
 #, fuzzy
 #| msgid "Attribution-NonCommercial-NoDerivs License"
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NonCommercial-NoDerivs License"
 msgstr "Zaslužna nekomercijalna neizvedena licenca"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:136
+#: src/plugins/render/photo/PhotoPlugin.cpp:132
 #, fuzzy
 #| msgid "Attribution License"
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution License"
 msgstr "Zaslužna licenca"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:143
+#: src/plugins/render/photo/PhotoPlugin.cpp:139
 #, fuzzy
 #| msgid "Attribution-ShareAlike License"
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-ShareAlike License"
 msgstr "Zaslužna dijeljena licenca"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:150
+#: src/plugins/render/photo/PhotoPlugin.cpp:146
 #, fuzzy
 #| msgid "Attribution-NoDerivs License"
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NoDerivs License"
 msgstr "Zaslužna neizvedena licenca"
 
-#: src/plugins/render/photo/PhotoPlugin.cpp:157
+#: src/plugins/render/photo/PhotoPlugin.cpp:153
 #, fuzzy
 #| msgid "No known copyright restrictions"
 msgctxt "Marble::PhotoPlugin|"
@@ -17894,7 +17894,7 @@ msgctxt "Marble::PositionMarker|"
 msgid "draws a marker at the current position"
 msgstr "crta marker na trenutnoj poziciji"
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:326
+#: src/plugins/render/positionmarker/PositionMarker.cpp:329
 #: src/plugins/render/positionmarker/PositionMarker.cpp:430
 #, fuzzy, qt-format
 #| msgid "Cursor Size: %1"
@@ -18152,203 +18152,203 @@ msgctxt "RoutingPlugin|"
 msgid "total time remaining"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:32
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:31
 #, fuzzy
 #| msgid "Comets"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Comets"
 msgstr "Komete"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:33
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:32
 #, fuzzy
 #| msgid "Moons"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Moons"
 msgstr "Mjeseci"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:34
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:33
 #, fuzzy
 #| msgid "Other"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Other"
 msgstr "Ostalo"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:35
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:34
 #, fuzzy
 #| msgid "Spacecrafts"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Spacecrafts"
 msgstr "Svemirskl brodovi"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:36
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:35
 #, fuzzy
 #| msgid "Spaceprobes"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Spaceprobes"
 msgstr "Svemirske sonde"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:38
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:37
 #, fuzzy
 #| msgid "Moon"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Moon"
 msgstr "Mjesec"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:39
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:38
 #, fuzzy
 #| msgid "Sun"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Sun"
 msgstr "Sunce"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:40
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:39
 #, fuzzy
 #| msgid "Mercury"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Mercury"
 msgstr "Merkur"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:41
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:40
 #, fuzzy
 #| msgid "Venus"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Venus"
 msgstr "Venera"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:42
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:41
 #, fuzzy
 #| msgid "Earth"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Earth"
 msgstr "Zemlja"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:43
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:42
 #, fuzzy
 #| msgid "Mars"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Mars"
 msgstr "Mars"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:44
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:43
 #, fuzzy
 #| msgid "Jupiter"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Jupiter"
 msgstr "Jupiter"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:45
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:44
 #, fuzzy
 #| msgid "Saturn"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Saturn"
 msgstr "Saturn"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:46
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:45
 #, fuzzy
 #| msgid "Uranus"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Uranus"
 msgstr "Uran"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:47
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:46
 #, fuzzy
 #| msgid "Neptune"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Neptune"
 msgstr "Neptun"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:126
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:125
 #, fuzzy
 #| msgid "&Satellites"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Satellites"
 msgstr "&Sateliti"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:127
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:126
 #, fuzzy
 #| msgid "&Data Sources"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Data Sources"
 msgstr "&izvori podataka"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:129
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:128
 #, fuzzy
 #| msgid "&Activate Plugin"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Activate Plugin"
 msgstr "&Aktiviraj priključak"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:229
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:228
 #, fuzzy
 #| msgid "Add Data Source"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Add Data Source"
 msgstr "Dodaj izvor podataka"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:229
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:228
 #, fuzzy
 #| msgid "URL or File path:"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "URL or File path:"
 msgstr "Put do datoteke ili URL:"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:235
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:234
 #, fuzzy
 #| msgid "Invalid data source input"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Invalid data source input"
 msgstr "Pogrešan ulaz izvora podataka"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:235
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:234
 #, fuzzy
 #| msgid "Please enter a valid URL or file path!"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Please enter a valid URL or file path!"
 msgstr "Molim, unesite važeći URL ili putanju do datoteke."
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
 #, fuzzy
 #| msgid "All Supported Files (*.txt *.msc)"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Supported Files (*.txt *.msc)"
 msgstr "Sve podržane datoteke (*.txt *.msc)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
 #, fuzzy
 #| msgid "Marble Satellite Catalog (*.msc)"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Marble Satellite Catalog (*.msc)"
 msgstr "Marble satelitski katalog (*.msc)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
 #, fuzzy
 #| msgid "Two Line Element Set (*.txt)"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Two Line Element Set (*.txt)"
 msgstr "Dvolinijski skup elemenata (*.txt)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:258
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
 #, fuzzy
 #| msgid "All Files (*.*)"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Files (*.*)"
 msgstr "Sve datoteke (*.*)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:259
 #, fuzzy
 #| msgid "Open Satellite Data File"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Open Satellite Data File"
 msgstr "Otvori datoteku s satelitima"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:287
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:286
 #, fuzzy
 #| msgid "Delete selected data source"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Delete selected data source"
 msgstr "Obriši izabrani izvor podataka"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:288
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:287
 #, fuzzy
 #| msgid "Do you really want to delete the selected data source?"
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -18474,7 +18474,7 @@ msgctxt "Marble::SatellitesConfigModel|"
 msgid "Catalogs"
 msgstr "Katalozi"
 
-#: src/plugins/render/satellites/SatellitesMSCItem.cpp:113
+#: src/plugins/render/satellites/SatellitesMSCItem.cpp:112
 #: src/plugins/render/satellites/SatellitesTLEItem.cpp:53
 #, fuzzy
 #| msgid "No info available."
@@ -20047,7 +20047,7 @@ msgstr ""
 "Podržao backstage.bbc.co.uk.\n"
 "Podaci o vremenu it UK MET ureda"
 
-#: src/plugins/render/wikipedia/GeonamesParser.cpp:37
+#: src/plugins/render/wikipedia/GeonamesParser.cpp:36
 #, fuzzy
 #| msgid "The file is not a valid Geonames answer."
 msgctxt "QObject|"
@@ -20069,7 +20069,7 @@ msgctxt "WikipediaConfigWidget|"
 msgid "Number of items on the screen"
 msgstr ""
 
-#: src/plugins/render/wikipedia/WikipediaItem.cpp:227
+#: src/plugins/render/wikipedia/WikipediaItem.cpp:223
 #, fuzzy, qt-format
 #| msgctxt ""
 #| "Title:\n"
