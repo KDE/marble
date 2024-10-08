@@ -263,7 +263,7 @@ QString OwncloudSyncBackend::routeName(const QString &timestamp) const
     QString routeName;
     GeoDocument *geoDoc = parser.releaseDocument();
     auto container = dynamic_cast<GeoDataDocument *>(geoDoc);
-    if (container && container->size() > 0) {
+    if (container && !container->isEmpty()) {
         GeoDataFolder *folder = container->folderList().at(0);
         for (GeoDataPlacemark *placemark : folder->placemarkList()) {
             routeName.append(placemark->name());
@@ -276,8 +276,8 @@ QString OwncloudSyncBackend::routeName(const QString &timestamp) const
 
 void OwncloudSyncBackend::validateSettings()
 {
-    if (d->m_cloudSyncManager->owncloudServer().size() > 0 && d->m_cloudSyncManager->owncloudUsername().size() > 0
-        && d->m_cloudSyncManager->owncloudPassword().size() > 0) {
+    if (!d->m_cloudSyncManager->owncloudServer().isEmpty() && !d->m_cloudSyncManager->owncloudUsername().isEmpty()
+        && !d->m_cloudSyncManager->owncloudPassword().isEmpty()) {
         QNetworkRequest request(endpointUrl(d->m_routeListEndpoint));
         d->m_authReply = d->m_network.get(request);
         connect(d->m_authReply, &QNetworkReply::finished, this, &OwncloudSyncBackend::checkAuthReply);

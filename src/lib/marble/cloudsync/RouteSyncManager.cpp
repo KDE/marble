@@ -147,7 +147,7 @@ QList<RouteItem> RouteSyncManager::cachedRouteList() const
         QString routeName;
         GeoDocument *geoDoc = parser.releaseDocument();
         auto container = dynamic_cast<GeoDataDocument *>(geoDoc);
-        if (container && container->size() > 0) {
+        if (container && !container->isEmpty()) {
             GeoDataFolder *folder = container->folderList().at(0);
             for (GeoDataPlacemark *placemark : folder->placemarkList()) {
                 routeName += placemark->name() + QLatin1StringView(" - ");
