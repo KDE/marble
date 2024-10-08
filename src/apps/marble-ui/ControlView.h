@@ -169,19 +169,19 @@ private:
     static void addViewSizeAction(QActionGroup *actionGroup, const QString &nameTemplate, int width, int height);
 
     MapThemeManager *const m_mapThemeManager;
-    MarbleWidget *m_marbleWidget;
+    MarbleWidget *m_marbleWidget = nullptr;
     QString m_externalEditor;
-    QDockWidget *m_searchDock;
-    CurrentLocationWidget *m_locationWidget;
-    ConflictDialog *m_conflictDialog;
-    CloudSyncManager *m_cloudSyncManager;
-    QAction *m_togglePanelVisibilityAction;
+    QDockWidget *m_searchDock = nullptr;
+    CurrentLocationWidget *m_locationWidget = nullptr;
+    ConflictDialog *m_conflictDialog = nullptr;
+    CloudSyncManager *m_cloudSyncManager = nullptr;
+    QAction *m_togglePanelVisibilityAction = nullptr;
     QList<QAction *> m_panelActions;
     QList<bool> m_panelVisibility;
     bool m_isPanelVisible;
-    TourWidget *m_tourWidget;
-    QDockWidget *m_annotationDock;
-    RenderPlugin *m_annotationPlugin;
+    TourWidget *m_tourWidget = nullptr;
+    QDockWidget *m_annotationDock = nullptr;
+    RenderPlugin *m_annotationPlugin = nullptr;
 };
 
 }

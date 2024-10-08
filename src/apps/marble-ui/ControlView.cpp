@@ -71,14 +71,7 @@ namespace Marble
 ControlView::ControlView(QWidget *parent)
     : QWidget(parent)
     , m_mapThemeManager(new MapThemeManager(this))
-    , m_searchDock(nullptr)
-    , m_locationWidget(nullptr)
-    , m_conflictDialog(nullptr)
-    , m_togglePanelVisibilityAction(nullptr)
     , m_isPanelVisible(true)
-    , m_tourWidget(nullptr)
-    , m_annotationDock(nullptr)
-    , m_annotationPlugin(nullptr)
 {
     setWindowTitle(tr("Marble - Virtual Globe"));
 
@@ -97,10 +90,9 @@ ControlView::ControlView(QWidget *parent)
     }
 #endif
 
-    auto layout = new QVBoxLayout;
+    auto layout = new QVBoxLayout(this);
     layout->addWidget(m_marbleWidget);
     layout->setContentsMargins({});
-    setLayout(layout);
 
     m_cloudSyncManager = new CloudSyncManager(this);
     m_cloudSyncManager->routeSyncManager()->setRoutingManager(m_marbleWidget->model()->routingManager());
@@ -854,7 +846,7 @@ void ControlView::togglePanelVisibility()
 
 void ControlView::handleTourLinkClicked(const QString &path)
 {
-    QString tourPath = MarbleDirs::path(path);
+    const QString tourPath = MarbleDirs::path(path);
     if (!tourPath.isEmpty()) {
         openTour(tourPath);
     }
