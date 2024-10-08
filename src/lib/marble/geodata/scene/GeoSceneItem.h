@@ -48,7 +48,7 @@ public:
 private:
     Q_DISABLE_COPY(GeoSceneItem)
 
-    GeoSceneIcon *m_icon;
+    GeoSceneIcon *const m_icon;
 
     QString m_name;
     QString m_text;

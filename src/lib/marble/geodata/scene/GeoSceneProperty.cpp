@@ -7,7 +7,6 @@
 #include "GeoSceneProperty.h"
 
 #include "GeoSceneTypes.h"
-#include "MarbleDebug.h"
 
 namespace Marble
 {

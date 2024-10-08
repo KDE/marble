@@ -39,9 +39,9 @@ public:
         delete m_license;
     }
 
-    GeoSceneZoom *m_zoom;
-    GeoSceneIcon *m_icon;
-    GeoSceneLicense *m_license;
+    GeoSceneZoom *const m_zoom;
+    GeoSceneIcon *const m_icon;
+    GeoSceneLicense *const m_license;
 
     QString m_name;
     QString m_target;

@@ -37,10 +37,10 @@ public:
         delete m_legend;
     }
 
-    GeoSceneHead *m_head;
-    GeoSceneMap *m_map;
-    GeoSceneSettings *m_settings;
-    GeoSceneLegend *m_legend;
+    GeoSceneHead *const m_head;
+    GeoSceneMap *const m_map;
+    GeoSceneSettings *const m_settings;
+    GeoSceneLegend *const m_legend;
 };
 
 GeoSceneDocument::GeoSceneDocument()

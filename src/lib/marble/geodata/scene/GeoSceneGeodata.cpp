@@ -12,7 +12,6 @@ namespace Marble
 {
 GeoSceneGeodata::GeoSceneGeodata(const QString &name)
     : GeoSceneAbstractDataset(name)
-    , m_sourceFile(QString())
     , m_alpha(1.0)
     , m_pen(QPen(Qt::NoPen))
     , m_brush(QBrush(Qt::transparent))

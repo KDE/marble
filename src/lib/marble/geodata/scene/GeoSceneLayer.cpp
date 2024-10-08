@@ -24,7 +24,7 @@ public:
     /// much about speed here), so we don't use a hash
     QList<GeoSceneAbstractDataset *> m_datasets;
 
-    GeoSceneFilter *m_filter;
+    GeoSceneFilter *m_filter = nullptr;
 
     QString m_name;
     QString m_backend;
