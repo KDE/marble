@@ -7,15 +7,11 @@
 // Local
 #include "MercatorProjection.h"
 
-#include "MarbleDebug.h"
-
 // Marble
 #include "GeoDataLatLonAltBox.h"
 #include "ViewportParams.h"
 
-#include "GeoDataPoint.h"
 #include "MarbleMath.h"
-#include "MathHelper.h"
 
 #include <QIcon>
 

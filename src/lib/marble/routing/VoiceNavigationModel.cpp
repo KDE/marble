@@ -27,7 +27,7 @@ public:
         }
     };
 
-    VoiceNavigationModel *m_parent;
+    VoiceNavigationModel *m_parent = nullptr;
 
     QString m_speaker;
 

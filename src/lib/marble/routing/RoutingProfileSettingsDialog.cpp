@@ -47,10 +47,10 @@ RoutingProfileSettingsDialog::RoutingProfileSettingsDialog(const PluginManager *
     connect(m_ui->services->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), SLOT(updateConfigWidget()), Qt::QueuedConnection);
     connect(m_servicesModel, SIGNAL(dataChanged(QModelIndex, QModelIndex)), SLOT(updateConfigWidget()));
 
-    connect(m_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(m_ui->buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(m_ui->buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+    connect(m_ui->buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
-    connect(m_ui->configureButton, SIGNAL(clicked()), this, SLOT(openConfigDialog()));
+    connect(m_ui->configureButton, &QAbstractButton::clicked, this, &RoutingProfileSettingsDialog::openConfigDialog);
 }
 
 RoutingProfileSettingsDialog::~RoutingProfileSettingsDialog()

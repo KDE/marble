@@ -37,7 +37,7 @@ public:
         delete m_model;
     }
 
-    AbstractDataPluginModel *m_model;
+    AbstractDataPluginModel *m_model = nullptr;
     quint32 m_numberOfItems;
     QTimer m_updateTimer;
 };

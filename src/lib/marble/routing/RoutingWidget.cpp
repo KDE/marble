@@ -96,20 +96,20 @@ public:
     bool m_playing;
     QString m_planetId;
 
-    QToolBar *m_toolBar;
+    QToolBar *m_toolBar = nullptr;
 
-    QToolButton *m_openRouteButton;
-    QToolButton *m_saveRouteButton;
-    QAction *m_cloudSyncSeparator;
-    QAction *m_uploadToCloudAction;
-    QAction *m_openCloudRoutesAction;
-    QToolButton *m_addViaButton;
-    QToolButton *m_reverseRouteButton;
-    QToolButton *m_clearRouteButton;
-    QToolButton *m_configureButton;
-    QToolButton *m_playButton;
+    QToolButton *m_openRouteButton = nullptr;
+    QToolButton *m_saveRouteButton = nullptr;
+    QAction *m_cloudSyncSeparator = nullptr;
+    QAction *m_uploadToCloudAction = nullptr;
+    QAction *m_openCloudRoutesAction = nullptr;
+    QToolButton *m_addViaButton = nullptr;
+    QToolButton *m_reverseRouteButton = nullptr;
+    QToolButton *m_clearRouteButton = nullptr;
+    QToolButton *m_configureButton = nullptr;
+    QToolButton *m_playButton = nullptr;
 
-    QProgressDialog *m_routeUploadDialog;
+    QProgressDialog *m_routeUploadDialog = nullptr;
 
     /** Constructor */
     RoutingWidgetPrivate(RoutingWidget *parent, MarbleWidget *marbleWidget);

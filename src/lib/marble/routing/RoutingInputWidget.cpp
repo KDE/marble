@@ -57,18 +57,18 @@ protected:
 class RoutingInputWidgetPrivate
 {
 public:
-    MarbleModel *m_marbleModel;
+    MarbleModel *m_marbleModel = nullptr;
 
-    RoutingInputLineEdit *m_lineEdit;
+    RoutingInputLineEdit *m_lineEdit = nullptr;
 
-    QPushButton *m_removeButton;
+    QPushButton *m_removeButton = nullptr;
 
     SearchRunnerManager m_placemarkRunnerManager;
     ReverseGeocodingRunnerManager m_reverseGeocodingRunnerManager;
 
-    MarblePlacemarkModel *m_placemarkModel;
+    MarblePlacemarkModel *m_placemarkModel = nullptr;
 
-    RouteRequest *m_route;
+    RouteRequest *m_route = nullptr;
 
     int m_index;
 
@@ -261,13 +261,13 @@ RoutingInputWidget::RoutingInputWidget(MarbleModel *model, int index, QWidget *p
 
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if (smallScreen) {
-        connect(d->m_lineEdit, SIGNAL(decoratorButtonClicked()), this, SLOT(openTargetSelectionDialog()));
+        connect(d->m_lineEdit, &MarbleLineEdit::decoratorButtonClicked, this, &RoutingInputWidget::openTargetSelectionDialog);
     } else {
         d->createMenu(this);
-        connect(d->m_lineEdit, SIGNAL(decoratorButtonClicked()), this, SLOT(showMenu()));
+        connect(d->m_lineEdit, &MarbleLineEdit::decoratorButtonClicked, this, &RoutingInputWidget::showMenu);
     }
 
-    connect(d->m_removeButton, SIGNAL(clicked()), this, SLOT(requestRemoval()));
+    connect(d->m_removeButton, &QAbstractButton::clicked, this, &RoutingInputWidget::requestRemoval);
     connect(d->m_marbleModel->bookmarkManager(), SIGNAL(bookmarksChanged()), this, SLOT(reloadBookmarks()));
     connect(d->m_marbleModel->positionTracking(),
             SIGNAL(statusChanged(PositionProviderStatus)),
@@ -279,13 +279,13 @@ RoutingInputWidget::RoutingInputWidget(MarbleModel *model, int index, QWidget *p
             this,
             SLOT(retrieveReverseGeocodingResult(GeoDataCoordinates, GeoDataPlacemark)));
     connect(d->m_lineEdit, SIGNAL(returnPressed()), this, SLOT(findPlacemarks()));
-    connect(d->m_lineEdit, SIGNAL(textEdited(QString)), this, SLOT(setInvalid()));
+    connect(d->m_lineEdit, &QLineEdit::textEdited, this, &RoutingInputWidget::setInvalid);
     connect(&d->m_placemarkRunnerManager, SIGNAL(searchFinished(QString)), this, SLOT(finishSearch()));
     connect(d->m_marbleModel->routingManager()->routeRequest(),
             SIGNAL(positionChanged(int, GeoDataCoordinates)),
             this,
             SLOT(updatePosition(int, GeoDataCoordinates)));
-    connect(&d->m_nominatimTimer, SIGNAL(timeout()), this, SLOT(reverseGeocoding()));
+    connect(&d->m_nominatimTimer, &QTimer::timeout, this, &RoutingInputWidget::reverseGeocoding);
     connect(this, SIGNAL(targetValidityChanged(bool)), this, SLOT(updateCenterButton(bool)));
     updateCenterButton(hasTargetPosition());
 

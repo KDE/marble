@@ -59,7 +59,7 @@ public:
 
     void updateFavoriteItems();
 
-    AbstractDataPluginModel *m_parent;
+    AbstractDataPluginModel *m_parent = nullptr;
     const QString m_name;
     const MarbleModel *const m_marbleModel;
     GeoDataLatLonAltBox m_lastBox;
@@ -87,7 +87,7 @@ public:
 class FavoritesModel : public QAbstractListModel
 {
 public:
-    AbstractDataPluginModelPrivate *d;
+    AbstractDataPluginModelPrivate *const d;
 
     explicit FavoritesModel(AbstractDataPluginModelPrivate *d, QObject *parent = nullptr);
 

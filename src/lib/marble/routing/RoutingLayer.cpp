@@ -83,17 +83,17 @@ public:
 
     RoutingModel *const m_routingModel;
 
-    MarblePlacemarkModel *m_placemarkModel;
+    MarblePlacemarkModel *m_placemarkModel = nullptr;
 
-    QItemSelectionModel *m_selectionModel;
+    QItemSelectionModel *m_selectionModel = nullptr;
 
     QSize m_pixmapSize;
 
     RouteRequest *const m_routeRequest;
 
-    MarbleWidgetPopupMenu *m_contextMenu;
+    MarbleWidgetPopupMenu *m_contextMenu = nullptr;
 
-    QAction *m_removeViaPointAction;
+    QAction *m_removeViaPointAction = nullptr;
 
     int m_activeMenuIndex;
 

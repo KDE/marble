@@ -26,7 +26,7 @@ public:
 class SpeakersModelPrivate
 {
 public:
-    SpeakersModel *m_parent;
+    SpeakersModel *m_parent = nullptr;
 
     QList<SpeakersModelItem> m_speakers;
 

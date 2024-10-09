@@ -8,15 +8,11 @@
 
 // Local
 #include "SphericalProjection.h"
-#include "AbstractProjection_p.h"
-
-#include "MarbleDebug.h"
 
 // Marble
 #include "AzimuthalProjection_p.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
-#include "GeoDataPoint.h"
 #include "MarbleGlobal.h"
 #include "ViewportParams.h"
 

@@ -40,7 +40,7 @@ namespace Marble
 class RoutingManagerPrivate
 {
 public:
-    RoutingManager *q;
+    RoutingManager *const q;
 
     RouteRequest m_routeRequest;
 
