@@ -5,8 +5,6 @@
 
 #include "GPXtrkptTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include <QStringView>
 
 #include "GPXElementDictionary.h"

@@ -78,7 +78,7 @@ SearchRunner *LocalOsmSearchPlugin::newRunner() const
 void LocalOsmSearchPlugin::addDatabaseDirectory(const QString &path)
 {
     QDir directory(path);
-    QStringList const nameFilters = QStringList() << "*.sqlite";
+    QStringList const nameFilters = QStringList() << QStringLiteral("*.sqlite");
     QStringList const files(directory.entryList(nameFilters, QDir::Files));
     for (const QString &file : files) {
         m_databaseFiles << directory.filePath(file);

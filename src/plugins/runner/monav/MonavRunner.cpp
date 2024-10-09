@@ -13,7 +13,6 @@
 #include "GeoDataLineString.h"
 #include "GeoDataPlacemark.h"
 #include "MarbleDebug.h"
-#include "MarbleDirs.h"
 #include "routing/RouteRequest.h"
 #include "routing/instructions/InstructionTransformation.h"
 

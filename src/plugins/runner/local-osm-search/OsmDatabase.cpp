@@ -7,7 +7,6 @@
 #include "OsmDatabase.h"
 
 #include "DatabaseQuery.h"
-#include "GeoDataLatLonAltBox.h"
 #include "MarbleDebug.h"
 #include "MarbleLocale.h"
 #include "MarbleMath.h"
@@ -97,7 +96,7 @@ QList<OsmPlacemark> OsmDatabase::find(const DatabaseQuery &userQuery)
             if (regionsQuery.lastError().isValid()) {
                 qWarning() << regionsQuery.lastError() << "in" << databaseFile << "with query" << regionsQuery.lastQuery();
             }
-            regionRestriction = " AND (";
+            regionRestriction = QStringLiteral(" AND (");
             int regionCount = 0;
             while (regionsQuery.next()) {
                 if (regionCount > 0) {
@@ -242,7 +241,7 @@ QString OsmDatabase::formatDistance(const GeoDataCoordinates &a, const GeoDataCo
     } else if (MarbleGlobal::getInstance()->locale()->measurementSystem() == MarbleLocale::MetricSystem) {
         if (distance >= 1000) {
             distance /= 1000;
-            distanceUnit = "km";
+            distanceUnit = QStringLiteral("km");
             precision = 1;
         } else if (distance >= 200) {
             distance = 50 * qRound(distance / 50);
@@ -253,7 +252,7 @@ QString OsmDatabase::formatDistance(const GeoDataCoordinates &a, const GeoDataCo
         }
     } else if (MarbleGlobal::getInstance()->locale()->measurementSystem() == MarbleLocale::NauticalSystem) {
         precision = 2;
-        distanceUnit = "nm";
+        distanceUnit = QStringLiteral("nm");
         distance *= METER2KM;
         distance *= KM2NM;
     }

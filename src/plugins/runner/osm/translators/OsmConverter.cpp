@@ -16,8 +16,6 @@
 #include "GeoDataPoint.h"
 #include "GeoDataPolygon.h"
 #include "GeoDataRelation.h"
-#include "GeoWriter.h"
-#include "OsmElementDictionary.h"
 #include "OsmNodeTagWriter.h"
 #include "OsmRelationTagWriter.h"
 #include "OsmWayTagWriter.h"

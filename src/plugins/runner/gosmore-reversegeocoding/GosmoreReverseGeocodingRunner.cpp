@@ -67,8 +67,8 @@ GosmoreRunner::GosmoreRunner(QObject *parent)
     , d(new GosmoreRunnerPrivate)
 {
     // Check installation
-    QDir mapDir(MarbleDirs::localPath() + QLatin1StringView("/maps/earth/gosmore/"));
-    d->m_gosmoreMapFile = QFileInfo(mapDir, "gosmore.pak");
+    const QDir mapDir(MarbleDirs::localPath() + QLatin1StringView("/maps/earth/gosmore/"));
+    d->m_gosmoreMapFile = QFileInfo(mapDir, QStringLiteral("gosmore.pak"));
 }
 
 GosmoreRunner::~GosmoreRunner()

@@ -64,8 +64,8 @@ ReverseGeocodingRunner *GosmorePlugin::newRunner() const
 
 bool GosmorePlugin::canWork() const
 {
-    QDir mapDir(MarbleDirs::localPath() + QLatin1StringView("/maps/earth/gosmore/"));
-    QFileInfo mapFile = QFileInfo(mapDir, "gosmore.pak");
+    const QDir mapDir(MarbleDirs::localPath() + QLatin1StringView("/maps/earth/gosmore/"));
+    const QFileInfo mapFile = QFileInfo(mapDir, QStringLiteral("gosmore.pak"));
     return mapFile.exists();
 }
 

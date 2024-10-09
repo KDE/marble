@@ -73,8 +73,8 @@ QVariant MonavMapsModel::data(const QModelIndex &index, int role) const
                 QString payload = m_data.at(row).payload();
                 payload = payload.mid(payload.lastIndexOf(QLatin1Char('/')) + 1);
                 if (m_remoteMaps.contains(payload)) {
-                    QDate remote = QDate::fromString(m_remoteMaps[payload], "MM/dd/yy");
-                    QDate local = QDate::fromString(m_data.at(row).date(), "MM/dd/yy");
+                    QDate remote = QDate::fromString(m_remoteMaps[payload], QStringLiteral("MM/dd/yy"));
+                    QDate local = QDate::fromString(m_data.at(row).date(), QStringLiteral("MM/dd/yy"));
                     return remote > local;
                 }
 
@@ -83,7 +83,7 @@ QVariant MonavMapsModel::data(const QModelIndex &index, int role) const
             case 4:
                 return QFileInfo(m_data.at(row).directory().absolutePath()).isWritable();
             case 5: {
-                QDate date = QDate::fromString(m_data.at(row).date(), "MM/dd/yy");
+                QDate date = QDate::fromString(m_data.at(row).date(), QStringLiteral("MM/dd/yy"));
                 if (date.year() < 2000) {
                     // Qt interprets 11 as 1911
                     date.setDate(date.year() + 100, date.month(), date.day());

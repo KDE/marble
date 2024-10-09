@@ -12,8 +12,6 @@
 #include "signals.h"
 
 #include "GeoDataData.h"
-#include "GeoDataExtendedData.h"
-#include "GeoDataLatLonBox.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "routing/RouteRequest.h"
@@ -176,8 +174,8 @@ void MonavPluginPrivate::loadMaps()
 void MonavPluginPrivate::loadMap(const QString &path)
 {
     QDir mapDir(path);
-    QFileInfo pluginsFile(mapDir, "plugins.ini");
-    QFileInfo moduleFile(mapDir, "Module.ini");
+    QFileInfo pluginsFile(mapDir, QStringLiteral("plugins.ini"));
+    QFileInfo moduleFile(mapDir, QStringLiteral("Module.ini"));
     if (pluginsFile.exists() && !moduleFile.exists()) {
         qDebug() << "Migrating" << mapDir.dirName() << "from monav-0.2";
         QFile file(moduleFile.absoluteFilePath());

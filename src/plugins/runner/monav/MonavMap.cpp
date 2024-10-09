@@ -20,7 +20,7 @@ namespace Marble
 void MonavMap::setDirectory(const QDir &dir)
 {
     m_directory = dir;
-    QFileInfo boundingBox(dir, QStringLiteral("marble.kml"));
+    const QFileInfo boundingBox(dir, QStringLiteral("marble.kml"));
     if (boundingBox.exists()) {
         parseBoundingBox(boundingBox);
     } else {
@@ -128,20 +128,14 @@ qint64 MonavMap::size() const
 QList<QFileInfo> MonavMap::files() const
 {
     QList<QFileInfo> files;
-    QStringList fileNames = QStringList() << "config"
-                                          << "edges"
-                                          << "names"
-                                          << "paths"
-                                          << "types";
+    QStringList fileNames = QStringList() << QStringLiteral("config") << QStringLiteral("edges") << QStringLiteral("names") << QStringLiteral("paths")
+                                          << QStringLiteral("types");
     for (const QString &file : std::as_const(fileNames)) {
         files << QFileInfo(m_directory, QLatin1StringView("Contraction Hierarchies_") + file);
     }
 
-    fileNames = QStringList() << "config"
-                              << "grid"
-                              << "index_1"
-                              << "index_2"
-                              << "index_3";
+    fileNames = QStringList() << QStringLiteral("config") << QStringLiteral("grid") << QStringLiteral("index_1") << QStringLiteral("index_2")
+                              << QStringLiteral("index_3");
     for (const QString &file : std::as_const(fileNames)) {
         files << QFileInfo(m_directory, QLatin1StringView("GPSGrid_") + file);
     }
@@ -151,7 +145,7 @@ QList<QFileInfo> MonavMap::files() const
     if (moduleDotIni.exists()) {
         files << moduleDotIni;
     }
-    files << QFileInfo(m_directory, "marble.kml");
+    files << QFileInfo(m_directory, QStringLiteral("marble.kml"));
     return files;
 }
 

@@ -5,8 +5,6 @@
 #include "HostipRunner.h"
 
 #include "GeoDataPlacemark.h"
-#include "MarbleDebug.h"
-
 #include <QList>
 #include <QNetworkReply>
 #include <QTimer>
@@ -77,12 +75,12 @@ void HostipRunner::slotRequestFinished(QNetworkReply *reply)
 {
     double lon(0.0), lat(0.0);
     for (QString line = reply->readLine(); !line.isEmpty(); line = reply->readLine()) {
-        QString lonInd = "Longitude: ";
+        QString lonInd = QStringLiteral("Longitude: ");
         if (line.startsWith(lonInd)) {
             lon = QStringView{line}.mid(lonInd.length()).toDouble();
         }
 
-        QString latInd = "Latitude: ";
+        QString latInd = QStringLiteral("Latitude: ");
         if (line.startsWith(latInd)) {
             lat = QStringView{line}.mid(latInd.length()).toDouble();
         }
@@ -95,7 +93,7 @@ void HostipRunner::slotRequestFinished(QNetworkReply *reply)
 
         placemark->setName(m_hostInfo.hostName());
 
-        QString description("%1 (%2)");
+        QString description(QStringLiteral("%1 (%2)"));
         placemark->setDescription(description.arg(m_hostInfo.hostName()).arg(m_hostInfo.addresses().first().toString()));
 
         placemark->setCoordinate(lon * DEG2RAD, lat * DEG2RAD);

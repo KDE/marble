@@ -21,7 +21,6 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataPoint.h"
 #include "GeoDataPolygon.h"
-#include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "StyleBuilder.h"
 #include "osm/OsmPlacemarkData.h"
@@ -134,9 +133,9 @@ bool JsonParser::read(QIODevice *device)
         QJsonObject jsonWrapper;
         QJsonObject jsonWrapperProperties;
 
-        jsonWrapper["type"] = QStringLiteral("Feature");
-        jsonWrapper["geometry"] = jsonDoc.object();
-        jsonWrapper["properties"] = jsonWrapperProperties;
+        jsonWrapper[QStringLiteral("type")] = QStringLiteral("Feature");
+        jsonWrapper[QStringLiteral("geometry")] = jsonDoc.object();
+        jsonWrapper[QStringLiteral("properties")] = jsonWrapperProperties;
 
         return parseGeoJsonTopLevel(jsonWrapper);
     }

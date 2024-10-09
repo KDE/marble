@@ -37,13 +37,13 @@ GeoDataDocument *GpsbabelRunner::parseFile(const QString &fileName, DocumentRole
 
     // Determine if fileName suffix is supported by this plugin
     QMap<QString, QString> fileTypes;
-    fileTypes["nmea"] = "nmea";
-    fileTypes["igc"] = "igc";
-    fileTypes["tiger"] = "tiger";
-    fileTypes["ov2"] = "tomtom";
-    fileTypes["garmin"] = "garmin_txt";
-    fileTypes["magellan"] = "magellan";
-    fileTypes["csv"] = "csv";
+    fileTypes[QStringLiteral("nmea")] = QStringLiteral("nmea");
+    fileTypes[QStringLiteral("igc")] = QStringLiteral("igc");
+    fileTypes[QStringLiteral("tiger")] = QStringLiteral("tiger");
+    fileTypes[QStringLiteral("ov2")] = QStringLiteral("tomtom");
+    fileTypes[QStringLiteral("garmin")] = QStringLiteral("garmin_txt");
+    fileTypes[QStringLiteral("magellan")] = QStringLiteral("magellan");
+    fileTypes[QStringLiteral("csv")] = QStringLiteral("csv");
     QString const inputFileType = fileTypes[fileSuffix];
     if (inputFileType.isEmpty()) {
         error = QStringLiteral("Unsupported file extension for").arg(fileName);
