@@ -9,6 +9,8 @@ include_directories(
 )
 
 set(o5mreader_SRCS
-    o5mreader.cpp)
+    o5mreader.cpp
+    o5mreader.h
+)
 
 add_library(o5mreader STATIC ${o5mreader_SRCS})
