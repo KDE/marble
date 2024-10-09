@@ -38,7 +38,7 @@ private Q_SLOTS:
 private:
     GeoDataDocument *parse(const QByteArray &content) const;
 
-    int maneuverType(QString &cycleStreetsName) const;
+    int maneuverType(const QString &cycleStreetsName) const;
 
     QNetworkAccessManager m_networkAccessManager;
 

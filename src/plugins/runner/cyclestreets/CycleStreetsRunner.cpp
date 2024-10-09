@@ -136,7 +136,7 @@ void CycleStreetsRunner::retrieveData(QNetworkReply *reply)
     }
 }
 
-int CycleStreetsRunner::maneuverType(QString &cycleStreetsName) const
+int CycleStreetsRunner::maneuverType(const QString &cycleStreetsName) const
 {
     if (turns.contains(cycleStreetsName)) {
         return turns[cycleStreetsName];
