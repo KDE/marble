@@ -71,9 +71,9 @@ public:
         ui_configWidget = new Ui::YoursConfigWidget;
         ui_configWidget->setupUi(this);
         // TODO: read from profiles.xml
-        ui_configWidget->transport->addItem(tr("Pedestrian"), "foot");
-        ui_configWidget->transport->addItem(tr("Bicycle"), "bicycle");
-        ui_configWidget->transport->addItem(tr("Motorcar"), "motorcar");
+        ui_configWidget->transport->addItem(tr("Pedestrian"), QStringLiteral("foot"));
+        ui_configWidget->transport->addItem(tr("Bicycle"), QStringLiteral("bicycle"));
+        ui_configWidget->transport->addItem(tr("Motorcar"), QStringLiteral("motorcar"));
     }
     ~YoursConfigWidget() override
     {

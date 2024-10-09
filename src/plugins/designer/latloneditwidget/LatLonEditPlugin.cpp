@@ -40,13 +40,14 @@ QIcon LatLonEditPlugin::icon() const
 
 QString LatLonEditPlugin::domXml() const
 {
-    return "<widget class=\"Marble::LatLonEdit\" name=\"LatLonEdit\">\n"
-           "</widget>\n";
+    return QStringLiteral(
+        "<widget class=\"Marble::LatLonEdit\" name=\"LatLonEdit\">\n"
+        "</widget>\n");
 }
 
 QString LatLonEditPlugin::group() const
 {
-    return "Marble Virtual Globe";
+    return QStringLiteral("Marble Virtual Globe");
 }
 
 QString LatLonEditPlugin::includeFile() const

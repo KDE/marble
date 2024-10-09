@@ -33,12 +33,12 @@ QWidget *MarbleNavigatorPlugin::createWidget(QWidget *parent)
 
 QString MarbleNavigatorPlugin::name() const
 {
-    return "Marble::MarbleNavigator";
+    return QStringLiteral("Marble::MarbleNavigator");
 }
 
 QString MarbleNavigatorPlugin::group() const
 {
-    return "Marble Virtual Globe";
+    return QStringLiteral("Marble Virtual Globe");
 }
 
 QIcon MarbleNavigatorPlugin::icon() const
@@ -63,27 +63,28 @@ bool MarbleNavigatorPlugin::isContainer() const
 
 QString MarbleNavigatorPlugin::domXml() const
 {
-    return "<widget class=\"Marble::MarbleNavigator\" name=\"MarbleNavigator\">\n"
-           " <property name=\"geometry\">\n"
-           "  <rect>\n"
-           "   <x>0</x>\n"
-           "   <y>0</y>\n"
-           "   <width>200</width>\n"
-           "   <height>200</height>\n"
-           "  </rect>\n"
-           " </property>\n"
-           " <property name=\"toolTip\" >\n"
-           "  <string>Navigation Control</string>\n"
-           " </property>\n"
-           " <property name=\"whatsThis\" >\n"
-           "  <string>Use this control to navigate.</string>\n"
-           " </property>\n"
-           "</widget>\n";
+    return QStringLiteral(
+        "<widget class=\"Marble::MarbleNavigator\" name=\"MarbleNavigator\">\n"
+        " <property name=\"geometry\">\n"
+        "  <rect>\n"
+        "   <x>0</x>\n"
+        "   <y>0</y>\n"
+        "   <width>200</width>\n"
+        "   <height>200</height>\n"
+        "  </rect>\n"
+        " </property>\n"
+        " <property name=\"toolTip\" >\n"
+        "  <string>Navigation Control</string>\n"
+        " </property>\n"
+        " <property name=\"whatsThis\" >\n"
+        "  <string>Use this control to navigate.</string>\n"
+        " </property>\n"
+        "</widget>\n");
 }
 
 QString MarbleNavigatorPlugin::includeFile() const
 {
-    return "MarbleNavigator.h";
+    return QStringLiteral("MarbleNavigator.h");
 }
 
 #include "moc_MarbleNavigatorPlugin.cpp"

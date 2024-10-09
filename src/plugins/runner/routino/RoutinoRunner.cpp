@@ -47,7 +47,7 @@ public:
 
 RoutinoRunnerPrivate::RoutinoRunnerPrivate()
 {
-    m_parser.setLineSeparator("\n");
+    m_parser.setLineSeparator(QStringLiteral("\n"));
     m_parser.setFieldSeparator(QLatin1Char('\t'));
     m_parser.setFieldIndex(WaypointParser::RoadName, 10);
 }
@@ -94,7 +94,7 @@ QByteArray RoutinoRunnerPrivate::retrieveWaypoints(const QStringList &params) co
     QStringList routinoParams;
     routinoParams << params;
     routinoParams << QLatin1StringView("--dir=") + m_mapDir.absolutePath();
-    routinoParams << "--output-text-all";
+    routinoParams << QStringLiteral("--output-text-all");
     mDebug() << routinoParams;
     routinoProcess.start("routino-router", routinoParams);
     if (!routinoProcess.waitForStarted(5000)) {
@@ -190,12 +190,12 @@ GeoDataDocument *RoutinoRunnerPrivate::createDocument(GeoDataLineString *routeWa
     routePlacemark->setGeometry(routeWaypoints);
     result->append(routePlacemark);
 
-    QString name = "%1 %2 (Routino)";
+    QString name = QStringLiteral("%1 %2 (Routino)");
     QString unit = QLatin1StringView("m");
     qreal length = routeWaypoints->length(EARTH_RADIUS);
     if (length >= 1000) {
         length /= 1000.0;
-        unit = "km";
+        unit = QStringLiteral("km");
     }
     result->setName(name.arg(length, 0, 'f', 1).arg(unit));
 
@@ -241,9 +241,9 @@ void RoutinoRunner::retrieveRoute(const RouteRequest *route)
     params << QStringLiteral("--transport=%0").arg(transport);
 
     if (settings[QStringLiteral("method")] == QLatin1StringView("shortest")) {
-        params << "--shortest";
+        params << QStringLiteral("--shortest");
     } else {
-        params << "--quickest";
+        params << QStringLiteral("--quickest");
     }
     /*
     if ( route->avoidFeatures() & RouteRequest::AvoidHighway ) {

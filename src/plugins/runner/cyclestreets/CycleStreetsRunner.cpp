@@ -32,7 +32,7 @@ CycleStreetsRunner::CycleStreetsRunner(QObject *parent)
     , m_networkAccessManager()
     , m_request()
 {
-    connect(&m_networkAccessManager, SIGNAL(finished(QNetworkReply *)), this, SLOT(retrieveData(QNetworkReply *)));
+    connect(&m_networkAccessManager, &QNetworkAccessManager::finished, this, &CycleStreetsRunner::retrieveData);
 
     turns.insert("", Maneuver::Continue);
     turns.insert("straight on", Maneuver::Straight);

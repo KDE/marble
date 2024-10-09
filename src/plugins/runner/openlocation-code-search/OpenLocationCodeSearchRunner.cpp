@@ -92,7 +92,7 @@ GeoDataLatLonBox OpenLocationCodeSearchRunner::decodeOLC(const QString &olc) con
 
     // remove padding
     QString decoded = olc;
-    decoded = decoded.remove(QRegularExpression("[0+]"));
+    decoded = decoded.remove(QRegularExpression(QStringLiteral("[0+]")));
     qreal southLatitude = 0;
     qreal westLongitude = 0;
 

@@ -132,7 +132,7 @@ private:
         m_node = node;
     }
     GeoParser::QualifiedName m_qualifiedName;
-    GeoNode *m_node;
+    GeoNode *m_node = nullptr;
 };
 
 }

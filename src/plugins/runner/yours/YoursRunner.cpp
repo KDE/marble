@@ -66,7 +66,7 @@ void YoursRunner::retrieveRoute(const RouteRequest *route)
         fast = "1";
     }
 
-    QString preferences = "&v=%1&fast=%2&layer=mapnik;";
+    QString preferences = QStringLiteral("&v=%1&fast=%2&layer=mapnik;");
     preferences = preferences.arg(transport).arg(fast);
     QString request = base + args + preferences;
     // mDebug() << "GET: " << request;
@@ -113,7 +113,7 @@ void YoursRunner::retrieveData(QNetworkReply *reply)
                 return;
             } else if (length >= 1000) {
                 length /= 1000.0;
-                unit = "km";
+                unit = QStringLiteral("km");
             }
             result->setName(name.arg(length, 0, 'f', 1).arg(unit));
         }

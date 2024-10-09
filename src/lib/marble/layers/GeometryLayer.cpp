@@ -13,7 +13,6 @@
 #include "GeoDataBuilding.h"
 #include "GeoDataDocument.h"
 #include "GeoDataFeature.h"
-#include "GeoDataFolder.h"
 #include "GeoDataIconStyle.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataLineStyle.h"
