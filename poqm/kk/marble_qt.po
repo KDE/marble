@@ -3260,74 +3260,74 @@ msgctxt "Marble::MainWindow|"
 msgid "Unnamed"
 msgstr "Аталмаған"
 
-#: src/apps/marble-ui/ControlView.cpp:83
+#: src/apps/marble-ui/ControlView.cpp:76
 #, fuzzy
 #| msgid "Marble - Virtual Globe"
 msgctxt "Marble::ControlView|"
 msgid "Marble - Virtual Globe"
 msgstr "Marble - виртуалды глобус"
 
-#: src/apps/marble-ui/ControlView.cpp:271
+#: src/apps/marble-ui/ControlView.cpp:263
 msgctxt "Marble::ControlView|"
 msgid "Default (Resizable)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:280
+#: src/apps/marble-ui/ControlView.cpp:272
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC (%1x%2)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:281
+#: src/apps/marble-ui/ControlView.cpp:273
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL (%1x%2)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:282
+#: src/apps/marble-ui/ControlView.cpp:274
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC 16:9 (%1x%2)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:283
+#: src/apps/marble-ui/ControlView.cpp:275
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL 16:9 (%1x%2)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:285
+#: src/apps/marble-ui/ControlView.cpp:277
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "DVD (%1x%2p)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:287
+#: src/apps/marble-ui/ControlView.cpp:279
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "HD (%1x%2p)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:289
+#: src/apps/marble-ui/ControlView.cpp:281
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Full HD (%1x%2p)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:290
+#: src/apps/marble-ui/ControlView.cpp:282
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Digital Cinema (%1x%2)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:475
+#: src/apps/marble-ui/ControlView.cpp:467
 #, fuzzy
 #| msgid "The Marble development team wishes you a pleasant and safe journey."
 msgctxt "Marble::ControlView|"
 msgid "The Marble development team wishes you a pleasant and safe journey."
 msgstr "Marble тобы Сізге жолыңыз болсын дейді."
 
-#: src/apps/marble-ui/ControlView.cpp:476
+#: src/apps/marble-ui/ControlView.cpp:468
 #, fuzzy
 #| msgid "Caution: Driving instructions may be incomplete or inaccurate."
 msgctxt "Marble::ControlView|"
@@ -3336,7 +3336,7 @@ msgstr ""
 "Абайлаңыз: Жүргізушіге берілетін нұсқаулары толық және нақты емес болуы "
 "мүмкін."
 
-#: src/apps/marble-ui/ControlView.cpp:477
+#: src/apps/marble-ui/ControlView.cpp:469
 #, fuzzy
 #| msgid ""
 #| "Road construction, weather and other unforeseen variables can result in "
@@ -3351,14 +3351,14 @@ msgstr ""
 "Жол жөндеу жұмыстары, ауа райы және т.б. болжауға келмейтін жағдайлар "
 "ұсынылған маршрут лайықты не қауіпсіз еместігіне апарып соғуға мүмкін."
 
-#: src/apps/marble-ui/ControlView.cpp:479
+#: src/apps/marble-ui/ControlView.cpp:471
 #, fuzzy
 #| msgid "Please use common sense while navigating."
 msgctxt "Marble::ControlView|"
 msgid "Please use common sense while navigating."
 msgstr "Багдарлау нұсқауларын ақылға салып, сыншыл көзбен қараңыз."
 
-#: src/apps/marble-ui/ControlView.cpp:563
+#: src/apps/marble-ui/ControlView.cpp:555
 #, fuzzy, qt-format
 #| msgid ""
 #| "Unable to start the external editor. Check that %1 is installed or choose "
@@ -3371,92 +3371,92 @@ msgstr ""
 "Сыртқы өңдегіш жегілмеді. %1 деген орнатылғанын тексеріңіз, немесе  баптау "
 "диалологында басқа өңдегішті таңдаңыз."
 
-#: src/apps/marble-ui/ControlView.cpp:565
+#: src/apps/marble-ui/ControlView.cpp:557
 #, fuzzy
 #| msgid "Cannot start external editor"
 msgctxt "Marble::ControlView|"
 msgid "Cannot start external editor"
 msgstr "Сыртқы өңдегіші жегілмеді"
 
-#: src/apps/marble-ui/ControlView.cpp:582
+#: src/apps/marble-ui/ControlView.cpp:574
 #, fuzzy
 #| msgid "Legend"
 msgctxt "Marble::ControlView|"
 msgid "Legend"
 msgstr "Түсініндірме"
 
-#: src/apps/marble-ui/ControlView.cpp:598
+#: src/apps/marble-ui/ControlView.cpp:590
 #, fuzzy
 #| msgid "Routing"
 msgctxt "Marble::ControlView|"
 msgid "Routing"
 msgstr "Жол салу"
 
-#: src/apps/marble-ui/ControlView.cpp:606
+#: src/apps/marble-ui/ControlView.cpp:598
 #, fuzzy
 #| msgid "Location"
 msgctxt "Marble::ControlView|"
 msgid "Location"
 msgstr "Жер-жай"
 
-#: src/apps/marble-ui/ControlView.cpp:614
+#: src/apps/marble-ui/ControlView.cpp:606
 #, fuzzy
 #| msgid "Search"
 msgctxt "Marble::ControlView|"
 msgid "Search"
 msgstr "Іздеу"
 
-#: src/apps/marble-ui/ControlView.cpp:627
+#: src/apps/marble-ui/ControlView.cpp:619
 #, fuzzy, qt-format
 #| msgid "Search for cities, addresses, points of interest and more (%1)"
 msgctxt "Marble::ControlView|"
 msgid "Search for cities, addresses, points of interest and more (%1)"
 msgstr "Қала, адресті, керек орынды, тағы басқаларды (%1) іздеу"
 
-#: src/apps/marble-ui/ControlView.cpp:631
+#: src/apps/marble-ui/ControlView.cpp:623
 #, fuzzy
 #| msgid "Map View"
 msgctxt "Marble::ControlView|"
 msgid "Map View"
 msgstr "Карта көрінісі"
 
-#: src/apps/marble-ui/ControlView.cpp:641
+#: src/apps/marble-ui/ControlView.cpp:633
 #, fuzzy
 #| msgid "Files"
 msgctxt "Marble::ControlView|"
 msgid "Files"
 msgstr "Файлдар"
 
-#: src/apps/marble-ui/ControlView.cpp:650
+#: src/apps/marble-ui/ControlView.cpp:642
 #, fuzzy
 #| msgid "Open Track"
 msgctxt "Marble::ControlView|"
 msgid "Tour"
 msgstr "Ізін ашу"
 
-#: src/apps/marble-ui/ControlView.cpp:663
+#: src/apps/marble-ui/ControlView.cpp:655
 #, fuzzy
 #| msgid "&Edit Map"
 msgctxt "QObject|"
 msgid "Edit Maps"
 msgstr "Картаны &өңдеу"
 
-#: src/apps/marble-ui/ControlView.cpp:712
-#: src/apps/marble-ui/ControlView.cpp:850
+#: src/apps/marble-ui/ControlView.cpp:704
+#: src/apps/marble-ui/ControlView.cpp:842
 #, fuzzy
 #| msgid "Show &Navigation Panel"
 msgctxt "Marble::ControlView|"
 msgid "Hide &All Panels"
 msgstr "&Шарлау панелін көрсету"
 
-#: src/apps/marble-ui/ControlView.cpp:714
+#: src/apps/marble-ui/ControlView.cpp:706
 #, fuzzy
 #| msgid "Show &Navigation Panel"
 msgctxt "Marble::ControlView|"
 msgid "Show or hide all panels."
 msgstr "&Шарлау панелін көрсету"
 
-#: src/apps/marble-ui/ControlView.cpp:839
+#: src/apps/marble-ui/ControlView.cpp:831
 #, fuzzy
 #| msgid "Show &Navigation Panel"
 msgctxt "Marble::ControlView|"
@@ -3876,32 +3876,32 @@ msgctxt "Marble::ConflictDialog|"
 msgid "Synchronization Conflict"
 msgstr "Қадамдастыру қайшылығы"
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:294
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:286
 #, qt-format
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "Server '%1' could not be reached"
 msgstr ""
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:312
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:304
 #, fuzzy
 #| msgid "Server is not a Web Map Server."
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "The Marble app is not installed on the ownCloud server"
 msgstr "Бұл Веб-карталар сервері емес."
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:314
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:306
 #, fuzzy
 #| msgid "Server is not a Web Map Server."
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "The server is not an ownCloud server"
 msgstr "Бұл Веб-карталар сервері емес."
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:318
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:310
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "Username or password are incorrect"
 msgstr ""
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:321
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:313
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "Login successful"
 msgstr ""

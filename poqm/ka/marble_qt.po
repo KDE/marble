@@ -2802,76 +2802,76 @@ msgctxt "Marble::MainWindow|"
 msgid "Unnamed"
 msgstr "უსახელო"
 
-#: src/apps/marble-ui/ControlView.cpp:83
+#: src/apps/marble-ui/ControlView.cpp:76
 msgctxt "Marble::ControlView|"
 msgid "Marble - Virtual Globe"
 msgstr "Marble - ვირტუალური გლობუსი"
 
-#: src/apps/marble-ui/ControlView.cpp:271
+#: src/apps/marble-ui/ControlView.cpp:263
 msgctxt "Marble::ControlView|"
 msgid "Default (Resizable)"
 msgstr "ნაგულისხმევი (ცვლადი ზომით)"
 
-#: src/apps/marble-ui/ControlView.cpp:280
+#: src/apps/marble-ui/ControlView.cpp:272
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC (%1x%2)"
 msgstr "NTSC (%1x%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:281
+#: src/apps/marble-ui/ControlView.cpp:273
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL (%1x%2)"
 msgstr "PAL (%1x%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:282
+#: src/apps/marble-ui/ControlView.cpp:274
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC 16:9 (%1x%2)"
 msgstr "NTSC 16:9 (%1x%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:283
+#: src/apps/marble-ui/ControlView.cpp:275
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL 16:9 (%1x%2)"
 msgstr "PAL 16:9 (%1x%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:285
+#: src/apps/marble-ui/ControlView.cpp:277
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "DVD (%1x%2p)"
 msgstr "DVD (%1x%2p)"
 
-#: src/apps/marble-ui/ControlView.cpp:287
+#: src/apps/marble-ui/ControlView.cpp:279
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "HD (%1x%2p)"
 msgstr "HD (%1x%2p)"
 
-#: src/apps/marble-ui/ControlView.cpp:289
+#: src/apps/marble-ui/ControlView.cpp:281
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Full HD (%1x%2p)"
 msgstr "Full HD (%1x%2p)"
 
-#: src/apps/marble-ui/ControlView.cpp:290
+#: src/apps/marble-ui/ControlView.cpp:282
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Digital Cinema (%1x%2)"
 msgstr "ციფრული კინოთეატრი (%1x%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:475
+#: src/apps/marble-ui/ControlView.cpp:467
 msgctxt "Marble::ControlView|"
 msgid "The Marble development team wishes you a pleasant and safe journey."
 msgstr ""
 "Marble-ის პროგრამისტების გუნდი სასიამოვნო და უსაფრთხო მოგზაურობას გისურვებთ."
 
-#: src/apps/marble-ui/ControlView.cpp:476
+#: src/apps/marble-ui/ControlView.cpp:468
 msgctxt "Marble::ControlView|"
 msgid "Caution: Driving instructions may be incomplete or inaccurate."
 msgstr "გაფრთხილება: მართვის ინსტრუქცია, შეიძლება, არასრული ან არაზუსტი იყოს."
 
-#: src/apps/marble-ui/ControlView.cpp:477
+#: src/apps/marble-ui/ControlView.cpp:469
 msgctxt "Marble::ControlView|"
 msgid ""
 "Road construction, weather and other unforeseen variables can result in this "
@@ -2882,12 +2882,12 @@ msgstr ""
 "გამოიწვიოს, რომ შემოთავაზებული მარშრუტი არ იქნება თქვენი დანიშნულების "
 "წერტილამდე ყველაზე შესაფერისი ან უსაფრთხო."
 
-#: src/apps/marble-ui/ControlView.cpp:479
+#: src/apps/marble-ui/ControlView.cpp:471
 msgctxt "Marble::ControlView|"
 msgid "Please use common sense while navigating."
 msgstr "ნავიგაციის დროს, გთხოვთ, გამოიყენეთ საღი აზრი."
 
-#: src/apps/marble-ui/ControlView.cpp:563
+#: src/apps/marble-ui/ControlView.cpp:555
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid ""
@@ -2897,69 +2897,69 @@ msgstr ""
 "გარე რედაქტორის გაშვება შეუძლებელია. შეამოწმეთ, დაყენებულია, თუ არა %1 ან "
 "აირჩიეთ სხვა გარე რედაქტორი მორგების დიალოგში."
 
-#: src/apps/marble-ui/ControlView.cpp:565
+#: src/apps/marble-ui/ControlView.cpp:557
 msgctxt "Marble::ControlView|"
 msgid "Cannot start external editor"
 msgstr "გარე რედაქტორის გაშვება შეუძლებელია"
 
-#: src/apps/marble-ui/ControlView.cpp:582
+#: src/apps/marble-ui/ControlView.cpp:574
 msgctxt "Marble::ControlView|"
 msgid "Legend"
 msgstr "შინაარსი"
 
-#: src/apps/marble-ui/ControlView.cpp:598
+#: src/apps/marble-ui/ControlView.cpp:590
 msgctxt "Marble::ControlView|"
 msgid "Routing"
 msgstr "რაუტინგი"
 
-#: src/apps/marble-ui/ControlView.cpp:606
+#: src/apps/marble-ui/ControlView.cpp:598
 msgctxt "Marble::ControlView|"
 msgid "Location"
 msgstr "მდებარეობა"
 
-#: src/apps/marble-ui/ControlView.cpp:614
+#: src/apps/marble-ui/ControlView.cpp:606
 msgctxt "Marble::ControlView|"
 msgid "Search"
 msgstr "ძებნა"
 
-#: src/apps/marble-ui/ControlView.cpp:627
+#: src/apps/marble-ui/ControlView.cpp:619
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Search for cities, addresses, points of interest and more (%1)"
 msgstr "მოძებნეთ ქალაქები, მისამართები, საინტერესო ადგილები და სხვა (%1)"
 
-#: src/apps/marble-ui/ControlView.cpp:631
+#: src/apps/marble-ui/ControlView.cpp:623
 msgctxt "Marble::ControlView|"
 msgid "Map View"
 msgstr "რუკის ხედი"
 
-#: src/apps/marble-ui/ControlView.cpp:641
+#: src/apps/marble-ui/ControlView.cpp:633
 msgctxt "Marble::ControlView|"
 msgid "Files"
 msgstr "ფაილები"
 
-#: src/apps/marble-ui/ControlView.cpp:650
+#: src/apps/marble-ui/ControlView.cpp:642
 msgctxt "Marble::ControlView|"
 msgid "Tour"
 msgstr "ტური"
 
-#: src/apps/marble-ui/ControlView.cpp:663
+#: src/apps/marble-ui/ControlView.cpp:655
 msgctxt "QObject|"
 msgid "Edit Maps"
 msgstr "რუკების ჩასწორება"
 
-#: src/apps/marble-ui/ControlView.cpp:712
-#: src/apps/marble-ui/ControlView.cpp:850
+#: src/apps/marble-ui/ControlView.cpp:704
+#: src/apps/marble-ui/ControlView.cpp:842
 msgctxt "Marble::ControlView|"
 msgid "Hide &All Panels"
 msgstr "&ყველა პანელის დამალვა"
 
-#: src/apps/marble-ui/ControlView.cpp:714
+#: src/apps/marble-ui/ControlView.cpp:706
 msgctxt "Marble::ControlView|"
 msgid "Show or hide all panels."
 msgstr "პანელების ჩვენება ან დამალვა."
 
-#: src/apps/marble-ui/ControlView.cpp:839
+#: src/apps/marble-ui/ControlView.cpp:831
 msgctxt "Marble::ControlView|"
 msgid "Show &All Panels"
 msgstr "&ყველა პანელის დამალვა"
@@ -3271,28 +3271,28 @@ msgctxt "Marble::ConflictDialog|"
 msgid "Synchronization Conflict"
 msgstr "სინქრონიზაციის კონფლიქტი"
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:294
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:286
 #, qt-format
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "Server '%1' could not be reached"
 msgstr "სერვერი '%1' ხელმისაწვდომი არაა"
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:312
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:304
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "The Marble app is not installed on the ownCloud server"
 msgstr "Marble-ის აპი ownCloud-ის სერვერზე დაყენებული არაა"
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:314
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:306
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "The server is not an ownCloud server"
 msgstr "სერვერი ownCloud-ის სერვერი არაა"
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:318
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:310
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "Username or password are incorrect"
 msgstr "არასწორი მომხმარებელი ან პაროლი"
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:321
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:313
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "Login successful"
 msgstr "შესვლა წარმატებულია"

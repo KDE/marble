@@ -2819,82 +2819,82 @@ msgctxt "Marble::MainWindow|"
 msgid "Unnamed"
 msgstr "Unavngivet"
 
-#: src/apps/marble-ui/ControlView.cpp:83
+#: src/apps/marble-ui/ControlView.cpp:76
 msgctxt "Marble::ControlView|"
 msgid "Marble - Virtual Globe"
 msgstr "Marble - virtuel globus"
 
-#: src/apps/marble-ui/ControlView.cpp:271
+#: src/apps/marble-ui/ControlView.cpp:263
 msgctxt "Marble::ControlView|"
 msgid "Default (Resizable)"
 msgstr "Default (størrelse kan ændres)"
 
-#: src/apps/marble-ui/ControlView.cpp:280
+#: src/apps/marble-ui/ControlView.cpp:272
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC (%1x%2)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:281
+#: src/apps/marble-ui/ControlView.cpp:273
 #, fuzzy, qt-format
 #| msgid "PAL 16:9 (1024x576)"
 msgctxt "Marble::ControlView|"
 msgid "PAL (%1x%2)"
 msgstr "PAL 16:9 (1024x576)"
 
-#: src/apps/marble-ui/ControlView.cpp:282
+#: src/apps/marble-ui/ControlView.cpp:274
 #, fuzzy, qt-format
 #| msgid "NTSC 16:9 (864x486)"
 msgctxt "Marble::ControlView|"
 msgid "NTSC 16:9 (%1x%2)"
 msgstr "NTSC 16:9 (864x486)"
 
-#: src/apps/marble-ui/ControlView.cpp:283
+#: src/apps/marble-ui/ControlView.cpp:275
 #, fuzzy, qt-format
 #| msgid "PAL 16:9 (1024x576)"
 msgctxt "Marble::ControlView|"
 msgid "PAL 16:9 (%1x%2)"
 msgstr "PAL 16:9 (1024x576)"
 
-#: src/apps/marble-ui/ControlView.cpp:285
+#: src/apps/marble-ui/ControlView.cpp:277
 #, fuzzy, qt-format
 #| msgid "DVD (852x480p)"
 msgctxt "Marble::ControlView|"
 msgid "DVD (%1x%2p)"
 msgstr "DVD (852x480p)"
 
-#: src/apps/marble-ui/ControlView.cpp:287
+#: src/apps/marble-ui/ControlView.cpp:279
 #, fuzzy, qt-format
 #| msgid "HD (1280x720p)"
 msgctxt "Marble::ControlView|"
 msgid "HD (%1x%2p)"
 msgstr "HD (1280x720p)"
 
-#: src/apps/marble-ui/ControlView.cpp:289
+#: src/apps/marble-ui/ControlView.cpp:281
 #, fuzzy, qt-format
 #| msgid "Full HD (1920x1080p)"
 msgctxt "Marble::ControlView|"
 msgid "Full HD (%1x%2p)"
 msgstr "Fuld HD (1920x1080p)"
 
-#: src/apps/marble-ui/ControlView.cpp:290
+#: src/apps/marble-ui/ControlView.cpp:282
 #, fuzzy, qt-format
 #| msgid "Digital Cinema (2048x1536)"
 msgctxt "Marble::ControlView|"
 msgid "Digital Cinema (%1x%2)"
 msgstr "Digital biograf (2048x1536)"
 
-#: src/apps/marble-ui/ControlView.cpp:475
+#: src/apps/marble-ui/ControlView.cpp:467
 msgctxt "Marble::ControlView|"
 msgid "The Marble development team wishes you a pleasant and safe journey."
 msgstr "Marble-udviklerne ønsker dig en behagelig og sikker rejse."
 
-#: src/apps/marble-ui/ControlView.cpp:476
+#: src/apps/marble-ui/ControlView.cpp:468
 msgctxt "Marble::ControlView|"
 msgid "Caution: Driving instructions may be incomplete or inaccurate."
 msgstr "Advarsel: Kørselsvejledninger kan være ufuldstændige eller unøjagtige."
 
-#: src/apps/marble-ui/ControlView.cpp:477
+#: src/apps/marble-ui/ControlView.cpp:469
 msgctxt "Marble::ControlView|"
 msgid ""
 "Road construction, weather and other unforeseen variables can result in this "
@@ -2905,12 +2905,12 @@ msgstr ""
 "foreslåede rute ikke er den mest hensigtsmæssige eller sikre rute til din "
 "destination."
 
-#: src/apps/marble-ui/ControlView.cpp:479
+#: src/apps/marble-ui/ControlView.cpp:471
 msgctxt "Marble::ControlView|"
 msgid "Please use common sense while navigating."
 msgstr "Brug venligst almindelig sund fornuft under navigation."
 
-#: src/apps/marble-ui/ControlView.cpp:563
+#: src/apps/marble-ui/ControlView.cpp:555
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid ""
@@ -2920,69 +2920,69 @@ msgstr ""
 "Kunne ikke starte den eksterne editor. Tjek at %1 er installeret eller vælg "
 "en anden ekstern editor i indstillingsdialogen."
 
-#: src/apps/marble-ui/ControlView.cpp:565
+#: src/apps/marble-ui/ControlView.cpp:557
 msgctxt "Marble::ControlView|"
 msgid "Cannot start external editor"
 msgstr "Kan ikke starte ekstern editor"
 
-#: src/apps/marble-ui/ControlView.cpp:582
+#: src/apps/marble-ui/ControlView.cpp:574
 msgctxt "Marble::ControlView|"
 msgid "Legend"
 msgstr "Tekstforklaring"
 
-#: src/apps/marble-ui/ControlView.cpp:598
+#: src/apps/marble-ui/ControlView.cpp:590
 msgctxt "Marble::ControlView|"
 msgid "Routing"
 msgstr "Ruteplanlægning"
 
-#: src/apps/marble-ui/ControlView.cpp:606
+#: src/apps/marble-ui/ControlView.cpp:598
 msgctxt "Marble::ControlView|"
 msgid "Location"
 msgstr "Sted"
 
-#: src/apps/marble-ui/ControlView.cpp:614
+#: src/apps/marble-ui/ControlView.cpp:606
 msgctxt "Marble::ControlView|"
 msgid "Search"
 msgstr "Søg"
 
-#: src/apps/marble-ui/ControlView.cpp:627
+#: src/apps/marble-ui/ControlView.cpp:619
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Search for cities, addresses, points of interest and more (%1)"
 msgstr "Søger efter byer, adresser, interesseområder og mere (%1)"
 
-#: src/apps/marble-ui/ControlView.cpp:631
+#: src/apps/marble-ui/ControlView.cpp:623
 msgctxt "Marble::ControlView|"
 msgid "Map View"
 msgstr "Kortvisning"
 
-#: src/apps/marble-ui/ControlView.cpp:641
+#: src/apps/marble-ui/ControlView.cpp:633
 msgctxt "Marble::ControlView|"
 msgid "Files"
 msgstr "Filer"
 
-#: src/apps/marble-ui/ControlView.cpp:650
+#: src/apps/marble-ui/ControlView.cpp:642
 msgctxt "Marble::ControlView|"
 msgid "Tour"
 msgstr "Rundtur"
 
-#: src/apps/marble-ui/ControlView.cpp:663
+#: src/apps/marble-ui/ControlView.cpp:655
 msgctxt "QObject|"
 msgid "Edit Maps"
 msgstr "Redigér kort"
 
-#: src/apps/marble-ui/ControlView.cpp:712
-#: src/apps/marble-ui/ControlView.cpp:850
+#: src/apps/marble-ui/ControlView.cpp:704
+#: src/apps/marble-ui/ControlView.cpp:842
 msgctxt "Marble::ControlView|"
 msgid "Hide &All Panels"
 msgstr "Skjul &alle paneler"
 
-#: src/apps/marble-ui/ControlView.cpp:714
+#: src/apps/marble-ui/ControlView.cpp:706
 msgctxt "Marble::ControlView|"
 msgid "Show or hide all panels."
 msgstr "Vis eller skjul alle paneler."
 
-#: src/apps/marble-ui/ControlView.cpp:839
+#: src/apps/marble-ui/ControlView.cpp:831
 msgctxt "Marble::ControlView|"
 msgid "Show &All Panels"
 msgstr "Vis &alle paneler"
@@ -3299,28 +3299,28 @@ msgctxt "Marble::ConflictDialog|"
 msgid "Synchronization Conflict"
 msgstr "Konflikt ved synkronisering"
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:294
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:286
 #, qt-format
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "Server '%1' could not be reached"
 msgstr "Serveren \"%1\" kunne ikke tilgås"
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:312
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:304
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "The Marble app is not installed on the ownCloud server"
 msgstr "Marble-app'en er ikke installeret på ownCloud-serveren"
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:314
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:306
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "The server is not an ownCloud server"
 msgstr "Serveren er ikke en ownCloud-server"
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:318
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:310
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "Username or password are incorrect"
 msgstr "Brugernavn eller adgangskode er forkert"
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:321
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:313
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "Login successful"
 msgstr "Login gennemført"

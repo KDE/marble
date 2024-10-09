@@ -3263,77 +3263,77 @@ msgctxt "Marble::MainWindow|"
 msgid "Unnamed"
 msgstr "Névtelen"
 
-#: src/apps/marble-ui/ControlView.cpp:83
+#: src/apps/marble-ui/ControlView.cpp:76
 #, fuzzy
 #| msgid "Marble - Virtual Globe"
 msgctxt "Marble::ControlView|"
 msgid "Marble - Virtual Globe"
 msgstr "Marble - Virtuális földgömb"
 
-#: src/apps/marble-ui/ControlView.cpp:271
+#: src/apps/marble-ui/ControlView.cpp:263
 #, fuzzy
 #| msgid "Default (Resizable)"
 msgctxt "Marble::ControlView|"
 msgid "Default (Resizable)"
 msgstr "Alapértelmezett (átméretezhető)"
 
-#: src/apps/marble-ui/ControlView.cpp:280
+#: src/apps/marble-ui/ControlView.cpp:272
 #, fuzzy, qt-format
 #| msgid "NTSC (720x486)"
 msgctxt "Marble::ControlView|"
 msgid "NTSC (%1x%2)"
 msgstr "NTSC (720x486)"
 
-#: src/apps/marble-ui/ControlView.cpp:281
+#: src/apps/marble-ui/ControlView.cpp:273
 #, fuzzy, qt-format
 #| msgid "PAL 16:9 (1024x576)"
 msgctxt "Marble::ControlView|"
 msgid "PAL (%1x%2)"
 msgstr "PAL 16:9 (1024x576)"
 
-#: src/apps/marble-ui/ControlView.cpp:282
+#: src/apps/marble-ui/ControlView.cpp:274
 #, fuzzy, qt-format
 #| msgid "NTSC 16:9 (864x486)"
 msgctxt "Marble::ControlView|"
 msgid "NTSC 16:9 (%1x%2)"
 msgstr "NTSC 16:9 (864x486)"
 
-#: src/apps/marble-ui/ControlView.cpp:283
+#: src/apps/marble-ui/ControlView.cpp:275
 #, fuzzy, qt-format
 #| msgid "PAL 16:9 (1024x576)"
 msgctxt "Marble::ControlView|"
 msgid "PAL 16:9 (%1x%2)"
 msgstr "PAL 16:9 (1024x576)"
 
-#: src/apps/marble-ui/ControlView.cpp:285
+#: src/apps/marble-ui/ControlView.cpp:277
 #, fuzzy, qt-format
 #| msgid "DVD (852x480p)"
 msgctxt "Marble::ControlView|"
 msgid "DVD (%1x%2p)"
 msgstr "DVD (852x480p)"
 
-#: src/apps/marble-ui/ControlView.cpp:287
+#: src/apps/marble-ui/ControlView.cpp:279
 #, fuzzy, qt-format
 #| msgid "HD (1280x720p)"
 msgctxt "Marble::ControlView|"
 msgid "HD (%1x%2p)"
 msgstr "HD (1280x720p)"
 
-#: src/apps/marble-ui/ControlView.cpp:289
+#: src/apps/marble-ui/ControlView.cpp:281
 #, fuzzy, qt-format
 #| msgid "Full HD (1920x1080p)"
 msgctxt "Marble::ControlView|"
 msgid "Full HD (%1x%2p)"
 msgstr "Full HD (1920x1080p)"
 
-#: src/apps/marble-ui/ControlView.cpp:290
+#: src/apps/marble-ui/ControlView.cpp:282
 #, fuzzy, qt-format
 #| msgid "Digital Cinema (2048x1536)"
 msgctxt "Marble::ControlView|"
 msgid "Digital Cinema (%1x%2)"
 msgstr "Digitális mozi (2048x1536)"
 
-#: src/apps/marble-ui/ControlView.cpp:475
+#: src/apps/marble-ui/ControlView.cpp:467
 #, fuzzy
 #| msgid "The Marble development team wishes you a pleasant and safe journey."
 msgctxt "Marble::ControlView|"
@@ -3341,7 +3341,7 @@ msgid "The Marble development team wishes you a pleasant and safe journey."
 msgstr ""
 "A Marble fejlesztő csapata kellemes és biztonságos utazást kíván önnek."
 
-#: src/apps/marble-ui/ControlView.cpp:476
+#: src/apps/marble-ui/ControlView.cpp:468
 #, fuzzy
 #| msgid "Caution: Driving instructions may be incomplete or inaccurate."
 msgctxt "Marble::ControlView|"
@@ -3349,7 +3349,7 @@ msgid "Caution: Driving instructions may be incomplete or inaccurate."
 msgstr ""
 "Figyelem: a vezetési információk befejezetlenek vagy pontatlanok lehetnek."
 
-#: src/apps/marble-ui/ControlView.cpp:477
+#: src/apps/marble-ui/ControlView.cpp:469
 msgctxt "Marble::ControlView|"
 msgid ""
 "Road construction, weather and other unforeseen variables can result in this "
@@ -3357,12 +3357,12 @@ msgid ""
 "destination."
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:479
+#: src/apps/marble-ui/ControlView.cpp:471
 msgctxt "Marble::ControlView|"
 msgid "Please use common sense while navigating."
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:563
+#: src/apps/marble-ui/ControlView.cpp:555
 #, fuzzy, qt-format
 #| msgid ""
 #| "Unable to start the external editor. Check that %1 is installed or choose "
@@ -3376,92 +3376,92 @@ msgstr ""
 "telepítve van-e vagy válasszon egy másik külső szerkesztőt a beállítások "
 "párbeszédablakban."
 
-#: src/apps/marble-ui/ControlView.cpp:565
+#: src/apps/marble-ui/ControlView.cpp:557
 #, fuzzy
 #| msgid "Cannot start external editor"
 msgctxt "Marble::ControlView|"
 msgid "Cannot start external editor"
 msgstr "Nem sikerült elindítani a külső szerkesztőt"
 
-#: src/apps/marble-ui/ControlView.cpp:582
+#: src/apps/marble-ui/ControlView.cpp:574
 #, fuzzy
 #| msgid "Legend"
 msgctxt "Marble::ControlView|"
 msgid "Legend"
 msgstr "Jelmagyarázat"
 
-#: src/apps/marble-ui/ControlView.cpp:598
+#: src/apps/marble-ui/ControlView.cpp:590
 #, fuzzy
 #| msgid "Routing"
 msgctxt "Marble::ControlView|"
 msgid "Routing"
 msgstr "Útválasztás"
 
-#: src/apps/marble-ui/ControlView.cpp:606
+#: src/apps/marble-ui/ControlView.cpp:598
 #, fuzzy
 #| msgid "Location"
 msgctxt "Marble::ControlView|"
 msgid "Location"
 msgstr "Hely"
 
-#: src/apps/marble-ui/ControlView.cpp:614
+#: src/apps/marble-ui/ControlView.cpp:606
 #, fuzzy
 #| msgid "Search"
 msgctxt "Marble::ControlView|"
 msgid "Search"
 msgstr "Keresés"
 
-#: src/apps/marble-ui/ControlView.cpp:627
+#: src/apps/marble-ui/ControlView.cpp:619
 #, fuzzy, qt-format
 #| msgid "Search for cities, addresses, points of interest and more (%1)"
 msgctxt "Marble::ControlView|"
 msgid "Search for cities, addresses, points of interest and more (%1)"
 msgstr "Települések, címek, érdekes pontok és továbbiak (%1) keresése"
 
-#: src/apps/marble-ui/ControlView.cpp:631
+#: src/apps/marble-ui/ControlView.cpp:623
 #, fuzzy
 #| msgid "Map View"
 msgctxt "Marble::ControlView|"
 msgid "Map View"
 msgstr "Térképnézet"
 
-#: src/apps/marble-ui/ControlView.cpp:641
+#: src/apps/marble-ui/ControlView.cpp:633
 #, fuzzy
 #| msgid "Files"
 msgctxt "Marble::ControlView|"
 msgid "Files"
 msgstr "Fájlok"
 
-#: src/apps/marble-ui/ControlView.cpp:650
+#: src/apps/marble-ui/ControlView.cpp:642
 #, fuzzy
 #| msgid "Tour"
 msgctxt "Marble::ControlView|"
 msgid "Tour"
 msgstr "Utazás"
 
-#: src/apps/marble-ui/ControlView.cpp:663
+#: src/apps/marble-ui/ControlView.cpp:655
 #, fuzzy
 #| msgid "&Edit Map"
 msgctxt "QObject|"
 msgid "Edit Maps"
 msgstr "Térkép sz&erkesztése"
 
-#: src/apps/marble-ui/ControlView.cpp:712
-#: src/apps/marble-ui/ControlView.cpp:850
+#: src/apps/marble-ui/ControlView.cpp:704
+#: src/apps/marble-ui/ControlView.cpp:842
 #, fuzzy
 #| msgid "Show &Navigation Panel"
 msgctxt "Marble::ControlView|"
 msgid "Hide &All Panels"
 msgstr "&Navigációs panel megjelenítése"
 
-#: src/apps/marble-ui/ControlView.cpp:714
+#: src/apps/marble-ui/ControlView.cpp:706
 #, fuzzy
 #| msgid "Show or hide all panels."
 msgctxt "Marble::ControlView|"
 msgid "Show or hide all panels."
 msgstr "Minden panel megjelenítése vagy elrejtése."
 
-#: src/apps/marble-ui/ControlView.cpp:839
+#: src/apps/marble-ui/ControlView.cpp:831
 #, fuzzy
 #| msgid "Show &Navigation Panel"
 msgctxt "Marble::ControlView|"
@@ -3876,35 +3876,35 @@ msgctxt "Marble::ConflictDialog|"
 msgid "Synchronization Conflict"
 msgstr "Szinkronizáció ütközés"
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:294
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:286
 #, fuzzy, qt-format
 #| msgid "Server '%1' could not be reached"
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "Server '%1' could not be reached"
 msgstr "A(z) „%1” kiszolgáló nem érhető el"
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:312
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:304
 #, fuzzy
 #| msgid "The Marble app is not installed on the ownCloud server"
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "The Marble app is not installed on the ownCloud server"
 msgstr "A Marble alkalmazás nincs telepítve az ownCloud kiszolgálóra"
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:314
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:306
 #, fuzzy
 #| msgid "The server is not an ownCloud server"
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "The server is not an ownCloud server"
 msgstr "A kiszolgáló nem ownCloud kiszolgáló"
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:318
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:310
 #, fuzzy
 #| msgid "Username or password are incorrect"
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "Username or password are incorrect"
 msgstr "A felhasználónév vagy jelszó hibás"
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:321
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:313
 #, fuzzy
 #| msgid "Login successful"
 msgctxt "Marble::OwncloudSyncBackend|"

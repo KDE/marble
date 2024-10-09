@@ -2812,75 +2812,75 @@ msgctxt "Marble::MainWindow|"
 msgid "Unnamed"
 msgstr "ਬਿਨ-ਨਾਂ"
 
-#: src/apps/marble-ui/ControlView.cpp:83
+#: src/apps/marble-ui/ControlView.cpp:76
 msgctxt "Marble::ControlView|"
 msgid "Marble - Virtual Globe"
 msgstr "ਮਾਰਬਲ - ਵੁਰਚੁਅਲ ਗਲੋਬ"
 
-#: src/apps/marble-ui/ControlView.cpp:271
+#: src/apps/marble-ui/ControlView.cpp:263
 msgctxt "Marble::ControlView|"
 msgid "Default (Resizable)"
 msgstr "ਮੂਲ (ਮੁੜ-ਆਕਾਰ-ਯੋਗ)"
 
-#: src/apps/marble-ui/ControlView.cpp:280
+#: src/apps/marble-ui/ControlView.cpp:272
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC (%1x%2)"
 msgstr "NTSC (%1x%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:281
+#: src/apps/marble-ui/ControlView.cpp:273
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL (%1x%2)"
 msgstr "PAL (%1x%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:282
+#: src/apps/marble-ui/ControlView.cpp:274
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC 16:9 (%1x%2)"
 msgstr "NTSC 16:9 (%1x%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:283
+#: src/apps/marble-ui/ControlView.cpp:275
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL 16:9 (%1x%2)"
 msgstr "PAL 16:9 (%1x%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:285
+#: src/apps/marble-ui/ControlView.cpp:277
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "DVD (%1x%2p)"
 msgstr "DVD (%1x%2p)"
 
-#: src/apps/marble-ui/ControlView.cpp:287
+#: src/apps/marble-ui/ControlView.cpp:279
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "HD (%1x%2p)"
 msgstr "HD (%1x%2p)"
 
-#: src/apps/marble-ui/ControlView.cpp:289
+#: src/apps/marble-ui/ControlView.cpp:281
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Full HD (%1x%2p)"
 msgstr "ਪੂਰਾ HD (%1x%2p)"
 
-#: src/apps/marble-ui/ControlView.cpp:290
+#: src/apps/marble-ui/ControlView.cpp:282
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Digital Cinema (%1x%2)"
 msgstr "ਡਿਜ਼ਿਟਲ ਸਿਨੇਮਾ (%1x%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:475
+#: src/apps/marble-ui/ControlView.cpp:467
 msgctxt "Marble::ControlView|"
 msgid "The Marble development team wishes you a pleasant and safe journey."
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:476
+#: src/apps/marble-ui/ControlView.cpp:468
 msgctxt "Marble::ControlView|"
 msgid "Caution: Driving instructions may be incomplete or inaccurate."
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:477
+#: src/apps/marble-ui/ControlView.cpp:469
 msgctxt "Marble::ControlView|"
 msgid ""
 "Road construction, weather and other unforeseen variables can result in this "
@@ -2888,12 +2888,12 @@ msgid ""
 "destination."
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:479
+#: src/apps/marble-ui/ControlView.cpp:471
 msgctxt "Marble::ControlView|"
 msgid "Please use common sense while navigating."
 msgstr "ਨੇਵੀਗੇਟ ਕਰਨ ਦੇ ਦੌਰਾਨ ਆਪਣਾ ਦਿਮਾਗ ਵਰਤੋਂ ਜੀ।"
 
-#: src/apps/marble-ui/ControlView.cpp:563
+#: src/apps/marble-ui/ControlView.cpp:555
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid ""
@@ -2901,69 +2901,69 @@ msgid ""
 "different external editor in the settings dialog."
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:565
+#: src/apps/marble-ui/ControlView.cpp:557
 msgctxt "Marble::ControlView|"
 msgid "Cannot start external editor"
 msgstr "ਬਾਹਰੀ ਐਡੀਟਰ ਸ਼ੁਰੂ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ"
 
-#: src/apps/marble-ui/ControlView.cpp:582
+#: src/apps/marble-ui/ControlView.cpp:574
 msgctxt "Marble::ControlView|"
 msgid "Legend"
 msgstr "ਸੰਕੇਤ"
 
-#: src/apps/marble-ui/ControlView.cpp:598
+#: src/apps/marble-ui/ControlView.cpp:590
 msgctxt "Marble::ControlView|"
 msgid "Routing"
 msgstr "ਰੂਟ"
 
-#: src/apps/marble-ui/ControlView.cpp:606
+#: src/apps/marble-ui/ControlView.cpp:598
 msgctxt "Marble::ControlView|"
 msgid "Location"
 msgstr "ਟਿਕਾਣਾ"
 
-#: src/apps/marble-ui/ControlView.cpp:614
+#: src/apps/marble-ui/ControlView.cpp:606
 msgctxt "Marble::ControlView|"
 msgid "Search"
 msgstr "ਖੋਜੋ"
 
-#: src/apps/marble-ui/ControlView.cpp:627
+#: src/apps/marble-ui/ControlView.cpp:619
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Search for cities, addresses, points of interest and more (%1)"
 msgstr "ਸ਼ਹਿਰ, ਸਿਰਨਾਵਾਂ, ਦਿਲਚਸਪੀ ਦੀਆਂ ਥਾਵਾਂ ਤੇ ਹੋਰ ਖੋਜੋ (%1)"
 
-#: src/apps/marble-ui/ControlView.cpp:631
+#: src/apps/marble-ui/ControlView.cpp:623
 msgctxt "Marble::ControlView|"
 msgid "Map View"
 msgstr "ਨਕਸ਼ਾ ਝਲਕ"
 
-#: src/apps/marble-ui/ControlView.cpp:641
+#: src/apps/marble-ui/ControlView.cpp:633
 msgctxt "Marble::ControlView|"
 msgid "Files"
 msgstr "ਫਾਇਲਾਂ"
 
-#: src/apps/marble-ui/ControlView.cpp:650
+#: src/apps/marble-ui/ControlView.cpp:642
 msgctxt "Marble::ControlView|"
 msgid "Tour"
 msgstr "ਟੂਰ"
 
-#: src/apps/marble-ui/ControlView.cpp:663
+#: src/apps/marble-ui/ControlView.cpp:655
 msgctxt "QObject|"
 msgid "Edit Maps"
 msgstr "ਨਕਸ਼ੇ ਸੋਧੋ"
 
-#: src/apps/marble-ui/ControlView.cpp:712
-#: src/apps/marble-ui/ControlView.cpp:850
+#: src/apps/marble-ui/ControlView.cpp:704
+#: src/apps/marble-ui/ControlView.cpp:842
 msgctxt "Marble::ControlView|"
 msgid "Hide &All Panels"
 msgstr "ਸਾਰੇ ਪੈਨਲ ਲੁਕਾਓ(&A)"
 
-#: src/apps/marble-ui/ControlView.cpp:714
+#: src/apps/marble-ui/ControlView.cpp:706
 msgctxt "Marble::ControlView|"
 msgid "Show or hide all panels."
 msgstr "ਸਾਰੇ ਪੈਨਲ ਵੇਖਾਓ ਜਾਂ ਲੁਕਾਓ।"
 
-#: src/apps/marble-ui/ControlView.cpp:839
+#: src/apps/marble-ui/ControlView.cpp:831
 msgctxt "Marble::ControlView|"
 msgid "Show &All Panels"
 msgstr "ਸਾਰੇ ਪੈਨਲ ਵੇਖਾਓ(&A)"
@@ -3273,28 +3273,28 @@ msgctxt "Marble::ConflictDialog|"
 msgid "Synchronization Conflict"
 msgstr "ਸਿੰਕਰੋਨਾਈਜ਼ੇਸ਼ਨ ਟਕਰਾ"
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:294
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:286
 #, qt-format
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "Server '%1' could not be reached"
 msgstr ""
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:312
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:304
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "The Marble app is not installed on the ownCloud server"
 msgstr "ਮਾਰਬਲ ਐਪ ownCloud ਸਰਵਰ ਉੱਤੇ ਇੰਸਟਾਲ ਨਹੀਂ ਹੈ"
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:314
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:306
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "The server is not an ownCloud server"
 msgstr "ਸਰਵਰ ownCloud ਸਰਵਰ ਨਹੀਂ ਹੈ"
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:318
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:310
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "Username or password are incorrect"
 msgstr "ਵਰਤੋਂਕਾਰ-ਨਾਂ ਜਾਂ ਪਾਸਵਰਡ ਗਲਤ ਹੈ"
 
-#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:321
+#: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:313
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "Login successful"
 msgstr "ਲਾਗਇਨ ਕਾਮਯਾਬ ਹੈ"
