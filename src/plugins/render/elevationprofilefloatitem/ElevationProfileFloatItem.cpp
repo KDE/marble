@@ -669,7 +669,7 @@ void ElevationProfileFloatItem::toggleZoomToViewport()
 {
     m_zoomToViewport = !m_zoomToViewport;
     calculateStatistics(m_eleData);
-    if (!m_zoomToViewport) {
+    if (!m_zoomToViewport && !m_eleData.isEmpty()) {
         m_axisX.setRange(m_eleData.first().x(), m_eleData.last().x());
         m_axisY.setRange(qMin(m_minElevation, qreal(0.0)), m_maxElevation);
     }
