@@ -52,7 +52,7 @@ KineticModel::KineticModel(QObject *parent)
     : QObject(parent)
     , d_ptr(new KineticModelPrivate)
 {
-    connect(&d_ptr->ticker, SIGNAL(timeout()), SLOT(update()));
+    connect(&d_ptr->ticker, &QTimer::timeout, this, &KineticModel::update);
     d_ptr->ticker.setInterval(KineticModelDefaultUpdateInterval);
 }
 

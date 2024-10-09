@@ -160,11 +160,11 @@ void EclipsesPlugin::initialize()
     m_configWidget = new Ui::EclipsesConfigDialog();
     m_configWidget->setupUi(m_configDialog);
 
-    connect(m_configDialog, SIGNAL(accepted()), this, SLOT(writeSettings()));
-    connect(m_configDialog, SIGNAL(rejected()), this, SLOT(readSettings()));
-    connect(m_configWidget->buttonBox->button(QDialogButtonBox::Reset), SIGNAL(clicked()), this, SLOT(readSettings()));
-    connect(m_configWidget->buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked()), this, SLOT(writeSettings()));
-    connect(m_configWidget->buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked()), this, SLOT(updateEclipses()));
+    connect(m_configDialog, &QDialog::accepted, this, &EclipsesPlugin::writeSettings);
+    connect(m_configDialog, &QDialog::rejected, this, &EclipsesPlugin::readSettings);
+    connect(m_configWidget->buttonBox->button(QDialogButtonBox::Reset), &QAbstractButton::clicked, this, &EclipsesPlugin::readSettings);
+    connect(m_configWidget->buttonBox->button(QDialogButtonBox::Apply), &QAbstractButton::clicked, this, &EclipsesPlugin::writeSettings);
+    connect(m_configWidget->buttonBox->button(QDialogButtonBox::Apply), &QAbstractButton::clicked, this, &EclipsesPlugin::updateEclipses);
 
     m_browserDialog = new EclipsesBrowserDialog(marbleModel());
     connect(m_browserDialog, &EclipsesBrowserDialog::buttonShowClicked, this, &EclipsesPlugin::showEclipse);

@@ -66,7 +66,7 @@ MarbleInputHandler::MarbleInputHandler(MarbleAbstractPresenter *marblePresenter)
     : d(new Protected(marblePresenter))
 {
     d->m_mouseWheelTimer = new QTimer(this);
-    connect(d->m_mouseWheelTimer, SIGNAL(timeout()), this, SLOT(restoreViewContext()));
+    connect(d->m_mouseWheelTimer, &QTimer::timeout, this, &MarbleInputHandler::restoreViewContext);
 
     connect(d->m_marblePresenter->map(), SIGNAL(renderPluginInitialized(RenderPlugin *)), this, SLOT(installPluginEventFilter(RenderPlugin *)));
 }

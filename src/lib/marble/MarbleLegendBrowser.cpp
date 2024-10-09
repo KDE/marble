@@ -70,7 +70,7 @@ void MarbleLegendBrowser::setMarbleModel(MarbleModel *marbleModel)
     d->m_marbleModel = marbleModel;
 
     if (d->m_marbleModel) {
-        connect(d->m_marbleModel, SIGNAL(themeChanged(QString)), this, SLOT(initTheme()));
+        connect(d->m_marbleModel, &MarbleModel::themeChanged, this, &MarbleLegendBrowser::initTheme);
     }
 }
 

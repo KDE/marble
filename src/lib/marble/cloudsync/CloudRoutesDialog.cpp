@@ -34,12 +34,12 @@ CloudRoutesDialog::CloudRoutesDialog(CloudRouteModel *model, QWidget *parent)
     d->setupUi(this);
 
     auto delegate = new RouteItemDelegate(d->listView, d->m_model);
-    connect(delegate, SIGNAL(downloadButtonClicked(QString)), this, SIGNAL(downloadButtonClicked(QString)));
-    connect(delegate, SIGNAL(openButtonClicked(QString)), this, SIGNAL(openButtonClicked(QString)));
-    connect(delegate, SIGNAL(deleteButtonClicked(QString)), this, SIGNAL(deleteButtonClicked(QString)));
-    connect(delegate, SIGNAL(removeFromCacheButtonClicked(QString)), this, SIGNAL(removeFromCacheButtonClicked(QString)));
-    connect(delegate, SIGNAL(uploadToCloudButtonClicked(QString)), this, SIGNAL(uploadToCloudButtonClicked(QString)));
-    connect(d->m_model, SIGNAL(modelReset()), this, SLOT(updateNoRouteLabel()));
+    connect(delegate, &RouteItemDelegate::downloadButtonClicked, this, &CloudRoutesDialog::downloadButtonClicked);
+    connect(delegate, &RouteItemDelegate::openButtonClicked, this, &CloudRoutesDialog::openButtonClicked);
+    connect(delegate, &RouteItemDelegate::deleteButtonClicked, this, &CloudRoutesDialog::deleteButtonClicked);
+    connect(delegate, &RouteItemDelegate::removeFromCacheButtonClicked, this, &CloudRoutesDialog::removeFromCacheButtonClicked);
+    connect(delegate, &RouteItemDelegate::uploadToCloudButtonClicked, this, &CloudRoutesDialog::uploadToCloudButtonClicked);
+    connect(d->m_model, &QAbstractItemModel::modelReset, this, &CloudRoutesDialog::updateNoRouteLabel);
 
     d->progressBar->setHidden(true);
     d->labelNoRoute->setHidden(true);

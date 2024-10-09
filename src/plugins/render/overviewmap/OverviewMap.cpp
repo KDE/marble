@@ -120,7 +120,7 @@ QDialog *OverviewMap::configDialog()
         loadMapSuggestions();
         connect(ui_configWidget->m_buttonBox, &QDialogButtonBox::accepted, this, &OverviewMap::writeSettings);
         connect(ui_configWidget->m_buttonBox, &QDialogButtonBox::rejected, this, &OverviewMap::readSettings);
-        connect(ui_configWidget->m_buttonBox->button(QDialogButtonBox::Reset), SIGNAL(clicked()), SLOT(restoreDefaultSettings()));
+        connect(ui_configWidget->m_buttonBox->button(QDialogButtonBox::Reset), &QAbstractButton::clicked, this, &RenderPlugin::restoreDefaultSettings);
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button(QDialogButtonBox::Apply);
         connect(applyButton, &QAbstractButton::clicked, this, &OverviewMap::writeSettings);
         connect(ui_configWidget->m_fileChooserButton, &QAbstractButton::clicked, this, &OverviewMap::chooseCustomMap);

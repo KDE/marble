@@ -15,9 +15,9 @@ MeasureConfigDialog::MeasureConfigDialog(QDialog *parent)
     ui->setupUi(this);
 
     QPushButton *apply = ui->m_buttonBox->button(QDialogButtonBox::Apply);
-    connect(apply, SIGNAL(clicked()), this, SIGNAL(applied()));
-    connect(ui->m_modeCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(updateTabs()));
-    connect(ui->m_modeCombo, SIGNAL(currentIndexChanged(int)), ui->tabWidget, SLOT(setCurrentIndex(int)));
+    connect(apply, &QAbstractButton::clicked, this, &MeasureConfigDialog::applied);
+    connect(ui->m_modeCombo, &QComboBox::currentIndexChanged, this, &MeasureConfigDialog::updateTabs);
+    connect(ui->m_modeCombo, &QComboBox::currentIndexChanged, ui->tabWidget, &QTabWidget::setCurrentIndex);
 }
 
 MeasureConfigDialog::~MeasureConfigDialog()

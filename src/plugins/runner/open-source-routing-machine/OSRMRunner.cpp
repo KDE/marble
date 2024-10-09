@@ -65,7 +65,7 @@ void OSRMRunner::retrieveRoute(const RouteRequest *route)
     timer.setInterval(15000);
 
     connect(&timer, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
-    connect(this, SIGNAL(routeCalculated(GeoDataDocument *)), &eventLoop, SLOT(quit()));
+    connect(this, &RoutingRunner::routeCalculated, &eventLoop, &QEventLoop::quit);
 
     // @todo FIXME Must currently be done in the main thread, see bug 257376
     QTimer::singleShot(0, this, SLOT(get()));

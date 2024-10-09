@@ -69,7 +69,7 @@ EditGroundOverlayDialog::EditGroundOverlayDialog(GeoDataGroundOverlay *overlay, 
     d->m_east->setValue(latLonBox.east(GeoDataCoordinates::Degree));
     d->m_rotation->setValue(latLonBox.rotation(GeoDataCoordinates::Degree));
 
-    connect(d->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(pressed()), this, SLOT(checkFields()));
+    connect(d->buttonBox->button(QDialogButtonBox::Ok), &QAbstractButton::pressed, this, &EditGroundOverlayDialog::checkFields);
 }
 
 EditGroundOverlayDialog::~EditGroundOverlayDialog()

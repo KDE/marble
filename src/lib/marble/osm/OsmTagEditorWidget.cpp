@@ -36,11 +36,11 @@ OsmTagEditorWidget::OsmTagEditorWidget(GeoDataPlacemark *placemark, QWidget *par
     d->m_currentTagsList->setSelectionMode(QAbstractItemView::SingleSelection);
     d->m_currentTagsList->setRootIsDecorated(false);
 
-    connect(d->m_addTagButton, SIGNAL(pressed()), this, SLOT(addSelectedTag()));
-    connect(d->m_recommendedTagsList, SIGNAL(itemDoubleClicked(QTreeWidgetItem *, int)), this, SLOT(addSelectedTag()));
-    connect(d->m_removeTagButton, SIGNAL(pressed()), this, SLOT(removeSelectedTag()));
-    connect(d->m_currentTagsList, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(handleItemChanged(QTreeWidgetItem *, int)));
-    connect(d->m_currentTagsList, SIGNAL(itemDoubleClicked(QTreeWidgetItem *, int)), this, SLOT(handleDoubleClick(QTreeWidgetItem *, int)));
+    connect(d->m_addTagButton, &QAbstractButton::pressed, this, &OsmTagEditorWidget::addSelectedTag);
+    connect(d->m_recommendedTagsList, &QTreeWidget::itemDoubleClicked, this, &OsmTagEditorWidget::addSelectedTag);
+    connect(d->m_removeTagButton, &QAbstractButton::pressed, this, &OsmTagEditorWidget::removeSelectedTag);
+    connect(d->m_currentTagsList, &QTreeWidget::itemChanged, this, &OsmTagEditorWidget::handleItemChanged);
+    connect(d->m_currentTagsList, &QTreeWidget::itemDoubleClicked, this, &OsmTagEditorWidget::handleDoubleClick);
 }
 
 OsmTagEditorWidget::~OsmTagEditorWidget()

@@ -56,7 +56,7 @@ MovieCapture::MovieCapture(MarbleWidget *widget, QObject *parent)
     Q_D(MovieCapture);
     if (d->method == MovieCapture::TimeDriven) {
         d->frameTimer.setInterval(1000 / 30); // fps = 30 (default)
-        connect(&d->frameTimer, SIGNAL(timeout()), this, SLOT(recordFrame()));
+        connect(&d->frameTimer, &QTimer::timeout, this, &MovieCapture::recordFrame);
     }
     d->fps = 30;
     MovieFormat avi("avi", tr("AVI (mpeg4)"), "avi");

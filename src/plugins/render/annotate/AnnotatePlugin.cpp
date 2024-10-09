@@ -81,7 +81,7 @@ AnnotatePlugin::AnnotatePlugin(const MarbleModel *model)
 {
     setEnabled(true);
     setVisible(true);
-    connect(this, SIGNAL(visibilityChanged(bool, QString)), SLOT(enableModel(bool)));
+    connect(this, &RenderPlugin::visibilityChanged, this, &AnnotatePlugin::enableModel);
 }
 
 AnnotatePlugin::~AnnotatePlugin()
@@ -864,43 +864,43 @@ void AnnotatePlugin::setupActions(MarbleWidget *widget)
     selectItem->setChecked(true);
 
     auto drawPolygon = new QAction(QIcon(QStringLiteral(":/icons/draw-polygon.png")), tr("Add Polygon"), this);
-    connect(drawPolygon, SIGNAL(triggered()), this, SLOT(addPolygon()));
+    connect(drawPolygon, &QAction::triggered, this, &AnnotatePlugin::addPolygon);
 
     auto addHole = new QAction(QIcon(QStringLiteral(":/icons/polygon-draw-hole.png")), tr("Add Polygon Hole"), this);
     addHole->setCheckable(true);
     addHole->setEnabled(false);
-    connect(addHole, SIGNAL(toggled(bool)), this, SLOT(setAddingPolygonHole(bool)));
+    connect(addHole, &QAction::toggled, this, &AnnotatePlugin::setAddingPolygonHole);
 
     auto addNodes = new QAction(QIcon(QStringLiteral(":/icons/polygon-add-nodes.png")), tr("Add Nodes"), this);
     addNodes->setCheckable(true);
     addNodes->setEnabled(false);
-    connect(addNodes, SIGNAL(toggled(bool)), this, SLOT(setAddingNodes(bool)));
+    connect(addNodes, &QAction::toggled, this, &AnnotatePlugin::setAddingNodes);
 
     auto addTextAnnotation = new QAction(QIcon(QStringLiteral(":/icons/add-placemark.png")), tr("Add Placemark"), this);
-    connect(addTextAnnotation, SIGNAL(triggered()), this, SLOT(addTextAnnotation()));
+    connect(addTextAnnotation, &QAction::triggered, this, &AnnotatePlugin::addTextAnnotation);
 
     auto addPath = new QAction(QIcon(QStringLiteral(":/icons/draw-path.png")), tr("Add Path"), this);
-    connect(addPath, SIGNAL(triggered()), this, SLOT(addPolyline()));
+    connect(addPath, &QAction::triggered, this, &AnnotatePlugin::addPolyline);
 
     auto addOverlay = new QAction(QIcon(QStringLiteral(":/icons/draw-overlay.png")), tr("Add Ground Overlay"), this);
-    connect(addOverlay, SIGNAL(triggered()), this, SLOT(addOverlay()));
+    connect(addOverlay, &QAction::triggered, this, &AnnotatePlugin::addOverlay);
 
     auto removeItem = new QAction(QIcon(QStringLiteral(":/icons/edit-delete-shred.png")), tr("Remove Item"), this);
     removeItem->setEnabled(false);
-    connect(removeItem, SIGNAL(triggered()), this, SLOT(askToRemoveFocusItem()));
+    connect(removeItem, &QAction::triggered, this, &AnnotatePlugin::askToRemoveFocusItem);
 
     auto loadAnnotationFile = new QAction(QIcon(QStringLiteral(":/icons/open-for-editing.png")), tr("Load Annotation File"), this);
-    connect(loadAnnotationFile, SIGNAL(triggered()), this, SLOT(loadAnnotationFile()));
+    connect(loadAnnotationFile, &QAction::triggered, this, &AnnotatePlugin::loadAnnotationFile);
 
     auto saveAnnotationFile = new QAction(QIcon(QStringLiteral(":/icons/document-save-as.png")), tr("Save Annotation File"), this);
-    connect(saveAnnotationFile, SIGNAL(triggered()), this, SLOT(saveAnnotationFile()));
+    connect(saveAnnotationFile, &QAction::triggered, this, &AnnotatePlugin::saveAnnotationFile);
 
     auto clearAnnotations = new QAction(QIcon(QStringLiteral(":/icons/remove.png")), tr("Clear all Annotations"), this);
     auto downloadOsm = new QAction(QIcon(":/icons/download.png"), tr("Download OpenStreetMap Data"), this);
-    connect(downloadOsm, SIGNAL(triggered(bool)), this, SLOT(downloadOsm()));
+    connect(downloadOsm, &QAction::triggered, this, &AnnotatePlugin::downloadOsm);
     downloadOsm->setToolTip(tr("Download OpenStreetMap data of the visible region"));
-    connect(drawPolygon, SIGNAL(toggled(bool)), clearAnnotations, SLOT(setDisabled(bool)));
-    connect(clearAnnotations, SIGNAL(triggered()), this, SLOT(clearAnnotations()));
+    connect(drawPolygon, &QAction::toggled, clearAnnotations, &QAction::setDisabled);
+    connect(clearAnnotations, &QAction::triggered, this, &AnnotatePlugin::clearAnnotations);
 
     auto sep1 = new QAction(this);
     sep1->setSeparator(true);

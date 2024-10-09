@@ -58,10 +58,10 @@ AprsPlugin::AprsPlugin(const MarbleModel *marbleModel)
 
     setSettings(QHash<QString, QVariant>());
 
-    connect(this, SIGNAL(visibilityChanged(bool, QString)), this, SLOT(updateVisibility(bool)));
+    connect(this, &RenderPlugin::visibilityChanged, this, &AprsPlugin::updateVisibility);
 
     m_action = new QAction(this);
-    connect(m_action, SIGNAL(toggled(bool)), this, SLOT(setVisible(bool)));
+    connect(m_action, &QAction::toggled, this, &RenderPlugin::setVisible);
 }
 
 AprsPlugin::~AprsPlugin()

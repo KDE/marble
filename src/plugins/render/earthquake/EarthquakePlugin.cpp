@@ -95,14 +95,14 @@ QDialog *EarthquakePlugin::configDialog()
         m_ui->setupUi(m_configDialog);
         m_ui->m_numResults->setRange(1, m_maximumNumberOfItems);
         readSettings();
-        connect(m_ui->m_buttonBox, SIGNAL(accepted()), SLOT(writeSettings()));
-        connect(m_ui->m_buttonBox, SIGNAL(rejected()), SLOT(readSettings()));
-        connect(m_ui->m_buttonBox->button(QDialogButtonBox::Reset), SIGNAL(clicked()), SLOT(restoreDefaultSettings()));
+        connect(m_ui->m_buttonBox, &QDialogButtonBox::accepted, this, &EarthquakePlugin::writeSettings);
+        connect(m_ui->m_buttonBox, &QDialogButtonBox::rejected, this, &EarthquakePlugin::readSettings);
+        connect(m_ui->m_buttonBox->button(QDialogButtonBox::Reset), &QAbstractButton::clicked, this, &RenderPlugin::restoreDefaultSettings);
         QPushButton *applyButton = m_ui->m_buttonBox->button(QDialogButtonBox::Apply);
-        connect(applyButton, SIGNAL(clicked()), SLOT(writeSettings()));
-        connect(m_ui->m_startDate, SIGNAL(dateTimeChanged(QDateTime)), SLOT(validateDateRange()));
-        connect(m_ui->m_endDate, SIGNAL(dateTimeChanged(QDateTime)), SLOT(validateDateRange()));
-        connect(this, SIGNAL(settingsChanged(QString)), this, SLOT(readSettings()));
+        connect(applyButton, &QAbstractButton::clicked, this, &EarthquakePlugin::writeSettings);
+        connect(m_ui->m_startDate, &QDateTimeEdit::dateTimeChanged, this, &EarthquakePlugin::validateDateRange);
+        connect(m_ui->m_endDate, &QDateTimeEdit::dateTimeChanged, this, &EarthquakePlugin::validateDateRange);
+        connect(this, &RenderPlugin::settingsChanged, this, &EarthquakePlugin::readSettings);
     }
     return m_configDialog;
 }
