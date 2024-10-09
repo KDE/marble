@@ -151,7 +151,7 @@ GeoDataDocument *OpenRouteServiceRunner::parse(const QByteArray &content) const
     result->setName(QStringLiteral("OpenRouteService"));
 
     QDomNodeList errors = root.elementsByTagName(QStringLiteral("xls:Error"));
-    if (errors.size() > 0) {
+    if (!errors.isEmpty()) {
         return nullptr;
         // Returning early because fallback routing providers are used now
         // The code below can be used to parse OpenGis errors reported by ORS
