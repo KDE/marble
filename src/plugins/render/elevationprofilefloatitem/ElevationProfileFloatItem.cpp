@@ -382,7 +382,7 @@ QDialog *ElevationProfileFloatItem::configDialog() // FIXME TODO Make a config d
         connect(ui_configWidget->m_buttonBox, &QDialogButtonBox::accepted, this, &ElevationProfileFloatItem::writeSettings);
         connect(ui_configWidget->m_buttonBox, &QDialogButtonBox::rejected, this, &ElevationProfileFloatItem::readSettings);
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button(QDialogButtonBox::Apply);
-        connect(applyButton, SIGNAL(clicked()), this, SLOT(writeSettings()));
+        connect(applyButton, &QAbstractButton::clicked, this, &ElevationProfileFloatItem::writeSettings);
     }
     return m_configDialog;
 }
@@ -406,9 +406,9 @@ bool ElevationProfileFloatItem::eventFilter(QObject *object, QEvent *e)
 
     if (widget && !m_marbleWidget) {
         m_marbleWidget = widget;
-        connect(this, SIGNAL(dataUpdated()), this, SLOT(updateVisiblePoints()));
-        connect(m_marbleWidget, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)), this, SLOT(updateVisiblePoints()));
-        connect(this, SIGNAL(settingsChanged(QString)), this, SLOT(updateVisiblePoints()));
+        connect(this, &ElevationProfileFloatItem::dataUpdated, this, &ElevationProfileFloatItem::updateVisiblePoints);
+        connect(m_marbleWidget, &MarbleWidget::visibleLatLonAltBoxChanged, this, &ElevationProfileFloatItem::updateVisiblePoints);
+        connect(this, &RenderPlugin::settingsChanged, this, &ElevationProfileFloatItem::updateVisiblePoints);
     }
 
     if (e->type() == QEvent::MouseButtonDblClick || e->type() == QEvent::MouseMove) {

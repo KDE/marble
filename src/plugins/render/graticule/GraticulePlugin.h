@@ -213,8 +213,8 @@ private:
 
     QIcon m_icon;
 
-    Ui::GraticuleConfigWidget *ui_configWidget;
-    QDialog *m_configDialog;
+    Ui::GraticuleConfigWidget *ui_configWidget = nullptr;
+    QDialog *m_configDialog = nullptr;
 };
 
 }

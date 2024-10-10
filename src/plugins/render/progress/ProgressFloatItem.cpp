@@ -38,12 +38,12 @@ ProgressFloatItem::ProgressFloatItem(const MarbleModel *marbleModel)
     // This timer is responsible to activate the automatic display with a small delay
     m_progressShowTimer.setInterval(250);
     m_progressShowTimer.setSingleShot(true);
-    connect(&m_progressShowTimer, SIGNAL(timeout()), this, SLOT(show()));
+    connect(&m_progressShowTimer, &QTimer::timeout, this, &ProgressFloatItem::show);
 
     // This timer is responsible to hide the automatic display when downloads are finished
     m_progressHideTimer.setInterval(750);
     m_progressHideTimer.setSingleShot(true);
-    connect(&m_progressHideTimer, SIGNAL(timeout()), this, SLOT(hideProgress()));
+    connect(&m_progressHideTimer, &QTimer::timeout, this, &ProgressFloatItem::hideProgress);
 
     // Repaint timer
     m_repaintTimer.setSingleShot(true);
@@ -112,7 +112,7 @@ void ProgressFloatItem::initialize()
 {
     const HttpDownloadManager *manager = marbleModel()->downloadManager();
     Q_ASSERT(manager);
-    connect(manager, SIGNAL(progressChanged(int, int)), this, SLOT(handleProgress(int, int)), Qt::UniqueConnection);
+    connect(manager, &HttpDownloadManager::progressChanged, this, &ProgressFloatItem::handleProgress, Qt::UniqueConnection);
     connect(manager, SIGNAL(jobRemoved()), this, SLOT(removeProgressItem()), Qt::UniqueConnection);
 
     // Calculate font size

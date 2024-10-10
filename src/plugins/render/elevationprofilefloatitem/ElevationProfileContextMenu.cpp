@@ -17,9 +17,6 @@ namespace Marble
 ElevationProfileContextMenu::ElevationProfileContextMenu(ElevationProfileFloatItem *floatItem)
     : QObject(floatItem)
     , m_floatItem(floatItem)
-    , m_sourceGrp(nullptr)
-    , m_contextMenu(nullptr)
-    , m_trackMapper(nullptr)
 {
 }
 
@@ -69,7 +66,7 @@ void ElevationProfileContextMenu::updateContextMenuEntries()
         route->setActionGroup(m_sourceGrp);
         route->setCheckable(true);
         route->setChecked(m_floatItem->m_activeDataSource == &m_floatItem->m_routeDataSource);
-        connect(route, SIGNAL(triggered()), m_floatItem, SLOT(switchToRouteDataSource()));
+        connect(route, &QAction::triggered, m_floatItem, &ElevationProfileFloatItem::switchToRouteDataSource);
         m_selectionActions.append(route);
     }
 

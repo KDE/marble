@@ -27,10 +27,10 @@ public Q_SLOTS:
 
 private:
     QList<QAction *> m_selectionActions;
-    ElevationProfileFloatItem *m_floatItem;
-    QActionGroup *m_sourceGrp;
-    QMenu *m_contextMenu;
-    QSignalMapper *m_trackMapper;
+    ElevationProfileFloatItem *m_floatItem = nullptr;
+    QActionGroup *m_sourceGrp = nullptr;
+    QMenu *m_contextMenu = nullptr;
+    QSignalMapper *m_trackMapper = nullptr;
 };
 }
 #endif
