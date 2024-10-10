@@ -11568,12 +11568,12 @@ msgid ""
 "De facto standard for global texture data sets for computer software.</p>"
 msgstr ""
 
-#: src/lib/marble/projections/GnomonicProjection.cpp:59
+#: src/lib/marble/projections/GnomonicProjection.cpp:55
 msgctxt "QObject|"
 msgid "Gnomonic"
 msgstr ""
 
-#: src/lib/marble/projections/GnomonicProjection.cpp:64
+#: src/lib/marble/projections/GnomonicProjection.cpp:60
 msgctxt "QObject|"
 msgid ""
 "<p><b>Gnomonic Projection</b> (\"rectilinear\")</p><p>Applications: Used for "
@@ -11581,38 +11581,38 @@ msgid ""
 "work.</p>"
 msgstr ""
 
-#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:59
+#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:55
 msgctxt "QObject|"
 msgid "Lambert Azimuthal Equal-Area"
 msgstr ""
 
-#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:64
+#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:60
 msgctxt "QObject|"
 msgid ""
 "<p><b>Lambert Azimuthal Equal-Area Projection</b></p><p>Applications: Used "
 "in structural geology to plot directional data.</p>"
 msgstr ""
 
-#: src/lib/marble/projections/MercatorProjection.cpp:37
+#: src/lib/marble/projections/MercatorProjection.cpp:33
 #, fuzzy
 msgctxt "QObject|"
 msgid "Mercator"
 msgstr "ഇപ്പോളെവിടെ"
 
-#: src/lib/marble/projections/MercatorProjection.cpp:42
+#: src/lib/marble/projections/MercatorProjection.cpp:38
 msgctxt "QObject|"
 msgid ""
 "<p><b>Mercator Projection</b></p><p>Applications: popular standard map "
 "projection for navigation.</p>"
 msgstr ""
 
-#: src/lib/marble/projections/SphericalProjection.cpp:61
+#: src/lib/marble/projections/SphericalProjection.cpp:57
 #, fuzzy
 msgctxt "QObject|"
 msgid "Globe"
 msgstr "ഗ്ലോബ്"
 
-#: src/lib/marble/projections/SphericalProjection.cpp:66
+#: src/lib/marble/projections/SphericalProjection.cpp:62
 msgctxt "QObject|"
 msgid ""
 "<p><b>Orthographic Projection</b> (\"orthogonal\")</p><p>Applications: A "
@@ -11620,24 +11620,24 @@ msgid ""
 "it appears from outer space.</p>"
 msgstr ""
 
-#: src/lib/marble/projections/StereographicProjection.cpp:59
+#: src/lib/marble/projections/StereographicProjection.cpp:55
 msgctxt "QObject|"
 msgid "Stereographic"
 msgstr ""
 
-#: src/lib/marble/projections/StereographicProjection.cpp:64
+#: src/lib/marble/projections/StereographicProjection.cpp:60
 msgctxt "QObject|"
 msgid ""
 "<p><b>Stereographic Projection</b> (\"orthogonal\")</p><p>Applications: Used "
 "for planetary cartography, geology and panorama photography.</p>"
 msgstr ""
 
-#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:72
+#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:68
 msgctxt "QObject|"
 msgid "Vertical Perspective Projection"
 msgstr ""
 
-#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:77
+#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:73
 msgctxt "QObject|"
 msgid ""
 "<p><b>Vertical Perspective Projection</b> (\"orthogonal\")</p><p> Shows the "
@@ -15273,16 +15273,16 @@ msgctxt "PhotoConfigWidget|"
 msgid "Configure Photo Plugin"
 msgstr "മാര്‍ബിളിനെ സംബന്ധിച്ചുള്ളതു്"
 
-#: src/plugins/render/photo/PhotoConfigWidget.ui:42
+#: src/plugins/render/photo/PhotoConfigWidget.ui:24
+msgctxt "PhotoConfigWidget|"
+msgid "Number of items on the screen"
+msgstr ""
+
+#: src/plugins/render/photo/PhotoConfigWidget.ui:49
 #, fuzzy
 msgctxt "PhotoConfigWidget|"
 msgid "License"
 msgstr "&ലൈസന്‍സ് എഗ്രിമെന്റ്"
-
-#: src/plugins/render/photo/PhotoConfigWidget.ui:71
-msgctxt "PhotoConfigWidget|"
-msgid "Number of items on the screen"
-msgstr ""
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:62
 msgctxt "Marble::PhotoPlugin|"
@@ -17720,50 +17720,50 @@ msgctxt "Marble::LocalOsmSearchPlugin|"
 msgid "Searches for addresses and points of interest in offline maps."
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:265
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:267
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:264
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:266
 #, fuzzy
 msgctxt "QObject|"
 msgid "north"
 msgstr "കാട്"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:269
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:268
 #, fuzzy
 msgctxt "QObject|"
 msgid "north-west"
 msgstr "കാട്"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:271
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:270
 #, fuzzy
 msgctxt "QObject|"
 msgid "west"
 msgstr "കാട്"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:273
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:272
 #, fuzzy
 msgctxt "QObject|"
 msgid "south-west"
 msgstr "&സംബന്ധിച്ചുള്ളതു്"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:275
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:274
 #, fuzzy
 msgctxt "QObject|"
 msgid "south"
 msgstr "&സംബന്ധിച്ചുള്ളതു്"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:277
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:276
 #, fuzzy
 msgctxt "QObject|"
 msgid "south-east"
 msgstr "കാട്"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:279
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:278
 #, fuzzy
 msgctxt "QObject|"
 msgid "east"
 msgstr "&ഭൂമി"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:281
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:280
 #, fuzzy
 msgctxt "QObject|"
 msgid "north-east"
@@ -18058,29 +18058,29 @@ msgctxt "Marble::MonavMapsModel|"
 msgid "Date"
 msgstr "&തീയതി"
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:219
+#: src/plugins/runner/monav/MonavPlugin.cpp:217
 msgctxt "Marble::MonavPlugin|"
 msgid "No offline maps installed yet."
 msgstr ""
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:222
+#: src/plugins/runner/monav/MonavPlugin.cpp:220
 msgctxt "Marble::MonavPlugin|"
 msgid "The monav routing daemon does not seem to be installed on your system."
 msgstr ""
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:235
+#: src/plugins/runner/monav/MonavPlugin.cpp:233
 #, fuzzy
 msgctxt "Marble::MonavPlugin|"
 msgid "Monav Routing"
 msgstr "പര്‍വതം"
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:240
+#: src/plugins/runner/monav/MonavPlugin.cpp:238
 #, fuzzy
 msgctxt "Marble::MonavPlugin|"
 msgid "Monav"
 msgstr "പര്‍വതം"
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:255
+#: src/plugins/runner/monav/MonavPlugin.cpp:253
 msgctxt "Marble::MonavPlugin|"
 msgid "Offline routing using the monav daemon"
 msgstr ""

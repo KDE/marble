@@ -11400,12 +11400,12 @@ msgstr ""
 "<p>Aplicacions: estàndard «de facto» per a conjunts de dades globals de "
 "textura en el programari d'ordinador.</p>"
 
-#: src/lib/marble/projections/GnomonicProjection.cpp:59
+#: src/lib/marble/projections/GnomonicProjection.cpp:55
 msgctxt "QObject|"
 msgid "Gnomonic"
 msgstr "Gnomònica"
 
-#: src/lib/marble/projections/GnomonicProjection.cpp:64
+#: src/lib/marble/projections/GnomonicProjection.cpp:60
 msgctxt "QObject|"
 msgid ""
 "<p><b>Gnomonic Projection</b> (\"rectilinear\")</p><p>Applications: Used for "
@@ -11416,13 +11416,13 @@ msgstr ""
 "mostrar fotografies panoràmiques i també en navegació, ràdio i sismologia.</"
 "p>"
 
-#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:59
+#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:55
 msgctxt "QObject|"
 msgid "Lambert Azimuthal Equal-Area"
 msgstr "Azimutal homologràfica de Lambert"
 
 # skip-rule: t-sc-plot
-#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:64
+#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:60
 msgctxt "QObject|"
 msgid ""
 "<p><b>Lambert Azimuthal Equal-Area Projection</b></p><p>Applications: Used "
@@ -11431,12 +11431,12 @@ msgstr ""
 "<p><b>Projecció azimutal homologràfica de Lambert</b></p><p>Aplicacions: "
 "S'usa en geologia estructural per a dibuixar dades direccionals.</p>"
 
-#: src/lib/marble/projections/MercatorProjection.cpp:37
+#: src/lib/marble/projections/MercatorProjection.cpp:33
 msgctxt "QObject|"
 msgid "Mercator"
 msgstr "Mercator"
 
-#: src/lib/marble/projections/MercatorProjection.cpp:42
+#: src/lib/marble/projections/MercatorProjection.cpp:38
 msgctxt "QObject|"
 msgid ""
 "<p><b>Mercator Projection</b></p><p>Applications: popular standard map "
@@ -11445,12 +11445,12 @@ msgstr ""
 "<p><b>Projecció de Mercator</b></p><p>Aplicacions: projecció de mapes "
 "popular en la navegació.</p>"
 
-#: src/lib/marble/projections/SphericalProjection.cpp:61
+#: src/lib/marble/projections/SphericalProjection.cpp:57
 msgctxt "QObject|"
 msgid "Globe"
 msgstr "Globus"
 
-#: src/lib/marble/projections/SphericalProjection.cpp:66
+#: src/lib/marble/projections/SphericalProjection.cpp:62
 msgctxt "QObject|"
 msgid ""
 "<p><b>Orthographic Projection</b> (\"orthogonal\")</p><p>Applications: A "
@@ -11461,12 +11461,12 @@ msgstr ""
 "projecció en perspectiva que s'usa per a mostrar l'hemisferi del globus tal "
 "com es veu des de l'espai.</p>"
 
-#: src/lib/marble/projections/StereographicProjection.cpp:59
+#: src/lib/marble/projections/StereographicProjection.cpp:55
 msgctxt "QObject|"
 msgid "Stereographic"
 msgstr "Estereogràfica"
 
-#: src/lib/marble/projections/StereographicProjection.cpp:64
+#: src/lib/marble/projections/StereographicProjection.cpp:60
 msgctxt "QObject|"
 msgid ""
 "<p><b>Stereographic Projection</b> (\"orthogonal\")</p><p>Applications: Used "
@@ -11475,12 +11475,12 @@ msgstr ""
 "<p><b>Projecció estereogràfica</b> («ortogonal»)</p><p>Aplicacions: s'usa en "
 "cartografia planetària, geologia i fotografia panoràmica.</p>"
 
-#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:72
+#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:68
 msgctxt "QObject|"
 msgid "Vertical Perspective Projection"
 msgstr "Projecció en perspectiva vertical"
 
-#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:77
+#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:73
 msgctxt "QObject|"
 msgid ""
 "<p><b>Vertical Perspective Projection</b> (\"orthogonal\")</p><p> Shows the "
@@ -14924,15 +14924,15 @@ msgctxt "PhotoConfigWidget|"
 msgid "Configure Photo Plugin"
 msgstr "Configura el connector de fotografies"
 
-#: src/plugins/render/photo/PhotoConfigWidget.ui:42
-msgctxt "PhotoConfigWidget|"
-msgid "License"
-msgstr "Llicència"
-
-#: src/plugins/render/photo/PhotoConfigWidget.ui:71
+#: src/plugins/render/photo/PhotoConfigWidget.ui:24
 msgctxt "PhotoConfigWidget|"
 msgid "Number of items on the screen"
 msgstr "Nombre d'elements a la pantalla"
+
+#: src/plugins/render/photo/PhotoConfigWidget.ui:49
+msgctxt "PhotoConfigWidget|"
+msgid "License"
+msgstr "Llicència"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:62
 msgctxt "Marble::PhotoPlugin|"
@@ -17234,43 +17234,43 @@ msgctxt "Marble::LocalOsmSearchPlugin|"
 msgid "Searches for addresses and points of interest in offline maps."
 msgstr "Cerca adreces i llocs d'interès als mapes mentre s'està desconnectat."
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:265
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:267
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:264
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:266
 msgctxt "QObject|"
 msgid "north"
 msgstr "nord"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:269
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:268
 msgctxt "QObject|"
 msgid "north-west"
 msgstr "nord-oest"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:271
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:270
 msgctxt "QObject|"
 msgid "west"
 msgstr "oest"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:273
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:272
 msgctxt "QObject|"
 msgid "south-west"
 msgstr "sud-oest"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:275
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:274
 msgctxt "QObject|"
 msgid "south"
 msgstr "sud"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:277
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:276
 msgctxt "QObject|"
 msgid "south-east"
 msgstr "sud-est"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:279
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:278
 msgctxt "QObject|"
 msgid "east"
 msgstr "est"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:281
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:280
 msgctxt "QObject|"
 msgid "north-east"
 msgstr "nord-est"
@@ -17553,29 +17553,29 @@ msgctxt "Marble::MonavMapsModel|"
 msgid "Date"
 msgstr "Data"
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:219
+#: src/plugins/runner/monav/MonavPlugin.cpp:217
 msgctxt "Marble::MonavPlugin|"
 msgid "No offline maps installed yet."
 msgstr "Encara no s'ha instal·lat cap mapa fora de línia."
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:222
+#: src/plugins/runner/monav/MonavPlugin.cpp:220
 msgctxt "Marble::MonavPlugin|"
 msgid "The monav routing daemon does not seem to be installed on your system."
 msgstr ""
 "Sembla que no teniu instal·lat al vostre sistema el dimoni d'itineraris "
 "MoNav."
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:235
+#: src/plugins/runner/monav/MonavPlugin.cpp:233
 msgctxt "Marble::MonavPlugin|"
 msgid "Monav Routing"
 msgstr "Itineraris de Monav"
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:240
+#: src/plugins/runner/monav/MonavPlugin.cpp:238
 msgctxt "Marble::MonavPlugin|"
 msgid "Monav"
 msgstr "Monav"
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:255
+#: src/plugins/runner/monav/MonavPlugin.cpp:253
 msgctxt "Marble::MonavPlugin|"
 msgid "Offline routing using the monav daemon"
 msgstr "Càlcul d'itineraris fora de línia usant el dimoni MoNav"

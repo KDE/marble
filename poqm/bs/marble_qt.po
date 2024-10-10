@@ -13264,14 +13264,14 @@ msgstr ""
 "facto standard za globalne setove teksturnih podataka za kompjuterske "
 "programe.</p>"
 
-#: src/lib/marble/projections/GnomonicProjection.cpp:59
+#: src/lib/marble/projections/GnomonicProjection.cpp:55
 #, fuzzy
 #| msgid "Gnomonic"
 msgctxt "QObject|"
 msgid "Gnomonic"
 msgstr "Gnomonička metoda"
 
-#: src/lib/marble/projections/GnomonicProjection.cpp:64
+#: src/lib/marble/projections/GnomonicProjection.cpp:60
 #, fuzzy
 #| msgid ""
 #| "<p><b>Gnomonic Projection</b> (\"rectilinear\")</p><p>Applications: Used "
@@ -13287,14 +13287,14 @@ msgstr ""
 "za prikaz panoramskih fotografija. Takođe se koristi za navigaciju, radio i "
 "sizmičke aktivnosti.</p>"
 
-#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:59
+#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:55
 #, fuzzy
 #| msgid "Lambert Azimuthal Equal-Area"
 msgctxt "QObject|"
 msgid "Lambert Azimuthal Equal-Area"
 msgstr "Lambert Azimutalni Jednako-prostorni"
 
-#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:64
+#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:60
 #, fuzzy
 #| msgid ""
 #| "<p><b>Lambert Azimuthal Equal-Area Projection</b></p><p>Applications: "
@@ -13308,14 +13308,14 @@ msgstr ""
 "Koristi se u strukturalnoj geologiji za nanošenje podataka o pravcima na "
 "kartama.</p>"
 
-#: src/lib/marble/projections/MercatorProjection.cpp:37
+#: src/lib/marble/projections/MercatorProjection.cpp:33
 #, fuzzy
 #| msgid "Mercator"
 msgctxt "QObject|"
 msgid "Mercator"
 msgstr "Merkatorova"
 
-#: src/lib/marble/projections/MercatorProjection.cpp:42
+#: src/lib/marble/projections/MercatorProjection.cpp:38
 #, fuzzy
 #| msgid ""
 #| "<p><b>Mercator Projection</b></p><p>Applications: popular standard map "
@@ -13328,14 +13328,14 @@ msgstr ""
 "<p><b>Merkatorova Projekcija</b></p><p>Primjene: popularna standardna "
 "projekcija mape za navgaciju.</p>"
 
-#: src/lib/marble/projections/SphericalProjection.cpp:61
+#: src/lib/marble/projections/SphericalProjection.cpp:57
 #, fuzzy
 #| msgid "Globe"
 msgctxt "QObject|"
 msgid "Globe"
 msgstr "Globus"
 
-#: src/lib/marble/projections/SphericalProjection.cpp:66
+#: src/lib/marble/projections/SphericalProjection.cpp:62
 #, fuzzy
 #| msgid ""
 #| "<p><b>Orthographic Projection</b> (\"orthogonal\")</p><p>Applications: A "
@@ -13351,14 +13351,14 @@ msgstr ""
 "Perspektivna projekcija koja se koristi za prikaz hemisfere globusa onako "
 "kako se vidi iz svemira.</p>"
 
-#: src/lib/marble/projections/StereographicProjection.cpp:59
+#: src/lib/marble/projections/StereographicProjection.cpp:55
 #, fuzzy
 #| msgid "Stereographic"
 msgctxt "QObject|"
 msgid "Stereographic"
 msgstr "Stereografska"
 
-#: src/lib/marble/projections/StereographicProjection.cpp:64
+#: src/lib/marble/projections/StereographicProjection.cpp:60
 #, fuzzy
 #| msgid ""
 #| "<p><b>Stereographic Projection</b> (\"orthogonal\")</p><p>Applications: "
@@ -13371,14 +13371,14 @@ msgstr ""
 "<p><b>Stereografska Projekcija</b> (\"ortogonalna\")</p><p>Primjene: Koristi "
 "se za planetarnu kartografiju, geologiju i panoramsku fotografiju.</p>"
 
-#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:72
+#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:68
 #, fuzzy
 #| msgid "Vertical Perspective Projection"
 msgctxt "QObject|"
 msgid "Vertical Perspective Projection"
 msgstr "Projekcija Vertikalne Perspektive"
 
-#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:77
+#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:73
 #, fuzzy
 #| msgid ""
 #| "<p><b>Vertical Perspective Projection</b> (\"orthogonal\")</p><p> Shows "
@@ -17787,17 +17787,17 @@ msgctxt "PhotoConfigWidget|"
 msgid "Configure Photo Plugin"
 msgstr "Podesi sunca kontrolu"
 
-#: src/plugins/render/photo/PhotoConfigWidget.ui:42
+#: src/plugins/render/photo/PhotoConfigWidget.ui:24
+msgctxt "PhotoConfigWidget|"
+msgid "Number of items on the screen"
+msgstr ""
+
+#: src/plugins/render/photo/PhotoConfigWidget.ui:49
 #, fuzzy
 #| msgid "License"
 msgctxt "PhotoConfigWidget|"
 msgid "License"
 msgstr "Licenca"
-
-#: src/plugins/render/photo/PhotoConfigWidget.ui:71
-msgctxt "PhotoConfigWidget|"
-msgid "Number of items on the screen"
-msgstr ""
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:62
 #, fuzzy
@@ -20794,57 +20794,57 @@ msgctxt "Marble::LocalOsmSearchPlugin|"
 msgid "Searches for addresses and points of interest in offline maps."
 msgstr "Traži adrese i tačke interesa u offline mapama."
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:265
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:267
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:264
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:266
 #, fuzzy
 #| msgid "north"
 msgctxt "QObject|"
 msgid "north"
 msgstr "sjever"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:269
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:268
 #, fuzzy
 #| msgid "north-west"
 msgctxt "QObject|"
 msgid "north-west"
 msgstr "sjevero-zapad"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:271
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:270
 #, fuzzy
 #| msgid "west"
 msgctxt "QObject|"
 msgid "west"
 msgstr "zapad"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:273
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:272
 #, fuzzy
 #| msgid "south-west"
 msgctxt "QObject|"
 msgid "south-west"
 msgstr "jugo-zapad"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:275
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:274
 #, fuzzy
 #| msgid "south"
 msgctxt "QObject|"
 msgid "south"
 msgstr "jug"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:277
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:276
 #, fuzzy
 #| msgid "south-east"
 msgctxt "QObject|"
 msgid "south-east"
 msgstr "jugo-istok"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:279
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:278
 #, fuzzy
 #| msgid "east"
 msgctxt "QObject|"
 msgid "east"
 msgstr "istok"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:281
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:280
 #, fuzzy
 #| msgid "north-east"
 msgctxt "QObject|"
@@ -21209,14 +21209,14 @@ msgctxt "Marble::MonavMapsModel|"
 msgid "Date"
 msgstr "Datum"
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:219
+#: src/plugins/runner/monav/MonavPlugin.cpp:217
 #, fuzzy
 #| msgid "No offline maps installed yet."
 msgctxt "Marble::MonavPlugin|"
 msgid "No offline maps installed yet."
 msgstr "Još uvijek nema instaliranih offline mapa."
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:222
+#: src/plugins/runner/monav/MonavPlugin.cpp:220
 #, fuzzy
 #| msgid ""
 #| "The monav routing daemon does not seem to be installed on your system."
@@ -21225,21 +21225,21 @@ msgid "The monav routing daemon does not seem to be installed on your system."
 msgstr ""
 "Monav usmjeravanje daemon-a ne čini se kao da je instaliran na Vašem sistemu."
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:235
+#: src/plugins/runner/monav/MonavPlugin.cpp:233
 #, fuzzy
 #| msgid "Monav Routing"
 msgctxt "Marble::MonavPlugin|"
 msgid "Monav Routing"
 msgstr "Monav rutiranje"
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:240
+#: src/plugins/runner/monav/MonavPlugin.cpp:238
 #, fuzzy
 #| msgid "Monav"
 msgctxt "Marble::MonavPlugin|"
 msgid "Monav"
 msgstr "Monav"
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:255
+#: src/plugins/runner/monav/MonavPlugin.cpp:253
 #, fuzzy
 #| msgid "Offline routing using the monav daemon"
 msgctxt "Marble::MonavPlugin|"

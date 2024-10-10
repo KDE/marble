@@ -11367,12 +11367,12 @@ msgstr ""
 "p><p>Aplicações: Padrão de fato para os conjuntos de dados globais de "
 "texturas para software de computador.</p>"
 
-#: src/lib/marble/projections/GnomonicProjection.cpp:59
+#: src/lib/marble/projections/GnomonicProjection.cpp:55
 msgctxt "QObject|"
 msgid "Gnomonic"
 msgstr "Gnomônico"
 
-#: src/lib/marble/projections/GnomonicProjection.cpp:64
+#: src/lib/marble/projections/GnomonicProjection.cpp:60
 msgctxt "QObject|"
 msgid ""
 "<p><b>Gnomonic Projection</b> (\"rectilinear\")</p><p>Applications: Used for "
@@ -11383,12 +11383,12 @@ msgstr ""
 "mostrar fotos panorâmicas. Também usado para navegação e trabalhos em rádio "
 "e sísmicos.</p>"
 
-#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:59
+#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:55
 msgctxt "QObject|"
 msgid "Lambert Azimuthal Equal-Area"
 msgstr "Azimutal de Lambert"
 
-#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:64
+#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:60
 msgctxt "QObject|"
 msgid ""
 "<p><b>Lambert Azimuthal Equal-Area Projection</b></p><p>Applications: Used "
@@ -11397,12 +11397,12 @@ msgstr ""
 "<p><b>Projeção azimutal de Lambert</b></p><p>Aplicações: Usado em geologia "
 "estrutural para desenhar dados de direção.</p>"
 
-#: src/lib/marble/projections/MercatorProjection.cpp:37
+#: src/lib/marble/projections/MercatorProjection.cpp:33
 msgctxt "QObject|"
 msgid "Mercator"
 msgstr "Mercator"
 
-#: src/lib/marble/projections/MercatorProjection.cpp:42
+#: src/lib/marble/projections/MercatorProjection.cpp:38
 msgctxt "QObject|"
 msgid ""
 "<p><b>Mercator Projection</b></p><p>Applications: popular standard map "
@@ -11411,12 +11411,12 @@ msgstr ""
 "<p><b>Projeção de Mercator</b></p><p>Aplicações: Projeção popular em mapas "
 "padrão para navegação.</p>"
 
-#: src/lib/marble/projections/SphericalProjection.cpp:61
+#: src/lib/marble/projections/SphericalProjection.cpp:57
 msgctxt "QObject|"
 msgid "Globe"
 msgstr "Globo"
 
-#: src/lib/marble/projections/SphericalProjection.cpp:66
+#: src/lib/marble/projections/SphericalProjection.cpp:62
 msgctxt "QObject|"
 msgid ""
 "<p><b>Orthographic Projection</b> (\"orthogonal\")</p><p>Applications: A "
@@ -11427,12 +11427,12 @@ msgstr ""
 "projeção em perspectiva que é usada para mostrar o hemisfério de um globo, "
 "como aparece se visto do espaço.</p>"
 
-#: src/lib/marble/projections/StereographicProjection.cpp:59
+#: src/lib/marble/projections/StereographicProjection.cpp:55
 msgctxt "QObject|"
 msgid "Stereographic"
 msgstr "Estereográfico"
 
-#: src/lib/marble/projections/StereographicProjection.cpp:64
+#: src/lib/marble/projections/StereographicProjection.cpp:60
 msgctxt "QObject|"
 msgid ""
 "<p><b>Stereographic Projection</b> (\"orthogonal\")</p><p>Applications: Used "
@@ -11441,12 +11441,12 @@ msgstr ""
 "<p><b>Projeção estereográfica</b> (\"ortogonal\")</p><p>Aplicações: Usado "
 "para cartografia planetária, geologia e fotografia panorâmica.</p>"
 
-#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:72
+#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:68
 msgctxt "QObject|"
 msgid "Vertical Perspective Projection"
 msgstr "Projeção em perspectiva vertical"
 
-#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:77
+#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:73
 msgctxt "QObject|"
 msgid ""
 "<p><b>Vertical Perspective Projection</b> (\"orthogonal\")</p><p> Shows the "
@@ -14887,15 +14887,15 @@ msgctxt "PhotoConfigWidget|"
 msgid "Configure Photo Plugin"
 msgstr "Configurar plugin de foto"
 
-#: src/plugins/render/photo/PhotoConfigWidget.ui:42
-msgctxt "PhotoConfigWidget|"
-msgid "License"
-msgstr "Licença"
-
-#: src/plugins/render/photo/PhotoConfigWidget.ui:71
+#: src/plugins/render/photo/PhotoConfigWidget.ui:24
 msgctxt "PhotoConfigWidget|"
 msgid "Number of items on the screen"
 msgstr "Número de itens na tela"
+
+#: src/plugins/render/photo/PhotoConfigWidget.ui:49
+msgctxt "PhotoConfigWidget|"
+msgid "License"
+msgstr "Licença"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:62
 msgctxt "Marble::PhotoPlugin|"
@@ -17187,43 +17187,43 @@ msgctxt "Marble::LocalOsmSearchPlugin|"
 msgid "Searches for addresses and points of interest in offline maps."
 msgstr "Pesquisa por endereços e pontos de interesse em mapas locais."
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:265
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:267
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:264
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:266
 msgctxt "QObject|"
 msgid "north"
 msgstr "norte"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:269
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:268
 msgctxt "QObject|"
 msgid "north-west"
 msgstr "noroeste"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:271
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:270
 msgctxt "QObject|"
 msgid "west"
 msgstr "oeste"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:273
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:272
 msgctxt "QObject|"
 msgid "south-west"
 msgstr "sudoeste"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:275
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:274
 msgctxt "QObject|"
 msgid "south"
 msgstr "sul"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:277
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:276
 msgctxt "QObject|"
 msgid "south-east"
 msgstr "sudeste"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:279
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:278
 msgctxt "QObject|"
 msgid "east"
 msgstr "leste"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:281
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:280
 msgctxt "QObject|"
 msgid "north-east"
 msgstr "nordeste"
@@ -17503,27 +17503,27 @@ msgctxt "Marble::MonavMapsModel|"
 msgid "Date"
 msgstr "Data"
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:219
+#: src/plugins/runner/monav/MonavPlugin.cpp:217
 msgctxt "Marble::MonavPlugin|"
 msgid "No offline maps installed yet."
 msgstr "Nenhum mapa offline instalado ainda."
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:222
+#: src/plugins/runner/monav/MonavPlugin.cpp:220
 msgctxt "Marble::MonavPlugin|"
 msgid "The monav routing daemon does not seem to be installed on your system."
 msgstr "O servidor de rotas monav não parece estar instalado no seu sistema."
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:235
+#: src/plugins/runner/monav/MonavPlugin.cpp:233
 msgctxt "Marble::MonavPlugin|"
 msgid "Monav Routing"
 msgstr "Rotas do Monav"
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:240
+#: src/plugins/runner/monav/MonavPlugin.cpp:238
 msgctxt "Marble::MonavPlugin|"
 msgid "Monav"
 msgstr "Monav"
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:255
+#: src/plugins/runner/monav/MonavPlugin.cpp:253
 msgctxt "Marble::MonavPlugin|"
 msgid "Offline routing using the monav daemon"
 msgstr "Roteamento offline usando o servidor monav"

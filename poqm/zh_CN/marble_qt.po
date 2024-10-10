@@ -11250,12 +11250,12 @@ msgstr ""
 "<p><b>等距圆柱投影</b> (方格投影)</p><p>适用场合：计算机软件处理球体纹理数据"
 "时的事实标准。</p>"
 
-#: src/lib/marble/projections/GnomonicProjection.cpp:59
+#: src/lib/marble/projections/GnomonicProjection.cpp:55
 msgctxt "QObject|"
 msgid "Gnomonic"
 msgstr "球心投影"
 
-#: src/lib/marble/projections/GnomonicProjection.cpp:64
+#: src/lib/marble/projections/GnomonicProjection.cpp:60
 msgctxt "QObject|"
 msgid ""
 "<p><b>Gnomonic Projection</b> (\"rectilinear\")</p><p>Applications: Used for "
@@ -11265,12 +11265,12 @@ msgstr ""
 "<p><b>球心投影</b> (直线)</p><p>适用场合：用于显示全景照片，也可以用于导航、"
 "显示无线电信号和地震信息。</p>"
 
-#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:59
+#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:55
 msgctxt "QObject|"
 msgid "Lambert Azimuthal Equal-Area"
 msgstr "兰勃特投影"
 
-#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:64
+#: src/lib/marble/projections/LambertAzimuthalProjection.cpp:60
 msgctxt "QObject|"
 msgid ""
 "<p><b>Lambert Azimuthal Equal-Area Projection</b></p><p>Applications: Used "
@@ -11278,24 +11278,24 @@ msgid ""
 msgstr ""
 "<p><b>兰勃特投影</b></p><p>适用场合：用于构造地质学的方向数据制图。</p>"
 
-#: src/lib/marble/projections/MercatorProjection.cpp:37
+#: src/lib/marble/projections/MercatorProjection.cpp:33
 msgctxt "QObject|"
 msgid "Mercator"
 msgstr "墨卡托投影"
 
-#: src/lib/marble/projections/MercatorProjection.cpp:42
+#: src/lib/marble/projections/MercatorProjection.cpp:38
 msgctxt "QObject|"
 msgid ""
 "<p><b>Mercator Projection</b></p><p>Applications: popular standard map "
 "projection for navigation.</p>"
 msgstr "<p><b>墨卡托投影</b></p><p>适用场合：导航常用的标准地图投影方式。</p>"
 
-#: src/lib/marble/projections/SphericalProjection.cpp:61
+#: src/lib/marble/projections/SphericalProjection.cpp:57
 msgctxt "QObject|"
 msgid "Globe"
 msgstr "立体球形"
 
-#: src/lib/marble/projections/SphericalProjection.cpp:66
+#: src/lib/marble/projections/SphericalProjection.cpp:62
 msgctxt "QObject|"
 msgid ""
 "<p><b>Orthographic Projection</b> (\"orthogonal\")</p><p>Applications: A "
@@ -11305,12 +11305,12 @@ msgstr ""
 "<p><b>正交投影</b> (正交)</p><p>用途：一种透视投影法，用于从外太空显示地球仪"
 "半球。</p>"
 
-#: src/lib/marble/projections/StereographicProjection.cpp:59
+#: src/lib/marble/projections/StereographicProjection.cpp:55
 msgctxt "QObject|"
 msgid "Stereographic"
 msgstr "球极平面投影"
 
-#: src/lib/marble/projections/StereographicProjection.cpp:64
+#: src/lib/marble/projections/StereographicProjection.cpp:60
 msgctxt "QObject|"
 msgid ""
 "<p><b>Stereographic Projection</b> (\"orthogonal\")</p><p>Applications: Used "
@@ -11319,12 +11319,12 @@ msgstr ""
 "<p><b>球极平面投影</b> (正交)</p><p>用途：用于行星地图制图、地质学和全景摄"
 "影。</p>"
 
-#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:72
+#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:68
 msgctxt "QObject|"
 msgid "Vertical Perspective Projection"
 msgstr "垂直透视投影"
 
-#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:77
+#: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:73
 msgctxt "QObject|"
 msgid ""
 "<p><b>Vertical Perspective Projection</b> (\"orthogonal\")</p><p> Shows the "
@@ -14718,15 +14718,15 @@ msgctxt "PhotoConfigWidget|"
 msgid "Configure Photo Plugin"
 msgstr "配置照片插件"
 
-#: src/plugins/render/photo/PhotoConfigWidget.ui:42
-msgctxt "PhotoConfigWidget|"
-msgid "License"
-msgstr "许可证"
-
-#: src/plugins/render/photo/PhotoConfigWidget.ui:71
+#: src/plugins/render/photo/PhotoConfigWidget.ui:24
 msgctxt "PhotoConfigWidget|"
 msgid "Number of items on the screen"
 msgstr "屏幕上可显示的项目数"
+
+#: src/plugins/render/photo/PhotoConfigWidget.ui:49
+msgctxt "PhotoConfigWidget|"
+msgid "License"
+msgstr "许可证"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:62
 msgctxt "Marble::PhotoPlugin|"
@@ -17006,43 +17006,43 @@ msgctxt "Marble::LocalOsmSearchPlugin|"
 msgid "Searches for addresses and points of interest in offline maps."
 msgstr "搜索离线地图中的地址和名胜。"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:265
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:267
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:264
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:266
 msgctxt "QObject|"
 msgid "north"
 msgstr "北"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:269
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:268
 msgctxt "QObject|"
 msgid "north-west"
 msgstr "西北"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:271
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:270
 msgctxt "QObject|"
 msgid "west"
 msgstr "西"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:273
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:272
 msgctxt "QObject|"
 msgid "south-west"
 msgstr "西南"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:275
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:274
 msgctxt "QObject|"
 msgid "south"
 msgstr "南"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:277
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:276
 msgctxt "QObject|"
 msgid "south-east"
 msgstr "东南"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:279
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:278
 msgctxt "QObject|"
 msgid "east"
 msgstr "西"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:281
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:280
 msgctxt "QObject|"
 msgid "north-east"
 msgstr "东北"
@@ -17324,27 +17324,27 @@ msgctxt "Marble::MonavMapsModel|"
 msgid "Date"
 msgstr "日期"
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:219
+#: src/plugins/runner/monav/MonavPlugin.cpp:217
 msgctxt "Marble::MonavPlugin|"
 msgid "No offline maps installed yet."
 msgstr "尚未安装离线地图。"
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:222
+#: src/plugins/runner/monav/MonavPlugin.cpp:220
 msgctxt "Marble::MonavPlugin|"
 msgid "The monav routing daemon does not seem to be installed on your system."
 msgstr "Monav 路线规划守护进程尚未安装到在您的系统。"
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:235
+#: src/plugins/runner/monav/MonavPlugin.cpp:233
 msgctxt "Marble::MonavPlugin|"
 msgid "Monav Routing"
 msgstr "Monav 路线规划"
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:240
+#: src/plugins/runner/monav/MonavPlugin.cpp:238
 msgctxt "Marble::MonavPlugin|"
 msgid "Monav"
 msgstr "Monav"
 
-#: src/plugins/runner/monav/MonavPlugin.cpp:255
+#: src/plugins/runner/monav/MonavPlugin.cpp:253
 msgctxt "Marble::MonavPlugin|"
 msgid "Offline routing using the monav daemon"
 msgstr "使用 monav 守护进程进行离线路线规划"
