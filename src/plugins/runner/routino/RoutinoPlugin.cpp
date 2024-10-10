@@ -70,16 +70,16 @@ public:
         ui_configWidget->setupUi(this);
         QStringList transports;
         // TODO: read from profiles.xml
-        ui_configWidget->transport->addItem(tr("Pedestrian"), "foot");
-        ui_configWidget->transport->addItem(tr("Horse"), "horse");
-        ui_configWidget->transport->addItem(tr("Wheelchair"), "wheelchair");
-        ui_configWidget->transport->addItem(tr("Bicycle"), "bicycle");
-        ui_configWidget->transport->addItem(tr("Moped"), "moped");
-        ui_configWidget->transport->addItem(tr("Motorbike"), "motorbike");
-        ui_configWidget->transport->addItem(tr("Motorcar"), "motorcar");
-        ui_configWidget->transport->addItem(tr("Small lorry"), "goods");
-        ui_configWidget->transport->addItem(tr("Large lorry"), "hgv");
-        ui_configWidget->transport->addItem(tr("Public Service Vehicle"), "psv");
+        ui_configWidget->transport->addItem(tr("Pedestrian"), QStringLiteral("foot"));
+        ui_configWidget->transport->addItem(tr("Horse"), QStringLiteral("horse"));
+        ui_configWidget->transport->addItem(tr("Wheelchair"), QStringLiteral("wheelchair"));
+        ui_configWidget->transport->addItem(tr("Bicycle"), QStringLiteral("bicycle"));
+        ui_configWidget->transport->addItem(tr("Moped"), QStringLiteral("moped"));
+        ui_configWidget->transport->addItem(tr("Motorbike"), QStringLiteral("motorbike"));
+        ui_configWidget->transport->addItem(tr("Motorcar"), QStringLiteral("motorcar"));
+        ui_configWidget->transport->addItem(tr("Small lorry"), QStringLiteral("goods"));
+        ui_configWidget->transport->addItem(tr("Large lorry"), QStringLiteral("hgv"));
+        ui_configWidget->transport->addItem(tr("Public Service Vehicle"), QStringLiteral("psv"));
     }
     ~RoutinoConfigWidget() override
     {

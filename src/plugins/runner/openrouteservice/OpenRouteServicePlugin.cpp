@@ -70,15 +70,15 @@ public:
         ui_configWidget = new Ui::OpenRouteServiceConfigWidget;
         ui_configWidget->setupUi(this);
 
-        ui_configWidget->preference->addItem(tr("Car (recommended way)"), "Recommended");
-        ui_configWidget->preference->addItem(tr("Car (fastest way)"), "Fastest");
-        ui_configWidget->preference->addItem(tr("Car (shortest way)"), "Shortest");
-        ui_configWidget->preference->addItem(tr("Pedestrian (shortest way)"), "Pedestrian");
-        ui_configWidget->preference->addItem(tr("Bicycle (shortest track)"), "Bicycle");
-        ui_configWidget->preference->addItem(tr("Bicycle (Mountainbike)"), "BicycleMTB");
-        ui_configWidget->preference->addItem(tr("Bicycle (Racer)"), "BicycleRacer");
-        ui_configWidget->preference->addItem(tr("Bicycle (safest track)"), "BicycleSafety");
-        ui_configWidget->preference->addItem(tr("Bicycle (preferred Cycleway/-route)"), "BicycleTour");
+        ui_configWidget->preference->addItem(tr("Car (recommended way)"), QStringLiteral("Recommended"));
+        ui_configWidget->preference->addItem(tr("Car (fastest way)"), QStringLiteral("Fastest"));
+        ui_configWidget->preference->addItem(tr("Car (shortest way)"), QStringLiteral("Shortest"));
+        ui_configWidget->preference->addItem(tr("Pedestrian (shortest way)"), QStringLiteral("Pedestrian"));
+        ui_configWidget->preference->addItem(tr("Bicycle (shortest track)"), QStringLiteral("Bicycle"));
+        ui_configWidget->preference->addItem(tr("Bicycle (Mountainbike)"), QStringLiteral("BicycleMTB"));
+        ui_configWidget->preference->addItem(tr("Bicycle (Racer)"), QStringLiteral("BicycleRacer"));
+        ui_configWidget->preference->addItem(tr("Bicycle (safest track)"), QStringLiteral("BicycleSafety"));
+        ui_configWidget->preference->addItem(tr("Bicycle (preferred Cycleway/-route)"), QStringLiteral("BicycleTour"));
     }
 
     void loadSettings(const QHash<QString, QVariant> &settings_) override
@@ -106,7 +106,7 @@ public:
     }
 
 private:
-    Ui::OpenRouteServiceConfigWidget *ui_configWidget;
+    Ui::OpenRouteServiceConfigWidget *ui_configWidget = nullptr;
 };
 
 RoutingRunnerPlugin::ConfigWidget *OpenRouteServicePlugin::configWidget()
