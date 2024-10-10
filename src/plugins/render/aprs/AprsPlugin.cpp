@@ -237,8 +237,8 @@ QDialog *AprsPlugin::configDialog()
         ui_configWidget = new Ui::AprsConfigWidget;
         ui_configWidget->setupUi(m_configDialog);
         readSettings();
-        connect(ui_configWidget->m_buttonBox, SIGNAL(accepted()), SLOT(writeSettings()));
-        connect(ui_configWidget->m_buttonBox, SIGNAL(rejected()), SLOT(readSettings()));
+        connect(ui_configWidget->m_buttonBox, &QDialogButtonBox::accepted, this, &AprsPlugin::writeSettings);
+        connect(ui_configWidget->m_buttonBox, &QDialogButtonBox::rejected, this, &AprsPlugin::readSettings);
         //       QPushButton *applyButton =
         //             ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
         //         connect( applyButton, SIGNAL(clicked()),

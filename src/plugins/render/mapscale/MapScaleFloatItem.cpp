@@ -331,11 +331,11 @@ QDialog *MapScaleFloatItem::configDialog()
 
         readSettings();
 
-        connect(ui_configWidget->m_buttonBox, SIGNAL(accepted()), SLOT(writeSettings()));
-        connect(ui_configWidget->m_buttonBox, SIGNAL(rejected()), SLOT(readSettings()));
+        connect(ui_configWidget->m_buttonBox, &QDialogButtonBox::accepted, this, &MapScaleFloatItem::writeSettings);
+        connect(ui_configWidget->m_buttonBox, &QDialogButtonBox::rejected, this, &MapScaleFloatItem::readSettings);
 
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button(QDialogButtonBox::Apply);
-        connect(applyButton, SIGNAL(clicked()), this, SLOT(writeSettings()));
+        connect(applyButton, &QAbstractButton::clicked, this, &MapScaleFloatItem::writeSettings);
     }
     return m_configDialog;
 }

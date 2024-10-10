@@ -145,7 +145,7 @@ void License::initialize()
     setPadding(0);
 
     updateLicenseText();
-    connect(marbleModel(), SIGNAL(themeChanged(QString)), this, SLOT(updateLicenseText()));
+    connect(marbleModel(), &MarbleModel::themeChanged, this, &License::updateLicenseText);
 }
 
 void License::updateLicenseText()
@@ -233,7 +233,6 @@ void License::contextMenuEvent(QWidget *w, QContextMenuEvent *e)
         m_contextMenu->addAction(tr("&Show Details"), this, SLOT(showAboutDialog()));
     }
 
-    Q_ASSERT(m_contextMenu);
     m_contextMenu->exec(w->mapToGlobal(e->pos()));
 }
 

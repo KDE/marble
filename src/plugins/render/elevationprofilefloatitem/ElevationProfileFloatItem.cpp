@@ -379,8 +379,8 @@ QDialog *ElevationProfileFloatItem::configDialog() // FIXME TODO Make a config d
 
         readSettings();
 
-        connect(ui_configWidget->m_buttonBox, SIGNAL(accepted()), SLOT(writeSettings()));
-        connect(ui_configWidget->m_buttonBox, SIGNAL(rejected()), SLOT(readSettings()));
+        connect(ui_configWidget->m_buttonBox, &QDialogButtonBox::accepted, this, &ElevationProfileFloatItem::writeSettings);
+        connect(ui_configWidget->m_buttonBox, &QDialogButtonBox::rejected, this, &ElevationProfileFloatItem::readSettings);
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button(QDialogButtonBox::Apply);
         connect(applyButton, SIGNAL(clicked()), this, SLOT(writeSettings()));
     }
