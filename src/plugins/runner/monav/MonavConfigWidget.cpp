@@ -391,7 +391,7 @@ void MonavConfigWidget::retrieveMapList(QNetworkReply *reply)
         if (!redirectionAttribute.isNull()) {
             d->m_networkAccessManager.get(QNetworkRequest(redirectionAttribute.toUrl()));
         } else {
-            disconnect(&d->m_networkAccessManager, SIGNAL(finished(QNetworkReply *)), this, SLOT(retrieveMapList(QNetworkReply *)));
+            disconnect(&d->m_networkAccessManager, &QNetworkAccessManager::finished, this, &MonavConfigWidget::retrieveMapList);
             d->parseNewStuff(reply->readAll());
             updateComboBoxes();
         }
@@ -405,9 +405,9 @@ void MonavConfigWidget::retrieveData()
         QVariant const redirectionAttribute = d->m_currentReply->attribute(QNetworkRequest::RedirectionTargetAttribute);
         if (!redirectionAttribute.isNull()) {
             d->m_currentReply = d->m_networkAccessManager.get(QNetworkRequest(redirectionAttribute.toUrl()));
-            connect(d->m_currentReply, SIGNAL(readyRead()), this, SLOT(retrieveData()));
-            connect(d->m_currentReply, SIGNAL(readChannelFinished()), this, SLOT(retrieveData()));
-            connect(d->m_currentReply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(updateProgressBar(qint64, qint64)));
+            connect(d->m_currentReply, &QIODevice::readyRead, this, &MonavConfigWidget::retrieveData);
+            connect(d->m_currentReply, &QIODevice::readChannelFinished, this, &MonavConfigWidget::retrieveData);
+            connect(d->m_currentReply, &QNetworkReply::downloadProgress, this, &MonavConfigWidget::updateProgressBar);
         } else {
             d->m_currentFile.write(d->m_currentReply->readAll());
             if (d->m_currentReply->isFinished()) {
