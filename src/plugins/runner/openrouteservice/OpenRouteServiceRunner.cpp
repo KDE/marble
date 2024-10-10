@@ -187,7 +187,7 @@ GeoDataDocument *OpenRouteServiceRunner::parse(const QByteArray &content) const
     routePlacemark->setName(QStringLiteral("Route"));
     QTime time;
     QDomNodeList summary = root.elementsByTagName(QStringLiteral("xls:RouteSummary"));
-    if (summary.size() > 0) {
+    if (!summary.isEmpty()) {
         QDomNodeList timeNodeList = summary.item(0).toElement().elementsByTagName(QStringLiteral("xls:TotalTime"));
         if (timeNodeList.size() == 1) {
             QRegExp regexp = QRegExp(R"(^P(?:(\d+)D)?T(?:(\d+)H)?(?:(\d+)M)?(\d+)S)");

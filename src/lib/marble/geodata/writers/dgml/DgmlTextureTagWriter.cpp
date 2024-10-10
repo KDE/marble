@@ -50,7 +50,7 @@ bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter &writer) const
     }
     writer.writeEndElement();
 
-    if (texture->downloadUrls().size() > 0) {
+    if (!texture->downloadUrls().isEmpty()) {
         for (int i = 0; i < texture->downloadUrls().size(); ++i) {
             QString protocol = texture->downloadUrls().at(i).toString().left(texture->downloadUrls().at(i).toString().indexOf(QLatin1Char(':')));
             QString host = QString(texture->downloadUrls().at(i).host());

@@ -183,7 +183,7 @@ void ElevationProfileFloatItem::paintContent(QPainter *painter)
     painter->setRenderHint(QPainter::Antialiasing, true);
     painter->setFont(font());
 
-    if (!(m_activeDataSource->isDataAvailable() && m_eleData.size() > 0)) {
+    if (!(m_activeDataSource->isDataAvailable() && !m_eleData.isEmpty())) {
         painter->setPen(QColor(Qt::black));
         QString text = tr("Create a route or load a track from file to view its elevation profile.");
         painter->drawText(contentRect().toRect(), Qt::TextWordWrap | Qt::AlignCenter, text);

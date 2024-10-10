@@ -509,7 +509,7 @@ void EclipsesItem::calculate()
         sunBoundary = *sunBoundaries.last();
         sunBoundaries.pop_back();
 
-        while (sunBoundaries.size() > 0) {
+        while (!sunBoundaries.isEmpty()) {
             int closestSection = -1;
 
             // TODO: Now that MableMath is not public anymore we need a

@@ -31,7 +31,7 @@ bool KmlPolygonTagWriter::write(const GeoNode *node, GeoWriter &writer) const
     writer.writeEndElement();
 
     const QList<GeoDataLinearRing> &linearRings = polygon->innerBoundaries();
-    if (linearRings.size() > 0) {
+    if (!linearRings.isEmpty()) {
         writer.writeStartElement("innerBoundaryIs");
         for (int i = 0; i < linearRings.size(); ++i) {
             const GeoDataLinearRing &ring = linearRings[i];

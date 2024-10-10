@@ -261,7 +261,7 @@ void SatellitesConfigDialog::openDataSource()
     if (!filename.isNull()) {
         QString url = QUrl::fromLocalFile(filename).toString();
 
-        if (m_configWidget->listDataSources->findItems(url, Qt::MatchFixedString).size() > 0) {
+        if (!m_configWidget->listDataSources->findItems(url, Qt::MatchFixedString).isEmpty()) {
             mDebug() << "Satellite data source exists:" << url;
             return; // already in list
         }
