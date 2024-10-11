@@ -149,6 +149,7 @@
       <caption xml:lang="tr">Doğrudan özgün Behaim küresinden alınan sayısal görüntüleme.</caption>
       <caption xml:lang="uk">Цифрові знімки зроблено безпосередньо з оригінального глобуса Бегайма.</caption>
       <caption xml:lang="x-test">xxDigital imagery taken directly from the original Behaim globe.xx</caption>
+      <caption xml:lang="zh-CN">直接拍摄贝海姆地球仪的数字影像。</caption>
     </screenshot>
     <screenshot>
       <image>https://cdn.kde.org/screenshots/marble/marble-behaim1.png</image>
@@ -168,6 +169,7 @@
       <caption xml:lang="tr">1853 yılında Friedrich Wilhelm Ghillany tarafından oluşturulmuş (kaba) bir faksimile.</caption>
       <caption xml:lang="uk">(Грубе) факсиміле, яке було створено Фрідріхом Вільгельмом Гіланьї у 1853 році.</caption>
       <caption xml:lang="x-test">xxA (rough) facsimile created by Friedrich Wilhelm Ghillany in 1853.xx</caption>
+      <caption xml:lang="zh-CN">弗里德里希·威廉·吉兰尼 (Friedrich Wilhelm Ghillany) 于 1853 年制作的 (粗略的) 复制品。</caption>
     </screenshot>
     <screenshot>
       <image>https://cdn.kde.org/screenshots/marble/marble-behaim2.png</image>
@@ -187,6 +189,7 @@
       <caption xml:lang="tr">1908 yılında Ernest George Ravenstein tarafından oluşturulmuş (kaba) bir faksimile.</caption>
       <caption xml:lang="uk">(Грубе) факсиміле, яке було створено Ернестом Георгом Равенштайном у 1908 році.</caption>
       <caption xml:lang="x-test">xxA (rough) facsimile created by Ernest George Ravenstein in 1908.xx</caption>
+      <caption xml:lang="zh-CN">埃内斯特·乔治·拉文施泰因 (Ernest George Ravenstein) 于1908年制作的 (粗略的) 复制品。</caption>
     </screenshot>
   </screenshots>
 </component>
