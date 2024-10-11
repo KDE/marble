@@ -74,8 +74,8 @@ ElevationProfileFloatItem::ElevationProfileFloatItem(const MarbleModel *marbleMo
     m_markerDocument.append(m_markerPlacemark);
 
     m_contextMenu = new ElevationProfileContextMenu(this);
-    connect(&m_trackDataSource, SIGNAL(sourceCountChanged()), m_contextMenu, SLOT(updateContextMenuEntries()));
-    connect(&m_routeDataSource, SIGNAL(sourceCountChanged()), m_contextMenu, SLOT(updateContextMenuEntries()));
+    connect(&m_trackDataSource, &ElevationProfileDataSource::sourceCountChanged, m_contextMenu, &ElevationProfileContextMenu::updateContextMenuEntries);
+    connect(&m_routeDataSource, &ElevationProfileDataSource::sourceCountChanged, m_contextMenu, &ElevationProfileContextMenu::updateContextMenuEntries);
 }
 
 ElevationProfileFloatItem::~ElevationProfileFloatItem() = default;

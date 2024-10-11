@@ -45,13 +45,13 @@ void PostalCodeModel::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 
     double const lon = box.center().longitude(GeoDataCoordinates::Degree);
     double const radius = qMin<double>(30.0, box.height() * marbleModel()->planet()->radius() * METER2KM);
 
-    QUrl geonamesUrl("http://api.geonames.org/findNearbyPostalCodesJSON");
+    QUrl geonamesUrl(QStringLiteral("http://api.geonames.org/findNearbyPostalCodesJSON"));
     QUrlQuery urlQuery;
-    urlQuery.addQueryItem("lat", QString::number(lat));
-    urlQuery.addQueryItem("lng", QString::number(lon));
-    urlQuery.addQueryItem("radius", QString::number(radius));
-    urlQuery.addQueryItem("maxRows", QString::number(number));
-    urlQuery.addQueryItem("username", "marble");
+    urlQuery.addQueryItem(QStringLiteral("lat"), QString::number(lat));
+    urlQuery.addQueryItem(QStringLiteral("lng"), QString::number(lon));
+    urlQuery.addQueryItem(QStringLiteral("radius"), QString::number(radius));
+    urlQuery.addQueryItem(QStringLiteral("maxRows"), QString::number(number));
+    urlQuery.addQueryItem(QStringLiteral("username"), QStringLiteral("marble"));
     geonamesUrl.setQuery(urlQuery);
 
     downloadDescriptionFile(QUrl(geonamesUrl));

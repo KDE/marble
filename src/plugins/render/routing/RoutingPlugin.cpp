@@ -44,17 +44,17 @@ int const thresholdDistance = 1000; // in meter
 class RoutingPluginPrivate
 {
 public:
-    MarbleWidget *m_marbleWidget;
-    WidgetGraphicsItem *m_widgetItem;
-    RoutingModel *m_routingModel;
+    MarbleWidget *m_marbleWidget = nullptr;
+    WidgetGraphicsItem *m_widgetItem = nullptr;
+    RoutingModel *m_routingModel = nullptr;
     Ui::RoutingPlugin m_widget;
     bool m_nearNextInstruction;
     bool m_guidanceModeEnabled;
-    AudioOutput *m_audio;
-    QDialog *m_configDialog;
+    AudioOutput *m_audio = nullptr;
+    QDialog *m_configDialog = nullptr;
     Ui::RoutingConfigDialog m_configUi;
     bool m_routeCompleted;
-    SpeakersModel *m_speakersModel;
+    SpeakersModel *m_speakersModel = nullptr;
 
     RoutingPluginPrivate(RoutingPlugin *parent);
 
@@ -89,7 +89,7 @@ public:
     qreal remainingDistance() const;
 
 private:
-    RoutingPlugin *m_parent;
+    RoutingPlugin *m_parent = nullptr;
 };
 
 RoutingPluginPrivate::RoutingPluginPrivate(RoutingPlugin *parent)

@@ -21,9 +21,9 @@ namespace Marble
 class AudioOutputPrivate
 {
 public:
-    AudioOutput *q;
+    AudioOutput *const q;
 
-    Phonon::MediaObject *m_output;
+    Phonon::MediaObject *m_output = nullptr;
 
     bool m_muted;
 
@@ -42,7 +42,6 @@ public:
 
 AudioOutputPrivate::AudioOutputPrivate(AudioOutput *parent)
     : q(parent)
-    , m_output(nullptr)
     , m_muted(false)
 {
     QObject::connect(&m_voiceNavigation, SIGNAL(instructionChanged()), q, SLOT(playInstructions()));

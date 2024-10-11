@@ -89,14 +89,14 @@ private Q_SLOTS:
 
 private:
     /** MarbleWidget this float item is installed as event filter for */
-    MarbleWidget *m_marbleWidget;
+    MarbleWidget *m_marbleWidget = nullptr;
 
     /** The GraphicsItem presenting the widgets. NavigationFloatItem doesn't take direct ownership
         of this */
-    WidgetGraphicsItem *m_widgetItem;
+    WidgetGraphicsItem *m_widgetItem = nullptr;
 
     /** Navigation controls */
-    Ui::Navigation *m_navigationWidget;
+    Ui::Navigation *m_navigationWidget = nullptr;
 
     /** Used Profile */
     MarbleGlobal::Profiles m_profiles;
@@ -107,9 +107,9 @@ private:
     int m_maxZoom;
     int m_minZoom;
 
-    QMenu *m_contextMenu;
-    QAction *m_activateCurrentPositionButtonAction;
-    QAction *m_activateHomeButtonAction;
+    QMenu *m_contextMenu = nullptr;
+    QAction *m_activateCurrentPositionButtonAction = nullptr;
+    QAction *m_activateHomeButtonAction = nullptr;
 
     bool m_showHomeButton;
 };

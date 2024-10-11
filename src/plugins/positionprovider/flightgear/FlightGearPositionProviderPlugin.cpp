@@ -15,12 +15,7 @@ using namespace Marble;
 
 using namespace std;
 
-FlightGearPositionProviderPlugin::FlightGearPositionProviderPlugin()
-    : m_socket(nullptr)
-    , m_speed(0.0)
-    , m_track(0.0)
-{
-}
+FlightGearPositionProviderPlugin::FlightGearPositionProviderPlugin() = default;
 
 FlightGearPositionProviderPlugin::~FlightGearPositionProviderPlugin()
 {

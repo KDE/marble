@@ -23,7 +23,7 @@ public:
     QtPositioningPositionProviderPluginPrivate();
     ~QtPositioningPositionProviderPluginPrivate();
 
-    QGeoPositionInfoSource *m_source;
+    QGeoPositionInfoSource *m_source = nullptr;
     PositionProviderStatus m_status;
     QTimer *const m_updateChecker;
 

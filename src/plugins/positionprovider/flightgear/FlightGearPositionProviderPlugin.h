@@ -53,12 +53,12 @@ private Q_SLOTS:
 private:
     void parseNmeaSentence(const QString &sentence);
     static double parsePosition(const QString &value, bool isNegative);
-    QUdpSocket *m_socket;
+    QUdpSocket *m_socket = nullptr;
     PositionProviderStatus m_status;
     GeoDataCoordinates m_position;
     GeoDataAccuracy m_accuracy;
-    qreal m_speed;
-    qreal m_track;
+    qreal m_speed = 0.0;
+    qreal m_track = 0.0;
     QDateTime m_timestamp;
 };
 

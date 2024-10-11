@@ -117,7 +117,7 @@ void ProgressFloatItem::initialize()
 
     // Calculate font size
     QFont myFont = font();
-    const QString text = "100%";
+    const QString text = QStringLiteral("100%");
     int fontSize = myFont.pointSize();
     while (QFontMetrics(myFont).boundingRect(text).width() < contentRect().width() - 2) {
         ++fontSize;

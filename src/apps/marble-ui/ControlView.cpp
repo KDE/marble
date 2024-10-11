@@ -588,7 +588,7 @@ QList<QAction *> ControlView::setupDockWidgets(QMainWindow *mainWindow)
     }
 
     auto routingDock = new QDockWidget(tr("Routing"), mainWindow);
-    routingDock->setObjectName("routingDock");
+    routingDock->setObjectName(QStringLiteral("routingDock"));
     routingDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
     auto routingWidget = new RoutingWidget(marbleWidget(), mainWindow);
     routingWidget->setRouteSyncManager(cloudSyncManager()->routeSyncManager());
@@ -596,7 +596,7 @@ QList<QAction *> ControlView::setupDockWidgets(QMainWindow *mainWindow)
     mainWindow->addDockWidget(Qt::LeftDockWidgetArea, routingDock);
 
     auto locationDock = new QDockWidget(tr("Location"), this);
-    locationDock->setObjectName("locationDock");
+    locationDock->setObjectName(QStringLiteral("locationDock"));
     locationDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
     m_locationWidget = new CurrentLocationWidget(this);
     m_locationWidget->setMarbleWidget(marbleWidget());
@@ -604,7 +604,7 @@ QList<QAction *> ControlView::setupDockWidgets(QMainWindow *mainWindow)
     mainWindow->addDockWidget(Qt::LeftDockWidgetArea, locationDock);
 
     m_searchDock = new QDockWidget(tr("Search"), this);
-    m_searchDock->setObjectName("searchDock");
+    m_searchDock->setObjectName(QStringLiteral("searchDock"));
     m_searchDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
     auto searchWidget = new SearchWidget(this);
     searchWidget->setMarbleWidget(marbleWidget());
@@ -621,7 +621,7 @@ QList<QAction *> ControlView::setupDockWidgets(QMainWindow *mainWindow)
     connect(searchShortcut, SIGNAL(activated()), this, SLOT(showSearch()));
 
     auto mapViewDock = new QDockWidget(tr("Map View"), this);
-    mapViewDock->setObjectName("mapViewDock");
+    mapViewDock->setObjectName(QStringLiteral("mapViewDock"));
     mapViewDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
     auto mapViewWidget = new MapViewWidget(this);
     mapViewWidget->setMarbleWidget(marbleWidget(), m_mapThemeManager);
@@ -631,7 +631,7 @@ QList<QAction *> ControlView::setupDockWidgets(QMainWindow *mainWindow)
     mainWindow->addDockWidget(Qt::LeftDockWidgetArea, mapViewDock);
 
     auto fileViewDock = new QDockWidget(tr("Files"), this);
-    fileViewDock->setObjectName("fileViewDock");
+    fileViewDock->setObjectName(QStringLiteral("fileViewDock"));
     fileViewDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
     auto fileViewWidget = new FileViewWidget(this);
     fileViewWidget->setMarbleWidget(marbleWidget());
@@ -640,7 +640,7 @@ QList<QAction *> ControlView::setupDockWidgets(QMainWindow *mainWindow)
     fileViewDock->hide();
 
     auto tourDock = new QDockWidget(tr("Tour"), this);
-    tourDock->setObjectName("tourDock");
+    tourDock->setObjectName(QStringLiteral("tourDock"));
     tourDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
     m_tourWidget = new TourWidget(this);
     m_tourWidget->setMarbleWidget(marbleWidget());
@@ -653,7 +653,7 @@ QList<QAction *> ControlView::setupDockWidgets(QMainWindow *mainWindow)
     mapViewDock->raise();
 
     m_annotationDock = new QDockWidget(QObject::tr("Edit Maps"));
-    m_annotationDock->setObjectName("annotateDock");
+    m_annotationDock->setObjectName(QStringLiteral("annotateDock"));
     m_annotationDock->hide();
     m_annotationDock->toggleViewAction()->setVisible(false);
 

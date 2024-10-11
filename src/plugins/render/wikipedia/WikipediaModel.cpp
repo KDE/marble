@@ -29,7 +29,7 @@
 using namespace Marble;
 
 WikipediaModel::WikipediaModel(const MarbleModel *marbleModel, QObject *parent)
-    : AbstractDataPluginModel("wikipedia", marbleModel, parent)
+    : AbstractDataPluginModel(QStringLiteral("wikipedia"), marbleModel, parent)
     , m_marbleWidget(nullptr)
     , m_wikipediaIcon(MarbleDirs::path(QStringLiteral("svg/wikipedia_shadow.svg")))
     , m_showThumbnail(true)
@@ -53,13 +53,13 @@ void WikipediaModel::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 n
 
     QUrl geonamesUrl("http://api.geonames.org/wikipediaBoundingBox");
     QUrlQuery urlQuery;
-    urlQuery.addQueryItem("north", QString::number(box.north(GeoDataCoordinates::Degree)));
-    urlQuery.addQueryItem("south", QString::number(box.south(GeoDataCoordinates::Degree)));
-    urlQuery.addQueryItem("east", QString::number(box.east(GeoDataCoordinates::Degree)));
-    urlQuery.addQueryItem("west", QString::number(box.west(GeoDataCoordinates::Degree)));
-    urlQuery.addQueryItem("maxRows", QString::number(number));
-    urlQuery.addQueryItem("lang", m_languageCode);
-    urlQuery.addQueryItem("username", "marble");
+    urlQuery.addQueryItem(QStringLiteral("north"), QString::number(box.north(GeoDataCoordinates::Degree)));
+    urlQuery.addQueryItem(QStringLiteral("south"), QString::number(box.south(GeoDataCoordinates::Degree)));
+    urlQuery.addQueryItem(QStringLiteral("east"), QString::number(box.east(GeoDataCoordinates::Degree)));
+    urlQuery.addQueryItem(QStringLiteral("west"), QString::number(box.west(GeoDataCoordinates::Degree)));
+    urlQuery.addQueryItem(QStringLiteral("maxRows"), QString::number(number));
+    urlQuery.addQueryItem(QStringLiteral("lang"), m_languageCode);
+    urlQuery.addQueryItem(QStringLiteral("username"), QStringLiteral("marble"));
     geonamesUrl.setQuery(urlQuery);
 
     downloadDescriptionFile(geonamesUrl);

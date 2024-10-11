@@ -176,9 +176,9 @@ bool NavigationFloatItem::eventFilter(QObject *object, QEvent *e)
         connect(m_navigationWidget->zoomOutButton, SIGNAL(repaintNeeded()), SIGNAL(repaintNeeded()));
         connect(m_navigationWidget->zoomOutButton, SIGNAL(clicked()), m_marbleWidget, SLOT(zoomOut()));
 
-        connect(m_marbleWidget, SIGNAL(zoomChanged(int)), SLOT(updateButtons(int)));
+        connect(m_marbleWidget, &MarbleWidget::zoomChanged, this, &NavigationFloatItem::updateButtons);
         updateButtons(m_marbleWidget->zoom());
-        connect(m_marbleWidget, SIGNAL(themeChanged(QString)), this, SLOT(selectTheme(QString)));
+        connect(m_marbleWidget, &MarbleWidget::themeChanged, this, &NavigationFloatItem::selectTheme);
     }
 
     return AbstractFloatItem::eventFilter(object, e);

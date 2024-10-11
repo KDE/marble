@@ -105,14 +105,14 @@ private:
 
     QPen m_pen;
 
-    QAction *m_addMeasurePointAction;
-    QAction *m_removeLastMeasurePointAction;
-    QAction *m_removeMeasurePointsAction;
-    QAction *m_separator;
+    QAction *m_addMeasurePointAction = nullptr;
+    QAction *m_removeLastMeasurePointAction = nullptr;
+    QAction *m_removeMeasurePointsAction = nullptr;
+    QAction *m_separator = nullptr;
 
-    MarbleWidget *m_marbleWidget;
+    MarbleWidget *m_marbleWidget = nullptr;
 
-    MeasureConfigDialog *m_configDialog;
+    MeasureConfigDialog *m_configDialog = nullptr;
 
     bool m_showDistanceLabel;
     bool m_showBearingLabel;

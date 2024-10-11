@@ -171,7 +171,7 @@ void GeonamesParser::readUrl(WikipediaItem *item)
             // lacks API for that unfortunately
             QString url = text().toString();
             if (!url.contains(QLatin1StringView("m.wikipedia.org"))) {
-                url.replace("wikipedia.org", "m.wikipedia.org");
+                url.replace(QStringLiteral("wikipedia.org"), QStringLiteral("m.wikipedia.org"));
             }
             item->setUrl(QUrl::fromEncoded(url.toUtf8()));
         }

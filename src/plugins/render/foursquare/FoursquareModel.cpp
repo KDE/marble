@@ -34,8 +34,8 @@ void FoursquareModel::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 
         return;
     }
 
-    QString clientId = "YPRWSYFW1RVL4PJQ2XS5G14RTOGTHOKZVHC1EP5KCCCYQPZF";
-    QString clientSecret = "5L2JDCAYQCEJWY5FNDU4A1RWATE4E5FIIXXRM41YBTFSERUH";
+    QString clientId = QStringLiteral("YPRWSYFW1RVL4PJQ2XS5G14RTOGTHOKZVHC1EP5KCCCYQPZF");
+    QString clientSecret = QStringLiteral("5L2JDCAYQCEJWY5FNDU4A1RWATE4E5FIIXXRM41YBTFSERUH");
 
     QString apiUrl("https://api.foursquare.com/v2/venues/search");
     qreal const distanceLon = marbleModel()->planetRadius() * distanceSphere(box.west(), box.north(), box.east(), box.north());

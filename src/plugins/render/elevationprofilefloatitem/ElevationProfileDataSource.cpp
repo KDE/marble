@@ -59,8 +59,8 @@ ElevationProfileTrackDataSource::ElevationProfileTrackDataSource(const GeoDataTr
     , m_currentSourceIndex(-1)
 {
     if (treeModel) {
-        connect(treeModel, SIGNAL(added(GeoDataObject *)), SLOT(handleObjectAdded(GeoDataObject *)));
-        connect(treeModel, SIGNAL(removed(GeoDataObject *)), SLOT(handleObjectRemoved(GeoDataObject *)));
+        connect(treeModel, &GeoDataTreeModel::added, this, &ElevationProfileTrackDataSource::handleObjectAdded);
+        connect(treeModel, &GeoDataTreeModel::removed, this, &ElevationProfileTrackDataSource::handleObjectRemoved);
     }
 }
 

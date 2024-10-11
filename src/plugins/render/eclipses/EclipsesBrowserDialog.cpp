@@ -89,10 +89,7 @@ void EclipsesBrowserDialog::initialize()
     connect(m_browserWidget->buttonShow, &QAbstractButton::clicked, this, &EclipsesBrowserDialog::accept);
     connect(m_browserWidget->buttonClose, &QAbstractButton::clicked, this, &QDialog::reject);
     connect(m_browserWidget->spinBoxYear, &QSpinBox::valueChanged, this, &EclipsesBrowserDialog::updateEclipsesForYear);
-    connect(m_browserWidget->treeView->selectionModel(),
-            SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
-            this,
-            SLOT(updateButtonStates()));
+    connect(m_browserWidget->treeView->selectionModel(), &QItemSelectionModel::selectionChanged, this, &EclipsesBrowserDialog::updateButtonStates);
     connect(m_browserWidget->buttonSettings, &QAbstractButton::clicked, this, &EclipsesBrowserDialog::buttonSettingsClicked);
 
     setYear(m_marbleModel->clock()->dateTime().date().year());

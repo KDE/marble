@@ -100,9 +100,9 @@ private:
 
     bool m_showRatioScale;
 
-    QMenu *m_contextMenu;
+    QMenu *m_contextMenu = nullptr;
 
-    QAction *m_minimizeAction;
+    QAction *m_minimizeAction = nullptr;
     bool m_minimized;
     int m_widthScaleFactor;
 };
