@@ -13992,27 +13992,27 @@ msgctxt "ElevationProfileConfigWidget|"
 msgid "Zoom to viewport"
 msgstr "Sovita näkymään"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:32
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:29
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Configure..."
 msgstr "&Asetukset…"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:38
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:35
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Zoom to viewport"
 msgstr "S&ovita näkymään"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:68
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:65
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Route"
 msgstr "Reitti"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:80
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:77
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Track: "
 msgstr "Kappale: "
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:93
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:90
 #, fuzzy
 #| msgid ""
 #| "Create a route or load a track from file to view its elevation profile."

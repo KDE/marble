@@ -15868,35 +15868,35 @@ msgctxt "ElevationProfileConfigWidget|"
 msgid "Zoom to viewport"
 msgstr "ពង្រីក​ទៅ viewport"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:32
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:29
 #, fuzzy
 #| msgid "&Configure..."
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Configure..."
 msgstr "កំណត់​រចនាសម្ព័ន្ធ..."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:38
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:35
 #, fuzzy
 #| msgid "&Zoom to viewport"
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Zoom to viewport"
 msgstr "ពង្រីក​ទៅ viewport"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:68
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:65
 #, fuzzy
 #| msgid "Open Route"
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Route"
 msgstr "បើក​ផ្លូវ"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:80
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:77
 #, fuzzy
 #| msgid "Tracking"
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Track: "
 msgstr "តាម​ដាន"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:93
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:90
 #, fuzzy
 #| msgid "Create a route to view its elevation profile."
 msgctxt "Marble::ElevationProfileContextMenu|"

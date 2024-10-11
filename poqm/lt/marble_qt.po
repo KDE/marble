@@ -14690,29 +14690,29 @@ msgctxt "ElevationProfileConfigWidget|"
 msgid "Zoom to viewport"
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:32
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:29
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Configure..."
 msgstr "&Konfigūruoti..."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:38
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:35
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Zoom to viewport"
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:68
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:65
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Route"
 msgstr "Maršrutas"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:80
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:77
 #, fuzzy
 #| msgid "Tracking"
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Track: "
 msgstr "Takelis"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:93
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:90
 #, fuzzy
 #| msgid "Calculate a route to get directions."
 msgctxt "Marble::ElevationProfileContextMenu|"

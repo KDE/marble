@@ -14603,27 +14603,27 @@ msgctxt "ElevationProfileConfigWidget|"
 msgid "Zoom to viewport"
 msgstr "縮放到檢視埠"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:32
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:29
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Configure..."
 msgstr "設定(&C)..."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:38
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:35
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Zoom to viewport"
 msgstr "縮放到檢視埠(&Z)"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:68
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:65
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Route"
 msgstr "路徑"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:80
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:77
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Track: "
 msgstr "追蹤："
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:93
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:90
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr "建立路徑或從檔案載入追蹤以檢視它的高度設定檔。"

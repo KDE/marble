@@ -14230,30 +14230,30 @@ msgctxt "ElevationProfileConfigWidget|"
 msgid "Zoom to viewport"
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:32
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:29
 #, fuzzy
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Configure..."
 msgstr "הגדרת פקד השליטה על השמש"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:38
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:35
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Zoom to viewport"
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:68
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:65
 #, fuzzy
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Route"
 msgstr "ייצא מפה"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:80
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:77
 #, fuzzy
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Track: "
 msgstr "עקוב אחר GPS"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:93
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:90
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""

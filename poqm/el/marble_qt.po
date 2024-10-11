@@ -14467,31 +14467,31 @@ msgctxt "ElevationProfileConfigWidget|"
 msgid "Zoom to viewport"
 msgstr "Εστίαση στην προβαλλόμενη περιοχή"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:32
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:29
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Configure..."
 msgstr "&Διαμόρφωση..."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:38
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:35
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Zoom to viewport"
 msgstr "&Εστίαση στην προβαλλόμενη περιοχή"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:68
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:65
 #, fuzzy
 #| msgid "Open Route"
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Route"
 msgstr "Άνοιγμα διαδρομής"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:80
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:77
 #, fuzzy
 #| msgid "Track Gps"
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Track: "
 msgstr "Ανίχνευση Gps"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:93
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:90
 #, fuzzy
 #| msgid "Create a route to view its elevation profile."
 msgctxt "Marble::ElevationProfileContextMenu|"

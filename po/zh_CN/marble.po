@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-trunk/messages/marble/marble.pot\n"
-"X-Crowdin-File-ID: 5050\n"
+"X-Crowdin-File: /kf6-trunk/messages/marble/marble.pot\n"
+"X-Crowdin-File-ID: 56056\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1227,6 +1227,3 @@ msgstr "主工具栏"
 #, kde-format
 msgid "Edit Toolbar"
 msgstr "编辑工具栏"
-
-#~ msgid "marble_part"
-#~ msgstr "marble_part"
