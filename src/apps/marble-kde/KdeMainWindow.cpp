@@ -51,14 +51,14 @@ MainWindow::MainWindow(const QString &marbleDataPath, QWidget *parent)
     QAction *allAction = panelActions.first();
     m_part->actionCollection()->setDefaultShortcut(allAction, allAction->shortcut());
     m_part->readTrackingSettings();
-    m_part->unplugActionList("panels_actionlist");
-    m_part->plugActionList("panels_actionlist", panelActions);
+    m_part->unplugActionList(QStringLiteral("panels_actionlist"));
+    m_part->plugActionList(QStringLiteral("panels_actionlist"), panelActions);
 
     // View size actions
     m_viewSizeActsGroup = ControlView::createViewSizeActionGroup(this);
     connect(m_viewSizeActsGroup, &QActionGroup::triggered, this, &MainWindow::changeViewSize);
 
-    m_part->plugActionList("viewSize_actionlist", m_viewSizeActsGroup->actions());
+    m_part->plugActionList(QStringLiteral("viewSize_actionlist"), m_viewSizeActsGroup->actions());
 
     // Creating the plugin menus
     m_part->createInfoBoxesMenu();

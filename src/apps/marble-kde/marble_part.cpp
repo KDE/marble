@@ -154,7 +154,7 @@ MarblePart::MarblePart(QWidget *parentWidget, QObject *parent, const KPluginMeta
 
     setupActions();
 
-    setXMLFile("marble_part.rc");
+    setXMLFile(QStringLiteral("marble_part.rc"));
 
     m_statusBarExtension = new KParts::StatusBarExtension(this);
     m_statusBarExtension->statusBar()->setUpdatesEnabled(false);
@@ -763,7 +763,7 @@ void MarblePart::setupActions()
 
     // Action: Show Sunshade options
     m_controlSunAction = new QAction(this);
-    actionCollection()->addAction("control_sun", m_controlSunAction);
+    actionCollection()->addAction(QStringLiteral("control_sun"), m_controlSunAction);
     m_controlSunAction->setText(i18nc("Action for sun control dialog", "S&un Control..."));
     connect(m_controlSunAction, &QAction::triggered, this, &MarblePart::controlSun);
 
@@ -797,7 +797,7 @@ void MarblePart::setupActions()
 
     // Toggle Action: Show Sun icon on the Sub-Solar Point
     m_setSubSolarPointIconVisible = new KToggleAction(i18n("Show sun icon on the Sub-Solar Point"), this);
-    actionCollection()->addAction("show_icon_on_subsolarpoint", m_setSubSolarPointIconVisible);
+    actionCollection()->addAction(QStringLiteral("show_icon_on_subsolarpoint"), m_setSubSolarPointIconVisible);
     m_setSubSolarPointIconVisible->setCheckedState(KGuiItem(i18n("Hide sun icon on the Sub-Solar Point")));
     m_setSubSolarPointIconVisible->setToolTip(i18n("Show sun icon on the sub-solar point"));
     connect(m_setSubSolarPointIconVisible, &QAction::triggered, this, &MarblePart::setSubSolarPointIconVisible);
@@ -826,7 +826,7 @@ void MarblePart::setupActions()
     connect(m_addBookmarkAction, &QAction::triggered, this, &MarblePart::openEditBookmarkDialog);
 
     m_toggleBookmarkDisplayAction = new QAction(this);
-    actionCollection()->addAction("show_bookmarks", m_toggleBookmarkDisplayAction);
+    actionCollection()->addAction(QStringLiteral("show_bookmarks"), m_toggleBookmarkDisplayAction);
     m_toggleBookmarkDisplayAction->setText(i18nc("Show Bookmarks", "Show &Bookmarks"));
     m_toggleBookmarkDisplayAction->setStatusTip(i18n("Show or hide bookmarks in the map"));
     m_toggleBookmarkDisplayAction->setCheckable(true);
@@ -840,7 +840,7 @@ void MarblePart::setupActions()
     connect(m_setHomeAction, &QAction::triggered, this, &MarblePart::setHome);
 
     m_manageBookmarksAction = new QAction(this);
-    actionCollection()->addAction("manage_bookmarks", m_manageBookmarksAction);
+    actionCollection()->addAction(QStringLiteral("manage_bookmarks"), m_manageBookmarksAction);
     m_manageBookmarksAction->setText(i18nc("Manage Bookmarks", "&Manage Bookmarks..."));
     m_manageBookmarksAction->setIcon(QIcon(QStringLiteral(":/icons/bookmarks-organize.png")));
     connect(m_manageBookmarksAction, &QAction::triggered, this, &MarblePart::openManageBookmarksDialog);
@@ -849,7 +849,7 @@ void MarblePart::setupActions()
     connect(m_controlView->marbleModel()->bookmarkManager(), SIGNAL(bookmarksChanged()), this, SLOT(createFolderList()));
 
     m_externalMapEditorAction = new QAction(this);
-    actionCollection()->addAction("external_editor", m_externalMapEditorAction);
+    actionCollection()->addAction(QStringLiteral("external_editor"), m_externalMapEditorAction);
     m_externalMapEditorAction->setText(i18nc("Edit the map in an external application", "&Edit Map..."));
     m_externalMapEditorAction->setIcon(QIcon(QStringLiteral(":/icons/edit-map.png")));
     actionCollection()->setDefaultShortcut(m_externalMapEditorAction, Qt::CTRL | Qt::Key_E);
@@ -1353,8 +1353,8 @@ void MarblePart::editSettings()
     w_pluginSettings->setObjectName("plugin_page");
     m_configDialog->addPage(w_pluginSettings, i18n("Plugins"), "preferences-plugin");
     // Setting the icons of the pluginSettings page.
-    w_pluginSettings->setConfigIcon(QIcon::fromTheme("configure"));
-    w_pluginSettings->setAboutIcon(QIcon::fromTheme("help-about"));
+    w_pluginSettings->setConfigIcon(QIcon::fromTheme(QStringLiteral("configure")));
+    w_pluginSettings->setAboutIcon(QIcon::fromTheme(QStringLiteral("help-about")));
 
     connect(w_pluginSettings, SIGNAL(pluginListViewClicked()), SLOT(enableApplyButton()));
     connect(m_configDialog, SIGNAL(settingsChanged(QString)), SLOT(updateSettings()));

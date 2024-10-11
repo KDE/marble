@@ -154,9 +154,9 @@ void ControlView::moveDown()
 QString ControlView::defaultMapThemeId() const
 {
     QStringList fallBackThemes;
-    fallBackThemes << "earth/srtm/srtm.dgml";
-    fallBackThemes << "earth/bluemarble/bluemarble.dgml";
-    fallBackThemes << "earth/openstreetmap/openstreetmap.dgml";
+    fallBackThemes << QStringLiteral("earth/srtm/srtm.dgml");
+    fallBackThemes << QStringLiteral("earth/bluemarble/bluemarble.dgml");
+    fallBackThemes << QStringLiteral("earth/openstreetmap/openstreetmap.dgml");
 
     const QStringList installedThemes = m_mapThemeManager->mapThemeIds();
 
@@ -379,13 +379,13 @@ void ControlView::printRouteSummary(QTextDocument &document, QString &text)
 
     RouteRequest *routeRequest = m_marbleWidget->model()->routingManager()->routeRequest();
     if (routeRequest) {
-        QString summary = "<h3>Route to %1: %2 %3</h3>";
+        QString summary = QStringLiteral("<h3>Route to %1: %2 %3</h3>");
         QString destination;
         if (routeRequest->size()) {
             destination = routeRequest->name(routeRequest->size() - 1);
         }
 
-        QString label = "<p>%1 %2</p>";
+        QString label = QStringLiteral("<p>%1 %2</p>");
         qreal distance = routingModel->route().distance();
         QString unit = distance > 1000 ? "km" : "m";
         int precision = distance > 1000 ? 1 : 0;
@@ -501,11 +501,11 @@ void ControlView::launchExternalMapEditor()
         synchronizeWithExternalMapEditor(editor, "--download=%1,%4,%3,%2");
     } else if (editor == QLatin1StringView("merkaartor")) {
         // Merkaartor, a Qt based editor
-        QString argument = "osm://download/load_and_zoom?top=%1&right=%2&bottom=%3&left=%4";
+        QString argument = QStringLiteral("osm://download/load_and_zoom?top=%1&right=%2&bottom=%3&left=%4");
         synchronizeWithExternalMapEditor(editor, argument);
     } else {
         // Potlatch, the flash based editor running at the osm main website
-        QString url = "http://www.openstreetmap.org/edit?lat=%1&lon=%2&zoom=%3";
+        QString url = QStringLiteral("http://www.openstreetmap.org/edit?lat=%1&lon=%2&zoom=%3");
         qreal lat = m_marbleWidget->centerLatitude();
         qreal lon = m_marbleWidget->centerLongitude();
         int zoom = m_marbleWidget->tileZoomLevel();
@@ -576,8 +576,8 @@ QList<QAction *> ControlView::setupDockWidgets(QMainWindow *mainWindow)
     legendDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
     auto legendWidget = new LegendWidget(this);
     legendWidget->setMarbleModel(m_marbleWidget->model());
-    connect(legendWidget, SIGNAL(tourLinkClicked(QString)), this, SLOT(handleTourLinkClicked(QString)));
-    connect(legendWidget, SIGNAL(propertyValueChanged(QString, bool)), marbleWidget(), SLOT(setPropertyValue(QString, bool)));
+    connect(legendWidget, &LegendWidget::tourLinkClicked, this, &ControlView::handleTourLinkClicked);
+    connect(legendWidget, &LegendWidget::propertyValueChanged, marbleWidget(), &MarbleWidget::setPropertyValue);
     legendDock->setWidget(legendWidget);
 
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
@@ -625,8 +625,8 @@ QList<QAction *> ControlView::setupDockWidgets(QMainWindow *mainWindow)
     mapViewDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
     auto mapViewWidget = new MapViewWidget(this);
     mapViewWidget->setMarbleWidget(marbleWidget(), m_mapThemeManager);
-    connect(mapViewWidget, SIGNAL(showMapWizard()), this, SIGNAL(showMapWizard()));
-    connect(mapViewWidget, SIGNAL(mapThemeDeleted()), this, SIGNAL(mapThemeDeleted()));
+    connect(mapViewWidget, &MapViewWidget::showMapWizard, this, &ControlView::showMapWizard);
+    connect(mapViewWidget, &MapViewWidget::mapThemeDeleted, this, &ControlView::mapThemeDeleted);
     mapViewDock->setWidget(mapViewWidget);
     mainWindow->addDockWidget(Qt::LeftDockWidgetArea, mapViewDock);
 
@@ -664,9 +664,9 @@ QList<QAction *> ControlView::setupDockWidgets(QMainWindow *mainWindow)
     for (; i != end; ++i) {
         if ((*i)->nameId() == QLatin1StringView("annotation")) {
             m_annotationPlugin = *i;
-            connect(m_annotationPlugin, SIGNAL(enabledChanged(bool)), this, SLOT(updateAnnotationDockVisibility()));
-            connect(m_annotationPlugin, SIGNAL(visibilityChanged(bool, QString)), this, SLOT(updateAnnotationDockVisibility()));
-            connect(m_annotationPlugin, SIGNAL(actionGroupsChanged()), this, SLOT(updateAnnotationDock()));
+            connect(m_annotationPlugin, &RenderPlugin::enabledChanged, this, &ControlView::updateAnnotationDockVisibility);
+            connect(m_annotationPlugin, &RenderPlugin::visibilityChanged, this, &ControlView::updateAnnotationDockVisibility);
+            connect(m_annotationPlugin, &RenderPlugin::actionGroupsChanged, this, &ControlView::updateAnnotationDock);
             updateAnnotationDock();
             updateAnnotationDockVisibility();
             mainWindow->addDockWidget(Qt::LeftDockWidgetArea, m_annotationDock);

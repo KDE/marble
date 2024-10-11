@@ -40,8 +40,8 @@ protected:
 
 private:
     QSize m_savedSize;
-    MarblePart *m_part;
-    QActionGroup *m_viewSizeActsGroup;
+    MarblePart *m_part = nullptr;
+    QActionGroup *m_viewSizeActsGroup = nullptr;
 };
 
 }
