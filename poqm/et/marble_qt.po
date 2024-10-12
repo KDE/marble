@@ -12729,17 +12729,17 @@ msgctxt "Marble::WaitEditWidget|seconds"
 msgid " s"
 msgstr " s"
 
-#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:32
+#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:27
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
 msgid "FlightGear position provider Plugin"
 msgstr "Flightgeari asukoha pakkuja plugin"
 
-#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:42
+#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:37
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
 msgid "FlightGear"
 msgstr "FlightGear"
 
-#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:52
+#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:47
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
 msgid "Reports the position of running flightgear application."
 msgstr "Töötava Flightgeari rakenduse asukoha teatamine."
@@ -15012,34 +15012,34 @@ msgctxt "Marble::PhotoPlugin|"
 msgid "No known copyright restrictions"
 msgstr "Autoriõiguse piiranguid pole teada"
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:81
+#: src/plugins/render/positionmarker/PositionMarker.cpp:79
 msgctxt "Marble::PositionMarker|"
 msgid "Position Marker"
 msgstr "Asukohatähis"
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:86
+#: src/plugins/render/positionmarker/PositionMarker.cpp:84
 msgctxt "Marble::PositionMarker|"
 msgid "&Position Marker"
 msgstr "&Asukohatähis"
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:101
+#: src/plugins/render/positionmarker/PositionMarker.cpp:99
 msgctxt "Marble::PositionMarker|"
 msgid "draws a marker at the current position"
 msgstr "tähise joonistamine aktiivsesse asukohta"
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:329
-#: src/plugins/render/positionmarker/PositionMarker.cpp:430
+#: src/plugins/render/positionmarker/PositionMarker.cpp:327
+#: src/plugins/render/positionmarker/PositionMarker.cpp:428
 #, qt-format
 msgctxt "Marble::PositionMarker|"
 msgid "Cursor Size: %1"
 msgstr "Kursori suurus: %1"
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:369
+#: src/plugins/render/positionmarker/PositionMarker.cpp:367
 msgctxt "Marble::PositionMarker|"
 msgid "Choose Custom Cursor"
 msgstr "Kohandatud kursori valimine"
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:408
+#: src/plugins/render/positionmarker/PositionMarker.cpp:406
 msgctxt "Marble::PositionMarker|"
 msgid "Please choose a color"
 msgstr "Palun vali värv"
@@ -16732,17 +16732,17 @@ msgctxt ""
 msgid "<b>%1</b><br>%2"
 msgstr "<b>%1</b><br>%2"
 
-#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:65
+#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:61
 msgctxt "Marble::WikipediaPlugin|"
 msgid "Wikipedia Articles"
 msgstr "Wikipedia artiklid"
 
-#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:70
+#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:66
 msgctxt "Marble::WikipediaPlugin|"
 msgid "&Wikipedia"
 msgstr "&Wikipedia"
 
-#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:85
+#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:81
 msgctxt "Marble::WikipediaPlugin|"
 msgid ""
 "Automatically downloads Wikipedia articles and shows them on the right "
@@ -16751,7 +16751,7 @@ msgstr ""
 "Wikipedia artiklite automaatne allalaadimine ja nende näitamine kaardil "
 "õiges kohas"
 
-#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:100
+#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:96
 msgctxt "Marble::WikipediaPlugin|"
 msgid ""
 "Geo positions by geonames.org\n"

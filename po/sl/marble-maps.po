@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-04 00:36+0000\n"
-"PO-Revision-Date: 2024-09-29 08:13+0200\n"
+"PO-Revision-Date: 2024-10-11 20:00+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <kde-i18n-doc@kde.org>\n"
 "Language: sl\n"
@@ -40,13 +40,13 @@ msgstr "Določilnik teme marble"
 #: config.kcfg:20
 #, kde-format
 msgid "Routing profile"
-msgstr ""
+msgstr "Profil usmerjanja"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:23
 #, kde-format
 msgid "Car"
-msgstr ""
+msgstr "Avto"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:26 ProfileSelectorMenu.qml:134
@@ -146,7 +146,7 @@ msgstr "Možnosti teme"
 #: MainScreen.qml:167
 #, kde-format
 msgid "Routing"
-msgstr ""
+msgstr "Usmerjanje"
 
 #: MainScreen.qml:457
 #, kde-format
@@ -275,31 +275,31 @@ msgstr "Avto (najhitrejše)"
 #, kde-format
 msgctxt "@title"
 msgid "Routing"
-msgstr ""
+msgstr "Usmerjanje"
 
 #: RouteEditorPage.qml:102
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Departure:"
-msgstr ""
+msgstr "Odhod:"
 
 #: RouteEditorPage.qml:104
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Arrival:"
-msgstr ""
+msgstr "Prihod:"
 
 #: RouteEditorPage.qml:106
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Waypoint:"
-msgstr ""
+msgstr "Točka na poti:"
 
 #: RouteEditorPage.qml:194
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Alternatives:"
-msgstr ""
+msgstr "Alternative:"
 
 #: SettingsDialog.qml:48
 #, kde-format

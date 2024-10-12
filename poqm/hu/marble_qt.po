@@ -14504,21 +14504,21 @@ msgctxt "Marble::WaitEditWidget|seconds"
 msgid " s"
 msgstr ""
 
-#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:32
+#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:27
 #, fuzzy
 #| msgid "Gpsd position provider Plugin"
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
 msgid "FlightGear position provider Plugin"
 msgstr "Gpsd pozíció szolgáltató bővítmény"
 
-#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:42
+#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:37
 #, fuzzy
 #| msgid "FlightGear"
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
 msgid "FlightGear"
 msgstr "FlightGear"
 
-#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:52
+#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:47
 #, fuzzy
 #| msgid "Reports the position of a GPS device."
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
@@ -17339,43 +17339,43 @@ msgctxt "Marble::PhotoPlugin|"
 msgid "No known copyright restrictions"
 msgstr "Nincs ismert szerzői jogi megkötés"
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:81
+#: src/plugins/render/positionmarker/PositionMarker.cpp:79
 #, fuzzy
 #| msgid "Position Marker"
 msgctxt "Marble::PositionMarker|"
 msgid "Position Marker"
 msgstr "Pozíciójelölő"
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:86
+#: src/plugins/render/positionmarker/PositionMarker.cpp:84
 #, fuzzy
 #| msgid "&Position Marker"
 msgctxt "Marble::PositionMarker|"
 msgid "&Position Marker"
 msgstr "&Pozíciójelölő"
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:101
+#: src/plugins/render/positionmarker/PositionMarker.cpp:99
 #, fuzzy
 #| msgid "draws a marker at the current position"
 msgctxt "Marble::PositionMarker|"
 msgid "draws a marker at the current position"
 msgstr "egy jelölőt rajzol a jelenlegi pozícióba"
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:329
-#: src/plugins/render/positionmarker/PositionMarker.cpp:430
+#: src/plugins/render/positionmarker/PositionMarker.cpp:327
+#: src/plugins/render/positionmarker/PositionMarker.cpp:428
 #, fuzzy, qt-format
 #| msgid "Cursor Size: %1"
 msgctxt "Marble::PositionMarker|"
 msgid "Cursor Size: %1"
 msgstr "Kurzor méret: %1"
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:369
+#: src/plugins/render/positionmarker/PositionMarker.cpp:367
 #, fuzzy
 #| msgid "Choose Custom Cursor"
 msgctxt "Marble::PositionMarker|"
 msgid "Choose Custom Cursor"
 msgstr "Egyéni kurzor kiválasztása"
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:408
+#: src/plugins/render/positionmarker/PositionMarker.cpp:406
 #, fuzzy
 #| msgid "Please choose a color"
 msgctxt "Marble::PositionMarker|"
@@ -19499,21 +19499,21 @@ msgctxt ""
 msgid "<b>%1</b><br>%2"
 msgstr "<b>%1</b><br>%2"
 
-#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:65
+#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:61
 #, fuzzy
 #| msgid "Wikipedia Articles"
 msgctxt "Marble::WikipediaPlugin|"
 msgid "Wikipedia Articles"
 msgstr "Wikipédia cikkek"
 
-#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:70
+#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:66
 #, fuzzy
 #| msgid "&Wikipedia"
 msgctxt "Marble::WikipediaPlugin|"
 msgid "&Wikipedia"
 msgstr "&Wikipédia"
 
-#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:85
+#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:81
 #, fuzzy
 #| msgid ""
 #| "Automatically downloads Wikipedia articles and shows them on the right "
@@ -19526,7 +19526,7 @@ msgstr ""
 "Automatikusan letölti a Wikipédia cikkeket és megjeleníti azokat a térkép "
 "jobb oldalán"
 
-#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:100
+#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:96
 msgctxt "Marble::WikipediaPlugin|"
 msgid ""
 "Geo positions by geonames.org\n"

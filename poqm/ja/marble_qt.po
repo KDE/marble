@@ -13040,19 +13040,19 @@ msgctxt "Marble::WaitEditWidget|seconds"
 msgid " s"
 msgstr ""
 
-#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:32
+#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:27
 #, fuzzy
 #| msgid "GeoData Plugin"
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
 msgid "FlightGear position provider Plugin"
 msgstr "ジオデータプラグイン"
 
-#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:42
+#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:37
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
 msgid "FlightGear"
 msgstr ""
 
-#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:52
+#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:47
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
 msgid "Reports the position of running flightgear application."
 msgstr ""
@@ -15649,34 +15649,34 @@ msgctxt "Marble::PhotoPlugin|"
 msgid "No known copyright restrictions"
 msgstr ""
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:81
+#: src/plugins/render/positionmarker/PositionMarker.cpp:79
 msgctxt "Marble::PositionMarker|"
 msgid "Position Marker"
 msgstr ""
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:86
+#: src/plugins/render/positionmarker/PositionMarker.cpp:84
 msgctxt "Marble::PositionMarker|"
 msgid "&Position Marker"
 msgstr ""
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:101
+#: src/plugins/render/positionmarker/PositionMarker.cpp:99
 msgctxt "Marble::PositionMarker|"
 msgid "draws a marker at the current position"
 msgstr ""
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:329
-#: src/plugins/render/positionmarker/PositionMarker.cpp:430
+#: src/plugins/render/positionmarker/PositionMarker.cpp:327
+#: src/plugins/render/positionmarker/PositionMarker.cpp:428
 #, qt-format
 msgctxt "Marble::PositionMarker|"
 msgid "Cursor Size: %1"
 msgstr ""
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:369
+#: src/plugins/render/positionmarker/PositionMarker.cpp:367
 msgctxt "Marble::PositionMarker|"
 msgid "Choose Custom Cursor"
 msgstr ""
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:408
+#: src/plugins/render/positionmarker/PositionMarker.cpp:406
 msgctxt "Marble::PositionMarker|"
 msgid "Please choose a color"
 msgstr ""
@@ -17574,21 +17574,21 @@ msgctxt ""
 msgid "<b>%1</b><br>%2"
 msgstr ""
 
-#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:65
+#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:61
 #, fuzzy
 #| msgid "Wikipedia Articles"
 msgctxt "Marble::WikipediaPlugin|"
 msgid "Wikipedia Articles"
 msgstr "Wikipedia の記事"
 
-#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:70
+#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:66
 #, fuzzy
 #| msgid "&Wikipedia"
 msgctxt "Marble::WikipediaPlugin|"
 msgid "&Wikipedia"
 msgstr "&Wikipedia"
 
-#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:85
+#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:81
 #, fuzzy
 #| msgid ""
 #| "Automatically downloads Wikipedia articles and shows them on the right "
@@ -17600,7 +17600,7 @@ msgid ""
 msgstr ""
 "Wikipedia の記事を自動的にダウンロードして地図上の適切な場所に表示します"
 
-#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:100
+#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:96
 msgctxt "Marble::WikipediaPlugin|"
 msgid ""
 "Geo positions by geonames.org\n"

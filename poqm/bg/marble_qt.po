@@ -12678,17 +12678,17 @@ msgctxt "Marble::WaitEditWidget|seconds"
 msgid " s"
 msgstr " с"
 
-#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:32
+#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:27
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
 msgid "FlightGear position provider Plugin"
 msgstr "Приставка за определяне на местоположението с FlightGear"
 
-#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:42
+#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:37
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
 msgid "FlightGear"
 msgstr "FlightGear"
 
-#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:52
+#: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:47
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
 msgid "Reports the position of running flightgear application."
 msgstr "Съобщава позицията на изпълняващо се  приложение flightgear."
@@ -14980,34 +14980,34 @@ msgctxt "Marble::PhotoPlugin|"
 msgid "No known copyright restrictions"
 msgstr "Няма известни ограничения за авторски права"
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:81
+#: src/plugins/render/positionmarker/PositionMarker.cpp:79
 msgctxt "Marble::PositionMarker|"
 msgid "Position Marker"
 msgstr "Маркер за позиция"
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:86
+#: src/plugins/render/positionmarker/PositionMarker.cpp:84
 msgctxt "Marble::PositionMarker|"
 msgid "&Position Marker"
 msgstr "&Маркер на местоположения"
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:101
+#: src/plugins/render/positionmarker/PositionMarker.cpp:99
 msgctxt "Marble::PositionMarker|"
 msgid "draws a marker at the current position"
 msgstr "начертава маркер на текущата позиция"
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:329
-#: src/plugins/render/positionmarker/PositionMarker.cpp:430
+#: src/plugins/render/positionmarker/PositionMarker.cpp:327
+#: src/plugins/render/positionmarker/PositionMarker.cpp:428
 #, qt-format
 msgctxt "Marble::PositionMarker|"
 msgid "Cursor Size: %1"
 msgstr "Размер на курсора: %1"
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:369
+#: src/plugins/render/positionmarker/PositionMarker.cpp:367
 msgctxt "Marble::PositionMarker|"
 msgid "Choose Custom Cursor"
 msgstr "Изберете персонализиран курсор"
 
-#: src/plugins/render/positionmarker/PositionMarker.cpp:408
+#: src/plugins/render/positionmarker/PositionMarker.cpp:406
 msgctxt "Marble::PositionMarker|"
 msgid "Please choose a color"
 msgstr "Моля, изберете цвят"
@@ -16709,17 +16709,17 @@ msgctxt ""
 msgid "<b>%1</b><br>%2"
 msgstr "<b>%1</b><br>%2"
 
-#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:65
+#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:61
 msgctxt "Marble::WikipediaPlugin|"
 msgid "Wikipedia Articles"
 msgstr "Статии на Уикипедия"
 
-#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:70
+#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:66
 msgctxt "Marble::WikipediaPlugin|"
 msgid "&Wikipedia"
 msgstr "&Уикипедия"
 
-#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:85
+#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:81
 msgctxt "Marble::WikipediaPlugin|"
 msgid ""
 "Automatically downloads Wikipedia articles and shows them on the right "
@@ -16728,7 +16728,7 @@ msgstr ""
 "Автоматично изтегля статии от Уикипедия и ги показва на правилното място на "
 "картата"
 
-#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:100
+#: src/plugins/render/wikipedia/WikipediaPlugin.cpp:96
 msgctxt "Marble::WikipediaPlugin|"
 msgid ""
 "Geo positions by geonames.org\n"
