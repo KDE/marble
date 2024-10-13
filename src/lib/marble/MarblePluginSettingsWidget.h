@@ -51,7 +51,7 @@ private:
     Q_PRIVATE_SLOT(d, void showPluginConfigDialog(const QModelIndex &))
 
 private:
-    MarblePluginSettingsWidgetPrivate *d;
+    MarblePluginSettingsWidgetPrivate *const d;
 };
 
 }

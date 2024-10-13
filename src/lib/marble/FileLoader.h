@@ -47,7 +47,7 @@ private:
 
     friend class FileLoaderPrivate;
 
-    FileLoaderPrivate *d;
+    FileLoaderPrivate *const d;
 };
 
 } // namespace Marble

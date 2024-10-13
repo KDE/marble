@@ -45,7 +45,7 @@ protected:
 
 private:
     Q_DISABLE_COPY(PositionProviderPlugin)
-    PositionProviderPluginPrivate *d;
+    PositionProviderPluginPrivate *const d;
 };
 
 }

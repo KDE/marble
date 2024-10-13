@@ -51,7 +51,7 @@ public:
     void unpack(QDataStream &stream) override;
 
 private:
-    GeoDataSimpleArrayDataPrivate *d;
+    GeoDataSimpleArrayDataPrivate *const d;
 };
 
 }

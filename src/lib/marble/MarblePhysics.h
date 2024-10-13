@@ -51,7 +51,7 @@ private Q_SLOTS:
 private:
     Q_DISABLE_COPY(MarblePhysics)
 
-    MarblePhysicsPrivate *d;
+    MarblePhysicsPrivate *const d;
 };
 
 }

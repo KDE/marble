@@ -48,7 +48,7 @@ private:
 
 private:
     friend class ElevationModelPrivate;
-    ElevationModelPrivate *d;
+    ElevationModelPrivate *const d;
 };
 
 }

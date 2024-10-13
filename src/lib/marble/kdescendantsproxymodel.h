@@ -166,7 +166,7 @@ public:
 private:
     Q_DECLARE_PRIVATE(KDescendantsProxyModel)
     //@cond PRIVATE
-    KDescendantsProxyModelPrivate *d_ptr;
+    KDescendantsProxyModelPrivate *const d_ptr;
 
     Q_PRIVATE_SLOT(d_func(), void sourceRowsAboutToBeInserted(const QModelIndex &, int, int))
     Q_PRIVATE_SLOT(d_func(), void sourceRowsInserted(const QModelIndex &, int, int))

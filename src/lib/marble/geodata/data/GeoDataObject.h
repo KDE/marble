@@ -82,7 +82,7 @@ public:
     void unpack(QDataStream &steam) override;
 
 private:
-    GeoDataObjectPrivate *d;
+    GeoDataObjectPrivate *const d;
 
 protected:
     /**

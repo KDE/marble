@@ -42,7 +42,7 @@ public:
     void setPriority(quint8 priority);
 
 private:
-    BBCStationPrivate *d;
+    BBCStationPrivate *d = nullptr;
 };
 
 } // namespace Marble

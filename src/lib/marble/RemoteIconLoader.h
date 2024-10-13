@@ -42,7 +42,7 @@ private Q_SLOTS:
     void storeIcon(const QByteArray &, const QString &);
 
 private:
-    RemoteIconLoaderPrivate *d;
+    RemoteIconLoaderPrivate *const d;
 };
 
 }

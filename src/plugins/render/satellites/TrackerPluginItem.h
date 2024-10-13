@@ -80,7 +80,7 @@ public:
 
 private:
     Q_DISABLE_COPY(TrackerPluginItem)
-    TrackerPluginItemPrivate *d;
+    TrackerPluginItemPrivate *const d;
 };
 
 } // namespace Marble

@@ -73,7 +73,7 @@ public:
 
 private:
     Q_DISABLE_COPY(TemplateDocument)
-    TemplateDocumentPrivate *d;
+    TemplateDocumentPrivate *const d;
 };
 
 } // namespace Marble
