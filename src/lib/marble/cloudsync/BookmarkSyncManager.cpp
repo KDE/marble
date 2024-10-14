@@ -213,7 +213,7 @@ BookmarkSyncManager::BookmarkSyncManager(CloudSyncManager *cloudSyncManager)
     , d(new Private(this, cloudSyncManager))
 {
     d->m_syncTimer.setInterval(60 * 60 * 1000); // 1 hour. TODO: Make this configurable.
-    connect(&d->m_syncTimer, SIGNAL(timeout()), this, SLOT(startBookmarkSync()));
+    connect(&d->m_syncTimer, &QTimer::timeout, this, &BookmarkSyncManager::startBookmarkSync);
 }
 
 BookmarkSyncManager::~BookmarkSyncManager()
