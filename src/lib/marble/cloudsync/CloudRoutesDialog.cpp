@@ -18,7 +18,7 @@ class Q_DECL_HIDDEN CloudRoutesDialog::Private : public Ui::CloudRoutesDialog
 {
 public:
     explicit Private(CloudRouteModel *model);
-    CloudRouteModel *m_model;
+    CloudRouteModel *const m_model;
 };
 
 CloudRoutesDialog::Private::Private(CloudRouteModel *model)

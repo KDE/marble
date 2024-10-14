@@ -48,8 +48,8 @@ class Q_DECL_HIDDEN BookmarkSyncManager::Private
 public:
     Private(BookmarkSyncManager *parent, CloudSyncManager *cloudSyncManager);
 
-    BookmarkSyncManager *m_q;
-    CloudSyncManager *m_cloudSyncManager;
+    BookmarkSyncManager *const m_q;
+    CloudSyncManager *const m_cloudSyncManager;
 
     QNetworkAccessManager m_network;
     QString m_uploadEndpoint;
@@ -71,7 +71,7 @@ public:
     QList<DiffItem> m_merged;
     DiffItem m_conflictItem;
 
-    BookmarkManager *m_bookmarkManager;
+    BookmarkManager *m_bookmarkManager = nullptr;
     QTimer m_syncTimer;
     bool m_bookmarkSyncEnabled;
 
