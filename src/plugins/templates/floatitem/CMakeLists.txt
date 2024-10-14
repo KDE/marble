@@ -12,6 +12,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( FITemplate_SRCS FITemplateFloatItem.cpp )
+set(FITemplate_SRCS FITemplateFloatItem.cpp)
 
-marble_add_plugin( FITemplateFloatItem ${FITemplate_SRCS} )
+marble_add_plugin( FITemplateFloatItem ${FITemplate_SRCS})

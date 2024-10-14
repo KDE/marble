@@ -44,7 +44,7 @@ target_link_libraries (
     KF6::Crash
     KF6::CoreAddons
     KF6::I18n
-    )
+)
 
 ## this works for win32 only because FindQt does not handle this correct
 if(STATIC_BUILD AND WIN32)
@@ -67,6 +67,6 @@ ki18n_install(${CMAKE_SOURCE_DIR}/po)
 
 macro_optional_find_package(KF6 ${REQUIRED_KF6_MIN_VERSION} QUIET COMPONENTS DocTools)
 
-if (KF6DocTools_FOUND)
+if(KF6DocTools_FOUND)
     kdoctools_install(${CMAKE_SOURCE_DIR}/po)
 endif()

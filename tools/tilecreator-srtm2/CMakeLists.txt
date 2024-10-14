@@ -6,12 +6,12 @@ include_directories(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( ${TARGET}_SRC main.cpp tccore.cpp )
+set(${TARGET}_SRC main.cpp tccore.cpp)
 add_definitions(-DTILECREATOR)
-add_executable( ${TARGET} ${${TARGET}_SRC} )
+add_executable(${TARGET} ${${TARGET}_SRC})
 
 target_link_libraries(${TARGET} marblewidget)
 
-if (APPLE)
+if(APPLE)
   target_link_libraries (${TARGET} ${APP_SERVICES_LIBRARY})
-endif (APPLE)
+endif(APPLE)

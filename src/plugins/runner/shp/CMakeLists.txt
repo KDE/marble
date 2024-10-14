@@ -1,4 +1,4 @@
-PROJECT( ShpPlugin )
+PROJECT( ShpPlugin)
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
@@ -6,11 +6,11 @@ INCLUDE_DIRECTORIES(
  ${LIBSHP_INCLUDE_DIR}
 )
 
-set( shp_SRCS ShpPlugin.cpp ShpRunner.cpp )
+set(shp_SRCS ShpPlugin.cpp ShpRunner.cpp)
 
-set( ShpPlugin_LIBS ${LIBSHP_LIBRARIES} )
+set(ShpPlugin_LIBS ${LIBSHP_LIBRARIES})
 
-marble_add_plugin( ShpPlugin ${shp_SRCS} )
+marble_add_plugin( ShpPlugin ${shp_SRCS})
 
 macro_optional_find_package(KF6 ${REQUIRED_KF6_MIN_VERSION} QUIET COMPONENTS KIO)
 if(NOT KF6_FOUND)

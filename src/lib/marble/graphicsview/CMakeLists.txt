@@ -14,7 +14,7 @@ SET( graphicsview_HDRS
         graphicsview/WidgetGraphicsItem.h
         graphicsview/AbstractMarbleGraphicsLayout.h
         graphicsview/MarbleGraphicsGridLayout.h
-   )
+  )
 
 SET( graphicsview_SRCS
         graphicsview/MarbleGraphicsItem.cpp
@@ -26,4 +26,4 @@ SET( graphicsview_SRCS
         graphicsview/WidgetGraphicsItem.cpp
         graphicsview/AbstractMarbleGraphicsLayout.cpp
         graphicsview/MarbleGraphicsGridLayout.cpp
-   )
+  )

@@ -823,7 +823,7 @@ SET ( geodata_parser_SRCS
         geodata/parser/GeoSceneParser.h
         geodata/parser/GeoSceneTypes.h
         geodata/parser/GeoTagHandler.h
-   )
+  )
 
 SET( geodata_writer_SRCS
         geodata/writer/GeoTagWriter.cpp
@@ -835,7 +835,7 @@ SET( geodata_writer_SRCS
         geodata/writer/GeoWriter.h
         geodata/writer/GeoWriterBackend.h
         geodata/writer/GeoDataDocumentWriter.h
-   )
+  )
 
 SET( geodata_SRCS
         ${geodata_data_SRCS}
@@ -847,6 +847,6 @@ SET( geodata_SRCS
         ${geodata_handlers_dgml_SRCS}
         ${geodata_writers_kml_SRCS}
         ${geodata_writers_dgml_SRCS}
-   )
+  )
 
 #add_subdirectory(geodata/data/tests)

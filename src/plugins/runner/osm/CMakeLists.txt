@@ -1,4 +1,4 @@
-PROJECT( OsmPlugin )
+PROJECT( OsmPlugin)
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_SOURCE_DIR}/src/3rdparty/o5mreader
@@ -9,12 +9,12 @@ INCLUDE_DIRECTORIES(
  ${ZLIB_INCLUDE_DIRS}
 )
 
-if (Protobuf_FOUND AND Protobuf_PROTOC_EXECUTABLE AND NOT MSVC) # FIXME linking issue on Windows
-    find_package( absl REQUIRED )
+if(Protobuf_FOUND AND Protobuf_PROTOC_EXECUTABLE AND NOT MSVC) # FIXME linking issue on Windows
+    find_package( absl REQUIRED)
     protobuf_generate_cpp(pbf_srcs pbf_hdrs
         ${CMAKE_SOURCE_DIR}/tools/osm-addresses/pbf/fileformat.proto
         ${CMAKE_SOURCE_DIR}/tools/osm-addresses/pbf/osmformat.proto
-    )
+)
     set(EXTRA_LIBS protobuf::libprotobuf protobuf::libprotoc ${ZLIB_LIBRARIES} absl::log_internal_message absl::log_internal_check_op)
     add_definitions(-DHAVE_PROTOBUF)
 
@@ -23,7 +23,7 @@ if (Protobuf_FOUND AND Protobuf_PROTOC_EXECUTABLE AND NOT MSVC) # FIXME linking 
 	endif()
 endif()
 
-set( osm_writers_SRCS
+set(osm_writers_SRCS
         writers/OsmObjectAttributeWriter.cpp
         writers/OsmNodeTagWriter.cpp
         writers/OsmWayTagWriter.cpp
@@ -37,8 +37,8 @@ set( osm_writers_SRCS
         writers/OsmRelationTagWriter.h
         writers/OsmTagWriter.h
         writers/OsmTagTagWriter.h
-   )
-set( osm_translators_SRCS
+  )
+set(osm_translators_SRCS
         translators/OsmDocumentTagTranslator.cpp
         translators/O5mWriter.cpp
         translators/OsmConverter.cpp
@@ -46,9 +46,9 @@ set( osm_translators_SRCS
         translators/OsmDocumentTagTranslator.h
         translators/O5mWriter.h
         translators/OsmConverter.h
-   )
+  )
 
-set( osm_SRCS
+set(osm_SRCS
   OsmParser.cpp
   OsmPlugin.cpp
   OsmRunner.cpp
@@ -70,7 +70,7 @@ set( osm_SRCS
   ${pbf_srcs}
 )
 
-marble_add_plugin( OsmPlugin ${osm_SRCS} ${osm_writers_SRCS} ${osm_translators_SRCS} )
+marble_add_plugin( OsmPlugin ${osm_SRCS} ${osm_writers_SRCS} ${osm_translators_SRCS})
 target_link_libraries(OsmPlugin o5mreader ${EXTRA_LIBS})
 
 macro_optional_find_package(KF6 ${REQUIRED_KF6_MIN_VERSION} QUIET COMPONENTS KIO)

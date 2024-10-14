@@ -10,7 +10,7 @@ target_link_libraries(marble-behaim PUBLIC
     KF6::CoreAddons
 )
 
-if (NOT ANDROID)
+if(NOT ANDROID)
     target_link_libraries(marble-behaim PUBLIC KF6::Crash)
 endif()
 

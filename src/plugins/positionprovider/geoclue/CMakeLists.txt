@@ -1,11 +1,11 @@
-PROJECT( GeoCluePositionProviderPlugin )
+PROJECT( GeoCluePositionProviderPlugin)
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( geoclue_SRCS
+set(geoclue_SRCS
  GeoCluePositionProviderPlugin.cpp
  GeoCute/Accuracy.cpp
  GeoCute/MasterClient.cpp
@@ -15,4 +15,4 @@ set( geoclue_SRCS
  GeoCute/VelocityProvider.cpp
 )
 
-marble_add_plugin( GeoCluePositionProviderPlugin ${geoclue_SRCS} )
+marble_add_plugin( GeoCluePositionProviderPlugin ${geoclue_SRCS})

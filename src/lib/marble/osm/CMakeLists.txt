@@ -1,4 +1,4 @@
-set( osm_HDRS
+set(osm_HDRS
     OsmPlacemarkData.h
     OsmObjectManager.h
     OsmTagEditorWidget.h
@@ -6,7 +6,7 @@ set( osm_HDRS
     OsmRelationManagerWidget.h
 )
 
-set( osm_SRCS
+set(osm_SRCS
     osm/OsmPlacemarkData.cpp
     osm/OsmObjectManager.cpp
     osm/OsmTagEditorWidget.cpp
@@ -16,7 +16,7 @@ set( osm_SRCS
     osm/OsmRelationManagerWidget_p.cpp
 )
 
-set( osm_UIS
+set(osm_UIS
     osm/OsmTagEditorWidget.ui
     osm/OsmRelationManagerWidget.ui
 )

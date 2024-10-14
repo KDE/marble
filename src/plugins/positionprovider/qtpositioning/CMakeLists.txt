@@ -1,4 +1,4 @@
-PROJECT( QtPositioningPositionProviderPlugin )
+PROJECT( QtPositioningPositionProviderPlugin)
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
@@ -10,6 +10,6 @@ SET( qtpositioning_SRCS
  QtPositioningPositionProviderPlugin.h
 )
 
-SET( QtPositioningPositionProviderPlugin_LIBS Qt6::Positioning )
+SET( QtPositioningPositionProviderPlugin_LIBS Qt6::Positioning)
 
-MARBLE_ADD_PLUGIN( QtPositioningPositionProviderPlugin ${qtpositioning_SRCS} )
+MARBLE_ADD_PLUGIN( QtPositioningPositionProviderPlugin ${qtpositioning_SRCS})

@@ -2,12 +2,12 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
 find_program(OSMCONVERT_EXECUTABLE NAMES osmconvert)
-if (NOT OSMCONVERT_EXECUTABLE)
+if(NOT OSMCONVERT_EXECUTABLE)
     include(FetchContent)
     message(STATUS "Building external osmconvert for tile generator tests!")
     FetchContent_Declare(osm-c-tools
         GIT_REPOSITORY https://gitlab.com/osm-c-tools/osmctools.git
-    )
+)
     FetchContent_Populate(osm-c-tools)
     add_executable(osmconvert ${osm-c-tools_SOURCE_DIR}/src/osmconvert.c)
     set_target_properties(osmconvert PROPERTIES C_STANDARD 99)

@@ -6,7 +6,7 @@ include_directories(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( ${TARGET}_SRC
+set(${TARGET}_SRC
 jobparameters.cpp
 jobmanager.cpp
 jobqueue.cpp
@@ -16,6 +16,6 @@ upload.cpp
 region.cpp
 main.cpp
 )
-add_executable( ${TARGET} ${${TARGET}_SRC} )
+add_executable(${TARGET} ${${TARGET}_SRC})
 
 target_link_libraries(${TARGET} marblewidget Qt6::Sql)

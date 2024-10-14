@@ -2,7 +2,7 @@ project(MarbleThumbnailer)
 
 macro_optional_find_package(KF6 ${REQUIRED_KF6_MIN_VERSION} QUIET COMPONENTS KIO)
 
-if (NOT KF6_FOUND)
+if(NOT KF6_FOUND)
   return()
 endif()
 

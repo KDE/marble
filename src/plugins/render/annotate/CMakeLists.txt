@@ -1,4 +1,4 @@
-PROJECT( AnnotatePlugin )
+PROJECT( AnnotatePlugin)
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
@@ -7,14 +7,14 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_SOURCE_DIR}/src/lib/marble/layers
 )
 
-set( annotate_UI
+set(annotate_UI
   EditGroundOverlayDialog.ui
   EditPolygonDialog.ui
   EditPolylineDialog.ui
   DownloadOsmDialog.ui
 )
 
-set( annotate_SRCS
+set(annotate_SRCS
   AnnotatePlugin.cpp
   AreaAnnotation.cpp
   DownloadOsmDialog.cpp
@@ -52,4 +52,4 @@ set( annotate_SRCS
 
 qt_wrap_ui(annotate_SRCS ${annotate_UI})
 
-marble_add_plugin( AnnotatePlugin ${annotate_SRCS} )
+marble_add_plugin( AnnotatePlugin ${annotate_SRCS})

@@ -1,4 +1,4 @@
-PROJECT( KmlPlugin )
+PROJECT( KmlPlugin)
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
@@ -6,9 +6,9 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_SOURCE_DIR}/src/lib/marble/geodata/handlers/kml
 )
 
-set( kml_SRCS KmlParser.cpp KmlPlugin.cpp KmlRunner.cpp KmlParser.h KmlPlugin.h KmlRunner.h)
+set(kml_SRCS KmlParser.cpp KmlPlugin.cpp KmlRunner.cpp KmlParser.h KmlPlugin.h KmlRunner.h)
 
-marble_add_plugin( KmlPlugin ${kml_SRCS} )
+marble_add_plugin( KmlPlugin ${kml_SRCS})
 
 macro_optional_find_package(KF6 ${REQUIRED_KF6_MIN_VERSION} QUIET COMPONENTS KIO)
 if(NOT KF6_FOUND)

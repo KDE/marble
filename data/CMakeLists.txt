@@ -278,7 +278,7 @@ if(NOT APPLE AND NOT WIN32)
   install (FILES icons/32-apps-marble.png DESTINATION ${ICON_INSTALL_DIR}/hicolor/32x32/apps/ RENAME marble.png)
   install (FILES icons/22-apps-marble.png DESTINATION ${ICON_INSTALL_DIR}/hicolor/22x22/apps/ RENAME marble.png)
   install (FILES icons/16-apps-marble.png DESTINATION ${ICON_INSTALL_DIR}/hicolor/16x16/apps/ RENAME marble.png)
-endif(NOT APPLE AND NOT WIN32 )
+endif(NOT APPLE AND NOT WIN32)
 
 FILE (GLOB AUDIO_FILES audio/*.ogg)
 install (FILES
@@ -287,9 +287,9 @@ DESTINATION ${MARBLE_DATA_INSTALL_PATH}/audio)
 
 add_subdirectory(lang)
 
-set( SHARED_MIME_INFO_MINIMUM_VERSION "1.8" )
-find_package( SharedMimeInfo QUIET )
+set(SHARED_MIME_INFO_MINIMUM_VERSION "1.8")
+find_package( SharedMimeInfo QUIET)
 if(SharedMimeInfo_FOUND)
     install(FILES mimetypes/geo.xml  DESTINATION ${KDE_INSTALL_MIMEDIR})
-    update_xdg_mimetypes( ${KDE_INSTALL_MIMEDIR} )
+    update_xdg_mimetypes( ${KDE_INSTALL_MIMEDIR})
 endif()

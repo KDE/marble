@@ -5,7 +5,7 @@ include_directories(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( sgp4_SRCS
+set(sgp4_SRCS
  sgp4ext.cpp
  sgp4unit.cpp
  sgp4io.cpp

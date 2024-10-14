@@ -34,25 +34,25 @@ ADD_LIBRARY(astro ${astrolib_SRCS})
 generate_export_header(astro BASE_NAME astrolib)
 target_include_directories(astro PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>)
 
-if (APPLE)
+if(APPLE)
   #defined in top level makefile
   TARGET_LINK_LIBRARIES(astro ${MAC_EXTRA_LIBS})
-endif (APPLE)
+endif(APPLE)
 
-if (CMAKE_SYSTEM_NAME MATCHES "SunOS")
+if(CMAKE_SYSTEM_NAME MATCHES "SunOS")
   TARGET_LINK_LIBRARIES(astro m)
-endif (CMAKE_SYSTEM_NAME MATCHES "SunOS")
+endif(CMAKE_SYSTEM_NAME MATCHES "SunOS")
 
 if(WIN32)
   TARGET_LINK_LIBRARIES(astro ws2_32 imm32 winmm)
 endif(WIN32)
 
-if (NOT ANDROID)
+if(NOT ANDROID)
   set_target_properties(astro PROPERTIES
       EXPORT_NAME "Astro"
       VERSION ${ASTRO_VERSION}
       SOVERSION ${ASTRO_SOVERSION}
-  )
+)
 endif()
 
 target_include_directories(astro
@@ -69,12 +69,12 @@ else()
     EXPORT AstroTargets
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  )
+)
 endif()
 
 ########### install headers & cmake config files ###############
 
-if (APPLE)
+if(APPLE)
     # TODO: find how to install & deploy library, headers and config files as bundle for development
     return()
 endif()

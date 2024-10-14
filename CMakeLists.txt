@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.20)
 
 # KDE Application Version, managed by release script
-set (RELEASE_SERVICE_VERSION_MAJOR "24")
-set (RELEASE_SERVICE_VERSION_MINOR "11")
-set (RELEASE_SERVICE_VERSION_MICRO "70")
-set (RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_VERSION_MINOR}.${RELEASE_SERVICE_VERSION_MICRO}")
+set(RELEASE_SERVICE_VERSION_MAJOR "24")
+set(RELEASE_SERVICE_VERSION_MINOR "11")
+set(RELEASE_SERVICE_VERSION_MICRO "70")
+set(RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_VERSION_MINOR}.${RELEASE_SERVICE_VERSION_MICRO}")
 
 set(MARBLE_LIB_SOVERSION 28)
 
@@ -96,12 +96,12 @@ find_package(Qt6 ${QT_MIN_VERSION} REQUIRED
         Core5Compat
 )
 
-if (BUILD_TESTING)
+if(BUILD_TESTING)
     find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS Test)
 endif()
 
 find_package(KF6 ${KF_MIN_VERSION} COMPONENTS CoreAddons I18n Config)
-if (NOT ANDROID)
+if(NOT ANDROID)
     find_package(KF6 ${KF_MIN_VERSION} COMPONENTS Crash Parts)
 endif()
 
@@ -119,20 +119,20 @@ if(ANDROID)
     find_package(Qt6Positioning ${REQUIRED_QT_VERSION} REQUIRED)
     find_package(Qt6Multimedia ${REQUIRED_QT_VERSION} REQUIRED)
 
-   set ( MARBLE_NO_WEBKITWIDGETS TRUE )
+   set(MARBLE_NO_WEBKITWIDGETS TRUE)
 else()
     find_package(Qt6WebChannel ${REQUIRED_QT_VERSION})
     find_package(Qt6WebEngineWidgets ${REQUIRED_QT_VERSION})
     find_package(Qt6WebEngineQuick ${REQUIRED_QT_VERSION})
 
-   if ( NOT Qt6WebEngineWidgets_FOUND )
-     set ( MARBLE_NO_WEBKITWIDGETS TRUE )
+   if( NOT Qt6WebEngineWidgets_FOUND)
+     set(MARBLE_NO_WEBKITWIDGETS TRUE)
    endif()
 endif()
 
-if (BUILD_WITH_DBUS)
+if(BUILD_WITH_DBUS)
   find_package(Qt6DBus ${REQUIRED_QT_VERSION})
-  if (NOT Qt6DBus_FOUND)
+  if(NOT Qt6DBus_FOUND)
     set(MARBLE_NO_DBUS TRUE)
   endif()
 else()
@@ -142,9 +142,9 @@ endif()
 SET(CMAKE_AUTOMOC TRUE)
 
 # Use M_PI under Windows
-if( WIN32 )
-    add_definitions( -D_USE_MATH_DEFINES )
-endif( WIN32 )
+if(WIN32)
+    add_definitions(-D_USE_MATH_DEFINES)
+endif( WIN32)
 
 ####################################################
 # build unit tests
@@ -153,12 +153,12 @@ INCLUDE (CTest)
 ENABLE_TESTING()
 
 ####################################################
-set (PEDANTIC FALSE CACHE BOOL "Determines if we should compile with -Wall -Werror.")
-set (WITH_DESIGNER_PLUGIN TRUE CACHE BOOL "Build plugins for Qt Designer")
+set(PEDANTIC FALSE CACHE BOOL "Determines if we should compile with -Wall -Werror.")
+set(WITH_DESIGNER_PLUGIN TRUE CACHE BOOL "Build plugins for Qt Designer")
 add_feature_info("Qt Designer plugins" WITH_DESIGNER_PLUGIN "Marble widget support in Qt Designer. Toggle with WITH_DESIGNER_PLUGIN=YES/NO")
 
 set(EXEC_INSTALL_PREFIX  ${CMAKE_INSTALL_PREFIX} CACHE PATH  "Base directory for executables and libraries" FORCE)
-if (NOT QT_PLUGINS_DIR)
+if(NOT QT_PLUGINS_DIR)
    set(QT_PLUGINS_DIR ${CMAKE_INSTALL_LIBDIR}/plugins)
 endif()
 
@@ -171,7 +171,7 @@ if(WIN32)
     set(plugin_dir plugins)
 elseif(APPLE)
     # needed for finding bundle path in e.g. katlasdir.h
-    FIND_LIBRARY(APP_SERVICES_LIBRARY ApplicationServices )
+    FIND_LIBRARY(APP_SERVICES_LIBRARY ApplicationServices)
     MARK_AS_ADVANCED (APP_SERVICES_LIBRARY)
     SET(MAC_EXTRA_LIBS ${APP_SERVICES_LIBRARY})
       # for Mac OS X, everything is put inside an application bundle
@@ -206,26 +206,26 @@ if(NOT INCLUDE_INSTALL_DIR)
     set(INCLUDE_INSTALL_DIR "include")
 endif()
 
-if (NOT MARBLE_DATA_PATH)
-  set (MARBLE_DATA_PATH ${data_dir})
-endif (NOT MARBLE_DATA_PATH)
+if(NOT MARBLE_DATA_PATH)
+  set(MARBLE_DATA_PATH ${data_dir})
+endif(NOT MARBLE_DATA_PATH)
 
-if (NOT MARBLE_PLUGIN_PATH)
-  set (MARBLE_PLUGIN_PATH ${plugin_dir})
-endif (NOT MARBLE_PLUGIN_PATH)
+if(NOT MARBLE_PLUGIN_PATH)
+  set(MARBLE_PLUGIN_PATH ${plugin_dir})
+endif(NOT MARBLE_PLUGIN_PATH)
 
-if (NOT MARBLE_DATA_INSTALL_PATH)
-  set (MARBLE_DATA_INSTALL_PATH ${MARBLE_DATA_PATH})
-endif (NOT MARBLE_DATA_INSTALL_PATH)
+if(NOT MARBLE_DATA_INSTALL_PATH)
+  set(MARBLE_DATA_INSTALL_PATH ${MARBLE_DATA_PATH})
+endif(NOT MARBLE_DATA_INSTALL_PATH)
 
-if (NOT MARBLE_PLUGIN_INSTALL_PATH)
-  set (MARBLE_PLUGIN_INSTALL_PATH ${MARBLE_PLUGIN_PATH})
-endif (NOT MARBLE_PLUGIN_INSTALL_PATH)
+if(NOT MARBLE_PLUGIN_INSTALL_PATH)
+  set(MARBLE_PLUGIN_INSTALL_PATH ${MARBLE_PLUGIN_PATH})
+endif(NOT MARBLE_PLUGIN_INSTALL_PATH)
 
-#MESSAGE( STATUS, "MARBLE_PLUGIN_INSTALL_PATH: ${MARBLE_PLUGIN_INSTALL_PATH}" )
+#message( STATUS, "MARBLE_PLUGIN_INSTALL_PATH: ${MARBLE_PLUGIN_INSTALL_PATH}")
 
 if(WIN32)
-  set (STATIC_BUILD FALSE CACHE BOOL "Link to static Qt libs (win32 only)?")
+  set(STATIC_BUILD FALSE CACHE BOOL "Link to static Qt libs (win32 only)?")
 endif(WIN32)
 
 add_definitions(
@@ -236,7 +236,7 @@ add_definitions(
     -DQT_NO_CAST_FROM_BYTEARRAY
 )
 
-if (NOT WIN32)
+if(NOT WIN32)
     # Strict iterators can't be used on Windows, they lead to a link error
     # when application code iterates over a QList<QPoint> for instance
     # See example at https://bugreports.qt.io/browse/QTBUG-78112
@@ -252,16 +252,16 @@ else()
 endif(STATIC_BUILD)
 
 #############################################################
-if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_C_COMPILER MATCHES "icc")
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_C_COMPILER MATCHES "icc")
     # Its good programming practice to build with no warnings...
     add_definitions( -Wall -Wextra -Wundef -Wnon-virtual-dtor -Woverloaded-virtual -Wno-long-long
-                     -Wchar-subscripts -Wcast-align -Wpointer-arith -Wformat-security )
+                     -Wchar-subscripts -Wcast-align -Wpointer-arith -Wformat-security)
 
     # In pedantic mode, treat warnings as errors
-    if (PEDANTIC)
-        add_definitions( -Werror )
-    endif (PEDANTIC)
-endif (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_C_COMPILER MATCHES "icc")
+    if(PEDANTIC)
+        add_definitions( -Werror)
+    endif(PEDANTIC)
+endif(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_C_COMPILER MATCHES "icc")
 
 #############################################################
 # Add a compiler def so that we can conditionally compile
@@ -270,7 +270,7 @@ IF (CMAKE_BUILD_TYPE MATCHES Debug)
     IF(NOT MINGW)
         ADD_DEFINITIONS(-DDEBUG)
     ELSE(NOT MINGW)
-        REMOVE_DEFINITIONS( -DQT_NO_DEBUG )
+        REMOVE_DEFINITIONS( -DQT_NO_DEBUG)
     ENDIF(NOT MINGW)
 ENDIF (CMAKE_BUILD_TYPE MATCHES Debug)
 
@@ -315,7 +315,7 @@ add_subdirectory(data)
 
 include(DistTarget)
 
-if (BUILD_TESTING)
+if(BUILD_TESTING)
     add_subdirectory(tests)
 endif()
 
@@ -345,7 +345,7 @@ marble_install_po_files_as_qm(poqm)
 # So the respective macro ki18n_install can be used.
 # Likewise, it contains the translated user documentation, which is handled by kdoctools_install.
 # Just, the macros are not available here in the toplevel CMakeLists.txt file.
-# As a temporary hack (your task to improve it, dear reader :) ) the macros
+# As a temporary hack (your task to improve it, dear reader :)) the macros
 # are called only from src/apps/marble-kde/CMakeLists.txt.
 # That should catch 99.9 % cases of builds from released tarball, where all the
 # KF6-dependent apps and plugins will be built and installed together.

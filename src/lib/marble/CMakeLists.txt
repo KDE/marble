@@ -522,28 +522,28 @@ set(marblewidget_SRCS
 )
 
 
-if (MARBLE_NO_WEBKITWIDGETS)
+if(MARBLE_NO_WEBKITWIDGETS)
     LIST(APPEND marblewidget_SRCS
         NullMarbleWebView.cpp
         NullTinyWebBrowser.cpp
-        )
+)
 else()
     LIST(APPEND marblewidget_SRCS
         MarbleWebView.cpp
         TinyWebBrowser.cpp
         MarbleWebView.h
         TinyWebBrowser.h
-        )
+)
 endif()
 
-if (NOT MARBLE_NO_DBUS)
+if(NOT MARBLE_NO_DBUS)
     LIST(APPEND marblewidget_SRCS
         MarbleDBusInterface.cpp
         MarbleDBusInterface.h
-        )
+)
 endif()
 
-set (marblewidget_UI
+set(marblewidget_UI
     ${osm_UIS}
     LatLonBoxWidget.ui
     MapViewWidget.ui
@@ -584,16 +584,16 @@ set (marblewidget_UI
     FormattedTextWidget.ui
     ElevationWidget.ui
 )
-if (MARBLE_NO_WEBKITWIDGETS)
+if(MARBLE_NO_WEBKITWIDGETS)
     LIST(APPEND marblewidget_UI
         NullLegendWidget.ui
         NullWebPopupWidget.ui
-        )
+)
 else()
     LIST(APPEND marblewidget_UI
         LegendWidget.ui
         WebPopupWidget.ui
-        )
+)
 endif()
 
 # FIXME: cleaner approach of src/lib/marblwidget/MarbleControlBox.* vs. marble.qrc
@@ -634,36 +634,36 @@ target_link_libraries(marblewidget
         Qt6::PrintSupport
         Qt6::Concurrent
 )
-if (NOT MARBLE_NO_WEBKITWIDGETS)
+if(NOT MARBLE_NO_WEBKITWIDGETS)
     target_link_libraries(marblewidget
         PUBLIC
             Qt6::WebChannel
             Qt6::WebEngineWidgets
-    )
-endif ()
-if (NOT MARBLE_NO_DBUS)
+)
+endif()
+if(NOT MARBLE_NO_DBUS)
     target_link_libraries(marblewidget
         PRIVATE
             Qt6::DBus
-    )
-endif ()
-if (Phonon4Qt6_FOUND)
+)
+endif()
+if(Phonon4Qt6_FOUND)
     target_link_libraries(marblewidget
         PRIVATE
             Phonon::phonon4qt6
-    )
+)
 endif()
 
-if (APPLE)
+if(APPLE)
   # TODO: PUBLIC or can be PRIVATE?
   #defined in top level makefile
-  target_link_libraries(marblewidget PUBLIC ${MAC_EXTRA_LIBS} )
-endif (APPLE)
+  target_link_libraries(marblewidget PUBLIC ${MAC_EXTRA_LIBS})
+endif(APPLE)
 
 # TODO: still supported?
-if (CMAKE_SYSTEM_NAME MATCHES "SunOS")
+if(CMAKE_SYSTEM_NAME MATCHES "SunOS")
   target_link_libraries(marblewidget PUBLIC m)
-endif (CMAKE_SYSTEM_NAME MATCHES "SunOS")
+endif(CMAKE_SYSTEM_NAME MATCHES "SunOS")
 
 if(WIN32)
   # TODO: PUBLIC or can be PRIVATE?
@@ -676,11 +676,11 @@ set_target_properties(marblewidget  PROPERTIES
     COMPILE_FLAGS "-DKML_LAZY_IMP"
 )
 
-if (NOT ANDROID)
+if(NOT ANDROID)
   set_target_properties(marblewidget  PROPERTIES
     VERSION ${MARBLE_VERSION}
     SOVERSION ${MARBLE_SOVERSION}
-  )
+)
 endif()
 
 target_include_directories(marblewidget
@@ -702,24 +702,24 @@ endif()
 
 ########### install headers & cmake config files ###############
 
-if (APPLE)
+if(APPLE)
     # TODO: find how to install & deploy library, headers and config files as bundle for development
     return()
 endif()
 
-if (MARBLE_NO_WEBKITWIDGETS)
+if(MARBLE_NO_WEBKITWIDGETS)
     set(marble_WebKit
         NullMarbleWebView.h
         NullTinyWebBrowser.h
-        )
+)
 else()
     set(marble_WebKit
         MarbleWebView.h
         TinyWebBrowser.h
-        )
+)
 endif()
 
-install( FILES
+install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/marble_version.h
     ${CMAKE_CURRENT_BINARY_DIR}/marble_export.h
     ${graphicsview_HDRS}
@@ -927,7 +927,7 @@ if(NOT IS_ABSOLUTE "${PRI_ABS_LIB_INSTALL_DIR}")
 endif()
 
 set(PRI_DEPS "xml gui widgets network")
-if (NOT MARBLE_NO_WEBKITWIDGETS)
+if(NOT MARBLE_NO_WEBKITWIDGETS)
     set(PRI_DEPS "${PRI_DEPS} webenginewidgets")
 endif()
 
@@ -955,7 +955,7 @@ function(query_qmake result_variable qt_variable)
         COMMAND ${QMAKE_EXECUTABLE} -query "${qt_variable}"
         RESULT_VARIABLE return_code
         OUTPUT_VARIABLE output
-    )
+)
     if(return_code EQUAL 0)
         string(STRIP "${output}" output)
         file(TO_CMAKE_PATH "${output}" output_path)

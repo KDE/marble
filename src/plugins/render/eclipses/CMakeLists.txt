@@ -6,7 +6,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( eclipses_SRCS
+set(eclipses_SRCS
     EclipsesModel.cpp
     EclipsesItem.cpp
     EclipsesPlugin.cpp
@@ -19,10 +19,10 @@ set( eclipses_SRCS
 qt_wrap_ui( eclipses_SRCS
     EclipsesConfigDialog.ui
     EclipsesBrowserDialog.ui
-    EclipsesReminderDialog.ui )
+    EclipsesReminderDialog.ui)
 
-qt_add_resources( eclipses_SRCS eclipses.qrc )
+qt_add_resources( eclipses_SRCS eclipses.qrc)
 
-marble_add_plugin( EclipsesPlugin ${eclipses_SRCS} )
+marble_add_plugin( EclipsesPlugin ${eclipses_SRCS})
 
-target_link_libraries( EclipsesPlugin astro )
+target_link_libraries(EclipsesPlugin astro)

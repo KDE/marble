@@ -5,7 +5,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( wikipedia_SRCS WikipediaPlugin.cpp
+set(wikipedia_SRCS WikipediaPlugin.cpp
     WikipediaModel.cpp
     WikipediaItem.cpp
     GeonamesParser.cpp
@@ -14,10 +14,10 @@ set( wikipedia_SRCS WikipediaPlugin.cpp
     WikipediaItem.h
     GeonamesParser.h
 )
-set( wikipedia_UI WikipediaConfigWidget.ui )
+set(wikipedia_UI WikipediaConfigWidget.ui)
 
 qt_wrap_ui(wikipedia_SRCS ${wikipedia_UI})
 
-set( Wikipedia_LIBS Qt6::Svg )
+set(Wikipedia_LIBS Qt6::Svg)
 
-marble_add_plugin( Wikipedia ${wikipedia_SRCS} )
+marble_add_plugin( Wikipedia ${wikipedia_SRCS})

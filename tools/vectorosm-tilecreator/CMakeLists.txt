@@ -1,4 +1,4 @@
-if (POLICY CMP0063)
+if(POLICY CMP0063)
     cmake_policy(SET CMP0063 NEW)
 endif()
 
@@ -32,7 +32,7 @@ add_executable(marble-vectorosm-tilecreator
     vectorosm-tilecreator.cpp
 )
 target_link_libraries(marble-vectorosm-tilecreator vectorosm-toolchain)
-if (STATIC_BUILD)
+if(STATIC_BUILD)
     target_link_libraries(marble-vectorosm-tilecreator OsmPlugin ShpPlugin)
 endif()
 
@@ -40,7 +40,7 @@ add_executable(marble-vectorosm-process-land-polygons
     vectorosm-process-land-polygons.cpp
 )
 target_link_libraries(marble-vectorosm-process-land-polygons vectorosm-toolchain)
-if (STATIC_BUILD)
+if(STATIC_BUILD)
     target_link_libraries(marble-vectorosm-process-land-polygons OsmPlugin ShpPlugin)
 endif()
 
@@ -51,10 +51,10 @@ add_executable(marble-vectorosm-tirex-backend
     WayConcatenator.cpp
 )
 target_link_libraries(marble-vectorosm-tirex-backend vectorosm-toolchain)
-if (STATIC_BUILD)
+if(STATIC_BUILD)
     target_link_libraries(marble-vectorosm-tirex-backend OsmPlugin ShpPlugin)
 endif()
 
-if (BUILD_TESTING)
+if(BUILD_TESTING)
     add_subdirectory(autotests)
 endif()

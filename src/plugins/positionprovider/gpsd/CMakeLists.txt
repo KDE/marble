@@ -1,4 +1,4 @@
-PROJECT( GpsdPositionProviderPlugin )
+PROJECT( GpsdPositionProviderPlugin)
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
@@ -6,12 +6,12 @@ INCLUDE_DIRECTORIES(
  ${LIBGPS_INCLUDE_DIR}
 )
 
-set( gpsd_SRCS
+set(gpsd_SRCS
  GpsdConnection.cpp
  GpsdPositionProviderPlugin.cpp
  GpsdThread.cpp
 )
 
-set( GpsdPositionProviderPlugin_LIBS ${LIBGPS_LIBRARIES} )
+set(GpsdPositionProviderPlugin_LIBS ${LIBGPS_LIBRARIES})
 
-marble_add_plugin( GpsdPositionProviderPlugin ${gpsd_SRCS} )
+marble_add_plugin( GpsdPositionProviderPlugin ${gpsd_SRCS})

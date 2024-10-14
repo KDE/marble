@@ -5,6 +5,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( progress_SRCS ProgressFloatItem.cpp ProgressFloatItem.h)
+set(progress_SRCS ProgressFloatItem.cpp ProgressFloatItem.h)
 
-marble_add_plugin( ProgressFloatItem ${progress_SRCS} )
+marble_add_plugin( ProgressFloatItem ${progress_SRCS})

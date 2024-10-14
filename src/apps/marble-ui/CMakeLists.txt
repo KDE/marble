@@ -9,7 +9,7 @@ qt_add_resources(marble_SRCS marble.qrc)
 
 qt_wrap_ui(marble_SRCS ${marble_UI})
 
-add_library (marbleui STATIC ${marble_SRCS})
+add_library(marbleui STATIC ${marble_SRCS})
 
 target_link_libraries (
     marbleui
@@ -20,12 +20,12 @@ target_link_libraries (
     PRIVATE
         Qt6::Network
 )
-if (NOT MARBLE_NO_DBUS)
-    target_link_libraries( marbleui
+if(NOT MARBLE_NO_DBUS)
+    target_link_libraries(marbleui
         PRIVATE
             Qt6::DBus
-    )
-endif ()
+)
+endif()
 
 if(WIN32)
   # TODO: PUBLIC or can be PRIVATE?
@@ -35,7 +35,7 @@ if(WIN32)
         ws2_32
         imm32
         winmm
-    )
+)
 endif(WIN32)
 
 ## this works for win32 only because FindQt does not handle this correct

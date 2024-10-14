@@ -7,7 +7,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( satellites_SRCS
+set(satellites_SRCS
  TrackerPluginModel.cpp
  TrackerPluginItem.cpp
 
@@ -35,12 +35,12 @@ set( satellites_SRCS
  SatellitesConfigLeafItem.h
 )
 
-qt_wrap_ui( satellites_SRCS SatellitesConfigDialog.ui )
+qt_wrap_ui( satellites_SRCS SatellitesConfigDialog.ui)
 
-qt_add_resources( satellites_SRCS satellites.qrc )
+qt_add_resources( satellites_SRCS satellites.qrc)
 
 marble_add_plugin( SatellitesPlugin
  ${satellites_SRCS}
- ${sgp4_SRCS} )
+ ${sgp4_SRCS})
 
-target_link_libraries( SatellitesPlugin astro sgp4 )
+target_link_libraries(SatellitesPlugin astro sgp4)

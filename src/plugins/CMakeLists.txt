@@ -9,10 +9,10 @@ ecm_qt_export_logging_category(
 add_definitions("-DLOGGING_IDENTIFIER=MARBLE_PLUGINS")
 
 if(NOT ANDROID)
-    add_subdirectory( designer )
-    add_subdirectory( templates )
+    add_subdirectory(designer)
+    add_subdirectory(templates)
 endif()
 
-add_subdirectory( render )
-add_subdirectory( positionprovider )
-add_subdirectory( runner )
+add_subdirectory(render)
+add_subdirectory(positionprovider)
+add_subdirectory(runner)

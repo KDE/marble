@@ -5,11 +5,11 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( postalcode_SRCS PostalCodePlugin.cpp
+set(postalcode_SRCS PostalCodePlugin.cpp
                      PostalCodePlugin.h
                      PostalCodeModel.cpp
                      PostalCodeModel.h
                      PostalCodeItem.cpp
-                     PostalCodeItem.h )
+                     PostalCodeItem.h)
 
-marble_add_plugin( PostalCode ${postalcode_SRCS} )
+marble_add_plugin( PostalCode ${postalcode_SRCS})

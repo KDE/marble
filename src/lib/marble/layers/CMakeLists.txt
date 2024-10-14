@@ -1,4 +1,4 @@
-set( layers_HDRS
+set(layers_HDRS
     FogLayer.h
     FpsLayer.h
     GeometryLayer.h
@@ -11,7 +11,7 @@ set( layers_HDRS
     VectorTileLayer.h
 )
 
-set( layers_SRCS
+set(layers_SRCS
     layers/FloatItemsLayer.cpp
     layers/FogLayer.cpp
     layers/FpsLayer.cpp

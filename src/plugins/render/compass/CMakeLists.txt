@@ -5,11 +5,11 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( compass_SRCS CompassFloatItem.cpp CompassFloatItem.h)
-set( compass_UI CompassConfigWidget.ui )
-qt_wrap_ui( compass_SRCS ${compass_UI} )
-qt_add_resources( compass_SRCS compass.qrc )
+set(compass_SRCS CompassFloatItem.cpp CompassFloatItem.h)
+set(compass_UI CompassConfigWidget.ui)
+qt_wrap_ui( compass_SRCS ${compass_UI})
+qt_add_resources( compass_SRCS compass.qrc)
 
-set( CompassFloatItem_LIBS Qt6::Svg )
+set(CompassFloatItem_LIBS Qt6::Svg)
 
-marble_add_plugin( CompassFloatItem ${compass_SRCS} )
+marble_add_plugin( CompassFloatItem ${compass_SRCS})

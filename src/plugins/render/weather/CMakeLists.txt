@@ -5,7 +5,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( weather_SRCS WeatherData.cpp
+set(weather_SRCS WeatherData.cpp
     WeatherItem.cpp
     WeatherModel.cpp
     WeatherPlugin.cpp
@@ -36,11 +36,11 @@ set( weather_SRCS WeatherData.cpp
     GeoNamesWeatherService.h
     GeoNamesWeatherItem.h
 )
-set( weather_UI WeatherConfigWidget.ui )
+set(weather_UI WeatherConfigWidget.ui)
 
-qt_wrap_ui( weather_SRCS ${weather_UI} )
-qt_add_resources( weather_SRCS weather.qrc )
+qt_wrap_ui( weather_SRCS ${weather_UI})
+qt_add_resources( weather_SRCS weather.qrc)
 
 set(Weather_LIBS Qt6::Svg)
 
-marble_add_plugin( Weather ${weather_SRCS} )
+marble_add_plugin( Weather ${weather_SRCS})

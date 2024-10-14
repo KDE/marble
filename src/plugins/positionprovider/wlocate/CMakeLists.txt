@@ -1,4 +1,4 @@
-PROJECT( WlocatePositionProviderPlugin )
+PROJECT( WlocatePositionProviderPlugin)
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
@@ -8,10 +8,10 @@ INCLUDE_DIRECTORIES(
 
 INCLUDE_DIRECTORIES(${Qt6Concurrent_INCLUDE_DIRS})
 
-set( wlocate_SRCS
+set(wlocate_SRCS
  WlocatePositionProviderPlugin.cpp
 )
 
-set( WlocatePositionProviderPlugin_LIBS ${LIBWLOCATE_LIBRARIES} )
+set(WlocatePositionProviderPlugin_LIBS ${LIBWLOCATE_LIBRARIES})
 
-marble_add_plugin( WlocatePositionProviderPlugin ${wlocate_SRCS} )
+marble_add_plugin( WlocatePositionProviderPlugin ${wlocate_SRCS})

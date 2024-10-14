@@ -6,7 +6,7 @@ include_directories(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( ${TARGET}_SRC main.cpp )
-add_executable( ${TARGET} ${${TARGET}_SRC} )
+set(${TARGET}_SRC main.cpp)
+add_executable(${TARGET} ${${TARGET}_SRC})
 
-target_link_libraries( ${TARGET} Qt6::Core Qt6::Sql )
+target_link_libraries(${TARGET} Qt6::Core Qt6::Sql)

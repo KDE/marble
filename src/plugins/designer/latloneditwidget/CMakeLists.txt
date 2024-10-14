@@ -1,4 +1,4 @@
-PROJECT( LatLonEditPlugin )
+PROJECT( LatLonEditPlugin)
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
@@ -7,6 +7,6 @@ INCLUDE_DIRECTORIES(
  ${Qt6Designer_INCLUDE_DIRS}
 )
 
-set( latloneditplugin_SRCS LatLonEditPlugin.cpp LatLonEditPlugin.h)
+set(latloneditplugin_SRCS LatLonEditPlugin.cpp LatLonEditPlugin.h)
 
-marble_add_designer_plugin( LatLonEditPlugin ${latloneditplugin_SRCS} )
+marble_add_designer_plugin( LatLonEditPlugin ${latloneditplugin_SRCS})

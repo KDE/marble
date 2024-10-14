@@ -6,12 +6,12 @@ include_directories(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( ${TARGET}_SRC main.cpp)
-add_executable( ${TARGET} ${${TARGET}_SRC} )
+set(${TARGET}_SRC main.cpp)
+add_executable(${TARGET} ${${TARGET}_SRC})
 
 target_link_libraries(${TARGET} marblewidget)
 
-install( TARGETS ${TARGET} RUNTIME DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} )
-install( FILES ${${TARGET}_SRC} Readme.txt DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} )
-install( FILES CMakeLists.txt.external DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} RENAME CMakeLists.txt )
-install( FILES hello-marble.pro.external DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} RENAME hello-marble.pro )
+install(TARGETS ${TARGET} RUNTIME DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET})
+install(FILES ${${TARGET}_SRC} Readme.txt DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET})
+install(FILES CMakeLists.txt.external DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} RENAME CMakeLists.txt)
+install(FILES hello-marble.pro.external DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} RENAME hello-marble.pro)

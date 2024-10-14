@@ -9,7 +9,7 @@ include_directories(
  ../../src/plugins/runner/local-osm-search
 )
 
-set( ${TARGET}_SRC
+set(${TARGET}_SRC
 OsmRegion.cpp
 OsmRegionTree.cpp
 OsmParser.cpp
@@ -25,9 +25,9 @@ PROTOBUF_GENERATE_CPP(PROTO_SRCS PROTO_HDRS
 pbf/fileformat.proto
 pbf/osmformat.proto
 )
-add_executable( ${TARGET} ${${TARGET}_SRC} ${PROTO_SRCS} ${PROTO_HDRS} )
+add_executable(${TARGET} ${${TARGET}_SRC} ${PROTO_SRCS} ${PROTO_HDRS})
 
-target_link_libraries( ${TARGET}
+target_link_libraries(${TARGET}
     marblewidget
     Qt6::Sql
     ${PROTOBUF_LIBRARIES}

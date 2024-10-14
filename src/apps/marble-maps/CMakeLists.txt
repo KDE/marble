@@ -18,7 +18,7 @@ if(NOT MARBLE_NO_WEBKITWIDGETS)
     add_definitions(-DMARBLE_WEBKITWIDGETS=1)
 endif()
 
-if (NOT ANDROID)
+if(NOT ANDROID)
     target_link_libraries(marble-maps PUBLIC KF6::Crash)
 endif()
 
