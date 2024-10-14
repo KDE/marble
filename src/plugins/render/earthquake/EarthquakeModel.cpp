@@ -22,9 +22,9 @@ namespace Marble
 {
 
 EarthquakeModel::EarthquakeModel(const MarbleModel *marbleModel, QObject *parent)
-    : AbstractDataPluginModel("earthquake", marbleModel, parent)
+    : AbstractDataPluginModel(QStringLiteral("earthquake"), marbleModel, parent)
     , m_minMagnitude(0.0)
-    , m_startDate(QDateTime::fromString("2006-02-04", "yyyy-MM-dd"))
+    , m_startDate(QDateTime::fromString(QStringLiteral("2006-02-04"), QStringLiteral("yyyy-MM-dd")))
     , m_endDate(QDateTime::currentDateTime())
 {
     // nothing to do

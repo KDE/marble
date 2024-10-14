@@ -21,7 +21,7 @@ namespace Marble
 {
 
 FoursquareModel::FoursquareModel(const MarbleModel *marbleModel, QObject *parent)
-    : AbstractDataPluginModel("foursquare", marbleModel, parent)
+    : AbstractDataPluginModel(QStringLiteral("foursquare"), marbleModel, parent)
 {
     // Enjoy laziness
 }
