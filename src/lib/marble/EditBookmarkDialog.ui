@@ -76,7 +76,7 @@ p, li { white-space: pre-wrap; }
        <item>
         <widget class="QPushButton" name="m_newFolderButton">
          <property name="text">
-          <string>&amp;Add Folder...</string>
+          <string>&amp;Add Folder…</string>
          </property>
         </widget>
        </item>

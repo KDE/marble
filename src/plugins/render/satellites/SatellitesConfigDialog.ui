@@ -178,7 +178,7 @@
              <string>Remove selected data source.</string>
             </property>
             <property name="text">
-             <string>...</string>
+             <string>…</string>
             </property>
             <property name="icon">
              <iconset resource="satellites.qrc">

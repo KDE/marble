@@ -294,7 +294,7 @@ p, li { white-space: pre-wrap; }
           <item row="0" column="0" colspan="2">
            <widget class="QCheckBox" name="checkBoxWmsMultipleSelections">
             <property name="toolTip">
-             <string>Enable this to select multiple layers without keyboard shortcuts (Shift, Ctrl, Ctrl+A, ...)</string>
+             <string>Enable this to select multiple layers without keyboard shortcuts (Shift, Ctrl, Ctrl+A, …)</string>
             </property>
             <property name="text">
              <string>Multiple Selections</string>
@@ -586,7 +586,7 @@ p, li { white-space: pre-wrap; }
       <item>
        <widget class="QPushButton" name="pushButtonSource">
         <property name="text">
-         <string>...</string>
+         <string>…</string>
         </property>
        </widget>
       </item>
@@ -822,7 +822,7 @@ p, li { white-space: pre-wrap; }
           <item>
            <widget class="QPushButton" name="pushButtonPreview">
             <property name="text">
-             <string>Change...</string>
+             <string>Change…</string>
             </property>
            </widget>
           </item>
@@ -871,7 +871,7 @@ p, li { white-space: pre-wrap; }
       <item>
        <widget class="QPushButton" name="pushButtonLegend_2">
         <property name="text">
-         <string>...</string>
+         <string>…</string>
         </property>
        </widget>
       </item>

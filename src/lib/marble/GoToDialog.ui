@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Go To...</string>
+   <string>Go To…</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
@@ -75,7 +75,7 @@
    <item row="2" column="0">
     <widget class="QLabel" name="descriptionLabel">
      <property name="text">
-      <string>Enter a search term and press Enter. &lt;a href=&quot;https://userbase.kde.org/Marble/Search&quot;&gt;Details...&lt;/a&gt;</string>
+      <string>Enter a search term and press Enter. &lt;a href=&quot;https://userbase.kde.org/Marble/Search&quot;&gt;Details…&lt;/a&gt;</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
