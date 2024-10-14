@@ -134,8 +134,11 @@ QIcon ElevationProfileFloatItem::icon() const
 
 void ElevationProfileFloatItem::initialize()
 {
-    connect(marbleModel()->elevationModel(), SIGNAL(updateAvailable()), &m_routeDataSource, SLOT(requestUpdate()));
-    connect(marbleModel()->routingManager()->routingModel(), SIGNAL(currentRouteChanged()), &m_routeDataSource, SLOT(requestUpdate()));
+    connect(marbleModel()->elevationModel(), &ElevationModel::updateAvailable, &m_routeDataSource, &ElevationProfileRouteDataSource::requestUpdate);
+    connect(marbleModel()->routingManager()->routingModel(),
+            &RoutingModel::currentRouteChanged,
+            &m_routeDataSource,
+            &ElevationProfileRouteDataSource::requestUpdate);
     connect(this, SIGNAL(dataUpdated()), SLOT(forceRepaint()));
     switchDataSource(&m_routeDataSource);
 

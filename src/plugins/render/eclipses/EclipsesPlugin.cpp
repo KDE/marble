@@ -182,17 +182,17 @@ void EclipsesPlugin::initialize()
 
     m_eclipsesListMenu = new QMenu();
     m_eclipsesActionGroup->addAction(m_eclipsesListMenu->menuAction());
-    connect(m_eclipsesListMenu, SIGNAL(triggered(QAction *)), this, SLOT(showEclipseFromMenu(QAction *)));
+    connect(m_eclipsesListMenu, &QMenu::triggered, this, &EclipsesPlugin::showEclipseFromMenu);
 
     m_eclipsesMenuAction = new QAction(tr("Browse Ecli&pses..."), m_eclipsesActionGroup);
     m_eclipsesMenuAction->setIcon(QIcon(QStringLiteral(":res/eclipses.png")));
     m_eclipsesActionGroup->addAction(m_eclipsesMenuAction);
-    connect(m_eclipsesMenuAction, SIGNAL(triggered()), m_browserDialog, SLOT(show()));
+    connect(m_eclipsesMenuAction, &QAction::triggered, m_browserDialog, &QWidget::show);
 
     // initialize eclipses model
     m_model = new EclipsesModel(marbleModel());
 
-    connect(marbleModel()->clock(), SIGNAL(timeChanged()), this, SLOT(updateEclipses()));
+    connect(marbleModel()->clock(), &MarbleClock::timeChanged, this, &EclipsesPlugin::updateEclipses);
 
     m_isInitialized = true;
 
@@ -212,7 +212,7 @@ bool EclipsesPlugin::eventFilter(QObject *object, QEvent *e)
     // delayed initialization of pointer to marble widget
     auto widget = dynamic_cast<MarbleWidget *>(object);
     if (widget && m_marbleWidget != widget) {
-        connect(widget, SIGNAL(themeChanged(QString)), this, SLOT(updateMenuItemState()));
+        connect(widget, &MarbleWidget::themeChanged, this, &EclipsesPlugin::updateMenuItemState);
         m_marbleWidget = widget;
     }
 
