@@ -203,9 +203,9 @@ BookmarkSyncManager::Private::Private(BookmarkSyncManager *parent, CloudSyncMana
 {
     m_cachePath = MarbleDirs::localPath() + QLatin1StringView("/cloudsync/cache/bookmarks");
     m_localBookmarksPath = MarbleDirs::localPath() + QLatin1StringView("/bookmarks/bookmarks.kml");
-    m_downloadEndpoint = "bookmarks/kml";
-    m_uploadEndpoint = "bookmarks/update";
-    m_timestampEndpoint = "bookmarks/timestamp";
+    m_downloadEndpoint = QStringLiteral("bookmarks/kml");
+    m_uploadEndpoint = QStringLiteral("bookmarks/update");
+    m_timestampEndpoint = QStringLiteral("bookmarks/timestamp");
 }
 
 BookmarkSyncManager::BookmarkSyncManager(CloudSyncManager *cloudSyncManager)

@@ -64,11 +64,11 @@ public:
 OwncloudSyncBackend::Private::Private(CloudSyncManager *cloudSyncManager)
     : m_cacheDir(MarbleDirs::localPath() + QLatin1StringView("/cloudsync/cache/routes/"))
     // Route API endpoints
-    , m_routeUploadEndpoint("routes/create")
-    , m_routeListEndpoint("routes")
-    , m_routeDownloadEndpoint("routes")
-    , m_routeDeleteEndpoint("routes/delete")
-    , m_routePreviewEndpoint("routes/preview")
+    , m_routeUploadEndpoint(QStringLiteral("routes/create"))
+    , m_routeListEndpoint(QStringLiteral("routes"))
+    , m_routeDownloadEndpoint(QStringLiteral("routes"))
+    , m_routeDeleteEndpoint(QStringLiteral("routes/delete"))
+    , m_routePreviewEndpoint(QStringLiteral("routes/preview"))
     , m_cloudSyncManager(cloudSyncManager)
 {
 }
