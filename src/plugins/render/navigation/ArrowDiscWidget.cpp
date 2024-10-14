@@ -19,7 +19,7 @@ ArrowDiscWidget::ArrowDiscWidget(QWidget *parent)
     : QWidget(parent)
     , m_arrowPressed(Qt::NoArrow)
     , m_repetitions(0)
-    , m_imagePath("marble/navigation/navigational_arrows")
+    , m_imagePath(QStringLiteral("marble/navigation/navigational_arrows"))
 {
     setMouseTracking(true);
 
@@ -30,15 +30,15 @@ ArrowDiscWidget::ArrowDiscWidget(QWidget *parent)
 
 ArrowDiscWidget::~ArrowDiscWidget()
 {
-    QPixmapCache::remove("marble/navigation/navigational_arrows");
-    QPixmapCache::remove("marble/navigation/navigational_arrows_hover_bottom");
-    QPixmapCache::remove("marble/navigation/navigational_arrows_hover_left");
-    QPixmapCache::remove("marble/navigation/navigational_arrows_hover_right");
-    QPixmapCache::remove("marble/navigation/navigational_arrows_hover_top");
-    QPixmapCache::remove("marble/navigation/navigational_arrows_press_bottom");
-    QPixmapCache::remove("marble/navigation/navigational_arrows_press_left");
-    QPixmapCache::remove("marble/navigation/navigational_arrows_press_right");
-    QPixmapCache::remove("marble/navigation/navigational_arrows_press_top");
+    QPixmapCache::remove(QStringLiteral("marble/navigation/navigational_arrows"));
+    QPixmapCache::remove(QStringLiteral("marble/navigation/navigational_arrows_hover_bottom"));
+    QPixmapCache::remove(QStringLiteral("marble/navigation/navigational_arrows_hover_left"));
+    QPixmapCache::remove(QStringLiteral("marble/navigation/navigational_arrows_hover_right"));
+    QPixmapCache::remove(QStringLiteral("marble/navigation/navigational_arrows_hover_top"));
+    QPixmapCache::remove(QStringLiteral("marble/navigation/navigational_arrows_press_bottom"));
+    QPixmapCache::remove(QStringLiteral("marble/navigation/navigational_arrows_press_left"));
+    QPixmapCache::remove(QStringLiteral("marble/navigation/navigational_arrows_press_right"));
+    QPixmapCache::remove(QStringLiteral("marble/navigation/navigational_arrows_press_top"));
 }
 
 void ArrowDiscWidget::setMarbleWidget(MarbleWidget *marbleWidget)
@@ -67,22 +67,22 @@ void ArrowDiscWidget::mousePressEvent(QMouseEvent *mouseEvent)
         m_arrowPressed = arrowUnderMouse(mouseEvent->pos());
         switch (m_arrowPressed) {
         case Qt::NoArrow:
-            m_imagePath = "marble/navigation/navigational_arrows";
+            m_imagePath = QStringLiteral("marble/navigation/navigational_arrows");
             break;
         case Qt::UpArrow:
-            m_imagePath = "marble/navigation/navigational_arrows_press_top";
+            m_imagePath = QStringLiteral("marble/navigation/navigational_arrows_press_top");
             m_marbleWidget->moveUp(Marble::Linear);
             break;
         case Qt::DownArrow:
-            m_imagePath = "marble/navigation/navigational_arrows_press_bottom";
+            m_imagePath = QStringLiteral("marble/navigation/navigational_arrows_press_bottom");
             m_marbleWidget->moveDown(Marble::Linear);
             break;
         case Qt::LeftArrow:
-            m_imagePath = "marble/navigation/navigational_arrows_press_left";
+            m_imagePath = QStringLiteral("marble/navigation/navigational_arrows_press_left");
             m_marbleWidget->moveLeft(Marble::Linear);
             break;
         case Qt::RightArrow:
-            m_imagePath = "marble/navigation/navigational_arrows_press_right";
+            m_imagePath = QStringLiteral("marble/navigation/navigational_arrows_press_right");
             m_marbleWidget->moveRight(Marble::Linear);
             break;
         }
