@@ -29,6 +29,7 @@
   <name xml:lang="fi">Marble</name>
   <name xml:lang="fr">Marble</name>
   <name xml:lang="gl">Marble</name>
+  <name xml:lang="he">Marble</name>
   <name xml:lang="id">Marble</name>
   <name xml:lang="is">Marble</name>
   <name xml:lang="it">Marble</name>
@@ -69,6 +70,7 @@
   <summary xml:lang="fi">Virtuaalinen maapallo</summary>
   <summary xml:lang="fr">Globe terrestre virtuel</summary>
   <summary xml:lang="gl">Globo virtual.</summary>
+  <summary xml:lang="he">גלובוס וירטואלי</summary>
   <summary xml:lang="id">Globe Virtual</summary>
   <summary xml:lang="is">Sýndarhnöttur</summary>
   <summary xml:lang="it">Globo virtuale</summary>
@@ -108,6 +110,7 @@
     <p xml:lang="fi">Marble on virtuaalinen maapallo ja maailmankartta – karttojen linkkuveitsi, jolla oppia lisää maapallosta ja muista planeetoista.</p>
     <p xml:lang="fr">Marble est un globe terrestre virtuel et un atlas mondial — votre couteau suisse pour les cartes, que vous pouvez utiliser pour en apprendre plus sur la Terre et les autres planètes.</p>
     <p xml:lang="gl">Marble é un globo terráqueo virtual e un atlas mundial. A navalla suíza dos mapas que lle permite aprender máis sobre a Terra e outros planetas.</p>
+    <p xml:lang="he">Marble הוא גלובוס וירטואלי ואטלס עולמי — האולר השוייצרי שלך שאפשר להשתמש בו כדי ללמוד עוד על כדור הארץ וכוכבי לכת נוספים.</p>
     <p xml:lang="id">Marble adalah bola dunia dan atlas dunia — pisau tentara Swiss Anda untuk peta yang dapat Anda gunakan untuk mempelajari selebihnya tentang Bumi dan planet lainnya.</p>
     <p xml:lang="it">Marble è un globo virtuale e un atlante del mondo — il tuo coltellino svizzero per le mappe che puoi usare per imparare di più sulla Terra e sugli altri pianeti.</p>
     <p xml:lang="ka">Marble ვირტუალური გლობუსი და მსოფლიოს ატლასია - თქვენი ალესილი დანა რუკებისთვის, რომელიც შეგიძლიათ, დედამიწის და სხვა პლანეტების შესახებ მეტის გასაგებად შეგიძლიათ, გამოიყენოთ.</p>
@@ -219,6 +222,7 @@
       <caption xml:lang="fi">Pallokartta Marblessa</caption>
       <caption xml:lang="fr">Globe terrestre dans Marble</caption>
       <caption xml:lang="gl">Globo terráqueo en Marble.</caption>
+      <caption xml:lang="he">גלובוס כדור הארץ ב־Marble</caption>
       <caption xml:lang="id">Globe bumi di Marble</caption>
       <caption xml:lang="is">Hnattlíkan í Marble</caption>
       <caption xml:lang="it">Il globo terrestre in Marble</caption>
