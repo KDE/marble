@@ -7,13 +7,11 @@
 
 #include <QIcon>
 
-#include "MarbleDebug.h"
 #include "MarbleGlobal.h"
 #include "MarbleGraphicsGridLayout.h"
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
 #include "PositionTracking.h"
-#include "ViewportParams.h"
 #include "WidgetGraphicsItem.h"
 
 namespace Marble

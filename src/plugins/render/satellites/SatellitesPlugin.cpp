@@ -11,11 +11,8 @@
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
 #include "MarbleWidgetPopupMenu.h"
-#include "SatellitesConfigLeafItem.h"
 #include "SatellitesConfigModel.h"
-#include "SatellitesConfigNodeItem.h"
 #include "SatellitesMSCItem.h"
-#include "SatellitesTLEItem.h"
 #include "ViewportParams.h"
 
 #include "ui_SatellitesConfigDialog.h"

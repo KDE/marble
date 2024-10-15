@@ -10,12 +10,9 @@
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataPlacemark.h"
-#include "GeoDataPoint.h"
-#include "GeoDataStyle.h"
 #include "GeoDataTrack.h"
 #include "GeoPainter.h"
 #include "MarbleClock.h"
-#include "MarbleGlobal.h"
 
 namespace Marble
 {

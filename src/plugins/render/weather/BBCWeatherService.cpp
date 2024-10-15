@@ -12,11 +12,8 @@
 #include "BBCWeatherItem.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
-#include "MarbleDebug.h"
 #include "MarbleDirs.h"
-#include "MarbleGlobal.h"
 #include "StationListParser.h"
-#include "WeatherData.h"
 #include "WeatherModel.h"
 
 // Qt

@@ -7,8 +7,6 @@
 #include "ProgressFloatItem.h"
 
 #include "HttpDownloadManager.h"
-#include "MarbleDebug.h"
-#include "MarbleDirs.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
 #include "ViewportParams.h"

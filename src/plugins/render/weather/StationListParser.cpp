@@ -9,7 +9,6 @@
 // Marble
 #include "BBCStation.h"
 #include "GeoDataCoordinates.h"
-#include "MarbleDebug.h"
 #include "MarbleGlobal.h"
 
 // Qt

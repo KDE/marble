@@ -10,7 +10,6 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataTreeModel.h"
 #include "HttpDownloadManager.h"
-#include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
 #include "TrackerPluginItem.h"

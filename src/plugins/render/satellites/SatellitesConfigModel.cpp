@@ -5,7 +5,6 @@
 
 #include "SatellitesConfigModel.h"
 
-#include "MarbleDebug.h"
 #include "SatellitesConfigLeafItem.h"
 
 namespace Marble

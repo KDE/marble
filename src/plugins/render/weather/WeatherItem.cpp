@@ -11,7 +11,6 @@
 #include "FrameGraphicsItem.h"
 #include "GeoPainter.h"
 #include "LabelGraphicsItem.h"
-#include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleGraphicsGridLayout.h"
 #include "MarbleWidget.h"
@@ -34,7 +33,6 @@
 namespace Marble
 {
 
-const QSize borderSpacing(4, 4);
 const QSize imageSize(28, 28);
 const double imageSizeRatio = ((double)imageSize.width()) / ((double)imageSize.height());
 

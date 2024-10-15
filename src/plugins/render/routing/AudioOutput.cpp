@@ -5,8 +5,6 @@
 
 #include "AudioOutput.h"
 
-#include "MarbleDebug.h"
-#include "MarbleDirs.h"
 #include "routing/Route.h"
 #include "routing/VoiceNavigationModel.h"
 

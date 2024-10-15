@@ -7,12 +7,9 @@
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataPlacemark.h"
-#include "GeoDataStyle.h"
 #include "GeoDataTrack.h"
 #include "GeoPainter.h"
 #include "MarbleClock.h"
-#include "MarbleDebug.h"
-#include "MarbleGlobal.h"
 
 #include <sgp4ext.h>
 

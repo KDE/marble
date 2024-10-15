@@ -8,8 +8,6 @@
 
 // Marble
 #include "BBCParser.h"
-#include "MarbleDebug.h"
-#include "WeatherData.h"
 
 // Qt
 #include <QUrl>
