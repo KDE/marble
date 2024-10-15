@@ -3177,14 +3177,16 @@ msgid "Bookmark Manager"
 msgstr "Mountain"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:25
+#, fuzzy
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Import Bookmarks..."
-msgstr ""
+msgid "Import Bookmarks…"
+msgstr "Mountain"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
+#, fuzzy
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Export Bookmarks..."
-msgstr ""
+msgid "Export Bookmarks…"
+msgstr "Mountain"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
@@ -3193,12 +3195,12 @@ msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
-msgid "New..."
+msgid "New…"
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Rename..."
+msgid "Rename…"
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
@@ -3499,7 +3501,7 @@ msgstr "bjart"
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
 msgctxt "CurrentLocationWidget|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
@@ -5054,9 +5056,10 @@ msgid "&Folder:"
 msgstr "Mountain"
 
 #: src/lib/marble/EditBookmarkDialog.ui:79
+#, fuzzy
 msgctxt "UiEditBookmarkDialog|"
-msgid "&Add Folder..."
-msgstr ""
+msgid "&Add Folder…"
+msgstr "Mountain"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -7518,14 +7521,14 @@ msgstr[1] ""
 
 #: src/lib/marble/GoToDialog.ui:14
 msgctxt "GoTo|"
-msgid "Go To..."
+msgid "Go To…"
 msgstr ""
 
 #: src/lib/marble/GoToDialog.ui:78
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-"Marble/Search\">Details...</a>"
+"Marble/Search\">Details…</a>"
 msgstr ""
 
 #: src/lib/marble/GoToDialog.ui:93
@@ -8206,7 +8209,7 @@ msgstr ""
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Ctrl, Ctrl+A, ...)"
+"Ctrl, Ctrl+A, …)"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:300
@@ -8328,7 +8331,7 @@ msgstr ""
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
 msgctxt "MapWizard|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:615
@@ -8442,7 +8445,7 @@ msgstr "Opna skrá"
 #: src/lib/marble/MapWizard.ui:825
 #, fuzzy
 msgctxt "MapWizard|"
-msgid "Change..."
+msgid "Change…"
 msgstr "Stilla"
 
 #: src/lib/marble/MapWizard.ui:855
@@ -9881,7 +9884,7 @@ msgstr ""
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
 msgctxt "MarbleNavigator|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
@@ -10618,7 +10621,7 @@ msgstr ""
 #: src/lib/marble/MovieCaptureDialog.ui:36
 #, fuzzy
 msgctxt "MovieCaptureDialog|"
-msgid "Open..."
+msgid "Open…"
 msgstr "&Opna kort..."
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
@@ -10783,7 +10786,7 @@ msgstr ""
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
 msgctxt "PlacemarkEditHeaderPrivate|"
-msgid "Browse..."
+msgid "Browse…"
 msgstr ""
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
@@ -11552,13 +11555,13 @@ msgstr ""
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
-msgid "&Add..."
+msgid "&Add…"
 msgstr ""
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
 #, fuzzy
 msgctxt "RoutingSettingsWidget|"
-msgid "&Configure..."
+msgid "&Configure…"
 msgstr "Stilla"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
@@ -12044,7 +12047,7 @@ msgstr ""
 #: src/lib/marble/TourCaptureDialog.ui:81
 #, fuzzy
 msgctxt "TourCaptureDialog|"
-msgid "Open..."
+msgid "Open…"
 msgstr "&Opna kort..."
 
 #: src/lib/marble/TourCaptureDialog.ui:97
@@ -13345,7 +13348,7 @@ msgstr ""
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
 #, fuzzy
 msgctxt "EclipsesBrowserDialog|"
-msgid "&Settings..."
+msgid "&Settings…"
 msgstr "&Stillingar"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
@@ -13612,19 +13615,19 @@ msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "A float item that shows the elevation profile of the current route."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:188
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:191
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:195
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:198
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid ""
 "Not enough points in the current viewport.\n"
 "Try to disable 'Zoom to viewport'."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:278
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:281
 #, qt-format
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Difference: %1 %2"
@@ -15130,7 +15133,7 @@ msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
 msgctxt "SatellitesConfigDialog|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
@@ -17725,6 +17728,26 @@ msgid "This is a template class for float items."
 msgstr ""
 
 #, fuzzy
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "&Opna kort..."
+
+#, fuzzy
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure..."
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "&Opna kort..."
+
+#, fuzzy
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Settings..."
+#~ msgstr "&Stillingar"
+
+#, fuzzy
 #~ msgctxt "Bookmarks|"
 #~ msgid "Removed"
 #~ msgstr "Mountain"
@@ -17753,11 +17776,6 @@ msgstr ""
 #~ msgctxt "MainScreen|"
 #~ msgid "About"
 #~ msgstr "Um"
-
-#, fuzzy
-#~ msgctxt "MainScreen|"
-#~ msgid "Bookmarks"
-#~ msgstr "Mountain"
 
 #, fuzzy
 #~ msgctxt "MainScreen|"
@@ -17878,11 +17896,6 @@ msgstr ""
 #~ msgctxt "MapWizard|"
 #~ msgid "Coordinate Grid"
 #~ msgstr "Hnita Net"
-
-#, fuzzy
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Configure"
-#~ msgstr "Stilla"
 
 #, fuzzy
 #~ msgctxt "Marble::MapViewWidget|"

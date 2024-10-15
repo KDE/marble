@@ -3358,14 +3358,14 @@ msgstr "خەتكۈشلەر"
 #, fuzzy
 #| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Import Bookmarks..."
+msgid "Import Bookmarks…"
 msgstr "خەتكۈچلەرنى ئېكسپورت قىل"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
 #, fuzzy
 #| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Export Bookmarks..."
+msgid "Export Bookmarks…"
 msgstr "خەتكۈچلەرنى ئېكسپورت قىل"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
@@ -3375,14 +3375,14 @@ msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
-msgid "New..."
+msgid "New…"
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
 #, fuzzy
 #| msgid "Unnamed"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Rename..."
+msgid "Rename…"
 msgstr "ئاتسىز"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
@@ -3728,7 +3728,7 @@ msgstr "تازىلا"
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
 msgctxt "CurrentLocationWidget|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
@@ -5333,7 +5333,7 @@ msgstr "ئۆچۈر"
 #, fuzzy
 #| msgid "Delete"
 msgctxt "UiEditBookmarkDialog|"
-msgid "&Add Folder..."
+msgid "&Add Folder…"
 msgstr "ئۆچۈر"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
@@ -7993,14 +7993,14 @@ msgstr[0] ""
 #, fuzzy
 #| msgid "&Go To..."
 msgctxt "GoTo|"
-msgid "Go To..."
+msgid "Go To…"
 msgstr "يۆتكەل(&G)…"
 
 #: src/lib/marble/GoToDialog.ui:78
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-"Marble/Search\">Details...</a>"
+"Marble/Search\">Details…</a>"
 msgstr ""
 
 #: src/lib/marble/GoToDialog.ui:93
@@ -8740,7 +8740,7 @@ msgstr ""
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Ctrl, Ctrl+A, ...)"
+"Ctrl, Ctrl+A, …)"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:300
@@ -8866,7 +8866,7 @@ msgstr ""
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
 msgctxt "MapWizard|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:615
@@ -8983,7 +8983,7 @@ msgstr ""
 #, fuzzy
 #| msgid "&Configure..."
 msgctxt "MapWizard|"
-msgid "Change..."
+msgid "Change…"
 msgstr "سەپلە(&C)…"
 
 #: src/lib/marble/MapWizard.ui:855
@@ -10453,7 +10453,7 @@ msgstr ""
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
 msgctxt "MarbleNavigator|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
@@ -11249,10 +11249,10 @@ msgstr ""
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
 #, fuzzy
-#| msgid "&Open..."
+#| msgid "Open"
 msgctxt "MovieCaptureDialog|"
-msgid "Open..."
-msgstr "ئاچ(&O)…"
+msgid "Open…"
+msgstr "ئاچ"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -11434,7 +11434,7 @@ msgstr "قوللايدىغان ھەممە ھۆججەتلەر"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
 msgctxt "PlacemarkEditHeaderPrivate|"
-msgid "Browse..."
+msgid "Browse…"
 msgstr ""
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
@@ -12278,15 +12278,15 @@ msgstr "يېڭى سەپلىمە ھۆججەت"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
-msgid "&Add..."
+msgid "&Add…"
 msgstr ""
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
 #, fuzzy
-#| msgid "&Configure..."
+#| msgid "Configure"
 msgctxt "RoutingSettingsWidget|"
-msgid "&Configure..."
-msgstr "سەپلە(&C)…"
+msgid "&Configure…"
+msgstr "سەپلە"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 #, fuzzy
@@ -12813,10 +12813,10 @@ msgstr ""
 
 #: src/lib/marble/TourCaptureDialog.ui:81
 #, fuzzy
-#| msgid "&Open..."
+#| msgid "Open"
 msgctxt "TourCaptureDialog|"
-msgid "Open..."
-msgstr "ئاچ(&O)…"
+msgid "Open…"
+msgstr "ئاچ"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
@@ -14239,7 +14239,7 @@ msgstr ""
 #, fuzzy
 #| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
-msgid "&Settings..."
+msgid "&Settings…"
 msgstr "تەڭشەك(&S)"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
@@ -14517,19 +14517,19 @@ msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "A float item that shows the elevation profile of the current route."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:188
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:191
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:195
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:198
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid ""
 "Not enough points in the current viewport.\n"
 "Try to disable 'Zoom to viewport'."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:278
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:281
 #, qt-format
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Difference: %1 %2"
@@ -16149,7 +16149,7 @@ msgstr "تۈر چىقىرىۋېتىش"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
 msgctxt "SatellitesConfigDialog|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
@@ -18942,6 +18942,42 @@ msgid "This is a template class for float items."
 msgstr ""
 
 #, fuzzy
+#~| msgid "Export Bookmarks"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Import Bookmarks..."
+#~ msgstr "خەتكۈچلەرنى ئېكسپورت قىل"
+
+#, fuzzy
+#~| msgid "Export Bookmarks"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Export Bookmarks..."
+#~ msgstr "خەتكۈچلەرنى ئېكسپورت قىل"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "ئاچ(&O)…"
+
+#, fuzzy
+#~| msgid "&Configure..."
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure..."
+#~ msgstr "سەپلە(&C)…"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "ئاچ(&O)…"
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Settings..."
+#~ msgstr "تەڭشەك(&S)"
+
+#, fuzzy
 #~| msgid "Remove"
 #~ msgctxt "Bookmarks|"
 #~ msgid "Removed"
@@ -19210,12 +19246,6 @@ msgstr ""
 #~ msgctxt "Marble::MainWindow|"
 #~ msgid "&Add Bookmark"
 #~ msgstr "خەتكۈش قوش(&A)"
-
-#, fuzzy
-#~| msgid "Configure"
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Configure"
-#~ msgstr "سەپلە"
 
 #, fuzzy
 #~| msgid "&Export Map..."

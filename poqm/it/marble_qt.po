@@ -3147,14 +3147,20 @@ msgid "Bookmark Manager"
 msgstr "Gestione segnalibri"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:25
+#, fuzzy
+#| msgctxt "Marble::BookmarkManagerDialog|"
+#| msgid "Import Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Import Bookmarks..."
-msgstr "Importa segnalibri..."
+msgid "Import Bookmarks…"
+msgstr "Importa segnalibri"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
+#, fuzzy
+#| msgctxt "Marble::BookmarkManagerDialog|"
+#| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Export Bookmarks..."
-msgstr "Esporta segnalibri..."
+msgid "Export Bookmarks…"
+msgstr "Esporta segnalibri"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
@@ -3163,12 +3169,15 @@ msgstr "Cartelle"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
-msgid "New..."
-msgstr "Nuovo..."
+msgid "New…"
+msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
+#, fuzzy
+#| msgctxt "UiBookmarkManagerDialog|"
+#| msgid "Rename..."
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Rename..."
+msgid "Rename…"
 msgstr "Rinomina..."
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
@@ -3453,9 +3462,12 @@ msgstr "Cancella traccia corrente"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "CurrentLocationWidget|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr "′"
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
 msgctxt "CurrentLocationWidget|"
@@ -5013,8 +5025,11 @@ msgid "&Folder:"
 msgstr "&Cartella:"
 
 #: src/lib/marble/EditBookmarkDialog.ui:79
+#, fuzzy
+#| msgctxt "UiEditBookmarkDialog|"
+#| msgid "&Add Folder..."
 msgctxt "UiEditBookmarkDialog|"
-msgid "&Add Folder..."
+msgid "&Add Folder…"
 msgstr "&Aggiungi cartella..."
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
@@ -7379,15 +7394,22 @@ msgstr[0] "%n risultato trovato"
 msgstr[1] "%n risultati trovati"
 
 #: src/lib/marble/GoToDialog.ui:14
+#, fuzzy
+#| msgid "Go To"
 msgctxt "GoTo|"
-msgid "Go To..."
-msgstr "Vai a..."
+msgid "Go To…"
+msgstr "Vai a"
 
 #: src/lib/marble/GoToDialog.ui:78
+#, fuzzy
+#| msgctxt "GoTo|"
+#| msgid ""
+#| "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
+#| "Marble/Search\">Details...</a>"
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-"Marble/Search\">Details...</a>"
+"Marble/Search\">Details…</a>"
 msgstr ""
 "Inserisci una parola e premi Invio. <a href=\"https://userbase.kde.org/"
 "Marble/Search\">Dettagli...</a>"
@@ -8103,10 +8125,15 @@ msgstr ""
 "loro ordine di resa."
 
 #: src/lib/marble/MapWizard.ui:297
+#, fuzzy
+#| msgctxt "MapWizard|"
+#| msgid ""
+#| "Enable this to select multiple layers without keyboard shortcuts (Shift, "
+#| "Ctrl, Ctrl+A, ...)"
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Ctrl, Ctrl+A, ...)"
+"Ctrl, Ctrl+A, …)"
 msgstr ""
 "Abilita questa opzione per selezionare più livelli senza scorciatoie da "
 "tastiera (Maiusc, Ctrl, Ctrl+A, ...)"
@@ -8251,9 +8278,12 @@ msgid "Source Image:"
 msgstr "Immagine sorgente:"
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "MapWizard|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr "′"
 
 #: src/lib/marble/MapWizard.ui:615
 msgctxt "MapWizard|"
@@ -8399,9 +8429,12 @@ msgid "preview image"
 msgstr "immagine d'anteprima"
 
 #: src/lib/marble/MapWizard.ui:825
+#, fuzzy
+#| msgctxt "Marble::ConflictDialog|"
+#| msgid "Changed"
 msgctxt "MapWizard|"
-msgid "Change..."
-msgstr "Cambia..."
+msgid "Change…"
+msgstr "Modificato"
 
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
@@ -10210,9 +10243,12 @@ msgstr "Inclina l'asse del globo verso l'utente."
 #: src/lib/marble/MarbleNavigator.ui:103 src/lib/marble/MarbleNavigator.ui:122
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "MarbleNavigator|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr "′"
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
 msgctxt "MarbleNavigator|"
@@ -11021,9 +11057,12 @@ msgid "Destination video:"
 msgstr "Video di destinazione:"
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
+#, fuzzy
+#| msgctxt "Marble::RouteItemDelegate|"
+#| msgid "Open"
 msgctxt "MovieCaptureDialog|"
-msgid "Open..."
-msgstr "&Apri..."
+msgid "Open…"
+msgstr "Apri"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -11175,9 +11214,12 @@ msgid "All Supported Files (*.png)"
 msgstr "Tutti i file supportati (*.png)"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
+#, fuzzy
+#| msgctxt "GoTo|"
+#| msgid "Browse"
 msgctxt "PlacemarkEditHeaderPrivate|"
-msgid "Browse..."
-msgstr "Sfoglia..."
+msgid "Browse…"
+msgstr "Sfoglia"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -11925,13 +11967,16 @@ msgstr "Nuovo profilo"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
-msgid "&Add..."
-msgstr "&Aggiungi..."
+msgid "&Add…"
+msgstr ""
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
+#, fuzzy
+#| msgctxt "RoutingSettingsWidget|"
+#| msgid "&Configure"
 msgctxt "RoutingSettingsWidget|"
-msgid "&Configure..."
-msgstr "&Configura..."
+msgid "&Configure…"
+msgstr "&Configura"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 msgctxt "RoutingSettingsWidget|"
@@ -12423,9 +12468,12 @@ msgid "Destination video"
 msgstr "Video di destinazione"
 
 #: src/lib/marble/TourCaptureDialog.ui:81
+#, fuzzy
+#| msgctxt "Marble::RouteItemDelegate|"
+#| msgid "Open"
 msgctxt "TourCaptureDialog|"
-msgid "Open..."
-msgstr "Apri..."
+msgid "Open…"
+msgstr "Apri"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
@@ -13689,9 +13737,12 @@ msgid "Show eclipses for year:"
 msgstr "Mostra eclissi per l'anno:"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
+#, fuzzy
+#| msgctxt "Marble::MainWindow|"
+#| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
-msgid "&Settings..."
-msgstr "Impo&stazioni..."
+msgid "&Settings…"
+msgstr "Impo&stazioni"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 msgctxt "EclipsesBrowserDialog|"
@@ -13955,14 +14006,14 @@ msgid "A float item that shows the elevation profile of the current route."
 msgstr ""
 "Un oggetto mobile che mostra il profilo altimetrico dell'itinerario corrente."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:188
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:191
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
 "Crea un itinerario oppure carica una traccia da file per vedere il suo "
 "profilo altimetrico."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:195
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:198
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid ""
 "Not enough points in the current viewport.\n"
@@ -13971,7 +14022,7 @@ msgstr ""
 "Non ci sono abbastanza punti nell'area di visualizzazione corrente.\n"
 "Prova a disabilitare «Ingrandimento all'area di visualizzazione»."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:278
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:281
 #, qt-format
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Difference: %1 %2"
@@ -15411,9 +15462,12 @@ msgid "Remove selected data source."
 msgstr "Elimina la fonte di dati selezionata"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "SatellitesConfigDialog|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr "′"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
 msgctxt "SatellitesConfigDialog|"
@@ -17941,6 +17995,66 @@ msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Questo è un modello di classe per oggetti mobili."
 
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Import Bookmarks..."
+#~ msgstr "Importa segnalibri..."
+
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Export Bookmarks..."
+#~ msgstr "Esporta segnalibri..."
+
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "New..."
+#~ msgstr "Nuovo..."
+
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgctxt "GoTo|"
+#~ msgid "Go To..."
+#~ msgstr "Vai a..."
+
+#~ msgctxt "MapWizard|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgctxt "MapWizard|"
+#~ msgid "Change..."
+#~ msgstr "Cambia..."
+
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "&Apri..."
+
+#~ msgctxt "PlacemarkEditHeaderPrivate|"
+#~ msgid "Browse..."
+#~ msgstr "Sfoglia..."
+
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Add..."
+#~ msgstr "&Aggiungi..."
+
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure..."
+#~ msgstr "&Configura..."
+
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "Apri..."
+
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Settings..."
+#~ msgstr "Impo&stazioni..."
+
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "..."
+#~ msgstr "..."
+
 #~ msgctxt "AboutDialog|"
 #~ msgid ""
 #~ "<h3>Marble Maps</h3><p>Find your way! Marble Maps brings the highly "
@@ -18327,10 +18441,6 @@ msgstr "Questo è un modello di classe per oggetti mobili."
 #~ msgctxt "UiBookmarkManagerDialog|"
 #~ msgid "New"
 #~ msgstr "Nuovo"
-
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Configure"
-#~ msgstr "&Configura"
 
 #~ msgctxt "Marble::MapViewWidget|"
 #~ msgid "&Upload Map..."
@@ -20128,9 +20238,6 @@ msgstr "Questo è un modello di classe per oggetti mobili."
 
 #~ msgid "Draw"
 #~ msgstr "Disegna"
-
-#~ msgid "Go To"
-#~ msgstr "Vai a"
 
 #~ msgid "Navigation mode"
 #~ msgstr "Modalità navigazione"

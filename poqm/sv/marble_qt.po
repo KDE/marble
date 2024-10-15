@@ -3134,14 +3134,20 @@ msgid "Bookmark Manager"
 msgstr "Bokmärkeshantering"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:25
+#, fuzzy
+#| msgctxt "Marble::BookmarkManagerDialog|"
+#| msgid "Import Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Import Bookmarks..."
-msgstr "Importera bokmärken..."
+msgid "Import Bookmarks…"
+msgstr "Importera bokmärken"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
+#, fuzzy
+#| msgctxt "Marble::BookmarkManagerDialog|"
+#| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Export Bookmarks..."
-msgstr "Exportera bokmärken..."
+msgid "Export Bookmarks…"
+msgstr "Exportera bokmärken"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
@@ -3150,12 +3156,15 @@ msgstr "Kataloger"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
-msgid "New..."
-msgstr "Nytt..."
+msgid "New…"
+msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
+#, fuzzy
+#| msgctxt "UiBookmarkManagerDialog|"
+#| msgid "Rename..."
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Rename..."
+msgid "Rename…"
 msgstr "Byt namn..."
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
@@ -3440,9 +3449,12 @@ msgstr "Rensa spår"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "CurrentLocationWidget|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr "′"
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
 msgctxt "CurrentLocationWidget|"
@@ -4999,8 +5011,11 @@ msgid "&Folder:"
 msgstr "&Katalog:"
 
 #: src/lib/marble/EditBookmarkDialog.ui:79
+#, fuzzy
+#| msgctxt "UiEditBookmarkDialog|"
+#| msgid "&Add Folder..."
 msgctxt "UiEditBookmarkDialog|"
-msgid "&Add Folder..."
+msgid "&Add Folder…"
 msgstr "&Lägg till katalog..."
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
@@ -7363,15 +7378,23 @@ msgstr[0] "%n resultat hittades."
 msgstr[1] "%n resultat hittades."
 
 #: src/lib/marble/GoToDialog.ui:14
+#, fuzzy
+#| msgctxt "GoTo|"
+#| msgid "Go To..."
 msgctxt "GoTo|"
-msgid "Go To..."
+msgid "Go To…"
 msgstr "Gå till..."
 
 #: src/lib/marble/GoToDialog.ui:78
+#, fuzzy
+#| msgctxt "GoTo|"
+#| msgid ""
+#| "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
+#| "Marble/Search\">Details...</a>"
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-"Marble/Search\">Details...</a>"
+"Marble/Search\">Details…</a>"
 msgstr ""
 "Ange ett sökbegrepp och tryck på returtangenten. <a href=\"https://userbase."
 "kde.org/Marble/Search\">Detaljinformation...</a>"
@@ -8081,10 +8104,15 @@ msgstr ""
 "Ordningen som flera lager väljes påverkar direkt deras återgivningsordning."
 
 #: src/lib/marble/MapWizard.ui:297
+#, fuzzy
+#| msgctxt "MapWizard|"
+#| msgid ""
+#| "Enable this to select multiple layers without keyboard shortcuts (Shift, "
+#| "Ctrl, Ctrl+A, ...)"
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Ctrl, Ctrl+A, ...)"
+"Ctrl, Ctrl+A, …)"
 msgstr ""
 "Aktivera för att välja flera lager utan snabbtangenter (Skift, Ctrl, Ctrl"
 "+A, ...)"
@@ -8227,9 +8255,12 @@ msgid "Source Image:"
 msgstr "Källbild:"
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "MapWizard|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr "′"
 
 #: src/lib/marble/MapWizard.ui:615
 msgctxt "MapWizard|"
@@ -8375,9 +8406,12 @@ msgid "preview image"
 msgstr "förhandsgranskningsbild"
 
 #: src/lib/marble/MapWizard.ui:825
+#, fuzzy
+#| msgctxt "Marble::ConflictDialog|"
+#| msgid "Changed"
 msgctxt "MapWizard|"
-msgid "Change..."
-msgstr "Ändra..."
+msgid "Change…"
+msgstr "Ändrad"
 
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
@@ -10172,9 +10206,12 @@ msgstr "Lutar klotets axel mot användaren."
 #: src/lib/marble/MarbleNavigator.ui:103 src/lib/marble/MarbleNavigator.ui:122
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "MarbleNavigator|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr "′"
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
 msgctxt "MarbleNavigator|"
@@ -10978,9 +11015,12 @@ msgid "Destination video:"
 msgstr "Målvideo:"
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
+#, fuzzy
+#| msgctxt "Marble::RouteItemDelegate|"
+#| msgid "Open"
 msgctxt "MovieCaptureDialog|"
-msgid "Open..."
-msgstr "Öppna..."
+msgid "Open…"
+msgstr "Öppna"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -11132,9 +11172,12 @@ msgid "All Supported Files (*.png)"
 msgstr "Alla filer som stöds (*.png)"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
+#, fuzzy
+#| msgctxt "GoTo|"
+#| msgid "Browse"
 msgctxt "PlacemarkEditHeaderPrivate|"
-msgid "Browse..."
-msgstr "Bläddra..."
+msgid "Browse…"
+msgstr "Bläddra"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -11882,13 +11925,16 @@ msgstr "Ny profil"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
-msgid "&Add..."
-msgstr "&Lägg till..."
+msgid "&Add…"
+msgstr ""
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
+#, fuzzy
+#| msgctxt "RoutingSettingsWidget|"
+#| msgid "&Configure"
 msgctxt "RoutingSettingsWidget|"
-msgid "&Configure..."
-msgstr "An&passa..."
+msgid "&Configure…"
+msgstr "A&npassa"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 msgctxt "RoutingSettingsWidget|"
@@ -12379,9 +12425,12 @@ msgid "Destination video"
 msgstr "Målvideo"
 
 #: src/lib/marble/TourCaptureDialog.ui:81
+#, fuzzy
+#| msgctxt "Marble::RouteItemDelegate|"
+#| msgid "Open"
 msgctxt "TourCaptureDialog|"
-msgid "Open..."
-msgstr "Öppna..."
+msgid "Open…"
+msgstr "Öppna"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
@@ -13638,9 +13687,12 @@ msgid "Show eclipses for year:"
 msgstr "Visa förmörkelser under år:"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
+#, fuzzy
+#| msgctxt "Marble::MainWindow|"
+#| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
-msgid "&Settings..."
-msgstr "In&ställningar..."
+msgid "&Settings…"
+msgstr "In&ställningar"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 msgctxt "EclipsesBrowserDialog|"
@@ -13905,14 +13957,14 @@ msgstr ""
 "Det här är ett flyttbart objekt som tillhandahåller höjdprofilen för "
 "nuvarande färdväg."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:188
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:191
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
 "Skapa en resväg eller läs in ett spår från en fil för att visa dess "
 "höjdprofil."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:195
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:198
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid ""
 "Not enough points in the current viewport.\n"
@@ -13921,7 +13973,7 @@ msgstr ""
 "Inte tillräckligt med punkter i aktuellt visningsområde.\n"
 "Försök inaktivera 'Zooma till visningsområde'."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:278
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:281
 #, qt-format
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Difference: %1 %2"
@@ -15357,9 +15409,12 @@ msgid "Remove selected data source."
 msgstr "Ta bort markerad datakälla."
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "SatellitesConfigDialog|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr "′"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
 msgctxt "SatellitesConfigDialog|"
@@ -17889,6 +17944,62 @@ msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Det här är en mallklass för flyttbara objekt."
 
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Import Bookmarks..."
+#~ msgstr "Importera bokmärken..."
+
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Export Bookmarks..."
+#~ msgstr "Exportera bokmärken..."
+
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "New..."
+#~ msgstr "Nytt..."
+
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgctxt "MapWizard|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgctxt "MapWizard|"
+#~ msgid "Change..."
+#~ msgstr "Ändra..."
+
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "Öppna..."
+
+#~ msgctxt "PlacemarkEditHeaderPrivate|"
+#~ msgid "Browse..."
+#~ msgstr "Bläddra..."
+
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Add..."
+#~ msgstr "&Lägg till..."
+
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure..."
+#~ msgstr "An&passa..."
+
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "Öppna..."
+
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Settings..."
+#~ msgstr "In&ställningar..."
+
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "..."
+#~ msgstr "..."
+
 #~ msgctxt "AboutDialog|"
 #~ msgid ""
 #~ "<h3>Marble Maps</h3><p>Find your way! Marble Maps brings the highly "
@@ -18275,10 +18386,6 @@ msgstr "Det här är en mallklass för flyttbara objekt."
 #~ msgctxt "UiBookmarkManagerDialog|"
 #~ msgid "New"
 #~ msgstr "Ny"
-
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Configure"
-#~ msgstr "A&npassa"
 
 #~ msgctxt "Marble::MapViewWidget|"
 #~ msgid "&Upload Map..."

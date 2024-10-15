@@ -3150,14 +3150,20 @@ msgid "Bookmark Manager"
 msgstr "Диспетчер закладок"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:25
+#, fuzzy
+#| msgctxt "Marble::BookmarkManagerDialog|"
+#| msgid "Import Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Import Bookmarks..."
-msgstr "Импорт закладок..."
+msgid "Import Bookmarks…"
+msgstr "Импорт закладок"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
+#, fuzzy
+#| msgctxt "Marble::BookmarkManagerDialog|"
+#| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Export Bookmarks..."
-msgstr "Экспорт закладок..."
+msgid "Export Bookmarks…"
+msgstr "Экспортировать закладки"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
@@ -3166,12 +3172,15 @@ msgstr "Папки"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
-msgid "New..."
-msgstr "Создать..."
+msgid "New…"
+msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
+#, fuzzy
+#| msgctxt "UiBookmarkManagerDialog|"
+#| msgid "Rename..."
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Rename..."
+msgid "Rename…"
 msgstr "Переименовать…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
@@ -3456,9 +3465,12 @@ msgstr "Очистить траекторию"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "CurrentLocationWidget|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr "′"
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
 msgctxt "CurrentLocationWidget|"
@@ -5024,8 +5036,11 @@ msgid "&Folder:"
 msgstr "&Папка:"
 
 #: src/lib/marble/EditBookmarkDialog.ui:79
+#, fuzzy
+#| msgctxt "UiEditBookmarkDialog|"
+#| msgid "&Add Folder..."
 msgctxt "UiEditBookmarkDialog|"
-msgid "&Add Folder..."
+msgid "&Add Folder…"
 msgstr "&Создать папку…"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
@@ -7391,15 +7406,23 @@ msgstr[1] "Найдено %n результата."
 msgstr[2] "Найдено %n результатов."
 
 #: src/lib/marble/GoToDialog.ui:14
+#, fuzzy
+#| msgctxt "GoTo|"
+#| msgid "Go To..."
 msgctxt "GoTo|"
-msgid "Go To..."
+msgid "Go To…"
 msgstr "Перейти..."
 
 #: src/lib/marble/GoToDialog.ui:78
+#, fuzzy
+#| msgctxt "GoTo|"
+#| msgid ""
+#| "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
+#| "Marble/Search\">Details...</a>"
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-"Marble/Search\">Details...</a>"
+"Marble/Search\">Details…</a>"
 msgstr ""
 "Введите условие поиска и нажмите клавишу ВВОД. <a href=\"https://userbase."
 "kde.org/Marble/Search\">Подробнее...</a>"
@@ -8106,10 +8129,15 @@ msgid ""
 msgstr "Порядок выбора слоёв напрямую влияет на порядок их обработки."
 
 #: src/lib/marble/MapWizard.ui:297
+#, fuzzy
+#| msgctxt "MapWizard|"
+#| msgid ""
+#| "Enable this to select multiple layers without keyboard shortcuts (Shift, "
+#| "Ctrl, Ctrl+A, ...)"
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Ctrl, Ctrl+A, ...)"
+"Ctrl, Ctrl+A, …)"
 msgstr ""
 "Включите этот параметр, чтобы выбирать несколько слоёв без комбинаций клавиш "
 "(Shift, Ctrl, Ctrl+A…)"
@@ -8251,9 +8279,12 @@ msgid "Source Image:"
 msgstr "Исходное изображение:"
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "MapWizard|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr "′"
 
 #: src/lib/marble/MapWizard.ui:615
 msgctxt "MapWizard|"
@@ -8401,9 +8432,12 @@ msgid "preview image"
 msgstr "изображение для предварительного просмотра"
 
 #: src/lib/marble/MapWizard.ui:825
+#, fuzzy
+#| msgctxt "Marble::ConflictDialog|"
+#| msgid "Changed"
 msgctxt "MapWizard|"
-msgid "Change..."
-msgstr "Изменить..."
+msgid "Change…"
+msgstr "Изменено"
 
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
@@ -10204,9 +10238,12 @@ msgstr "Наклон оси глобуса в сторону пользоват�
 #: src/lib/marble/MarbleNavigator.ui:103 src/lib/marble/MarbleNavigator.ui:122
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "MarbleNavigator|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr "′"
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
 msgctxt "MarbleNavigator|"
@@ -11012,11 +11049,13 @@ msgctxt "MovieCaptureDialog|"
 msgid "Destination video:"
 msgstr "Выходной видеофайл:"
 
-# BUGME: change to "Select..." --aspotashev
 #: src/lib/marble/MovieCaptureDialog.ui:36
+#, fuzzy
+#| msgctxt "Marble::RouteItemDelegate|"
+#| msgid "Open"
 msgctxt "MovieCaptureDialog|"
-msgid "Open..."
-msgstr "Выбрать..."
+msgid "Open…"
+msgstr "Открыть"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -11168,9 +11207,12 @@ msgid "All Supported Files (*.png)"
 msgstr "Все поддерживаемые файлы (*.png)"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
+#, fuzzy
+#| msgctxt "GoTo|"
+#| msgid "Browse"
 msgctxt "PlacemarkEditHeaderPrivate|"
-msgid "Browse..."
-msgstr "Обзор..."
+msgid "Browse…"
+msgstr "Обзор"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -11920,13 +11962,16 @@ msgstr "Новый профиль"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
-msgid "&Add..."
-msgstr "&Добавить..."
+msgid "&Add…"
+msgstr ""
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
+#, fuzzy
+#| msgctxt "RoutingSettingsWidget|"
+#| msgid "&Configure"
 msgctxt "RoutingSettingsWidget|"
-msgid "&Configure..."
-msgstr "&Настроить..."
+msgid "&Configure…"
+msgstr "&Изменить..."
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 msgctxt "RoutingSettingsWidget|"
@@ -12414,11 +12459,13 @@ msgctxt "TourCaptureDialog|"
 msgid "Destination video"
 msgstr "Выходной видеофайл:"
 
-# BUGME: change to "Select..." --aspotashev
 #: src/lib/marble/TourCaptureDialog.ui:81
+#, fuzzy
+#| msgctxt "Marble::RouteItemDelegate|"
+#| msgid "Open"
 msgctxt "TourCaptureDialog|"
-msgid "Open..."
-msgstr "Открыть..."
+msgid "Open…"
+msgstr "Открыть"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
@@ -13681,9 +13728,12 @@ msgid "Show eclipses for year:"
 msgstr "Показать затмения для года:"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
+#, fuzzy
+#| msgctxt "Marble::MainWindow|"
+#| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
-msgid "&Settings..."
-msgstr "&Настроить..."
+msgid "&Settings…"
+msgstr "&Настройка"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 msgctxt "EclipsesBrowserDialog|"
@@ -13943,12 +13993,12 @@ msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "A float item that shows the elevation profile of the current route."
 msgstr "Плавающий элемент, показывающий высотный профиль текущего маршрута."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:188
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:191
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr "Создать или загрузить маршрут для просмотра его высотного профиля."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:195
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:198
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid ""
 "Not enough points in the current viewport.\n"
@@ -13957,7 +14007,7 @@ msgstr ""
 "Недостаточно точек на текущей области просмотра.\n"
 "Попробуйте отключить функцию «Масштабировать область просмотра»"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:278
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:281
 #, qt-format
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Difference: %1 %2"
@@ -15404,9 +15454,12 @@ msgid "Remove selected data source."
 msgstr "Удалить выделенный источник данных."
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "SatellitesConfigDialog|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr "′"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
 msgctxt "SatellitesConfigDialog|"
@@ -17933,6 +17986,64 @@ msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Это шаблонный класс для плавающих элементов."
 
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Import Bookmarks..."
+#~ msgstr "Импорт закладок..."
+
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Export Bookmarks..."
+#~ msgstr "Экспорт закладок..."
+
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "New..."
+#~ msgstr "Создать..."
+
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgctxt "MapWizard|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgctxt "MapWizard|"
+#~ msgid "Change..."
+#~ msgstr "Изменить..."
+
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "..."
+#~ msgstr "..."
+
+# BUGME: change to "Select..." --aspotashev
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "Выбрать..."
+
+#~ msgctxt "PlacemarkEditHeaderPrivate|"
+#~ msgid "Browse..."
+#~ msgstr "Обзор..."
+
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Add..."
+#~ msgstr "&Добавить..."
+
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure..."
+#~ msgstr "&Настроить..."
+
+# BUGME: change to "Select..." --aspotashev
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "Открыть..."
+
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Settings..."
+#~ msgstr "&Настроить..."
+
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "..."
+#~ msgstr "..."
+
 #~ msgctxt "AboutDialog|"
 #~ msgid ""
 #~ "<h3>Marble Maps</h3><p>Find your way! Marble Maps brings the highly "
@@ -18311,10 +18422,6 @@ msgstr "Это шаблонный класс для плавающих элем�
 #~ msgctxt "UiBookmarkManagerDialog|"
 #~ msgid "New"
 #~ msgstr "Создать"
-
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Configure"
-#~ msgstr "&Изменить..."
 
 #~ msgctxt "Marble::MapViewWidget|"
 #~ msgid "&Upload Map..."

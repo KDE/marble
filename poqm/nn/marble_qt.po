@@ -3091,12 +3091,12 @@ msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:25
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Import Bookmarks..."
+msgid "Import Bookmarks…"
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Export Bookmarks..."
+msgid "Export Bookmarks…"
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
@@ -3106,12 +3106,12 @@ msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
-msgid "New..."
+msgid "New…"
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Rename..."
+msgid "Rename…"
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
@@ -3395,7 +3395,7 @@ msgstr ""
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
 msgctxt "CurrentLocationWidget|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
@@ -4929,7 +4929,7 @@ msgstr ""
 
 #: src/lib/marble/EditBookmarkDialog.ui:79
 msgctxt "UiEditBookmarkDialog|"
-msgid "&Add Folder..."
+msgid "&Add Folder…"
 msgstr ""
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
@@ -7269,14 +7269,14 @@ msgstr[1] ""
 
 #: src/lib/marble/GoToDialog.ui:14
 msgctxt "GoTo|"
-msgid "Go To..."
+msgid "Go To…"
 msgstr ""
 
 #: src/lib/marble/GoToDialog.ui:78
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-"Marble/Search\">Details...</a>"
+"Marble/Search\">Details…</a>"
 msgstr ""
 
 #: src/lib/marble/GoToDialog.ui:93
@@ -7932,7 +7932,7 @@ msgstr ""
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Ctrl, Ctrl+A, ...)"
+"Ctrl, Ctrl+A, …)"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:300
@@ -8050,7 +8050,7 @@ msgstr ""
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
 msgctxt "MapWizard|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:615
@@ -8159,7 +8159,7 @@ msgstr ""
 
 #: src/lib/marble/MapWizard.ui:825
 msgctxt "MapWizard|"
-msgid "Change..."
+msgid "Change…"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:855
@@ -9578,7 +9578,7 @@ msgstr ""
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
 msgctxt "MarbleNavigator|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
@@ -10309,7 +10309,7 @@ msgstr ""
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
 msgctxt "MovieCaptureDialog|"
-msgid "Open..."
+msgid "Open…"
 msgstr ""
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
@@ -10463,7 +10463,7 @@ msgstr ""
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
 msgctxt "PlacemarkEditHeaderPrivate|"
-msgid "Browse..."
+msgid "Browse…"
 msgstr ""
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
@@ -11189,12 +11189,12 @@ msgstr ""
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
-msgid "&Add..."
+msgid "&Add…"
 msgstr ""
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
 msgctxt "RoutingSettingsWidget|"
-msgid "&Configure..."
+msgid "&Configure…"
 msgstr ""
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
@@ -11653,7 +11653,7 @@ msgstr ""
 
 #: src/lib/marble/TourCaptureDialog.ui:81
 msgctxt "TourCaptureDialog|"
-msgid "Open..."
+msgid "Open…"
 msgstr ""
 
 #: src/lib/marble/TourCaptureDialog.ui:97
@@ -12892,7 +12892,7 @@ msgstr ""
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
 msgctxt "EclipsesBrowserDialog|"
-msgid "&Settings..."
+msgid "&Settings…"
 msgstr ""
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
@@ -13150,19 +13150,19 @@ msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "A float item that shows the elevation profile of the current route."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:188
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:191
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:195
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:198
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid ""
 "Not enough points in the current viewport.\n"
 "Try to disable 'Zoom to viewport'."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:278
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:281
 #, qt-format
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Difference: %1 %2"
@@ -14582,7 +14582,7 @@ msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
 msgctxt "SatellitesConfigDialog|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204

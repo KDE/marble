@@ -3228,14 +3228,20 @@ msgid "Bookmark Manager"
 msgstr "Laster-marken kudeatzailea"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:25
+#, fuzzy
+#| msgctxt "Marble::BookmarkManagerDialog|"
+#| msgid "Import Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Import Bookmarks..."
-msgstr "Inportatu Laster-markak..."
+msgid "Import Bookmarks…"
+msgstr "Inportatu Laster-markak"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
+#, fuzzy
+#| msgctxt "Marble::BookmarkManagerDialog|"
+#| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Export Bookmarks..."
-msgstr "Esportatu Laster-markak..."
+msgid "Export Bookmarks…"
+msgstr "Esportatu Laster-markak"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
@@ -3243,17 +3249,16 @@ msgid "Folders"
 msgstr "Karpetak"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:74
-#, fuzzy
 msgctxt "UiBookmarkManagerDialog|"
-msgid "New..."
-msgstr "Berria..."
+msgid "New…"
+msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
 #, fuzzy
 #| msgctxt "UiBookmarkManagerDialog|"
 #| msgid "Rename"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Rename..."
+msgid "Rename…"
 msgstr "Berrizendatu..."
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
@@ -3538,9 +3543,12 @@ msgstr "Garbitu aztarna"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "CurrentLocationWidget|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr "′"
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
 msgctxt "CurrentLocationWidget|"
@@ -5104,7 +5112,7 @@ msgstr "&Karpeta:"
 #| msgctxt "UiEditBookmarkDialog|"
 #| msgid "&Add Folder"
 msgctxt "UiEditBookmarkDialog|"
-msgid "&Add Folder..."
+msgid "&Add Folder…"
 msgstr "Gehitu karpeta..."
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
@@ -7541,15 +7549,23 @@ msgstr[0] "Emaitza %n aurkitu da."
 msgstr[1] "%n emaitza aurkitu dira."
 
 #: src/lib/marble/GoToDialog.ui:14
+#, fuzzy
+#| msgctxt "GoTo|"
+#| msgid "Go To..."
 msgctxt "GoTo|"
-msgid "Go To..."
+msgid "Go To…"
 msgstr "Joan hona..."
 
 #: src/lib/marble/GoToDialog.ui:78
+#, fuzzy
+#| msgctxt "GoTo|"
+#| msgid ""
+#| "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
+#| "Marble/Search\">Details...</a>"
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-"Marble/Search\">Details...</a>"
+"Marble/Search\">Details…</a>"
 msgstr ""
 "Sartu bilatzeko termino bat eta sakatu Sartu. <a href=\"https://userbase.kde."
 "org/Marble/Search\">Xehetasunak...</a>"
@@ -8240,7 +8256,7 @@ msgstr ""
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Ctrl, Ctrl+A, ...)"
+"Ctrl, Ctrl+A, …)"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:300
@@ -8376,9 +8392,12 @@ msgid "Source Image:"
 msgstr "Sorburu-irudia"
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "MapWizard|"
-msgid "..."
-msgstr ""
+msgid "…"
+msgstr "′"
 
 #: src/lib/marble/MapWizard.ui:615
 msgctxt "MapWizard|"
@@ -8491,9 +8510,11 @@ msgstr "Aurreikusi irudia"
 
 #: src/lib/marble/MapWizard.ui:825
 #, fuzzy
+#| msgctxt "Marble::ConflictDialog|"
+#| msgid "Changed"
 msgctxt "MapWizard|"
-msgid "Change..."
-msgstr "Aldatu..."
+msgid "Change…"
+msgstr "Aldatuta"
 
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
@@ -9983,9 +10004,12 @@ msgstr ""
 #: src/lib/marble/MarbleNavigator.ui:103 src/lib/marble/MarbleNavigator.ui:122
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "MarbleNavigator|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr "′"
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
 #, fuzzy
@@ -10722,9 +10746,12 @@ msgid "Destination video:"
 msgstr ""
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
+#, fuzzy
+#| msgctxt "Marble::RouteItemDelegate|"
+#| msgid "Open"
 msgctxt "MovieCaptureDialog|"
-msgid "Open..."
-msgstr "Ireki..."
+msgid "Open…"
+msgstr "Ireki"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -10879,9 +10906,12 @@ msgid "All Supported Files (*.png)"
 msgstr "Onartutako fitxategi guztiak (*.png)"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
+#, fuzzy
+#| msgctxt "GoTo|"
+#| msgid "Browse"
 msgctxt "PlacemarkEditHeaderPrivate|"
-msgid "Browse..."
-msgstr "Arakatu..."
+msgid "Browse…"
+msgstr "Arakatu"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -11623,20 +11653,17 @@ msgid "New Profile"
 msgstr "Profil berria"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
-#, fuzzy
-#| msgctxt "RoutingSettingsWidget|"
-#| msgid "&Add"
 msgctxt "RoutingSettingsWidget|"
-msgid "&Add..."
-msgstr "&Gehitu..."
+msgid "&Add…"
+msgstr ""
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
 #, fuzzy
-#| msgctxt "Marble::AbstractFloatItem|"
-#| msgid "&Configure..."
+#| msgctxt "RoutingSettingsWidget|"
+#| msgid "&Configure"
 msgctxt "RoutingSettingsWidget|"
-msgid "&Configure..."
-msgstr "&Konfiguratu..."
+msgid "&Configure…"
+msgstr "&Konfiguratu"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 msgctxt "RoutingSettingsWidget|"
@@ -12105,9 +12132,12 @@ msgid "Destination video"
 msgstr ""
 
 #: src/lib/marble/TourCaptureDialog.ui:81
+#, fuzzy
+#| msgctxt "Marble::RouteItemDelegate|"
+#| msgid "Open"
 msgctxt "TourCaptureDialog|"
-msgid "Open..."
-msgstr "Ireki..."
+msgid "Open…"
+msgstr "Ireki"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
@@ -13431,9 +13461,11 @@ msgstr ""
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
 #, fuzzy
+#| msgctxt "Marble::MainWindow|"
+#| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
-msgid "&Settings..."
-msgstr "Ezarpenak"
+msgid "&Settings…"
+msgstr "E&zarpenak"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 #, fuzzy
@@ -13701,19 +13733,19 @@ msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "A float item that shows the elevation profile of the current route."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:188
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:191
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:195
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:198
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid ""
 "Not enough points in the current viewport.\n"
 "Try to disable 'Zoom to viewport'."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:278
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:281
 #, qt-format
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Difference: %1 %2"
@@ -15242,9 +15274,12 @@ msgid "Remove selected data source."
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "SatellitesConfigDialog|"
-msgid "..."
-msgstr ""
+msgid "…"
+msgstr "′"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
 msgctxt "SatellitesConfigDialog|"
@@ -17832,6 +17867,63 @@ msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Hau elementu higikorretarako txantiloi bat da."
 
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Import Bookmarks..."
+#~ msgstr "Inportatu Laster-markak..."
+
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Export Bookmarks..."
+#~ msgstr "Esportatu Laster-markak..."
+
+#, fuzzy
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "New..."
+#~ msgstr "Berria..."
+
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Change..."
+#~ msgstr "Aldatu..."
+
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "Ireki..."
+
+#~ msgctxt "PlacemarkEditHeaderPrivate|"
+#~ msgid "Browse..."
+#~ msgstr "Arakatu..."
+
+#, fuzzy
+#~| msgctxt "RoutingSettingsWidget|"
+#~| msgid "&Add"
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Add..."
+#~ msgstr "&Gehitu..."
+
+#, fuzzy
+#~| msgctxt "Marble::AbstractFloatItem|"
+#~| msgid "&Configure..."
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure..."
+#~ msgstr "&Konfiguratu..."
+
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "Ireki..."
+
+#, fuzzy
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Settings..."
+#~ msgstr "Ezarpenak"
+
 #~ msgctxt "Bookmarks|"
 #~ msgid "Removed"
 #~ msgstr "Kenduta"
@@ -18095,10 +18187,6 @@ msgstr "Hau elementu higikorretarako txantiloi bat da."
 #~ msgctxt "UiBookmarkManagerDialog|"
 #~ msgid "New"
 #~ msgstr "Berria"
-
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Configure"
-#~ msgstr "&Konfiguratu"
 
 #~ msgctxt "Marble::MapViewWidget|"
 #~ msgid "&Upload Map..."

@@ -3134,14 +3134,20 @@ msgid "Bookmark Manager"
 msgstr "Legomarko-Manaĝero"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:25
+#, fuzzy
+#| msgctxt "Marble::BookmarkManagerDialog|"
+#| msgid "Import Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Import Bookmarks..."
-msgstr "Importi legosignojn..."
+msgid "Import Bookmarks…"
+msgstr "Importi legosignojn"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
+#, fuzzy
+#| msgctxt "Marble::BookmarkManagerDialog|"
+#| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Export Bookmarks..."
-msgstr "Exporti legosignojn..."
+msgid "Export Bookmarks…"
+msgstr "Exporti legosignojn"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
@@ -3150,12 +3156,15 @@ msgstr "Dosierujoj"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
-msgid "New..."
-msgstr "Nova..."
+msgid "New…"
+msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
+#, fuzzy
+#| msgctxt "UiBookmarkManagerDialog|"
+#| msgid "Rename..."
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Rename..."
+msgid "Rename…"
 msgstr "Alinomi..."
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
@@ -3440,9 +3449,12 @@ msgstr "Viŝi Trakon"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "CurrentLocationWidget|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr "′"
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
 msgctxt "CurrentLocationWidget|"
@@ -4996,8 +5008,11 @@ msgid "&Folder:"
 msgstr "&Dosierujo:"
 
 #: src/lib/marble/EditBookmarkDialog.ui:79
+#, fuzzy
+#| msgctxt "UiEditBookmarkDialog|"
+#| msgid "&Add Folder..."
 msgctxt "UiEditBookmarkDialog|"
-msgid "&Add Folder..."
+msgid "&Add Folder…"
 msgstr "&Aldoni dosierujon..."
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
@@ -7357,15 +7372,23 @@ msgstr[0] "trovis %n rezulto(j)n."
 msgstr[1] "trovis %n rezulto(j)n."
 
 #: src/lib/marble/GoToDialog.ui:14
+#, fuzzy
+#| msgctxt "GoTo|"
+#| msgid "Go To..."
 msgctxt "GoTo|"
-msgid "Go To..."
+msgid "Go To…"
 msgstr "Iri al..."
 
 #: src/lib/marble/GoToDialog.ui:78
+#, fuzzy
+#| msgctxt "GoTo|"
+#| msgid ""
+#| "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
+#| "Marble/Search\">Details...</a>"
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-"Marble/Search\">Details...</a>"
+"Marble/Search\">Details…</a>"
 msgstr ""
 "Enigu serĉan terminon kaj premu Enen. <a href=\"https://userbase.kde.org/"
 "Marble/Search\">Detaloj...</a>"
@@ -8077,10 +8100,15 @@ msgstr ""
 "ordon."
 
 #: src/lib/marble/MapWizard.ui:297
+#, fuzzy
+#| msgctxt "MapWizard|"
+#| msgid ""
+#| "Enable this to select multiple layers without keyboard shortcuts (Shift, "
+#| "Ctrl, Ctrl+A, ...)"
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Ctrl, Ctrl+A, ...)"
+"Ctrl, Ctrl+A, …)"
 msgstr ""
 "Ebligu tion por elekti plurajn tavolojn sen klavaraj ŝparvojoj (Shift, Ctrl, "
 "Ctrl+A, ...)"
@@ -8222,9 +8250,12 @@ msgid "Source Image:"
 msgstr "Fonta bildo:"
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "MapWizard|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr "′"
 
 #: src/lib/marble/MapWizard.ui:615
 msgctxt "MapWizard|"
@@ -8370,9 +8401,12 @@ msgid "preview image"
 msgstr "antaŭrigarda bildo"
 
 #: src/lib/marble/MapWizard.ui:825
+#, fuzzy
+#| msgctxt "Marble::ConflictDialog|"
+#| msgid "Changed"
 msgctxt "MapWizard|"
-msgid "Change..."
-msgstr "Ŝanĝi..."
+msgid "Change…"
+msgstr "Ŝanĝita"
 
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
@@ -10165,9 +10199,12 @@ msgstr "Klinas la globan akson al la uzanto."
 #: src/lib/marble/MarbleNavigator.ui:103 src/lib/marble/MarbleNavigator.ui:122
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "MarbleNavigator|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr "′"
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
 msgctxt "MarbleNavigator|"
@@ -10969,9 +11006,12 @@ msgid "Destination video:"
 msgstr "Celvideo:"
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
+#, fuzzy
+#| msgctxt "Marble::RouteItemDelegate|"
+#| msgid "Open"
 msgctxt "MovieCaptureDialog|"
-msgid "Open..."
-msgstr "Malfermi..."
+msgid "Open…"
+msgstr "Malfermi"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -11123,9 +11163,12 @@ msgid "All Supported Files (*.png)"
 msgstr "Ĉiuj subtenataj Dosieroj (*.png)"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
+#, fuzzy
+#| msgctxt "GoTo|"
+#| msgid "Browse"
 msgctxt "PlacemarkEditHeaderPrivate|"
-msgid "Browse..."
-msgstr "Foliumi..."
+msgid "Browse…"
+msgstr "Foliumi"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -11871,13 +11914,16 @@ msgstr "Nova Profilo"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
-msgid "&Add..."
-msgstr "&Aldoni..."
+msgid "&Add…"
+msgstr ""
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
+#, fuzzy
+#| msgctxt "Marble::PluginItemDelegate|"
+#| msgid "Configure"
 msgctxt "RoutingSettingsWidget|"
-msgid "&Configure..."
-msgstr "A&gordi"
+msgid "&Configure…"
+msgstr "Agordi"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 msgctxt "RoutingSettingsWidget|"
@@ -12368,9 +12414,12 @@ msgid "Destination video"
 msgstr "Cela video"
 
 #: src/lib/marble/TourCaptureDialog.ui:81
+#, fuzzy
+#| msgctxt "Marble::RouteItemDelegate|"
+#| msgid "Open"
 msgctxt "TourCaptureDialog|"
-msgid "Open..."
-msgstr "Malfermi..."
+msgid "Open…"
+msgstr "Malfermi"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
@@ -13626,9 +13675,12 @@ msgid "Show eclipses for year:"
 msgstr "Montri eklipsojn por jaro:"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
+#, fuzzy
+#| msgctxt "Marble::MainWindow|"
+#| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
-msgid "&Settings..."
-msgstr "A&gordo..."
+msgid "&Settings…"
+msgstr "A&gordo"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 msgctxt "EclipsesBrowserDialog|"
@@ -13889,12 +13941,12 @@ msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "A float item that shows the elevation profile of the current route."
 msgstr "Glitero kiu montras la profilon de alteco de la aktuala vojo."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:188
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:191
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr "Krei itineron aŭ ŝargi trakon de dosiero por vidi ĝian altprofilon."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:195
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:198
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid ""
 "Not enough points in the current viewport.\n"
@@ -13903,7 +13955,7 @@ msgstr ""
 "Ne sufiĉe da punktoj en la nuna vidfenestro.\n"
 "Provu malŝalti 'Zomi al vidfenestro'."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:278
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:281
 #, qt-format
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Difference: %1 %2"
@@ -15337,9 +15389,12 @@ msgid "Remove selected data source."
 msgstr "Forigi elektitan datumfonton."
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "SatellitesConfigDialog|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr "′"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
 msgctxt "SatellitesConfigDialog|"
@@ -17859,6 +17914,62 @@ msgstr "Gli&tera Ŝablono"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "tio estas ŝablono por gliteroj."
+
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Import Bookmarks..."
+#~ msgstr "Importi legosignojn..."
+
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Export Bookmarks..."
+#~ msgstr "Exporti legosignojn..."
+
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "New..."
+#~ msgstr "Nova..."
+
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgctxt "MapWizard|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgctxt "MapWizard|"
+#~ msgid "Change..."
+#~ msgstr "Ŝanĝi..."
+
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "Malfermi..."
+
+#~ msgctxt "PlacemarkEditHeaderPrivate|"
+#~ msgid "Browse..."
+#~ msgstr "Foliumi..."
+
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Add..."
+#~ msgstr "&Aldoni..."
+
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure..."
+#~ msgstr "A&gordi"
+
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "Malfermi..."
+
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Settings..."
+#~ msgstr "A&gordo..."
+
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "..."
+#~ msgstr "..."
 
 #~ msgctxt "AboutDialog|"
 #~ msgid ""

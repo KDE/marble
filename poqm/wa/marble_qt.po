@@ -3384,14 +3384,14 @@ msgstr "&Rimarkes"
 #, fuzzy
 #| msgid "&Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Import Bookmarks..."
+msgid "Import Bookmarks…"
 msgstr "&Rimarkes"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
 #, fuzzy
 #| msgid "&Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Export Bookmarks..."
+msgid "Export Bookmarks…"
 msgstr "&Rimarkes"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
@@ -3401,12 +3401,12 @@ msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
-msgid "New..."
+msgid "New…"
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Rename..."
+msgid "Rename…"
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
@@ -3739,7 +3739,7 @@ msgstr "Båre di schåle"
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
 msgctxt "CurrentLocationWidget|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
@@ -5339,9 +5339,10 @@ msgid "&Folder:"
 msgstr "Tchôke-divins des Markes di plaeces"
 
 #: src/lib/marble/EditBookmarkDialog.ui:79
+#, fuzzy
 msgctxt "UiEditBookmarkDialog|"
-msgid "&Add Folder..."
-msgstr ""
+msgid "&Add Folder…"
+msgstr "Tchôke-divins des Markes di plaeces"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
 #, fuzzy
@@ -7991,14 +7992,14 @@ msgstr[1] ""
 
 #: src/lib/marble/GoToDialog.ui:14
 msgctxt "GoTo|"
-msgid "Go To..."
+msgid "Go To…"
 msgstr ""
 
 #: src/lib/marble/GoToDialog.ui:78
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-"Marble/Search\">Details...</a>"
+"Marble/Search\">Details…</a>"
 msgstr ""
 
 #: src/lib/marble/GoToDialog.ui:93
@@ -8721,7 +8722,7 @@ msgstr ""
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Ctrl, Ctrl+A, ...)"
+"Ctrl, Ctrl+A, …)"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:300
@@ -8848,7 +8849,7 @@ msgstr ""
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
 msgctxt "MapWizard|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:615
@@ -8968,7 +8969,7 @@ msgstr "Mwaisse vuwe del mape"
 #: src/lib/marble/MapWizard.ui:825
 #, fuzzy
 msgctxt "MapWizard|"
-msgid "Change..."
+msgid "Change…"
 msgstr "Apontyî l' contrôle do solea"
 
 #: src/lib/marble/MapWizard.ui:855
@@ -10476,7 +10477,7 @@ msgstr ""
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
 msgctxt "MarbleNavigator|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
@@ -11255,7 +11256,7 @@ msgstr ""
 #, fuzzy
 #| msgid "&Open..."
 msgctxt "MovieCaptureDialog|"
-msgid "Open..."
+msgid "Open…"
 msgstr "&Drovi..."
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
@@ -11435,7 +11436,7 @@ msgstr ""
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
 msgctxt "PlacemarkEditHeaderPrivate|"
-msgid "Browse..."
+msgid "Browse…"
 msgstr ""
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
@@ -12279,13 +12280,13 @@ msgstr "Nouzome hôteur"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
-msgid "&Add..."
+msgid "&Add…"
 msgstr ""
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
 #, fuzzy
 msgctxt "RoutingSettingsWidget|"
-msgid "&Configure..."
+msgid "&Configure…"
 msgstr "Apontyî l' contrôle do solea"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
@@ -12823,7 +12824,7 @@ msgstr ""
 #, fuzzy
 #| msgid "&Open..."
 msgctxt "TourCaptureDialog|"
-msgid "Open..."
+msgid "Open…"
 msgstr "&Drovi..."
 
 #: src/lib/marble/TourCaptureDialog.ui:97
@@ -14236,7 +14237,7 @@ msgstr ""
 #, fuzzy
 #| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
-msgid "&Settings..."
+msgid "&Settings…"
 msgstr "&Apontiaedjes"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
@@ -14512,19 +14513,19 @@ msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "A float item that shows the elevation profile of the current route."
 msgstr "Çouchal est on cayet flotant ki dene ene mwaisse vuwe del mape."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:188
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:191
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:195
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:198
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid ""
 "Not enough points in the current viewport.\n"
 "Try to disable 'Zoom to viewport'."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:278
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:281
 #, qt-format
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Difference: %1 %2"
@@ -16217,7 +16218,7 @@ msgstr "&Copyî mape"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
 msgctxt "SatellitesConfigDialog|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
@@ -18960,6 +18961,41 @@ msgid "This is a template class for float items."
 msgstr "Çouchal est ene classe di modele po les cayets flotants."
 
 #, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Import Bookmarks..."
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Export Bookmarks..."
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "&Drovi..."
+
+#, fuzzy
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure..."
+#~ msgstr "Apontyî l' contrôle do solea"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "&Drovi..."
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Settings..."
+#~ msgstr "&Apontiaedjes"
+
+#, fuzzy
 #~| msgid "&Copy Map"
 #~ msgctxt "Bookmarks|"
 #~ msgid "Removed"
@@ -19205,11 +19241,6 @@ msgstr "Çouchal est ene classe di modele po les cayets flotants."
 #~ msgctxt "Marble::MainWindow|"
 #~ msgid "&Add Bookmark"
 #~ msgstr "&Radjouter rimarke"
-
-#, fuzzy
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Configure"
-#~ msgstr "Apontyî l' contrôle do solea"
 
 #, fuzzy
 #~| msgid "&Download Maps..."

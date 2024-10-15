@@ -3159,14 +3159,20 @@ msgid "Bookmark Manager"
 msgstr "Διαχειριστής σελιδοδεικτών"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:25
+#, fuzzy
+#| msgctxt "Marble::BookmarkManagerDialog|"
+#| msgid "Import Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Import Bookmarks..."
-msgstr "Εισαγωγή σελιδοδεικτών..."
+msgid "Import Bookmarks…"
+msgstr "Εισαγωγή σελιδοδεικτών"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
+#, fuzzy
+#| msgctxt "Marble::BookmarkManagerDialog|"
+#| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Export Bookmarks..."
-msgstr "Εξαγωγή σελιδοδεικτών..."
+msgid "Export Bookmarks…"
+msgstr "Εξαγωγή σελιδοδεικτών"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
@@ -3175,12 +3181,15 @@ msgstr "Φάκελοι"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
-msgid "New..."
+msgid "New…"
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
+#, fuzzy
+#| msgctxt "UiBookmarkManagerDialog|"
+#| msgid "Rename..."
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Rename..."
+msgid "Rename…"
 msgstr "Μετονομασία..."
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
@@ -3466,9 +3475,12 @@ msgstr "Καθαρισμός πορείας"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "CurrentLocationWidget|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr "′"
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
 msgctxt "CurrentLocationWidget|"
@@ -5028,8 +5040,11 @@ msgid "&Folder:"
 msgstr "&Φάκελος:"
 
 #: src/lib/marble/EditBookmarkDialog.ui:79
+#, fuzzy
+#| msgctxt "UiEditBookmarkDialog|"
+#| msgid "&Add Folder..."
 msgctxt "UiEditBookmarkDialog|"
-msgid "&Add Folder..."
+msgid "&Add Folder…"
 msgstr "&Προσθήκη φακέλου..."
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
@@ -7419,8 +7434,11 @@ msgstr[0] "βρέθηκαν %n αποτελέσματα."
 msgstr[1] "βρέθηκαν %n αποτελέσματα."
 
 #: src/lib/marble/GoToDialog.ui:14
+#, fuzzy
+#| msgctxt "GoTo|"
+#| msgid "Go To..."
 msgctxt "GoTo|"
-msgid "Go To..."
+msgid "Go To…"
 msgstr "Μετάβαση σε..."
 
 #: src/lib/marble/GoToDialog.ui:78
@@ -7432,7 +7450,7 @@ msgstr "Μετάβαση σε..."
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-"Marble/Search\">Details...</a>"
+"Marble/Search\">Details…</a>"
 msgstr ""
 "Δώστε έναν όρο αναζήτησης και πατήστε Enter. <a href=\"http://userbase.kde."
 "org/Marble/Search\">Λεπτομέρειες...</a>"
@@ -8197,7 +8215,7 @@ msgstr ""
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Ctrl, Ctrl+A, ...)"
+"Ctrl, Ctrl+A, …)"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:300
@@ -8375,9 +8393,12 @@ msgid "Source Image:"
 msgstr "Πηγαία εικόνα:"
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "MapWizard|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr "′"
 
 #: src/lib/marble/MapWizard.ui:615
 #, fuzzy
@@ -8536,9 +8557,12 @@ msgid "preview image"
 msgstr "εικόνα προεπισκόπησης"
 
 #: src/lib/marble/MapWizard.ui:825
+#, fuzzy
+#| msgctxt "Marble::ConflictDialog|"
+#| msgid "Changed"
 msgctxt "MapWizard|"
-msgid "Change..."
-msgstr "Αλλαγή..."
+msgid "Change…"
+msgstr "Άλλαξε"
 
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
@@ -10515,9 +10539,12 @@ msgstr "Κλίση του άξονα της Γης προς το χρήστη."
 #: src/lib/marble/MarbleNavigator.ui:103 src/lib/marble/MarbleNavigator.ui:122
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "MarbleNavigator|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr "′"
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
 msgctxt "MarbleNavigator|"
@@ -11359,9 +11386,12 @@ msgid "Destination video:"
 msgstr "Ο προορισμός βρίσκεται μπροστά σας."
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
+#, fuzzy
+#| msgctxt "Marble::RouteItemDelegate|"
+#| msgid "Open"
 msgctxt "MovieCaptureDialog|"
-msgid "Open..."
-msgstr "Άνοιγμα..."
+msgid "Open…"
+msgstr "Άνοιγμα"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -11533,9 +11563,12 @@ msgid "All Supported Files (*.png)"
 msgstr "Όλα τα υποστηριζόμενα αρχεία (*.txt *.msc)"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
+#, fuzzy
+#| msgctxt "GoTo|"
+#| msgid "Browse"
 msgctxt "PlacemarkEditHeaderPrivate|"
-msgid "Browse..."
-msgstr ""
+msgid "Browse…"
+msgstr "Περιήγηση"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -12296,13 +12329,15 @@ msgstr "Νέο προφίλ"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
-msgid "&Add..."
+msgid "&Add…"
 msgstr ""
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
+#, fuzzy
+#| msgid "Configure"
 msgctxt "RoutingSettingsWidget|"
-msgid "&Configure..."
-msgstr "&Διαμόρφωση..."
+msgid "&Configure…"
+msgstr "Διαμόρφωση"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 msgctxt "RoutingSettingsWidget|"
@@ -12829,9 +12864,12 @@ msgid "Destination video"
 msgstr "Ο προορισμός βρίσκεται μπροστά σας."
 
 #: src/lib/marble/TourCaptureDialog.ui:81
+#, fuzzy
+#| msgctxt "Marble::RouteItemDelegate|"
+#| msgid "Open"
 msgctxt "TourCaptureDialog|"
-msgid "Open..."
-msgstr "Άνοιγμα..."
+msgid "Open…"
+msgstr "Άνοιγμα"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
@@ -14238,9 +14276,12 @@ msgid "Show eclipses for year:"
 msgstr ""
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
+#, fuzzy
+#| msgctxt "Marble::MainWindow|"
+#| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
-msgid "&Settings..."
-msgstr "&Ρυθμίσεις..."
+msgid "&Settings…"
+msgstr "&Ρυθμίσεις"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 msgctxt "EclipsesBrowserDialog|"
@@ -14515,14 +14556,14 @@ msgstr ""
 "Αυτό το κινούμενο αντικείμενο εμφανίζει το υψομετρικό προφίλ της τρέχουσας "
 "διαδρομής."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:188
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:191
 #, fuzzy
 #| msgid "Create a route to view its elevation profile."
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr "Δημιουργήστε μια διαδρομή για να προβάλλετε το υψομετρικό προφίλ της."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:195
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:198
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid ""
 "Not enough points in the current viewport.\n"
@@ -14531,7 +14572,7 @@ msgstr ""
 "Δεν υπάρχουν αρκετά σημεία στην τρέχουσα προβαλλόμενη περιοχή.\n"
 "Δοκιμάστε να απενεργοποιήσετε την 'Εστίαση στην προβαλλόμενη περιοχή'."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:278
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:281
 #, qt-format
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Difference: %1 %2"
@@ -16085,9 +16126,12 @@ msgid "Remove selected data source."
 msgstr "Διαγραφή της επιλεγμένης πηγής δεδομένων"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
+#, fuzzy
+#| msgctxt "LatLonEditPrivate|"
+#| msgid "′"
 msgctxt "SatellitesConfigDialog|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr "′"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
 msgctxt "SatellitesConfigDialog|"
@@ -18833,6 +18877,50 @@ msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Αυτή είναι μια κλάση προτύπου για κινητά αντικείμενα."
 
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Import Bookmarks..."
+#~ msgstr "Εισαγωγή σελιδοδεικτών..."
+
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Export Bookmarks..."
+#~ msgstr "Εξαγωγή σελιδοδεικτών..."
+
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgctxt "MapWizard|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgctxt "MapWizard|"
+#~ msgid "Change..."
+#~ msgstr "Αλλαγή..."
+
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "Άνοιγμα..."
+
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure..."
+#~ msgstr "&Διαμόρφωση..."
+
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "Άνοιγμα..."
+
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Settings..."
+#~ msgstr "&Ρυθμίσεις..."
+
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "..."
+#~ msgstr "..."
+
 #~ msgctxt "AboutDialog|"
 #~ msgid ""
 #~ "<h3>Marble Maps</h3><p>Find your way! Marble Maps brings the highly "
@@ -19236,12 +19324,6 @@ msgstr "Αυτή είναι μια κλάση προτύπου για κινητ
 #~ msgctxt "UiBookmarkManagerDialog|"
 #~ msgid "New"
 #~ msgstr "Νέο"
-
-#, fuzzy
-#~| msgid "Configure"
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Configure"
-#~ msgstr "Διαμόρφωση"
 
 #~ msgctxt "Marble::MapViewWidget|"
 #~ msgid "&Upload Map..."

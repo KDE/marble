@@ -3488,14 +3488,14 @@ msgstr "ढूंढें पंक्ति"
 #, fuzzy
 #| msgid "Search line"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Import Bookmarks..."
+msgid "Import Bookmarks…"
 msgstr "ढूंढें पंक्ति"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
 #, fuzzy
 #| msgid "Search line"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Export Bookmarks..."
+msgid "Export Bookmarks…"
 msgstr "ढूंढें पंक्ति"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
@@ -3505,12 +3505,12 @@ msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
-msgid "New..."
+msgid "New…"
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Rename..."
+msgid "Rename…"
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
@@ -3845,11 +3845,9 @@ msgstr "ट्रैक जीपीएस"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
-#, fuzzy
-#| msgid "..."
 msgctxt "CurrentLocationWidget|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr ""
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
 msgctxt "CurrentLocationWidget|"
@@ -5495,7 +5493,7 @@ msgstr "एलीवेश मॉडल दिखाएँ"
 #, fuzzy
 #| msgid "Show elevation model"
 msgctxt "UiEditBookmarkDialog|"
-msgid "&Add Folder..."
+msgid "&Add Folder…"
 msgstr "एलीवेश मॉडल दिखाएँ"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
@@ -8160,14 +8158,14 @@ msgstr[1] ""
 #, fuzzy
 #| msgid "Go To"
 msgctxt "GoTo|"
-msgid "Go To..."
+msgid "Go To…"
 msgstr " पर जाएं"
 
 #: src/lib/marble/GoToDialog.ui:78
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-"Marble/Search\">Details...</a>"
+"Marble/Search\">Details…</a>"
 msgstr ""
 
 #: src/lib/marble/GoToDialog.ui:93
@@ -8974,7 +8972,7 @@ msgstr ""
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Ctrl, Ctrl+A, ...)"
+"Ctrl, Ctrl+A, …)"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:300
@@ -9134,11 +9132,9 @@ msgid "Source Image:"
 msgstr "पृष्ठ छापें"
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
-#, fuzzy
-#| msgid "..."
 msgctxt "MapWizard|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr ""
 
 #: src/lib/marble/MapWizard.ui:615
 #, fuzzy
@@ -9307,7 +9303,7 @@ msgstr "पृष्ठ छापें"
 #, fuzzy
 #| msgid "Navigation Control"
 msgctxt "MapWizard|"
-msgid "Change..."
+msgid "Change…"
 msgstr "नेविगेशन नियंत्रक"
 
 #: src/lib/marble/MapWizard.ui:855
@@ -11026,11 +11022,9 @@ msgstr "पृथ्वी के अक्ष को उपयोक्ता �
 #: src/lib/marble/MarbleNavigator.ui:103 src/lib/marble/MarbleNavigator.ui:122
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
-#, fuzzy
-#| msgid "..."
 msgctxt "MarbleNavigator|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr ""
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
 msgctxt "MarbleNavigator|"
@@ -12008,7 +12002,7 @@ msgstr "वर्णन क्षेत्र"
 #, fuzzy
 #| msgid "&Open Map..."
 msgctxt "MovieCaptureDialog|"
-msgid "Open..."
+msgid "Open…"
 msgstr "नक्शा खोलें...(&O)"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
@@ -12197,7 +12191,7 @@ msgstr ""
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
 msgctxt "PlacemarkEditHeaderPrivate|"
-msgid "Browse..."
+msgid "Browse…"
 msgstr ""
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
@@ -13028,14 +13022,14 @@ msgstr "एलीवेशन एक्सट्रीम"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
-msgid "&Add..."
+msgid "&Add…"
 msgstr ""
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
 #, fuzzy
 #| msgid "Navigation Control"
 msgctxt "RoutingSettingsWidget|"
-msgid "&Configure..."
+msgid "&Configure…"
 msgstr "नेविगेशन नियंत्रक"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
@@ -13635,7 +13629,7 @@ msgstr "वर्णन क्षेत्र"
 #, fuzzy
 #| msgid "&Open Map..."
 msgctxt "TourCaptureDialog|"
-msgid "Open..."
+msgid "Open…"
 msgstr "नक्शा खोलें...(&O)"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
@@ -15111,7 +15105,7 @@ msgstr ""
 #, fuzzy
 #| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
-msgid "&Settings..."
+msgid "&Settings…"
 msgstr "विन्यास (&S)"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
@@ -15391,19 +15385,19 @@ msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "A float item that shows the elevation profile of the current route."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:188
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:191
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:195
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:198
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid ""
 "Not enough points in the current viewport.\n"
 "Try to disable 'Zoom to viewport'."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:278
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:281
 #, qt-format
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Difference: %1 %2"
@@ -17069,11 +17063,9 @@ msgid "Remove selected data source."
 msgstr "चपटा नक्शा"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
-#, fuzzy
-#| msgid "..."
 msgctxt "SatellitesConfigDialog|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
 msgctxt "SatellitesConfigDialog|"
@@ -19954,6 +19946,66 @@ msgid "This is a template class for float items."
 msgstr ""
 
 #, fuzzy
+#~| msgid "Search line"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Import Bookmarks..."
+#~ msgstr "ढूंढें पंक्ति"
+
+#, fuzzy
+#~| msgid "Search line"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Export Bookmarks..."
+#~ msgstr "ढूंढें पंक्ति"
+
+#, fuzzy
+#~| msgid "..."
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~| msgid "..."
+#~ msgctxt "MapWizard|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~| msgid "..."
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~| msgid "&Open Map..."
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "नक्शा खोलें...(&O)"
+
+#, fuzzy
+#~| msgid "Navigation Control"
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure..."
+#~ msgstr "नेविगेशन नियंत्रक"
+
+#, fuzzy
+#~| msgid "&Open Map..."
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "नक्शा खोलें...(&O)"
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Settings..."
+#~ msgstr "विन्यास (&S)"
+
+#, fuzzy
+#~| msgid "..."
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
 #~| msgid "Flat Map"
 #~ msgctxt "Bookmarks|"
 #~ msgid "Removed"
@@ -20222,12 +20274,6 @@ msgstr ""
 #~ msgctxt "Marble::MainWindow|"
 #~ msgid "&Add Bookmark"
 #~ msgstr "ढूंढें पंक्ति"
-
-#, fuzzy
-#~| msgid "Navigation Control"
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Configure"
-#~ msgstr "नेविगेशन नियंत्रक"
 
 #, fuzzy
 #~| msgid "Downloading data..."

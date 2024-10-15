@@ -3717,14 +3717,14 @@ msgstr "Oznaka Izvoza - Marble"
 #, fuzzy
 #| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Import Bookmarks..."
+msgid "Import Bookmarks…"
 msgstr "Izvezi obilježivače"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
 #, fuzzy
 #| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Export Bookmarks..."
+msgid "Export Bookmarks…"
 msgstr "Izvezi obilježivače"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
@@ -3734,14 +3734,14 @@ msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
-msgid "New..."
+msgid "New…"
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
 #, fuzzy
 #| msgid "Unnamed"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Rename..."
+msgid "Rename…"
 msgstr "Neimenovano"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
@@ -4131,7 +4131,7 @@ msgstr "Obriši trenutni trag"
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
 msgctxt "CurrentLocationWidget|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
@@ -5795,7 +5795,7 @@ msgstr "Dodaj čvorove"
 #, fuzzy
 #| msgid "Add Nodes"
 msgctxt "UiEditBookmarkDialog|"
-msgid "&Add Folder..."
+msgid "&Add Folder…"
 msgstr "Dodaj čvorove"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
@@ -8624,14 +8624,14 @@ msgstr[2] "Nema pronađenih ruta"
 
 #: src/lib/marble/GoToDialog.ui:14
 msgctxt "GoTo|"
-msgid "Go To..."
+msgid "Go To…"
 msgstr ""
 
 #: src/lib/marble/GoToDialog.ui:78
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-"Marble/Search\">Details...</a>"
+"Marble/Search\">Details…</a>"
 msgstr ""
 
 #: src/lib/marble/GoToDialog.ui:93
@@ -9458,7 +9458,7 @@ msgstr ""
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Ctrl, Ctrl+A, ...)"
+"Ctrl, Ctrl+A, …)"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:300
@@ -9588,7 +9588,7 @@ msgstr "Izvorna slika"
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
 msgctxt "MapWizard|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:615
@@ -9709,7 +9709,7 @@ msgstr "Pregled slike"
 #, fuzzy
 #| msgid "Changed"
 msgctxt "MapWizard|"
-msgid "Change..."
+msgid "Change…"
 msgstr "Izmijenjeno"
 
 #: src/lib/marble/MapWizard.ui:855
@@ -11926,7 +11926,7 @@ msgstr ""
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
 msgctxt "MarbleNavigator|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
@@ -12773,10 +12773,10 @@ msgstr "Destinacija naprijed."
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
 #, fuzzy
-#| msgid "&Open..."
+#| msgid "Open"
 msgctxt "MovieCaptureDialog|"
-msgid "Open..."
-msgstr "&Otvori..."
+msgid "Open…"
+msgstr "Otvori"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -12969,7 +12969,7 @@ msgstr "Sve podržane datoteke (*.png)"
 #, fuzzy
 #| msgid "Browse Ecli&pses..."
 msgctxt "PlacemarkEditHeaderPrivate|"
-msgid "Browse..."
+msgid "Browse…"
 msgstr "Pretraži &Pomračenja..."
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
@@ -13978,15 +13978,15 @@ msgstr "Novi profil"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
-msgid "&Add..."
+msgid "&Add…"
 msgstr ""
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
 #, fuzzy
-#| msgid "&Configure..."
+#| msgid "Configure"
 msgctxt "RoutingSettingsWidget|"
-msgid "&Configure..."
-msgstr "&Podesi..."
+msgid "&Configure…"
+msgstr "Podesi"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 #, fuzzy
@@ -14564,10 +14564,10 @@ msgstr "Destinacija naprijed."
 
 #: src/lib/marble/TourCaptureDialog.ui:81
 #, fuzzy
-#| msgid "&Open..."
+#| msgid "Open"
 msgctxt "TourCaptureDialog|"
-msgid "Open..."
-msgstr "&Otvori..."
+msgid "Open…"
+msgstr "Otvori"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
@@ -16180,7 +16180,7 @@ msgstr ""
 #, fuzzy
 #| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
-msgid "&Settings..."
+msgid "&Settings…"
 msgstr "&Postavke"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
@@ -16515,7 +16515,7 @@ msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "A float item that shows the elevation profile of the current route."
 msgstr "Plutajući predmet koji pokazuje elevacijski profil trenutne rute."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:188
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:191
 #, fuzzy
 #| msgid ""
 #| "Create a route or load a track from file to view its elevation profile."
@@ -16524,7 +16524,7 @@ msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
 "Kreiraj rutu ili pusti snimak iz datoteke da vidiš njegog profil povišenja."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:195
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:198
 #, fuzzy
 #| msgid ""
 #| "Not enough points in the current viewport.\n"
@@ -16537,7 +16537,7 @@ msgstr ""
 "Nedovoljno bodova u trenutnom prikaznom polju.\n"
 "Pokušajte onemogućiti 'Zumiraj u prikazno područje'."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:278
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:281
 #, fuzzy, qt-format
 #| msgid "Difference: %1 %2"
 msgctxt "Marble::ElevationProfileFloatItem|"
@@ -18429,7 +18429,7 @@ msgstr "Obriši izabrani izvor podataka"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
 msgctxt "SatellitesConfigDialog|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
@@ -21756,6 +21756,48 @@ msgid "This is a template class for float items."
 msgstr "Ovo je šablonska klasa za plutajuće predmete."
 
 #, fuzzy
+#~| msgid "Export Bookmarks"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Import Bookmarks..."
+#~ msgstr "Izvezi obilježivače"
+
+#, fuzzy
+#~| msgid "Export Bookmarks"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Export Bookmarks..."
+#~ msgstr "Izvezi obilježivače"
+
+#, fuzzy
+#~| msgid "Changed"
+#~ msgctxt "MapWizard|"
+#~ msgid "Change..."
+#~ msgstr "Izmijenjeno"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "&Otvori..."
+
+#, fuzzy
+#~| msgid "&Configure..."
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure..."
+#~ msgstr "&Podesi..."
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "&Otvori..."
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Settings..."
+#~ msgstr "&Postavke"
+
+#, fuzzy
 #~| msgid "Remove"
 #~ msgctxt "Bookmarks|"
 #~ msgid "Removed"
@@ -22070,12 +22112,6 @@ msgstr "Ovo je šablonska klasa za plutajuće predmete."
 #~ msgctxt "Marble::MainWindow|"
 #~ msgid "&Add Bookmark"
 #~ msgstr "&Dodaj zabilješkama"
-
-#, fuzzy
-#~| msgid "Configure"
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Configure"
-#~ msgstr "Podesi"
 
 #, fuzzy
 #~| msgid "&Upload Map..."

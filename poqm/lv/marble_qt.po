@@ -3694,14 +3694,14 @@ msgstr "Grāmatzīmju eksportēšana – Marble"
 #, fuzzy
 #| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Import Bookmarks..."
+msgid "Import Bookmarks…"
 msgstr "Eksportēt grāmatzīmes"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
 #, fuzzy
 #| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Export Bookmarks..."
+msgid "Export Bookmarks…"
 msgstr "Eksportēt grāmatzīmes"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
@@ -3711,14 +3711,14 @@ msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
-msgid "New..."
+msgid "New…"
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
 #, fuzzy
 #| msgid "Unnamed"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Rename..."
+msgid "Rename…"
 msgstr "Nenosaukts"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
@@ -4086,7 +4086,7 @@ msgstr "Notīrīt pašreizējo celiņu"
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
 msgctxt "CurrentLocationWidget|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
@@ -5750,7 +5750,7 @@ msgstr "Dzēst"
 #, fuzzy
 #| msgid "Delete"
 msgctxt "UiEditBookmarkDialog|"
-msgid "&Add Folder..."
+msgid "&Add Folder…"
 msgstr "Dzēst"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
@@ -8576,14 +8576,14 @@ msgstr[2] "Maršruts nav atrasts"
 #, fuzzy
 #| msgid "&Go To..."
 msgctxt "GoTo|"
-msgid "Go To..."
+msgid "Go To…"
 msgstr "&Iet uz..."
 
 #: src/lib/marble/GoToDialog.ui:78
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-"Marble/Search\">Details...</a>"
+"Marble/Search\">Details…</a>"
 msgstr ""
 
 #: src/lib/marble/GoToDialog.ui:93
@@ -9382,7 +9382,7 @@ msgstr ""
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Ctrl, Ctrl+A, ...)"
+"Ctrl, Ctrl+A, …)"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:300
@@ -9512,7 +9512,7 @@ msgstr "Izejas attēls"
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
 msgctxt "MapWizard|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:615
@@ -9633,7 +9633,7 @@ msgstr "Priekšapskates attēls"
 #, fuzzy
 #| msgid "&Configure..."
 msgctxt "MapWizard|"
-msgid "Change..."
+msgid "Change…"
 msgstr "&Konfigurēt..."
 
 #: src/lib/marble/MapWizard.ui:855
@@ -11829,7 +11829,7 @@ msgstr ""
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
 msgctxt "MarbleNavigator|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
@@ -12655,10 +12655,10 @@ msgstr "Mērķis priekšā."
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
 #, fuzzy
-#| msgid "&Open..."
+#| msgid "Open"
 msgctxt "MovieCaptureDialog|"
-msgid "Open..."
-msgstr "&Atvērt..."
+msgid "Open…"
+msgstr "Atvērt"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -12845,7 +12845,7 @@ msgstr "Visi atbalstītie faili (*.txt *.msc)"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
 msgctxt "PlacemarkEditHeaderPrivate|"
-msgid "Browse..."
+msgid "Browse…"
 msgstr ""
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
@@ -13781,15 +13781,15 @@ msgstr "Jauns profils"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
-msgid "&Add..."
+msgid "&Add…"
 msgstr ""
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
 #, fuzzy
-#| msgid "&Configure..."
+#| msgid "Configure"
 msgctxt "RoutingSettingsWidget|"
-msgid "&Configure..."
-msgstr "&Konfigurēt..."
+msgid "&Configure…"
+msgstr "Konfigurēt"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 #, fuzzy
@@ -14354,10 +14354,10 @@ msgstr "Mērķis priekšā."
 
 #: src/lib/marble/TourCaptureDialog.ui:81
 #, fuzzy
-#| msgid "&Open..."
+#| msgid "Open"
 msgctxt "TourCaptureDialog|"
-msgid "Open..."
-msgstr "&Atvērt..."
+msgid "Open…"
+msgstr "Atvērt"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
@@ -15908,7 +15908,7 @@ msgstr ""
 #, fuzzy
 #| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
-msgid "&Settings..."
+msgid "&Settings…"
 msgstr "&Iestatījumi"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
@@ -16199,14 +16199,14 @@ msgid "A float item that shows the elevation profile of the current route."
 msgstr ""
 "Šis ir peldošs elements, kas parāda pašreizējā maršruta augstuma profilu."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:188
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:191
 #, fuzzy
 #| msgid "Create a route to view its elevation profile."
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr "Izveidojiet maršrutu, lai skatītu tā augstuma profilu."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:195
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:198
 #, fuzzy
 #| msgid ""
 #| "Not enough points in the current viewport.\n"
@@ -16219,7 +16219,7 @@ msgstr ""
 "Pašreizējā skata apgabalā nav pietiekams daudzums punktu.\n"
 "Mēģiniet atslēgt 'Pietuvināt skata apgalam'."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:278
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:281
 #, fuzzy, qt-format
 #| msgid "Difference: %1 %2"
 msgctxt "Marble::ElevationProfileFloatItem|"
@@ -18082,7 +18082,7 @@ msgstr "Dzēst izvēlēto datu avotu"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
 msgctxt "SatellitesConfigDialog|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
@@ -21336,6 +21336,42 @@ msgid "This is a template class for float items."
 msgstr "Šī ir sagataves klase peldošiem elementiem."
 
 #, fuzzy
+#~| msgid "Export Bookmarks"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Import Bookmarks..."
+#~ msgstr "Eksportēt grāmatzīmes"
+
+#, fuzzy
+#~| msgid "Export Bookmarks"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Export Bookmarks..."
+#~ msgstr "Eksportēt grāmatzīmes"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "&Atvērt..."
+
+#, fuzzy
+#~| msgid "&Configure..."
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure..."
+#~ msgstr "&Konfigurēt..."
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "&Atvērt..."
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Settings..."
+#~ msgstr "&Iestatījumi"
+
+#, fuzzy
 #~| msgid "Remove"
 #~ msgctxt "Bookmarks|"
 #~ msgid "Removed"
@@ -21644,12 +21680,6 @@ msgstr "Šī ir sagataves klase peldošiem elementiem."
 #~ msgctxt "Marble::MainWindow|"
 #~ msgid "&Add Bookmark"
 #~ msgstr "Pievienot &grāmatzīmi"
-
-#, fuzzy
-#~| msgid "Configure"
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Configure"
-#~ msgstr "Konfigurēt"
 
 #, fuzzy
 #~| msgid "&Upload Map..."

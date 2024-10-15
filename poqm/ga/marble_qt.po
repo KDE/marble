@@ -3595,14 +3595,14 @@ msgstr "Leabharmharcanna"
 #, fuzzy
 #| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Import Bookmarks..."
+msgid "Import Bookmarks…"
 msgstr "Easpórtáil Leabharmharcanna"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
 #, fuzzy
 #| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Export Bookmarks..."
+msgid "Export Bookmarks…"
 msgstr "Easpórtáil Leabharmharcanna"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
@@ -3612,14 +3612,14 @@ msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
-msgid "New..."
+msgid "New…"
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
 #, fuzzy
 #| msgid "Unnamed"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Rename..."
+msgid "Rename…"
 msgstr "Gan Ainm"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
@@ -3957,11 +3957,9 @@ msgstr "Glan"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
-#, fuzzy
-#| msgid "..."
 msgctxt "CurrentLocationWidget|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr ""
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
 #, fuzzy
@@ -5630,7 +5628,7 @@ msgstr "Scrios"
 #, fuzzy
 #| msgid "Delete"
 msgctxt "UiEditBookmarkDialog|"
-msgid "&Add Folder..."
+msgid "&Add Folder…"
 msgstr "Scrios"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
@@ -8379,14 +8377,14 @@ msgstr[4] ""
 #, fuzzy
 #| msgid "&Go To..."
 msgctxt "GoTo|"
-msgid "Go To..."
+msgid "Go To…"
 msgstr "Téigh &Go..."
 
 #: src/lib/marble/GoToDialog.ui:78
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-"Marble/Search\">Details...</a>"
+"Marble/Search\">Details…</a>"
 msgstr ""
 
 #: src/lib/marble/GoToDialog.ui:93
@@ -9200,7 +9198,7 @@ msgstr ""
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Ctrl, Ctrl+A, ...)"
+"Ctrl, Ctrl+A, …)"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:300
@@ -9365,11 +9363,9 @@ msgid "Source Image:"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
-#, fuzzy
-#| msgid "..."
 msgctxt "MapWizard|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr ""
 
 #: src/lib/marble/MapWizard.ui:615
 msgctxt "MapWizard|"
@@ -9507,7 +9503,7 @@ msgstr ""
 #, fuzzy
 #| msgid "&Configure..."
 msgctxt "MapWizard|"
-msgid "Change..."
+msgid "Change…"
 msgstr "&Cumraigh..."
 
 #: src/lib/marble/MapWizard.ui:855
@@ -11281,11 +11277,9 @@ msgstr ""
 #: src/lib/marble/MarbleNavigator.ui:103 src/lib/marble/MarbleNavigator.ui:122
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
-#, fuzzy
-#| msgid "..."
 msgctxt "MarbleNavigator|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr ""
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
 msgctxt "MarbleNavigator|"
@@ -12286,7 +12280,7 @@ msgstr ""
 #, fuzzy
 #| msgid "&Open..."
 msgctxt "MovieCaptureDialog|"
-msgid "Open..."
+msgid "Open…"
 msgstr "&Oscail..."
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
@@ -12470,7 +12464,7 @@ msgstr "Gach Comhad a dTacaítear Leis (*.txt *.msc)"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
 msgctxt "PlacemarkEditHeaderPrivate|"
-msgid "Browse..."
+msgid "Browse…"
 msgstr ""
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
@@ -13339,15 +13333,15 @@ msgstr "Próifíl Nua"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
-msgid "&Add..."
+msgid "&Add…"
 msgstr ""
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
 #, fuzzy
-#| msgid "&Configure..."
+#| msgid "Configure"
 msgctxt "RoutingSettingsWidget|"
-msgid "&Configure..."
-msgstr "&Cumraigh..."
+msgid "&Configure…"
+msgstr "Cumraigh"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 msgctxt "RoutingSettingsWidget|"
@@ -13955,7 +13949,7 @@ msgstr ""
 #, fuzzy
 #| msgid "&Open..."
 msgctxt "TourCaptureDialog|"
-msgid "Open..."
+msgid "Open…"
 msgstr "&Oscail..."
 
 #: src/lib/marble/TourCaptureDialog.ui:97
@@ -15399,7 +15393,7 @@ msgstr ""
 #, fuzzy
 #| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
-msgid "&Settings..."
+msgid "&Settings…"
 msgstr "&Socruithe"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
@@ -15681,19 +15675,19 @@ msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "A float item that shows the elevation profile of the current route."
 msgstr "Seo é snámh-mhír a thaispeánann próifíl airde ar an ród reatha."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:188
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:191
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:195
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:198
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid ""
 "Not enough points in the current viewport.\n"
 "Try to disable 'Zoom to viewport'."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:278
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:281
 #, fuzzy, qt-format
 #| msgid "Difference: %1 %2"
 msgctxt "Marble::ElevationProfileFloatItem|"
@@ -17423,11 +17417,9 @@ msgid "Remove selected data source."
 msgstr "&Bain Pointí Tomhais"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
-#, fuzzy
-#| msgid "..."
 msgctxt "SatellitesConfigDialog|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
 msgctxt "SatellitesConfigDialog|"
@@ -20453,6 +20445,66 @@ msgid "This is a template class for float items."
 msgstr "Seo é aicme teimpléid le haghaidh snámh-mhíreanna."
 
 #, fuzzy
+#~| msgid "Export Bookmarks"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Import Bookmarks..."
+#~ msgstr "Easpórtáil Leabharmharcanna"
+
+#, fuzzy
+#~| msgid "Export Bookmarks"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Export Bookmarks..."
+#~ msgstr "Easpórtáil Leabharmharcanna"
+
+#, fuzzy
+#~| msgid "..."
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~| msgid "..."
+#~ msgctxt "MapWizard|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~| msgid "..."
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "&Oscail..."
+
+#, fuzzy
+#~| msgid "&Configure..."
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure..."
+#~ msgstr "&Cumraigh..."
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "&Oscail..."
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Settings..."
+#~ msgstr "&Socruithe"
+
+#, fuzzy
+#~| msgid "..."
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
 #~| msgid "&Remove Measure Points"
 #~ msgctxt "Bookmarks|"
 #~ msgid "Removed"
@@ -20741,12 +20793,6 @@ msgstr "Seo é aicme teimpléid le haghaidh snámh-mhíreanna."
 #~ msgctxt "Marble::MainWindow|"
 #~ msgid "&Add Bookmark"
 #~ msgstr "&Cuir Leabharmharc Leis"
-
-#, fuzzy
-#~| msgid "Configure"
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Configure"
-#~ msgstr "Cumraigh"
 
 #, fuzzy
 #~| msgid "&Download Maps..."

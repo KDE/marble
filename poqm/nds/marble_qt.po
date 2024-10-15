@@ -4010,14 +4010,14 @@ msgstr "Leesteken exporteren - Marble"
 #, fuzzy
 #| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Import Bookmarks..."
+msgid "Import Bookmarks…"
 msgstr "Leestekens exporteren…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
 #, fuzzy
 #| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Export Bookmarks..."
+msgid "Export Bookmarks…"
 msgstr "Leestekens exporteren…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
@@ -4027,14 +4027,14 @@ msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
-msgid "New..."
+msgid "New…"
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
 #, fuzzy
 #| msgid "Unnamed"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Rename..."
+msgid "Rename…"
 msgstr "Ahn Naam"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
@@ -4423,11 +4423,9 @@ msgstr "Aktuell Spoor wegmaken"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
-#, fuzzy
-#| msgid "..."
 msgctxt "CurrentLocationWidget|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr ""
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
 #, fuzzy
@@ -6141,7 +6139,7 @@ msgstr "Knütten tofögen"
 #, fuzzy
 #| msgid "Add Nodes"
 msgctxt "UiEditBookmarkDialog|"
-msgid "&Add Folder..."
+msgid "&Add Folder…"
 msgstr "Knütten tofögen"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
@@ -9071,16 +9069,16 @@ msgstr[1] "Keen Weg funnen"
 
 #: src/lib/marble/GoToDialog.ui:14
 #, fuzzy
-#| msgid "&Go To..."
+#| msgid "Go To"
 msgctxt "GoTo|"
-msgid "Go To..."
-msgstr "&Gah na…"
+msgid "Go To…"
+msgstr "Gahn na"
 
 #: src/lib/marble/GoToDialog.ui:78
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-"Marble/Search\">Details...</a>"
+"Marble/Search\">Details…</a>"
 msgstr ""
 
 #: src/lib/marble/GoToDialog.ui:93
@@ -9975,7 +9973,7 @@ msgstr ""
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Ctrl, Ctrl+A, ...)"
+"Ctrl, Ctrl+A, …)"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:300
@@ -10138,11 +10136,9 @@ msgid "Source Image:"
 msgstr "Bornbild"
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
-#, fuzzy
-#| msgid "..."
 msgctxt "MapWizard|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr ""
 
 #: src/lib/marble/MapWizard.ui:615
 #, fuzzy
@@ -10311,7 +10307,7 @@ msgstr "Bildvöransicht"
 #, fuzzy
 #| msgid "Changed"
 msgctxt "MapWizard|"
-msgid "Change..."
+msgid "Change…"
 msgstr "Ännert"
 
 #: src/lib/marble/MapWizard.ui:855
@@ -12803,11 +12799,9 @@ msgstr "Kippt de Eerass na den Bruker to"
 #: src/lib/marble/MarbleNavigator.ui:103 src/lib/marble/MarbleNavigator.ui:122
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
-#, fuzzy
-#| msgid "..."
 msgctxt "MarbleNavigator|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr ""
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
 msgctxt "MarbleNavigator|"
@@ -13868,10 +13862,10 @@ msgstr "Meist bi't Teel ankamen"
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
 #, fuzzy
-#| msgid "&Open..."
+#| msgid "Open"
 msgctxt "MovieCaptureDialog|"
-msgid "Open..."
-msgstr "&Opmaken..."
+msgid "Open…"
+msgstr "Opmaken"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -14066,7 +14060,7 @@ msgstr "All ünnerstütt Dateien (*.png)"
 #, fuzzy
 #| msgid "Browse Ecli&pses..."
 msgctxt "PlacemarkEditHeaderPrivate|"
-msgid "Browse..."
+msgid "Browse…"
 msgstr "Ver&düüstern dörkieken..."
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
@@ -15016,15 +15010,15 @@ msgstr "Nieg Profil"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
-msgid "&Add..."
+msgid "&Add…"
 msgstr ""
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
 #, fuzzy
-#| msgid "&Configure..."
+#| msgid "Configure"
 msgctxt "RoutingSettingsWidget|"
-msgid "&Configure..."
-msgstr "&Instellen…"
+msgid "&Configure…"
+msgstr "Instellen"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 #, fuzzy
@@ -15663,10 +15657,10 @@ msgstr "Meist bi't Teel ankamen"
 
 #: src/lib/marble/TourCaptureDialog.ui:81
 #, fuzzy
-#| msgid "&Open..."
+#| msgid "Open"
 msgctxt "TourCaptureDialog|"
-msgid "Open..."
-msgstr "&Opmaken..."
+msgid "Open…"
+msgstr "Opmaken"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
@@ -17288,7 +17282,7 @@ msgstr ""
 #, fuzzy
 #| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
-msgid "&Settings..."
+msgid "&Settings…"
 msgstr "&Instellen"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
@@ -17622,14 +17616,14 @@ msgid "A float item that shows the elevation profile of the current route."
 msgstr ""
 "En sweven Element, dat dat Hööchdenprofil vun den aktuellen Weg praatstellt."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:188
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:191
 #, fuzzy
 #| msgid "Create a route to view its elevation profile."
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr "Du muttst en Weg utreken, wenn Du sien Hööchdenprofil ankiekwn wullt."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:195
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:198
 #, fuzzy
 #| msgid ""
 #| "Not enough points in the current viewport.\n"
@@ -17642,7 +17636,7 @@ msgstr ""
 "Nich noog Pünkt binnen dat aktuelle Kiekrebeet.\n"
 "Maak man maal „Ansichtgrött op Kiekrebeet topassen“ ut."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:278
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:281
 #, fuzzy, qt-format
 #| msgid "Difference: %1 %2"
 msgctxt "Marble::ElevationProfileFloatItem|"
@@ -19535,11 +19529,9 @@ msgid "Remove selected data source."
 msgstr "Utsöcht Datenborn wegmaken"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
-#, fuzzy
-#| msgid "..."
 msgctxt "SatellitesConfigDialog|"
-msgid "..."
-msgstr "..."
+msgid "…"
+msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
 msgctxt "SatellitesConfigDialog|"
@@ -23010,6 +23002,78 @@ msgid "This is a template class for float items."
 msgstr "Dit is en Vörlaagklass för Sweevelementen"
 
 #, fuzzy
+#~| msgid "Export Bookmarks"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Import Bookmarks..."
+#~ msgstr "Leestekens exporteren…"
+
+#, fuzzy
+#~| msgid "Export Bookmarks"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Export Bookmarks..."
+#~ msgstr "Leestekens exporteren…"
+
+#, fuzzy
+#~| msgid "..."
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~| msgid "&Go To..."
+#~ msgctxt "GoTo|"
+#~ msgid "Go To..."
+#~ msgstr "&Gah na…"
+
+#, fuzzy
+#~| msgid "..."
+#~ msgctxt "MapWizard|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~| msgid "Changed"
+#~ msgctxt "MapWizard|"
+#~ msgid "Change..."
+#~ msgstr "Ännert"
+
+#, fuzzy
+#~| msgid "..."
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "&Opmaken..."
+
+#, fuzzy
+#~| msgid "&Configure..."
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure..."
+#~ msgstr "&Instellen…"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "&Opmaken..."
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Settings..."
+#~ msgstr "&Instellen"
+
+#, fuzzy
+#~| msgid "..."
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
 #~| msgid "Remove"
 #~ msgctxt "Bookmarks|"
 #~ msgid "Removed"
@@ -23354,12 +23418,6 @@ msgstr "Dit is en Vörlaagklass för Sweevelementen"
 #~ msgctxt "Marble::MainWindow|"
 #~ msgid "&Add Bookmark"
 #~ msgstr "&Leesteken tofögen"
-
-#, fuzzy
-#~| msgid "Configure"
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Configure"
-#~ msgstr "Instellen"
 
 #, fuzzy
 #~| msgid "&Upload Map..."
@@ -25349,9 +25407,6 @@ msgstr "Dit is en Vörlaagklass för Sweevelementen"
 
 #~ msgid "Draw"
 #~ msgstr "Teken"
-
-#~ msgid "Go To"
-#~ msgstr "Gahn na"
 
 #~ msgid "Navigation mode"
 #~ msgstr "Navigatschoonbedrief"

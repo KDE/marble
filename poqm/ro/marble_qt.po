@@ -3463,14 +3463,14 @@ msgstr "Linie de căutare"
 #, fuzzy
 #| msgid "Search line"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Import Bookmarks..."
+msgid "Import Bookmarks…"
 msgstr "Linie de căutare"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
 #, fuzzy
 #| msgid "Search line"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Export Bookmarks..."
+msgid "Export Bookmarks…"
 msgstr "Linie de căutare"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
@@ -3480,12 +3480,12 @@ msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
-msgid "New..."
+msgid "New…"
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Rename..."
+msgid "Rename…"
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
@@ -3821,7 +3821,7 @@ msgstr "Înapoi"
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
 msgctxt "CurrentLocationWidget|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
@@ -5472,7 +5472,7 @@ msgstr "Afișează modelul de elevație"
 #, fuzzy
 #| msgid "Show elevation model"
 msgctxt "UiEditBookmarkDialog|"
-msgid "&Add Folder..."
+msgid "&Add Folder…"
 msgstr "Afișează modelul de elevație"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
@@ -8139,14 +8139,14 @@ msgstr[2] ""
 #, fuzzy
 #| msgid "Go To"
 msgctxt "GoTo|"
-msgid "Go To..."
+msgid "Go To…"
 msgstr "Mergi la"
 
 #: src/lib/marble/GoToDialog.ui:78
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-"Marble/Search\">Details...</a>"
+"Marble/Search\">Details…</a>"
 msgstr ""
 
 #: src/lib/marble/GoToDialog.ui:93
@@ -8955,7 +8955,7 @@ msgstr ""
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Ctrl, Ctrl+A, ...)"
+"Ctrl, Ctrl+A, …)"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:300
@@ -9117,7 +9117,7 @@ msgstr "Tipărește pagina"
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
 msgctxt "MapWizard|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:615
@@ -9288,7 +9288,7 @@ msgstr "Tipărește pagina"
 #, fuzzy
 #| msgid "Navigation Control"
 msgctxt "MapWizard|"
-msgid "Change..."
+msgid "Change…"
 msgstr "Control al navigării"
 
 #: src/lib/marble/MapWizard.ui:855
@@ -11012,7 +11012,7 @@ msgstr "Înclină axa pământului în direcția utilizatorului."
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
 msgctxt "MarbleNavigator|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
@@ -11993,7 +11993,7 @@ msgstr "Câmp rezervat descrierii"
 #, fuzzy
 #| msgid "&Open Map..."
 msgctxt "MovieCaptureDialog|"
-msgid "Open..."
+msgid "Open…"
 msgstr "&Deschide harta..."
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
@@ -12183,7 +12183,7 @@ msgstr ""
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
 msgctxt "PlacemarkEditHeaderPrivate|"
-msgid "Browse..."
+msgid "Browse…"
 msgstr ""
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
@@ -13014,14 +13014,14 @@ msgstr "Extremă de elevație"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
-msgid "&Add..."
+msgid "&Add…"
 msgstr ""
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
 #, fuzzy
 #| msgid "Navigation Control"
 msgctxt "RoutingSettingsWidget|"
-msgid "&Configure..."
+msgid "&Configure…"
 msgstr "Control al navigării"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
@@ -13621,7 +13621,7 @@ msgstr "Câmp rezervat descrierii"
 #, fuzzy
 #| msgid "&Open Map..."
 msgctxt "TourCaptureDialog|"
-msgid "Open..."
+msgid "Open…"
 msgstr "&Deschide harta..."
 
 #: src/lib/marble/TourCaptureDialog.ui:97
@@ -15101,7 +15101,7 @@ msgstr ""
 #, fuzzy
 #| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
-msgid "&Settings..."
+msgid "&Settings…"
 msgstr "&Configurări"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
@@ -15381,19 +15381,19 @@ msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "A float item that shows the elevation profile of the current route."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:188
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:191
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:195
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:198
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid ""
 "Not enough points in the current viewport.\n"
 "Try to disable 'Zoom to viewport'."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:278
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:281
 #, qt-format
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Difference: %1 %2"
@@ -17064,7 +17064,7 @@ msgstr "Hartă plană"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
 msgctxt "SatellitesConfigDialog|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
@@ -19960,6 +19960,42 @@ msgid "This is a template class for float items."
 msgstr ""
 
 #, fuzzy
+#~| msgid "Search line"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Import Bookmarks..."
+#~ msgstr "Linie de căutare"
+
+#, fuzzy
+#~| msgid "Search line"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Export Bookmarks..."
+#~ msgstr "Linie de căutare"
+
+#, fuzzy
+#~| msgid "&Open Map..."
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "&Deschide harta..."
+
+#, fuzzy
+#~| msgid "Navigation Control"
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure..."
+#~ msgstr "Control al navigării"
+
+#, fuzzy
+#~| msgid "&Open Map..."
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "&Deschide harta..."
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Settings..."
+#~ msgstr "&Configurări"
+
+#, fuzzy
 #~| msgid "Flat Map"
 #~ msgctxt "Bookmarks|"
 #~ msgid "Removed"
@@ -20228,12 +20264,6 @@ msgstr ""
 #~ msgctxt "Marble::MainWindow|"
 #~ msgid "&Add Bookmark"
 #~ msgstr "Linie de căutare"
-
-#, fuzzy
-#~| msgid "Navigation Control"
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Configure"
-#~ msgstr "Control al navigării"
 
 #, fuzzy
 #~| msgid "Downloading data..."

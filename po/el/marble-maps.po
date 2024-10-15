@@ -54,9 +54,7 @@ msgstr "Προφίλ δρομολόγησης - Marble"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:23
-#, fuzzy, kde-format
-#| msgctxt "DGML|"
-#| msgid "Car"
+#, kde-format
 msgid "Car"
 msgstr "Αυτοκίνητο"
 
@@ -167,9 +165,7 @@ msgid "Theme Options"
 msgstr "<h3>Επιλογές επιπέδων</h3>"
 
 #: MainScreen.qml:167
-#, fuzzy, kde-format
-#| msgctxt "Marble::ControlView|"
-#| msgid "Routing"
+#, kde-format
 msgid "Routing"
 msgstr "Δρομολόγηση"
 
@@ -305,9 +301,7 @@ msgid "Car (fastest)"
 msgstr "Αυτοκίνητο (ταχύτερη)"
 
 #: RouteEditorPage.qml:19
-#, fuzzy, kde-format
-#| msgctxt "Marble::ControlView|"
-#| msgid "Routing"
+#, kde-format
 msgctxt "@title"
 msgid "Routing"
 msgstr "Δρομολόγηση"

@@ -3132,14 +3132,20 @@ msgid "Bookmark Manager"
 msgstr "책갈피 관리자"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:25
+#, fuzzy
+#| msgctxt "Marble::BookmarkManagerDialog|"
+#| msgid "Import Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Import Bookmarks..."
-msgstr "책갈피 가져오기..."
+msgid "Import Bookmarks…"
+msgstr "책갈피 가져오기"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
+#, fuzzy
+#| msgctxt "Marble::BookmarkManagerDialog|"
+#| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Export Bookmarks..."
-msgstr "책갈피 내보내기..."
+msgid "Export Bookmarks…"
+msgstr "책갈피 내보내기"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
@@ -3148,12 +3154,12 @@ msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
-msgid "New..."
+msgid "New…"
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
 msgctxt "UiBookmarkManagerDialog|"
-msgid "Rename..."
+msgid "Rename…"
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
@@ -3443,7 +3449,7 @@ msgstr ""
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
 msgctxt "CurrentLocationWidget|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
@@ -4988,7 +4994,7 @@ msgstr "폴더(&F)"
 #| msgctxt "UiEditBookmarkDialog|"
 #| msgid "&Folder"
 msgctxt "UiEditBookmarkDialog|"
-msgid "&Add Folder..."
+msgid "&Add Folder…"
 msgstr "폴더(&F)"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
@@ -7374,14 +7380,14 @@ msgstr[0] ""
 
 #: src/lib/marble/GoToDialog.ui:14
 msgctxt "GoTo|"
-msgid "Go To..."
+msgid "Go To…"
 msgstr ""
 
 #: src/lib/marble/GoToDialog.ui:78
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-"Marble/Search\">Details...</a>"
+"Marble/Search\">Details…</a>"
 msgstr ""
 
 #: src/lib/marble/GoToDialog.ui:93
@@ -8060,7 +8066,7 @@ msgstr ""
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Ctrl, Ctrl+A, ...)"
+"Ctrl, Ctrl+A, …)"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:300
@@ -8187,7 +8193,7 @@ msgstr ""
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
 msgctxt "MapWizard|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:615
@@ -8296,10 +8302,11 @@ msgstr ""
 
 #: src/lib/marble/MapWizard.ui:825
 #, fuzzy
-#| msgid "&Configure..."
+#| msgctxt "Marble::ConflictDialog|"
+#| msgid "Changed"
 msgctxt "MapWizard|"
-msgid "Change..."
-msgstr "설정(&C)..."
+msgid "Change…"
+msgstr "변경됨"
 
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
@@ -9720,7 +9727,7 @@ msgstr ""
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
 msgctxt "MarbleNavigator|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
@@ -10444,9 +10451,11 @@ msgid "Destination video:"
 msgstr ""
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
+#, fuzzy
+#| msgid "Open File"
 msgctxt "MovieCaptureDialog|"
-msgid "Open..."
-msgstr "열기..."
+msgid "Open…"
+msgstr "파일 열기"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -10603,8 +10612,11 @@ msgid "All Supported Files (*.png)"
 msgstr "모든 파일 (*.*)"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
+#, fuzzy
+#| msgctxt "PlacemarkEditHeaderPrivate|"
+#| msgid "Browse..."
 msgctxt "PlacemarkEditHeaderPrivate|"
-msgid "Browse..."
+msgid "Browse…"
 msgstr "찾아보기..."
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
@@ -11339,20 +11351,17 @@ msgid "New Profile"
 msgstr "새 프로필"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
-#, fuzzy
-#| msgctxt "RoutingSettingsWidget|"
-#| msgid "&Add"
 msgctxt "RoutingSettingsWidget|"
-msgid "&Add..."
-msgstr "추가(&A)"
+msgid "&Add…"
+msgstr ""
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
 #, fuzzy
-#| msgctxt "Marble::AbstractFloatItem|"
-#| msgid "&Configure..."
+#| msgctxt "RoutingSettingsWidget|"
+#| msgid "&Configure"
 msgctxt "RoutingSettingsWidget|"
-msgid "&Configure..."
-msgstr "설정(&C)..."
+msgid "&Configure…"
+msgstr "설정(&C)"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 msgctxt "RoutingSettingsWidget|"
@@ -11829,9 +11838,11 @@ msgid "Destination video"
 msgstr ""
 
 #: src/lib/marble/TourCaptureDialog.ui:81
+#, fuzzy
+#| msgid "Open File"
 msgctxt "TourCaptureDialog|"
-msgid "Open..."
-msgstr "열기..."
+msgid "Open…"
+msgstr "파일 열기"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
@@ -13079,9 +13090,12 @@ msgid "Show eclipses for year:"
 msgstr ""
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
+#, fuzzy
+#| msgctxt "Marble::MainWindow|"
+#| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
-msgid "&Settings..."
-msgstr ""
+msgid "&Settings…"
+msgstr "설정(&S)"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 msgctxt "EclipsesBrowserDialog|"
@@ -13340,19 +13354,19 @@ msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "A float item that shows the elevation profile of the current route."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:188
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:191
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:195
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:198
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid ""
 "Not enough points in the current viewport.\n"
 "Try to disable 'Zoom to viewport'."
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:278
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:281
 #, qt-format
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Difference: %1 %2"
@@ -14788,7 +14802,7 @@ msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
 msgctxt "SatellitesConfigDialog|"
-msgid "..."
+msgid "…"
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
@@ -17273,6 +17287,42 @@ msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr ""
 
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Import Bookmarks..."
+#~ msgstr "책갈피 가져오기..."
+
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Export Bookmarks..."
+#~ msgstr "책갈피 내보내기..."
+
+#, fuzzy
+#~| msgid "&Configure..."
+#~ msgctxt "MapWizard|"
+#~ msgid "Change..."
+#~ msgstr "설정(&C)..."
+
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "열기..."
+
+#, fuzzy
+#~| msgctxt "RoutingSettingsWidget|"
+#~| msgid "&Add"
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Add..."
+#~ msgstr "추가(&A)"
+
+#, fuzzy
+#~| msgctxt "Marble::AbstractFloatItem|"
+#~| msgid "&Configure..."
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure..."
+#~ msgstr "설정(&C)..."
+
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "열기..."
+
 #~ msgctxt "Bookmarks|"
 #~ msgid "Removed"
 #~ msgstr "삭제됨"
@@ -17382,10 +17432,6 @@ msgstr ""
 #~ msgctxt "MapWizard|"
 #~ msgid "Terrain"
 #~ msgstr "지형"
-
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Configure"
-#~ msgstr "설정(&C)"
 
 #, fuzzy
 #~| msgid "Routing"
