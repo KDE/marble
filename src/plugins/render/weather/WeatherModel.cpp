@@ -117,9 +117,9 @@ void WeatherModel::addService(AbstractWeatherService *service)
 {
     service->setFavoriteItems(favoriteItems());
 
-    connect(service, SIGNAL(createdItems(QList<AbstractDataPluginItem *>)), this, SLOT(addItemsToList(QList<AbstractDataPluginItem *>)));
-    connect(service, SIGNAL(requestedDownload(QUrl, QString, AbstractDataPluginItem *)), this, SLOT(downloadItemData(QUrl, QString, AbstractDataPluginItem *)));
-    connect(service, SIGNAL(downloadDescriptionFileRequested(QUrl)), this, SLOT(downloadDescriptionFileRequested(QUrl)));
+    connect(service, &AbstractWeatherService::createdItems, this, &AbstractDataPluginModel::addItemsToList);
+    connect(service, &AbstractWeatherService::requestedDownload, this, &WeatherModel::downloadItemData);
+    connect(service, &AbstractWeatherService::downloadDescriptionFileRequested, this, &WeatherModel::downloadDescriptionFileRequested);
 
     m_services.append(service);
 }
