@@ -39,6 +39,7 @@ QtPositioningPositionProviderPluginPrivate::QtPositioningPositionProviderPluginP
 
 QtPositioningPositionProviderPluginPrivate::~QtPositioningPositionProviderPluginPrivate()
 {
+    delete m_updateChecker;
     delete m_source;
 }
 
@@ -126,7 +127,6 @@ QtPositioningPositionProviderPlugin::QtPositioningPositionProviderPlugin()
 
 QtPositioningPositionProviderPlugin::~QtPositioningPositionProviderPlugin()
 {
-    delete d->m_updateChecker;
     delete d;
 }
 
