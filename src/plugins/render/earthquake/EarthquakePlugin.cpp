@@ -36,6 +36,11 @@ EarthquakePlugin::EarthquakePlugin(const MarbleModel *marbleModel)
     connect(this, &RenderPlugin::settingsChanged, this, &EarthquakePlugin::updateModel);
 }
 
+EarthquakePlugin::~EarthquakePlugin()
+{
+    delete m_ui;
+}
+
 void EarthquakePlugin::initialize()
 {
     auto model = new EarthquakeModel(marbleModel(), this);

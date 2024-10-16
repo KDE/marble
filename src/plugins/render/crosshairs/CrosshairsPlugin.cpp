@@ -42,6 +42,7 @@ CrosshairsPlugin::CrosshairsPlugin(const MarbleModel *marbleModel)
 
 CrosshairsPlugin::~CrosshairsPlugin()
 {
+    delete m_uiConfigWidget;
     delete m_svgobj;
 }
 

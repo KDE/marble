@@ -33,6 +33,7 @@ public:
     EarthquakePlugin();
 
     explicit EarthquakePlugin(const MarbleModel *marbleModel);
+    ~EarthquakePlugin() override;
 
     void initialize() override;
 

@@ -46,7 +46,10 @@ SatellitesConfigDialog::SatellitesConfigDialog(QWidget *parent)
     m_translations["Neptune"] = tr("Neptune");
 }
 
-SatellitesConfigDialog::~SatellitesConfigDialog() = default;
+SatellitesConfigDialog::~SatellitesConfigDialog()
+{
+    delete m_configWidget;
+}
 
 void SatellitesConfigDialog::setUserDataSources(const QStringList &sources)
 {

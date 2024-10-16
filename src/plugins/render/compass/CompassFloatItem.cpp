@@ -43,6 +43,7 @@ CompassFloatItem::CompassFloatItem(const MarbleModel *marbleModel)
 
 CompassFloatItem::~CompassFloatItem()
 {
+    delete m_uiConfigWidget;
     delete m_svgobj;
 }
 

@@ -81,6 +81,11 @@ public:
         ui_configWidget->preference->addItem(tr("Bicycle (preferred Cycleway/-route)"), QStringLiteral("BicycleTour"));
     }
 
+    ~OpenRouteServiceConfigWidget()
+    {
+        delete ui_configWidget;
+    }
+
     void loadSettings(const QHash<QString, QVariant> &settings_) override
     {
         QHash<QString, QVariant> settings = settings_;

@@ -85,6 +85,11 @@ public:
         ui_configWidget->descending->addItem(tr("Favor"), "FAVOR_DOWN_HILL");
     }
 
+    ~MapQuestConfigWidget() override
+    {
+        delete ui_configWidget;
+    }
+
     void loadSettings(const QHash<QString, QVariant> &settings_) override
     {
         QHash<QString, QVariant> settings = settings_;

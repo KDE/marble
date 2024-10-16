@@ -80,6 +80,7 @@ StarsPlugin::StarsPlugin(const MarbleModel *marbleModel)
 
 StarsPlugin::~StarsPlugin()
 {
+    delete ui_configWidget;
     delete m_contextMenu;
 }
 

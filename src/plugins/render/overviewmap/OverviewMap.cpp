@@ -58,6 +58,7 @@ OverviewMap::~OverviewMap()
     for (; pos != end; ++pos) {
         delete pos.value();
     }
+    delete ui_configWidget;
 }
 
 QStringList OverviewMap::backendTypes() const
