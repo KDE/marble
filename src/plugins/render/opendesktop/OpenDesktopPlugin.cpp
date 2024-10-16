@@ -30,6 +30,11 @@ OpenDesktopPlugin::OpenDesktopPlugin(const MarbleModel *marbleModel)
     setVisible(false); // Plugin is invisible by default
 }
 
+OpenDesktopPlugin::~OpenDesktopPlugin()
+{
+    delete m_uiConfigWidget;
+}
+
 void OpenDesktopPlugin::initialize()
 {
     setModel(new OpenDesktopModel(marbleModel(), this));
