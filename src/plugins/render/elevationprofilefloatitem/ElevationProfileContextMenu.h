@@ -27,7 +27,7 @@ public Q_SLOTS:
 
 private:
     QList<QAction *> m_selectionActions;
-    ElevationProfileFloatItem *m_floatItem = nullptr;
+    ElevationProfileFloatItem *const m_floatItem;
     QActionGroup *m_sourceGrp = nullptr;
     QMenu *m_contextMenu = nullptr;
     QSignalMapper *m_trackMapper = nullptr;

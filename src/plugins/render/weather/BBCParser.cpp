@@ -341,7 +341,7 @@ void BBCParser::readDescription(WeatherData *data)
             QRegExp regExp;
 
             // Temperature
-            regExp.setPattern("(Temperature:\\s*)(-?\\d+)(.C)");
+            regExp.setPattern(QStringLiteral("(Temperature:\\s*)(-?\\d+)(.C)"));
             int pos = regExp.indexIn(description);
             if (pos > -1) {
                 QString value = regExp.cap(2);

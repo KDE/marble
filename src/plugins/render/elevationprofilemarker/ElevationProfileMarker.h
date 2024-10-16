@@ -66,7 +66,7 @@ private Q_SLOTS:
     void onGeoObjectRemoved(GeoDataObject *object);
 
 private:
-    GeoDataPlacemark *m_markerPlacemark;
+    GeoDataPlacemark *m_markerPlacemark = nullptr;
     GeoDataCoordinates m_currentPosition;
 
     BillboardGraphicsItem m_markerItem;

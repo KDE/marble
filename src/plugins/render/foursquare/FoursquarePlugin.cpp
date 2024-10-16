@@ -81,7 +81,7 @@ bool FoursquarePlugin::isAuthenticated()
 
 bool FoursquarePlugin::storeAccessToken(const QString &tokenUrl)
 {
-    QString expected = "http://edu.kde.org/marble/dummy#access_token=";
+    QString expected = QStringLiteral("http://edu.kde.org/marble/dummy#access_token=");
     if (tokenUrl.startsWith(expected)) {
         QSettings settings;
         QString url = tokenUrl;

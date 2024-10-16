@@ -89,14 +89,14 @@ void WeatherModel::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 num
 
 void WeatherModel::getItem(const QString &id)
 {
-    for (AbstractWeatherService *service : m_services) {
+    for (AbstractWeatherService *service : std::as_const(m_services)) {
         service->getItem(id);
     }
 }
 
 void WeatherModel::parseFile(const QByteArray &file)
 {
-    for (AbstractWeatherService *service : m_services) {
+    for (AbstractWeatherService *service : std::as_const(m_services)) {
         service->parseFile(file);
     }
 }
@@ -108,7 +108,7 @@ void WeatherModel::downloadDescriptionFileRequested(const QUrl &url)
 
 void WeatherModel::setMarbleWidget(MarbleWidget *widget)
 {
-    for (AbstractWeatherService *service : m_services) {
+    for (AbstractWeatherService *service : std::as_const(m_services)) {
         service->setMarbleWidget(widget);
     }
 }

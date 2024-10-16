@@ -7,7 +7,6 @@
 #include "BBCItemGetter.h"
 #include "BBCStation.h"
 #include "BBCWeatherItem.h"
-#include "MarbleDebug.h"
 
 // Qt
 #include <QMutexLocker>
