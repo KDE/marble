@@ -51,6 +51,7 @@ public:
     GraticulePlugin();
 
     explicit GraticulePlugin(const MarbleModel *marbleModel);
+    ~GraticulePlugin() override;
 
     QStringList backendTypes() const override;
 

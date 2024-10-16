@@ -46,6 +46,11 @@ GraticulePlugin::GraticulePlugin(const MarbleModel *marbleModel)
 {
 }
 
+GraticulePlugin::~GraticulePlugin()
+{
+    delete ui_configWidget;
+}
+
 QStringList GraticulePlugin::backendTypes() const
 {
     return QStringList(QStringLiteral("graticule"));
