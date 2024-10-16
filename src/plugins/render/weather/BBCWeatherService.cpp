@@ -76,7 +76,7 @@ void BBCWeatherService::fetchStationList()
         return;
     }
 
-    connect(m_itemGetter, SIGNAL(foundStation(BBCStation)), this, SLOT(createItem(BBCStation)));
+    connect(m_itemGetter, &BBCItemGetter::foundStation, this, &BBCWeatherService::createItem);
 
     m_stationList = m_parser->stationList();
     m_itemGetter->setStationList(m_stationList);

@@ -28,22 +28,22 @@ SatellitesConfigDialog::SatellitesConfigDialog(QWidget *parent)
 
     // allow translation for catalog items
     // + categories
-    m_translations["Comets"] = tr("Comets");
-    m_translations["Moons"] = tr("Moons");
-    m_translations["Other"] = tr("Other");
-    m_translations["Spacecrafts"] = tr("Spacecrafts");
-    m_translations["Spaceprobes"] = tr("Spaceprobes");
+    m_translations[QStringLiteral("Comets")] = tr("Comets");
+    m_translations[QStringLiteral("Moons")] = tr("Moons");
+    m_translations[QStringLiteral("Other")] = tr("Other");
+    m_translations[QStringLiteral("Spacecrafts")] = tr("Spacecrafts");
+    m_translations[QStringLiteral("Spaceprobes")] = tr("Spaceprobes");
     // + bodies
-    m_translations["Moon"] = tr("Moon");
-    m_translations["Sun"] = tr("Sun");
-    m_translations["Mercury"] = tr("Mercury");
-    m_translations["Venus"] = tr("Venus");
-    m_translations["Earth"] = tr("Earth");
-    m_translations["Mars"] = tr("Mars");
-    m_translations["Jupiter"] = tr("Jupiter");
-    m_translations["Saturn"] = tr("Saturn");
-    m_translations["Uranus"] = tr("Uranus");
-    m_translations["Neptune"] = tr("Neptune");
+    m_translations[QStringLiteral("Moon")] = tr("Moon");
+    m_translations[QStringLiteral("Sun")] = tr("Sun");
+    m_translations[QStringLiteral("Mercury")] = tr("Mercury");
+    m_translations[QStringLiteral("Venus")] = tr("Venus");
+    m_translations[QStringLiteral("Earth")] = tr("Earth");
+    m_translations[QStringLiteral("Mars")] = tr("Mars");
+    m_translations[QStringLiteral("Jupiter")] = tr("Jupiter");
+    m_translations[QStringLiteral("Saturn")] = tr("Saturn");
+    m_translations[QStringLiteral("Uranus")] = tr("Uranus");
+    m_translations[QStringLiteral("Neptune")] = tr("Neptune");
 }
 
 SatellitesConfigDialog::~SatellitesConfigDialog()
@@ -117,7 +117,7 @@ SatellitesConfigAbstractItem *SatellitesConfigDialog::addTLESatelliteItem(const 
 {
     // TLE items always have their id set to their url and
     // are always related to the earth
-    return addSatelliteItem("Earth", category, title, url, url);
+    return addSatelliteItem(QStringLiteral("Earth"), category, title, url, url);
 }
 
 void SatellitesConfigDialog::setDialogActive(bool active)

@@ -59,7 +59,7 @@ public:
         m_windSpeedLabel.setMinimumSize(QSizeF(0, imageSize.height()));
 
         auto button = new QPushButton();
-        button->setStyleSheet("border-style: outset;");
+        button->setStyleSheet(QStringLiteral("border-style: outset;"));
         button->setIcon(QIcon(QStringLiteral(":/icons/bookmarks.png")));
         button->setFixedSize(22, 22);
         button->setFlat(true);
@@ -454,7 +454,7 @@ QString WeatherItem::createFromTemplate(const QString &templateHtml)
 {
     QString html = templateHtml;
     QLocale locale = QLocale::system();
-    html.replace("%city_name%", stationName());
+    html.replace(QStringLiteral("%city_name%"), stationName());
 
     if (!d->m_currentWeather.iconSource().isEmpty()) {
         html.replace("%weather_situation%", QLatin1StringView("<img src=\"file://") + d->m_currentWeather.iconSource() + QLatin1StringView("\" />"));
@@ -470,9 +470,9 @@ QString WeatherItem::createFromTemplate(const QString &templateHtml)
     html.replace("%publish_time%", d->m_currentWeather.publishingTime().toString());
 
     if (d->m_forecastWeather.size() < 1) {
-        html.replace("%forecast_available%", "none");
+        html.replace(QStringLiteral("%forecast_available%"), QStringLiteral("none"));
     } else {
-        html.replace("%forecast_available%", "block");
+        html.replace(QStringLiteral("%forecast_available%"), QStringLiteral("block"));
     }
 
     int forecastNumber = 0;

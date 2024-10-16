@@ -51,7 +51,7 @@ void WikipediaModel::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 n
         return;
     }
 
-    QUrl geonamesUrl("http://api.geonames.org/wikipediaBoundingBox");
+    QUrl geonamesUrl(QStringLiteral("http://api.geonames.org/wikipediaBoundingBox"));
     QUrlQuery urlQuery;
     urlQuery.addQueryItem(QStringLiteral("north"), QString::number(box.north(GeoDataCoordinates::Degree)));
     urlQuery.addQueryItem(QStringLiteral("south"), QString::number(box.south(GeoDataCoordinates::Degree)));
@@ -84,7 +84,7 @@ void WikipediaModel::parseFile(const QByteArray &file)
         (*it)->setIcon(m_wikipediaIcon);
         QUrl thumbnailImageUrl = (*it)->thumbnailImageUrl();
         if (m_showThumbnail && !thumbnailImageUrl.isEmpty()) {
-            downloadItem(thumbnailImageUrl, "thumbnail", *it);
+            downloadItem(thumbnailImageUrl, QStringLiteral("thumbnail"), *it);
         } else {
             items << *it;
         }

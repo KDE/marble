@@ -37,14 +37,14 @@ void GeoNamesWeatherService::getAdditionalItems(const GeoDataLatLonAltBox &box, 
         return;
     }
 
-    QUrl geonamesUrl("http://api.geonames.org/weatherJSON");
+    QUrl geonamesUrl(QStringLiteral("http://api.geonames.org/weatherJSON"));
     QUrlQuery urlQuery;
-    urlQuery.addQueryItem("north", QString::number(box.north(GeoDataCoordinates::Degree)));
-    urlQuery.addQueryItem("south", QString::number(box.south(GeoDataCoordinates::Degree)));
-    urlQuery.addQueryItem("east", QString::number(box.east(GeoDataCoordinates::Degree)));
-    urlQuery.addQueryItem("west", QString::number(box.west(GeoDataCoordinates::Degree)));
-    urlQuery.addQueryItem("maxRows", QString::number(number));
-    urlQuery.addQueryItem("username", "marble");
+    urlQuery.addQueryItem(QStringLiteral("north"), QString::number(box.north(GeoDataCoordinates::Degree)));
+    urlQuery.addQueryItem(QStringLiteral("south"), QString::number(box.south(GeoDataCoordinates::Degree)));
+    urlQuery.addQueryItem(QStringLiteral("east"), QString::number(box.east(GeoDataCoordinates::Degree)));
+    urlQuery.addQueryItem(QStringLiteral("west"), QString::number(box.west(GeoDataCoordinates::Degree)));
+    urlQuery.addQueryItem(QStringLiteral("maxRows"), QString::number(number));
+    urlQuery.addQueryItem(QStringLiteral("username"), QStringLiteral("marble"));
     geonamesUrl.setQuery(urlQuery);
 
     Q_EMIT downloadDescriptionFileRequested(geonamesUrl);
@@ -57,7 +57,7 @@ void GeoNamesWeatherService::getItem(const QString &id)
     }
 
     if (id.startsWith(QLatin1StringView("geonames_"))) {
-        QUrl geonamesUrl("http://api.geonames.org/weatherIcaoJSON");
+        QUrl geonamesUrl(QStringLiteral("http://api.geonames.org/weatherIcaoJSON"));
         QUrlQuery urlQuery;
         urlQuery.addQueryItem("ICAO", id.mid(9));
         urlQuery.addQueryItem("username", "marble");

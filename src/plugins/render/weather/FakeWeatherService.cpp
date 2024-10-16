@@ -28,10 +28,10 @@ void FakeWeatherService::getAdditionalItems(const GeoDataLatLonAltBox &box, qint
     Q_UNUSED(number);
 
     auto item = new FakeWeatherItem(this);
-    item->setStationName("Fake");
+    item->setStationName(QStringLiteral("Fake"));
     item->setPriority(0);
     item->setCoordinate(GeoDataCoordinates(1, 1));
-    item->setId("fake1");
+    item->setId(QStringLiteral("fake1"));
 
     WeatherData data;
     data.setCondition(WeatherData::ClearDay);
