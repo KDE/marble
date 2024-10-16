@@ -17465,21 +17465,21 @@ msgctxt "Marble::PostalCodePlugin|"
 msgid "Shows postal codes of the area on the map."
 msgstr "A terület postai irányítószámainak megjelenítése a térképen."
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:72
+#: src/plugins/render/progress/ProgressFloatItem.cpp:70
 #, fuzzy
 #| msgid "Download Progress Indicator"
 msgctxt "Marble::ProgressFloatItem|"
 msgid "Download Progress Indicator"
 msgstr "Letöltési folyamat jelző"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:77
+#: src/plugins/render/progress/ProgressFloatItem.cpp:75
 #, fuzzy
 #| msgid "&Download Progress"
 msgctxt "Marble::ProgressFloatItem|"
 msgid "&Download Progress"
 msgstr "Letöltési &folyamat"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:92
+#: src/plugins/render/progress/ProgressFloatItem.cpp:90
 #, fuzzy
 #| msgid "Shows a pie chart download progress indicator"
 msgctxt "Marble::ProgressFloatItem|"
@@ -17921,55 +17921,55 @@ msgid ""
 "moment."
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesConfigModel.cpp:148
+#: src/plugins/render/satellites/SatellitesConfigModel.cpp:147
 msgctxt "Marble::SatellitesConfigModel|"
 msgid "Catalogs"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesMSCItem.cpp:112
-#: src/plugins/render/satellites/SatellitesTLEItem.cpp:53
+#: src/plugins/render/satellites/SatellitesMSCItem.cpp:109
+#: src/plugins/render/satellites/SatellitesTLEItem.cpp:50
 #, fuzzy
 #| msgid "No info available."
 msgctxt "QObject|"
 msgid "No info available."
 msgstr "Nincs elérhető információ."
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:43
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:40
 #, fuzzy
 #| msgid "Display orbit"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Display orbit"
 msgstr "Pálya megjelenítése"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:47
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:44
 #, fuzzy
 #| msgid "Keep centered"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Keep centered"
 msgstr "Középen tartás"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:79
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:76
 #, fuzzy
 #| msgid "Satellites"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Satellites"
 msgstr "Műholdak"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:89
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:86
 #, fuzzy
 #| msgid "&Satellites"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "&Satellites"
 msgstr "&Műholdak"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:99
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:96
 #, fuzzy
 #| msgid "This plugin displays satellites and their orbits."
 msgctxt "Marble::SatellitesPlugin|"
 msgid "This plugin displays satellites and their orbits."
 msgstr "Ez a bővítmény megjeleníti a műholdakat és azok pályáját."
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:116
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:113
 msgctxt "Marble::SatellitesPlugin|"
 msgid ""
 "Earth-Satellites orbital elements from <ul><li><a href=\"https://www."
@@ -17978,31 +17978,31 @@ msgid ""
 "\">JPL Horizons</a></li></ul>"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:420
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:417
 #, fuzzy
 #| msgid "Scientific Satellites"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Special-Interest Satellites"
 msgstr "Tudományos műholdak"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:422
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:419
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Last 30 Days' Launches"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:425
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:422
 #, fuzzy
 #| msgid "Elevation Profile"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Space Stations"
 msgstr "Magassági profil"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:428
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:425
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "100 (or so) Brightest"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:431
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:428
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "FENGYUN 1C Debris"
@@ -18010,7 +18010,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "FENGYUN 1C Debris"
 msgstr "FENGYUN 1C törmelék"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:434
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:431
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "IRIDIUM 33 Debris"
@@ -18018,7 +18018,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "IRIDIUM 33 Debris"
 msgstr "IRIDIUM 33 törmelék"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:437
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:434
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "COSMOS 2251 Debris"
@@ -18026,21 +18026,21 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "COSMOS 2251 Debris"
 msgstr "COSMOS 2251 törmelék"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:440
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:437
 #, fuzzy
 #| msgid "Weather & Earth Resources Satellites"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Weather & Earth Resources Satellites"
 msgstr "Időjárás és földi erőforrás műholdak"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:441
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:438
 #, fuzzy
 #| msgid "Weather"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Weather"
 msgstr "Időjárás"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:442
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:439
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "NOAA"
@@ -18048,7 +18048,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "NOAA"
 msgstr "NOAA"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:443
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:440
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "GOES"
@@ -18056,7 +18056,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "GOES"
 msgstr "GOES"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:445
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:442
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Earth Resources"
@@ -18064,7 +18064,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Earth Resources"
 msgstr "Földi erőforrások"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:448
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:445
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Search & Rescue (SARSAT)"
@@ -18072,7 +18072,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Search & Rescue (SARSAT)"
 msgstr "Keresés és mentés (SARSAT)"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:451
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:448
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Disaster Monitoring"
@@ -18080,7 +18080,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Disaster Monitoring"
 msgstr "Katasztrófa figyelés"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:454
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:451
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Tracking and Data Relay Satellite System (TDRSS)"
@@ -18088,14 +18088,14 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Tracking and Data Relay Satellite System (TDRSS)"
 msgstr "Követő és adatkésleltető műholdrendszer (TDRSS)"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:457
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:454
 #, fuzzy
 #| msgid "Communications Satellites"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Communications Satellites"
 msgstr "Kommunikációs műholdak"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:458
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:455
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Geostationary"
@@ -18103,7 +18103,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Geostationary"
 msgstr "Geostacionárius"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:459
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:456
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Intelsat"
@@ -18111,7 +18111,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Intelsat"
 msgstr "Intelsat"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:460
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:457
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Gorizont"
@@ -18119,7 +18119,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Gorizont"
 msgstr "Gorizont"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:461
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:458
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Raduga"
@@ -18127,7 +18127,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Raduga"
 msgstr "Raduga"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:462
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:459
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Molniya"
@@ -18135,7 +18135,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Molniya"
 msgstr "Molniya"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:463
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:460
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Iridium"
@@ -18143,7 +18143,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Iridium"
 msgstr "Iridium"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:464
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:461
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Orbcomm"
@@ -18151,7 +18151,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Orbcomm"
 msgstr "Orbcomm"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:466
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:463
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Globalstar"
@@ -18159,7 +18159,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Globalstar"
 msgstr "Globalstar"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:469
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:466
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Amateur radio"
@@ -18167,7 +18167,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Amateur radio"
 msgstr "Amatőr rádió"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:472
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:469
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Experimental"
@@ -18175,22 +18175,22 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Experimental"
 msgstr "Kísérleti"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:474
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:514
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:471
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:511
 #, fuzzy
 #| msgid "Other"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Other"
 msgstr "Egyéb"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:476
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:473
 #, fuzzy
 #| msgid "Navigation Satellites"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Navigation Satellites"
 msgstr "Navigációs műholdak"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:478
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:475
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "GPS Operational"
@@ -18198,7 +18198,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "GPS Operational"
 msgstr "GPS működőképes"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:481
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:478
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Glonass Operational"
@@ -18206,7 +18206,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Glonass Operational"
 msgstr "Glonass működőképes"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:483
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:480
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Galileo"
@@ -18214,7 +18214,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Galileo"
 msgstr "Galileo"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:485
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:482
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)"
@@ -18222,7 +18222,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)"
 msgstr "Műhold-alapú növekedési rendszer (WAAS/EGNOS/MSAS)"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:488
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:485
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Navy Navigation Satellite System (NNSS)"
@@ -18230,7 +18230,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Navy Navigation Satellite System (NNSS)"
 msgstr "Tengeri navigációs műholdrendszer (NNSS)"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:491
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:488
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Russian LEO Navigation"
@@ -18238,14 +18238,14 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Russian LEO Navigation"
 msgstr "Orosz LEO navigáció"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:494
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:491
 #, fuzzy
 #| msgid "Scientific Satellites"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Scientific Satellites"
 msgstr "Tudományos műholdak"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:496
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:493
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Space & Earth Science"
@@ -18253,7 +18253,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Space & Earth Science"
 msgstr "Űr és Föld tudomány"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:498
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:495
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Geodetic"
@@ -18261,7 +18261,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Geodetic"
 msgstr "Geodetikus"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:500
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:497
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Engineering"
@@ -18269,7 +18269,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Engineering"
 msgstr "Mérnöki"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:503
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:500
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Education"
@@ -18277,14 +18277,14 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Education"
 msgstr "Oktatás"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:506
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:503
 #, fuzzy
 #| msgid "Miscellaneous Satellites"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Miscellaneous Satellites"
 msgstr "Egyéb műholdak"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:508
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:505
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Miscellaneous Military"
@@ -18292,7 +18292,7 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Miscellaneous Military"
 msgstr "Egyéb katonai"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:511
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:508
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Radar Calibration"
@@ -18300,47 +18300,47 @@ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Radar Calibration"
 msgstr "Radar kalibrálás"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:513
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:510
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "CubeSats"
 msgstr ""
 
-#: src/plugins/render/speedometer/Speedometer.cpp:51
+#: src/plugins/render/speedometer/Speedometer.cpp:49
 #, fuzzy
 #| msgid "Speedometer"
 msgctxt "Marble::Speedometer|"
 msgid "Speedometer"
 msgstr "Sebességmérő"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:56
+#: src/plugins/render/speedometer/Speedometer.cpp:54
 #, fuzzy
 #| msgid "&Speedometer"
 msgctxt "Marble::Speedometer|"
 msgid "&Speedometer"
 msgstr "&Sebességmérő"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:71
+#: src/plugins/render/speedometer/Speedometer.cpp:69
 #, fuzzy
 #| msgid "Display the current cruising speed."
 msgctxt "Marble::Speedometer|"
 msgid "Display the current cruising speed."
 msgstr "A jelenlegi utazósebesség megjelenítése."
 
-#: src/plugins/render/speedometer/Speedometer.cpp:122
+#: src/plugins/render/speedometer/Speedometer.cpp:120
 #, fuzzy
 #| msgid "mph"
 msgctxt "Marble::Speedometer|"
 msgid "mph"
 msgstr "mph"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:128
+#: src/plugins/render/speedometer/Speedometer.cpp:126
 #, fuzzy
 #| msgid "km/h"
 msgctxt "Marble::Speedometer|"
 msgid "km/h"
 msgstr "km/h"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:133
+#: src/plugins/render/speedometer/Speedometer.cpp:131
 #, fuzzy
 #| msgid "kt"
 msgctxt "Marble::Speedometer|"
@@ -18692,7 +18692,7 @@ msgctxt "QObject|"
 msgid "The file is not a valid BBC answer."
 msgstr "A fájl nem érvényes BBC válasz."
 
-#: src/plugins/render/weather/BBCWeatherItem.cpp:80
+#: src/plugins/render/weather/BBCWeatherItem.cpp:78
 #, fuzzy
 #| msgid ""
 #| "Supported by <a href=\"http://backstage.bbc.co.uk\" target=\"_BLANK"
@@ -18718,7 +18718,7 @@ msgstr ""
 "A <a href=\"http://www.geonames.org/export/JSON-webservices.html\" target="
 "\"_BLANK\">geonames.org</a> támogatásával"
 
-#: src/plugins/render/weather/StationListParser.cpp:43
+#: src/plugins/render/weather/StationListParser.cpp:42
 #, fuzzy
 #| msgid "The file is not a valid file."
 msgctxt "QObject|"
@@ -19344,21 +19344,21 @@ msgctxt "WeatherData|"
 msgid "Humidity: %1<br>"
 msgstr "Páratartalom: %1<br>"
 
-#: src/plugins/render/weather/WeatherItem.cpp:49
+#: src/plugins/render/weather/WeatherItem.cpp:47
 #, fuzzy
 #| msgid "Weather"
 msgctxt "WeatherItemPrivate|"
 msgid "Weather"
 msgstr "Időjárás"
 
-#: src/plugins/render/weather/WeatherItem.cpp:100
+#: src/plugins/render/weather/WeatherItem.cpp:98
 #, fuzzy, qt-format
 #| msgid "Station: %1\n"
 msgctxt "WeatherItemPrivate|"
 msgid "Station: %1\n"
 msgstr "Állomás: %1\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:109
+#: src/plugins/render/weather/WeatherItem.cpp:107
 #, fuzzy, qt-format
 #| msgctxt "Wind: WindSpeed, WindDirection"
 #| msgid "Wind: %4, %5\n"
@@ -19366,7 +19366,7 @@ msgctxt "WeatherItemPrivate|Wind: WindSpeed, WindDirection"
 msgid "Wind: %4, %5\n"
 msgstr "Szél: %4,%5\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:111
+#: src/plugins/render/weather/WeatherItem.cpp:109
 #, fuzzy, qt-format
 #| msgctxt "Wind: WindSpeed"
 #| msgid "Wind: %4\n"
@@ -19374,7 +19374,7 @@ msgctxt "WeatherItemPrivate|Wind: WindSpeed"
 msgid "Wind: %4\n"
 msgstr "Szél: %4\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:113
+#: src/plugins/render/weather/WeatherItem.cpp:111
 #, fuzzy, qt-format
 #| msgctxt "Wind: WindSpeed"
 #| msgid "Wind: %4\n"
@@ -19382,7 +19382,7 @@ msgctxt "WeatherItemPrivate|Wind: WindDirection"
 msgid "Wind: %4\n"
 msgstr "Szél: %4\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:116
+#: src/plugins/render/weather/WeatherItem.cpp:114
 #, fuzzy, qt-format
 #| msgctxt "Pressure: Pressure, Development"
 #| msgid "Pressure: %6, %7"
@@ -19390,7 +19390,7 @@ msgctxt "WeatherItemPrivate|Pressure: Pressure, Development"
 msgid "Pressure: %6, %7"
 msgstr "Légnyomás: %6, %7"
 
-#: src/plugins/render/weather/WeatherItem.cpp:118
+#: src/plugins/render/weather/WeatherItem.cpp:116
 #, fuzzy, qt-format
 #| msgctxt "Pressure: Pressure"
 #| msgid "Pressure: %6"
@@ -19398,7 +19398,7 @@ msgctxt "WeatherItemPrivate|Pressure: Pressure"
 msgid "Pressure: %6"
 msgstr "Légnyomás: %6"
 
-#: src/plugins/render/weather/WeatherItem.cpp:120
+#: src/plugins/render/weather/WeatherItem.cpp:118
 #, fuzzy, qt-format
 #| msgctxt "Pressure Development"
 #| msgid "Pressure %7"
@@ -19406,7 +19406,7 @@ msgctxt "WeatherItemPrivate|Pressure Development"
 msgid "Pressure %7"
 msgstr "Légnyomás: %7"
 
-#: src/plugins/render/weather/WeatherItem.cpp:130
+#: src/plugins/render/weather/WeatherItem.cpp:128
 #, fuzzy, qt-format
 #| msgctxt "DayOfWeek: Condition, MinTemp to MaxTemp"
 #| msgid "%1: %2, %3 to %4"
@@ -19414,14 +19414,14 @@ msgctxt "WeatherItemPrivate|DayOfWeek: Condition, MinTemp to MaxTemp"
 msgid "%1: %2, %3 to %4"
 msgstr "%1: %2,  %3 - %4"
 
-#: src/plugins/render/weather/WeatherItem.cpp:194
+#: src/plugins/render/weather/WeatherItem.cpp:192
 #, fuzzy
 #| msgid "Remove from Favorites"
 msgctxt "WeatherItemPrivate|"
 msgid "Remove from Favorites"
 msgstr "Eltávolítás a Kedvencekből"
 
-#: src/plugins/render/weather/WeatherItem.cpp:194
+#: src/plugins/render/weather/WeatherItem.cpp:192
 #, fuzzy
 #| msgid "Add to Favorites"
 msgctxt "WeatherItemPrivate|"

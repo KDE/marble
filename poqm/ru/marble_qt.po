@@ -15122,17 +15122,17 @@ msgctxt "Marble::PostalCodePlugin|"
 msgid "Shows postal codes of the area on the map."
 msgstr "Показывает почтовые индексы данного местоположения на карте"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:72
+#: src/plugins/render/progress/ProgressFloatItem.cpp:70
 msgctxt "Marble::ProgressFloatItem|"
 msgid "Download Progress Indicator"
 msgstr "Индикатор хода загрузки"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:77
+#: src/plugins/render/progress/ProgressFloatItem.cpp:75
 msgctxt "Marble::ProgressFloatItem|"
 msgid "&Download Progress"
 msgstr "&Ход загрузки"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:92
+#: src/plugins/render/progress/ProgressFloatItem.cpp:90
 msgctxt "Marble::ProgressFloatItem|"
 msgid "Shows a pie chart download progress indicator"
 msgstr "Показывает ход загрузки в виде круговой диаграммы"
@@ -15501,43 +15501,43 @@ msgid ""
 msgstr ""
 "Параметры конфигурации недоступны, поскольку модуль в данный момент отключён."
 
-#: src/plugins/render/satellites/SatellitesConfigModel.cpp:148
+#: src/plugins/render/satellites/SatellitesConfigModel.cpp:147
 msgctxt "Marble::SatellitesConfigModel|"
 msgid "Catalogs"
 msgstr "Каталоги"
 
-#: src/plugins/render/satellites/SatellitesMSCItem.cpp:112
-#: src/plugins/render/satellites/SatellitesTLEItem.cpp:53
+#: src/plugins/render/satellites/SatellitesMSCItem.cpp:109
+#: src/plugins/render/satellites/SatellitesTLEItem.cpp:50
 msgctxt "QObject|"
 msgid "No info available."
 msgstr "Нет данных"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:43
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:40
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Display orbit"
 msgstr "Показать орбиту"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:47
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:44
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Keep centered"
 msgstr "Держитесь центра"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:79
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:76
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Satellites"
 msgstr "Спутники"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:89
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:86
 msgctxt "Marble::SatellitesPlugin|"
 msgid "&Satellites"
 msgstr "&Спутники"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:99
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:96
 msgctxt "Marble::SatellitesPlugin|"
 msgid "This plugin displays satellites and their orbits."
 msgstr "Этот модуль показывает спутники с их орбитами."
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:116
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:113
 msgctxt "Marble::SatellitesPlugin|"
 msgid ""
 "Earth-Satellites orbital elements from <ul><li><a href=\"https://www."
@@ -15550,249 +15550,249 @@ msgstr ""
 "спутников планет с ресурса <ul><li><a href=\"https://ssd.jpl.nasa.gov/?"
 "horizons\">JPL Horizons</a></li></ul>"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:420
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:417
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Special-Interest Satellites"
 msgstr "Интересные спутники"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:422
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:419
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Last 30 Days' Launches"
 msgstr "Запущенные за последние 30 дней"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:425
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:422
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Space Stations"
 msgstr "Космические станции"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:428
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:425
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "100 (or so) Brightest"
 msgstr "Сотня самых ярких"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:431
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:428
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "FENGYUN 1C Debris"
 msgstr "Обломки Фэнъюнь-1C"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:434
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:431
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "IRIDIUM 33 Debris"
 msgstr "Обломки IRIDIUM 33"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:437
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:434
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "COSMOS 2251 Debris"
 msgstr "Обломки Космос-2251"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:440
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:437
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Weather & Earth Resources Satellites"
 msgstr "Спутники погоды и ресурсов Земли"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:441
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:438
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Weather"
 msgstr "Погода"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:442
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:439
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "NOAA"
 msgstr "NOAA"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:443
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:440
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "GOES"
 msgstr "GOES"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:445
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:442
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Earth Resources"
 msgstr "Земные ресурсы"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:448
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:445
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Search & Rescue (SARSAT)"
 msgstr "Спутниковая поисково-спасательная система (SARSAT)"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:451
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:448
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Disaster Monitoring"
 msgstr "Мониторинг катастроф"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:454
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:451
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Tracking and Data Relay Satellite System (TDRSS)"
 msgstr "Спутниковая система слежения и ретрансляции данных (TDRSS)"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:457
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:454
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Communications Satellites"
 msgstr "Спутники связи"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:458
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:455
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Geostationary"
 msgstr "Геостационарные"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:459
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:456
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Intelsat"
 msgstr "Intelsat"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:460
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:457
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Gorizont"
 msgstr "Горизонт"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:461
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:458
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Raduga"
 msgstr "Радуга"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:462
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:459
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Molniya"
 msgstr "Молния"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:463
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:460
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Iridium"
 msgstr "Iridium"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:464
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:461
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Orbcomm"
 msgstr "Orbcomm"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:466
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:463
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Globalstar"
 msgstr "Globalstar"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:469
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:466
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Amateur radio"
 msgstr "Радиолюбительские"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:472
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:469
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Experimental"
 msgstr "Экспериментальные"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:474
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:514
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:471
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:511
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Other"
 msgstr "Другое"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:476
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:473
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Navigation Satellites"
 msgstr "Навигационные спутники"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:478
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:475
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "GPS Operational"
 msgstr "GPS"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:481
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:478
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Glonass Operational"
 msgstr "ГЛОНАСС"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:483
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:480
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Galileo"
 msgstr "Galileo"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:485
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:482
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)"
 msgstr ""
 "Дополнения глобальных навигационных спутниковых систем (WAAS/EGNOS/MSAS)"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:488
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:485
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Navy Navigation Satellite System (NNSS)"
 msgstr "Радионавигационная спутниковая система ВМФ (NNSS)"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:491
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:488
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Russian LEO Navigation"
 msgstr "Российские низкоорбитальные навигационные"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:494
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:491
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Scientific Satellites"
 msgstr "Научные спутники"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:496
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:493
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Space & Earth Science"
 msgstr "Космические и земные науки"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:498
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:495
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Geodetic"
 msgstr "Геодезические"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:500
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:497
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Engineering"
 msgstr "Технические"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:503
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:500
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Education"
 msgstr "Учебные"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:506
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:503
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Miscellaneous Satellites"
 msgstr "Различные спутники"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:508
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:505
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Miscellaneous Military"
 msgstr "Различные военные"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:511
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:508
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Radar Calibration"
 msgstr "Спутники для калибровки радаров"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:513
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:510
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "CubeSats"
 msgstr "Наноспутники"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:51
+#: src/plugins/render/speedometer/Speedometer.cpp:49
 msgctxt "Marble::Speedometer|"
 msgid "Speedometer"
 msgstr "Спидометр"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:56
+#: src/plugins/render/speedometer/Speedometer.cpp:54
 msgctxt "Marble::Speedometer|"
 msgid "&Speedometer"
 msgstr "&Спидометр"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:71
+#: src/plugins/render/speedometer/Speedometer.cpp:69
 msgctxt "Marble::Speedometer|"
 msgid "Display the current cruising speed."
 msgstr "Отображение текущей крейсерской скорости."
 
-#: src/plugins/render/speedometer/Speedometer.cpp:122
+#: src/plugins/render/speedometer/Speedometer.cpp:120
 msgctxt "Marble::Speedometer|"
 msgid "mph"
 msgstr "мили/ч"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:128
+#: src/plugins/render/speedometer/Speedometer.cpp:126
 msgctxt "Marble::Speedometer|"
 msgid "km/h"
 msgstr "км/ч"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:133
+#: src/plugins/render/speedometer/Speedometer.cpp:131
 msgctxt "Marble::Speedometer|"
 msgid "kt"
 msgstr "узлы"
@@ -16065,7 +16065,7 @@ msgctxt "QObject|"
 msgid "The file is not a valid BBC answer."
 msgstr "Указанный файл не является корректным ответом BBC."
 
-#: src/plugins/render/weather/BBCWeatherItem.cpp:80
+#: src/plugins/render/weather/BBCWeatherItem.cpp:78
 msgctxt "Marble::BBCWeatherItem|"
 msgid ""
 "Supported by <a href=\"https://www.bbc.co.uk/blogs/bbcbackstage\" target="
@@ -16083,7 +16083,7 @@ msgstr ""
 "При поддержке <a href=\"https://www.geonames.org/export/JSON-webservices.html"
 "\" target=\"_BLANK\">geonames.org</a>"
 
-#: src/plugins/render/weather/StationListParser.cpp:43
+#: src/plugins/render/weather/StationListParser.cpp:42
 msgctxt "QObject|"
 msgid "The file is not a valid file."
 msgstr "Указанный файл не является корректным."
@@ -16629,65 +16629,65 @@ msgctxt "WeatherData|"
 msgid "Humidity: %1<br>"
 msgstr "Влажность: %1<br>"
 
-#: src/plugins/render/weather/WeatherItem.cpp:49
+#: src/plugins/render/weather/WeatherItem.cpp:47
 msgctxt "WeatherItemPrivate|"
 msgid "Weather"
 msgstr "Погода"
 
-#: src/plugins/render/weather/WeatherItem.cpp:100
+#: src/plugins/render/weather/WeatherItem.cpp:98
 #, qt-format
 msgctxt "WeatherItemPrivate|"
 msgid "Station: %1\n"
 msgstr "Станция: %1\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:109
+#: src/plugins/render/weather/WeatherItem.cpp:107
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindSpeed, WindDirection"
 msgid "Wind: %4, %5\n"
 msgstr "Ветер: %4, %5\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:111
+#: src/plugins/render/weather/WeatherItem.cpp:109
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindSpeed"
 msgid "Wind: %4\n"
 msgstr "Ветер: %4\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:113
+#: src/plugins/render/weather/WeatherItem.cpp:111
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindDirection"
 msgid "Wind: %4\n"
 msgstr "Ветер: %4\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:116
+#: src/plugins/render/weather/WeatherItem.cpp:114
 #, qt-format
 msgctxt "WeatherItemPrivate|Pressure: Pressure, Development"
 msgid "Pressure: %6, %7"
 msgstr "Давление: %6, %7"
 
-#: src/plugins/render/weather/WeatherItem.cpp:118
+#: src/plugins/render/weather/WeatherItem.cpp:116
 #, qt-format
 msgctxt "WeatherItemPrivate|Pressure: Pressure"
 msgid "Pressure: %6"
 msgstr "Давление: %6"
 
-#: src/plugins/render/weather/WeatherItem.cpp:120
+#: src/plugins/render/weather/WeatherItem.cpp:118
 #, qt-format
 msgctxt "WeatherItemPrivate|Pressure Development"
 msgid "Pressure %7"
 msgstr "Давление %7"
 
-#: src/plugins/render/weather/WeatherItem.cpp:130
+#: src/plugins/render/weather/WeatherItem.cpp:128
 #, qt-format
 msgctxt "WeatherItemPrivate|DayOfWeek: Condition, MinTemp to MaxTemp"
 msgid "%1: %2, %3 to %4"
 msgstr "%1: %2, от %3 до %4"
 
-#: src/plugins/render/weather/WeatherItem.cpp:194
+#: src/plugins/render/weather/WeatherItem.cpp:192
 msgctxt "WeatherItemPrivate|"
 msgid "Remove from Favorites"
 msgstr "Удалить из избранного"
 
-#: src/plugins/render/weather/WeatherItem.cpp:194
+#: src/plugins/render/weather/WeatherItem.cpp:192
 msgctxt "WeatherItemPrivate|"
 msgid "Add to Favorites"
 msgstr "Добавить в избранное"

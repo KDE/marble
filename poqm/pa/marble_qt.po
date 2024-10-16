@@ -15521,17 +15521,17 @@ msgctxt "Marble::PostalCodePlugin|"
 msgid "Shows postal codes of the area on the map."
 msgstr "ਨਕਸ਼ੇ ਉੱਤੇ ਭੁਚਾਲ ਵੇਖੋ।"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:72
+#: src/plugins/render/progress/ProgressFloatItem.cpp:70
 msgctxt "Marble::ProgressFloatItem|"
 msgid "Download Progress Indicator"
 msgstr "ਡਾਊਨਲੋਡ ਤਰੱਕੀ ਇੰਡੀਕੇਟਰ"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:77
+#: src/plugins/render/progress/ProgressFloatItem.cpp:75
 msgctxt "Marble::ProgressFloatItem|"
 msgid "&Download Progress"
 msgstr "ਡਾਊਨਲੋਡ ਤਰੱਕੀ(&D)"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:92
+#: src/plugins/render/progress/ProgressFloatItem.cpp:90
 #, fuzzy
 #| msgid "Shows a pie chart download progress indicator"
 msgctxt "Marble::ProgressFloatItem|"
@@ -15900,43 +15900,43 @@ msgid ""
 "moment."
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesConfigModel.cpp:148
+#: src/plugins/render/satellites/SatellitesConfigModel.cpp:147
 msgctxt "Marble::SatellitesConfigModel|"
 msgid "Catalogs"
 msgstr "ਕੈਟਾਲਾਗ"
 
-#: src/plugins/render/satellites/SatellitesMSCItem.cpp:112
-#: src/plugins/render/satellites/SatellitesTLEItem.cpp:53
+#: src/plugins/render/satellites/SatellitesMSCItem.cpp:109
+#: src/plugins/render/satellites/SatellitesTLEItem.cpp:50
 msgctxt "QObject|"
 msgid "No info available."
 msgstr "ਕੋਈ ਜਾਣਕਾਰੀ ਮੌਜੂਦ ਨਹੀਂ ਹੈ।"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:43
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:40
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Display orbit"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:47
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:44
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Keep centered"
 msgstr "ਸੈਂਟਰ 'ਚ ਰੱਖੋ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:79
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:76
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Satellites"
 msgstr "ਸੈਟੇਲਾਈਟ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:89
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:86
 msgctxt "Marble::SatellitesPlugin|"
 msgid "&Satellites"
 msgstr "ਸੈਟੇਲਾਈਟ(&S)"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:99
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:96
 msgctxt "Marble::SatellitesPlugin|"
 msgid "This plugin displays satellites and their orbits."
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:116
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:113
 msgctxt "Marble::SatellitesPlugin|"
 msgid ""
 "Earth-Satellites orbital elements from <ul><li><a href=\"https://www."
@@ -15945,254 +15945,254 @@ msgid ""
 "\">JPL Horizons</a></li></ul>"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:420
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:417
 #, fuzzy
 #| msgid "Scientific Satellites"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Special-Interest Satellites"
 msgstr "ਵਿਗਿਆਨਿਕ ਸੈਟੇਲਾਈਟ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:422
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:419
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Last 30 Days' Launches"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:425
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:422
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Space Stations"
 msgstr "ਪੁਲਾੜੀ ਮੰਚ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:428
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:425
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "100 (or so) Brightest"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:431
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:428
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "FENGYUN 1C Debris"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:434
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:431
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "IRIDIUM 33 Debris"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:437
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:434
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "COSMOS 2251 Debris"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:440
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:437
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Weather & Earth Resources Satellites"
 msgstr "ਮੌਸਮ ਤੇ ਧਰਤ ਸਰੋਤਾਂ ਲਈ ਸੈਟੇਲਾਈਟ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:441
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:438
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Weather"
 msgstr "ਮੌਸਮ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:442
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:439
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "NOAA"
 msgstr "NOAA"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:443
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:440
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "GOES"
 msgstr "GOES"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:445
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:442
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Earth Resources"
 msgstr "ਧਰਤ ਸਰੋਤ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:448
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:445
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Search & Rescue (SARSAT)"
 msgstr "ਖੋਜ ਤੇ ਬਚਾਅ (SARSAT)"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:451
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:448
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Disaster Monitoring"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:454
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:451
 #, fuzzy
 #| msgid "Navigation Satellites"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Tracking and Data Relay Satellite System (TDRSS)"
 msgstr "ਨੇਵੀਗੇਸ਼ਨ ਸੈਟੇਲਾਇਟ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:457
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:454
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Communications Satellites"
 msgstr "ਸੰਚਾਰ ਸੈਟੇਲਾਇਟ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:458
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:455
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Geostationary"
 msgstr "ਭੂਗੋਲਿਕ-ਸਥਿਰ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:459
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:456
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Intelsat"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:460
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:457
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Gorizont"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:461
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:458
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Raduga"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:462
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:459
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Molniya"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:463
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:460
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Iridium"
 msgstr "ਇਰਡੀਅਮ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:464
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:461
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Orbcomm"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:466
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:463
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Globalstar"
 msgstr "ਗਲੋਬਲਸਟਾਰ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:469
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:466
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Amateur radio"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:472
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:469
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Experimental"
 msgstr "ਤਜਰਬੇ ਅਧੀਨ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:474
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:514
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:471
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:511
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Other"
 msgstr "ਹੋਰ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:476
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:473
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Navigation Satellites"
 msgstr "ਨੇਵੀਗੇਸ਼ਨ ਸੈਟੇਲਾਇਟ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:478
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:475
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "GPS Operational"
 msgstr "GPS ਓਪਰੇਸ਼ਨਲ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:481
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:478
 #, fuzzy
 #| msgid "International"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Glonass Operational"
 msgstr "ਅੰਤਰਰਾਸ਼ਟਰੀ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:483
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:480
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Galileo"
 msgstr "ਗਲੈਲਿਓ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:485
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:482
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:488
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:485
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Navy Navigation Satellite System (NNSS)"
 msgstr "ਨੇਵੀ ਨੇਵੀਗੇਸ਼ਨ ਸੈਟੇਲਾਇਟ ਸਿਸਟਮ (NNSS)"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:491
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:488
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Russian LEO Navigation"
 msgstr "ਰੂਸੀ LEO ਨੇਵੀਗੇਸ਼ਨ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:494
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:491
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Scientific Satellites"
 msgstr "ਵਿਗਿਆਨਿਕ ਸੈਟੇਲਾਈਟ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:496
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:493
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Space & Earth Science"
 msgstr "ਪੁਲਾੜ ਤੇ ਧਰਤ ਵਿਗਿਆਨ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:498
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:495
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Geodetic"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:500
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:497
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Engineering"
 msgstr "ਇੰਜਨੀਅਰਗ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:503
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:500
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Education"
 msgstr "ਸਿੱਖਿਆ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:506
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:503
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Miscellaneous Satellites"
 msgstr "ਫੁਟਕਲ ਸੈਟੇਲਾਇਟ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:508
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:505
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Miscellaneous Military"
 msgstr "ਫੁਟਕਲ ਫ਼ੌਜੀ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:511
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:508
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Radar Calibration"
 msgstr "ਰੇਡਾਰ ਇਕਸੁਰਤਾ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:513
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:510
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "CubeSats"
 msgstr ""
 
-#: src/plugins/render/speedometer/Speedometer.cpp:51
+#: src/plugins/render/speedometer/Speedometer.cpp:49
 msgctxt "Marble::Speedometer|"
 msgid "Speedometer"
 msgstr "ਸਪੀਡੋਮੀਟਰ"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:56
+#: src/plugins/render/speedometer/Speedometer.cpp:54
 msgctxt "Marble::Speedometer|"
 msgid "&Speedometer"
 msgstr "ਸਪੀਡੋਮੀਟਰ(&S)"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:71
+#: src/plugins/render/speedometer/Speedometer.cpp:69
 msgctxt "Marble::Speedometer|"
 msgid "Display the current cruising speed."
 msgstr ""
 
-#: src/plugins/render/speedometer/Speedometer.cpp:122
+#: src/plugins/render/speedometer/Speedometer.cpp:120
 msgctxt "Marble::Speedometer|"
 msgid "mph"
 msgstr "ਮੀ.ਪ੍ਰ.ਘੰ"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:128
+#: src/plugins/render/speedometer/Speedometer.cpp:126
 msgctxt "Marble::Speedometer|"
 msgid "km/h"
 msgstr "ਕਿਮੀ/ਘੰਟਾ"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:133
+#: src/plugins/render/speedometer/Speedometer.cpp:131
 msgctxt "Marble::Speedometer|"
 msgid "kt"
 msgstr "ਨਾਟ"
@@ -16490,7 +16490,7 @@ msgctxt "QObject|"
 msgid "The file is not a valid BBC answer."
 msgstr "ਫਾਇਲ ਠੀਕ ਫਾਇਲ ਨਹੀਂ ਹੈ।"
 
-#: src/plugins/render/weather/BBCWeatherItem.cpp:80
+#: src/plugins/render/weather/BBCWeatherItem.cpp:78
 msgctxt "Marble::BBCWeatherItem|"
 msgid ""
 "Supported by <a href=\"https://www.bbc.co.uk/blogs/bbcbackstage\" target="
@@ -16506,7 +16506,7 @@ msgstr ""
 "<a href=\"https://www.geonames.org/export/JSON-webservices.html\" target="
 "\"_BLANK\">geonames.org</a> ਵਲੋਂ ਸਹਾਇਤਾ ਪ੍ਰਾਪਤ ਹੈ"
 
-#: src/plugins/render/weather/StationListParser.cpp:43
+#: src/plugins/render/weather/StationListParser.cpp:42
 msgctxt "QObject|"
 msgid "The file is not a valid file."
 msgstr "ਫਾਇਲ ਠੀਕ ਫਾਇਲ ਨਹੀਂ ਹੈ।"
@@ -17020,65 +17020,65 @@ msgctxt "WeatherData|"
 msgid "Humidity: %1<br>"
 msgstr "ਨਮੀ: %1<br>"
 
-#: src/plugins/render/weather/WeatherItem.cpp:49
+#: src/plugins/render/weather/WeatherItem.cpp:47
 msgctxt "WeatherItemPrivate|"
 msgid "Weather"
 msgstr "ਮੌਸਮ"
 
-#: src/plugins/render/weather/WeatherItem.cpp:100
+#: src/plugins/render/weather/WeatherItem.cpp:98
 #, qt-format
 msgctxt "WeatherItemPrivate|"
 msgid "Station: %1\n"
 msgstr "ਸਟੇਸ਼ਨ: %1\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:109
+#: src/plugins/render/weather/WeatherItem.cpp:107
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindSpeed, WindDirection"
 msgid "Wind: %4, %5\n"
 msgstr "ਹਵਾ: %4, %5\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:111
+#: src/plugins/render/weather/WeatherItem.cpp:109
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindSpeed"
 msgid "Wind: %4\n"
 msgstr "ਹਵਾ: %4\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:113
+#: src/plugins/render/weather/WeatherItem.cpp:111
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindDirection"
 msgid "Wind: %4\n"
 msgstr "ਹਵਾ: %4\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:116
+#: src/plugins/render/weather/WeatherItem.cpp:114
 #, qt-format
 msgctxt "WeatherItemPrivate|Pressure: Pressure, Development"
 msgid "Pressure: %6, %7"
 msgstr "ਦਬਾਉ: %6, %7"
 
-#: src/plugins/render/weather/WeatherItem.cpp:118
+#: src/plugins/render/weather/WeatherItem.cpp:116
 #, qt-format
 msgctxt "WeatherItemPrivate|Pressure: Pressure"
 msgid "Pressure: %6"
 msgstr "ਦਬਾਉ: %6"
 
-#: src/plugins/render/weather/WeatherItem.cpp:120
+#: src/plugins/render/weather/WeatherItem.cpp:118
 #, qt-format
 msgctxt "WeatherItemPrivate|Pressure Development"
 msgid "Pressure %7"
 msgstr "ਦਬਾਉ %7"
 
-#: src/plugins/render/weather/WeatherItem.cpp:130
+#: src/plugins/render/weather/WeatherItem.cpp:128
 #, qt-format
 msgctxt "WeatherItemPrivate|DayOfWeek: Condition, MinTemp to MaxTemp"
 msgid "%1: %2, %3 to %4"
 msgstr "%1: %2, %3 ਤੋਂ %4"
 
-#: src/plugins/render/weather/WeatherItem.cpp:194
+#: src/plugins/render/weather/WeatherItem.cpp:192
 msgctxt "WeatherItemPrivate|"
 msgid "Remove from Favorites"
 msgstr "ਪਸੰਦ ਵਿੱਚੋਂ ਹਟਾਓ"
 
-#: src/plugins/render/weather/WeatherItem.cpp:194
+#: src/plugins/render/weather/WeatherItem.cpp:192
 msgctxt "WeatherItemPrivate|"
 msgid "Add to Favorites"
 msgstr "ਪਸੰਦ ਵਿੱਚ ਜੋੜੋ"

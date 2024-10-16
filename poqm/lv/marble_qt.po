@@ -17647,21 +17647,21 @@ msgctxt "Marble::PostalCodePlugin|"
 msgid "Shows postal codes of the area on the map."
 msgstr "Rāda apgabalu pasta kodus uz kartes."
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:72
+#: src/plugins/render/progress/ProgressFloatItem.cpp:70
 #, fuzzy
 #| msgid "Download Progress Indicator"
 msgctxt "Marble::ProgressFloatItem|"
 msgid "Download Progress Indicator"
 msgstr "Lejupielādes progresa indikators"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:77
+#: src/plugins/render/progress/ProgressFloatItem.cpp:75
 #, fuzzy
 #| msgid "&Download Progress"
 msgctxt "Marble::ProgressFloatItem|"
 msgid "&Download Progress"
 msgstr "Lejupielā&des progress"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:92
+#: src/plugins/render/progress/ProgressFloatItem.cpp:90
 #, fuzzy
 #| msgid "Shows a pie chart download progress indicator"
 msgctxt "Marble::ProgressFloatItem|"
@@ -18120,57 +18120,57 @@ msgid ""
 "moment."
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesConfigModel.cpp:148
+#: src/plugins/render/satellites/SatellitesConfigModel.cpp:147
 #, fuzzy
 #| msgid "Catalogues"
 msgctxt "Marble::SatellitesConfigModel|"
 msgid "Catalogs"
 msgstr "Katalogi"
 
-#: src/plugins/render/satellites/SatellitesMSCItem.cpp:112
-#: src/plugins/render/satellites/SatellitesTLEItem.cpp:53
+#: src/plugins/render/satellites/SatellitesMSCItem.cpp:109
+#: src/plugins/render/satellites/SatellitesTLEItem.cpp:50
 #, fuzzy
 #| msgid "No info available."
 msgctxt "QObject|"
 msgid "No info available."
 msgstr "Informācija nav pieejama."
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:43
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:40
 #, fuzzy
 #| msgid "Display orbit"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Display orbit"
 msgstr "Rādīt orbītu"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:47
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:44
 #, fuzzy
 #| msgid "Keep centered"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Keep centered"
 msgstr "Turēt centrā"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:79
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:76
 #, fuzzy
 #| msgid "Satellites"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Satellites"
 msgstr "Satelīti"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:89
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:86
 #, fuzzy
 #| msgid "&Satellites"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "&Satellites"
 msgstr "&Satelīti"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:99
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:96
 #, fuzzy
 #| msgid "This plugin displays satellites and their orbits."
 msgctxt "Marble::SatellitesPlugin|"
 msgid "This plugin displays satellites and their orbits."
 msgstr "Šis spraudnis parāda satelītus un to orbītas."
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:116
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:113
 #, fuzzy
 #| msgid ""
 #| "Earth-Satellites orbital elements from <ul><li><a href=\"http://www."
@@ -18191,338 +18191,338 @@ msgstr ""
 "li><li><a href=\"http://ssd.jpl.nasa.gov/?horizons\">JPL Horizons</a></li></"
 "ul>"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:420
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:417
 #, fuzzy
 #| msgid "Special-Interest Satellites"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Special-Interest Satellites"
 msgstr "Speciālo interešu satelīti"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:422
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:419
 #, fuzzy
 #| msgid "Last 30 Days' Launches"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Last 30 Days' Launches"
 msgstr "Pēdējo 30 dienu palaišanas"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:425
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:422
 #, fuzzy
 #| msgid "Space Stations"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Space Stations"
 msgstr "Kosmosa stacijas"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:428
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:425
 #, fuzzy
 #| msgid "100 (or so) Brightest"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "100 (or so) Brightest"
 msgstr "100 (apmēram) spilgtākās"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:431
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:428
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "FENGYUN 1C Debris"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:434
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:431
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "IRIDIUM 33 Debris"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:437
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:434
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "COSMOS 2251 Debris"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:440
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:437
 #, fuzzy
 #| msgid "Weather & Earth Resources Satellites"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Weather & Earth Resources Satellites"
 msgstr "Laikapstākļu un Zemes resursu satelīti"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:441
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:438
 #, fuzzy
 #| msgid "Weather"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Weather"
 msgstr "Laikapstākļi"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:442
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:439
 #, fuzzy
 #| msgid "NOAA"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "NOAA"
 msgstr "NOAA"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:443
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:440
 #, fuzzy
 #| msgid "GOES"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "GOES"
 msgstr "GOES"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:445
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:442
 #, fuzzy
 #| msgid "Earth Resources"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Earth Resources"
 msgstr "Zemes resursi"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:448
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:445
 #, fuzzy
 #| msgid "Search & Rescue (SARSAT)"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Search & Rescue (SARSAT)"
 msgstr "Atrašana un glābšana (SARSAT)"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:451
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:448
 #, fuzzy
 #| msgid "Disaster Monitoring"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Disaster Monitoring"
 msgstr "Nelaimju monitorings"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:454
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:451
 #, fuzzy
 #| msgid "Tracking and Data Relay Satellite System (TDRSS)"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Tracking and Data Relay Satellite System (TDRSS)"
 msgstr "Sekošanas un datu retranslācijas satelītu sistēma (TDRSS)"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:457
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:454
 #, fuzzy
 #| msgid "Communications Satellites"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Communications Satellites"
 msgstr "Sakaru satelīti"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:458
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:455
 #, fuzzy
 #| msgid "Geostationary"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Geostationary"
 msgstr "Ģeostacionārie"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:459
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:456
 #, fuzzy
 #| msgid "Intelsat"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Intelsat"
 msgstr "Intelsat"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:460
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:457
 #, fuzzy
 #| msgid "Gorizont"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Gorizont"
 msgstr "Gorizont"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:461
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:458
 #, fuzzy
 #| msgid "Raduga"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Raduga"
 msgstr "Raduga"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:462
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:459
 #, fuzzy
 #| msgid "Molniya"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Molniya"
 msgstr "Molniya"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:463
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:460
 #, fuzzy
 #| msgid "Iridium"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Iridium"
 msgstr "Irīdijs"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:464
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:461
 #, fuzzy
 #| msgid "Orbcomm"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Orbcomm"
 msgstr "Orbcomm"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:466
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:463
 #, fuzzy
 #| msgid "Globalstar"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Globalstar"
 msgstr "Globalstar"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:469
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:466
 #, fuzzy
 #| msgid "Amateur radio"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Amateur radio"
 msgstr "Amatieru radio"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:472
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:469
 #, fuzzy
 #| msgid "Experimental"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Experimental"
 msgstr "Eksperimentāls"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:474
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:514
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:471
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:511
 #, fuzzy
 #| msgid "Other"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Other"
 msgstr "Cits"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:476
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:473
 #, fuzzy
 #| msgid "Navigation Satellites"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Navigation Satellites"
 msgstr "Navigācijas satelīti"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:478
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:475
 #, fuzzy
 #| msgid "GPS Operational"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "GPS Operational"
 msgstr "GPS darbojas"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:481
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:478
 #, fuzzy
 #| msgid "Glonass Operational"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Glonass Operational"
 msgstr "Glonass darbojas"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:483
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:480
 #, fuzzy
 #| msgid "Galileo"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Galileo"
 msgstr "Galileo"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:485
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:482
 #, fuzzy
 #| msgid "Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)"
 msgstr "Uz satelītiem balstītā augmentācijas sistēma (WAAS/EGNOS/MSAS)"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:488
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:485
 #, fuzzy
 #| msgid "Navy Navigation Satellite System (NNSS)"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Navy Navigation Satellite System (NNSS)"
 msgstr "Flotiles navigācijas satelītu sistēma (NNSS)"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:491
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:488
 #, fuzzy
 #| msgid "Russian LEO Navigation"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Russian LEO Navigation"
 msgstr "Krievijas LEO navigācija"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:494
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:491
 #, fuzzy
 #| msgid "Scientific Satellites"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Scientific Satellites"
 msgstr "Zinātniskie satelīti"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:496
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:493
 #, fuzzy
 #| msgid "Space & Earth Science"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Space & Earth Science"
 msgstr "Kosmosa un Zemes zinātne"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:498
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:495
 #, fuzzy
 #| msgid "Geodetic"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Geodetic"
 msgstr "Ģeodēzija"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:500
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:497
 #, fuzzy
 #| msgid "Engineering"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Engineering"
 msgstr "Inženierzinība"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:503
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:500
 #, fuzzy
 #| msgid "Education"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Education"
 msgstr "Izglītība"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:506
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:503
 #, fuzzy
 #| msgid "Miscellaneous Satellites"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Miscellaneous Satellites"
 msgstr "Dažādi satelīti"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:508
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:505
 #, fuzzy
 #| msgid "Miscellaneous Military"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Miscellaneous Military"
 msgstr "Dažādi militārie"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:511
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:508
 #, fuzzy
 #| msgid "Radar Calibration"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Radar Calibration"
 msgstr "Radara kalibrācija"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:513
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:510
 #, fuzzy
 #| msgid "CubeSats"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "CubeSats"
 msgstr "CubeSats"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:51
+#: src/plugins/render/speedometer/Speedometer.cpp:49
 #, fuzzy
 #| msgid "Speedometer"
 msgctxt "Marble::Speedometer|"
 msgid "Speedometer"
 msgstr "Ātruma mērītājs"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:56
+#: src/plugins/render/speedometer/Speedometer.cpp:54
 #, fuzzy
 #| msgid "&Speedometer"
 msgctxt "Marble::Speedometer|"
 msgid "&Speedometer"
 msgstr "Āt&ruma mērītājs"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:71
+#: src/plugins/render/speedometer/Speedometer.cpp:69
 #, fuzzy
 #| msgid "Display the current cruising speed."
 msgctxt "Marble::Speedometer|"
 msgid "Display the current cruising speed."
 msgstr "Parāda pašreizējo ceļošanas ātrumu."
 
-#: src/plugins/render/speedometer/Speedometer.cpp:122
+#: src/plugins/render/speedometer/Speedometer.cpp:120
 #, fuzzy
 #| msgid "mph"
 msgctxt "Marble::Speedometer|"
 msgid "mph"
 msgstr "mph"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:128
+#: src/plugins/render/speedometer/Speedometer.cpp:126
 #, fuzzy
 #| msgid "km/h"
 msgctxt "Marble::Speedometer|"
 msgid "km/h"
 msgstr "km/st"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:133
+#: src/plugins/render/speedometer/Speedometer.cpp:131
 msgctxt "Marble::Speedometer|"
 msgid "kt"
 msgstr ""
@@ -18878,7 +18878,7 @@ msgctxt "QObject|"
 msgid "The file is not a valid BBC answer."
 msgstr "Fails nav derīga BBC atbilde."
 
-#: src/plugins/render/weather/BBCWeatherItem.cpp:80
+#: src/plugins/render/weather/BBCWeatherItem.cpp:78
 #, fuzzy
 #| msgid ""
 #| "Supported by <a href=\"http://backstage.bbc.co.uk\" target=\"_BLANK"
@@ -18904,7 +18904,7 @@ msgstr ""
 "Atbalsta <a href=\"http://www.geonames.org/export/JSON-webservices.html\" "
 "target=\"_BLANK\">geonames.org</a>"
 
-#: src/plugins/render/weather/StationListParser.cpp:43
+#: src/plugins/render/weather/StationListParser.cpp:42
 #, fuzzy
 #| msgid "The file is not a valid file."
 msgctxt "QObject|"
@@ -19531,21 +19531,21 @@ msgctxt "WeatherData|"
 msgid "Humidity: %1<br>"
 msgstr "Mitrums: %1<br>"
 
-#: src/plugins/render/weather/WeatherItem.cpp:49
+#: src/plugins/render/weather/WeatherItem.cpp:47
 #, fuzzy
 #| msgid "Weather"
 msgctxt "WeatherItemPrivate|"
 msgid "Weather"
 msgstr "Laikapstākļi"
 
-#: src/plugins/render/weather/WeatherItem.cpp:100
+#: src/plugins/render/weather/WeatherItem.cpp:98
 #, fuzzy, qt-format
 #| msgid "Station: %1\n"
 msgctxt "WeatherItemPrivate|"
 msgid "Station: %1\n"
 msgstr "Stacija: %1\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:109
+#: src/plugins/render/weather/WeatherItem.cpp:107
 #, fuzzy, qt-format
 #| msgctxt "Wind: WindSpeed, WindDirection"
 #| msgid "Wind: %4, %5\n"
@@ -19553,7 +19553,7 @@ msgctxt "WeatherItemPrivate|Wind: WindSpeed, WindDirection"
 msgid "Wind: %4, %5\n"
 msgstr "Vējš: %4, %5\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:111
+#: src/plugins/render/weather/WeatherItem.cpp:109
 #, fuzzy, qt-format
 #| msgctxt "Wind: WindSpeed"
 #| msgid "Wind: %4\n"
@@ -19561,7 +19561,7 @@ msgctxt "WeatherItemPrivate|Wind: WindSpeed"
 msgid "Wind: %4\n"
 msgstr "Vēja ātrums: %4\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:113
+#: src/plugins/render/weather/WeatherItem.cpp:111
 #, fuzzy, qt-format
 #| msgctxt "Wind: WindSpeed"
 #| msgid "Wind: %4\n"
@@ -19569,7 +19569,7 @@ msgctxt "WeatherItemPrivate|Wind: WindDirection"
 msgid "Wind: %4\n"
 msgstr "Vēja ātrums: %4\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:116
+#: src/plugins/render/weather/WeatherItem.cpp:114
 #, fuzzy, qt-format
 #| msgctxt "Pressure: Pressure, Development"
 #| msgid "Pressure: %6, %7"
@@ -19577,7 +19577,7 @@ msgctxt "WeatherItemPrivate|Pressure: Pressure, Development"
 msgid "Pressure: %6, %7"
 msgstr "Spiediens: %6, %7"
 
-#: src/plugins/render/weather/WeatherItem.cpp:118
+#: src/plugins/render/weather/WeatherItem.cpp:116
 #, fuzzy, qt-format
 #| msgctxt "Pressure: Pressure"
 #| msgid "Pressure: %6"
@@ -19585,7 +19585,7 @@ msgctxt "WeatherItemPrivate|Pressure: Pressure"
 msgid "Pressure: %6"
 msgstr "Spiediens: %6"
 
-#: src/plugins/render/weather/WeatherItem.cpp:120
+#: src/plugins/render/weather/WeatherItem.cpp:118
 #, fuzzy, qt-format
 #| msgctxt "Pressure Development"
 #| msgid "Pressure %7"
@@ -19593,7 +19593,7 @@ msgctxt "WeatherItemPrivate|Pressure Development"
 msgid "Pressure %7"
 msgstr "Spiediens: %7"
 
-#: src/plugins/render/weather/WeatherItem.cpp:130
+#: src/plugins/render/weather/WeatherItem.cpp:128
 #, fuzzy, qt-format
 #| msgctxt "DayOfWeek: Condition, MinTemp to MaxTemp"
 #| msgid "%1: %2, %3 to %4"
@@ -19601,14 +19601,14 @@ msgctxt "WeatherItemPrivate|DayOfWeek: Condition, MinTemp to MaxTemp"
 msgid "%1: %2, %3 to %4"
 msgstr "%1: %2, no %3 līdz %4"
 
-#: src/plugins/render/weather/WeatherItem.cpp:194
+#: src/plugins/render/weather/WeatherItem.cpp:192
 #, fuzzy
 #| msgid "Remove from Favorites"
 msgctxt "WeatherItemPrivate|"
 msgid "Remove from Favorites"
 msgstr "Izņemt no iecienītajiem"
 
-#: src/plugins/render/weather/WeatherItem.cpp:194
+#: src/plugins/render/weather/WeatherItem.cpp:192
 #, fuzzy
 #| msgid "Add to Favorites"
 msgctxt "WeatherItemPrivate|"

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-10-05 12:11+0200\n"
+"PO-Revision-Date: 2024-10-15 10:31+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -3148,20 +3148,14 @@ msgid "Bookmark Manager"
 msgstr "Gestor d'adreces d'interés"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:25
-#, fuzzy
-#| msgctxt "Marble::BookmarkManagerDialog|"
-#| msgid "Import Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Import Bookmarks…"
-msgstr "Importa les adreces d'interés"
+msgstr "Importa les adreces d'interés…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
-#, fuzzy
-#| msgctxt "Marble::BookmarkManagerDialog|"
-#| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Export Bookmarks…"
-msgstr "Exporta adreces d'interés"
+msgstr "Exporta les adreces d'interés…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
@@ -3171,12 +3165,9 @@ msgstr "Carpetes"
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
 msgid "New…"
-msgstr ""
+msgstr "Nova…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
-#, fuzzy
-#| msgctxt "UiBookmarkManagerDialog|"
-#| msgid "Rename..."
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Rename…"
 msgstr "Canvia el nom…"
@@ -3463,12 +3454,9 @@ msgstr "Neteja el camí"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "CurrentLocationWidget|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
 msgctxt "CurrentLocationWidget|"
@@ -5029,9 +5017,6 @@ msgid "&Folder:"
 msgstr "&Carpeta:"
 
 #: src/lib/marble/EditBookmarkDialog.ui:79
-#, fuzzy
-#| msgctxt "UiEditBookmarkDialog|"
-#| msgid "&Add Folder..."
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Add Folder…"
 msgstr "Afi&g una carpeta…"
@@ -7402,19 +7387,11 @@ msgstr[0] "S'ha trobat %n resultat."
 msgstr[1] "S'han trobat %n resultats."
 
 #: src/lib/marble/GoToDialog.ui:14
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid "Go To..."
 msgctxt "GoTo|"
 msgid "Go To…"
 msgstr "Ves fins a…"
 
 #: src/lib/marble/GoToDialog.ui:78
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid ""
-#| "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-#| "Marble/Search\">Details...</a>"
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
@@ -8136,11 +8113,6 @@ msgstr ""
 "ordre de renderització."
 
 #: src/lib/marble/MapWizard.ui:297
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid ""
-#| "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-#| "Ctrl, Ctrl+A, ...)"
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
@@ -8288,12 +8260,9 @@ msgid "Source Image:"
 msgstr "Imatge origen:"
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "MapWizard|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/lib/marble/MapWizard.ui:615
 msgctxt "MapWizard|"
@@ -8440,12 +8409,9 @@ msgid "preview image"
 msgstr "previsualitza la imatge"
 
 #: src/lib/marble/MapWizard.ui:825
-#, fuzzy
-#| msgctxt "Marble::ConflictDialog|"
-#| msgid "Changed"
 msgctxt "MapWizard|"
 msgid "Change…"
-msgstr "Canviada"
+msgstr "Canvia…"
 
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
@@ -10252,12 +10218,9 @@ msgstr "Inclina l'eix del globus envers l'usuari."
 #: src/lib/marble/MarbleNavigator.ui:103 src/lib/marble/MarbleNavigator.ui:122
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "MarbleNavigator|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
 msgctxt "MarbleNavigator|"
@@ -11065,12 +11028,9 @@ msgid "Destination video:"
 msgstr "Vídeo del destí:"
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
-#, fuzzy
-#| msgctxt "Marble::RouteItemDelegate|"
-#| msgid "Open"
 msgctxt "MovieCaptureDialog|"
 msgid "Open…"
-msgstr "Obri"
+msgstr "Obri…"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -11222,12 +11182,9 @@ msgid "All Supported Files (*.png)"
 msgstr "Tots els fitxers admesos (*.png)"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid "Browse"
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Browse…"
-msgstr "Explora"
+msgstr "Explora…"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -11981,15 +11938,12 @@ msgstr "Perfil nou"
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
 msgid "&Add…"
-msgstr ""
+msgstr "Afi&g…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
-#, fuzzy
-#| msgctxt "Marble::PluginItemDelegate|"
-#| msgid "Configure"
 msgctxt "RoutingSettingsWidget|"
 msgid "&Configure…"
-msgstr "Configura"
+msgstr "&Configura…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 msgctxt "RoutingSettingsWidget|"
@@ -12483,12 +12437,9 @@ msgid "Destination video"
 msgstr "Vídeo del destí"
 
 #: src/lib/marble/TourCaptureDialog.ui:81
-#, fuzzy
-#| msgctxt "Marble::RouteItemDelegate|"
-#| msgid "Open"
 msgctxt "TourCaptureDialog|"
 msgid "Open…"
-msgstr "Obri"
+msgstr "Obri…"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
@@ -13756,12 +13707,9 @@ msgid "Show eclipses for year:"
 msgstr "Mostra els eclipsis per a l'any:"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
-#, fuzzy
-#| msgctxt "Marble::MainWindow|"
-#| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
 msgid "&Settings…"
-msgstr "Con&figuració"
+msgstr "Con&figuració…"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 msgctxt "EclipsesBrowserDialog|"
@@ -15151,17 +15099,17 @@ msgctxt "Marble::PostalCodePlugin|"
 msgid "Shows postal codes of the area on the map."
 msgstr "Mostra els codis postals de la zona al mapa."
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:72
+#: src/plugins/render/progress/ProgressFloatItem.cpp:70
 msgctxt "Marble::ProgressFloatItem|"
 msgid "Download Progress Indicator"
 msgstr "Indicador de progrés de la baixada"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:77
+#: src/plugins/render/progress/ProgressFloatItem.cpp:75
 msgctxt "Marble::ProgressFloatItem|"
 msgid "&Download Progress"
 msgstr "Progrés de la &baixada"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:92
+#: src/plugins/render/progress/ProgressFloatItem.cpp:90
 msgctxt "Marble::ProgressFloatItem|"
 msgid "Shows a pie chart download progress indicator"
 msgstr "Mostra un diagrama de sectors indicant el progrés de la baixada"
@@ -15484,12 +15432,9 @@ msgid "Remove selected data source."
 msgstr "Elimina la font de dades seleccionada."
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "SatellitesConfigDialog|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
 msgctxt "SatellitesConfigDialog|"
@@ -15532,43 +15477,43 @@ msgstr ""
 "Les opcions de configuració no estan disponibles atés que el connector es "
 "troba desactivat en este moment."
 
-#: src/plugins/render/satellites/SatellitesConfigModel.cpp:148
+#: src/plugins/render/satellites/SatellitesConfigModel.cpp:147
 msgctxt "Marble::SatellitesConfigModel|"
 msgid "Catalogs"
 msgstr "Catàlegs"
 
-#: src/plugins/render/satellites/SatellitesMSCItem.cpp:112
-#: src/plugins/render/satellites/SatellitesTLEItem.cpp:53
+#: src/plugins/render/satellites/SatellitesMSCItem.cpp:109
+#: src/plugins/render/satellites/SatellitesTLEItem.cpp:50
 msgctxt "QObject|"
 msgid "No info available."
 msgstr "Sense informació disponible."
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:43
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:40
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Display orbit"
 msgstr "Mostra l'òrbita"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:47
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:44
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Keep centered"
 msgstr "Mantín centrat"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:79
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:76
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Satellites"
 msgstr "Satèl·lits"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:89
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:86
 msgctxt "Marble::SatellitesPlugin|"
 msgid "&Satellites"
 msgstr "&Satèl·lits"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:99
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:96
 msgctxt "Marble::SatellitesPlugin|"
 msgid "This plugin displays satellites and their orbits."
 msgstr "Este connector mostra els satèl·lits i les seues òrbites."
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:116
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:113
 msgctxt "Marble::SatellitesPlugin|"
 msgid ""
 "Earth-Satellites orbital elements from <ul><li><a href=\"https://www."
@@ -15581,248 +15526,248 @@ msgstr ""
 "dels satèl·lits planetaris de <ul><li><a href=\"https://ssd.jpl.nasa.gov/?"
 "horizons\">«Horizons», de JPL</a></li></ul>"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:420
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:417
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Special-Interest Satellites"
 msgstr "Satèl·lits d'interés especial"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:422
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:419
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Last 30 Days' Launches"
 msgstr "Llançaments de l'últim mes"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:425
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:422
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Space Stations"
 msgstr "Estacions espacials"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:428
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:425
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "100 (or so) Brightest"
 msgstr "Brillantor 100 (o similar)"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:431
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:428
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "FENGYUN 1C Debris"
 msgstr "Deixalles del FENGUYN 1C"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:434
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:431
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "IRIDIUM 33 Debris"
 msgstr "Deixalles d'IRIDIUM 33"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:437
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:434
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "COSMOS 2251 Debris"
 msgstr "Deixalles del COSMOS 2251"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:440
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:437
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Weather & Earth Resources Satellites"
 msgstr "Satèl·lits meteorològics i de recursos naturals"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:441
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:438
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Weather"
 msgstr "Meteorologia"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:442
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:439
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "NOAA"
 msgstr "NOAA"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:443
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:440
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "GOES"
 msgstr "GOES"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:445
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:442
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Earth Resources"
 msgstr "Recursos naturals terrestres"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:448
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:445
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Search & Rescue (SARSAT)"
 msgstr "Busca i salvament (SARSAT)"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:451
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:448
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Disaster Monitoring"
 msgstr "Seguiment de desastres"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:454
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:451
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Tracking and Data Relay Satellite System (TDRSS)"
 msgstr "Sistema de satèl·lits de Seguiment i Traspàs de dades (TDRSS)"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:457
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:454
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Communications Satellites"
 msgstr "Satèl·lits de comunicacions"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:458
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:455
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Geostationary"
 msgstr "Geoestacionaris"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:459
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:456
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Intelsat"
 msgstr "Intelsat"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:460
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:457
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Gorizont"
 msgstr "Gorizont"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:461
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:458
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Raduga"
 msgstr "Raduga"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:462
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:459
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Molniya"
 msgstr "Molniya"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:463
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:460
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Iridium"
 msgstr "Iridium"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:464
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:461
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Orbcomm"
 msgstr "Orbcomm"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:466
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:463
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Globalstar"
 msgstr "Globalstar"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:469
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:466
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Amateur radio"
 msgstr "Radioafició"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:472
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:469
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Experimental"
 msgstr "Experimentals"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:474
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:514
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:471
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:511
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Other"
 msgstr "Altres"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:476
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:473
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Navigation Satellites"
 msgstr "Satèl·lits de navegació"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:478
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:475
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "GPS Operational"
 msgstr "GPS Operacionals"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:481
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:478
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Glonass Operational"
 msgstr "Glonass Operacionals"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:483
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:480
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Galileo"
 msgstr "Galileu"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:485
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:482
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)"
 msgstr "Sistemes d'augment basats en satèl·lits (WAAS/EGNOS/MSAS)"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:488
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:485
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Navy Navigation Satellite System (NNSS)"
 msgstr "Sistema de navegació per satèl·lit de la marina dels EUA (NNSS)"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:491
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:488
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Russian LEO Navigation"
 msgstr "Navegació LEO de Rússia"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:494
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:491
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Scientific Satellites"
 msgstr "Satèl·lits científics"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:496
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:493
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Space & Earth Science"
 msgstr "Ciències de la terra i l'espai"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:498
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:495
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Geodetic"
 msgstr "Geodèsics"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:500
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:497
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Engineering"
 msgstr "Enginyeria"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:503
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:500
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Education"
 msgstr "Educació"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:506
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:503
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Miscellaneous Satellites"
 msgstr "Satèl·lits miscel·lanis"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:508
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:505
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Miscellaneous Military"
 msgstr "Militars diversos"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:511
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:508
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Radar Calibration"
 msgstr "Calibratge de radars"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:513
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:510
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "CubeSats"
 msgstr "CubeSats"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:51
+#: src/plugins/render/speedometer/Speedometer.cpp:49
 msgctxt "Marble::Speedometer|"
 msgid "Speedometer"
 msgstr "Velocímetre"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:56
+#: src/plugins/render/speedometer/Speedometer.cpp:54
 msgctxt "Marble::Speedometer|"
 msgid "&Speedometer"
 msgstr "&Velocímetre"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:71
+#: src/plugins/render/speedometer/Speedometer.cpp:69
 msgctxt "Marble::Speedometer|"
 msgid "Display the current cruising speed."
 msgstr "Mostra la velocitat de creuer actual."
 
-#: src/plugins/render/speedometer/Speedometer.cpp:122
+#: src/plugins/render/speedometer/Speedometer.cpp:120
 msgctxt "Marble::Speedometer|"
 msgid "mph"
 msgstr "mph"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:128
+#: src/plugins/render/speedometer/Speedometer.cpp:126
 msgctxt "Marble::Speedometer|"
 msgid "km/h"
 msgstr "km/h"
 
-#: src/plugins/render/speedometer/Speedometer.cpp:133
+#: src/plugins/render/speedometer/Speedometer.cpp:131
 msgctxt "Marble::Speedometer|"
 msgid "kt"
 msgstr "kt"
@@ -16095,7 +16040,7 @@ msgctxt "QObject|"
 msgid "The file is not a valid BBC answer."
 msgstr "El fitxer no és una resposta de BBC vàlida."
 
-#: src/plugins/render/weather/BBCWeatherItem.cpp:80
+#: src/plugins/render/weather/BBCWeatherItem.cpp:78
 msgctxt "Marble::BBCWeatherItem|"
 msgid ""
 "Supported by <a href=\"https://www.bbc.co.uk/blogs/bbcbackstage\" target="
@@ -16114,7 +16059,7 @@ msgstr ""
 "Amb el suport de <a href=\"https://www.geonames.org/export/JSON-webservices."
 "html\" target=\"_BLANK\">geonames.org</a>"
 
-#: src/plugins/render/weather/StationListParser.cpp:43
+#: src/plugins/render/weather/StationListParser.cpp:42
 msgctxt "QObject|"
 msgid "The file is not a valid file."
 msgstr "El fitxer no és vàlid."
@@ -16660,65 +16605,65 @@ msgctxt "WeatherData|"
 msgid "Humidity: %1<br>"
 msgstr "Humitat: %1<br>"
 
-#: src/plugins/render/weather/WeatherItem.cpp:49
+#: src/plugins/render/weather/WeatherItem.cpp:47
 msgctxt "WeatherItemPrivate|"
 msgid "Weather"
 msgstr "Meteorologia"
 
-#: src/plugins/render/weather/WeatherItem.cpp:100
+#: src/plugins/render/weather/WeatherItem.cpp:98
 #, qt-format
 msgctxt "WeatherItemPrivate|"
 msgid "Station: %1\n"
 msgstr "Estació: %1\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:109
+#: src/plugins/render/weather/WeatherItem.cpp:107
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindSpeed, WindDirection"
 msgid "Wind: %4, %5\n"
 msgstr "Vent: %4, %5\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:111
+#: src/plugins/render/weather/WeatherItem.cpp:109
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindSpeed"
 msgid "Wind: %4\n"
 msgstr "Vent: %4\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:113
+#: src/plugins/render/weather/WeatherItem.cpp:111
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindDirection"
 msgid "Wind: %4\n"
 msgstr "Vent: %4\n"
 
-#: src/plugins/render/weather/WeatherItem.cpp:116
+#: src/plugins/render/weather/WeatherItem.cpp:114
 #, qt-format
 msgctxt "WeatherItemPrivate|Pressure: Pressure, Development"
 msgid "Pressure: %6, %7"
 msgstr "Pressió: %6, %7"
 
-#: src/plugins/render/weather/WeatherItem.cpp:118
+#: src/plugins/render/weather/WeatherItem.cpp:116
 #, qt-format
 msgctxt "WeatherItemPrivate|Pressure: Pressure"
 msgid "Pressure: %6"
 msgstr "Pressió: %6"
 
-#: src/plugins/render/weather/WeatherItem.cpp:120
+#: src/plugins/render/weather/WeatherItem.cpp:118
 #, qt-format
 msgctxt "WeatherItemPrivate|Pressure Development"
 msgid "Pressure %7"
 msgstr "Pressió %7"
 
-#: src/plugins/render/weather/WeatherItem.cpp:130
+#: src/plugins/render/weather/WeatherItem.cpp:128
 #, qt-format
 msgctxt "WeatherItemPrivate|DayOfWeek: Condition, MinTemp to MaxTemp"
 msgid "%1: %2, %3 to %4"
 msgstr "%1: %2, %3 a %4"
 
-#: src/plugins/render/weather/WeatherItem.cpp:194
+#: src/plugins/render/weather/WeatherItem.cpp:192
 msgctxt "WeatherItemPrivate|"
 msgid "Remove from Favorites"
 msgstr "Elimina dels preferits"
 
-#: src/plugins/render/weather/WeatherItem.cpp:194
+#: src/plugins/render/weather/WeatherItem.cpp:192
 msgctxt "WeatherItemPrivate|"
 msgid "Add to Favorites"
 msgstr "Afig als preferits"
@@ -18023,59 +17968,3 @@ msgstr "Plan&tilla d'element flotant"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Esta és una classe de plantilla per a elements flotants."
-
-#~ msgctxt "UiBookmarkManagerDialog|"
-#~ msgid "Import Bookmarks..."
-#~ msgstr "Importa les adreces d'interés…"
-
-#~ msgctxt "UiBookmarkManagerDialog|"
-#~ msgid "Export Bookmarks..."
-#~ msgstr "Exporta les adreces d'interés…"
-
-#~ msgctxt "UiBookmarkManagerDialog|"
-#~ msgid "New..."
-#~ msgstr "Nova…"
-
-#~ msgctxt "CurrentLocationWidget|"
-#~ msgid "..."
-#~ msgstr "…"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "..."
-#~ msgstr "…"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Change..."
-#~ msgstr "Canvia…"
-
-#~ msgctxt "MarbleNavigator|"
-#~ msgid "..."
-#~ msgstr "…"
-
-#~ msgctxt "MovieCaptureDialog|"
-#~ msgid "Open..."
-#~ msgstr "Obri…"
-
-#~ msgctxt "PlacemarkEditHeaderPrivate|"
-#~ msgid "Browse..."
-#~ msgstr "Explora…"
-
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Add..."
-#~ msgstr "Afi&g…"
-
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Configure..."
-#~ msgstr "&Configura…"
-
-#~ msgctxt "TourCaptureDialog|"
-#~ msgid "Open..."
-#~ msgstr "Obri…"
-
-#~ msgctxt "EclipsesBrowserDialog|"
-#~ msgid "&Settings..."
-#~ msgstr "Con&figuració…"
-
-#~ msgctxt "SatellitesConfigDialog|"
-#~ msgid "..."
-#~ msgstr "…"
