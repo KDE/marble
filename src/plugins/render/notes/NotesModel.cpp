@@ -21,7 +21,7 @@
 using namespace Marble;
 
 NotesModel::NotesModel(const MarbleModel *marbleModel, QObject *parent)
-    : AbstractDataPluginModel("Notes", marbleModel, parent)
+    : AbstractDataPluginModel(QStringLiteral("Notes"), marbleModel, parent)
 {
 }
 

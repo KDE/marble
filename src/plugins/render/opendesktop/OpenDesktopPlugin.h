@@ -33,6 +33,7 @@ public:
     OpenDesktopPlugin();
 
     explicit OpenDesktopPlugin(const MarbleModel *marbleModel);
+    ~OpenDesktopPlugin() override;
 
     void initialize() override;
 

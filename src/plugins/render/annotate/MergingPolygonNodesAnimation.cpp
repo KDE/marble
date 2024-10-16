@@ -40,13 +40,10 @@ MergingPolygonNodesAnimation::MergingPolygonNodesAnimation(AreaAnnotation *polyg
         m_boundary = InnerBoundary;
     }
 
-    connect(m_timer, SIGNAL(timeout()), this, SLOT(updateNodes()));
+    connect(m_timer, &QTimer::timeout, this, &MergingPolygonNodesAnimation::updateNodes);
 }
 
-MergingPolygonNodesAnimation::~MergingPolygonNodesAnimation()
-{
-    delete m_timer;
-}
+MergingPolygonNodesAnimation::~MergingPolygonNodesAnimation() = default;
 
 void MergingPolygonNodesAnimation::startAnimation()
 {

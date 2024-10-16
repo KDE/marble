@@ -31,7 +31,7 @@ DownloadOsmDialog::DownloadOsmDialog(MarbleWidget *parent, AnnotatePlugin *annot
     this->setWindowTitle(tr("Download"));
     connect(m_marbleWidget, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)), this, SLOT(updateCoordinates(GeoDataLatLonAltBox)));
 
-    m_downloadButton = new QPushButton(tr("Download"));
+    m_downloadButton = new QPushButton(tr("Download"), this);
     m_downloadButton->setDefault(true);
 
     buttonBox->addButton(m_downloadButton, QDialogButtonBox::ActionRole);
@@ -64,7 +64,7 @@ void DownloadOsmDialog::downloadFile()
     QString m_north;
     QString url;
     m_isDownloadSuccess = false;
-    m_file = new QTemporaryFile(QDir::tempPath() + "/" + "XXXXXXosmdata.osm");
+    m_file = new QTemporaryFile(QDir::tempPath() + "/XXXXXXosmdata.osm");
     if (!m_file->open()) {
         QMessageBox::information(this, tr("ERROR"), tr("Unable to create temporary file to download OSM data to."));
         this->close();

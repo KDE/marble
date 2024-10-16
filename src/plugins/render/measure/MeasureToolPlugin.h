@@ -70,7 +70,7 @@ public:
 Q_SIGNALS:
     void numberOfMeasurePointsChanged(int newNumber);
 
-public Q_SLOTS:
+public:
     bool eventFilter(QObject *object, QEvent *event) override;
 
 private:

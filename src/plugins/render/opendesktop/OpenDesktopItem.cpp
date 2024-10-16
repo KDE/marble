@@ -14,8 +14,8 @@ using namespace Marble;
 
 OpenDesktopItem::OpenDesktopItem(QObject *parent)
     : AbstractDataPluginItem(parent)
+    , m_action(new QAction(this))
 {
-    m_action = new QAction(this);
     connect(m_action, &QAction::triggered, this, &OpenDesktopItem::openBrowser);
     setCacheMode(ItemCoordinateCache);
 }

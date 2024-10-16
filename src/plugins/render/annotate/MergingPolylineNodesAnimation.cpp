@@ -28,10 +28,7 @@ MergingPolylineNodesAnimation::MergingPolylineNodesAnimation(PolylineAnnotation 
     connect(m_timer, &QTimer::timeout, this, &MergingPolylineNodesAnimation::updateNodes);
 }
 
-MergingPolylineNodesAnimation::~MergingPolylineNodesAnimation()
-{
-    delete m_timer;
-}
+MergingPolylineNodesAnimation::~MergingPolylineNodesAnimation() = default;
 
 void MergingPolylineNodesAnimation::startAnimation()
 {
