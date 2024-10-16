@@ -35,10 +35,10 @@ public:
     Private(GeoDataPlacemark *placemark);
     ~Private();
 
-    GeoDataPlacemark *m_placemark;
+    GeoDataPlacemark *const m_placemark;
 
-    QColorDialog *m_linesDialog;
-    QColorDialog *m_polyDialog;
+    QColorDialog *m_linesDialog = nullptr;
+    QColorDialog *m_polyDialog = nullptr;
 
     QString m_initialDescription;
     QString m_initialName;

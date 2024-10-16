@@ -34,7 +34,7 @@ Q_SIGNALS:
 
 private:
     void updateCoordinates();
-    MarbleWidget *m_marbleWidget;
+    MarbleWidget *const m_marbleWidget;
     QPushButton *m_downloadButton;
     QNetworkAccessManager m_qnam;
     QNetworkReply *m_reply;

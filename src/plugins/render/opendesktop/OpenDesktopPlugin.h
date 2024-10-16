@@ -67,7 +67,7 @@ private Q_SLOTS:
     void writeSettings();
 
 private:
-    QDialog *m_configDialog;
+    QDialog *m_configDialog = nullptr;
     Ui::OpenDesktopConfigWidget *m_uiConfigWidget;
 };
 

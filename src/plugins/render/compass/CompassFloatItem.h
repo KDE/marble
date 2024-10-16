@@ -82,15 +82,15 @@ private:
 
     bool m_isInitialized;
 
-    QSvgRenderer *m_svgobj;
+    QSvgRenderer *m_svgobj = nullptr;
     QPixmap m_compass;
 
     /// allowed values: -1, 0, 1; default here: 0. FIXME: Declare enum
     int m_polarity;
 
     int m_themeIndex;
-    QDialog *m_configDialog;
-    Ui::CompassConfigWidget *m_uiConfigWidget;
+    QDialog *m_configDialog = nullptr;
+    Ui::CompassConfigWidget *m_uiConfigWidget = nullptr;
 };
 }
 

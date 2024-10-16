@@ -33,10 +33,10 @@ public:
     Private(GeoDataPlacemark *placemark);
     ~Private();
 
-    QColorDialog *m_linesDialog;
-    OsmTagEditorWidget *m_osmTagEditorWidget;
-    OsmRelationManagerWidget *m_osmRelationManagerWidget;
-    GeoDataPlacemark *m_placemark;
+    QColorDialog *m_linesDialog = nullptr;
+    OsmTagEditorWidget *m_osmTagEditorWidget = nullptr;
+    OsmRelationManagerWidget *m_osmRelationManagerWidget = nullptr;
+    GeoDataPlacemark *const m_placemark;
 
     // Used to restore if the Cancel button is pressed.
     QString m_initialName;
@@ -46,7 +46,7 @@ public:
     OsmPlacemarkData m_initialOsmData;
     bool m_hadInitialOsmData;
 
-    NodeItemDelegate *m_delegate;
+    NodeItemDelegate *m_delegate = nullptr;
     NodeModel *const m_nodeModel;
 };
 

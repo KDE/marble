@@ -181,7 +181,7 @@ private:
     ActionState m_state;
     bool m_hasFocus;
     MarbleWidgetRequest m_request;
-    GeoDataPlacemark *m_placemark;
+    GeoDataPlacemark *const m_placemark;
 };
 
 }

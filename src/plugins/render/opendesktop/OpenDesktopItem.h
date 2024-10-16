@@ -67,7 +67,7 @@ private:
     QString m_role;
     QPixmap m_pixmap;
     QUrl m_avatarUrl;
-    QAction *m_action;
+    QAction *const m_action;
 };
 
 }

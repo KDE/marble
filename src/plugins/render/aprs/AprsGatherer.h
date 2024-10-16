@@ -49,9 +49,9 @@ private:
     void initMicETables();
     static qreal calculateLongitude(const QString &threeBytes, int offset, bool isEast);
 
-    AprsSource *m_source;
-    QIODevice *m_socket;
-    QString *m_filter;
+    AprsSource *m_source = nullptr;
+    QIODevice *m_socket = nullptr;
+    QString *const m_filter;
     bool m_running;
     bool m_dumpOutput;
     GeoAprsCoordinates::SeenFrom m_seenFrom;
