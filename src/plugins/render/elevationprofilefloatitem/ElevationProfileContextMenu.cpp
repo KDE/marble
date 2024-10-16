@@ -92,7 +92,7 @@ void ElevationProfileContextMenu::updateContextMenuEntries()
         m_selectionActions.append(disabledInformationAction);
     }
 
-    for (QAction *action : m_selectionActions) {
+    for (QAction *action : std::as_const(m_selectionActions)) {
         m_contextMenu->addAction(action);
     }
 }
