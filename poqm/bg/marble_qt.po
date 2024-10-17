@@ -12758,17 +12758,17 @@ msgctxt "Marble::GpsdPositionProviderPlugin|"
 msgid "Reports the position of a GPS device."
 msgstr "Съобщава позицията на GPS устройство."
 
-#: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:47
+#: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:48
 msgctxt "Marble::QtPositioningPositionProviderPlugin|"
 msgid "Qt Positioning Position Provider Plugin"
 msgstr "Приставка на Qt за определяне на местоположението"
 
-#: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:57
+#: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:58
 msgctxt "Marble::QtPositioningPositionProviderPlugin|"
 msgid "Qt Positioning Location"
 msgstr "Qt локация на позицията"
 
-#: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:67
+#: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:68
 msgctxt "Marble::QtPositioningPositionProviderPlugin|"
 msgid "Reports the GPS position of a QtPositioning compatible device."
 msgstr "Съобщава GPS позицията на устройство, съвместимо с QtPositioning."
@@ -13531,28 +13531,28 @@ msgctxt "CompassConfigWidget|"
 msgid "Magnet"
 msgstr "Магнит"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:56
+#: src/plugins/render/compass/CompassFloatItem.cpp:57
 msgctxt "Marble::CompassFloatItem|"
 msgid "Compass"
 msgstr "Компас"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:61
+#: src/plugins/render/compass/CompassFloatItem.cpp:62
 msgctxt "Marble::CompassFloatItem|"
 msgid "&Compass"
 msgstr "&Компас"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:76
+#: src/plugins/render/compass/CompassFloatItem.cpp:77
 msgctxt "Marble::CompassFloatItem|"
 msgid "This is a float item that provides a compass."
 msgstr ""
 "Поставя подвижен инструмент върху картата, който показва посоките на компаса."
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:136
+#: src/plugins/render/compass/CompassFloatItem.cpp:137
 msgctxt "Marble::CompassFloatItem|"
 msgid "N"
 msgstr "N"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:137
+#: src/plugins/render/compass/CompassFloatItem.cpp:138
 msgctxt "Marble::CompassFloatItem|"
 msgid "S"
 msgstr "Ю"
@@ -13592,17 +13592,17 @@ msgctxt "CrosshairsConfigWidget|"
 msgid "German"
 msgstr "Немски кръст"
 
-#: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:70
+#: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:71
 msgctxt "Marble::CrosshairsPlugin|"
 msgid "Crosshairs"
 msgstr "Маркиране на центъра"
 
-#: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:75
+#: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:76
 msgctxt "Marble::CrosshairsPlugin|"
 msgid "Cross&hairs"
 msgstr "&Маркиране на центъра"
 
-#: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:90
+#: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:91
 msgctxt "Marble::CrosshairsPlugin|"
 msgid "A plugin that shows crosshairs."
 msgstr "Приставка, показваща центъра на картата с кръстче."
@@ -13667,17 +13667,17 @@ msgctxt "Marble::EarthquakeItem|"
 msgid "Depth:"
 msgstr "Дълбочина:"
 
-#: src/plugins/render/earthquake/EarthquakePlugin.cpp:50
+#: src/plugins/render/earthquake/EarthquakePlugin.cpp:55
 msgctxt "Marble::EarthquakePlugin|"
 msgid "Earthquakes"
 msgstr "Земетресения"
 
-#: src/plugins/render/earthquake/EarthquakePlugin.cpp:55
+#: src/plugins/render/earthquake/EarthquakePlugin.cpp:60
 msgctxt "Marble::EarthquakePlugin|"
 msgid "&Earthquakes"
 msgstr "&Земетресения"
 
-#: src/plugins/render/earthquake/EarthquakePlugin.cpp:70
+#: src/plugins/render/earthquake/EarthquakePlugin.cpp:75
 msgctxt "Marble::EarthquakePlugin|"
 msgid "Shows earthquakes on the map."
 msgstr "Показва земетръсните зони на картата."
@@ -14218,67 +14218,67 @@ msgctxt "GraticuleConfigWidget|"
 msgid "Show numerical Labels."
 msgstr "Показване на числените етикети."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:66
+#: src/plugins/render/graticule/GraticulePlugin.cpp:71
 msgctxt "Marble::GraticulePlugin|"
 msgid "Coordinate Grid"
 msgstr "Координатна мрежа"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:71
+#: src/plugins/render/graticule/GraticulePlugin.cpp:76
 msgctxt "Marble::GraticulePlugin|"
 msgid "Coordinate &Grid"
 msgstr "Координатна &мрежа"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:86
+#: src/plugins/render/graticule/GraticulePlugin.cpp:91
 msgctxt "Marble::GraticulePlugin|"
 msgid "A plugin that shows a coordinate grid."
 msgstr "Приставка, показваща координатна мрежа."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:195
+#: src/plugins/render/graticule/GraticulePlugin.cpp:200
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the coordinate grid."
 msgstr "Моля, изберете цвета за координатната мрежа."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:206
+#: src/plugins/render/graticule/GraticulePlugin.cpp:211
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the tropic circles."
 msgstr "Моля, изберете цвета за тропическите кръгове."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:217
+#: src/plugins/render/graticule/GraticulePlugin.cpp:222
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the equator."
 msgstr "Моля, изберете цвета за екватора."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:288
+#: src/plugins/render/graticule/GraticulePlugin.cpp:293
 msgctxt "Marble::GraticulePlugin|"
 msgid "Equator"
 msgstr "Екватор"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:293
+#: src/plugins/render/graticule/GraticulePlugin.cpp:298
 msgctxt "Marble::GraticulePlugin|"
 msgid "Prime Meridian"
 msgstr "Главен меридиан"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:294
+#: src/plugins/render/graticule/GraticulePlugin.cpp:299
 msgctxt "Marble::GraticulePlugin|"
 msgid "Antimeridian"
 msgstr "Антимеридиан"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:360
+#: src/plugins/render/graticule/GraticulePlugin.cpp:365
 msgctxt "Marble::GraticulePlugin|"
 msgid "Tropic of Cancer"
 msgstr "Тропик на Рака"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:361
+#: src/plugins/render/graticule/GraticulePlugin.cpp:366
 msgctxt "Marble::GraticulePlugin|"
 msgid "Tropic of Capricorn"
 msgstr "Тропик на Козирога"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:364
+#: src/plugins/render/graticule/GraticulePlugin.cpp:369
 msgctxt "Marble::GraticulePlugin|"
 msgid "Arctic Circle"
 msgstr "Северен полярен кръг"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:365
+#: src/plugins/render/graticule/GraticulePlugin.cpp:370
 msgctxt "Marble::GraticulePlugin|"
 msgid "Antarctic Circle"
 msgstr "Южен полярен кръг"
@@ -14793,17 +14793,17 @@ msgctxt "OpenDesktopConfigWidget|"
 msgid "Number of displayed items on the screen:"
 msgstr "Брой на показваните елементи на екрана:"
 
-#: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:41
+#: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:46
 msgctxt "Marble::OpenDesktopPlugin|"
 msgid "OpenDesktop Items"
 msgstr "Елементи OpenDesktop"
 
-#: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:46
+#: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:51
 msgctxt "Marble::OpenDesktopPlugin|"
 msgid "&OpenDesktop Community"
 msgstr "&Общност на OpenDesktop"
 
-#: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:61
+#: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:66
 msgctxt "Marble::OpenDesktopPlugin|"
 msgid ""
 "Shows OpenDesktop users' avatars and some extra information about them on "
@@ -14812,29 +14812,29 @@ msgstr ""
 "Показва на картата аватарите на потребителите на OpenDesktop и допълнителна "
 "информация за тях."
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:70
+#: src/plugins/render/overviewmap/OverviewMap.cpp:71
 msgctxt "Marble::OverviewMap|"
 msgid "Overview Map"
 msgstr "Преглед на картата"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:75
+#: src/plugins/render/overviewmap/OverviewMap.cpp:76
 msgctxt "Marble::OverviewMap|"
 msgid "&Overview Map"
 msgstr "&Обзорна карта"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:90
+#: src/plugins/render/overviewmap/OverviewMap.cpp:91
 msgctxt "Marble::OverviewMap|"
 msgid "This is a float item that provides an overview map."
 msgstr ""
 "Поставя подвижен инструмент върху картата, който предоставя малка обзорна "
 "карта."
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:452
+#: src/plugins/render/overviewmap/OverviewMap.cpp:453
 msgctxt "Marble::OverviewMap|"
 msgid "Choose Overview Map"
 msgstr "Изберете обзорна карта"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:481
+#: src/plugins/render/overviewmap/OverviewMap.cpp:482
 msgctxt "Marble::OverviewMap|"
 msgid "Please choose the color for the position indicator"
 msgstr "Моля, изберете цвета на индикатора за позиция"
@@ -15289,72 +15289,72 @@ msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Neptune"
 msgstr "Нептун"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:125
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:128
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Satellites"
 msgstr "&Сателити"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:126
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:129
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Data Sources"
 msgstr "&Източници на данни"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:128
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:131
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Activate Plugin"
 msgstr "&Активиране на приставката"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:228
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:231
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Add Data Source"
 msgstr "Добавяне на източник на данни"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:228
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:231
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "URL or File path:"
 msgstr "Адрес URL или път до файл:"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:234
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:237
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Invalid data source input"
 msgstr "Невалиден източник на данни за въвеждане"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:234
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:237
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Please enter a valid URL or file path!"
 msgstr "Моля, въведете валиден URL адрес или файлов път!"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Supported Files (*.txt *.msc)"
 msgstr "Всички поддържани файлове (*.txt *.msc)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Marble Satellite Catalog (*.msc)"
 msgstr "Marble Satellite Catalog (*.msc)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Two Line Element Set (*.txt)"
 msgstr "Набор от двуредови елементи - TLE (*.txt)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Files (*.*)"
 msgstr "Всички файлове (*.*)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:259
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:262
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Open Satellite Data File"
 msgstr "Отваряне на файл със сателитни данни"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:286
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:289
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Delete selected data source"
 msgstr "Изтриване на избрания източник на данни"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:287
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:290
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Do you really want to delete the selected data source?"
 msgstr "Наистина ли искате да изтриете избрания източник на данни?"
@@ -15925,73 +15925,73 @@ msgctxt "StarsConfigWidget|"
 msgid "Ecliptic"
 msgstr "Еклиптика"
 
-#: src/plugins/render/stars/StarsPlugin.cpp:108
+#: src/plugins/render/stars/StarsPlugin.cpp:109
 msgctxt "Marble::StarsPlugin|"
 msgid "Stars"
 msgstr "Звезди"
 
-#: src/plugins/render/stars/StarsPlugin.cpp:113
+#: src/plugins/render/stars/StarsPlugin.cpp:114
 msgctxt "Marble::StarsPlugin|"
 msgid "&Stars"
 msgstr "&Звезди "
 
-#: src/plugins/render/stars/StarsPlugin.cpp:128
+#: src/plugins/render/stars/StarsPlugin.cpp:129
 msgctxt "Marble::StarsPlugin|"
 msgid "A plugin that shows the Starry Sky and the Sun."
 msgstr "Приставка, показваща  звездното небе и Слънцето"
 
-#: src/plugins/render/stars/StarsPlugin.cpp:446
+#: src/plugins/render/stars/StarsPlugin.cpp:447
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the constellation lines."
 msgstr "Моля, изберете цвета за линиите на съзведията."
 
-#: src/plugins/render/stars/StarsPlugin.cpp:457
+#: src/plugins/render/stars/StarsPlugin.cpp:458
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the constellation labels."
 msgstr "Моля, изберете цвета за етикетите на съзвездията."
 
-#: src/plugins/render/stars/StarsPlugin.cpp:468
+#: src/plugins/render/stars/StarsPlugin.cpp:469
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the dso labels."
 msgstr "Моля, изберете цвета за етикетите на дълбокия космос."
 
-#: src/plugins/render/stars/StarsPlugin.cpp:479
+#: src/plugins/render/stars/StarsPlugin.cpp:480
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the ecliptic."
 msgstr "Моля, изберете цвета за еклиптиката."
 
-#: src/plugins/render/stars/StarsPlugin.cpp:490
-#: src/plugins/render/stars/StarsPlugin.cpp:501
+#: src/plugins/render/stars/StarsPlugin.cpp:491
+#: src/plugins/render/stars/StarsPlugin.cpp:502
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the celestial equator."
 msgstr "Моля, изберете цвета за небесния екватор."
 
-#: src/plugins/render/stars/StarsPlugin.cpp:1107
+#: src/plugins/render/stars/StarsPlugin.cpp:1108
 msgctxt "Marble::StarsPlugin|"
 msgid "Sun"
 msgstr "Слънце"
 
-#: src/plugins/render/stars/StarsPlugin.cpp:1387
+#: src/plugins/render/stars/StarsPlugin.cpp:1388
 msgctxt "Marble::StarsPlugin|"
 msgid "Show &Constellations"
 msgstr "Показване на &съзвездията"
 
-#: src/plugins/render/stars/StarsPlugin.cpp:1390
+#: src/plugins/render/stars/StarsPlugin.cpp:1391
 msgctxt "Marble::StarsPlugin|"
 msgid "Show &Sun and Moon"
 msgstr "Показване на С&лънцето и Луната"
 
-#: src/plugins/render/stars/StarsPlugin.cpp:1393
+#: src/plugins/render/stars/StarsPlugin.cpp:1394
 msgctxt "Marble::StarsPlugin|"
 msgid "Show &Planets"
 msgstr "Показване на &планетите"
 
-#: src/plugins/render/stars/StarsPlugin.cpp:1396
+#: src/plugins/render/stars/StarsPlugin.cpp:1397
 msgctxt "Marble::StarsPlugin|"
 msgid "Show &Deep Sky Objects"
 msgstr "Показване на обекти на дълбокия космос"
 
-#: src/plugins/render/stars/StarsPlugin.cpp:1400
+#: src/plugins/render/stars/StarsPlugin.cpp:1401
 msgctxt "Marble::StarsPlugin|"
 msgid "&Configure..."
 msgstr "&Настройки..."

@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-06 00:37+0000\n"
-"PO-Revision-Date: 2024-09-21 10:52+0300\n"
+"PO-Revision-Date: 2024-10-15 08:49+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -65,7 +65,7 @@ msgstr "ברנהרד בשקוב"
 #: kdemain.cpp:94
 #, kde-format
 msgid "WMS Support, Mobile, Performance"
-msgstr ""
+msgstr "תמיכה ב־WMS, ניידים, ביצועים"
 
 #: kdemain.cpp:95
 #, kde-format
@@ -75,7 +75,7 @@ msgstr ""
 #: kdemain.cpp:95
 #, kde-format
 msgid "Geodata"
-msgstr ""
+msgstr "נתונים גאוגרפיים"
 
 #: kdemain.cpp:96
 #, kde-format
@@ -85,7 +85,7 @@ msgstr ""
 #: kdemain.cpp:96
 #, kde-format
 msgid "OpenStreetMap Integration, OSM Namefinder, Download Management"
-msgstr ""
+msgstr "שילוב מול OpenStreetMap, מאתר שמות ב־OSM, ניהול הורדות"
 
 #: kdemain.cpp:97
 #, kde-format
@@ -205,7 +205,7 @@ msgstr ""
 #: kdemain.cpp:111
 #, kde-format
 msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
-msgstr ""
+msgstr "מפתח ליבה: אצנים של Marble, פלזמויד של שעון עולמי"
 
 #: kdemain.cpp:112
 #, kde-format
@@ -225,7 +225,7 @@ msgstr ""
 #: kdemain.cpp:113
 #, kde-format
 msgid "Planet filter"
-msgstr ""
+msgstr "מסנן כוכבים"
 
 #: kdemain.cpp:114
 #, kde-format
@@ -288,7 +288,7 @@ msgstr ""
 #: kdemain.cpp:134
 #, kde-format
 msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
-msgstr ""
+msgstr "מיזם Google Summer of Code 2011: Marble Touch ל־MeeGo"
 
 #: kdemain.cpp:137
 #, kde-format
@@ -308,7 +308,7 @@ msgstr ""
 #: kdemain.cpp:142
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Time Support"
-msgstr ""
+msgstr "מיזם Google Summer of Code 2010 Project: תמיכה בזמן"
 
 #: kdemain.cpp:145
 #, kde-format
@@ -318,32 +318,32 @@ msgstr ""
 #: kdemain.cpp:146
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
-msgstr ""
+msgstr "מיזם Google Summer of Code 2010: ניווט לפי פניות"
 
 #: kdemain.cpp:149 kdemain.cpp:169
 #, kde-format
 msgid "Andrew Manson"
-msgstr ""
+msgstr "אנדרו מנסון"
 
 #: kdemain.cpp:150
 #, kde-format
 msgid "Google Summer of Code 2009 Project: OSM Annotation"
-msgstr ""
+msgstr "מיזם Google Summer of Code 2009: הערות ב־OSM"
 
 #: kdemain.cpp:154
 #, kde-format
 msgid "Google Summer of Code 2009 Project: Online Services"
-msgstr ""
+msgstr "מיזם Google Summer of Code 2009: שירותים מקוונים"
 
 #: kdemain.cpp:158
 #, kde-format
 msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
-msgstr ""
+msgstr "מיזם Google Summer of Code 2008: אריחים וקטוריים ל־Marble"
 
 #: kdemain.cpp:161
 #, kde-format
 msgid "Shashank Singh"
-msgstr ""
+msgstr "ששאנק סינג"
 
 #: kdemain.cpp:162
 #, kde-format
@@ -351,11 +351,13 @@ msgid ""
 "Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
 "Marble"
 msgstr ""
+"מיזם Google Summer of Code 2008 Project: תמיכה בתמונות Panoramio / ויקיפדיהל־"
+"Marble"
 
 #: kdemain.cpp:165
 #, kde-format
 msgid "Carlos Licea"
-msgstr ""
+msgstr "קרלוס ליסאה"
 
 #: kdemain.cpp:166
 #, kde-format
@@ -612,6 +614,8 @@ msgid ""
 "Special thanks for providing an important source of inspiration by creating "
 "Marble's predecessor \"Kartographer\"."
 msgstr ""
+"תודה מיוחדת על אספקת מקור חשוב להשראה ל־Marble על ידי יצירת התוכנה המקורית "
+"„Kartographer”."
 
 #: kdemain.cpp:238
 #, kde-format
@@ -621,7 +625,7 @@ msgstr "הפעלת פלט ניפוי שגיאות"
 #: kdemain.cpp:241
 #, kde-format
 msgid "Display OSM placemarks according to the level selected"
-msgstr ""
+msgstr "להציג סמני מקום לפי הרמה שנבחרה"
 
 #: kdemain.cpp:243
 #, kde-format
@@ -646,27 +650,27 @@ msgstr "הצגת הזמן שהושקע בכל שכבה"
 #: kdemain.cpp:251
 #, kde-format
 msgid "Use a different directory <directory> which contains map data."
-msgstr ""
+msgstr "להשתמש בתיקייה אחרת <directory> שמכילה נתוני מפות."
 
 #: kdemain.cpp:253
 #, kde-format
 msgid "Do not use the interface optimized for small screens"
-msgstr ""
+msgstr "לא להשתמש בממשק שממוטב למסכים קטנים"
 
 #: kdemain.cpp:254
 #, kde-format
 msgid "Use the interface optimized for small screens"
-msgstr ""
+msgstr "להשתמש בממשק שממוטב למסכים קטנים"
 
 #: kdemain.cpp:256
 #, kde-format
 msgid "Do not use the interface optimized for high resolutions"
-msgstr ""
+msgstr "לא להשתמש בממשק שממוטב לרזולוציות גבוהות"
 
 #: kdemain.cpp:257
 #, kde-format
 msgid "Use the interface optimized for high resolutions"
-msgstr ""
+msgstr "להשתמש בממשק שממוטב לרזולוציות גבוהות"
 
 #: kdemain.cpp:259
 #, kde-format
@@ -697,67 +701,67 @@ msgstr ""
 #: marble.kcfg:58
 #, kde-format
 msgid "The date and time of marble clock"
-msgstr ""
+msgstr "התאריך והשעה של שעון marble"
 
 #. i18n: ectx: label, entry, group (Time)
 #: marble.kcfg:61
 #, kde-format
 msgid "The speed of marble clock"
-msgstr ""
+msgstr "מהירות השעון של marble"
 
 #. i18n: ectx: label, entry, group (View)
 #: marble.kcfg:107
 #, kde-format
 msgid "The unit chosen to measure distances."
-msgstr ""
+msgstr "היחידה הנבחרת למדידת מרחקים."
 
 #. i18n: ectx: label, entry, group (View)
 #: marble.kcfg:115
 #, kde-format
 msgid "The unit chosen to measure angles."
-msgstr ""
+msgstr "היחידה הנבחרת למדידת זוויות."
 
 #. i18n: ectx: label, entry, group (View)
 #: marble.kcfg:124
 #, kde-format
 msgid "The quality at which a still map gets painted."
-msgstr ""
+msgstr "האיכות בה תצויר מפה דוממת."
 
 #. i18n: ectx: label, entry, group (View)
 #: marble.kcfg:135
 #, kde-format
 msgid "The quality at which an animated map gets painted."
-msgstr ""
+msgstr "האיכות בה תצויר מפה מונפשת."
 
 #. i18n: ectx: label, entry, group (View)
 #: marble.kcfg:146
 #, kde-format
 msgid "The localization of the labels."
-msgstr ""
+msgstr "הגדרות אזור ושפה של התוויות."
 
 #. i18n: ectx: label, entry (mapFont), group (View)
 #: marble.kcfg:155
 #, kde-format
 msgid "The general font used on the map."
-msgstr ""
+msgstr "הגופן הכללי שישמש את המפה."
 
 #. i18n: ectx: label, entry (lastFileOpenDir), group (View)
 #: marble.kcfg:159
 #, kde-format
 msgid "The last directory that was opened by File->Open."
-msgstr ""
+msgstr "התיקייה האחרונה שנפתחה על ידי קובץ->פתיחה."
 
 #. i18n: ectx: label, entry, group (Navigation)
 #: marble.kcfg:179
 #, kde-format
 msgid "The behaviour of the planet's axis on mouse dragging."
-msgstr ""
+msgstr "התנהגות ציר הכוכב בגרירת עכבר."
 
 #. i18n: ectx: label, entry, group (Navigation)
 #: marble.kcfg:187
 #, kde-format
 msgid "The location shown on application startup."
-msgstr ""
+msgstr "המקום שמופיע עם עליית היישום."
 
 #. i18n: ectx: label, entry, group (Navigation)
 #: marble.kcfg:201
@@ -769,19 +773,19 @@ msgstr "הצגת הנפשה במסע אל היעד."
 #: marble.kcfg:205
 #, kde-format
 msgid "The external OpenStreetMap editor application"
-msgstr ""
+msgstr "היישום החיצוני לעריכת OpenStreetMap"
 
 #. i18n: ectx: label, entry, group (Cache)
 #: marble.kcfg:211
 #, kde-format
 msgid "Cache for tiles reserved in the physical memory."
-msgstr ""
+msgstr "מטמון האריחים נשמר בזיכרון הפיזי."
 
 #. i18n: ectx: label, entry, group (Cache)
 #: marble.kcfg:217
 #, kde-format
 msgid "Maximum space on the hard disk that can be used to store tiles."
-msgstr ""
+msgstr "המקום המרבי בכונן הקשיח שניתן להשתמש בו כדי לאחסן אריחים."
 
 #. i18n: ectx: label, entry (proxyUrl), group (Cache)
 #: marble.kcfg:223
@@ -829,7 +833,7 @@ msgstr "המתווך דורש אימות"
 #: marble.kcfg:260
 #, kde-format
 msgid "The position tracking plugin used to determine the current location"
-msgstr ""
+msgstr "תוסף מעקב המקום משמש לקבוע את המקום הנוכחי"
 
 #: marble_part.cpp:101
 #, kde-format
@@ -844,7 +848,7 @@ msgstr "גובה: %1"
 #: marble_part.cpp:103
 #, kde-format
 msgid "Tile Zoom Level: %1"
-msgstr ""
+msgstr "רמת תקריב אריחים: %1"
 
 #: marble_part.cpp:104
 #, kde-format
@@ -857,11 +861,13 @@ msgid ""
 "Sorry, unable to open '%1':\n"
 "'%2'"
 msgstr ""
+"לא ניתן לפתוח את ‚%1’:\n"
+"‚%2’, עמך הסליחה"
 
 #: marble_part.cpp:163
 #, kde-format
 msgid "File not readable"
-msgstr ""
+msgstr "הקובץ אינו קריא"
 
 #: marble_part.cpp:211
 #, kde-format
@@ -871,17 +877,17 @@ msgstr "הגלובוס הווירטואלי"
 #: marble_part.cpp:224
 #, kde-format
 msgid "Sorry, unable to open '%1'. The file is not accessible."
-msgstr ""
+msgstr "לא ניתן לפתוח את ‚%1’. הקובץ לא נגיש, עמך הסליחה."
 
 #: marble_part.cpp:224
 #, kde-format
 msgid "File not accessible"
-msgstr ""
+msgstr "הקובץ לא נגיש"
 
 #: marble_part.cpp:245
 #, kde-format
 msgid "All Supported Files"
-msgstr ""
+msgstr "כל הקבצים הנתמכים"
 
 #: marble_part.cpp:251
 #, kde-format
@@ -968,13 +974,13 @@ msgstr "הורדת מפות חדשות"
 #, kde-format
 msgctxt "Action for creating new maps"
 msgid "&Create a New Map..."
-msgstr ""
+msgstr "יצירת מפה חדשה…"
 
 #: marble_part.cpp:737
 #, kde-format
 msgctxt "Status tip"
 msgid "A wizard guides you through the creation of your own map theme."
-msgstr ""
+msgstr "אשף מנחה אותך ביצירת ערכת העיצוב מפה משלך."
 
 #: marble_part.cpp:761
 #, kde-format
@@ -1013,7 +1019,7 @@ msgstr "הסתרת צל"
 #: marble_part.cpp:795
 #, kde-format
 msgid "Shows and hides the shadow of the sun"
-msgstr ""
+msgstr "הצגת או הסתרת הצל מהשמש."
 
 #: marble_part.cpp:799
 #, kde-format
@@ -1060,7 +1066,7 @@ msgstr "הצגת &סימניות"
 #: marble_part.cpp:831
 #, kde-format
 msgid "Show or hide bookmarks in the map"
-msgstr ""
+msgstr "הצגת או הסתרת סימניות במפה"
 
 #: marble_part.cpp:838
 #, kde-format
@@ -1082,22 +1088,22 @@ msgstr "&עריכת מפה…"
 #: marble_part.cpp:859
 #, kde-format
 msgid "&Record Movie"
-msgstr ""
+msgstr "ה&קלטת סרט"
 
 #: marble_part.cpp:861
 #, kde-format
 msgid "Records a movie of the globe"
-msgstr ""
+msgstr "הקלטת סרט של הגלובוס"
 
 #: marble_part.cpp:866
 #, kde-format
 msgid "&Stop Recording"
-msgstr ""
+msgstr "&עצירת הקלטה"
 
 #: marble_part.cpp:868
 #, kde-format
 msgid "Stop recording a movie of the globe"
-msgstr ""
+msgstr "עצירת הקלטת סרט של הגלובוס"
 
 #: marble_part.cpp:1202
 #, kde-format
@@ -1121,7 +1127,7 @@ msgstr "הצגת גובה"
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Tile Zoom Level"
-msgstr ""
+msgstr "הצגת רמת תקריב אריח"
 
 #: marble_part.cpp:1206
 #, kde-format

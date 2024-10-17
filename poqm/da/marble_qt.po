@@ -13205,21 +13205,21 @@ msgctxt "Marble::GpsdPositionProviderPlugin|"
 msgid "Reports the position of a GPS device."
 msgstr "Rapporterer en GPS-enheds position."
 
-#: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:47
+#: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:48
 #, fuzzy
 #| msgid "Qt Mobility Position Provider Plugin"
 msgctxt "Marble::QtPositioningPositionProviderPlugin|"
 msgid "Qt Positioning Position Provider Plugin"
 msgstr "Qt Mobility positionsudbyder-plugin"
 
-#: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:57
+#: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:58
 #, fuzzy
 #| msgid "Qt Mobility Location"
 msgctxt "Marble::QtPositioningPositionProviderPlugin|"
 msgid "Qt Positioning Location"
 msgstr "Qt Mobility lokalisering"
 
-#: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:67
+#: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:68
 #, fuzzy
 #| msgid "Reports the GPS position of a QtMobility compatible device."
 msgctxt "Marble::QtPositioningPositionProviderPlugin|"
@@ -14008,27 +14008,27 @@ msgctxt "CompassConfigWidget|"
 msgid "Magnet"
 msgstr "Magnet"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:56
+#: src/plugins/render/compass/CompassFloatItem.cpp:57
 msgctxt "Marble::CompassFloatItem|"
 msgid "Compass"
 msgstr "Kompas"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:61
+#: src/plugins/render/compass/CompassFloatItem.cpp:62
 msgctxt "Marble::CompassFloatItem|"
 msgid "&Compass"
 msgstr "&Kompas"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:76
+#: src/plugins/render/compass/CompassFloatItem.cpp:77
 msgctxt "Marble::CompassFloatItem|"
 msgid "This is a float item that provides a compass."
 msgstr "Dette er et flydeelement som giver et kompas."
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:136
+#: src/plugins/render/compass/CompassFloatItem.cpp:137
 msgctxt "Marble::CompassFloatItem|"
 msgid "N"
 msgstr "N"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:137
+#: src/plugins/render/compass/CompassFloatItem.cpp:138
 msgctxt "Marble::CompassFloatItem|"
 msgid "S"
 msgstr "S"
@@ -14068,17 +14068,17 @@ msgctxt "CrosshairsConfigWidget|"
 msgid "German"
 msgstr "Tysk"
 
-#: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:70
+#: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:71
 msgctxt "Marble::CrosshairsPlugin|"
 msgid "Crosshairs"
 msgstr "Trådkors"
 
-#: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:75
+#: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:76
 msgctxt "Marble::CrosshairsPlugin|"
 msgid "Cross&hairs"
 msgstr "Tråd&kors"
 
-#: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:90
+#: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:91
 msgctxt "Marble::CrosshairsPlugin|"
 msgid "A plugin that shows crosshairs."
 msgstr "Et plugin som viser et trådkors."
@@ -14146,17 +14146,17 @@ msgctxt "Marble::EarthquakeItem|"
 msgid "Depth:"
 msgstr "Dybde:"
 
-#: src/plugins/render/earthquake/EarthquakePlugin.cpp:50
+#: src/plugins/render/earthquake/EarthquakePlugin.cpp:55
 msgctxt "Marble::EarthquakePlugin|"
 msgid "Earthquakes"
 msgstr "Jordskælv"
 
-#: src/plugins/render/earthquake/EarthquakePlugin.cpp:55
+#: src/plugins/render/earthquake/EarthquakePlugin.cpp:60
 msgctxt "Marble::EarthquakePlugin|"
 msgid "&Earthquakes"
 msgstr "&Jordskælv"
 
-#: src/plugins/render/earthquake/EarthquakePlugin.cpp:70
+#: src/plugins/render/earthquake/EarthquakePlugin.cpp:75
 msgctxt "Marble::EarthquakePlugin|"
 msgid "Shows earthquakes on the map."
 msgstr "Viser jordskælv på kortet."
@@ -14697,67 +14697,67 @@ msgctxt "GraticuleConfigWidget|"
 msgid "Show numerical Labels."
 msgstr "Vis numeriske etiketter."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:66
+#: src/plugins/render/graticule/GraticulePlugin.cpp:71
 msgctxt "Marble::GraticulePlugin|"
 msgid "Coordinate Grid"
 msgstr "Koordinatgitter"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:71
+#: src/plugins/render/graticule/GraticulePlugin.cpp:76
 msgctxt "Marble::GraticulePlugin|"
 msgid "Coordinate &Grid"
 msgstr "Koordinat&gitter"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:86
+#: src/plugins/render/graticule/GraticulePlugin.cpp:91
 msgctxt "Marble::GraticulePlugin|"
 msgid "A plugin that shows a coordinate grid."
 msgstr "Et plugin som viser et koordinatgitter"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:195
+#: src/plugins/render/graticule/GraticulePlugin.cpp:200
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the coordinate grid."
 msgstr "Vælg farve for koordinatgitteret."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:206
+#: src/plugins/render/graticule/GraticulePlugin.cpp:211
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the tropic circles."
 msgstr "Vælg farve for de tropiske cirkler."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:217
+#: src/plugins/render/graticule/GraticulePlugin.cpp:222
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the equator."
 msgstr "Vælg farve for ækvator."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:288
+#: src/plugins/render/graticule/GraticulePlugin.cpp:293
 msgctxt "Marble::GraticulePlugin|"
 msgid "Equator"
 msgstr "Ækvator"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:293
+#: src/plugins/render/graticule/GraticulePlugin.cpp:298
 msgctxt "Marble::GraticulePlugin|"
 msgid "Prime Meridian"
 msgstr "Nulmeridianen"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:294
+#: src/plugins/render/graticule/GraticulePlugin.cpp:299
 msgctxt "Marble::GraticulePlugin|"
 msgid "Antimeridian"
 msgstr "180° meridianen"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:360
+#: src/plugins/render/graticule/GraticulePlugin.cpp:365
 msgctxt "Marble::GraticulePlugin|"
 msgid "Tropic of Cancer"
 msgstr "Krebsens vendekreds"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:361
+#: src/plugins/render/graticule/GraticulePlugin.cpp:366
 msgctxt "Marble::GraticulePlugin|"
 msgid "Tropic of Capricorn"
 msgstr "Stenbukkens vendekreds"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:364
+#: src/plugins/render/graticule/GraticulePlugin.cpp:369
 msgctxt "Marble::GraticulePlugin|"
 msgid "Arctic Circle"
 msgstr "Den nordlige polarcirkel"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:365
+#: src/plugins/render/graticule/GraticulePlugin.cpp:370
 msgctxt "Marble::GraticulePlugin|"
 msgid "Antarctic Circle"
 msgstr "Den sydlige polarkreds"
@@ -15280,17 +15280,17 @@ msgctxt "OpenDesktopConfigWidget|"
 msgid "Number of displayed items on the screen:"
 msgstr "Antal viste elementer på skærmen:"
 
-#: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:41
+#: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:46
 msgctxt "Marble::OpenDesktopPlugin|"
 msgid "OpenDesktop Items"
 msgstr "OpenDesktop-elementer"
 
-#: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:46
+#: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:51
 msgctxt "Marble::OpenDesktopPlugin|"
 msgid "&OpenDesktop Community"
 msgstr "&OpenDesktop-fællesskab"
 
-#: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:61
+#: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:66
 msgctxt "Marble::OpenDesktopPlugin|"
 msgid ""
 "Shows OpenDesktop users' avatars and some extra information about them on "
@@ -15299,27 +15299,27 @@ msgstr ""
 "Vis OpenDesktop-brugeres avatarer og nogle ekstra informationer om dem på "
 "kortet."
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:70
+#: src/plugins/render/overviewmap/OverviewMap.cpp:71
 msgctxt "Marble::OverviewMap|"
 msgid "Overview Map"
 msgstr "Oversigtskort"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:75
+#: src/plugins/render/overviewmap/OverviewMap.cpp:76
 msgctxt "Marble::OverviewMap|"
 msgid "&Overview Map"
 msgstr "&Oversigtskort"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:90
+#: src/plugins/render/overviewmap/OverviewMap.cpp:91
 msgctxt "Marble::OverviewMap|"
 msgid "This is a float item that provides an overview map."
 msgstr "Dette er et flydeelement der giver et oversigtskort."
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:452
+#: src/plugins/render/overviewmap/OverviewMap.cpp:453
 msgctxt "Marble::OverviewMap|"
 msgid "Choose Overview Map"
 msgstr "Vælg oversigtskort"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:481
+#: src/plugins/render/overviewmap/OverviewMap.cpp:482
 msgctxt "Marble::OverviewMap|"
 msgid "Please choose the color for the position indicator"
 msgstr "Vælg farve for positionsindikatoren"
@@ -15778,73 +15778,73 @@ msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Neptune"
 msgstr "Neptun"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:125
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:128
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Satellites"
 msgstr "&Satellitter"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:126
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:129
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Data Sources"
 msgstr "&Datakilder"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:128
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:131
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Activate Plugin"
 msgstr "&Aktivér plugin"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:228
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:231
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Add Data Source"
 msgstr "Tilføj datakilde"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:228
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:231
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "URL or File path:"
 msgstr "URL eller filsti:"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:234
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:237
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Invalid data source input"
 msgstr "Ugyldig datakilde angivet"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:234
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:237
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Please enter a valid URL or file path!"
 msgstr "Angiv en gyldig URL eller filsti!"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Supported Files (*.txt *.msc)"
 msgstr "Alle understøttede filer (*.txt *.msc)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Marble Satellite Catalog (*.msc)"
 msgstr "Marble Satellite Catalog (*.msc)"
 
 # name af dataformat
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Two Line Element Set (*.txt)"
 msgstr "Two Line Element Set (*.txt)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Files (*.*)"
 msgstr "Alle filer (*.*)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:259
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:262
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Open Satellite Data File"
 msgstr "Open Satellite-datafil"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:286
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:289
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Delete selected data source"
 msgstr "Slet markeret datakilde"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:287
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:290
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Do you really want to delete the selected data source?"
 msgstr "Vil du virkelig slette den markerede datakilde?"
@@ -16417,73 +16417,73 @@ msgctxt "StarsConfigWidget|"
 msgid "Ecliptic"
 msgstr "Ekliptika"
 
-#: src/plugins/render/stars/StarsPlugin.cpp:108
+#: src/plugins/render/stars/StarsPlugin.cpp:109
 msgctxt "Marble::StarsPlugin|"
 msgid "Stars"
 msgstr "Stjerner"
 
-#: src/plugins/render/stars/StarsPlugin.cpp:113
+#: src/plugins/render/stars/StarsPlugin.cpp:114
 msgctxt "Marble::StarsPlugin|"
 msgid "&Stars"
 msgstr "&Stjerner"
 
-#: src/plugins/render/stars/StarsPlugin.cpp:128
+#: src/plugins/render/stars/StarsPlugin.cpp:129
 msgctxt "Marble::StarsPlugin|"
 msgid "A plugin that shows the Starry Sky and the Sun."
 msgstr "Et plugin som viser stjernehimlen og solen."
 
-#: src/plugins/render/stars/StarsPlugin.cpp:446
+#: src/plugins/render/stars/StarsPlugin.cpp:447
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the constellation lines."
 msgstr "Vælg farven af stjernebilledelinjerne."
 
-#: src/plugins/render/stars/StarsPlugin.cpp:457
+#: src/plugins/render/stars/StarsPlugin.cpp:458
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the constellation labels."
 msgstr "Vælg farven af stjernebilledeetiketterne."
 
-#: src/plugins/render/stars/StarsPlugin.cpp:468
+#: src/plugins/render/stars/StarsPlugin.cpp:469
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the dso labels."
 msgstr "Vælg farven af dso-etiketterne."
 
-#: src/plugins/render/stars/StarsPlugin.cpp:479
+#: src/plugins/render/stars/StarsPlugin.cpp:480
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the ecliptic."
 msgstr "Vælg farven af ekliptika."
 
-#: src/plugins/render/stars/StarsPlugin.cpp:490
-#: src/plugins/render/stars/StarsPlugin.cpp:501
+#: src/plugins/render/stars/StarsPlugin.cpp:491
+#: src/plugins/render/stars/StarsPlugin.cpp:502
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the celestial equator."
 msgstr "Vælg farven af himlens ækvator."
 
-#: src/plugins/render/stars/StarsPlugin.cpp:1107
+#: src/plugins/render/stars/StarsPlugin.cpp:1108
 msgctxt "Marble::StarsPlugin|"
 msgid "Sun"
 msgstr "Solen"
 
-#: src/plugins/render/stars/StarsPlugin.cpp:1387
+#: src/plugins/render/stars/StarsPlugin.cpp:1388
 msgctxt "Marble::StarsPlugin|"
 msgid "Show &Constellations"
 msgstr "Vis &stjernebilleder"
 
-#: src/plugins/render/stars/StarsPlugin.cpp:1390
+#: src/plugins/render/stars/StarsPlugin.cpp:1391
 msgctxt "Marble::StarsPlugin|"
 msgid "Show &Sun and Moon"
 msgstr "Vis &Solen og Månen"
 
-#: src/plugins/render/stars/StarsPlugin.cpp:1393
+#: src/plugins/render/stars/StarsPlugin.cpp:1394
 msgctxt "Marble::StarsPlugin|"
 msgid "Show &Planets"
 msgstr "Vis &planeter"
 
-#: src/plugins/render/stars/StarsPlugin.cpp:1396
+#: src/plugins/render/stars/StarsPlugin.cpp:1397
 msgctxt "Marble::StarsPlugin|"
 msgid "Show &Deep Sky Objects"
 msgstr "Vis &dybrumsobjekter"
 
-#: src/plugins/render/stars/StarsPlugin.cpp:1400
+#: src/plugins/render/stars/StarsPlugin.cpp:1401
 msgctxt "Marble::StarsPlugin|"
 msgid "&Configure..."
 msgstr "&Indstil..."

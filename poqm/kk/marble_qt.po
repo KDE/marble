@@ -14787,21 +14787,21 @@ msgctxt "Marble::GpsdPositionProviderPlugin|"
 msgid "Reports the position of a GPS device."
 msgstr "GPS құрылғының орынын анықтап береді."
 
-#: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:47
+#: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:48
 #, fuzzy
 #| msgid "Qt Mobility Position Provider Plugin"
 msgctxt "Marble::QtPositioningPositionProviderPlugin|"
 msgid "Qt Positioning Position Provider Plugin"
 msgstr "Qt Mobility орын анықтаушының плагині"
 
-#: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:57
+#: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:58
 #, fuzzy
 #| msgid "Qt Mobility Location"
 msgctxt "Marble::QtPositioningPositionProviderPlugin|"
 msgid "Qt Positioning Location"
 msgstr "Qt Mobility бойынша орын"
 
-#: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:67
+#: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:68
 #, fuzzy
 #| msgid "Reports the GPS position of a QtMobility compatible device."
 msgctxt "Marble::QtPositioningPositionProviderPlugin|"
@@ -15716,35 +15716,35 @@ msgctxt "CompassConfigWidget|"
 msgid "Magnet"
 msgstr "Магниттік полюс"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:56
+#: src/plugins/render/compass/CompassFloatItem.cpp:57
 #, fuzzy
 #| msgid "Compass"
 msgctxt "Marble::CompassFloatItem|"
 msgid "Compass"
 msgstr "Компас"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:61
+#: src/plugins/render/compass/CompassFloatItem.cpp:62
 #, fuzzy
 #| msgid "&Compass"
 msgctxt "Marble::CompassFloatItem|"
 msgid "&Compass"
 msgstr "&Компас"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:76
+#: src/plugins/render/compass/CompassFloatItem.cpp:77
 #, fuzzy
 #| msgid "This is a float item that provides a compass."
 msgctxt "Marble::CompassFloatItem|"
 msgid "This is a float item that provides a compass."
 msgstr "Қалқымалы компас."
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:136
+#: src/plugins/render/compass/CompassFloatItem.cpp:137
 #, fuzzy
 #| msgid "N"
 msgctxt "Marble::CompassFloatItem|"
 msgid "N"
 msgstr "С"
 
-#: src/plugins/render/compass/CompassFloatItem.cpp:137
+#: src/plugins/render/compass/CompassFloatItem.cpp:138
 #, fuzzy
 #| msgid "S"
 msgctxt "Marble::CompassFloatItem|"
@@ -15792,21 +15792,21 @@ msgctxt "CrosshairsConfigWidget|"
 msgid "German"
 msgstr ""
 
-#: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:70
+#: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:71
 #, fuzzy
 #| msgid "Crosshairs"
 msgctxt "Marble::CrosshairsPlugin|"
 msgid "Crosshairs"
 msgstr "Қарауыл"
 
-#: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:75
+#: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:76
 #, fuzzy
 #| msgid "Cross&hairs"
 msgctxt "Marble::CrosshairsPlugin|"
 msgid "Cross&hairs"
 msgstr "Қа&рауыл"
 
-#: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:90
+#: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:91
 #, fuzzy
 #| msgid "A plugin that shows crosshairs."
 msgctxt "Marble::CrosshairsPlugin|"
@@ -15881,21 +15881,21 @@ msgctxt "Marble::EarthquakeItem|"
 msgid "Depth:"
 msgstr ""
 
-#: src/plugins/render/earthquake/EarthquakePlugin.cpp:50
+#: src/plugins/render/earthquake/EarthquakePlugin.cpp:55
 #, fuzzy
 #| msgid "Earthquakes"
 msgctxt "Marble::EarthquakePlugin|"
 msgid "Earthquakes"
 msgstr "Жер сілкіністер"
 
-#: src/plugins/render/earthquake/EarthquakePlugin.cpp:55
+#: src/plugins/render/earthquake/EarthquakePlugin.cpp:60
 #, fuzzy
 #| msgid "&Earthquakes"
 msgctxt "Marble::EarthquakePlugin|"
 msgid "&Earthquakes"
 msgstr "&Жер сілкіністер"
 
-#: src/plugins/render/earthquake/EarthquakePlugin.cpp:70
+#: src/plugins/render/earthquake/EarthquakePlugin.cpp:75
 #, fuzzy
 #| msgid "Shows earthquakes on the map."
 msgctxt "Marble::EarthquakePlugin|"
@@ -16542,91 +16542,91 @@ msgctxt "GraticuleConfigWidget|"
 msgid "Show numerical Labels."
 msgstr "Шоқжұлдыз жарлықтары болсын"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:66
+#: src/plugins/render/graticule/GraticulePlugin.cpp:71
 #, fuzzy
 #| msgid "Coordinate Grid"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Coordinate Grid"
 msgstr "Координат торы"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:71
+#: src/plugins/render/graticule/GraticulePlugin.cpp:76
 #, fuzzy
 #| msgid "Coordinate &Grid"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Coordinate &Grid"
 msgstr "Координат &торы"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:86
+#: src/plugins/render/graticule/GraticulePlugin.cpp:91
 #, fuzzy
 #| msgid "A plugin that shows a coordinate grid."
 msgctxt "Marble::GraticulePlugin|"
 msgid "A plugin that shows a coordinate grid."
 msgstr "Координат торын көрсететін плагині."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:195
+#: src/plugins/render/graticule/GraticulePlugin.cpp:200
 #, fuzzy
 #| msgid "Please choose the color for the coordinate grid."
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the coordinate grid."
 msgstr "Координаттар торының түсін таңдаңыз."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:206
+#: src/plugins/render/graticule/GraticulePlugin.cpp:211
 #, fuzzy
 #| msgid "Please choose the color for the tropic circles."
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the tropic circles."
 msgstr "Тропик шеңберлерінің түсін таңдаңыз."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:217
+#: src/plugins/render/graticule/GraticulePlugin.cpp:222
 #, fuzzy
 #| msgid "Please choose the color for the equator."
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the equator."
 msgstr "Экватор сызығының түсін таңдаңыз."
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:288
+#: src/plugins/render/graticule/GraticulePlugin.cpp:293
 #, fuzzy
 #| msgid "Equator"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Equator"
 msgstr "Экватор"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:293
+#: src/plugins/render/graticule/GraticulePlugin.cpp:298
 #, fuzzy
 #| msgid "Prime Meridian"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Prime Meridian"
 msgstr "Бастапқы меридиан"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:294
+#: src/plugins/render/graticule/GraticulePlugin.cpp:299
 #, fuzzy
 #| msgid "Antimeridian"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Antimeridian"
 msgstr "Антимеридиан"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:360
+#: src/plugins/render/graticule/GraticulePlugin.cpp:365
 #, fuzzy
 #| msgid "Tropic of Cancer"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Tropic of Cancer"
 msgstr "Шаян тропигі"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:361
+#: src/plugins/render/graticule/GraticulePlugin.cpp:366
 #, fuzzy
 #| msgid "Tropic of Capricorn"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Tropic of Capricorn"
 msgstr "Тауешкі тропигі"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:364
+#: src/plugins/render/graticule/GraticulePlugin.cpp:369
 #, fuzzy
 #| msgid "Arctic Circle"
 msgctxt "Marble::GraticulePlugin|"
 msgid "Arctic Circle"
 msgstr "Солтүстік поляр шеңбері"
 
-#: src/plugins/render/graticule/GraticulePlugin.cpp:365
+#: src/plugins/render/graticule/GraticulePlugin.cpp:370
 #, fuzzy
 #| msgid "Antarctic Circle"
 msgctxt "Marble::GraticulePlugin|"
@@ -17271,21 +17271,21 @@ msgctxt "OpenDesktopConfigWidget|"
 msgid "Number of displayed items on the screen:"
 msgstr ""
 
-#: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:41
+#: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:46
 #, fuzzy
 #| msgid "OpenDesktop Items"
 msgctxt "Marble::OpenDesktopPlugin|"
 msgid "OpenDesktop Items"
 msgstr "OpenDesktop дүниесі"
 
-#: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:46
+#: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:51
 #, fuzzy
 #| msgid "&OpenDesktop Community"
 msgctxt "Marble::OpenDesktopPlugin|"
 msgid "&OpenDesktop Community"
 msgstr "&OpenDesktop қауымы"
 
-#: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:61
+#: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:66
 #, fuzzy
 #| msgid ""
 #| "Shows OpenDesktop users' avatars and some extra information about them on "
@@ -17298,35 +17298,35 @@ msgstr ""
 "OpenDesktop пайдаланушылардың аватарларын және басқа да ақпататтарын картаға "
 "шығарады."
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:70
+#: src/plugins/render/overviewmap/OverviewMap.cpp:71
 #, fuzzy
 #| msgid "Overview Map"
 msgctxt "Marble::OverviewMap|"
 msgid "Overview Map"
 msgstr "Шолу картасы"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:75
+#: src/plugins/render/overviewmap/OverviewMap.cpp:76
 #, fuzzy
 #| msgid "&Overview Map"
 msgctxt "Marble::OverviewMap|"
 msgid "&Overview Map"
 msgstr "&Шолу картасы"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:90
+#: src/plugins/render/overviewmap/OverviewMap.cpp:91
 #, fuzzy
 #| msgid "This is a float item that provides an overview map."
 msgctxt "Marble::OverviewMap|"
 msgid "This is a float item that provides an overview map."
 msgstr "Қалқымалы шолу картасы"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:452
+#: src/plugins/render/overviewmap/OverviewMap.cpp:453
 #, fuzzy
 #| msgid "Choose Overview Map"
 msgctxt "Marble::OverviewMap|"
 msgid "Choose Overview Map"
 msgstr "Шолу картасын таңдау"
 
-#: src/plugins/render/overviewmap/OverviewMap.cpp:481
+#: src/plugins/render/overviewmap/OverviewMap.cpp:482
 #, fuzzy
 #| msgid "Please choose the color for the position indicator"
 msgctxt "Marble::OverviewMap|"
@@ -17913,98 +17913,98 @@ msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Neptune"
 msgstr "Нептун"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:125
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:128
 #, fuzzy
 #| msgid "&Satellites"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Satellites"
 msgstr "&Жерсеріктер"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:126
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:129
 #, fuzzy
 #| msgid "&Data Sources"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Data Sources"
 msgstr "&Деректер көзі"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:128
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:131
 #, fuzzy
 #| msgid "&Activate Plugin"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Activate Plugin"
 msgstr "Плагинді &белсендету"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:228
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:231
 #, fuzzy
 #| msgid "Add Data Source"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Add Data Source"
 msgstr "Дерек көзін қосу"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:228
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:231
 #, fuzzy
 #| msgid "URL or File path:"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "URL or File path:"
 msgstr "URL не файл жолы:"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:234
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:237
 #, fuzzy
 #| msgid "Invalid data source input"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Invalid data source input"
 msgstr "Жарамсыз дерек көзінің кірісі"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:234
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:237
 #, fuzzy
 #| msgid "Please enter a valid URL or file path!"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Please enter a valid URL or file path!"
 msgstr "URL не файл жолын дұрыс келтіріңіз!"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
 #, fuzzy
 #| msgid "All Supported Files (*.txt *.msc)"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Supported Files (*.txt *.msc)"
 msgstr "Бүкіл танитын файлдар (*.txt *.msc)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
 #, fuzzy
 #| msgid "Marble Satellite Catalogue (*.msc)"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Marble Satellite Catalog (*.msc)"
 msgstr "Marble серіктер каталогы (*.msc)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
 #, fuzzy
 #| msgid "Two Line Element Set (*.txt)"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Two Line Element Set (*.txt)"
 msgstr "Екіжолды эллементтер жиыны (*.txt)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:257
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
 #, fuzzy
 #| msgid "All Files (*.*)"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Files (*.*)"
 msgstr "Бүкіл файлдар (*.*)"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:259
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:262
 #, fuzzy
 #| msgid "Open Satellite Data File"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Open Satellite Data File"
 msgstr "Жерсерік дерегінің файлын ашу"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:286
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:289
 #, fuzzy
 #| msgid "Delete selected data source"
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Delete selected data source"
 msgstr "Таңдалған дерек көзін өшіру"
 
-#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:287
+#: src/plugins/render/satellites/SatellitesConfigDialog.cpp:290
 #, fuzzy
 #| msgid "Do you really want to delete the selected data source?"
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -18782,99 +18782,99 @@ msgctxt "StarsConfigWidget|"
 msgid "Ecliptic"
 msgstr ""
 
-#: src/plugins/render/stars/StarsPlugin.cpp:108
+#: src/plugins/render/stars/StarsPlugin.cpp:109
 #, fuzzy
 #| msgid "Stars"
 msgctxt "Marble::StarsPlugin|"
 msgid "Stars"
 msgstr "Жұлдыздар"
 
-#: src/plugins/render/stars/StarsPlugin.cpp:113
+#: src/plugins/render/stars/StarsPlugin.cpp:114
 #, fuzzy
 #| msgid "&Stars"
 msgctxt "Marble::StarsPlugin|"
 msgid "&Stars"
 msgstr "&Жұлдыздар"
 
-#: src/plugins/render/stars/StarsPlugin.cpp:128
+#: src/plugins/render/stars/StarsPlugin.cpp:129
 #, fuzzy
 #| msgid "A plugin that shows the Starry Sky and the Sun."
 msgctxt "Marble::StarsPlugin|"
 msgid "A plugin that shows the Starry Sky and the Sun."
 msgstr "Жұлдызды аспан және Күннің көзін көрсететін плагині."
 
-#: src/plugins/render/stars/StarsPlugin.cpp:446
+#: src/plugins/render/stars/StarsPlugin.cpp:447
 #, fuzzy
 #| msgid "Please choose the color for the constellation lines."
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the constellation lines."
 msgstr "Шоқжұлдыз сызықтарының түсін таңдау."
 
-#: src/plugins/render/stars/StarsPlugin.cpp:457
+#: src/plugins/render/stars/StarsPlugin.cpp:458
 #, fuzzy
 #| msgid "Please choose the color for the constellation labels."
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the constellation labels."
 msgstr "Шоқжұлдыз жарлықтарының түсін таңдау."
 
-#: src/plugins/render/stars/StarsPlugin.cpp:468
+#: src/plugins/render/stars/StarsPlugin.cpp:469
 #, fuzzy
 #| msgid "Please choose the color for the dso labels."
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the dso labels."
 msgstr "Алыс ғарыш нысандарының түсін таңдау."
 
-#: src/plugins/render/stars/StarsPlugin.cpp:479
+#: src/plugins/render/stars/StarsPlugin.cpp:480
 #, fuzzy
 #| msgid "Please choose the color for the ecliptic."
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the ecliptic."
 msgstr "Эклиптика түсін таңдау."
 
-#: src/plugins/render/stars/StarsPlugin.cpp:490
-#: src/plugins/render/stars/StarsPlugin.cpp:501
+#: src/plugins/render/stars/StarsPlugin.cpp:491
+#: src/plugins/render/stars/StarsPlugin.cpp:502
 #, fuzzy
 #| msgid "Please choose the color for the celestial equator."
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the celestial equator."
 msgstr "Аспан экватор сызығының түсін таңдау."
 
-#: src/plugins/render/stars/StarsPlugin.cpp:1107
+#: src/plugins/render/stars/StarsPlugin.cpp:1108
 #, fuzzy
 #| msgid "Sun"
 msgctxt "Marble::StarsPlugin|"
 msgid "Sun"
 msgstr "Күннің көзі"
 
-#: src/plugins/render/stars/StarsPlugin.cpp:1387
+#: src/plugins/render/stars/StarsPlugin.cpp:1388
 #, fuzzy
 #| msgid "Show &Constellation Lines"
 msgctxt "Marble::StarsPlugin|"
 msgid "Show &Constellations"
 msgstr "&Шоқжұлдыз сызықтары болсын"
 
-#: src/plugins/render/stars/StarsPlugin.cpp:1390
+#: src/plugins/render/stars/StarsPlugin.cpp:1391
 #, fuzzy
 #| msgid "Show &Sun"
 msgctxt "Marble::StarsPlugin|"
 msgid "Show &Sun and Moon"
 msgstr "Күннің к&өзі болсын"
 
-#: src/plugins/render/stars/StarsPlugin.cpp:1393
+#: src/plugins/render/stars/StarsPlugin.cpp:1394
 #, fuzzy
 #| msgid "Show &Navigation Panel"
 msgctxt "Marble::StarsPlugin|"
 msgid "Show &Planets"
 msgstr "&Шарлау панелін көрсету"
 
-#: src/plugins/render/stars/StarsPlugin.cpp:1396
+#: src/plugins/render/stars/StarsPlugin.cpp:1397
 #, fuzzy
 #| msgid "Show &Deep Sky Objects"
 msgctxt "Marble::StarsPlugin|"
 msgid "Show &Deep Sky Objects"
 msgstr "&Алыс ғарыш нысандары көрсетілсін"
 
-#: src/plugins/render/stars/StarsPlugin.cpp:1400
+#: src/plugins/render/stars/StarsPlugin.cpp:1401
 #, fuzzy
 #| msgid "&Configure..."
 msgctxt "Marble::StarsPlugin|"
