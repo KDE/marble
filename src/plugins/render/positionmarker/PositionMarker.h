@@ -96,7 +96,7 @@ private:
     void loadCustomCursor(const QString &filename, bool useCursor);
     void loadDefaultCursor();
 
-    const MarbleModel *m_marbleModel;
+    const MarbleModel *const m_marbleModel;
 
     bool m_isInitialized;
     bool m_useCustomCursor;

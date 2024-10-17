@@ -125,8 +125,8 @@ void MapScaleFloatItem::setProjection(const ViewportParams *viewport)
             setContentSize(QSizeF(viewport->width() / m_widthScaleFactor, fontHeight + 3 + m_scaleBarHeight));
         }
 
-        m_leftBarMargin = QFontMetrics(font()).boundingRect("0").width() / 2;
-        m_rightBarMargin = QFontMetrics(font()).boundingRect("0000").width() / 2;
+        m_leftBarMargin = QFontMetrics(font()).boundingRect(QStringLiteral("0")).width() / 2;
+        m_rightBarMargin = QFontMetrics(font()).boundingRect(QStringLiteral("0000")).width() / 2;
 
         m_scaleBarWidth = contentSize().width() - m_leftBarMargin - m_rightBarMargin;
         m_viewportWidth = viewport->width();

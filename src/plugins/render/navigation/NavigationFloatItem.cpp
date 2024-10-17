@@ -15,7 +15,6 @@
 #include <QWidget>
 #include <qmath.h>
 
-#include "MarbleDebug.h"
 #include "MarbleGraphicsGridLayout.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"

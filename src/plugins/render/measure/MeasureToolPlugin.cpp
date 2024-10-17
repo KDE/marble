@@ -630,11 +630,11 @@ void MeasureToolPlugin::addContextItems()
         menu->addAction(Qt::RightButton, m_separator);
     }
 
-    connect(m_addMeasurePointAction, SIGNAL(triggered()), SLOT(addMeasurePointEvent()));
-    connect(m_removeLastMeasurePointAction, SIGNAL(triggered()), SLOT(removeLastMeasurePoint()));
-    connect(m_removeMeasurePointsAction, SIGNAL(triggered()), SLOT(removeMeasurePoints()));
+    connect(m_addMeasurePointAction, &QAction::triggered, this, &MeasureToolPlugin::addMeasurePointEvent);
+    connect(m_removeLastMeasurePointAction, &QAction::triggered, this, &MeasureToolPlugin::removeLastMeasurePoint);
+    connect(m_removeMeasurePointsAction, &QAction::triggered, this, &MeasureToolPlugin::removeMeasurePoints);
 
-    connect(this, SIGNAL(numberOfMeasurePointsChanged(int)), SLOT(setNumberOfMeasurePoints(int)));
+    connect(this, &MeasureToolPlugin::numberOfMeasurePointsChanged, this, &MeasureToolPlugin::setNumberOfMeasurePoints);
 }
 
 void MeasureToolPlugin::removeContextItems()

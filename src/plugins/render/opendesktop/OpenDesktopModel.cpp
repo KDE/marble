@@ -19,7 +19,7 @@
 using namespace Marble;
 
 OpenDesktopModel::OpenDesktopModel(const MarbleModel *marbleModel, QObject *parent)
-    : AbstractDataPluginModel("opendesktop", marbleModel, parent)
+    : AbstractDataPluginModel(QStringLiteral("opendesktop"), marbleModel, parent)
 {
     // Nothing to do...
 }
@@ -86,7 +86,7 @@ void OpenDesktopModel::parseFile(const QByteArray &file)
                 item->setFullName(firstName + QLatin1Char(' ') + lastName);
                 item->setLocation(city + QLatin1StringView(", ") + country);
                 item->setRole(!role.isEmpty() ? role : QStringLiteral("nothing"));
-                downloadItem(avatarUrl, "avatar", item);
+                downloadItem(avatarUrl, QStringLiteral("avatar"), item);
                 items << item;
             }
         }

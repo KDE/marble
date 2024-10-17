@@ -46,7 +46,7 @@ void NavigationSlider::enterEvent(QEnterEvent *)
 {
     setSliderDown(false);
     if (m_handleImagePath != QLatin1StringView("marble/navigation/navigational_slider_handle_hover")) {
-        m_handleImagePath = "marble/navigation/navigational_slider_handle_hover";
+        m_handleImagePath = QStringLiteral("marble/navigation/navigational_slider_handle_hover");
         repaint();
     }
 }
@@ -68,7 +68,7 @@ void NavigationSlider::mousePressEvent(QMouseEvent *)
 {
     setSliderDown(true);
     if (m_handleImagePath != QLatin1StringView("marble/navigation/navigational_slider_handle_press")) {
-        m_handleImagePath = "marble/navigation/navigational_slider_handle_press";
+        m_handleImagePath = QStringLiteral("marble/navigation/navigational_slider_handle_press");
         repaint();
     }
 }
@@ -77,7 +77,7 @@ void NavigationSlider::mouseReleaseEvent(QMouseEvent *)
 {
     setSliderDown(false);
     if (m_handleImagePath != QLatin1StringView("marble/navigation/navigational_slider_handle_hover")) {
-        m_handleImagePath = "marble/navigation/navigational_slider_handle_hover";
+        m_handleImagePath = QStringLiteral("marble/navigation/navigational_slider_handle_hover");
         repaint();
     }
 }
@@ -86,7 +86,7 @@ void NavigationSlider::leaveEvent(QEvent *)
 {
     setSliderDown(false);
     if (m_handleImagePath != QLatin1StringView("marble/navigation/navigational_slider_handle")) {
-        m_handleImagePath = "marble/navigation/navigational_slider_handle";
+        m_handleImagePath = QStringLiteral("marble/navigation/navigational_slider_handle");
         repaint();
     }
 }
@@ -100,7 +100,7 @@ void NavigationSlider::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
     for (int y = 0; y <= 160; y += 10) {
-        painter.drawPixmap(0, y, pixmap("marble/navigation/navigational_slider_groove"));
+        painter.drawPixmap(0, y, pixmap(QStringLiteral("marble/navigation/navigational_slider_groove")));
     }
     qreal const fraction = (value() - minimum()) / qreal(maximum() - minimum());
     int const y = (height() - handleImageHeight) * (1 - fraction);
