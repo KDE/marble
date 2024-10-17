@@ -730,6 +730,16 @@ void MarbleQuickItem::setHoverEnabled(bool hoverEnabled)
     Q_EMIT hoverEnabledChanged(d->m_hoverEnabled);
 }
 
+qreal MarbleQuickItem::centerLongitude() const
+{
+    return d->m_presenter.centerLongitude();
+}
+
+qreal MarbleQuickItem::centerLatitude() const
+{
+    return d->m_presenter.centerLatitude();
+}
+
 void MarbleQuickItem::setZoom(int newZoom, FlyToMode mode)
 {
     d->m_presenter.setZoom(newZoom, mode);

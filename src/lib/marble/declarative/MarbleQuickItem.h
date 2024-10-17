@@ -164,6 +164,8 @@ public Q_SLOTS:
 
     void setHeading(qreal heading);
     void setHoverEnabled(bool hoverEnabled);
+    qreal centerLongitude() const;
+    qreal centerLatitude() const;
 
 public:
     void paint(QPainter *painter) override;
