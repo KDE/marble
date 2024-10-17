@@ -414,6 +414,16 @@ namespace Marble
         return d->m_map.height();
     }
 
+    qreal MarbleQuickItem::centerLongitude() const
+    {
+        return d->m_presenter.centerLongitude();
+    }
+
+    qreal MarbleQuickItem::centerLatitude() const
+    {
+        return d->m_presenter.centerLatitude();
+    }
+
     bool MarbleQuickItem::showFrameRate() const
     {
         return d->m_map.showFrameRate();
