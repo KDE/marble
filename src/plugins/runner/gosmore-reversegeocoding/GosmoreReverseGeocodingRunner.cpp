@@ -47,7 +47,7 @@ QByteArray GosmoreRunnerPrivate::retrieveWaypoints(const QString &query) const
     QProcess gosmore;
     gosmore.setProcessEnvironment(env);
 
-    gosmore.start("gosmore", QStringList() << m_gosmoreMapFile.absoluteFilePath());
+    gosmore.start(QStringLiteral("gosmore"), QStringList() << m_gosmoreMapFile.absoluteFilePath());
     if (!gosmore.waitForStarted(5000)) {
         mDebug() << "Couldn't start gosmore from the current PATH. Install it to retrieve routing results from gosmore.";
         return {};
@@ -83,7 +83,7 @@ void GosmoreRunner::reverseGeocoding(const GeoDataCoordinates &coordinates)
         return;
     }
 
-    QString queryString = "flat=%1&flon=%2&tlat=%1&tlon=%2&fastest=1&v=motorcar";
+    QString queryString = QStringLiteral("flat=%1&flon=%2&tlat=%1&tlon=%2&fastest=1&v=motorcar");
     double lon = coordinates.longitude(GeoDataCoordinates::Degree);
     double lat = coordinates.latitude(GeoDataCoordinates::Degree);
     queryString = queryString.arg(lat, 0, 'f', 8).arg(lon, 0, 'f', 8);

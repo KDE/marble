@@ -186,7 +186,7 @@ GeoDataDocument *RoutinoRunnerPrivate::createDocument(GeoDataLineString *routeWa
 
     auto result = new GeoDataDocument();
     auto routePlacemark = new GeoDataPlacemark;
-    routePlacemark->setName("Route");
+    routePlacemark->setName(QStringLiteral("Route"));
     routePlacemark->setGeometry(routeWaypoints);
     result->append(routePlacemark);
 

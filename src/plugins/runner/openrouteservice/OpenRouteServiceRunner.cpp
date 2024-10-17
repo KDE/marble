@@ -53,33 +53,33 @@ void OpenRouteServiceRunner::retrieveRoute(const RouteRequest *route)
         unit = QStringLiteral("M");
     }
 
-    queries.addQueryItem("start", formatCoordinates(source));
+    queries.addQueryItem(QStringLiteral("start"), formatCoordinates(source));
     QStringList via;
     for (int i = 1; i < route->size() - 1; ++i) {
         via << formatCoordinates(route->at(i));
     }
-    queries.addQueryItem("via", via.join(' '));
-    queries.addQueryItem("end", formatCoordinates(destination));
+    queries.addQueryItem(QStringLiteral("via"), via.join(' '));
+    queries.addQueryItem(QStringLiteral("end"), formatCoordinates(destination));
 
-    queries.addQueryItem("distunit", unit);
+    queries.addQueryItem(QStringLiteral("distunit"), unit);
     if (preference == "Fastest" || preference == "Shortest" || preference == "Recommended") {
-        queries.addQueryItem("routepref", "Car");
-        queries.addQueryItem("weighting", preference);
+        queries.addQueryItem(QStringLiteral("routepref"), QStringLiteral("Car"));
+        queries.addQueryItem(QStringLiteral("weighting"), preference);
     } else {
-        queries.addQueryItem("routepref", preference);
-        queries.addQueryItem("weighting", "Recommended");
+        queries.addQueryItem(QStringLiteral("routepref"), preference);
+        queries.addQueryItem(QStringLiteral("weighting"), QStringLiteral("Recommended"));
     }
 
-    QString const motorways = settings.value("noMotorways").toInt() == 0 ? "false" : "true";
-    queries.addQueryItem("noMotorways", motorways);
-    QString const tollways = settings.value("noTollways").toInt() == 0 ? "false" : "true";
-    queries.addQueryItem("noTollways", tollways);
-    queries.addQueryItem("noUnpavedroads", "false");
-    queries.addQueryItem("noSteps", "false");
-    QString const ferries = settings.value("noFerries").toInt() == 0 ? "false" : "true";
-    queries.addQueryItem("noFerries", ferries);
-    queries.addQueryItem("instructions", "true");
-    queries.addQueryItem("lang", "en");
+    QString const motorways = settings.value("noMotorways").toInt() == 0 ? QStringLiteral("false") : QStringLiteral("true");
+    queries.addQueryItem(QStringLiteral("noMotorways"), motorways);
+    QString const tollways = settings.value("noTollways").toInt() == 0 ? QStringLiteral("false") : QStringLiteral("true");
+    queries.addQueryItem(QStringLiteral("noTollways"), tollways);
+    queries.addQueryItem(QStringLiteral("noUnpavedroads"), QStringLiteral("false"));
+    queries.addQueryItem(QStringLiteral("noSteps"), QStringLiteral("false"));
+    QString const ferries = settings.value("noFerries").toInt() == 0 ? QStringLiteral("false") : QStringLiteral("true");
+    queries.addQueryItem(QStringLiteral("noFerries"), ferries);
+    queries.addQueryItem(QStringLiteral("instructions"), QStringLiteral("true"));
+    queries.addQueryItem(QStringLiteral("lang"), QStringLiteral("en"));
 
     QUrl url = QUrl("http://openls.geog.uni-heidelberg.de/route");
     // QUrlQuery strips empty value pairs, but OpenRouteService does not work without
