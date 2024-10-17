@@ -8,7 +8,6 @@
 #include "DatabaseQuery.h"
 
 #include "GeoDataPoint.h"
-#include "MarbleDebug.h"
 
 #include <QList>
 #include <QString>

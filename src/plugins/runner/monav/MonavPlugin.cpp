@@ -93,7 +93,7 @@ MonavPluginPrivate::~MonavPluginPrivate()
 bool MonavPluginPrivate::isDaemonRunning()
 {
     QLocalSocket socket;
-    socket.connectToServer("MoNavD");
+    socket.connectToServer(QStringLiteral("MoNavD"));
     return socket.waitForConnected();
 }
 
@@ -147,7 +147,7 @@ void MonavPluginPrivate::stopDaemon()
 {
     if (m_ownsServer) {
         m_ownsServer = false;
-        QProcess::startDetached(m_monavDaemonProcess, QStringList() << "-t");
+        QProcess::startDetached(m_monavDaemonProcess, QStringList() << QStringLiteral("-t"));
     }
 }
 

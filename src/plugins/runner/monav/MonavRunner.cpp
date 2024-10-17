@@ -75,7 +75,7 @@ bool MonavRunnerPrivate::retrieveData(const RouteRequest *route, RoutingResult *
 bool MonavRunnerPrivate::retrieveData(const RouteRequest *route, const QString &mapDir, RoutingResult *reply) const
 {
     QLocalSocket socket;
-    socket.connectToServer("MoNavD");
+    socket.connectToServer(QStringLiteral("MoNavD"));
     if (socket.waitForConnected()) {
         if (m_plugin->monavVersion() == MonavPlugin::Monav_0_3) {
             CommandType commandType;

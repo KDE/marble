@@ -63,19 +63,19 @@ private:
 class MonavConfigWidgetPrivate
 {
 public:
-    MonavConfigWidget *m_parent;
+    MonavConfigWidget *m_parent = nullptr;
 
-    MonavPlugin *m_plugin;
+    MonavPlugin *m_plugin = nullptr;
 
     QNetworkAccessManager m_networkAccessManager;
 
-    QNetworkReply *m_currentReply;
+    QNetworkReply *m_currentReply = nullptr;
 
     QProcess *m_unpackProcess;
 
-    QSortFilterProxyModel *m_filteredModel;
+    QSortFilterProxyModel *const m_filteredModel;
 
-    MonavMapsModel *m_mapsModel;
+    MonavMapsModel *m_mapsModel = nullptr;
 
     bool m_initialized;
 
@@ -638,7 +638,7 @@ void MonavConfigWidget::updateTransportTypeFilter(const QString &filter)
 void MonavConfigWidget::removeMap(int index)
 {
     QMessageBox::StandardButtons buttons = QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel;
-    QString text = tr("Are you sure you want to delete this map from the system?");
+    const QString text = tr("Are you sure you want to delete this map from the system?");
     if (QMessageBox::question(this, tr("Remove Map"), text, buttons, QMessageBox::No) == QMessageBox::Yes) {
         d->m_mapsModel->deleteMapFiles(index);
         d->m_plugin->reloadMaps();

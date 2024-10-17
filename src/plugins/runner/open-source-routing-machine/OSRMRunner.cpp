@@ -46,10 +46,10 @@ void OSRMRunner::retrieveRoute(const RouteRequest *route)
     for (int i = 0; i < route->size(); ++i) {
         GeoDataCoordinates const coordinates = route->at(i);
         url += QString::number(coordinates.longitude(degree), 'f', 6);
-        url += ',';
+        url += QLatin1Char(',');
         url += QString::number(coordinates.latitude(degree), 'f', 6);
         if (i + 1 < route->size()) {
-            url += ';';
+            url += QLatin1Char(';');
         }
     }
 

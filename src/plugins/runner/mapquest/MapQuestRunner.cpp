@@ -66,13 +66,13 @@ void MapQuestRunner::retrieveRoute(const RouteRequest *route)
     append(&url, "units", unit);
 
     if (settings[QStringLiteral("noMotorways")].toInt()) {
-        append(&url, "avoids", "Limited Access");
+        append(&url, QStringLiteral("avoids"), QStringLiteral("Limited Access"));
     }
     if (settings[QStringLiteral("noTollroads")].toInt()) {
-        append(&url, "avoids", "Toll road");
+        append(&url, QStringLiteral("avoids"), QStringLiteral("Toll road"));
     }
     if (settings[QStringLiteral("noFerries")].toInt()) {
-        append(&url, "avoids", "Ferry");
+        append(&url, QStringLiteral("avoids"), QStringLiteral("Ferry"));
     }
 
     if (!settings[QStringLiteral("preference")].toString().isEmpty()) {
@@ -234,7 +234,7 @@ GeoDataDocument *MapQuestRunner::parse(const QByteArray &content) const
     QTime time;
     time = time.addSecs(root.elementsByTagName(QStringLiteral("time")).at(0).toElement().text().toInt());
     qreal length = routeWaypoints->length(EARTH_RADIUS);
-    const QString name = nameString("MQ", length, time);
+    const QString name = nameString(QStringLiteral("MQ"), length, time);
     const GeoDataExtendedData data = routeData(length, time);
     routePlacemark->setExtendedData(data);
     result->setName(name);
@@ -297,7 +297,7 @@ GeoDataDocument *MapQuestRunner::parse(const QByteArray &content) const
         }
     }
 
-    if (routeWaypoints->size() < 1) {
+    if (routeWaypoints->isEmpty()) {
         delete result;
         result = nullptr;
     }
