@@ -45,7 +45,7 @@ AreaAnnotation::AreaAnnotation(GeoDataPlacemark *placemark)
     , m_interactingObj(InteractingNothing)
     , m_virtualHovered(-1, -1)
 {
-    setPaintLayers(QStringList() << "AreaAnnotation");
+    setPaintLayers(QStringList() << QStringLiteral("AreaAnnotation"));
 }
 
 AreaAnnotation::~AreaAnnotation()

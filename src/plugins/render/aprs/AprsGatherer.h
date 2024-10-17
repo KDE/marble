@@ -58,8 +58,8 @@ private:
     QString m_sourceName;
 
     // Shared with the parent thread
-    QMutex *m_mutex;
-    QMap<QString, AprsObject *> *m_objects;
+    QMutex *m_mutex = nullptr;
+    QMap<QString, AprsObject *> *m_objects = nullptr;
 
     QMap<QPair<QChar, QChar>, QString> m_pixmaps;
 

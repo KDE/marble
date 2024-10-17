@@ -37,8 +37,8 @@ private:
     MarbleWidget *const m_marbleWidget;
     QPushButton *m_downloadButton;
     QNetworkAccessManager m_qnam;
-    QNetworkReply *m_reply;
-    QTemporaryFile *m_file;
+    QNetworkReply *m_reply = nullptr;
+    QTemporaryFile *m_file = nullptr;
     LatLonBoxWidget *const m_latLonBoxWidget;
     bool m_isDownloadSuccess;
 

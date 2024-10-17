@@ -37,9 +37,9 @@ public:
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
 private:
-    GeoDataPlacemark *m_placemark;
+    GeoDataPlacemark *const m_placemark;
     mutable QModelIndex m_indexBeingEdited;
-    QTreeView *m_view;
+    QTreeView *const m_view;
 
 private Q_SLOTS:
     void previewNodeMove(qreal value);
