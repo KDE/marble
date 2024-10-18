@@ -188,51 +188,51 @@ private:
 
 private:
     // All the functionality is provided by this widget.
-    ControlView *m_controlView;
-    SunControlWidget *m_sunControlDialog;
-    TimeControlWidget *m_timeControlDialog;
-    DownloadRegionDialog *m_downloadRegionDialog;
-    MovieCaptureDialog *m_movieCaptureDialog;
+    ControlView *m_controlView = nullptr;
+    SunControlWidget *m_sunControlDialog = nullptr;
+    TimeControlWidget *m_timeControlDialog = nullptr;
+    DownloadRegionDialog *m_downloadRegionDialog = nullptr;
+    MovieCaptureDialog *m_movieCaptureDialog = nullptr;
 
     // Actions for the GUI.
-    QAction *m_exportMapAction;
-    QAction *m_printMapAction;
-    QAction *m_printPreviewAction;
-    QAction *m_workOfflineAction;
-    QAction *m_copyMapAction;
-    QAction *m_copyCoordinatesAction;
-    QAction *m_showCloudsAction;
-    QAction *m_fullScreenAct;
-    QAction *m_openAct;
-    QAction *m_newStuffAction;
-    QAction *m_downloadRegionAction;
-    QAction *m_controlSunAction;
-    QAction *m_controlTimeAction;
-    QAction *m_lockFloatItemsAct;
-    QAction *m_mapWizardAct;
-    QAction *m_externalMapEditorAction;
-    QAction *m_recordMovieAction;
-    QAction *m_stopRecordingAction;
-    KRecentFilesAction *m_recentFilesAction;
+    QAction *m_exportMapAction = nullptr;
+    QAction *m_printMapAction = nullptr;
+    QAction *m_printPreviewAction = nullptr;
+    QAction *m_workOfflineAction = nullptr;
+    QAction *m_copyMapAction = nullptr;
+    QAction *m_copyCoordinatesAction = nullptr;
+    QAction *m_showCloudsAction = nullptr;
+    QAction *m_fullScreenAct = nullptr;
+    QAction *m_openAct = nullptr;
+    QAction *m_newStuffAction = nullptr;
+    QAction *m_downloadRegionAction = nullptr;
+    QAction *m_controlSunAction = nullptr;
+    QAction *m_controlTimeAction = nullptr;
+    QAction *m_lockFloatItemsAct = nullptr;
+    QAction *m_mapWizardAct = nullptr;
+    QAction *m_externalMapEditorAction = nullptr;
+    QAction *m_recordMovieAction = nullptr;
+    QAction *m_stopRecordingAction = nullptr;
+    KRecentFilesAction *m_recentFilesAction = nullptr;
 
     // Bookmark Menu
-    QAction *m_addBookmarkAction;
-    QAction *m_toggleBookmarkDisplayAction;
-    QAction *m_setHomeAction;
-    QAction *m_manageBookmarksAction;
+    QAction *m_addBookmarkAction = nullptr;
+    QAction *m_toggleBookmarkDisplayAction = nullptr;
+    QAction *m_setHomeAction = nullptr;
+    QAction *m_manageBookmarksAction = nullptr;
     // Actions for the status bar
-    QAction *m_showPositionAction;
-    QAction *m_showDateTimeAction;
-    QAction *m_showAltitudeAction;
-    QAction *m_showTileZoomLevelAction;
-    QAction *m_showDownloadProgressAction;
+    QAction *m_showPositionAction = nullptr;
+    QAction *m_showDateTimeAction = nullptr;
+    QAction *m_showAltitudeAction = nullptr;
+    QAction *m_showTileZoomLevelAction = nullptr;
+    QAction *m_showDownloadProgressAction = nullptr;
 
     // Action for the tool bar
-    KToggleAction *m_showShadow;
-    KToggleAction *m_lockToSubSolarPoint;
-    KToggleAction *m_setSubSolarPointIconVisible;
+    KToggleAction *m_showShadow = nullptr;
+    KToggleAction *m_lockToSubSolarPoint = nullptr;
+    KToggleAction *m_setSubSolarPointIconVisible = nullptr;
 
-    KConfigDialog *m_configDialog;
+    KConfigDialog *m_configDialog = nullptr;
 
     QHash<QString, int> m_pluginEnabled;
 
@@ -242,13 +242,13 @@ private:
     QString m_lastFileOpenPath;
 
     // Items for the statusbar.
-    QLabel *m_positionLabel;
-    QLabel *m_clockLabel;
-    QLabel *m_distanceLabel;
-    QLabel *m_tileZoomLevelLabel;
-    QProgressBar *m_downloadProgressBar;
+    QLabel *m_positionLabel = nullptr;
+    QLabel *m_clockLabel = nullptr;
+    QLabel *m_distanceLabel = nullptr;
+    QLabel *m_tileZoomLevelLabel = nullptr;
+    QProgressBar *m_downloadProgressBar = nullptr;
 
-    KParts::StatusBarExtension *m_statusBarExtension;
+    KParts::StatusBarExtension *m_statusBarExtension = nullptr;
 
     QHash<int, int> m_timezone;
     QMap<int, QString> m_externalEditorMapping;
