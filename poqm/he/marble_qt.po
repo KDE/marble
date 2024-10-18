@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-09-25 22:04+0300\n"
+"PO-Revision-Date: 2024-10-17 23:14+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -25,7 +25,7 @@ msgstr ""
 #. file data/maps/moon/clementine/clementine.dgml:5
 msgctxt "DGML|"
 msgid "Moon"
-msgstr ""
+msgstr "ירח"
 
 #. file data/maps/moon/clementine/clementine.dgml:15
 msgctxt "DGML|"
@@ -38,12 +38,12 @@ msgstr ""
 #. file data/maps/moon/clementine/clementine.dgml:111
 msgctxt "DGML|"
 msgid "Explore the Moon"
-msgstr ""
+msgstr "חקירת הירח"
 
 #. file data/maps/moon/clementine/clementine.dgml:118
 msgctxt "DGML|"
 msgid "Landing Sites"
-msgstr ""
+msgstr "אתרי נחיתה"
 
 #. file data/maps/moon/clementine/clementine.dgml:138
 #, fuzzy
@@ -90,7 +90,7 @@ msgstr "מקום אחר"
 #. file data/maps/sky/nightsky/nightsky.dgml:134
 msgctxt "DGML|"
 msgid "Places of Interest"
-msgstr ""
+msgstr "נקודות עניין"
 
 #. file data/maps/moon/clementine/clementine.dgml:179
 #. ----------
@@ -140,22 +140,22 @@ msgstr ""
 #. file data/maps/moon/clementine/clementine.dgml:121
 msgctxt "DGML|"
 msgid "Manned landing site"
-msgstr ""
+msgstr "אתר נחיתה מאוישת"
 
 #. file data/maps/moon/clementine/clementine.dgml:125
 msgctxt "DGML|"
 msgid "Robotic rover"
-msgstr ""
+msgstr "גשושית רובוטית"
 
 #. file data/maps/moon/clementine/clementine.dgml:129
 msgctxt "DGML|"
 msgid "Unmanned soft landing"
-msgstr ""
+msgstr "נחיתה רכה בלתי מאוישת"
 
 #. file data/maps/moon/clementine/clementine.dgml:133
 msgctxt "DGML|"
 msgid "Unmanned hard landing"
-msgstr ""
+msgstr "נחיתה קשה בלתי מאוישת"
 
 #. file data/maps/moon/clementine/clementine.dgml:142
 msgctxt "DGML|"
@@ -236,7 +236,7 @@ msgstr "פני שטח"
 #. file data/maps/earth/bluemarble/bluemarble.dgml:235
 msgctxt "DGML|"
 msgid "Boundaries"
-msgstr ""
+msgstr "גבולות"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:216
 #. ----------
@@ -376,7 +376,7 @@ msgstr ""
 #. file data/maps/sky/nightsky/nightsky.dgml:146
 msgctxt "DGML|"
 msgid "Airport"
-msgstr ""
+msgstr "נמל תעופה"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:194
 #. ----------
@@ -597,7 +597,7 @@ msgstr ""
 #. file data/maps/earth/schagen1689/schagen1689.dgml:144
 msgctxt "DGML|"
 msgid "Populated Places"
-msgstr ""
+msgstr "מקומות מאוכלסים"
 
 #. file data/maps/earth/citylights/citylights.dgml:162
 #, fuzzy
@@ -906,14 +906,14 @@ msgstr ""
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:363
 msgctxt "DGML|"
 msgid "Entertainment"
-msgstr ""
+msgstr "בידור"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:368
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:374
 msgctxt "DGML|"
 msgid "Public Buildings"
-msgstr ""
+msgstr "בנייני ציבור"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:403
 #. ----------
@@ -928,7 +928,7 @@ msgstr "מתחיל חיפוש"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:420
 msgctxt "DGML|"
 msgid "Emergency"
-msgstr ""
+msgstr "חירום"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:425
 #. ----------
@@ -942,14 +942,14 @@ msgstr ""
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:442
 msgctxt "DGML|"
 msgid "Food and Drinks"
-msgstr ""
+msgstr "מזון ומשקאות"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:471
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:477
 msgctxt "DGML|"
 msgid "Shop"
-msgstr ""
+msgstr "חנות"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:122
 #. ----------
@@ -1187,7 +1187,7 @@ msgstr ""
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:259
 msgctxt "DGML|"
 msgid "Farm"
-msgstr ""
+msgstr "חווה"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:257
 #. ----------
@@ -1201,7 +1201,7 @@ msgstr ""
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:267
 msgctxt "DGML|"
 msgid "Cemetery"
-msgstr ""
+msgstr "בית קברות"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:265
 #. ----------
@@ -1222,119 +1222,119 @@ msgstr ""
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:279
 msgctxt "DGML|"
 msgid "Sports centre"
-msgstr ""
+msgstr "מרכז ספורט"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:277
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:283
 msgctxt "DGML|"
 msgid "Nature reserve"
-msgstr ""
+msgstr "שמורת טבע"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:281
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:287
 msgctxt "DGML|"
 msgid "Military area"
-msgstr ""
+msgstr "שטח צבאי"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:288
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:294
 msgctxt "DGML|"
 msgid "School, university"
-msgstr ""
+msgstr "בית ספר, אוניברסיטה"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:292
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:298
 msgctxt "DGML|"
 msgid "Significant Building"
-msgstr ""
+msgstr "בניין משמעותי"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:296
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:302
 msgctxt "DGML|"
 msgid "Summit, peak"
-msgstr ""
+msgstr "פסגה"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:303
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:309
 msgctxt "DGML|"
 msgid "College"
-msgstr ""
+msgstr "מכללה"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:307
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:313
 msgctxt "DGML|"
 msgid "Kindergarten"
-msgstr ""
+msgstr "גן ילדים"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:311
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:317
 msgctxt "DGML|"
 msgid "Library"
-msgstr ""
+msgstr "ספרייה"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:315
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:321
 msgctxt "DGML|"
 msgid "School"
-msgstr ""
+msgstr "בית ספר"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:319
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:325
 msgctxt "DGML|"
 msgid "University"
-msgstr ""
+msgstr "אוניברסיטה"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:326
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:332
 msgctxt "DGML|"
 msgid "ATM"
-msgstr ""
+msgstr "כספומט"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:330
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:336
 msgctxt "DGML|"
 msgid "Bank"
-msgstr ""
+msgstr "בנק"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:334
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:340
 msgctxt "DGML|"
 msgid "Bureau de change"
-msgstr ""
+msgstr "חלפנות כספים"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:341
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:347
 msgctxt "DGML|"
 msgid "Dentist"
-msgstr ""
+msgstr "מרפאת שיניים"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:345
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:351
 msgctxt "DGML|"
 msgid "Doctors"
-msgstr ""
+msgstr "רופאים"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:349
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:355
 msgctxt "DGML|"
 msgid "Pharmacy"
-msgstr ""
+msgstr "בית מרקחת"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:353
 #. ----------
@@ -1349,7 +1349,7 @@ msgstr "מתחיל חיפוש"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:366
 msgctxt "DGML|"
 msgid "Cinema"
-msgstr ""
+msgstr "בית קולנוע"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:364
 #. ----------
@@ -1364,70 +1364,70 @@ msgstr "&שמור"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:377
 msgctxt "DGML|"
 msgid "Court"
-msgstr ""
+msgstr "בית משפט"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:375
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:381
 msgctxt "DGML|"
 msgid "Embassy"
-msgstr ""
+msgstr "שגרירות"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:379
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:385
 msgctxt "DGML|"
 msgid "Church"
-msgstr ""
+msgstr "כנסייה"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:383
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:389
 msgctxt "DGML|"
 msgid "Playground"
-msgstr ""
+msgstr "מגרש משחקים"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:387
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:393
 msgctxt "DGML|"
 msgid "Place of worship"
-msgstr ""
+msgstr "מקום סגידה"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:391
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:397
 msgctxt "DGML|"
 msgid "Post office"
-msgstr ""
+msgstr "משרד דואר"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:395
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:401
 msgctxt "DGML|"
 msgid "Public building"
-msgstr ""
+msgstr "מבנה ציבורי"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:399
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:405
 msgctxt "DGML|"
 msgid "Toilets"
-msgstr ""
+msgstr "שירותים"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:406
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:412
 msgctxt "DGML|"
 msgid "Hotel"
-msgstr ""
+msgstr "מלון"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:410
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:416
 msgctxt "DGML|"
 msgid "Motel"
-msgstr ""
+msgstr "מלון דרכים"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:417
 #. ----------
@@ -1450,21 +1450,21 @@ msgstr "שם חלופי"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:434
 msgctxt "DGML|"
 msgid "Monument"
-msgstr ""
+msgstr "אתר מורשת"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:432
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:438
 msgctxt "DGML|"
 msgid "Ruins"
-msgstr ""
+msgstr "חורבות"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:439
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:445
 msgctxt "DGML|"
 msgid "Bar"
-msgstr ""
+msgstr "בר"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:443
 #. ----------
@@ -1485,49 +1485,49 @@ msgstr ""
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:457
 msgctxt "DGML|"
 msgid "Drinking water"
-msgstr ""
+msgstr "מים לשתייה"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:455
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:461
 msgctxt "DGML|"
 msgid "Fast Food"
-msgstr ""
+msgstr "מזון מהיר"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:459
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:465
 msgctxt "DGML|"
 msgid "Ice Cream"
-msgstr ""
+msgstr "גלידה"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:463
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:469
 msgctxt "DGML|"
 msgid "Pub"
-msgstr ""
+msgstr "פאב"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:467
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:473
 msgctxt "DGML|"
 msgid "Restaurant"
-msgstr ""
+msgstr "מסעדה"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:474
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:480
 msgctxt "DGML|"
 msgid "Alcohol"
-msgstr ""
+msgstr "אלכוהול"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:478
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:484
 msgctxt "DGML|"
 msgid "Bakery"
-msgstr ""
+msgstr "מאפייה"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:482
 #. ----------
@@ -1550,33 +1550,33 @@ msgstr "&חפש"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:496
 msgctxt "DGML|"
 msgid "Clothes"
-msgstr ""
+msgstr "ביגוד"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:494
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:500
 msgctxt "DGML|"
 msgid "Convenience"
-msgstr ""
+msgstr "נוחות"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:498
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:504
 msgctxt "DGML|"
 msgid "Gas"
-msgstr ""
+msgstr "דלק"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:502
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:508
 msgctxt "DGML|"
 msgid "Gift"
-msgstr ""
+msgstr "מתנה"
 
 #. file data/maps/earth/empty/empty.dgml:6
 msgctxt "DGML|"
 msgid "Empty globe"
-msgstr ""
+msgstr "גלובוס ריק"
 
 #. file data/maps/earth/empty/empty.dgml:11
 msgctxt "DGML|"
@@ -1594,7 +1594,7 @@ msgstr "&פתיחת מפה..."
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:122
 msgctxt "DGML|"
 msgid "Humanitarian OSM Team"
-msgstr ""
+msgstr "צוות OSM ההומניטרי"
 
 #. file data/maps/earth/plain/plain.dgml:11
 #, fuzzy
@@ -1627,7 +1627,7 @@ msgstr ""
 #. file data/maps/earth/behaim1492/behaim1492.dgml:181
 msgctxt "DGML|"
 msgid "Places (in German)"
-msgstr ""
+msgstr "מקומות (בגרמנית)"
 
 #. file data/maps/earth/behaim1492/behaim1492.dgml:184
 #, fuzzy
@@ -1644,7 +1644,7 @@ msgstr "שם חלופי"
 #. file data/maps/earth/behaim1492/behaim1492.dgml:190
 msgctxt "DGML|"
 msgid "Facsimile drawings"
-msgstr ""
+msgstr "ציורי פקס"
 
 #. file data/maps/earth/behaim1492/behaim1492.dgml:193
 msgctxt "DGML|"
@@ -1724,7 +1724,7 @@ msgstr "3500 מ'"
 #. file data/maps/earth/precip-dec/precip-dec.dgml:248
 msgctxt "DGML|"
 msgid "89 mm"
-msgstr ""
+msgstr "89 מ״מ"
 
 #. file data/maps/earth/precip-july/precip-july.dgml:253
 #. ----------
@@ -1755,12 +1755,12 @@ msgstr "%1 מ'"
 #. file data/maps/earth/precip-dec/precip-dec.dgml:264
 msgctxt "DGML|"
 msgid "1024 mm or more"
-msgstr ""
+msgstr "1024 מ״מ ומעלה"
 
 #. file data/maps/earth/precip-dec/precip-dec.dgml:11
 msgctxt "DGML|"
 msgid "Precipitation (December)"
-msgstr ""
+msgstr "משקעים (דצמבר)"
 
 #. file data/maps/earth/precip-dec/precip-dec.dgml:21
 msgctxt "DGML|"
@@ -1794,7 +1794,7 @@ msgstr "&נתונים"
 #. file data/maps/earth/political/political.dgml:11
 msgctxt "DGML|"
 msgid "Political Map"
-msgstr ""
+msgstr "מפה פוליטית"
 
 #. file data/maps/earth/political/political.dgml:21
 msgctxt "DGML|"
@@ -1822,12 +1822,12 @@ msgstr ""
 #. file data/maps/earth/temp-dec/temp-dec.dgml:11
 msgctxt "DGML|"
 msgid "Temperature (December)"
-msgstr ""
+msgstr "טמפרטורה (דצמבר)"
 
 #. file data/maps/earth/temp-dec/temp-dec.dgml:21
 msgctxt "DGML|"
 msgid "A map which shows the average temperature in December."
-msgstr ""
+msgstr "מפה שמציגה את הטמפרטורה הממוצעת בדצמבר."
 
 #. file data/maps/earth/bluemarble/bluemarble.dgml:11
 #, fuzzy
@@ -1849,7 +1849,7 @@ msgstr ""
 #. file data/maps/earth/bluemarble/bluemarble.dgml:252
 msgctxt "DGML|"
 msgid "Ice"
-msgstr ""
+msgstr "קרח"
 
 #. file data/maps/earth/bluemarble/bluemarble.dgml:260
 #, fuzzy
@@ -1860,7 +1860,7 @@ msgstr "גובה"
 #. file data/maps/earth/bluemarble/bluemarble.dgml:264
 msgctxt "DGML|"
 msgid "Desert"
-msgstr ""
+msgstr "מדבר"
 
 #. file data/maps/sky/nightsky/nightsky.dgml:10
 #, fuzzy
@@ -1884,7 +1884,7 @@ msgstr "Marble"
 #. file data/legend.html
 msgctxt "Legends|"
 msgid "<a href=\"checkbox:cities\"/>"
-msgstr ""
+msgstr "<a href=\"checkbox:cities\"/>"
 
 #. file data/legend.html
 msgctxt "Legends|"
@@ -1924,7 +1924,7 @@ msgstr "&lt; 10,000"
 #. file data/legend.html
 msgctxt "Legends|"
 msgid "<br/>"
-msgstr ""
+msgstr "<br/>"
 
 #. file data/legend.html
 #, fuzzy
@@ -1959,12 +1959,12 @@ msgstr "לבן&nbsp;כלום"
 #. file data/legend.html
 msgctxt "Legends|"
 msgid "<!-- ##customLegendEntries:all## -->"
-msgstr ""
+msgstr "<!-- ##customLegendEntries:all## -->"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Andromeda"
-msgstr ""
+msgstr "אנדרומדה"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
@@ -14918,31 +14918,31 @@ msgctxt "Navigation|"
 msgid "Navigation"
 msgstr "ניווט"
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:61
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:60
 #, fuzzy
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Navigation"
 msgstr "ניווט"
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:66
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:65
 #, fuzzy
 msgctxt "Marble::NavigationFloatItem|"
 msgid "&Navigation"
 msgstr "&ניווט"
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:81
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:80
 #, fuzzy
 msgctxt "Marble::NavigationFloatItem|"
 msgid "A mouse control to zoom and move the map"
 msgstr "השתמש בעכבר כדי להתקרב ולהזיז את המפה"
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:234
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:233
 #, fuzzy
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Current Location Button"
 msgstr "מיקום נוכחי"
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:235
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:234
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Home Button"
 msgstr ""
@@ -18013,6 +18013,12 @@ msgstr ""
 msgctxt "Marble::MonavMapsModel|"
 msgid "Date"
 msgstr "תאריך"
+
+#: src/plugins/runner/monav/MonavMapsModel.cpp:71
+#, qt-format
+msgctxt "Marble::MonavMapsModel|"
+msgid "%1 MB"
+msgstr ""
 
 #: src/plugins/runner/monav/MonavPlugin.cpp:217
 msgctxt "Marble::MonavPlugin|"

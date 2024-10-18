@@ -16081,33 +16081,33 @@ msgctxt "Navigation|"
 msgid "Navigation"
 msgstr "Navigare"
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:61
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:60
 #, fuzzy
 #| msgid "Navigation"
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Navigation"
 msgstr "Navigare"
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:66
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:65
 #, fuzzy
 #| msgid "&Navigation"
 msgctxt "Marble::NavigationFloatItem|"
 msgid "&Navigation"
 msgstr "&Navigare"
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:81
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:80
 msgctxt "Marble::NavigationFloatItem|"
 msgid "A mouse control to zoom and move the map"
 msgstr ""
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:234
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:233
 #, fuzzy
 #| msgid "Current Location"
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Current Location Button"
 msgstr "Poziția curentă pe hartă"
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:235
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:234
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Home Button"
 msgstr ""
@@ -19513,6 +19513,12 @@ msgstr ""
 msgctxt "Marble::MonavMapsModel|"
 msgid "Date"
 msgstr "&Date"
+
+#: src/plugins/runner/monav/MonavMapsModel.cpp:71
+#, qt-format
+msgctxt "Marble::MonavMapsModel|"
+msgid "%1 MB"
+msgstr ""
 
 #: src/plugins/runner/monav/MonavPlugin.cpp:217
 msgctxt "Marble::MonavPlugin|"

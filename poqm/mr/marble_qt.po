@@ -14421,30 +14421,30 @@ msgctxt "Navigation|"
 msgid "Navigation"
 msgstr "संचारण"
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:61
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:60
 #, fuzzy
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Navigation"
 msgstr "संचारण"
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:66
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:65
 #, fuzzy
 msgctxt "Marble::NavigationFloatItem|"
 msgid "&Navigation"
 msgstr "संचारण"
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:81
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:80
 msgctxt "Marble::NavigationFloatItem|"
 msgid "A mouse control to zoom and move the map"
 msgstr ""
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:234
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:233
 #, fuzzy
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Current Location Button"
 msgstr "स्थान"
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:235
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:234
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Home Button"
 msgstr ""
@@ -17457,6 +17457,12 @@ msgstr "काढून टाका"
 msgctxt "Marble::MonavMapsModel|"
 msgid "Date"
 msgstr "दिनांक"
+
+#: src/plugins/runner/monav/MonavMapsModel.cpp:71
+#, qt-format
+msgctxt "Marble::MonavMapsModel|"
+msgid "%1 MB"
+msgstr ""
 
 #: src/plugins/runner/monav/MonavPlugin.cpp:217
 msgctxt "Marble::MonavPlugin|"

@@ -16677,35 +16677,35 @@ msgctxt "Navigation|"
 msgid "Navigation"
 msgstr "ការ​រុករក"
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:61
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:60
 #, fuzzy
 #| msgid "Navigation"
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Navigation"
 msgstr "ការ​រុករក"
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:66
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:65
 #, fuzzy
 #| msgid "&Navigation"
 msgctxt "Marble::NavigationFloatItem|"
 msgid "&Navigation"
 msgstr "ការ​រុករក"
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:81
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:80
 #, fuzzy
 #| msgid "A mouse control to zoom and move the map"
 msgctxt "Marble::NavigationFloatItem|"
 msgid "A mouse control to zoom and move the map"
 msgstr "វត្ថុ​បញ្ជា​កណ្ដុរ​ដើម្បី​ពង្រីក ឬ​ផ្លាស់ទី​ផែនទី"
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:234
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:233
 #, fuzzy
 #| msgid "Current Location"
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Current Location Button"
 msgstr "ទីតាំង​បច្ចុប្បន្ន"
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:235
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:234
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Home Button"
 msgstr ""
@@ -20391,6 +20391,12 @@ msgstr "លុប"
 msgctxt "Marble::MonavMapsModel|"
 msgid "Date"
 msgstr "កាលបរិច្ឆេទ"
+
+#: src/plugins/runner/monav/MonavMapsModel.cpp:71
+#, qt-format
+msgctxt "Marble::MonavMapsModel|"
+msgid "%1 MB"
+msgstr ""
 
 #: src/plugins/runner/monav/MonavPlugin.cpp:217
 #, fuzzy

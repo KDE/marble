@@ -14565,27 +14565,27 @@ msgctxt "Navigation|"
 msgid "Navigation"
 msgstr "Навігація"
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:61
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:60
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Navigation"
 msgstr "Навігація"
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:66
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:65
 msgctxt "Marble::NavigationFloatItem|"
 msgid "&Navigation"
 msgstr "&Навігація"
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:81
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:80
 msgctxt "Marble::NavigationFloatItem|"
 msgid "A mouse control to zoom and move the map"
 msgstr "Керування мишею зміни масштабу і пересування картою"
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:234
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:233
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Current Location Button"
 msgstr "Кнопка поточного розташування"
 
-#: src/plugins/render/navigation/NavigationFloatItem.cpp:235
+#: src/plugins/render/navigation/NavigationFloatItem.cpp:234
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Home Button"
 msgstr "Кнопка домівки"
@@ -17548,6 +17548,12 @@ msgstr "Вилучити"
 msgctxt "Marble::MonavMapsModel|"
 msgid "Date"
 msgstr "Дата"
+
+#: src/plugins/runner/monav/MonavMapsModel.cpp:71
+#, qt-format
+msgctxt "Marble::MonavMapsModel|"
+msgid "%1 MB"
+msgstr ""
 
 #: src/plugins/runner/monav/MonavPlugin.cpp:217
 msgctxt "Marble::MonavPlugin|"
