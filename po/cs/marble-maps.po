@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-04 00:36+0000\n"
-"PO-Revision-Date: 2024-09-27 11:49+0200\n"
+"PO-Revision-Date: 2024-10-18 16:02+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 24.08.1\n"
+"X-Generator: Lokalize 24.08.2\n"
 "X-Qt-Contexts: true\n"
 
 #: Bookmarks.qml:20
@@ -34,7 +34,7 @@ msgstr ""
 #: config.kcfg:14
 #, kde-format
 msgid "The marble theme id"
-msgstr ""
+msgstr "ID motivu Marble."
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:20
@@ -46,7 +46,7 @@ msgstr ""
 #: config.kcfg:23
 #, kde-format
 msgid "Car"
-msgstr ""
+msgstr "Auto"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:26 ProfileSelectorMenu.qml:134
@@ -141,12 +141,12 @@ msgstr "Možnosti vrstev"
 #, kde-format
 msgctxt "@action:button"
 msgid "Theme Options"
-msgstr ""
+msgstr "Možnosti motivu"
 
 #: MainScreen.qml:167
 #, kde-format
 msgid "Routing"
-msgstr ""
+msgstr "Směrování"
 
 #: MainScreen.qml:457
 #, kde-format
@@ -281,13 +281,13 @@ msgstr ""
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Departure:"
-msgstr ""
+msgstr "Odjezd:"
 
 #: RouteEditorPage.qml:104
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Arrival:"
-msgstr ""
+msgstr "Příjezd:"
 
 #: RouteEditorPage.qml:106
 #, kde-format
@@ -299,7 +299,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Alternatives:"
-msgstr ""
+msgstr "Alternativy:"
 
 #: SettingsDialog.qml:48
 #, kde-format
@@ -315,4 +315,4 @@ msgstr "Stáhnout mapy pouze přes WLAN"
 #, kde-format
 msgctxt "@title:window"
 msgid "Themes"
-msgstr ""
+msgstr "Motivy"

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-05-24 17:32+0100\n"
+"PO-Revision-Date: 2024-10-18 16:48+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.08.2\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -3133,20 +3133,14 @@ msgid "Bookmark Manager"
 msgstr "Bookmark Manager"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:25
-#, fuzzy
-#| msgctxt "Marble::BookmarkManagerDialog|"
-#| msgid "Import Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Import Bookmarks…"
-msgstr "Import Bookmarks"
+msgstr "Import Bookmarks…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
-#, fuzzy
-#| msgctxt "Marble::BookmarkManagerDialog|"
-#| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Export Bookmarks…"
-msgstr "Export Bookmarks"
+msgstr "Export Bookmarks…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
@@ -3156,15 +3150,12 @@ msgstr "Folders"
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
 msgid "New…"
-msgstr ""
+msgstr "New…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
-#, fuzzy
-#| msgctxt "UiBookmarkManagerDialog|"
-#| msgid "Rename..."
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Rename…"
-msgstr "Rename..."
+msgstr "Rename…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
 #: src/lib/marble/BookmarkManagerDialog.ui:151
@@ -3448,12 +3439,9 @@ msgstr "Clear Track"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "CurrentLocationWidget|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
 msgctxt "CurrentLocationWidget|"
@@ -5007,12 +4995,9 @@ msgid "&Folder:"
 msgstr "&Folder:"
 
 #: src/lib/marble/EditBookmarkDialog.ui:79
-#, fuzzy
-#| msgctxt "UiEditBookmarkDialog|"
-#| msgid "&Add Folder..."
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Add Folder…"
-msgstr "&Add Folder..."
+msgstr "&Add Folder…"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -7366,26 +7351,18 @@ msgstr[0] "%n result(s) found."
 msgstr[1] "%n result(s) found."
 
 #: src/lib/marble/GoToDialog.ui:14
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid "Go To..."
 msgctxt "GoTo|"
 msgid "Go To…"
-msgstr "Go To..."
+msgstr "Go To…"
 
 #: src/lib/marble/GoToDialog.ui:78
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid ""
-#| "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-#| "Marble/Search\">Details...</a>"
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
 "Marble/Search\">Details…</a>"
 msgstr ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-"Marble/Search\">Details...</a>"
+"Marble/Search\">Details…</a>"
 
 #: src/lib/marble/GoToDialog.ui:93
 msgctxt "GoTo|"
@@ -8096,18 +8073,13 @@ msgstr ""
 "rendering order."
 
 #: src/lib/marble/MapWizard.ui:297
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid ""
-#| "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-#| "Ctrl, Ctrl+A, ...)"
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
 "Ctrl, Ctrl+A, …)"
 msgstr ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Ctrl, Ctrl+A, ...)"
+"Ctrl, Ctrl+A, …)"
 
 #: src/lib/marble/MapWizard.ui:300
 msgctxt "MapWizard|"
@@ -8246,12 +8218,9 @@ msgid "Source Image:"
 msgstr "Source Image:"
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "MapWizard|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/lib/marble/MapWizard.ui:615
 msgctxt "MapWizard|"
@@ -8397,12 +8366,9 @@ msgid "preview image"
 msgstr "preview image"
 
 #: src/lib/marble/MapWizard.ui:825
-#, fuzzy
-#| msgctxt "Marble::ConflictDialog|"
-#| msgid "Changed"
 msgctxt "MapWizard|"
 msgid "Change…"
-msgstr "Changed"
+msgstr "Change…"
 
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
@@ -10197,12 +10163,9 @@ msgstr "Tilts the globe's axis towards the user."
 #: src/lib/marble/MarbleNavigator.ui:103 src/lib/marble/MarbleNavigator.ui:122
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "MarbleNavigator|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
 msgctxt "MarbleNavigator|"
@@ -11004,12 +10967,9 @@ msgid "Destination video:"
 msgstr "Destination video:"
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
-#, fuzzy
-#| msgctxt "Marble::RouteItemDelegate|"
-#| msgid "Open"
 msgctxt "MovieCaptureDialog|"
 msgid "Open…"
-msgstr "Open"
+msgstr "Open…"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -11161,12 +11121,9 @@ msgid "All Supported Files (*.png)"
 msgstr "All Supported Files (*.png)"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid "Browse"
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Browse…"
-msgstr "Browse"
+msgstr "Browse…"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -11915,15 +11872,12 @@ msgstr "New Profile"
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
 msgid "&Add…"
-msgstr ""
+msgstr "&Add…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
-#, fuzzy
-#| msgctxt "RoutingSettingsWidget|"
-#| msgid "&Configure"
 msgctxt "RoutingSettingsWidget|"
 msgid "&Configure…"
-msgstr "&Configure"
+msgstr "&Configure…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 msgctxt "RoutingSettingsWidget|"
@@ -12413,12 +12367,9 @@ msgid "Destination video"
 msgstr "Destination video"
 
 #: src/lib/marble/TourCaptureDialog.ui:81
-#, fuzzy
-#| msgctxt "Marble::RouteItemDelegate|"
-#| msgid "Open"
 msgctxt "TourCaptureDialog|"
 msgid "Open…"
-msgstr "Open"
+msgstr "Open…"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
@@ -13673,12 +13624,9 @@ msgid "Show eclipses for year:"
 msgstr "Show eclipses for year:"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
-#, fuzzy
-#| msgctxt "Marble::MainWindow|"
-#| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
 msgid "&Settings…"
-msgstr "&Settings"
+msgstr "&Settings…"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 msgctxt "EclipsesBrowserDialog|"
@@ -15394,12 +15342,9 @@ msgid "Remove selected data source."
 msgstr "Remove selected data source."
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "SatellitesConfigDialog|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
 msgctxt "SatellitesConfigDialog|"
@@ -17395,7 +17340,7 @@ msgstr "Installing %1"
 #, qt-format
 msgctxt "Marble::MonavConfigWidget|"
 msgid "%1/%2 MB"
-msgstr ""
+msgstr "%1/%2 MB"
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:612
 msgctxt "QObject|"
@@ -17521,7 +17466,7 @@ msgstr "Date"
 #, qt-format
 msgctxt "Marble::MonavMapsModel|"
 msgid "%1 MB"
-msgstr ""
+msgstr "%1 MB"
 
 #: src/plugins/runner/monav/MonavPlugin.cpp:217
 msgctxt "Marble::MonavPlugin|"

@@ -1,6 +1,6 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# SPDX-FileCopyrightText: 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2023 Vít Pelčák <vit@pelcak.org>
+# SPDX-FileCopyrightText: 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2023, 2024 Vít Pelčák <vit@pelcak.org>
 # Vit Pelcak <vit@pelcak.org>, 2021, 2023.
 #
 msgid ""
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-11-10 16:31+0100\n"
+"PO-Revision-Date: 2024-10-18 15:54+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 24.08.2\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -3114,20 +3114,14 @@ msgid "Bookmark Manager"
 msgstr "Správce záložek"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:25
-#, fuzzy
-#| msgctxt "Marble::BookmarkManagerDialog|"
-#| msgid "Import Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Import Bookmarks…"
-msgstr "Importovat záložky"
+msgstr "Importovat záložky…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
-#, fuzzy
-#| msgctxt "Marble::BookmarkManagerDialog|"
-#| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Export Bookmarks…"
-msgstr "Exportovat záložky"
+msgstr "Exportovat záložky…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
@@ -3137,15 +3131,12 @@ msgstr "Složky"
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
 msgid "New…"
-msgstr ""
+msgstr "Nový…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
-#, fuzzy
-#| msgctxt "UiBookmarkManagerDialog|"
-#| msgid "Rename..."
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Rename…"
-msgstr "Přejmenovat..."
+msgstr "Přejmenovat…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
 #: src/lib/marble/BookmarkManagerDialog.ui:151
@@ -3427,12 +3418,9 @@ msgstr "Vyčistit trasu"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "CurrentLocationWidget|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
 msgctxt "CurrentLocationWidget|"
@@ -4990,12 +4978,9 @@ msgid "&Folder:"
 msgstr "&Složka:"
 
 #: src/lib/marble/EditBookmarkDialog.ui:79
-#, fuzzy
-#| msgctxt "UiEditBookmarkDialog|"
-#| msgid "&Add Folder..."
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Add Folder…"
-msgstr "Přid&at složku..."
+msgstr "Přid&at složku…"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -7337,26 +7322,18 @@ msgstr[1] ""
 msgstr[2] ""
 
 #: src/lib/marble/GoToDialog.ui:14
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid "Go To..."
 msgctxt "GoTo|"
 msgid "Go To…"
-msgstr "Přejít na..."
+msgstr "Přejít na…"
 
 #: src/lib/marble/GoToDialog.ui:78
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid ""
-#| "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-#| "Marble/Search\">Details...</a>"
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
 "Marble/Search\">Details…</a>"
 msgstr ""
 "Zadejte hledanou položku a stiskněte Enter. <a href=\"https://userbase.kde."
-"org/Marble/Search\">Podrobnosti...</a>"
+"org/Marble/Search\">Podrobnosti…</a>"
 
 #: src/lib/marble/GoToDialog.ui:93
 msgctxt "GoTo|"
@@ -8147,12 +8124,9 @@ msgid "Source Image:"
 msgstr "Zdrojový obrázek:"
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "MapWizard|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/lib/marble/MapWizard.ui:615
 msgctxt "MapWizard|"
@@ -8295,12 +8269,9 @@ msgid "preview image"
 msgstr "náhled obrázku"
 
 #: src/lib/marble/MapWizard.ui:825
-#, fuzzy
-#| msgctxt "Marble::ConflictDialog|"
-#| msgid "Changed"
 msgctxt "MapWizard|"
 msgid "Change…"
-msgstr "Změněno"
+msgstr "Změnit…"
 
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
@@ -9904,12 +9875,9 @@ msgstr ""
 #: src/lib/marble/MarbleNavigator.ui:103 src/lib/marble/MarbleNavigator.ui:122
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "MarbleNavigator|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
 msgctxt "MarbleNavigator|"
@@ -10691,12 +10659,9 @@ msgid "Destination video:"
 msgstr "Cílové video:"
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
-#, fuzzy
-#| msgctxt "Marble::RouteItemDelegate|"
-#| msgid "Open"
 msgctxt "MovieCaptureDialog|"
 msgid "Open…"
-msgstr "Otevřít"
+msgstr "Otevřít…"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -10848,12 +10813,9 @@ msgid "All Supported Files (*.png)"
 msgstr "Všechny podporované soubory (*.png)"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid "Browse"
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Browse…"
-msgstr "Procházet"
+msgstr "Procházet…"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -11579,15 +11541,12 @@ msgstr "Nový profil"
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
 msgid "&Add…"
-msgstr ""
+msgstr "Přid&at…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
-#, fuzzy
-#| msgctxt "Marble::PluginItemDelegate|"
-#| msgid "Configure"
 msgctxt "RoutingSettingsWidget|"
 msgid "&Configure…"
-msgstr "Nastavit"
+msgstr "N&astavit…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 msgctxt "RoutingSettingsWidget|"
@@ -12056,12 +12015,9 @@ msgid "Destination video"
 msgstr "Cílové video"
 
 #: src/lib/marble/TourCaptureDialog.ui:81
-#, fuzzy
-#| msgctxt "Marble::RouteItemDelegate|"
-#| msgid "Open"
 msgctxt "TourCaptureDialog|"
 msgid "Open…"
-msgstr "Otevřít"
+msgstr "Otevřít…"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
@@ -13302,12 +13258,9 @@ msgid "Show eclipses for year:"
 msgstr ""
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
-#, fuzzy
-#| msgctxt "Marble::MainWindow|"
-#| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
 msgid "&Settings…"
-msgstr "Na&stavení"
+msgstr "Na&stavení…"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 msgctxt "EclipsesBrowserDialog|"
@@ -15007,12 +14960,9 @@ msgid "Remove selected data source."
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "SatellitesConfigDialog|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
 msgctxt "SatellitesConfigDialog|"
@@ -16983,7 +16933,7 @@ msgstr "Instaluje se %1"
 #, qt-format
 msgctxt "Marble::MonavConfigWidget|"
 msgid "%1/%2 MB"
-msgstr ""
+msgstr "%1/%2 MB"
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:612
 msgctxt "QObject|"
@@ -17513,59 +17463,3 @@ msgstr "Šablona &plovoucího nástroje"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Toto je třída šablony pro plovoucí nástroje."
-
-#~ msgctxt "UiBookmarkManagerDialog|"
-#~ msgid "Import Bookmarks..."
-#~ msgstr "Importovat záložky..."
-
-#~ msgctxt "UiBookmarkManagerDialog|"
-#~ msgid "Export Bookmarks..."
-#~ msgstr "Exportovat záložky..."
-
-#~ msgctxt "UiBookmarkManagerDialog|"
-#~ msgid "New..."
-#~ msgstr "Nový..."
-
-#~ msgctxt "CurrentLocationWidget|"
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgctxt "MapWizard|"
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Change..."
-#~ msgstr "Změnit..."
-
-#~ msgctxt "MarbleNavigator|"
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgctxt "MovieCaptureDialog|"
-#~ msgid "Open..."
-#~ msgstr "Otevřít..."
-
-#~ msgctxt "PlacemarkEditHeaderPrivate|"
-#~ msgid "Browse..."
-#~ msgstr "Procházet..."
-
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Add..."
-#~ msgstr "Přid&at..."
-
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Configure..."
-#~ msgstr "N&astavit..."
-
-#~ msgctxt "TourCaptureDialog|"
-#~ msgid "Open..."
-#~ msgstr "Otevřít..."
-
-#~ msgctxt "EclipsesBrowserDialog|"
-#~ msgid "&Settings..."
-#~ msgstr "Na&stavení..."
-
-#~ msgctxt "SatellitesConfigDialog|"
-#~ msgid "..."
-#~ msgstr "..."
