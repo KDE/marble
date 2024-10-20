@@ -19,7 +19,7 @@ class CycleStreetsConfigWidget : public RoutingRunnerPlugin::ConfigWidget
 
 public:
     CycleStreetsConfigWidget();
-    ~CycleStreetsConfigWidget();
+    ~CycleStreetsConfigWidget() override;
     void loadSettings(const QHash<QString, QVariant> &settings) override;
     QHash<QString, QVariant> settings() const override;
 

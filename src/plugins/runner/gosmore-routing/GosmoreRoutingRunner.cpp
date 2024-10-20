@@ -171,7 +171,7 @@ GeoDataDocument *GosmoreRunnerPrivate::createDocument(GeoDataLineString *routeWa
     qreal length = routeWaypoints->length(EARTH_RADIUS);
     if (length >= 1000) {
         length /= 1000.0;
-        unit = "km";
+        unit = QStringLiteral("km");
     }
     result->setName(name.arg(length, 0, 'f', 1).arg(unit));
 
@@ -188,7 +188,7 @@ GosmoreRunner::GosmoreRunner(QObject *parent)
 {
     // Check installation
     QDir mapDir(MarbleDirs::localPath() + QLatin1StringView("/maps/earth/gosmore/"));
-    d->m_gosmoreMapFile = QFileInfo(mapDir, "gosmore.pak");
+    d->m_gosmoreMapFile = QFileInfo(mapDir, QStringLiteral("gosmore.pak"));
 }
 
 GosmoreRunner::~GosmoreRunner()
@@ -207,7 +207,7 @@ void GosmoreRunner::retrieveRoute(const RouteRequest *route)
     QByteArray completeOutput;
 
     for (int i = 0; i < route->size() - 1; ++i) {
-        QString queryString = "flat=%1&flon=%2&tlat=%3&tlon=%4&fastest=1&v=motorcar";
+        QString queryString = QStringLiteral("flat=%1&flon=%2&tlat=%3&tlon=%4&fastest=1&v=motorcar");
         GeoDataCoordinates source = route->at(i);
         double fLon = source.longitude(GeoDataCoordinates::Degree);
         double fLat = source.latitude(GeoDataCoordinates::Degree);

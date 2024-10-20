@@ -65,7 +65,7 @@ RoutingRunner *GosmorePlugin::newRunner() const
 bool GosmorePlugin::canWork() const
 {
     QDir mapDir(MarbleDirs::localPath() + QLatin1StringView("/maps/earth/gosmore/"));
-    QFileInfo mapFile = QFileInfo(mapDir, "gosmore.pak");
+    QFileInfo mapFile = QFileInfo(mapDir, QStringLiteral("gosmore.pak"));
     return mapFile.exists();
 }
 
