@@ -255,7 +255,7 @@ bool GraticulePlugin::render(GeoPainter *painter, ViewportParams *viewport, cons
     int defaultFontSize = 8;
 #endif
 
-    QFont gridFont("Sans Serif");
+    QFont gridFont(QStringLiteral("Sans Serif"));
     gridFont.setPointSize(defaultFontSize);
     gridFont.setBold(true);
 

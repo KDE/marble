@@ -56,7 +56,7 @@ void EarthquakeModel::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 
     const QString geonamesUrl(
         QLatin1StringView("http://api.geonames.org/earthquakesJSON") + QLatin1StringView("?north=") + QString::number(box.north() * RAD2DEG)
         + QLatin1StringView("&south=") + QString::number(box.south() * RAD2DEG) + QLatin1StringView("&east=") + QString::number(box.east() * RAD2DEG)
-        + QLatin1StringView("&west=") + QString::number(box.west() * RAD2DEG) + QLatin1StringView("&date=") + m_endDate.toString("yyyy-MM-dd")
+        + QLatin1StringView("&west=") + QString::number(box.west() * RAD2DEG) + QLatin1StringView("&date=") + m_endDate.toString(QStringLiteral("yyyy-MM-dd"))
         + QLatin1StringView("&maxRows=") + QString::number(number) + QLatin1StringView("&username=marble") + QLatin1StringView("&formatted=true"));
     downloadDescriptionFile(QUrl(geonamesUrl));
 }

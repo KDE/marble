@@ -220,9 +220,9 @@ QPixmap NavigationFloatItem::pixmap(const QString &id)
 
 void NavigationFloatItem::paintContent(QPainter *painter)
 {
-    painter->drawPixmap(0, 0, pixmap("marble/navigation/navigational_backdrop_top"));
-    painter->drawPixmap(0, 70, pixmap("marble/navigation/navigational_backdrop_center"));
-    painter->drawPixmap(0, 311, pixmap("marble/navigation/navigational_backdrop_bottom"));
+    painter->drawPixmap(0, 0, pixmap(QStringLiteral("marble/navigation/navigational_backdrop_top")));
+    painter->drawPixmap(0, 70, pixmap(QStringLiteral("marble/navigation/navigational_backdrop_center")));
+    painter->drawPixmap(0, 311, pixmap(QStringLiteral("marble/navigation/navigational_backdrop_bottom")));
 }
 
 void NavigationFloatItem::contextMenuEvent(QWidget *w, QContextMenuEvent *e)
@@ -253,9 +253,9 @@ void NavigationFloatItem::activateCurrentPositionButton()
     }
 
     QIcon icon;
-    icon.addPixmap(pixmap("marble/navigation/navigational_currentlocation"), QIcon::Normal);
-    icon.addPixmap(pixmap("marble/navigation/navigational_currentlocation_hover"), QIcon::Active);
-    icon.addPixmap(pixmap("marble/navigation/navigational_currentlocation_pressed"), QIcon::Selected);
+    icon.addPixmap(pixmap(QStringLiteral("marble/navigation/navigational_currentlocation")), QIcon::Normal);
+    icon.addPixmap(pixmap(QStringLiteral("marble/navigation/navigational_currentlocation_hover")), QIcon::Active);
+    icon.addPixmap(pixmap(QStringLiteral("marble/navigation/navigational_currentlocation_pressed")), QIcon::Selected);
     m_navigationWidget->homeButton->setProperty("icon", QVariant(icon));
 
     if (m_contextMenu) {
@@ -279,9 +279,9 @@ void NavigationFloatItem::activateHomeButton()
     }
 
     QIcon icon;
-    icon.addPixmap(pixmap("marble/navigation/navigational_homebutton"), QIcon::Normal);
-    icon.addPixmap(pixmap("marble/navigation/navigational_homebutton_hover"), QIcon::Active);
-    icon.addPixmap(pixmap("marble/navigation/navigational_homebutton_press"), QIcon::Selected);
+    icon.addPixmap(pixmap(QStringLiteral("marble/navigation/navigational_homebutton")), QIcon::Normal);
+    icon.addPixmap(pixmap(QStringLiteral("marble/navigation/navigational_homebutton_hover")), QIcon::Active);
+    icon.addPixmap(pixmap(QStringLiteral("marble/navigation/navigational_homebutton_press")), QIcon::Selected);
     m_navigationWidget->homeButton->setProperty("icon", QVariant(icon));
 
     if (m_contextMenu) {

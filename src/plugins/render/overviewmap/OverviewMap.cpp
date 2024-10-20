@@ -436,7 +436,7 @@ void OverviewMap::loadPlanetMaps()
 
 void OverviewMap::loadMapSuggestions()
 {
-    QStringList paths = QDir(MarbleDirs::pluginPath(QString())).entryList(QStringList("*.svg"), QDir::Files | QDir::NoDotAndDotDot);
+    QStringList paths = QDir(MarbleDirs::pluginPath(QString())).entryList(QStringList(QStringLiteral("*.svg")), QDir::Files | QDir::NoDotAndDotDot);
     for (int i = 0; i < paths.size(); ++i) {
         paths[i] = MarbleDirs::pluginPath(QString()) + QLatin1Char('/') + paths[i];
     }
@@ -450,7 +450,7 @@ void OverviewMap::loadMapSuggestions()
 
 void OverviewMap::chooseCustomMap()
 {
-    QString path = QFileDialog::getOpenFileName(m_configDialog, tr("Choose Overview Map"), "", "SVG (*.svg)");
+    QString path = QFileDialog::getOpenFileName(m_configDialog, tr("Choose Overview Map"), QString(), QStringLiteral("SVG (*.svg)"));
     if (!path.isNull()) {
         ui_configWidget->m_fileChooserButton->layout()->removeWidget(currentWidget());
         delete currentWidget();

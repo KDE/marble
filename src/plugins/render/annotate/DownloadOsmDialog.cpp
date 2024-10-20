@@ -64,7 +64,7 @@ void DownloadOsmDialog::downloadFile()
     QString m_north;
     QString url;
     m_isDownloadSuccess = false;
-    m_file = new QTemporaryFile(QDir::tempPath() + "/XXXXXXosmdata.osm");
+    m_file = new QTemporaryFile(QDir::tempPath() + QStringLiteral("/XXXXXXosmdata.osm"));
     if (!m_file->open()) {
         QMessageBox::information(this, tr("ERROR"), tr("Unable to create temporary file to download OSM data to."));
         this->close();
@@ -76,10 +76,10 @@ void DownloadOsmDialog::downloadFile()
     m_east = QString::number(m_latLonBoxWidget->latLonBox().east() * RAD2DEG);
     m_north = QString::number(m_latLonBoxWidget->latLonBox().north() * RAD2DEG);
 
-    url = "http://api.openstreetmap.org/api/0.6/map?bbox=";
-    url += m_west + ",";
-    url += m_south + ",";
-    url += m_east + ",";
+    url = QStringLiteral("http://api.openstreetmap.org/api/0.6/map?bbox=");
+    url += m_west + QStringLiteral(",");
+    url += m_south + QStringLiteral(",");
+    url += m_east + QStringLiteral(",");
     url += m_north;
 
     m_reply = m_qnam.get(QNetworkRequest(QUrl(url)));

@@ -33,7 +33,7 @@ bool OpenDesktopItem::initialized() const
 bool OpenDesktopItem::operator<(const AbstractDataPluginItem *other) const
 {
     // Custom avatars will have more priority than default ones
-    QString noAvatar = "http://opendesktop.org/usermanager/nopic.png";
+    QString noAvatar = QStringLiteral("http://opendesktop.org/usermanager/nopic.png");
     const auto item = dynamic_cast<const OpenDesktopItem *>(other);
 
     if (item) {

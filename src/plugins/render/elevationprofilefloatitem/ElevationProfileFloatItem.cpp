@@ -143,7 +143,7 @@ void ElevationProfileFloatItem::initialize()
     switchDataSource(&m_routeDataSource);
 
     m_fontHeight = QFontMetricsF(font()).ascent() + 1;
-    m_leftGraphMargin = QFontMetricsF(font()).horizontalAdvance("0000 m"); /// TODO make this dynamic according to actual need
+    m_leftGraphMargin = QFontMetricsF(font()).horizontalAdvance(QStringLiteral("0000 m")); /// TODO make this dynamic according to actual need
 
     m_isInitialized = true;
 }

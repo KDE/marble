@@ -63,7 +63,7 @@ void NotesItem::paint(QPainter *painter)
     int const y = qMax(0, int(size().width() - m_pixmap_open.width()) / 2);
 
     // The two pixmaps have the same dimensions, so all the logic for one works for the other
-    QPixmap const &pixmap = m_noteStatus == "closed" ? m_pixmap_closed : m_pixmap_open;
+    QPixmap const &pixmap = m_noteStatus == QStringLiteral("closed") ? m_pixmap_closed : m_pixmap_open;
     painter->drawPixmap(y, 2 + painter->fontMetrics().height(), pixmap);
 
     painter->restore();

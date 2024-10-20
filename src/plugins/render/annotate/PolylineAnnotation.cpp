@@ -43,7 +43,7 @@ PolylineAnnotation::PolylineAnnotation(GeoDataPlacemark *placemark)
     , m_virtualHoveredNode(-1)
 
 {
-    setPaintLayers(QStringList() << "PolylineAnnotation");
+    setPaintLayers(QStringList() << QStringLiteral("PolylineAnnotation"));
 }
 
 PolylineAnnotation::~PolylineAnnotation()

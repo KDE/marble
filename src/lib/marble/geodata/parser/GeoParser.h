@@ -99,7 +99,7 @@ public:
     // Fast path for tag handlers
     bool represents(const char *tagName) const
     {
-        return m_node && tagName == m_qualifiedName.first;
+        return m_node && QLatin1StringView(tagName) == m_qualifiedName.first;
     }
 
     // Helper for tag handlers. Does NOT guard against miscasting. Use with care.

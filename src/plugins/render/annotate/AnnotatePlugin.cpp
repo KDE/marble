@@ -238,7 +238,7 @@ bool AnnotatePlugin::render(GeoPainter *painter, ViewportParams *viewport, const
 
     QListIterator<SceneGraphicsItem *> iter(m_graphicsItems);
     while (iter.hasNext()) {
-        iter.next()->paint(painter, viewport, "Annotation", -1);
+        iter.next()->paint(painter, viewport, QStringLiteral("Annotation"), -1);
     }
 
     return true;
@@ -284,7 +284,7 @@ void AnnotatePlugin::setAreaAvailable()
 
     enableAllActions(m_actions.first());
     disableFocusActions();
-    enableActionsOnItemType(SceneGraphicsTypes::SceneGraphicAreaAnnotation);
+    enableActionsOnItemType(QLatin1StringView(SceneGraphicsTypes::SceneGraphicAreaAnnotation));
     Q_EMIT repaintNeeded();
 }
 
@@ -295,7 +295,7 @@ void AnnotatePlugin::setPolylineAvailable()
 
     enableAllActions(m_actions.first());
     disableFocusActions();
-    enableActionsOnItemType(SceneGraphicsTypes::SceneGraphicPolylineAnnotation);
+    enableActionsOnItemType(QLatin1StringView(SceneGraphicsTypes::SceneGraphicPolylineAnnotation));
     Q_EMIT repaintNeeded();
 }
 
@@ -368,11 +368,11 @@ void AnnotatePlugin::saveAnnotationFile()
         GeoWriter writer;
         // FIXME: This should be consistent with the way the loading is done.
         if (filename.endsWith(QLatin1StringView(".kml"), Qt::CaseInsensitive)) {
-            writer.setDocumentType(kml::kmlTag_nameSpaceOgc22);
+            writer.setDocumentType(QLatin1StringView(kml::kmlTag_nameSpaceOgc22));
         } else if (filename.endsWith(QLatin1StringView(".osm"), Qt::CaseInsensitive)) {
             // "0.6" is the current version of osm, it is used to identify the osm writer
             // The reference value is kept in plugins/runner/osm/OsmElementDictionary.hz
-            writer.setDocumentType("0.6");
+            writer.setDocumentType(QStringLiteral("0.6"));
         }
 
         QFile file(filename);
@@ -572,7 +572,7 @@ bool AnnotatePlugin::eventFilter(QObject *watched, QEvent *event)
             if (mouseEvent->type() == QEvent::MouseButtonPress && mouseEvent->button() == Qt::LeftButton) {
                 item->setFocus(true);
                 disableFocusActions();
-                enableActionsOnItemType(item->graphicType());
+                enableActionsOnItemType(QLatin1StringView(item->graphicType()));
 
                 if (m_focusItem && m_focusItem != item) {
                     m_focusItem->setFocus(false);
@@ -896,7 +896,7 @@ void AnnotatePlugin::setupActions(MarbleWidget *widget)
     connect(saveAnnotationFile, &QAction::triggered, this, &AnnotatePlugin::saveAnnotationFile);
 
     auto clearAnnotations = new QAction(QIcon(QStringLiteral(":/icons/remove.png")), tr("Clear all Annotations"), this);
-    auto downloadOsm = new QAction(QIcon(":/icons/download.png"), tr("Download OpenStreetMap Data"), this);
+    auto downloadOsm = new QAction(QIcon(QStringLiteral(":/icons/download.png")), tr("Download OpenStreetMap Data"), this);
     connect(downloadOsm, &QAction::triggered, this, &AnnotatePlugin::downloadOsm);
     downloadOsm->setToolTip(tr("Download OpenStreetMap data of the visible region"));
     connect(drawPolygon, &QAction::toggled, clearAnnotations, &QAction::setDisabled);
@@ -954,10 +954,10 @@ void AnnotatePlugin::enableAllActions(QActionGroup *group)
 
 void AnnotatePlugin::enableActionsOnItemType(const QString &type)
 {
-    if (type == SceneGraphicsTypes::SceneGraphicAreaAnnotation) {
+    if (type == QLatin1StringView(SceneGraphicsTypes::SceneGraphicAreaAnnotation)) {
         m_actions.first()->actions().at(9)->setEnabled(true);
         m_actions.first()->actions().at(10)->setEnabled(true);
-    } else if (type == SceneGraphicsTypes::SceneGraphicPolylineAnnotation) {
+    } else if (type == QLatin1StringView(SceneGraphicsTypes::SceneGraphicPolylineAnnotation)) {
         m_actions.first()->actions().at(10)->setEnabled(true);
     }
 
@@ -1089,7 +1089,7 @@ void AnnotatePlugin::stopEditingTextAnnotation(int result)
     if (!result && m_addingPlacemark) {
         removeFocusItem();
     } else {
-        enableActionsOnItemType(SceneGraphicsTypes::SceneGraphicTextAnnotation);
+        enableActionsOnItemType(QLatin1StringView(SceneGraphicsTypes::SceneGraphicTextAnnotation));
     }
 
     m_addingPlacemark = false;
@@ -1194,7 +1194,7 @@ void AnnotatePlugin::displayOverlayFrame(GeoDataGroundOverlay *overlay)
         m_focusItem->setFocus(false);
     }
     m_focusItem = frame;
-    enableActionsOnItemType(SceneGraphicsTypes::SceneGraphicGroundOverlay);
+    enableActionsOnItemType(QLatin1StringView(SceneGraphicsTypes::SceneGraphicGroundOverlay));
 }
 
 void AnnotatePlugin::updateOverlayFrame(GeoDataGroundOverlay *overlay)
@@ -1328,7 +1328,7 @@ void AnnotatePlugin::stopEditingPolygon(int result)
     if (!result && m_drawingPolygon) {
         removeFocusItem();
     } else {
-        enableActionsOnItemType(SceneGraphicsTypes::SceneGraphicAreaAnnotation);
+        enableActionsOnItemType(QLatin1StringView(SceneGraphicsTypes::SceneGraphicAreaAnnotation));
     }
 
     m_editingDialogIsShown = false;
@@ -1577,7 +1577,7 @@ void AnnotatePlugin::stopEditingPolyline(int result)
     if (!result && m_drawingPolyline) {
         removeFocusItem();
     } else {
-        enableActionsOnItemType(SceneGraphicsTypes::SceneGraphicPolylineAnnotation);
+        enableActionsOnItemType(QLatin1StringView(SceneGraphicsTypes::SceneGraphicPolylineAnnotation));
     }
 
     m_editingDialogIsShown = false;
@@ -1665,7 +1665,7 @@ void AnnotatePlugin::pasteItem()
     m_graphicsItems.append(m_clipboardItem);
 
     m_clipboardItem->setFocus(true);
-    enableActionsOnItemType(m_clipboardItem->graphicType());
+    enableActionsOnItemType(QLatin1StringView(m_clipboardItem->graphicType()));
     m_focusItem = m_clipboardItem;
     m_clipboardItem = nullptr;
 

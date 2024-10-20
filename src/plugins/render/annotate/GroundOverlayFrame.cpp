@@ -87,7 +87,7 @@ GroundOverlayFrame::GroundOverlayFrame(GeoDataPlacemark *placemark, GeoDataGroun
     m_rotateIcons.append(QImage(MarbleDirs::systemPath() + QLatin1StringView("/bitmaps/editarrows/arrow-vertical-active.png")));
 
     update();
-    setPaintLayers(QStringList() << "GroundOverlayFrame");
+    setPaintLayers(QStringList() << QStringLiteral("GroundOverlayFrame"));
 }
 
 void GroundOverlayFrame::paint(GeoPainter *painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel)

@@ -34,17 +34,17 @@ void NotesModel::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 numbe
 
     QString bboxValue;
     bboxValue.append(QString::number(left))
-        .append(",")
+        .append(QStringLiteral(","))
         .append(QString::number(bottom))
-        .append(",")
+        .append(QStringLiteral(","))
         .append(QString::number(right))
-        .append(",")
+        .append(QStringLiteral(","))
         .append(QString::number(top));
 
-    QUrl osmNotesApiUrl("https://api.openstreetmap.org/api/0.6/notes.json");
+    QUrl osmNotesApiUrl(QStringLiteral("https://api.openstreetmap.org/api/0.6/notes.json"));
     QUrlQuery urlQuery;
-    urlQuery.addQueryItem("bbox", bboxValue);
-    urlQuery.addQueryItem("limit", QString::number(number));
+    urlQuery.addQueryItem(QStringLiteral("bbox"), bboxValue);
+    urlQuery.addQueryItem(QStringLiteral("limit"), QString::number(number));
     osmNotesApiUrl.setQuery(urlQuery);
 
     downloadDescriptionFile(osmNotesApiUrl);
@@ -84,10 +84,10 @@ void NotesModel::parseFile(const QByteArray &file)
 
             for (auto const commentRef : std::as_const(noteComments)) {
                 QJsonObject commentObj = commentRef.toObject();
-                QDateTime date = QDateTime::fromString(commentObj.value("date").toString(), Qt::ISODate);
-                QString user = commentObj.value("user").toString();
-                QString text = commentObj.value("text").toString();
-                int uid = commentObj.value("uid").toInt();
+                QDateTime date = QDateTime::fromString(commentObj.value(QStringLiteral("date")).toString(), Qt::ISODate);
+                QString user = commentObj.value(QStringLiteral("user")).toString();
+                QString text = commentObj.value(QStringLiteral("text")).toString();
+                int uid = commentObj.value(QStringLiteral("uid")).toInt();
                 Comment comment(date, text, user, uid);
                 item->addComment(comment);
             }

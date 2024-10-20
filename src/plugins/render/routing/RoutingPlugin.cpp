@@ -120,13 +120,13 @@ QString RoutingPluginPrivate::fuzzyDistance(qreal length)
 
     if (MarbleGlobal::getInstance()->locale()->measurementSystem() != MarbleLocale::MetricSystem) {
         precision = 1;
-        distanceUnit = "mi";
+        distanceUnit = QStringLiteral("mi");
         length *= METER2KM;
         length *= KM2MI;
     } else if (MarbleGlobal::getInstance()->locale()->measurementSystem() == MarbleLocale::MetricSystem) {
         if (length >= 1000) {
             length /= 1000;
-            distanceUnit = "km";
+            distanceUnit = QStringLiteral("km");
             precision = 1;
         } else if (length >= 200) {
             length = 50 * qRound(length / 50);
@@ -137,7 +137,7 @@ QString RoutingPluginPrivate::fuzzyDistance(qreal length)
         }
     } else if (MarbleGlobal::getInstance()->locale()->measurementSystem() == MarbleLocale::NauticalSystem) {
         precision = 2;
-        distanceUnit = "nm";
+        distanceUnit = QStringLiteral("nm");
         length *= METER2KM;
         length *= KM2NM;
     }
@@ -233,7 +233,7 @@ void RoutingPluginPrivate::toggleGuidanceMode(bool enabled)
 
     if (enabled) {
         QString const text = QObject::tr("Starting guidance mode, please wait...");
-        m_widget.instructionLabel->setText(richText("%1").arg(text));
+        m_widget.instructionLabel->setText(richText(QStringLiteral("%1").arg(text)));
     }
 
     if (enabled) {
@@ -268,7 +268,7 @@ void RoutingPluginPrivate::updateDestinationInformation()
 
         m_nearNextInstruction = distanceLeft < thresholdDistance;
 
-        QString pixmapHtml = "<img src=\":/flag.png\" /><br />";
+        QString pixmapHtml = QStringLiteral("<img src=\":/flag.png\" /><br />");
         m_widget.destinationDistanceLabel->setText(pixmapHtml + richText(fuzzyDistance(remaining)));
 
         m_widget.instructionIconLabel->setEnabled(m_nearNextInstruction);
@@ -297,7 +297,7 @@ void RoutingPluginPrivate::updateDestinationInformation()
         } else {
             pixmap = m_routingModel->route().currentSegment().nextRouteSegment().maneuver().directionPixmap();
             QString const instructionText = m_routingModel->route().currentSegment().nextRouteSegment().maneuver().instructionText();
-            m_widget.instructionLabel->setText(richText("%1").arg(instructionText));
+            m_widget.instructionLabel->setText(richText(QStringLiteral("%1").arg(instructionText)));
             pixmapHtml = QStringLiteral("<p align=\"center\"><img src=\"%1\" /><br />%2</p>").arg(pixmap);
             m_widget.instructionIconLabel->setText(pixmapHtml.arg(richText(fuzzyDistance(distanceLeft))));
 
@@ -306,7 +306,7 @@ void RoutingPluginPrivate::updateDestinationInformation()
             } else {
                 if (!m_routeCompleted) {
                     QString content = QObject::tr("Arrived at destination. <a href=\"#reverse\">Calculate the way back.</a>");
-                    m_widget.instructionLabel->setText(richText("%1").arg(content));
+                    m_widget.instructionLabel->setText(richText(QStringLiteral("%1").arg(content)));
                 }
                 m_routeCompleted = true;
             }

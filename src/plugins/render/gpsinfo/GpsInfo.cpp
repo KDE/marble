@@ -136,7 +136,7 @@ void GpsInfo::updateLocation(const GeoDataCoordinates &coordinates, qreal)
 
     m_widget.SpeedValue->setText(QStringLiteral(" %1 %2").arg(QLocale().toString(speed, 'f', 1)).arg(speedString));
     m_widget.AltitudeValue->setText(QStringLiteral(" %1 %2").arg(QLocale().toString(altitude, 'f', 1)).arg(distanceString));
-    m_widget.DirectionValue->setText(QStringLiteral(" %1 %2").arg(QLocale().toString(direction, 'f', 1)).arg("d"));
+    m_widget.DirectionValue->setText(QStringLiteral(" %1 %2").arg(QLocale().toString(direction, 'f', 1)).arg(QStringLiteral("d")));
     m_widget.PrecisionValue->setText(QStringLiteral(" %1 %2").arg(QLocale().toString(precision, 'f', 1)).arg(distanceString));
 
     int const minimumWidth = m_widgetItem->widget()->sizeHint().width();

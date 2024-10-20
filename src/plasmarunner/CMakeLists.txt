@@ -6,6 +6,8 @@ if(NOT KF6_FOUND)
   return()
 endif()
 
+add_definitions(-DQT_NO_CAST_FROM_ASCII)
+
 kcoreaddons_add_plugin(plasma_runner_marble INSTALL_NAMESPACE "kf6/krunner")
 
 target_sources(plasma_runner_marble PRIVATE plasmarunner.cpp plasmarunner.h)
