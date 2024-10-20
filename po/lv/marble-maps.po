@@ -8,26 +8,26 @@
 # Viesturs Zariņš <viesturs.zarins@algorego.com>, 2008.
 # Viesturs Zariņš <viesturs.zarins@mii.lu.lv>, 2009.
 # Einars Sprugis <einars8@gmail.com>, 2011, 2012, 2013.
+# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-04 00:36+0000\n"
-"PO-Revision-Date: 2013-07-10 21:15+0300\n"
-"Last-Translator: Einars Sprugis <einars8@gmail.com>\n"
-"Language-Team: Latvian <locale@laka.lv>\n"
+"PO-Revision-Date: 2024-10-19 11:06+0300\n"
+"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
+"Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Lokalize 24.08.2\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
 "X-Qt-Contexts: true\n"
 
 #: Bookmarks.qml:20
-#, fuzzy, kde-format
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "Grāmatzīmes"
@@ -35,330 +35,294 @@ msgstr "Grāmatzīmes"
 #: Bookmarks.qml:69
 #, kde-format
 msgid "Your bookmarks will appear here."
-msgstr ""
+msgstr "Te būs redzamas pievienotās grāmatzīmes"
 
 #. i18n: ectx: label, entry (MapThemeId), group (General)
 #: config.kcfg:14
 #, kde-format
 msgid "The marble theme id"
-msgstr ""
+msgstr "„Marble“ motīva ID"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:20
-#, fuzzy, kde-format
-#| msgid "Routing Profile - Marble"
+#, kde-format
 msgid "Routing profile"
-msgstr "Maršrutēšanas profils – Marble"
+msgstr "Maršrutēšanas profils"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:23
-#, fuzzy, kde-format
-#| msgid "Clear"
+#, kde-format
 msgid "Car"
-msgstr "Notīrīt"
+msgstr "Automobilis"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:26 ProfileSelectorMenu.qml:134
-#, fuzzy, kde-format
-#| msgid "Bicycle"
+#, kde-format
 msgid "Bicycle"
 msgstr "Velosipēds"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:29 ProfileSelectorMenu.qml:144
-#, fuzzy, kde-format
-#| msgid "Pedestrian"
+#, kde-format
 msgid "Pedestrian"
 msgstr "Kājām"
 
 #: CurrentPosition.qml:54
-#, fuzzy, kde-format
-#| msgid "Current Location"
+#, kde-format
 msgctxt "@option:check"
 msgid "Follow Current Position"
-msgstr "Pašreizējā atrašanās vieta"
+msgstr "Sekot atrašanās vietai"
 
 #: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
-#, fuzzy, kde-format
-#| msgid "Manage Bookmarks"
+#, kde-format
 msgid "Marble Maps"
-msgstr "Pārvaldīt grāmatzīmes"
+msgstr "„Marble“ kartes"
 
 #: main.cpp:44
-#, fuzzy, kde-format
-#| msgid "&Edit Map"
+#, kde-format
 msgid "Maps"
-msgstr "&Rediģēt karti"
+msgstr "Kartes"
 
 #: main.cpp:46
 #, kde-format
 msgid "© KDE Community"
-msgstr ""
+msgstr "© KDE kopiena"
 
 #: main.cpp:52
 #, kde-format
 msgid "Carl Schwan"
-msgstr ""
+msgstr "Carl Schwan"
 
 #: main.cpp:53
-#, fuzzy, kde-format
-#| msgid "Developer"
+#, kde-format
 msgid "Developer"
 msgstr "Izstrādātājs"
 
 #: main.cpp:58
-#, fuzzy, kde-format
-#| msgid "Yours"
+#, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Jūsu"
+msgstr "Toms Trasūns"
 
 #: main.cpp:58
-#, fuzzy, kde-format
-#| msgid "Address Details"
+#, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "Adreses detaļas"
+msgstr "toms.trasuns@posteo.net"
 
 #: MainScreen.qml:87
-#, fuzzy, kde-format
-#| msgid "Transit (Public Transport)"
+#, kde-format
 msgid "Public Transport"
-msgstr "Pilsētas (publiskais) transports"
+msgstr "Sabiedriskais transports"
 
 #: MainScreen.qml:102
 #, kde-format
 msgid "Outdoor Activities"
-msgstr ""
+msgstr "Āra aktivitātes"
 
 #: MainScreen.qml:114
 #, kde-format
 msgctxt "@action:button"
 msgid "Accessibility"
-msgstr ""
+msgstr "Pieejamība"
 
 #: MainScreen.qml:123
-#, fuzzy, kde-format
-#| msgid "About"
+#, kde-format
 msgctxt "@action:button"
 msgid "About"
 msgstr "Par"
 
 #: MainScreen.qml:134
-#, fuzzy, kde-format
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@action:button"
 msgid "Bookmarks"
 msgstr "Grāmatzīmes"
 
 #: MainScreen.qml:145
-#, fuzzy, kde-format
-#| msgid "New Profile"
+#, kde-format
 msgctxt "@action:button"
 msgid "Layer Options"
-msgstr "Jauns profils"
+msgstr "Slāņa opcijas"
 
 #: MainScreen.qml:156
-#, fuzzy, kde-format
-#| msgid "New Profile"
+#, kde-format
 msgctxt "@action:button"
 msgid "Theme Options"
-msgstr "Jauns profils"
+msgstr "Motīva opcijas"
 
 #: MainScreen.qml:167
-#, fuzzy, kde-format
-#| msgid "Routing"
+#, kde-format
 msgid "Routing"
 msgstr "Maršrutēšana"
 
 #: MainScreen.qml:457
-#, fuzzy, kde-format
-#| msgid "%1 km"
+#, kde-format
 msgid "%1 km"
 msgstr "%1 km"
 
 #: NavigationInfoBar.qml:20
-#, fuzzy, kde-format
-#| msgid "%1 km"
+#, kde-format
 msgctxt "distance in km"
 msgid "%1 km"
 msgstr "%1 km"
 
 #: NavigationInfoBar.qml:22
-#, fuzzy, kde-format
-#| msgid "%1 m"
+#, kde-format
 msgctxt "distance in m"
 msgid "%1 m"
 msgstr "%1 m"
 
 #: NavigationInfoBar.qml:24
-#, fuzzy, kde-format
-#| msgid "%1 m"
+#, kde-format
 msgctxt "distance in m with decimals"
 msgid "%1 m"
 msgstr "%1 m"
 
 #: Options.qml:20
-#, fuzzy, kde-format
-#| msgid "New Profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "Layer Options"
-msgstr "Jauns profils"
+msgstr "Slāņa opcijas"
 
 #: Options.qml:23
-#, fuzzy, kde-format
-#| msgid "Transit (Public Transport)"
+#, kde-format
 msgctxt "@title:group"
 msgid "Public Transport Layers"
-msgstr "Pilsētas (publiskais) transports"
+msgstr "Sabiedriskā transporta slāņi"
 
 #: Options.qml:28
-#, fuzzy, kde-format
-#| msgid "rain"
+#, kde-format
 msgctxt "@option:check"
 msgid "Train"
-msgstr "lietus"
+msgstr "Vilciens"
 
 #: Options.qml:35
 #, kde-format
 msgctxt "@option:check"
 msgid "Subway"
-msgstr ""
+msgstr "Metro"
 
 #: Options.qml:42
-#, fuzzy, kde-format
-#| msgid "tram stop"
+#, kde-format
 msgctxt "@option:check"
 msgid "Tram"
-msgstr "tramvaja pietura"
+msgstr "Tramvajs"
 
 #: Options.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Bus"
-msgstr ""
+msgstr "Autobuss"
 
 #: Options.qml:56
 #, kde-format
 msgctxt "@option:check"
 msgid "Trolley Bus"
-msgstr ""
+msgstr "Trolejbuss"
 
 #: Options.qml:64
 #, kde-format
 msgid "Outdoor Activities Layers"
-msgstr ""
+msgstr "Āra aktivitāšu slāņi"
 
 #: Options.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Walkways"
-msgstr ""
+msgstr "Pastaigu maršruti"
 
 #: Options.qml:76
-#, fuzzy, kde-format
-#| msgid "Open Route"
+#, kde-format
 msgctxt "@option:check"
 msgid "Hiking Routes"
-msgstr "Atvērt maršrutu"
+msgstr "Pārgājienu maršruti"
 
 #: Options.qml:83
-#, fuzzy, kde-format
-#| msgid "bicycle rental"
+#, kde-format
 msgctxt "@option:check"
 msgid "Bicycle Routes"
-msgstr "velosipēdu īre"
+msgstr "Velomaršruti"
 
 #: Options.qml:90
-#, fuzzy, kde-format
-#| msgid "Mountain"
+#, kde-format
 msgctxt "@option:check"
 msgid "Mountainbike Routes"
-msgstr "Kalns"
+msgstr "Kalnu velosipēdu maršruti"
 
 #: Options.qml:97
-#, fuzzy, kde-format
-#| msgid "Save Route"
+#, kde-format
 msgctxt "@option:check"
 msgid "Inline Skating Routes"
-msgstr "Saglabāt maršrutu"
+msgstr "Skrituļošanas maršruts"
 
 #: Options.qml:104
 #, kde-format
 msgctxt "@option:check"
 msgid "Bridleways"
-msgstr ""
+msgstr "Jāšanas ceļi"
 
 #: PlacemarkDialog.qml:48
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "placeholder"
 msgid "No Name"
-msgstr "Nosaukums"
+msgstr "Bez nosaukuma"
 
 #: PlacemarkDialog.qml:168
-#, fuzzy, kde-format
-#| msgid "Tags:"
+#, kde-format
 msgctxt "@title:group"
 msgid "Tags:"
-msgstr "Tagi:"
+msgstr "Birkas:"
 
 #: ProfileSelectorMenu.qml:124
-#, fuzzy, kde-format
-#| msgid "Car (fastest)"
+#, kde-format
 msgid "Car (fastest)"
-msgstr "Automašīna (visātrāk)"
+msgstr "Automobilis (visātrāk)"
 
 #: RouteEditorPage.qml:19
-#, fuzzy, kde-format
-#| msgid "Routing"
+#, kde-format
 msgctxt "@title"
 msgid "Routing"
 msgstr "Maršrutēšana"
 
 #: RouteEditorPage.qml:102
-#, fuzzy, kde-format
-#| msgid "Temperature: %1<br>"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Departure:"
-msgstr "Temperatūra: %1<br>"
+msgstr "Izbraukšana:"
 
 #: RouteEditorPage.qml:104
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Arrival:"
-msgstr ""
+msgstr "Ierašanās:"
 
 #: RouteEditorPage.qml:106
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Waypoint:"
-msgstr ""
+msgstr "Maršruta punkts"
 
 #: RouteEditorPage.qml:194
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Alternatives:"
-msgstr ""
+msgstr "Alternatīvas:"
 
 #: SettingsDialog.qml:48
-#, fuzzy, kde-format
-#| msgid "Settings"
+#, kde-format
 msgid "Network Settings"
-msgstr "Iestatījumi"
+msgstr "Tīkla iestatījumi"
 
 #: SettingsDialog.qml:53
-#, fuzzy, kde-format
-#| msgid "Download Region"
+#, kde-format
 msgid "Download Maps via WLAN only"
-msgstr "Lejupielādēt reģionu"
+msgstr "Lejupielādēt kartes tikai caur WLAN"
 
 #: ThemeConfigPage.qml:19
-#, fuzzy, kde-format
-#| msgid "theme park"
+#, kde-format
 msgctxt "@title:window"
 msgid "Themes"
-msgstr "tematiskais parks"
+msgstr "Motīvi"
 
 #, fuzzy
 #~| msgid "Moon"

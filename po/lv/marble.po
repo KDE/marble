@@ -8,38 +8,39 @@
 # Viesturs Zariņš <viesturs.zarins@algorego.com>, 2008.
 # Viesturs Zariņš <viesturs.zarins@mii.lu.lv>, 2009.
 # Einars Sprugis <einars8@gmail.com>, 2010, 2011, 2012, 2013.
+# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-06 00:37+0000\n"
-"PO-Revision-Date: 2013-08-03 13:10+0300\n"
-"Last-Translator: Maris Nartiss <maris.kde@gmail.com>\n"
-"Language-Team: Latvian\n"
+"PO-Revision-Date: 2024-10-18 23:03+0300\n"
+"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
+"Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 24.08.2\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Māris Nartišs, Viesturs Zariņš, Einārs Sprūģis"
+msgstr "Māris Nartišs, Viesturs Zariņš, Einārs Sprūģis, Toms Trasūns"
 
-#, fuzzy, kde-format
-#| msgctxt "EMAIL OF TRANSLATORS\""
-#| msgid "Your emails"
+#, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "maris.kde@gmail.com, viesturs.zarins@mi.lu.lv, einars8@gmail.com"
+msgstr ""
+"maris.kde@gmail.com, viesturs.zarins@mi.lu.lv, einars8@gmail.com, toms."
+"trasuns@posteo.net"
 
 #: kdemain.cpp:84
 #, kde-format
 msgid "Marble Virtual Globe"
-msgstr "Marble virtuālais globuss"
+msgstr "„Marble“ virtuālais globuss"
 
 #: kdemain.cpp:86
 #, kde-format
@@ -47,10 +48,9 @@ msgid "A World Atlas."
 msgstr "Pasaules atlants."
 
 #: kdemain.cpp:88
-#, fuzzy, kde-format
-#| msgid "(c) 2007-2012"
+#, kde-format
 msgid "(c) 2007-%1"
-msgstr "(c) 2007-2012"
+msgstr "(c) 2007—%1"
 
 #: kdemain.cpp:93 kdemain.cpp:208
 #, kde-format
@@ -70,7 +70,7 @@ msgstr "Bernhard Beschow"
 #: kdemain.cpp:94
 #, kde-format
 msgid "WMS Support, Mobile, Performance"
-msgstr "WMS atbalsts, mobilo ier. atbalsts, veiktspēja"
+msgstr "WMS atbalsts, mobilo ierīču atbalsts, veiktspēja"
 
 #: kdemain.cpp:95
 #, kde-format
@@ -80,7 +80,7 @@ msgstr "Thibaut Gridel"
 #: kdemain.cpp:95
 #, kde-format
 msgid "Geodata"
-msgstr "Ģeodati"
+msgstr "Ģeotelpiskie dati"
 
 #: kdemain.cpp:96
 #, kde-format
@@ -90,7 +90,7 @@ msgstr "Jens-Michael Hoffmann"
 #: kdemain.cpp:96
 #, kde-format
 msgid "OpenStreetMap Integration, OSM Namefinder, Download Management"
-msgstr "OpenStreetMap integrācija, OSM Namefinder, lejupielāžu pārvalde"
+msgstr "„OpenStreetMap“ integrācija, „OSM Namefinder“, lejupielāžu pārvalde"
 
 #: kdemain.cpp:97
 #, kde-format
@@ -100,7 +100,7 @@ msgstr "Florian E&szlig;er"
 #: kdemain.cpp:97
 #, kde-format
 msgid "Elevation Profile"
-msgstr "Augstuma profils"
+msgstr "Augstumu profils"
 
 #: kdemain.cpp:98
 #, kde-format
@@ -150,7 +150,7 @@ msgstr "Friedrich W. H. Kossebau"
 #: kdemain.cpp:102
 #, kde-format
 msgid "Plasma Integration, Bugfixes"
-msgstr "Plasma integrācija, kļūdu labojumi"
+msgstr "„Plasma“ integrācija, kļūdu labojumi"
 
 #: kdemain.cpp:103
 #, kde-format
@@ -170,7 +170,7 @@ msgstr "Niko Sams"
 #: kdemain.cpp:104
 #, kde-format
 msgid "Routing, Elevation Profile"
-msgstr "Maršrutēšana, augstuma profils"
+msgstr "Maršrutēšana, augstumu profils"
 
 #: kdemain.cpp:105 kdemain.cpp:157
 #, kde-format
@@ -180,7 +180,7 @@ msgstr "Patrick Spendrin"
 #: kdemain.cpp:105
 #, kde-format
 msgid "Core Developer: KML and Windows support"
-msgstr "Galvenais izstrādātājs: KML un Windows atbalsts"
+msgstr "Galvenais izstrādātājs: KML un „Windows“ atbalsts"
 
 #: kdemain.cpp:106
 #, kde-format
@@ -210,7 +210,8 @@ msgstr "Henry de Valence"
 #: kdemain.cpp:111
 #, kde-format
 msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
-msgstr "Glavenais izstrādātājs: Marble darbinātāji, World-Clock sīkrīks"
+msgstr ""
+"Galvenais izstrādātājs: „Marble“ darbinātāji, pasaules pulksteņu plazmoīds"
 
 #: kdemain.cpp:112
 #, kde-format
@@ -240,7 +241,7 @@ msgstr "Simon Edwards"
 #: kdemain.cpp:114
 #, kde-format
 msgid "Marble Python Bindings"
-msgstr "Marble Python piesaistes"
+msgstr "„Marble“ „Python“ saistījumi"
 
 #: kdemain.cpp:115
 #, kde-format
@@ -268,17 +269,14 @@ msgid ""
 "ESA Summer of Code in Space 2012 Project: Visualization of planetary "
 "satellites"
 msgstr ""
-"ESA Summer of Code in Space 2012 projekts: planetāro satelītu vizualizācija"
+"„ESA Summer of Code in Space 2012“ projekts: Planetāro pavadoņu vizualizācija"
 
 #: kdemain.cpp:124
-#, fuzzy, kde-format
-#| msgid ""
-#| "ESA Summer of Code in Space 2011 Project: Visualisation of Satellite "
-#| "Orbits"
+#, kde-format
 msgid ""
 "ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
 msgstr ""
-"ESA Summer of Code in Space 2011 projekts: satelītu orbītu vizualizācija"
+"„ESA Summer of Code in Space 2011“ projekts: Pavadoņu orbītu vizualizācija"
 
 #: kdemain.cpp:129
 #, kde-format
@@ -288,7 +286,8 @@ msgstr "Konstantin Oblaukhov"
 #: kdemain.cpp:130
 #, kde-format
 msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
-msgstr "Google Summer of Code 2011 projekts: OpenStreetMap vektoru renderēšana"
+msgstr ""
+"„Google Summer of Code 2011“ projekts: „OpenStreetMap“ vektoru renderēšana"
 
 #: kdemain.cpp:133
 #, kde-format
@@ -298,7 +297,7 @@ msgstr "Daniel Marth"
 #: kdemain.cpp:134
 #, kde-format
 msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
-msgstr "Google Summer of Code 2011 projekts: Marble Touch uz MeeGo"
+msgstr "„Google Summer of Code 2011“ projekts: „Marble Touch“ „MeeGo“ ierīcēm"
 
 #: kdemain.cpp:137
 #, kde-format
@@ -308,7 +307,7 @@ msgstr "Gaurav Gupta"
 #: kdemain.cpp:138
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Bookmarks"
-msgstr "Google Summer of Code 2010 projekts: grāmatzīmes"
+msgstr "„Google Summer of Code 2010“ projekts: Grāmatzīmes"
 
 #: kdemain.cpp:141
 #, kde-format
@@ -318,7 +317,7 @@ msgstr "Harshit Jain "
 #: kdemain.cpp:142
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Time Support"
-msgstr "Google Summer of Code 2010 projekts: laika atbalsts"
+msgstr "„Google Summer of Code 2010“ projekts: Laika atbalsts"
 
 #: kdemain.cpp:145
 #, kde-format
@@ -328,7 +327,7 @@ msgstr "Siddharth Srivastava"
 #: kdemain.cpp:146
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
-msgstr "Google Summer of Code 2010 projekts: pakāpeniskā navigācija"
+msgstr "„Google Summer of Code 2010“ projekts: Pakāpeniska navigācija"
 
 #: kdemain.cpp:149 kdemain.cpp:169
 #, kde-format
@@ -338,17 +337,17 @@ msgstr "Andrew Manson"
 #: kdemain.cpp:150
 #, kde-format
 msgid "Google Summer of Code 2009 Project: OSM Annotation"
-msgstr "Google Summer of Code 2009 projekts: OSM anotācija"
+msgstr "„Google Summer of Code 2009“ projekts: OSM anotācijas"
 
 #: kdemain.cpp:154
 #, kde-format
 msgid "Google Summer of Code 2009 Project: Online Services"
-msgstr "Google Summer of Code 2009 projekts: tiešsaistes servisi"
+msgstr "„Google Summer of Code 2009“ projekts: Tiešsaistes pakalpojumi"
 
 #: kdemain.cpp:158
 #, kde-format
 msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
-msgstr "Google Summer of Code 2008 projekts: vektoru flīzes priekš Marble"
+msgstr "„Google Summer of Code 2008“ projekts: „Marble“ vektoru flīzes"
 
 #: kdemain.cpp:161
 #, kde-format
@@ -361,8 +360,8 @@ msgid ""
 "Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
 "Marble"
 msgstr ""
-"Google Summer of Code 2008 projekts: Panoramio / Wikipedia fotogrāfiju "
-"atbalsts priekš Marble"
+"„Google Summer of Code 2008“ projekts: „Panoramio“ / Vikipēdijas fotogrāfiju "
+"atbalsts „Marble“ programmā"
 
 #: kdemain.cpp:165
 #, kde-format
@@ -374,13 +373,13 @@ msgstr "Carlos Licea"
 msgid ""
 "Google Summer of Code 2007 Project: Equirectangular Projection (\"Flat Map\")"
 msgstr ""
-"Google Summer of Code 2007 projekts: ekvirektilineārā projekcija (\"Plakana "
-"karte\")"
+"„Google Summer of Code 2007“ projekts: Taisnstūra projekcija („plakana "
+"karte“)"
 
 #: kdemain.cpp:170
 #, kde-format
 msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
-msgstr "Google Summer of Code 2007 projekts: GPS atbalsts priekš Marble"
+msgstr "„Google Summer of Code 2007“ projekts: „Marble“ GPS atbalsts"
 
 #: kdemain.cpp:173
 #, kde-format
@@ -390,7 +389,7 @@ msgstr "Murad Tagirov"
 #: kdemain.cpp:174
 #, kde-format
 msgid "Google Summer of Code 2007 Project: KML Support for Marble"
-msgstr "Google Summer of Code 2007 projekts: KML atbalsts priekš Marble"
+msgstr "„Google Summer of Code 2007“ projekts: „Marble“ KML atbalsts"
 
 #: kdemain.cpp:179
 #, kde-format
@@ -626,8 +625,8 @@ msgid ""
 "Special thanks for providing an important source of inspiration by creating "
 "Marble's predecessor \"Kartographer\"."
 msgstr ""
-"Īpašs paldies par nozīmīga iedvesmas avota nodrošināšanu, izveidojot Marble "
-"priekšteci \"Kartographer\"."
+"Īpašs paldies par nozīmīga iedvesmas avota nodrošināšanu, izveidojot "
+"„Marble“ priekšteci „Kartographer“."
 
 #: kdemain.cpp:238
 #, kde-format
@@ -637,7 +636,7 @@ msgstr "Ieslēgt atkļūdošanas izvadi"
 #: kdemain.cpp:241
 #, kde-format
 msgid "Display OSM placemarks according to the level selected"
-msgstr ""
+msgstr "Parādīt OSM vietas saskaņā ar atlasītajiem līmeņiem"
 
 #: kdemain.cpp:243
 #, kde-format
@@ -652,7 +651,7 @@ msgstr "Rādīt kadru skaitu sekundē"
 #: kdemain.cpp:247
 #, kde-format
 msgid "Show tile IDs"
-msgstr "Rādīt flīžu id"
+msgstr "Rādīt flīžu ID"
 
 #: kdemain.cpp:249
 #, kde-format
@@ -660,10 +659,9 @@ msgid "Show time spent in each layer"
 msgstr "Rādīt laiku, kas pavadīts katrā slānī"
 
 #: kdemain.cpp:251
-#, fuzzy, kde-format
-#| msgid "Use a different directory which contains map data"
+#, kde-format
 msgid "Use a different directory <directory> which contains map data."
-msgstr "Izmantot citu mapi, kas satur kartes datus"
+msgstr "Izmantot citu mapi <mape>, kas satur kartes datus."
 
 #: kdemain.cpp:253
 #, kde-format
@@ -686,44 +684,42 @@ msgid "Use the interface optimized for high resolutions"
 msgstr "Izmantot saskarni, kas optimizēta augstām izšķirtspējām"
 
 #: kdemain.cpp:259
-#, fuzzy, kde-format
-#| msgid "Show map at given lat lon coordinates"
+#, kde-format
 msgid "Show map at given lat lon <coordinates>"
-msgstr "Rādīt karti dotajās platuma lon koordinātēs"
+msgstr "Rādīt kartes vietu pēc platuma un garuma <koordinātām>"
 
 #: kdemain.cpp:261
-#, fuzzy, kde-format
-#| msgid "Show map at given lat lon coordinates"
+#, kde-format
 msgid "Show map at given geo <uri>"
-msgstr "Rādīt karti dotajās platuma lon koordinātēs"
+msgstr "Rādīt karti dotajās ģeo <uri>"
 
 #: kdemain.cpp:263
 #, kde-format
 msgid "Set the distance of the observer to the globe (in km)"
-msgstr "Iestatīt attēlumu no novērotāja līdz globusam (kilometros)"
+msgstr "Iestatīt attālumu no novērotāja līdz globusam (kilometros)"
 
 #: kdemain.cpp:265
-#, fuzzy, kde-format
-#| msgid "Use map id (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
+#, kde-format
 msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
-msgstr "Lietot kartes id (piem., \"earth/openstreetmap/openstreetmap.dgml\")"
+msgstr ""
+"Lietot kartes <id> (piemēram, „earth/openstreetmap/openstreetmap.dgml“)"
 
 #: kdemain.cpp:267
 #, kde-format
 msgid "One or more placemark files to be opened"
-msgstr "Viens vai vairāki atveramie vietu atzīmju faili"
+msgstr "Atverams viena vai vairākas vietu datnes"
 
 #. i18n: ectx: label, entry, group (Time)
 #: marble.kcfg:58
 #, kde-format
 msgid "The date and time of marble clock"
-msgstr "Marble pulksteņa datums un laiks"
+msgstr "„Marble“ pulksteņa datums un laiks"
 
 #. i18n: ectx: label, entry, group (Time)
 #: marble.kcfg:61
 #, kde-format
 msgid "The speed of marble clock"
-msgstr "Marble pulksteņa ātrums"
+msgstr "„Marble“ pulksteņa ātrums"
 
 #. i18n: ectx: label, entry, group (View)
 #: marble.kcfg:107
@@ -765,7 +761,7 @@ msgstr "Kartē izmantotais fonts."
 #: marble.kcfg:159
 #, kde-format
 msgid "The last directory that was opened by File->Open."
-msgstr "Pēdējā mape, kas tika atvērta ar Fails->Atvērt."
+msgstr "Pēdējā mape, kas ir atvērta ar Datne—>Atvērt."
 
 #. i18n: ectx: label, entry, group (Navigation)
 #: marble.kcfg:179
@@ -789,19 +785,19 @@ msgstr "Animēt ceļojumu uz mērķi."
 #: marble.kcfg:205
 #, kde-format
 msgid "The external OpenStreetMap editor application"
-msgstr "Ārējā OpenStreetMap rediģēšanas programma"
+msgstr "Ārējā „OpenStreetMap“ rediģēšanas programma"
 
 #. i18n: ectx: label, entry, group (Cache)
 #: marble.kcfg:211
 #, kde-format
 msgid "Cache for tiles reserved in the physical memory."
-msgstr "Rezervētais flīžu glabātuves izmērs datora atmiņā."
+msgstr "Rezervētais flīžu kešatmiņas izmērs fiziskajā atmiņā."
 
 #. i18n: ectx: label, entry, group (Cache)
 #: marble.kcfg:217
 #, kde-format
 msgid "Maximum space on the hard disk that can be used to store tiles."
-msgstr "Maksimālais izmērs uz diska, ko izmantot flīžu glabāšanai."
+msgstr "Maksimālā vieta diskā, ko izmantot flīžu glabāšanai."
 
 #. i18n: ectx: label, entry (proxyUrl), group (Cache)
 #: marble.kcfg:223
@@ -837,7 +833,7 @@ msgstr "Starpniekserveris ir HTTP"
 #: marble.kcfg:250
 #, kde-format
 msgid "Proxy type is Socks5"
-msgstr "Starpniekserveris ir Socks5"
+msgstr "Starpniekserveris ir „Socks5“"
 
 #. i18n: ectx: label, entry (proxyAuth), group (Cache)
 #: marble.kcfg:254
@@ -850,13 +846,13 @@ msgstr "Starpniekserveris pieprasa autentificēšanos"
 #, kde-format
 msgid "The position tracking plugin used to determine the current location"
 msgstr ""
-"Pozīcijas izsekošanas spraudnis tiek izmantots, lai noteiktu pašreizējo "
-"atrašanās vietu."
+"Atrašanās vietas izsekošanas spraudnis, lai noteiktu pašreizējo atrašanās "
+"vietu."
 
 #: marble_part.cpp:101
 #, kde-format
 msgid "Position: %1"
-msgstr "Novietojums: %1"
+msgstr "Atrašanās vieta: %1"
 
 #: marble_part.cpp:102
 #, kde-format
@@ -879,11 +875,13 @@ msgid ""
 "Sorry, unable to open '%1':\n"
 "'%2'"
 msgstr ""
+"Diemžēl neizdevās atvērt „%1“:\n"
+"„%2“"
 
 #: marble_part.cpp:163
 #, kde-format
 msgid "File not readable"
-msgstr ""
+msgstr "Datnes nav lasāma"
 
 #: marble_part.cpp:211
 #, kde-format
@@ -893,28 +891,26 @@ msgstr "Virtuālais globuss"
 #: marble_part.cpp:224
 #, kde-format
 msgid "Sorry, unable to open '%1'. The file is not accessible."
-msgstr ""
+msgstr "Diemžēl neizdevās atvērt „%1“. Datnei nevar piekļūt."
 
 #: marble_part.cpp:224
 #, kde-format
 msgid "File not accessible"
-msgstr ""
+msgstr "Datnei nevar piekļūt"
 
 #: marble_part.cpp:245
 #, kde-format
 msgid "All Supported Files"
-msgstr "Visi atbalstītie faili"
+msgstr "Visas atbalstītās datnes"
 
 #: marble_part.cpp:251
-#, fuzzy, kde-format
-#| msgid "Open File"
+#, kde-format
 msgctxt "@title:window"
 msgid "Open File"
-msgstr "Atvērt failu"
+msgstr "Atvērt datni"
 
 #: marble_part.cpp:267
-#, fuzzy, kde-format
-#| msgid "Export Map"
+#, kde-format
 msgctxt "@title:window"
 msgid "Export Map"
 msgstr "Eksportēt karti"
@@ -933,13 +929,12 @@ msgstr "Marble"
 #: marble_part.cpp:279
 #, kde-format
 msgid "An error occurred while trying to save the file.\n"
-msgstr "Gadījās kļūda, mēģinot saglabāt failā.\n"
+msgstr "Gadījās kļūda, mēģinot saglabāt datnē.\n"
 
 #: marble_part.cpp:461
-#, fuzzy, kde-format
-#| msgid "U&sername:"
+#, kde-format
 msgid "Unnamed"
-msgstr "&Lietotājs:"
+msgstr "Nenosaukta"
 
 #: marble_part.cpp:681
 #, kde-format
@@ -999,7 +994,7 @@ msgstr "I&zveidot jaunu karti..."
 #, kde-format
 msgctxt "Status tip"
 msgid "A wizard guides you through the creation of your own map theme."
-msgstr "Vednis, kas palīdzēs jums izveidot pašam savu kartes tēmu."
+msgstr "Vednis, kas palīdzēs jums izveidot savu kartes motīvu."
 
 #: marble_part.cpp:761
 #, kde-format
@@ -1023,7 +1018,7 @@ msgstr "Laika kon&trole..."
 #, kde-format
 msgctxt "Action for locking float items on the map"
 msgid "Lock Position"
-msgstr "Slēgt vietu"
+msgstr "Slēgt novietojumu"
 
 #: marble_part.cpp:791
 #, kde-format
@@ -1038,45 +1033,43 @@ msgstr "Paslēpt ēnu"
 #: marble_part.cpp:795
 #, kde-format
 msgid "Shows and hides the shadow of the sun"
-msgstr "Rāda un paslēpj saules ēnu"
+msgstr "Rāda un paslēpj Saules ēnu"
 
 #: marble_part.cpp:799
 #, kde-format
 msgid "Show sun icon on the Sub-Solar Point"
-msgstr "Rādīt saules ikonu uz subsolārā punkta"
+msgstr "Rādīt saules ikonu zemsaules punktā"
 
 #: marble_part.cpp:801
 #, kde-format
 msgid "Hide sun icon on the Sub-Solar Point"
-msgstr "Slēpt saules ikonu uz subsolārā punkta"
+msgstr "Slēpt saules ikonu zemsaules punktā"
 
 #: marble_part.cpp:802
 #, kde-format
 msgid "Show sun icon on the sub-solar point"
-msgstr "Rādīt saules ikonu uz subsolārā punkta"
+msgstr "Rādīt saules ikonu zemsaules punktā"
 
 #: marble_part.cpp:806
 #, kde-format
 msgid "Lock Globe to the Sub-Solar Point"
-msgstr "Noslēgt globusu uz subsolārā punkta"
+msgstr "Slēgt globusu zemsaules punktā"
 
 #: marble_part.cpp:808
 #, kde-format
 msgid "Unlock Globe to the Sub-Solar Point"
-msgstr "Atslēgt globusu uz subsolārā punkta"
+msgstr "Atslēgt globusu zemsaules punktā"
 
 #: marble_part.cpp:809
 #, kde-format
 msgid "Lock globe to the sub-solar point"
-msgstr "Noslēgt globusu uz subsolārā punkta"
+msgstr "Slēgt globusu zemsaules punktā"
 
 #: marble_part.cpp:823
-#, fuzzy, kde-format
-#| msgctxt "Add Bookmark"
-#| msgid "&Add Bookmark"
+#, kde-format
 msgctxt "Add Bookmark"
 msgid "Add &Bookmark..."
-msgstr "&Pievienot grāmatzīmi"
+msgstr "&Pievienot grāmatzīmi..."
 
 #: marble_part.cpp:830
 #, kde-format
@@ -1087,49 +1080,44 @@ msgstr "Rādīt &grāmatzīmes"
 #: marble_part.cpp:831
 #, kde-format
 msgid "Show or hide bookmarks in the map"
-msgstr ""
+msgstr "Rādīt vai slēpt kartē grāmatzīmes"
 
 #: marble_part.cpp:838
-#, fuzzy, kde-format
-#| msgid "Show Home Location"
+#, kde-format
 msgid "&Set Home Location"
-msgstr "Rādīt mājas vietu"
+msgstr "&Iestatīt mājas vietu"
 
 #: marble_part.cpp:844
-#, fuzzy, kde-format
-#| msgctxt "Manage Bookmarks"
-#| msgid "&Manage Bookmarks"
+#, kde-format
 msgctxt "Manage Bookmarks"
 msgid "&Manage Bookmarks..."
-msgstr "Pār&valdīt grāmatzīmes"
+msgstr "Pār&valdīt grāmatzīmes..."
 
 #: marble_part.cpp:853
-#, fuzzy, kde-format
-#| msgctxt "Edit the map in an external application"
-#| msgid "&Edit Map"
+#, kde-format
 msgctxt "Edit the map in an external application"
 msgid "&Edit Map..."
-msgstr "&Rediģēt karti"
+msgstr "&Rediģēt karti..."
 
 #: marble_part.cpp:859
 #, kde-format
 msgid "&Record Movie"
-msgstr ""
+msgstr "&Ierakstīt videoceliņu"
 
 #: marble_part.cpp:861
 #, kde-format
 msgid "Records a movie of the globe"
-msgstr ""
+msgstr "Ieraksta videoceliņu ar globusu"
 
 #: marble_part.cpp:866
 #, kde-format
 msgid "&Stop Recording"
-msgstr ""
+msgstr "&Pārtraukt ierakstīšanu"
 
 #: marble_part.cpp:868
 #, kde-format
 msgid "Stop recording a movie of the globe"
-msgstr ""
+msgstr "Pārtraukt globusa videoceliņa ierakstīšanu"
 
 #: marble_part.cpp:1202
 #, kde-format
@@ -1159,7 +1147,7 @@ msgstr "Rādīt flīžu tuvinājuma līmeni"
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Download Progress Bar"
-msgstr "Rādīt lejupielādes progresa joslu"
+msgstr "Rādīt lejupielāžu progresa joslu"
 
 #: marble_part.cpp:1297
 #, kde-format
@@ -1174,7 +1162,7 @@ msgstr "Navigācija"
 #: marble_part.cpp:1318
 #, kde-format
 msgid "Cache & Proxy"
-msgstr "Glabātuve un starpniekserveri"
+msgstr "Kešatmiņa un starpniekserveri"
 
 #: marble_part.cpp:1328
 #, kde-format
@@ -1184,7 +1172,7 @@ msgstr "Datums un laiks"
 #: marble_part.cpp:1336
 #, kde-format
 msgid "Synchronization"
-msgstr ""
+msgstr "Sinhronizācija"
 
 #: marble_part.cpp:1346
 #, kde-format
@@ -1200,7 +1188,7 @@ msgstr "Spraudņi"
 #: marble_part.rc:6 marbleui.rc:5
 #, kde-format
 msgid "&File"
-msgstr "&Fails"
+msgstr "&Datne"
 
 #. i18n: ectx: Menu (edit)
 #: marble_part.rc:21 marbleui.rc:14
@@ -1240,10 +1228,9 @@ msgstr "&Paneļi"
 
 #. i18n: ectx: Menu (viewSize)
 #: marble_part.rc:65
-#, fuzzy, kde-format
-#| msgid "&View"
+#, kde-format
 msgid "&View Size"
-msgstr "&Skats"
+msgstr "&Skata izmērs"
 
 #. i18n: ectx: Menu (bookmarks)
 #: marble_part.rc:73 marbleui.rc:29
