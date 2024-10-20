@@ -29,6 +29,7 @@ Notes:
     <comment xml:lang="ka">OSM გეოგრაფიული მონაცემები</comment>
     <comment xml:lang="ko">OSM 데이터</comment>
     <comment xml:lang="lt">OSM duomenys</comment>
+    <comment xml:lang="lv">OSM dati</comment>
     <comment xml:lang="nl">Gegevens OSM</comment>
     <comment xml:lang="nn">OSM-data</comment>
     <comment xml:lang="pa">OSM ਡਾਟਾ</comment>
@@ -76,6 +77,7 @@ Notes:
     <comment xml:lang="it">Shapefile ESRI</comment>
     <comment xml:lang="ka">ESRI Shapefile</comment>
     <comment xml:lang="ko">ESRI 모양 파일</comment>
+    <comment xml:lang="lv">ESRI „Shapefile“ datne</comment>
     <comment xml:lang="nl">Vormbestand ESRI</comment>
     <comment xml:lang="nn">ESRI-shapefile</comment>
     <comment xml:lang="pa">ESRI ਸ਼ਕਲ-ਫਾਇਲ</comment>
@@ -118,6 +120,7 @@ Notes:
     <comment xml:lang="it">Indice Shapefile ESRI</comment>
     <comment xml:lang="ka">ESRI Shapefile-ის ინდექსი</comment>
     <comment xml:lang="ko">ESRI 모양 파일 인덱스</comment>
+    <comment xml:lang="lv">ESRI „Shapefile“ datnes indekss</comment>
     <comment xml:lang="nl">Index vormbestand ESRI</comment>
     <comment xml:lang="nn">ESRI-shapefile-indeks</comment>
     <comment xml:lang="pa">ESRI ਸ਼ਕਲ-ਫਾਇਲ ਇੰਡੈਕਸ</comment>
