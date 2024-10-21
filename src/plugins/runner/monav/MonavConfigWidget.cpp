@@ -141,11 +141,11 @@ void MonavStuffEntry::setName(const QString &name)
     m_continent = size > 0 ? parsed.at(0).trimmed() : QString();
     m_state = size > 1 ? parsed.at(1).trimmed() : QString();
     m_region = size > 2 ? parsed.at(2).trimmed() : QString();
-    m_transport = "Motorcar"; // No i18n
+    m_transport = QStringLiteral("Motorcar"); // No i18n
 
     if (size > 1) {
         QString last = parsed.last().trimmed();
-        QRegExp regexp("([^(]+)\\(([^)]+)\\)");
+        QRegExp regexp(QStringLiteral("([^(]+)\\(([^)]+)\\)"));
         if (regexp.indexIn(last) >= 0) {
             QStringList matches = regexp.capturedTexts();
             if (matches.size() == 3) {
@@ -287,7 +287,7 @@ bool MonavConfigWidgetPrivate::updateRegions(const QString &continent, const QSt
     for (const MonavStuffEntry &map : std::as_const(m_remoteMaps)) {
         Q_ASSERT(map.isValid());
         if (map.continent() == continent && map.state() == state) {
-            QString item = "%1 - %2";
+            QString item = QStringLiteral("%1 - %2");
             if (map.region().isEmpty()) {
                 item = item.arg(map.state());
                 comboBox->addItem(item.arg(map.transport()), map.payload());
@@ -501,7 +501,7 @@ void MonavConfigWidgetPrivate::installMap()
         delete m_unpackProcess;
         m_unpackProcess = nullptr;
         m_parent->m_installButton->setEnabled(true);
-    } else if (m_currentFile.fileName().endsWith(QLatin1StringView("tar.gz")) && canExecute("tar")) {
+    } else if (m_currentFile.fileName().endsWith(QLatin1StringView("tar.gz")) && canExecute(QStringLiteral("tar"))) {
         QFileInfo file(m_currentFile);
         QString message = QObject::tr("Installing %1").arg(file.fileName());
         setBusy(true, message);
@@ -509,11 +509,9 @@ void MonavConfigWidgetPrivate::installMap()
         if (file.exists() && file.isReadable()) {
             m_unpackProcess = new QProcess;
             QObject::connect(m_unpackProcess, SIGNAL(finished(int)), m_parent, SLOT(mapInstalled(int)));
-            QStringList arguments = QStringList() << "-x"
-                                                  << "-z"
-                                                  << "-f" << file.fileName();
+            QStringList arguments = QStringList() << QStringLiteral("-x") << QStringLiteral("-z") << QStringLiteral("-f") << file.fileName();
             m_unpackProcess->setWorkingDirectory(file.dir().absolutePath());
-            m_unpackProcess->start("tar", arguments);
+            m_unpackProcess->start(QStringLiteral("tar"), arguments);
         }
     } else {
         if (!m_currentFile.fileName().endsWith(QLatin1StringView("tar.gz"))) {
@@ -569,7 +567,7 @@ void MonavConfigWidget::showEvent(QShowEvent *event)
     if (!event->spontaneous() && !d->m_initialized) {
         d->m_initialized = true;
         d->updateInstalledMapsView();
-        QUrl url = QUrl("http://files.kde.org/marble/newstuff/maps-monav.xml");
+        QUrl url = QUrl(QStringLiteral("http://files.kde.org/marble/newstuff/maps-monav.xml"));
         d->m_networkAccessManager.get(QNetworkRequest(url));
     }
 }

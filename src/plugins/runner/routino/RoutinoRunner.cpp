@@ -96,7 +96,7 @@ QByteArray RoutinoRunnerPrivate::retrieveWaypoints(const QStringList &params) co
     routinoParams << QLatin1StringView("--dir=") + m_mapDir.absolutePath();
     routinoParams << QStringLiteral("--output-text-all");
     mDebug() << routinoParams;
-    routinoProcess.start("routino-router", routinoParams);
+    routinoProcess.start(QStringLiteral("routino-router"), routinoParams);
     if (!routinoProcess.waitForStarted(5000)) {
         mDebug() << "Couldn't start routino-router from the current PATH. Install it to retrieve routing results from routino.";
         return nullptr;
@@ -223,7 +223,7 @@ void RoutinoRunner::retrieveRoute(const RouteRequest *route)
 {
     mDebug();
 
-    if (!QFileInfo(d->m_mapDir, "nodes.mem").exists()) {
+    if (!QFileInfo(d->m_mapDir, QStringLiteral("nodes.mem")).exists()) {
         Q_EMIT routeCalculated(nullptr);
         return;
     }

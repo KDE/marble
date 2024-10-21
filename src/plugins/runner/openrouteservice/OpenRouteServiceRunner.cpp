@@ -39,7 +39,7 @@ void OpenRouteServiceRunner::retrieveRoute(const RouteRequest *route)
 
     GeoDataCoordinates source = route->source();
     GeoDataCoordinates destination = route->destination();
-    QHash<QString, QVariant> settings = route->routingProfile().pluginSettings()["openrouteservice"];
+    QHash<QString, QVariant> settings = route->routingProfile().pluginSettings()[QStringLiteral("openrouteservice")];
 
     QUrlQuery queries;
     queries.addQueryItem(QStringLiteral("api_key"), QStringLiteral("ee0b8233adff52ce9fd6afc2a2859a28"));
@@ -58,11 +58,11 @@ void OpenRouteServiceRunner::retrieveRoute(const RouteRequest *route)
     for (int i = 1; i < route->size() - 1; ++i) {
         via << formatCoordinates(route->at(i));
     }
-    queries.addQueryItem(QStringLiteral("via"), via.join(' '));
+    queries.addQueryItem(QStringLiteral("via"), via.join(QLatin1Char(' ')));
     queries.addQueryItem(QStringLiteral("end"), formatCoordinates(destination));
 
     queries.addQueryItem(QStringLiteral("distunit"), unit);
-    if (preference == "Fastest" || preference == "Shortest" || preference == "Recommended") {
+    if (preference == QStringLiteral("Fastest") || preference == QStringLiteral("Shortest") || preference == QStringLiteral("Recommended")) {
         queries.addQueryItem(QStringLiteral("routepref"), QStringLiteral("Car"));
         queries.addQueryItem(QStringLiteral("weighting"), preference);
     } else {
@@ -70,20 +70,20 @@ void OpenRouteServiceRunner::retrieveRoute(const RouteRequest *route)
         queries.addQueryItem(QStringLiteral("weighting"), QStringLiteral("Recommended"));
     }
 
-    QString const motorways = settings.value("noMotorways").toInt() == 0 ? QStringLiteral("false") : QStringLiteral("true");
+    QString const motorways = settings.value(QStringLiteral("noMotorways")).toInt() == 0 ? QStringLiteral("false") : QStringLiteral("true");
     queries.addQueryItem(QStringLiteral("noMotorways"), motorways);
-    QString const tollways = settings.value("noTollways").toInt() == 0 ? QStringLiteral("false") : QStringLiteral("true");
+    QString const tollways = settings.value(QStringLiteral("noTollways")).toInt() == 0 ? QStringLiteral("false") : QStringLiteral("true");
     queries.addQueryItem(QStringLiteral("noTollways"), tollways);
     queries.addQueryItem(QStringLiteral("noUnpavedroads"), QStringLiteral("false"));
     queries.addQueryItem(QStringLiteral("noSteps"), QStringLiteral("false"));
-    QString const ferries = settings.value("noFerries").toInt() == 0 ? QStringLiteral("false") : QStringLiteral("true");
+    QString const ferries = settings.value(QStringLiteral("noFerries")).toInt() == 0 ? QStringLiteral("false") : QStringLiteral("true");
     queries.addQueryItem(QStringLiteral("noFerries"), ferries);
     queries.addQueryItem(QStringLiteral("instructions"), QStringLiteral("true"));
     queries.addQueryItem(QStringLiteral("lang"), QStringLiteral("en"));
 
-    QUrl url = QUrl("http://openls.geog.uni-heidelberg.de/route");
+    QUrl url = QUrl(QStringLiteral("http://openls.geog.uni-heidelberg.de/route"));
     // QUrlQuery strips empty value pairs, but OpenRouteService does not work without
-    QString const trailer = route->size() == 2 ? "&via=" : QString();
+    QString const trailer = route->size() == 2 ? QStringLiteral("&via=") : QString();
     url.setQuery(queries.toString() + trailer);
 
     m_request = QNetworkRequest(url);
@@ -160,7 +160,7 @@ GeoDataDocument *OpenRouteServiceRunner::parse(const QByteArray &content) const
         for (int i = 0; i < errors.length(); ++i) {
             QDomNode node = errors.item(i);
             QString errorMessage = node.attributes().namedItem(QStringLiteral("message")).nodeValue();
-            QRegExp regexp = QRegExp("^(.*) Please Check your Position: (-?[0-9]+.[0-9]+) (-?[0-9]+.[0-9]+) !");
+            QRegExp regexp = QRegExp(QStringLiteral("^(.*) Please Check your Position: (-?[0-9]+.[0-9]+) (-?[0-9]+.[0-9]+) !"));
             if (regexp.indexIn(errorMessage) == 0) {
                 if (regexp.capturedTexts().size() == 4) {
                     auto placemark = new GeoDataPlacemark;
@@ -190,7 +190,7 @@ GeoDataDocument *OpenRouteServiceRunner::parse(const QByteArray &content) const
     if (!summary.isEmpty()) {
         QDomNodeList timeNodeList = summary.item(0).toElement().elementsByTagName(QStringLiteral("xls:TotalTime"));
         if (timeNodeList.size() == 1) {
-            QRegExp regexp = QRegExp(R"(^P(?:(\d+)D)?T(?:(\d+)H)?(?:(\d+)M)?(\d+)S)");
+            QRegExp regexp = QRegExp(QStringLiteral(R"(^P(?:(\d+)D)?T(?:(\d+)H)?(?:(\d+)M)?(\d+)S)"));
             if (regexp.indexIn(timeNodeList.item(0).toElement().text()) == 0) {
                 QStringList matches = regexp.capturedTexts();
                 unsigned int hours(0), minutes(0), seconds(0);
@@ -234,7 +234,7 @@ GeoDataDocument *OpenRouteServiceRunner::parse(const QByteArray &content) const
     routePlacemark->setGeometry(routeWaypoints);
 
     qreal length = routeWaypoints->length(EARTH_RADIUS);
-    const QString name = nameString("ORS", length, time);
+    const QString name = nameString(QStringLiteral("ORS"), length, time);
     const GeoDataExtendedData data = routeData(length, time);
     routePlacemark->setExtendedData(data);
     result->setName(name);
@@ -265,7 +265,7 @@ GeoDataDocument *OpenRouteServiceRunner::parse(const QByteArray &content) const
 
                     auto instruction = new GeoDataPlacemark;
 
-                    QString const text = textNodes.item(0).toElement().text().remove(QRegularExpression("<[^>]*>"));
+                    QString const text = textNodes.item(0).toElement().text().remove(QRegularExpression(QStringLiteral("<[^>]*>")));
                     GeoDataExtendedData extendedData;
                     GeoDataData turnTypeData;
                     turnTypeData.setName(QStringLiteral("turnType"));
@@ -296,7 +296,7 @@ GeoDataDocument *OpenRouteServiceRunner::parse(const QByteArray &content) const
 
 RoutingInstruction::TurnType OpenRouteServiceRunner::parseTurnType(const QString &text, QString *road)
 {
-    QRegExp syntax("^(Go|Drive|Turn) (half left|left|sharp left|straight forward|half right|right|sharp right)( on )?(.*)?$",
+    QRegExp syntax(QStringLiteral("^(Go|Drive|Turn) (half left|left|sharp left|straight forward|half right|right|sharp right)( on )?(.*)?$"),
                    Qt::CaseSensitive,
                    QRegExp::RegExp2);
     QString instruction;

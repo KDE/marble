@@ -70,19 +70,19 @@ public:
         ui_configWidget = new Ui::MapQuestConfigWidget;
         ui_configWidget->setupUi(this);
 
-        ui_configWidget->preference->addItem(tr("Car (fastest way)"), "fastest");
-        ui_configWidget->preference->addItem(tr("Car (shortest way)"), "shortest");
-        ui_configWidget->preference->addItem(tr("Pedestrian"), "pedestrian");
-        ui_configWidget->preference->addItem(tr("Bicycle"), "bicycle");
-        ui_configWidget->preference->addItem(tr("Transit (Public Transport)"), "multimodal");
+        ui_configWidget->preference->addItem(tr("Car (fastest way)"), QStringLiteral("fastest"));
+        ui_configWidget->preference->addItem(tr("Car (shortest way)"), QStringLiteral("shortest"));
+        ui_configWidget->preference->addItem(tr("Pedestrian"), QStringLiteral("pedestrian"));
+        ui_configWidget->preference->addItem(tr("Bicycle"), QStringLiteral("bicycle"));
+        ui_configWidget->preference->addItem(tr("Transit (Public Transport)"), QStringLiteral("multimodal"));
 
-        ui_configWidget->ascending->addItem(tr("Ignore"), "DEFAULT_STRATEGY");
-        ui_configWidget->ascending->addItem(tr("Avoid"), "AVOID_UP_HILL");
-        ui_configWidget->ascending->addItem(tr("Favor"), "FAVOR_UP_HILL");
+        ui_configWidget->ascending->addItem(tr("Ignore"), QStringLiteral("DEFAULT_STRATEGY"));
+        ui_configWidget->ascending->addItem(tr("Avoid"), QStringLiteral("AVOID_UP_HILL"));
+        ui_configWidget->ascending->addItem(tr("Favor"), QStringLiteral("FAVOR_UP_HILL"));
 
-        ui_configWidget->descending->addItem(tr("Ignore"), "DEFAULT_STRATEGY");
-        ui_configWidget->descending->addItem(tr("Avoid"), "AVOID_DOWN_HILL");
-        ui_configWidget->descending->addItem(tr("Favor"), "FAVOR_DOWN_HILL");
+        ui_configWidget->descending->addItem(tr("Ignore"), QStringLiteral("DEFAULT_STRATEGY"));
+        ui_configWidget->descending->addItem(tr("Avoid"), QStringLiteral("AVOID_DOWN_HILL"));
+        ui_configWidget->descending->addItem(tr("Favor"), QStringLiteral("FAVOR_DOWN_HILL"));
     }
 
     ~MapQuestConfigWidget() override

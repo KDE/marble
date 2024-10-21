@@ -158,7 +158,7 @@ int MonavRunnerPrivate::retrieveRoute(const Marble::RouteRequest *route,
                 bool const last = l == reply.pathEdges[i].length - 1;
                 RoutingWaypoint::JunctionType finalJunction =
                     last ? junction : (reply.pathEdges[i].branchingPossible ? RoutingWaypoint::Other : RoutingWaypoint::None);
-                RoutingWaypoint waypoint(point, finalJunction, "", type, -1, road);
+                RoutingWaypoint waypoint(point, finalJunction, QString(), type, -1, road);
                 waypoints.push_back(waypoint);
             }
         }

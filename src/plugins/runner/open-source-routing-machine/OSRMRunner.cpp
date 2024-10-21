@@ -56,7 +56,7 @@ void OSRMRunner::retrieveRoute(const RouteRequest *route)
     url += QStringLiteral("?alternatives=false&overview=full&geometries=polyline6");
 
     m_request = QNetworkRequest(QUrl(url));
-    m_request.setRawHeader("User-Agent", HttpDownloadManager::userAgent("Browser", "OSRMRunner"));
+    m_request.setRawHeader("User-Agent", HttpDownloadManager::userAgent(QStringLiteral("Browser"), QStringLiteral("OSRMRunner")));
 
     QEventLoop eventLoop;
 
@@ -194,7 +194,7 @@ GeoDataDocument *OSRMRunner::parse(const QByteArray &input) const
                 auto time = QTime(0, 0, 0);
                 time = time.addSecs(qRound(route.value(QStringLiteral("duration")).toDouble()));
                 qreal length = routeWaypoints->length(EARTH_RADIUS);
-                const QString name = nameString("OSRM", length, time);
+                const QString name = nameString(QStringLiteral("OSRM"), length, time);
                 const GeoDataExtendedData extendedData = routeData(length, time);
                 routePlacemark->setExtendedData(extendedData);
                 result->setName(name);

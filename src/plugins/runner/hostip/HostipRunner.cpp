@@ -74,7 +74,7 @@ void HostipRunner::get()
 void HostipRunner::slotRequestFinished(QNetworkReply *reply)
 {
     double lon(0.0), lat(0.0);
-    for (QString line = QString::fromUtf8(reply->readLine()); !line.isEmpty(); line = reply->readLine()) {
+    for (QString line = QString::fromUtf8(reply->readLine()); !line.isEmpty(); line = QString::fromUtf8(reply->readLine())) {
         QString lonInd = QStringLiteral("Longitude: ");
         if (line.startsWith(lonInd)) {
             lon = QStringView{line}.mid(lonInd.length()).toDouble();
