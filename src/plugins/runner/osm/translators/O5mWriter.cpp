@@ -222,12 +222,12 @@ void O5mWriter::writeMultipolygonMembers(const GeoDataPolygon &polygon,
     qint64 idDiff = id - lastId[(int)OsmType::Way];
     writeSigned(idDiff, stream);
     lastId[(int)OsmType::Way] = id;
-    writeStringPair(StringPair("1outer", QString()), stringTable, stream); // type=way, role=outer
+    writeStringPair(StringPair(QStringLiteral("1outer"), QString()), stringTable, stream); // type=way, role=outer
     for (int index = 0; index < polygon.innerBoundaries().size(); ++index) {
         id = osmData.memberReference(index).id();
         qint64 idDiff = id - lastId[(int)OsmType::Way];
         writeSigned(idDiff, stream);
-        writeStringPair(StringPair("1inner", QString()), stringTable, stream); // type=way, role=inner
+        writeStringPair(StringPair(QStringLiteral("1inner"), QString()), stringTable, stream); // type=way, role=inner
         lastId[(int)OsmType::Way] = id;
     }
 }
@@ -364,6 +364,5 @@ qint32 O5mWriter::deltaTo(double value, double previous) const
     return qRound(diff * 1e7);
 }
 
-MARBLE_ADD_WRITER(O5mWriter, "o5m")
-
+MARBLE_ADD_WRITER(O5mWriter, QStringLiteral("o5m"))
 }

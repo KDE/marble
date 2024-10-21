@@ -34,22 +34,22 @@ CycleStreetsRunner::CycleStreetsRunner(QObject *parent)
 {
     connect(&m_networkAccessManager, &QNetworkAccessManager::finished, this, &CycleStreetsRunner::retrieveData);
 
-    turns.insert("", Maneuver::Continue);
-    turns.insert("straight on", Maneuver::Straight);
-    turns.insert("bear right", Maneuver::SlightRight);
-    turns.insert("bear left", Maneuver::SlightLeft);
-    turns.insert("sharp right", Maneuver::SharpRight);
-    turns.insert("sharp left", Maneuver::SharpLeft);
-    turns.insert("turn right", Maneuver::Right);
-    turns.insert("turn left", Maneuver::Left);
-    turns.insert("double-back", Maneuver::TurnAround);
-    turns.insert("first exit", Maneuver::RoundaboutFirstExit);
-    turns.insert("second exit", Maneuver::RoundaboutSecondExit);
-    turns.insert("third exit", Maneuver::RoundaboutThirdExit);
-    turns.insert("fourth exit", Maneuver::RoundaboutExit);
-    turns.insert("fifth exit", Maneuver::RoundaboutExit);
-    turns.insert("sixth exit", Maneuver::RoundaboutExit);
-    turns.insert("seventh or more exit", Maneuver::RoundaboutExit);
+    turns.insert({}, Maneuver::Continue);
+    turns.insert(QStringLiteral("straight on"), Maneuver::Straight);
+    turns.insert(QStringLiteral("bear right"), Maneuver::SlightRight);
+    turns.insert(QStringLiteral("bear left"), Maneuver::SlightLeft);
+    turns.insert(QStringLiteral("sharp right"), Maneuver::SharpRight);
+    turns.insert(QStringLiteral("sharp left"), Maneuver::SharpLeft);
+    turns.insert(QStringLiteral("turn right"), Maneuver::Right);
+    turns.insert(QStringLiteral("turn left"), Maneuver::Left);
+    turns.insert(QStringLiteral("double-back"), Maneuver::TurnAround);
+    turns.insert(QStringLiteral("first exit"), Maneuver::RoundaboutFirstExit);
+    turns.insert(QStringLiteral("second exit"), Maneuver::RoundaboutSecondExit);
+    turns.insert(QStringLiteral("third exit"), Maneuver::RoundaboutThirdExit);
+    turns.insert(QStringLiteral("fourth exit"), Maneuver::RoundaboutExit);
+    turns.insert(QStringLiteral("fifth exit"), Maneuver::RoundaboutExit);
+    turns.insert(QStringLiteral("sixth exit"), Maneuver::RoundaboutExit);
+    turns.insert(QStringLiteral("seventh or more exit"), Maneuver::RoundaboutExit);
 }
 
 CycleStreetsRunner::~CycleStreetsRunner()
@@ -65,19 +65,19 @@ void CycleStreetsRunner::retrieveRoute(const RouteRequest *route)
 
     QHash<QString, QVariant> settings = route->routingProfile().pluginSettings()[QStringLiteral("cyclestreets")];
 
-    QUrl url("https://www.cyclestreets.net/api/journey.json");
+    QUrl url(QStringLiteral("https://www.cyclestreets.net/api/journey.json"));
     QMap<QString, QString> queryStrings;
-    queryStrings["key"] = "cdccf13997d59e70";
-    queryStrings["reporterrors"] = QLatin1Char('1');
-    queryStrings["plan"] = settings[QStringLiteral("plan")].toString();
-    if (queryStrings["plan"].isEmpty()) {
+    queryStrings[QStringLiteral("key")] = QStringLiteral("cdccf13997d59e70");
+    queryStrings[QStringLiteral("reporterrors")] = QLatin1Char('1');
+    queryStrings[QStringLiteral("plan")] = settings[QStringLiteral("plan")].toString();
+    if (queryStrings[QStringLiteral("plan")].isEmpty()) {
         mDebug() << "Missing a value for 'plan' in the settings, falling back to 'balanced'";
-        queryStrings["plan"] = QStringLiteral("balanced");
+        queryStrings[QStringLiteral("plan")] = QStringLiteral("balanced");
     }
-    queryStrings["speed"] = settings[QStringLiteral("speed")].toString();
-    if (queryStrings["speed"].isEmpty()) {
+    queryStrings[QStringLiteral("speed")] = settings[QStringLiteral("speed")].toString();
+    if (queryStrings[QStringLiteral("speed")].isEmpty()) {
         mDebug() << "Missing a value for 'speed' in the settings, falling back to '20'";
-        queryStrings["speed"] = QStringLiteral("20");
+        queryStrings[QStringLiteral("speed")] = QStringLiteral("20");
     }
     GeoDataCoordinates::Unit const degree = GeoDataCoordinates::Degree;
     QString itinerarypoints;
@@ -87,7 +87,7 @@ void CycleStreetsRunner::retrieveRoute(const RouteRequest *route)
         itinerarypoints.append(QLatin1Char('|') + QString::number(route->at(i).longitude(degree), 'f', 6) + QLatin1Char(',')
                                + QString::number(route->at(i).latitude(degree), 'f', 6));
     }
-    queryStrings["itinerarypoints"] = itinerarypoints;
+    queryStrings[QStringLiteral("itinerarypoints")] = itinerarypoints;
 
     QUrlQuery urlQuery;
     for (const QString &key : queryStrings.keys()) {
@@ -96,7 +96,7 @@ void CycleStreetsRunner::retrieveRoute(const RouteRequest *route)
     url.setQuery(urlQuery);
 
     m_request.setUrl(url);
-    m_request.setRawHeader("User-Agent", HttpDownloadManager::userAgent("Browser", "CycleStreetsRunner"));
+    m_request.setRawHeader("User-Agent", HttpDownloadManager::userAgent(QStringLiteral("Browser"), QStringLiteral("CycleStreetsRunner")));
 
     QEventLoop eventLoop;
 
@@ -155,8 +155,8 @@ GeoDataDocument *CycleStreetsRunner::parse(const QByteArray &content) const
     }
 
     // Check if CycleStreets has found any error
-    if (!json.object()["error"].isNull()) {
-        mDebug() << "CycleStreets reported an error: " << json.object()["error"].toString();
+    if (!json.object()[QStringLiteral("error")].isNull()) {
+        mDebug() << "CycleStreets reported an error: " << json.object()[QStringLiteral("error")].toString();
         return nullptr;
     }
 
@@ -166,13 +166,13 @@ GeoDataDocument *CycleStreetsRunner::parse(const QByteArray &content) const
     routePlacemark->setName(QStringLiteral("Route"));
 
     auto routeWaypoints = new GeoDataLineString;
-    QJsonArray features = json.object()["marker"].toArray();
+    QJsonArray features = json.object()[QStringLiteral("marker")].toArray();
 
     if (features.isEmpty()) {
         return nullptr;
     }
-    QJsonObject route = features.first().toObject()["@attributes"].toObject();
-    QJsonValue coordinates = route["coordinates"];
+    QJsonObject route = features.first().toObject()[QStringLiteral("@attributes")].toObject();
+    QJsonValue coordinates = route[QStringLiteral("coordinates")];
     QStringList coordinatesList = coordinates.toString().split(QLatin1Char(' '));
 
     QStringList::iterator iter = coordinatesList.begin();
@@ -190,29 +190,29 @@ GeoDataDocument *CycleStreetsRunner::parse(const QByteArray &content) const
     routePlacemark->setGeometry(routeWaypoints);
 
     QTime duration;
-    duration = duration.addSecs(route["time"].toInt());
+    duration = duration.addSecs(route[QStringLiteral("time")].toInt());
     qreal length = routeWaypoints->length(EARTH_RADIUS);
 
-    const QString name = nameString("CS", length, duration);
+    const QString name = nameString(QStringLiteral("CS"), length, duration);
     const GeoDataExtendedData data = routeData(length, duration);
     routePlacemark->setExtendedData(data);
     result->setName(name);
     result->append(routePlacemark);
 
     for (int i = 1; i < features.count(); ++i) {
-        QJsonObject segment = features.at(i).toObject()["@attributes"].toObject();
+        QJsonObject segment = features.at(i).toObject()[QStringLiteral("@attributes")].toObject();
 
-        QString name = segment["name"].toString();
-        QString maneuver = segment["turn"].toString();
-        QStringList points = segment["points"].toString().split(QLatin1Char(' '));
-        QStringList const elevation = segment["elevations"].toString().split(QLatin1Char(','));
+        QString name = segment[QStringLiteral("name")].toString();
+        QString maneuver = segment[QStringLiteral("turn")].toString();
+        QStringList points = segment[QStringLiteral("points")].toString().split(QLatin1Char(' '));
+        QStringList const elevation = segment[QStringLiteral("elevations")].toString().split(QLatin1Char(','));
 
         auto instructions = new GeoDataPlacemark;
         QString instructionName;
         if (!maneuver.isEmpty()) {
             instructionName = maneuver.left(1).toUpper() + maneuver.mid(1);
         } else {
-            instructionName = "Straight";
+            instructionName = QStringLiteral("Straight");
         }
         if (name != QLatin1StringView("Short un-named link") && name != QLatin1StringView("Un-named link")) {
             instructionName.append(QLatin1StringView(" into ") + name);

@@ -18,7 +18,7 @@ KmlParser::~KmlParser() = default;
 
 bool KmlParser::isValidRootElement()
 {
-    return isValidElement(kml::kmlTag_kml);
+    return isValidElement(QString::fromLatin1(kml::kmlTag_kml));
 }
 
 bool KmlParser::isValidElement(const QString &tagName) const

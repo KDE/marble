@@ -40,7 +40,7 @@ GeoDataPlacemark *OsmNode::create() const
     auto placemark = new GeoDataPlacemark;
     placemark->setOsmData(m_osmData);
     auto coordinates = m_coordinates;
-    coordinates.setAltitude(m_osmData.tagValue("ele").toDouble());
+    coordinates.setAltitude(m_osmData.tagValue(QStringLiteral("ele")).toDouble());
     placemark->setCoordinate(coordinates);
 
     QHash<QString, QString>::const_iterator tagIter;

@@ -12,7 +12,7 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerOsm(GeoTagWriter::QualifiedName("", osm::osmTag_version06), new OsmTagWriter());
+static GeoTagWriterRegistrar s_writerOsm(GeoTagWriter::QualifiedName({}, QString::fromLatin1(osm::osmTag_version06)), new OsmTagWriter());
 
 bool OsmTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {

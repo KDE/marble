@@ -113,7 +113,7 @@ GeoDataDocument *OsmParser::parseO5m(const QString &filename, QString &error)
     }
 
     fclose(file);
-    error = reader->errMsg;
+    error = QString::fromLatin1(reader->errMsg);
     if (!error.isEmpty())
         mDebug() << error;
     o5mreader_close(reader);

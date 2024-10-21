@@ -47,10 +47,10 @@ void MonavMap::parseBoundingBox(const QFileInfo &file)
         if (placemarks.size() == 1) {
             GeoDataPlacemark *placemark = placemarks.first();
             m_name = placemark->name();
-            m_version = placemark->extendedData().value("version").value().toString();
-            m_date = placemark->extendedData().value("date").value().toString();
-            m_transport = placemark->extendedData().value("transport").value().toString();
-            m_payload = placemark->extendedData().value("payload").value().toString();
+            m_version = placemark->extendedData().value(QStringLiteral("version")).value().toString();
+            m_date = placemark->extendedData().value(QStringLiteral("date")).value().toString();
+            m_transport = placemark->extendedData().value(QStringLiteral("transport")).value().toString();
+            m_payload = placemark->extendedData().value(QStringLiteral("payload")).value().toString();
             const auto geometry = dynamic_cast<const GeoDataMultiGeometry *>(placemark->geometry());
             if (geometry->size() > 1500) {
                 tooLarge = true;
@@ -140,8 +140,8 @@ QList<QFileInfo> MonavMap::files() const
         files << QFileInfo(m_directory, QLatin1StringView("GPSGrid_") + file);
     }
 
-    files << QFileInfo(m_directory, "plugins.ini");
-    QFileInfo moduleDotIni(m_directory, "Module.ini");
+    files << QFileInfo(m_directory, QStringLiteral("plugins.ini"));
+    QFileInfo moduleDotIni(m_directory, QStringLiteral("Module.ini"));
     if (moduleDotIni.exists()) {
         files << moduleDotIni;
     }

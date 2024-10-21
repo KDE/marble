@@ -51,9 +51,9 @@ void YoursRunner::retrieveRoute(const RouteRequest *route)
     double tLon = destination.longitude(GeoDataCoordinates::Degree);
     double tLat = destination.latitude(GeoDataCoordinates::Degree);
 
-    QString base = "http://www.yournavigation.org/api/1.0/gosmore.php";
+    QString base = QStringLiteral("http://www.yournavigation.org/api/1.0/gosmore.php");
     // QString base = "http://nroets.dev.openstreetmap.org/demo/gosmore.php";
-    QString args = "?flat=%1&flon=%2&tlat=%3&tlon=%4";
+    QString args = QStringLiteral("?flat=%1&flon=%2&tlat=%3&tlon=%4");
     args = args.arg(fLat, 0, 'f', 6).arg(fLon, 0, 'f', 6).arg(tLat, 0, 'f', 6).arg(tLon, 0, 'f', 6);
 
     QHash<QString, QVariant> settings = route->routingProfile().pluginSettings()[QStringLiteral("yours")];
@@ -61,9 +61,9 @@ void YoursRunner::retrieveRoute(const RouteRequest *route)
     QString fast;
 
     if (settings[QStringLiteral("method")] == QLatin1StringView("shortest")) {
-        fast = "0";
+        fast = QStringLiteral("0");
     } else {
-        fast = "1";
+        fast = QStringLiteral("1");
     }
 
     QString preferences = QStringLiteral("&v=%1&fast=%2&layer=mapnik;");

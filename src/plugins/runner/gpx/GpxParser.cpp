@@ -18,7 +18,7 @@ GpxParser::~GpxParser() = default;
 
 bool GpxParser::isValidRootElement()
 {
-    return isValidElement(gpx::gpxTag_gpx);
+    return isValidElement(QString::fromLatin1(gpx::gpxTag_gpx));
 }
 
 bool GpxParser::isValidElement(const QString &tagName) const

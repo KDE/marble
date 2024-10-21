@@ -60,7 +60,7 @@ JsonParser::JsonParser()
     m_iconStylePoints->setIconPath(MarbleDirs::path(QStringLiteral("svg/dot-circle-regular.svg")));
     m_iconStylePoints->setSize(QSize(22, 22), Qt::KeepAspectRatio);
 
-    m_iconStyleOther->setIconPath(nullptr);
+    m_iconStyleOther->setIconPath({});
     m_iconStyleOther->setColor(QColor(0x7e, 0x7e, 0x7e, 0xff));
 
     // Set "stroke": "#555555", "stroke-opacity": 1.0 and "stroke-width": 2 (increased to 2.5 due

@@ -33,18 +33,18 @@ CycleStreetsConfigWidget::CycleStreetsConfigWidget()
 {
     ui_configWidget->setupUi(this);
 
-    ui_configWidget->plan->addItem(tr("balanced"), "balanced");
-    ui_configWidget->plan->addItem(tr("fastest"), "fastest");
-    ui_configWidget->plan->addItem(tr("quietest"), "quietest");
+    ui_configWidget->plan->addItem(tr("balanced"), QStringLiteral("balanced"));
+    ui_configWidget->plan->addItem(tr("fastest"), QStringLiteral("fastest"));
+    ui_configWidget->plan->addItem(tr("quietest"), QStringLiteral("quietest"));
 
     if (MarbleGlobal::getInstance()->locale()->measurementSystem() == MarbleLocale::MetricSystem) {
-        ui_configWidget->speed->addItem(tr("slow (16 km/h)"), "16");
-        ui_configWidget->speed->addItem(tr("normal (20 km/h)"), "20");
-        ui_configWidget->speed->addItem(tr("fast (24 km/h)"), "24");
+        ui_configWidget->speed->addItem(tr("slow (16 km/h)"), QStringLiteral("16"));
+        ui_configWidget->speed->addItem(tr("normal (20 km/h)"), QStringLiteral("20"));
+        ui_configWidget->speed->addItem(tr("fast (24 km/h)"), QStringLiteral("24"));
     } else {
-        ui_configWidget->speed->addItem(tr("slow (10 mph)"), "16");
-        ui_configWidget->speed->addItem(tr("normal (12 mph)"), "20");
-        ui_configWidget->speed->addItem(tr("fast (15 mph)"), "24");
+        ui_configWidget->speed->addItem(tr("slow (10 mph)"), QStringLiteral("16"));
+        ui_configWidget->speed->addItem(tr("normal (12 mph)"), QStringLiteral("20"));
+        ui_configWidget->speed->addItem(tr("fast (15 mph)"), QStringLiteral("24"));
     }
 }
 

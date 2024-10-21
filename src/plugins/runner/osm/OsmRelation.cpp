@@ -159,10 +159,10 @@ void OsmRelation::createMultipolygon(GeoDataDocument *document, OsmWays &ways, c
 
 static OsmType stringToType(const QString &str)
 {
-    if (str == "relation") {
+    if (str == QStringLiteral("relation")) {
         return OsmType::Relation;
     }
-    if (str == "node") {
+    if (str == QStringLiteral("node")) {
         return OsmType::Node;
     }
     return OsmType::Way;
