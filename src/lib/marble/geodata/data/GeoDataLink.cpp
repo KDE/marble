@@ -32,7 +32,7 @@ GeoDataLinkPrivate::GeoDataLinkPrivate()
     , m_viewRefreshMode(GeoDataLink::Never)
     , m_viewRefreshTime(4.0)
     , m_viewBoundScale(1.0)
-    , m_viewFormat("BBOX=[bboxWest],[bboxSouth],[bboxEast],[bboxNorth]")
+    , m_viewFormat(QStringLiteral("BBOX=[bboxWest],[bboxSouth],[bboxEast],[bboxNorth]"))
     , m_httpQuery()
 {
     // nothing to do

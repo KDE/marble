@@ -117,20 +117,20 @@ GeoDataRelation::RelationType GeoDataRelation::relationType() const
 
     if (GeoDataRelationPrivate::s_relationTypes.isEmpty()) {
         auto &map = GeoDataRelationPrivate::s_relationTypes;
-        map["road"] = RouteRoad;
-        map["detour"] = RouteDetour;
-        map["ferry"] = RouteFerry;
-        map["train"] = RouteTrain;
-        map["subway"] = RouteSubway;
-        map["tram"] = RouteTram;
-        map["bus"] = RouteBus;
-        map["trolleybus"] = RouteTrolleyBus;
-        map["bicycle"] = RouteBicycle;
-        map["mtb"] = RouteMountainbike;
-        map["foot"] = RouteFoot;
-        map["hiking"] = GeoDataRelation::RouteHiking;
-        map["horse"] = RouteHorse;
-        map["inline_skates"] = RouteInlineSkates;
+        map[QStringLiteral("road")] = RouteRoad;
+        map[QStringLiteral("detour")] = RouteDetour;
+        map[QStringLiteral("ferry")] = RouteFerry;
+        map[QStringLiteral("train")] = RouteTrain;
+        map[QStringLiteral("subway")] = RouteSubway;
+        map[QStringLiteral("tram")] = RouteTram;
+        map[QStringLiteral("bus")] = RouteBus;
+        map[QStringLiteral("trolleybus")] = RouteTrolleyBus;
+        map[QStringLiteral("bicycle")] = RouteBicycle;
+        map[QStringLiteral("mtb")] = RouteMountainbike;
+        map[QStringLiteral("foot")] = RouteFoot;
+        map[QStringLiteral("hiking")] = GeoDataRelation::RouteHiking;
+        map[QStringLiteral("horse")] = RouteHorse;
+        map[QStringLiteral("inline_skates")] = RouteInlineSkates;
     }
 
     d->m_relationType = GeoDataRelation::UnknownType;

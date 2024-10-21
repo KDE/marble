@@ -102,7 +102,7 @@ public:
         , m_popularity(0)
         , m_zoomLevel(1)
         , m_visible(true)
-        , m_role(" ")
+        , m_role(QStringLiteral(" "))
         , m_style(nullptr)
         , m_styleMap(nullptr)
         , m_extendedData()

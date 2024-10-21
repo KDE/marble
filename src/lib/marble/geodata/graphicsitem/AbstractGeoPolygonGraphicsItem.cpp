@@ -190,7 +190,7 @@ int AbstractGeoPolygonGraphicsItem::extractElevation(const GeoDataPlacemark &pla
 
 QPixmap AbstractGeoPolygonGraphicsItem::texture(const QString &texturePath, const QColor &color) const
 {
-    QString const key = QString::number(color.rgba()) + '/' + texturePath;
+    QString const key = QString::number(color.rgba()) + QLatin1Char('/') + texturePath;
     QPixmap texture;
     if (!QPixmapCache::find(key, &texture)) {
         QImageReader imageReader(style()->polyStyle().resolvePath(texturePath));

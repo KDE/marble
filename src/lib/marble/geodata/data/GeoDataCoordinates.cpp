@@ -586,7 +586,7 @@ QString GeoDataCoordinates::latToString(qreal lat, GeoDataCoordinates::Notation 
     QString nsString;
 
     if (notation == GeoDataCoordinates::Astro) {
-        pmString = (lat > 0) ? "+" : "-";
+        pmString = (lat > 0) ? QStringLiteral("+") : QStringLiteral("-");
     } else {
         nsString = (lat > 0) ? tr("N") : tr("S");
     }

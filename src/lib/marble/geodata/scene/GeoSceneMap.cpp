@@ -153,7 +153,7 @@ QVariantList GeoSceneMap::center() const
 
 void GeoSceneMap::setCenter(const QString &coordinatesString)
 {
-    QStringList coordinatesList = coordinatesString.split(",");
+    QStringList coordinatesList = coordinatesString.split(QStringLiteral(","));
     if (coordinatesList.count() == 2) {
         bool success = false;
         const GeoDataCoordinates coordinates = GeoDataCoordinates::fromString(coordinatesString, success);

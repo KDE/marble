@@ -70,7 +70,7 @@ QString GeoDataDocumentWriter::determineDocumentIdentifier(const QString &filena
         return kml::kmlTag_nameSpaceOgc22;
     }
     if (fileExtension == QLatin1StringView("osm")) {
-        return "0.6";
+        return QStringLiteral("0.6");
     }
 
     for (const auto &backend : s_backends) {
