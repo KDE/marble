@@ -445,7 +445,7 @@ void WeatherItem::openBrowser()
             return;
         }
 
-        QString templateHtml = weatherHtmlFile.readAll();
+        QString templateHtml = QString::fromLatin1(weatherHtmlFile.readAll());
         popup->setContent(createFromTemplate(templateHtml));
     }
 }
@@ -457,17 +457,18 @@ QString WeatherItem::createFromTemplate(const QString &templateHtml)
     html.replace(QStringLiteral("%city_name%"), stationName());
 
     if (!d->m_currentWeather.iconSource().isEmpty()) {
-        html.replace("%weather_situation%", QLatin1StringView("<img src=\"file://") + d->m_currentWeather.iconSource() + QLatin1StringView("\" />"));
+        html.replace(QStringLiteral("%weather_situation%"),
+                     QLatin1StringView("<img src=\"file://") + d->m_currentWeather.iconSource() + QLatin1StringView("\" />"));
     } else {
-        html.remove("%weather_situation%");
+        html.remove(QStringLiteral("%weather_situation%"));
     }
 
-    html.replace("%current_temp%", d->temperatureString());
-    html.replace("%current_condition%", d->m_currentWeather.conditionString());
-    html.replace("%wind_direction%", d->m_currentWeather.windDirectionString());
-    html.replace("%wind_speed%", d->m_currentWeather.windSpeedString());
-    html.replace("%humidity_level%", d->m_currentWeather.humidityString());
-    html.replace("%publish_time%", d->m_currentWeather.publishingTime().toString());
+    html.replace(QStringLiteral("%current_temp%"), d->temperatureString());
+    html.replace(QStringLiteral("%current_condition%"), d->m_currentWeather.conditionString());
+    html.replace(QStringLiteral("%wind_direction%"), d->m_currentWeather.windDirectionString());
+    html.replace(QStringLiteral("%wind_speed%"), d->m_currentWeather.windSpeedString());
+    html.replace(QStringLiteral("%humidity_level%"), d->m_currentWeather.humidityString());
+    html.replace(QStringLiteral("%publish_time%"), d->m_currentWeather.publishingTime().toString());
 
     if (d->m_forecastWeather.size() < 1) {
         html.replace(QStringLiteral("%forecast_available%"), QStringLiteral("none"));

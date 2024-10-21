@@ -48,10 +48,10 @@ public:
 
 GosmoreRunnerPrivate::GosmoreRunnerPrivate()
 {
-    m_parser.setLineSeparator("\r");
+    m_parser.setLineSeparator(QStringLiteral("\r"));
     m_parser.setFieldSeparator(QLatin1Char(','));
     m_parser.setFieldIndex(WaypointParser::RoadName, 4);
-    m_parser.addJunctionTypeMapping("Jr", RoutingWaypoint::Roundabout);
+    m_parser.addJunctionTypeMapping(QStringLiteral("Jr"), RoutingWaypoint::Roundabout);
 }
 
 QMap<QString, QByteArray> GosmoreRunnerPrivate::m_partialRoutes;
@@ -70,12 +70,12 @@ void GosmoreRunnerPrivate::merge(GeoDataLineString *one, const GeoDataLineString
 QByteArray GosmoreRunnerPrivate::retrieveWaypoints(const QString &query) const
 {
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-    env.insert("QUERY_STRING", query);
-    env.insert("LC_ALL", "C");
+    env.insert(QStringLiteral("QUERY_STRING"), query);
+    env.insert(QStringLiteral("LC_ALL"), QStringLiteral("C"));
     QProcess gosmore;
     gosmore.setProcessEnvironment(env);
 
-    gosmore.start("gosmore", QStringList() << m_gosmoreMapFile.absoluteFilePath());
+    gosmore.start(QStringLiteral("gosmore"), QStringList() << m_gosmoreMapFile.absoluteFilePath());
     if (!gosmore.waitForStarted(5000)) {
         mDebug() << "Couldn't start gosmore from the current PATH. Install it to retrieve routing results from gosmore.";
         return {};

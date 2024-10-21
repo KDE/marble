@@ -47,11 +47,11 @@ void OsmNominatimRunner::search(const QString &searchTerm, const GeoDataLatLonBo
     QString url = QString(base + query).arg(searchTerm).arg(MarbleLocale::languageCode());
     if (!preferred.isEmpty()) {
         GeoDataCoordinates::Unit deg = GeoDataCoordinates::Degree;
-        QString viewbox("&viewbox=%1,%2,%3,%4&bounded=1"); // left, top, right, bottom
+        QString viewbox(QStringLiteral("&viewbox=%1,%2,%3,%4&bounded=1")); // left, top, right, bottom
         url += viewbox.arg(preferred.west(deg)).arg(preferred.north(deg)).arg(preferred.east(deg)).arg(preferred.south(deg));
     }
     m_request.setUrl(QUrl(url));
-    m_request.setRawHeader("User-Agent", HttpDownloadManager::userAgent("Browser", "OsmNominatimRunner"));
+    m_request.setRawHeader("User-Agent", HttpDownloadManager::userAgent(QStringLiteral("Browser"), QStringLiteral("OsmNominatimRunner")));
 
     QEventLoop eventLoop;
 

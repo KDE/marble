@@ -28,7 +28,7 @@
 using namespace Marble;
 
 PostalCodeModel::PostalCodeModel(const MarbleModel *marbleModel, QObject *parent)
-    : AbstractDataPluginModel("postalCode", marbleModel, parent)
+    : AbstractDataPluginModel(QStringLiteral("postalCode"), marbleModel, parent)
 {
 }
 

@@ -109,15 +109,15 @@ void SatellitesMSCItem::setDescription()
         placemark()->setDescription(QObject::tr("No info available."));
         return;
     }
-    QString html = templateFile.readAll();
+    QString html = QString::fromLocal8Bit(templateFile.readAll());
 
-    html.replace("%name%", name());
-    html.replace("%noradId%", QString::number(catalogIndex()));
-    html.replace("%perigee%", QString::number(m_perc, 'f', 2));
-    html.replace("%apogee%", QString::number(m_apoc, 'f', 2));
-    html.replace("%inclination%", QString::number(m_inc, 'f', 2));
-    html.replace("%period%", "?");
-    html.replace("%semiMajorAxis%", "?");
+    html.replace(QStringLiteral("%name%"), name());
+    html.replace(QStringLiteral("%noradId%"), QString::number(catalogIndex()));
+    html.replace(QStringLiteral("%perigee%"), QString::number(m_perc, 'f', 2));
+    html.replace(QStringLiteral("%apogee%"), QString::number(m_apoc, 'f', 2));
+    html.replace(QStringLiteral("%inclination%"), QString::number(m_inc, 'f', 2));
+    html.replace(QStringLiteral("%period%"), QStringLiteral("?"));
+    html.replace(QStringLiteral("%semiMajorAxis%"), QStringLiteral("?"));
 
     placemark()->setDescription(html);
 }

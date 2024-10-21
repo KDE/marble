@@ -35,7 +35,7 @@ AprsGatherer::AprsGatherer(QIODevice *from, QMap<QString, AprsObject *> *objects
     , m_running(true)
     , m_dumpOutput(false)
     , m_seenFrom(GeoAprsCoordinates::FromNowhere)
-    , m_sourceName("unknown")
+    , m_sourceName(QStringLiteral("unknown"))
     , m_mutex(mutex)
     , m_objects(objects)
 {
@@ -48,8 +48,8 @@ void AprsGatherer::run()
     qint64 linelength;
     // one particular APRS packet sender can add data after the : ( sigh )
     QRegExp matcher(
-        "^([0-9A-Z]+-*[0-9A-Z]*)>([^:]*):([!=@\\/])([0-9][0-9][0-9][0-9][0-9][0-9]|)([hz\\/"
-        "]|)([0-9][0-9])([0-9][0-9]\\.[0-9][0-9])([NS])(.)([0-9][0-9][0-9])([0-9][0-9]\\.[0-9][0-9])([EW])(.)");
+        QStringLiteral("^([0-9A-Z]+-*[0-9A-Z]*)>([^:]*):([!=@\\/])([0-9][0-9][0-9][0-9][0-9][0-9]|)([hz\\/"
+                       "]|)([0-9][0-9])([0-9][0-9]\\.[0-9][0-9])([NS])(.)([0-9][0-9][0-9])([0-9][0-9]\\.[0-9][0-9])([EW])(.)"));
 
     // mic-e formatted
     // 1: src
@@ -59,7 +59,7 @@ void AprsGatherer::run()
     // 5: speed and course x3
     // 6: symbol and symbol ID
     // 7: status text
-    QRegExp mic_e_matcher("^([0-9A-Z]+-*[0-9A-Z]*)>([^,:]*),*([^:]*):['`](...)(...)(..)(.*)");
+    QRegExp mic_e_matcher(QStringLiteral("^([0-9A-Z]+-*[0-9A-Z]*)>([^,:]*),*([^:]*):['`](...)(...)(..)(.*)"));
 
     // If a source can directly receive a signal (as opposed to
     // through a relay like the internet) will return true.  This
@@ -116,7 +116,7 @@ void AprsGatherer::run()
         }
 
         // Parse the results
-        QString line(buf);
+        QString line(QString::fromUtf8(buf));
 
         // Dump it out if we wanted it dumped
         if (m_dumpOutput)

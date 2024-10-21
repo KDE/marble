@@ -146,7 +146,7 @@ void SatellitesModel::parseCatalog(const QString &id, const QByteArray &data)
             continue;
         }
 
-        QStringList elms = line.split(", ");
+        QStringList elms = line.split(QStringLiteral(", "));
 
         // check for '<' instead of '==' in order to allow fields to be added
         // to catalogs later without breaking the code
@@ -225,7 +225,7 @@ void SatellitesModel::parseTLE(const QString &id, const QByteArray &data)
     elsetrec satrec;
     int i = 0;
     while (i < tleLines.size() - 1) {
-        QString satelliteName = QString(tleLines.at(i++)).trimmed();
+        QString satelliteName = QString(QString::fromUtf8(tleLines.at(i++))).trimmed();
         char line1[130];
         char line2[130];
         if (tleLines.at(i).size() >= 79 || tleLines.at(i + 1).size() >= 79) {

@@ -228,7 +228,7 @@ void SatellitesConfigDialog::addDataSource()
     QListWidget *list = m_configWidget->listDataSources;
 
     bool ok;
-    QString text = QInputDialog::getText(this, tr("Add Data Source"), tr("URL or File path:"), QLineEdit::Normal, "", &ok);
+    QString text = QInputDialog::getText(this, tr("Add Data Source"), tr("URL or File path:"), QLineEdit::Normal, QString(), &ok);
 
     if (ok && !text.isEmpty()) {
         QUrl url = QUrl::fromUserInput(text);
@@ -259,7 +259,7 @@ void SatellitesConfigDialog::openDataSource()
         QStringLiteral("%1;;%2;;%3")
             .arg(tr("All Supported Files (*.txt *.msc)"), tr("Marble Satellite Catalog (*.msc)"), tr("Two Line Element Set (*.txt)"), tr("All Files (*.*)"));
 
-    QString filename = QFileDialog::getOpenFileName(this, tr("Open Satellite Data File"), "", filter);
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open Satellite Data File"), QString(), filter);
 
     if (!filename.isNull()) {
         QString url = QUrl::fromLocalFile(filename).toString();

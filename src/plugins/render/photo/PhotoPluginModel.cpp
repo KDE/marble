@@ -25,10 +25,10 @@
 
 using namespace Marble;
 
-const QString flickrApiKey("620131a1b82b000c9582b94effcdc636");
+const QString flickrApiKey(QStringLiteral("620131a1b82b000c9582b94effcdc636"));
 
 PhotoPluginModel::PhotoPluginModel(const MarbleModel *marbleModel, QObject *parent)
-    : AbstractDataPluginModel("photo", marbleModel, parent)
+    : AbstractDataPluginModel(QStringLiteral("photo"), marbleModel, parent)
     , m_marbleWidget(nullptr)
 {
 }
@@ -65,35 +65,35 @@ void PhotoPluginModel::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32
             + QString::number(box.east() * RAD2DEG) + QLatin1Char(',') + QString::number(box.north() * RAD2DEG);
 
         QHash<QString, QString> options;
-        options.insert("per_page", QString::number(number));
-        options.insert("bbox", bbox);
-        options.insert("sort", "interestingness-desc");
-        options.insert("license", m_licenses);
+        options.insert(QStringLiteral("per_page"), QString::number(number));
+        options.insert(QStringLiteral("bbox"), bbox);
+        options.insert(QStringLiteral("sort"), QStringLiteral("interestingness-desc"));
+        options.insert(QStringLiteral("license"), m_licenses);
 
-        downloadDescriptionFile(generateUrl("flickr", "flickr.photos.search", options));
+        downloadDescriptionFile(generateUrl(QStringLiteral("flickr"), QStringLiteral("flickr.photos.search"), options));
     } else {
         // Flickr api doesn't support bboxes with west > east so we have to split in two boxes
         const QString bboxWest = QString::number(box.west() * RAD2DEG) + QLatin1Char(',') + QString::number(box.south() * RAD2DEG) + QLatin1Char(',')
             + QString::number(180) + QLatin1Char(',') + QString::number(box.north() * RAD2DEG);
 
         QHash<QString, QString> optionsWest;
-        optionsWest.insert("per_page", QString::number(number / 2));
-        optionsWest.insert("bbox", bboxWest);
-        optionsWest.insert("sort", "interestingness-desc");
-        optionsWest.insert("license", m_licenses);
+        optionsWest.insert(QStringLiteral("per_page"), QString::number(number / 2));
+        optionsWest.insert(QStringLiteral("bbox"), bboxWest);
+        optionsWest.insert(QStringLiteral("sort"), QStringLiteral("interestingness-desc"));
+        optionsWest.insert(QStringLiteral("license"), m_licenses);
 
-        downloadDescriptionFile(generateUrl("flickr", "flickr.photos.search", optionsWest));
+        downloadDescriptionFile(generateUrl(QStringLiteral("flickr"), QStringLiteral("flickr.photos.search"), optionsWest));
 
         const QString bboxEast = QString::number(-180) + QLatin1Char(',') + QString::number(box.south() * RAD2DEG) + QLatin1Char(',')
             + QString::number(box.east() * RAD2DEG) + QLatin1Char(',') + QString::number(box.north() * RAD2DEG);
 
         QHash<QString, QString> optionsEast;
-        optionsEast.insert("per_page", QString::number(number / 2));
-        optionsEast.insert("bbox", bboxEast);
-        optionsEast.insert("sort", "interestingness-desc");
-        optionsEast.insert("license", m_licenses);
+        optionsEast.insert(QStringLiteral("per_page"), QString::number(number / 2));
+        optionsEast.insert(QStringLiteral("bbox"), bboxEast);
+        optionsEast.insert(QStringLiteral("sort"), QStringLiteral("interestingness-desc"));
+        optionsEast.insert(QStringLiteral("license"), m_licenses);
 
-        downloadDescriptionFile(generateUrl("flickr", "flickr.photos.search", optionsEast));
+        downloadDescriptionFile(generateUrl(QStringLiteral("flickr"), QStringLiteral("flickr.photos.search"), optionsEast));
     }
 }
 
@@ -113,8 +113,8 @@ void PhotoPluginModel::parseFile(const QByteArray &file)
             continue;
         }
 
-        downloadItem((*it)->photoUrl(), "thumbnail", (*it));
-        downloadItem((*it)->infoUrl(), "info", (*it));
+        downloadItem((*it)->photoUrl(), QStringLiteral("thumbnail"), (*it));
+        downloadItem((*it)->infoUrl(), QStringLiteral("info"), (*it));
         items << *it;
     }
     addItemsToList(items);

@@ -96,7 +96,7 @@ bool PhotoPluginItem::operator<(const AbstractDataPluginItem *other) const
 
 QUrl PhotoPluginItem::photoUrl() const
 {
-    QString url = "https://farm%1.static.flickr.com/%2/%3_%4_s.jpg";
+    QString url = QStringLiteral("https://farm%1.static.flickr.com/%2/%3_%4_s.jpg");
 
     return QUrl(url.arg(farm()).arg(server()).arg(id()).arg(secret()));
 }
@@ -105,9 +105,9 @@ QUrl PhotoPluginItem::infoUrl() const
 {
     QHash<QString, QString> options;
 
-    options.insert("photo_id", id());
+    options.insert(QStringLiteral("photo_id"), id());
 
-    return PhotoPluginModel::generateUrl("flickr", "flickr.photos.geo.getLocation", options);
+    return PhotoPluginModel::generateUrl(QStringLiteral("flickr"), QStringLiteral("flickr.photos.geo.getLocation"), options);
 }
 
 QString PhotoPluginItem::server() const
@@ -182,7 +182,7 @@ void PhotoPluginItem::openBrowser()
             m_browser = new TinyWebBrowser();
         }
 
-        QString url = "http://www.flickr.com/photos/%1/%2/";
+        QString url = QStringLiteral("http://www.flickr.com/photos/%1/%2/");
         m_browser->load(QUrl(url.arg(owner()).arg(id())));
         m_browser->show();
     }

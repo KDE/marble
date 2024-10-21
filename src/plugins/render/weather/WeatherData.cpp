@@ -336,7 +336,7 @@ QString WeatherData::conditionString() const
     case SandStorm:
         return tr("sandstorm");
     default:
-        return "Condition not available";
+        return QStringLiteral("Condition not available");
     }
 }
 
@@ -360,7 +360,7 @@ QString WeatherData::iconSource() const
 {
     QString const invalid = MarbleDirs::path(QStringLiteral("weather/weather-none-available.png"));
     QString const icon = WeatherDataPrivate::s_iconPath.value(condition());
-    return icon == invalid ? "" : icon;
+    return icon == invalid ? QString() : icon;
 }
 
 WeatherData::WindDirection WeatherData::windDirection() const
@@ -415,7 +415,7 @@ QString WeatherData::windDirectionString() const
     case WSW:
         return tr("WSW");
     default:
-        return "";
+        return {};
     }
 }
 
@@ -711,7 +711,7 @@ QString WeatherData::pressureDevelopmentString() const
     case Falling:
         return tr("falling", "air pressure falls");
     default:
-        return "";
+        return {};
     }
 }
 

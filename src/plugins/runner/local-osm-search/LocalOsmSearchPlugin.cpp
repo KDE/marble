@@ -23,7 +23,7 @@ LocalOsmSearchPlugin::LocalOsmSearchPlugin(QObject *parent)
     QString const path = MarbleDirs::localPath() + QLatin1StringView("/maps/earth/placemarks/");
     QFileInfo pathInfo(path);
     if (!pathInfo.exists()) {
-        QDir("/").mkpath(pathInfo.absolutePath());
+        QDir(QStringLiteral("/")).mkpath(pathInfo.absolutePath());
         pathInfo.refresh();
     }
     if (pathInfo.exists()) {

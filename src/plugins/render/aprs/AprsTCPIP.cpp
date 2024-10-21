@@ -48,7 +48,7 @@ QIODevice *AprsTCPIP::openSocket()
         mDebug() << "Aprs TCPIP server: " << buf;
     }
 
-    QString towrite("user MARBLE pass -1 vers aprs-cgi 1.0 filter r/38/-120/200\n");
+    QString towrite(QStringLiteral("user MARBLE pass -1 vers aprs-cgi 1.0 filter r/38/-120/200\n"));
     socket->write(towrite.toLocal8Bit().data(), towrite.length());
 
     mDebug() << "opened TCPIP socket";

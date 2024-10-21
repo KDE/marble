@@ -81,7 +81,7 @@ bool fixBadGPRMC(QByteArray &line)
     if (!line.startsWith("$GPRMC"))
         return false;
 
-    QStringList parts = QString(line).split(QLatin1Char(','));
+    QStringList parts = QString(QString::fromLatin1(line)).split(QLatin1Char(','));
     if (parts[9].size() == 7) {
         parts[9].remove(4, 1);
         line = parts.join(QLatin1Char(',')).toLatin1();
@@ -112,7 +112,7 @@ void FlightGearPositionProviderPlugin::readPendingDatagrams()
         for (Iterator i = split.begin(); i != split.end(); i++) {
             fixBadGPRMC(*i);
             i->append("\n");
-            parseNmeaSentence(*i);
+            parseNmeaSentence(QString::fromLatin1(*i));
         }
     }
 }
@@ -129,7 +129,7 @@ void FlightGearPositionProviderPlugin::parseNmeaSentence(const QString &sentence
                 m_speed = values[7].toDouble() * 0.514444; // knots => m/s
                 m_track = values[8].toDouble();
                 QString const date = values[9] + QLatin1Char(' ') + values[1];
-                m_timestamp = QDateTime::fromString(date, "ddMMyy HHmmss");
+                m_timestamp = QDateTime::fromString(date, QStringLiteral("ddMMyy HHmmss"));
                 if (m_timestamp.date().year() <= 1930 && m_timestamp.date().year() >= 1900) {
                     m_timestamp = m_timestamp.addYears(100); // Qt range is 1900-1999 for two-digits
                 }

@@ -46,7 +46,7 @@ void MapQuestRunner::retrieveRoute(const RouteRequest *route)
         return;
     }
 
-    QHash<QString, QVariant> settings = route->routingProfile().pluginSettings()["mapquest"];
+    QHash<QString, QVariant> settings = route->routingProfile().pluginSettings()[QStringLiteral("mapquest")];
 
     if (settings.value(QStringLiteral("appKey")).toString().isEmpty()) {
         return;
@@ -56,14 +56,16 @@ void MapQuestRunner::retrieveRoute(const RouteRequest *route)
         "http://open.mapquestapi.com/directions/v1/route?callback=renderAdvancedNarrative&outFormat=xml&narrativeType=text&shapeFormat=raw&generalize=0");
     GeoDataCoordinates::Unit const degree = GeoDataCoordinates::Degree;
     append(&url,
-           "from",
+           QStringLiteral("from"),
            QString::number(route->source().latitude(degree), 'f', 6) + QLatin1Char(',') + QString::number(route->source().longitude(degree), 'f', 6));
     for (int i = 1; i < route->size(); ++i) {
-        append(&url, "to", QString::number(route->at(i).latitude(degree), 'f', 6) + QLatin1Char(',') + QString::number(route->at(i).longitude(degree), 'f', 6));
+        append(&url,
+               QStringLiteral("to"),
+               QString::number(route->at(i).latitude(degree), 'f', 6) + QLatin1Char(',') + QString::number(route->at(i).longitude(degree), 'f', 6));
     }
 
     QString const unit = MarbleGlobal::getInstance()->locale()->measurementSystem() == MarbleLocale::MetricSystem ? "k" : "m";
-    append(&url, "units", unit);
+    append(&url, QStringLiteral("units"), unit);
 
     if (settings[QStringLiteral("noMotorways")].toInt()) {
         append(&url, QStringLiteral("avoids"), QStringLiteral("Limited Access"));
@@ -102,10 +104,10 @@ void MapQuestRunner::retrieveRoute(const RouteRequest *route)
     QUrl qurl(url);
     // FIXME: verify that this works with special characters.
     QUrlQuery urlQuery;
-    urlQuery.addQueryItem(QStringLiteral("key"), settings.value(QStringLiteral("appKey")).toByteArray());
+    urlQuery.addQueryItem(QStringLiteral("key"), QString::fromLatin1(settings.value(QStringLiteral("appKey")).toByteArray()));
     qurl.setQuery(urlQuery);
     m_request.setUrl(qurl);
-    m_request.setRawHeader("User-Agent", HttpDownloadManager::userAgent("Browser", "MapQuestRunner"));
+    m_request.setRawHeader("User-Agent", HttpDownloadManager::userAgent(QStringLiteral("Browser"), QStringLiteral("MapQuestRunner")));
 
     QEventLoop eventLoop;
 

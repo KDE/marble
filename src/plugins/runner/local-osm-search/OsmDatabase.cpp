@@ -74,7 +74,8 @@ QList<OsmPlacemark> OsmDatabase::find(const DatabaseQuery &userQuery)
         return {};
     }
 
-    QSqlDatabase database = QSqlDatabase::addDatabase("QSQLITE", QStringLiteral("marble/local-osm-search-%1").arg(reinterpret_cast<size_t>(this)));
+    QSqlDatabase database =
+        QSqlDatabase::addDatabase(QStringLiteral("QSQLITE"), QStringLiteral("marble/local-osm-search-%1").arg(reinterpret_cast<size_t>(this)));
 
     QList<OsmPlacemark> result;
     QElapsedTimer timer;
@@ -118,11 +119,11 @@ QList<OsmPlacemark> OsmDatabase::find(const DatabaseQuery &userQuery)
 
         QString queryString;
 
-        queryString =
+        queryString = QStringLiteral(
             " SELECT regions.name,"
             " places.name, places.number,"
             " places.category, places.lon, places.lat"
-            " FROM regions, places";
+            " FROM regions, places");
 
         if (userQuery.queryType() == DatabaseQuery::CategorySearch) {
             queryString += QLatin1StringView(" WHERE regions.id = places.region");
@@ -235,7 +236,7 @@ QString OsmDatabase::formatDistance(const GeoDataCoordinates &a, const GeoDataCo
 
     if (MarbleGlobal::getInstance()->locale()->measurementSystem() == MarbleLocale::ImperialSystem) {
         precision = 1;
-        distanceUnit = "mi";
+        distanceUnit = QStringLiteral("mi");
         distance *= METER2KM;
         distance *= KM2MI;
     } else if (MarbleGlobal::getInstance()->locale()->measurementSystem() == MarbleLocale::MetricSystem) {
