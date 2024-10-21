@@ -28,7 +28,8 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerDocument(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataDocumentType, osm::osmTag_version06),
+static GeoTagWriterRegistrar s_writerDocument(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoDataTypes::GeoDataDocumentType),
+                                                                          QString::fromLatin1(osm::osmTag_version06)),
                                               new OsmDocumentTagTranslator());
 
 bool OsmDocumentTagTranslator::write(const GeoNode *node, GeoWriter &writer) const

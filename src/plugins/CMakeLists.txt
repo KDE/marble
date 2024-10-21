@@ -1,5 +1,5 @@
 
-#add_definitions(-DQT_NO_CAST_FROM_ASCII)
+add_definitions(-DQT_NO_CAST_FROM_ASCII)
 # Logging for Marble plugins
 ecm_qt_export_logging_category(
     IDENTIFIER "MARBLE_PLUGINS"
