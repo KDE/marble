@@ -13,7 +13,8 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerLink(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataLinkType, kml::kmlTag_nameSpaceOgc22), new KmlLinkTagWriter);
+static GeoTagWriterRegistrar s_writerLink(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataLinkType, QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
+                                          new KmlLinkTagWriter);
 
 bool KmlLinkTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
@@ -25,20 +26,20 @@ bool KmlLinkTagWriter::write(const GeoNode *node, GeoWriter &writer) const
     writer.writeElement(kml::kmlTag_href, link->href());
 
     QString const refreshMode = refreshModeToString(link->refreshMode());
-    writer.writeOptionalElement(kml::kmlTag_refreshMode, refreshMode, "onChange");
+    writer.writeOptionalElement(QLatin1String(kml::kmlTag_refreshMode), refreshMode, "onChange");
 
     writer.writeElement(kml::kmlTag_refreshInterval, QString::number(link->refreshInterval()));
 
     QString const viewRefreshMode = viewRefreshModeToString(link->viewRefreshMode());
-    writer.writeOptionalElement(kml::kmlTag_viewRefreshMode, viewRefreshMode, "never");
+    writer.writeOptionalElement(QLatin1String(kml::kmlTag_viewRefreshMode), viewRefreshMode, "never");
 
     writer.writeElement(kml::kmlTag_viewRefreshTime, QString::number(link->viewRefreshTime()));
 
     writer.writeElement(kml::kmlTag_viewBoundScale, QString::number(link->viewBoundScale()));
 
-    writer.writeOptionalElement(kml::kmlTag_viewFormat, link->viewFormat());
+    writer.writeOptionalElement(QLatin1String(kml::kmlTag_viewFormat), link->viewFormat());
 
-    writer.writeOptionalElement(kml::kmlTag_httpQuery, link->httpQuery());
+    writer.writeOptionalElement(QLatin1String(kml::kmlTag_httpQuery), link->httpQuery());
 
     writer.writeEndElement();
 
@@ -49,11 +50,11 @@ QString KmlLinkTagWriter::refreshModeToString(GeoDataLink::RefreshMode refreshMo
 {
     switch (refreshMode) {
     case GeoDataLink::OnInterval:
-        return "onInterval";
+        return QStringLiteral("onInterval");
     case GeoDataLink::OnExpire:
-        return "onExpire";
+        return QStringLiteral("onExpire");
     default:
-        return "onChange";
+        return QStringLiteral("onChange");
     }
 }
 

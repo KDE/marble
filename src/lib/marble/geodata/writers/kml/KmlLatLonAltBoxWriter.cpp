@@ -15,7 +15,8 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerLatLonAltBox(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataLatLonAltBoxType, kml::kmlTag_nameSpaceOgc22),
+static GeoTagWriterRegistrar s_writerLatLonAltBox(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoDataTypes::GeoDataLatLonAltBoxType),
+                                                                              QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
                                                   new KmlLatLonAltBoxWriter);
 
 bool KmlLatLonAltBoxWriter::write(const GeoNode *node, GeoWriter &writer) const

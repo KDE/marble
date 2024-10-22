@@ -13,16 +13,18 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerData(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataDataType, kml::kmlTag_nameSpaceOgc22), new KmlDataTagWriter());
+static GeoTagWriterRegistrar s_writerData(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoDataTypes::GeoDataDataType),
+                                                                      QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
+                                          new KmlDataTagWriter());
 
 bool KmlDataTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
     const auto data = static_cast<const GeoDataData *>(node);
 
-    writer.writeStartElement(QString::fromUtf8(kml::kmlTag_Data));
+    writer.writeStartElement(QString::fromLatin1(kml::kmlTag_Data));
     writer.writeAttribute("name", data->name());
-    writer.writeOptionalElement(kml::kmlTag_displayName, data->displayName());
-    writer.writeElement("value", data->value().toString());
+    writer.writeOptionalElement(QString::fromLatin1(kml::kmlTag_displayName), data->displayName());
+    writer.writeElement(QStringLiteral("value"), data->value().toString());
     writer.writeEndElement();
 
     return true;

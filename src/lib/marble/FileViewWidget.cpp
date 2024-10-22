@@ -128,7 +128,7 @@ void FileViewWidgetPrivate::saveFile()
     const auto document = geodata_cast<GeoDataDocument>(object);
     if (document && !document->fileName().isEmpty()) {
         const QString saveFileName = QFileDialog::getSaveFileName(q, QObject::tr("Select filename for KML document"));
-        GeoDataDocumentWriter::write(saveFileName, *document, kml::kmlTag_nameSpaceOgc22);
+        GeoDataDocumentWriter::write(saveFileName, *document, QString::fromLatin1(kml::kmlTag_nameSpaceOgc22));
     }
 }
 

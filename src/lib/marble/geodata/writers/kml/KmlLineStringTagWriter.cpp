@@ -16,7 +16,8 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerLookAt(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataLineStringType, kml::kmlTag_nameSpaceOgc22),
+static GeoTagWriterRegistrar s_writerLookAt(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoDataTypes::GeoDataLineStringType),
+                                                                        QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
                                             new KmlLineStringTagWriter);
 
 bool KmlLineStringTagWriter::write(const GeoNode *node, GeoWriter &writer) const
@@ -26,8 +27,8 @@ bool KmlLineStringTagWriter::write(const GeoNode *node, GeoWriter &writer) const
     if (lineString->size() > 1) {
         writer.writeStartElement(QString::fromUtf8(kml::kmlTag_LineString));
         KmlObjectTagWriter::writeIdentifiers(writer, lineString);
-        writer.writeOptionalElement(kml::kmlTag_extrude, QString::number(lineString->extrude()), "0");
-        writer.writeOptionalElement(kml::kmlTag_tessellate, QString::number(lineString->tessellate()), "0");
+        writer.writeOptionalElement(QString::fromLatin1(kml::kmlTag_extrude), QString::number(lineString->extrude()), QStringLiteral("0"));
+        writer.writeOptionalElement(QString::fromLatin1(kml::kmlTag_tessellate), QString::number(lineString->tessellate()), QStringLiteral("0"));
         writer.writeStartElement("coordinates");
 
         // Write altitude for *all* elements, if *any* element

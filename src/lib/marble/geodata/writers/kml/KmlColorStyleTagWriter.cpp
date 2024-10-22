@@ -32,9 +32,9 @@ bool KmlColorStyleTagWriter::write(const Marble::GeoNode *node, GeoWriter &write
     writer.writeStartElement(m_elementName);
 
     KmlObjectTagWriter::writeIdentifiers(writer, colorStyle);
-    writer.writeOptionalElement(kml::kmlTag_color, formatColor(colorStyle->color()), formatColor(defaultColor()));
-    QString const colorMode = colorStyle->colorMode() == GeoDataColorStyle::Random ? "random" : "normal";
-    writer.writeOptionalElement(kml::kmlTag_colorMode, colorMode, "normal");
+    writer.writeOptionalElement(QString::fromLatin1(kml::kmlTag_color), formatColor(colorStyle->color()), formatColor(defaultColor()));
+    QString const colorMode = colorStyle->colorMode() == GeoDataColorStyle::Random ? QStringLiteral("random") : QStringLiteral("normal");
+    writer.writeOptionalElement(QString::fromLatin1(kml::kmlTag_colorMode), colorMode, QStringLiteral("normal"));
 
     bool const result = writeMid(node, writer);
     writer.writeEndElement();

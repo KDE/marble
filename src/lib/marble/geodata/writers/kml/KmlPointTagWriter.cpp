@@ -16,7 +16,8 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerPoint(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataPointType, kml::kmlTag_nameSpaceOgc22), new KmlPointTagWriter());
+static GeoTagWriterRegistrar s_writerPoint(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataPointType, QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
+                                           new KmlPointTagWriter());
 
 bool KmlPointTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
@@ -28,7 +29,7 @@ bool KmlPointTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_Point));
     KmlObjectTagWriter::writeIdentifiers(writer, point);
-    writer.writeOptionalElement(kml::kmlTag_extrude, QString::number(point->extrude()), "0");
+    writer.writeOptionalElement(QLatin1String(kml::kmlTag_extrude), QString::number(point->extrude()), QStringLiteral("0"));
     writer.writeStartElement("coordinates");
 
     // FIXME: this should be using the GeoDataCoordinates::toString but currently

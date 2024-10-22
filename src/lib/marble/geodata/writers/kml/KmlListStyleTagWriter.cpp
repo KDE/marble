@@ -14,7 +14,8 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerListStyle(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataListStyleType, kml::kmlTag_nameSpaceOgc22),
+static GeoTagWriterRegistrar s_writerListStyle(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoDataTypes::GeoDataListStyleType),
+                                                                           QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
                                                new KmlListStyleTagWriter());
 
 bool KmlListStyleTagWriter::write(const GeoNode *node, GeoWriter &writer) const
@@ -28,15 +29,15 @@ bool KmlListStyleTagWriter::write(const GeoNode *node, GeoWriter &writer) const
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_ListStyle));
 
     QString const itemType = itemTypeToString(listStyle->listItemType());
-    writer.writeOptionalElement(kml::kmlTag_listItemType, itemType, "check");
+    writer.writeOptionalElement(QString::fromLatin1(kml::kmlTag_listItemType), itemType, QStringLiteral("check"));
     QString const color = KmlColorStyleTagWriter::formatColor(listStyle->backgroundColor());
-    writer.writeOptionalElement(kml::kmlTag_bgColor, color, "ffffffff");
+    writer.writeOptionalElement(QLatin1String(kml::kmlTag_bgColor), color, QStringLiteral("ffffffff"));
 
     for (GeoDataItemIcon *icon : listStyle->itemIconList()) {
-        writer.writeStartElement(QString::fromUtf8(kml::kmlTag_ItemIcon));
+        writer.writeStartElement(QString::fromLatin1(kml::kmlTag_ItemIcon));
         QString const state = iconStateToString(icon->state());
-        writer.writeOptionalElement(kml::kmlTag_state, state, "open");
-        writer.writeOptionalElement(kml::kmlTag_href, icon->iconPath());
+        writer.writeOptionalElement(QString::fromLatin1(kml::kmlTag_state), state, QStringLiteral("open"));
+        writer.writeOptionalElement(QString::fromLatin1(kml::kmlTag_href), icon->iconPath());
         writer.writeEndElement();
     }
 
@@ -48,13 +49,13 @@ QString KmlListStyleTagWriter::itemTypeToString(GeoDataListStyle::ListItemType i
 {
     switch (itemType) {
     case GeoDataListStyle::CheckOffOnly:
-        return "checkOffOnly";
+        return QStringLiteral("checkOffOnly");
     case GeoDataListStyle::CheckHideChildren:
-        return "checkHideChildren";
+        return QStringLiteral("checkHideChildren");
     case GeoDataListStyle::RadioFolder:
-        return "radioFolder";
+        return QStringLiteral("radioFolder");
     default:
-        return "check";
+        return QStringLiteral("check");
     }
 }
 
@@ -62,22 +63,22 @@ QString KmlListStyleTagWriter::iconStateToString(GeoDataItemIcon::ItemIconStates
 {
     QStringList stateList;
     if (state & GeoDataItemIcon::Open) {
-        stateList << "open";
+        stateList << QStringLiteral("open");
     }
     if (state & GeoDataItemIcon::Closed) {
-        stateList << "closed";
+        stateList << QStringLiteral("closed");
     }
     if (state & GeoDataItemIcon::Error) {
-        stateList << "error";
+        stateList << QStringLiteral("error");
     }
     if (state & GeoDataItemIcon::Fetching0) {
-        stateList << "fetching0";
+        stateList << QStringLiteral("fetching0");
     }
     if (state & GeoDataItemIcon::Fetching1) {
-        stateList << "fetching1";
+        stateList << QStringLiteral("fetching1");
     }
     if (state & GeoDataItemIcon::Fetching2) {
-        stateList << "fetching2";
+        stateList << QStringLiteral("fetching2");
     }
 
     return stateList.join(QLatin1Char(' '));

@@ -16,7 +16,8 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerLookAt(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataPolygonType, kml::kmlTag_nameSpaceOgc22), new KmlPolygonTagWriter);
+static GeoTagWriterRegistrar s_writerLookAt(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataPolygonType, QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
+                                            new KmlPolygonTagWriter);
 
 bool KmlPolygonTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
@@ -24,7 +25,7 @@ bool KmlPolygonTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_Polygon));
     KmlObjectTagWriter::writeIdentifiers(writer, polygon);
-    writer.writeOptionalElement(kml::kmlTag_extrude, QString::number(polygon->extrude()), "0");
+    writer.writeOptionalElement(QLatin1String(kml::kmlTag_extrude), QString::number(polygon->extrude()), QStringLiteral("0"));
 
     writer.writeStartElement("outerBoundaryIs");
     writeElement(&polygon->outerBoundary(), writer);

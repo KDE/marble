@@ -14,7 +14,8 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerLatLonQuad(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataLatLonQuadType, kml::kmlTag_nameSpaceOgc22),
+static GeoTagWriterRegistrar s_writerLatLonQuad(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoDataTypes::GeoDataLatLonQuadType),
+                                                                            QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
                                                 new KmlLatLonQuadWriter);
 
 bool KmlLatLonQuadWriter::write(const GeoNode *node, GeoWriter &writer) const
@@ -28,22 +29,22 @@ bool KmlLatLonQuadWriter::write(const GeoNode *node, GeoWriter &writer) const
         writer.writeStartElement(QString::fromUtf8(kml::kmlTag_coordinates));
 
         writer.writeCharacters(QString::number(latLonQuad->bottomLeftLongitude(GeoDataCoordinates::Degree)));
-        writer.writeCharacters(QString(','));
+        writer.writeCharacters(QLatin1Char(','));
         writer.writeCharacters(QString::number(latLonQuad->bottomLeftLatitude(GeoDataCoordinates::Degree)));
-        writer.writeCharacters(QString(' '));
+        writer.writeCharacters(QLatin1Char(' '));
 
         writer.writeCharacters(QString::number(latLonQuad->bottomRightLongitude(GeoDataCoordinates::Degree)));
-        writer.writeCharacters(QString(','));
+        writer.writeCharacters(QLatin1Char(','));
         writer.writeCharacters(QString::number(latLonQuad->bottomRightLatitude(GeoDataCoordinates::Degree)));
-        writer.writeCharacters(QString(' '));
+        writer.writeCharacters(QLatin1Char(' '));
 
         writer.writeCharacters(QString::number(latLonQuad->topRightLongitude(GeoDataCoordinates::Degree)));
-        writer.writeCharacters(QString(','));
+        writer.writeCharacters(QLatin1Char(','));
         writer.writeCharacters(QString::number(latLonQuad->topRightLatitude(GeoDataCoordinates::Degree)));
-        writer.writeCharacters(QString(' '));
+        writer.writeCharacters(QLatin1Char(' '));
 
         writer.writeCharacters(QString::number(latLonQuad->topLeftLongitude(GeoDataCoordinates::Degree)));
-        writer.writeCharacters(QString(','));
+        writer.writeCharacters(QLatin1Char(','));
         writer.writeCharacters(QString::number(latLonQuad->topLeftLatitude(GeoDataCoordinates::Degree)));
 
         writer.writeEndElement();

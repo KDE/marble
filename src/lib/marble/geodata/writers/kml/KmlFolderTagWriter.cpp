@@ -16,7 +16,8 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerDocument(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataFolderType, kml::kmlTag_nameSpaceOgc22),
+static GeoTagWriterRegistrar s_writerDocument(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoDataTypes::GeoDataFolderType),
+                                                                          QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
                                               new KmlFolderTagWriter());
 
 bool KmlFolderTagWriter::writeMid(const GeoNode *node, GeoWriter &writer) const
@@ -35,7 +36,7 @@ bool KmlFolderTagWriter::writeMid(const GeoNode *node, GeoWriter &writer) const
 }
 
 KmlFolderTagWriter::KmlFolderTagWriter()
-    : KmlFeatureTagWriter(kml::kmlTag_Folder)
+    : KmlFeatureTagWriter(QString::fromLatin1(kml::kmlTag_Folder))
 {
     // nothing to do
 }

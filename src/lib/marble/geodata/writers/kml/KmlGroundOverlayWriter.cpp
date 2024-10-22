@@ -15,11 +15,12 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerLookAt(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataGroundOverlayType, kml::kmlTag_nameSpaceOgc22),
+static GeoTagWriterRegistrar s_writerLookAt(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoDataTypes::GeoDataGroundOverlayType),
+                                                                        QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
                                             new KmlGroundOverlayWriter);
 
 KmlGroundOverlayWriter::KmlGroundOverlayWriter()
-    : KmlOverlayTagWriter(kml::kmlTag_GroundOverlay)
+    : KmlOverlayTagWriter(QString::fromLatin1(kml::kmlTag_GroundOverlay))
 {
     // nothing to do
 }
@@ -30,7 +31,7 @@ bool KmlGroundOverlayWriter::writeMid(const GeoNode *node, GeoWriter &writer) co
 
     const auto ground_overlay = static_cast<const GeoDataGroundOverlay *>(node);
 
-    writer.writeOptionalElement(kml::kmlTag_altitude, QString::number(ground_overlay->altitude()), "0");
+    writer.writeOptionalElement(QLatin1String(kml::kmlTag_altitude), QString::number(ground_overlay->altitude()), QStringLiteral("0"));
     KmlGroundOverlayWriter::writeAltitudeMode(writer, ground_overlay->altitudeMode());
 
     if (!ground_overlay->latLonBox().isEmpty()) {
@@ -48,17 +49,17 @@ QString KmlGroundOverlayWriter::altitudeModeToString(AltitudeMode mode)
 {
     switch (mode) {
     case ClampToGround:
-        return "clampToGround";
+        return QStringLiteral("clampToGround");
     case RelativeToGround:
-        return "relativeToGround";
+        return QStringLiteral("relativeToGround");
     case ClampToSeaFloor:
-        return "clampToSeaFloor";
+        return QStringLiteral("clampToSeaFloor");
     case RelativeToSeaFloor:
-        return "relativeToSeaFloor";
+        return QStringLiteral("relativeToSeaFloor");
     case Absolute:
-        return "absolute";
+        return QStringLiteral("absolute");
     }
-    return "";
+    return {};
 }
 
 void KmlGroundOverlayWriter::writeAltitudeMode(GeoWriter &writer, AltitudeMode altMode)
@@ -72,9 +73,9 @@ void KmlGroundOverlayWriter::writeAltitudeMode(GeoWriter &writer, AltitudeMode a
     bool const isGoogleExtension = (altMode == ClampToSeaFloor || altMode == RelativeToSeaFloor);
     if (isGoogleExtension) {
         // clampToSeaFloor and relativeToSeaFloor are Google extensions that need a gx: tag namespace
-        writer.writeElement(kml::kmlTag_nameSpaceGx22, kml::kmlTag_altitudeMode, altitudeMode);
+        writer.writeElement(QString::fromLatin1(kml::kmlTag_nameSpaceGx22), QString::fromLatin1(kml::kmlTag_altitudeMode), altitudeMode);
     } else {
-        writer.writeElement(kml::kmlTag_altitudeMode, altitudeMode);
+        writer.writeElement(QString::fromLatin1(kml::kmlTag_altitudeMode), altitudeMode);
     }
 }
 

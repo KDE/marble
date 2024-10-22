@@ -16,7 +16,8 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerNetworkLinkControl(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataNetworkLinkControlType, kml::kmlTag_nameSpaceOgc22),
+static GeoTagWriterRegistrar s_writerNetworkLinkControl(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataNetworkLinkControlType,
+                                                                                    QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
                                                         new KmlNetworkLinkControlTagWriter);
 
 bool KmlNetworkLinkControlTagWriter::write(const GeoNode *node, GeoWriter &writer) const
@@ -24,12 +25,12 @@ bool KmlNetworkLinkControlTagWriter::write(const GeoNode *node, GeoWriter &write
     const auto networkLinkControl = static_cast<const GeoDataNetworkLinkControl *>(node);
 
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_NetworkLinkControl));
-    writer.writeOptionalElement(kml::kmlTag_minRefreshPeriod, QString::number(networkLinkControl->minRefreshPeriod()), "1");
-    writer.writeOptionalElement(kml::kmlTag_maxSessionLength, QString::number(networkLinkControl->maxSessionLength()), "2");
-    writer.writeOptionalElement(kml::kmlTag_cookie, networkLinkControl->cookie());
-    writer.writeOptionalElement(kml::kmlTag_message, networkLinkControl->message());
-    writer.writeOptionalElement(kml::kmlTag_linkName, networkLinkControl->linkName());
-    writer.writeOptionalElement(kml::kmlTag_linkDescription, networkLinkControl->linkDescription());
+    writer.writeOptionalElement(QLatin1String(kml::kmlTag_minRefreshPeriod), QString::number(networkLinkControl->minRefreshPeriod()), "1");
+    writer.writeOptionalElement(QLatin1String(kml::kmlTag_maxSessionLength), QString::number(networkLinkControl->maxSessionLength()), "2");
+    writer.writeOptionalElement(QLatin1String(kml::kmlTag_cookie), networkLinkControl->cookie());
+    writer.writeOptionalElement(QLatin1String(kml::kmlTag_message), networkLinkControl->message());
+    writer.writeOptionalElement(QLatin1String(kml::kmlTag_linkName), networkLinkControl->linkName());
+    writer.writeOptionalElement(QLatin1String(kml::kmlTag_linkDescription), networkLinkControl->linkDescription());
 
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_linkSnippet));
 
@@ -40,7 +41,7 @@ bool KmlNetworkLinkControlTagWriter::write(const GeoNode *node, GeoWriter &write
     writer.writeCharacters(networkLinkControl->linkSnippet());
     writer.writeEndElement();
 
-    writer.writeOptionalElement(kml::kmlTag_expires, networkLinkControl->expires().toString(Qt::ISODate));
+    writer.writeOptionalElement(QLatin1String(kml::kmlTag_expires), networkLinkControl->expires().toString(Qt::ISODate));
     writeElement(&networkLinkControl->update(), writer);
     writer.writeEndElement();
 

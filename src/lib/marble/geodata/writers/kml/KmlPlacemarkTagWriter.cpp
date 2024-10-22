@@ -21,14 +21,14 @@ namespace Marble
 // don't use the tag dictionary for tag names, because with the writer we are using
 //  the object type strings instead
 // FIXME: USE object strings provided by idis
-static GeoTagWriterRegistrar s_writerPlacemark(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataPlacemarkType, kml::kmlTag_nameSpaceOgc22),
+static GeoTagWriterRegistrar s_writerPlacemark(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataPlacemarkType, QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
                                                new KmlPlacemarkTagWriter());
 
 bool KmlPlacemarkTagWriter::writeMid(const GeoNode *node, GeoWriter &writer) const
 {
     const auto placemark = static_cast<const GeoDataPlacemark *>(node);
 
-    writer.writeOptionalElement(kml::kmlTag_styleUrl, placemark->styleUrl());
+    writer.writeOptionalElement(QLatin1String(kml::kmlTag_styleUrl), placemark->styleUrl());
     if (placemark->styleUrl().isEmpty() && placemark->customStyle()) {
         writeElement(placemark->customStyle().data(), writer);
     }

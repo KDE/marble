@@ -17,7 +17,7 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerLookAt(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataPhotoOverlayType, kml::kmlTag_nameSpaceOgc22),
+static GeoTagWriterRegistrar s_writerLookAt(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataPhotoOverlayType, QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
                                             new KmlPhotoOverlayWriter);
 
 KmlPhotoOverlayWriter::KmlPhotoOverlayWriter()
@@ -34,7 +34,7 @@ bool KmlPhotoOverlayWriter::writeMid(const GeoNode *node, GeoWriter &writer) con
 
     // rotation
     QString const rotation = QString::number(photo_overlay->rotation(), 'f', 3);
-    writer.writeOptionalElement(kml::kmlTag_rotation, rotation, "0.000");
+    writer.writeOptionalElement(QLatin1String(kml::kmlTag_rotation), rotation, "0.000");
 
     // ViewVolume
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_ViewVolume));

@@ -14,7 +14,8 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerLod(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataLodType, kml::kmlTag_nameSpaceOgc22), new KmlLodTagWriter);
+static GeoTagWriterRegistrar s_writerLod(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataLodType, QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
+                                         new KmlLodTagWriter);
 
 bool KmlLodTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {

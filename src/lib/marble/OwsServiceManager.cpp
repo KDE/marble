@@ -417,13 +417,13 @@ void OwsServiceManager::queryWmsLegendImage(const QUrl &url)
 void OwsServiceManager::queryWmtsLevelZeroTile(const QString &url, const QString &style, const QString &tileMatrixSet)
 {
     m_imageRequestResult.setResultType(LevelZeroTile);
-    queryWmtsTile(url, style, tileMatrixSet, "0", "0", "0");
+    queryWmtsTile(url, style, tileMatrixSet, "0", "0", QStringLiteral("0"));
 }
 
 void OwsServiceManager::queryWmtsPreviewImage(const QString &url, const QString &style, const QString &tileMatrixSet)
 {
     m_imageRequestResult.setResultType(PreviewImage);
-    queryWmtsTile(url, style, tileMatrixSet, "0", "0", "0");
+    queryWmtsTile(url, style, tileMatrixSet, "0", "0", QStringLiteral("0"));
 }
 
 void OwsServiceManager::queryWmtsTile(const QString &url,
