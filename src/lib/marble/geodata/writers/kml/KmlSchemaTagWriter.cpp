@@ -24,7 +24,7 @@ bool KmlSchemaTagWriter::write(const GeoNode *node, GeoWriter &writer) const
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_Schema));
     KmlObjectTagWriter::writeIdentifiers(writer, schema);
     QString name = schema->schemaName();
-    writer.writeAttribute("name", name);
+    writer.writeAttribute(QStringLiteral("name"), name);
 
     for (const GeoDataSimpleField &simpleField : schema->simpleFields()) {
         writeElement(&simpleField, writer);

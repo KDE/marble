@@ -14,13 +14,15 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerLayer(GeoTagWriter::QualifiedName(GeoSceneTypes::GeoSceneLayerType, dgml::dgmlTag_nameSpace20), new DgmlLayerTagWriter());
+static GeoTagWriterRegistrar s_writerLayer(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoSceneTypes::GeoSceneLayerType),
+                                                                       QString::fromLatin1(dgml::dgmlTag_nameSpace20)),
+                                           new DgmlLayerTagWriter());
 
 bool DgmlLayerTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
     const auto layer = static_cast<const GeoSceneLayer *>(node);
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Layer));
-    writer.writeAttribute("name", layer->name());
+    writer.writeAttribute(QStringLiteral("name"), layer->name());
     writer.writeAttribute("backend", layer->backend());
     if (!layer->role().isEmpty()) {
         writer.writeAttribute("role", layer->role());

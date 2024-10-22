@@ -15,16 +15,18 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerHead(GeoTagWriter::QualifiedName(GeoSceneTypes::GeoSceneHeadType, dgml::dgmlTag_nameSpace20), new DgmlHeadTagWriter());
+static GeoTagWriterRegistrar s_writerHead(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoSceneTypes::GeoSceneHeadType),
+                                                                      QString::fromLatin1(dgml::dgmlTag_nameSpace20)),
+                                          new DgmlHeadTagWriter());
 
 bool DgmlHeadTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
     const auto head = static_cast<const GeoSceneHead *>(node);
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Head));
-    writer.writeElement("name", head->name());
-    writer.writeElement("target", head->target());
-    writer.writeElement("theme", head->theme());
-    writer.writeElement("visible", head->visible() ? "true" : "false");
+    writer.writeElement(QStringLiteral("name"), head->name());
+    writer.writeElement(QStringLiteral("target"), head->target());
+    writer.writeElement(QStringLiteral("theme"), head->theme());
+    writer.writeElement(QStringLiteral("visible"), head->visible() ? "true" : "false");
     writer.writeStartElement("description");
     writer.writeCDATA(head->description());
     writer.writeEndElement();
@@ -36,7 +38,7 @@ bool DgmlHeadTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 
     const auto &zoom = static_cast<const GeoSceneZoom &>(*head->zoom());
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Zoom));
-    writer.writeElement("discrete", zoom.discrete() ? "true" : "false");
+    writer.writeElement(QStringLiteral("discrete"), zoom.discrete() ? "true" : "false");
     writer.writeTextElement("minimum", QString::number(zoom.minimum()));
     writer.writeTextElement("maximum", QString::number(zoom.maximum()));
     writer.writeEndElement();

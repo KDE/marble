@@ -22,13 +22,13 @@ bool KmlSimpleFieldTagWriter::write(const GeoNode *node, GeoWriter &writer) cons
 {
     const auto simpleField = static_cast<const GeoDataSimpleField *>(node);
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_SimpleField));
-    writer.writeAttribute("name", simpleField->name());
+    writer.writeAttribute(QStringLiteral("name"), simpleField->name());
     GeoDataSimpleField::SimpleFieldType simpleFieldType = simpleField->type();
     QString type = resolveType(simpleFieldType);
     writer.writeAttribute("type", type);
 
     QString displayName = simpleField->displayName();
-    writer.writeElement("displayName", displayName);
+    writer.writeElement(QStringLiteral("displayName"), displayName);
 
     writer.writeEndElement();
 

@@ -13,14 +13,15 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerGeodata(GeoTagWriter::QualifiedName(GeoSceneTypes::GeoSceneGeodataType, dgml::dgmlTag_nameSpace20),
+static GeoTagWriterRegistrar s_writerGeodata(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoSceneTypes::GeoSceneGeodataType),
+                                                                         QString::fromLatin1(dgml::dgmlTag_nameSpace20)),
                                              new DgmlGeodataTagWriter());
 
 bool DgmlGeodataTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
     const auto geodata = static_cast<const GeoSceneGeodata *>(node);
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Geodata));
-    writer.writeAttribute("name", geodata->name());
+    writer.writeAttribute(QStringLiteral("name"), geodata->name());
 
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_SourceFile));
     writer.writeCharacters(geodata->sourceFile());

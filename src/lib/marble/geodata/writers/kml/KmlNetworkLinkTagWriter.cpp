@@ -14,7 +14,7 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerNetworkLink(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataNetworkLinkType,
+static GeoTagWriterRegistrar s_writerNetworkLink(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoDataTypes::GeoDataNetworkLinkType),
                                                                              QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
                                                  new KmlNetworkLinkTagWriter);
 
@@ -26,7 +26,7 @@ bool KmlNetworkLinkTagWriter::write(const GeoNode *node, GeoWriter &writer) cons
 
     writer.writeOptionalElement(QLatin1String(kml::kmlTag_name), networkLink->name());
 
-    writer.writeOptionalElement(QLatin1String(kml::kmlTag_visibility), QString::number(networkLink->isVisible()), "1");
+    writer.writeOptionalElement(QLatin1String(kml::kmlTag_visibility), QString::number(networkLink->isVisible()), QStringLiteral("1"));
 
     writer.writeOptionalElement(QLatin1String(kml::kmlTag_refreshVisibility), QString::number(networkLink->refreshVisibility()), QStringLiteral("0"));
 

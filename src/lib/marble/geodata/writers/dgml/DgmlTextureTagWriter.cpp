@@ -17,18 +17,19 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerTexture(GeoTagWriter::QualifiedName(GeoSceneTypes::GeoSceneTileDatasetType, dgml::dgmlTag_nameSpace20),
+static GeoTagWriterRegistrar s_writerTexture(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoSceneTypes::GeoSceneTileDatasetType),
+                                                                         QString::fromLatin1(dgml::dgmlTag_nameSpace20)),
                                              new DgmlTextureTagWriter());
 
 bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
     const auto texture = static_cast<const GeoSceneTileDataset *>(node);
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Texture));
-    writer.writeAttribute("name", texture->name());
+    writer.writeAttribute(QStringLiteral("name"), texture->name());
     writer.writeAttribute("expire", QString::number(texture->expire()));
 
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_SourceDir));
-    writer.writeAttribute("format", texture->fileFormat());
+    writer.writeAttribute(QStringLiteral("format"), texture->fileFormat());
     if (texture->expire()) {
         writer.writeAttribute("expire", QString::number(texture->expire()));
     }
@@ -89,15 +90,15 @@ bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter &writer) const
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Projection));
     const GeoSceneAbstractTileProjection::Type tileProjectionType = texture->tileProjectionType();
     if (tileProjectionType == GeoSceneAbstractTileProjection::Mercator) {
-        writer.writeAttribute("name", "Mercator");
+        writer.writeAttribute(QStringLiteral("name"), "Mercator");
     } else if (tileProjectionType == GeoSceneAbstractTileProjection::Equirectangular) {
-        writer.writeAttribute("name", "Equirectangular");
+        writer.writeAttribute(QStringLiteral("name"), "Equirectangular");
     }
     writer.writeEndElement();
 
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Blending));
     if (!texture->blending().isEmpty()) {
-        writer.writeAttribute("name", texture->blending());
+        writer.writeAttribute(QStringLiteral("name"), texture->blending());
     }
     writer.writeEndElement();
 

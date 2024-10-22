@@ -28,14 +28,14 @@ bool KmlTrackWriter::write(const GeoNode *node, GeoWriter &writer) const
 
     int points = track->size();
     for (int i = 0; i < points; i++) {
-        writer.writeElement("when", track->whenList().at(i).toString(Qt::ISODate));
+        writer.writeElement(QStringLiteral("when"), track->whenList().at(i).toString(Qt::ISODate));
 
         qreal lon, lat, alt;
         track->coordinatesList().at(i).geoCoordinates(lon, lat, alt, GeoDataCoordinates::Degree);
         const QString coord =
             QString::number(lon, 'f', 10) + QLatin1Char(' ') + QString::number(lat, 'f', 10) + QLatin1Char(' ') + QString::number(alt, 'f', 10);
 
-        writer.writeElement("gx:coord", coord);
+        writer.writeElement(QStringLiteral("gx:coord"), coord);
     }
     writer.writeEndElement();
 

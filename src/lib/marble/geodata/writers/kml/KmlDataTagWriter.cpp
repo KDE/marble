@@ -22,7 +22,7 @@ bool KmlDataTagWriter::write(const GeoNode *node, GeoWriter &writer) const
     const auto data = static_cast<const GeoDataData *>(node);
 
     writer.writeStartElement(QString::fromLatin1(kml::kmlTag_Data));
-    writer.writeAttribute("name", data->name());
+    writer.writeAttribute(QStringLiteral("name"), data->name());
     writer.writeOptionalElement(QString::fromLatin1(kml::kmlTag_displayName), data->displayName());
     writer.writeElement(QStringLiteral("value"), data->value().toString());
     writer.writeEndElement();

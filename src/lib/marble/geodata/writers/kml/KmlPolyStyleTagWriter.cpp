@@ -25,10 +25,10 @@ bool KmlPolyStyleTagWriter::writeMid(const GeoNode *node, GeoWriter &writer) con
     const auto style = static_cast<const GeoDataPolyStyle *>(node);
 
     if (!style->fill()) {
-        writer.writeElement("fill", QStringLiteral("0"));
+        writer.writeElement(QStringLiteral("fill"), QStringLiteral("0"));
     }
     if (!style->outline()) {
-        writer.writeElement("outline", QStringLiteral("0"));
+        writer.writeElement(QStringLiteral("outline"), QStringLiteral("0"));
     }
 
     return true;
