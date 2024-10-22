@@ -6,8 +6,6 @@
 
 #include "DgmlItemTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "DgmlAttributeDictionary.h"
 #include "DgmlAuxillaryDictionary.h"
 #include "DgmlElementDictionary.h"
@@ -37,7 +35,7 @@ GeoNode *DgmlItemTagHandler::parse(GeoParser &parser) const
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Section)) {
         item = new GeoSceneItem(name);
-        item->setCheckable(checkable == dgmlValue_true || checkable == dgmlValue_on);
+        item->setCheckable(checkable == QString::fromLatin1(dgmlValue_true) || checkable == QString::fromLatin1(dgmlValue_on));
         item->setConnectTo(connectTo);
         item->setSpacing(spacing);
         parentItem.nodeAs<GeoSceneSection>()->addItem(item);

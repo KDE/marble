@@ -11,14 +11,14 @@
 #include "GeoParser.h"
 #include "GeoSceneTileDataset.h"
 
-#include "MarbleDebug.h"
 #include "MarbleGlobal.h"
 
 namespace Marble
 {
 namespace dgml
 {
-static GeoTagHandlerRegistrar handler(GeoParser::QualifiedName(dgmlTag_DownloadPolicy, dgmlTag_nameSpace20), new DgmlDownloadPolicyTagHandler);
+static GeoTagHandlerRegistrar handler(GeoParser::QualifiedName(QString::fromLatin1(dgmlTag_DownloadPolicy), QString::fromLatin1(dgmlTag_nameSpace20)),
+                                      new DgmlDownloadPolicyTagHandler);
 
 // Error handling:
 // Here it is not possible to return an error code or throw an exception

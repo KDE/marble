@@ -6,16 +6,12 @@
 #include "KmlDocumentTagWriter.h"
 
 #include "GeoDataDocument.h"
-#include "GeoDataExtendedData.h"
 #include "GeoDataSchema.h"
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
-#include "GeoDataTimeSpan.h"
-#include "GeoDataTimeStamp.h"
 #include "GeoDocument.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
-#include "MarbleDebug.h"
 
 #include "GeoDataTypes.h"
 
@@ -24,11 +20,12 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerDocument(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataDocumentType, kml::kmlTag_nameSpaceOgc22),
+static GeoTagWriterRegistrar s_writerDocument(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoDataTypes::GeoDataDocumentType),
+                                                                          QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
                                               new KmlDocumentTagWriter());
 
 KmlDocumentTagWriter::KmlDocumentTagWriter()
-    : KmlFeatureTagWriter(kml::kmlTag_Document)
+    : KmlFeatureTagWriter(QString::fromLatin1(kml::kmlTag_Document))
 {
     // nothing to do
 }

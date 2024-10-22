@@ -28,7 +28,7 @@ GeoNode *KmlTourTagHandler::parse(GeoParser &parser) const
     if (parentItem.represents(kmlTag_Folder) || parentItem.represents(kmlTag_Document)) {
         parentItem.nodeAs<GeoDataContainer>()->append(tour);
         return tour;
-    } else if (parentItem.qualifiedName().first == kmlTag_kml) {
+    } else if (parentItem.qualifiedName().first == QString::fromLatin1(kmlTag_kml)) {
         GeoDataDocument *doc = geoDataDoc(parser);
         doc->append(tour);
         return tour;

@@ -10,7 +10,6 @@
 #include "GeoDataExtendedData.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataLookAt.h"
-#include "GeoDataOverlay.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataRegion.h"
 #include "GeoDataStyle.h"
@@ -52,9 +51,9 @@ bool KmlFeatureTagWriter::write(const Marble::GeoNode *node, GeoWriter &writer) 
 
     KmlObjectTagWriter::writeIdentifiers(writer, feature);
 
-    writer.writeOptionalElement(kml::kmlTag_name, feature->name());
-    writer.writeOptionalElement(kml::kmlTag_visibility, QString::number(feature->isVisible()), "1");
-    writer.writeOptionalElement("address", feature->address());
+    writer.writeOptionalElement(QString::fromLatin1(kml::kmlTag_name), feature->name());
+    writer.writeOptionalElement(QString::fromLatin1(kml::kmlTag_visibility), QString::number(feature->isVisible()), QStringLiteral("1"));
+    writer.writeOptionalElement(QStringLiteral("address"), feature->address());
 
     if (!feature->description().isEmpty()) {
         writer.writeStartElement("description");

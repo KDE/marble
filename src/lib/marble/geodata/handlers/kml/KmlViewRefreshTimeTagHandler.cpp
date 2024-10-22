@@ -18,7 +18,7 @@ KML_DEFINE_TAG_HANDLER(viewRefreshTime)
 
 GeoNode *KmlviewRefreshTimeTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_viewRefreshTime));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QString::fromLatin1(kmlTag_viewRefreshTime)));
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.is<GeoDataLink>()) {

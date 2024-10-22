@@ -31,7 +31,7 @@ bool GeoSceneParser::isValidRootElement()
 {
     switch ((GeoSceneSourceType)m_source) {
     case GeoScene_DGML:
-        return isValidElement(dgml::dgmlTag_Dgml);
+        return isValidElement(QString::fromLatin1(dgml::dgmlTag_Dgml));
     default:
         Q_ASSERT(false);
         return false;

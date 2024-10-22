@@ -49,7 +49,7 @@ GeoNode *DgmlGeodataTagHandler::parse(GeoParser &parser) const
 
     // Check parent type and make sure that the dataSet type
     // matches the backend of the parent layer
-    if (parentItem.represents(dgmlTag_Layer) && parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_geodata) {
+    if (parentItem.represents(dgmlTag_Layer) && parentItem.nodeAs<GeoSceneLayer>()->backend() == QString::fromLatin1(dgmlValue_geodata)) {
         dataSource = new GeoSceneGeodata(name);
         dataSource->setProperty(property);
         dataSource->setColorize(colorize);

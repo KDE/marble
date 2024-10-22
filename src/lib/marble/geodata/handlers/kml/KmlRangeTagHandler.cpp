@@ -1,7 +1,5 @@
 #include "KmlRangeTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "KmlElementDictionary.h"
 
 #include "GeoDataCoordinates.h"
@@ -16,7 +14,7 @@ namespace kml
 KML_DEFINE_TAG_HANDLER(range)
 GeoNode *KmlrangeTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_range));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QString::fromLatin1(kmlTag_range)));
 
     GeoStackItem parentItem = parser.parentElement();
 

@@ -18,7 +18,7 @@ KML_DEFINE_TAG_HANDLER(viewBoundScale)
 
 GeoNode *KmlviewBoundScaleTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_viewBoundScale));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QString::fromLatin1(kmlTag_viewBoundScale)));
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.is<GeoDataLink>()) {
         qreal const viewBoundScale = parser.readElementText().trimmed().toDouble();

@@ -6,8 +6,6 @@
 
 #include "KmlPlacemarkTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "GeoDataContainer.h"
 #include "GeoDataDocument.h"
 #include "GeoDataParser.h"
@@ -34,7 +32,7 @@ GeoNode *KmlPlacemarkTagHandler::parse(GeoParser &parser) const
         || parentItem.represents(kmlTag_Create) || parentItem.represents(kmlTag_Delete)) {
         parentItem.nodeAs<GeoDataContainer>()->append(placemark);
         return placemark;
-    } else if (parentItem.qualifiedName().first == kmlTag_kml) {
+    } else if (parentItem.qualifiedName().first == QString::fromLatin1(kmlTag_kml)) {
         GeoDataDocument *doc = geoDataDoc(parser);
         doc->append(placemark);
         return placemark;

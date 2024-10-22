@@ -6,8 +6,6 @@
 
 #include "DgmlValueTagHandler.h"
 
-#include "MarbleDebug.h"
-
 #include "DgmlAuxillaryDictionary.h"
 #include "DgmlElementDictionary.h"
 #include "GeoParser.h"
@@ -28,7 +26,8 @@ GeoNode *DgmlValueTagHandler::parse(GeoParser &parser) const
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Property)) {
         QString parsedText = parser.readElementText().toLower().trimmed();
-        parentItem.nodeAs<GeoSceneProperty>()->setDefaultValue(parsedText == dgmlValue_true || parsedText == dgmlValue_on);
+        parentItem.nodeAs<GeoSceneProperty>()->setDefaultValue(parsedText == QString::fromLatin1(dgmlValue_true)
+                                                               || parsedText == QString::fromLatin1(dgmlValue_on));
     }
 
     return nullptr;

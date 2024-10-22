@@ -27,7 +27,7 @@ GeoNode *KmlNetworkLinkTagHandler::parse(GeoParser &parser) const
     if (parentItem.represents(kmlTag_Folder) || parentItem.represents(kmlTag_Document)) {
         parentItem.nodeAs<GeoDataContainer>()->append(networkLink);
         return networkLink;
-    } else if (parentItem.qualifiedName().first == kmlTag_kml) {
+    } else if (parentItem.qualifiedName().first == QString::fromLatin1(kmlTag_kml)) {
         GeoDataDocument *doc = geoDataDoc(parser);
         doc->append(networkLink);
         return networkLink;

@@ -18,7 +18,8 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerBallonStyle(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataBalloonStyleType, kml::kmlTag_nameSpaceOgc22),
+static GeoTagWriterRegistrar s_writerBallonStyle(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoDataTypes::GeoDataBalloonStyleType),
+                                                                             QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
                                                  new KmlBalloonStyleTagWriter());
 
 bool KmlBalloonStyleTagWriter::write(const GeoNode *node, GeoWriter &writer) const
@@ -34,21 +35,21 @@ bool KmlBalloonStyleTagWriter::write(const GeoNode *node, GeoWriter &writer) con
     KmlObjectTagWriter::writeIdentifiers(writer, balloonStyle);
 
     QString const backgroundColor = KmlColorStyleTagWriter::formatColor(balloonStyle->backgroundColor());
-    writer.writeOptionalElement(kml::kmlTag_bgColor, backgroundColor, "ffffffff");
+    writer.writeOptionalElement(QString::fromLatin1(kml::kmlTag_bgColor), backgroundColor, QStringLiteral("ffffffff"));
     QString const textColor = KmlColorStyleTagWriter::formatColor(balloonStyle->textColor());
-    writer.writeOptionalElement(kml::kmlTag_textColor, textColor, "ff000000");
+    writer.writeOptionalElement(QString::fromLatin1(kml::kmlTag_textColor), textColor, QStringLiteral("ff000000"));
 
     QString const textString = balloonStyle->text();
-    if (textString.contains(QRegularExpression("[<>&]"))) {
+    if (textString.contains(QRegularExpression(QStringLiteral("[<>&]")))) {
         writer.writeStartElement(QString::fromUtf8(kml::kmlTag_text));
         writer.writeCDATA(textString);
         writer.writeEndElement();
     } else {
-        writer.writeOptionalElement(kml::kmlTag_text, textString);
+        writer.writeOptionalElement(QString::fromLatin1(kml::kmlTag_text), textString);
     }
 
     if (balloonStyle->displayMode() == GeoDataBalloonStyle::Hide) {
-        writer.writeElement(kml::kmlTag_displayMode, "hide");
+        writer.writeElement(QString::fromLatin1(kml::kmlTag_displayMode), QStringLiteral("hide"));
     }
 
     writer.writeEndElement();

@@ -39,7 +39,7 @@ GeoNode *DgmlSectionTagHandler::parse(GeoParser &parser) const
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Legend)) {
         section = new GeoSceneSection(name);
-        section->setCheckable(checkable == dgmlValue_true || checkable == dgmlValue_on);
+        section->setCheckable(checkable == QString::fromLatin1(dgmlValue_true) || checkable == QString::fromLatin1(dgmlValue_on));
         section->setConnectTo(connectTo);
         section->setSpacing(spacing);
         section->setRadio(radio);

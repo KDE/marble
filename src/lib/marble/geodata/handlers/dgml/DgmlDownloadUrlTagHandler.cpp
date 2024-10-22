@@ -69,7 +69,7 @@ GeoNode *DgmlDownloadUrlTagHandler::parse(GeoParser &parser) const
     const QString queryStr = parser.attribute(dgmlAttr_query).trimmed();
     if (!queryStr.isEmpty()) {
         QUrlQuery query;
-        query.setQuery(queryStr.toLatin1());
+        query.setQuery(queryStr);
         url.setQuery(query);
     }
 

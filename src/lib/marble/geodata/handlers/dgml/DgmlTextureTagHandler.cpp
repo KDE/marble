@@ -42,7 +42,7 @@ GeoNode *DgmlTextureTagHandler::parse(GeoParser &parser) const
 
     // Check parent type and make sure that the dataSet type
     // matches the backend of the parent layer
-    if (parentItem.represents(dgmlTag_Layer) && parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_texture) {
+    if (parentItem.represents(dgmlTag_Layer) && parentItem.nodeAs<GeoSceneLayer>()->backend() == QString::fromLatin1(dgmlValue_texture)) {
         texture = new GeoSceneTextureTileDataset(name);
         texture->setExpire(expire);
         parentItem.nodeAs<GeoSceneLayer>()->addDataset(texture);

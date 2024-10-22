@@ -26,7 +26,7 @@ GeoNode *DgmlDiscreteTagHandler::parse(GeoParser &parser) const
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Zoom)) {
         QString parsedText = parser.readElementText().toLower().trimmed();
-        parentItem.nodeAs<GeoSceneZoom>()->setDiscrete(parsedText == dgmlValue_true || parsedText == dgmlValue_on);
+        parentItem.nodeAs<GeoSceneZoom>()->setDiscrete(parsedText == QString::fromLatin1(dgmlValue_true) || parsedText == QString::fromLatin1(dgmlValue_on));
     }
 
     return nullptr;
