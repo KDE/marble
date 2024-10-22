@@ -15380,191 +15380,191 @@ msgctxt "Marble::SatellitesPlugin|"
 msgid "Weather & Earth Resources Satellites"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:438
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:439
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Weather"
 msgstr "الطقس"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:439
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:442
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "NOAA"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:440
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:445
 #, fuzzy
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "GOES"
 msgstr "خوس"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:442
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:448
 #, fuzzy
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Earth Resources"
 msgstr "البيانات ورقة"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:445
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:451
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Search & Rescue (SARSAT)"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:448
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:454
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Disaster Monitoring"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:451
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:457
 #, fuzzy
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Tracking and Data Relay Satellite System (TDRSS)"
 msgstr "اعرض الملاحة شريط"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:454
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:460
 #, fuzzy
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Communications Satellites"
 msgstr "اعرض الملاحة شريط"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:455
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:462
 #, fuzzy
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Geostationary"
 msgstr "ابحث سطر"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:456
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:465
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Intelsat"
 msgstr "إنتل سات"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:457
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:468
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Gorizont"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:458
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:471
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Raduga"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:459
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:474
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Molniya"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:460
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:477
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Iridium"
 msgstr "الإريديوم"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:461
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:480
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Orbcomm"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:463
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:483
 #, fuzzy
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Globalstar"
 msgstr "إ&بحث"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:466
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:486
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Amateur radio"
 msgstr "اللاسلكي للهواة"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:469
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:489
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Experimental"
 msgstr "تجريبي"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:471
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:511
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:492
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:540
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Other"
 msgstr "أخرى"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:473
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:495
 #, fuzzy
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Navigation Satellites"
 msgstr "اعرض الملاحة شريط"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:475
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:497
 #, fuzzy
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "GPS Operational"
 msgstr "عالمي"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:478
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:500
 #, fuzzy
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Glonass Operational"
 msgstr "عالمي"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:480
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:503
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Galileo"
 msgstr "غاليليو"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:482
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:506
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:485
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:509
 #, fuzzy
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Navy Navigation Satellite System (NNSS)"
 msgstr "اعرض الملاحة شريط"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:488
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:512
 #, fuzzy
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Russian LEO Navigation"
 msgstr "الملاحة"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:491
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:515
 #, fuzzy
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Scientific Satellites"
 msgstr "قمر اصتناعي عرض"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:493
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:517
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Space & Earth Science"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:495
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:520
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Geodetic"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:497
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:523
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Engineering"
 msgstr "الهندسة"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:500
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:526
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Education"
 msgstr "التعليم"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:503
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:529
 #, fuzzy
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Miscellaneous Satellites"
 msgstr "اعرض الملاحة شريط"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:505
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:531
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Miscellaneous Military"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:508
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:534
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Radar Calibration"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:510
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:537
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "CubeSats"
 msgstr ""
@@ -17086,44 +17086,44 @@ msgctxt "Marble::LocalOsmSearchPlugin|"
 msgid "Searches for addresses and points of interest in offline maps."
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:264
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:266
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:265
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:267
 msgctxt "QObject|"
 msgid "north"
 msgstr "شمال"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:268
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:269
 msgctxt "QObject|"
 msgid "north-west"
 msgstr "شمال غربي"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:270
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:271
 msgctxt "QObject|"
 msgid "west"
 msgstr "غرب"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:272
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:273
 #, fuzzy
 msgctxt "QObject|"
 msgid "south-west"
 msgstr "&حوْل"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:274
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:275
 msgctxt "QObject|"
 msgid "south"
 msgstr "جنوب"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:276
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:277
 msgctxt "QObject|"
 msgid "south-east"
 msgstr "جنوب شرقي"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:278
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:279
 msgctxt "QObject|"
 msgid "east"
 msgstr "شرق"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:280
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:281
 msgctxt "QObject|"
 msgid "north-east"
 msgstr "شمال شرق"
@@ -17278,34 +17278,34 @@ msgctxt "QObject|"
 msgid "Installing %1"
 msgstr "يثبّت %1"
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:533
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:531
 #, qt-format
 msgctxt "Marble::MonavConfigWidget|"
 msgid "%1/%2 MB"
 msgstr ""
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:612
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:610
 msgctxt "QObject|"
 msgid "An update is available. Click to install it."
 msgstr ""
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:613
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:611
 msgctxt "QObject|"
 msgid "No update available. You are running the latest version."
 msgstr ""
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:641
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:639
 msgctxt "Marble::MonavConfigWidget|"
 msgid "Are you sure you want to delete this map from the system?"
 msgstr ""
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:642
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:640
 #, fuzzy
 msgctxt "Marble::MonavConfigWidget|"
 msgid "Remove Map"
 msgstr "مسطح الخريطة"
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:673
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:671
 msgctxt "QObject|"
 msgid "Nothing to do."
 msgstr "لا شيء لأفعله."

@@ -17885,211 +17885,211 @@ msgctxt "Marble::SatellitesPlugin|"
 msgid "Weather & Earth Resources Satellites"
 msgstr "ផ្កាយរណប​ធនធាន​ផែនដី និង​អាកាសធាតុ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:438
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:439
 #, fuzzy
 #| msgid "Weather"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Weather"
 msgstr "អាកាសធាតុ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:439
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:442
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "NOAA"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:440
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:445
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "GOES"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:442
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:448
 #, fuzzy
 #| msgid "Search"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Earth Resources"
 msgstr "ស្វែងរក"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:445
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:451
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Search & Rescue (SARSAT)"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:448
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:454
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Disaster Monitoring"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:451
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:457
 #, fuzzy
 #| msgid "Navigation Satellites"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Tracking and Data Relay Satellite System (TDRSS)"
 msgstr "ផ្កាយរណប​រុករក"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:454
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:460
 #, fuzzy
 #| msgid "Communications Satellites"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Communications Satellites"
 msgstr "ផ្កាយរណប​ទំនាក់ទំនង"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:455
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:462
 #, fuzzy
 #| msgid "Save Annotation File"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Geostationary"
 msgstr "រក្សា​ទុក​ឯកសារ​ចំណារ​ពន្យល់"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:456
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:465
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Intelsat"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:457
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:468
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Gorizont"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:458
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:471
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Raduga"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:459
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:474
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Molniya"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:460
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:477
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Iridium"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:461
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:480
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Orbcomm"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:463
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:483
 #, fuzzy
 #| msgid "Local OSM Search"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Globalstar"
 msgstr "ការ​ស្វែងរក OSM មូលដ្ឋាន"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:466
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:486
 #, fuzzy
 #| msgid "Amateur Radio Aprs Plugin"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Amateur radio"
 msgstr "កម្មវិធី​ជំនួយ​របស់ Amateur Radio Aprs"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:469
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:489
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Experimental"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:471
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:511
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:492
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:540
 #, fuzzy
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Other"
 msgstr "សភាព"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:473
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:495
 #, fuzzy
 #| msgid "Navigation Satellites"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Navigation Satellites"
 msgstr "ផ្កាយរណប​រុករក"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:475
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:497
 #, fuzzy
 #| msgid "International"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "GPS Operational"
 msgstr "អន្តរជាតិ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:478
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:500
 #, fuzzy
 #| msgid "International"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Glonass Operational"
 msgstr "អន្តរជាតិ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:480
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:503
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Galileo"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:482
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:506
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:485
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:509
 #, fuzzy
 #| msgid "Navigation Satellites"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Navy Navigation Satellite System (NNSS)"
 msgstr "ផ្កាយរណប​រុករក"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:488
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:512
 #, fuzzy
 #| msgid "Navigation"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Russian LEO Navigation"
 msgstr "ការ​រុករក"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:491
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:515
 #, fuzzy
 #| msgid "Scientific Satellites"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Scientific Satellites"
 msgstr "ផ្កាយរណប​វិទ្យាសាស្ត្រ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:493
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:517
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Space & Earth Science"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:495
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:520
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Geodetic"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:497
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:523
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Engineering"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:500
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:526
 #, fuzzy
 #| msgid "Location"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Education"
 msgstr "ទីតាំង"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:503
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:529
 #, fuzzy
 #| msgid "Miscellaneous Satellites"
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Miscellaneous Satellites"
 msgstr "ផ្កាយរណប​ផ្សេងៗ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:505
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:531
 #, fuzzy
 #| msgid "Miscellaneous Satellites"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Miscellaneous Military"
 msgstr "ផ្កាយរណប​ផ្សេងៗ"
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:508
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:534
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Radar Calibration"
 msgstr ""
 
-#: src/plugins/render/satellites/SatellitesPlugin.cpp:510
+#: src/plugins/render/satellites/SatellitesPlugin.cpp:537
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "CubeSats"
 msgstr ""
@@ -19985,57 +19985,57 @@ msgctxt "Marble::LocalOsmSearchPlugin|"
 msgid "Searches for addresses and points of interest in offline maps."
 msgstr "ស្វែងរក​អាសយដ្ឋាន និង​ចំណុច​ចាប់អារម្មណ៍​នៅ​ក្នុង​ផែនទី​ក្រៅ​បណ្ដាញ ។"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:264
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:266
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:265
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:267
 #, fuzzy
 #| msgid "north"
 msgctxt "QObject|"
 msgid "north"
 msgstr "ខាងជើង"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:268
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:269
 #, fuzzy
 #| msgid "north-west"
 msgctxt "QObject|"
 msgid "north-west"
 msgstr "ពាយ័ព្យ"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:270
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:271
 #, fuzzy
 #| msgid "west"
 msgctxt "QObject|"
 msgid "west"
 msgstr "ខាងលិច"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:272
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:273
 #, fuzzy
 #| msgid "south-west"
 msgctxt "QObject|"
 msgid "south-west"
 msgstr "និរតី"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:274
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:275
 #, fuzzy
 #| msgid "south"
 msgctxt "QObject|"
 msgid "south"
 msgstr "ខាងត្បូង"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:276
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:277
 #, fuzzy
 #| msgid "south-east"
 msgctxt "QObject|"
 msgid "south-east"
 msgstr "អាគ្នេយ៍"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:278
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:279
 #, fuzzy
 #| msgid "east"
 msgctxt "QObject|"
 msgid "east"
 msgstr "ខាងកើត"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:280
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:281
 #, fuzzy
 #| msgid "north-east"
 msgctxt "QObject|"
@@ -20226,41 +20226,41 @@ msgctxt "QObject|"
 msgid "Installing %1"
 msgstr "កំពុង​ដំឡើង %1"
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:533
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:531
 #, qt-format
 msgctxt "Marble::MonavConfigWidget|"
 msgid "%1/%2 MB"
 msgstr ""
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:612
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:610
 #, fuzzy
 #| msgid "An update is available. Click to install it."
 msgctxt "QObject|"
 msgid "An update is available. Click to install it."
 msgstr "មាន​ការ​ធ្វើ​បច្ចុប្បន្នភាព ។ ចុច​ដើម្បី​ដំឡើង​វា ។"
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:613
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:611
 #, fuzzy
 #| msgid "No update available. You are running the latest version."
 msgctxt "QObject|"
 msgid "No update available. You are running the latest version."
 msgstr "មិន​មាន​ការ​ធ្វើ​បច្ចុប្បន្នភាព​ទេ ។ អ្នក​កំពុង​ដំណើរការ​កំណែ​ចុងក្រោយ​បំផុត ។"
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:641
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:639
 #, fuzzy
 #| msgid "Are you sure you want to delete this map from the system?"
 msgctxt "Marble::MonavConfigWidget|"
 msgid "Are you sure you want to delete this map from the system?"
 msgstr "តើ​អ្នក​ពិតជា​ចង់​លុប​ផែនទី​នេះ​ចេញពី​ប្រព័ន្ធ​មែន​ឬ ?"
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:642
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:640
 #, fuzzy
 #| msgid "Remove Map"
 msgctxt "Marble::MonavConfigWidget|"
 msgid "Remove Map"
 msgstr "យក​ផែនទី​ចេញ"
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:673
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:671
 #, fuzzy
 #| msgid "Nothing to do."
 msgctxt "QObject|"
