@@ -18,18 +18,9 @@ QList<QString> PlanetFactory::planetList()
 {
     QStringList planets;
 
-    planets << "mercury"
-            << "venus"
-            << "earth"
-            << "mars"
-            << "jupiter"
-            << "saturn"
-            << "uranus"
-            << "neptune"
-            << "pluto"
-            << "sun"
-            << "moon"
-            << "sky";
+    planets << QStringLiteral("mercury") << QStringLiteral("venus") << QStringLiteral("earth") << QStringLiteral("mars") << QStringLiteral("jupiter")
+            << QStringLiteral("saturn") << QStringLiteral("uranus") << QStringLiteral("neptune") << QStringLiteral("pluto") << QStringLiteral("sun")
+            << QStringLiteral("moon") << QStringLiteral("sky");
 
     return planets;
 }

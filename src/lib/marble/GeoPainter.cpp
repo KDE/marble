@@ -944,7 +944,7 @@ void GeoPainter::drawRoundedRect(const GeoDataCoordinates &centerPosition, qreal
 
 void GeoPainter::drawTextFragment(const QPoint &position, const QString &text, const qreal fontSize, const QColor &color, const Frames &flags)
 {
-    const QString key = text + ":" + QString::number(static_cast<int>(flags));
+    const QString key = text + QString::fromLatin1(":") + QString::number(static_cast<int>(flags));
 
     QPixmap pixmap;
 

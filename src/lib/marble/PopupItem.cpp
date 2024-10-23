@@ -67,7 +67,7 @@ PopupItem::PopupItem(QObject *parent)
     m_ui.webView->page()->settings()->setAttribute(QWebEngineSettings::LocalStorageEnabled, true);
 #endif
     m_ui.webView->setAttribute(Qt::WA_OpaquePaintEvent, false);
-    m_ui.webView->setUrl(QUrl("about:blank"));
+    m_ui.webView->setUrl(QUrl(QStringLiteral("about:blank")));
 
     connect(m_ui.hideButton, SIGNAL(clicked()), this, SIGNAL(hide()));
 
@@ -135,11 +135,11 @@ void PopupItem::setBackgroundColor(const QColor &color)
 {
     if (color.isValid()) {
         m_backColor = color;
-        QPixmapCache::remove("marble/webpopup/webpopup2");
-        QPixmapCache::remove("marble/webpopup/arrow2_topleft");
-        QPixmapCache::remove("marble/webpopup/arrow2_bottomleft");
-        QPixmapCache::remove("marble/webpopup/arrow2_topright");
-        QPixmapCache::remove("marble/webpopup/arrow2_bottomright");
+        QPixmapCache::remove(QStringLiteral("marble/webpopup/webpopup2"));
+        QPixmapCache::remove(QStringLiteral("marble/webpopup/arrow2_topleft"));
+        QPixmapCache::remove(QStringLiteral("marble/webpopup/arrow2_bottomleft"));
+        QPixmapCache::remove(QStringLiteral("marble/webpopup/arrow2_topright"));
+        QPixmapCache::remove(QStringLiteral("marble/webpopup/arrow2_bottomright"));
 
         requestUpdate();
     }
@@ -160,52 +160,52 @@ void PopupItem::colorize(QImage &img, const QColor &col)
 void PopupItem::paint(QPainter *painter)
 {
     QRect popupRect;
-    QPixmap image = pixmap("marble/webpopup/arrow2_vertical_topright");
+    QPixmap image = pixmap(QStringLiteral("marble/webpopup/arrow2_vertical_topright"));
 
     if (alignment() & Qt::AlignRight) {
         popupRect.setRect(image.width() - 13, -10, size().width() - (image.width() - 3), size().height());
-        qDrawBorderPixmap(painter, popupRect, QMargins(20, 20, 20, 20), pixmap("marble/webpopup/webpopup2"));
+        qDrawBorderPixmap(painter, popupRect, QMargins(20, 20, 20, 20), pixmap(QStringLiteral("marble/webpopup/webpopup2")));
         if (alignment() & Qt::AlignTop) {
-            image = pixmap("marble/webpopup/arrow2_bottomleft");
+            image = pixmap(QStringLiteral("marble/webpopup/arrow2_bottomleft"));
             painter->drawPixmap(0, size().height() - image.height(), image);
         } else if (alignment() & Qt::AlignBottom) {
-            image = pixmap("marble/webpopup/arrow2_topleft");
+            image = pixmap(QStringLiteral("marble/webpopup/arrow2_topleft"));
             painter->drawPixmap(0, 0, image);
         } else { // for no horizontal align value and Qt::AlignVCenter
-            image = pixmap("marble/webpopup/arrow2_topleft");
+            image = pixmap(QStringLiteral("marble/webpopup/arrow2_topleft"));
             painter->drawPixmap(0, size().height() / 2, image);
         }
         m_widget->render(painter, QPoint(image.width() - 3, 0));
     } else if (alignment() & Qt::AlignLeft) {
         popupRect.setRect(-10, -10, size().width() - (image.width() - 3), size().height());
-        qDrawBorderPixmap(painter, popupRect, QMargins(20, 20, 20, 20), pixmap("marble/webpopup/webpopup2"));
+        qDrawBorderPixmap(painter, popupRect, QMargins(20, 20, 20, 20), pixmap(QStringLiteral("marble/webpopup/webpopup2")));
         if (alignment() & Qt::AlignTop) {
-            image = pixmap("marble/webpopup/arrow2_bottomright");
+            image = pixmap(QStringLiteral("marble/webpopup/arrow2_bottomright"));
             painter->drawPixmap(size().width() - image.width(), size().height() - image.height(), image);
         } else if (alignment() & Qt::AlignBottom) {
-            image = pixmap("marble/webpopup/arrow2_topright");
+            image = pixmap(QStringLiteral("marble/webpopup/arrow2_topright"));
             painter->drawPixmap(size().width() - image.width(), 0, image);
         } else { // for no horizontal align value and Qt::AlignVCenter
-            image = pixmap("marble/webpopup/arrow2_topright");
+            image = pixmap(QStringLiteral("marble/webpopup/arrow2_topright"));
             painter->drawPixmap(size().width() - image.width(), size().height() / 2 - image.height() / 2 + 23, image);
         }
         m_widget->render(painter, QPoint(5, 0), QRegion());
     } else if (alignment() & Qt::AlignHCenter) {
         if (alignment() & Qt::AlignTop) {
-            image = pixmap("marble/webpopup/arrow2_vertical_bottomright");
+            image = pixmap(QStringLiteral("marble/webpopup/arrow2_vertical_bottomright"));
             popupRect.setRect(-10, -10, size().width(), size().height() - image.height() + 3);
-            qDrawBorderPixmap(painter, popupRect, QMargins(20, 20, 20, 20), pixmap("marble/webpopup/webpopup2"));
+            qDrawBorderPixmap(painter, popupRect, QMargins(20, 20, 20, 20), pixmap(QStringLiteral("marble/webpopup/webpopup2")));
             painter->drawPixmap(size().width() / 2 - image.width(), size().height() - image.height(), image);
             m_widget->render(painter, QPoint(0, 0), QRegion());
         } else if (alignment() & Qt::AlignBottom) {
-            image = pixmap("marble/webpopup/arrow2_vertical_topleft");
+            image = pixmap(QStringLiteral("marble/webpopup/arrow2_vertical_topleft"));
             popupRect.setRect(-10, image.height() - 13, size().width(), size().height() - image.height() + 3);
-            qDrawBorderPixmap(painter, popupRect, QMargins(20, 20, 20, 20), pixmap("marble/webpopup/webpopup2"));
+            qDrawBorderPixmap(painter, popupRect, QMargins(20, 20, 20, 20), pixmap(QStringLiteral("marble/webpopup/webpopup2")));
             painter->drawPixmap(size().width() / 2, 0, image);
             m_widget->render(painter, QPoint(5, image.height() - 7), QRegion());
         } else { // for no horizontal align value and Qt::AlignVCenter
             popupRect.setRect(-10, -10, size().width(), size().height());
-            qDrawBorderPixmap(painter, popupRect, QMargins(20, 20, 20, 20), pixmap("marble/webpopup/webpopup2"));
+            qDrawBorderPixmap(painter, popupRect, QMargins(20, 20, 20, 20), pixmap(QStringLiteral("marble/webpopup/webpopup2")));
             m_widget->render(painter, QPoint(0, 0), QRegion());
         }
     }
@@ -315,7 +315,7 @@ QWidget *PopupItem::transform(QPoint &point) const
 void PopupItem::clearHistory()
 {
     m_content.clear();
-    m_ui.webView->setUrl(QUrl("about:blank"));
+    m_ui.webView->setUrl(QUrl(QStringLiteral("about:blank")));
 #ifndef MARBLE_NO_WEBKITWIDGETS
     m_ui.webView->history()->clear();
 #endif
@@ -347,7 +347,7 @@ void PopupItem::updateBackButton()
     bool const hasHistory = m_ui.webView->page()->history()->count() > 1;
     bool const previousIsHtml = !m_content.isEmpty() && m_ui.webView->page()->history()->currentItemIndex() == 1;
     bool const atStart = m_ui.webView->page()->history()->currentItemIndex() <= 1;
-    bool const currentIsHtml = m_ui.webView->page()->url() == QUrl("about:blank");
+    bool const currentIsHtml = m_ui.webView->page()->url() == QUrl(QStringLiteral("about:blank"));
 
     m_ui.goBackButton->setVisible(hasHistory && !currentIsHtml && (previousIsHtml || !atStart));
 #endif

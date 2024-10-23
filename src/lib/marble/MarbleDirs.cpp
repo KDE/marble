@@ -116,7 +116,7 @@ QString MarbleDirs::systemPath()
 
 #ifdef MARBLE_DATA_PATH
     // MARBLE_DATA_PATH is a compiler define set by cmake
-    QString compileTimeMarbleDataPath(MARBLE_DATA_PATH);
+    QString compileTimeMarbleDataPath(QString::fromLatin1(MARBLE_DATA_PATH));
 
     if (QDir(compileTimeMarbleDataPath).exists())
         return compileTimeMarbleDataPath;
@@ -174,7 +174,7 @@ QString MarbleDirs::pluginSystemPath()
 
 #ifdef MARBLE_PLUGIN_PATH
     // MARBLE_PLUGIN_PATH is a compiler define set by cmake
-    QString compileTimeMarblePluginPath(MARBLE_PLUGIN_PATH);
+    QString compileTimeMarblePluginPath(QString::fromLatin1(MARBLE_PLUGIN_PATH));
 
     if (QDir(compileTimeMarblePluginPath).exists())
         return compileTimeMarblePluginPath;
@@ -224,7 +224,7 @@ QString MarbleDirs::pluginSystemPath()
 QString MarbleDirs::localPath()
 {
 #ifndef Q_OS_WIN
-    QString dataHome = getenv("XDG_DATA_HOME");
+    QString dataHome = QString::fromUtf8(getenv("XDG_DATA_HOME"));
     if (dataHome.isEmpty())
         dataHome = QDir::homePath() + QLatin1StringView("/.local/share");
 
@@ -245,7 +245,7 @@ QStringList MarbleDirs::oldLocalPaths()
     const QString xdgDefault = QDir::homePath() + QLatin1StringView("/.local/share/marble");
     possibleOldPaths.append(xdgDefault);
 
-    QString xdg = getenv("XDG_DATA_HOME");
+    QString xdg = QString::fromUtf8(getenv("XDG_DATA_HOME"));
     xdg += QLatin1StringView("/marble/");
     possibleOldPaths.append(xdg);
 #endif
@@ -324,10 +324,10 @@ void MarbleDirs::debug()
     mDebug() << "Plugin Local Path:" << pluginLocalPath();
     mDebug() << "";
     mDebug() << "Marble Data Path (Run Time) :" << runTimeMarbleDataPath;
-    mDebug() << "Marble Data Path (Compile Time):" << QString(MARBLE_DATA_PATH);
+    mDebug() << "Marble Data Path (Compile Time):" << QString::fromLatin1(MARBLE_DATA_PATH);
     mDebug() << "";
     mDebug() << "Marble Plugin Path (Run Time) :" << runTimeMarblePluginPath;
-    mDebug() << "Marble Plugin Path (Compile Time):" << QString(MARBLE_PLUGIN_PATH);
+    mDebug() << "Marble Plugin Path (Compile Time):" << QString::fromLatin1(MARBLE_PLUGIN_PATH);
     mDebug() << "";
     mDebug() << "System Path:" << systemPath();
     mDebug() << "Plugin System Path:" << pluginSystemPath();

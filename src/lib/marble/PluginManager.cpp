@@ -159,12 +159,12 @@ void PluginManager::addParseRunnerPlugin(const ParseRunnerPlugin *plugin)
 
 void PluginManager::blacklistPlugin(const QString &filename)
 {
-    PluginManagerPrivate::m_blacklist << MARBLE_SHARED_LIBRARY_PREFIX + filename;
+    PluginManagerPrivate::m_blacklist << QString::fromLatin1(MARBLE_SHARED_LIBRARY_PREFIX) + filename;
 }
 
 void PluginManager::whitelistPlugin(const QString &filename)
 {
-    PluginManagerPrivate::m_whitelist << MARBLE_SHARED_LIBRARY_PREFIX + filename;
+    PluginManagerPrivate::m_whitelist << QString::fromLatin1(MARBLE_SHARED_LIBRARY_PREFIX) + filename;
 }
 
 /** Append obj to the given plugins list if it inherits both T and U */
@@ -173,7 +173,7 @@ bool appendPlugin(QObject *obj, const QPluginLoader *loader, QList<Plugin> &plug
 {
     if (qobject_cast<Iface *>(obj) && qobject_cast<Plugin>(obj)) {
         Q_ASSERT(obj->metaObject()->superClass()); // all our plugins have a super class
-        mDebug() << obj->metaObject()->superClass()->className() << "plugin loaded from" << (loader ? loader->fileName() : "<static>");
+        mDebug() << obj->metaObject()->superClass()->className() << "plugin loaded from" << (loader ? loader->fileName() : QStringLiteral("<static>"));
         auto plugin = qobject_cast<Plugin>(obj);
         Q_ASSERT(plugin); // checked above
         plugins << plugin;
@@ -192,8 +192,8 @@ bool PluginManagerPrivate::addPlugin(QObject *obj, const QPluginLoader *loader)
     isPlugin = isPlugin || appendPlugin<RoutingRunnerPlugin>(obj, loader, m_routingRunnerPlugins);
     isPlugin = isPlugin || appendPlugin<ParseRunnerPlugin>(obj, loader, m_parsingRunnerPlugins);
     if (!isPlugin) {
-        qWarning() << "Ignoring the following plugin since it couldn't be loaded:" << (loader ? loader->fileName() : "<static>");
-        mDebug() << "Plugin failure:" << (loader ? loader->fileName() : "<static>") << "is a plugin, but it does not implement the "
+        qWarning() << "Ignoring the following plugin since it couldn't be loaded:" << (loader ? loader->fileName() : QStringLiteral("<static>"));
+        mDebug() << "Plugin failure:" << (loader ? loader->fileName() : QStringLiteral("<static>")) << "is a plugin, but it does not implement the "
                  << "right interfaces or it was compiled against an old version of Marble. Ignoring it.";
     }
     return isPlugin;
@@ -209,7 +209,7 @@ void PluginManagerPrivate::loadPlugins()
     t.start();
     mDebug() << "Starting to load Plugins.";
 
-    QStringList pluginFileNameList = MarbleDirs::pluginEntryList("", QDir::Files);
+    QStringList pluginFileNameList = MarbleDirs::pluginEntryList(QString(), QDir::Files);
 
     MarbleDirs::debug();
 
@@ -223,7 +223,7 @@ void PluginManagerPrivate::loadPlugins()
     bool foundPlugin = false;
     for (const QString &fileName : pluginFileNameList) {
         QString const baseName = QFileInfo(fileName).baseName();
-        QString const libBaseName = MARBLE_SHARED_LIBRARY_PREFIX + QFileInfo(fileName).baseName();
+        QString const libBaseName = QString::fromLatin1(MARBLE_SHARED_LIBRARY_PREFIX) + QFileInfo(fileName).baseName();
         if (!m_whitelist.isEmpty() && !m_whitelist.contains(baseName) && !m_whitelist.contains(libBaseName)) {
             mDebug() << "Ignoring non-whitelisted plugin " << fileName;
             continue;

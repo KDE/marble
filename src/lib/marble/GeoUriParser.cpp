@@ -63,9 +63,10 @@ bool GeoUriParser::parse()
         return false;
     }
 
-    QString const floatRegexp = "[-+]?[0-9]*\\.?[0-9]+(?:[eE][-+]?[0-9]+)?";
+    QString const floatRegexp = QStringLiteral("[-+]?[0-9]*\\.?[0-9]+(?:[eE][-+]?[0-9]+)?");
 
-    QRegExp geoUriRegexp("geo:(" + floatRegexp + "),(" + floatRegexp + "),?(" + floatRegexp + R"()?(?:;(crs|u)=([\w\d-]+))?(?:;(crs|u)=([\w\d-]+))?)",
+    QRegExp geoUriRegexp(QStringLiteral("geo:(") + floatRegexp + QStringLiteral("),(") + floatRegexp + QStringLiteral("),?(") + floatRegexp
+                             + QStringLiteral(R"()?(?:;(crs|u)=([\w\d-]+))?(?:;(crs|u)=([\w\d-]+))?)"),
                          Qt::CaseInsensitive,
                          QRegExp::RegExp2);
 
@@ -105,14 +106,14 @@ bool GeoUriParser::parse()
         m_geoUri.replace(QStringLiteral("goto/"), QStringLiteral("goto/?"));
         QUrl worldwindUrl(m_geoUri);
 
-        double lat = queryValue(worldwindUrl, "lat", "latitude").toDouble();
-        double lon = queryValue(worldwindUrl, "lon", "longitude").toDouble();
-        double alt = queryValue(worldwindUrl, "alt", "altitude").toDouble();
+        double lat = queryValue(worldwindUrl, QStringLiteral("lat"), QStringLiteral("latitude")).toDouble();
+        double lon = queryValue(worldwindUrl, QStringLiteral("lon"), QStringLiteral("longitude")).toDouble();
+        double alt = queryValue(worldwindUrl, QStringLiteral("alt"), QStringLiteral("altitude")).toDouble();
         // double bank = getDoubleFromParameter(worldwindUrl, "bank", "");
         // double dir = getDoubleFromParameter(worldwindUrl, "dir", "direction");
         // double tilt = getDoubleFromParameter(worldwindUrl, "tilt", "");
         // QString layer = worldwindUrl.queryItemValue("layer");
-        QString world = queryValue(worldwindUrl, "world");
+        QString world = queryValue(worldwindUrl, QStringLiteral("world"));
 
         for (const QString &str : PlanetFactory::planetList()) {
             if (world.contains(str, Qt::CaseInsensitive)) {

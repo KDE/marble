@@ -206,7 +206,7 @@ QVariant GeoDataTreeModel::data(const QModelIndex &index, int role) const
                 }
 
             } else if (index.column() == 1) {
-                return {placemark->nodeType()};
+                return {QString::fromLatin1(placemark->nodeType())};
             } else if (index.column() == 2) {
                 return {placemark->popularity()};
             } else if (index.column() == 3) {
@@ -218,13 +218,13 @@ QVariant GeoDataTreeModel::data(const QModelIndex &index, int role) const
             if (index.column() == 0) {
                 return QVariant(feature->name());
             } else if (index.column() == 1) {
-                return {feature->nodeType()};
+                return {QString::fromLatin1(feature->nodeType())};
             }
         }
 
         auto geometry = dynamic_cast<GeoDataGeometry *>(object);
         if (geometry && index.column() == 1) {
-            return {geometry->nodeType()};
+            return {QString::fromLatin1(geometry->nodeType())};
         }
 
         auto playlist = geodata_cast<GeoDataPlaylist>(object);
@@ -233,7 +233,7 @@ QVariant GeoDataTreeModel::data(const QModelIndex &index, int role) const
         }
 
         if (object && index.column() == 1) {
-            return {object->nodeType()};
+            return {QString::fromLatin1(object->nodeType())};
         }
 
     } else if (role == Qt::CheckStateRole && index.column() == 0) {

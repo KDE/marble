@@ -39,7 +39,7 @@ HttpJobPrivate::HttpJobPrivate(const QUrl &sourceUrl, const QString &destFileNam
     ,
     // FIXME: remove initialization depending on if empty pluginId
     // results in valid user agent string
-    m_userAgent("unknown")
+    m_userAgent(QStringLiteral("unknown"))
     , m_networkAccessManager(networkAccessManager)
     , m_networkReply(nullptr)
 {
@@ -114,12 +114,12 @@ QByteArray HttpJob::userAgent() const
 {
     switch (d->m_downloadUsage) {
     case DownloadBrowse:
-        return HttpDownloadManager::userAgent("Browser", d->m_userAgent);
+        return HttpDownloadManager::userAgent(QStringLiteral("Browser"), d->m_userAgent);
     case DownloadBulk:
-        return HttpDownloadManager::userAgent("BulkDownloader", d->m_userAgent);
+        return HttpDownloadManager::userAgent(QStringLiteral("BulkDownloader"), d->m_userAgent);
     default:
         qCritical() << "Unknown download usage value:" << d->m_downloadUsage;
-        return HttpDownloadManager::userAgent("unknown", d->m_userAgent);
+        return HttpDownloadManager::userAgent(QStringLiteral("unknown"), d->m_userAgent);
     }
 }
 

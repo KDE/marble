@@ -130,7 +130,7 @@ QString MarbleLocale::unitAbbreviation(MeasureUnit unit)
     case NauticalMile:
         return QObject::tr("nm", "means nautical miles");
     default:
-        return "";
+        return {};
     }
 }
 
@@ -141,7 +141,7 @@ QString MarbleLocale::languageCode()
 
     int index = lang.indexOf(QLatin1Char('_'));
     if (lang == QLatin1StringView("C")) {
-        code = "en";
+        code = QStringLiteral("en");
     } else if (index != -1) {
         code = lang.left(index);
     } else {

@@ -336,13 +336,13 @@ void QtMarbleConfigDialog::updateCloudSyncStatus(const QString &status)
     CloudSyncManager::Status status_type = d->m_cloudSyncManager ? d->m_cloudSyncManager->status() : CloudSyncManager::Unknown;
     switch (status_type) {
     case CloudSyncManager::Success:
-        d->m_cloudSyncStatusLabel->setStyleSheet("QLabel { color : green; }");
+        d->m_cloudSyncStatusLabel->setStyleSheet(QStringLiteral("QLabel { color : green; }"));
         break;
     case CloudSyncManager::Error:
-        d->m_cloudSyncStatusLabel->setStyleSheet("QLabel { color : red; }");
+        d->m_cloudSyncStatusLabel->setStyleSheet(QStringLiteral("QLabel { color : red; }"));
         break;
     case CloudSyncManager::Unknown:
-        d->m_cloudSyncStatusLabel->setStyleSheet("QLabel { color : grey; }");
+        d->m_cloudSyncStatusLabel->setStyleSheet(QStringLiteral("QLabel { color : grey; }"));
         break;
     }
 }
@@ -365,13 +365,13 @@ void QtMarbleConfigDialog::writeSettings()
     d->m_settings.setValue("mouseViewRotation", d->ui_navigationSettings.kcfg_mouseViewRotation->isChecked());
     d->m_settings.setValue("animateTargetVoyage", d->ui_navigationSettings.kcfg_animateTargetVoyage->isChecked());
     if (d->ui_navigationSettings.kcfg_externalMapEditor->currentIndex() == 0) {
-        d->m_settings.setValue("externalMapEditor", "");
+        d->m_settings.setValue("externalMapEditor", {});
     } else if (d->ui_navigationSettings.kcfg_externalMapEditor->currentIndex() == 1) {
-        d->m_settings.setValue("externalMapEditor", "potlatch");
+        d->m_settings.setValue("externalMapEditor", QStringLiteral("potlatch"));
     } else if (d->ui_navigationSettings.kcfg_externalMapEditor->currentIndex() == 2) {
-        d->m_settings.setValue("externalMapEditor", "josm");
+        d->m_settings.setValue("externalMapEditor", QStringLiteral("josm"));
     } else if (d->ui_navigationSettings.kcfg_externalMapEditor->currentIndex() == 3) {
-        d->m_settings.setValue("externalMapEditor", "merkaartor");
+        d->m_settings.setValue("externalMapEditor", QStringLiteral("merkaartor"));
     } else {
         Q_ASSERT(false && "Unexpected index of the external editor setting");
     }
@@ -403,7 +403,7 @@ void QtMarbleConfigDialog::writeSettings()
 
     d->m_settings.beginGroup("CloudSync");
     d->m_settings.setValue("enableSync", d->ui_cloudSyncSettings.kcfg_enableSync->isChecked());
-    d->m_settings.setValue("syncBackend", "owncloud");
+    d->m_settings.setValue("syncBackend", QStringLiteral("owncloud"));
     d->m_settings.setValue("syncBookmarks", d->ui_cloudSyncSettings.kcfg_syncBookmarks->isChecked());
     d->m_settings.setValue("syncRoutes", d->ui_cloudSyncSettings.kcfg_syncRoutes->isChecked());
     d->m_settings.setValue("owncloudServer", d->ui_cloudSyncSettings.kcfg_owncloudServer->text());
@@ -463,7 +463,7 @@ int QtMarbleConfigDialog::onStartup() const
 
 QString QtMarbleConfigDialog::externalMapEditor() const
 {
-    return d->m_settings.value("Navigation/externalMapEditor", "").toString();
+    return d->m_settings.value("Navigation/externalMapEditor", {}).toString();
 }
 
 bool QtMarbleConfigDialog::animateTargetVoyage() const
@@ -495,7 +495,7 @@ int QtMarbleConfigDialog::persistentTileCacheLimit() const
 
 QString QtMarbleConfigDialog::proxyUrl() const
 {
-    return d->m_settings.value("Cache/proxyUrl", "").toString();
+    return d->m_settings.value("Cache/proxyUrl", {}).toString();
 }
 
 int QtMarbleConfigDialog::proxyPort() const
@@ -505,12 +505,12 @@ int QtMarbleConfigDialog::proxyPort() const
 
 QString QtMarbleConfigDialog::proxyUser() const
 {
-    return d->m_settings.value("Cache/proxyUser", "").toString();
+    return d->m_settings.value("Cache/proxyUser", {}).toString();
 }
 
 QString QtMarbleConfigDialog::proxyPass() const
 {
-    return d->m_settings.value("Cache/proxyPass", "").toString();
+    return d->m_settings.value("Cache/proxyPass", {}).toString();
 }
 
 bool QtMarbleConfigDialog::proxyType() const
@@ -597,7 +597,7 @@ bool QtMarbleConfigDialog::syncEnabled() const
 
 QString QtMarbleConfigDialog::syncBackend() const
 {
-    return d->m_settings.value("CloudSync/syncBackend", "").toString();
+    return d->m_settings.value("CloudSync/syncBackend", {}).toString();
 }
 
 bool QtMarbleConfigDialog::syncBookmarks() const
@@ -612,17 +612,17 @@ bool QtMarbleConfigDialog::syncRoutes() const
 
 QString QtMarbleConfigDialog::owncloudServer() const
 {
-    return d->m_settings.value("CloudSync/owncloudServer", "").toString();
+    return d->m_settings.value("CloudSync/owncloudServer", {}).toString();
 }
 
 QString QtMarbleConfigDialog::owncloudUsername() const
 {
-    return d->m_settings.value("CloudSync/owncloudUsername", "").toString();
+    return d->m_settings.value("CloudSync/owncloudUsername", {}).toString();
 }
 
 QString QtMarbleConfigDialog::owncloudPassword() const
 {
-    return d->m_settings.value("CloudSync/owncloudPassword", "").toString();
+    return d->m_settings.value("CloudSync/owncloudPassword", {}).toString();
 }
 
 }
