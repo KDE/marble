@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-10-17 23:14+0300\n"
+"PO-Revision-Date: 2024-10-21 09:12+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -1969,440 +1969,437 @@ msgstr "אנדרומדה"
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Antlia"
-msgstr ""
+msgstr "משאבה"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Apus"
-msgstr ""
+msgstr "ציפור גן עדן"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Aquarius"
-msgstr ""
+msgstr "דלי"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Aquila"
-msgstr ""
+msgstr "נשר"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Ara"
-msgstr "אטלס"
+msgstr "מזבח"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Aries"
-msgstr ""
+msgstr "טלה"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Auriga"
-msgstr ""
+msgstr "עגלון"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Boötes"
-msgstr ""
+msgstr "רועה דובים"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Caelum"
-msgstr ""
+msgstr "מפסלת"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Camelopardalis"
-msgstr ""
+msgstr "ג'ירף"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Cancer"
-msgstr "&ביטול"
+msgstr "סרטן"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Canes Venatici"
-msgstr ""
+msgstr "כלבי ציד"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Canis Major"
-msgstr ""
+msgstr "כלב גדול"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Canis Minor"
-msgstr ""
+msgstr "כלב קטן"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Capricornus"
-msgstr ""
+msgstr "גדי"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Carina"
-msgstr ""
+msgstr "שדרית"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Cassiopeia"
-msgstr ""
+msgstr "קסיופאה"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Centaurus"
-msgstr ""
+msgstr "קנטאור"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Cepheus"
-msgstr ""
+msgstr "קפאוס"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Cetus"
-msgstr ""
+msgstr "לווייתן"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Chamaeleon"
-msgstr ""
+msgstr "זיקית"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Circinus"
-msgstr ""
+msgstr "מחוגה"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Columba"
-msgstr ""
+msgstr "יונה"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Coma Berenices"
-msgstr ""
+msgstr "שערות ברניקי"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Corona Australis"
-msgstr ""
+msgstr "כתר דרומי"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Corona Borealis"
-msgstr ""
+msgstr "כתר צפוני"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Corvus"
-msgstr ""
+msgstr "עורב"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Crater"
-msgstr "0 מ' (מים)"
+msgstr "גביע"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Crux"
-msgstr ""
+msgstr "הצלב הדרומי"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Cygnus"
-msgstr ""
+msgstr "ברבור"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Delphinus"
-msgstr ""
+msgstr "דולפין"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Dorado"
-msgstr ""
+msgstr "דג זהב"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Draco"
-msgstr ""
+msgstr "דרקון"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Equuleus"
-msgstr ""
+msgstr "סוסון"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Eridanus"
-msgstr ""
+msgstr "ארידנוס"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Fornax"
-msgstr ""
+msgstr "תנור"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Gemini"
-msgstr ""
+msgstr "תאומים"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Grus"
-msgstr ""
+msgstr "עגור"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Hercules"
-msgstr ""
+msgstr "הרקולס"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Horologium"
-msgstr ""
+msgstr "שעון מטוטלת"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Hydra"
-msgstr ""
+msgstr "נחש מים"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Hydrus"
-msgstr ""
+msgstr "נחש מים קטן"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Indus"
-msgstr ""
+msgstr "אינדיאני"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Lacerta"
-msgstr ""
+msgstr "לטאה"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Leo"
-msgstr ""
+msgstr "אריה"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Leo Minor"
-msgstr ""
+msgstr "אריה קטן"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Lepus"
-msgstr ""
+msgstr "ארנבת"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Libra"
-msgstr ""
+msgstr "מאזניים"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Lupus"
-msgstr ""
+msgstr "זאב"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Lynx"
-msgstr ""
+msgstr "לינקס"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Lyra"
-msgstr ""
+msgstr "נבל"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Mensa"
-msgstr ""
+msgstr "הר השולחן"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Microscopium"
-msgstr ""
+msgstr "מיקרוסקופ"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Monoceros"
-msgstr ""
+msgstr "חד-קרן"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Musca"
-msgstr ""
+msgstr "זבוב"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Norma"
-msgstr ""
+msgstr "סרגל"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Octans"
-msgstr ""
+msgstr "אוקטנט"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Ophiuchus"
-msgstr ""
+msgstr "נושא הנחש"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Orion"
-msgstr ""
+msgstr "אוריון"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Pavo"
-msgstr ""
+msgstr "טווס"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Pegasus"
-msgstr ""
+msgstr "פגסוס"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Perseus"
-msgstr ""
+msgstr "פרסאוס"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Phoenix"
-msgstr ""
+msgstr "עוף החול"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Pictor"
-msgstr ""
+msgstr "כן ציור"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Pisces"
-msgstr ""
+msgstr "דגים"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Piscis Austrinus"
-msgstr ""
+msgstr "דג דרומי"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Puppis"
-msgstr ""
+msgstr "ירכתי הספינה"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Pyxis"
-msgstr ""
+msgstr "מצפן"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Reticulum"
-msgstr ""
+msgstr "רשת"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Sagitta"
-msgstr ""
+msgstr "חץ"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Sagittarius"
-msgstr ""
+msgstr "קשת"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Scorpius"
-msgstr ""
+msgstr "עקרב"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Sculptor"
-msgstr ""
+msgstr "פסל"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Scutum"
-msgstr ""
+msgstr "מגן"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Serpens"
-msgstr ""
+msgstr "נחש"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Sextans"
-msgstr ""
+msgstr "סקסטנט"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Taurus"
-msgstr ""
+msgstr "שור"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Telescopium"
-msgstr ""
+msgstr "טלסקופ"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Triangulum"
-msgstr ""
+msgstr "משולש"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Triangulum Australe"
-msgstr ""
+msgstr "משולש דרומי"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Tucana"
-msgstr ""
+msgstr "טוקאן"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Ursa Major"
-msgstr ""
+msgstr "הדובה הגדולה"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Ursa Minor"
-msgstr ""
+msgstr "הדובה הקטנה"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Vela"
-msgstr ""
+msgstr "מפרש"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Virgo"
-msgstr ""
+msgstr "בתולה"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Volans"
-msgstr ""
+msgstr "דג מעופף"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Vulpecula"
-msgstr ""
+msgstr "שועלון"
 
 #: src/apps/marble-qt/qtmain.cpp:89
 #, fuzzy
@@ -13858,16 +13855,14 @@ msgid "S"
 msgstr "ד"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:14
-#, fuzzy
 msgctxt "CrosshairsConfigWidget|"
 msgid "Configure Crosshairs Plugin"
-msgstr "מתחיל חיפוש"
+msgstr "הגדרת תוסף סמן צלב"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:20
-#, fuzzy
 msgctxt "CrosshairsConfigWidget|"
 msgid "Theme"
-msgstr "ער&כת נושא"
+msgstr "ערכת עיצוב"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:43
 msgctxt "CrosshairsConfigWidget|"
@@ -13905,16 +13900,14 @@ msgid "Cross&hairs"
 msgstr ""
 
 #: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:91
-#, fuzzy
 msgctxt "Marble::CrosshairsPlugin|"
 msgid "A plugin that shows crosshairs."
-msgstr "תוסף המציג את השמיים מלאים בכוכבים."
+msgstr "תוסף שמציג סמני צלב."
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:14
-#, fuzzy
 msgctxt "EarthquakeConfigWidget|"
 msgid "Configure Earthquakes Plugin"
-msgstr "&כדור הארץ"
+msgstr "הגדרת תוסף רעידות אדמה"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:20
 msgctxt "EarthquakeConfigWidget|"
@@ -13958,10 +13951,9 @@ msgid "to"
 msgstr ""
 
 #: src/plugins/render/earthquake/EarthquakeItem.cpp:127
-#, fuzzy
 msgctxt "Marble::EarthquakeItem|"
 msgid "Date:"
-msgstr "&נתונים"
+msgstr "תאריך:"
 
 #: src/plugins/render/earthquake/EarthquakeItem.cpp:130
 #, fuzzy
@@ -13975,16 +13967,14 @@ msgid "Depth:"
 msgstr ""
 
 #: src/plugins/render/earthquake/EarthquakePlugin.cpp:55
-#, fuzzy
 msgctxt "Marble::EarthquakePlugin|"
 msgid "Earthquakes"
-msgstr "&כדור הארץ"
+msgstr "רעידות אדמה"
 
 #: src/plugins/render/earthquake/EarthquakePlugin.cpp:60
-#, fuzzy
 msgctxt "Marble::EarthquakePlugin|"
 msgid "&Earthquakes"
-msgstr "&כדור הארץ"
+msgstr "&רעידות אדמה"
 
 #: src/plugins/render/earthquake/EarthquakePlugin.cpp:75
 #, fuzzy
@@ -14004,16 +13994,14 @@ msgid "Show eclipses for year:"
 msgstr ""
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
-#, fuzzy
 msgctxt "EclipsesBrowserDialog|"
 msgid "&Settings…"
-msgstr "&הגדרות"
+msgstr "ה&גדרות…"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
-#, fuzzy
 msgctxt "EclipsesBrowserDialog|"
 msgid "&Close"
-msgstr "&סגור"
+msgstr "&סגירה"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:171
 msgctxt "EclipsesBrowserDialog|"
@@ -14027,10 +14015,9 @@ msgid "Eclipses Configuration"
 msgstr "מתחיל חיפוש"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:30
-#, fuzzy
 msgctxt "EclipsesConfigDialog|"
 msgid "&View"
-msgstr "&תצוגה"
+msgstr "ת&צוגה"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:36
 msgctxt "EclipsesConfigDialog|"
@@ -14148,10 +14135,9 @@ msgid "Sun, Annular/Total"
 msgstr ""
 
 #: src/plugins/render/eclipses/EclipsesModel.cpp:169
-#, fuzzy
 msgctxt "Marble::EclipsesModel|"
 msgid "Start"
-msgstr "&כוכבים"
+msgstr "התחלה"
 
 #: src/plugins/render/eclipses/EclipsesModel.cpp:171
 msgctxt "Marble::EclipsesModel|"
@@ -14343,29 +14329,25 @@ msgid "Marks the current elevation of the elevation profile on the map."
 msgstr "זהו פריט צף שמספק סקירה של המפה."
 
 #: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:134
-#, fuzzy
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "m"
-msgstr "מ'"
+msgstr "מ׳"
 
 #: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:142
 #: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:146
-#, fuzzy
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "ft"
-msgstr "שמאלה"
+msgstr "רגל"
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:50
-#, fuzzy
 msgctxt "Marble::FileViewFloatItem|"
 msgid "File View"
 msgstr "תצוגת קבצים"
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:55
-#, fuzzy
 msgctxt "Marble::FileViewFloatItem|"
 msgid "&File View"
-msgstr "תצוגת קבצים"
+msgstr "ת&צוגת קבצים"
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:65
 msgctxt "Marble::FileViewFloatItem|"
@@ -14373,10 +14355,9 @@ msgid "A list of currently opened files"
 msgstr ""
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:201
-#, fuzzy
 msgctxt "Marble::FileViewFloatItem|"
 msgid "Open file..."
-msgstr "פתח קובץ"
+msgstr "פתיחת קובץ…"
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:202
 msgctxt "Marble::FileViewFloatItem|"
@@ -14384,32 +14365,28 @@ msgid "Close this file"
 msgstr ""
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:212
-#, fuzzy
 msgctxt "Marble::FileViewFloatItem|"
 msgid "Open File"
-msgstr "פתח קובץ"
+msgstr "פתיחת קובץ"
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:214
-#, fuzzy
 msgctxt "Marble::FileViewFloatItem|"
 msgid ""
 "All Supported Files (*.gpx *.kml *.pnt);;GPS Data (*.gpx);;Google Earth KML "
 "(*.kml);PNT Data (*.pnt)"
 msgstr ""
-"כל הקבצים הנתמכים (‎*.gpx *.kml);;מידע של ‏GPS‏ (‎*.gpx);;Google Earth KML‏ (‎*."
-"kml)"
+"כל הקבצים הנתמכים (‎*.gpx‏ ‎*.kml‏ ‎*.pnt);;נתוני GPS‏ (‎*.gpx);;Google Earth KML "
+"(*.kml);נתוני PNT‏ (‎*.pnt)"
 
 #: src/plugins/render/foursquare/FoursquarePlugin.cpp:36
-#, fuzzy
 msgctxt "Marble::FoursquarePlugin|"
 msgid "Places"
-msgstr "תבליט"
+msgstr "מקומות"
 
 #: src/plugins/render/foursquare/FoursquarePlugin.cpp:41
-#, fuzzy
 msgctxt "Marble::FoursquarePlugin|"
 msgid "&Places"
-msgstr "תבליט"
+msgstr "מ&קומות"
 
 #: src/plugins/render/foursquare/FoursquarePlugin.cpp:56
 msgctxt "Marble::FoursquarePlugin|"
@@ -14445,16 +14422,14 @@ msgid "ft"
 msgstr "שמאלה"
 
 #: src/plugins/render/gpsinfo/GpsInfo.cpp:124
-#, fuzzy
 msgctxt "Marble::GpsInfo|"
 msgid "km/h"
-msgstr "ק\"מ"
+msgstr "קמ״ש"
 
 #: src/plugins/render/gpsinfo/GpsInfo.cpp:126
-#, fuzzy
 msgctxt "Marble::GpsInfo|"
 msgid "m"
-msgstr "מ'"
+msgstr "מ׳"
 
 #: src/plugins/render/gpsinfo/GpsInfo.cpp:131
 msgctxt "Marble::GpsInfo|"
@@ -14473,16 +14448,14 @@ msgid "Speed"
 msgstr ""
 
 #: src/plugins/render/gpsinfo/GpsInfoPlugin.ui:43
-#, fuzzy
 msgctxt "GpsInfoPlugin|"
 msgid "Direction"
-msgstr "&היטל"
+msgstr "כיוון"
 
 #: src/plugins/render/gpsinfo/GpsInfoPlugin.ui:57
-#, fuzzy
 msgctxt "GpsInfoPlugin|"
 msgid "Altitude"
-msgstr "קו &רוחב"
+msgstr "גובה"
 
 #: src/plugins/render/gpsinfo/GpsInfoPlugin.ui:71
 msgctxt "GpsInfoPlugin|"
@@ -14628,16 +14601,14 @@ msgid "Antarctic Circle"
 msgstr ""
 
 #: src/plugins/render/license/License.cpp:92
-#, fuzzy
 msgctxt "Marble::License|"
 msgid "License"
-msgstr "&הסכם רישיון"
+msgstr "רישיון"
 
 #: src/plugins/render/license/License.cpp:97
-#, fuzzy
 msgctxt "Marble::License|"
 msgid "&License"
-msgstr "&הסכם רישיון"
+msgstr "&רישיון"
 
 #: src/plugins/render/license/License.cpp:112
 #, fuzzy
@@ -14646,16 +14617,14 @@ msgid "This is a float item that provides copyright information."
 msgstr "זהו פריט צף המספק מצפן."
 
 #: src/plugins/render/license/License.cpp:229
-#, fuzzy
 msgctxt "Marble::License|"
 msgid "&Full License"
-msgstr "&מצב מסך מלא"
+msgstr "&רישיון מלא"
 
 #: src/plugins/render/license/License.cpp:233
-#, fuzzy
 msgctxt "Marble::License|"
 msgid "&Show Details"
-msgstr "הצג רשת"
+msgstr "הצגת &פרטים"
 
 #: src/plugins/render/mapscale/MapScaleConfigWidget.ui:14
 #, fuzzy
@@ -14698,23 +14667,20 @@ msgid "This is a float item that provides a map scale."
 msgstr "זהו פריט צף שמספק קנה מידה של המפה."
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:95
-#, fuzzy
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "Original Developer"
-msgstr "כותב מקורי, מפתח ומתחזק"
+msgstr "מפתח מקורי"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:221
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:225
-#, fuzzy
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "km"
-msgstr "ק\"מ"
+msgstr "ק״מ"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:228
-#, fuzzy
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "m"
-msgstr "מ'"
+msgstr "מ׳"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:233
 #, fuzzy
@@ -14740,10 +14706,9 @@ msgid "&Ratio Scale"
 msgstr ""
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:14
-#, fuzzy
 msgctxt "MeasureConfigDialog|"
 msgid "Measure Tool Configuration"
-msgstr "הר"
+msgstr "הגדרת כלי מדידה"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:20
 msgctxt "MeasureConfigDialog|"
@@ -14752,10 +14717,9 @@ msgstr ""
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:28
 #: src/plugins/render/measure/MeasureConfigDialog.ui:45
-#, fuzzy
 msgctxt "MeasureConfigDialog|"
 msgid "Polygon"
-msgstr "מפה רגילה"
+msgstr "מצולע"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:33
 #: src/plugins/render/measure/MeasureConfigDialog.ui:127
@@ -14769,10 +14733,9 @@ msgid "Segment labels"
 msgstr ""
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:60
-#, fuzzy
 msgctxt "MeasureConfigDialog|"
 msgid "Distance "
-msgstr "מרחק כולל: %1 מ'"
+msgstr "מרחק "
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:70
 msgctxt "MeasureConfigDialog|"
@@ -14791,10 +14754,9 @@ msgstr ""
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:100
 #: src/plugins/render/measure/MeasureConfigDialog.ui:159
-#, fuzzy
 msgctxt "MeasureConfigDialog|"
 msgid "Area"
-msgstr "אטלס"
+msgstr "שטח"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:133
 msgctxt "MeasureConfigDialog|"
@@ -14812,16 +14774,14 @@ msgid "Circumference"
 msgstr ""
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:86
-#, fuzzy
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Measure Tool"
-msgstr "ה&וסף נקודת מדידה"
+msgstr "כלי מדידה"
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:91
-#, fuzzy
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "&Measure Tool"
-msgstr "ה&וסף נקודת מדידה"
+msgstr "&כלי מדידה"
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:106
 msgctxt "Marble::MeasureToolPlugin|"
@@ -14830,12 +14790,14 @@ msgstr ""
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:360
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:477
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid ""
 "Area:\n"
 "%1"
-msgstr "איזור:"
+msgstr ""
+"שטח:\n"
+"%1"
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:380
 #, qt-format
@@ -14864,29 +14826,29 @@ msgid "Circle Ruler"
 msgstr ""
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:559
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Total Distance: %1<br/>\n"
-msgstr "מרחק כולל: %1 מ'"
+msgstr "מרחק כולל: %1<br/>\n"
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:561
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:570
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Area: %1<br/>\n"
-msgstr "איזור:"
+msgstr "שטח: %1<br/>\n"
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:563
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Perimeter: %1<br/>\n"
-msgstr "מרחק כולל: %1 מ'"
+msgstr "היקף: %1<br/>\n"
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:566
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Radius: %1<br/>\n"
-msgstr "מרחק כולל: %1 מ'"
+msgstr "רדיוס: %1<br/>\n"
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:568
 #, qt-format
@@ -14895,52 +14857,44 @@ msgid "Circumference: %1<br/>\n"
 msgstr ""
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:617
-#, fuzzy
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Add &Measure Point"
-msgstr "ה&וסף נקודת מדידה"
+msgstr "הו&ספת נקודת מדידה"
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:618
-#, fuzzy
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Remove &Last Measure Point"
-msgstr "ה&סר נקודות מדידה"
+msgstr "הסרת נקודת המדידה ה&אחרונה"
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:620
-#, fuzzy
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "&Remove Measure Points"
-msgstr "ה&סר נקודות מדידה"
+msgstr "הס&רת נקודות מדידה"
 
 #: src/plugins/render/navigation/navigation.ui:14
-#, fuzzy
 msgctxt "Navigation|"
 msgid "Navigation"
 msgstr "ניווט"
 
 #: src/plugins/render/navigation/NavigationFloatItem.cpp:60
-#, fuzzy
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Navigation"
 msgstr "ניווט"
 
 #: src/plugins/render/navigation/NavigationFloatItem.cpp:65
-#, fuzzy
 msgctxt "Marble::NavigationFloatItem|"
 msgid "&Navigation"
 msgstr "&ניווט"
 
 #: src/plugins/render/navigation/NavigationFloatItem.cpp:80
-#, fuzzy
 msgctxt "Marble::NavigationFloatItem|"
 msgid "A mouse control to zoom and move the map"
-msgstr "השתמש בעכבר כדי להתקרב ולהזיז את המפה"
+msgstr "העכבר שולט בתקריב ובמקום במפה"
 
 #: src/plugins/render/navigation/NavigationFloatItem.cpp:233
-#, fuzzy
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Current Location Button"
-msgstr "מיקום נוכחי"
+msgstr "כפתור מקום נוכחי"
 
 #: src/plugins/render/navigation/NavigationFloatItem.cpp:234
 msgctxt "Marble::NavigationFloatItem|"
@@ -14958,10 +14912,9 @@ msgid "OSM Mapper Notes"
 msgstr ""
 
 #: src/plugins/render/notes/NotesPlugin.cpp:64
-#, fuzzy
 msgctxt "Marble::NotesPlugin|"
 msgid "Display OpenStreetMap Mapper Notes."
-msgstr "&פתיחת מפה..."
+msgstr "הצגת הערות הממפים ב־OpenStreetMap."
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:14
 msgctxt "OpenCachingCacheDialog|"
@@ -14974,10 +14927,9 @@ msgid "General"
 msgstr ""
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:36
-#, fuzzy
 msgctxt "OpenCachingCacheDialog|"
 msgid "Cache name:"
-msgstr "&ביטול"
+msgstr "שם המטמון:"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:56
 msgctxt "OpenCachingCacheDialog|"
@@ -14990,13 +14942,11 @@ msgid "Type:"
 msgstr ""
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:96
-#, fuzzy
 msgctxt "OpenCachingCacheDialog|"
 msgid "Status:"
-msgstr "&שורת מצב"
+msgstr "מצב:"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:116
-#, fuzzy
 msgctxt "OpenCachingCacheDialog|"
 msgid "Country:"
 msgstr "מדינה:"
@@ -15012,22 +14962,19 @@ msgid "Difficulty:"
 msgstr ""
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:176
-#, fuzzy
 msgctxt "OpenCachingCacheDialog|"
 msgid "Terrain:"
-msgstr "פני שטח"
+msgstr "פני שטח:"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:196
-#, fuzzy
 msgctxt "OpenCachingCacheDialog|"
 msgid "Longitude:"
-msgstr "קו &אורך"
+msgstr "קו אורך:"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:216
-#, fuzzy
 msgctxt "OpenCachingCacheDialog|"
 msgid "Latitude:"
-msgstr "קו &רוחב"
+msgstr "קו רוחב:"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:236
 msgctxt "OpenCachingCacheDialog|"
@@ -15045,7 +14992,6 @@ msgid "Date last modified:"
 msgstr ""
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:291
-#, fuzzy
 msgctxt "OpenCachingCacheDialog|"
 msgid "Description"
 msgstr "תיאור"
@@ -15056,10 +15002,9 @@ msgid "Log"
 msgstr ""
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:346
-#, fuzzy
 msgctxt "OpenCachingCacheDialog|"
 msgid "Previous"
-msgstr "ייצא מפה"
+msgstr "הקודם"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:356
 msgctxt "OpenCachingCacheDialog|"
@@ -15092,10 +15037,9 @@ msgid "Maximum difficulty:"
 msgstr ""
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:70
-#, fuzzy
 msgctxt "OpenCachingConfigWidget|"
 msgid "Maximum Distance:"
-msgstr "מרחק כולל: %1 מ'"
+msgstr "מרחק מרבי:"
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:87
 msgctxt "OpenCachingConfigWidget|"
@@ -15103,10 +15047,9 @@ msgid "Time Range"
 msgstr ""
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:93
-#, fuzzy
 msgctxt "OpenCachingConfigWidget|"
 msgid "Start:"
-msgstr "&כוכבים"
+msgstr "התחלה:"
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:104
 msgctxt "OpenCachingConfigWidget|"
@@ -15159,10 +15102,9 @@ msgid "Shows caches from OpenCaching.de on the screen."
 msgstr ""
 
 #: src/plugins/render/opendesktop/OpenDesktopConfigWidget.ui:14
-#, fuzzy
 msgctxt "OpenDesktopConfigWidget|"
 msgid "OpenDesktop plugin configuration"
-msgstr "אודות Marble"
+msgstr "הגדרת תוסף OpenDesktop"
 
 #: src/plugins/render/opendesktop/OpenDesktopConfigWidget.ui:22
 msgctxt "OpenDesktopConfigWidget|"
@@ -15187,28 +15129,24 @@ msgid ""
 msgstr ""
 
 #: src/plugins/render/overviewmap/OverviewMap.cpp:71
-#, fuzzy
 msgctxt "Marble::OverviewMap|"
 msgid "Overview Map"
 msgstr "מפת סקירה"
 
 #: src/plugins/render/overviewmap/OverviewMap.cpp:76
-#, fuzzy
 msgctxt "Marble::OverviewMap|"
 msgid "&Overview Map"
-msgstr "&מפת סקירה"
+msgstr "מפת ס&קירה"
 
 #: src/plugins/render/overviewmap/OverviewMap.cpp:91
-#, fuzzy
 msgctxt "Marble::OverviewMap|"
 msgid "This is a float item that provides an overview map."
-msgstr "זהו פריט צף שמספק סקירה של המפה."
+msgstr "זה פריט צף שמספק סקירה של המפה."
 
 #: src/plugins/render/overviewmap/OverviewMap.cpp:453
-#, fuzzy
 msgctxt "Marble::OverviewMap|"
 msgid "Choose Overview Map"
-msgstr "מפת סקירה"
+msgstr "בחירת מפת סקירה"
 
 #: src/plugins/render/overviewmap/OverviewMap.cpp:482
 msgctxt "Marble::OverviewMap|"
@@ -15216,22 +15154,19 @@ msgid "Please choose the color for the position indicator"
 msgstr ""
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:14
-#, fuzzy
 msgctxt "OverviewMapConfigWidget|"
 msgid "Configure Overview Map"
-msgstr "מפת סקירה"
+msgstr "הגדרת מפת סקירה"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:20
-#, fuzzy
 msgctxt "OverviewMapConfigWidget|"
 msgid "Map &Image"
-msgstr "שם"
+msgstr "&תמונת מפה"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:28
-#, fuzzy
 msgctxt "OverviewMapConfigWidget|"
 msgid "&Planet:"
-msgstr "הצג מיקומים"
+msgstr "&כוכב לכת:"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:71
 msgctxt "OverviewMapConfigWidget|"
@@ -15244,16 +15179,14 @@ msgid "x"
 msgstr ""
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:178
-#, fuzzy
 msgctxt "OverviewMapConfigWidget|"
 msgid "Preview"
-msgstr "מפת סקירה"
+msgstr "תצוגה מקדימה"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:183
-#, fuzzy
 msgctxt "OverviewMapConfigWidget|"
 msgid "Filename"
-msgstr "&קובץ"
+msgstr "שם קובץ"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:194
 msgctxt "OverviewMapConfigWidget|"
@@ -15261,19 +15194,16 @@ msgid "C&olors"
 msgstr ""
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:200
-#, fuzzy
 msgctxt "OverviewMapConfigWidget|"
 msgid "Position I&ndicator:"
-msgstr "אוכלוסייה:"
+msgstr "מ&חוון מקום:"
 
 #: src/plugins/render/panoramio/PanoramioPlugin.cpp:33
-#, fuzzy
 msgctxt "Marble::PanoramioPlugin|"
 msgid "Panoramio Photos"
 msgstr "תמונות של Panoramio"
 
 #: src/plugins/render/panoramio/PanoramioPlugin.cpp:38
-#, fuzzy
 msgctxt "Marble::PanoramioPlugin|"
 msgid "&Panoramio"
 msgstr "&Panoramio"
@@ -15300,10 +15230,9 @@ msgid "The file is not a valid Flickr answer."
 msgstr "הקובץ הוא לא קובץ DGML 2.0 תקני"
 
 #: src/plugins/render/photo/PhotoConfigWidget.ui:14
-#, fuzzy
 msgctxt "PhotoConfigWidget|"
 msgid "Configure Photo Plugin"
-msgstr "מתחיל חיפוש"
+msgstr "הגדרת תוסף תמונות"
 
 #: src/plugins/render/photo/PhotoConfigWidget.ui:24
 msgctxt "PhotoConfigWidget|"
@@ -15311,10 +15240,9 @@ msgid "Number of items on the screen"
 msgstr ""
 
 #: src/plugins/render/photo/PhotoConfigWidget.ui:49
-#, fuzzy
 msgctxt "PhotoConfigWidget|"
 msgid "License"
-msgstr "&הסכם רישיון"
+msgstr "רישיון"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:62
 msgctxt "Marble::PhotoPlugin|"
@@ -15370,16 +15298,14 @@ msgid "No known copyright restrictions"
 msgstr ""
 
 #: src/plugins/render/positionmarker/PositionMarker.cpp:79
-#, fuzzy
 msgctxt "Marble::PositionMarker|"
 msgid "Position Marker"
-msgstr "אוכלוסייה:"
+msgstr "סמן מקום"
 
 #: src/plugins/render/positionmarker/PositionMarker.cpp:84
-#, fuzzy
 msgctxt "Marble::PositionMarker|"
 msgid "&Position Marker"
-msgstr "אוכלוסייה:"
+msgstr "סמן מ&קום"
 
 #: src/plugins/render/positionmarker/PositionMarker.cpp:99
 msgctxt "Marble::PositionMarker|"
@@ -15570,10 +15496,9 @@ msgid "Routing information and navigation controls"
 msgstr ""
 
 #: src/plugins/render/routing/RoutingPlugin.ui:129
-#, fuzzy
 msgctxt "RoutingPlugin|"
 msgid "Guidance Mode"
-msgstr "אודות Marble"
+msgstr "מצב הכוונה"
 
 #: src/plugins/render/routing/RoutingPlugin.ui:132
 msgctxt "RoutingPlugin|"
@@ -15586,25 +15511,21 @@ msgid "Toggle GPS"
 msgstr ""
 
 #: src/plugins/render/routing/RoutingPlugin.ui:187
-#, fuzzy
 msgctxt "RoutingPlugin|"
 msgid "Zoom Out"
-msgstr "התרחק"
+msgstr "התרחקות"
 
 #: src/plugins/render/routing/RoutingPlugin.ui:190
-#, fuzzy
 msgctxt "RoutingPlugin|"
 msgid "-"
 msgstr "-"
 
 #: src/plugins/render/routing/RoutingPlugin.ui:219
-#, fuzzy
 msgctxt "RoutingPlugin|"
 msgid "Zoom In"
-msgstr "התקרב"
+msgstr "התקרבות"
 
 #: src/plugins/render/routing/RoutingPlugin.ui:222
-#, fuzzy
 msgctxt "RoutingPlugin|"
 msgid "+"
 msgstr "+"
@@ -15625,10 +15546,9 @@ msgid "Moons"
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:33
-#, fuzzy
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Other"
-msgstr "0 מ' (מים)"
+msgstr "אחר"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:34
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -15651,10 +15571,9 @@ msgid "Sun"
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:39
-#, fuzzy
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Mercury"
-msgstr "תצוגת מפה"
+msgstr "כוכב חמה"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:40
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -15662,16 +15581,14 @@ msgid "Venus"
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:41
-#, fuzzy
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Earth"
-msgstr "&כדור הארץ"
+msgstr "כדור הארץ"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:42
-#, fuzzy
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Mars"
-msgstr "Marble"
+msgstr "מאדים"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:43
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -15694,28 +15611,24 @@ msgid "Neptune"
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:128
-#, fuzzy
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Satellites"
 msgstr "&לוויינים"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:129
-#, fuzzy
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Data Sources"
-msgstr "גיליון נתונים"
+msgstr "מקורות &נתונים"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:131
-#, fuzzy
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Activate Plugin"
-msgstr "ת&וסף DataView"
+msgstr "ה&פעלת תוסף"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:231
-#, fuzzy
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Add Data Source"
-msgstr "גיליון נתונים"
+msgstr "הוספת מקור נתונים"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:231
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -15733,12 +15646,9 @@ msgid "Please enter a valid URL or file path!"
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
-#, fuzzy
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Supported Files (*.txt *.msc)"
-msgstr ""
-"כל הקבצים הנתמכים (‎*.gpx *.kml);;מידע של ‏GPS‏ (‎*.gpx);;Google Earth KML‏ (‎*."
-"kml)"
+msgstr "כל הקבצים הנתמכים (‎*.txt‏ ‎*.msc)"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -15751,22 +15661,19 @@ msgid "Two Line Element Set (*.txt)"
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
-#, fuzzy
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Files (*.*)"
-msgstr "קובץ GpxFile ‏(‎*.gpx)"
+msgstr "כל הקבצים (*.*)"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:262
-#, fuzzy
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Open Satellite Data File"
-msgstr "&פתיחת מפה..."
+msgstr "פתיחת קובץ נתוני לוויינים"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:289
-#, fuzzy
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Delete selected data source"
-msgstr "מפה רגילה"
+msgstr "מחיקת מקור הנתונים הנבחר"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:290
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -15774,22 +15681,19 @@ msgid "Do you really want to delete the selected data source?"
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:14
-#, fuzzy
 msgctxt "SatellitesConfigDialog|"
 msgid "Satellites Configuration"
-msgstr "תמונת לוויין"
+msgstr "הגדרת לוויינים"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:27
-#, fuzzy
 msgctxt "SatellitesConfigDialog|"
 msgid "&Satellites"
 msgstr "&לוויינים"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:44
-#, fuzzy
 msgctxt "SatellitesConfigDialog|"
 msgid "&Data Sources"
-msgstr "גיליון נתונים"
+msgstr "&רענון כל מקורות הנתונים"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:74
 msgctxt "SatellitesConfigDialog|"
@@ -15800,22 +15704,19 @@ msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:81
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:164
-#, fuzzy
 msgctxt "SatellitesConfigDialog|"
 msgid "-"
 msgstr "-"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:104
-#, fuzzy
 msgctxt "SatellitesConfigDialog|"
 msgid "&Reload All Data Sources"
-msgstr "גיליון נתונים"
+msgstr "&רענון כל מקורות הנתונים"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:127
-#, fuzzy
 msgctxt "SatellitesConfigDialog|"
 msgid "Satellite Data Sources:"
-msgstr "&פתיחת מפה..."
+msgstr "מקורות נתוני לוויינים:"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:147
 msgctxt "SatellitesConfigDialog|"
@@ -15823,7 +15724,6 @@ msgid "Add a new data source (URL)."
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:150
-#, fuzzy
 msgctxt "SatellitesConfigDialog|"
 msgid "+"
 msgstr "+"
@@ -15834,10 +15734,9 @@ msgid "Open a new data source from disk."
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:178
-#, fuzzy
 msgctxt "SatellitesConfigDialog|"
 msgid "Remove selected data source."
-msgstr "מפה רגילה"
+msgstr "הסרת מקור הנתונים הנבחר."
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
 msgctxt "SatellitesConfigDialog|"
@@ -15866,10 +15765,9 @@ msgid "Plugin Inactive"
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:289
-#, fuzzy
 msgctxt "SatellitesConfigDialog|"
 msgid "&Activate Plugin"
-msgstr "ת&וסף DataView"
+msgstr "ה&פעלת תוסף"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:315
 msgctxt "SatellitesConfigDialog|"
@@ -15900,13 +15798,11 @@ msgid "Keep centered"
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:76
-#, fuzzy
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Satellites"
-msgstr "לווינים"
+msgstr "לוויינים"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:86
-#, fuzzy
 msgctxt "Marble::SatellitesPlugin|"
 msgid "&Satellites"
 msgstr "&לוויינים"
@@ -15938,10 +15834,9 @@ msgid "Last 30 Days' Launches"
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:422
-#, fuzzy
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Space Stations"
-msgstr "גובה:"
+msgstr "תחנות חלל"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:425
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
@@ -15969,10 +15864,9 @@ msgid "Weather & Earth Resources Satellites"
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:439
-#, fuzzy
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Weather"
-msgstr "0 מ' (מים)"
+msgstr "מזג אוויר"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:442
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
@@ -16072,10 +15966,9 @@ msgid "Other"
 msgstr "0 מ' (מים)"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:495
-#, fuzzy
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Navigation Satellites"
-msgstr "הצג סרגל ניווט"
+msgstr "לווייני ניווט"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:497
 #, fuzzy
@@ -16112,10 +16005,9 @@ msgid "Russian LEO Navigation"
 msgstr "ניווט"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:515
-#, fuzzy
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Scientific Satellites"
-msgstr "לווינים"
+msgstr "לוויינים מדעיים"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:517
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
@@ -16235,10 +16127,9 @@ msgid "Moon"
 msgstr ""
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:97
-#, fuzzy
 msgctxt "StarsConfigWidget|"
 msgid "Mercury"
-msgstr "תצוגת מפה"
+msgstr "כוכב חמה"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:105
 msgctxt "StarsConfigWidget|"
@@ -16246,16 +16137,14 @@ msgid "Venus"
 msgstr ""
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:113
-#, fuzzy
 msgctxt "StarsConfigWidget|"
 msgid "Earth"
-msgstr "&כדור הארץ"
+msgstr "כדור הארץ"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:124
-#, fuzzy
 msgctxt "StarsConfigWidget|"
 msgid "Mars"
-msgstr "Marble"
+msgstr "מאדים"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:132
 msgctxt "StarsConfigWidget|"
@@ -16283,16 +16172,14 @@ msgid "Use name labels"
 msgstr ""
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:177
-#, fuzzy
 msgctxt "StarsConfigWidget|"
 msgid "Magnify Sun and Moon"
-msgstr "הצג רשת"
+msgstr "הגדלת השמש והירח"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:190
-#, fuzzy
 msgctxt "StarsConfigWidget|"
 msgid "Other"
-msgstr "0 מ' (מים)"
+msgstr "אחר"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:196
 msgctxt "StarsConfigWidget|"
@@ -16310,10 +16197,9 @@ msgid "Lines and Orientation"
 msgstr ""
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:284
-#, fuzzy
 msgctxt "StarsConfigWidget|"
 msgid "Constellations"
-msgstr "הגדר &מיקום בית"
+msgstr "קבוצות כוכבים"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:290
 msgctxt "StarsConfigWidget|"
@@ -16326,34 +16212,29 @@ msgid "Labels"
 msgstr ""
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:390
-#, fuzzy
 msgctxt "StarsConfigWidget|"
 msgid "Names"
-msgstr "שם"
+msgstr "שמות"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:401
-#, fuzzy
 msgctxt "StarsConfigWidget|"
 msgid "Latin Name"
-msgstr "שם"
+msgstr "שם לטיני"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:406
-#, fuzzy
 msgctxt "StarsConfigWidget|"
 msgid "Native Translation"
-msgstr "שם חלופי"
+msgstr "תרגום טבעי"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:411
-#, fuzzy
 msgctxt "StarsConfigWidget|"
 msgid "Abbreviation"
-msgstr "גובה:"
+msgstr "ראשי תיבות"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:435
-#, fuzzy
 msgctxt "StarsConfigWidget|"
 msgid "Coordinate Grid"
-msgstr "רשת קואורדינטות"
+msgstr "רשת נקודות ציון"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:441
 msgctxt "StarsConfigWidget|"
@@ -16371,10 +16252,9 @@ msgid "Ecliptic"
 msgstr ""
 
 #: src/plugins/render/stars/StarsPlugin.cpp:109
-#, fuzzy
 msgctxt "Marble::StarsPlugin|"
 msgid "Stars"
-msgstr "&כוכבים"
+msgstr "כוכבים"
 
 #: src/plugins/render/stars/StarsPlugin.cpp:114
 #, fuzzy
