@@ -58,9 +58,9 @@ bool KmlModelTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_Scale));
 
-    writer.writeOptionalElement(QString::fromLatin1(kml::kmlTag_x), QString::number(scale.x()), "1");
-    writer.writeOptionalElement(QString::fromLatin1(kml::kmlTag_y), QString::number(scale.y()), "1");
-    writer.writeOptionalElement(QString::fromLatin1(kml::kmlTag_z), QString::number(scale.z()), "1");
+    writer.writeOptionalElement(QString::fromLatin1(kml::kmlTag_x), QString::number(scale.x()), QStringLiteral("1"));
+    writer.writeOptionalElement(QString::fromLatin1(kml::kmlTag_y), QString::number(scale.y()), QStringLiteral("1"));
+    writer.writeOptionalElement(QString::fromLatin1(kml::kmlTag_z), QString::number(scale.z()), QStringLiteral("1"));
 
     writer.writeEndElement();
 

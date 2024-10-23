@@ -16,7 +16,7 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerNetworkLinkControl(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataNetworkLinkControlType,
+static GeoTagWriterRegistrar s_writerNetworkLinkControl(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoDataTypes::GeoDataNetworkLinkControlType),
                                                                                     QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
                                                         new KmlNetworkLinkControlTagWriter);
 
@@ -25,8 +25,8 @@ bool KmlNetworkLinkControlTagWriter::write(const GeoNode *node, GeoWriter &write
     const auto networkLinkControl = static_cast<const GeoDataNetworkLinkControl *>(node);
 
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_NetworkLinkControl));
-    writer.writeOptionalElement(QLatin1String(kml::kmlTag_minRefreshPeriod), QString::number(networkLinkControl->minRefreshPeriod()), "1");
-    writer.writeOptionalElement(QLatin1String(kml::kmlTag_maxSessionLength), QString::number(networkLinkControl->maxSessionLength()), "2");
+    writer.writeOptionalElement(QLatin1String(kml::kmlTag_minRefreshPeriod), QString::number(networkLinkControl->minRefreshPeriod()), QStringLiteral("1"));
+    writer.writeOptionalElement(QLatin1String(kml::kmlTag_maxSessionLength), QString::number(networkLinkControl->maxSessionLength()), QStringLiteral("2"));
     writer.writeOptionalElement(QLatin1String(kml::kmlTag_cookie), networkLinkControl->cookie());
     writer.writeOptionalElement(QLatin1String(kml::kmlTag_message), networkLinkControl->message());
     writer.writeOptionalElement(QLatin1String(kml::kmlTag_linkName), networkLinkControl->linkName());

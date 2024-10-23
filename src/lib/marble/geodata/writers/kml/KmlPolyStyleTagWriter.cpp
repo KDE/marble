@@ -12,11 +12,12 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerLineStyle(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataPolyStyleType, QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
+static GeoTagWriterRegistrar s_writerLineStyle(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoDataTypes::GeoDataPolyStyleType),
+                                                                           QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
                                                new KmlPolyStyleTagWriter);
 
 KmlPolyStyleTagWriter::KmlPolyStyleTagWriter()
-    : KmlColorStyleTagWriter(kml::kmlTag_PolyStyle)
+    : KmlColorStyleTagWriter(QString::fromLatin1(kml::kmlTag_PolyStyle))
 {
 }
 

@@ -30,7 +30,7 @@ public:
 
     QStringList renderPosition() const override;
 
-    bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos = "NONE", GeoSceneLayer *layer = nullptr) override;
+    bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos = QStringLiteral("NONE"), GeoSceneLayer *layer = nullptr) override;
 
     void addFloatItem(AbstractFloatItem *floatItem);
 

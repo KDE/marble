@@ -155,9 +155,9 @@ bool PlacemarkLayer::render(GeoPainter *geoPainter, ViewportParams *viewport, co
         if (m_debugModeEnabled) {
             QPixmap debugPixmap(fragment.pixmap.size());
             QColor backgroundColor;
-            QString idStr = iter.key().section('/', -1);
+            QString idStr = iter.key().section(QLatin1Char('/'), -1);
             if (idStr.length() > 2) {
-                idStr.remove("shop_");
+                idStr.remove(QStringLiteral("shop_"));
                 backgroundColor =
                     QColor((10 * (int)(idStr[0].toLatin1())) % 255, (10 * (int)(idStr[1].toLatin1())) % 255, (10 * (int)(idStr[2].toLatin1())) % 255);
             } else {

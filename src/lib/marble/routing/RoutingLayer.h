@@ -49,7 +49,7 @@ public:
     qreal zValue() const override;
 
     /** Reimplemented from LayerInterface. Paints route items and placemarks */
-    bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos = "NONE", GeoSceneLayer *layer = nullptr) override;
+    bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos = QStringLiteral("NONE"), GeoSceneLayer *layer = nullptr) override;
 
     RenderState renderState() const override;
 

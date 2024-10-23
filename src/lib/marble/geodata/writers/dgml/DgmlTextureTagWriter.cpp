@@ -40,7 +40,7 @@ bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter &writer) const
     writer.writeAttribute("height", QString::number(texture->tileSize().height()));
     writer.writeEndElement();
 
-    writer.writeOptionalElement(dgml::dgmlTag_InstallMap, texture->installMap());
+    writer.writeOptionalElement(QString::fromLatin1(dgml::dgmlTag_InstallMap), texture->installMap());
 
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_StorageLayout));
     if (texture->hasMaximumTileLevel()) {

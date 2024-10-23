@@ -258,9 +258,9 @@ void FrameGraphicsItem::paint(QPainter *painter)
     // Needs to be done here cause we don't want the margin translation
     if (frame() == ShadowFrame) {
         QPixmap shadow;
-        if (!QPixmapCache::find("marble/frames/shadowframe.png", &shadow)) {
+        if (!QPixmapCache::find(QStringLiteral("marble/frames/shadowframe.png"), &shadow)) {
             shadow = QPixmap(QStringLiteral(":/marble/frames/shadowframe.png"));
-            QPixmapCache::insert("marble/frames/shadowframe.png", shadow);
+            QPixmapCache::insert(QStringLiteral("marble/frames/shadowframe.png"), shadow);
         }
         qDrawBorderPixmap(painter, QRect(QPoint(0, 0), size().toSize()), QMargins(10, 10, 10, 10), shadow);
     }

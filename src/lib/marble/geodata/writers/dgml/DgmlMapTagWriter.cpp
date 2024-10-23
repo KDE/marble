@@ -32,11 +32,12 @@ bool DgmlMapTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 
     if (!map->center().isEmpty()) {
         if (map->center().count() == 2) {
-            writer.writeElement(dgml::dgmlTag_Center, map->center().at(0).toString() + "," + map->center().at(1).toString());
+            writer.writeElement(QString::fromLatin1(dgml::dgmlTag_Center),
+                                map->center().at(0).toString() + QStringLiteral(",") + map->center().at(1).toString());
         } else if (map->center().count() == 4) {
-            writer.writeElement(dgml::dgmlTag_Center,
-                                map->center().at(0).toString() + "," + map->center().at(1).toString() + "," + map->center().at(2).toString() + ","
-                                    + map->center().at(3).toString());
+            writer.writeElement(QString::fromLatin1(dgml::dgmlTag_Center),
+                                map->center().at(0).toString() + QStringLiteral(",") + map->center().at(1).toString() + QStringLiteral(",")
+                                    + map->center().at(2).toString() + QStringLiteral(",") + map->center().at(3).toString());
         }
     }
 

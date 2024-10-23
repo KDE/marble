@@ -153,7 +153,7 @@ BookmarksModel *Bookmarks::model()
         flattener->setSourceModel(&m_treeModel);
 
         m_proxyModel = new BookmarksModel(this);
-        m_proxyModel->setFilterFixedString(Marble::GeoDataTypes::GeoDataPlacemarkType);
+        m_proxyModel->setFilterFixedString(QString::fromLatin1(Marble::GeoDataTypes::GeoDataPlacemarkType));
         m_proxyModel->setFilterKeyColumn(1);
         m_proxyModel->setSourceModel(flattener);
     }

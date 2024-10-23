@@ -1052,7 +1052,7 @@ GeoSceneDocument *MapWizard::createDocument()
         urlQuery.addQueryItem("layers", d->selectedLayers.join(','));
         urlQuery.addQueryItem("styles", styles.join(","));
         bool isBackdropAvailable = d->uiWidget.checkBoxWmsBackdrop->isEnabled() && d->uiWidget.checkBoxWmsBackdrop->isChecked();
-        urlQuery.addQueryItem("transparent", isBackdropTextureAvailable ? "true" : "false");
+        urlQuery.addQueryItem("transparent", isBackdropTextureAvailable ? QStringLiteral("true") : QStringLiteral("false"));
 
         if (d->uiWidget.checkBoxWmsBackdrop->isChecked() && d->uiWidget.radioButtonColor->isChecked()) {
             QString bgColorName = d->uiWidget.labelBackgroundColor->palette().color(QPalette::Window).name();

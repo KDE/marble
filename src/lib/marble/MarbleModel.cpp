@@ -100,12 +100,12 @@ public:
     {
         m_descendantProxy.setSourceModel(&m_treeModel);
 
-        m_placemarkProxyModel.setFilterFixedString(GeoDataTypes::GeoDataPlacemarkType);
+        m_placemarkProxyModel.setFilterFixedString(QString::fromLatin1(GeoDataTypes::GeoDataPlacemarkType));
         m_placemarkProxyModel.setFilterKeyColumn(1);
         m_placemarkProxyModel.setSourceModel(&m_descendantProxy);
         m_placemarkSelectionModel.setModel(&m_placemarkProxyModel);
 
-        m_groundOverlayProxyModel.setFilterFixedString(GeoDataTypes::GeoDataGroundOverlayType);
+        m_groundOverlayProxyModel.setFilterFixedString(QString::fromLatin1(GeoDataTypes::GeoDataGroundOverlayType));
         m_groundOverlayProxyModel.setFilterKeyColumn(1);
         m_groundOverlayProxyModel.setSourceModel(&m_descendantProxy);
     }
@@ -250,7 +250,7 @@ void MarbleModel::setMapTheme(GeoSceneDocument *document)
         }
 
         // Fall back to default theme
-        QString defaultTheme = "earth/srtm/srtm.dgml";
+        QString defaultTheme = QStringLiteral("earth/srtm/srtm.dgml");
         qWarning() << "Falling back to default theme:" << defaultTheme;
         mapTheme = MapThemeManager::loadMapTheme(defaultTheme);
     }
@@ -265,7 +265,7 @@ void MarbleModel::setMapTheme(GeoSceneDocument *document)
     QList<GeoSceneGeodata> currentDatasets;
     if (d->m_mapTheme) {
         for (GeoSceneLayer *layer : d->m_mapTheme->map()->layers()) {
-            if (layer->backend() != dgml::dgmlValue_geodata && layer->backend() != dgml::dgmlValue_vector)
+            if (layer->backend() != QString::fromLatin1(dgml::dgmlValue_geodata) && layer->backend() != QString::fromLatin1(dgml::dgmlValue_vector))
                 continue;
 
             // look for documents
@@ -316,7 +316,7 @@ void MarbleModel::setMapTheme(GeoSceneDocument *document)
     QList<int> renderOrderList;
 
     for (GeoSceneLayer *layer : d->m_mapTheme->map()->layers()) {
-        if (layer->backend() != dgml::dgmlValue_geodata && layer->backend() != dgml::dgmlValue_vector)
+        if (layer->backend() != QString::fromLatin1(dgml::dgmlValue_geodata) && layer->backend() != QString::fromLatin1(dgml::dgmlValue_vector))
             continue;
 
         // look for datasets which are different from currentDatasets
@@ -567,7 +567,7 @@ void MarbleModel::clearPersistentTileCache()
                      << "SourceDir: " << sourceDir << "InstallMap:" << installMap;
             MarbleDirs::debug();
 
-            auto tileCreator = new TileCreator(sourceDir, installMap, (role == QLatin1StringView("dem")) ? "true" : "false");
+            auto tileCreator = new TileCreator(sourceDir, installMap, (role == QLatin1StringView("dem")) ? QStringLiteral("true") : QStringLiteral("false"));
             tileCreator->setTileFormat(texture->fileFormat().toLower());
 
             QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog(tileCreator, nullptr);
@@ -727,7 +727,7 @@ void MarbleModelPrivate::assignFillColors(const QString &filePath)
     const GeoSceneGeodata *data = nullptr;
 
     for (auto layer : m_mapTheme->map()->layers()) {
-        if (layer->backend() != dgml::dgmlValue_geodata && layer->backend() != dgml::dgmlValue_vector) {
+        if (layer->backend() != QString::fromLatin1(dgml::dgmlValue_geodata) && layer->backend() != QString::fromLatin1(dgml::dgmlValue_vector)) {
             continue;
         }
 

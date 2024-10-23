@@ -13,12 +13,12 @@
 
 namespace Marble
 {
-static GeoTagWriterRegistrar s_writerLookAt(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataScreenOverlayType,
+static GeoTagWriterRegistrar s_writerLookAt(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoDataTypes::GeoDataScreenOverlayType),
                                                                         QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
                                             new KmlScreenOverlayWriter);
 
 KmlScreenOverlayWriter::KmlScreenOverlayWriter()
-    : KmlOverlayTagWriter(kml::kmlTag_ScreenOverlay)
+    : KmlOverlayTagWriter(QString::fromLatin1(kml::kmlTag_ScreenOverlay))
 {
     // nothing to do
 }
@@ -28,10 +28,10 @@ bool KmlScreenOverlayWriter::writeMid(const GeoNode *node, GeoWriter &writer) co
     KmlOverlayTagWriter::writeMid(node, writer);
 
     const auto screenOverlay = static_cast<const GeoDataScreenOverlay *>(node);
-    writeVec2(kml::kmlTag_overlayXY, screenOverlay->overlayXY(), writer);
-    writeVec2(kml::kmlTag_screenXY, screenOverlay->screenXY(), writer);
-    writeVec2(kml::kmlTag_rotationXY, screenOverlay->rotationXY(), writer);
-    writeVec2(kml::kmlTag_size, screenOverlay->size(), writer);
+    writeVec2(QString::fromLatin1(kml::kmlTag_overlayXY), screenOverlay->overlayXY(), writer);
+    writeVec2(QString::fromLatin1(kml::kmlTag_screenXY), screenOverlay->screenXY(), writer);
+    writeVec2(QString::fromLatin1(kml::kmlTag_rotationXY), screenOverlay->rotationXY(), writer);
+    writeVec2(QString::fromLatin1(kml::kmlTag_size), screenOverlay->size(), writer);
     QString const rotation = QString::number(screenOverlay->rotation());
     writer.writeOptionalElement(QLatin1String(kml::kmlTag_rotation), rotation, QStringLiteral("0"));
     return true;
@@ -51,15 +51,15 @@ QString KmlScreenOverlayWriter::unitToString(GeoDataVec2::Unit unit)
 {
     switch (unit) {
     case GeoDataVec2::Fraction:
-        return "fraction";
+        return QStringLiteral("fraction");
     case GeoDataVec2::Pixels:
-        return "pixels";
+        return QStringLiteral("pixels");
     case GeoDataVec2::InsetPixels:
-        return "insetPixels";
+        return QStringLiteral("insetPixels");
     }
 
     Q_ASSERT(false);
-    return "fraction";
+    return QStringLiteral("fraction");
 }
 
 }

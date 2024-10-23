@@ -5,11 +5,9 @@
 
 #include "KmlPlacemarkTagWriter.h"
 
-#include "GeoDataExtendedData.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPolygon.h"
 #include "GeoDataStyle.h"
-#include "GeoDataTimeStamp.h"
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
@@ -21,7 +19,8 @@ namespace Marble
 // don't use the tag dictionary for tag names, because with the writer we are using
 //  the object type strings instead
 // FIXME: USE object strings provided by idis
-static GeoTagWriterRegistrar s_writerPlacemark(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataPlacemarkType, QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
+static GeoTagWriterRegistrar s_writerPlacemark(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoDataTypes::GeoDataPlacemarkType),
+                                                                           QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
                                                new KmlPlacemarkTagWriter());
 
 bool KmlPlacemarkTagWriter::writeMid(const GeoNode *node, GeoWriter &writer) const
@@ -40,14 +39,14 @@ bool KmlPlacemarkTagWriter::writeMid(const GeoNode *node, GeoWriter &writer) con
     if (placemark->isBalloonVisible()) {
         QString string;
         string.setNum(1);
-        writer.writeElement(kml::kmlTag_nameSpaceGx22, kml::kmlTag_balloonVisibility, string);
+        writer.writeElement(QString::fromLatin1(kml::kmlTag_nameSpaceGx22), QString::fromLatin1(kml::kmlTag_balloonVisibility), string);
     }
 
     return true;
 }
 
 KmlPlacemarkTagWriter::KmlPlacemarkTagWriter()
-    : KmlFeatureTagWriter(kml::kmlTag_Placemark)
+    : KmlFeatureTagWriter(QString::fromLatin1(kml::kmlTag_Placemark))
 {
     // nothing to do
 }

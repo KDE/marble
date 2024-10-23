@@ -14,7 +14,7 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerSimpleField(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataSimpleFieldType,
+static GeoTagWriterRegistrar s_writerSimpleField(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoDataTypes::GeoDataSimpleFieldType),
                                                                              QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
                                                  new KmlSimpleFieldTagWriter);
 
@@ -39,25 +39,25 @@ QString KmlSimpleFieldTagWriter::resolveType(GeoDataSimpleField::SimpleFieldType
 {
     switch (type) {
     case GeoDataSimpleField::String:
-        return "string";
+        return QStringLiteral("string");
     case GeoDataSimpleField::Int:
-        return "int";
+        return QStringLiteral("int");
     case GeoDataSimpleField::UInt:
-        return "uint";
+        return QStringLiteral("uint");
     case GeoDataSimpleField::Short:
-        return "short";
+        return QStringLiteral("short");
     case GeoDataSimpleField::UShort:
-        return "ushort";
+        return QStringLiteral("ushort");
     case GeoDataSimpleField::Float:
-        return "float";
+        return QStringLiteral("float");
     case GeoDataSimpleField::Double:
-        return "double";
+        return QStringLiteral("double");
     case GeoDataSimpleField::Bool:
-        return "bool";
+        return QStringLiteral("bool");
     }
 
     Q_ASSERT(false);
-    return "string";
+    return QStringLiteral("string");
 }
 
 }

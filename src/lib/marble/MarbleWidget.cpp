@@ -56,7 +56,7 @@ public:
 
     QStringList renderPosition() const override
     {
-        return QStringList() << "USER_TOOLS";
+        return QStringList() << QStringLiteral("USER_TOOLS");
     }
 
     bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer) override

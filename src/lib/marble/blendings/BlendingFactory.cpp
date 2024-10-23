@@ -31,59 +31,59 @@ Blending const *BlendingFactory::findBlending(QString const &name) const
 BlendingFactory::BlendingFactory(const SunLocator *sunLocator)
     : m_sunLightBlending(new SunLightBlending(sunLocator))
 {
-    m_blendings.insert("OverpaintBlending", new OverpaintBlending);
+    m_blendings.insert(QStringLiteral("OverpaintBlending"), new OverpaintBlending);
 
     // Neutral blendings
-    m_blendings.insert("AllanonBlending", new AllanonBlending);
-    m_blendings.insert("ArcusTangentBlending", new ArcusTangentBlending);
-    m_blendings.insert("GeometricMeanBlending", new GeometricMeanBlending);
-    m_blendings.insert("LinearLightBlending", new LinearLightBlending);
+    m_blendings.insert(QStringLiteral("AllanonBlending"), new AllanonBlending);
+    m_blendings.insert(QStringLiteral("ArcusTangentBlending"), new ArcusTangentBlending);
+    m_blendings.insert(QStringLiteral("GeometricMeanBlending"), new GeometricMeanBlending);
+    m_blendings.insert(QStringLiteral("LinearLightBlending"), new LinearLightBlending);
     // m_blendings.insert( "NoiseBlending", new NoiseBlending );
-    m_blendings.insert("OverlayBlending", new OverlayBlending);
-    // m_blendings.insert( "ParallelBlending", new ParallelBlending );
-    // m_blendings.insert( "TextureBlending", new TextureBlending );
+    m_blendings.insert(QStringLiteral("OverlayBlending"), new OverlayBlending);
+    // m_blendings.insert( "ParallelBlending"), new ParallelBlending );
+    // m_blendings.insert( "TextureBlending"), new TextureBlending );
 
     // Darkening blendings
-    m_blendings.insert("AlphaBlending", new OverpaintBlending); // for backwards compatibility
-    m_blendings.insert("ColorBurnBlending", new ColorBurnBlending);
-    m_blendings.insert("DarkBlending", new DarkBlending);
-    m_blendings.insert("DarkenBlending", new DarkenBlending);
-    m_blendings.insert("DivideBlending", new DivideBlending);
-    m_blendings.insert("GammaDarkBlending", new GammaDarkBlending);
-    m_blendings.insert("LinearBurnBlending", new LinearBurnBlending);
-    m_blendings.insert("MultiplyBlending", new MultiplyBlending);
-    m_blendings.insert("SubtractiveBlending", new SubtractiveBlending);
+    m_blendings.insert(QStringLiteral("AlphaBlending"), new OverpaintBlending); // for backwards compatibility
+    m_blendings.insert(QStringLiteral("ColorBurnBlending"), new ColorBurnBlending);
+    m_blendings.insert(QStringLiteral("DarkBlending"), new DarkBlending);
+    m_blendings.insert(QStringLiteral("DarkenBlending"), new DarkenBlending);
+    m_blendings.insert(QStringLiteral("DivideBlending"), new DivideBlending);
+    m_blendings.insert(QStringLiteral("GammaDarkBlending"), new GammaDarkBlending);
+    m_blendings.insert(QStringLiteral("LinearBurnBlending"), new LinearBurnBlending);
+    m_blendings.insert(QStringLiteral("MultiplyBlending"), new MultiplyBlending);
+    m_blendings.insert(QStringLiteral("SubtractiveBlending"), new SubtractiveBlending);
 
     // Lightening blendings
-    m_blendings.insert("AdditiveBlending", new AdditiveBlending);
-    m_blendings.insert("ColorDodgeBlending", new ColorDodgeBlending);
-    m_blendings.insert("GammaLightBlending", new GammaLightBlending);
-    m_blendings.insert("HardLightBlending", new HardLightBlending);
-    m_blendings.insert("LightBlending", new LightBlending);
-    m_blendings.insert("LightenBlending", new LightenBlending);
-    m_blendings.insert("PinLightBlending", new PinLightBlending);
-    m_blendings.insert("ScreenBlending", new ScreenBlending);
-    m_blendings.insert("SoftLightBlending", new SoftLightBlending);
-    m_blendings.insert("VividLightBlending", new VividLightBlending);
+    m_blendings.insert(QStringLiteral("AdditiveBlending"), new AdditiveBlending);
+    m_blendings.insert(QStringLiteral("ColorDodgeBlending"), new ColorDodgeBlending);
+    m_blendings.insert(QStringLiteral("GammaLightBlending"), new GammaLightBlending);
+    m_blendings.insert(QStringLiteral("HardLightBlending"), new HardLightBlending);
+    m_blendings.insert(QStringLiteral("LightBlending"), new LightBlending);
+    m_blendings.insert(QStringLiteral("LightenBlending"), new LightenBlending);
+    m_blendings.insert(QStringLiteral("PinLightBlending"), new PinLightBlending);
+    m_blendings.insert(QStringLiteral("ScreenBlending"), new ScreenBlending);
+    m_blendings.insert(QStringLiteral("SoftLightBlending"), new SoftLightBlending);
+    m_blendings.insert(QStringLiteral("VividLightBlending"), new VividLightBlending);
 
     // Inverter blendings
     // m_blendings.insert( "AdditiveSubtractiveBlending", new AdditiveSubtractiveBlending );
-    m_blendings.insert("BleachBlending", new BleachBlending);
-    m_blendings.insert("DifferenceBlending", new DifferenceBlending);
-    m_blendings.insert("EquivalenceBlending", new EquivalenceBlending);
-    m_blendings.insert("HalfDifferenceBlending", new HalfDifferenceBlending);
+    m_blendings.insert(QStringLiteral("BleachBlending"), new BleachBlending);
+    m_blendings.insert(QStringLiteral("DifferenceBlending"), new DifferenceBlending);
+    m_blendings.insert(QStringLiteral("EquivalenceBlending"), new EquivalenceBlending);
+    m_blendings.insert(QStringLiteral("HalfDifferenceBlending"), new HalfDifferenceBlending);
 
     // Special purpose blendings
-    m_blendings.insert("CloudsBlending", new CloudsBlending);
-    m_blendings.insert("SunLightBlending", m_sunLightBlending);
-    m_blendings.insert("GrayscaleBlending", new GrayscaleBlending);
-    m_blendings.insert("InvertColorBlending", new InvertColorBlending);
-    m_blendings.insert("InvertHueBlending", new InvertHueBlending);
+    m_blendings.insert(QStringLiteral("CloudsBlending"), new CloudsBlending);
+    m_blendings.insert(QStringLiteral("SunLightBlending"), m_sunLightBlending);
+    m_blendings.insert(QStringLiteral("GrayscaleBlending"), new GrayscaleBlending);
+    m_blendings.insert(QStringLiteral("InvertColorBlending"), new InvertColorBlending);
+    m_blendings.insert(QStringLiteral("InvertHueBlending"), new InvertHueBlending);
 }
 
 BlendingFactory::~BlendingFactory()
 {
-    m_blendings.remove("SunLightBlending");
+    m_blendings.remove(QStringLiteral("SunLightBlending"));
     delete m_sunLightBlending;
     qDeleteAll(m_blendings);
 }

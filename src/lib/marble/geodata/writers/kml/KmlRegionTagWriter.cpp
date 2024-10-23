@@ -11,14 +11,13 @@
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
-#include "KmlLatLonAltBoxWriter.h"
-#include "KmlLodTagWriter.h"
 #include "KmlObjectTagWriter.h"
 
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerRegion(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataRegionType, QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
+static GeoTagWriterRegistrar s_writerRegion(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoDataTypes::GeoDataRegionType),
+                                                                        QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
                                             new KmlRegionTagWriter);
 
 bool KmlRegionTagWriter::write(const GeoNode *node, GeoWriter &writer) const

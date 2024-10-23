@@ -14,7 +14,7 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerMultiGeometry(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataMultiGeometryType,
+static GeoTagWriterRegistrar s_writerMultiGeometry(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoDataTypes::GeoDataMultiGeometryType),
                                                                                QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
                                                    new KmlMultiGeometryTagWriter);
 

@@ -13,7 +13,8 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerLink(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataLinkType, QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
+static GeoTagWriterRegistrar s_writerLink(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoDataTypes::GeoDataLinkType),
+                                                                      QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
                                           new KmlLinkTagWriter);
 
 bool KmlLinkTagWriter::write(const GeoNode *node, GeoWriter &writer) const
@@ -23,19 +24,19 @@ bool KmlLinkTagWriter::write(const GeoNode *node, GeoWriter &writer) const
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_Link));
     KmlObjectTagWriter::writeIdentifiers(writer, link);
 
-    writer.writeElement(kml::kmlTag_href, link->href());
+    writer.writeElement(QString::fromLatin1(kml::kmlTag_href), link->href());
 
     QString const refreshMode = refreshModeToString(link->refreshMode());
-    writer.writeOptionalElement(QLatin1String(kml::kmlTag_refreshMode), refreshMode, "onChange");
+    writer.writeOptionalElement(QLatin1String(kml::kmlTag_refreshMode), refreshMode, QStringLiteral("onChange"));
 
-    writer.writeElement(kml::kmlTag_refreshInterval, QString::number(link->refreshInterval()));
+    writer.writeElement(QString::fromLatin1(kml::kmlTag_refreshInterval), QString::number(link->refreshInterval()));
 
     QString const viewRefreshMode = viewRefreshModeToString(link->viewRefreshMode());
-    writer.writeOptionalElement(QLatin1String(kml::kmlTag_viewRefreshMode), viewRefreshMode, "never");
+    writer.writeOptionalElement(QLatin1String(kml::kmlTag_viewRefreshMode), viewRefreshMode, QStringLiteral("never"));
 
-    writer.writeElement(kml::kmlTag_viewRefreshTime, QString::number(link->viewRefreshTime()));
+    writer.writeElement(QString::fromLatin1(kml::kmlTag_viewRefreshTime), QString::number(link->viewRefreshTime()));
 
-    writer.writeElement(kml::kmlTag_viewBoundScale, QString::number(link->viewBoundScale()));
+    writer.writeElement(QString::fromLatin1(kml::kmlTag_viewBoundScale), QString::number(link->viewBoundScale()));
 
     writer.writeOptionalElement(QLatin1String(kml::kmlTag_viewFormat), link->viewFormat());
 
@@ -62,13 +63,13 @@ QString KmlLinkTagWriter::viewRefreshModeToString(GeoDataLink::ViewRefreshMode v
 {
     switch (viewRefreshMode) {
     case GeoDataLink::OnStop:
-        return "onStop";
+        return QStringLiteral("onStop");
     case GeoDataLink::OnRequest:
-        return "onRequest";
+        return QStringLiteral("onRequest");
     case GeoDataLink::OnRegion:
-        return "onRegion";
+        return QStringLiteral("onRegion");
     default:
-        return "never";
+        return QStringLiteral("never");
     }
 }
 

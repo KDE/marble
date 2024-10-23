@@ -27,8 +27,8 @@ bool DgmlSettingsTagWriter::write(const GeoNode *node, GeoWriter &writer) const
         const GeoSceneProperty *property = settings->allProperties().at(i);
         writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Property));
         writer.writeAttribute(QStringLiteral("name"), property->name());
-        writer.writeElement(dgml::dgmlTag_Value, property->defaultValue() ? "true" : "false");
-        writer.writeElement(dgml::dgmlTag_Available, property->available() ? "true" : "false");
+        writer.writeElement(QString::fromLatin1(dgml::dgmlTag_Value), property->defaultValue() ? QStringLiteral("true") : QStringLiteral("false"));
+        writer.writeElement(QString::fromLatin1(dgml::dgmlTag_Available), property->available() ? QStringLiteral("true") : QStringLiteral("false"));
         writer.writeEndElement();
     }
 

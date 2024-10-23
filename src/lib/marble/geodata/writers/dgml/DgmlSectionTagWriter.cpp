@@ -25,10 +25,10 @@ bool DgmlSectionTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Section));
     writer.writeAttribute(QStringLiteral("name"), section->name());
-    writer.writeAttribute("checkable", section->checkable() ? "true" : "false");
+    writer.writeAttribute("checkable", section->checkable() ? QStringLiteral("true") : QStringLiteral("false"));
     writer.writeAttribute("connect", section->connectTo());
     writer.writeAttribute("spacing", QString::number(section->spacing()));
-    writer.writeElement(dgml::dgmlTag_Heading, section->heading());
+    writer.writeElement(QString::fromLatin1(dgml::dgmlTag_Heading), section->heading());
 
     for (int i = 0; i < section->items().count(); ++i) {
         GeoSceneItem *item = section->items().at(i);

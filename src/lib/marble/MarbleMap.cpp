@@ -767,7 +767,7 @@ void MarbleMapPrivate::setDocument(const QString &key)
 
     const auto layers = m_model->mapTheme()->map()->layers();
     for (const GeoSceneLayer *layer : layers) {
-        if (layer->backend() != dgml::dgmlValue_geodata && layer->backend() != dgml::dgmlValue_vector)
+        if (layer->backend() != QString::fromLatin1(dgml::dgmlValue_geodata) && layer->backend() != QString::fromLatin1(dgml::dgmlValue_vector))
             continue;
 
         // look for documents
@@ -881,8 +881,8 @@ void MarbleMapPrivate::updateMapTheme()
     // Check whether there is a texture layer and vectortile layer available:
     if (m_model->mapTheme()->map()->hasTextureLayers()) {
         const GeoSceneSettings *const settings = m_model->mapTheme()->settings();
-        const GeoSceneGroup *const textureLayerSettings = settings ? settings->group("Texture Layers") : nullptr;
-        const GeoSceneGroup *const vectorTileLayerSettings = settings ? settings->group("VectorTile Layers") : nullptr;
+        const GeoSceneGroup *const textureLayerSettings = settings ? settings->group(QStringLiteral("Texture Layers")) : nullptr;
+        const GeoSceneGroup *const vectorTileLayerSettings = settings ? settings->group(QStringLiteral("VectorTile Layers")) : nullptr;
 
         bool textureLayersOk = true;
         bool vectorTileLayersOk = true;
@@ -893,7 +893,7 @@ void MarbleMapPrivate::updateMapTheme()
         QList<const GeoSceneVectorTileDataset *> vectorTiles;
 
         for (GeoSceneLayer *layer : m_model->mapTheme()->map()->layers()) {
-            if (layer->backend() == dgml::dgmlValue_texture) {
+            if (layer->backend() == QString::fromLatin1(dgml::dgmlValue_texture)) {
                 const auto datasets = layer->datasets();
                 for (const GeoSceneAbstractDataset *pos : datasets) {
                     auto const *texture = dynamic_cast<GeoSceneTextureTileDataset const *>(pos);
@@ -910,7 +910,8 @@ void MarbleMapPrivate::updateMapTheme()
                         mDebug() << "Base tiles not available. Creating Tiles ... \n"
                                  << "SourceDir: " << sourceDir << "InstallMap:" << installMap;
 
-                        auto tileCreator = new TileCreator(sourceDir, installMap, (role == QLatin1StringView("dem")) ? "true" : "false");
+                        auto tileCreator =
+                            new TileCreator(sourceDir, installMap, (role == QLatin1StringView("dem")) ? QStringLiteral("true") : QStringLiteral("false"));
                         tileCreator->setTileFormat(texture->fileFormat().toLower());
 
                         QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog(tileCreator, nullptr);
@@ -932,7 +933,7 @@ void MarbleMapPrivate::updateMapTheme()
                         textureLayersOk = false;
                     }
                 }
-            } else if (layer->backend() == dgml::dgmlValue_vectortile) {
+            } else if (layer->backend() == QString::fromLatin1(dgml::dgmlValue_vectortile)) {
                 const auto datasets = layer->datasets();
                 for (const GeoSceneAbstractDataset *pos : datasets) {
                     auto const *vectorTile = dynamic_cast<GeoSceneVectorTileDataset const *>(pos);
@@ -949,7 +950,8 @@ void MarbleMapPrivate::updateMapTheme()
                         mDebug() << "Base tiles not available. Creating Tiles ... \n"
                                  << "SourceDir: " << sourceDir << "InstallMap:" << installMap;
 
-                        auto tileCreator = new TileCreator(sourceDir, installMap, (role == QLatin1StringView("dem")) ? "true" : "false");
+                        auto tileCreator =
+                            new TileCreator(sourceDir, installMap, (role == QLatin1StringView("dem")) ? QStringLiteral("true") : QStringLiteral("false"));
                         tileCreator->setTileFormat(vectorTile->fileFormat().toLower());
 
                         QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog(tileCreator, nullptr);

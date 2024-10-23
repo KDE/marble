@@ -26,7 +26,7 @@ bool DgmlHeadTagWriter::write(const GeoNode *node, GeoWriter &writer) const
     writer.writeElement(QStringLiteral("name"), head->name());
     writer.writeElement(QStringLiteral("target"), head->target());
     writer.writeElement(QStringLiteral("theme"), head->theme());
-    writer.writeElement(QStringLiteral("visible"), head->visible() ? "true" : "false");
+    writer.writeElement(QStringLiteral("visible"), head->visible() ? QStringLiteral("true") : QStringLiteral("false"));
     writer.writeStartElement("description");
     writer.writeCDATA(head->description());
     writer.writeEndElement();
@@ -38,7 +38,7 @@ bool DgmlHeadTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 
     const auto &zoom = static_cast<const GeoSceneZoom &>(*head->zoom());
     writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Zoom));
-    writer.writeElement(QStringLiteral("discrete"), zoom.discrete() ? "true" : "false");
+    writer.writeElement(QStringLiteral("discrete"), zoom.discrete() ? QStringLiteral("true") : QStringLiteral("false"));
     writer.writeTextElement("minimum", QString::number(zoom.minimum()));
     writer.writeTextElement("maximum", QString::number(zoom.maximum()));
     writer.writeEndElement();

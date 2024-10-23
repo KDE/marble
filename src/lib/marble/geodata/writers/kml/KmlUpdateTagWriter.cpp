@@ -17,7 +17,8 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerUpdate(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataUpdateType, QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
+static GeoTagWriterRegistrar s_writerUpdate(GeoTagWriter::QualifiedName(QString::fromLatin1(GeoDataTypes::GeoDataUpdateType),
+                                                                        QString::fromLatin1(kml::kmlTag_nameSpaceOgc22)),
                                             new KmlUpdateTagWriter);
 
 bool KmlUpdateTagWriter::write(const GeoNode *node, GeoWriter &writer) const
@@ -25,7 +26,7 @@ bool KmlUpdateTagWriter::write(const GeoNode *node, GeoWriter &writer) const
     const auto update = static_cast<const GeoDataUpdate *>(node);
     KmlObjectTagWriter::writeIdentifiers(writer, update);
     writer.writeStartElement(QString::fromUtf8(kml::kmlTag_Update));
-    writer.writeElement(kml::kmlTag_targetHref, update->targetHref());
+    writer.writeElement(QString::fromLatin1(kml::kmlTag_targetHref), update->targetHref());
 
     if (update->change() && update->change()->size() > 0) {
         writer.writeStartElement(QString::fromUtf8(kml::kmlTag_Change));

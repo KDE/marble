@@ -5,7 +5,6 @@
 
 #include "KmlOsmPlacemarkDataTagWriter.h"
 
-#include "GeoDataExtendedData.h"
 #include "GeoDataFeature.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataPlacemark.h"
@@ -48,13 +47,13 @@ bool KmlOsmPlacemarkDataTagWriter::writeOsmData(const GeoDataGeometry *geometry,
 
     // Writing the attributes
     writer.writeAttribute("id", QString::number(osmData.id()));
-    writer.writeOptionalAttribute("changeset", osmData.changeset());
-    writer.writeOptionalAttribute("timestamp", osmData.timestamp());
-    writer.writeOptionalAttribute("uid", osmData.uid());
-    writer.writeOptionalAttribute("user", osmData.user());
-    writer.writeOptionalAttribute("version", osmData.version());
-    writer.writeOptionalAttribute("visible", osmData.isVisible());
-    writer.writeOptionalAttribute("action", osmData.action());
+    writer.writeOptionalAttribute(QStringLiteral("changeset"), osmData.changeset());
+    writer.writeOptionalAttribute(QStringLiteral("timestamp"), osmData.timestamp());
+    writer.writeOptionalAttribute(QStringLiteral("uid"), osmData.uid());
+    writer.writeOptionalAttribute(QStringLiteral("user"), osmData.user());
+    writer.writeOptionalAttribute(QStringLiteral("version"), osmData.version());
+    writer.writeOptionalAttribute(QStringLiteral("visible"), osmData.isVisible());
+    writer.writeOptionalAttribute(QStringLiteral("action"), osmData.action());
 
     // Writing the tags
     QHash<QString, QString>::const_iterator tagsIt = osmData.tagsBegin();
