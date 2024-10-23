@@ -80,7 +80,7 @@ public:
 
     QStringList renderPosition() const override
     {
-        return QStringList() << "USER_TOOLS";
+        return QStringList() << QStringLiteral("USER_TOOLS");
     }
 
     bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer) override
@@ -1014,7 +1014,7 @@ void MarbleMapPrivate::updateMapTheme()
             m_layerManager.addLayer(&m_vectorTileLayer);
     } else {
         m_layerManager.addLayer(&m_groundLayer);
-        m_textureLayer.setMapTheme(QList<const GeoSceneTextureTileDataset *>(), nullptr, "", "");
+        m_textureLayer.setMapTheme(QList<const GeoSceneTextureTileDataset *>(), nullptr, QString(), QString());
         m_vectorTileLayer.setMapTheme(QList<const GeoSceneVectorTileDataset *>(), nullptr);
     }
 

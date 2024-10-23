@@ -293,7 +293,8 @@ QList<int> DownloadRegion::validTileLevels(const TileType tileType) const
     GeoSceneMap *map = d->m_marbleModel->mapTheme()->map();
     QList<GeoSceneLayer *> layers = map->layers();
     for (auto layer : std::as_const(layers)) {
-        if ((layer->backend() == "vectortile" && tileType == VectorTileType) || (layer->backend() == "texture" && tileType == TextureTileType)) {
+        if ((layer->backend() == QLatin1StringView("vectortile") && tileType == VectorTileType)
+            || (layer->backend() == QLatin1StringView("texture") && tileType == TextureTileType)) {
             GeoSceneTileDataset *dataset = dynamic_cast<GeoSceneTileDataset *>(layer->datasets().first());
             validTileLevels = dataset->tileLevels();
             break;

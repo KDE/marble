@@ -142,7 +142,7 @@ QWidget *DownloadRegionDialog::Private::createSelectionMethodBox()
     int defaultOffset = 500;
     m_routeOffsetSpinBox->setValue(defaultOffset);
     m_routeOffsetSpinBox->setSingleStep(100);
-    m_routeOffsetSpinBox->setSuffix(" m");
+    m_routeOffsetSpinBox->setSuffix(QStringLiteral(" m"));
     m_routeOffsetSpinBox->setDecimals(0);
     m_routeOffsetSpinBox->setAlignment(Qt::AlignRight);
 
@@ -528,13 +528,13 @@ void DownloadRegionDialog::setOffsetUnit()
     qreal offset = d->m_routeOffsetSpinBox->value();
 
     if (offset >= 1100) {
-        d->m_routeOffsetSpinBox->setSuffix(" km");
+        d->m_routeOffsetSpinBox->setSuffix(QStringLiteral(" km"));
         d->m_routeOffsetSpinBox->setRange(minimumRouteOffset * METER2KM, maximumRouteOffset * METER2KM);
         d->m_routeOffsetSpinBox->setDecimals(1);
         d->m_routeOffsetSpinBox->setValue(offset * METER2KM);
         d->m_routeOffsetSpinBox->setSingleStep(0.1);
     } else if (offset <= 1 && d->m_routeOffsetSpinBox->suffix() == QLatin1StringView(" km")) {
-        d->m_routeOffsetSpinBox->setSuffix(" m");
+        d->m_routeOffsetSpinBox->setSuffix(QStringLiteral(" m"));
         d->m_routeOffsetSpinBox->setRange(minimumRouteOffset, maximumRouteOffset);
         d->m_routeOffsetSpinBox->setDecimals(0);
         d->m_routeOffsetSpinBox->setValue(offset * KM2METER);

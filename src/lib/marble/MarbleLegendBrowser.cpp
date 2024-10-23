@@ -202,14 +202,14 @@ void MarbleLegendBrowser::translateHtml(QString &html)
 {
     // must match string extraction in Messages.sh
     QString s = html;
-    QRegularExpression rx(R"(</?\w+((\s+\w+(\s*=\s*(?:".*"|'.*'|[^'">\s]+))?)+\s*|\s*)/?>)",
+    QRegularExpression rx(QStringLiteral(R"(</?\w+((\s+\w+(\s*=\s*(?:".*"|'.*'|[^'">\s]+))?)+\s*|\s*)/?>)"),
                           QRegularExpression::InvertedGreedinessOption); // PORT_QT6: double check
     /*
         QRegExp rx( "</?\\w+((\\s+\\w+(\\s*=\\s*(?:\".*\"|'.*'|[^'\">\\s]+))?)+\\s*|\\s*)/?>");
         rx.setMinimal( true );
     */
     s.replace(rx, QLatin1StringView("\n"));
-    s.replace(QRegularExpression("\\s*\n\\s*"), "\n");
+    s.replace(QRegularExpression(QStringLiteral("\\s*\n\\s*")), QStringLiteral("\n"));
     const QStringList words = s.split(QLatin1Char('\n'), Qt::SkipEmptyParts);
 
     QStringList::const_iterator i = words.constBegin();
@@ -220,24 +220,24 @@ void MarbleLegendBrowser::translateHtml(QString &html)
 
 void MarbleLegendBrowser::injectWebChannel(QString &html)
 {
-    QString webChannelCode = R"(<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>)";
-    webChannelCode +=
+    QString webChannelCode = QStringLiteral(R"(<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>)");
+    webChannelCode += QStringLiteral(
         "<script> document.addEventListener(\"DOMContentLoaded\", function() {"
         "new QWebChannel(qt.webChannelTransport, function (channel) {"
         "Marble = channel.objects.Marble;"
         "});"
         "}); </script>"
-        "</head>";
-    html.replace("</head>", webChannelCode);
+        "</head>");
+    html.replace(QStringLiteral("</head>"), webChannelCode);
 }
 
 void MarbleLegendBrowser::reverseSupportCheckboxes(QString &html)
 {
-    const QString old = "<a href=\"checkbox:cities\"/>";
+    const QString old = QStringLiteral("<a href=\"checkbox:cities\"/>");
 
     QString checked;
-    if (d->m_checkBoxMap["cities"])
-        checked = "checked";
+    if (d->m_checkBoxMap[QStringLiteral("cities")])
+        checked = QStringLiteral("checked");
 
     const QString repair = QLatin1StringView(
                                "<input style=\"position: relative; top: -4px;\" type=\"checkbox\" "
@@ -274,7 +274,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
         QString checkBoxString;
         if (section->checkable()) {
             // If it's needed to make a checkbox here, we will
-            QString const checked = d->m_checkBoxMap[section->connectTo()] ? "checked" : "";
+            QString const checked = d->m_checkBoxMap[section->connectTo()] ? QStringLiteral("checked") : QString();
             /* Important comment:
              * We inject Marble object into JavaScript of each legend html file
              * This is only one way to handle checkbox changes we see, so
@@ -306,7 +306,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
             // checkbox for item
             QString checkBoxString;
             if (item->checkable()) {
-                QString const checked = d->m_checkBoxMap[item->connectTo()] ? "checked" : "";
+                QString const checked = d->m_checkBoxMap[item->connectTo()] ? QStringLiteral("checked") : QString();
                 checkBoxString = QLatin1StringView(
                                      "<input type=\"checkbox\" "
                                      "onchange=\"Marble.setCheckedProperty(this.name, this.checked);\" ")
@@ -328,7 +328,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
                     + QLatin1StringView("px;");
             } else {
                 // Workaround for rendered border around empty images in webkit
-                src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+                src = QStringLiteral("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
             }
             // NOTICE. There are some pixmaps without image, so we should
             //         create just a plain rectangle with set color
@@ -337,7 +337,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
                 styleDiv = QLatin1StringView("width: ") + QString::number(pixmapWidth) + QLatin1StringView("px; height: ") + QString::number(pixmapHeight)
                     + QLatin1StringView("px; background-color: ") + color.name() + QLatin1Char(';');
             }
-            styleDiv += " position: relative; top: -3px;";
+            styleDiv += QStringLiteral(" position: relative; top: -3px;");
             const QString text = QCoreApplication::translate("DGML", item->text().toUtf8().constData());
             QString html = QLatin1StringView(
                                "<div class=\"legend-entry\">"

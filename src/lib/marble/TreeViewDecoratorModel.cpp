@@ -43,7 +43,7 @@ QVariant TreeViewDecoratorModel::data(const QModelIndex &proxyIndex, int role) c
 {
     if (role != Qt::DecorationRole || proxyIndex.column() != 0) {
         if (proxyIndex.column() == 1) {
-            return QSortFilterProxyModel::data(proxyIndex, role).toString().remove("GeoData");
+            return QSortFilterProxyModel::data(proxyIndex, role).toString().remove(QStringLiteral("GeoData"));
         } else {
             return QSortFilterProxyModel::data(proxyIndex, role);
         }

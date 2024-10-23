@@ -106,7 +106,7 @@ void CurrentLocationWidget::setMarbleWidget(MarbleWidget *widget)
     }
     if (d->m_positionProviderPlugins.isEmpty()) {
         d->m_currentLocationUi.positionTrackingComboBox->setEnabled(false);
-        QString html = "<p>No Position Tracking Plugin installed.</p>";
+        QString html = tr("<p>No Position Tracking Plugin installed.</p>");
         d->m_currentLocationUi.locationLabel->setText(html);
         d->m_currentLocationUi.locationLabel->setEnabled(true);
         bool const hasTrack = !d->m_widget->model()->positionTracking()->isTrackEmpty();
@@ -176,7 +176,7 @@ void CurrentLocationWidgetPrivate::adjustPositionTrackingStatus(PositionProvider
         return;
     }
 
-    QString html = "<html><body><p>";
+    QString html = QStringLiteral("<html><body><p>");
 
     switch (status) {
     case PositionProviderStatusUnavailable:
@@ -365,7 +365,7 @@ void CurrentLocationWidgetPrivate::saveTrack()
     QString fileName = QFileDialog::getSaveFileName(
         m_widget,
         QObject::tr("Save Track"), // krazy:exclude=qclasses
-        suggested.append(QLatin1Char('/') + QDateTime::currentDateTime().toString("yyyy-MM-dd_hhmmss") + QLatin1StringView(".kml")),
+        suggested.append(QLatin1Char('/') + QDateTime::currentDateTime().toString(QStringLiteral("yyyy-MM-dd_hhmmss")) + QLatin1StringView(".kml")),
         QObject::tr("KML File (*.kml)"));
     if (fileName.isEmpty()) {
         return;

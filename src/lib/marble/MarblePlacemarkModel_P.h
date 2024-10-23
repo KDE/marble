@@ -15,7 +15,7 @@ namespace Marble
 
 namespace GeoString
 {
-static const QRegularExpression combiningDiacriticalMarks("[\\x0300-\\x036F]+");
+static const QRegularExpression combiningDiacriticalMarks(QStringLiteral("[\\x0300-\\x036F]+"));
 
 QString deaccent(const QString &accentString)
 {

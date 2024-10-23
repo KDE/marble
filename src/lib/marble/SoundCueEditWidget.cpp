@@ -34,7 +34,7 @@ SoundCueEditWidget::SoundCueEditWidget(const QModelIndex &index, QWidget *parent
     iconLabel->setPixmap(QPixmap(QStringLiteral(":/marble/playback-play.png")));
     layout->addWidget(iconLabel);
 
-    m_lineEdit->setPlaceholderText("Audio location");
+    m_lineEdit->setPlaceholderText(tr("Audio location"));
     m_lineEdit->setText(soundCueElement()->href());
     layout->addWidget(m_lineEdit);
 

@@ -47,55 +47,55 @@ void CelestialSortFilterProxyModel::setupPriorities()
     // here we will set m_priority for default order
     int prefix = 100;
 
-    m_priority["sun"] = prefix;
-    m_priority["mercury"] = prefix--;
-    m_priority["venus"] = prefix--;
-    m_priority["earth"] = prefix--;
-    m_priority["moon"] = prefix--;
-    m_priority["mars"] = prefix--;
+    m_priority[QStringLiteral("sun")] = prefix;
+    m_priority[QStringLiteral("mercury")] = prefix--;
+    m_priority[QStringLiteral("venus")] = prefix--;
+    m_priority[QStringLiteral("earth")] = prefix--;
+    m_priority[QStringLiteral("moon")] = prefix--;
+    m_priority[QStringLiteral("mars")] = prefix--;
 
-    m_priority["jupiter"] = prefix--;
+    m_priority[QStringLiteral("jupiter")] = prefix--;
     // Moons of Jupiter
-    m_priority["io"] = prefix--;
-    m_priority["europa"] = prefix--;
-    m_priority["ganymede"] = prefix--;
-    m_priority["callisto"] = prefix--;
+    m_priority[QStringLiteral("io")] = prefix--;
+    m_priority[QStringLiteral("europa")] = prefix--;
+    m_priority[QStringLiteral("ganymede")] = prefix--;
+    m_priority[QStringLiteral("callisto")] = prefix--;
 
-    m_priority["saturn"] = prefix--;
+    m_priority[QStringLiteral("saturn")] = prefix--;
     // Moons of Saturn
-    m_priority["mimas"] = prefix--;
-    m_priority["enceladus"] = prefix--;
-    m_priority["thetys"] = prefix--;
-    m_priority["dione"] = prefix--;
-    m_priority["rhea"] = prefix--;
-    m_priority["titan"] = prefix--;
-    m_priority["iapetus"] = prefix--;
+    m_priority[QStringLiteral("mimas")] = prefix--;
+    m_priority[QStringLiteral("enceladus")] = prefix--;
+    m_priority[QStringLiteral("thetys")] = prefix--;
+    m_priority[QStringLiteral("dione")] = prefix--;
+    m_priority[QStringLiteral("rhea")] = prefix--;
+    m_priority[QStringLiteral("titan")] = prefix--;
+    m_priority[QStringLiteral("iapetus")] = prefix--;
 
-    m_priority["uranus"] = prefix--;
-    m_priority["neptune"] = prefix--;
-    m_priority["pluto"] = prefix--;
-    m_priority["ceres"] = prefix--;
+    m_priority[QStringLiteral("uranus")] = prefix--;
+    m_priority[QStringLiteral("neptune")] = prefix--;
+    m_priority[QStringLiteral("pluto")] = prefix--;
+    m_priority[QStringLiteral("ceres")] = prefix--;
 }
 
 void CelestialSortFilterProxyModel::setupMoonsList()
 {
-    m_moons.push_back("moon");
-    m_moons.push_back("europa");
-    m_moons.push_back("ganymede");
-    m_moons.push_back("callisto");
-    m_moons.push_back("mimas");
-    m_moons.push_back("enceladus");
-    m_moons.push_back("thetys");
-    m_moons.push_back("dione");
-    m_moons.push_back("rhea");
-    m_moons.push_back("titan");
-    m_moons.push_back("iapetus");
+    m_moons.push_back(QStringLiteral("moon"));
+    m_moons.push_back(QStringLiteral("europa"));
+    m_moons.push_back(QStringLiteral("ganymede"));
+    m_moons.push_back(QStringLiteral("callisto"));
+    m_moons.push_back(QStringLiteral("mimas"));
+    m_moons.push_back(QStringLiteral("enceladus"));
+    m_moons.push_back(QStringLiteral("thetys"));
+    m_moons.push_back(QStringLiteral("dione"));
+    m_moons.push_back(QStringLiteral("rhea"));
+    m_moons.push_back(QStringLiteral("titan"));
+    m_moons.push_back(QStringLiteral("iapetus"));
 }
 
 void CelestialSortFilterProxyModel::setupDwarfsList()
 {
-    m_dwarfs.push_back("pluto");
-    m_dwarfs.push_back("ceres");
+    m_dwarfs.push_back(QStringLiteral("pluto"));
+    m_dwarfs.push_back(QStringLiteral("ceres"));
 }
 
 bool CelestialSortFilterProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
