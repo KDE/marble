@@ -269,7 +269,7 @@ void RoutingModel::updatePosition(const GeoDataCoordinates &location, qreal spee
     d->m_route.setPosition(location);
 
     d->updateViaPoints(location);
-    const qreal planetRadius = PlanetFactory::construct("earth").radius();
+    const qreal planetRadius = PlanetFactory::construct(QStringLiteral("earth")).radius();
     const qreal distance = planetRadius * location.sphericalDistanceTo(d->m_route.positionOnRoute());
     Q_EMIT positionChanged();
 

@@ -25,7 +25,7 @@ public:
 
 void TemplateDocumentPrivate::processTemplateIncludes(QString &input)
 {
-    QRegExp rx("%!\\{([^}]*)\\}%");
+    QRegExp rx(QStringLiteral("%!\\{([^}]*)\\}%"));
 
     QStringList includes;
     int pos = 0;
@@ -38,7 +38,7 @@ void TemplateDocumentPrivate::processTemplateIncludes(QString &input)
     for (const QString &include : includes) {
         QFile includeFile(QLatin1StringView(":/htmlfeatures/includes/") + include + QLatin1StringView(".inc"));
         if (includeFile.open(QIODevice::ReadOnly)) {
-            input.replace(QLatin1StringView("%!{") + include + QLatin1StringView("}%"), includeFile.readAll());
+            input.replace(QLatin1StringView("%!{") + include + QLatin1StringView("}%"), QString::fromLatin1(includeFile.readAll()));
         } else {
             mDebug() << "[WARNING] Can't process template include" << include;
         }

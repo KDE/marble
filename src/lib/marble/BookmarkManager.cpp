@@ -14,7 +14,6 @@
 #include "GeoDataParser.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataTreeModel.h"
-#include "KmlElementDictionary.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "StyleBuilder.h"
@@ -26,7 +25,7 @@ namespace Marble
 BookmarkManagerPrivate::BookmarkManagerPrivate(GeoDataTreeModel *treeModel)
     : m_treeModel(treeModel)
     , m_bookmarkDocument(nullptr)
-    , m_bookmarkFileRelativePath("bookmarks/bookmarks.kml")
+    , m_bookmarkFileRelativePath(QStringLiteral("bookmarks/bookmarks.kml"))
     , m_styleBuilder(nullptr)
 {
     resetBookmarkDocument();

@@ -35,8 +35,8 @@ public:
                              QObject::tr("Missing encoding tools"),
                              QObject::tr("Marble requires additional software in order to "
                                          "create movies. Please get %1 ")
-                                 .arg("<a href=\"https://libav.org/"
-                                      "download.html\">avconv</a>"),
+                                 .arg(QStringLiteral("<a href=\"https://libav.org/"
+                                                     "download.html\">avconv</a>")),
                              QMessageBox::Ok);
     }
 
@@ -59,13 +59,13 @@ MovieCapture::MovieCapture(MarbleWidget *widget, QObject *parent)
         connect(&d->frameTimer, &QTimer::timeout, this, &MovieCapture::recordFrame);
     }
     d->fps = 30;
-    MovieFormat avi("avi", tr("AVI (mpeg4)"), "avi");
-    MovieFormat flv("flv", tr("FLV"), "flv");
-    MovieFormat mkv("matroska", tr("Matroska (h264)"), "mkv");
-    MovieFormat mp4("mp4", tr("MPEG-4"), "mp4");
-    MovieFormat vob("vob", tr("MPEG-2 PS (VOB)"), "vob");
-    MovieFormat ogg("ogg", tr("OGG"), "ogg");
-    MovieFormat swf("swf", tr("SWF"), "swf");
+    MovieFormat avi(QStringLiteral("avi"), tr("AVI (mpeg4)"), QStringLiteral("avi"));
+    MovieFormat flv(QStringLiteral("flv"), tr("FLV"), QStringLiteral("flv"));
+    MovieFormat mkv(QStringLiteral("matroska"), tr("Matroska (h264)"), QStringLiteral("mkv"));
+    MovieFormat mp4(QStringLiteral("mp4"), tr("MPEG-4"), QStringLiteral("mp4"));
+    MovieFormat vob(QStringLiteral("vob"), tr("MPEG-2 PS (VOB)"), QStringLiteral("vob"));
+    MovieFormat ogg(QStringLiteral("ogg"), tr("OGG"), QStringLiteral("ogg"));
+    MovieFormat swf(QStringLiteral("swf"), tr("SWF"), QStringLiteral("swf"));
     m_supportedFormats << avi << flv << mkv << mp4 << vob << ogg << swf;
 }
 
@@ -116,10 +116,10 @@ QList<MovieFormat> MovieCapture::availableFormats()
         for (const MovieFormat &format : std::as_const(m_supportedFormats)) {
             QString type = format.type();
             QStringList args;
-            args << "-h" << QLatin1StringView("muxer=") + type;
+            args << QStringLiteral("-h") << QLatin1StringView("muxer=") + type;
             encoder.start(d->encoderExec, args);
             encoder.waitForFinished();
-            QString output = encoder.readAll();
+            QString output = QString::fromLatin1(encoder.readAll());
             bool isFormatAvailable = !output.contains(QLatin1StringView("Unknown format"));
             if (isFormatAvailable) {
                 availableFormats << format;
@@ -141,16 +141,16 @@ bool MovieCapture::checkToolsAvailability()
     static bool toolsAvailable = false;
     if (toolsAvailable == false) {
         QProcess encoder(this);
-        encoder.start("avconv", QStringList() << "-version");
+        encoder.start(QStringLiteral("avconv"), QStringList() << QStringLiteral("-version"));
         encoder.waitForFinished();
         if (!encoder.readAll().isEmpty()) { // avconv have output when it's here
-            d->encoderExec = "avconv";
+            d->encoderExec = QStringLiteral("avconv");
             toolsAvailable = true;
         } else {
-            encoder.start("ffmpeg", QStringList() << "-version");
+            encoder.start(QStringLiteral("ffmpeg"), QStringList() << QStringLiteral("-version"));
             encoder.waitForFinished();
             if (!encoder.readAll().isEmpty()) {
-                d->encoderExec = "ffmpeg";
+                d->encoderExec = QStringLiteral("ffmpeg");
                 toolsAvailable = true;
             }
         }
@@ -163,15 +163,11 @@ void MovieCapture::recordFrame()
     Q_D(MovieCapture);
     QImage const screenshot = d->marbleWidget->mapScreenShot().toImage().convertToFormat(QImage::Format_RGB888);
     if (d->process.state() == QProcess::NotRunning) {
-        QStringList const arguments = QStringList() << "-y"
-                                                    << "-r" << QString::number(fps()) << "-f"
-                                                    << "rawvideo"
-                                                    << "-pix_fmt"
-                                                    << "rgb24"
-                                                    << "-s" << QStringLiteral("%1x%2").arg(screenshot.width()).arg(screenshot.height()) << "-i"
-                                                    << "pipe:"
-                                                    << "-b"
-                                                    << "2000k" << d->destinationFile;
+        QStringList const arguments = QStringList() << QStringLiteral("-y") << QStringLiteral("-r") << QString::number(fps()) << QStringLiteral("-f")
+                                                    << QStringLiteral("rawvideo") << QStringLiteral("-pix_fmt") << QStringLiteral("rgb24")
+                                                    << QStringLiteral("-s") << QStringLiteral("%1x%2").arg(screenshot.width()).arg(screenshot.height())
+                                                    << QStringLiteral("-i") << QStringLiteral("pipe:") << QStringLiteral("-b") << QStringLiteral("2000k")
+                                                    << d->destinationFile;
         d->process.start(d->encoderExec, arguments);
         connect(&d->process, SIGNAL(finished(int)), this, SLOT(processWrittenMovie(int)));
     }

@@ -141,7 +141,7 @@ GeoDataFolder *RoutingManagerPrivate::createFolderFromRequest(const RouteRequest
 
 QString RoutingManagerPrivate::stateFile(const QString &name)
 {
-    QString const subdir = "routing";
+    QString const subdir = QStringLiteral("routing");
     QDir dir(MarbleDirs::localPath());
     if (!dir.exists(subdir)) {
         if (!dir.mkdir(subdir)) {
@@ -160,7 +160,7 @@ QString RoutingManagerPrivate::stateFile(const QString &name)
 void RoutingManagerPrivate::saveRoute(const QString &filename)
 {
     GeoWriter writer;
-    writer.setDocumentType(kml::kmlTag_nameSpaceOgc22);
+    writer.setDocumentType(QString::fromLatin1(kml::kmlTag_nameSpaceOgc22));
 
     QMutexLocker locker(&m_fileMutex);
     QFile file(filename);
@@ -399,9 +399,7 @@ void RoutingManagerPrivate::importPlacemark(RouteSegment &outline, QList<RouteSe
 {
     const GeoDataGeometry *geometry = placemark->geometry();
     const auto lineString = dynamic_cast<const GeoDataLineString *>(geometry);
-    QStringList blacklist = QStringList() << ""
-                                          << "Route"
-                                          << "Tessellated";
+    QStringList blacklist = QStringList() << QString() << QStringLiteral("Route") << QStringLiteral("Tessellated");
     RouteSegment segment;
     bool isOutline = true;
     if (!blacklist.contains(placemark->name())) {
@@ -504,7 +502,7 @@ void RoutingManager::setGuidanceModeEnabled(bool enabled)
     d->m_guidanceModeEnabled = enabled;
 
     if (enabled) {
-        d->saveRoute(d->stateFile("guidance.kml"));
+        d->saveRoute(d->stateFile(QStringLiteral("guidance.kml")));
 
         if (d->m_guidanceModeWarning) {
             QString text = QLatin1StringView("<p>") + tr("Caution: Driving instructions may be incomplete or wrong.") + QLatin1Char(' ')
@@ -526,7 +524,7 @@ void RoutingManager::setGuidanceModeEnabled(bool enabled)
             delete messageBox;
         }
     } else {
-        d->loadRoute(d->stateFile("guidance.kml"));
+        d->loadRoute(d->stateFile(QStringLiteral("guidance.kml")));
     }
 
     PositionProviderPlugin *positionProvider = d->m_positionTracking->positionProviderPlugin();

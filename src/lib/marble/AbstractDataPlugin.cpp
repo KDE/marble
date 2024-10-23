@@ -71,7 +71,7 @@ QString AbstractDataPlugin::renderPolicy() const
 
 QStringList AbstractDataPlugin::renderPosition() const
 {
-    return QStringList("ALWAYS_ON_TOP");
+    return QStringList(QStringLiteral("ALWAYS_ON_TOP"));
 }
 
 bool AbstractDataPlugin::render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer)

@@ -157,7 +157,7 @@ void FileLoader::run()
         if (fileinfo.isAbsolute()) {
             // We got an _absolute_ path now: e.g. "/patrick.kml"
             defaultSourceName = path + QLatin1Char('/') + name + QLatin1Char('.') + suffix;
-        } else if (d->m_filepath.contains('/')) {
+        } else if (d->m_filepath.contains(QLatin1Char('/'))) {
             // _relative_ path: "maps/mars/viking/patrick.kml"
             defaultSourceName = MarbleDirs::path(path + QLatin1Char('/') + name + QLatin1Char('.') + suffix);
             if (!QFile::exists(defaultSourceName)) {

@@ -376,7 +376,7 @@ void OwsServiceManager::queryWmsLevelZeroTile(const QUrl &url, const QString &la
 {
     QString bbox;
     if (projection == "epsg:3857") {
-        bbox = "-20037508.34,-20048966.1,20037508.34,20048966.1";
+        bbox = QStringLiteral("-20037508.34,-20048966.1,20037508.34,20048966.1");
 
     } else if (projection == "epsg:4326") {
         bbox = wmsCapabilities().version() == "1.3.0" ? "-90,-180,90,180" : "-180,-90,180,90"; // flipped axes for 1.3.0 in epsg:4326 according to spec
@@ -766,9 +766,9 @@ void OwsServiceManager::parseWmtsCapabilities(QNetworkReply *reply)
         }
 
         QStringList tileMatrixSets;
-        QDomNodeList tileMatrixLinkList = layers.at(i).toElement().elementsByTagName("TileMatrixSetLink");
+        QDomNodeList tileMatrixLinkList = layers.at(i).toElement().elementsByTagName(QStringLiteral("TileMatrixSetLink"));
         for (int t = 0; t < tileMatrixLinkList.size(); ++t) {
-            tileMatrixSets << tileMatrixLinkList.at(t).toElement().firstChildElement("TileMatrixSet").text();
+            tileMatrixSets << tileMatrixLinkList.at(t).toElement().firstChildElement(QStringLiteral("TileMatrixSet")).text();
         }
         wmtsTileMatrixSets[name] = tileMatrixSets;
     }

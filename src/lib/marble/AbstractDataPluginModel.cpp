@@ -31,7 +31,7 @@
 namespace Marble
 {
 
-const QString descriptionPrefix("description_");
+const QString descriptionPrefix(QStringLiteral("description_"));
 
 // Time between two tried description file downloads (we decided not to download anything) in ms
 const int timeBetweenTriedDownloads = 500;
@@ -217,7 +217,7 @@ QVariant FavoritesModel::data(const QModelIndex &index, int role) const
         for (AbstractDataPluginItem *item : std::as_const(d->m_itemSet)) {
             if (item->initialized() && item->isFavorite()) {
                 if (count == row) {
-                    QString const roleName = roleNames().value(role);
+                    QString const roleName = QString::fromUtf8(roleNames().value(role));
                     return item->property(roleName.toLatin1().constData());
                 }
                 ++count;

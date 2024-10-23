@@ -96,10 +96,10 @@ void PluginAboutDialog::setLicense(PluginAboutDialog::LicenseKey license)
     QString filename;
     switch (license) {
     case PluginAboutDialog::License_LGPL_V2:
-        filename = "lgpl2.txt";
+        filename = QStringLiteral("lgpl2.txt");
         break;
     default:
-        filename = "lgpl2.txt";
+        filename = QStringLiteral("lgpl2.txt");
     }
 
     const QString path = MarbleDirs::path(QLatin1StringView("licenses/") + filename);

@@ -110,24 +110,24 @@ RenderStatus RenderState::Private::minimumStatus(RenderStatus a, RenderStatus b)
 
 QString RenderState::Private::toString(const RenderState &state, int level) const
 {
-    QString const prefix = level > 0 ? "\n" : "";
+    QString const prefix = level > 0 ? QStringLiteral("\n") : QString();
     QString const indent(level * 2, QLatin1Char(' '));
     QString status;
     switch (state.status()) {
     case Marble::Complete:
-        status = "Complete";
+        status = QStringLiteral("Complete");
         break;
     case Marble::WaitingForUpdate:
-        status = "Waiting for update";
+        status = QStringLiteral("Waiting for update");
         break;
     case Marble::WaitingForData:
-        status = "Waiting for data";
+        status = QStringLiteral("Waiting for data");
         break;
     case Marble::Incomplete:
-        status = "Incomplete";
+        status = QStringLiteral("Incomplete");
         break;
     }
-    QString const name = (state.name().isEmpty() ? "Anonymous renderer" : state.name());
+    QString const name = (state.name().isEmpty() ? QStringLiteral("Anonymous renderer") : state.name());
     QString result = QStringLiteral("%1%2%3: %4").arg(prefix, indent, name, status);
 
     for (const RenderState &child : state.d->m_children) {

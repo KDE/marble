@@ -250,8 +250,7 @@ QString RoutingInstruction::nextRoadInstruction() const
     }
 
     if (roadType() == QLatin1StringView("motorway_link")) {
-        QStringList motorways = QStringList() << "motorway"
-                                              << "motorway_link";
+        QStringList motorways = QStringList() << QStringLiteral("motorway") << QStringLiteral("motorway_link");
         bool const leaving = predecessor() && motorways.contains(predecessor()->roadType());
         if (leaving) {
             if (roadName().isEmpty()) {
@@ -294,18 +293,18 @@ QString RoutingInstruction::nextDistanceInstruction() const
 
     if (measurement != QLocale::MetricSystem) {
         precision = 1;
-        distanceUnit = "mi";
+        distanceUnit = QStringLiteral("mi");
         length /= 1000.0;
         length /= 1.609344;
         if (length < 0.1) {
             length = 10 * qRound(length * 528);
             precision = 0;
-            distanceUnit = "ft";
+            distanceUnit = QStringLiteral("ft");
         }
     } else {
         if (length >= 1000) {
             length /= 1000;
-            distanceUnit = "km";
+            distanceUnit = QStringLiteral("km");
             precision = 1;
         } else if (length >= 200) {
             length = 50 * qRound(length / 50);
@@ -327,11 +326,11 @@ QString RoutingInstruction::nextDistanceInstruction() const
 QString RoutingInstruction::totalDurationRemaining() const
 {
     qreal duration = secondsLeft();
-    QString durationUnit = "sec";
+    QString durationUnit = QStringLiteral("sec");
     int precision = 0;
     if (duration >= 60.0) {
         duration /= 60.0;
-        durationUnit = "min";
+        durationUnit = QStringLiteral("min");
         precision = 0;
     }
     if (duration >= 60.0) {
@@ -340,7 +339,7 @@ QString RoutingInstruction::totalDurationRemaining() const
         precision = 1;
     }
 
-    QString text = "Arrival in %1 %2.";
+    QString text = QStringLiteral("Arrival in %1 %2.");
     return text.arg(duration, 0, 'f', precision).arg(durationUnit);
 }
 
@@ -487,16 +486,16 @@ QTextStream &operator<<(QTextStream &stream, const RoutingInstruction &i)
         stream << i.points().constFirst().point().lat() << ',';
         stream << i.points().constFirst().point().lon() << ',';
     } else {
-        QString distanceUnit = "m ";
+        QString distanceUnit = QStringLiteral("m ");
         int precision = 0;
         qreal length = i.distanceFromStart();
         if (length >= 1000) {
             length /= 1000;
-            distanceUnit = "km";
+            distanceUnit = QStringLiteral("km");
             precision = 1;
         }
 
-        QString totalDistance = "[%1 %2] ";
+        QString totalDistance = QStringLiteral("[%1 %2] ");
         stream << totalDistance.arg(length, 3, 'f', precision).arg(distanceUnit);
     }
 

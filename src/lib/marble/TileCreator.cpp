@@ -31,7 +31,7 @@ public:
         : m_dem(dem)
         , m_targetDir(targetDir)
         , m_cancelled(false)
-        , m_tileFormat("jpg")
+        , m_tileFormat(QStringLiteral("jpg"))
         , m_resume(false)
         , m_verify(false)
         , m_source(source)

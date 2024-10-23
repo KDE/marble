@@ -238,9 +238,7 @@ qreal AlternativeRoutesModel::Private::instructionScore(const GeoDataDocument *d
 {
     bool hasInstructions = false;
 
-    QStringList blacklist = QStringList() << ""
-                                          << "Route"
-                                          << "Tessellated";
+    QStringList blacklist = QStringList() << QString() << QStringLiteral("Route") << QStringLiteral("Tessellated");
     QList<GeoDataFolder *> folders = document->folderList();
     for (const GeoDataFolder *folder : std::as_const(folders)) {
         for (const GeoDataPlacemark *placemark : folder->placemarkList()) {

@@ -199,7 +199,7 @@ void FormattedTextWidget::addLinkToDescription()
         QTextCursor cursor = d->m_description->textCursor();
         cursor.setCharFormat(oldFormat);
         d->m_description->setTextCursor(cursor);
-        d->m_description->textCursor().insertText(" ");
+        d->m_description->textCursor().insertText(QStringLiteral(" "));
     }
 }
 

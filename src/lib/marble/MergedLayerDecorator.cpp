@@ -302,7 +302,7 @@ StackedTile *MergedLayerDecorator::loadTile(const TileId &stackedTileId)
 
 RenderState MergedLayerDecorator::renderState(const TileId &stackedTileId) const
 {
-    QString const nameTemplate = "Tile %1/%2/%3";
+    QString const nameTemplate = QStringLiteral("Tile %1/%2/%3");
     RenderState state(nameTemplate.arg(stackedTileId.zoomLevel()).arg(stackedTileId.x()).arg(stackedTileId.y()));
     const QList<const GeoSceneTextureTileDataset *> textureLayers = d->findRelevantTextureLayers(stackedTileId);
     for (const GeoSceneTextureTileDataset *layer : textureLayers) {
