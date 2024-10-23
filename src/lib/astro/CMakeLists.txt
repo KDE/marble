@@ -5,9 +5,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-include(CMakePackageConfigHelpers)
-write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/${ASTRO_CMAKECONFIGNAME}ConfigVersion.cmake" VERSION "${PROJECT_VERSION}" COMPATIBILITY AnyNewerVersion)
-
 SET(astrolib_SRCS
   astrolib.cpp
   astr2lib.cpp
@@ -27,6 +24,7 @@ SET(astrolib_SRCS
 ecm_setup_version(${RELEASE_SERVICE_VERSION}
     VARIABLE_PREFIX ASTRO
     VERSION_HEADER ${CMAKE_CURRENT_BINARY_DIR}/astro_version.h
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/AstroConfigVersion.cmake"
     SOVERSION 1
 )
 
@@ -97,22 +95,22 @@ endif()
 
 include(CMakePackageConfigHelpers)
 
-set(ASTRO_INSTALL_CMAKECONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/${ASTRO_CMAKECONFIGNAME})
+set(ASTRO_INSTALL_CMAKECONFIGDIR "${CMAKE_INSTALL_LIBDIR}/cmake/Astro")
 
 configure_package_config_file(AstroConfig.cmake.in
-    ${CMAKE_CURRENT_BINARY_DIR}/${ASTRO_CMAKECONFIGNAME}Config.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/AstroConfig.cmake
     INSTALL_DESTINATION ${ASTRO_INSTALL_CMAKECONFIGDIR}
 )
 
 install(FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/${ASTRO_CMAKECONFIGNAME}Config.cmake
-    ${CMAKE_CURRENT_BINARY_DIR}/${ASTRO_CMAKECONFIGNAME}ConfigVersion.cmake
-
+    ${CMAKE_CURRENT_BINARY_DIR}/AstroConfig.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/AstroConfigVersion.cmake
     DESTINATION ${ASTRO_INSTALL_CMAKECONFIGDIR}
+    COMPONENT Devel
 )
 
 install(
     EXPORT AstroTargets
-    FILE ${ASTRO_CMAKECONFIGNAME}Targets.cmake
+    FILE AstroTargets.cmake
     DESTINATION ${ASTRO_INSTALL_CMAKECONFIGDIR}
 )
