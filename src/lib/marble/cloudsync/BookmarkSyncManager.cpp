@@ -272,7 +272,7 @@ void BookmarkSyncManager::Private::uploadBookmarks()
 {
     QByteArray data;
     QByteArray lineBreak = "\r\n";
-    QString word = "----MarbleCloudBoundary";
+    QString word = QStringLiteral("----MarbleCloudBoundary");
     QString boundary = QStringLiteral("--%0").arg(word);
     QNetworkRequest request(endpointUrl(m_uploadEndpoint));
     request.setHeader(QNetworkRequest::ContentTypeHeader, QStringLiteral("multipart/form-data; boundary=%0").arg(word));
@@ -318,7 +318,7 @@ bool BookmarkSyncManager::Private::cloudBookmarksModified(const QString &cloudTi
                                 .entryList(
                                     // TODO: replace with regex filter that only
                                     // allows timestamp filenames
-                                    QStringList() << "*.kml",
+                                    QStringList() << QStringLiteral("*.kml"),
                                     QDir::NoFilter,
                                     QDir::Name);
     if (!entryList.isEmpty()) {
@@ -333,7 +333,7 @@ bool BookmarkSyncManager::Private::cloudBookmarksModified(const QString &cloudTi
 void BookmarkSyncManager::Private::clearCache()
 {
     QDir cacheDir(m_cachePath);
-    QFileInfoList fileInfoList = cacheDir.entryInfoList(QStringList() << "*.kml", QDir::NoFilter, QDir::Name);
+    QFileInfoList fileInfoList = cacheDir.entryInfoList(QStringList() << QStringLiteral("*.kml"), QDir::NoFilter, QDir::Name);
     if (!fileInfoList.isEmpty()) {
         for (const QFileInfo &fileInfo : std::as_const(fileInfoList)) {
             QFile file(fileInfo.absoluteFilePath());
@@ -348,7 +348,7 @@ void BookmarkSyncManager::Private::clearCache()
 QString BookmarkSyncManager::Private::lastSyncedKmlPath() const
 {
     QDir cacheDir(m_cachePath);
-    QFileInfoList fileInfoList = cacheDir.entryInfoList(QStringList() << "*.kml", QDir::NoFilter, QDir::Name);
+    QFileInfoList fileInfoList = cacheDir.entryInfoList(QStringList() << QStringLiteral("*.kml"), QDir::NoFilter, QDir::Name);
     if (!fileInfoList.isEmpty()) {
         return fileInfoList.last().absoluteFilePath();
     } else {
@@ -675,7 +675,7 @@ void BookmarkSyncManager::resolveConflict(MergeItem *item)
 void BookmarkSyncManager::Private::saveDownloadedToCache(const QByteArray &kml)
 {
     QString localBookmarksDir = m_localBookmarksPath;
-    QDir().mkdir(localBookmarksDir.remove("bookmarks.kml"));
+    QDir().mkdir(localBookmarksDir.remove(QStringLiteral("bookmarks.kml")));
     QFile bookmarksFile(m_localBookmarksPath);
     if (!bookmarksFile.open(QFile::ReadWrite)) {
         mDebug() << "Failed to open file" << bookmarksFile.fileName() << ". It is either missing or not readable.";

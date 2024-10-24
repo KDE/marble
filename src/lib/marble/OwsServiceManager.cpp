@@ -216,7 +216,7 @@ QString WmsCapabilities::boundingBoxNSEWDegrees(const QStringList &layers, const
         }
         QStringList layerBBoxList = layerBBox.split(",");
         qreal west, south, east, north;
-        if (projection == "epsg:3857") {
+        if (projection == QStringLiteral("epsg:3857")) {
             west = layerBBoxList.at(0).toDouble() * 180 / 20037508.34;
             south = atan(pow(2.7182818284, (layerBBoxList.at(1).toDouble() / 20037508.34 * M_PI))) * (360 / M_PI) - 90;
             east = layerBBoxList.at(2).toDouble() * 180 / 20037508.34;
@@ -299,8 +299,8 @@ void OwsServiceManager::queryOwsCapabilities(const QUrl &queryUrl, const QString
     m_url = queryUrl;
     QUrl url(queryUrl);
     QUrlQuery urlQuery;
-    urlQuery.addQueryItem("service", serviceString);
-    urlQuery.addQueryItem("request", "GetCapabilities");
+    urlQuery.addQueryItem(QStringLiteral("service"), serviceString);
+    urlQuery.addQueryItem(QStringLiteral("request"), QStringLiteral("GetCapabilities"));
     url.setQuery(urlQuery);
 
     QNetworkRequest request;
@@ -375,13 +375,15 @@ void OwsServiceManager::queryWmsMap(const QUrl &url,
 void OwsServiceManager::queryWmsLevelZeroTile(const QUrl &url, const QString &layers, const QString &projection, const QString &format, const QString &style)
 {
     QString bbox;
-    if (projection == "epsg:3857") {
+    if (projection == QStringLiteral("epsg:3857")) {
         bbox = QStringLiteral("-20037508.34,-20048966.1,20037508.34,20048966.1");
 
-    } else if (projection == "epsg:4326") {
-        bbox = wmsCapabilities().version() == "1.3.0" ? "-90,-180,90,180" : "-180,-90,180,90"; // flipped axes for 1.3.0 in epsg:4326 according to spec
-    } else if (projection == "crs:84") {
-        bbox = "-180,-90,180,90"; // order: WGS84 longitude-latitude
+    } else if (projection == QStringLiteral("epsg:4326")) {
+        bbox = wmsCapabilities().version() == QStringLiteral("1.3.0")
+            ? QStringLiteral("-90,-180,90,180")
+            : QStringLiteral("-180,-90,180,90"); // flipped axes for 1.3.0 in epsg:4326 according to spec
+    } else if (projection == QStringLiteral("crs:84")) {
+        bbox = QStringLiteral("-180,-90,180,90"); // order: WGS84 longitude-latitude
     }
 
     m_imageRequestResult.setResultType(LevelZeroTile);
@@ -440,7 +442,7 @@ void OwsServiceManager::queryWmtsTile(const QString &url,
 
     QUrl downloadUrl;
     QString baseUrl = url;
-    baseUrl.replace(baseUrl.indexOf(QLatin1StringView("{Time}")), 6, "current");
+    baseUrl.replace(baseUrl.indexOf(QLatin1StringView("{Time}")), 6, QStringLiteral("current"));
     baseUrl.replace(baseUrl.indexOf(QLatin1StringView("{style}")), 7, style);
     baseUrl.replace(baseUrl.indexOf(QLatin1StringView("{Style}")), 7, style);
     baseUrl.replace(baseUrl.indexOf(QLatin1StringView("{TileMatrixSet}")), 15, tileMatrixSet);
@@ -484,8 +486,8 @@ void OwsServiceManager::queryXYZImage(const QString urlString)
 void OwsServiceManager::handleAuthentication(QNetworkReply *reply, QAuthenticator *authenticator)
 {
     if (reply->url().host() == QStringLiteral("api.tileserver.org")) {
-        authenticator->setUser("");
-        authenticator->setPassword("");
+        authenticator->setUser({});
+        authenticator->setPassword({});
     }
 }
 
@@ -760,7 +762,7 @@ void OwsServiceManager::parseWmtsCapabilities(QNetworkReply *reply)
                 } else {
                     continue;
                 }
-                QString templ = resourceList.at(r).toElement().attribute("template");
+                QString templ = resourceList.at(r).toElement().attribute(QStringLiteral("template"));
                 wmtsTileResource[name][resultFormat] = templ;
             }
         }

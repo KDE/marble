@@ -53,9 +53,9 @@ endif()
 
 add_subdirectory(3rdparty/o5mreader)
 add_subdirectory(3rdparty/sgp4)
+#add_definitions(-DQT_NO_CAST_FROM_ASCII)
 add_subdirectory(lib/marble)
 add_subdirectory(lib/astro)
-#add_definitions(-DQT_NO_CAST_FROM_ASCII)
 add_subdirectory(lib/marble/declarative)
 
 add_subdirectory(plugins)

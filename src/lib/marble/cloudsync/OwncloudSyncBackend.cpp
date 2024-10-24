@@ -86,7 +86,7 @@ OwncloudSyncBackend::~OwncloudSyncBackend()
 
 void OwncloudSyncBackend::uploadRoute(const QString &timestamp)
 {
-    QString word = "----MarbleCloudBoundary";
+    QString word = QStringLiteral("----MarbleCloudBoundary");
     QString boundary = QStringLiteral("--%0").arg(word);
     QNetworkRequest request(endpointUrl(d->m_routeUploadEndpoint));
     request.setHeader(QNetworkRequest::ContentTypeHeader, QStringLiteral("multipart/form-data; boundary=%0").arg(word));
@@ -97,8 +97,8 @@ void OwncloudSyncBackend::uploadRoute(const QString &timestamp)
     // Timestamp part
     data.append("Content-Disposition: form-data; name=\"timestamp\"");
     data.append("\r\n\r\n");
-    data.append(QString(timestamp + "\r\n").toUtf8());
-    data.append(QString(boundary + "\r\n").toUtf8());
+    data.append(QString(timestamp + QStringLiteral("\r\n")).toUtf8());
+    data.append(QString(boundary + QStringLiteral("\r\n")).toUtf8());
 
     // Name part
     data.append("Content-Disposition: form-data; name=\"name\"");
@@ -233,7 +233,7 @@ QPixmap OwncloudSyncBackend::createPreview(const QString &timestamp) const
     }
 
     QPixmap pixmap = mapWidget.grab();
-    QDir(d->m_cacheDir.absolutePath()).mkpath("preview");
+    QDir(d->m_cacheDir.absolutePath()).mkpath(QStringLiteral("preview"));
     pixmap.save(d->m_cacheDir.absolutePath() + QLatin1StringView("/preview/") + timestamp + QLatin1StringView(".jpg"));
 
     return pixmap;
@@ -259,7 +259,7 @@ QString OwncloudSyncBackend::routeName(const QString &timestamp) const
         GeoDataFolder *folder = container->folderList().at(0);
         for (GeoDataPlacemark *placemark : folder->placemarkList()) {
             routeName.append(placemark->name());
-            routeName.append(" - ");
+            routeName.append(QStringLiteral(" - "));
         }
     }
 
@@ -276,7 +276,7 @@ void OwncloudSyncBackend::validateSettings()
         connect(d->m_authReply, &QNetworkReply::errorOccurred, this, &OwncloudSyncBackend::checkAuthError);
     } else {
         // no server, make the error field blank
-        d->m_cloudSyncManager->setStatus("", CloudSyncManager::Success);
+        d->m_cloudSyncManager->setStatus({}, CloudSyncManager::Success);
     }
 }
 
@@ -295,7 +295,7 @@ void OwncloudSyncBackend::checkAuthReply()
     if (statusCode == 0) // request was cancelled
         return;
 
-    QString result = d->m_authReply->readAll();
+    QString result = QString::fromLatin1(d->m_authReply->readAll());
 
     if (!result.startsWith(QLatin1Char('{'))) {
         // not a JSON result
@@ -308,7 +308,7 @@ void OwncloudSyncBackend::checkAuthReply()
     } else if (result == QLatin1StringView(R"({"message":"Current user is not logged in"})") && statusCode == 401) {
         // credentials were incorrect
         d->m_cloudSyncManager->setStatus(tr("Username or password are incorrect"), CloudSyncManager::Error);
-    } else if (result.contains(R"("status":"success")") && statusCode == 200) {
+    } else if (result.contains(QStringLiteral(R"("status":"success")")) && statusCode == 200) {
         // credentials were correct
         d->m_cloudSyncManager->setStatus(tr("Login successful"), CloudSyncManager::Success);
     }

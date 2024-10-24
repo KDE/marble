@@ -140,7 +140,7 @@ public:
     explicit OwsServiceManager(QObject *parent = nullptr);
 
 public Q_SLOTS:
-    void queryOwsCapabilities(const QUrl &queryUrl, const QString &serviceString = "WMS");
+    void queryOwsCapabilities(const QUrl &queryUrl, const QString &serviceString = QStringLiteral("WMS"));
     void queryWmsMap(const QUrl &url,
                      const QString &layers,
                      const QString &projection,

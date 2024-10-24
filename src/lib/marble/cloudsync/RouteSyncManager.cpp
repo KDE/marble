@@ -131,7 +131,7 @@ void RouteSyncManager::uploadRoute()
 QList<RouteItem> RouteSyncManager::cachedRouteList() const
 {
     QList<RouteItem> routeList;
-    QStringList cachedRoutes = d->m_cacheDir.entryList(QStringList() << "*.kml", QDir::Files);
+    QStringList cachedRoutes = d->m_cacheDir.entryList(QStringList() << QStringLiteral("*.kml"), QDir::Files);
     for (const QString &routeFilename : std::as_const(cachedRoutes)) {
         QFile file(d->m_cacheDir.absolutePath() + QLatin1Char('/') + routeFilename);
         file.open(QFile::ReadOnly);
