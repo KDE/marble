@@ -179,7 +179,7 @@ QPixmap RouteRequest::pixmap(int position, int size, int margin) const
         while (fontSize-- > 0) {
             font.setPointSize(fontSize);
             QFontMetrics const fontMetric(font);
-            if (fontMetric.horizontalAdvance(QString::fromLatin1(&text)) <= iconSize && fontMetric.height() <= iconSize) {
+            if (fontMetric.horizontalAdvance(QString(text)) <= iconSize && fontMetric.height() <= iconSize) {
                 break;
             }
         }
@@ -189,7 +189,7 @@ QPixmap RouteRequest::pixmap(int position, int size, int margin) const
         painter.setFont(font);
 
         // Paint a character denoting the position (0=A, 1=B, 2=C, ...)
-        painter.drawText(0, 0, imageSize, imageSize, Qt::AlignCenter, QString::fromLatin1(&text));
+        painter.drawText(0, 0, imageSize, imageSize, Qt::AlignCenter, QString(text));
 
         d->m_pixmapCache.insert(element, QPixmap::fromImage(result));
     }
