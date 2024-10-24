@@ -77,8 +77,8 @@ void GeoPolyline::updateScreenPositions()
                 QVariantList polyline;
                 for (auto node : screenPolygon) {
                     QVariantMap vmap;
-                    vmap["x"] = node.x();
-                    vmap["y"] = node.y();
+                    vmap[QStringLiteral("x")] = node.x();
+                    vmap[QStringLiteral("y")] = node.y();
                     polyline.append(vmap);
                 }
                 m_screenCoordinates.insert(i, polyline);
@@ -128,7 +128,10 @@ void GeoPolyline::setGeoCoordinates(const QVariantList &coordinates)
     m_lineString.setTessellate(m_tessellate);
     for (auto &item : coordinates) {
         QVariantMap map = item.toMap();
-        m_lineString << GeoDataCoordinates(map["lon"].toReal(), map["lat"].toReal(), map["alt"].toReal(), GeoDataCoordinates::Degree);
+        m_lineString << GeoDataCoordinates(map[QStringLiteral("lon")].toReal(),
+                                           map[QStringLiteral("lat")].toReal(),
+                                           map[QStringLiteral("alt")].toReal(),
+                                           GeoDataCoordinates::Degree);
     }
 
     m_geoCoordinates = coordinates;

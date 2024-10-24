@@ -145,7 +145,7 @@ public Q_SLOTS:
 
     void setWorkOffline(bool enabled);
 
-    Q_INVOKABLE void setInvertColorEnabled(bool enabled, const QString &blending = QString("InvertColorBlending"));
+    Q_INVOKABLE void setInvertColorEnabled(bool enabled, const QString &blending = QStringLiteral("InvertColorBlending"));
 
     Q_INVOKABLE void setShowRuntimeTrace(bool showRuntimeTrace);
     Q_INVOKABLE void setShowDebugPolygons(bool showDebugPolygons);

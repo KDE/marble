@@ -30,7 +30,7 @@ MarbleDeclarativeObject::~MarbleDeclarativeObject()
 
 QString MarbleDeclarativeObject::version() const
 {
-    return MARBLE_VERSION_STRING;
+    return QString::fromLatin1(MARBLE_VERSION_STRING);
 }
 
 QString MarbleDeclarativeObject::resolvePath(const QString &path) const

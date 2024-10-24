@@ -13,7 +13,7 @@ TextToSpeechClient::TextToSpeechClient(QObject *parent)
     : QObject(parent)
 {
     // TODOShip translations and only fall back to english if no translations for the system locale are installed
-    setLocale("en");
+    setLocale(QStringLiteral("en"));
 }
 
 TextToSpeechClient::~TextToSpeechClient() = default;

@@ -14,8 +14,9 @@ OfflineDataModel::OfflineDataModel(QObject *parent)
     , m_vehicleTypeFilter(Any)
 {
     m_newstuffModel.setTargetDirectory(Marble::MarbleDirs::localPath() + QLatin1StringView("/maps"));
-    m_newstuffModel.setRegistryFile(QDir::homePath() + "/.kde/share/apps/knewstuff3/marble-offline-data.knsregistry", Marble::NewstuffModel::NameTag);
-    m_newstuffModel.setProvider("http://files.kde.org/marble/newstuff/maps-monav.xml");
+    m_newstuffModel.setRegistryFile(QDir::homePath() + QStringLiteral("/.kde/share/apps/knewstuff3/marble-offline-data.knsregistry"),
+                                    Marble::NewstuffModel::NameTag);
+    m_newstuffModel.setProvider(QStringLiteral("http://files.kde.org/marble/newstuff/maps-monav.xml"));
 
     setSourceModel(&m_newstuffModel);
     QHash<int, QByteArray> roleNames = m_newstuffModel.roleNames();

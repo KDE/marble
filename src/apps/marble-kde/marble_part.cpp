@@ -143,7 +143,7 @@ MarblePart::MarblePart(QWidget *parentWidget, QObject *parent, const KPluginMeta
     marbleLocale->setMeasurementSystem(MarbleLocale::ImperialSystem);
     migrateNewstuffConfigFiles();
 
-    m_externalEditorMapping[0] = "";
+    m_externalEditorMapping[0] = QString();
     m_externalEditorMapping[1] = QStringLiteral("potlatch");
     m_externalEditorMapping[2] = QStringLiteral("josm");
     m_externalEditorMapping[3] = QStringLiteral("merkaartor");
@@ -235,7 +235,7 @@ bool MarblePart::openFile()
         if (plugin->nameId() == QLatin1StringView("Cache"))
             continue;
 
-        const QStringList fileExtensions = plugin->fileExtensions().replaceInStrings(QRegularExpression("^"), "*.");
+        const QStringList fileExtensions = plugin->fileExtensions().replaceInStrings(QRegularExpression(QStringLiteral("^")), QStringLiteral("*."));
         const QString filter = plugin->fileFormatDescription() + QLatin1StringView(" (") + fileExtensions.join(QLatin1Char(' ')) + QLatin1Char(')');
         filters << filter;
         allFileExtensions << fileExtensions;
@@ -246,7 +246,7 @@ bool MarblePart::openFile()
 
     filters.sort();
     filters.prepend(allFileTypes);
-    const QString filter = filters.join(";;");
+    const QString filter = filters.join(QStringLiteral(";;"));
 
     const QStringList fileNames = QFileDialog::getOpenFileNames(widget(), i18nc("@title:window", "Open File"), m_lastFileOpenPath, filter);
 
@@ -452,9 +452,9 @@ void MarblePart::readSettings()
     m_controlView->marbleModel()->routingManager()->setShowGuidanceModeStartupWarning(startupWarning);
 
     KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig();
-    if (sharedConfig->hasGroup("Routing Profiles")) {
+    if (sharedConfig->hasGroup(QStringLiteral("Routing Profiles"))) {
         QList<RoutingProfile> profiles;
-        KConfigGroup profilesGroup = sharedConfig->group("Routing Profiles");
+        KConfigGroup profilesGroup = sharedConfig->group(QStringLiteral("Routing Profiles"));
         int numProfiles = profilesGroup.readEntry("Num", 0);
         for (int i = 0; i < numProfiles; ++i) {
             KConfigGroup profileGroup = profilesGroup.group(QStringLiteral("Profile %1").arg(i));
@@ -679,7 +679,7 @@ void MarblePart::setupActions()
     // Action: Download Region
     m_downloadRegionAction = new QAction(this);
     m_downloadRegionAction->setText(i18nc("Action for downloading an entire region of a map", "Download Region..."));
-    actionCollection()->addAction("file_download_region", m_downloadRegionAction);
+    actionCollection()->addAction(QStringLiteral("file_download_region"), m_downloadRegionAction);
     connect(m_downloadRegionAction, &QAction::triggered, this, &MarblePart::showDownloadRegionDialog);
 
     // Action: Print Map
@@ -689,17 +689,17 @@ void MarblePart::setupActions()
 
     // Action: Export Map
     m_exportMapAction = new QAction(this);
-    actionCollection()->addAction("exportMap", m_exportMapAction);
+    actionCollection()->addAction(QStringLiteral("exportMap"), m_exportMapAction);
     m_exportMapAction->setText(i18nc("Action for saving the map to a file", "&Export Map..."));
-    m_exportMapAction->setIcon(QIcon::fromTheme("document-save-as"));
+    m_exportMapAction->setIcon(QIcon::fromTheme(QStringLiteral("document-save-as")));
     actionCollection()->setDefaultShortcut(m_exportMapAction, Qt::CTRL | Qt::Key_S);
     connect(m_exportMapAction, &QAction::triggered, this, &MarblePart::exportMapScreenShot);
 
     // Action: Work Offline
     m_workOfflineAction = new QAction(this);
-    actionCollection()->addAction("workOffline", m_workOfflineAction);
+    actionCollection()->addAction(QStringLiteral("workOffline"), m_workOfflineAction);
     m_workOfflineAction->setText(i18nc("Action for toggling offline mode", "&Work Offline"));
-    m_workOfflineAction->setIcon(QIcon::fromTheme("user-offline"));
+    m_workOfflineAction->setIcon(QIcon::fromTheme(QStringLiteral("user-offline")));
     m_workOfflineAction->setCheckable(true);
     m_workOfflineAction->setChecked(false);
     connect(m_workOfflineAction, &QAction::triggered, this, &MarblePart::workOffline);
@@ -710,7 +710,7 @@ void MarblePart::setupActions()
 
     // Action: Copy Coordinates string
     m_copyCoordinatesAction = new QAction(this);
-    actionCollection()->addAction("edit_copy_coordinates", m_copyCoordinatesAction);
+    actionCollection()->addAction(QStringLiteral("edit_copy_coordinates"), m_copyCoordinatesAction);
     m_copyCoordinatesAction->setText(i18nc("Action for copying the coordinates to the clipboard", "C&opy Coordinates"));
     m_copyCoordinatesAction->setIcon(QIcon(QStringLiteral(":/icons/copy-coordinates.png")));
     connect(m_copyCoordinatesAction, &QAction::triggered, this, &MarblePart::copyCoordinates);
@@ -733,7 +733,7 @@ void MarblePart::setupActions()
     // Action: Create a New Map
     m_mapWizardAct = new QAction(i18nc("Action for creating new maps", "&Create a New Map..."), this);
     m_mapWizardAct->setIcon(QIcon(QStringLiteral(":/icons/create-new-map.png")));
-    actionCollection()->addAction("createMap", m_mapWizardAct);
+    actionCollection()->addAction(QStringLiteral("createMap"), m_mapWizardAct);
     m_mapWizardAct->setStatusTip(i18nc("Status tip", "A wizard guides you through the creation of your own map theme."));
     connect(m_mapWizardAct, SIGNAL(triggered()), SLOT(showMapWizard()));
 
@@ -748,7 +748,7 @@ void MarblePart::setupActions()
     QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
     for (; i != end; ++i) {
         if ((*i)->nameId() == QLatin1StringView("crosshairs")) {
-            actionCollection()->addAction("show_crosshairs", (*i)->action());
+            actionCollection()->addAction(QStringLiteral("show_crosshairs"), (*i)->action());
         }
     }
 
@@ -804,7 +804,7 @@ void MarblePart::setupActions()
 
     // Toggle Action: Lock globe to the Sub-Solar Point
     m_lockToSubSolarPoint = new KToggleAction(i18n("Lock Globe to the Sub-Solar Point"), this);
-    actionCollection()->addAction("lock_to_subsolarpoint", m_lockToSubSolarPoint);
+    actionCollection()->addAction(QStringLiteral("lock_to_subsolarpoint"), m_lockToSubSolarPoint);
     m_lockToSubSolarPoint->setCheckedState(KGuiItem(i18n("Unlock Globe to the Sub-Solar Point")));
     m_lockToSubSolarPoint->setToolTip(i18n("Lock globe to the sub-solar point"));
     connect(m_lockToSubSolarPoint, &QAction::triggered, this, &MarblePart::lockToSubSolarPoint);
@@ -836,7 +836,7 @@ void MarblePart::setupActions()
     m_setHomeAction = new QAction(this);
     actionCollection()->addAction(QStringLiteral("set_home"), m_setHomeAction);
     m_setHomeAction->setText(i18n("&Set Home Location"));
-    m_setHomeAction->setIcon(QIcon::fromTheme("go-home"));
+    m_setHomeAction->setIcon(QIcon::fromTheme(QStringLiteral("go-home")));
     connect(m_setHomeAction, &QAction::triggered, this, &MarblePart::setHome);
 
     m_manageBookmarksAction = new QAction(this);
@@ -864,7 +864,7 @@ void MarblePart::setupActions()
     connect(m_recordMovieAction, &QAction::triggered, this, &MarblePart::showMovieCaptureDialog);
 
     m_stopRecordingAction = new QAction(i18n("&Stop Recording"), this);
-    actionCollection()->addAction("stop_recording", m_stopRecordingAction);
+    actionCollection()->addAction(QStringLiteral("stop_recording"), m_stopRecordingAction);
     m_stopRecordingAction->setStatusTip(i18n("Stop recording a movie of the globe"));
     actionCollection()->setDefaultShortcut(m_recordMovieAction, Qt::CTRL | Qt::SHIFT | Qt::Key_S);
     m_stopRecordingAction->setEnabled(false);
@@ -1044,7 +1044,7 @@ void MarblePart::migrateNewstuffConfigFiles()
     // exists and the latter not.
     QFileInfo const target(MarbleDirs::localPath() + QLatin1StringView("/newstuff/marble-map-themes.knsregistry"));
     if (!target.exists()) {
-        QString const source = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "knewstuff3/marble.knsregistry");
+        QString const source = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("knewstuff3/marble.knsregistry"));
         if (!source.isEmpty()) {
             if (!target.absoluteDir().exists()) {
                 if (!QDir::root().mkpath(target.absolutePath())) {
@@ -1064,7 +1064,7 @@ void MarblePart::migrateNewstuffConfigFiles()
                 return;
             }
 
-            QDomNodeList items = xml.elementsByTagName("stuff");
+            QDomNodeList items = xml.elementsByTagName(QStringLiteral("stuff"));
             for (int i = 0; i < items.length(); ++i) {
                 repairNode(items.item(i), QStringLiteral("summary"));
                 repairNode(items.item(i), QStringLiteral("author"));
@@ -1142,8 +1142,9 @@ void MarblePart::setupStatusBar()
     QString templateDistanceString = QStringLiteral("%1 00.000,0 mu").arg(DISTANCE_STRING.toString());
     m_distanceLabel = setupStatusBarLabel(templateDistanceString);
 
-    QString templateDateTimeString =
-        QStringLiteral("%1 %2").arg(DATETIME_STRING.toString(), QLocale().toString(QDateTime::fromString("01:01:1000", "dd:mm:yyyy"), QLocale::ShortFormat));
+    QString templateDateTimeString = QStringLiteral("%1 %2").arg(
+        DATETIME_STRING.toString(),
+        QLocale().toString(QDateTime::fromString(QStringLiteral("01:01:1000"), QStringLiteral("dd:mm:yyyy")), QLocale::ShortFormat));
 
     m_clockLabel = setupStatusBarLabel(templateDateTimeString);
 
@@ -1283,10 +1284,10 @@ void MarblePart::showMapWizard()
 
 void MarblePart::editSettings()
 {
-    if (KConfigDialog::showDialog("settings"))
+    if (KConfigDialog::showDialog(QStringLiteral("settings")))
         return;
 
-    m_configDialog = new KConfigDialog(m_controlView, "settings", MarbleSettings::self());
+    m_configDialog = new KConfigDialog(m_controlView, QStringLiteral("settings"), MarbleSettings::self());
 
     // view page
     Ui_MarbleViewSettingsWidget ui_viewSettings;
@@ -1294,7 +1295,7 @@ void MarblePart::editSettings()
 
     w_viewSettings->setObjectName("view_page");
     ui_viewSettings.setupUi(w_viewSettings);
-    m_configDialog->addPage(w_viewSettings, i18n("View"), "configure");
+    m_configDialog->addPage(w_viewSettings, i18n("View"), QStringLiteral("configure"));
 
     ui_viewSettings.label_labelLocalization->hide();
     ui_viewSettings.kcfg_labelLocalization->hide();
@@ -1305,7 +1306,7 @@ void MarblePart::editSettings()
 
     w_navigationSettings->setObjectName("navigation_page");
     ui_navigationSettings.setupUi(w_navigationSettings);
-    m_configDialog->addPage(w_navigationSettings, i18n("Navigation"), "transform-move");
+    m_configDialog->addPage(w_navigationSettings, i18n("Navigation"), QStringLiteral("transform-move"));
     ui_navigationSettings.kcfg_dragLocation->hide();
     ui_navigationSettings.label_dragLocation->hide();
 
@@ -1315,7 +1316,7 @@ void MarblePart::editSettings()
 
     w_cacheSettings->setObjectName("cache_page");
     ui_cacheSettings.setupUi(w_cacheSettings);
-    m_configDialog->addPage(w_cacheSettings, i18n("Cache & Proxy"), "preferences-web-browser-cache");
+    m_configDialog->addPage(w_cacheSettings, i18n("Cache & Proxy"), QStringLiteral("preferences-web-browser-cache"));
     connect(ui_cacheSettings.button_clearVolatileCache, SIGNAL(clicked()), m_controlView->marbleWidget(), SLOT(clearVolatileTileCache()));
     connect(ui_cacheSettings.button_clearPersistentCache, SIGNAL(clicked()), m_controlView->marbleModel(), SLOT(clearPersistentTileCache()));
 
@@ -1325,7 +1326,7 @@ void MarblePart::editSettings()
 
     w_timeSettings->setObjectName("time_page");
     ui_timeSettings.setupUi(w_timeSettings);
-    m_configDialog->addPage(w_timeSettings, i18n("Date & Time"), "clock");
+    m_configDialog->addPage(w_timeSettings, i18n("Date & Time"), QStringLiteral("clock"));
 
     // Sync page
     auto w_cloudSyncSettings = new QWidget(nullptr);
@@ -1333,7 +1334,7 @@ void MarblePart::editSettings()
     w_cloudSyncSettings->setObjectName("sync_page");
     m_ui_cloudSyncSettings.setupUi(w_cloudSyncSettings);
     m_ui_cloudSyncSettings.button_syncNow->setEnabled(MarbleSettings::syncBookmarks());
-    m_configDialog->addPage(w_cloudSyncSettings, i18n("Synchronization"), "folder-sync");
+    m_configDialog->addPage(w_cloudSyncSettings, i18n("Synchronization"), QStringLiteral("folder-sync"));
 
     connect(m_ui_cloudSyncSettings.button_syncNow, SIGNAL(clicked()), m_controlView->cloudSyncManager()->bookmarkSyncManager(), SLOT(startBookmarkSync()));
     connect(m_ui_cloudSyncSettings.testLoginButton, SIGNAL(clicked()), this, SLOT(updateCloudSyncCredentials()));
@@ -1343,7 +1344,7 @@ void MarblePart::editSettings()
     // routing page
     auto w_routingSettings = new RoutingProfilesWidget(m_controlView->marbleModel());
     w_routingSettings->setObjectName("routing_page");
-    m_configDialog->addPage(w_routingSettings, i18n("Routing"), "flag");
+    m_configDialog->addPage(w_routingSettings, i18n("Routing"), QStringLiteral("flag"));
 
     // plugin page
     auto w_pluginSettings = new MarblePluginSettingsWidget();
@@ -1351,7 +1352,7 @@ void MarblePart::editSettings()
     pluginModel->setRenderPlugins(m_controlView->marbleWidget()->renderPlugins());
     w_pluginSettings->setModel(pluginModel);
     w_pluginSettings->setObjectName("plugin_page");
-    m_configDialog->addPage(w_pluginSettings, i18n("Plugins"), "preferences-plugin");
+    m_configDialog->addPage(w_pluginSettings, i18n("Plugins"), QStringLiteral("preferences-plugin"));
     // Setting the icons of the pluginSettings page.
     w_pluginSettings->setConfigIcon(QIcon::fromTheme(QStringLiteral("configure")));
     w_pluginSettings->setAboutIcon(QIcon::fromTheme(QStringLiteral("help-about")));
@@ -1374,7 +1375,7 @@ void MarblePart::applyPluginState()
 {
     QList<RoutingProfile> profiles = m_controlView->marbleWidget()->model()->routingManager()->profilesModel()->profiles();
     KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig();
-    KConfigGroup profilesGroup = sharedConfig->group("Routing Profiles");
+    KConfigGroup profilesGroup = sharedConfig->group(QStringLiteral("Routing Profiles"));
     profilesGroup.writeEntry("Num", profiles.count());
     for (int i = 0; i < profiles.count(); ++i) {
         KConfigGroup profileGroup = profilesGroup.group(QStringLiteral("Profile %0").arg(i));

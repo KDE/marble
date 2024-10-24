@@ -81,8 +81,8 @@ ControlView::ControlView(QWidget *parent)
     m_marbleWidget->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
 #ifdef MARBLE_DBUS
     new MarbleDBusInterface(m_marbleWidget);
-    QDBusConnection::sessionBus().registerObject("/Marble", m_marbleWidget);
-    if (!QDBusConnection::sessionBus().registerService("org.kde.marble")) {
+    QDBusConnection::sessionBus().registerObject(QStringLiteral("/Marble"), m_marbleWidget);
+    if (!QDBusConnection::sessionBus().registerService(QStringLiteral("org.kde.marble"))) {
         QString const urlWithPid = QStringLiteral("org.kde.marble-%1").arg(QCoreApplication::applicationPid());
         if (!QDBusConnection::sessionBus().registerService(urlWithPid)) {
             mDebug() << "Failed to register service org.kde.marble and " << urlWithPid << " with the DBus session bus.";
@@ -113,7 +113,7 @@ ControlView::~ControlView()
 
 QString ControlView::applicationVersion()
 {
-    return MARBLE_VERSION_STRING;
+    return QString::fromLatin1(MARBLE_VERSION_STRING);
 }
 
 MapThemeManager *ControlView::mapThemeManager()
@@ -190,7 +190,7 @@ void ControlView::printMapScreenShot(const QPointer<QPrintDialog> &printDialog)
 
     if (printDialog->exec() == QDialog::Accepted) {
         QTextDocument document;
-        QString text = "<html><head><title>Marble Printout</title></head><body>";
+        QString text = QStringLiteral("<html><head><title>Marble Printout</title></head><body>");
         QPalette const originalPalette = m_marbleWidget->palette();
         bool const wasBackgroundVisible = m_marbleWidget->showBackground();
         bool const hideBackground = !mapCoversViewport && !printOptions->printBackground();
@@ -340,9 +340,9 @@ void ControlView::printMap(QTextDocument &document, QString &text, QPrinter *pri
         painter.drawRect(0, 0, image.width() - 2, image.height() - 2);
     }
 
-    QString uri = "marble://screenshot.png";
+    QString uri = QStringLiteral("marble://screenshot.png");
     document.addResource(QTextDocument::ImageResource, QUrl(uri), QVariant(image));
-    QString img = R"(<img src="%1" width="%2" align="center">)";
+    QString img = QStringLiteral(R"(<img src="%1" width="%2" align="center">)");
     int width = qRound(printer->pageRect(QPrinter::Point).width());
     text += img.arg(uri).arg(width);
 #endif
@@ -361,9 +361,9 @@ void ControlView::printLegend(QTextDocument &document, QString &text)
         painter.setRenderHint(QPainter::Antialiasing, true);
         painter.drawRoundedRect(QRect(QPoint(0, 0), size), 5, 5);
         legend->drawContents(&painter);
-        document.addResource(QTextDocument::ImageResource, QUrl("marble://legend.png"), QVariant(image));
-        QString img = R"(<p><img src="%1" align="center"></p>)";
-        text += img.arg("marble://legend.png");
+        document.addResource(QTextDocument::ImageResource, QUrl(QStringLiteral("marble://legend.png")), QVariant(image));
+        QString img = QStringLiteral(R"(<p><img src="%1" align="center"></p>)");
+        text += img.arg(QStringLiteral("marble://legend.png"));
     }
 #endif
 }
@@ -387,7 +387,7 @@ void ControlView::printRouteSummary(QTextDocument &document, QString &text)
 
         QString label = QStringLiteral("<p>%1 %2</p>");
         qreal distance = routingModel->route().distance();
-        QString unit = distance > 1000 ? "km" : "m";
+        QString unit = distance > 1000 ? QStringLiteral("km") : QStringLiteral("m");
         int precision = distance > 1000 ? 1 : 0;
         if (distance > 1000) {
             distance /= 1000;
@@ -396,13 +396,13 @@ void ControlView::printRouteSummary(QTextDocument &document, QString &text)
         text += summary;
 
         text += QLatin1StringView("<table cellpadding=\"2\">");
-        QString pixmapTemplate = "marble://viaPoint-%1.png";
+        QString pixmapTemplate = QStringLiteral("marble://viaPoint-%1.png");
         for (int i = 0; i < routeRequest->size(); ++i) {
             text += QLatin1StringView("<tr><td>");
             QPixmap pixmap = routeRequest->pixmap(i);
             QString pixmapResource = pixmapTemplate.arg(i);
             document.addResource(QTextDocument::ImageResource, QUrl(pixmapResource), QVariant(pixmap));
-            QString myimg = "<img src=\"%1\">";
+            QString myimg = QStringLiteral("<img src=\"%1\">");
             text += myimg.arg(pixmapResource) + QLatin1StringView("</td><td>");
             routeRequest->name(i) + QLatin1StringView("</td></tr>");
         }
@@ -498,7 +498,7 @@ void ControlView::launchExternalMapEditor()
 
     if (editor == QLatin1StringView("josm")) {
         // JOSM, the java based editor
-        synchronizeWithExternalMapEditor(editor, "--download=%1,%4,%3,%2");
+        synchronizeWithExternalMapEditor(editor, QStringLiteral("--download=%1,%4,%3,%2"));
     } else if (editor == QLatin1StringView("merkaartor")) {
         // Merkaartor, a Qt based editor
         QString argument = QStringLiteral("osm://download/load_and_zoom?top=%1&right=%2&bottom=%3&left=%4");
@@ -524,7 +524,7 @@ void ControlView::synchronizeWithExternalMapEditor(const QString &application, c
     connect(&manager, SIGNAL(finished(QNetworkReply *)), &localEventLoop, SLOT(quit()));
 
     // Wait at most two seconds for the local server to respond
-    QNetworkReply *reply = manager.get(QNetworkRequest(QUrl("http://localhost:8111/")));
+    QNetworkReply *reply = manager.get(QNetworkRequest(QUrl(QStringLiteral("http://localhost:8111/"))));
     watchdog.start(2000);
     localEventLoop.exec();
 
@@ -537,7 +537,7 @@ void ControlView::synchronizeWithExternalMapEditor(const QString &application, c
     if (watchdog.isActive() && reply->bytesAvailable() > 0) {
         // The local server is alive. Tell it to download the current region
         watchdog.stop();
-        QString serverUrl = "http://localhost:8111/load_and_zoom?top=%1&right=%2&bottom=%3&left=%4";
+        QString serverUrl = QStringLiteral("http://localhost:8111/load_and_zoom?top=%1&right=%2&bottom=%3&left=%4");
         serverUrl = serverUrl.arg(north, 0, 'f', 8).arg(east, 0, 'f', 8);
         serverUrl = serverUrl.arg(south, 0, 'f', 8).arg(west, 0, 'f', 8);
         mDebug() << "Connecting to local server URL " << serverUrl;

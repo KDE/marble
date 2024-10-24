@@ -193,24 +193,24 @@ public:
         , m_invertColorEnabled(false)
     {
         m_currentPosition.setName(QObject::tr("Current Location"));
-        m_relationTypeConverter["road"] = GeoDataRelation::RouteRoad;
-        m_relationTypeConverter["detour"] = GeoDataRelation::RouteDetour;
-        m_relationTypeConverter["ferry"] = GeoDataRelation::RouteFerry;
-        m_relationTypeConverter["train"] = GeoDataRelation::RouteTrain;
-        m_relationTypeConverter["subway"] = GeoDataRelation::RouteSubway;
-        m_relationTypeConverter["tram"] = GeoDataRelation::RouteTram;
-        m_relationTypeConverter["bus"] = GeoDataRelation::RouteBus;
-        m_relationTypeConverter["trolley-bus"] = GeoDataRelation::RouteTrolleyBus;
-        m_relationTypeConverter["bicycle"] = GeoDataRelation::RouteBicycle;
-        m_relationTypeConverter["mountainbike"] = GeoDataRelation::RouteMountainbike;
-        m_relationTypeConverter["foot"] = GeoDataRelation::RouteFoot;
-        m_relationTypeConverter["hiking"] = GeoDataRelation::RouteHiking;
-        m_relationTypeConverter["horse"] = GeoDataRelation::RouteHorse;
-        m_relationTypeConverter["inline-skates"] = GeoDataRelation::RouteInlineSkates;
-        m_relationTypeConverter["downhill"] = GeoDataRelation::RouteSkiDownhill;
-        m_relationTypeConverter["ski-nordic"] = GeoDataRelation::RouteSkiNordic;
-        m_relationTypeConverter["skitour"] = GeoDataRelation::RouteSkitour;
-        m_relationTypeConverter["sled"] = GeoDataRelation::RouteSled;
+        m_relationTypeConverter[QStringLiteral("road")] = GeoDataRelation::RouteRoad;
+        m_relationTypeConverter[QStringLiteral("detour")] = GeoDataRelation::RouteDetour;
+        m_relationTypeConverter[QStringLiteral("ferry")] = GeoDataRelation::RouteFerry;
+        m_relationTypeConverter[QStringLiteral("train")] = GeoDataRelation::RouteTrain;
+        m_relationTypeConverter[QStringLiteral("subway")] = GeoDataRelation::RouteSubway;
+        m_relationTypeConverter[QStringLiteral("tram")] = GeoDataRelation::RouteTram;
+        m_relationTypeConverter[QStringLiteral("bus")] = GeoDataRelation::RouteBus;
+        m_relationTypeConverter[QStringLiteral("trolley-bus")] = GeoDataRelation::RouteTrolleyBus;
+        m_relationTypeConverter[QStringLiteral("bicycle")] = GeoDataRelation::RouteBicycle;
+        m_relationTypeConverter[QStringLiteral("mountainbike")] = GeoDataRelation::RouteMountainbike;
+        m_relationTypeConverter[QStringLiteral("foot")] = GeoDataRelation::RouteFoot;
+        m_relationTypeConverter[QStringLiteral("hiking")] = GeoDataRelation::RouteHiking;
+        m_relationTypeConverter[QStringLiteral("horse")] = GeoDataRelation::RouteHorse;
+        m_relationTypeConverter[QStringLiteral("inline-skates")] = GeoDataRelation::RouteInlineSkates;
+        m_relationTypeConverter[QStringLiteral("downhill")] = GeoDataRelation::RouteSkiDownhill;
+        m_relationTypeConverter[QStringLiteral("ski-nordic")] = GeoDataRelation::RouteSkiNordic;
+        m_relationTypeConverter[QStringLiteral("skitour")] = GeoDataRelation::RouteSkitour;
+        m_relationTypeConverter[QStringLiteral("sled")] = GeoDataRelation::RouteSled;
     }
 
     void updateVisibleRoutes();
@@ -1211,13 +1211,8 @@ void MarbleQuickItem::loadSettings()
     if (zoom > 0) {
         setZoom(zoom);
     }
-    auto const defaultRelationTypes = QStringList() << "ferry"
-                                                    << "train"
-                                                    << "subway"
-                                                    << "tram"
-                                                    << "bus"
-                                                    << "trolley-bus"
-                                                    << "hiking";
+    auto const defaultRelationTypes = QStringList() << QStringLiteral("ferry") << QStringLiteral("train") << QStringLiteral("subway") << QStringLiteral("tram")
+                                                    << QStringLiteral("bus") << QStringLiteral("trolley-bus") << QStringLiteral("hiking");
     auto const visibleRelationTypes = settings.value(QStringLiteral("visibleRelationTypes"), defaultRelationTypes).toStringList();
     d->m_enabledRelationTypes = GeoDataRelation::UnknownType;
     for (auto const &route : visibleRelationTypes) {
@@ -1386,7 +1381,7 @@ void MarbleQuickItemPrivate::changeBlending(bool enabled, const QString &blendin
             textureDataset->setBlending(blendingName);
             m_map.clearVolatileTileCache();
         } else if (!enabled && textureDataset->blending() == blendingName) {
-            textureDataset->setBlending("");
+            textureDataset->setBlending({});
             m_map.clearVolatileTileCache();
         }
     }

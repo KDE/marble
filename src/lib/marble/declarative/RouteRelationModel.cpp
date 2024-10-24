@@ -119,7 +119,7 @@ QVariant RouteRelationModel::data(const QModelIndex &index, int role) const
         if (iter != m_networks.end()) {
             return *iter;
         }
-        auto const fields = network.split(':', Qt::SkipEmptyParts);
+        auto const fields = network.split(QLatin1Char(':'), Qt::SkipEmptyParts);
         for (auto const &field : fields) {
             auto iter = m_networks.find(field);
             if (iter != m_networks.end()) {
@@ -143,7 +143,7 @@ QVariant RouteRelationModel::data(const QModelIndex &index, int role) const
         return ref.isEmpty() ? m_relations.at(index.row())->name() : ref;
     } else if (role == RouteVia) {
         auto const viaValue = m_relations.at(index.row())->osmData().tagValue(QStringLiteral("via"));
-        auto viaList = viaValue.split(';', Qt::SkipEmptyParts);
+        auto viaList = viaValue.split(QLatin1Char(';'), Qt::SkipEmptyParts);
         for (auto &via : viaList) {
             via = via.trimmed();
         }

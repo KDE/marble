@@ -80,100 +80,100 @@ int main(int argc, char *argv[])
     // Init KF6 translation system
     KLocalizedString::setApplicationDomain("marble");
 
-    KAboutData aboutData("marble",
+    KAboutData aboutData(QStringLiteral("marble"),
                          i18n("Marble Virtual Globe"),
                          ControlView::applicationVersion(),
                          i18n("A World Atlas."),
                          KAboutLicense::LGPL_V2,
                          i18n("(c) 2007-%1", QLatin1StringView("2016")),
                          QString(),
-                         "https://marble.kde.org/");
+                         QStringLiteral("https://marble.kde.org/"));
 
     // Active Development Team of Marble
-    aboutData.addAuthor(i18n("Torsten Rahn"), i18n("Developer and Original Author"), "rahn@kde.org");
-    aboutData.addAuthor(i18n("Bernhard Beschow"), i18n("WMS Support, Mobile, Performance"), "bbeschow@cs.tu-berlin.de");
-    aboutData.addAuthor(i18n("Thibaut Gridel"), i18n("Geodata"), "tgridel@free.fr");
-    aboutData.addAuthor(i18n("Jens-Michael Hoffmann"), i18n("OpenStreetMap Integration, OSM Namefinder, Download Management"), "jmho@c-xx.com");
-    aboutData.addAuthor(i18n("Florian E&szlig;er"), i18n("Elevation Profile"), "f.esser@rwth-aachen.de");
-    aboutData.addAuthor(i18n("Wes Hardaker"), i18n("APRS Plugin"), "marble@hardakers.net");
-    aboutData.addAuthor(i18n("Bastian Holst"), i18n("Online Services support"), "bastianholst@gmx.de");
-    aboutData.addAuthor(i18n("Guillaume Martres"), i18n("Satellites"), "smarter@ubuntu.com");
-    aboutData.addAuthor(i18n("Rene Kuettner"), i18n("Satellites, Eclipses"), "rene@bitkanal.net");
-    aboutData.addAuthor(i18n("Friedrich W. H. Kossebau"), i18n("Plasma Integration, Bugfixes"), "kossebau@kde.org");
-    aboutData.addAuthor(i18n("Dennis Nienhüser"), i18n("Routing, Navigation, Mobile"), "nienhueser@kde.org");
-    aboutData.addAuthor(i18n("Niko Sams"), i18n("Routing, Elevation Profile"), "niko.sams@gmail.com");
-    aboutData.addAuthor(i18n("Patrick Spendrin"), i18n("Core Developer: KML and Windows support"), "pspendrin@gmail.com");
-    aboutData.addAuthor(i18n("Eckhart Wörner"), i18n("Bugfixes"), "kde@ewsoftware.de");
+    aboutData.addAuthor(i18n("Torsten Rahn"), i18n("Developer and Original Author"), QStringLiteral("rahn@kde.org"));
+    aboutData.addAuthor(i18n("Bernhard Beschow"), i18n("WMS Support, Mobile, Performance"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
+    aboutData.addAuthor(i18n("Thibaut Gridel"), i18n("Geodata"), QStringLiteral("tgridel@free.fr"));
+    aboutData.addAuthor(i18n("Jens-Michael Hoffmann"), i18n("OpenStreetMap Integration, OSM Namefinder, Download Management"), QStringLiteral("jmho@c-xx.com"));
+    aboutData.addAuthor(i18n("Florian E&szlig;er"), i18n("Elevation Profile"), QStringLiteral("f.esser@rwth-aachen.de"));
+    aboutData.addAuthor(i18n("Wes Hardaker"), i18n("APRS Plugin"), QStringLiteral("marble@hardakers.net"));
+    aboutData.addAuthor(i18n("Bastian Holst"), i18n("Online Services support"), QStringLiteral("bastianholst@gmx.de"));
+    aboutData.addAuthor(i18n("Guillaume Martres"), i18n("Satellites"), QStringLiteral("smarter@ubuntu.com"));
+    aboutData.addAuthor(i18n("Rene Kuettner"), i18n("Satellites, Eclipses"), QStringLiteral("rene@bitkanal.net"));
+    aboutData.addAuthor(i18n("Friedrich W. H. Kossebau"), i18n("Plasma Integration, Bugfixes"), QStringLiteral("kossebau@kde.org"));
+    aboutData.addAuthor(i18n("Dennis Nienhüser"), i18n("Routing, Navigation, Mobile"), QStringLiteral("nienhueser@kde.org"));
+    aboutData.addAuthor(i18n("Niko Sams"), i18n("Routing, Elevation Profile"), QStringLiteral("niko.sams@gmail.com"));
+    aboutData.addAuthor(i18n("Patrick Spendrin"), i18n("Core Developer: KML and Windows support"), QStringLiteral("pspendrin@gmail.com"));
+    aboutData.addAuthor(i18n("Eckhart Wörner"), i18n("Bugfixes"), QStringLiteral("kde@ewsoftware.de"));
 
     // Developers:
 
-    aboutData.addAuthor(i18n("Inge Wallin"), i18n("Core Developer and Co-Maintainer"), "inge@lysator.liu.se");
-    aboutData.addAuthor(i18n("Henry de Valence"), i18n("Core Developer: Marble Runners, World-Clock Plasmoid"), "hdevalence@gmail.com");
-    aboutData.addAuthor(i18n("Pino Toscano"), i18n("Network plugins"), "pino@kde.org");
-    aboutData.addAuthor(i18n("Harshit Jain"), i18n("Planet filter"), "sonu.itbhu@googlemail.com");
-    aboutData.addAuthor(i18n("Simon Edwards"), i18n("Marble Python Bindings"), "simon@simonzone.com");
-    aboutData.addAuthor(i18n("Magnus Valle"), i18n("Historical Maps"), "");
-    aboutData.addAuthor(i18n("Médéric Boquien"), i18n("Astronomical Observatories"), "mboquien@free.fr");
+    aboutData.addAuthor(i18n("Inge Wallin"), i18n("Core Developer and Co-Maintainer"), QStringLiteral("inge@lysator.liu.se"));
+    aboutData.addAuthor(i18n("Henry de Valence"), i18n("Core Developer: Marble Runners, World-Clock Plasmoid"), QStringLiteral("hdevalence@gmail.com"));
+    aboutData.addAuthor(i18n("Pino Toscano"), i18n("Network plugins"), QStringLiteral("pino@kde.org"));
+    aboutData.addAuthor(i18n("Harshit Jain"), i18n("Planet filter"), QStringLiteral("sonu.itbhu@googlemail.com"));
+    aboutData.addAuthor(i18n("Simon Edwards"), i18n("Marble Python Bindings"), QStringLiteral("simon@simonzone.com"));
+    aboutData.addAuthor(i18n("Magnus Valle"), i18n("Historical Maps"), {});
+    aboutData.addAuthor(i18n("Médéric Boquien"), i18n("Astronomical Observatories"), QStringLiteral("mboquien@free.fr"));
 
     // ESA Summer of Code in Space
     aboutData.addAuthor(i18n("Rene Kuettner"),
                         i18n("ESA Summer of Code in Space 2012 Project:"
                              " Visualization of planetary satellites"),
-                        "rene@bitkanal.net");
+                        QStringLiteral("rene@bitkanal.net"));
     aboutData.addAuthor(i18n("Guillaume Martres"),
                         i18n("ESA Summer of Code in Space 2011 Project:"
                              " Visualization of Satellite Orbits"),
-                        "smarter@ubuntu.com");
+                        QStringLiteral("smarter@ubuntu.com"));
 
     // Google Summer of Code
     aboutData.addAuthor(i18n("Konstantin Oblaukhov"),
                         i18n("Google Summer of Code 2011 Project:"
                              " OpenStreetMap Vector Rendering"),
-                        "oblaukhov.konstantin@gmail.com");
+                        QStringLiteral("oblaukhov.konstantin@gmail.com"));
     aboutData.addAuthor(i18n("Daniel Marth"),
                         i18n("Google Summer of Code 2011 Project:"
                              " Marble Touch on MeeGo"),
-                        "danielmarth@gmx.at");
+                        QStringLiteral("danielmarth@gmx.at"));
     aboutData.addAuthor(i18n("Gaurav Gupta"),
                         i18n("Google Summer of Code 2010 Project:"
                              " Bookmarks"),
-                        "1989.gaurav@gmail.com");
+                        QStringLiteral("1989.gaurav@gmail.com"));
     aboutData.addAuthor(i18n("Harshit Jain "),
                         i18n("Google Summer of Code 2010 Project:"
                              " Time Support"),
-                        "hjain.itbhu@gmail.com");
+                        QStringLiteral("hjain.itbhu@gmail.com"));
     aboutData.addAuthor(i18n("Siddharth Srivastava"),
                         i18n("Google Summer of Code 2010 Project:"
                              " Turn-by-turn Navigation"),
-                        "akssps011@gmail.com");
+                        QStringLiteral("akssps011@gmail.com"));
     aboutData.addAuthor(i18n("Andrew Manson"),
                         i18n("Google Summer of Code 2009 Project:"
                              " OSM Annotation"),
-                        "g.real.ate@gmail.com");
+                        QStringLiteral("g.real.ate@gmail.com"));
     aboutData.addAuthor(i18n("Bastian Holst"),
                         i18n("Google Summer of Code 2009 Project:"
                              " Online Services"),
-                        "bastianholst@gmx.de");
+                        QStringLiteral("bastianholst@gmx.de"));
     aboutData.addAuthor(i18n("Patrick Spendrin"),
                         i18n("Google Summer of Code 2008 Project:"
                              " Vector Tiles for Marble"),
-                        "pspendrin@gmail.com");
+                        QStringLiteral("pspendrin@gmail.com"));
     aboutData.addAuthor(i18n("Shashank Singh"),
                         i18n("Google Summer of Code 2008 Project:"
                              " Panoramio / Wikipedia -photo support for Marble"),
-                        "shashank.personal@gmail.com");
+                        QStringLiteral("shashank.personal@gmail.com"));
     aboutData.addAuthor(i18n("Carlos Licea"),
                         i18n("Google Summer of Code 2007 Project:"
                              " Equirectangular Projection (\"Flat Map\")"),
-                        "carlos.licea@kdemail.net");
+                        QStringLiteral("carlos.licea@kdemail.net"));
     aboutData.addAuthor(i18n("Andrew Manson"),
                         i18n("Google Summer of Code 2007 Project:"
                              " GPS Support for Marble"),
-                        "g.real.ate@gmail.com");
+                        QStringLiteral("g.real.ate@gmail.com"));
     aboutData.addAuthor(i18n("Murad Tagirov"),
                         i18n("Google Summer of Code 2007 Project:"
                              " KML Support for Marble"),
-                        "tmurad@gmail.com");
+                        QStringLiteral("tmurad@gmail.com"));
 
     // Developers
     aboutData.addAuthor(i18n("Simon Schmeisser"), i18n("Development & Patches"));
@@ -235,36 +235,38 @@ int main(int argc, char *argv[])
     // Autodetect profiles
     MarbleGlobal::Profiles profiles = MarbleGlobal::getInstance()->profiles();
 
-    QCommandLineOption debugOption("debug-info", i18n("Enable debug output"));
+    QCommandLineOption debugOption(QStringLiteral("debug-info"), i18n("Enable debug output"));
     debugOption.setFlags(QCommandLineOption::HiddenFromHelp);
     parser.addOption(debugOption);
-    QCommandLineOption levelOption("debug-levels", i18n("Display OSM placemarks according to the level selected"));
+    QCommandLineOption levelOption(QStringLiteral("debug-levels"), i18n("Display OSM placemarks according to the level selected"));
     parser.addOption(levelOption);
-    QCommandLineOption timeOption("timedemo", i18n("Make a time measurement to check performance"));
+    QCommandLineOption timeOption(QStringLiteral("timedemo"), i18n("Make a time measurement to check performance"));
     parser.addOption(timeOption);
-    QCommandLineOption fpsOption("fps", i18n("Show frame rate"));
+    QCommandLineOption fpsOption(QStringLiteral("fps"), i18n("Show frame rate"));
     parser.addOption(fpsOption);
-    QCommandLineOption tileOption("tile-id", i18n("Show tile IDs"));
+    QCommandLineOption tileOption(QStringLiteral("tile-id"), i18n("Show tile IDs"));
     parser.addOption(tileOption);
-    QCommandLineOption traceOption("runtimeTrace", i18n("Show time spent in each layer"));
+    QCommandLineOption traceOption(QStringLiteral("runtimeTrace"), i18n("Show time spent in each layer"));
     parser.addOption(traceOption);
-    QCommandLineOption dataPathOption("marbledatapath", i18n("Use a different directory <directory> which contains map data."), "directory");
+    QCommandLineOption dataPathOption(QStringLiteral("marbledatapath"),
+                                      i18n("Use a different directory <directory> which contains map data."),
+                                      QStringLiteral("directory"));
     parser.addOption(dataPathOption);
-    QCommandLineOption noSmallScreenOption("nosmallscreen", i18n("Do not use the interface optimized for small screens"));
-    QCommandLineOption smallScreenOption("smallscreen", i18n("Use the interface optimized for small screens"));
+    QCommandLineOption noSmallScreenOption(QStringLiteral("nosmallscreen"), i18n("Do not use the interface optimized for small screens"));
+    QCommandLineOption smallScreenOption(QStringLiteral("smallscreen"), i18n("Use the interface optimized for small screens"));
     parser.addOption((profiles & MarbleGlobal::SmallScreen) ? noSmallScreenOption : smallScreenOption);
-    QCommandLineOption noHighResOption("nohighresolution", i18n("Do not use the interface optimized for high resolutions"));
-    QCommandLineOption highResOption("highresolution", i18n("Use the interface optimized for high resolutions"));
+    QCommandLineOption noHighResOption(QStringLiteral("nohighresolution"), i18n("Do not use the interface optimized for high resolutions"));
+    QCommandLineOption highResOption(QStringLiteral("highresolution"), i18n("Use the interface optimized for high resolutions"));
     parser.addOption((profiles & MarbleGlobal::HighResolution) ? noHighResOption : highResOption);
-    QCommandLineOption coordinatesOption("latlon", i18n("Show map at given lat lon <coordinates>"), "coordinates");
+    QCommandLineOption coordinatesOption(QStringLiteral("latlon"), i18n("Show map at given lat lon <coordinates>"), QStringLiteral("coordinates"));
     parser.addOption(coordinatesOption);
-    QCommandLineOption geoUriOption("geo-uri", i18n("Show map at given geo <uri>"), "uri");
+    QCommandLineOption geoUriOption(QStringLiteral("geo-uri"), i18n("Show map at given geo <uri>"), QStringLiteral("uri"));
     parser.addOption(geoUriOption);
-    QCommandLineOption distanceOption("distance", i18n("Set the distance of the observer to the globe (in km)"), "distance");
+    QCommandLineOption distanceOption(QStringLiteral("distance"), i18n("Set the distance of the observer to the globe (in km)"), QStringLiteral("distance"));
     parser.addOption(distanceOption);
-    QCommandLineOption mapIdOption("map", i18n("Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"), "id");
+    QCommandLineOption mapIdOption(QStringLiteral("map"), i18n("Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"), QStringLiteral("id"));
     parser.addOption(mapIdOption);
-    parser.addPositionalArgument("file", i18n("One or more placemark files to be opened"));
+    parser.addPositionalArgument(QStringLiteral("file"), i18n("One or more placemark files to be opened"));
 
     parser.process(app);
     aboutData.processCommandLine(&parser);

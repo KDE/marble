@@ -81,9 +81,7 @@ QString Placemark::description() const
                     addTagValue(m_description, QStringLiteral("stars"));
                 }
             }
-            addFirstTagValueOf(m_description,
-                               QStringList() << "brand"
-                                             << "operator");
+            addFirstTagValueOf(m_description, QStringList() << QStringLiteral("brand") << QStringLiteral("operator"));
         }
 
         if ((category >= GeoDataPlacemark::AccomodationHostel && category <= GeoDataPlacemark::AccomodationGuestHouse)
@@ -110,35 +108,31 @@ QString Placemark::description() const
 
         if (category >= GeoDataPlacemark::FoodBar && category <= GeoDataPlacemark::FoodRestaurant) {
             if (category != GeoDataPlacemark::FoodRestaurant) {
-                addFirstTagValueOf(m_description,
-                                   QStringList() << "brand"
-                                                 << "operator");
+                addFirstTagValueOf(m_description, QStringList() << QStringLiteral("brand") << QStringLiteral("operator"));
             } else {
                 // Do nothing, already added in stars section above
             }
-            addTagValue(m_description, "cuisine");
-            addTagValue(m_description, "brewery");
-            addTagDescription(m_description, "self_service", "yes", "Self Service");
-            addTagDescription(m_description, "takeaway", "yes", "Take Away");
-            addTagDescription(m_description, "outdoor_seating", "yes", "Outdoor Seating");
-            addTagDescription(m_description, "ice_cream", "yes", "Ice Cream");
-            addTagDescription(m_description, "smoking", "dedicated", "Smoking (dedicated)");
-            addTagDescription(m_description, "smoking", "yes", "Smoking allowed");
-            addTagDescription(m_description, "smoking", "separated", "Smoking (separated)");
-            addTagDescription(m_description, "smoking", "isolated", "Smoking (isolated)");
-            addTagDescription(m_description, "smoking", "no", "No smoking");
-            addTagDescription(m_description, "smoking", "outside", "Smoking (outside)");
-            addTagDescription(m_description, "smoking:outside", "yes", "Smoking (outside)");
-            addTagDescription(m_description, "smoking:outside", "separated", "Smoking (outside separated)");
-            addTagDescription(m_description, "smoking:outside", "no", "No smoking outside");
+            addTagValue(m_description, QStringLiteral("cuisine"));
+            addTagValue(m_description, QStringLiteral("brewery"));
+            addTagDescription(m_description, QStringLiteral("self_service"), QStringLiteral("yes"), QStringLiteral("Self Service"));
+            addTagDescription(m_description, QStringLiteral("takeaway"), QStringLiteral("yes"), QStringLiteral("Take Away"));
+            addTagDescription(m_description, QStringLiteral("outdoor_seating"), QStringLiteral("yes"), QStringLiteral("Outdoor Seating"));
+            addTagDescription(m_description, QStringLiteral("ice_cream"), QStringLiteral("yes"), QStringLiteral("Ice Cream"));
+            addTagDescription(m_description, QStringLiteral("smoking"), QStringLiteral("dedicated"), QStringLiteral("Smoking (dedicated)"));
+            addTagDescription(m_description, QStringLiteral("smoking"), QStringLiteral("yes"), QStringLiteral("Smoking allowed"));
+            addTagDescription(m_description, QStringLiteral("smoking"), QStringLiteral("separated"), QStringLiteral("Smoking (separated)"));
+            addTagDescription(m_description, QStringLiteral("smoking"), QStringLiteral("isolated"), QStringLiteral("Smoking (isolated)"));
+            addTagDescription(m_description, QStringLiteral("smoking"), QStringLiteral("no"), QStringLiteral("No smoking"));
+            addTagDescription(m_description, QStringLiteral("smoking"), QStringLiteral("outside"), QStringLiteral("Smoking (outside)"));
+            addTagDescription(m_description, QStringLiteral("smoking:outside"), QStringLiteral("yes"), QStringLiteral("Smoking (outside)"));
+            addTagDescription(m_description, QStringLiteral("smoking:outside"), QStringLiteral("separated"), QStringLiteral("Smoking (outside separated)"));
+            addTagDescription(m_description, QStringLiteral("smoking:outside"), QStringLiteral("no"), QStringLiteral("No smoking outside"));
         } else if (category >= GeoDataPlacemark::ShopBeverages && category <= GeoDataPlacemark::Shop) {
-            addFirstTagValueOf(m_description,
-                               QStringList() << "brand"
-                                             << "operator");
-            addTagValue(m_description, "clothes");
-            addTagValue(m_description, "designation");
+            addFirstTagValueOf(m_description, QStringList() << QStringLiteral("brand") << QStringLiteral("operator"));
+            addTagValue(m_description, QStringLiteral("clothes"));
+            addTagValue(m_description, QStringLiteral("designation"));
             if (category == GeoDataPlacemark::ShopButcher) {
-                addTagValue(m_description, "butcher");
+                addTagValue(m_description, QStringLiteral("butcher"));
             } else if (category == GeoDataPlacemark::ShopCopy) {
                 addTagDescription(m_description,
                                   QStringLiteral("service:computer"),
@@ -261,60 +255,56 @@ QString Placemark::description() const
                 addTagDescription(m_description, QStringLiteral("salt"), QStringLiteral("yes"), tr("Sells salt", "A tobacco shop that also sells salt"));
             }
         } else if (category == GeoDataPlacemark::TransportBusStop) {
-            addTagValue(m_description, "network");
-            addTagValue(m_description, "operator");
-            addTagValue(m_description, "ref");
+            addTagValue(m_description, QStringLiteral("network"));
+            addTagValue(m_description, QStringLiteral("operator"));
+            addTagValue(m_description, QStringLiteral("ref"));
         } else if (category == GeoDataPlacemark::TransportCarShare) {
-            addTagValue(m_description, "network");
-            addTagValue(m_description, "operator");
+            addTagValue(m_description, QStringLiteral("network"));
+            addTagValue(m_description, QStringLiteral("operator"));
         } else if (category == GeoDataPlacemark::TransportRentalBicycle || category == GeoDataPlacemark::TransportRentalCar
                    || category == GeoDataPlacemark::TransportRentalSki) {
-            addFirstTagValueOf(m_description,
-                               QStringList() << "brand"
-                                             << "operator");
+            addFirstTagValueOf(m_description, QStringList() << QStringLiteral("brand") << QStringLiteral("operator"));
 
         } else if (category == GeoDataPlacemark::TransportFuel) {
-            addFirstTagValueOf(m_description,
-                               QStringList() << "brand"
-                                             << "operator");
-            addTagDescription(m_description, "fuel:diesel", "yes", tr("Diesel"));
-            addTagDescription(m_description, "fuel:biodiesel", "yes", tr("Biodiesel"));
-            addTagDescription(m_description, "fuel:octane_91", "yes", tr("Octane 91"));
-            addTagDescription(m_description, "fuel:octane_95", "yes", tr("Octane 95"));
-            addTagDescription(m_description, "fuel:octane_98", "yes", tr("Octane 98"));
-            addTagDescription(m_description, "fuel:octane_100", "yes", tr("Octane 100"));
-            addTagDescription(m_description, "fuel:e10", "yes", tr("E10"));
-            addTagDescription(m_description, "fuel:lpg", "yes", tr("LPG"));
+            addFirstTagValueOf(m_description, QStringList() << QStringLiteral("brand") << QStringLiteral("operator"));
+            addTagDescription(m_description, QStringLiteral("fuel:diesel"), QStringLiteral("yes"), tr("Diesel"));
+            addTagDescription(m_description, QStringLiteral("fuel:biodiesel"), QStringLiteral("yes"), tr("Biodiesel"));
+            addTagDescription(m_description, QStringLiteral("fuel:octane_91"), QStringLiteral("yes"), tr("Octane 91"));
+            addTagDescription(m_description, QStringLiteral("fuel:octane_95"), QStringLiteral("yes"), tr("Octane 95"));
+            addTagDescription(m_description, QStringLiteral("fuel:octane_98"), QStringLiteral("yes"), tr("Octane 98"));
+            addTagDescription(m_description, QStringLiteral("fuel:octane_100"), QStringLiteral("yes"), tr("Octane 100"));
+            addTagDescription(m_description, QStringLiteral("fuel:e10"), QStringLiteral("yes"), tr("E10"));
+            addTagDescription(m_description, QStringLiteral("fuel:lpg"), QStringLiteral("yes"), tr("LPG"));
         } else if (category == GeoDataPlacemark::NaturalTree) {
-            addTagValue(m_description, "species:en");
-            addTagValue(m_description, "genus:en");
-            addTagValue(m_description, "leaf_type");
+            addTagValue(m_description, QStringLiteral("species:en"));
+            addTagValue(m_description, QStringLiteral("genus:en"));
+            addTagValue(m_description, QStringLiteral("leaf_type"));
         } else if (category == GeoDataPlacemark::NaturalCave) {
-            addTagValue(m_description, "cave:ref");
+            addTagValue(m_description, QStringLiteral("cave:ref"));
         } else if (category == GeoDataPlacemark::AmenityRecycling) {
-            addTagDescription(m_description, QStringLiteral("recycling:batteries"), "yes", tr("Batteries"));
-            addTagDescription(m_description, QStringLiteral("recycling:clothes"), "yes", tr("Clothes"));
-            addTagDescription(m_description, QStringLiteral("recycling:glass"), "yes", tr("Glass"));
-            addTagDescription(m_description, QStringLiteral("recycling:glass_bottles"), "yes", tr("Glass bottles"));
-            addTagDescription(m_description, QStringLiteral("recycling:green_waste"), "yes", tr("Green waste"));
-            addTagDescription(m_description, QStringLiteral("recycling:garden_waste"), "yes", tr("Garden waste"));
-            addTagDescription(m_description, QStringLiteral("recycling:electrical_items"), "yes", tr("Electrical items"));
-            addTagDescription(m_description, QStringLiteral("recycling:metal"), "yes", tr("Metal"));
-            addTagDescription(m_description, QStringLiteral("recycling:mobile_phones"), "yes", tr("Mobile phones"));
-            addTagDescription(m_description, QStringLiteral("recycling:newspaper"), "yes", tr("Newspaper"));
-            addTagDescription(m_description, QStringLiteral("recycling:paint"), "yes", tr("Paint"));
-            addTagDescription(m_description, QStringLiteral("recycling:paper"), "yes", tr("Paper"));
-            addTagDescription(m_description, QStringLiteral("recycling:paper_packaging"), "yes", tr("Paper packaging"));
-            addTagDescription(m_description, QStringLiteral("recycling:PET"), "yes", tr("PET"));
-            addTagDescription(m_description, QStringLiteral("recycling:plastic"), "yes", tr("Plastic"));
-            addTagDescription(m_description, QStringLiteral("recycling:plastic_bags"), "yes", tr("Plastic bags"));
-            addTagDescription(m_description, QStringLiteral("recycling:plastic_bottles"), "yes", tr("Plastic bottles"));
-            addTagDescription(m_description, QStringLiteral("recycling:plastic_packaging"), "yes", tr("Plastic packaging"));
-            addTagDescription(m_description, QStringLiteral("recycling:polyester"), "yes", tr("Polyester"));
-            addTagDescription(m_description, QStringLiteral("recycling:tyres"), "yes", tr("Tyres"));
-            addTagDescription(m_description, QStringLiteral("recycling:waste"), "yes", tr("Waste"));
-            addTagDescription(m_description, QStringLiteral("recycling:white_goods"), "yes", tr("White goods"));
-            addTagDescription(m_description, QStringLiteral("recycling:wood"), "yes", tr("Wood"));
+            addTagDescription(m_description, QStringLiteral("recycling:batteries"), QStringLiteral("yes"), tr("Batteries"));
+            addTagDescription(m_description, QStringLiteral("recycling:clothes"), QStringLiteral("yes"), tr("Clothes"));
+            addTagDescription(m_description, QStringLiteral("recycling:glass"), QStringLiteral("yes"), tr("Glass"));
+            addTagDescription(m_description, QStringLiteral("recycling:glass_bottles"), QStringLiteral("yes"), tr("Glass bottles"));
+            addTagDescription(m_description, QStringLiteral("recycling:green_waste"), QStringLiteral("yes"), tr("Green waste"));
+            addTagDescription(m_description, QStringLiteral("recycling:garden_waste"), QStringLiteral("yes"), tr("Garden waste"));
+            addTagDescription(m_description, QStringLiteral("recycling:electrical_items"), QStringLiteral("yes"), tr("Electrical items"));
+            addTagDescription(m_description, QStringLiteral("recycling:metal"), QStringLiteral("yes"), tr("Metal"));
+            addTagDescription(m_description, QStringLiteral("recycling:mobile_phones"), QStringLiteral("yes"), tr("Mobile phones"));
+            addTagDescription(m_description, QStringLiteral("recycling:newspaper"), QStringLiteral("yes"), tr("Newspaper"));
+            addTagDescription(m_description, QStringLiteral("recycling:paint"), QStringLiteral("yes"), tr("Paint"));
+            addTagDescription(m_description, QStringLiteral("recycling:paper"), QStringLiteral("yes"), tr("Paper"));
+            addTagDescription(m_description, QStringLiteral("recycling:paper_packaging"), QStringLiteral("yes"), tr("Paper packaging"));
+            addTagDescription(m_description, QStringLiteral("recycling:PET"), QStringLiteral("yes"), tr("PET"));
+            addTagDescription(m_description, QStringLiteral("recycling:plastic"), QStringLiteral("yes"), tr("Plastic"));
+            addTagDescription(m_description, QStringLiteral("recycling:plastic_bags"), QStringLiteral("yes"), tr("Plastic bags"));
+            addTagDescription(m_description, QStringLiteral("recycling:plastic_bottles"), QStringLiteral("yes"), tr("Plastic bottles"));
+            addTagDescription(m_description, QStringLiteral("recycling:plastic_packaging"), QStringLiteral("yes"), tr("Plastic packaging"));
+            addTagDescription(m_description, QStringLiteral("recycling:polyester"), QStringLiteral("yes"), tr("Polyester"));
+            addTagDescription(m_description, QStringLiteral("recycling:tyres"), QStringLiteral("yes"), tr("Tyres"));
+            addTagDescription(m_description, QStringLiteral("recycling:waste"), QStringLiteral("yes"), tr("Waste"));
+            addTagDescription(m_description, QStringLiteral("recycling:white_goods"), QStringLiteral("yes"), tr("White goods"));
+            addTagDescription(m_description, QStringLiteral("recycling:wood"), QStringLiteral("yes"), tr("Wood"));
         } else if (category == GeoDataPlacemark::NaturalVolcano) {
             addTagDescription(m_description, QStringLiteral("volcano:status"), QStringLiteral("active"), tr("Active", "An active volcano"));
             addTagDescription(m_description,
@@ -366,7 +356,7 @@ QString Placemark::description() const
             addTagValue(m_description, QStringLiteral("waste"));
         } else if (category == GeoDataPlacemark::TransportSpeedCamera) {
             addTagValue(m_description, QStringLiteral("maxspeed"), tr("%1 km/h"));
-            addTagValue(m_description, "ref");
+            addTagValue(m_description, QStringLiteral("ref"));
         } else if (category == GeoDataPlacemark::TransportParking) {
             addTagDescription(m_description,
                               QStringLiteral("supervised"),
@@ -577,19 +567,31 @@ QString Placemark::description() const
         }
 
         if (category == GeoDataPlacemark::AerialwayStation) {
-            addTagDescription(m_description, "aerialway:access", "entry", tr("Entry", "Entry station of an aerialway"));
-            addTagDescription(m_description, "aerialway:access", "exit", tr("Exit", "Exit station of an aerialway"));
-            addTagDescription(m_description, "aerialway:access", "both", tr("Entry and exit", "Entry and exit station of an aerialway"));
-            addTagDescription(m_description, "aerialway:access", "no", tr("No entry or exit", "Transit only station of an aerialway"));
-            addTagDescription(m_description, "aerialway:summer:access", "entry", tr("Entry during summer", "Entry station of an aerialway during summer"));
-            addTagDescription(m_description, "aerialway:summer:access", "exit", tr("Exit during summer", "Exit station of an aerialway during summer"));
+            addTagDescription(m_description, QStringLiteral("aerialway:access"), QStringLiteral("entry"), tr("Entry", "Entry station of an aerialway"));
+            addTagDescription(m_description, QStringLiteral("aerialway:access"), QStringLiteral("exit"), tr("Exit", "Exit station of an aerialway"));
             addTagDescription(m_description,
-                              "aerialway:summer:access",
-                              "both",
+                              QStringLiteral("aerialway:access"),
+                              QStringLiteral("both"),
+                              tr("Entry and exit", "Entry and exit station of an aerialway"));
+            addTagDescription(m_description,
+                              QStringLiteral("aerialway:access"),
+                              QStringLiteral("no"),
+                              tr("No entry or exit", "Transit only station of an aerialway"));
+            addTagDescription(m_description,
+                              QStringLiteral("aerialway:summer:access"),
+                              QStringLiteral("entry"),
+                              tr("Entry during summer", "Entry station of an aerialway during summer"));
+            addTagDescription(m_description,
+                              QStringLiteral("aerialway:summer:access"),
+                              QStringLiteral("exit"),
+                              tr("Exit during summer", "Exit station of an aerialway during summer"));
+            addTagDescription(m_description,
+                              QStringLiteral("aerialway:summer:access"),
+                              QStringLiteral("both"),
                               tr("Entry and exit during summer", "Entry and exit station of an aerialway during summer"));
             addTagDescription(m_description,
-                              "aerialway:summer:access",
-                              "no",
+                              QStringLiteral("aerialway:summer:access"),
+                              QStringLiteral("no"),
                               tr("No entry or exit during summer", "Transit only station of an aerialway during summer"));
         }
 
@@ -597,7 +599,7 @@ QString Placemark::description() const
             addTagValue(m_description, QStringLiteral("ele"), tr("Elevation: %1 m"));
         }
 
-        addTagDescription(m_description, "access", "customers", tr("Customers only"));
+        addTagDescription(m_description, QStringLiteral("access"), QStringLiteral("customers"), tr("Customers only"));
         addTagDescription(m_description,
                           QStringLiteral("access"),
                           QStringLiteral("yes"),
@@ -646,11 +648,8 @@ QString Placemark::website() const
     if (!m_website.isEmpty()) {
         return m_website;
     }
-    auto const tags = QStringList() << "website"
-                                    << "contact:website"
-                                    << "facebook"
-                                    << "contact:facebook"
-                                    << "url";
+    auto const tags = QStringList() << QStringLiteral("website") << QStringLiteral("contact:website") << QStringLiteral("facebook")
+                                    << QStringLiteral("contact:facebook") << QStringLiteral("url");
     for (const QString &tag : tags) {
         QString const value = m_placemark.osmData().tagValue(tag);
         if (!value.isEmpty()) {
@@ -678,14 +677,14 @@ QString Placemark::wikipedia() const
     }
 
     // TODO: also support "wikipedia:lang=page title" tags
-    const QString wikipedia = m_placemark.osmData().tagValue("wikipedia");
+    const QString wikipedia = m_placemark.osmData().tagValue(QStringLiteral("wikipedia"));
     if (!wikipedia.isEmpty()) {
         // full URL?
         if (wikipedia.startsWith(QLatin1StringView("http://")) || wikipedia.startsWith(QLatin1StringView("https://"))) {
             m_wikipedia = wikipedia;
         } else {
             // match "(lang:)human readable title"
-            QRegularExpression re("^(?:([a-z]{2,}):)?(.*)$");
+            QRegularExpression re(QStringLiteral("^(?:([a-z]{2,}):)?(.*)$"));
             QRegularExpressionMatch match = re.match(wikipedia);
             QString lang = match.captured(1);
             if (lang.isEmpty()) {
@@ -706,7 +705,7 @@ QString Placemark::openingHours() const
         return m_openingHours;
     }
 
-    addTagValue(m_openingHours, "opening_hours");
+    addTagValue(m_openingHours, QStringLiteral("opening_hours"));
     return m_openingHours;
 }
 
@@ -741,7 +740,7 @@ QString Placemark::wheelchairInfo() const
         }
     }
 
-    addTagValue(m_wheelchairInfo, "wheelchair:description");
+    addTagValue(m_wheelchairInfo, QStringLiteral("wheelchair:description"));
 
     return m_wheelchairInfo;
 }
@@ -800,7 +799,7 @@ QString Placemark::phone() const
         return m_phone;
     }
 
-    addTagValue(m_phone, "phone");
+    addTagValue(m_phone, QStringLiteral("phone"));
     return m_phone;
 }
 
@@ -877,15 +876,15 @@ QString Placemark::addressFromOsmData() const
 #ifdef HAVE_QT6_POSITIONING
     QGeoAddress address;
     OsmPlacemarkData const data = m_placemark.osmData();
-    address.setCountry(data.tagValue("addr:country"));
-    address.setState(data.tagValue("addr:state"));
-    address.setCity(data.tagValue("addr:city"));
-    address.setDistrict(data.tagValue("district"));
-    address.setPostalCode(data.tagValue("addr:postcode"));
-    QString const street = data.tagValue("addr:street");
-    QString const houseNumber = data.tagValue("addr:housenumber");
+    address.setCountry(data.tagValue(QStringLiteral("addr:country")));
+    address.setState(data.tagValue(QStringLiteral("addr:state")));
+    address.setCity(data.tagValue(QStringLiteral("addr:city")));
+    address.setDistrict(data.tagValue(QStringLiteral("district")));
+    address.setPostalCode(data.tagValue(QStringLiteral("addr:postcode")));
+    QString const street = data.tagValue(QStringLiteral("addr:street"));
+    QString const houseNumber = data.tagValue(QStringLiteral("addr:housenumber"));
     address.setStreet(formatStreet(street, houseNumber));
-    return address.text().replace("<br/>", ", ");
+    return address.text().replace(QStringLiteral("<br/>"), QStringLiteral(", "));
 #else
     return QString();
 #endif
