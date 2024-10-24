@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-10-21 09:12+0300\n"
+"PO-Revision-Date: 2024-10-22 23:18+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -3166,18 +3166,18 @@ msgctxt "UiAddLinkDialog|"
 msgid "Name:"
 msgstr "שם"
 
-#: src/lib/marble/BookmarkManager.cpp:52
+#: src/lib/marble/BookmarkManager.cpp:51
 msgctxt "QObject|"
 msgid "Default"
 msgstr ""
 
-#: src/lib/marble/BookmarkManager.cpp:56
+#: src/lib/marble/BookmarkManager.cpp:55
 #, fuzzy
 msgctxt "QObject|"
 msgid "Bookmarks"
 msgstr "ייצא מפה"
 
-#: src/lib/marble/BookmarkManager.cpp:244
+#: src/lib/marble/BookmarkManager.cpp:243
 msgctxt "Marble::BookmarkManager|"
 msgid "Default"
 msgstr ""
@@ -3499,6 +3499,11 @@ msgctxt "Marble::RouteItemDelegate|"
 msgid "Upload to cloud"
 msgstr ""
 
+#: src/lib/marble/CurrentLocationWidget.cpp:109
+msgctxt "Marble::CurrentLocationWidget|"
+msgid "<p>No Position Tracking Plugin installed.</p>"
+msgstr ""
+
 #: src/lib/marble/CurrentLocationWidget.cpp:183
 msgctxt "QObject|"
 msgid "No position available."
@@ -3697,8 +3702,8 @@ msgid ""
 msgstr ""
 
 #: src/lib/marble/declarative/MarbleQuickItem.cpp:195
-#: src/lib/marble/routing/RoutingManager.cpp:558
-#: src/lib/marble/routing/RoutingManager.cpp:561
+#: src/lib/marble/routing/RoutingManager.cpp:556
+#: src/lib/marble/routing/RoutingManager.cpp:559
 #, fuzzy
 msgctxt "QObject|"
 msgid "Current Location"
@@ -7909,7 +7914,7 @@ msgctxt "MapThemeDownloadDialog|"
 msgid "Install Maps"
 msgstr "‏Marble - גלובוס שולחני"
 
-#: src/lib/marble/MapThemeManager.cpp:376
+#: src/lib/marble/MapThemeManager.cpp:374
 #, fuzzy
 msgctxt "QObject|"
 msgid "Name"
@@ -11008,47 +11013,47 @@ msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "No description available."
 msgstr ""
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:385
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:382
 #, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "National Capital"
 msgstr "בירת מחוז"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:387
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:384
 #, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "City"
 msgstr "עיר"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:389
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:386
 #, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "State Capital"
 msgstr "עיר בירה"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:391
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:388
 #, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "County Capital"
 msgstr "עיר בירה"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:393
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:390
 #, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Capital"
 msgstr "עיר בירה"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:396
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:393
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Village"
 msgstr ""
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:539
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:536
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "&Info Boxes"
 msgstr ""
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:900
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:885
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Address Details"
 msgstr ""
@@ -11313,7 +11318,7 @@ msgctxt "QObject|"
 msgid "Add custom tag..."
 msgstr "הוספת תגית מותאמת אישית…"
 
-#: src/lib/marble/osm/OsmTagEditorWidget_p.cpp:101
+#: src/lib/marble/osm/OsmTagEditorWidget_p.cpp:100
 msgctxt "QObject|"
 msgid "value"
 msgstr "ערך"
@@ -11384,70 +11389,70 @@ msgctxt "Marble::PlacemarkPositionProviderPlugin|"
 msgid "Reports the position of a placemark"
 msgstr ""
 
-#: src/lib/marble/PlanetFactory.cpp:230
+#: src/lib/marble/PlanetFactory.cpp:221
 #, fuzzy
 msgctxt "QObject|the planet"
 msgid "Mercury"
 msgstr "תצוגת מפה"
 
-#: src/lib/marble/PlanetFactory.cpp:232
+#: src/lib/marble/PlanetFactory.cpp:223
 msgctxt "QObject|the planet"
 msgid "Venus"
 msgstr "נוגה"
 
-#: src/lib/marble/PlanetFactory.cpp:234
+#: src/lib/marble/PlanetFactory.cpp:225
 #, fuzzy
 msgctxt "QObject|the planet"
 msgid "Earth"
 msgstr "&כדור הארץ"
 
-#: src/lib/marble/PlanetFactory.cpp:236
+#: src/lib/marble/PlanetFactory.cpp:227
 #, fuzzy
 msgctxt "QObject|the planet"
 msgid "Mars"
 msgstr "Marble"
 
-#: src/lib/marble/PlanetFactory.cpp:238
+#: src/lib/marble/PlanetFactory.cpp:229
 msgctxt "QObject|the planet"
 msgid "Jupiter"
 msgstr "צדק"
 
-#: src/lib/marble/PlanetFactory.cpp:240
+#: src/lib/marble/PlanetFactory.cpp:231
 msgctxt "QObject|the planet"
 msgid "Saturn"
 msgstr "שבתאי"
 
-#: src/lib/marble/PlanetFactory.cpp:242
+#: src/lib/marble/PlanetFactory.cpp:233
 msgctxt "QObject|the planet"
 msgid "Uranus"
 msgstr "אורון"
 
-#: src/lib/marble/PlanetFactory.cpp:244
+#: src/lib/marble/PlanetFactory.cpp:235
 msgctxt "QObject|the planet"
 msgid "Neptune"
 msgstr "רהב"
 
-#: src/lib/marble/PlanetFactory.cpp:247
+#: src/lib/marble/PlanetFactory.cpp:238
 msgctxt "QObject|the planet"
 msgid "Pluto"
 msgstr "פלוטו"
 
-#: src/lib/marble/PlanetFactory.cpp:250
+#: src/lib/marble/PlanetFactory.cpp:241
 msgctxt "QObject|the earth's star"
 msgid "Sun"
 msgstr "שמש"
 
-#: src/lib/marble/PlanetFactory.cpp:252
+#: src/lib/marble/PlanetFactory.cpp:243
 msgctxt "QObject|the earth's moon"
 msgid "Moon"
 msgstr "ירח"
 
-#: src/lib/marble/PlanetFactory.cpp:254
+#: src/lib/marble/PlanetFactory.cpp:245
 msgctxt "QObject|"
 msgid "Sky"
 msgstr "שמיים"
 
-#: src/lib/marble/PlanetFactory.cpp:257
+#: src/lib/marble/PlanetFactory.cpp:248
 #, fuzzy
 msgctxt "QObject|a planet without data"
 msgid "Unknown Planet"
@@ -11726,186 +11731,186 @@ msgctxt "QObject|"
 msgid "Enter the roundabout."
 msgstr "להיכנס לכיכר."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:258
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:257
 msgctxt "QObject|"
 msgid "Take the exit."
 msgstr "לצאת ביציאה."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:260
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:259
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the exit towards %1."
 msgstr "לצאת ביציאה לכיוון %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:264
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:263
 msgctxt "QObject|"
 msgid "Take the ramp."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:266
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:265
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the ramp towards %1."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:322
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:321
 #, qt-format
 msgctxt "QObject|"
 msgid "Follow the road for %1 %2."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:376
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:375
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the %1. exit in the roundabout."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:378
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:377
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the %1. exit in the roundabout into %2."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:386
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:385
 #, fuzzy
 msgctxt "QObject|"
 msgid "Continue."
 msgstr "הגדרת פקד השליטה על השמש"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:388
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:387
 msgctxt "QObject|"
 msgid "Merge."
 msgstr "להתמזג."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:390
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:389
 msgctxt "QObject|"
 msgid "Turn around."
 msgstr "להסתובב."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:392
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:391
 msgctxt "QObject|"
 msgid "Turn sharp left."
 msgstr "לפנות פנייה חדה שמאלה."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:394
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:393
 msgctxt "QObject|"
 msgid "Turn left."
 msgstr "לפנות שמאלה."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:396
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:395
 msgctxt "QObject|"
 msgid "Keep slightly left."
 msgstr "להיצמד לשמאל."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:398
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:397
 #, fuzzy
 msgctxt "QObject|"
 msgid "Go straight ahead."
 msgstr "שדה תיאור"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:400
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:399
 msgctxt "QObject|"
 msgid "Keep slightly right."
 msgstr "להיצמד לימין."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:402
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:401
 msgctxt "QObject|"
 msgid "Turn right."
 msgstr "לפנות ימינה."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:404
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:403
 msgctxt "QObject|"
 msgid "Turn sharp right."
 msgstr "לפנות פנייה חדה ימינה."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:406
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:405
 msgctxt "QObject|"
 msgid "Exit the roundabout."
 msgstr "לצאת מהכיכר."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:414
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:413
 msgctxt "QObject|"
 msgid "Take the exit to the left."
 msgstr "לצאת ביציאה השמאלית."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:416
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:415
 msgctxt "QObject|"
 msgid "Take the exit to the right."
 msgstr "לצאת ביציאה הימנית."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:421
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:420
 #, fuzzy, qt-format
 msgctxt "QObject|"
 msgid "Continue onto %1."
 msgstr "הגדרת פקד השליטה על השמש"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:423
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:422
 #, fuzzy, qt-format
 msgctxt "QObject|"
 msgid "Merge onto %1."
 msgstr "הגדרת פקד השליטה על השמש"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:425
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:424
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn around onto %1."
 msgstr "להסתובב אל %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:427
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:426
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn sharp left on %1."
 msgstr "לפנות פנייה חדה שמאלה ב%1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:429
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:428
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn left into %1."
 msgstr "לפנות שמאלה אל %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:431
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:430
 #, qt-format
 msgctxt "QObject|"
 msgid "Keep slightly left on %1."
 msgstr "להיצמד לשמאל ב%1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:433
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:432
 #, fuzzy, qt-format
 msgctxt "QObject|"
 msgid "Continue on %1."
 msgstr "הגדרת פקד השליטה על השמש"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:435
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:434
 #, qt-format
 msgctxt "QObject|"
 msgid "Keep slightly right on %1."
 msgstr "להיצמד לימין ב%1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:437
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:436
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn right into %1."
 msgstr "לפנות ימינה אל %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:439
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:438
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn sharp right into %1."
 msgstr "לפנות פנייה חדה ימינה אל %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:441
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:440
 #, qt-format
 msgctxt "QObject|"
 msgid "Exit the roundabout into %2."
 msgstr "לצאת מהכיכר אל %2."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:449
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:448
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the exit to the left onto %1."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:451
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:450
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the exit to the right onto %1."
@@ -11964,10 +11969,9 @@ msgid "&Home"
 msgstr "בית"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:307
-#, fuzzy
 msgctxt "Marble::RoutingInputWidget|"
 msgid "Current Location"
-msgstr "מיקום נוכחי"
+msgstr "מקום נוכחי"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:481
 #, fuzzy
@@ -11999,12 +12003,12 @@ msgctxt "Marble::RoutingLayer|"
 msgid "GPX and KML files (*.gpx *.kml)"
 msgstr "קובץ GpxFile ‏(‎*.gpx)"
 
-#: src/lib/marble/routing/RoutingManager.cpp:510
+#: src/lib/marble/routing/RoutingManager.cpp:508
 msgctxt "Marble::RoutingManager|"
 msgid "Caution: Driving instructions may be incomplete or wrong."
 msgstr "זהירות: הנחיות הנהיגה עלולות להיות חלקיות או שגויות."
 
-#: src/lib/marble/routing/RoutingManager.cpp:511
+#: src/lib/marble/routing/RoutingManager.cpp:509
 msgctxt "Marble::RoutingManager|"
 msgid ""
 "Road construction, weather and other unforeseen variables can result in the "
@@ -12012,27 +12016,25 @@ msgid ""
 "destination."
 msgstr ""
 
-#: src/lib/marble/routing/RoutingManager.cpp:513
+#: src/lib/marble/routing/RoutingManager.cpp:511
 msgctxt "Marble::RoutingManager|"
 msgid "Please use common sense while navigating."
 msgstr ""
 
-#: src/lib/marble/routing/RoutingManager.cpp:514
+#: src/lib/marble/routing/RoutingManager.cpp:512
 msgctxt "Marble::RoutingManager|"
 msgid "The Marble development team wishes you a pleasant and safe journey."
 msgstr ""
 
-#: src/lib/marble/routing/RoutingManager.cpp:515
-#, fuzzy
+#: src/lib/marble/routing/RoutingManager.cpp:513
 msgctxt "Marble::RoutingManager|"
 msgid "Guidance Mode"
-msgstr "אודות Marble"
+msgstr "מצב הכוונה"
 
-#: src/lib/marble/routing/RoutingManager.cpp:516
-#, fuzzy
+#: src/lib/marble/routing/RoutingManager.cpp:514
 msgctxt "Marble::RoutingManager|"
 msgid "Show again"
-msgstr "הצג רשת"
+msgstr "להציג שוב"
 
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:14
 #, fuzzy
@@ -12041,10 +12043,9 @@ msgid "Configure Routing Profile"
 msgstr "הגדרת פקד השליטה על השמש"
 
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:25
-#, fuzzy
 msgctxt "RoutingProfileSettingsDialog|"
 msgid "Name:"
-msgstr "שם"
+msgstr "שם:"
 
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:41
 msgctxt "RoutingProfileSettingsDialog|"
@@ -12370,6 +12371,12 @@ msgstr "&חפש"
 msgctxt "QObject|"
 msgid "Search for '%1'"
 msgstr "0 מ' (מים)"
+
+#: src/lib/marble/SoundCueEditWidget.cpp:37
+#, fuzzy
+msgctxt "Marble::SoundCueEditWidget|"
+msgid "Audio location"
+msgstr "גובה:"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:67
 #, fuzzy
@@ -12734,10 +12741,9 @@ msgid "Add FlyTo"
 msgstr ""
 
 #: src/lib/marble/TourWidget.cpp:143
-#, fuzzy
 msgctxt "QObject|"
 msgid "Add Wait"
-msgstr "נתיב"
+msgstr "הוספת המתנה"
 
 #: src/lib/marble/TourWidget.cpp:145
 #, fuzzy
@@ -12746,22 +12752,19 @@ msgid "Add SoundCue"
 msgstr "הצג דגם גבהים"
 
 #: src/lib/marble/TourWidget.cpp:148
-#, fuzzy
 msgctxt "QObject|"
 msgid "Add Placemark"
-msgstr "מפה רגילה"
+msgstr "הוספת סמן מקום"
 
 #: src/lib/marble/TourWidget.cpp:150
-#, fuzzy
 msgctxt "QObject|"
 msgid "Remove placemark"
-msgstr "מפה רגילה"
+msgstr "הסרת סמן מקום"
 
 #: src/lib/marble/TourWidget.cpp:152
-#, fuzzy
 msgctxt "QObject|"
 msgid "Change placemark"
-msgstr "מפה רגילה"
+msgstr "שינוי סמן מקום"
 
 #: src/lib/marble/TourWidget.cpp:154
 msgctxt "QObject|"
@@ -12769,10 +12772,9 @@ msgid "Loop"
 msgstr "לולאה"
 
 #: src/lib/marble/TourWidget.cpp:329
-#, fuzzy
 msgctxt "QObject|"
 msgid "Save tour"
-msgstr "עקוב אחר GPS"
+msgstr "שמירת סיור"
 
 #: src/lib/marble/TourWidget.cpp:330
 msgctxt "QObject|"
@@ -12780,22 +12782,19 @@ msgid "There are unsaved Tours. Do you want to save your changes?"
 msgstr ""
 
 #: src/lib/marble/TourWidget.cpp:358
-#, fuzzy
 msgctxt "QObject|"
 msgid "Open Tour"
-msgstr "עקוב אחר GPS"
+msgstr "פתיחת סיור"
 
 #: src/lib/marble/TourWidget.cpp:358 src/lib/marble/TourWidget.cpp:820
-#, fuzzy
 msgctxt "QObject|"
 msgid "KML Tours (*.kml)"
-msgstr "קובץ GpxFile ‏(‎*.gpx)"
+msgstr "סיורים ב־KML‏ (‎*.kml)"
 
 #: src/lib/marble/TourWidget.cpp:536
-#, fuzzy
 msgctxt "QObject|"
 msgid "Remove Selected Items"
-msgstr "מפה רגילה"
+msgstr "הסרת הפריטים הנבחרים"
 
 #: src/lib/marble/TourWidget.cpp:537
 msgctxt "QObject|"
@@ -12803,10 +12802,9 @@ msgid "Are you sure want to remove selected items?"
 msgstr ""
 
 #: src/lib/marble/TourWidget.cpp:820
-#, fuzzy
 msgctxt "QObject|"
 msgid "Save Tour as"
-msgstr "עקוב אחר GPS"
+msgstr "שמירת הסיור בתור"
 
 #: src/lib/marble/TourWidget.cpp:880
 msgctxt "QObject|"
@@ -12820,10 +12818,9 @@ msgid ""
 msgstr ""
 
 #: src/lib/marble/TourWidget.ui:14
-#, fuzzy
 msgctxt "TourWidget|"
 msgid "Tour"
-msgstr "עקוב אחר GPS"
+msgstr "סיור"
 
 #: src/lib/marble/TourWidget.ui:20 src/lib/marble/TourWidget.ui:45
 msgctxt "TourWidget|"
@@ -12851,28 +12848,24 @@ msgid "Delete"
 msgstr "מחיקה"
 
 #: src/lib/marble/TourWidget.ui:123
-#, fuzzy
 msgctxt "TourWidget|"
 msgid "New Tour"
-msgstr "עקוב אחר GPS"
+msgstr "סיור חדש"
 
 #: src/lib/marble/TourWidget.ui:135
-#, fuzzy
 msgctxt "TourWidget|"
 msgid "Save Tour"
-msgstr "עקוב אחר GPS"
+msgstr "שמירת סיור"
 
 #: src/lib/marble/TourWidget.ui:147
-#, fuzzy
 msgctxt "TourWidget|"
 msgid "Save Tour As"
-msgstr "עקוב אחר GPS"
+msgstr "שמירת הסיור בתור"
 
 #: src/lib/marble/TourWidget.ui:156
-#, fuzzy
 msgctxt "TourWidget|"
 msgid "Open Tour"
-msgstr "עקוב אחר GPS"
+msgstr "פתיחת סיור"
 
 #: src/lib/marble/TourWidget.ui:168
 msgctxt "TourWidget|"
@@ -12895,10 +12888,9 @@ msgid "Stops touring (playing again will start tour from the start)"
 msgstr ""
 
 #: src/lib/marble/TourWidget.ui:192
-#, fuzzy
 msgctxt "TourWidget|"
 msgid "Record tour"
-msgstr "עקוב אחר GPS"
+msgstr "הקלטת סיור"
 
 #: src/lib/marble/TourWidget.ui:195
 msgctxt "TourWidget|"
@@ -12906,10 +12898,9 @@ msgid "Converts the loaded tour into a movie"
 msgstr ""
 
 #: src/lib/marble/WaitEditWidget.cpp:36
-#, fuzzy
 msgctxt "Marble::WaitEditWidget|"
 msgid "Wait duration:"
-msgstr "מדינה"
+msgstr "משך המתנה:"
 
 #: src/lib/marble/WaitEditWidget.cpp:41
 msgctxt "Marble::WaitEditWidget|seconds"
@@ -13034,16 +13025,14 @@ msgid "Reports the current position based on nearby WLAN access points"
 msgstr ""
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:125
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Annotation"
-msgstr "מתחיל חיפוש"
+msgstr "פירוש"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:130
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "&Annotation"
-msgstr "מתחיל חיפוש"
+msgstr "ה&סבר"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:140
 msgctxt "Marble::AnnotatePlugin|"
@@ -13051,16 +13040,14 @@ msgid "Draws annotations on maps with placemarks or polygons."
 msgstr ""
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:183
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Annotations"
-msgstr "מתחיל חיפוש"
+msgstr "פירושים"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:305
-#, fuzzy
 msgctxt "QObject|"
 msgid "Remove current item"
-msgstr "מפה רגילה"
+msgstr "הסרת הפריט הנוכחי"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:306
 msgctxt "QObject|"
@@ -13068,10 +13055,9 @@ msgid "Are you sure you want to remove the current item?"
 msgstr ""
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:342
-#, fuzzy
 msgctxt "QObject|"
 msgid "Clear all annotations"
-msgstr "מתחיל חיפוש"
+msgstr "פינוי כל הפירושים"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:343
 msgctxt "QObject|"
@@ -13080,10 +13066,9 @@ msgstr ""
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:362
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:895
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Save Annotation File"
-msgstr "מתחיל חיפוש"
+msgstr "שמירת קובץ פירושים"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:364
 #, fuzzy
@@ -13096,10 +13081,9 @@ msgstr ""
 "kml)"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:390
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Open Annotation File"
-msgstr "מתחיל חיפוש"
+msgstr "פתיחת קובץ פירושים"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:392
 #, fuzzy
@@ -13141,16 +13125,14 @@ msgstr ""
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:862
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:940
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Select Item"
-msgstr "הצג דגם גבהים"
+msgstr "בחירת פריט"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:866
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Polygon"
-msgstr "מפה רגילה"
+msgstr "הוספת מצולע"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:869
 msgctxt "Marble::AnnotatePlugin|"
@@ -13158,16 +13140,14 @@ msgid "Add Polygon Hole"
 msgstr "הוספת חור מצולע"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:874
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Nodes"
-msgstr "הצג דגם גבהים"
+msgstr "הוספת נקודות"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:879
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Placemark"
-msgstr "מפה רגילה"
+msgstr "הוספת סמני מקום"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:882
 #, fuzzy
@@ -13182,28 +13162,24 @@ msgid "Add Ground Overlay"
 msgstr "ה&סר נקודות מדידה"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:888
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Remove Item"
-msgstr "מפה רגילה"
+msgstr "הסרת פריט"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:892
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Load Annotation File"
-msgstr "מתחיל חיפוש"
+msgstr "טעינת קובץ פירושים"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:898
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Clear all Annotations"
-msgstr "מתחיל חיפוש"
+msgstr "פינוי כל הפירושים"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:899
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Download OpenStreetMap Data"
-msgstr "&פתיחת מפה..."
+msgstr "הורדת נתוני OpenStreetMap"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:901
 msgctxt "Marble::AnnotatePlugin|"
@@ -13218,27 +13194,24 @@ msgstr "הדבקה"
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:999
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1238
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1480
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Cut"
-msgstr "מדינה"
+msgstr "גזירה"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1003
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1242
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1484
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Copy"
-msgstr "הע&תק מפה"
+msgstr "העתקה"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1007
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1119
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1246
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1488
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Remove"
-msgstr "מפה רגילה"
+msgstr "הסרה"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1013
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1113
@@ -13464,13 +13437,11 @@ msgid "Add polygon"
 msgstr ""
 
 #: src/plugins/render/annotate/EditPolygonDialog.ui:25
-#, fuzzy
 msgctxt "UiEditPolygonDialog|"
 msgid "Name"
 msgstr "שם"
 
 #: src/plugins/render/annotate/EditPolygonDialog.ui:45
-#, fuzzy
 msgctxt "UiEditPolygonDialog|"
 msgid "Description"
 msgstr "תיאור"
@@ -13497,10 +13468,9 @@ msgid "Width:"
 msgstr ""
 
 #: src/plugins/render/annotate/EditPolygonDialog.ui:157
-#, fuzzy
 msgctxt "UiEditPolygonDialog|"
 msgid "Area"
-msgstr "אטלס"
+msgstr "שטח"
 
 #: src/plugins/render/annotate/EditPolygonDialog.ui:206
 msgctxt "UiEditPolygonDialog|"
@@ -13513,10 +13483,9 @@ msgid "Not Filled"
 msgstr ""
 
 #: src/plugins/render/annotate/EditPolygonDialog.ui:252
-#, fuzzy
 msgctxt "UiEditPolygonDialog|"
 msgid "Nodes"
-msgstr "הצג דגם גבהים"
+msgstr "נקודות"
 
 #: src/plugins/render/annotate/EditPolylineDialog.cpp:82
 msgctxt "Marble::EditPolylineDialog|"
@@ -13524,10 +13493,9 @@ msgid "Tags"
 msgstr ""
 
 #: src/plugins/render/annotate/EditPolylineDialog.cpp:87
-#, fuzzy
 msgctxt "Marble::EditPolylineDialog|"
 msgid "Relations"
-msgstr "גובה:"
+msgstr "קשרים"
 
 #: src/plugins/render/annotate/EditPolylineDialog.cpp:100
 #, fuzzy
@@ -13564,13 +13532,11 @@ msgid "Add path"
 msgstr "נתיב"
 
 #: src/plugins/render/annotate/EditPolylineDialog.ui:25
-#, fuzzy
 msgctxt "UiEditPolylineDialog|"
 msgid "Name"
 msgstr "שם"
 
 #: src/plugins/render/annotate/EditPolylineDialog.ui:45
-#, fuzzy
 msgctxt "UiEditPolylineDialog|"
 msgid "Description"
 msgstr "תיאור"
@@ -13596,10 +13562,9 @@ msgid "Width:"
 msgstr ""
 
 #: src/plugins/render/annotate/EditPolylineDialog.ui:171
-#, fuzzy
 msgctxt "UiEditPolylineDialog|"
 msgid "Nodes"
-msgstr "הצג דגם גבהים"
+msgstr "נקודות"
 
 #: src/plugins/render/annotate/NodeModel.cpp:80
 msgctxt "Marble::NodeModel|"
@@ -13607,28 +13572,24 @@ msgid "No."
 msgstr ""
 
 #: src/plugins/render/annotate/NodeModel.cpp:82
-#, fuzzy
 msgctxt "Marble::NodeModel|"
 msgid "Longitude"
-msgstr "קו &אורך"
+msgstr "קו אורך"
 
 #: src/plugins/render/annotate/NodeModel.cpp:84
-#, fuzzy
 msgctxt "Marble::NodeModel|"
 msgid "Latitude"
-msgstr "קו &רוחב"
+msgstr "קו רוחב"
 
 #: src/plugins/render/annotate/NodeModel.cpp:86
-#, fuzzy
 msgctxt "Marble::NodeModel|"
 msgid "Elevation"
-msgstr "גובה:"
+msgstr "עילוי"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:14
-#, fuzzy
 msgctxt "AprsConfigWidget|"
 msgid "APRS Plugin"
-msgstr "מתחיל חיפוש"
+msgstr "תוסף APRS"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:24
 msgctxt "AprsConfigWidget|"
@@ -13652,10 +13613,9 @@ msgid "Do not show data older than (minutes)"
 msgstr ""
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:79
-#, fuzzy
 msgctxt "AprsConfigWidget|"
 msgid "Internet"
-msgstr "שם חלופי"
+msgstr "אינטרנט"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:88
 #, fuzzy
@@ -13736,10 +13696,9 @@ msgstr ""
 #: src/plugins/render/aprs/AprsConfigWidget.ui:229
 #: src/plugins/render/aprs/AprsConfigWidget.ui:235
 #: src/plugins/render/aprs/AprsConfigWidget.ui:259
-#, fuzzy
 msgctxt "AprsConfigWidget|"
 msgid "File"
-msgstr "&קובץ"
+msgstr "קובץ"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:241
 msgctxt "AprsConfigWidget|"
@@ -13774,34 +13733,29 @@ msgid ""
 msgstr ""
 
 #: src/plugins/render/atmosphere/AtmospherePlugin.cpp:59
-#, fuzzy
 msgctxt "Marble::AtmospherePlugin|"
 msgid "Atmosphere"
-msgstr "&אטמוספרה"
+msgstr "אטמוספרה"
 
 #: src/plugins/render/atmosphere/AtmospherePlugin.cpp:64
-#, fuzzy
 msgctxt "Marble::AtmospherePlugin|"
 msgid "&Atmosphere"
 msgstr "&אטמוספרה"
 
 #: src/plugins/render/atmosphere/AtmospherePlugin.cpp:79
-#, fuzzy
 msgctxt "Marble::AtmospherePlugin|"
 msgid "Shows the atmosphere around the earth."
-msgstr "הצג את תיבות האודות של התוכנית"
+msgstr "הצגת האטמוספרה מסביב לכדור הארץ."
 
 #: src/plugins/render/compass/CompassConfigWidget.ui:14
-#, fuzzy
 msgctxt "CompassConfigWidget|"
 msgid "Configure Compass Plugin"
-msgstr "מתחיל חיפוש"
+msgstr "הגדרת תוסף מצפן"
 
 #: src/plugins/render/compass/CompassConfigWidget.ui:20
-#, fuzzy
 msgctxt "CompassConfigWidget|"
 msgid "Theme"
-msgstr "ער&כת נושא"
+msgstr "ערכת עיצוב"
 
 #: src/plugins/render/compass/CompassConfigWidget.ui:43
 msgctxt "CompassConfigWidget|"
@@ -13819,22 +13773,19 @@ msgid "Atom"
 msgstr ""
 
 #: src/plugins/render/compass/CompassConfigWidget.ui:70
-#, fuzzy
 msgctxt "CompassConfigWidget|"
 msgid "Magnet"
-msgstr "קו &רוחב"
+msgstr "מגנט"
 
 #: src/plugins/render/compass/CompassFloatItem.cpp:57
-#, fuzzy
 msgctxt "Marble::CompassFloatItem|"
 msgid "Compass"
 msgstr "מצפן"
 
 #: src/plugins/render/compass/CompassFloatItem.cpp:62
-#, fuzzy
 msgctxt "Marble::CompassFloatItem|"
 msgid "&Compass"
-msgstr "&מצפן"
+msgstr "מ&צפן"
 
 #: src/plugins/render/compass/CompassFloatItem.cpp:77
 #, fuzzy
@@ -13843,16 +13794,14 @@ msgid "This is a float item that provides a compass."
 msgstr "זהו פריט צף המספק מצפן."
 
 #: src/plugins/render/compass/CompassFloatItem.cpp:137
-#, fuzzy
 msgctxt "Marble::CompassFloatItem|"
 msgid "N"
-msgstr "צ"
+msgstr "צפ׳"
 
 #: src/plugins/render/compass/CompassFloatItem.cpp:138
-#, fuzzy
 msgctxt "Marble::CompassFloatItem|"
 msgid "S"
-msgstr "ד"
+msgstr "דר׳"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:14
 msgctxt "CrosshairsConfigWidget|"
@@ -14217,10 +14166,9 @@ msgid "Zoom to viewport"
 msgstr ""
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:29
-#, fuzzy
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Configure..."
-msgstr "הגדרת פקד השליטה על השמש"
+msgstr "ה&גדרה…"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:35
 msgctxt "Marble::ElevationProfileContextMenu|"
@@ -14228,10 +14176,9 @@ msgid "&Zoom to viewport"
 msgstr ""
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:65
-#, fuzzy
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Route"
-msgstr "ייצא מפה"
+msgstr ""
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:77
 #, fuzzy
@@ -14281,16 +14228,14 @@ msgid "Difference: %1 %2"
 msgstr ""
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfilePlotAxis.cpp:136
-#, fuzzy
 msgctxt "Marble::ElevationProfilePlotAxis|"
 msgid "km"
-msgstr "ק\"מ"
+msgstr "ק״מ"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfilePlotAxis.cpp:139
-#, fuzzy
 msgctxt "Marble::ElevationProfilePlotAxis|"
 msgid "m"
-msgstr "מ'"
+msgstr "מ׳"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfilePlotAxis.cpp:146
 #, fuzzy
@@ -14305,10 +14250,9 @@ msgid "ft"
 msgstr "שמאלה"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfilePlotAxis.cpp:155
-#, fuzzy
 msgctxt "Marble::ElevationProfilePlotAxis|"
 msgid "nm"
-msgstr "מ'"
+msgstr "נ״מ"
 
 #: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:65
 #, fuzzy
@@ -14689,16 +14633,14 @@ msgid "mi"
 msgstr "מ'"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:243
-#, fuzzy
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "nm"
-msgstr "מ'"
+msgstr "נ״מ"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:349
-#, fuzzy
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Configure..."
-msgstr "הגדרת פקד השליטה על השמש"
+msgstr "ה&גדרה…"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:355
 msgctxt "Marble::MapScaleFloatItem|"
@@ -15887,12 +15829,12 @@ msgstr "גיליון נתונים"
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:451
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Search & Rescue (SARSAT)"
-msgstr ""
+msgstr "איתור וחילוץ (SARSAT)"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:454
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Disaster Monitoring"
-msgstr ""
+msgstr "עוקב אסונות"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:457
 #, fuzzy
@@ -15951,7 +15893,7 @@ msgstr "&חפש"
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:486
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Amateur radio"
-msgstr ""
+msgstr "רדיו חובבים"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:489
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
@@ -16022,19 +15964,17 @@ msgstr ""
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:523
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Engineering"
-msgstr ""
+msgstr "הנדסה"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:526
-#, fuzzy
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Education"
-msgstr "מיקום"
+msgstr "חינוך"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:529
-#, fuzzy
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Miscellaneous Satellites"
-msgstr "הצג סרגל ניווט"
+msgstr "לוויינים שונים"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:531
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
@@ -16054,12 +15994,12 @@ msgstr ""
 #: src/plugins/render/speedometer/Speedometer.cpp:49
 msgctxt "Marble::Speedometer|"
 msgid "Speedometer"
-msgstr ""
+msgstr "מד אוץ"
 
 #: src/plugins/render/speedometer/Speedometer.cpp:54
 msgctxt "Marble::Speedometer|"
 msgid "&Speedometer"
-msgstr ""
+msgstr "מד &אוץ"
 
 #: src/plugins/render/speedometer/Speedometer.cpp:69
 msgctxt "Marble::Speedometer|"
@@ -16073,10 +16013,9 @@ msgid "mph"
 msgstr "ק\"מ"
 
 #: src/plugins/render/speedometer/Speedometer.cpp:126
-#, fuzzy
 msgctxt "Marble::Speedometer|"
 msgid "km/h"
-msgstr "ק\"מ"
+msgstr "קמ״ש"
 
 #: src/plugins/render/speedometer/Speedometer.cpp:131
 msgctxt "Marble::Speedometer|"
@@ -16084,16 +16023,14 @@ msgid "kt"
 msgstr ""
 
 #: src/plugins/render/speedometer/Speedometer.ui:45
-#, fuzzy
 msgctxt "Speedometer|"
 msgid "km/h"
-msgstr "ק\"מ"
+msgstr "קמ״ש"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:14
-#, fuzzy
 msgctxt "StarsConfigWidget|"
 msgid "Configure Stars Plugin"
-msgstr "מתחיל חיפוש"
+msgstr "הגדרת תוסף כוכבים"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:24
 msgctxt "StarsConfigWidget|"
@@ -16114,17 +16051,17 @@ msgstr ""
 #: src/plugins/render/stars/StarsConfigWidget.ui:74
 msgctxt "StarsConfigWidget|"
 msgid "Solar System"
-msgstr ""
+msgstr "מערכת השמש"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:81
 msgctxt "StarsConfigWidget|"
 msgid "Sun"
-msgstr ""
+msgstr "השמש"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:89
 msgctxt "StarsConfigWidget|"
 msgid "Moon"
-msgstr ""
+msgstr "הירח"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:97
 msgctxt "StarsConfigWidget|"
@@ -16134,7 +16071,7 @@ msgstr "כוכב חמה"
 #: src/plugins/render/stars/StarsConfigWidget.ui:105
 msgctxt "StarsConfigWidget|"
 msgid "Venus"
-msgstr ""
+msgstr "נוגה"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:113
 msgctxt "StarsConfigWidget|"
@@ -16149,27 +16086,27 @@ msgstr "מאדים"
 #: src/plugins/render/stars/StarsConfigWidget.ui:132
 msgctxt "StarsConfigWidget|"
 msgid "Jupiter"
-msgstr ""
+msgstr "צדק"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:140
 msgctxt "StarsConfigWidget|"
 msgid "Saturn"
-msgstr ""
+msgstr "שבתאי"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:148
 msgctxt "StarsConfigWidget|"
 msgid "Uranus"
-msgstr ""
+msgstr "אורון"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:156
 msgctxt "StarsConfigWidget|"
 msgid "Neptune"
-msgstr ""
+msgstr "רהב"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:167
 msgctxt "StarsConfigWidget|"
 msgid "Use name labels"
-msgstr ""
+msgstr "להשתמש בתוויות שם"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:177
 msgctxt "StarsConfigWidget|"
@@ -16194,7 +16131,7 @@ msgstr ""
 #: src/plugins/render/stars/StarsConfigWidget.ui:278
 msgctxt "StarsConfigWidget|"
 msgid "Lines and Orientation"
-msgstr ""
+msgstr "קווים וכיוון"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:284
 msgctxt "StarsConfigWidget|"
@@ -16204,12 +16141,12 @@ msgstr "קבוצות כוכבים"
 #: src/plugins/render/stars/StarsConfigWidget.ui:290
 msgctxt "StarsConfigWidget|"
 msgid "Lines"
-msgstr ""
+msgstr "קווים"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:332
 msgctxt "StarsConfigWidget|"
 msgid "Labels"
-msgstr ""
+msgstr "תוויות"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:390
 msgctxt "StarsConfigWidget|"
@@ -16257,7 +16194,6 @@ msgid "Stars"
 msgstr "כוכבים"
 
 #: src/plugins/render/stars/StarsPlugin.cpp:114
-#, fuzzy
 msgctxt "Marble::StarsPlugin|"
 msgid "&Stars"
 msgstr "&כוכבים"
@@ -16297,7 +16233,7 @@ msgstr ""
 #: src/plugins/render/stars/StarsPlugin.cpp:1108
 msgctxt "Marble::StarsPlugin|"
 msgid "Sun"
-msgstr ""
+msgstr "השמש"
 
 #: src/plugins/render/stars/StarsPlugin.cpp:1388
 #, fuzzy
@@ -16323,40 +16259,35 @@ msgid "Show &Deep Sky Objects"
 msgstr ""
 
 #: src/plugins/render/stars/StarsPlugin.cpp:1401
-#, fuzzy
 msgctxt "Marble::StarsPlugin|"
 msgid "&Configure..."
-msgstr "הגדרת פקד השליטה על השמש"
+msgstr "ה&גדרה…"
 
 #: src/plugins/render/sun/SunPlugin.cpp:48
 #: src/plugins/render/sun/SunPlugin.cpp:53
 msgctxt "Marble::SunPlugin|"
 msgid "Sun"
-msgstr ""
+msgstr "השמש"
 
 #: src/plugins/render/sun/SunPlugin.cpp:68
-#, fuzzy
 msgctxt "Marble::SunPlugin|"
 msgid "A plugin that shows the Sun."
-msgstr "תוסף המציג את השמיים מלאים בכוכבים."
+msgstr "תוסף שמציג את השמש."
 
 #: src/plugins/render/twitter/twitterPlugin.cpp:41
-#, fuzzy
 msgctxt "Marble::twitterPlugin|"
 msgid "twitter "
-msgstr "twitter "
+msgstr "טוויטר "
 
 #: src/plugins/render/twitter/twitterPlugin.cpp:46
-#, fuzzy
 msgctxt "Marble::twitterPlugin|"
 msgid "&twitter"
-msgstr "&twitter"
+msgstr "&טוויטר"
 
 #: src/plugins/render/twitter/twitterPlugin.cpp:56
-#, fuzzy
 msgctxt "Marble::twitterPlugin|"
 msgid "show public twitts in their places"
-msgstr "הצג את ה־twitts הפומביים במקומות שלהם"
+msgstr "הצגת ציוצים ציבוריים במקום שלהם"
 
 #: src/plugins/render/weather/BBCParser.cpp:238
 #, fuzzy
@@ -16377,24 +16308,23 @@ msgid ""
 "Supported by <a href=\"https://www.geonames.org/export/JSON-webservices.html"
 "\" target=\"_BLANK\">geonames.org</a>"
 msgstr ""
+"נתמך על ידי <a href=\"https://www.geonames.org/export/JSON-webservices.html"
+"\" target=\"_BLANK\">geonames.org</a>"
 
 #: src/plugins/render/weather/StationListParser.cpp:42
-#, fuzzy
 msgctxt "QObject|"
 msgid "The file is not a valid file."
-msgstr "הקובץ הוא לא קובץ DGML 2.0 תקני"
+msgstr "הקובץ הוא לא קובץ תקף."
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:14
-#, fuzzy
 msgctxt "WeatherConfigWidget|"
 msgid "Configure Weather Plugin"
-msgstr "מתחיל חיפוש"
+msgstr "הגדרת תוסף מזג אוויר"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:23
-#, fuzzy
 msgctxt "WeatherConfigWidget|"
 msgid "Information"
-msgstr "שם חלופי"
+msgstr "פרטים"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:29
 #, fuzzy
@@ -16421,7 +16351,7 @@ msgstr ""
 #: src/plugins/render/weather/WeatherConfigWidget.ui:33
 msgctxt "WeatherConfigWidget|"
 msgid "Weather condition"
-msgstr ""
+msgstr "תנאי מזג אוויר"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:40
 #, fuzzy
@@ -16446,10 +16376,9 @@ msgstr ""
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:44
 #: src/plugins/render/weather/WeatherConfigWidget.ui:84
-#, fuzzy
 msgctxt "WeatherConfigWidget|"
 msgid "Temperature"
-msgstr "FITemplate"
+msgstr "טמפרטורה"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:51
 #, fuzzy
@@ -16473,10 +16402,9 @@ msgstr ""
 "italic;\">תפקיד</span></p></body></html>"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:55
-#, fuzzy
 msgctxt "WeatherConfigWidget|"
 msgid "Wind direction"
-msgstr "מדינה"
+msgstr "כיוון הרוח"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:62
 #, fuzzy
@@ -16503,12 +16431,12 @@ msgstr ""
 #: src/plugins/render/weather/WeatherConfigWidget.ui:113
 msgctxt "WeatherConfigWidget|"
 msgid "Wind speed"
-msgstr ""
+msgstr "מהירות הרוח"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:76
 msgctxt "WeatherConfigWidget|"
 msgid "Units"
-msgstr ""
+msgstr "יחידות"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:91
 #, fuzzy
@@ -16533,12 +16461,12 @@ msgstr ""
 #: src/plugins/render/weather/WeatherConfigWidget.ui:96
 msgctxt "WeatherConfigWidget|"
 msgid "Celsius"
-msgstr ""
+msgstr "צלזיוס"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:101
 msgctxt "WeatherConfigWidget|"
 msgid "Fahrenheit"
-msgstr ""
+msgstr "פרנהייט"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:120
 #, fuzzy
@@ -16563,32 +16491,32 @@ msgstr ""
 #: src/plugins/render/weather/WeatherConfigWidget.ui:125
 msgctxt "WeatherConfigWidget|"
 msgid "Kilometers per hour"
-msgstr ""
+msgstr "קילומטרים לשעה"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:130
 msgctxt "WeatherConfigWidget|"
 msgid "Miles per hour"
-msgstr ""
+msgstr "מייל לשעה"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:135
 msgctxt "WeatherConfigWidget|"
 msgid "Meters per second"
-msgstr ""
+msgstr "מטרים לשנייה"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:140
 msgctxt "WeatherConfigWidget|"
 msgid "Knots"
-msgstr ""
+msgstr "קשרים"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:145
 msgctxt "WeatherConfigWidget|"
 msgid "Beaufort"
-msgstr ""
+msgstr "ביופורט"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:157
 msgctxt "WeatherConfigWidget|"
 msgid "Pressure"
-msgstr ""
+msgstr "לחץ"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:164
 #, fuzzy
@@ -16613,42 +16541,42 @@ msgstr ""
 #: src/plugins/render/weather/WeatherConfigWidget.ui:169
 msgctxt "WeatherConfigWidget|"
 msgid "Hecto Pascals"
-msgstr ""
+msgstr "הקטו פסקל"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:174
 msgctxt "WeatherConfigWidget|"
 msgid "Kilo Pascals"
-msgstr ""
+msgstr "קילו פסקל"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:179
 msgctxt "WeatherConfigWidget|"
 msgid "Bars"
-msgstr ""
+msgstr "ברים"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:184
 msgctxt "WeatherConfigWidget|"
 msgid "Millimeters of Mercury"
-msgstr ""
+msgstr "מילימטר כספית"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:189
 msgctxt "WeatherConfigWidget|"
 msgid "Inches of Mercury"
-msgstr ""
+msgstr "אינץ׳ כספית"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:202
 msgctxt "WeatherConfigWidget|"
 msgid "Miscellaneous"
-msgstr ""
+msgstr "שונות"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:208
 msgctxt "WeatherConfigWidget|"
 msgid "Show only favorite items"
-msgstr ""
+msgstr "להציג פריטים מועדפים בלבד"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:217
 msgctxt "WeatherConfigWidget|"
 msgid "Weather update interval"
-msgstr ""
+msgstr "הפרש בין עדכוני מזג אוויר"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:224
 msgctxt "WeatherConfigWidget|"
@@ -16658,7 +16586,7 @@ msgstr " שעות"
 #: src/plugins/render/weather/WeatherData.cpp:297
 msgctxt "WeatherData|"
 msgid "sunny"
-msgstr ""
+msgstr "שמשי"
 
 #: src/plugins/render/weather/WeatherData.cpp:299
 msgctxt "WeatherData|"
@@ -16673,7 +16601,7 @@ msgstr "מעט עננים"
 #: src/plugins/render/weather/WeatherData.cpp:305
 msgctxt "WeatherData|"
 msgid "partly cloudy"
-msgstr ""
+msgstr "מעונן חלקית"
 
 #: src/plugins/render/weather/WeatherData.cpp:307
 msgctxt "WeatherData|"
@@ -16703,22 +16631,22 @@ msgstr "גשם"
 #: src/plugins/render/weather/WeatherData.cpp:320
 msgctxt "WeatherData|"
 msgid "occasionally thunderstorm"
-msgstr ""
+msgstr "סופת רעמים לסירוגין"
 
 #: src/plugins/render/weather/WeatherData.cpp:322
 msgctxt "WeatherData|"
 msgid "thunderstorm"
-msgstr ""
+msgstr "סופת רעמים"
 
 #: src/plugins/render/weather/WeatherData.cpp:324
 msgctxt "WeatherData|"
 msgid "hail"
-msgstr ""
+msgstr "ברד"
 
 #: src/plugins/render/weather/WeatherData.cpp:327
 msgctxt "WeatherData|"
 msgid "occasionally snow"
-msgstr ""
+msgstr "שלג לסירוגין"
 
 #: src/plugins/render/weather/WeatherData.cpp:329
 msgctxt "WeatherData|"
@@ -16728,22 +16656,22 @@ msgstr "שלג קל"
 #: src/plugins/render/weather/WeatherData.cpp:331
 msgctxt "WeatherData|"
 msgid "snow"
-msgstr ""
+msgstr "שלג"
 
 #: src/plugins/render/weather/WeatherData.cpp:333
 msgctxt "WeatherData|"
 msgid "rain and snow"
-msgstr ""
+msgstr "גשם ושלג"
 
 #: src/plugins/render/weather/WeatherData.cpp:335
 msgctxt "WeatherData|"
 msgid "mist"
-msgstr ""
+msgstr "ערפל קל"
 
 #: src/plugins/render/weather/WeatherData.cpp:337
 msgctxt "WeatherData|"
 msgid "sandstorm"
-msgstr ""
+msgstr "סופת חול"
 
 #: src/plugins/render/weather/WeatherData.cpp:386
 msgctxt "WeatherData|"
@@ -16838,12 +16766,12 @@ msgstr "מטרים לשנייה"
 #: src/plugins/render/weather/WeatherData.cpp:533
 msgctxt "QObject|"
 msgid "knots"
-msgstr ""
+msgstr "קשרים"
 
 #: src/plugins/render/weather/WeatherData.cpp:536
 msgctxt "QObject|"
 msgid "Beaufort"
-msgstr ""
+msgstr "ביופורט"
 
 #: src/plugins/render/weather/WeatherData.cpp:670
 msgctxt "WeatherData|"
@@ -16858,7 +16786,7 @@ msgstr ""
 #: src/plugins/render/weather/WeatherData.cpp:676
 msgctxt "WeatherData|"
 msgid "Bar"
-msgstr ""
+msgstr "בר"
 
 #: src/plugins/render/weather/WeatherData.cpp:679
 msgctxt "WeatherData|"
@@ -16873,10 +16801,9 @@ msgstr ""
 #: src/plugins/render/weather/WeatherData.cpp:708
 msgctxt "WeatherData|air pressure is rising"
 msgid "rising"
-msgstr ""
+msgstr "עולה"
 
 #: src/plugins/render/weather/WeatherData.cpp:710
-#, fuzzy
 msgctxt "WeatherData|air pressure has no change"
 msgid "steady"
 msgstr "יציב"
@@ -16884,67 +16811,67 @@ msgstr "יציב"
 #: src/plugins/render/weather/WeatherData.cpp:712
 msgctxt "WeatherData|air pressure falls"
 msgid "falling"
-msgstr ""
+msgstr "יורד"
 
 #: src/plugins/render/weather/WeatherData.cpp:743
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Publishing time: %1<br>"
-msgstr ""
+msgstr "זמן הפרסום: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:746
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Condition: %1<br>"
-msgstr ""
+msgstr "מצב: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:749
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Temperature: %1<br>"
-msgstr ""
+msgstr "טמפרטורה: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:752
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Max temperature: %1<br>"
-msgstr ""
+msgstr "טמפרטורה מרבית: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:755
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Min temperature: %1<br>"
-msgstr ""
+msgstr "טמפרטורה מזערית: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:758
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Wind direction: %1<br>"
-msgstr ""
+msgstr "כיוון הרוח: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:761
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Wind speed: %1<br>"
-msgstr ""
+msgstr "מהירות הרוח: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:764
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Pressure: %1<br>"
-msgstr ""
+msgstr "לחץ: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:767
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Pressure development: %1<br>"
-msgstr ""
+msgstr "התפתחות לחץ: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:770
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Humidity: %1<br>"
-msgstr ""
+msgstr "לחות: %1<br>"
 
 #: src/plugins/render/weather/WeatherItem.cpp:47
 msgctxt "WeatherItemPrivate|"
@@ -16961,43 +16888,43 @@ msgstr "תחנה: %1\n"
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindSpeed, WindDirection"
 msgid "Wind: %4, %5\n"
-msgstr ""
+msgstr "רוח: %4, %5\n"
 
 #: src/plugins/render/weather/WeatherItem.cpp:109
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindSpeed"
 msgid "Wind: %4\n"
-msgstr ""
+msgstr "רוח: %4\n"
 
 #: src/plugins/render/weather/WeatherItem.cpp:111
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindDirection"
 msgid "Wind: %4\n"
-msgstr ""
+msgstr "רוח: %4\n"
 
 #: src/plugins/render/weather/WeatherItem.cpp:114
 #, qt-format
 msgctxt "WeatherItemPrivate|Pressure: Pressure, Development"
 msgid "Pressure: %6, %7"
-msgstr ""
+msgstr "לחץ: %6, %7"
 
 #: src/plugins/render/weather/WeatherItem.cpp:116
 #, qt-format
 msgctxt "WeatherItemPrivate|Pressure: Pressure"
 msgid "Pressure: %6"
-msgstr ""
+msgstr "לחץ: %6"
 
 #: src/plugins/render/weather/WeatherItem.cpp:118
 #, qt-format
 msgctxt "WeatherItemPrivate|Pressure Development"
 msgid "Pressure %7"
-msgstr ""
+msgstr "לחץ %7"
 
 #: src/plugins/render/weather/WeatherItem.cpp:128
 #, qt-format
 msgctxt "WeatherItemPrivate|DayOfWeek: Condition, MinTemp to MaxTemp"
 msgid "%1: %2, %3 to %4"
-msgstr ""
+msgstr "%1: %2, %3 עד %4"
 
 #: src/plugins/render/weather/WeatherItem.cpp:192
 msgctxt "WeatherItemPrivate|"
@@ -17294,10 +17221,9 @@ msgid "Google Earth KML"
 msgstr ""
 
 #: src/plugins/runner/latlon/LatLonPlugin.cpp:19
-#, fuzzy
 msgctxt "Marble::LatLonPlugin|"
 msgid "Geographic Coordinates Search"
-msgstr "העתק קואורדינטות"
+msgstr "חיפוש נקודות ציון גאוגרפיות"
 
 #: src/plugins/runner/latlon/LatLonPlugin.cpp:24
 msgctxt "Marble::LatLonPlugin|"
@@ -17450,7 +17376,6 @@ msgid "museum"
 msgstr ""
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:121
-#, fuzzy
 msgctxt "QObject|"
 msgid "ruin"
 msgstr "חורבות"
@@ -17466,7 +17391,6 @@ msgid "theme park"
 msgstr ""
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:127
-#, fuzzy
 msgctxt "QObject|"
 msgid "view point"
 msgstr "נקודת תצפית"
@@ -17517,7 +17441,6 @@ msgid "fuel"
 msgstr ""
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:147
-#, fuzzy
 msgctxt "QObject|"
 msgid "parking"
 msgstr "חנייה"
@@ -17604,7 +17527,6 @@ msgid "south"
 msgstr "דרום"
 
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:277
-#, fuzzy
 msgctxt "QObject|"
 msgid "south-east"
 msgstr "דרום־מזרח"
@@ -17615,7 +17537,6 @@ msgid "east"
 msgstr "מזרח"
 
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:281
-#, fuzzy
 msgctxt "QObject|"
 msgid "north-east"
 msgstr "צפון־מזרח"
@@ -17926,10 +17847,9 @@ msgid "Offline routing using the monav daemon"
 msgstr ""
 
 #: src/plugins/runner/nominatim-reversegeocoding/NominatimReverseGeocodingPlugin.cpp:22
-#, fuzzy
 msgctxt "Marble::NominatimPlugin|"
 msgid "OpenStreetMap Nominatim Reverse Geocoding"
-msgstr "הר"
+msgstr ""
 
 #: src/plugins/runner/nominatim-reversegeocoding/NominatimReverseGeocodingPlugin.cpp:27
 #: src/plugins/runner/nominatim-search/NominatimSearchPlugin.cpp:27

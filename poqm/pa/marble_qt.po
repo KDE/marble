@@ -3018,17 +3018,17 @@ msgctxt "UiAddLinkDialog|"
 msgid "Name:"
 msgstr "ਨਾਂ:"
 
-#: src/lib/marble/BookmarkManager.cpp:52
+#: src/lib/marble/BookmarkManager.cpp:51
 msgctxt "QObject|"
 msgid "Default"
 msgstr "ਮੂਲ"
 
-#: src/lib/marble/BookmarkManager.cpp:56
+#: src/lib/marble/BookmarkManager.cpp:55
 msgctxt "QObject|"
 msgid "Bookmarks"
 msgstr "ਬੁੱਕਮਾਰਕ"
 
-#: src/lib/marble/BookmarkManager.cpp:244
+#: src/lib/marble/BookmarkManager.cpp:243
 msgctxt "Marble::BookmarkManager|"
 msgid "Default"
 msgstr "ਮੂਲ"
@@ -3334,6 +3334,11 @@ msgctxt "Marble::RouteItemDelegate|"
 msgid "Upload to cloud"
 msgstr "ਕਲਾਉਡ ਉੱਤੇ ਅੱਪਲੋਡ ਕਰੋ"
 
+#: src/lib/marble/CurrentLocationWidget.cpp:109
+msgctxt "Marble::CurrentLocationWidget|"
+msgid "<p>No Position Tracking Plugin installed.</p>"
+msgstr ""
+
 #: src/lib/marble/CurrentLocationWidget.cpp:183
 msgctxt "QObject|"
 msgid "No position available."
@@ -3518,8 +3523,8 @@ msgid ""
 msgstr ""
 
 #: src/lib/marble/declarative/MarbleQuickItem.cpp:195
-#: src/lib/marble/routing/RoutingManager.cpp:558
-#: src/lib/marble/routing/RoutingManager.cpp:561
+#: src/lib/marble/routing/RoutingManager.cpp:556
+#: src/lib/marble/routing/RoutingManager.cpp:559
 msgctxt "QObject|"
 msgid "Current Location"
 msgstr "ਮੌਜੂਦਾ ਟਿਕਾਣਾ"
@@ -7750,7 +7755,7 @@ msgctxt "MapThemeDownloadDialog|"
 msgid "Install Maps"
 msgstr "%1 ਇੰਸਟਾਲ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
-#: src/lib/marble/MapThemeManager.cpp:376
+#: src/lib/marble/MapThemeManager.cpp:374
 #, fuzzy
 #| msgid "Name"
 msgctxt "QObject|"
@@ -10810,56 +10815,56 @@ msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "No description available."
 msgstr "ਉਪਲੱਬਧ ਨਹੀਂ"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:385
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:382
 #, fuzzy
 #| msgid "National Capital"
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "National Capital"
 msgstr "ਰਾਸ਼ਟਰੀ ਰਾਜਧਾਨੀ"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:387
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:384
 #, fuzzy
 #| msgid "City"
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "City"
 msgstr "ਸ਼ਹਿਰ"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:389
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:386
 #, fuzzy
 #| msgid "State Capital"
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "State Capital"
 msgstr "ਸੂਬਾ ਰਾਜਧਾਨੀ"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:391
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:388
 #, fuzzy
 #| msgid "County Capital"
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "County Capital"
 msgstr "ਦੇਸ਼ ਰਾਜਧਾਨੀ"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:393
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:390
 #, fuzzy
 #| msgid "Capital"
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Capital"
 msgstr "ਰਾਜਧਾਨੀ"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:396
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:393
 #, fuzzy
 #| msgid "Village"
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Village"
 msgstr "ਪਿੰਡ"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:539
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:536
 #, fuzzy
 #| msgid "&Info Boxes"
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "&Info Boxes"
 msgstr "ਜਾਣਕਾਰੀ ਬਾਕਸ(&I)"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:900
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:885
 #, fuzzy
 #| msgid "Address Details"
 msgctxt "Marble::MarbleWidgetPopupMenu|"
@@ -11148,7 +11153,7 @@ msgctxt "QObject|"
 msgid "Add custom tag..."
 msgstr ""
 
-#: src/lib/marble/osm/OsmTagEditorWidget_p.cpp:101
+#: src/lib/marble/osm/OsmTagEditorWidget_p.cpp:100
 msgctxt "QObject|"
 msgid "value"
 msgstr ""
@@ -11222,7 +11227,7 @@ msgctxt "Marble::PlacemarkPositionProviderPlugin|"
 msgid "Reports the position of a placemark"
 msgstr "GPS ਜੰਤਰ ਦੀ ਸਥਿਤੀ ਬਾਰੇ ਜਾਣਕਾਰੀ ਦਿੰਦਾ ਹੈ।"
 
-#: src/lib/marble/PlanetFactory.cpp:230
+#: src/lib/marble/PlanetFactory.cpp:221
 #, fuzzy
 #| msgctxt "the planet"
 #| msgid "Mercury"
@@ -11230,7 +11235,7 @@ msgctxt "QObject|the planet"
 msgid "Mercury"
 msgstr "ਬੁੱਧ"
 
-#: src/lib/marble/PlanetFactory.cpp:232
+#: src/lib/marble/PlanetFactory.cpp:223
 #, fuzzy
 #| msgctxt "the planet"
 #| msgid "Venus"
@@ -11238,7 +11243,7 @@ msgctxt "QObject|the planet"
 msgid "Venus"
 msgstr "ਸ਼ੁੱਕਰ"
 
-#: src/lib/marble/PlanetFactory.cpp:234
+#: src/lib/marble/PlanetFactory.cpp:225
 #, fuzzy
 #| msgctxt "the planet"
 #| msgid "Earth"
@@ -11246,7 +11251,7 @@ msgctxt "QObject|the planet"
 msgid "Earth"
 msgstr "ਧਰਤੀ"
 
-#: src/lib/marble/PlanetFactory.cpp:236
+#: src/lib/marble/PlanetFactory.cpp:227
 #, fuzzy
 #| msgctxt "the planet"
 #| msgid "Mars"
@@ -11254,7 +11259,7 @@ msgctxt "QObject|the planet"
 msgid "Mars"
 msgstr "ਮੰਗਲ"
 
-#: src/lib/marble/PlanetFactory.cpp:238
+#: src/lib/marble/PlanetFactory.cpp:229
 #, fuzzy
 #| msgctxt "the planet"
 #| msgid "Jupiter"
@@ -11262,7 +11267,7 @@ msgctxt "QObject|the planet"
 msgid "Jupiter"
 msgstr "ਬ੍ਰਹਿਸਪਤੀ"
 
-#: src/lib/marble/PlanetFactory.cpp:240
+#: src/lib/marble/PlanetFactory.cpp:231
 #, fuzzy
 #| msgctxt "the planet"
 #| msgid "Saturn"
@@ -11270,7 +11275,7 @@ msgctxt "QObject|the planet"
 msgid "Saturn"
 msgstr "ਸ਼ਨਿੱਚਰ"
 
-#: src/lib/marble/PlanetFactory.cpp:242
+#: src/lib/marble/PlanetFactory.cpp:233
 #, fuzzy
 #| msgctxt "the planet"
 #| msgid "Uranus"
@@ -11278,7 +11283,7 @@ msgctxt "QObject|the planet"
 msgid "Uranus"
 msgstr "ਯੂਰੇਨਸ"
 
-#: src/lib/marble/PlanetFactory.cpp:244
+#: src/lib/marble/PlanetFactory.cpp:235
 #, fuzzy
 #| msgctxt "the planet"
 #| msgid "Neptune"
@@ -11286,7 +11291,7 @@ msgctxt "QObject|the planet"
 msgid "Neptune"
 msgstr "ਨੈਪਚੂਨ"
 
-#: src/lib/marble/PlanetFactory.cpp:247
+#: src/lib/marble/PlanetFactory.cpp:238
 #, fuzzy
 #| msgctxt "the planet"
 #| msgid "Pluto"
@@ -11294,14 +11299,14 @@ msgctxt "QObject|the planet"
 msgid "Pluto"
 msgstr "ਪਲੂਟੋ"
 
-#: src/lib/marble/PlanetFactory.cpp:250
+#: src/lib/marble/PlanetFactory.cpp:241
 #, fuzzy
 #| msgid "Sun"
 msgctxt "QObject|the earth's star"
 msgid "Sun"
 msgstr "ਸੂਰਜ"
 
-#: src/lib/marble/PlanetFactory.cpp:252
+#: src/lib/marble/PlanetFactory.cpp:243
 #, fuzzy
 #| msgctxt "the earth's moon"
 #| msgid "Moon"
@@ -11309,12 +11314,12 @@ msgctxt "QObject|the earth's moon"
 msgid "Moon"
 msgstr "ਚੰਦ"
 
-#: src/lib/marble/PlanetFactory.cpp:254
+#: src/lib/marble/PlanetFactory.cpp:245
 msgctxt "QObject|"
 msgid "Sky"
 msgstr ""
 
-#: src/lib/marble/PlanetFactory.cpp:257
+#: src/lib/marble/PlanetFactory.cpp:248
 #, fuzzy
 #| msgctxt "a planet without data"
 #| msgid "Unknown Planet"
@@ -11623,227 +11628,227 @@ msgctxt "QObject|"
 msgid "Enter the roundabout."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:258
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:257
 #, fuzzy
 #| msgid "Take the exit."
 msgctxt "QObject|"
 msgid "Take the exit."
 msgstr "ਬਾਹਰ ਜਾਉ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:260
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:259
 #, fuzzy, qt-format
 #| msgid "Take the exit."
 msgctxt "QObject|"
 msgid "Take the exit towards %1."
 msgstr "ਬਾਹਰ ਜਾਉ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:264
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:263
 #, fuzzy
 #| msgid "Take the exit."
 msgctxt "QObject|"
 msgid "Take the ramp."
 msgstr "ਬਾਹਰ ਜਾਉ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:266
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:265
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the ramp towards %1."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:322
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:321
 #, fuzzy, qt-format
 #| msgid "Follow the road for %1 %2."
 msgctxt "QObject|"
 msgid "Follow the road for %1 %2."
 msgstr "%1 %2 ਲਈ ਰਾਹ ਲਵੋ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:376
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:375
 #, fuzzy, qt-format
 #| msgid "Take the exit to the right."
 msgctxt "QObject|"
 msgid "Take the %1. exit in the roundabout."
 msgstr "ਬਾਹਰ ਲਈ ਸੱਜਾ ਚੁਣੋ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:378
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:377
 #, fuzzy, qt-format
 #| msgid "Take the exit to the right."
 msgctxt "QObject|"
 msgid "Take the %1. exit in the roundabout into %2."
 msgstr "ਬਾਹਰ ਲਈ ਸੱਜਾ ਚੁਣੋ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:386
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:385
 #, fuzzy
 #| msgid "Continue."
 msgctxt "QObject|"
 msgid "Continue."
 msgstr "ਜਾਰੀ ਰੱਖੋ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:388
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:387
 #, fuzzy
 #| msgid "Turn left into %1."
 msgctxt "QObject|"
 msgid "Merge."
 msgstr "%1 ਵਿੱਚ ਖੱਬੇ ਮੁੜੋ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:390
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:389
 #, fuzzy
 #| msgid "Turn around."
 msgctxt "QObject|"
 msgid "Turn around."
 msgstr "ਪਾਸਿਓ ਮੋੜੋ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:392
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:391
 #, fuzzy
 #| msgid "Turn sharp left."
 msgctxt "QObject|"
 msgid "Turn sharp left."
 msgstr "ਖੱਬੇ ਤਿੱਖਾ ਮੋੜ ਹੈ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:394
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:393
 #, fuzzy
 #| msgid "Turn left."
 msgctxt "QObject|"
 msgid "Turn left."
 msgstr "ਖੱਬੇ ਮੁੜੋ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:396
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:395
 #, fuzzy
 #| msgid "Keep slightly left."
 msgctxt "QObject|"
 msgid "Keep slightly left."
 msgstr "ਥੋੜ੍ਹਾ ਖੱਬੇ ਰੱਖੋ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:398
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:397
 #, fuzzy
 #| msgid "Go straight ahead."
 msgctxt "QObject|"
 msgid "Go straight ahead."
 msgstr "ਸਿੱਧੇ ਅੱਗੇ ਜਾਓ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:400
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:399
 #, fuzzy
 #| msgid "Keep slightly right."
 msgctxt "QObject|"
 msgid "Keep slightly right."
 msgstr "ਥੋੜ੍ਹਾ ਸੱਜੇ ਰੱਖੋ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:402
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:401
 #, fuzzy
 #| msgid "Turn right."
 msgctxt "QObject|"
 msgid "Turn right."
 msgstr "ਸੱਜੇ ਮੁੜੋ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:404
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:403
 #, fuzzy
 #| msgid "Turn sharp left."
 msgctxt "QObject|"
 msgid "Turn sharp right."
 msgstr "ਖੱਬੇ ਤਿੱਖਾ ਮੋੜ ਹੈ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:406
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:405
 msgctxt "QObject|"
 msgid "Exit the roundabout."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:414
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:413
 #, fuzzy
 #| msgid "Take the exit to the left."
 msgctxt "QObject|"
 msgid "Take the exit to the left."
 msgstr "ਬਾਹਰ ਲਈ ਖੱਬਾ ਚੁਣੋ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:416
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:415
 #, fuzzy
 #| msgid "Take the exit to the right."
 msgctxt "QObject|"
 msgid "Take the exit to the right."
 msgstr "ਬਾਹਰ ਲਈ ਸੱਜਾ ਚੁਣੋ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:421
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:420
 #, fuzzy, qt-format
 #| msgid "Continue onto %1."
 msgctxt "QObject|"
 msgid "Continue onto %1."
 msgstr "%1 ਉੱਤੇ ਜਾਰੀ ਰੱਖੋ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:423
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:422
 #, fuzzy, qt-format
 #| msgid "Turn left into %1."
 msgctxt "QObject|"
 msgid "Merge onto %1."
 msgstr "%1 ਵਿੱਚ ਖੱਬੇ ਮੁੜੋ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:425
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:424
 #, fuzzy, qt-format
 #| msgid "Turn around."
 msgctxt "QObject|"
 msgid "Turn around onto %1."
 msgstr "ਪਾਸਿਓ ਮੋੜੋ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:427
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:426
 #, fuzzy, qt-format
 #| msgid "Turn sharp left on %1."
 msgctxt "QObject|"
 msgid "Turn sharp left on %1."
 msgstr "%1 ਉੱਤੇ ਤੇਜ਼ ਖੱਬੇ ਪਾਸੇ ਮੋੜ ਹੈ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:429
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:428
 #, fuzzy, qt-format
 #| msgid "Turn left into %1."
 msgctxt "QObject|"
 msgid "Turn left into %1."
 msgstr "%1 ਵਿੱਚ ਖੱਬੇ ਮੁੜੋ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:431
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:430
 #, fuzzy, qt-format
 #| msgid "Keep slightly left on %1."
 msgctxt "QObject|"
 msgid "Keep slightly left on %1."
 msgstr "%1 ਉੱਤੇ ਥੋੜ੍ਹਾ ਖੱਬੇ ਰੱਖੋ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:433
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:432
 #, fuzzy, qt-format
 #| msgid "Continue on %1."
 msgctxt "QObject|"
 msgid "Continue on %1."
 msgstr "%1 ਉੱਤੇ ਜਾਰੀ ਰੱਖੋ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:435
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:434
 #, fuzzy, qt-format
 #| msgid "Keep slightly right on %1."
 msgctxt "QObject|"
 msgid "Keep slightly right on %1."
 msgstr "%1 ਉੱਤੇ ਥੋੜ੍ਹਾ ਸੱਜੇ ਰੱਖੋ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:437
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:436
 #, fuzzy, qt-format
 #| msgid "Turn right into %1."
 msgctxt "QObject|"
 msgid "Turn right into %1."
 msgstr "%1 ਵਿੱਚ ਸੱਜੇ ਮੁੜੋ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:439
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:438
 #, fuzzy, qt-format
 #| msgid "Turn right into %1."
 msgctxt "QObject|"
 msgid "Turn sharp right into %1."
 msgstr "%1 ਵਿੱਚ ਸੱਜੇ ਮੁੜੋ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:441
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:440
 #, qt-format
 msgctxt "QObject|"
 msgid "Exit the roundabout into %2."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:449
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:448
 #, fuzzy, qt-format
 #| msgid "Take the exit to the left."
 msgctxt "QObject|"
 msgid "Take the exit to the left onto %1."
 msgstr "ਬਾਹਰ ਲਈ ਖੱਬਾ ਚੁਣੋ।"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:451
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:450
 #, fuzzy, qt-format
 #| msgid "Take the exit to the right."
 msgctxt "QObject|"
@@ -11955,12 +11960,12 @@ msgctxt "Marble::RoutingLayer|"
 msgid "GPX and KML files (*.gpx *.kml)"
 msgstr "GPX ਅਤੇ KML ਫਾਇਲਾਂ (*.gpx *.kml)"
 
-#: src/lib/marble/routing/RoutingManager.cpp:510
+#: src/lib/marble/routing/RoutingManager.cpp:508
 msgctxt "Marble::RoutingManager|"
 msgid "Caution: Driving instructions may be incomplete or wrong."
 msgstr ""
 
-#: src/lib/marble/routing/RoutingManager.cpp:511
+#: src/lib/marble/routing/RoutingManager.cpp:509
 msgctxt "Marble::RoutingManager|"
 msgid ""
 "Road construction, weather and other unforeseen variables can result in the "
@@ -11968,26 +11973,26 @@ msgid ""
 "destination."
 msgstr ""
 
-#: src/lib/marble/routing/RoutingManager.cpp:513
+#: src/lib/marble/routing/RoutingManager.cpp:511
 #, fuzzy
 #| msgid "Please use common sense while navigating."
 msgctxt "Marble::RoutingManager|"
 msgid "Please use common sense while navigating."
 msgstr "ਨੇਵੀਗੇਟ ਕਰਨ ਦੇ ਦੌਰਾਨ ਆਪਣਾ ਦਿਮਾਗ ਵਰਤੋਂ ਜੀ।"
 
-#: src/lib/marble/routing/RoutingManager.cpp:514
+#: src/lib/marble/routing/RoutingManager.cpp:512
 msgctxt "Marble::RoutingManager|"
 msgid "The Marble development team wishes you a pleasant and safe journey."
 msgstr ""
 
-#: src/lib/marble/routing/RoutingManager.cpp:515
+#: src/lib/marble/routing/RoutingManager.cpp:513
 #, fuzzy
 #| msgid "Guidance Mode - Marble"
 msgctxt "Marble::RoutingManager|"
 msgid "Guidance Mode"
 msgstr "ਗਾਈਡ ਮੋਡ - ਮਾਰਬਲ"
 
-#: src/lib/marble/routing/RoutingManager.cpp:516
+#: src/lib/marble/routing/RoutingManager.cpp:514
 #, fuzzy
 #| msgid "Show again"
 msgctxt "Marble::RoutingManager|"
@@ -12387,6 +12392,13 @@ msgstr "ਖੋਜ"
 msgctxt "QObject|"
 msgid "Search for '%1'"
 msgstr "%1 ਲਈ ਮੌਸਮ"
+
+#: src/lib/marble/SoundCueEditWidget.cpp:37
+#, fuzzy
+#| msgid "Elevation extreme"
+msgctxt "Marble::SoundCueEditWidget|"
+msgid "Audio location"
+msgstr "ਬਹੁਤ ਉਚਾਈ"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:67
 #, fuzzy

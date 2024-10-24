@@ -3104,17 +3104,17 @@ msgctxt "UiAddLinkDialog|"
 msgid "Name:"
 msgstr "Nome:"
 
-#: src/lib/marble/BookmarkManager.cpp:52
+#: src/lib/marble/BookmarkManager.cpp:51
 msgctxt "QObject|"
 msgid "Default"
 msgstr "Predefinição"
 
-#: src/lib/marble/BookmarkManager.cpp:56
+#: src/lib/marble/BookmarkManager.cpp:55
 msgctxt "QObject|"
 msgid "Bookmarks"
 msgstr "Favoritos"
 
-#: src/lib/marble/BookmarkManager.cpp:244
+#: src/lib/marble/BookmarkManager.cpp:243
 msgctxt "Marble::BookmarkManager|"
 msgid "Default"
 msgstr "Predefinição"
@@ -3426,6 +3426,11 @@ msgctxt "Marble::RouteItemDelegate|"
 msgid "Upload to cloud"
 msgstr "Enviar para a nuvem"
 
+#: src/lib/marble/CurrentLocationWidget.cpp:109
+msgctxt "Marble::CurrentLocationWidget|"
+msgid "<p>No Position Tracking Plugin installed.</p>"
+msgstr ""
+
 #: src/lib/marble/CurrentLocationWidget.cpp:183
 msgctxt "QObject|"
 msgid "No position available."
@@ -3615,8 +3620,8 @@ msgstr ""
 "usados pela versão actual?"
 
 #: src/lib/marble/declarative/MarbleQuickItem.cpp:195
-#: src/lib/marble/routing/RoutingManager.cpp:558
-#: src/lib/marble/routing/RoutingManager.cpp:561
+#: src/lib/marble/routing/RoutingManager.cpp:556
+#: src/lib/marble/routing/RoutingManager.cpp:559
 msgctxt "QObject|"
 msgid "Current Location"
 msgstr "Localização Actual"
@@ -7650,7 +7655,7 @@ msgctxt "MapThemeDownloadDialog|"
 msgid "Install Maps"
 msgstr "Instalar os Mapas"
 
-#: src/lib/marble/MapThemeManager.cpp:376
+#: src/lib/marble/MapThemeManager.cpp:374
 msgctxt "QObject|"
 msgid "Name"
 msgstr "Nome"
@@ -10991,42 +10996,42 @@ msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "No description available."
 msgstr "Descrição não disponível."
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:385
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:382
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "National Capital"
 msgstr "Capital Nacional"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:387
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:384
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "City"
 msgstr "Cidade"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:389
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:386
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "State Capital"
 msgstr "Capital do Distrito"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:391
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:388
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "County Capital"
 msgstr "Capital da Província"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:393
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:390
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Capital"
 msgstr "Capital"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:396
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:393
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Village"
 msgstr "Aldeia"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:539
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:536
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "&Info Boxes"
 msgstr "Áreas &Informativas"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:900
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:885
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Address Details"
 msgstr "Detalhes do Endereço"
@@ -11278,7 +11283,7 @@ msgctxt "QObject|"
 msgid "Add custom tag..."
 msgstr "Adicionar uma marca personalizada..."
 
-#: src/lib/marble/osm/OsmTagEditorWidget_p.cpp:101
+#: src/lib/marble/osm/OsmTagEditorWidget_p.cpp:100
 msgctxt "QObject|"
 msgid "value"
 msgstr "valor"
@@ -11341,67 +11346,67 @@ msgctxt "Marble::PlacemarkPositionProviderPlugin|"
 msgid "Reports the position of a placemark"
 msgstr "Devolve a posição de um marcador"
 
-#: src/lib/marble/PlanetFactory.cpp:230
+#: src/lib/marble/PlanetFactory.cpp:221
 msgctxt "QObject|the planet"
 msgid "Mercury"
 msgstr "Mercúrio"
 
-#: src/lib/marble/PlanetFactory.cpp:232
+#: src/lib/marble/PlanetFactory.cpp:223
 msgctxt "QObject|the planet"
 msgid "Venus"
 msgstr "Vénus"
 
-#: src/lib/marble/PlanetFactory.cpp:234
+#: src/lib/marble/PlanetFactory.cpp:225
 msgctxt "QObject|the planet"
 msgid "Earth"
 msgstr "Terra"
 
-#: src/lib/marble/PlanetFactory.cpp:236
+#: src/lib/marble/PlanetFactory.cpp:227
 msgctxt "QObject|the planet"
 msgid "Mars"
 msgstr "Marte"
 
-#: src/lib/marble/PlanetFactory.cpp:238
+#: src/lib/marble/PlanetFactory.cpp:229
 msgctxt "QObject|the planet"
 msgid "Jupiter"
 msgstr "Júpiter"
 
-#: src/lib/marble/PlanetFactory.cpp:240
+#: src/lib/marble/PlanetFactory.cpp:231
 msgctxt "QObject|the planet"
 msgid "Saturn"
 msgstr "Saturno"
 
-#: src/lib/marble/PlanetFactory.cpp:242
+#: src/lib/marble/PlanetFactory.cpp:233
 msgctxt "QObject|the planet"
 msgid "Uranus"
 msgstr "Úrano"
 
-#: src/lib/marble/PlanetFactory.cpp:244
+#: src/lib/marble/PlanetFactory.cpp:235
 msgctxt "QObject|the planet"
 msgid "Neptune"
 msgstr "Neptuno"
 
-#: src/lib/marble/PlanetFactory.cpp:247
+#: src/lib/marble/PlanetFactory.cpp:238
 msgctxt "QObject|the planet"
 msgid "Pluto"
 msgstr "Plutão"
 
-#: src/lib/marble/PlanetFactory.cpp:250
+#: src/lib/marble/PlanetFactory.cpp:241
 msgctxt "QObject|the earth's star"
 msgid "Sun"
 msgstr "Sol"
 
-#: src/lib/marble/PlanetFactory.cpp:252
+#: src/lib/marble/PlanetFactory.cpp:243
 msgctxt "QObject|the earth's moon"
 msgid "Moon"
 msgstr "Lua"
 
-#: src/lib/marble/PlanetFactory.cpp:254
+#: src/lib/marble/PlanetFactory.cpp:245
 msgctxt "QObject|"
 msgid "Sky"
 msgstr "Céu"
 
-#: src/lib/marble/PlanetFactory.cpp:257
+#: src/lib/marble/PlanetFactory.cpp:248
 msgctxt "QObject|a planet without data"
 msgid "Unknown Planet"
 msgstr "Planeta Desconhecido"
@@ -11680,184 +11685,184 @@ msgctxt "QObject|"
 msgid "Enter the roundabout."
 msgstr "Entre na rotunda."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:258
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:257
 msgctxt "QObject|"
 msgid "Take the exit."
 msgstr "Siga pela saída."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:260
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:259
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the exit towards %1."
 msgstr "Siga pela saída para %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:264
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:263
 msgctxt "QObject|"
 msgid "Take the ramp."
 msgstr "Siga pela rampa."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:266
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:265
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the ramp towards %1."
 msgstr "Siga pela rampa para %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:322
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:321
 #, qt-format
 msgctxt "QObject|"
 msgid "Follow the road for %1 %2."
 msgstr "Siga a estrada para a %1 %2."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:376
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:375
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the %1. exit in the roundabout."
 msgstr "Tome a %1. saída na rotunda."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:378
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:377
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the %1. exit in the roundabout into %2."
 msgstr "Tome a %1. saída na rotunda para %2."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:386
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:385
 msgctxt "QObject|"
 msgid "Continue."
 msgstr "Prossiga."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:388
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:387
 msgctxt "QObject|"
 msgid "Merge."
 msgstr "Junte-se."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:390
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:389
 msgctxt "QObject|"
 msgid "Turn around."
 msgstr "Contorne."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:392
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:391
 msgctxt "QObject|"
 msgid "Turn sharp left."
 msgstr "Vire na curva apertada à esquerda."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:394
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:393
 msgctxt "QObject|"
 msgid "Turn left."
 msgstr "Vire à esquerda."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:396
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:395
 msgctxt "QObject|"
 msgid "Keep slightly left."
 msgstr "Siga ligeiramente à esquerda."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:398
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:397
 msgctxt "QObject|"
 msgid "Go straight ahead."
 msgstr "Siga em frente."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:400
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:399
 msgctxt "QObject|"
 msgid "Keep slightly right."
 msgstr "Siga ligeiramente à direita."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:402
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:401
 msgctxt "QObject|"
 msgid "Turn right."
 msgstr "Vire à direita."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:404
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:403
 msgctxt "QObject|"
 msgid "Turn sharp right."
 msgstr "Vire na curva apertada à direita."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:406
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:405
 msgctxt "QObject|"
 msgid "Exit the roundabout."
 msgstr "Saia da rotunda."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:414
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:413
 msgctxt "QObject|"
 msgid "Take the exit to the left."
 msgstr "Tome a saída à esquerda."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:416
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:415
 msgctxt "QObject|"
 msgid "Take the exit to the right."
 msgstr "Tome a saída à direita."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:421
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:420
 #, qt-format
 msgctxt "QObject|"
 msgid "Continue onto %1."
 msgstr "Prossiga para %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:423
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:422
 #, qt-format
 msgctxt "QObject|"
 msgid "Merge onto %1."
 msgstr "Junte-se a %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:425
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:424
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn around onto %1."
 msgstr "Contorne para %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:427
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:426
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn sharp left on %1."
 msgstr "Curva apertada à esquerda em %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:429
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:428
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn left into %1."
 msgstr "Curva à esquerda para %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:431
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:430
 #, qt-format
 msgctxt "QObject|"
 msgid "Keep slightly left on %1."
 msgstr "Curva ligeira à esquerda em %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:433
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:432
 #, qt-format
 msgctxt "QObject|"
 msgid "Continue on %1."
 msgstr "Prossiga em %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:435
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:434
 #, qt-format
 msgctxt "QObject|"
 msgid "Keep slightly right on %1."
 msgstr "Curva ligeira à direita em %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:437
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:436
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn right into %1."
 msgstr "Curva à direita para %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:439
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:438
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn sharp right into %1."
 msgstr "Curva apertada à direita em %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:441
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:440
 #, qt-format
 msgctxt "QObject|"
 msgid "Exit the roundabout into %2."
 msgstr "Saia da rotunda para %2."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:449
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:448
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the exit to the left onto %1."
 msgstr "Tome a saída à esquerda para %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:451
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:450
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the exit to the right onto %1."
@@ -11940,13 +11945,13 @@ msgctxt "Marble::RoutingLayer|"
 msgid "GPX and KML files (*.gpx *.kml)"
 msgstr "Ficheiros GPX e KML (*.gpx *.kml)"
 
-#: src/lib/marble/routing/RoutingManager.cpp:510
+#: src/lib/marble/routing/RoutingManager.cpp:508
 msgctxt "Marble::RoutingManager|"
 msgid "Caution: Driving instructions may be incomplete or wrong."
 msgstr ""
 "Atenção: As instruções de condução poderão estar incompletas ou incorrectas."
 
-#: src/lib/marble/routing/RoutingManager.cpp:511
+#: src/lib/marble/routing/RoutingManager.cpp:509
 msgctxt "Marble::RoutingManager|"
 msgid ""
 "Road construction, weather and other unforeseen variables can result in the "
@@ -11957,23 +11962,23 @@ msgstr ""
 "imprevisíveis poderão resultar em que este trajecto sugerido não seja o mais "
 "rápido ou o mais seguro para o seu destino."
 
-#: src/lib/marble/routing/RoutingManager.cpp:513
+#: src/lib/marble/routing/RoutingManager.cpp:511
 msgctxt "Marble::RoutingManager|"
 msgid "Please use common sense while navigating."
 msgstr "Use por favor o senso comum durante a navegação."
 
-#: src/lib/marble/routing/RoutingManager.cpp:514
+#: src/lib/marble/routing/RoutingManager.cpp:512
 msgctxt "Marble::RoutingManager|"
 msgid "The Marble development team wishes you a pleasant and safe journey."
 msgstr ""
 "A equipa de desenvolvimento do Marble deseja-lhe uma boa e segura viagem."
 
-#: src/lib/marble/routing/RoutingManager.cpp:515
+#: src/lib/marble/routing/RoutingManager.cpp:513
 msgctxt "Marble::RoutingManager|"
 msgid "Guidance Mode"
 msgstr "Modo de Condução"
 
-#: src/lib/marble/routing/RoutingManager.cpp:516
+#: src/lib/marble/routing/RoutingManager.cpp:514
 msgctxt "Marble::RoutingManager|"
 msgid "Show again"
 msgstr "Mostrar de novo"
@@ -12283,6 +12288,14 @@ msgstr "Resultados da Procura"
 msgctxt "QObject|"
 msgid "Search for '%1'"
 msgstr "Procurar por '%1'"
+
+#: src/lib/marble/SoundCueEditWidget.cpp:37
+#, fuzzy
+#| msgctxt "OsmRelationManagerWidgetPrivate|"
+#| msgid "Add Relation"
+msgctxt "Marble::SoundCueEditWidget|"
+msgid "Audio location"
+msgstr "Adicionar a Relação"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:67
 msgctxt "Marble::SoundCueEditWidget|"

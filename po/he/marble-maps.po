@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-04 00:36+0000\n"
-"PO-Revision-Date: 2024-09-21 10:37+0300\n"
+"PO-Revision-Date: 2024-10-22 23:24+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -25,21 +25,21 @@ msgstr ""
 "X-Qt-Contexts: true\n"
 
 #: Bookmarks.qml:20
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title:window"
 msgid "Bookmarks"
-msgstr "ייצא מפה"
+msgstr "סימניות"
 
 #: Bookmarks.qml:69
 #, kde-format
 msgid "Your bookmarks will appear here."
-msgstr ""
+msgstr "הסימניות שלך תופענה כאן"
 
 #. i18n: ectx: label, entry (MapThemeId), group (General)
 #: config.kcfg:14
 #, kde-format
 msgid "The marble theme id"
-msgstr ""
+msgstr "מזהה ערכת עיצוב של marble"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:20
@@ -49,15 +49,13 @@ msgstr "הגדרת פקד השליטה על השמש"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:23
-#, fuzzy, kde-format
+#, kde-format
 msgid "Car"
-msgstr "&חפש"
+msgstr "מכונית"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:26 ProfileSelectorMenu.qml:134
-#, fuzzy, kde-format
-#| msgctxt "Marble::RoutinoConfigWidget|"
-#| msgid "Bicycle"
+#, kde-format
 msgid "Bicycle"
 msgstr "אופניים"
 
@@ -65,92 +63,90 @@ msgstr "אופניים"
 #: config.kcfg:29 ProfileSelectorMenu.qml:144
 #, kde-format
 msgid "Pedestrian"
-msgstr ""
+msgstr "הולך רגל"
 
 #: CurrentPosition.qml:54
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@option:check"
 msgid "Follow Current Position"
-msgstr "מיקום נוכחי"
+msgstr "מעקב אחר המקום הנוכחי"
 
 #: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
-#, fuzzy, kde-format
+#, kde-format
 msgid "Marble Maps"
-msgstr "יוצר מפה"
+msgstr "Marble Maps"
 
 #: main.cpp:44
-#, fuzzy, kde-format
+#, kde-format
 msgid "Maps"
-msgstr "&עריכה"
+msgstr "מפות"
 
 #: main.cpp:46
 #, kde-format
 msgid "© KDE Community"
-msgstr ""
+msgstr "© קהילת KDE"
 
 #: main.cpp:52
 #, kde-format
 msgid "Carl Schwan"
-msgstr ""
+msgstr "קארל שוואן"
 
 #: main.cpp:53
-#, fuzzy, kde-format
+#, kde-format
 msgid "Developer"
-msgstr "כותב מקורי, מפתח ומתחזק"
+msgstr "מפתח"
 
 #: main.cpp:58
-#, fuzzy, kde-format
-#| msgctxt "Marble::YoursPlugin|"
-#| msgid "Yours"
+#, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "שלך"
+msgstr "צוות התרגום של KDE ישראל"
 
 #: main.cpp:58
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "הצג רשת"
+msgstr "kde-l10n-he@kde.org"
 
 #: MainScreen.qml:87
-#, fuzzy, kde-format
+#, kde-format
 msgid "Public Transport"
-msgstr "שם חלופי"
+msgstr "תחבורה ציבורית"
 
 #: MainScreen.qml:102
 #, kde-format
 msgid "Outdoor Activities"
-msgstr ""
+msgstr "פעילויות חוץ"
 
 #: MainScreen.qml:114
 #, kde-format
 msgctxt "@action:button"
 msgid "Accessibility"
-msgstr ""
+msgstr "נגישות"
 
 #: MainScreen.qml:123
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@action:button"
 msgid "About"
-msgstr "&אודות"
+msgstr "על אודות"
 
 #: MainScreen.qml:134
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@action:button"
 msgid "Bookmarks"
-msgstr "ייצא מפה"
+msgstr "סימניות"
 
 #: MainScreen.qml:145
 #, kde-format
 msgctxt "@action:button"
 msgid "Layer Options"
-msgstr ""
+msgstr "אפשרויות שכבה"
 
 #: MainScreen.qml:156
 #, kde-format
 msgctxt "@action:button"
 msgid "Theme Options"
-msgstr ""
+msgstr "אפשרויות ערכת עיצוב"
 
 #: MainScreen.qml:167
 #, fuzzy, kde-format
@@ -158,80 +154,80 @@ msgid "Routing"
 msgstr "הר"
 
 #: MainScreen.qml:457
-#, fuzzy, kde-format
+#, kde-format
 msgid "%1 km"
-msgstr "%1 מ'"
+msgstr "%1 ק״מ"
 
 #: NavigationInfoBar.qml:20
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "distance in km"
 msgid "%1 km"
-msgstr "%1 מ'"
+msgstr "%1 ק״מ"
 
 #: NavigationInfoBar.qml:22
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "distance in m"
 msgid "%1 m"
-msgstr "%1 מ'"
+msgstr "%1 מ׳"
 
 #: NavigationInfoBar.qml:24
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "distance in m with decimals"
 msgid "%1 m"
-msgstr "%1 מ'"
+msgstr "%1 מ׳"
 
 #: Options.qml:20
 #, kde-format
 msgctxt "@title:window"
 msgid "Layer Options"
-msgstr ""
+msgstr "אפשרויות שכבה"
 
 #: Options.qml:23
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title:group"
 msgid "Public Transport Layers"
-msgstr "שם חלופי"
+msgstr "שכבות תחבורה ציבורית"
 
 #: Options.qml:28
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@option:check"
 msgid "Train"
-msgstr "פני שטח"
+msgstr "רכבת"
 
 #: Options.qml:35
 #, kde-format
 msgctxt "@option:check"
 msgid "Subway"
-msgstr ""
+msgstr "רכבת תחתית"
 
 #: Options.qml:42
 #, kde-format
 msgctxt "@option:check"
 msgid "Tram"
-msgstr ""
+msgstr "חשמלית"
 
 #: Options.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Bus"
-msgstr ""
+msgstr "אוטובוס"
 
 #: Options.qml:56
 #, kde-format
 msgctxt "@option:check"
 msgid "Trolley Bus"
-msgstr ""
+msgstr "טרוליבוס"
 
 #: Options.qml:64
 #, kde-format
 msgid "Outdoor Activities Layers"
-msgstr ""
+msgstr "שכבות פעילויות חוץ"
 
 #: Options.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Walkways"
-msgstr ""
+msgstr "שבילי הליכה"
 
 #: Options.qml:76
 #, fuzzy, kde-format
@@ -240,16 +236,16 @@ msgid "Hiking Routes"
 msgstr "ייצא מפה"
 
 #: Options.qml:83
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@option:check"
 msgid "Bicycle Routes"
-msgstr "עקוב אחר GPS"
+msgstr "מסלולי אופניים"
 
 #: Options.qml:90
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@option:check"
 msgid "Mountainbike Routes"
-msgstr "הר"
+msgstr "מסלולי אופני הרים"
 
 #: Options.qml:97
 #, fuzzy, kde-format
@@ -264,67 +260,67 @@ msgid "Bridleways"
 msgstr "גבולות"
 
 #: PlacemarkDialog.qml:48
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "placeholder"
 msgid "No Name"
-msgstr "שם"
+msgstr "אין שם"
 
 #: PlacemarkDialog.qml:168
 #, kde-format
 msgctxt "@title:group"
 msgid "Tags:"
-msgstr ""
+msgstr "תגיות:"
 
 #: ProfileSelectorMenu.qml:124
-#, fuzzy, kde-format
+#, kde-format
 msgid "Car (fastest)"
-msgstr "0 מ' (מים)"
+msgstr "מכונית (המהיר ביותר)"
 
 #: RouteEditorPage.qml:19
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title"
 msgid "Routing"
-msgstr "הר"
+msgstr ""
 
 #: RouteEditorPage.qml:102
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Departure:"
-msgstr "FITemplate"
+msgstr "יציאה:"
 
 #: RouteEditorPage.qml:104
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Arrival:"
-msgstr ""
+msgstr "הגעה:"
 
 #: RouteEditorPage.qml:106
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Waypoint:"
-msgstr ""
+msgstr "נק׳ דרך:"
 
 #: RouteEditorPage.qml:194
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Alternatives:"
-msgstr "שם חלופי"
+msgstr "חלופות:"
 
 #: SettingsDialog.qml:48
-#, fuzzy, kde-format
+#, kde-format
 msgid "Network Settings"
-msgstr "&הגדרות"
+msgstr "הגדרות רשת"
 
 #: SettingsDialog.qml:53
-#, fuzzy, kde-format
+#, kde-format
 msgid "Download Maps via WLAN only"
-msgstr "ההורדה הסתיימה."
+msgstr "להוריד מפות דרך רשת אלחוטית בלבד"
 
 #: ThemeConfigPage.qml:19
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title:window"
 msgid "Themes"
-msgstr "ער&כת נושא"
+msgstr "ערכות עיצוב"
 
 #, fuzzy
 #~ msgctxt "DGML|"
