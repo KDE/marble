@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-06 00:37+0000\n"
+"POT-Creation-Date: 2024-10-25 00:37+0000\n"
 "PO-Revision-Date: 2021-10-18 16:48+0200\n"
 "Last-Translator: J.J.H. Woldringh <jjhwoldringh@kde.nl>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
@@ -656,53 +656,53 @@ msgstr "ID's van tegels tonen"
 msgid "Show time spent in each layer"
 msgstr "Toon de besteedde tijd in elke laag"
 
-#: kdemain.cpp:251
+#: kdemain.cpp:252
 #, kde-format
 msgid "Use a different directory <directory> which contains map data."
 msgstr "Gebruik een andere map <directory> die kaartgegevens bevat"
 
-#: kdemain.cpp:253
+#: kdemain.cpp:255
 #, kde-format
 msgid "Do not use the interface optimized for small screens"
 msgstr "Gebruik niet de interface voor kleine schermen"
 
-#: kdemain.cpp:254
+#: kdemain.cpp:256
 #, kde-format
 msgid "Use the interface optimized for small screens"
 msgstr "Gebruik de interface voor kleine schermen"
 
-#: kdemain.cpp:256
+#: kdemain.cpp:258
 #, kde-format
 msgid "Do not use the interface optimized for high resolutions"
 msgstr "Gebruik niet de interface voor hoge resolutie"
 
-#: kdemain.cpp:257
+#: kdemain.cpp:259
 #, kde-format
 msgid "Use the interface optimized for high resolutions"
 msgstr "Gebruik de interface voor hoge resolutie"
 
-#: kdemain.cpp:259
+#: kdemain.cpp:261
 #, kde-format
 msgid "Show map at given lat lon <coordinates>"
 msgstr "Toon kaart voor opgegeven breedte lengte <coordinates>"
 
-#: kdemain.cpp:261
+#: kdemain.cpp:263
 #, kde-format
 msgid "Show map at given geo <uri>"
 msgstr "Toon kaart voor opgegeven geo  <uri>"
 
-#: kdemain.cpp:263
+#: kdemain.cpp:265
 #, kde-format
 msgid "Set the distance of the observer to the globe (in km)"
 msgstr "Stel hoogte boven de globe in van de waarnemer (in km)"
 
-#: kdemain.cpp:265
+#: kdemain.cpp:267
 #, kde-format
 msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgstr ""
 "Gebruik <id> van de kaart (bv. \"earth/openstreetmap/openstreetmap.dgml\")"
 
-#: kdemain.cpp:267
+#: kdemain.cpp:269
 #, kde-format
 msgid "One or more placemark files to be opened"
 msgstr "Een of meer te openen bestanden met plaatsmarkeringen"
@@ -1121,67 +1121,67 @@ msgstr "&Opslaan stoppen"
 msgid "Stop recording a movie of the globe"
 msgstr "Het opslaan van een film van de aardbol stoppen"
 
-#: marble_part.cpp:1202
+#: marble_part.cpp:1203
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Position"
 msgstr "Locatie tonen"
 
-#: marble_part.cpp:1203
+#: marble_part.cpp:1204
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Date and Time"
 msgstr "Datum en tijd tonen"
 
-#: marble_part.cpp:1204
+#: marble_part.cpp:1205
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Altitude"
 msgstr "Hoogte tonen"
 
-#: marble_part.cpp:1205
+#: marble_part.cpp:1206
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Tile Zoom Level"
 msgstr "Tegel-zoomniveau tonen"
 
-#: marble_part.cpp:1206
+#: marble_part.cpp:1207
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Download Progress Bar"
 msgstr "Download-voortgangsbalk tonen"
 
-#: marble_part.cpp:1297
+#: marble_part.cpp:1298
 #, kde-format
 msgid "View"
 msgstr "Beeld"
 
-#: marble_part.cpp:1308
+#: marble_part.cpp:1309
 #, kde-format
 msgid "Navigation"
 msgstr "Navigatie"
 
-#: marble_part.cpp:1318
+#: marble_part.cpp:1319
 #, kde-format
 msgid "Cache & Proxy"
 msgstr "Cache & Proxy"
 
-#: marble_part.cpp:1328
+#: marble_part.cpp:1329
 #, kde-format
 msgid "Date & Time"
 msgstr "Datum &Tijd"
 
-#: marble_part.cpp:1336
+#: marble_part.cpp:1337
 #, kde-format
 msgid "Synchronization"
 msgstr "Synchroniseren"
 
-#: marble_part.cpp:1346
+#: marble_part.cpp:1347
 #, kde-format
 msgid "Routing"
 msgstr "Routering"
 
-#: marble_part.cpp:1354
+#: marble_part.cpp:1355
 #, kde-format
 msgid "Plugins"
 msgstr "Plug-ins"

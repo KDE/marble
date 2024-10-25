@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-06 00:37+0000\n"
+"POT-Creation-Date: 2024-10-25 00:37+0000\n"
 "PO-Revision-Date: 2014-09-18 16:24+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -652,56 +652,56 @@ msgstr "IDs wiesen"
 msgid "Show time spent in each layer"
 msgstr "Tiet för elk Laag wiesen"
 
-#: kdemain.cpp:251
+#: kdemain.cpp:252
 #, fuzzy, kde-format
 #| msgid "Use a different directory which contains map data"
 msgid "Use a different directory <directory> which contains map data."
 msgstr "En anner Orner för de Koortendaten bruken"
 
-#: kdemain.cpp:253
+#: kdemain.cpp:255
 #, kde-format
 msgid "Do not use the interface optimized for small screens"
 msgstr "De för lütte Schirmen topasste Koppelsteed nich bruken"
 
-#: kdemain.cpp:254
+#: kdemain.cpp:256
 #, kde-format
 msgid "Use the interface optimized for small screens"
 msgstr "De för lütte Schirmen topasste Koppelsteed bruken"
 
-#: kdemain.cpp:256
+#: kdemain.cpp:258
 #, kde-format
 msgid "Do not use the interface optimized for high resolutions"
 msgstr "De för hoge Oplösen topasste Koppelsteed nich bruken"
 
-#: kdemain.cpp:257
+#: kdemain.cpp:259
 #, kde-format
 msgid "Use the interface optimized for high resolutions"
 msgstr "De för hoge Oplösen topasste Koppelsteed bruken"
 
-#: kdemain.cpp:259
+#: kdemain.cpp:261
 #, fuzzy, kde-format
 #| msgid "Show map at given lat lon coordinates"
 msgid "Show map at given lat lon <coordinates>"
 msgstr "Koort för angeven klassch Koordinaten wiesen"
 
-#: kdemain.cpp:261
+#: kdemain.cpp:263
 #, fuzzy, kde-format
 #| msgid "Show map at given geo uri"
 msgid "Show map at given geo <uri>"
 msgstr "Koort för angeven Geo-URI wiesen"
 
-#: kdemain.cpp:263
+#: kdemain.cpp:265
 #, kde-format
 msgid "Set the distance of the observer to the globe (in km)"
 msgstr "Den Kiekafstand to den Eerball (in km) angeven"
 
-#: kdemain.cpp:265
+#: kdemain.cpp:267
 #, fuzzy, kde-format
 #| msgid "Use map id (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgstr "Koortbeteker bruken (a.B. „earth/openstreetmap/openstreetmap.dgml“)"
 
-#: kdemain.cpp:267
+#: kdemain.cpp:269
 #, kde-format
 msgid "One or more placemark files to be opened"
 msgstr "Een oder mehr Steedmark-Dateien, de Du opmaken wullt"
@@ -1125,67 +1125,67 @@ msgstr ""
 msgid "Stop recording a movie of the globe"
 msgstr ""
 
-#: marble_part.cpp:1202
+#: marble_part.cpp:1203
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Position"
 msgstr "Steed wiesen"
 
-#: marble_part.cpp:1203
+#: marble_part.cpp:1204
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Date and Time"
 msgstr "Datum un Tiet wiesen"
 
-#: marble_part.cpp:1204
+#: marble_part.cpp:1205
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Altitude"
 msgstr "Hööchde wiesen"
 
-#: marble_part.cpp:1205
+#: marble_part.cpp:1206
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Tile Zoom Level"
 msgstr "Kachel-Ansichtgrött wiesen"
 
-#: marble_part.cpp:1206
+#: marble_part.cpp:1207
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Download Progress Bar"
 msgstr "Daallaad-Vörankamenbalken wiesen"
 
-#: marble_part.cpp:1297
+#: marble_part.cpp:1298
 #, kde-format
 msgid "View"
 msgstr "Ansicht"
 
-#: marble_part.cpp:1308
+#: marble_part.cpp:1309
 #, kde-format
 msgid "Navigation"
 msgstr "Navigatschoon"
 
-#: marble_part.cpp:1318
+#: marble_part.cpp:1319
 #, kde-format
 msgid "Cache & Proxy"
 msgstr "Twischenspieker un Proxy"
 
-#: marble_part.cpp:1328
+#: marble_part.cpp:1329
 #, kde-format
 msgid "Date & Time"
 msgstr "Datum un Tiet"
 
-#: marble_part.cpp:1336
+#: marble_part.cpp:1337
 #, kde-format
 msgid "Synchronization"
 msgstr "Synkroniseren"
 
-#: marble_part.cpp:1346
+#: marble_part.cpp:1347
 #, kde-format
 msgid "Routing"
 msgstr "Weegplanen"
 
-#: marble_part.cpp:1354
+#: marble_part.cpp:1355
 #, kde-format
 msgid "Plugins"
 msgstr "Modulen"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-06 00:37+0000\n"
+"POT-Creation-Date: 2024-10-25 00:37+0000\n"
 "PO-Revision-Date: 2013-11-01 23:04+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -648,57 +648,57 @@ msgstr "Тор көзінің ID-і көрсетілсін"
 msgid "Show time spent in each layer"
 msgstr "Әр қабатта жұмсаған уақытын көрсету"
 
-#: kdemain.cpp:251
+#: kdemain.cpp:252
 #, fuzzy, kde-format
 #| msgid "Use a different directory which contains map data"
 msgid "Use a different directory <directory> which contains map data."
 msgstr "Басқа карта дерегінің қапшығы пайдалансын "
 
-#: kdemain.cpp:253
+#: kdemain.cpp:255
 #, kde-format
 msgid "Do not use the interface optimized for small screens"
 msgstr "Интерфейсі шағын экрандарға ыңғайланған болмасын"
 
-#: kdemain.cpp:254
+#: kdemain.cpp:256
 #, kde-format
 msgid "Use the interface optimized for small screens"
 msgstr "Интерфейсі шағын экрандарға ыңғайланған болсын"
 
-#: kdemain.cpp:256
+#: kdemain.cpp:258
 #, kde-format
 msgid "Do not use the interface optimized for high resolutions"
 msgstr "Интерфейсі жоғары айырымдылыққа ыңғайланған болмасын"
 
-#: kdemain.cpp:257
+#: kdemain.cpp:259
 #, kde-format
 msgid "Use the interface optimized for high resolutions"
 msgstr "Интерфейсі жоғары айырымдылыққа ыңғайланған болсын"
 
-#: kdemain.cpp:259
+#: kdemain.cpp:261
 #, fuzzy, kde-format
 #| msgid "Show map at given lat lon coordinates"
 msgid "Show map at given lat lon <coordinates>"
 msgstr "Келтірілген координаттарды картада көрсету"
 
-#: kdemain.cpp:261
+#: kdemain.cpp:263
 #, fuzzy, kde-format
 #| msgid "Show map at given lat lon coordinates"
 msgid "Show map at given geo <uri>"
 msgstr "Келтірілген координаттарды картада көрсету"
 
-#: kdemain.cpp:263
+#: kdemain.cpp:265
 #, kde-format
 msgid "Set the distance of the observer to the globe (in km)"
 msgstr "Қарау қашықтығын (километрлеп) келтіріңіз"
 
-#: kdemain.cpp:265
+#: kdemain.cpp:267
 #, fuzzy, kde-format
 #| msgid "Use map id (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgstr ""
 "Картаның ID-ін пайдалану (мысалы: \"earth/openstreetmap/openstreetmap.dgml\")"
 
-#: kdemain.cpp:267
+#: kdemain.cpp:269
 #, kde-format
 msgid "One or more placemark files to be opened"
 msgstr "Бір не бірнеше ашатын орындар атаулар файлы"
@@ -1119,67 +1119,67 @@ msgstr ""
 msgid "Stop recording a movie of the globe"
 msgstr ""
 
-#: marble_part.cpp:1202
+#: marble_part.cpp:1203
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Position"
 msgstr "Орынын көрсету"
 
-#: marble_part.cpp:1203
+#: marble_part.cpp:1204
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Date and Time"
 msgstr "Күн мен уақытты көрсету"
 
-#: marble_part.cpp:1204
+#: marble_part.cpp:1205
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Altitude"
 msgstr "Биіктігін көрсету"
 
-#: marble_part.cpp:1205
+#: marble_part.cpp:1206
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Tile Zoom Level"
 msgstr "Тор көзін масштабын көрсету"
 
-#: marble_part.cpp:1206
+#: marble_part.cpp:1207
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Download Progress Bar"
 msgstr "Жүктеу барысын көрсету"
 
-#: marble_part.cpp:1297
+#: marble_part.cpp:1298
 #, kde-format
 msgid "View"
 msgstr "Көрініс"
 
-#: marble_part.cpp:1308
+#: marble_part.cpp:1309
 #, kde-format
 msgid "Navigation"
 msgstr "Шарлау"
 
-#: marble_part.cpp:1318
+#: marble_part.cpp:1319
 #, kde-format
 msgid "Cache & Proxy"
 msgstr "Кэш пен прокси"
 
-#: marble_part.cpp:1328
+#: marble_part.cpp:1329
 #, kde-format
 msgid "Date & Time"
 msgstr "Күн мен уақыт"
 
-#: marble_part.cpp:1336
+#: marble_part.cpp:1337
 #, kde-format
 msgid "Synchronization"
 msgstr "Қадамдастыру"
 
-#: marble_part.cpp:1346
+#: marble_part.cpp:1347
 #, kde-format
 msgid "Routing"
 msgstr "Маршрутизация"
 
-#: marble_part.cpp:1354
+#: marble_part.cpp:1355
 #, kde-format
 msgid "Plugins"
 msgstr "Плагиндер"

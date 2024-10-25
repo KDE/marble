@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble-gu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-06 00:37+0000\n"
+"POT-Creation-Date: 2024-10-25 00:37+0000\n"
 "PO-Revision-Date: 2009-10-20 20:58+0530\n"
 "Last-Translator: pragnesh radadiya <pg.radadia@gmail.com>\n"
 "Language-Team: Gujarati <kde-i18n-doc@kde.org>\n"
@@ -648,52 +648,52 @@ msgstr "જગ્યાઓ બતાવો"
 msgid "Show time spent in each layer"
 msgstr ""
 
-#: kdemain.cpp:251
+#: kdemain.cpp:252
 #, kde-format
 msgid "Use a different directory <directory> which contains map data."
 msgstr ""
 
-#: kdemain.cpp:253
+#: kdemain.cpp:255
 #, kde-format
 msgid "Do not use the interface optimized for small screens"
 msgstr ""
 
-#: kdemain.cpp:254
+#: kdemain.cpp:256
 #, kde-format
 msgid "Use the interface optimized for small screens"
 msgstr ""
 
-#: kdemain.cpp:256
+#: kdemain.cpp:258
 #, kde-format
 msgid "Do not use the interface optimized for high resolutions"
 msgstr ""
 
-#: kdemain.cpp:257
+#: kdemain.cpp:259
 #, kde-format
 msgid "Use the interface optimized for high resolutions"
 msgstr ""
 
-#: kdemain.cpp:259
+#: kdemain.cpp:261
 #, kde-format
 msgid "Show map at given lat lon <coordinates>"
 msgstr ""
 
-#: kdemain.cpp:261
+#: kdemain.cpp:263
 #, kde-format
 msgid "Show map at given geo <uri>"
 msgstr ""
 
-#: kdemain.cpp:263
+#: kdemain.cpp:265
 #, kde-format
 msgid "Set the distance of the observer to the globe (in km)"
 msgstr ""
 
-#: kdemain.cpp:265
+#: kdemain.cpp:267
 #, kde-format
 msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgstr ""
 
-#: kdemain.cpp:267
+#: kdemain.cpp:269
 #, kde-format
 msgid "One or more placemark files to be opened"
 msgstr ""
@@ -1120,69 +1120,69 @@ msgstr ""
 msgid "Stop recording a movie of the globe"
 msgstr ""
 
-#: marble_part.cpp:1202
+#: marble_part.cpp:1203
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Position"
 msgstr "સ્થિતિ બતાવો"
 
-#: marble_part.cpp:1203
+#: marble_part.cpp:1204
 #, fuzzy, kde-format
 #| msgid "Show frame rate"
 msgctxt "Action for toggling"
 msgid "Show Date and Time"
 msgstr "ચોકઠાં દર દર્શાવો"
 
-#: marble_part.cpp:1204
+#: marble_part.cpp:1205
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Altitude"
 msgstr "ઉંચાઇ બતાવો"
 
-#: marble_part.cpp:1205
+#: marble_part.cpp:1206
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Tile Zoom Level"
 msgstr ""
 
-#: marble_part.cpp:1206
+#: marble_part.cpp:1207
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Download Progress Bar"
 msgstr "ડાઉનલોડ પ્રગતિ પટ્ટી બતાવો"
 
-#: marble_part.cpp:1297
+#: marble_part.cpp:1298
 #, kde-format
 msgid "View"
 msgstr "દેખાવ"
 
-#: marble_part.cpp:1308
+#: marble_part.cpp:1309
 #, kde-format
 msgid "Navigation"
 msgstr "શોધખોળ"
 
-#: marble_part.cpp:1318
+#: marble_part.cpp:1319
 #, kde-format
 msgid "Cache & Proxy"
 msgstr "કૅશ અને પ્રોક્સી"
 
-#: marble_part.cpp:1328
+#: marble_part.cpp:1329
 #, fuzzy, kde-format
 #| msgid "&Time"
 msgid "Date & Time"
 msgstr "સમય (&T)"
 
-#: marble_part.cpp:1336
+#: marble_part.cpp:1337
 #, kde-format
 msgid "Synchronization"
 msgstr ""
 
-#: marble_part.cpp:1346
+#: marble_part.cpp:1347
 #, kde-format
 msgid "Routing"
 msgstr "રાઉટિંગ"
 
-#: marble_part.cpp:1354
+#: marble_part.cpp:1355
 #, kde-format
 msgid "Plugins"
 msgstr "પ્લગઇન્સ"

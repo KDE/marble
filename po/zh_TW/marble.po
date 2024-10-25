@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-06 00:37+0000\n"
+"POT-Creation-Date: 2024-10-25 00:37+0000\n"
 "PO-Revision-Date: 2024-07-18 03:08+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -650,52 +650,52 @@ msgstr "顯示鋪排代碼"
 msgid "Show time spent in each layer"
 msgstr "顯示每一層花費的時間"
 
-#: kdemain.cpp:251
+#: kdemain.cpp:252
 #, kde-format
 msgid "Use a different directory <directory> which contains map data."
 msgstr "包含地圖資料時使用不同的目錄 <directory>"
 
-#: kdemain.cpp:253
+#: kdemain.cpp:255
 #, kde-format
 msgid "Do not use the interface optimized for small screens"
 msgstr "不要使用為小螢幕最佳化過的介面"
 
-#: kdemain.cpp:254
+#: kdemain.cpp:256
 #, kde-format
 msgid "Use the interface optimized for small screens"
 msgstr "使用為小螢幕最佳化過的介面"
 
-#: kdemain.cpp:256
+#: kdemain.cpp:258
 #, kde-format
 msgid "Do not use the interface optimized for high resolutions"
 msgstr "不要使用為高解析度螢幕最佳化過的介面"
 
-#: kdemain.cpp:257
+#: kdemain.cpp:259
 #, kde-format
 msgid "Use the interface optimized for high resolutions"
 msgstr "使用為高解析度螢幕最佳化過的介面"
 
-#: kdemain.cpp:259
+#: kdemain.cpp:261
 #, kde-format
 msgid "Show map at given lat lon <coordinates>"
 msgstr "顯示指定經緯度座標 <coordinates> 的地圖"
 
-#: kdemain.cpp:261
+#: kdemain.cpp:263
 #, kde-format
 msgid "Show map at given geo <uri>"
 msgstr "顯示指定地理網址 <uri> 的地圖"
 
-#: kdemain.cpp:263
+#: kdemain.cpp:265
 #, kde-format
 msgid "Set the distance of the observer to the globe (in km)"
 msgstr "設定觀測者的距離（公里）"
 
-#: kdemain.cpp:265
+#: kdemain.cpp:267
 #, kde-format
 msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgstr "使用地圖代碼 <id> （如 \"earth/openstreetmap/openstreetmap.dgml\"）"
 
-#: kdemain.cpp:267
+#: kdemain.cpp:269
 #, kde-format
 msgid "One or more placemark files to be opened"
 msgstr "要開啟的地標檔"
@@ -1108,67 +1108,67 @@ msgstr "停止錄影(&S)"
 msgid "Stop recording a movie of the globe"
 msgstr "停止錄製地球的影片"
 
-#: marble_part.cpp:1202
+#: marble_part.cpp:1203
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Position"
 msgstr "顯示位置"
 
-#: marble_part.cpp:1203
+#: marble_part.cpp:1204
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Date and Time"
 msgstr "顯示日期與時間"
 
-#: marble_part.cpp:1204
+#: marble_part.cpp:1205
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Altitude"
 msgstr "顯示高度"
 
-#: marble_part.cpp:1205
+#: marble_part.cpp:1206
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Tile Zoom Level"
 msgstr "顯示鋪排縮放等級"
 
-#: marble_part.cpp:1206
+#: marble_part.cpp:1207
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Download Progress Bar"
 msgstr "顯示下載進度列"
 
-#: marble_part.cpp:1297
+#: marble_part.cpp:1298
 #, kde-format
 msgid "View"
 msgstr "檢視"
 
-#: marble_part.cpp:1308
+#: marble_part.cpp:1309
 #, kde-format
 msgid "Navigation"
 msgstr "導覽"
 
-#: marble_part.cpp:1318
+#: marble_part.cpp:1319
 #, kde-format
 msgid "Cache & Proxy"
 msgstr "快取與代理伺服器"
 
-#: marble_part.cpp:1328
+#: marble_part.cpp:1329
 #, kde-format
 msgid "Date & Time"
 msgstr "日期與時間"
 
-#: marble_part.cpp:1336
+#: marble_part.cpp:1337
 #, kde-format
 msgid "Synchronization"
 msgstr "同步化"
 
-#: marble_part.cpp:1346
+#: marble_part.cpp:1347
 #, kde-format
 msgid "Routing"
 msgstr "路徑"
 
-#: marble_part.cpp:1354
+#: marble_part.cpp:1355
 #, kde-format
 msgid "Plugins"
 msgstr "外掛程式"

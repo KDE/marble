@@ -15,7 +15,7 @@ msgid_plural "There is a limit of %n tile(s) to download."
 msgstr[0] "There is a limit of %n tile to download."
 msgstr[1] "There is a limit of %n tiles to download."
 
-#: ../src/lib/marble/declarative/Placemark.cpp:95
+#: ../src/lib/marble/declarative/Placemark.cpp:93
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%n rooms"
@@ -23,7 +23,7 @@ msgid_plural "%n rooms"
 msgstr[0] "%n room"
 msgstr[1] "%n rooms"
 
-#: ../src/lib/marble/declarative/Placemark.cpp:101
+#: ../src/lib/marble/declarative/Placemark.cpp:99
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%n beds"
@@ -31,7 +31,7 @@ msgid_plural "%n beds"
 msgstr[0] "%n bed"
 msgstr[1] "%n beds"
 
-#: ../src/lib/marble/declarative/Placemark.cpp:354
+#: ../src/lib/marble/declarative/Placemark.cpp:344
 #, qt-format
 msgctxt "Marble::Placemark|number of seats a bench provides"
 msgid "%n seats"

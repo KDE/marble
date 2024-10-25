@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-06 00:37+0000\n"
+"POT-Creation-Date: 2024-10-25 00:37+0000\n"
 "PO-Revision-Date: 2022-06-11 22:03+0700\n"
 "Last-Translator: Linerly <linerly@protonmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -644,52 +644,52 @@ msgstr "Tampilkan ID ubin"
 msgid "Show time spent in each layer"
 msgstr "Tampilkan waktu yang dihabiskan dalam setiap lapisan"
 
-#: kdemain.cpp:251
+#: kdemain.cpp:252
 #, kde-format
 msgid "Use a different directory <directory> which contains map data."
 msgstr "Gunakan direktori <directory> yang berbeda, yang berisi data peta."
 
-#: kdemain.cpp:253
+#: kdemain.cpp:255
 #, kde-format
 msgid "Do not use the interface optimized for small screens"
 msgstr "Jangan gunakan antarmuka yang dioptimalkan untuk perangkat ponsel"
 
-#: kdemain.cpp:254
+#: kdemain.cpp:256
 #, kde-format
 msgid "Use the interface optimized for small screens"
 msgstr "Gunakan antarmuka yang dioptimalkan untuk layar kecil"
 
-#: kdemain.cpp:256
+#: kdemain.cpp:258
 #, kde-format
 msgid "Do not use the interface optimized for high resolutions"
 msgstr "Jangan gunakan antarmuka yang dioptimalkan untuk resolusi tinggi"
 
-#: kdemain.cpp:257
+#: kdemain.cpp:259
 #, kde-format
 msgid "Use the interface optimized for high resolutions"
 msgstr "Gunakan antarmuka yang dioptimalkan untuk resolusi tinggi"
 
-#: kdemain.cpp:259
+#: kdemain.cpp:261
 #, kde-format
 msgid "Show map at given lat lon <coordinates>"
 msgstr "Tampilkan peta pada garis lintas dan garis bujur <coordinates>"
 
-#: kdemain.cpp:261
+#: kdemain.cpp:263
 #, kde-format
 msgid "Show map at given geo <uri>"
 msgstr "Tampilkan pada geo <uri>"
 
-#: kdemain.cpp:263
+#: kdemain.cpp:265
 #, kde-format
 msgid "Set the distance of the observer to the globe (in km)"
 msgstr "Tetapkan jarak observer ke globe (dalam km)"
 
-#: kdemain.cpp:265
+#: kdemain.cpp:267
 #, kde-format
 msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgstr "Gunakan peta <id> (mis. \"earth/openstreetmap/openstreetmap.dgml\")"
 
-#: kdemain.cpp:267
+#: kdemain.cpp:269
 #, kde-format
 msgid "One or more placemark files to be opened"
 msgstr "Satu file markah tempat atau lebih yang akan dibuka"
@@ -1104,67 +1104,67 @@ msgstr "&Berhenti Merekam"
 msgid "Stop recording a movie of the globe"
 msgstr "Berhenti merekam sebuah film dari globe"
 
-#: marble_part.cpp:1202
+#: marble_part.cpp:1203
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Position"
 msgstr "Tampilkan Posisi"
 
-#: marble_part.cpp:1203
+#: marble_part.cpp:1204
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Date and Time"
 msgstr "Tampilkan Tanggal dan Waktu"
 
-#: marble_part.cpp:1204
+#: marble_part.cpp:1205
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Altitude"
 msgstr "Tampilkan Ketinggian"
 
-#: marble_part.cpp:1205
+#: marble_part.cpp:1206
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Tile Zoom Level"
 msgstr "Tampilkan Tingkat Perbesaran Ubin"
 
-#: marble_part.cpp:1206
+#: marble_part.cpp:1207
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Download Progress Bar"
 msgstr "Tampilkan Bilah Progres Unduhan"
 
-#: marble_part.cpp:1297
+#: marble_part.cpp:1298
 #, kde-format
 msgid "View"
 msgstr "Tampilan"
 
-#: marble_part.cpp:1308
+#: marble_part.cpp:1309
 #, kde-format
 msgid "Navigation"
 msgstr "Navigasi"
 
-#: marble_part.cpp:1318
+#: marble_part.cpp:1319
 #, kde-format
 msgid "Cache & Proxy"
 msgstr "Cache & Proxy"
 
-#: marble_part.cpp:1328
+#: marble_part.cpp:1329
 #, kde-format
 msgid "Date & Time"
 msgstr "Tanggal & Waktu"
 
-#: marble_part.cpp:1336
+#: marble_part.cpp:1337
 #, kde-format
 msgid "Synchronization"
 msgstr "Sinkronisasi"
 
-#: marble_part.cpp:1346
+#: marble_part.cpp:1347
 #, kde-format
 msgid "Routing"
 msgstr "Perutean"
 
-#: marble_part.cpp:1354
+#: marble_part.cpp:1355
 #, kde-format
 msgid "Plugins"
 msgstr "Plugin"

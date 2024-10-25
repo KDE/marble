@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-06 00:37+0000\n"
+"POT-Creation-Date: 2024-10-25 00:37+0000\n"
 "PO-Revision-Date: 2012-07-20 10:58+0700\n"
 "Last-Translator: Sok Sophea <sophea@khmeros.info>\n"
 "Language-Team: Khmer <>\n"
@@ -656,56 +656,56 @@ msgstr "បង្ហាញ​លេខ​សម្គាល់​ក្រឡា
 msgid "Show time spent in each layer"
 msgstr ""
 
-#: kdemain.cpp:251
+#: kdemain.cpp:252
 #, fuzzy, kde-format
 #| msgid "Use a different directory which contains map data"
 msgid "Use a different directory <directory> which contains map data."
 msgstr "ប្រើ​ថត​ផ្សេងគ្នា​ដែល​មាន​ទិន្នន័យ​ផែនទី"
 
-#: kdemain.cpp:253
+#: kdemain.cpp:255
 #, kde-format
 msgid "Do not use the interface optimized for small screens"
 msgstr "កុំ​ប្រើ​ចំណុចប្រទាក់​គុណភាព​ខ្ពស់​សម្រាប់​អេក្រង់​តូច"
 
-#: kdemain.cpp:254
+#: kdemain.cpp:256
 #, kde-format
 msgid "Use the interface optimized for small screens"
 msgstr "​ប្រើ​ចំណុចប្រទាក់​គុណភាព​ខ្ពស់​សម្រាប់​អេក្រង់​តូច"
 
-#: kdemain.cpp:256
+#: kdemain.cpp:258
 #, kde-format
 msgid "Do not use the interface optimized for high resolutions"
 msgstr "កុំ​​ប្រើ​ចំណុចប្រទាក់​គុណភាព​ខ្ពស់​សម្រាប់​គុណភាព​បង្ហាញ​ខ្ពស់"
 
-#: kdemain.cpp:257
+#: kdemain.cpp:259
 #, kde-format
 msgid "Use the interface optimized for high resolutions"
 msgstr "ប្រើ​ចំណុចប្រទាក់​គុណភាព​ខ្ពស់​សម្រាប់​គុណភាព​បង្ហាញ​ខ្ពស់"
 
-#: kdemain.cpp:259
+#: kdemain.cpp:261
 #, fuzzy, kde-format
 #| msgid "Show map at given lat lon coordinates"
 msgid "Show map at given lat lon <coordinates>"
 msgstr "បង្ហាញ​ផែនទី​នៅ​កូអរដោណេ​រយៈទទឹង​ និង​រយៈបណ្ដោយ"
 
-#: kdemain.cpp:261
+#: kdemain.cpp:263
 #, fuzzy, kde-format
 #| msgid "Show map at given lat lon coordinates"
 msgid "Show map at given geo <uri>"
 msgstr "បង្ហាញ​ផែនទី​នៅ​កូអរដោណេ​រយៈទទឹង​ និង​រយៈបណ្ដោយ"
 
-#: kdemain.cpp:263
+#: kdemain.cpp:265
 #, kde-format
 msgid "Set the distance of the observer to the globe (in km)"
 msgstr "កំណត់​ចម្ងាយ​របស់​អ្នក​សង្កេតការណ៍​ទៅ​សាកល (គិតជា​គ.ម.)"
 
-#: kdemain.cpp:265
+#: kdemain.cpp:267
 #, fuzzy, kde-format
 #| msgid "Use map id (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgstr "ប្រើ​លេខ​សម្គាល់​ផែនទី (ឧ. \"earth/openstreetmap/openstreetmap.dgml\")"
 
-#: kdemain.cpp:267
+#: kdemain.cpp:269
 #, kde-format
 msgid "One or more placemark files to be opened"
 msgstr "ឯកសារ​សញ្ញា​សម្គាល់​កន្លែង​មួយ ឬ​ច្រើន​ដែល​ត្រូវ​បើក"
@@ -1126,68 +1126,68 @@ msgstr ""
 msgid "Stop recording a movie of the globe"
 msgstr ""
 
-#: marble_part.cpp:1202
+#: marble_part.cpp:1203
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Position"
 msgstr "បង្ហាញ​ទីតាំង"
 
-#: marble_part.cpp:1203
+#: marble_part.cpp:1204
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Date and Time"
 msgstr "បង្ហាញ​ពេលវេលា និង​កាលបរិច្ឆេទ"
 
-#: marble_part.cpp:1204
+#: marble_part.cpp:1205
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Altitude"
 msgstr "បង្ហាញ​រយៈ​កម្ពស់"
 
-#: marble_part.cpp:1205
+#: marble_part.cpp:1206
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Tile Zoom Level"
 msgstr "បង្ហាញ​កម្រិត​ពង្រីក​ក្រឡាក្បឿង"
 
-#: marble_part.cpp:1206
+#: marble_part.cpp:1207
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Download Progress Bar"
 msgstr "បង្ហាញ​របារ​វឌ្ឍភាព​ទាញយក"
 
-#: marble_part.cpp:1297
+#: marble_part.cpp:1298
 #, kde-format
 msgid "View"
 msgstr "មើល"
 
-#: marble_part.cpp:1308
+#: marble_part.cpp:1309
 #, kde-format
 msgid "Navigation"
 msgstr "ការ​រុករក"
 
-#: marble_part.cpp:1318
+#: marble_part.cpp:1319
 #, kde-format
 msgid "Cache & Proxy"
 msgstr "ឃ្លាំង​សម្ងាត់ និង​ប្រូកស៊ី"
 
-#: marble_part.cpp:1328
+#: marble_part.cpp:1329
 #, kde-format
 msgid "Date & Time"
 msgstr "ពេលវេលា និង​កាលបរច្ឆេទ"
 
-#: marble_part.cpp:1336
+#: marble_part.cpp:1337
 #, kde-format
 msgid "Synchronization"
 msgstr ""
 
-#: marble_part.cpp:1346
+#: marble_part.cpp:1347
 #, fuzzy, kde-format
 #| msgid "Route"
 msgid "Routing"
 msgstr "ផ្លូវ"
 
-#: marble_part.cpp:1354
+#: marble_part.cpp:1355
 #, kde-format
 msgid "Plugins"
 msgstr "កម្មវិធី​ជំនួយ"

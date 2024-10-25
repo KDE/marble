@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-06 00:37+0000\n"
+"POT-Creation-Date: 2024-10-25 00:37+0000\n"
 "PO-Revision-Date: 2013-01-12 05:02+0200\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -664,57 +664,57 @@ msgstr "Arată ID-urile dalelor"
 msgid "Show time spent in each layer"
 msgstr ""
 
-#: kdemain.cpp:251
+#: kdemain.cpp:252
 #, fuzzy, kde-format
 #| msgid "Use a different directory which contains map data"
 msgid "Use a different directory <directory> which contains map data."
 msgstr "Folosește un director diferit care conține date pentru hartă"
 
-#: kdemain.cpp:253
+#: kdemain.cpp:255
 #, kde-format
 msgid "Do not use the interface optimized for small screens"
 msgstr "Nu folosi interfața optimizată pentru ecrane mici"
 
-#: kdemain.cpp:254
+#: kdemain.cpp:256
 #, kde-format
 msgid "Use the interface optimized for small screens"
 msgstr "Folosește interfața optimizată pentru ecrane mici"
 
-#: kdemain.cpp:256
+#: kdemain.cpp:258
 #, kde-format
 msgid "Do not use the interface optimized for high resolutions"
 msgstr "Nu folosi interfața optimizată pentru rezoluții mari"
 
-#: kdemain.cpp:257
+#: kdemain.cpp:259
 #, kde-format
 msgid "Use the interface optimized for high resolutions"
 msgstr "Folosește interfața optimizată pentru rezoluții mari"
 
-#: kdemain.cpp:259
+#: kdemain.cpp:261
 #, fuzzy, kde-format
 #| msgid "Show map at given lat lon coordinates"
 msgid "Show map at given lat lon <coordinates>"
 msgstr "Arată hartă la coordonatele lat lon date"
 
-#: kdemain.cpp:261
+#: kdemain.cpp:263
 #, fuzzy, kde-format
 #| msgid "Show map at given lat lon coordinates"
 msgid "Show map at given geo <uri>"
 msgstr "Arată hartă la coordonatele lat lon date"
 
-#: kdemain.cpp:263
+#: kdemain.cpp:265
 #, kde-format
 msgid "Set the distance of the observer to the globe (in km)"
 msgstr "Setați distanța observatorului față de glob (în km)"
 
-#: kdemain.cpp:265
+#: kdemain.cpp:267
 #, fuzzy, kde-format
 #| msgid "Use map id (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgstr ""
 "Folosește id hartă (de exemplu \"earth/openstreetmap/openstreetmap.dgml\")"
 
-#: kdemain.cpp:267
+#: kdemain.cpp:269
 #, kde-format
 msgid "One or more placemark files to be opened"
 msgstr "Una sau mai multe fișiere placemark de deschis"
@@ -1141,67 +1141,67 @@ msgstr ""
 msgid "Stop recording a movie of the globe"
 msgstr ""
 
-#: marble_part.cpp:1202
+#: marble_part.cpp:1203
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Position"
 msgstr "Arată poziția"
 
-#: marble_part.cpp:1203
+#: marble_part.cpp:1204
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Date and Time"
 msgstr "Arată data și ora"
 
-#: marble_part.cpp:1204
+#: marble_part.cpp:1205
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Altitude"
 msgstr "Arată altitudinea"
 
-#: marble_part.cpp:1205
+#: marble_part.cpp:1206
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Tile Zoom Level"
 msgstr "Arată nivelul de mărire a dalelor"
 
-#: marble_part.cpp:1206
+#: marble_part.cpp:1207
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Download Progress Bar"
 msgstr "Arată bara de progres al descărcărilor"
 
-#: marble_part.cpp:1297
+#: marble_part.cpp:1298
 #, kde-format
 msgid "View"
 msgstr "Vizualizare"
 
-#: marble_part.cpp:1308
+#: marble_part.cpp:1309
 #, kde-format
 msgid "Navigation"
 msgstr "Navigare"
 
-#: marble_part.cpp:1318
+#: marble_part.cpp:1319
 #, kde-format
 msgid "Cache & Proxy"
 msgstr "Cache și Proxy"
 
-#: marble_part.cpp:1328
+#: marble_part.cpp:1329
 #, kde-format
 msgid "Date & Time"
 msgstr "Data și ora"
 
-#: marble_part.cpp:1336
+#: marble_part.cpp:1337
 #, kde-format
 msgid "Synchronization"
 msgstr ""
 
-#: marble_part.cpp:1346
+#: marble_part.cpp:1347
 #, kde-format
 msgid "Routing"
 msgstr "Pod"
 
-#: marble_part.cpp:1354
+#: marble_part.cpp:1355
 #, kde-format
 msgid "Plugins"
 msgstr "Extensii"

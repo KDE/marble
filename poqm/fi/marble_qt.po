@@ -3543,7 +3543,7 @@ msgctxt "QObject|"
 msgid "Current Location"
 msgstr "Nykyinen sijainti"
 
-#: src/lib/marble/declarative/Placemark.cpp:95
+#: src/lib/marble/declarative/Placemark.cpp:93
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%n rooms"
@@ -3551,7 +3551,7 @@ msgid_plural "%n rooms"
 msgstr[0] "%n huone"
 msgstr[1] "%n huonetta"
 
-#: src/lib/marble/declarative/Placemark.cpp:101
+#: src/lib/marble/declarative/Placemark.cpp:99
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%n beds"
@@ -3559,357 +3559,357 @@ msgid_plural "%n beds"
 msgstr[0] "%n vuode"
 msgstr[1] "%n vuodetta"
 
-#: src/lib/marble/declarative/Placemark.cpp:107
+#: src/lib/marble/declarative/Placemark.cpp:105
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 parking spaces"
 msgstr "%1 pysäköintipaikkaa"
 
-#: src/lib/marble/declarative/Placemark.cpp:108
+#: src/lib/marble/declarative/Placemark.cpp:106
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Maximum parking time %1"
 msgstr "Pisin pysäköintiaika %1"
 
-#: src/lib/marble/declarative/Placemark.cpp:146
+#: src/lib/marble/declarative/Placemark.cpp:140
 msgctxt "Marble::Placemark|A copy shop provides computers for customer use"
 msgid "Computers available"
 msgstr "Tietokoneita käytettävissä"
 
-#: src/lib/marble/declarative/Placemark.cpp:150
+#: src/lib/marble/declarative/Placemark.cpp:144
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide computers for customer use"
 msgid "No computers available"
 msgstr "Ei tietokoneita käytettävissä"
 
-#: src/lib/marble/declarative/Placemark.cpp:154
+#: src/lib/marble/declarative/Placemark.cpp:148
 msgctxt "Marble::Placemark|A copy shop provides photocopying service"
 msgid "Photocopying service"
 msgstr "Kopiointipalvelu"
 
-#: src/lib/marble/declarative/Placemark.cpp:158
+#: src/lib/marble/declarative/Placemark.cpp:152
 msgctxt "Marble::Placemark|A copy shop does not provide photocopying service"
 msgid "No photocopying service"
 msgstr "Ei kopiointipalvelua"
 
-#: src/lib/marble/declarative/Placemark.cpp:162
+#: src/lib/marble/declarative/Placemark.cpp:156
 msgctxt ""
 "Marble::Placemark|A copy shop provides a service for scanning documents into "
 "digital files"
 msgid "Digital scanning"
 msgstr "Digikopiointi"
 
-#: src/lib/marble/declarative/Placemark.cpp:166
+#: src/lib/marble/declarative/Placemark.cpp:160
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a service for scanning "
 "documents into digital files"
 msgid "No digital scanning"
 msgstr "Ei digikopiointia"
 
-#: src/lib/marble/declarative/Placemark.cpp:170
+#: src/lib/marble/declarative/Placemark.cpp:164
 msgctxt ""
 "Marble::Placemark|A copy shop provides a service to send documents through "
 "fax"
 msgid "Fax service"
 msgstr "Faksipalvelu"
 
-#: src/lib/marble/declarative/Placemark.cpp:174
+#: src/lib/marble/declarative/Placemark.cpp:168
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a service to send documents "
 "through fax"
 msgid "No fax service"
 msgstr "Ei faksipalvelua"
 
-#: src/lib/marble/declarative/Placemark.cpp:178
+#: src/lib/marble/declarative/Placemark.cpp:172
 msgctxt ""
 "Marble::Placemark|A copy shop provides a paid service to make phone calls"
 msgid "Phone service"
 msgstr "Puhelinpalvelu"
 
-#: src/lib/marble/declarative/Placemark.cpp:182
+#: src/lib/marble/declarative/Placemark.cpp:176
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a paid service to make phone "
 "calls"
 msgid "No phone service"
 msgstr "Ei puhelinpalvelua"
 
-#: src/lib/marble/declarative/Placemark.cpp:186
+#: src/lib/marble/declarative/Placemark.cpp:180
 msgctxt ""
 "Marble::Placemark|A copy shop provides services to print paper documents "
 "from digital files"
 msgid "Digital printing"
 msgstr "Digitulostus"
 
-#: src/lib/marble/declarative/Placemark.cpp:190
+#: src/lib/marble/declarative/Placemark.cpp:184
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide services to print paper "
 "documents from digital files"
 msgid "No digital printing"
 msgstr "Ei digitulostusta"
 
-#: src/lib/marble/declarative/Placemark.cpp:194
+#: src/lib/marble/declarative/Placemark.cpp:188
 msgctxt ""
 "Marble::Placemark|A copy shop provides a professional service to print a "
 "large number of copies of a document"
 msgid "Press printing service"
 msgstr "Tulostuspalvelu"
 
-#: src/lib/marble/declarative/Placemark.cpp:199
+#: src/lib/marble/declarative/Placemark.cpp:193
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a professional service to "
 "print a large number of copies of a document"
 msgid "No press printing service"
 msgstr "Ei tulostuspalvelua"
 
-#: src/lib/marble/declarative/Placemark.cpp:203
+#: src/lib/marble/declarative/Placemark.cpp:197
 msgctxt ""
 "Marble::Placemark|A copy shop provides help with preparing special printing "
 "techniques"
 msgid "Press printing assistance"
 msgstr "Tulostusavustus"
 
-#: src/lib/marble/declarative/Placemark.cpp:207
+#: src/lib/marble/declarative/Placemark.cpp:201
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide help with preparing special "
 "printing techniques"
 msgid "No press printing assistance"
 msgstr "Ei tulostusavustusta"
 
-#: src/lib/marble/declarative/Placemark.cpp:211
+#: src/lib/marble/declarative/Placemark.cpp:205
 msgctxt ""
 "Marble::Placemark|A copy shop provides individual copy machines for self-"
 "service"
 msgid "Self service"
 msgstr "Itsepalvelu"
 
-#: src/lib/marble/declarative/Placemark.cpp:215
+#: src/lib/marble/declarative/Placemark.cpp:209
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide individual machines for self-"
 "service"
 msgid " No self service"
 msgstr "Ei itsepalvelua"
 
-#: src/lib/marble/declarative/Placemark.cpp:217
+#: src/lib/marble/declarative/Placemark.cpp:211
 msgctxt "Marble::Placemark|A deli that sells organic food"
 msgid "Sells organic food"
 msgstr "Myy luomuruokaa"
 
-#: src/lib/marble/declarative/Placemark.cpp:221
+#: src/lib/marble/declarative/Placemark.cpp:215
 msgctxt "Marble::Placemark|A deli that does not sell organic food"
 msgid "Does not sell organic food"
 msgstr "Ei myy luomuruokaa"
 
-#: src/lib/marble/declarative/Placemark.cpp:225
+#: src/lib/marble/declarative/Placemark.cpp:219
 msgctxt "Marble::Placemark|A deli that only sells organic food"
 msgid "Only sells organic food"
 msgstr "Myy vain luomuruokaa"
 
-#: src/lib/marble/declarative/Placemark.cpp:230
+#: src/lib/marble/declarative/Placemark.cpp:224
 msgctxt "Marble::Placemark|A deli that sells gluten free food"
 msgid "Sells gluten free food"
 msgstr "Myy gluteenitonta ruokaa"
 
-#: src/lib/marble/declarative/Placemark.cpp:234
+#: src/lib/marble/declarative/Placemark.cpp:228
 msgctxt "Marble::Placemark|A deli that does not sell gluten free food"
 msgid "Does not sell gluten free food"
 msgstr "Ei myy gluteenitonta ruokaa"
 
-#: src/lib/marble/declarative/Placemark.cpp:238
+#: src/lib/marble/declarative/Placemark.cpp:232
 msgctxt "Marble::Placemark|A deli that only sells gluten free food"
 msgid "Only sells gluten free food"
 msgstr "Myy vain gluteenitonta ruokaa"
 
-#: src/lib/marble/declarative/Placemark.cpp:243
+#: src/lib/marble/declarative/Placemark.cpp:237
 msgctxt "Marble::Placemark|A deli that sells lactose free food"
 msgid "Sells lactose free food"
 msgstr "Myy laktoositonta ruokaa"
 
-#: src/lib/marble/declarative/Placemark.cpp:247
+#: src/lib/marble/declarative/Placemark.cpp:241
 msgctxt "Marble::Placemark|A deli that does not sell lactose free food"
 msgid "Does not sell lactose free food"
 msgstr "Ei myy laktoositonta ruokaa"
 
-#: src/lib/marble/declarative/Placemark.cpp:251
+#: src/lib/marble/declarative/Placemark.cpp:245
 msgctxt "Marble::Placemark|A deli that only sells lactose free food"
 msgid "Only sells lactose free food"
 msgstr "Myy vain laktoositonta ruokaa"
 
-#: src/lib/marble/declarative/Placemark.cpp:256
+#: src/lib/marble/declarative/Placemark.cpp:250
 msgctxt "Marble::Placemark|A tobacco shop that also sells lottery tickets"
 msgid "Sells lottery tickets"
 msgstr "Myy lottoarpoja"
 
-#: src/lib/marble/declarative/Placemark.cpp:260
+#: src/lib/marble/declarative/Placemark.cpp:254
 msgctxt "Marble::Placemark|A tobacco shop that also sells revenue stamps"
 msgid "Sells revenue stamps"
 msgstr "Myy leimamerkkejä"
 
-#: src/lib/marble/declarative/Placemark.cpp:261
+#: src/lib/marble/declarative/Placemark.cpp:255
 msgctxt "Marble::Placemark|A tobacco shop that also sells salt"
 msgid "Sells salt"
 msgstr "Myy suolaa"
 
-#: src/lib/marble/declarative/Placemark.cpp:280
+#: src/lib/marble/declarative/Placemark.cpp:270
 msgctxt "Marble::Placemark|"
 msgid "Diesel"
 msgstr "Diesel"
 
-#: src/lib/marble/declarative/Placemark.cpp:281
+#: src/lib/marble/declarative/Placemark.cpp:271
 msgctxt "Marble::Placemark|"
 msgid "Biodiesel"
 msgstr "Biodiesel"
 
-#: src/lib/marble/declarative/Placemark.cpp:282
+#: src/lib/marble/declarative/Placemark.cpp:272
 msgctxt "Marble::Placemark|"
 msgid "Octane 91"
 msgstr "Oktaani 91"
 
-#: src/lib/marble/declarative/Placemark.cpp:283
+#: src/lib/marble/declarative/Placemark.cpp:273
 msgctxt "Marble::Placemark|"
 msgid "Octane 95"
 msgstr "Oktaani 95"
 
-#: src/lib/marble/declarative/Placemark.cpp:284
+#: src/lib/marble/declarative/Placemark.cpp:274
 msgctxt "Marble::Placemark|"
 msgid "Octane 98"
 msgstr "Oktaani 98"
 
-#: src/lib/marble/declarative/Placemark.cpp:285
+#: src/lib/marble/declarative/Placemark.cpp:275
 msgctxt "Marble::Placemark|"
 msgid "Octane 100"
 msgstr "Oktaani 100"
 
-#: src/lib/marble/declarative/Placemark.cpp:286
+#: src/lib/marble/declarative/Placemark.cpp:276
 msgctxt "Marble::Placemark|"
 msgid "E10"
 msgstr "E10"
 
-#: src/lib/marble/declarative/Placemark.cpp:287
+#: src/lib/marble/declarative/Placemark.cpp:277
 msgctxt "Marble::Placemark|"
 msgid "LPG"
 msgstr "Nestekaasu"
 
-#: src/lib/marble/declarative/Placemark.cpp:295
+#: src/lib/marble/declarative/Placemark.cpp:285
 msgctxt "Marble::Placemark|"
 msgid "Batteries"
 msgstr "Paristot"
 
-#: src/lib/marble/declarative/Placemark.cpp:296
+#: src/lib/marble/declarative/Placemark.cpp:286
 msgctxt "Marble::Placemark|"
 msgid "Clothes"
 msgstr "Vaatteet"
 
-#: src/lib/marble/declarative/Placemark.cpp:297
+#: src/lib/marble/declarative/Placemark.cpp:287
 msgctxt "Marble::Placemark|"
 msgid "Glass"
 msgstr "Lasi"
 
-#: src/lib/marble/declarative/Placemark.cpp:298
+#: src/lib/marble/declarative/Placemark.cpp:288
 msgctxt "Marble::Placemark|"
 msgid "Glass bottles"
 msgstr "Lasipullot"
 
-#: src/lib/marble/declarative/Placemark.cpp:299
+#: src/lib/marble/declarative/Placemark.cpp:289
 msgctxt "Marble::Placemark|"
 msgid "Green waste"
 msgstr "Biojäte"
 
-#: src/lib/marble/declarative/Placemark.cpp:300
+#: src/lib/marble/declarative/Placemark.cpp:290
 msgctxt "Marble::Placemark|"
 msgid "Garden waste"
 msgstr "Puutarhajäte"
 
-#: src/lib/marble/declarative/Placemark.cpp:301
+#: src/lib/marble/declarative/Placemark.cpp:291
 msgctxt "Marble::Placemark|"
 msgid "Electrical items"
 msgstr "Sähkölaitteet"
 
-#: src/lib/marble/declarative/Placemark.cpp:302
+#: src/lib/marble/declarative/Placemark.cpp:292
 msgctxt "Marble::Placemark|"
 msgid "Metal"
 msgstr "Metalli"
 
-#: src/lib/marble/declarative/Placemark.cpp:303
+#: src/lib/marble/declarative/Placemark.cpp:293
 msgctxt "Marble::Placemark|"
 msgid "Mobile phones"
 msgstr "Matkapuhelimet"
 
-#: src/lib/marble/declarative/Placemark.cpp:304
+#: src/lib/marble/declarative/Placemark.cpp:294
 msgctxt "Marble::Placemark|"
 msgid "Newspaper"
 msgstr "Sanomalehti"
 
-#: src/lib/marble/declarative/Placemark.cpp:305
+#: src/lib/marble/declarative/Placemark.cpp:295
 msgctxt "Marble::Placemark|"
 msgid "Paint"
 msgstr "Maali"
 
-#: src/lib/marble/declarative/Placemark.cpp:306
+#: src/lib/marble/declarative/Placemark.cpp:296
 msgctxt "Marble::Placemark|"
 msgid "Paper"
 msgstr "Paperi"
 
-#: src/lib/marble/declarative/Placemark.cpp:307
+#: src/lib/marble/declarative/Placemark.cpp:297
 msgctxt "Marble::Placemark|"
 msgid "Paper packaging"
 msgstr "Paperipakkaus"
 
-#: src/lib/marble/declarative/Placemark.cpp:308
+#: src/lib/marble/declarative/Placemark.cpp:298
 msgctxt "Marble::Placemark|"
 msgid "PET"
 msgstr "PET"
 
-#: src/lib/marble/declarative/Placemark.cpp:309
+#: src/lib/marble/declarative/Placemark.cpp:299
 msgctxt "Marble::Placemark|"
 msgid "Plastic"
 msgstr "Muovi"
 
-#: src/lib/marble/declarative/Placemark.cpp:310
+#: src/lib/marble/declarative/Placemark.cpp:300
 msgctxt "Marble::Placemark|"
 msgid "Plastic bags"
 msgstr "Muovipussit"
 
-#: src/lib/marble/declarative/Placemark.cpp:311
+#: src/lib/marble/declarative/Placemark.cpp:301
 msgctxt "Marble::Placemark|"
 msgid "Plastic bottles"
 msgstr "Muovipullot"
 
-#: src/lib/marble/declarative/Placemark.cpp:312
+#: src/lib/marble/declarative/Placemark.cpp:302
 msgctxt "Marble::Placemark|"
 msgid "Plastic packaging"
 msgstr "Muovipakkaukset"
 
-#: src/lib/marble/declarative/Placemark.cpp:313
+#: src/lib/marble/declarative/Placemark.cpp:303
 msgctxt "Marble::Placemark|"
 msgid "Polyester"
 msgstr "Polyesteri"
 
-#: src/lib/marble/declarative/Placemark.cpp:314
+#: src/lib/marble/declarative/Placemark.cpp:304
 msgctxt "Marble::Placemark|"
 msgid "Tyres"
 msgstr "Renkaat"
 
-#: src/lib/marble/declarative/Placemark.cpp:315
+#: src/lib/marble/declarative/Placemark.cpp:305
 msgctxt "Marble::Placemark|"
 msgid "Waste"
 msgstr "Jäte"
 
-#: src/lib/marble/declarative/Placemark.cpp:316
+#: src/lib/marble/declarative/Placemark.cpp:306
 msgctxt "Marble::Placemark|"
 msgid "White goods"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:317
+#: src/lib/marble/declarative/Placemark.cpp:307
 msgctxt "Marble::Placemark|"
 msgid "Wood"
 msgstr "Puu"
 
-#: src/lib/marble/declarative/Placemark.cpp:319
+#: src/lib/marble/declarative/Placemark.cpp:309
 msgctxt "Marble::Placemark|An active volcano"
 msgid "Active"
 msgstr "Aktiivinen"
 
-#: src/lib/marble/declarative/Placemark.cpp:323
+#: src/lib/marble/declarative/Placemark.cpp:313
 msgctxt ""
 "Marble::Placemark|A dormant volcano that will erupt at some point in the "
 "future."
@@ -3917,111 +3917,111 @@ msgid "Dormant"
 msgstr "Lepotilainen"
 
 # Google Translaten mukaan ”extinct volcano” on todella ”kuollut tulivuori”, uskoako?
-#: src/lib/marble/declarative/Placemark.cpp:327
+#: src/lib/marble/declarative/Placemark.cpp:317
 msgctxt ""
 "Marble::Placemark|A volcano considered extinct, it has not erupted within "
 "the last 10000 years and likely never will again."
 msgid "Extinct"
 msgstr "Kuollut"
 
-#: src/lib/marble/declarative/Placemark.cpp:328
+#: src/lib/marble/declarative/Placemark.cpp:318
 msgctxt "Marble::Placemark|"
 msgid "Stratovolcano"
 msgstr "Kerrostulivuori"
 
-#: src/lib/marble/declarative/Placemark.cpp:329
+#: src/lib/marble/declarative/Placemark.cpp:319
 msgctxt "Marble::Placemark|"
 msgid "Shield volcano"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:330
+#: src/lib/marble/declarative/Placemark.cpp:320
 msgctxt "Marble::Placemark|A scoria cone volcano."
 msgid "Scoria cone"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:332
+#: src/lib/marble/declarative/Placemark.cpp:322
 msgctxt "Marble::Placemark|"
 msgid "Alternative medicine"
 msgstr "Vaihtoehtolääkintä"
 
-#: src/lib/marble/declarative/Placemark.cpp:333
+#: src/lib/marble/declarative/Placemark.cpp:323
 msgctxt "Marble::Placemark|"
 msgid "Audiologist"
 msgstr "Kuulotutkimus"
 
-#: src/lib/marble/declarative/Placemark.cpp:334
+#: src/lib/marble/declarative/Placemark.cpp:324
 msgctxt "Marble::Placemark|"
 msgid "Blood bank"
 msgstr "Veripankki"
 
-#: src/lib/marble/declarative/Placemark.cpp:335
+#: src/lib/marble/declarative/Placemark.cpp:325
 msgctxt "Marble::Placemark|"
 msgid "Blood donation"
 msgstr "Verenluovutus"
 
-#: src/lib/marble/declarative/Placemark.cpp:336
+#: src/lib/marble/declarative/Placemark.cpp:326
 msgctxt "Marble::Placemark|"
 msgid "Medical center"
 msgstr "Lääkärikeskus"
 
-#: src/lib/marble/declarative/Placemark.cpp:337
+#: src/lib/marble/declarative/Placemark.cpp:327
 msgctxt "Marble::Placemark|"
 msgid "Clinic"
 msgstr "Klinikka"
 
-#: src/lib/marble/declarative/Placemark.cpp:338
+#: src/lib/marble/declarative/Placemark.cpp:328
 msgctxt "Marble::Placemark|"
 msgid "Dentist"
 msgstr "Hammaslääkäri"
 
-#: src/lib/marble/declarative/Placemark.cpp:339
+#: src/lib/marble/declarative/Placemark.cpp:329
 msgctxt "Marble::Placemark|"
 msgid "Medical practitioner"
 msgstr "Lääketieteen harjoittaja"
 
-#: src/lib/marble/declarative/Placemark.cpp:340
+#: src/lib/marble/declarative/Placemark.cpp:330
 msgctxt "Marble::Placemark|"
 msgid "Hospital"
 msgstr "Sairaala"
 
-#: src/lib/marble/declarative/Placemark.cpp:341
+#: src/lib/marble/declarative/Placemark.cpp:331
 msgctxt "Marble::Placemark|"
 msgid "Midwife"
 msgstr "Kätilö"
 
-#: src/lib/marble/declarative/Placemark.cpp:342
+#: src/lib/marble/declarative/Placemark.cpp:332
 msgctxt "Marble::Placemark|"
 msgid "Optometrist"
 msgstr "Optikko"
 
-#: src/lib/marble/declarative/Placemark.cpp:343
+#: src/lib/marble/declarative/Placemark.cpp:333
 msgctxt "Marble::Placemark|"
 msgid "Physiotherapist"
 msgstr "Fysioterapeutti"
 
-#: src/lib/marble/declarative/Placemark.cpp:344
+#: src/lib/marble/declarative/Placemark.cpp:334
 msgctxt "Marble::Placemark|"
 msgid "Podiatrist"
 msgstr "Jalkahoitaja"
 
-#: src/lib/marble/declarative/Placemark.cpp:345
+#: src/lib/marble/declarative/Placemark.cpp:335
 msgctxt "Marble::Placemark|"
 msgid "Psychotherapist"
 msgstr "Psykoterapeutti"
 
-#: src/lib/marble/declarative/Placemark.cpp:346
+#: src/lib/marble/declarative/Placemark.cpp:336
 #, fuzzy
 #| msgid "Relations"
 msgctxt "Marble::Placemark|"
 msgid "Rehabilitation"
 msgstr "Relaatiot"
 
-#: src/lib/marble/declarative/Placemark.cpp:347
+#: src/lib/marble/declarative/Placemark.cpp:337
 msgctxt "Marble::Placemark|"
 msgid "Speech therapist"
 msgstr "Puheterapeutti"
 
-#: src/lib/marble/declarative/Placemark.cpp:354
+#: src/lib/marble/declarative/Placemark.cpp:344
 #, qt-format
 msgctxt "Marble::Placemark|number of seats a bench provides"
 msgid "%n seats"
@@ -4029,768 +4029,768 @@ msgid_plural "%n seats"
 msgstr[0] "%n istumapaikka"
 msgstr[1] "%n istumapaikkaa"
 
-#: src/lib/marble/declarative/Placemark.cpp:360
+#: src/lib/marble/declarative/Placemark.cpp:350
 msgctxt "Marble::Placemark|A bench provides a backrest to lean against"
 msgid "Has backrest"
 msgstr "On selkänoja"
 
-#: src/lib/marble/declarative/Placemark.cpp:364
+#: src/lib/marble/declarative/Placemark.cpp:354
 msgctxt "Marble::Placemark|A bench provides no backrest to lean against"
 msgid "No backrest"
 msgstr "Ei selkänojaa"
 
-#: src/lib/marble/declarative/Placemark.cpp:368
+#: src/lib/marble/declarative/Placemark.cpp:358
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 km/h"
 msgstr "%1 km/t"
 
-#: src/lib/marble/declarative/Placemark.cpp:374
+#: src/lib/marble/declarative/Placemark.cpp:364
 msgctxt "Marble::Placemark|Parking spaces are supervised by guards"
 msgid "Is supervised"
 msgstr "Valvottu"
 
-#: src/lib/marble/declarative/Placemark.cpp:378
+#: src/lib/marble/declarative/Placemark.cpp:368
 msgctxt "Marble::Placemark|Parking spaces are not supervised by guards"
 msgid "Not supervised"
 msgstr "Ei valvottu"
 
-#: src/lib/marble/declarative/Placemark.cpp:382
+#: src/lib/marble/declarative/Placemark.cpp:372
 #, qt-format
 msgctxt "Marble::Placemark|Parking spaces"
 msgid "%1 disabled spaces"
 msgstr "%1 vammaispaikkaa"
 
-#: src/lib/marble/declarative/Placemark.cpp:386
+#: src/lib/marble/declarative/Placemark.cpp:376
 #, qt-format
 msgctxt "Marble::Placemark|Parking spaces"
 msgid "%1 women spaces"
 msgstr "%1 naisten paikkaa"
 
-#: src/lib/marble/declarative/Placemark.cpp:390
+#: src/lib/marble/declarative/Placemark.cpp:380
 #, qt-format
 msgctxt "Marble::Placemark|Parking spaces"
 msgid "%1 parent and child spaces"
 msgstr "%1 perhepaikkaa"
 
-#: src/lib/marble/declarative/Placemark.cpp:394
+#: src/lib/marble/declarative/Placemark.cpp:384
 #, qt-format
 msgctxt "Marble::Placemark|Parking spaces"
 msgid "%1 spaces with electric chargers"
 msgstr "%1 laturipaikkaa"
 
-#: src/lib/marble/declarative/Placemark.cpp:400
+#: src/lib/marble/declarative/Placemark.cpp:390
 msgctxt "Marble::Placemark|A parking space has outdoor surveillance"
 msgid "Has outdoor surveillance"
 msgstr "Ulkovalvonta"
 
-#: src/lib/marble/declarative/Placemark.cpp:404
+#: src/lib/marble/declarative/Placemark.cpp:394
 msgctxt "Marble::Placemark|A parking space has indoor surveillance"
 msgid "Has indoor surveillance"
 msgstr "Sisävalvonta"
 
-#: src/lib/marble/declarative/Placemark.cpp:408
+#: src/lib/marble/declarative/Placemark.cpp:398
 msgctxt "Marble::Placemark|A parking space has public surveillance"
 msgid "Has public surveillance"
 msgstr "Julkinen valvonta"
 
-#: src/lib/marble/declarative/Placemark.cpp:410
+#: src/lib/marble/declarative/Placemark.cpp:400
 msgctxt "Marble::Placemark|A hut provides showers inside or aside"
 msgid "Has shower"
 msgstr "Suihku"
 
-#: src/lib/marble/declarative/Placemark.cpp:414
+#: src/lib/marble/declarative/Placemark.cpp:404
 msgctxt "Marble::Placemark|A hut does not provide showers inside or aside"
 msgid "Has no shower"
 msgstr "Ei suihkua"
 
-#: src/lib/marble/declarative/Placemark.cpp:415
+#: src/lib/marble/declarative/Placemark.cpp:405
 msgctxt "Marble::Placemark|A hut provides mattress"
 msgid "Has mattress"
 msgstr "Patja"
 
-#: src/lib/marble/declarative/Placemark.cpp:416
+#: src/lib/marble/declarative/Placemark.cpp:406
 msgctxt "Marble::Placemark|A hut does not provide mattress"
 msgid "Has no mattress"
 msgstr "Ei patjaa"
 
-#: src/lib/marble/declarative/Placemark.cpp:417
+#: src/lib/marble/declarative/Placemark.cpp:407
 msgctxt "Marble::Placemark|Water is available inside or aside"
 msgid "Has water"
 msgstr "Vesi"
 
-#: src/lib/marble/declarative/Placemark.cpp:421
+#: src/lib/marble/declarative/Placemark.cpp:411
 msgctxt "Marble::Placemark|Water is not available inside nor aside"
 msgid "Has no water"
 msgstr "Ei vettä"
 
-#: src/lib/marble/declarative/Placemark.cpp:422
+#: src/lib/marble/declarative/Placemark.cpp:412
 msgctxt "Marble::Placemark|A hut provides toilets"
 msgid "Has toilets"
 msgstr "Vessa"
 
-#: src/lib/marble/declarative/Placemark.cpp:423
+#: src/lib/marble/declarative/Placemark.cpp:413
 msgctxt "Marble::Placemark|A hut does not provide toilets"
 msgid "Has no toilets"
 msgstr "Ei vessaa"
 
-#: src/lib/marble/declarative/Placemark.cpp:424
+#: src/lib/marble/declarative/Placemark.cpp:414
 msgctxt "Marble::Placemark|"
 msgid "Reservation is possible"
 msgstr "Varaus on mahdollista"
 
-#: src/lib/marble/declarative/Placemark.cpp:425
+#: src/lib/marble/declarative/Placemark.cpp:415
 msgctxt "Marble::Placemark|"
 msgid "No reservation possible"
 msgstr "Varaus ei ole mahdollista"
 
-#: src/lib/marble/declarative/Placemark.cpp:426
+#: src/lib/marble/declarative/Placemark.cpp:416
 msgctxt "Marble::Placemark|"
 msgid "Reservation is required"
 msgstr "Varaus vaaditaan"
 
-#: src/lib/marble/declarative/Placemark.cpp:430
+#: src/lib/marble/declarative/Placemark.cpp:420
 msgctxt "Marble::Placemark|You should make reservation"
 msgid "Reservation is recommended"
 msgstr "Suositellaan varaamaan"
 
-#: src/lib/marble/declarative/Placemark.cpp:434
+#: src/lib/marble/declarative/Placemark.cpp:424
 msgctxt ""
 "Marble::Placemark|Reservation is only possible for members of the "
 "organisation running the hut"
 msgid "Only for members"
 msgstr "Vain jäsenille"
 
-#: src/lib/marble/declarative/Placemark.cpp:436
+#: src/lib/marble/declarative/Placemark.cpp:426
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "By %1"
 msgstr "Tekijä: %1"
 
-#: src/lib/marble/declarative/Placemark.cpp:438
+#: src/lib/marble/declarative/Placemark.cpp:428
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 vehicles"
 msgstr "%1 ajoneuvoa"
 
-#: src/lib/marble/declarative/Placemark.cpp:439
+#: src/lib/marble/declarative/Placemark.cpp:429
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 ampere"
 msgstr "%1 ampeeria"
 
-#: src/lib/marble/declarative/Placemark.cpp:440
+#: src/lib/marble/declarative/Placemark.cpp:430
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 volt"
 msgstr "%1 volttia"
 
-#: src/lib/marble/declarative/Placemark.cpp:442
+#: src/lib/marble/declarative/Placemark.cpp:432
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 blue CEE sockets"
 msgstr "%1 sinistä CEE-pistorasiaa"
 
-#: src/lib/marble/declarative/Placemark.cpp:443
+#: src/lib/marble/declarative/Placemark.cpp:433
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 red CEE sockets (16 A)"
 msgstr "%1 punaista CEE-pistorasiaa (16 A)"
 
-#: src/lib/marble/declarative/Placemark.cpp:444
+#: src/lib/marble/declarative/Placemark.cpp:434
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 red CEE sockets (32 A)"
 msgstr "%1 punaista CEE-pistorasiaa (32 A)"
 
-#: src/lib/marble/declarative/Placemark.cpp:445
+#: src/lib/marble/declarative/Placemark.cpp:435
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 red CEE sockets (64 A)"
 msgstr "%1 punaista CEE-pistorasiaa (64 A)"
 
-#: src/lib/marble/declarative/Placemark.cpp:446
+#: src/lib/marble/declarative/Placemark.cpp:436
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 red CEE sockets (125 A)"
 msgstr "%1 punaista CEE-pistorasiaa (125 A)"
 
-#: src/lib/marble/declarative/Placemark.cpp:447
-#: src/lib/marble/declarative/Placemark.cpp:448
+#: src/lib/marble/declarative/Placemark.cpp:437
+#: src/lib/marble/declarative/Placemark.cpp:438
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 NEMA-5-15P plugs"
 msgstr "%1 NEMA-5-15P-pistoketta"
 
-#: src/lib/marble/declarative/Placemark.cpp:449
+#: src/lib/marble/declarative/Placemark.cpp:439
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 NEMA-5-20P plugs"
 msgstr "%1 NEMA-5-20P-pistoketta"
 
-#: src/lib/marble/declarative/Placemark.cpp:450
+#: src/lib/marble/declarative/Placemark.cpp:440
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 NEMA 14-30 sockets"
 msgstr "%1 NEMA 14-30 -pistoketta"
 
-#: src/lib/marble/declarative/Placemark.cpp:451
+#: src/lib/marble/declarative/Placemark.cpp:441
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 NEMA 14-50 sockets"
 msgstr "%1 NEMA 14-50 -pistoketta"
 
-#: src/lib/marble/declarative/Placemark.cpp:452
+#: src/lib/marble/declarative/Placemark.cpp:442
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Schuko sockets"
 msgstr "%1 Schuko-pistoketta"
 
-#: src/lib/marble/declarative/Placemark.cpp:453
+#: src/lib/marble/declarative/Placemark.cpp:443
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 BS 1363 sockets"
 msgstr "%1 BS 1363 -pistoketta"
 
-#: src/lib/marble/declarative/Placemark.cpp:454
+#: src/lib/marble/declarative/Placemark.cpp:444
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Type 1 plugs"
 msgstr "%1 tyypin 1 pistoketta"
 
-#: src/lib/marble/declarative/Placemark.cpp:455
+#: src/lib/marble/declarative/Placemark.cpp:445
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Type 1 combo plugs"
 msgstr "%1 tyypin 1 yhdistelmäpistoketta"
 
-#: src/lib/marble/declarative/Placemark.cpp:456
+#: src/lib/marble/declarative/Placemark.cpp:446
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Type 2 sockets"
 msgstr "%1 tyypin 2 pistoketta"
 
-#: src/lib/marble/declarative/Placemark.cpp:457
+#: src/lib/marble/declarative/Placemark.cpp:447
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Type 2 combo sockets"
 msgstr "%1 tyypin 2 yhdistelmäpistoketta"
 
-#: src/lib/marble/declarative/Placemark.cpp:458
+#: src/lib/marble/declarative/Placemark.cpp:448
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Type 3 sockets"
 msgstr "%1 tyypin 3 pistoketta"
 
-#: src/lib/marble/declarative/Placemark.cpp:459
+#: src/lib/marble/declarative/Placemark.cpp:449
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 CHAdeMO plugs"
 msgstr "%1 CHAdeMO-pistoketta"
 
-#: src/lib/marble/declarative/Placemark.cpp:460
+#: src/lib/marble/declarative/Placemark.cpp:450
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Magne Charge plugs"
 msgstr "%1 Magne Charge -pistoketta"
 
-#: src/lib/marble/declarative/Placemark.cpp:461
+#: src/lib/marble/declarative/Placemark.cpp:451
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Tesla standard plugs"
 msgstr "%1 Teslan vakiopistoketta"
 
-#: src/lib/marble/declarative/Placemark.cpp:462
+#: src/lib/marble/declarative/Placemark.cpp:452
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Tesla standard plugs (Supercharger)"
 msgstr "%1 Teslan vakiopistoketta (Supercharger)"
 
-#: src/lib/marble/declarative/Placemark.cpp:463
+#: src/lib/marble/declarative/Placemark.cpp:453
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Tesla roadster plugs"
 msgstr "%1 Teslan roadster-pistoketta"
 
-#: src/lib/marble/declarative/Placemark.cpp:465
+#: src/lib/marble/declarative/Placemark.cpp:455
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Maximum vehicle width: %1"
 msgstr "Ajoneuvon enimmäisleveys: %1"
 
-#: src/lib/marble/declarative/Placemark.cpp:466
+#: src/lib/marble/declarative/Placemark.cpp:456
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Maximum vehicle height: %1"
 msgstr "Ajoneuvon enimmäiskorkeus: %1"
 
-#: src/lib/marble/declarative/Placemark.cpp:468
+#: src/lib/marble/declarative/Placemark.cpp:458
 msgctxt "Marble::Placemark|"
 msgid "Self-service"
 msgstr "Itsepalvelu"
 
-#: src/lib/marble/declarative/Placemark.cpp:469
+#: src/lib/marble/declarative/Placemark.cpp:459
 msgctxt "Marble::Placemark|"
 msgid "No self-service"
 msgstr "Ei itsepalvelua"
 
-#: src/lib/marble/declarative/Placemark.cpp:470
+#: src/lib/marble/declarative/Placemark.cpp:460
 msgctxt "Marble::Placemark|"
 msgid "Automated"
 msgstr "Automaattinen"
 
-#: src/lib/marble/declarative/Placemark.cpp:471
+#: src/lib/marble/declarative/Placemark.cpp:461
 msgctxt "Marble::Placemark|"
 msgid "Manual"
 msgstr "Manuaalinen"
 
-#: src/lib/marble/declarative/Placemark.cpp:473
+#: src/lib/marble/declarative/Placemark.cpp:463
 msgctxt "Marble::Placemark|"
 msgid "Group home"
 msgstr "Ryhmäkoti"
 
-#: src/lib/marble/declarative/Placemark.cpp:474
+#: src/lib/marble/declarative/Placemark.cpp:464
 msgctxt "Marble::Placemark|"
 msgid "Nursing home"
 msgstr "Hoitokoti"
 
-#: src/lib/marble/declarative/Placemark.cpp:478
+#: src/lib/marble/declarative/Placemark.cpp:468
 msgctxt ""
 "Marble::Placemark|Like group home but for more independent people, e.g. who "
 "have flats"
 msgid "Assisted living"
 msgstr "Avustettu asuminen"
 
-#: src/lib/marble/declarative/Placemark.cpp:479
+#: src/lib/marble/declarative/Placemark.cpp:469
 msgctxt "Marble::Placemark|"
 msgid "Nursing services on a daily basis"
 msgstr "Päivittäishoitopalvelut"
 
-#: src/lib/marble/declarative/Placemark.cpp:480
+#: src/lib/marble/declarative/Placemark.cpp:470
 msgctxt "Marble::Placemark|"
 msgid "Shelter"
 msgstr "Katos"
 
-#: src/lib/marble/declarative/Placemark.cpp:481
+#: src/lib/marble/declarative/Placemark.cpp:471
 msgctxt "Marble::Placemark|"
 msgid "Ambulatory care"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:482
+#: src/lib/marble/declarative/Placemark.cpp:472
 msgctxt "Marble::Placemark|"
 msgid "Social welfare services"
 msgstr "Sosiaalipalvelut"
 
-#: src/lib/marble/declarative/Placemark.cpp:486
+#: src/lib/marble/declarative/Placemark.cpp:476
 msgctxt "Marble::Placemark|"
 msgid "Employment and workshops for offenders and people with disabilities"
 msgstr "Työmahdollisuus rikoksiin syyllistyneille tai vammaisille"
 
-#: src/lib/marble/declarative/Placemark.cpp:490
+#: src/lib/marble/declarative/Placemark.cpp:480
 msgctxt "Marble::Placemark|"
 msgid "Pre-packaged food for free or below market price"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:494
+#: src/lib/marble/declarative/Placemark.cpp:484
 msgctxt "Marble::Placemark|"
 msgid "Prepared meals for free or below market price"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:498
+#: src/lib/marble/declarative/Placemark.cpp:488
 msgctxt "Marble::Placemark|"
 msgid "Free dairy food (subject to local regulations)"
 msgstr "Vapaat maitotuotteet (paikallisten sääntöjen mukaisesti)"
 
-#: src/lib/marble/declarative/Placemark.cpp:500
+#: src/lib/marble/declarative/Placemark.cpp:490
 msgctxt "Marble::Placemark|"
 msgid "For abused"
 msgstr "Pahoinpidellyille"
 
-#: src/lib/marble/declarative/Placemark.cpp:501
+#: src/lib/marble/declarative/Placemark.cpp:491
 msgctxt "Marble::Placemark|"
 msgid "For children"
 msgstr "Lapsille"
 
-#: src/lib/marble/declarative/Placemark.cpp:502
+#: src/lib/marble/declarative/Placemark.cpp:492
 msgctxt "Marble::Placemark|"
 msgid "For people with physical disabilities"
 msgstr "Fyysisesti vammautuneille"
 
-#: src/lib/marble/declarative/Placemark.cpp:503
+#: src/lib/marble/declarative/Placemark.cpp:493
 msgctxt "Marble::Placemark|"
 msgid "For those who suffer of a disease"
 msgstr "Sairauksista kärsiville"
 
-#: src/lib/marble/declarative/Placemark.cpp:504
+#: src/lib/marble/declarative/Placemark.cpp:494
 msgctxt "Marble::Placemark|"
 msgid "For drug-addicted"
 msgstr "Huumeiden käyttäjille"
 
-#: src/lib/marble/declarative/Placemark.cpp:505
+#: src/lib/marble/declarative/Placemark.cpp:495
 msgctxt "Marble::Placemark|"
 msgid "For homeless"
 msgstr "Kodittomille"
 
-#: src/lib/marble/declarative/Placemark.cpp:506
+#: src/lib/marble/declarative/Placemark.cpp:496
 msgctxt "Marble::Placemark|"
 msgid "For juvenile"
 msgstr "Nuorille"
 
-#: src/lib/marble/declarative/Placemark.cpp:510
+#: src/lib/marble/declarative/Placemark.cpp:500
 msgctxt "Marble::Placemark|"
 msgid "For those with mental/psychological problems"
 msgstr "Niille, joilla on henkisiä ongelmia"
 
-#: src/lib/marble/declarative/Placemark.cpp:511
+#: src/lib/marble/declarative/Placemark.cpp:501
 msgctxt "Marble::Placemark|"
 msgid "For migrants"
 msgstr "Maahanmuuttajille"
 
-#: src/lib/marble/declarative/Placemark.cpp:512
+#: src/lib/marble/declarative/Placemark.cpp:502
 msgctxt "Marble::Placemark|"
 msgid "For orphans"
 msgstr "Orvoille"
 
-#: src/lib/marble/declarative/Placemark.cpp:513
+#: src/lib/marble/declarative/Placemark.cpp:503
 msgctxt "Marble::Placemark|"
 msgid "For elder people"
 msgstr "Vanhuksille"
 
-#: src/lib/marble/declarative/Placemark.cpp:514
+#: src/lib/marble/declarative/Placemark.cpp:504
 msgctxt "Marble::Placemark|"
 msgid "For poor or disadvantaged people"
 msgstr "Köyhille tai vähävaraisille"
 
-#: src/lib/marble/declarative/Placemark.cpp:515
+#: src/lib/marble/declarative/Placemark.cpp:505
 msgctxt "Marble::Placemark|"
 msgid "For unemployed"
 msgstr "Työttömille"
 
-#: src/lib/marble/declarative/Placemark.cpp:516
+#: src/lib/marble/declarative/Placemark.cpp:506
 msgctxt "Marble::Placemark|"
 msgid "For victims of crimes"
 msgstr "Rikosten uhreille"
 
-#: src/lib/marble/declarative/Placemark.cpp:518
+#: src/lib/marble/declarative/Placemark.cpp:508
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Inscription: %1"
 msgstr "Omistus: %1"
 
-#: src/lib/marble/declarative/Placemark.cpp:520
+#: src/lib/marble/declarative/Placemark.cpp:510
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 places per carriage"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:521
+#: src/lib/marble/declarative/Placemark.cpp:511
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 people per hour"
 msgstr "%1 henkeä tunnissa"
 
-#: src/lib/marble/declarative/Placemark.cpp:522
+#: src/lib/marble/declarative/Placemark.cpp:512
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 minutes"
 msgstr "%1 minuuttia"
 
-#: src/lib/marble/declarative/Placemark.cpp:527
+#: src/lib/marble/declarative/Placemark.cpp:517
 msgctxt "Marble::Placemark|A carriage is protected from the weather"
 msgid "Has weather protection"
 msgstr "Sääsuoja"
 
-#: src/lib/marble/declarative/Placemark.cpp:531
+#: src/lib/marble/declarative/Placemark.cpp:521
 msgctxt "Marble::Placemark|A carriage is not protected from the weather"
 msgid "No weather protection"
 msgstr "Ei sääsuojaa"
 
-#: src/lib/marble/declarative/Placemark.cpp:532
+#: src/lib/marble/declarative/Placemark.cpp:522
 msgctxt "Marble::Placemark|A carriage is heated"
 msgid "Is heated"
 msgstr "Lämmitys"
 
-#: src/lib/marble/declarative/Placemark.cpp:533
+#: src/lib/marble/declarative/Placemark.cpp:523
 msgctxt "Marble::Placemark|A carriage is not heated"
 msgid "Not heated"
 msgstr "Ei lämmitystä"
 
-#: src/lib/marble/declarative/Placemark.cpp:537
+#: src/lib/marble/declarative/Placemark.cpp:527
 msgctxt "Marble::Placemark|Bicycles can be transported"
 msgid "Bicycle transportation possible"
 msgstr "Kulku polkupyörällä mahdollista"
 
-#: src/lib/marble/declarative/Placemark.cpp:541
+#: src/lib/marble/declarative/Placemark.cpp:531
 msgctxt "Marble::Placemark|Bicycles can only be transported in summer"
 msgid "Bicycle transportation only in summer"
 msgstr "Kulku polkupyörällä vain kesäisin"
 
-#: src/lib/marble/declarative/Placemark.cpp:545
+#: src/lib/marble/declarative/Placemark.cpp:535
 msgctxt "Marble::Placemark|Bicyles cannot be transported"
 msgid "Bicycle transportation impossible"
 msgstr "Kulku polkupyörällä mahdotonta"
 
-#: src/lib/marble/declarative/Placemark.cpp:547
+#: src/lib/marble/declarative/Placemark.cpp:537
 msgctxt "Marble::Placemark|"
 msgid "Lit at night"
 msgstr "Valaistu yöllä"
 
-#: src/lib/marble/declarative/Placemark.cpp:548
+#: src/lib/marble/declarative/Placemark.cpp:538
 msgctxt "Marble::Placemark|"
 msgid "Lit in winter"
 msgstr "Valaistu talvisin"
 
-#: src/lib/marble/declarative/Placemark.cpp:549
+#: src/lib/marble/declarative/Placemark.cpp:539
 msgctxt "Marble::Placemark|A ski piste with trees (gladed)"
 msgid "Contains trees"
 msgstr "Puita"
 
-#: src/lib/marble/declarative/Placemark.cpp:550
+#: src/lib/marble/declarative/Placemark.cpp:540
 msgctxt "Marble::Placemark|"
 msgid "Not patrolled"
 msgstr "Ei vartioitu"
 
-#: src/lib/marble/declarative/Placemark.cpp:555
+#: src/lib/marble/declarative/Placemark.cpp:545
 msgctxt "Marble::Placemark|"
 msgid "Groomed for classic style nordic or downhill skiing"
 msgstr "Suunnattu lasketteluun tai perinteisen tyylin hiihtoon"
 
-#: src/lib/marble/declarative/Placemark.cpp:556
+#: src/lib/marble/declarative/Placemark.cpp:546
 msgctxt "Marble::Placemark|"
 msgid "Mogul piste"
 msgstr "Kumparelaskurata"
 
-#: src/lib/marble/declarative/Placemark.cpp:557
+#: src/lib/marble/declarative/Placemark.cpp:547
 msgctxt "Marble::Placemark|"
 msgid "Groomed for free style or skating"
 msgstr "Suunnattu vapaaseen tyyliin tai luisteluun"
 
-#: src/lib/marble/declarative/Placemark.cpp:561
-#: src/lib/marble/declarative/Placemark.cpp:565
+#: src/lib/marble/declarative/Placemark.cpp:551
+#: src/lib/marble/declarative/Placemark.cpp:555
 msgctxt "Marble::Placemark|"
 msgid "Groomed for classic and free style skiing"
 msgstr "Suunnattu perinteisen tai vapaan tyylin hiihtoon"
 
-#: src/lib/marble/declarative/Placemark.cpp:566
+#: src/lib/marble/declarative/Placemark.cpp:556
 msgctxt "Marble::Placemark|"
 msgid "Groomed by a smaller snowmobile"
 msgstr "Suunnattu pienille lumiajoneuvoille"
 
-#: src/lib/marble/declarative/Placemark.cpp:567
+#: src/lib/marble/declarative/Placemark.cpp:557
 msgctxt "Marble::Placemark|"
 msgid "Unmarked piste (backcountry touring)"
 msgstr "Merkitsemätön rata (maastoreitti)"
 
-#: src/lib/marble/declarative/Placemark.cpp:571
+#: src/lib/marble/declarative/Placemark.cpp:561
 msgctxt "Marble::Placemark|A parking space is covered"
 msgid "Is covered"
 msgstr "Katettu"
 
-#: src/lib/marble/declarative/Placemark.cpp:572
+#: src/lib/marble/declarative/Placemark.cpp:562
 msgctxt "Marble::Placemark|A parking space is not covered"
 msgid "Not covered"
 msgstr "Ei katettu"
 
-#: src/lib/marble/declarative/Placemark.cpp:576
+#: src/lib/marble/declarative/Placemark.cpp:566
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Collection times %1"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:580
+#: src/lib/marble/declarative/Placemark.cpp:570
 msgctxt "Marble::Placemark|Entry station of an aerialway"
 msgid "Entry"
 msgstr "Sisäänkäynti"
 
-#: src/lib/marble/declarative/Placemark.cpp:581
+#: src/lib/marble/declarative/Placemark.cpp:571
 msgctxt "Marble::Placemark|Exit station of an aerialway"
 msgid "Exit"
 msgstr "Uloskäynti"
 
-#: src/lib/marble/declarative/Placemark.cpp:582
+#: src/lib/marble/declarative/Placemark.cpp:575
 msgctxt "Marble::Placemark|Entry and exit station of an aerialway"
 msgid "Entry and exit"
 msgstr "Sisään- ja uloskäynti"
 
-#: src/lib/marble/declarative/Placemark.cpp:583
+#: src/lib/marble/declarative/Placemark.cpp:579
 msgctxt "Marble::Placemark|Transit only station of an aerialway"
 msgid "No entry or exit"
 msgstr "Ei sisään- tai uloskäyntiä"
 
-#: src/lib/marble/declarative/Placemark.cpp:584
+#: src/lib/marble/declarative/Placemark.cpp:583
 msgctxt "Marble::Placemark|Entry station of an aerialway during summer"
 msgid "Entry during summer"
 msgstr "Sisäänkäynti kesäisin"
 
-#: src/lib/marble/declarative/Placemark.cpp:585
+#: src/lib/marble/declarative/Placemark.cpp:587
 msgctxt "Marble::Placemark|Exit station of an aerialway during summer"
 msgid "Exit during summer"
 msgstr "Uloskäynti kesäisin"
 
-#: src/lib/marble/declarative/Placemark.cpp:589
+#: src/lib/marble/declarative/Placemark.cpp:591
 msgctxt ""
 "Marble::Placemark|Entry and exit station of an aerialway during summer"
 msgid "Entry and exit during summer"
 msgstr "Sisään- ja uloskäynti kesäisin"
 
-#: src/lib/marble/declarative/Placemark.cpp:593
+#: src/lib/marble/declarative/Placemark.cpp:595
 msgctxt "Marble::Placemark|Transit only station of an aerialway during summer"
 msgid "No entry or exit during summer"
 msgstr "Ei sisään- tai uloskäyntiä kesäisin"
 
-#: src/lib/marble/declarative/Placemark.cpp:597
+#: src/lib/marble/declarative/Placemark.cpp:599
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Elevation: %1 m"
 msgstr "Korkeus: %1 m"
 
-#: src/lib/marble/declarative/Placemark.cpp:600
+#: src/lib/marble/declarative/Placemark.cpp:602
 msgctxt "Marble::Placemark|"
 msgid "Customers only"
 msgstr "Vain asiakkaille"
 
-#: src/lib/marble/declarative/Placemark.cpp:604
+#: src/lib/marble/declarative/Placemark.cpp:606
 msgctxt ""
 "Marble::Placemark|The public has an official, legally-enshrined right of "
 "access; i.e., it's a right of way"
 msgid "Accessible by anyone"
 msgstr "Vapaa pääsy"
 
-#: src/lib/marble/declarative/Placemark.cpp:608
+#: src/lib/marble/declarative/Placemark.cpp:610
 msgctxt ""
 "Marble::Placemark|Only with permission of the owner on an individual basis."
 msgid "Private"
 msgstr "Yksityinen"
 
-#: src/lib/marble/declarative/Placemark.cpp:612
+#: src/lib/marble/declarative/Placemark.cpp:614
 msgctxt ""
 "Marble::Placemark|Open to general traffic but permission can be revoked by "
 "the owner"
 msgid "Open to general traffic"
 msgstr "Avoinna julkiselle liikenteelle"
 
-#: src/lib/marble/declarative/Placemark.cpp:613
+#: src/lib/marble/declarative/Placemark.cpp:615
 msgctxt "Marble::Placemark|No access for the general public"
 msgid "No access"
 msgstr "Ei pääsyä"
 
-#: src/lib/marble/declarative/Placemark.cpp:615
+#: src/lib/marble/declarative/Placemark.cpp:617
 msgctxt "Marble::Placemark|"
 msgid "no fee"
 msgstr "ei maksua"
 
-#: src/lib/marble/declarative/Placemark.cpp:617
+#: src/lib/marble/declarative/Placemark.cpp:619
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "formerly <i>%1</i>"
 msgstr "aiemmin <i>%1</i>"
 
-#: src/lib/marble/declarative/Placemark.cpp:621
+#: src/lib/marble/declarative/Placemark.cpp:623
 #, qt-format
 msgctxt "Marble::Placemark|Positive floor level"
 msgid "Floor %1"
 msgstr "%1. kerros"
 
-#: src/lib/marble/declarative/Placemark.cpp:623
+#: src/lib/marble/declarative/Placemark.cpp:625
 #, qt-format
 msgctxt "Marble::Placemark|Negative floor level"
 msgid "Basement %1"
 msgstr "%1. kellarikerros"
 
-#: src/lib/marble/declarative/Placemark.cpp:625
+#: src/lib/marble/declarative/Placemark.cpp:627
 msgctxt "Marble::Placemark|Floor level 2, two levels above ground level"
 msgid "Floor 2"
 msgstr "3. kerros"
 
-#: src/lib/marble/declarative/Placemark.cpp:626
+#: src/lib/marble/declarative/Placemark.cpp:628
 msgctxt "Marble::Placemark|Floor level 1, one level above ground level"
 msgid "Floor 1"
 msgstr "2. kerros"
 
-#: src/lib/marble/declarative/Placemark.cpp:627
+#: src/lib/marble/declarative/Placemark.cpp:629
 msgctxt "Marble::Placemark|Floor level 0"
 msgid "Ground floor"
 msgstr "1. kerros"
 
-#: src/lib/marble/declarative/Placemark.cpp:628
+#: src/lib/marble/declarative/Placemark.cpp:630
 msgctxt "Marble::Placemark|Floor level -1, one level below ground level"
 msgid "Basement 1"
 msgstr "1. kellarikerros"
 
-#: src/lib/marble/declarative/Placemark.cpp:629
+#: src/lib/marble/declarative/Placemark.cpp:631
 msgctxt "Marble::Placemark|Floor level -2, two levels below ground level"
 msgid "Basement 2"
 msgstr "2. kellarikerros"
 
-#: src/lib/marble/declarative/Placemark.cpp:723
+#: src/lib/marble/declarative/Placemark.cpp:722
 msgctxt "Marble::Placemark|"
 msgid "Wheelchair accessible"
 msgstr "Pääsy pyörätuolilla"
 
-#: src/lib/marble/declarative/Placemark.cpp:724
+#: src/lib/marble/declarative/Placemark.cpp:723
 msgctxt "Marble::Placemark|"
 msgid "Wheelchair inaccessible"
 msgstr "Ei pääsyä pyörätuolilla"
 
-#: src/lib/marble/declarative/Placemark.cpp:725
+#: src/lib/marble/declarative/Placemark.cpp:724
 msgctxt "Marble::Placemark|"
 msgid "Limited wheelchair accessibility"
 msgstr "Rajallinen kulku pyörätuolilla"
 
-#: src/lib/marble/declarative/Placemark.cpp:726
+#: src/lib/marble/declarative/Placemark.cpp:725
 msgctxt "Marble::Placemark|"
 msgid "Designated wheelchair access"
 msgstr "Oma pääsy pyörätuolille"
 
-#: src/lib/marble/declarative/Placemark.cpp:759
+#: src/lib/marble/declarative/Placemark.cpp:758
 msgctxt ""
 "Marble::Placemark|This location does not provide public Internet access"
 msgid "No public Internet access"
 msgstr "Ei julkista internetiä"
 
-#: src/lib/marble/declarative/Placemark.cpp:763
+#: src/lib/marble/declarative/Placemark.cpp:762
 msgctxt ""
 "Marble::Placemark|This location provides an unknown type of public Internet "
 "access."
 msgid "Public Internet access available"
 msgstr "Julkinen internet"
 
-#: src/lib/marble/declarative/Placemark.cpp:769
+#: src/lib/marble/declarative/Placemark.cpp:768
 msgctxt ""
 "Marble::Placemark|Public wireless Internet access is available here for a "
 "fee."
 msgid "Charged public wifi available"
 msgstr "Maksullinen julkinen langaton verkko"
 
-#: src/lib/marble/declarative/Placemark.cpp:774
+#: src/lib/marble/declarative/Placemark.cpp:773
 msgctxt ""
 "Marble::Placemark|Public wireless Internet access is available here for no "
 "cost."
 msgid "Free public wifi available"
 msgstr "Ilmainen julkinen langaton verkko"
 
-#: src/lib/marble/declarative/Placemark.cpp:779
+#: src/lib/marble/declarative/Placemark.cpp:778
 msgctxt "Marble::Placemark|Public wireless Internet access is available here."
 msgid "Public wifi available"
 msgstr "Julkinen langaton verkko"
 
-#: src/lib/marble/declarative/Placemark.cpp:783
+#: src/lib/marble/declarative/Placemark.cpp:782
 msgctxt "Marble::Placemark|Public wifi is not available here."
 msgid "No public wifi"
 msgstr "Ei julkista langatonta verkkoa"
 
-#: src/lib/marble/declarative/Placemark.cpp:787
+#: src/lib/marble/declarative/Placemark.cpp:786
 msgctxt "Marble::Placemark|Public wireless Internet is available here."
 msgid "Public wifi available"
 msgstr "Julkinen langaton verkko"
 
-#: src/lib/marble/declarative/Placemark.cpp:791
+#: src/lib/marble/declarative/Placemark.cpp:790
 msgctxt ""
 "Marble::Placemark|Public wireless Internet is available here for no cost."
 msgid "Free public wifi available"
 msgstr "Ilmainen julkinen langaton verkko"
 
-#: src/lib/marble/declarative/Placemark.cpp:898
+#: src/lib/marble/declarative/Placemark.cpp:897
 #, qt-format
 msgctxt ""
 "Marble::Placemark|House number (first argument) and street name (second "
@@ -7761,19 +7761,19 @@ msgid "Server is not an OWS Server."
 msgstr "Palvelin ei ole Web Map -palvelin."
 
 #: src/lib/marble/MapWizard.cpp:366 src/lib/marble/MapWizard.cpp:383
-#: src/lib/marble/MapWizard.cpp:1070
+#: src/lib/marble/MapWizard.cpp:1076
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr "Verkon Mercator (epsg:3857)"
 
-#: src/lib/marble/MapWizard.cpp:367 src/lib/marble/MapWizard.cpp:795
-#: src/lib/marble/MapWizard.cpp:915
+#: src/lib/marble/MapWizard.cpp:367 src/lib/marble/MapWizard.cpp:797
+#: src/lib/marble/MapWizard.cpp:921
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr "Tasavälinen lieriö (epsg:4326)"
 
-#: src/lib/marble/MapWizard.cpp:368 src/lib/marble/MapWizard.cpp:797
-#: src/lib/marble/MapWizard.cpp:917
+#: src/lib/marble/MapWizard.cpp:368 src/lib/marble/MapWizard.cpp:799
+#: src/lib/marble/MapWizard.cpp:923
 #, fuzzy
 #| msgctxt "Marble::MapWizard|"
 #| msgid "Equirectangular (epsg:4326)"
@@ -7794,7 +7794,7 @@ msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:438 src/lib/marble/MapWizard.cpp:907
+#: src/lib/marble/MapWizard.cpp:438 src/lib/marble/MapWizard.cpp:913
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "Esikatsele kuvaa"
@@ -7840,9 +7840,9 @@ msgstr ""
 "\n"
 "%1"
 
-#: src/lib/marble/MapWizard.cpp:542 src/lib/marble/MapWizard.cpp:1459
-#: src/lib/marble/MapWizard.cpp:1460 src/lib/marble/MapWizard.cpp:1469
-#: src/lib/marble/MapWizard.cpp:1470
+#: src/lib/marble/MapWizard.cpp:542 src/lib/marble/MapWizard.cpp:1465
+#: src/lib/marble/MapWizard.cpp:1466 src/lib/marble/MapWizard.cpp:1475
+#: src/lib/marble/MapWizard.cpp:1476
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "Mukautettu"
@@ -7862,79 +7862,79 @@ msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "Arkistointiprosessi kaatui."
 
-#: src/lib/marble/MapWizard.cpp:841 src/lib/marble/MapWizard.cpp:847
-#: src/lib/marble/MapWizard.cpp:855
+#: src/lib/marble/MapWizard.cpp:847 src/lib/marble/MapWizard.cpp:853
+#: src/lib/marble/MapWizard.cpp:861
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Lähdekuva"
 
-#: src/lib/marble/MapWizard.cpp:841
+#: src/lib/marble/MapWizard.cpp:847
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Anna lähdekuva."
 
-#: src/lib/marble/MapWizard.cpp:847
+#: src/lib/marble/MapWizard.cpp:853
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
 "one."
 msgstr "Valitsemaasi lähdekuvaa ei ole olemassa. Valitse toinen."
 
-#: src/lib/marble/MapWizard.cpp:856
+#: src/lib/marble/MapWizard.cpp:862
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
 "a different image file."
 msgstr "Valitsemasi lähde ei vaikuta kuvalta. Anna toinen kuvatiedosto."
 
-#: src/lib/marble/MapWizard.cpp:886
+#: src/lib/marble/MapWizard.cpp:892
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Kartan otsikko"
 
-#: src/lib/marble/MapWizard.cpp:886
+#: src/lib/marble/MapWizard.cpp:892
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Anna kartan otsikko."
 
-#: src/lib/marble/MapWizard.cpp:893 src/lib/marble/MapWizard.cpp:900
+#: src/lib/marble/MapWizard.cpp:899 src/lib/marble/MapWizard.cpp:906
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Kartan nimi"
 
-#: src/lib/marble/MapWizard.cpp:893
+#: src/lib/marble/MapWizard.cpp:899
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Anna kartalle nimi."
 
-#: src/lib/marble/MapWizard.cpp:900
+#: src/lib/marble/MapWizard.cpp:906
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "Please specify another map name, since there is already a map named \"%1\"."
 msgstr "Anna kartalle toinen nimi, koska kartta nimeltä ”%1” on jo olemassa."
 
-#: src/lib/marble/MapWizard.cpp:907
+#: src/lib/marble/MapWizard.cpp:913
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Valitse esikatselukuva."
 
-#: src/lib/marble/MapWizard.cpp:1403
+#: src/lib/marble/MapWizard.cpp:1409
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "Ongelma luotaessa tiedostoja"
 
-#: src/lib/marble/MapWizard.cpp:1403
+#: src/lib/marble/MapWizard.cpp:1409
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "Tarkista, onko samannimistä teemaa olemassa."
 
-#: src/lib/marble/MapWizard.cpp:1454
+#: src/lib/marble/MapWizard.cpp:1460
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
 msgstr "WMS-palvelin"
 
-#: src/lib/marble/MapWizard.cpp:1456
+#: src/lib/marble/MapWizard.cpp:1462
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
@@ -7943,12 +7943,12 @@ msgstr ""
 "<h4>WMS-palvelin</h4>Valitse <a href=\"https://fi.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a>-palvelin tai anna mukauta palvelinosoite."
 
-#: src/lib/marble/MapWizard.cpp:1463
+#: src/lib/marble/MapWizard.cpp:1469
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
 msgstr "WMTS-palvelin"
 
-#: src/lib/marble/MapWizard.cpp:1465
+#: src/lib/marble/MapWizard.cpp:1471
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
