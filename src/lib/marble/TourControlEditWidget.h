@@ -39,9 +39,9 @@ private Q_SLOTS:
 private:
     GeoDataTourControl *tourControlElement();
     QPersistentModelIndex m_index;
-    QRadioButton *m_radio_play;
-    QRadioButton *m_radio_pause;
-    QToolButton *m_button;
+    QRadioButton *const m_radio_play;
+    QRadioButton *const m_radio_pause;
+    QToolButton *const m_button;
 };
 
 } // namespace Marble

@@ -44,9 +44,9 @@ private Q_SLOTS:
     void recordNextFrame();
 
 private:
-    Ui::TourCaptureDialog *ui;
-    MovieCapture *m_recorder;
-    TourPlayback *m_playback;
+    Ui::TourCaptureDialog *const ui;
+    MovieCapture *const m_recorder;
+    TourPlayback *m_playback = nullptr;
     bool m_writingPossible;
     double m_current_position;
     QString m_defaultFileName;
