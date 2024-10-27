@@ -3303,7 +3303,7 @@ msgstr "上传到云端"
 #: src/lib/marble/CurrentLocationWidget.cpp:109
 msgctxt "Marble::CurrentLocationWidget|"
 msgid "<p>No Position Tracking Plugin installed.</p>"
-msgstr ""
+msgstr "<p>没有安装位置轨迹插件。</p>"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:183
 msgctxt "QObject|"
@@ -12011,7 +12011,7 @@ msgstr "搜索“%1”"
 #: src/lib/marble/SoundCueEditWidget.cpp:37
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Audio location"
-msgstr ""
+msgstr "音频位置"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:67
 msgctxt "Marble::SoundCueEditWidget|"

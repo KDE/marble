@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-25 00:37+0000\n"
-"PO-Revision-Date: 2024-10-15 08:49+0300\n"
+"PO-Revision-Date: 2024-10-26 08:08+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -278,7 +278,7 @@ msgstr "קונסטנטין אובלאוחוב"
 #: kdemain.cpp:130
 #, kde-format
 msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
-msgstr ""
+msgstr "מיזם Google Summer of Code 2011: עיבוד וקטורי של OpenStreetMap"
 
 #: kdemain.cpp:133
 #, kde-format
@@ -363,12 +363,12 @@ msgstr "קרלוס ליסאה"
 #, kde-format
 msgid ""
 "Google Summer of Code 2007 Project: Equirectangular Projection (\"Flat Map\")"
-msgstr ""
+msgstr "מיזם Google Summer of Code 2007: היטל שווה מלבנים („Flat Map”)"
 
 #: kdemain.cpp:170
 #, kde-format
 msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
-msgstr ""
+msgstr "מיזם Google Summer of Code 2007: תמיכה בנווטן/GPS ל־Marble"
 
 #: kdemain.cpp:173
 #, kde-format
@@ -378,7 +378,7 @@ msgstr "מוראד טגירוב"
 #: kdemain.cpp:174
 #, kde-format
 msgid "Google Summer of Code 2007 Project: KML Support for Marble"
-msgstr ""
+msgstr "מיזם Google Summer of Code 2007: תמיכה ב־KML ל־Marble"
 
 #: kdemain.cpp:179
 #, kde-format
@@ -494,7 +494,7 @@ msgstr ""
 #: kdemain.cpp:206
 #, kde-format
 msgid "Platforms & Distributions"
-msgstr ""
+msgstr "פלטפורמות והוצאה לאור"
 
 #: kdemain.cpp:199
 #, kde-format
