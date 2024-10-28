@@ -32,7 +32,12 @@ public:
     const GeoDataRelation *relation;
 };
 
-enum StyleEffect { NoEffect, InvertedEffect, GrayscaleEffect, RedModeEffect };
+enum StyleEffect {
+    NoEffect,
+    InvertedEffect,
+    GrayscaleEffect,
+    RedModeEffect
+};
 
 class MARBLE_EXPORT StyleBuilder
 {

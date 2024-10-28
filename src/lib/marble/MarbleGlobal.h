@@ -24,7 +24,13 @@
 namespace Marble
 {
 
-enum TessellationFlag { NoTessellation = 0x0, Tessellate = 0x1, RespectLatitudeCircle = 0x2, FollowGround = 0x4, PreventNodeFiltering = 0x8 };
+enum TessellationFlag {
+    NoTessellation = 0x0,
+    Tessellate = 0x1,
+    RespectLatitudeCircle = 0x2,
+    FollowGround = 0x4,
+    PreventNodeFiltering = 0x8
+};
 
 Q_DECLARE_FLAGS(TessellationFlags, TessellationFlag)
 
@@ -83,7 +89,15 @@ enum ProxyType {
 /**
  * @brief This enum is used to choose the localization of the labels.
  */
-enum LabelPositionFlag { NoLabel = 0x0, LineStart = 0x1, LineCenter = 0x2, LineEnd = 0x4, IgnoreXMargin = 0x8, IgnoreYMargin = 0x10, FollowLine = 0x20 };
+enum LabelPositionFlag {
+    NoLabel = 0x0,
+    LineStart = 0x1,
+    LineCenter = 0x2,
+    LineEnd = 0x4,
+    IgnoreXMargin = 0x8,
+    IgnoreYMargin = 0x10,
+    FollowLine = 0x20
+};
 
 Q_DECLARE_FLAGS(LabelPositionFlags, LabelPositionFlag)
 
@@ -251,7 +265,11 @@ public:
 
     MarbleLocale *locale() const;
 
-    enum Profile { Default = 0x0, SmallScreen = 0x1, HighResolution = 0x2 };
+    enum Profile {
+        Default = 0x0,
+        SmallScreen = 0x1,
+        HighResolution = 0x2
+    };
 
     Q_DECLARE_FLAGS(Profiles, Profile)
 

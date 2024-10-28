@@ -22,7 +22,11 @@ namespace Marble
 class RoutingModelPrivate
 {
 public:
-    enum RouteDeviation { Unknown, OnRoute, OffRoute };
+    enum RouteDeviation {
+        Unknown,
+        OnRoute,
+        OffRoute
+    };
 
     explicit RoutingModelPrivate(PositionTracking *positionTracking, RouteRequest *request);
 

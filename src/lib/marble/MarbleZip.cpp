@@ -432,7 +432,11 @@ public:
     QFile::Permissions permissions;
     MarbleZipWriter::CompressionPolicy compressionPolicy;
 
-    enum EntryType { Directory, File, Symlink };
+    enum EntryType {
+        Directory,
+        File,
+        Symlink
+    };
 
     void addEntry(EntryType type, const QString &fileName, const QByteArray &contents);
 };

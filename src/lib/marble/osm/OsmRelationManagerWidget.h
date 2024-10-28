@@ -20,7 +20,11 @@ class OsmRelationManagerWidgetPrivate;
 class GeoDataPlacemark;
 class OsmPlacemarkData;
 
-enum Column { Name = 0, Type = 1, Role = 2 };
+enum Column {
+    Name = 0,
+    Type = 1,
+    Role = 2
+};
 
 /**
  * @brief The OsmRelationManagerWidget class is used to view and edit relations for any placemark

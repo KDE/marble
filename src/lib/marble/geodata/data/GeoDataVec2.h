@@ -19,7 +19,11 @@ class GeoDataVec2Private;
 class GEODATA_EXPORT GeoDataVec2 : public QPointF
 {
 public:
-    enum Unit { Fraction, Pixels, InsetPixels };
+    enum Unit {
+        Fraction,
+        Pixels,
+        InsetPixels
+    };
 
     GeoDataVec2();
 

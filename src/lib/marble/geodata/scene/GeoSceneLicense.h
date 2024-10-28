@@ -18,7 +18,12 @@ namespace Marble
 class GEODATA_EXPORT GeoSceneLicense : public GeoNode
 {
 public:
-    enum Attribution { Never, OptOut, OptIn, Always };
+    enum Attribution {
+        Never,
+        OptOut,
+        OptIn,
+        Always
+    };
 
     GeoSceneLicense();
 

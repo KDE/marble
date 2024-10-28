@@ -85,7 +85,10 @@ class GeoDataPolygon;
 class MARBLE_EXPORT GeoPainter : public ClipPainter
 {
 public:
-    enum Frame { NoOptions = 0x0, RoundFrame = 0x1 };
+    enum Frame {
+        NoOptions = 0x0,
+        RoundFrame = 0x1
+    };
 
     Q_DECLARE_FLAGS(Frames, Frame)
 

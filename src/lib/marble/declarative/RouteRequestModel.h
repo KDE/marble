@@ -23,7 +23,10 @@ class RouteRequestModel : public QAbstractListModel
     Q_PROPERTY(Marble::Routing *routing READ routing WRITE setRouting NOTIFY routingChanged)
 
 public:
-    enum RouteRequestModelRoles { LongitudeRole = Qt::UserRole + 1, LatitudeRole = Qt::UserRole + 2 };
+    enum RouteRequestModelRoles {
+        LongitudeRole = Qt::UserRole + 1,
+        LatitudeRole = Qt::UserRole + 2
+    };
 
     /** Constructor */
     explicit RouteRequestModel(QObject *parent = nullptr);

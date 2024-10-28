@@ -15,7 +15,11 @@
 
 using namespace Marble;
 
-enum DebugLevel { Debug, Info, Mute };
+enum DebugLevel {
+    Debug,
+    Info,
+    Mute
+};
 
 DebugLevel debugLevel = Info;
 

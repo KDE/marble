@@ -35,7 +35,10 @@ public:
     /** Provides type information for downcasting a GeoNode */
     const char *nodeType() const override;
 
-    enum DisplayMode { Default, Hide };
+    enum DisplayMode {
+        Default,
+        Hide
+    };
 
     QColor backgroundColor() const;
     void setBackgroundColor(const QColor &color);

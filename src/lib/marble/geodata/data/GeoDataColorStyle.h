@@ -69,7 +69,10 @@ public:
     QColor color() const;
 
     /// The color mode
-    enum ColorMode { Normal, Random };
+    enum ColorMode {
+        Normal,
+        Random
+    };
 
     /**
      * @brief Returns the color that should be painted: Either color() or a randomized

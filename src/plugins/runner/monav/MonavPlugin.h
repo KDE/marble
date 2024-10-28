@@ -22,7 +22,10 @@ class MonavPlugin : public RoutingRunnerPlugin
     Q_INTERFACES(Marble::RoutingRunnerPlugin)
 
 public:
-    enum MonavRoutingDaemonVersion { Monav_0_2, Monav_0_3 };
+    enum MonavRoutingDaemonVersion {
+        Monav_0_2,
+        Monav_0_3
+    };
 
     explicit MonavPlugin(QObject *parent = nullptr);
 

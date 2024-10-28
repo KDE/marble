@@ -32,7 +32,16 @@ protected:
     bool editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index) override;
 
 private:
-    enum Element { Icon, Text, InstallButton, UpgradeButton, OpenButton, CancelButton, RemoveButton, ProgressReport };
+    enum Element {
+        Icon,
+        Text,
+        InstallButton,
+        UpgradeButton,
+        OpenButton,
+        CancelButton,
+        RemoveButton,
+        ProgressReport
+    };
 
     int buttonWidth(const QStyleOptionViewItem &option) const;
     QStyleOptionButton button(Element element, const QStyleOptionViewItem &option) const;

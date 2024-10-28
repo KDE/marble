@@ -28,7 +28,11 @@ class MarbleGraphicsItemPrivate;
 class MARBLE_EXPORT MarbleGraphicsItem
 {
 public:
-    enum CacheMode { NoCache, ItemCoordinateCache, DeviceCoordinateCache };
+    enum CacheMode {
+        NoCache,
+        ItemCoordinateCache,
+        DeviceCoordinateCache
+    };
 
     virtual ~MarbleGraphicsItem();
 

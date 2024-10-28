@@ -69,7 +69,13 @@ public:
     QByteArray fileData(const QString &fileName) const;
     bool extractAll(const QString &destinationDir) const;
 
-    enum Status { NoError, FileReadError, FileOpenError, FilePermissionsError, FileError };
+    enum Status {
+        NoError,
+        FileReadError,
+        FileOpenError,
+        FilePermissionsError,
+        FileError
+    };
 
     Status status() const;
 

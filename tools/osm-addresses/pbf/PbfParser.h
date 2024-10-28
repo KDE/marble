@@ -26,7 +26,12 @@ public:
     bool parse(const QFileInfo &file, int pass, bool &needAnotherPass) override;
 
 private:
-    enum Mode { ModeNode, ModeWay, ModeRelation, ModeDense };
+    enum Mode {
+        ModeNode,
+        ModeWay,
+        ModeRelation,
+        ModeDense
+    };
 
     bool parseBlobHeader();
 

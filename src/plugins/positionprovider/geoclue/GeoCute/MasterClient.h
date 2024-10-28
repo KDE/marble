@@ -13,9 +13,18 @@
 namespace GeoCute
 {
 
-enum ResourceFlags { ResourceNone = 0, ResourceNetwork = 1 << 0, ResourceCell = 1 << 1, ResourceGPS = 1 << 2, ResourceAll = (1 << 10) - 1 };
+enum ResourceFlags {
+    ResourceNone = 0,
+    ResourceNetwork = 1 << 0,
+    ResourceCell = 1 << 1,
+    ResourceGPS = 1 << 2,
+    ResourceAll = (1 << 10) - 1
+};
 
-enum SignallingFlags { SignallingNotRequired, SignallingRequired };
+enum SignallingFlags {
+    SignallingNotRequired,
+    SignallingRequired
+};
 
 class PositionProvider;
 

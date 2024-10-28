@@ -55,7 +55,16 @@ namespace Marble
 
 int const layerIdRole = 1001;
 
-enum wizardPage { WelcomePage, WmsSelectionPage, LayerSelectionPage, GlobalSourceImagePage, XYZUrlPage, ThemeInfoPage, LegendPage, SummaryPage };
+enum wizardPage {
+    WelcomePage,
+    WmsSelectionPage,
+    LayerSelectionPage,
+    GlobalSourceImagePage,
+    XYZUrlPage,
+    ThemeInfoPage,
+    LegendPage,
+    SummaryPage
+};
 
 class MapWizardPrivate
 {
@@ -90,7 +99,13 @@ public:
     bool m_previewImageValid;
     bool m_legendImageValid;
 
-    enum mapType { NoMap, StaticImageMap, WmsMap, WmtsMap, StaticUrlMap };
+    enum mapType {
+        NoMap,
+        StaticImageMap,
+        WmsMap,
+        WmtsMap,
+        StaticUrlMap
+    };
     QStringList selectedLayers;
     QString selectedProjection;
 

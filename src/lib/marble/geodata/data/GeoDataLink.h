@@ -19,9 +19,18 @@ class GeoDataLinkPrivate;
 class GEODATA_EXPORT GeoDataLink : public GeoDataObject
 {
 public:
-    enum RefreshMode { OnChange, OnInterval, OnExpire };
+    enum RefreshMode {
+        OnChange,
+        OnInterval,
+        OnExpire
+    };
 
-    enum ViewRefreshMode { Never, OnStop, OnRequest, OnRegion };
+    enum ViewRefreshMode {
+        Never,
+        OnStop,
+        OnRequest,
+        OnRegion
+    };
 
     GeoDataLink();
 

@@ -22,7 +22,14 @@ class MARBLE_EXPORT WaypointParser
 {
 public:
     /** Fields which can be parsed */
-    enum Field { Longitude, Latitude, JunctionType, RoadName, TotalSecondsRemaining, RoadType };
+    enum Field {
+        Longitude,
+        Latitude,
+        JunctionType,
+        RoadName,
+        TotalSecondsRemaining,
+        RoadType
+    };
 
     /** Constructor */
     WaypointParser();

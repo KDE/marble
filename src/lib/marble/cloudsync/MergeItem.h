@@ -33,9 +33,16 @@ public:
     Q_PROPERTY(MergeItem::Action actionB READ actionB WRITE setActionB NOTIFY actionBChanged)
     Q_PROPERTY(MergeItem::Resolution resolution READ resolution WRITE setResolution NOTIFY resolutionChanged)
 
-    enum Resolution { None, A, B };
+    enum Resolution {
+        None,
+        A,
+        B
+    };
 
-    enum Action { Changed, Deleted };
+    enum Action {
+        Changed,
+        Deleted
+    };
 
     QString pathA() const;
     void setPathA(const QString &path);

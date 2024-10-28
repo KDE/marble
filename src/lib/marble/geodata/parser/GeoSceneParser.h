@@ -16,7 +16,9 @@ namespace Marble
 class GeoDocument;
 class GeoSceneDocument;
 
-enum GeoSceneSourceType { GeoScene_DGML = 0 };
+enum GeoSceneSourceType {
+    GeoScene_DGML = 0
+};
 
 class GEODATA_EXPORT GeoSceneParser : public GeoParser
 {

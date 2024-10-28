@@ -22,7 +22,11 @@ class MARBLE_EXPORT RoutingWaypoint
 {
 public:
     /** Junction types that affect instructions */
-    enum JunctionType { Roundabout, Other, None };
+    enum JunctionType {
+        Roundabout,
+        Other,
+        None
+    };
 
     /** Constructor */
     RoutingWaypoint();

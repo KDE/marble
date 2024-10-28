@@ -25,7 +25,12 @@ class MARBLE_EXPORT MarbleAboutDialog : public QDialog
     Q_OBJECT
 
 public:
-    enum Tab { About, Authors, Data, License };
+    enum Tab {
+        About,
+        Authors,
+        Data,
+        License
+    };
 
     explicit MarbleAboutDialog(QWidget *parent = nullptr);
     ~MarbleAboutDialog() override;

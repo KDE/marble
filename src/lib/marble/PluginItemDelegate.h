@@ -50,7 +50,10 @@ protected:
     bool editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index) override;
 
 private:
-    enum ButtonType { About, Configure };
+    enum ButtonType {
+        About,
+        Configure
+    };
 
     static QStyleOptionButton
     checkboxOption(const QStyleOptionViewItem &option, const QModelIndex &index, int position = 0, Qt::AlignmentFlag alignment = Qt::AlignLeft);

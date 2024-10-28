@@ -19,7 +19,10 @@ namespace MoNav
 
 // has to be send before each command to identify the following command type
 struct CommandType {
-    enum Type { RoutingCommand = 0, UnpackCommand = 1 } value;
+    enum Type {
+        RoutingCommand = 0,
+        UnpackCommand = 1
+    } value;
 
     void post(QIODevice *out)
     {
@@ -152,7 +155,13 @@ public:
 class RoutingResult
 {
 public:
-    enum ResultType { LoadFailed = 1, RouteFailed = 2, NameLookupFailed = 3, TypeLookupFailed = 4, Success = 5 } type;
+    enum ResultType {
+        LoadFailed = 1,
+        RouteFailed = 2,
+        NameLookupFailed = 3,
+        TypeLookupFailed = 4,
+        Success = 5
+    } type;
 
     double seconds;
     QList<Node> pathNodes;
@@ -262,7 +271,10 @@ public:
 class UnpackResult
 {
 public:
-    enum ResultType { FailUnpacking = 1, Success = 2 } type;
+    enum ResultType {
+        FailUnpacking = 1,
+        Success = 2
+    } type;
 
     void post(QIODevice *out)
     {

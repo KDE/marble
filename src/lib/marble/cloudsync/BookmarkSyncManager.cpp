@@ -32,9 +32,17 @@ namespace Marble
 class DiffItem
 {
 public:
-    enum Action { NoAction, Created, Changed, Deleted };
+    enum Action {
+        NoAction,
+        Created,
+        Changed,
+        Deleted
+    };
 
-    enum Status { Source, Destination };
+    enum Status {
+        Source,
+        Destination
+    };
 
     QString m_path;
     Action m_action;

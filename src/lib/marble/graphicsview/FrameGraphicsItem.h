@@ -23,7 +23,12 @@ class FrameGraphicsItemPrivate;
 class MARBLE_EXPORT FrameGraphicsItem : public ScreenGraphicsItem
 {
 public:
-    enum FrameType { NoFrame, RectFrame, RoundedRectFrame, ShadowFrame };
+    enum FrameType {
+        NoFrame,
+        RectFrame,
+        RoundedRectFrame,
+        ShadowFrame
+    };
 
     explicit FrameGraphicsItem(MarbleGraphicsItem *parent = nullptr);
 

@@ -28,7 +28,10 @@ class MARBLE_EXPORT AlternativeRoutesModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-    enum WritePolicy { Instant, Lazy };
+    enum WritePolicy {
+        Instant,
+        Lazy
+    };
 
     /** Constructor */
     explicit AlternativeRoutesModel(QObject *parent = nullptr);

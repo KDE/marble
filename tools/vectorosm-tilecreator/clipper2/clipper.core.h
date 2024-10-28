@@ -86,7 +86,12 @@ static void DoError(int error_code)
 // By far the most widely used filling rules for polygons are EvenOdd
 // and NonZero, sometimes called Alternate and Winding respectively.
 // https://en.wikipedia.org/wiki/Nonzero-rule
-enum class FillRule { EvenOdd, NonZero, Positive, Negative };
+enum class FillRule {
+    EvenOdd,
+    NonZero,
+    Positive,
+    Negative
+};
 
 // Point ------------------------------------------------------------------------
 
@@ -745,7 +750,11 @@ inline Point64 GetClosestPointOnSegment(const Point64 &offPt, const Point64 &seg
     return Point64(seg1.x + static_cast<int64_t>(nearbyint(q * dx)), seg1.y + static_cast<int64_t>(nearbyint(q * dy)));
 }
 
-enum class PointInPolygonResult { IsOn, IsInside, IsOutside };
+enum class PointInPolygonResult {
+    IsOn,
+    IsInside,
+    IsOutside
+};
 
 template<typename T>
 inline PointInPolygonResult PointInPolygon(const Point<T> &pt, const Path<T> &polygon)

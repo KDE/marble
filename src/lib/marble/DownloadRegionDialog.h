@@ -21,7 +21,11 @@ class MARBLE_EXPORT DownloadRegionDialog : public QDialog
     Q_OBJECT
 
 public:
-    enum SelectionMethod { VisibleRegionMethod, SpecifiedRegionMethod, RouteDownloadMethod };
+    enum SelectionMethod {
+        VisibleRegionMethod,
+        SpecifiedRegionMethod,
+        RouteDownloadMethod
+    };
 
     explicit DownloadRegionDialog(MarbleWidget *const widget, QWidget *const parent = nullptr, Qt::WindowFlags const f = Qt::WindowFlags());
     ~DownloadRegionDialog() override;

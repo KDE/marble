@@ -19,7 +19,13 @@
 namespace Clipper2Lib
 {
 
-enum class Location { Left, Top, Right, Bottom, Inside };
+enum class Location {
+    Left,
+    Top,
+    Right,
+    Bottom,
+    Inside
+};
 
 class OutPt2;
 typedef std::vector<OutPt2 *> OutPt2List;

@@ -29,7 +29,11 @@ public:
     MarbleLocale();
     ~MarbleLocale();
 
-    enum MeasurementSystem { MetricSystem = 0, ImperialSystem, NauticalSystem };
+    enum MeasurementSystem {
+        MetricSystem = 0,
+        ImperialSystem,
+        NauticalSystem
+    };
 
     enum MeasureUnit {
         Meter = 0,

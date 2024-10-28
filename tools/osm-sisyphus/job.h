@@ -17,7 +17,16 @@ class Job : public QObject, public QRunnable
 {
     Q_OBJECT
 public:
-    enum Status { Waiting, Downloading, Routing, Search, Packaging, Uploading, Finished, Error };
+    enum Status {
+        Waiting,
+        Downloading,
+        Routing,
+        Search,
+        Packaging,
+        Uploading,
+        Finished,
+        Error
+    };
 
     explicit Job(const Region &region, const JobParameters &parameters, QObject *parent = nullptr);
 

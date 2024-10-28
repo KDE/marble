@@ -22,7 +22,11 @@ namespace Marble
 {
 
 /** Type of OSM element. */
-enum class OsmType { Node, Way, Relation };
+enum class OsmType {
+    Node,
+    Way,
+    Relation
+};
 
 /** Identifier for an OSM element.
  *  @note OSM uses distinct id spaces for all its three basic element types, so just the numeric id

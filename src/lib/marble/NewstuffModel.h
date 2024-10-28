@@ -47,7 +47,10 @@ public:
         DownloadedSize
     };
 
-    enum IdTag { PayloadTag, NameTag };
+    enum IdTag {
+        PayloadTag,
+        NameTag
+    };
 
     /** Constructor */
     explicit NewstuffModel(QObject *parent = nullptr);

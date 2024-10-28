@@ -56,17 +56,64 @@ public:
         // REMEMBER to change the implementation of conditionString() if you add items to this enum
     };
 
-    enum WindDirection { N, NNE, NE, ENE, E, SSE, SE, ESE, S, NNW, NW, WNW, W, SSW, SW, WSW, DirectionNotAvailable };
+    enum WindDirection {
+        N,
+        NNE,
+        NE,
+        ENE,
+        E,
+        SSE,
+        SE,
+        ESE,
+        S,
+        NNW,
+        NW,
+        WNW,
+        W,
+        SSW,
+        SW,
+        WSW,
+        DirectionNotAvailable
+    };
 
-    enum PressureDevelopment { Rising, NoChange, Falling, PressureDevelopmentNotAvailable };
+    enum PressureDevelopment {
+        Rising,
+        NoChange,
+        Falling,
+        PressureDevelopmentNotAvailable
+    };
 
-    enum Visibility { VeryGood, Good, Normal, Poor, VeryPoor, Fog, VisibilityNotAvailable };
+    enum Visibility {
+        VeryGood,
+        Good,
+        Normal,
+        Poor,
+        VeryPoor,
+        Fog,
+        VisibilityNotAvailable
+    };
 
-    enum SpeedUnit { kph, mph, mps, knots, beaufort };
+    enum SpeedUnit {
+        kph,
+        mph,
+        mps,
+        knots,
+        beaufort
+    };
 
-    enum TemperatureUnit { Celsius, Fahrenheit, Kelvin };
+    enum TemperatureUnit {
+        Celsius,
+        Fahrenheit,
+        Kelvin
+    };
 
-    enum PressureUnit { HectoPascal, KiloPascal, Bar, mmHg, inchHg };
+    enum PressureUnit {
+        HectoPascal,
+        KiloPascal,
+        Bar,
+        mmHg,
+        inchHg
+    };
 
     WeatherData();
     WeatherData(const WeatherData &other);

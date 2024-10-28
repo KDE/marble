@@ -23,9 +23,18 @@ class MARBLE_EXPORT ConflictDialog : public QDialog
     Q_OBJECT
 
 public:
-    enum Button { Local = 1, Cloud, AllLocal, AllCloud };
+    enum Button {
+        Local = 1,
+        Cloud,
+        AllLocal,
+        AllCloud
+    };
 
-    enum ResolveAction { AskUser, PreferLocal, PreferCloud };
+    enum ResolveAction {
+        AskUser,
+        PreferLocal,
+        PreferCloud
+    };
 
     explicit ConflictDialog(QWidget *parent = nullptr);
     void setMergeItem(MergeItem *item);

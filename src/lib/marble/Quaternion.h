@@ -21,7 +21,12 @@
 namespace Marble
 {
 
-enum { Q_X = 0, Q_Y = 1, Q_Z = 2, Q_W = 3 };
+enum {
+    Q_X = 0,
+    Q_Y = 1,
+    Q_Z = 2,
+    Q_W = 3
+};
 
 typedef qreal xmmfloat[4];
 typedef xmmfloat matrix[3];

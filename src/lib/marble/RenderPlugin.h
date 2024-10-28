@@ -50,7 +50,13 @@ public:
     /**
      * @brief A Type of plugin
      */
-    enum RenderType { UnknownRenderType, TopLevelRenderType, PanelRenderType, OnlineRenderType, ThemeRenderType };
+    enum RenderType {
+        UnknownRenderType,
+        TopLevelRenderType,
+        PanelRenderType,
+        OnlineRenderType,
+        ThemeRenderType
+    };
 
     explicit RenderPlugin(const MarbleModel *marbleModel);
     ~RenderPlugin() override;

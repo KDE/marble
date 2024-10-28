@@ -52,7 +52,12 @@ Q_SIGNALS:
     void defaultFeatureIdChanged(const QString &id);
 
 public:
-    enum Element { GeoDataElementIcon, Label, EditButton, ActionButton };
+    enum Element {
+        GeoDataElementIcon,
+        Label,
+        EditButton,
+        ActionButton
+    };
 
 protected:
     bool editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index) override;

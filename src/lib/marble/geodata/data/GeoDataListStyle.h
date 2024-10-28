@@ -38,7 +38,12 @@ public:
     /** Provides type information for downcasting a GeoNode */
     const char *nodeType() const override;
 
-    enum ListItemType { Check, RadioFolder, CheckOffOnly, CheckHideChildren };
+    enum ListItemType {
+        Check,
+        RadioFolder,
+        CheckOffOnly,
+        CheckHideChildren
+    };
 
     ListItemType listItemType() const;
     void setListItemType(ListItemType type);

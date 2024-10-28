@@ -39,7 +39,11 @@ public:
     /**
      * Status enumeration
      */
-    enum Status { Unknown, Success, Error };
+    enum Status {
+        Unknown,
+        Success,
+        Error
+    };
 
     /**
      * Getter for offline mode.

@@ -1157,7 +1157,11 @@ void kepler(double gm, double t0, double t, double m0, double a, double ecc, dou
                  In either case t0 signifies the time of perihelion passage.
      */
     const double dgrd = M_PI / 180.0;
-    enum { ell, par, hyp } kepc;
+    enum {
+        ell,
+        par,
+        hyp
+    } kepc;
     Mat3 m1, m2;
 
     kepc = ell; // just to keep the compiler happy

@@ -22,7 +22,10 @@ namespace Marble
 // AbstractInputHandler.
 // TODO: simply remove the LatLonEdit.ui file and embed code directly here?
 
-enum { PositiveSphereIndex = 0, NegativeSphereIndex = 1 };
+enum {
+    PositiveSphereIndex = 0,
+    NegativeSphereIndex = 1
+};
 
 class LatLonEditPrivate;
 

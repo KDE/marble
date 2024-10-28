@@ -45,9 +45,20 @@ class MARBLE_EXPORT AbstractProjection
 {
     // Not a QObject so far because we don't need to send signals.
 public:
-    enum SurfaceType { Cylindrical, Pseudocylindrical, Hybrid, Conical, Pseudoconical, Azimuthal };
+    enum SurfaceType {
+        Cylindrical,
+        Pseudocylindrical,
+        Hybrid,
+        Conical,
+        Pseudoconical,
+        Azimuthal
+    };
 
-    enum PreservationType { NoPreservation, Conformal, EqualArea };
+    enum PreservationType {
+        NoPreservation,
+        Conformal,
+        EqualArea
+    };
 
     /**
      * @brief Construct a new AbstractProjection.

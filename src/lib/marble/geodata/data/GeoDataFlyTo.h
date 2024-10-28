@@ -20,7 +20,10 @@ class GeoDataFlyToPrivate;
 class GEODATA_EXPORT GeoDataFlyTo : public GeoDataTourPrimitive
 {
 public:
-    enum FlyToMode { Bounce, Smooth };
+    enum FlyToMode {
+        Bounce,
+        Smooth
+    };
 
     GeoDataFlyTo();
 

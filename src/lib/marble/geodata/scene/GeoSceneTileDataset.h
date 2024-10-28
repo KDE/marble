@@ -37,7 +37,11 @@ class TileId;
 class GEODATA_EXPORT GeoSceneTileDataset : public GeoSceneAbstractDataset
 {
 public:
-    enum StorageLayout { Marble, OpenStreetMap, TileMapService };
+    enum StorageLayout {
+        Marble,
+        OpenStreetMap,
+        TileMapService
+    };
 
     explicit GeoSceneTileDataset(const QString &name);
     ~GeoSceneTileDataset() override;

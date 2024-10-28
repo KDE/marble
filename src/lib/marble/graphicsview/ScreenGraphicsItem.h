@@ -21,7 +21,10 @@ class ScreenGraphicsItemPrivate;
 class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
 {
 public:
-    enum GraphicsItemFlag { ItemIsMovable = 0x1, ItemIsHideable = 0x2 };
+    enum GraphicsItemFlag {
+        ItemIsMovable = 0x1,
+        ItemIsHideable = 0x2
+    };
     Q_DECLARE_FLAGS(GraphicsItemFlags, GraphicsItemFlag)
 
     explicit ScreenGraphicsItem(MarbleGraphicsItem *parent = nullptr);

@@ -22,7 +22,12 @@ class MARBLE_EXPORT SpeakersModel : public QAbstractListModel
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 
 public:
-    enum SpeakersModelRoles { Name = Qt::UserRole + 1, Path, IsLocal, IsRemote };
+    enum SpeakersModelRoles {
+        Name = Qt::UserRole + 1,
+        Path,
+        IsLocal,
+        IsRemote
+    };
 
     /** Constructor */
     explicit SpeakersModel(QObject *parent = nullptr);

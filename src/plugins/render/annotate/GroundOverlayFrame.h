@@ -19,9 +19,23 @@ class GroundOverlayFrame : public SceneGraphicsItem
 public:
     GroundOverlayFrame(GeoDataPlacemark *placemark, GeoDataGroundOverlay *overlay, TextureLayer *textureLayer);
 
-    enum MovedRegion { NoRegion = -1, NorthWest = 0, SouthWest, SouthEast, NorthEast, North, South, East, West, Polygon };
+    enum MovedRegion {
+        NoRegion = -1,
+        NorthWest = 0,
+        SouthWest,
+        SouthEast,
+        NorthEast,
+        North,
+        South,
+        East,
+        West,
+        Polygon
+    };
 
-    enum EditStatus { Resize, Rotate };
+    enum EditStatus {
+        Resize,
+        Rotate
+    };
 
     void update();
 

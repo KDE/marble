@@ -59,9 +59,15 @@ class FetchPreviewJob;
 class NewstuffModelPrivate
 {
 public:
-    enum NodeAction { Append, Replace };
+    enum NodeAction {
+        Append,
+        Replace
+    };
 
-    enum UserAction { Install, Uninstall };
+    enum UserAction {
+        Install,
+        Uninstall
+    };
 
     using Action = QPair<int, UserAction>;
 

@@ -39,7 +39,11 @@ public:
     /** Provides type information for downcasting a GeoNode */
     const char *nodeType() const override;
 
-    enum Shape { Rectangle, Cylinder, Sphere };
+    enum Shape {
+        Rectangle,
+        Cylinder,
+        Sphere
+    };
 
     qreal rotation() const;
     void setRotation(const qreal rotation);

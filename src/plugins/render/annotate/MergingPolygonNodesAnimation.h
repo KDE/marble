@@ -25,7 +25,10 @@ public:
     explicit MergingPolygonNodesAnimation(AreaAnnotation *polygon);
     ~MergingPolygonNodesAnimation() override;
 
-    enum NodesBoundary { InnerBoundary, OuterBoundary };
+    enum NodesBoundary {
+        InnerBoundary,
+        OuterBoundary
+    };
 
 public Q_SLOTS:
     void startAnimation();

@@ -52,7 +52,10 @@ public:
      * However the Marble's interfaces to the outside should default
      * to degrees.
      */
-    enum Unit { Radian, Degree };
+    enum Unit {
+        Radian,
+        Degree
+    };
 
     /**
      * @brief enum used to specify the notation / numerical system
@@ -81,7 +84,10 @@ public:
      * corresponds to the bearing value at A, the "FinalBearing" bearing to that
      * at B.
      */
-    enum BearingType { InitialBearing, FinalBearing };
+    enum BearingType {
+        InitialBearing,
+        FinalBearing
+    };
 
     // Type definitions
     using Vector = QList<GeoDataCoordinates>;

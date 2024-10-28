@@ -9,6 +9,10 @@ enum EInterpolationMethod {
     BilinearInterpolationMethod
 };
 
-enum MapSourceType { UnknownMapSource, NasaWorldWindMap, BathymetryMap };
+enum MapSourceType {
+    UnknownMapSource,
+    NasaWorldWindMap,
+    BathymetryMap
+};
 
 #endif

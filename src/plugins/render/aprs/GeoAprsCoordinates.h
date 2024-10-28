@@ -15,7 +15,13 @@ class GeoAprsCoordinates : public GeoDataCoordinates
 {
 public:
     // must match AprsObject's SeenFrom
-    enum SeenFrom { FromNowhere = 0x00, FromTTY = 0x01, FromTCPIP = 0x02, FromFile = 0x04, Directly = 0x08 };
+    enum SeenFrom {
+        FromNowhere = 0x00,
+        FromTTY = 0x01,
+        FromTCPIP = 0x02,
+        FromFile = 0x04,
+        Directly = 0x08
+    };
 
     GeoAprsCoordinates(qreal lon, qreal lat, int where);
     ~GeoAprsCoordinates() override;

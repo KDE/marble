@@ -30,7 +30,11 @@ class TileLoader : public QObject
     Q_OBJECT
 
 public:
-    enum TileStatus { Missing, Expired, Available };
+    enum TileStatus {
+        Missing,
+        Expired,
+        Available
+    };
 
     explicit TileLoader(HttpDownloadManager *const, const PluginManager *);
     ~TileLoader() override;

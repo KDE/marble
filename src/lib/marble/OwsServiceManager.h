@@ -16,11 +16,28 @@ class QNetworkReply;
 namespace Marble
 {
 
-enum OwsServiceType { NoOwsType, WmsType, WmtsType, WfsType, WcsType };
+enum OwsServiceType {
+    NoOwsType,
+    WmsType,
+    WmtsType,
+    WfsType,
+    WcsType
+};
 
-enum OwsCapabilitiesStatus { OwsCapabilitiesNone, OwsCapabilitiesSuccess, OwsCapabilitiesNoOwsServer, OwsCapabilitiesReplyUnreadable, OwsCapabilitiesFailed };
+enum OwsCapabilitiesStatus {
+    OwsCapabilitiesNone,
+    OwsCapabilitiesSuccess,
+    OwsCapabilitiesNoOwsServer,
+    OwsCapabilitiesReplyUnreadable,
+    OwsCapabilitiesFailed
+};
 
-enum WmsImageStatus { WmsImageNone, WmsImageSuccess, WmsImageFailed, WmsImageFailedServerMessage };
+enum WmsImageStatus {
+    WmsImageNone,
+    WmsImageSuccess,
+    WmsImageFailed,
+    WmsImageFailedServerMessage
+};
 
 class OwsMappingCapabilities
 {
@@ -103,7 +120,12 @@ public:
     QMap<QString, QMap<QString, QString>> m_wmtsTileResource; // layerId -> Format -> RessourceUrl
 };
 
-enum ImageResultType { GenericImage, LevelZeroTile, PreviewImage, LegendImage };
+enum ImageResultType {
+    GenericImage,
+    LevelZeroTile,
+    PreviewImage,
+    LegendImage
+};
 
 class ImageRequestResult
 {

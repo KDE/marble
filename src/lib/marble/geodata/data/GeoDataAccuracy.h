@@ -19,7 +19,15 @@ namespace Marble
 class GEODATA_EXPORT GeoDataAccuracy
 {
 public:
-    enum Level { none = 0, Country, Region, Locality, PostalCode, Street, Detailed };
+    enum Level {
+        none = 0,
+        Country,
+        Region,
+        Locality,
+        PostalCode,
+        Street,
+        Detailed
+    };
 
     explicit GeoDataAccuracy(Level level = none, qreal horizontal = 0.0, qreal vertical = 0.0);
 

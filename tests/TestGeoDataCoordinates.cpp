@@ -514,11 +514,27 @@ void TestGeoDataCoordinates::testNormalizeRadian()
     QCOMPARE(ceil(normalized_lat * 1000) / 1000, qreal(0.442));
 }
 
-enum SignType { NoSign, PositiveSign, NegativeSign };
-enum SphereType { PosSphere, NegSphere };
-enum UnitsType { NoUnits, WithUnits };
-enum SpacesType { NoSpaces, WithSpaces };
-enum LocaleType { CLocale, SystemLocale };
+enum SignType {
+    NoSign,
+    PositiveSign,
+    NegativeSign
+};
+enum SphereType {
+    PosSphere,
+    NegSphere
+};
+enum UnitsType {
+    NoUnits,
+    WithUnits
+};
+enum SpacesType {
+    NoSpaces,
+    WithSpaces
+};
+enum LocaleType {
+    CLocale,
+    SystemLocale
+};
 
 static QString
 createDegreeString(SignType signType, int degreeValue, int minutesValue, qreal secondsValue, LocaleType locale, UnitsType unitsType, SpacesType spacesType)

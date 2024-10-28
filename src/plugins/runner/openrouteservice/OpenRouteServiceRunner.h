@@ -22,7 +22,11 @@ class OpenRouteServiceRunner : public RoutingRunner
 {
     Q_OBJECT
 
-    enum PointType { StartPoint, ViaPoint, EndPoint };
+    enum PointType {
+        StartPoint,
+        ViaPoint,
+        EndPoint
+    };
 
 public:
     explicit OpenRouteServiceRunner(QObject *parent = nullptr);

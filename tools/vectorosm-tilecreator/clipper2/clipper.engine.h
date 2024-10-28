@@ -35,12 +35,31 @@ struct OutRec;
 struct HorzSegment;
 
 // Note: all clipping operations except for Difference are commutative.
-enum class ClipType { None, Intersection, Union, Difference, Xor };
+enum class ClipType {
+    None,
+    Intersection,
+    Union,
+    Difference,
+    Xor
+};
 
-enum class PathType { Subject, Clip };
-enum class JoinWith { None, Left, Right };
+enum class PathType {
+    Subject,
+    Clip
+};
+enum class JoinWith {
+    None,
+    Left,
+    Right
+};
 
-enum class VertexFlags : uint32_t { None = 0, OpenStart = 1, OpenEnd = 2, LocalMax = 4, LocalMin = 8 };
+enum class VertexFlags : uint32_t {
+    None = 0,
+    OpenStart = 1,
+    OpenEnd = 2,
+    LocalMax = 4,
+    LocalMin = 8
+};
 
 constexpr enum VertexFlags operator&(enum VertexFlags a, enum VertexFlags b)
 {

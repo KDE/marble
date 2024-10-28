@@ -31,7 +31,16 @@ public:
     /*
      * @brief Enum for different values of type attribute of SimpleField
      */
-    enum SimpleFieldType { String, Int, UInt, Short, UShort, Float, Double, Bool };
+    enum SimpleFieldType {
+        String,
+        Int,
+        UInt,
+        Short,
+        UShort,
+        Float,
+        Double,
+        Bool
+    };
 
     /*
      * @brief Return the value of type attribute of simple field

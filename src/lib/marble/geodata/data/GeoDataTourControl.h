@@ -16,7 +16,10 @@ namespace Marble
 class GEODATA_EXPORT GeoDataTourControl : public GeoDataTourPrimitive
 {
 public:
-    enum PlayMode { Play, Pause };
+    enum PlayMode {
+        Play,
+        Pause
+    };
 
     GeoDataTourControl();
     ~GeoDataTourControl() override;

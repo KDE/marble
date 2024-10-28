@@ -29,7 +29,10 @@ class TileId;
 class GEODATA_EXPORT GeoSceneAbstractTileProjection
 {
 public:
-    enum Type { Equirectangular, Mercator };
+    enum Type {
+        Equirectangular,
+        Mercator
+    };
 
     /**
      * @brief Construct a new GeoSceneAbstractTileProjection.

@@ -15,7 +15,13 @@ namespace Marble
 class PolylineNode
 {
 public:
-    enum PolyNodeFlag { NoOption = 0x0, NodeIsSelected = 0x1, NodeIsMerged = 0x2, NodeIsEditingHighlighted = 0x4, NodeIsMergingHighlighted = 0x8 };
+    enum PolyNodeFlag {
+        NoOption = 0x0,
+        NodeIsSelected = 0x1,
+        NodeIsMerged = 0x2,
+        NodeIsEditingHighlighted = 0x4,
+        NodeIsMergingHighlighted = 0x8
+    };
     Q_DECLARE_FLAGS(PolyNodeFlags, PolyNodeFlag)
 
     explicit PolylineNode(const QRegion &region = QRegion());

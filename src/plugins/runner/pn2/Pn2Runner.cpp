@@ -44,7 +44,13 @@
 namespace Marble
 {
 // Polygon header flags, representing the type of polygon
-enum polygonFlagType { LINESTRING = 0, LINEARRING = 1, OUTERBOUNDARY = 2, INNERBOUNDARY = 3, MULTIGEOMETRY = 4 };
+enum polygonFlagType {
+    LINESTRING = 0,
+    LINEARRING = 1,
+    OUTERBOUNDARY = 2,
+    INNERBOUNDARY = 3,
+    MULTIGEOMETRY = 4
+};
 
 Pn2Runner::Pn2Runner(QObject *parent)
     : ParsingRunner(parent)

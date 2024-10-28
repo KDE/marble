@@ -25,7 +25,9 @@ class SatellitesConfigDialog : public QDialog
     Q_OBJECT
 
 public:
-    enum { IsLoadedRole = Qt::UserRole + 1 };
+    enum {
+        IsLoadedRole = Qt::UserRole + 1
+    };
 
     explicit SatellitesConfigDialog(QWidget *parent = nullptr);
     ~SatellitesConfigDialog() override;

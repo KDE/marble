@@ -22,9 +22,18 @@ namespace Marble
 
 class GeoDataLineString;
 
-enum ElementType { NoType, NodeType, WayType, RelationType };
+enum ElementType {
+    NoType,
+    NodeType,
+    WayType,
+    RelationType
+};
 
-enum RelationRole { None, Outer, Inner };
+enum RelationRole {
+    None,
+    Outer,
+    Inner
+};
 
 struct OsmOsmRegion {
     OsmOsmRegion *parent;

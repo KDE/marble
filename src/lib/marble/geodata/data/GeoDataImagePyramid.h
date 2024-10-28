@@ -32,7 +32,10 @@ public:
     /** Provides type information for downcasting a GeoNode */
     const char *nodeType() const override;
 
-    enum GridOrigin { LowerLeft, UpperLeft };
+    enum GridOrigin {
+        LowerLeft,
+        UpperLeft
+    };
 
     int tileSize() const;
     void setTileSize(int tileSize);

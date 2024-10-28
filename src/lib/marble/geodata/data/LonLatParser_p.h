@@ -22,7 +22,10 @@ namespace Marble
 class LonLatParser
 {
 private:
-    enum DirPosition { PrefixDir, PostfixDir };
+    enum DirPosition {
+        PrefixDir,
+        PostfixDir
+    };
 
     /**
      * Parses the double value from the input string in system locale

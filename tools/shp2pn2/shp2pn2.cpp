@@ -55,7 +55,13 @@ using namespace Marble;
 qreal epsilon = 1.0;
 
 // Polygon header flags, representing the type of polygon
-enum polygonFlagType { LINESTRING = 0, LINEARRING = 1, OUTERBOUNDARY = 2, INNERBOUNDARY = 3, MULTIGEOMETRY = 4 };
+enum polygonFlagType {
+    LINESTRING = 0,
+    LINEARRING = 1,
+    OUTERBOUNDARY = 2,
+    INNERBOUNDARY = 3,
+    MULTIGEOMETRY = 4
+};
 
 qreal latDistance(const GeoDataCoordinates &A, const GeoDataCoordinates &B)
 {

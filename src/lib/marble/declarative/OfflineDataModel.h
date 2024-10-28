@@ -19,7 +19,13 @@ class OfflineDataModel : public QSortFilterProxyModel
     Q_FLAGS(VehicleType VehicleTypes)
 
 public:
-    enum VehicleType { None = 0x0, Motorcar = 0x1, Bicycle = 0x2, Pedestrian = 0x4, Any = Motorcar | Bicycle | Pedestrian };
+    enum VehicleType {
+        None = 0x0,
+        Motorcar = 0x1,
+        Bicycle = 0x2,
+        Pedestrian = 0x4,
+        Any = Motorcar | Bicycle | Pedestrian
+    };
 
     Q_DECLARE_FLAGS(VehicleTypes, VehicleType)
 

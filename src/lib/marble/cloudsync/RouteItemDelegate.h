@@ -28,7 +28,16 @@ Q_SIGNALS:
     void uploadToCloudButtonClicked(const QString &timestamp);
 
 private:
-    enum Element { Text, OpenButton, DownloadButton, RemoveFromCacheButton, RemoveFromCloudButton, Progressbar, Preview, UploadToCloudButton };
+    enum Element {
+        Text,
+        OpenButton,
+        DownloadButton,
+        RemoveFromCacheButton,
+        RemoveFromCloudButton,
+        Progressbar,
+        Preview,
+        UploadToCloudButton
+    };
 
     int buttonWidth(const QStyleOptionViewItem &option) const;
     QStyleOptionButton button(Element element, const QStyleOptionViewItem &option) const;

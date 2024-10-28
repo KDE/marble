@@ -22,7 +22,12 @@ class GeoDataTimeStampPrivate;
 class GEODATA_EXPORT GeoDataTimeStamp : public GeoDataTimePrimitive
 {
 public:
-    enum TimeResolution { SecondResolution, DayResolution, MonthResolution, YearResolution };
+    enum TimeResolution {
+        SecondResolution,
+        DayResolution,
+        MonthResolution,
+        YearResolution
+    };
 
     GeoDataTimeStamp();
     GeoDataTimeStamp(const GeoDataTimeStamp &other);

@@ -95,7 +95,11 @@ public:
      */
     void setLabelRect(const QRectF &area);
 
-    enum LabelStyle { Normal = 0, Glow, Selected };
+    enum LabelStyle {
+        Normal = 0,
+        Glow,
+        Selected
+    };
 
     void setStyle(const GeoDataStyle::ConstPtr &style);
 

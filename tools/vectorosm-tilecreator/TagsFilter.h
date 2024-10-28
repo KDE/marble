@@ -23,7 +23,10 @@ public:
     typedef QPair<QString, QString> Tag;
     using Tags = QList<Tag>;
 
-    enum FilterFlag { NoFlag = 0, FilterRailwayService };
+    enum FilterFlag {
+        NoFlag = 0,
+        FilterRailwayService
+    };
 
     // Filters placemarks which have tags in the hash
     TagsFilter(GeoDataDocument *document, const Tags &tagsList, FilterFlag filterFlag = NoFlag);

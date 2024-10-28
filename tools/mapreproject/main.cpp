@@ -102,7 +102,15 @@ ReadOnlyMapDefinition parseInput(char *subopts)
     if (!subopts)
         qFatal("Missing argument for '--input'");
 
-    enum { TypeOption = 0, BaseDirectoryOption, FileOption, TileLevelOption, InterpolationOption, CacheSizeOption, TheEnd };
+    enum {
+        TypeOption = 0,
+        BaseDirectoryOption,
+        FileOption,
+        TileLevelOption,
+        InterpolationOption,
+        CacheSizeOption,
+        TheEnd
+    };
 
     char optionType[] = "type";
     char optionBaseDirectory[] = "base-directory";
@@ -167,7 +175,15 @@ int main(int argc, char *argv[])
     // --input,type=NasaWW,tile-level=8,base-directory=<dir>,interpolation-method=Bilinear
     // --input,type=Image,file=<file>
 
-    enum { HelpOption = 1, InputOption, OutputDirectoryOption, OutputTileLevelOption, JobsOption, ClusterSizeOption, SimulateOption };
+    enum {
+        HelpOption = 1,
+        InputOption,
+        OutputDirectoryOption,
+        OutputTileLevelOption,
+        JobsOption,
+        ClusterSizeOption,
+        SimulateOption
+    };
 
     static struct option long_options[] = {{"help", no_argument, nullptr, HelpOption},
                                            {"input", required_argument, nullptr, InputOption},

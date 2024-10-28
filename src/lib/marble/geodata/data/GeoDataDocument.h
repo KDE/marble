@@ -20,7 +20,14 @@
 namespace Marble
 {
 
-enum DocumentRole { UnknownDocument, MapDocument, UserDocument, TrackingDocument, BookmarkDocument, SearchResultDocument };
+enum DocumentRole {
+    UnknownDocument,
+    MapDocument,
+    UserDocument,
+    TrackingDocument,
+    BookmarkDocument,
+    SearchResultDocument
+};
 
 class GeoDataStyleMap;
 class GeoDataNetworkLinkControl;

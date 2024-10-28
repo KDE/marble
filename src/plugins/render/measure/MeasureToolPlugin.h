@@ -38,7 +38,10 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
 public:
     explicit MeasureToolPlugin(const MarbleModel *marbleModel = nullptr);
 
-    enum PaintMode { Polygon = 0, Circular };
+    enum PaintMode {
+        Polygon = 0,
+        Circular
+    };
 
     QStringList backendTypes() const override;
     QString renderPolicy() const override;

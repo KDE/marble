@@ -44,11 +44,21 @@ public:
     bool isWritable() const;
     bool exists() const;
 
-    enum Status { NoError, FileWriteError, FileOpenError, FilePermissionsError, FileError };
+    enum Status {
+        NoError,
+        FileWriteError,
+        FileOpenError,
+        FilePermissionsError,
+        FileError
+    };
 
     Status status() const;
 
-    enum CompressionPolicy { AlwaysCompress, NeverCompress, AutoCompress };
+    enum CompressionPolicy {
+        AlwaysCompress,
+        NeverCompress,
+        AutoCompress
+    };
 
     void setCompressionPolicy(CompressionPolicy policy);
     CompressionPolicy compressionPolicy() const;

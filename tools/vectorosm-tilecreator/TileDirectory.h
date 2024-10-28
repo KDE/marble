@@ -45,9 +45,15 @@ class TileDirectory : public QObject
     Q_OBJECT
 
 public:
-    enum TileType { Landmass, OpenStreetMap };
+    enum TileType {
+        Landmass,
+        OpenStreetMap
+    };
 
-    enum InputType { OsmxInput, RawInput };
+    enum InputType {
+        OsmxInput,
+        RawInput
+    };
 
     TileDirectory(TileType tileType, const QString &cacheDir, ParsingRunnerManager &manager, int maxZoomLevel);
     /** Create a tile directory for loading data from an OSMX file.

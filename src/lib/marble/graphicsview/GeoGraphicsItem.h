@@ -44,7 +44,12 @@ public:
     explicit GeoGraphicsItem(const GeoDataFeature *feature);
     virtual ~GeoGraphicsItem();
 
-    enum GeoGraphicsItemFlag { NoOptions = 0x0, ItemIsMovable = 0x1, ItemIsSelectable = 0x2, ItemIsVisible = 0x4 };
+    enum GeoGraphicsItemFlag {
+        NoOptions = 0x0,
+        ItemIsMovable = 0x1,
+        ItemIsSelectable = 0x2,
+        ItemIsVisible = 0x4
+    };
 
     Q_DECLARE_FLAGS(GeoGraphicsItemFlags, GeoGraphicsItemFlag)
 

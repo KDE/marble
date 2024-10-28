@@ -27,7 +27,9 @@ public:
     void setTileLevel(int const level);
 
 private:
-    enum { DefaultCacheSizeBytes = 32 * 1024 * 1024 };
+    enum {
+        DefaultCacheSizeBytes = 32 * 1024 * 1024
+    };
 
     static int tileId(int const tileX, int const tileY);
     QPair<QImage, bool> tile(int const tileX, int const tileY);
