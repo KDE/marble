@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-10-22 23:18+0300\n"
+"PO-Revision-Date: 2024-10-27 07:53+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -188,12 +188,12 @@ msgstr "העתק קואורדינטות"
 #. file data/maps/earth/temp-july/temp-july.dgml:11
 msgctxt "DGML|"
 msgid "Temperature (July)"
-msgstr ""
+msgstr "טמפרטורה (יולי)"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:21
 msgctxt "DGML|"
 msgid "A map which shows the average temperature in July."
-msgstr ""
+msgstr "מפה שמציגה את הטמפרטורה הממוצעת ביולי."
 
 #. file data/maps/earth/temp-july/temp-july.dgml:165
 #. ----------
@@ -355,7 +355,7 @@ msgstr "העתק קואורדינטות"
 #. file data/maps/sky/nightsky/nightsky.dgml:142
 msgctxt "DGML|"
 msgid "Magnetic Pole"
-msgstr ""
+msgstr "קוטב מגנטי"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:190
 #. ----------
@@ -501,70 +501,70 @@ msgstr "נהר"
 #. file data/maps/earth/temp-dec/temp-dec.dgml:232
 msgctxt "DGML|"
 msgid "42&deg;C"
-msgstr ""
+msgstr "42&deg;C"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:237
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:236
 msgctxt "DGML|"
 msgid "32&deg;C"
-msgstr ""
+msgstr "32&deg;C"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:241
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:240
 msgctxt "DGML|"
 msgid "23&deg;C"
-msgstr ""
+msgstr "23&deg;C"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:245
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:244
 msgctxt "DGML|"
 msgid "12&deg;C"
-msgstr ""
+msgstr "12&deg;C"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:249
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:248
 msgctxt "DGML|"
 msgid "1&deg;C"
-msgstr ""
+msgstr "1&deg;C"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:253
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:252
 msgctxt "DGML|"
 msgid "-10&deg;C"
-msgstr ""
+msgstr "‎-10&deg;C"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:257
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:256
 msgctxt "DGML|"
 msgid "-21&deg;C"
-msgstr ""
+msgstr "‎-21&deg;C"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:261
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:260
 msgctxt "DGML|"
 msgid "-32&deg;C"
-msgstr ""
+msgstr "‎-32&deg;C"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:265
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:264
 msgctxt "DGML|"
 msgid "-41&deg;C"
-msgstr ""
+msgstr "‎-41&deg;C"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:269
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:268
 msgctxt "DGML|"
 msgid "-69&deg;C"
-msgstr ""
+msgstr "‎-69&deg;C"
 
 #. file data/maps/earth/citylights/citylights.dgml:11
 #, fuzzy
@@ -590,7 +590,7 @@ msgstr ""
 #. file data/maps/earth/bluemarble/bluemarble.dgml:248
 msgctxt "DGML|"
 msgid "Surface"
-msgstr ""
+msgstr "משטח"
 
 #. file data/maps/earth/citylights/citylights.dgml:158
 #. ----------
@@ -892,14 +892,14 @@ msgstr "מיקום"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:329
 msgctxt "DGML|"
 msgid "Financial"
-msgstr ""
+msgstr "כלכלי"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:338
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:344
 msgctxt "DGML|"
 msgid "Healthcare"
-msgstr ""
+msgstr "רפואי"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:357
 #. ----------
@@ -935,7 +935,7 @@ msgstr "חירום"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:431
 msgctxt "DGML|"
 msgid "Historic"
-msgstr ""
+msgstr "היסטורי"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:436
 #. ----------
@@ -956,7 +956,7 @@ msgstr "חנות"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:128
 msgctxt "DGML|"
 msgid "Motorway"
-msgstr ""
+msgstr "דרכי תחבורה"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:126
 #. ----------
@@ -970,28 +970,28 @@ msgstr ""
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:136
 msgctxt "DGML|"
 msgid "Primary road"
-msgstr ""
+msgstr "דרך ראשית"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:134
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:140
 msgctxt "DGML|"
 msgid "Secondary road"
-msgstr ""
+msgstr "דרך משנית"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:138
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:144
 msgctxt "DGML|"
 msgid "Unclassified road"
-msgstr ""
+msgstr "דרך לא מסווגת"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:142
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:148
 msgctxt "DGML|"
 msgid "Unsurfaced road"
-msgstr ""
+msgstr "דרך לא סלולה"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:146
 #. ----------
@@ -1079,7 +1079,7 @@ msgstr ""
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:196
 msgctxt "DGML|"
 msgid "Administrative boundary"
-msgstr ""
+msgstr "גבול מנהלי"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:194
 #. ----------
@@ -1094,7 +1094,7 @@ msgstr "גבולות"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:204
 msgctxt "DGML|"
 msgid "Tunnel"
-msgstr ""
+msgstr "מנהרה"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:205
 #. ----------
@@ -1109,28 +1109,28 @@ msgstr "גבולות"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:215
 msgctxt "DGML|"
 msgid "Wood"
-msgstr ""
+msgstr "עץ"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:213
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:219
 msgctxt "DGML|"
 msgid "Golf course"
-msgstr ""
+msgstr "מסלול גולף"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:217
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:223
 msgctxt "DGML|"
 msgid "Park"
-msgstr ""
+msgstr "חנייה"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:221
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:227
 msgctxt "DGML|"
 msgid "Residential Area"
-msgstr ""
+msgstr "אזור מגורים"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:225
 #. ----------
@@ -1159,7 +1159,7 @@ msgstr ""
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:243
 msgctxt "DGML|"
 msgid "Industrial Area"
-msgstr ""
+msgstr "אזור תעשיה"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:241
 #. ----------
@@ -1478,7 +1478,7 @@ msgstr ""
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:453
 msgctxt "DGML|"
 msgid "Cafe"
-msgstr ""
+msgstr "בית קפה"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:451
 #. ----------
@@ -1671,7 +1671,7 @@ msgstr ""
 #. file data/maps/earth/precip-july/precip-july.dgml:11
 msgctxt "DGML|"
 msgid "Precipitation (July)"
-msgstr ""
+msgstr "משקעים (יולי)"
 
 #. file data/maps/earth/precip-july/precip-july.dgml:21
 msgctxt "DGML|"
@@ -1765,12 +1765,12 @@ msgstr "משקעים (דצמבר)"
 #. file data/maps/earth/precip-dec/precip-dec.dgml:21
 msgctxt "DGML|"
 msgid "A map which shows the average precipitation in December."
-msgstr ""
+msgstr "מפה שמציגה את כמות המשקעים הממוצעת בדצמבר."
 
 #. file data/maps/earth/schagen1689/schagen1689.dgml:11
 msgctxt "DGML|"
 msgid "Historical Map 1689"
-msgstr ""
+msgstr "מפה היסטורית מ־1689"
 
 #. file data/maps/earth/schagen1689/schagen1689.dgml:21
 msgctxt "DGML|"
@@ -1778,6 +1778,7 @@ msgid ""
 "<i>Historical world map</i> from the year 1689 created by G. van Schagen in "
 "Amsterdam."
 msgstr ""
+"<i>מפה היסטורית של העולם</i> משנת 1689 נוצרה על ידי ג׳. ואן שאגן באמסטרדם."
 
 #. file data/maps/earth/schagen1689/schagen1689.dgml:148
 #, fuzzy
@@ -2421,6 +2422,8 @@ msgid ""
 "Sorry, unable to open '%1':\n"
 "'%2'"
 msgstr ""
+"מחילה, לא ניתן לפתוח את ‚%1’:\n"
+"‚%2’"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:265
 #, fuzzy
@@ -2461,7 +2464,7 @@ msgstr "הורד &איזור..."
 #: src/apps/marble-qt/QtMainWindow.cpp:280
 msgctxt "Marble::MainWindow|"
 msgid "Download a map region in different zoom levels for offline usage"
-msgstr ""
+msgstr "הורדת אזור במפה ברמות תקריב שונות לשימוש בלתי מקוון"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:283
 #, fuzzy
@@ -2485,7 +2488,7 @@ msgstr "הדפסת תצלום של המפה"
 #: src/apps/marble-qt/QtMainWindow.cpp:288
 msgctxt "Marble::MainWindow|"
 msgid "Print Previe&w ..."
-msgstr ""
+msgstr "הצגה מ&קדימה להדפסה…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:292
 #, fuzzy
@@ -2526,27 +2529,27 @@ msgstr "&עריכה"
 #: src/apps/marble-qt/QtMainWindow.cpp:304
 msgctxt "Marble::MainWindow|"
 msgid "Edit the current map region in an external editor"
-msgstr ""
+msgstr "עריכת האזור הנוכחי במפה בעורך חיצוני"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:308
 msgctxt "Marble::MainWindow|"
 msgid "&Record Movie"
-msgstr ""
+msgstr "ה&קלטת סרט"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:309
 msgctxt "Marble::MainWindow|"
 msgid "Records a movie of the globe"
-msgstr ""
+msgstr "הקלטת סרט של הגלובוס"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:314
 msgctxt "Marble::MainWindow|"
 msgid "&Stop Recording"
-msgstr ""
+msgstr "&עצירת הקלטה"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:315
 msgctxt "Marble::MainWindow|"
 msgid "Stop recording a movie of the globe"
-msgstr ""
+msgstr "עצירת הקלטת סרט של הגלובוס"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:320
 #, fuzzy
@@ -2605,7 +2608,7 @@ msgstr "אוכלוסייה:"
 #: src/apps/marble-qt/QtMainWindow.cpp:341
 msgctxt "Marble::MainWindow|"
 msgid "Lock Position of Floating Items"
-msgstr ""
+msgstr "נעילת מקום הפריטים הצפים"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:344
 #, fuzzy
@@ -2652,7 +2655,7 @@ msgstr "הגדרת פקד השליטה על השמש"
 #: src/apps/marble-qt/QtMainWindow.cpp:361
 msgctxt "Marble::MainWindow|"
 msgid "&Redisplay"
-msgstr ""
+msgstr "הצגה מ&חדש"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:363
 #, fuzzy
@@ -2687,12 +2690,12 @@ msgstr "הצג הסבר מפורט של הפעולה."
 #: src/apps/marble-qt/QtMainWindow.cpp:376
 msgctxt "Marble::MainWindow|"
 msgid "&Community Forum"
-msgstr ""
+msgstr "&פורום הקהילה"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:377
 msgctxt "Marble::MainWindow|"
 msgid "Visit Marble's Community Forum"
-msgstr ""
+msgstr "ביקור בפורום קהילת Marble"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:380
 #, fuzzy
@@ -2746,7 +2749,7 @@ msgstr "ייצא מפה"
 #: src/apps/marble-qt/QtMainWindow.cpp:399
 msgctxt "Marble::MainWindow|"
 msgid "Toggle display of Bookmarks"
-msgstr ""
+msgstr "החלפת תצוגת הסימניות"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:403
 #, fuzzy
@@ -2763,32 +2766,32 @@ msgstr "ייצא מפה"
 #: src/apps/marble-qt/QtMainWindow.cpp:408
 msgctxt "Marble::MainWindow|"
 msgid "&Create a New Map..."
-msgstr ""
+msgstr "יצירת מפה &חדשה…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:409
 msgctxt "Marble::MainWindow|"
 msgid "A wizard guides you through the creation of your own map theme."
-msgstr ""
+msgstr "אשף מנחה אותך ביצירת ערכת העיצוב מפה משלך."
 
 #: src/apps/marble-qt/QtMainWindow.cpp:413
 msgctxt "Marble::MainWindow|"
 msgid "Show Tile Zoom Level"
-msgstr ""
+msgstr "הצגת רמת תקריב אריח"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:420
 msgctxt "Marble::MainWindow|"
 msgid "Degree (DMS)"
-msgstr ""
+msgstr "מעלה (DMS)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:425
 msgctxt "Marble::MainWindow|"
 msgid "Degree (Decimal)"
-msgstr ""
+msgstr "מעלה (עשרונית)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:430
 msgctxt "Marble::MainWindow|"
 msgid "Universal Transverse Mercator (UTM)"
-msgstr ""
+msgstr "מרקטור רוחבי בינלאומי (UTM)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:444
 #, fuzzy
@@ -2811,7 +2814,7 @@ msgstr "&תצוגה"
 #: src/apps/marble-qt/QtMainWindow.cpp:466
 msgctxt "Marble::MainWindow|"
 msgid "&Info Boxes"
-msgstr ""
+msgstr "&תיבות מידע"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:467
 #, fuzzy
@@ -2858,7 +2861,7 @@ msgstr "בית"
 #: src/apps/marble-qt/QtMainWindow.cpp:602
 msgctxt "Marble::MainWindow|"
 msgid "Default"
-msgstr ""
+msgstr "ברירת מחדל"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:718
 #, fuzzy
@@ -2935,12 +2938,12 @@ msgstr "פתח קובץ"
 #: src/apps/marble-qt/QtMainWindow.cpp:989
 msgctxt "Marble::MainWindow|"
 msgid "&Angle Display Unit"
-msgstr ""
+msgstr "י&חידת הצגת זוויות"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:1221
 msgctxt "Marble::MainWindow|"
 msgid "Unnamed"
-msgstr ""
+msgstr "ללא שם"
 
 #: src/apps/marble-ui/ControlView.cpp:76
 #, fuzzy
@@ -2957,49 +2960,49 @@ msgstr ""
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC (%1x%2)"
-msgstr ""
+msgstr "NTSC (%1×%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:273
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL (%1x%2)"
-msgstr ""
+msgstr "PAL (%1×%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:274
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC 16:9 (%1x%2)"
-msgstr ""
+msgstr "NTSC 16:9 (%1×%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:275
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL 16:9 (%1x%2)"
-msgstr ""
+msgstr "PAL 16:9 (%1×%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:277
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "DVD (%1x%2p)"
-msgstr ""
+msgstr "DVD (%1×%2p)"
 
 #: src/apps/marble-ui/ControlView.cpp:279
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "HD (%1x%2p)"
-msgstr ""
+msgstr "HD (%1×%2p)"
 
 #: src/apps/marble-ui/ControlView.cpp:281
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Full HD (%1x%2p)"
-msgstr ""
+msgstr "HD מלא (%1×%2p)"
 
 #: src/apps/marble-ui/ControlView.cpp:282
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Digital Cinema (%1x%2)"
-msgstr ""
+msgstr "קולנוע דיגיטלי (%1×%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:467
 msgctxt "Marble::ControlView|"
@@ -3313,18 +3316,18 @@ msgstr ""
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
 msgid "New…"
-msgstr ""
+msgstr "חדש…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Rename…"
-msgstr ""
+msgstr "שינוי שם…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
 #: src/lib/marble/BookmarkManagerDialog.ui:151
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Delete"
-msgstr ""
+msgstr "מחיקה"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:118
 #, fuzzy
@@ -3341,18 +3344,18 @@ msgstr "&עריכה"
 #: src/lib/marble/CacheStoragePolicy.cpp:31
 msgctxt "QObject|"
 msgid "Unable to insert data into cache"
-msgstr ""
+msgstr "לא ניתן להכניס נתונים למטמון"
 
 #: src/lib/marble/CelestialSortFilterProxyModel.cpp:31
 #: src/lib/marble/CelestialSortFilterProxyModel.cpp:32
 msgctxt "Marble::CelestialSortFilterProxyModel|"
 msgid "Moon"
-msgstr ""
+msgstr "ירח"
 
 #: src/lib/marble/CelestialSortFilterProxyModel.cpp:34
 msgctxt "Marble::CelestialSortFilterProxyModel|"
 msgid "moon"
-msgstr ""
+msgstr "ירח"
 
 #: src/lib/marble/CelestialSortFilterProxyModel.cpp:36
 msgctxt "Marble::CelestialSortFilterProxyModel|"
@@ -3410,19 +3413,19 @@ msgstr "מפה רגילה"
 #, qt-format
 msgctxt "Marble::ConflictDialog|"
 msgid "Path: %0 <br /> Name: %1 <br /> Description: %2 <br /> Status: %3"
-msgstr ""
+msgstr "נתיב: %0 <br /> שם: %1 <br /> תיאור: %2 <br /> מצב: %3"
 
 #: src/lib/marble/cloudsync/ConflictDialog.cpp:126
 #: src/lib/marble/cloudsync/ConflictDialog.cpp:146
 msgctxt "Marble::ConflictDialog|"
 msgid "Changed"
-msgstr ""
+msgstr "השתנה"
 
 #: src/lib/marble/cloudsync/ConflictDialog.cpp:129
 #: src/lib/marble/cloudsync/ConflictDialog.cpp:149
 msgctxt "Marble::ConflictDialog|"
 msgid "Deleted"
-msgstr ""
+msgstr "נמחק"
 
 #: src/lib/marble/cloudsync/ConflictDialog.cpp:141
 #, fuzzy
@@ -3440,33 +3443,33 @@ msgstr ""
 #: src/lib/marble/cloudsync/ConflictDialog.cpp:176
 msgctxt "Marble::ConflictDialog|"
 msgid "Synchronization Conflict"
-msgstr ""
+msgstr "סתירת סנכרון"
 
 #: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:286
 #, qt-format
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "Server '%1' could not be reached"
-msgstr ""
+msgstr "לא ניתן לגשת לשרת ‚%1’"
 
 #: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:304
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "The Marble app is not installed on the ownCloud server"
-msgstr ""
+msgstr "יישומון Marble לא מותקן בשרת ה־ownCloud"
 
 #: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:306
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "The server is not an ownCloud server"
-msgstr ""
+msgstr "השרת אינו שרת ownCloud"
 
 #: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:310
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "Username or password are incorrect"
-msgstr ""
+msgstr "שם המשתמש או הסיסמה שגויים"
 
 #: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:313
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "Login successful"
-msgstr ""
+msgstr "הכניסה הצליחה"
 
 #: src/lib/marble/cloudsync/RouteItemDelegate.cpp:183
 #: src/lib/marble/cloudsync/RouteItemDelegate.cpp:204
@@ -3479,7 +3482,7 @@ msgstr "&פתח..."
 #: src/lib/marble/cloudsync/RouteItemDelegate.cpp:209
 msgctxt "Marble::RouteItemDelegate|"
 msgid "Load"
-msgstr ""
+msgstr "טעינה"
 
 #: src/lib/marble/cloudsync/RouteItemDelegate.cpp:185
 #: src/lib/marble/cloudsync/RouteItemDelegate.cpp:214
@@ -3492,12 +3495,12 @@ msgstr "ה&סר נקודות מדידה"
 #: src/lib/marble/cloudsync/RouteItemDelegate.cpp:219
 msgctxt "Marble::RouteItemDelegate|"
 msgid "Delete from cloud"
-msgstr ""
+msgstr "מחיקה מהענן"
 
 #: src/lib/marble/cloudsync/RouteItemDelegate.cpp:224
 msgctxt "Marble::RouteItemDelegate|"
 msgid "Upload to cloud"
-msgstr ""
+msgstr "העלה לענן"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:109
 msgctxt "Marble::CurrentLocationWidget|"
@@ -3512,7 +3515,7 @@ msgstr ""
 #: src/lib/marble/CurrentLocationWidget.cpp:186
 msgctxt "QObject|"
 msgid "Waiting for current location information..."
-msgstr ""
+msgstr "בהמתנה לפרטי המקום הנוכחיים…"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:192
 #, fuzzy
@@ -3615,7 +3618,7 @@ msgstr "אוכלוסייה:"
 #: src/lib/marble/CurrentLocationWidget.ui:37
 msgctxt "CurrentLocationWidget|"
 msgid "Disabled"
-msgstr ""
+msgstr "מושבת"
 
 #: src/lib/marble/CurrentLocationWidget.ui:53
 #, fuzzy
@@ -3633,7 +3636,7 @@ msgstr "עקוב אחר GPS"
 #: src/lib/marble/CurrentLocationWidget.ui:91
 msgctxt "CurrentLocationWidget|"
 msgid "…"
-msgstr ""
+msgstr "…"
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
 msgctxt "CurrentLocationWidget|"
@@ -3650,43 +3653,43 @@ msgstr ""
 #: src/lib/marble/CurrentLocationWidget.ui:154
 msgctxt "CurrentLocationWidget|"
 msgid "Map Adjustment"
-msgstr ""
+msgstr "כיוון המפה"
 
 #: src/lib/marble/CurrentLocationWidget.ui:165
 msgctxt "CurrentLocationWidget|Disable Auto Recenter"
 msgid "Disabled"
-msgstr ""
+msgstr "מושבת"
 
 #: src/lib/marble/CurrentLocationWidget.ui:170
 msgctxt ""
 "CurrentLocationWidget|Always keep gps location at the center of the map"
 msgid "Keep at Center"
-msgstr ""
+msgstr "להשאיר במרכז"
 
 #: src/lib/marble/CurrentLocationWidget.ui:175
 msgctxt "CurrentLocationWidget|Auto center when required"
 msgid "When required"
-msgstr ""
+msgstr "בעת הצורך"
 
 #: src/lib/marble/CurrentLocationWidget.ui:186
 msgctxt "CurrentLocationWidget|Auto Zoom to appropriate zoom level"
 msgid "Auto Zoom to appropriate zoom level"
-msgstr ""
+msgstr "תקריב אוטומטית לרמת התקריב המתאימה"
 
 #: src/lib/marble/CurrentLocationWidget.ui:189
 msgctxt "CurrentLocationWidget|"
 msgid "Auto Zoom"
-msgstr ""
+msgstr "תקריב אוטומטי"
 
 #: src/lib/marble/DataMigration.cpp:90
 msgctxt "Marble::DataMigration|"
 msgid "Marble data conversion"
-msgstr ""
+msgstr "המרת נתונים של Marble"
 
 #: src/lib/marble/DataMigration.cpp:91
 msgctxt "Marble::DataMigration|"
 msgid "Converting data ..."
-msgstr ""
+msgstr "המרת נתונים…"
 
 #: src/lib/marble/DataMigrationWidget.ui:20
 #, fuzzy
@@ -3714,20 +3717,20 @@ msgstr "מיקום נוכחי"
 msgctxt "Marble::Placemark|"
 msgid "%n rooms"
 msgid_plural "%n rooms"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "חדר"
+msgstr[1] "שני חדרים"
+msgstr[2] "%n חדרים"
+msgstr[3] "%n חדרים"
 
 #: src/lib/marble/declarative/Placemark.cpp:99
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%n beds"
 msgid_plural "%n beds"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "מיטה"
+msgstr[1] "שתי מיטות"
+msgstr[2] "%n מיטות"
+msgstr[3] "%n מיטות"
 
 #: src/lib/marble/declarative/Placemark.cpp:105
 #, fuzzy, qt-format
@@ -3739,12 +3742,12 @@ msgstr "עקוב אחר GPS"
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Maximum parking time %1"
-msgstr ""
+msgstr "זמן החנייה המרבי הוא %1"
 
 #: src/lib/marble/declarative/Placemark.cpp:140
 msgctxt "Marble::Placemark|A copy shop provides computers for customer use"
 msgid "Computers available"
-msgstr ""
+msgstr "מחשבים זמינים"
 
 #: src/lib/marble/declarative/Placemark.cpp:144
 #, fuzzy
@@ -3756,40 +3759,40 @@ msgstr "הצג סרגל ניווט"
 #: src/lib/marble/declarative/Placemark.cpp:148
 msgctxt "Marble::Placemark|A copy shop provides photocopying service"
 msgid "Photocopying service"
-msgstr ""
+msgstr "שירות צילום מסמכים"
 
 #: src/lib/marble/declarative/Placemark.cpp:152
 msgctxt "Marble::Placemark|A copy shop does not provide photocopying service"
 msgid "No photocopying service"
-msgstr ""
+msgstr "אין שירות צילום מסמכים"
 
 #: src/lib/marble/declarative/Placemark.cpp:156
 msgctxt ""
 "Marble::Placemark|A copy shop provides a service for scanning documents into "
 "digital files"
 msgid "Digital scanning"
-msgstr ""
+msgstr "סריקה דיגיטלית"
 
 #: src/lib/marble/declarative/Placemark.cpp:160
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a service for scanning "
 "documents into digital files"
 msgid "No digital scanning"
-msgstr ""
+msgstr "אין סריקה דיגיטלית"
 
 #: src/lib/marble/declarative/Placemark.cpp:164
 msgctxt ""
 "Marble::Placemark|A copy shop provides a service to send documents through "
 "fax"
 msgid "Fax service"
-msgstr ""
+msgstr "שירות פקס"
 
 #: src/lib/marble/declarative/Placemark.cpp:168
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a service to send documents "
 "through fax"
 msgid "No fax service"
-msgstr ""
+msgstr "אין שירות פקס"
 
 #: src/lib/marble/declarative/Placemark.cpp:172
 #, fuzzy
@@ -3803,113 +3806,113 @@ msgctxt ""
 "Marble::Placemark|A copy shop does not provide a paid service to make phone "
 "calls"
 msgid "No phone service"
-msgstr ""
+msgstr "אין שירות טלפון"
 
 #: src/lib/marble/declarative/Placemark.cpp:180
 msgctxt ""
 "Marble::Placemark|A copy shop provides services to print paper documents "
 "from digital files"
 msgid "Digital printing"
-msgstr ""
+msgstr "הדפסה דיגיטלית"
 
 #: src/lib/marble/declarative/Placemark.cpp:184
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide services to print paper "
 "documents from digital files"
 msgid "No digital printing"
-msgstr ""
+msgstr "אין הדפסה דיגיטלית"
 
 #: src/lib/marble/declarative/Placemark.cpp:188
 msgctxt ""
 "Marble::Placemark|A copy shop provides a professional service to print a "
 "large number of copies of a document"
 msgid "Press printing service"
-msgstr ""
+msgstr "שירות הדפסה כמותית"
 
 #: src/lib/marble/declarative/Placemark.cpp:193
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a professional service to "
 "print a large number of copies of a document"
 msgid "No press printing service"
-msgstr ""
+msgstr "אין שירות הדפסה כמותית"
 
 #: src/lib/marble/declarative/Placemark.cpp:197
 msgctxt ""
 "Marble::Placemark|A copy shop provides help with preparing special printing "
 "techniques"
 msgid "Press printing assistance"
-msgstr ""
+msgstr "סיוע בהדפסה כמותית"
 
 #: src/lib/marble/declarative/Placemark.cpp:201
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide help with preparing special "
 "printing techniques"
 msgid "No press printing assistance"
-msgstr ""
+msgstr "אין סיוע בהדפסה כמותית"
 
 #: src/lib/marble/declarative/Placemark.cpp:205
 msgctxt ""
 "Marble::Placemark|A copy shop provides individual copy machines for self-"
 "service"
 msgid "Self service"
-msgstr ""
+msgstr "שירות עצמי"
 
 #: src/lib/marble/declarative/Placemark.cpp:209
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide individual machines for self-"
 "service"
 msgid " No self service"
-msgstr ""
+msgstr "אין שירות עצמי"
 
 #: src/lib/marble/declarative/Placemark.cpp:211
 msgctxt "Marble::Placemark|A deli that sells organic food"
 msgid "Sells organic food"
-msgstr ""
+msgstr "מכירת מזון אורגני"
 
 #: src/lib/marble/declarative/Placemark.cpp:215
 msgctxt "Marble::Placemark|A deli that does not sell organic food"
 msgid "Does not sell organic food"
-msgstr ""
+msgstr "אין מכירת מזון אורגני"
 
 #: src/lib/marble/declarative/Placemark.cpp:219
 msgctxt "Marble::Placemark|A deli that only sells organic food"
 msgid "Only sells organic food"
-msgstr ""
+msgstr "מכירת מזון אורגני בלבד"
 
 #: src/lib/marble/declarative/Placemark.cpp:224
 msgctxt "Marble::Placemark|A deli that sells gluten free food"
 msgid "Sells gluten free food"
-msgstr ""
+msgstr "מכירת מזון נטול גלוטן"
 
 #: src/lib/marble/declarative/Placemark.cpp:228
 msgctxt "Marble::Placemark|A deli that does not sell gluten free food"
 msgid "Does not sell gluten free food"
-msgstr ""
+msgstr "אין מכירת מזון נטול גלוטן"
 
 #: src/lib/marble/declarative/Placemark.cpp:232
 msgctxt "Marble::Placemark|A deli that only sells gluten free food"
 msgid "Only sells gluten free food"
-msgstr ""
+msgstr "מכירת מזון נטול גלוטן בלבד"
 
 #: src/lib/marble/declarative/Placemark.cpp:237
 msgctxt "Marble::Placemark|A deli that sells lactose free food"
 msgid "Sells lactose free food"
-msgstr ""
+msgstr "מכירת מזון נטול לקטוז"
 
 #: src/lib/marble/declarative/Placemark.cpp:241
 msgctxt "Marble::Placemark|A deli that does not sell lactose free food"
 msgid "Does not sell lactose free food"
-msgstr ""
+msgstr "אין מכירת מזון נטול לקטוז"
 
 #: src/lib/marble/declarative/Placemark.cpp:245
 msgctxt "Marble::Placemark|A deli that only sells lactose free food"
 msgid "Only sells lactose free food"
-msgstr ""
+msgstr "מכירת מזון נטול לקטוז בלבד"
 
 #: src/lib/marble/declarative/Placemark.cpp:250
 msgctxt "Marble::Placemark|A tobacco shop that also sells lottery tickets"
 msgid "Sells lottery tickets"
-msgstr ""
+msgstr "מכירת כרטיסי לוטו"
 
 #: src/lib/marble/declarative/Placemark.cpp:254
 msgctxt "Marble::Placemark|A tobacco shop that also sells revenue stamps"
@@ -3919,112 +3922,112 @@ msgstr ""
 #: src/lib/marble/declarative/Placemark.cpp:255
 msgctxt "Marble::Placemark|A tobacco shop that also sells salt"
 msgid "Sells salt"
-msgstr ""
+msgstr "מכירת מלח"
 
 #: src/lib/marble/declarative/Placemark.cpp:270
 msgctxt "Marble::Placemark|"
 msgid "Diesel"
-msgstr ""
+msgstr "דיזל"
 
 #: src/lib/marble/declarative/Placemark.cpp:271
 msgctxt "Marble::Placemark|"
 msgid "Biodiesel"
-msgstr ""
+msgstr "ביודיזל"
 
 #: src/lib/marble/declarative/Placemark.cpp:272
 msgctxt "Marble::Placemark|"
 msgid "Octane 91"
-msgstr ""
+msgstr "אוקטן 91"
 
 #: src/lib/marble/declarative/Placemark.cpp:273
 msgctxt "Marble::Placemark|"
 msgid "Octane 95"
-msgstr ""
+msgstr "אוקטן 95"
 
 #: src/lib/marble/declarative/Placemark.cpp:274
 msgctxt "Marble::Placemark|"
 msgid "Octane 98"
-msgstr ""
+msgstr "אוקטן 98"
 
 #: src/lib/marble/declarative/Placemark.cpp:275
 msgctxt "Marble::Placemark|"
 msgid "Octane 100"
-msgstr ""
+msgstr "אוקטן 100"
 
 #: src/lib/marble/declarative/Placemark.cpp:276
 msgctxt "Marble::Placemark|"
 msgid "E10"
-msgstr ""
+msgstr "E10"
 
 #: src/lib/marble/declarative/Placemark.cpp:277
 msgctxt "Marble::Placemark|"
 msgid "LPG"
-msgstr ""
+msgstr "גפ״מ/LPG"
 
 #: src/lib/marble/declarative/Placemark.cpp:285
 msgctxt "Marble::Placemark|"
 msgid "Batteries"
-msgstr ""
+msgstr "סוללות"
 
 #: src/lib/marble/declarative/Placemark.cpp:286
 msgctxt "Marble::Placemark|"
 msgid "Clothes"
-msgstr ""
+msgstr "ביגוד"
 
 #: src/lib/marble/declarative/Placemark.cpp:287
 msgctxt "Marble::Placemark|"
 msgid "Glass"
-msgstr ""
+msgstr "זכוכית"
 
 #: src/lib/marble/declarative/Placemark.cpp:288
 msgctxt "Marble::Placemark|"
 msgid "Glass bottles"
-msgstr ""
+msgstr "בקבוקי זכוכית"
 
 #: src/lib/marble/declarative/Placemark.cpp:289
 msgctxt "Marble::Placemark|"
 msgid "Green waste"
-msgstr ""
+msgstr "פסולת ירוקה"
 
 #: src/lib/marble/declarative/Placemark.cpp:290
 msgctxt "Marble::Placemark|"
 msgid "Garden waste"
-msgstr ""
+msgstr "פסולת גינה"
 
 #: src/lib/marble/declarative/Placemark.cpp:291
 msgctxt "Marble::Placemark|"
 msgid "Electrical items"
-msgstr ""
+msgstr "פריטים אלקטרוניים"
 
 #: src/lib/marble/declarative/Placemark.cpp:292
 msgctxt "Marble::Placemark|"
 msgid "Metal"
-msgstr ""
+msgstr "מתכת"
 
 #: src/lib/marble/declarative/Placemark.cpp:293
 msgctxt "Marble::Placemark|"
 msgid "Mobile phones"
-msgstr ""
+msgstr "טלפונים ניידים"
 
 #: src/lib/marble/declarative/Placemark.cpp:294
 msgctxt "Marble::Placemark|"
 msgid "Newspaper"
-msgstr ""
+msgstr "עיתון"
 
 #: src/lib/marble/declarative/Placemark.cpp:295
 msgctxt "Marble::Placemark|"
 msgid "Paint"
-msgstr ""
+msgstr "צבע"
 
 #: src/lib/marble/declarative/Placemark.cpp:296
 msgctxt "Marble::Placemark|"
 msgid "Paper"
-msgstr ""
+msgstr "נייר"
 
 #: src/lib/marble/declarative/Placemark.cpp:297
 msgctxt "Marble::Placemark|"
 msgid "Paper packaging"
-msgstr ""
+msgstr "אריזת נייר"
 
 #: src/lib/marble/declarative/Placemark.cpp:298
 msgctxt "Marble::Placemark|"
@@ -4034,37 +4037,37 @@ msgstr ""
 #: src/lib/marble/declarative/Placemark.cpp:299
 msgctxt "Marble::Placemark|"
 msgid "Plastic"
-msgstr ""
+msgstr "פלסטיק"
 
 #: src/lib/marble/declarative/Placemark.cpp:300
 msgctxt "Marble::Placemark|"
 msgid "Plastic bags"
-msgstr ""
+msgstr "שקיות פלסטיק"
 
 #: src/lib/marble/declarative/Placemark.cpp:301
 msgctxt "Marble::Placemark|"
 msgid "Plastic bottles"
-msgstr ""
+msgstr "בקבוקי פלסטיק"
 
 #: src/lib/marble/declarative/Placemark.cpp:302
 msgctxt "Marble::Placemark|"
 msgid "Plastic packaging"
-msgstr ""
+msgstr "אריזות פלסטיק"
 
 #: src/lib/marble/declarative/Placemark.cpp:303
 msgctxt "Marble::Placemark|"
 msgid "Polyester"
-msgstr ""
+msgstr "פוליאסטר"
 
 #: src/lib/marble/declarative/Placemark.cpp:304
 msgctxt "Marble::Placemark|"
 msgid "Tyres"
-msgstr ""
+msgstr "צמיגים"
 
 #: src/lib/marble/declarative/Placemark.cpp:305
 msgctxt "Marble::Placemark|"
 msgid "Waste"
-msgstr ""
+msgstr "אשפה"
 
 #: src/lib/marble/declarative/Placemark.cpp:306
 msgctxt "Marble::Placemark|"
@@ -4074,7 +4077,7 @@ msgstr ""
 #: src/lib/marble/declarative/Placemark.cpp:307
 msgctxt "Marble::Placemark|"
 msgid "Wood"
-msgstr ""
+msgstr "עץ"
 
 #: src/lib/marble/declarative/Placemark.cpp:309
 #, fuzzy

@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-25 00:37+0000\n"
-"PO-Revision-Date: 2024-10-26 08:08+0300\n"
+"PO-Revision-Date: 2024-10-26 09:53+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -160,7 +160,7 @@ msgstr "ניווט, מסלול, נייד"
 #: kdemain.cpp:104
 #, kde-format
 msgid "Niko Sams"
-msgstr ""
+msgstr "ניקו סאמס"
 
 #: kdemain.cpp:104
 #, kde-format
@@ -313,7 +313,7 @@ msgstr "מיזם Google Summer of Code 2010 Project: תמיכה בזמן"
 #: kdemain.cpp:145
 #, kde-format
 msgid "Siddharth Srivastava"
-msgstr ""
+msgstr "סידארת סריבסטבה"
 
 #: kdemain.cpp:146
 #, kde-format
@@ -432,7 +432,7 @@ msgstr ""
 #: kdemain.cpp:187
 #, kde-format
 msgid "Prashanth Udupa"
-msgstr ""
+msgstr "פרשאנת אודופה"
 
 #: kdemain.cpp:188
 #, kde-format
@@ -442,7 +442,7 @@ msgstr "אן־מרי מחפוף"
 #: kdemain.cpp:189
 #, kde-format
 msgid "Josef Spillner"
-msgstr ""
+msgstr "יוזף שפילנר"
 
 #: kdemain.cpp:190
 #, kde-format
@@ -457,7 +457,7 @@ msgstr "פרדריק גלדהורן"
 #: kdemain.cpp:192
 #, kde-format
 msgid "Fredrik Höglund"
-msgstr ""
+msgstr "פרדריק הוגלונד"
 
 #: kdemain.cpp:193
 #, kde-format
@@ -514,7 +514,7 @@ msgstr ""
 #: kdemain.cpp:202
 #, kde-format
 msgid "Ralf Habacker"
-msgstr ""
+msgstr "ראלף הבאקר"
 
 #: kdemain.cpp:203
 #, kde-format
