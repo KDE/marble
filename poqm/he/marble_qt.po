@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-10-27 07:53+0200\n"
+"PO-Revision-Date: 2024-10-28 06:56+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -3362,7 +3362,7 @@ msgctxt "Marble::CelestialSortFilterProxyModel|"
 msgid "dwarf planet"
 msgstr ""
 
-#: src/lib/marble/cloudsync/BookmarkSyncManager.cpp:634
+#: src/lib/marble/cloudsync/BookmarkSyncManager.cpp:642
 #, fuzzy
 msgctxt "Marble::BookmarkSyncManager|"
 msgid "Bookmarks"
@@ -4072,7 +4072,7 @@ msgstr "אשפה"
 #: src/lib/marble/declarative/Placemark.cpp:306
 msgctxt "Marble::Placemark|"
 msgid "White goods"
-msgstr ""
+msgstr "מכשירי חשמל"
 
 #: src/lib/marble/declarative/Placemark.cpp:307
 msgctxt "Marble::Placemark|"
@@ -4090,14 +4090,14 @@ msgctxt ""
 "Marble::Placemark|A dormant volcano that will erupt at some point in the "
 "future."
 msgid "Dormant"
-msgstr ""
+msgstr "רדום"
 
 #: src/lib/marble/declarative/Placemark.cpp:317
 msgctxt ""
 "Marble::Placemark|A volcano considered extinct, it has not erupted within "
 "the last 10000 years and likely never will again."
 msgid "Extinct"
-msgstr ""
+msgstr "כבוי"
 
 #: src/lib/marble/declarative/Placemark.cpp:318
 #, fuzzy
@@ -4129,27 +4129,27 @@ msgstr ""
 #: src/lib/marble/declarative/Placemark.cpp:324
 msgctxt "Marble::Placemark|"
 msgid "Blood bank"
-msgstr ""
+msgstr "בנק דם"
 
 #: src/lib/marble/declarative/Placemark.cpp:325
 msgctxt "Marble::Placemark|"
 msgid "Blood donation"
-msgstr ""
+msgstr "תרומת דם"
 
 #: src/lib/marble/declarative/Placemark.cpp:326
 msgctxt "Marble::Placemark|"
 msgid "Medical center"
-msgstr ""
+msgstr "מרכז רפואי"
 
 #: src/lib/marble/declarative/Placemark.cpp:327
 msgctxt "Marble::Placemark|"
 msgid "Clinic"
-msgstr ""
+msgstr "מרפאה"
 
 #: src/lib/marble/declarative/Placemark.cpp:328
 msgctxt "Marble::Placemark|"
 msgid "Dentist"
-msgstr ""
+msgstr "מרפאת שיניים"
 
 #: src/lib/marble/declarative/Placemark.cpp:329
 msgctxt "Marble::Placemark|"
@@ -4165,27 +4165,27 @@ msgstr "עיר בירה"
 #: src/lib/marble/declarative/Placemark.cpp:331
 msgctxt "Marble::Placemark|"
 msgid "Midwife"
-msgstr ""
+msgstr "מיילדת"
 
 #: src/lib/marble/declarative/Placemark.cpp:332
 msgctxt "Marble::Placemark|"
 msgid "Optometrist"
-msgstr ""
+msgstr "אופטומטריה"
 
 #: src/lib/marble/declarative/Placemark.cpp:333
 msgctxt "Marble::Placemark|"
 msgid "Physiotherapist"
-msgstr ""
+msgstr "פיזיותרפיה"
 
 #: src/lib/marble/declarative/Placemark.cpp:334
 msgctxt "Marble::Placemark|"
 msgid "Podiatrist"
-msgstr ""
+msgstr "פודיאטריה"
 
 #: src/lib/marble/declarative/Placemark.cpp:335
 msgctxt "Marble::Placemark|"
 msgid "Psychotherapist"
-msgstr ""
+msgstr "פסיכותרפיה"
 
 #: src/lib/marble/declarative/Placemark.cpp:336
 #, fuzzy
@@ -4196,27 +4196,27 @@ msgstr "גובה:"
 #: src/lib/marble/declarative/Placemark.cpp:337
 msgctxt "Marble::Placemark|"
 msgid "Speech therapist"
-msgstr ""
+msgstr "קלינאות תקשורת"
 
 #: src/lib/marble/declarative/Placemark.cpp:344
 #, qt-format
 msgctxt "Marble::Placemark|number of seats a bench provides"
 msgid "%n seats"
 msgid_plural "%n seats"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "מושב"
+msgstr[1] "שני מושבים"
+msgstr[2] "%n מושבים"
+msgstr[3] "%n מושבים"
 
 #: src/lib/marble/declarative/Placemark.cpp:350
 msgctxt "Marble::Placemark|A bench provides a backrest to lean against"
 msgid "Has backrest"
-msgstr ""
+msgstr "עם משענת"
 
 #: src/lib/marble/declarative/Placemark.cpp:354
 msgctxt "Marble::Placemark|A bench provides no backrest to lean against"
 msgid "No backrest"
-msgstr ""
+msgstr "בלי משענת"
 
 #: src/lib/marble/declarative/Placemark.cpp:358
 #, fuzzy, qt-format
@@ -4227,12 +4227,12 @@ msgstr "%1 מ'"
 #: src/lib/marble/declarative/Placemark.cpp:364
 msgctxt "Marble::Placemark|Parking spaces are supervised by guards"
 msgid "Is supervised"
-msgstr ""
+msgstr "בפיקוח"
 
 #: src/lib/marble/declarative/Placemark.cpp:368
 msgctxt "Marble::Placemark|Parking spaces are not supervised by guards"
 msgid "Not supervised"
-msgstr ""
+msgstr "ללא פיקוח"
 
 #: src/lib/marble/declarative/Placemark.cpp:372
 #, fuzzy, qt-format
@@ -4256,22 +4256,22 @@ msgstr "עקוב אחר GPS"
 #, qt-format
 msgctxt "Marble::Placemark|Parking spaces"
 msgid "%1 spaces with electric chargers"
-msgstr ""
+msgstr "%1 מקומות עם מטענים חשמליים"
 
 #: src/lib/marble/declarative/Placemark.cpp:390
 msgctxt "Marble::Placemark|A parking space has outdoor surveillance"
 msgid "Has outdoor surveillance"
-msgstr ""
+msgstr "יש מעקב חוץ"
 
 #: src/lib/marble/declarative/Placemark.cpp:394
 msgctxt "Marble::Placemark|A parking space has indoor surveillance"
 msgid "Has indoor surveillance"
-msgstr ""
+msgstr "יש מעקב פנים"
 
 #: src/lib/marble/declarative/Placemark.cpp:398
 msgctxt "Marble::Placemark|A parking space has public surveillance"
 msgid "Has public surveillance"
-msgstr ""
+msgstr "יש מעקב ציבורי"
 
 #: src/lib/marble/declarative/Placemark.cpp:400
 #, fuzzy
@@ -4282,64 +4282,64 @@ msgstr "הצג גבולות"
 #: src/lib/marble/declarative/Placemark.cpp:404
 msgctxt "Marble::Placemark|A hut does not provide showers inside or aside"
 msgid "Has no shower"
-msgstr ""
+msgstr "אין מקלחת"
 
 #: src/lib/marble/declarative/Placemark.cpp:405
 msgctxt "Marble::Placemark|A hut provides mattress"
 msgid "Has mattress"
-msgstr ""
+msgstr "יש מזרון"
 
 #: src/lib/marble/declarative/Placemark.cpp:406
 msgctxt "Marble::Placemark|A hut does not provide mattress"
 msgid "Has no mattress"
-msgstr ""
+msgstr "אין מזרון"
 
 #: src/lib/marble/declarative/Placemark.cpp:407
 msgctxt "Marble::Placemark|Water is available inside or aside"
 msgid "Has water"
-msgstr ""
+msgstr "יש מים"
 
 #: src/lib/marble/declarative/Placemark.cpp:411
 msgctxt "Marble::Placemark|Water is not available inside nor aside"
 msgid "Has no water"
-msgstr ""
+msgstr "אין מים"
 
 #: src/lib/marble/declarative/Placemark.cpp:412
 msgctxt "Marble::Placemark|A hut provides toilets"
 msgid "Has toilets"
-msgstr ""
+msgstr "יש שירותים"
 
 #: src/lib/marble/declarative/Placemark.cpp:413
 msgctxt "Marble::Placemark|A hut does not provide toilets"
 msgid "Has no toilets"
-msgstr ""
+msgstr "אין שירותים"
 
 #: src/lib/marble/declarative/Placemark.cpp:414
 msgctxt "Marble::Placemark|"
 msgid "Reservation is possible"
-msgstr ""
+msgstr "אפשר להזמין"
 
 #: src/lib/marble/declarative/Placemark.cpp:415
 msgctxt "Marble::Placemark|"
 msgid "No reservation possible"
-msgstr ""
+msgstr "אי אפשר להזמין"
 
 #: src/lib/marble/declarative/Placemark.cpp:416
 msgctxt "Marble::Placemark|"
 msgid "Reservation is required"
-msgstr ""
+msgstr "צריך להזמין"
 
 #: src/lib/marble/declarative/Placemark.cpp:420
 msgctxt "Marble::Placemark|You should make reservation"
 msgid "Reservation is recommended"
-msgstr ""
+msgstr "מומלץ להזמין"
 
 #: src/lib/marble/declarative/Placemark.cpp:424
 msgctxt ""
 "Marble::Placemark|Reservation is only possible for members of the "
 "organisation running the hut"
 msgid "Only for members"
-msgstr ""
+msgstr "לחברים בלבד"
 
 #: src/lib/marble/declarative/Placemark.cpp:426
 #, qt-format
@@ -4351,158 +4351,158 @@ msgstr ""
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 vehicles"
-msgstr ""
+msgstr "%1 מכוניות"
 
 #: src/lib/marble/declarative/Placemark.cpp:429
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 ampere"
-msgstr ""
+msgstr "%1 אמפר"
 
 #: src/lib/marble/declarative/Placemark.cpp:430
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 volt"
-msgstr ""
+msgstr "%1 וולט"
 
 #: src/lib/marble/declarative/Placemark.cpp:432
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 blue CEE sockets"
-msgstr ""
+msgstr "%1 שקעי CEE כחולים"
 
 #: src/lib/marble/declarative/Placemark.cpp:433
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 red CEE sockets (16 A)"
-msgstr ""
+msgstr "%1 שקעי CEE אדומים (‎16 A)"
 
 #: src/lib/marble/declarative/Placemark.cpp:434
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 red CEE sockets (32 A)"
-msgstr ""
+msgstr "%1 שקעי CEE אדומים (‎32 A)"
 
 #: src/lib/marble/declarative/Placemark.cpp:435
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 red CEE sockets (64 A)"
-msgstr ""
+msgstr "%1 שקעי CEE אדומים (‎64 A)"
 
 #: src/lib/marble/declarative/Placemark.cpp:436
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 red CEE sockets (125 A)"
-msgstr ""
+msgstr "%1 שקעי CEE אדומים (‎125 A)"
 
 #: src/lib/marble/declarative/Placemark.cpp:437
 #: src/lib/marble/declarative/Placemark.cpp:438
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 NEMA-5-15P plugs"
-msgstr ""
+msgstr "%1 תקעי NEMA-5-15P"
 
 #: src/lib/marble/declarative/Placemark.cpp:439
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 NEMA-5-20P plugs"
-msgstr ""
+msgstr "%1 תקעי NEMA-5-20P"
 
 #: src/lib/marble/declarative/Placemark.cpp:440
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 NEMA 14-30 sockets"
-msgstr ""
+msgstr "%1 שקעי NEMA 14-30"
 
 #: src/lib/marble/declarative/Placemark.cpp:441
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 NEMA 14-50 sockets"
-msgstr ""
+msgstr "%1 שקעי NEMA 14-50"
 
 #: src/lib/marble/declarative/Placemark.cpp:442
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Schuko sockets"
-msgstr ""
+msgstr "%1 שקעי שוקו"
 
 #: src/lib/marble/declarative/Placemark.cpp:443
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 BS 1363 sockets"
-msgstr ""
+msgstr "%1 שקעי BS 1363"
 
 #: src/lib/marble/declarative/Placemark.cpp:444
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Type 1 plugs"
-msgstr ""
+msgstr "%1 תקעי Type 1"
 
 #: src/lib/marble/declarative/Placemark.cpp:445
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Type 1 combo plugs"
-msgstr ""
+msgstr "%1 תקעי Type 1 משולבים"
 
 #: src/lib/marble/declarative/Placemark.cpp:446
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Type 2 sockets"
-msgstr ""
+msgstr "%1 שקעי Type 2"
 
 #: src/lib/marble/declarative/Placemark.cpp:447
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Type 2 combo sockets"
-msgstr ""
+msgstr "%1 שקעי Type 2 משולבים"
 
 #: src/lib/marble/declarative/Placemark.cpp:448
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Type 3 sockets"
-msgstr ""
+msgstr "%1 שקעי Type 3"
 
 #: src/lib/marble/declarative/Placemark.cpp:449
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 CHAdeMO plugs"
-msgstr ""
+msgstr "%1 תקעי CHAdeMO"
 
 #: src/lib/marble/declarative/Placemark.cpp:450
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Magne Charge plugs"
-msgstr ""
+msgstr "%1 תקעי Magne Charge"
 
 #: src/lib/marble/declarative/Placemark.cpp:451
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Tesla standard plugs"
-msgstr ""
+msgstr "%1 תקעי Tesla תקניים"
 
 #: src/lib/marble/declarative/Placemark.cpp:452
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Tesla standard plugs (Supercharger)"
-msgstr ""
+msgstr "%1 תקעי Tesla תקניים (Supercharger)"
 
 #: src/lib/marble/declarative/Placemark.cpp:453
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Tesla roadster plugs"
-msgstr ""
+msgstr "%1 תקעי Tesla roadster"
 
 #: src/lib/marble/declarative/Placemark.cpp:455
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Maximum vehicle width: %1"
-msgstr ""
+msgstr "רוחב מכונית מרבי: %1"
 
 #: src/lib/marble/declarative/Placemark.cpp:456
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Maximum vehicle height: %1"
-msgstr ""
+msgstr "גובה מכונית מרבי: %1"
 
 #: src/lib/marble/declarative/Placemark.cpp:458
 #, fuzzy
@@ -7810,40 +7810,40 @@ msgctxt "LatLonBoxWidget|"
 msgid "&S"
 msgstr "ד"
 
-#: src/lib/marble/LatLonEdit.cpp:139
+#: src/lib/marble/LatLonEdit.cpp:142
 msgctxt "Marble::LatLonEdit|"
 msgid "°"
 msgstr ""
 
-#: src/lib/marble/LatLonEdit.cpp:189 src/lib/marble/LatLonEdit.cpp:348
+#: src/lib/marble/LatLonEdit.cpp:192 src/lib/marble/LatLonEdit.cpp:351
 msgctxt "Marble::LatLonEdit|"
 msgid "'"
 msgstr ""
 
-#: src/lib/marble/LatLonEdit.cpp:190
+#: src/lib/marble/LatLonEdit.cpp:193
 msgctxt "Marble::LatLonEdit|"
 msgid "\""
 msgstr ""
 
-#: src/lib/marble/LatLonEdit.cpp:538
+#: src/lib/marble/LatLonEdit.cpp:541
 #, fuzzy
 msgctxt "Marble::LatLonEdit|East, the direction"
 msgid "E"
 msgstr "מז"
 
-#: src/lib/marble/LatLonEdit.cpp:539
+#: src/lib/marble/LatLonEdit.cpp:542
 #, fuzzy
 msgctxt "Marble::LatLonEdit|West, the direction"
 msgid "W"
 msgstr "מע"
 
-#: src/lib/marble/LatLonEdit.cpp:542
+#: src/lib/marble/LatLonEdit.cpp:545
 #, fuzzy
 msgctxt "Marble::LatLonEdit|North, the direction"
 msgid "N"
 msgstr "צ"
 
-#: src/lib/marble/LatLonEdit.cpp:543
+#: src/lib/marble/LatLonEdit.cpp:546
 #, fuzzy
 msgctxt "Marble::LatLonEdit|South, the direction"
 msgid "S"
@@ -7875,37 +7875,37 @@ msgctxt "LegendWidget|"
 msgid "about:blank"
 msgstr ""
 
-#: src/lib/marble/MapThemeDownloadDialog.cpp:242
-#: src/lib/marble/MapThemeDownloadDialog.cpp:263
+#: src/lib/marble/MapThemeDownloadDialog.cpp:251
+#: src/lib/marble/MapThemeDownloadDialog.cpp:272
 msgctxt "Marble::MapItemDelegate|"
 msgid "Install"
 msgstr ""
 
-#: src/lib/marble/MapThemeDownloadDialog.cpp:243
-#: src/lib/marble/MapThemeDownloadDialog.cpp:281
+#: src/lib/marble/MapThemeDownloadDialog.cpp:252
+#: src/lib/marble/MapThemeDownloadDialog.cpp:290
 #, fuzzy
 msgctxt "Marble::MapItemDelegate|"
 msgid "Remove"
 msgstr "מפה רגילה"
 
-#: src/lib/marble/MapThemeDownloadDialog.cpp:244
-#: src/lib/marble/MapThemeDownloadDialog.cpp:278
+#: src/lib/marble/MapThemeDownloadDialog.cpp:253
+#: src/lib/marble/MapThemeDownloadDialog.cpp:287
 #, fuzzy
 msgctxt "Marble::MapItemDelegate|"
 msgid "Cancel"
 msgstr "&ביטול"
 
-#: src/lib/marble/MapThemeDownloadDialog.cpp:245
+#: src/lib/marble/MapThemeDownloadDialog.cpp:254
 msgctxt "Marble::MapItemDelegate|"
 msgid "Upgrade"
 msgstr ""
 
-#: src/lib/marble/MapThemeDownloadDialog.cpp:268
+#: src/lib/marble/MapThemeDownloadDialog.cpp:277
 msgctxt "Marble::MapItemDelegate|"
 msgid "Update"
 msgstr ""
 
-#: src/lib/marble/MapThemeDownloadDialog.cpp:273
+#: src/lib/marble/MapThemeDownloadDialog.cpp:282
 #, fuzzy
 msgctxt "Marble::MapItemDelegate|"
 msgid "Open"
@@ -8079,87 +8079,87 @@ msgctxt "MapViewWidget|"
 msgid "Here you can choose the preferred map view from different topics."
 msgstr "כאן באפשרותך לבחור את תצוגת המפה המועדפת עליך."
 
-#: src/lib/marble/MapWizard.cpp:153
+#: src/lib/marble/MapWizard.cpp:168
 #, fuzzy
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr "מפת סקירה"
 
-#: src/lib/marble/MapWizard.cpp:272 src/lib/marble/MapWizard.cpp:276
+#: src/lib/marble/MapWizard.cpp:287 src/lib/marble/MapWizard.cpp:291
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:272
+#: src/lib/marble/MapWizard.cpp:287
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:276
+#: src/lib/marble/MapWizard.cpp:291
 msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:366 src/lib/marble/MapWizard.cpp:383
-#: src/lib/marble/MapWizard.cpp:1076
+#: src/lib/marble/MapWizard.cpp:381 src/lib/marble/MapWizard.cpp:398
+#: src/lib/marble/MapWizard.cpp:1091
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:367 src/lib/marble/MapWizard.cpp:797
-#: src/lib/marble/MapWizard.cpp:921
+#: src/lib/marble/MapWizard.cpp:382 src/lib/marble/MapWizard.cpp:812
+#: src/lib/marble/MapWizard.cpp:936
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:368 src/lib/marble/MapWizard.cpp:799
-#: src/lib/marble/MapWizard.cpp:923
+#: src/lib/marble/MapWizard.cpp:383 src/lib/marble/MapWizard.cpp:814
+#: src/lib/marble/MapWizard.cpp:938
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (crs:84)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:379
+#: src/lib/marble/MapWizard.cpp:394
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
 msgstr "&היטל"
 
-#: src/lib/marble/MapWizard.cpp:395
+#: src/lib/marble/MapWizard.cpp:410
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:438 src/lib/marble/MapWizard.cpp:913
+#: src/lib/marble/MapWizard.cpp:453 src/lib/marble/MapWizard.cpp:928
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "מפת סקירה"
 
-#: src/lib/marble/MapWizard.cpp:442
+#: src/lib/marble/MapWizard.cpp:457
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "שמור קובץ"
 
-#: src/lib/marble/MapWizard.cpp:446
+#: src/lib/marble/MapWizard.cpp:461
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
 msgstr "מקרא"
 
-#: src/lib/marble/MapWizard.cpp:452 src/lib/marble/MapWizard.cpp:462
+#: src/lib/marble/MapWizard.cpp:467 src/lib/marble/MapWizard.cpp:477
 #, fuzzy, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "%1"
 msgstr "%1 מ'"
 
-#: src/lib/marble/MapWizard.cpp:452
+#: src/lib/marble/MapWizard.cpp:467
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:463
+#: src/lib/marble/MapWizard.cpp:478
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -8168,119 +8168,119 @@ msgid ""
 "%2"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:542 src/lib/marble/MapWizard.cpp:1465
-#: src/lib/marble/MapWizard.cpp:1466 src/lib/marble/MapWizard.cpp:1475
-#: src/lib/marble/MapWizard.cpp:1476
+#: src/lib/marble/MapWizard.cpp:557 src/lib/marble/MapWizard.cpp:1480
+#: src/lib/marble/MapWizard.cpp:1481 src/lib/marble/MapWizard.cpp:1490
+#: src/lib/marble/MapWizard.cpp:1491
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:751 src/lib/marble/MapWizard.cpp:754
+#: src/lib/marble/MapWizard.cpp:766 src/lib/marble/MapWizard.cpp:769
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:751
+#: src/lib/marble/MapWizard.cpp:766
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:754
+#: src/lib/marble/MapWizard.cpp:769
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:847 src/lib/marble/MapWizard.cpp:853
-#: src/lib/marble/MapWizard.cpp:861
+#: src/lib/marble/MapWizard.cpp:862 src/lib/marble/MapWizard.cpp:868
+#: src/lib/marble/MapWizard.cpp:876
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:847
+#: src/lib/marble/MapWizard.cpp:862
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "שם חלופי עבור המיקום."
 
-#: src/lib/marble/MapWizard.cpp:853
+#: src/lib/marble/MapWizard.cpp:868
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
 "one."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:862
+#: src/lib/marble/MapWizard.cpp:877
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
 "a different image file."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:892
+#: src/lib/marble/MapWizard.cpp:907
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "תצוגת מפה"
 
-#: src/lib/marble/MapWizard.cpp:892
+#: src/lib/marble/MapWizard.cpp:907
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "שם חלופי עבור המיקום."
 
-#: src/lib/marble/MapWizard.cpp:899 src/lib/marble/MapWizard.cpp:906
+#: src/lib/marble/MapWizard.cpp:914 src/lib/marble/MapWizard.cpp:921
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "שם"
 
-#: src/lib/marble/MapWizard.cpp:899
+#: src/lib/marble/MapWizard.cpp:914
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "שם חלופי עבור המיקום."
 
-#: src/lib/marble/MapWizard.cpp:906
+#: src/lib/marble/MapWizard.cpp:921
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "Please specify another map name, since there is already a map named \"%1\"."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:913
+#: src/lib/marble/MapWizard.cpp:928
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "שם חלופי עבור המיקום."
 
-#: src/lib/marble/MapWizard.cpp:1409
+#: src/lib/marble/MapWizard.cpp:1424
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1409
+#: src/lib/marble/MapWizard.cpp:1424
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1460
+#: src/lib/marble/MapWizard.cpp:1475
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1462
+#: src/lib/marble/MapWizard.cpp:1477
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1469
+#: src/lib/marble/MapWizard.cpp:1484
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1471
+#: src/lib/marble/MapWizard.cpp:1486
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
@@ -10060,7 +10060,7 @@ msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Test Login"
 msgstr "תוסף בדיקה"
 
-#: src/lib/marble/MarbleGlobal.h:229
+#: src/lib/marble/MarbleGlobal.h:243
 msgctxt "Marble|"
 msgid "not available"
 msgstr ""
@@ -10954,10 +10954,9 @@ msgstr ""
 "italic;\">תפקיד</span></p></body></html>"
 
 #: src/lib/marble/MarbleWebView.cpp:18
-#, fuzzy
 msgctxt "MarbleWebView|"
 msgid "Copy"
-msgstr "הע&תק מפה"
+msgstr "העתקה"
 
 #: src/lib/marble/MarbleWebView.cpp:21
 msgctxt "MarbleWebView|"
@@ -10965,10 +10964,9 @@ msgid "Copy selected content"
 msgstr ""
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:113
-#, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Copy Coordinates"
-msgstr "העתק קואורדינטות"
+msgstr "העתקת נקודות ציון"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:114
 msgctxt "Marble::MarbleWidgetPopupMenu|"
@@ -10976,16 +10974,14 @@ msgid "Copy geo: URL"
 msgstr ""
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:123
-#, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Directions &from here"
-msgstr "אודות Marble"
+msgstr "הנחיות &מכאן"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:124
-#, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Directions &to here"
-msgstr "אודות Marble"
+msgstr "הנחיות &לכאן"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:131
 #, fuzzy
@@ -10994,22 +10990,19 @@ msgid "Add &Bookmark"
 msgstr "ייצא מפה"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:132
-#, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "&Full Screen Mode"
-msgstr "&מצב מסך מלא"
+msgstr "מצב מסך מ&לא"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:135
-#, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "&About"
-msgstr "&אודות"
+msgstr "על &אודות"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:153
-#, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "&Address Details"
-msgstr "הצג רשת"
+msgstr "פרטי &כתובת"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:182
 msgctxt "Marble::MarbleWidgetPopupMenu|"
@@ -11017,34 +11010,29 @@ msgid "No description available."
 msgstr ""
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:382
-#, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "National Capital"
-msgstr "בירת מחוז"
+msgstr "בירה לאומית"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:384
-#, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "City"
 msgstr "עיר"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:386
-#, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "State Capital"
-msgstr "עיר בירה"
+msgstr "בירת מדינה"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:388
-#, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "County Capital"
-msgstr "עיר בירה"
+msgstr "בירת מחוז"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:390
-#, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Capital"
-msgstr "עיר בירה"
+msgstr "בירה"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:393
 msgctxt "Marble::MarbleWidgetPopupMenu|"
@@ -11104,16 +11092,14 @@ msgid "OGG"
 msgstr ""
 
 #: src/lib/marble/MovieCapture.cpp:68
-#, fuzzy
 msgctxt "Marble::MovieCapture|"
 msgid "SWF"
-msgstr "ד"
+msgstr "SWF"
 
 #: src/lib/marble/MovieCaptureDialog.cpp:25
-#, fuzzy
 msgctxt "Marble::MovieCaptureDialog|Start recording a movie"
 msgid "&Start"
-msgstr "&כוכבים"
+msgstr "ה&תחלה"
 
 #: src/lib/marble/MovieCaptureDialog.cpp:49
 msgctxt "Marble::MovieCaptureDialog|"
@@ -11126,16 +11112,14 @@ msgid "Supported codecs are not found."
 msgstr ""
 
 #: src/lib/marble/MovieCaptureDialog.cpp:58
-#, fuzzy
 msgctxt "Marble::MovieCaptureDialog|"
 msgid "Save video file"
-msgstr "שמור קובץ"
+msgstr "שמירת קובץ וידאו"
 
 #: src/lib/marble/MovieCaptureDialog.cpp:78
-#, fuzzy
 msgctxt "Marble::MovieCaptureDialog|"
 msgid "Filename is not valid"
-msgstr "הקובץ הוא לא קובץ DGML 2.0 תקני"
+msgstr "שם הקובץ שגוי"
 
 #: src/lib/marble/MovieCaptureDialog.cpp:79
 #, qt-format
@@ -11156,22 +11140,19 @@ msgid ""
 msgstr ""
 
 #: src/lib/marble/MovieCaptureDialog.ui:14
-#, fuzzy
 msgctxt "MovieCaptureDialog|"
 msgid "Movie Recording"
-msgstr "אודות Marble"
+msgstr "סרט מוקלט"
 
 #: src/lib/marble/MovieCaptureDialog.ui:20
-#, fuzzy
 msgctxt "MovieCaptureDialog|"
 msgid "Destination video:"
-msgstr "שדה תיאור"
+msgstr "וידאו היעד:"
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
-#, fuzzy
 msgctxt "MovieCaptureDialog|"
 msgid "Open…"
-msgstr "&פתח..."
+msgstr "פתיחה…"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -11179,24 +11160,21 @@ msgid "FPS (frames per second)"
 msgstr ""
 
 #: src/lib/marble/NewBookmarkFolderDialog.ui:14
-#, fuzzy
 msgctxt "UiNewBookmarkFolderDialog|"
 msgid "New Bookmark Folder"
-msgstr "אודות Marble"
+msgstr "תיקיית סימניות חדשה"
 
 #: src/lib/marble/NewBookmarkFolderDialog.ui:22
-#, fuzzy
 msgctxt "UiNewBookmarkFolderDialog|"
 msgid "&Folder name:"
-msgstr "תבליט"
+msgstr "&שם התיקייה:"
 
-#: src/lib/marble/NewstuffModel.cpp:733 src/lib/marble/NewstuffModel.cpp:742
+#: src/lib/marble/NewstuffModel.cpp:739 src/lib/marble/NewstuffModel.cpp:748
 msgctxt "Marble::NewstuffModel|"
 msgid "Installation aborted by user."
 msgstr ""
 
 #: src/lib/marble/osm/OsmRelationEditorDialog.cpp:36
-#, fuzzy
 msgctxt "Marble::OsmRelationEditorDialog|"
 msgid "Name"
 msgstr "שם"

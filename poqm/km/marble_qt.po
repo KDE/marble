@@ -3590,7 +3590,7 @@ msgctxt "Marble::CelestialSortFilterProxyModel|"
 msgid "dwarf planet"
 msgstr ""
 
-#: src/lib/marble/cloudsync/BookmarkSyncManager.cpp:634
+#: src/lib/marble/cloudsync/BookmarkSyncManager.cpp:642
 #, fuzzy
 #| msgid "Bookmarks"
 msgctxt "Marble::BookmarkSyncManager|"
@@ -8419,47 +8419,47 @@ msgctxt "LatLonBoxWidget|"
 msgid "&S"
 msgstr "ត្បូង"
 
-#: src/lib/marble/LatLonEdit.cpp:139
+#: src/lib/marble/LatLonEdit.cpp:142
 msgctxt "Marble::LatLonEdit|"
 msgid "°"
 msgstr ""
 
-#: src/lib/marble/LatLonEdit.cpp:189 src/lib/marble/LatLonEdit.cpp:348
+#: src/lib/marble/LatLonEdit.cpp:192 src/lib/marble/LatLonEdit.cpp:351
 #, fuzzy
 #| msgid "'"
 msgctxt "Marble::LatLonEdit|"
 msgid "'"
 msgstr "'"
 
-#: src/lib/marble/LatLonEdit.cpp:190
+#: src/lib/marble/LatLonEdit.cpp:193
 #, fuzzy
 #| msgid "\""
 msgctxt "Marble::LatLonEdit|"
 msgid "\""
 msgstr "\""
 
-#: src/lib/marble/LatLonEdit.cpp:538
+#: src/lib/marble/LatLonEdit.cpp:541
 #, fuzzy
 #| msgid "E"
 msgctxt "Marble::LatLonEdit|East, the direction"
 msgid "E"
 msgstr "E"
 
-#: src/lib/marble/LatLonEdit.cpp:539
+#: src/lib/marble/LatLonEdit.cpp:542
 #, fuzzy
 #| msgid "W"
 msgctxt "Marble::LatLonEdit|West, the direction"
 msgid "W"
 msgstr "W"
 
-#: src/lib/marble/LatLonEdit.cpp:542
+#: src/lib/marble/LatLonEdit.cpp:545
 #, fuzzy
 #| msgid "N"
 msgctxt "Marble::LatLonEdit|North, the direction"
 msgid "N"
 msgstr "ជើង"
 
-#: src/lib/marble/LatLonEdit.cpp:543
+#: src/lib/marble/LatLonEdit.cpp:546
 #, fuzzy
 #| msgid "S"
 msgctxt "Marble::LatLonEdit|South, the direction"
@@ -8493,43 +8493,43 @@ msgctxt "LegendWidget|"
 msgid "about:blank"
 msgstr ""
 
-#: src/lib/marble/MapThemeDownloadDialog.cpp:242
-#: src/lib/marble/MapThemeDownloadDialog.cpp:263
+#: src/lib/marble/MapThemeDownloadDialog.cpp:251
+#: src/lib/marble/MapThemeDownloadDialog.cpp:272
 #, fuzzy
 #| msgid "Installing %1"
 msgctxt "Marble::MapItemDelegate|"
 msgid "Install"
 msgstr "កំពុង​ដំឡើង %1"
 
-#: src/lib/marble/MapThemeDownloadDialog.cpp:243
-#: src/lib/marble/MapThemeDownloadDialog.cpp:281
+#: src/lib/marble/MapThemeDownloadDialog.cpp:252
+#: src/lib/marble/MapThemeDownloadDialog.cpp:290
 #, fuzzy
 #| msgid "Remove Map"
 msgctxt "Marble::MapItemDelegate|"
 msgid "Remove"
 msgstr "យក​ផែនទី​ចេញ"
 
-#: src/lib/marble/MapThemeDownloadDialog.cpp:244
-#: src/lib/marble/MapThemeDownloadDialog.cpp:278
+#: src/lib/marble/MapThemeDownloadDialog.cpp:253
+#: src/lib/marble/MapThemeDownloadDialog.cpp:287
 #, fuzzy
 #| msgid "Cancel"
 msgctxt "Marble::MapItemDelegate|"
 msgid "Cancel"
 msgstr "បោះបង់"
 
-#: src/lib/marble/MapThemeDownloadDialog.cpp:245
+#: src/lib/marble/MapThemeDownloadDialog.cpp:254
 msgctxt "Marble::MapItemDelegate|"
 msgid "Upgrade"
 msgstr ""
 
-#: src/lib/marble/MapThemeDownloadDialog.cpp:268
+#: src/lib/marble/MapThemeDownloadDialog.cpp:277
 #, fuzzy
 #| msgid "Update"
 msgctxt "Marble::MapItemDelegate|"
 msgid "Update"
 msgstr "ធ្វើ​បច្ចុប្បន្នភាព"
 
-#: src/lib/marble/MapThemeDownloadDialog.cpp:273
+#: src/lib/marble/MapThemeDownloadDialog.cpp:282
 #, fuzzy
 #| msgid "&Open..."
 msgctxt "Marble::MapItemDelegate|"
@@ -8720,99 +8720,99 @@ msgctxt "MapViewWidget|"
 msgid "Here you can choose the preferred map view from different topics."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:153
+#: src/lib/marble/MapWizard.cpp:168
 #, fuzzy
 #| msgid "Preview Map"
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr "មើល​ផែនទី​ជាមុន"
 
-#: src/lib/marble/MapWizard.cpp:272 src/lib/marble/MapWizard.cpp:276
+#: src/lib/marble/MapWizard.cpp:287 src/lib/marble/MapWizard.cpp:291
 #, fuzzy
 #| msgid "Error while parsing"
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr "កំហុស​ពេល​ញែក"
 
-#: src/lib/marble/MapWizard.cpp:272
+#: src/lib/marble/MapWizard.cpp:287
 #, fuzzy
 #| msgid "Wizard cannot parse server's response"
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr "អ្នកជំនួយការ​មិន​អាច​ញែក​ចម្លើយ​តប​របស់​ម៉ាស៊ីន​បម្រើ​បាន​ទេ"
 
-#: src/lib/marble/MapWizard.cpp:276
+#: src/lib/marble/MapWizard.cpp:291
 #, fuzzy
 #| msgid "Server is not a Web Map Server."
 msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
 msgstr "ម៉ាស៊ីន​បម្រើ​មិនមែន​ជា​ម៉ាស៊ីន​បម្រើ​ផែនទី​បណ្ដាញ​ទេ ។"
 
-#: src/lib/marble/MapWizard.cpp:366 src/lib/marble/MapWizard.cpp:383
-#: src/lib/marble/MapWizard.cpp:1076
+#: src/lib/marble/MapWizard.cpp:381 src/lib/marble/MapWizard.cpp:398
+#: src/lib/marble/MapWizard.cpp:1091
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:367 src/lib/marble/MapWizard.cpp:797
-#: src/lib/marble/MapWizard.cpp:921
+#: src/lib/marble/MapWizard.cpp:382 src/lib/marble/MapWizard.cpp:812
+#: src/lib/marble/MapWizard.cpp:936
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:368 src/lib/marble/MapWizard.cpp:799
-#: src/lib/marble/MapWizard.cpp:923
+#: src/lib/marble/MapWizard.cpp:383 src/lib/marble/MapWizard.cpp:814
+#: src/lib/marble/MapWizard.cpp:938
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (crs:84)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:379
+#: src/lib/marble/MapWizard.cpp:394
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
 msgstr "ការពិពណ៌នា"
 
-#: src/lib/marble/MapWizard.cpp:395
+#: src/lib/marble/MapWizard.cpp:410
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:438 src/lib/marble/MapWizard.cpp:913
+#: src/lib/marble/MapWizard.cpp:453 src/lib/marble/MapWizard.cpp:928
 #, fuzzy
 #| msgid "Preview Image"
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "មើល​រួប​ភាព​ជាមុន"
 
-#: src/lib/marble/MapWizard.cpp:442
+#: src/lib/marble/MapWizard.cpp:457
 #, fuzzy
 #| msgid "Base Tile"
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "ក្រឡា​ក្បឿង​គោល"
 
-#: src/lib/marble/MapWizard.cpp:446
+#: src/lib/marble/MapWizard.cpp:461
 #, fuzzy
 #| msgid "Legend"
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
 msgstr "កំណត់​សម្គាល់"
 
-#: src/lib/marble/MapWizard.cpp:452 src/lib/marble/MapWizard.cpp:462
+#: src/lib/marble/MapWizard.cpp:467 src/lib/marble/MapWizard.cpp:477
 #, fuzzy, qt-format
 #| msgid "%1 m"
 msgctxt "Marble::MapWizard|"
 msgid "%1"
 msgstr "%1 ម."
 
-#: src/lib/marble/MapWizard.cpp:452
+#: src/lib/marble/MapWizard.cpp:467
 #, fuzzy, qt-format
 #| msgid "The base tile could not be downloaded."
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
 msgstr "មិន​អាច​ទាញ​យក​ក្រឡា​ក្បឿង​គោល​បាន​ទេ ។"
 
-#: src/lib/marble/MapWizard.cpp:463
+#: src/lib/marble/MapWizard.cpp:478
 #, fuzzy, qt-format
 #| msgid ""
 #| "The base tile could not be downloaded successfully. The server replied:\n"
@@ -8828,52 +8828,52 @@ msgstr ""
 "\n"
 "%1"
 
-#: src/lib/marble/MapWizard.cpp:542 src/lib/marble/MapWizard.cpp:1465
-#: src/lib/marble/MapWizard.cpp:1466 src/lib/marble/MapWizard.cpp:1475
-#: src/lib/marble/MapWizard.cpp:1476
+#: src/lib/marble/MapWizard.cpp:557 src/lib/marble/MapWizard.cpp:1480
+#: src/lib/marble/MapWizard.cpp:1481 src/lib/marble/MapWizard.cpp:1490
+#: src/lib/marble/MapWizard.cpp:1491
 #, fuzzy
 #| msgid "Custom"
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "ផ្ទាល់ខ្លួន"
 
-#: src/lib/marble/MapWizard.cpp:751 src/lib/marble/MapWizard.cpp:754
+#: src/lib/marble/MapWizard.cpp:766 src/lib/marble/MapWizard.cpp:769
 #, fuzzy
 #| msgid "Archiving failed"
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "ការ​ទុក​ក្នុង​ប័ណ្ណសារ​បាន​បរាជ័យ"
 
-#: src/lib/marble/MapWizard.cpp:751
+#: src/lib/marble/MapWizard.cpp:766
 #, fuzzy
 #| msgid "Archiving process cannot be started."
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "មិន​អាច​ចាប់ផ្ដើម​ដំណើរការ​ទុក​ក្នុង​ប័ណ្ណសារ​បាន​ទេ ។"
 
-#: src/lib/marble/MapWizard.cpp:754
+#: src/lib/marble/MapWizard.cpp:769
 #, fuzzy
 #| msgid "Archiving process crashed."
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "ដំណើរការ​ទុក​ក្នុង​ប័ណ្ណសារ​បាន​គាំង ។"
 
-#: src/lib/marble/MapWizard.cpp:847 src/lib/marble/MapWizard.cpp:853
-#: src/lib/marble/MapWizard.cpp:861
+#: src/lib/marble/MapWizard.cpp:862 src/lib/marble/MapWizard.cpp:868
+#: src/lib/marble/MapWizard.cpp:876
 #, fuzzy
 #| msgid "Source Image"
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "រូបភាព​ប្រភព"
 
-#: src/lib/marble/MapWizard.cpp:847
+#: src/lib/marble/MapWizard.cpp:862
 #, fuzzy
 #| msgid "Please specify a source image."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "សូម​បញ្ជាក់​រូបភាព​ប្រភព ។"
 
-#: src/lib/marble/MapWizard.cpp:853
+#: src/lib/marble/MapWizard.cpp:868
 #, fuzzy
 #| msgid ""
 #| "The source image you specified does not exist. Please specify a different "
@@ -8884,7 +8884,7 @@ msgid ""
 "one."
 msgstr "រូបភាព​ប្រភព​ដែល​អ្នក​បាន​បញ្ជាក់​មិន​មាន​ទេ ។ សូម​បញ្ជាក់​មួយ​ផ្សេង​ទៀត ។"
 
-#: src/lib/marble/MapWizard.cpp:862
+#: src/lib/marble/MapWizard.cpp:877
 #, fuzzy
 #| msgid ""
 #| "The source image you specified does not seem to be an image. Please "
@@ -8895,35 +8895,35 @@ msgid ""
 "a different image file."
 msgstr "រូបភាព​ប្រភព​ដែល​អ្នក​បាន​បញ្ជាក់​ហាក់​មិនមែន​ជា​រូបភាព​ទេ ។ សូម​បញ្ជាក់​ឯកសារ​រូបភាព​ផ្សេង​ទៀត ។"
 
-#: src/lib/marble/MapWizard.cpp:892
+#: src/lib/marble/MapWizard.cpp:907
 #, fuzzy
 #| msgid "Map Title"
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "ចំណងជើង​ផែនទី"
 
-#: src/lib/marble/MapWizard.cpp:892
+#: src/lib/marble/MapWizard.cpp:907
 #, fuzzy
 #| msgid "Please specify a map title."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "សូម​បញ្ជាក់​ចំណងជើង​ផែនទី ។"
 
-#: src/lib/marble/MapWizard.cpp:899 src/lib/marble/MapWizard.cpp:906
+#: src/lib/marble/MapWizard.cpp:914 src/lib/marble/MapWizard.cpp:921
 #, fuzzy
 #| msgid "Map Name"
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "ឈ្មោះ​ផែនទី"
 
-#: src/lib/marble/MapWizard.cpp:899
+#: src/lib/marble/MapWizard.cpp:914
 #, fuzzy
 #| msgid "Please specify a map name."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "សូម​បញ្ជាក់​ឈ្មោះ​ផែនទី ។"
 
-#: src/lib/marble/MapWizard.cpp:906
+#: src/lib/marble/MapWizard.cpp:921
 #, fuzzy, qt-format
 #| msgid ""
 #| "Please specify another map name, since there is already a map named "
@@ -8933,45 +8933,45 @@ msgid ""
 "Please specify another map name, since there is already a map named \"%1\"."
 msgstr "សូម​បញ្ជាក់​ឈ្មោះ​ផែនទី​ផ្សេងទៀត ព្រោះ​ផែនទី​ឈ្មោះ \"%1\" មាន​រួចហើយ ។"
 
-#: src/lib/marble/MapWizard.cpp:913
+#: src/lib/marble/MapWizard.cpp:928
 #, fuzzy
 #| msgid "Please specify a preview image."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "សូម​បញ្ជាក់​រូបភាព​មើល​ជាមុន ។"
 
-#: src/lib/marble/MapWizard.cpp:1409
+#: src/lib/marble/MapWizard.cpp:1424
 #, fuzzy
 #| msgid "Problem while creating files"
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "បញ្ហា​នៅ​ពេល​បង្កើត​ឯកសារ"
 
-#: src/lib/marble/MapWizard.cpp:1409
+#: src/lib/marble/MapWizard.cpp:1424
 #, fuzzy
 #| msgid "Check if a theme with the same name exists."
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "ពិនិត្យមើល​ក្រែងលោ​រូបរាង​មាន​ឈ្មោះ​ដូចគ្នា ។"
 
-#: src/lib/marble/MapWizard.cpp:1460
+#: src/lib/marble/MapWizard.cpp:1475
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1462
+#: src/lib/marble/MapWizard.cpp:1477
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1469
+#: src/lib/marble/MapWizard.cpp:1484
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1471
+#: src/lib/marble/MapWizard.cpp:1486
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
@@ -11342,7 +11342,7 @@ msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Test Login"
 msgstr ""
 
-#: src/lib/marble/MarbleGlobal.h:229
+#: src/lib/marble/MarbleGlobal.h:243
 msgctxt "Marble|"
 msgid "not available"
 msgstr ""
@@ -12431,7 +12431,7 @@ msgctxt "UiNewBookmarkFolderDialog|"
 msgid "&Folder name:"
 msgstr "ឈ្មោះ​របស់​សញ្ញា​សម្គាល់​កន្លែង"
 
-#: src/lib/marble/NewstuffModel.cpp:733 src/lib/marble/NewstuffModel.cpp:742
+#: src/lib/marble/NewstuffModel.cpp:739 src/lib/marble/NewstuffModel.cpp:748
 #, fuzzy
 #| msgid "Installation aborted by user."
 msgctxt "Marble::NewstuffModel|"
