@@ -671,7 +671,7 @@ void AnnotatePlugin::handleReleaseOverlay(QMouseEvent *mouseEvent)
             if (mouseEvent->button() == Qt::LeftButton) {
                 displayOverlayFrame(overlay);
             } else if (mouseEvent->button() == Qt::RightButton) {
-                showOverlayRmbMenu(overlay, mouseEvent->x(), mouseEvent->y());
+                showOverlayRmbMenu(overlay, mouseEvent->position().x(), mouseEvent->position().y());
             }
         }
     }
@@ -772,9 +772,9 @@ void AnnotatePlugin::handleRequests(QMouseEvent *mouseEvent, SceneGraphicsItem *
         auto const polyline = static_cast<PolylineAnnotation *>(item);
 
         if (polyline->request() == SceneGraphicsItem::ShowPolylineRmbMenu) {
-            showPolylineRmbMenu(mouseEvent->x(), mouseEvent->y());
+            showPolylineRmbMenu(mouseEvent->position().x(), mouseEvent->position().y());
         } else if (polyline->request() == SceneGraphicsItem::ShowNodeRmbMenu) {
-            showNodeRmbMenu(mouseEvent->x(), mouseEvent->y());
+            showNodeRmbMenu(mouseEvent->position().x(), mouseEvent->position().y());
         } else if (polyline->request() == SceneGraphicsItem::StartPolylineAnimation) {
             QPointer<MergingPolylineNodesAnimation> animation = polyline->animation();
 
@@ -795,7 +795,7 @@ void AnnotatePlugin::handleRequests(QMouseEvent *mouseEvent, SceneGraphicsItem *
         auto const textAnnotation = static_cast<PlacemarkTextAnnotation *>(item);
 
         if (textAnnotation->request() == SceneGraphicsItem::ShowPlacemarkRmbMenu) {
-            showTextAnnotationRmbMenu(mouseEvent->x(), mouseEvent->y());
+            showTextAnnotationRmbMenu(mouseEvent->position().x(), mouseEvent->position().y());
         } else if (textAnnotation->request() == SceneGraphicsItem::ChangeCursorPlacemarkHover) {
             m_marbleWidget->setCursor(Qt::SizeAllCursor);
         }
