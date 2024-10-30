@@ -16,8 +16,6 @@
 #include <QList>
 #include <QString>
 
-#include <QtDebug>
-
 namespace Marble
 {
 

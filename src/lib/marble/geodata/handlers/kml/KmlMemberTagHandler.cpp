@@ -14,8 +14,6 @@
 #include "KmlElementDictionary.h"
 #include "osm/OsmPlacemarkData.h"
 
-#include <QtDebug>
-
 namespace Marble
 {
 namespace kml

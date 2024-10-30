@@ -9,8 +9,6 @@
 
 #include <QList>
 
-#include <QtDebug>
-
 namespace Marble
 {
 
