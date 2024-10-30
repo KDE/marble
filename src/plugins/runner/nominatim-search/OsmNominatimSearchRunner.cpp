@@ -42,8 +42,8 @@ void OsmNominatimRunner::returnNoResults()
 
 void OsmNominatimRunner::search(const QString &searchTerm, const GeoDataLatLonBox &preferred)
 {
-    QString base = QStringLiteral("https://nominatim.openstreetmap.org/search?");
-    QString query = QStringLiteral("q=%1&format=xml&addressdetails=1&accept-language=%2");
+    const QString base = QStringLiteral("https://nominatim.openstreetmap.org/search?");
+    const QString query = QStringLiteral("q=%1&format=xml&addressdetails=1&accept-language=%2");
     QString url = QString(base + query).arg(searchTerm).arg(MarbleLocale::languageCode());
     if (!preferred.isEmpty()) {
         GeoDataCoordinates::Unit deg = GeoDataCoordinates::Degree;

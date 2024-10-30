@@ -29,7 +29,6 @@ public:
     GeoDataThumbnailer();
     ~GeoDataThumbnailer() override;
 
-public: // ThumbnailCreator API
     ThumbnailResult create(const ThumbnailRequest &request) override;
 
 private:

@@ -20,7 +20,6 @@ namespace Marble
 
 GeoDataThumbnailer::GeoDataThumbnailer()
     : ThumbnailCreator(nullptr, QVariantList())
-    , m_marbleMap()
 {
     m_marbleMap.setMapThemeId(QStringLiteral("earth/openstreetmap/openstreetmap.dgml"));
     m_marbleMap.setProjection(Equirectangular);
