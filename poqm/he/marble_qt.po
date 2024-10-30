@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-10-28 06:56+0200\n"
+"PO-Revision-Date: 2024-10-28 19:26+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -10119,10 +10119,9 @@ msgid "mi"
 msgstr "מ'"
 
 #: src/lib/marble/MarbleLocale.cpp:131
-#, fuzzy
 msgctxt "QObject|means nautical miles"
 msgid "nm"
-msgstr "מ'"
+msgstr "מייל ימי"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:17
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10429,14 +10428,13 @@ msgid "-"
 msgstr "-"
 
 #: src/lib/marble/MarblePluginSettingsWidget.cpp:58
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "QObject|"
 msgid ""
 "<br/>(c) %1 The Marble Project<br /><br/><a href=\"https://edu.kde.org/marble"
 "\">https://edu.kde.org/marble</a>"
 msgstr ""
-"<br />(c) 2007, 2008, 2009 פרוייקט Marble<br /><br /><a href=\"http://edu."
-"kde.org/marble\">http://edu.kde.org/marble</a>"
+"<br/>(c) %1 מיזם Marble<br /><br/><a href=\">https://edu.kde.org/marble</a>"
 
 #: src/lib/marble/MarblePluginSettingsWidget.ui:17
 #, fuzzy
@@ -10482,10 +10480,9 @@ msgstr ""
 "p></body></html>"
 
 #: src/lib/marble/MarblePluginSettingsWidget.ui:26
-#, fuzzy
 msgctxt "MarblePluginSettingsWidget|"
 msgid "P&lugins"
-msgstr "תוסף בדיקה"
+msgstr "&תוספים"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:23
 msgctxt "MarbleTimeSettingsWidget|"
@@ -10685,13 +10682,11 @@ msgid "&Units"
 msgstr ""
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:35
-#, fuzzy
 msgctxt "MarbleViewSettingsWidget|"
 msgid "&Distance:"
-msgstr "מרחק כולל: %1 מ'"
+msgstr "מ&רחק:"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:54
-#, fuzzy
 msgctxt "MarbleViewSettingsWidget|"
 msgid ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
@@ -10705,12 +10700,12 @@ msgid ""
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
-"p, li { white-space: pre-wrap; }\n"
+"p, li { white-space: pre-wrap; direction:rtl;}\n"
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
-"weight:400; font-style:normal; text-decoration:none;\">\n"
+"weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:"
-"italic;\">תפקיד</span></p></body></html>"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">היחידה לשימוש למדידת גובה,"
+"אורכים ומרחקים (למשל: ק״מ, מייל, רגל).</p></body></html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:61
 msgctxt "MarbleViewSettingsWidget|"
@@ -10882,13 +10877,11 @@ msgid "&Text Labels"
 msgstr ""
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:286
-#, fuzzy
 msgctxt "MarbleViewSettingsWidget|"
 msgid "&Place names:"
-msgstr "תבליט"
+msgstr "שמות מ&קומות:"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:299
-#, fuzzy
 msgctxt "MarbleViewSettingsWidget|"
 msgid ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
@@ -10906,10 +10899,11 @@ msgstr ""
 "\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
-"weight:400; font-style:normal; text-decoration:none;\">\n"
+"weight:400; font-style:normal;direction:rtl;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">אין תיאור זמין</p></body></"
-"html>"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">למקומות יש בדרך כלל שמות "
+"שונים בשפות שונות. התווית על המפה יכולה להציג את השם בשפת המשתמש. לחלופין "
+"היא יכולה להציג את השם בשפה ובכתב הרשמי למקום הזה. </p></body></html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:306
 msgctxt "MarbleViewSettingsWidget|"
@@ -10932,7 +10926,6 @@ msgid "Default map &font:"
 msgstr ""
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:350
-#, fuzzy
 msgctxt "MarbleViewSettingsWidget|"
 msgid ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
@@ -10948,10 +10941,10 @@ msgstr ""
 "\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
-"weight:400; font-style:normal; text-decoration:none;\">\n"
+"weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:"
-"italic;\">תפקיד</span></p></body></html>"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">גופן ברירת המחדל לשימוש "
+"במפה.</p></body></html>"
 
 #: src/lib/marble/MarbleWebView.cpp:18
 msgctxt "MarbleWebView|"
@@ -14072,12 +14065,12 @@ msgstr "התחלה"
 #: src/plugins/render/eclipses/EclipsesModel.cpp:171
 msgctxt "Marble::EclipsesModel|"
 msgid "End"
-msgstr ""
+msgstr "סוף"
 
 #: src/plugins/render/eclipses/EclipsesModel.cpp:173
 msgctxt "Marble::EclipsesModel|"
 msgid "Type"
-msgstr ""
+msgstr "סוג"
 
 #: src/plugins/render/eclipses/EclipsesModel.cpp:175
 #, fuzzy
@@ -14088,22 +14081,22 @@ msgstr "קו &רוחב"
 #: src/plugins/render/eclipses/EclipsesPlugin.cpp:94
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Eclipses"
-msgstr ""
+msgstr "ליקויי חמה"
 
 #: src/plugins/render/eclipses/EclipsesPlugin.cpp:104
 msgctxt "Marble::EclipsesPlugin|"
 msgid "E&clipses"
-msgstr ""
+msgstr "&ליקויי חמה"
 
 #: src/plugins/render/eclipses/EclipsesPlugin.cpp:114
 msgctxt "Marble::EclipsesPlugin|"
 msgid "This plugin visualizes solar eclipses."
-msgstr ""
+msgstr "התוסף הזה ממחיש ליקויי חמה."
 
 #: src/plugins/render/eclipses/EclipsesPlugin.cpp:187
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Browse Ecli&pses..."
-msgstr ""
+msgstr "עיון ב&ליקויי חמה…"
 
 #: src/plugins/render/eclipses/EclipsesPlugin.cpp:329
 msgctxt "Marble::EclipsesPlugin|"
@@ -14233,7 +14226,7 @@ msgstr "שמאלה"
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfilePlotAxis.cpp:155
 msgctxt "Marble::ElevationProfilePlotAxis|"
 msgid "nm"
-msgstr "נ״מ"
+msgstr "מייל ימי"
 
 #: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:65
 #, fuzzy
@@ -14370,7 +14363,7 @@ msgstr "מ'"
 #: src/plugins/render/gpsinfo/GpsInfoPlugin.ui:29
 msgctxt "GpsInfoPlugin|"
 msgid "Speed"
-msgstr ""
+msgstr "מהירות"
 
 #: src/plugins/render/gpsinfo/GpsInfoPlugin.ui:43
 msgctxt "GpsInfoPlugin|"
@@ -14385,7 +14378,7 @@ msgstr "גובה"
 #: src/plugins/render/gpsinfo/GpsInfoPlugin.ui:71
 msgctxt "GpsInfoPlugin|"
 msgid "Precision"
-msgstr ""
+msgstr "דיוק"
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:14
 #, fuzzy
@@ -14396,12 +14389,12 @@ msgstr "רשת קואורדינטות"
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:20
 msgctxt "GraticuleConfigWidget|"
 msgid "C&olors"
-msgstr ""
+msgstr "&צבעים"
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:444
 msgctxt "GraticuleConfigWidget|"
 msgid "&Grid:"
-msgstr ""
+msgstr "&רשת:"
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:497
 #, fuzzy
@@ -14433,7 +14426,7 @@ msgstr "תפקיד המיקום."
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1392
 msgctxt "GraticuleConfigWidget|"
 msgid "Labels"
-msgstr ""
+msgstr "תוויות"
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1398
 msgctxt "GraticuleConfigWidget|"
@@ -14566,12 +14559,12 @@ msgstr "הצג סרגל ניווט"
 #: src/plugins/render/mapscale/MapScaleConfigWidget.ui:30
 msgctxt "MapScaleConfigWidget|"
 msgid "Minimize"
-msgstr ""
+msgstr "מזעור"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:50
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "Minimize"
-msgstr ""
+msgstr "מזעור"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:65
 #, fuzzy
@@ -14616,7 +14609,7 @@ msgstr "מ'"
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:243
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "nm"
-msgstr "נ״מ"
+msgstr "מייל ימי"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:349
 msgctxt "Marble::MapScaleFloatItem|"
