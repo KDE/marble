@@ -10,14 +10,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-10-28 19:26+0200\n"
+"PO-Revision-Date: 2024-10-30 23:15+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 24.08.1\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
 "X-Qt-Contexts: true\n"
@@ -46,10 +46,9 @@ msgid "Landing Sites"
 msgstr "אתרי נחיתה"
 
 #. file data/maps/moon/clementine/clementine.dgml:138
-#, fuzzy
 msgctxt "DGML|"
 msgid "Craters"
-msgstr "0 מ' (מים)"
+msgstr "מעוצב"
 
 #. file data/maps/moon/clementine/clementine.dgml:147
 #, fuzzy
@@ -58,10 +57,9 @@ msgid "Maria"
 msgstr "Marble"
 
 #. file data/maps/moon/clementine/clementine.dgml:151
-#, fuzzy
 msgctxt "DGML|"
 msgid "Other features"
-msgstr "מקום אחר"
+msgstr "תכונות אחרות"
 
 #. file data/maps/moon/clementine/clementine.dgml:169
 #. ----------
@@ -125,10 +123,9 @@ msgstr "נקודות עניין"
 #. file data/maps/earth/temp-dec/temp-dec.dgml:273
 #. ----------
 #. file data/maps/earth/bluemarble/bluemarble.dgml:273
-#, fuzzy
 msgctxt "DGML|"
 msgid "Coordinate Grid"
-msgstr "רשת קואורדינטות"
+msgstr "רשת נקודות ציון"
 
 #. file data/maps/moon/clementine/clementine.dgml:114
 msgctxt "DGML|"
@@ -174,16 +171,14 @@ msgid "Vallis, valley"
 msgstr ""
 
 #. file data/maps/moon/clementine/clementine.dgml:163
-#, fuzzy
 msgctxt "DGML|"
 msgid "Other"
-msgstr "0 מ' (מים)"
+msgstr "אחר"
 
 #. file data/maps/moon/clementine/clementine.dgml:173
-#, fuzzy
 msgctxt "DGML|"
 msgid "Selenographic Pole"
-msgstr "העתק קואורדינטות"
+msgstr "קוטב סלנוגרפי (ירח)"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:11
 msgctxt "DGML|"
@@ -214,7 +209,6 @@ msgstr "מפה שמציגה את הטמפרטורה הממוצעת ביולי."
 #. file data/maps/earth/bluemarble/bluemarble.dgml:197
 #. ----------
 #. file data/maps/sky/nightsky/nightsky.dgml:121
-#, fuzzy
 msgctxt "DGML|"
 msgid "Terrain"
 msgstr "פני שטח"
@@ -251,7 +245,6 @@ msgstr "גבולות"
 #. file data/maps/earth/political/political.dgml:110
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:216
-#, fuzzy
 msgctxt "DGML|"
 msgid "Water Bodies"
 msgstr "גופי מים"
@@ -259,10 +252,9 @@ msgstr "גופי מים"
 #. file data/maps/earth/temp-july/temp-july.dgml:229
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:228
-#, fuzzy
 msgctxt "DGML|"
 msgid "Temperature"
-msgstr "FITemplate"
+msgstr "טמפרטורה"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:169
 #. ----------
@@ -285,7 +277,6 @@ msgstr "FITemplate"
 #. file data/maps/earth/bluemarble/bluemarble.dgml:256
 #. ----------
 #. file data/maps/sky/nightsky/nightsky.dgml:125
-#, fuzzy
 msgctxt "DGML|"
 msgid "Mountain"
 msgstr "הר"
@@ -307,7 +298,6 @@ msgstr "הר"
 #. file data/maps/earth/bluemarble/bluemarble.dgml:205
 #. ----------
 #. file data/maps/sky/nightsky/nightsky.dgml:129
-#, fuzzy
 msgctxt "DGML|"
 msgid "Volcano"
 msgstr "הר געש"
@@ -331,10 +321,9 @@ msgstr "הר געש"
 #. file data/maps/earth/bluemarble/bluemarble.dgml:214
 #. ----------
 #. file data/maps/sky/nightsky/nightsky.dgml:138
-#, fuzzy
 msgctxt "DGML|"
 msgid "Geographic Pole"
-msgstr "העתק קואורדינטות"
+msgstr "קוטב גאוגרפי"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:186
 #. ----------
@@ -395,10 +384,9 @@ msgstr "נמל תעופה"
 #. file data/maps/earth/bluemarble/bluemarble.dgml:226
 #. ----------
 #. file data/maps/sky/nightsky/nightsky.dgml:150
-#, fuzzy
 msgctxt "DGML|"
 msgid "Shipwreck"
-msgstr "מספנה"
+msgstr "ספינה טרופה"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:198
 #. ----------
@@ -417,10 +405,9 @@ msgstr "מספנה"
 #. file data/maps/earth/bluemarble/bluemarble.dgml:230
 #. ----------
 #. file data/maps/sky/nightsky/nightsky.dgml:154
-#, fuzzy
 msgctxt "DGML|"
 msgid "Astronomical Observatory"
-msgstr "מיקום נוכחי"
+msgstr "מצפה כוכבים"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:207
 #. ----------
@@ -437,10 +424,9 @@ msgstr "מיקום נוכחי"
 #. file data/maps/earth/temp-dec/temp-dec.dgml:207
 #. ----------
 #. file data/maps/earth/bluemarble/bluemarble.dgml:239
-#, fuzzy
 msgctxt "DGML|"
 msgid "International"
-msgstr "שם חלופי"
+msgstr "בינלאומי"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:211
 #. ----------
@@ -455,10 +441,9 @@ msgstr "שם חלופי"
 #. file data/maps/earth/temp-dec/temp-dec.dgml:211
 #. ----------
 #. file data/maps/earth/bluemarble/bluemarble.dgml:243
-#, fuzzy
 msgctxt "DGML|"
 msgid "State"
-msgstr "&שמור"
+msgstr "מדינה"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:220
 #. ----------
@@ -473,7 +458,6 @@ msgstr "&שמור"
 #. file data/maps/earth/schagen1689/schagen1689.dgml:170
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:220
-#, fuzzy
 msgctxt "DGML|"
 msgid "Lake"
 msgstr "אגם"
@@ -491,7 +475,6 @@ msgstr "אגם"
 #. file data/maps/earth/schagen1689/schagen1689.dgml:166
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:224
-#, fuzzy
 msgctxt "DGML|"
 msgid "River"
 msgstr "נהר"
@@ -567,7 +550,6 @@ msgid "-69&deg;C"
 msgstr "‎-69&deg;C"
 
 #. file data/maps/earth/citylights/citylights.dgml:11
-#, fuzzy
 msgctxt "DGML|"
 msgid "Earth at Night"
 msgstr "כדור הארץ בלילה"
@@ -600,27 +582,23 @@ msgid "Populated Places"
 msgstr "מקומות מאוכלסים"
 
 #. file data/maps/earth/citylights/citylights.dgml:162
-#, fuzzy
 msgctxt "DGML|"
 msgid "Light terrain"
-msgstr "פני שטח"
+msgstr "פני שטח בהירים"
 
 #. file data/maps/earth/citylights/citylights.dgml:166
-#, fuzzy
 msgctxt "DGML|"
 msgid "Dark terrain"
-msgstr "פני שטח"
+msgstr "פני שטח כהים"
 
 #. file data/maps/earth/citylights/citylights.dgml:170
 #. ----------
 #. file data/maps/earth/bluemarble/bluemarble.dgml:268
-#, fuzzy
 msgctxt "DGML|"
 msgid "Water"
-msgstr "0 מ' (מים)"
+msgstr "מים"
 
 #. file data/maps/earth/srtm/srtm.dgml:11
-#, fuzzy
 msgctxt "DGML|"
 msgid "Atlas"
 msgstr "אטלס"
@@ -643,15 +621,13 @@ msgstr ""
 #. file data/maps/earth/plain/plain.dgml:187
 #. ----------
 #. file data/maps/earth/plain/plain.dgml:191
-#, fuzzy
 msgctxt "DGML|"
 msgid "Urban Areas"
-msgstr "אטלס"
+msgstr "אזורים עירוניים"
 
 #. file data/maps/earth/srtm/srtm.dgml:290
 #. ----------
 #. file data/maps/earth/plain/plain.dgml:276
-#, fuzzy
 msgctxt "DGML|"
 msgid "Ice and Glaciers"
 msgstr "קרח וקרחונים"
@@ -662,10 +638,9 @@ msgid "Relief"
 msgstr ""
 
 #. file data/maps/earth/srtm/srtm.dgml:306
-#, fuzzy
 msgctxt "DGML|"
 msgid "Elevation"
-msgstr "גובה:"
+msgstr "עילוי"
 
 #. file data/maps/earth/srtm/srtm.dgml:260
 #. ----------
@@ -674,22 +649,21 @@ msgstr "גובה:"
 #. file data/maps/earth/political/political.dgml:106
 msgctxt "DGML|"
 msgid "Disputed Areas"
-msgstr ""
+msgstr "אזורים במחלוקת"
 
 #. file data/maps/earth/srtm/srtm.dgml:264
 #. ----------
 #. file data/maps/earth/plain/plain.dgml:250
-#, fuzzy
 msgctxt "DGML|"
 msgid "Maritime Borders"
-msgstr "גבול מחוז"
+msgstr "גבולות ימיים"
 
 #. file data/maps/earth/srtm/srtm.dgml:277
 #. ----------
 #. file data/maps/earth/plain/plain.dgml:263
 msgctxt "DGML|"
 msgid "Historic Lake"
-msgstr ""
+msgstr "אגם היסטורי"
 
 #. file data/maps/earth/srtm/srtm.dgml:281
 #. ----------
@@ -701,10 +675,9 @@ msgstr ""
 #. file data/maps/earth/srtm/srtm.dgml:293
 #. ----------
 #. file data/maps/earth/plain/plain.dgml:279
-#, fuzzy
 msgctxt "DGML|"
 msgid "Glaciers"
-msgstr "קרח וקרחונים"
+msgstr "קרחונים"
 
 #. file data/maps/earth/srtm/srtm.dgml:297
 #. ----------
@@ -714,105 +687,89 @@ msgid "Antarctic Iceshelves"
 msgstr ""
 
 #. file data/maps/earth/srtm/srtm.dgml:310
-#, fuzzy
 msgctxt "DGML|"
 msgid "7000 m"
-msgstr "7000 מ'"
+msgstr "7000 מ׳"
 
 #. file data/maps/earth/srtm/srtm.dgml:314
-#, fuzzy
 msgctxt "DGML|"
 msgid "5000 m"
-msgstr "5000 מ'"
+msgstr "5000 מ׳"
 
 #. file data/maps/earth/srtm/srtm.dgml:318
-#, fuzzy
 msgctxt "DGML|"
 msgid "3500 m"
-msgstr "3500 מ'"
+msgstr "3500 מ׳"
 
 #. file data/maps/earth/srtm/srtm.dgml:322
-#, fuzzy
 msgctxt "DGML|"
 msgid "2000 m"
-msgstr "2000 מ'"
+msgstr "2000 מ׳"
 
 #. file data/maps/earth/srtm/srtm.dgml:326
-#, fuzzy
 msgctxt "DGML|"
 msgid "1000 m"
-msgstr "1000 מ'"
+msgstr "1000 מ׳"
 
 #. file data/maps/earth/srtm/srtm.dgml:330
-#, fuzzy
 msgctxt "DGML|"
 msgid "500 m"
-msgstr "500 מ'"
+msgstr "500 מ׳"
 
 #. file data/maps/earth/srtm/srtm.dgml:334
-#, fuzzy
 msgctxt "DGML|"
 msgid "200 m"
-msgstr "200 מ'"
+msgstr "200 מ׳"
 
 #. file data/maps/earth/srtm/srtm.dgml:338
-#, fuzzy
 msgctxt "DGML|"
 msgid "50 m"
-msgstr "50 מ'"
+msgstr "50 מ׳"
 
 #. file data/maps/earth/srtm/srtm.dgml:342
-#, fuzzy
 msgctxt "DGML|"
 msgid "0 m"
-msgstr "0 מ'"
+msgstr "0 מ׳"
 
 #. file data/maps/earth/srtm/srtm.dgml:346
-#, fuzzy
 msgctxt "DGML|"
 msgid "0 m (Water)"
-msgstr "0 מ' (מים)"
+msgstr "0 מ׳ (מים)"
 
 #. file data/maps/earth/srtm/srtm.dgml:350
-#, fuzzy
 msgctxt "DGML|"
 msgid "-50 m"
-msgstr "-50 מ'"
+msgstr "‎-50 מ׳"
 
 #. file data/maps/earth/srtm/srtm.dgml:354
-#, fuzzy
 msgctxt "DGML|"
 msgid "-200 m"
-msgstr "-200 מ'"
+msgstr "‎-200 מ׳"
 
 #. file data/maps/earth/srtm/srtm.dgml:358
-#, fuzzy
 msgctxt "DGML|"
 msgid "-2000 m"
-msgstr "-2000 מ'"
+msgstr "‎-2000 מ׳"
 
 #. file data/maps/earth/srtm/srtm.dgml:362
-#, fuzzy
 msgctxt "DGML|"
 msgid "-4000 m"
-msgstr "-4000 מ'"
+msgstr "‎-4000 מ׳"
 
 #. file data/maps/earth/srtm/srtm.dgml:366
-#, fuzzy
 msgctxt "DGML|"
 msgid "-6500 m"
-msgstr "-6500 מ'"
+msgstr "‎-6500 מ׳"
 
 #. file data/maps/earth/srtm/srtm.dgml:370
-#, fuzzy
 msgctxt "DGML|"
 msgid "-11000 m"
-msgstr "-11000 מ'"
+msgstr "‎-11000 מ׳"
 
 #. file data/maps/earth/vectorosm-dev/vectorosm-dev.dgml:12
 msgctxt "DGML|"
 msgid "Vector OSM (Development)"
-msgstr ""
+msgstr "OSM וקטורי (פיתוח)"
 
 #. file data/maps/earth/vectorosm-dev/vectorosm-dev.dgml:17
 msgctxt "DGML|"
@@ -826,10 +783,9 @@ msgstr ""
 #. file data/maps/earth/vectorosm/vectorosm.dgml:109
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:112
-#, fuzzy
 msgctxt "DGML|"
 msgid "Explore the Earth"
-msgstr "כדור הארץ"
+msgstr "חקר כדור הארץ"
 
 #. file data/maps/earth/vectorosm-dev/vectorosm-dev.dgml:87
 #. ----------
@@ -841,11 +797,13 @@ msgid ""
 "<a href=\"tour://earth/openstreetmap/tour.kml\">Play a tour of popular "
 "places.</a>"
 msgstr ""
+"<a href=\"tour://earth/openstreetmap/tour.kml\">הפעלת סיור במקומות נפוצים.</"
+"a>"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:12
 msgctxt "DGML|"
 msgid "Vector OSM"
-msgstr ""
+msgstr "OSM וקטורי"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:17
 #. ----------
@@ -866,26 +824,23 @@ msgstr "תצוגת מפה"
 #. file data/maps/earth/vectorosm/vectorosm.dgml:119
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:125
-#, fuzzy
 msgctxt "DGML|"
 msgid "Transportation"
-msgstr "שם חלופי"
+msgstr "תחבורה"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:202
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:208
-#, fuzzy
 msgctxt "DGML|"
 msgid "Areas"
-msgstr "אטלס"
+msgstr "אזורים"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:300
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:306
-#, fuzzy
 msgctxt "DGML|"
 msgid "Education"
-msgstr "מיקום"
+msgstr "חינוך"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:323
 #. ----------
@@ -918,10 +873,9 @@ msgstr "בנייני ציבור"
 #. file data/maps/earth/vectorosm/vectorosm.dgml:403
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:409
-#, fuzzy
 msgctxt "DGML|"
 msgid "Accommodation"
-msgstr "מתחיל חיפוש"
+msgstr "הסדר לינה"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:414
 #. ----------
@@ -1690,34 +1644,30 @@ msgstr "&היטל"
 #. file data/maps/earth/precip-july/precip-july.dgml:233
 #. ----------
 #. file data/maps/earth/precip-dec/precip-dec.dgml:232
-#, fuzzy
 msgctxt "DGML|"
 msgid "0 mm"
-msgstr "0 מ'"
+msgstr "0 מ״מ"
 
 #. file data/maps/earth/precip-july/precip-july.dgml:237
 #. ----------
 #. file data/maps/earth/precip-dec/precip-dec.dgml:236
-#, fuzzy
 msgctxt "DGML|"
 msgid "10 mm"
-msgstr "0 מ'"
+msgstr "10 מ״מ"
 
 #. file data/maps/earth/precip-july/precip-july.dgml:241
 #. ----------
 #. file data/maps/earth/precip-dec/precip-dec.dgml:240
-#, fuzzy
 msgctxt "DGML|"
 msgid "40 mm"
-msgstr "0 מ'"
+msgstr "40 מ״מ"
 
 #. file data/maps/earth/precip-july/precip-july.dgml:245
 #. ----------
 #. file data/maps/earth/precip-dec/precip-dec.dgml:244
-#, fuzzy
 msgctxt "DGML|"
 msgid "63 mm"
-msgstr "3500 מ'"
+msgstr "63 מ״מ"
 
 #. file data/maps/earth/precip-july/precip-july.dgml:249
 #. ----------
@@ -1729,26 +1679,23 @@ msgstr "89 מ״מ"
 #. file data/maps/earth/precip-july/precip-july.dgml:253
 #. ----------
 #. file data/maps/earth/precip-dec/precip-dec.dgml:252
-#, fuzzy
 msgctxt "DGML|"
 msgid "127 mm"
-msgstr "%1 מ'"
+msgstr "127 מ״מ"
 
 #. file data/maps/earth/precip-july/precip-july.dgml:257
 #. ----------
 #. file data/maps/earth/precip-dec/precip-dec.dgml:256
-#, fuzzy
 msgctxt "DGML|"
 msgid "256 mm"
-msgstr "50 מ'"
+msgstr "256 מ״מ"
 
 #. file data/maps/earth/precip-july/precip-july.dgml:261
 #. ----------
 #. file data/maps/earth/precip-dec/precip-dec.dgml:260
-#, fuzzy
 msgctxt "DGML|"
 msgid "512 mm"
-msgstr "%1 מ'"
+msgstr "512 מ״מ"
 
 #. file data/maps/earth/precip-july/precip-july.dgml:265
 #. ----------
@@ -1804,10 +1751,9 @@ msgid ""
 msgstr ""
 
 #. file data/maps/earth/political/political.dgml:114
-#, fuzzy
 msgctxt "DGML|"
 msgid "Rivers"
-msgstr "נהר"
+msgstr "נהרות"
 
 #. file data/maps/earth/sentinel2/sentinel2.dgml:5
 #, fuzzy
@@ -1831,10 +1777,9 @@ msgid "A map which shows the average temperature in December."
 msgstr "מפה שמציגה את הטמפרטורה הממוצעת בדצמבר."
 
 #. file data/maps/earth/bluemarble/bluemarble.dgml:11
-#, fuzzy
 msgctxt "DGML|"
 msgid "Satellite View"
-msgstr "לווינים"
+msgstr "תצוגת לוויינים"
 
 #. file data/maps/earth/bluemarble/bluemarble.dgml:21
 #, fuzzy
@@ -1853,10 +1798,9 @@ msgid "Ice"
 msgstr "קרח"
 
 #. file data/maps/earth/bluemarble/bluemarble.dgml:260
-#, fuzzy
 msgctxt "DGML|"
 msgid "Vegetation"
-msgstr "גובה"
+msgstr "צמחיה"
 
 #. file data/maps/earth/bluemarble/bluemarble.dgml:264
 msgctxt "DGML|"
@@ -1864,10 +1808,9 @@ msgid "Desert"
 msgstr "מדבר"
 
 #. file data/maps/sky/nightsky/nightsky.dgml:10
-#, fuzzy
 msgctxt "DGML|"
 msgid "Night Sky"
-msgstr "ימינה"
+msgstr "שמי לילה"
 
 #. file data/maps/sky/nightsky/nightsky.dgml:20
 msgctxt "DGML|"
@@ -1877,10 +1820,9 @@ msgid ""
 msgstr ""
 
 #. file data/legend.html
-#, fuzzy
 msgctxt "Legends|"
 msgid "Marble: Legend"
-msgstr "Marble"
+msgstr "Marble: מקרא"
 
 #. file data/legend.html
 msgctxt "Legends|"
@@ -1893,10 +1835,9 @@ msgid "Populated Places"
 msgstr "אזורים מאוכלסים"
 
 #. file data/legend.html
-#, fuzzy
 msgctxt "Legends|"
 msgid "Population:"
-msgstr "מדינה"
+msgstr "אוכלוסיה:"
 
 #. file data/legend.html
 #, fuzzy
@@ -1928,34 +1869,29 @@ msgid "<br/>"
 msgstr "<br/>"
 
 #. file data/legend.html
-#, fuzzy
 msgctxt "Legends|"
 msgid "Capitals:"
 msgstr "ערי בירה:"
 
 #. file data/legend.html
-#, fuzzy
 msgctxt "Legends|"
 msgid "Red:&nbsp;Nation"
-msgstr "אדום&nbsp;מדינה"
+msgstr "אדום:&nbsp;ארץ"
 
 #. file data/legend.html
-#, fuzzy
 msgctxt "Legends|"
 msgid "Orange:&nbsp;State"
-msgstr "כתום&nbsp;איזור"
+msgstr "כתום:&nbsp;מדינה"
 
 #. file data/legend.html
-#, fuzzy
 msgctxt "Legends|"
 msgid "Yellow:&nbsp;County"
-msgstr "צהוב&nbsp;מחוז"
+msgstr "צהוב:&nbsp;מחוז"
 
 #. file data/legend.html
-#, fuzzy
 msgctxt "Legends|"
 msgid "White:&nbsp;None"
-msgstr "לבן&nbsp;כלום"
+msgstr "לבן:&nbsp;כלום"
 
 #. file data/legend.html
 msgctxt "Legends|"
@@ -2438,28 +2374,24 @@ msgid "Open a file for viewing on Marble"
 msgstr "פתיחת קובץ להצגה ב־Marble"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:270
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Download Maps..."
-msgstr "&הורד מפות..."
+msgstr "הו&רדת מפות…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:273
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
-msgstr "&ייצא מפה..."
+msgstr "יי&צןא מפה…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:275
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Save a screenshot of the map"
-msgstr "שמור תצלום של המפה"
+msgstr "שמירת צילום של המפה"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:279
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Download &Region..."
-msgstr "הורד &איזור..."
+msgstr "הורדת &אזור…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:280
 msgctxt "Marble::MainWindow|"
@@ -2467,23 +2399,20 @@ msgid "Download a map region in different zoom levels for offline usage"
 msgstr "הורדת אזור במפה ברמות תקריב שונות לשימוש בלתי מקוון"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:283
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Print..."
-msgstr "ה&דפס..."
+msgstr "ה&דפסה…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:284
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:285
 #: src/apps/marble-qt/QtMainWindow.cpp:289
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Print a screenshot of the map"
-msgstr "הדפסת תצלום של המפה"
+msgstr "הדפסת צילום של המפה"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:288
 msgctxt "Marble::MainWindow|"
@@ -2491,40 +2420,34 @@ msgid "Print Previe&w ..."
 msgstr "הצגה מ&קדימה להדפסה…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:292
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Quit"
 msgstr "י&ציאה"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:293
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:294
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Quit the Application"
-msgstr "יציאה מהתוכנית"
+msgstr "יציאה מהיישום"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:297
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Copy Map"
-msgstr "הע&תק מפה"
+msgstr "הע&תקת מפה"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:299
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Copy a screenshot of the map"
-msgstr "העתקת תצלום של המפה"
+msgstr "העתקת צילום של המפה"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:302
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
-msgstr "&עריכה"
+msgstr "&עריכת מפה…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:304
 msgctxt "Marble::MainWindow|"
@@ -2670,22 +2593,19 @@ msgid "Marble Virtual Globe &Handbook"
 msgstr "הגלובוס השולחני Marble"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:368
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Show the Handbook for Marble Virtual Globe"
-msgstr "&אודות הגלובוס השולחני Marble"
+msgstr "הצגת ספרון ההדרכה על הגלובוס הווירטואלי Marble"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:371
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "What's &This"
 msgstr "מה &זה"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:373
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Show a detailed explanation of the action."
-msgstr "הצג הסבר מפורט של הפעולה."
+msgstr "הצגת הסבר מפורט של הפעולה."
 
 #: src/apps/marble-qt/QtMainWindow.cpp:376
 msgctxt "Marble::MainWindow|"
@@ -2698,28 +2618,24 @@ msgid "Visit Marble's Community Forum"
 msgstr "ביקור בפורום קהילת Marble"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:380
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&About Marble Virtual Globe"
-msgstr "&אודות הגלובוס השולחני Marble"
+msgstr "על ה&גלובוס הווירטואלי Marble"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:381
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Show the application's About Box"
-msgstr "הצג את תיבות האודות של התוכנית"
+msgstr "הצגת התיבה עם פרטים על היישום"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:384
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "About &Qt"
-msgstr "אודות &Qt"
+msgstr "&על Qt"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:385
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Show the Qt library's About box"
-msgstr "הצג את תיבת האודות של ספריית Qt"
+msgstr "הצגת תיבת המידע על ספריית Qt"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:389
 #, fuzzy
@@ -2728,10 +2644,9 @@ msgid "Add &Bookmark..."
 msgstr "ייצא מפה"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:391
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Add Bookmark"
-msgstr "ייצא מפה"
+msgstr "הוספת סימנייה"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:394
 #: src/apps/marble-qt/QtMainWindow.cpp:395
@@ -2794,22 +2709,19 @@ msgid "Universal Transverse Mercator (UTM)"
 msgstr "מרקטור רוחבי בינלאומי (UTM)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:444
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&File"
 msgstr "&קובץ"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:457
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Edit"
 msgstr "&עריכה"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:465
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&View"
-msgstr "&תצוגה"
+msgstr "ת&צוגה"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:466
 msgctxt "Marble::MainWindow|"
@@ -2817,46 +2729,39 @@ msgid "&Info Boxes"
 msgstr "&תיבות מידע"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:467
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Online Services"
-msgstr "ייצא מפה"
+msgstr "&שירותים מקוונים"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:470
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Bookmarks"
-msgstr "ייצא מפה"
+msgstr "&סימניות"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:474
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Panels"
-msgstr "הצג מיקומים"
+msgstr "&לוחות"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:479
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&View Size"
-msgstr "&תצוגה"
+msgstr "&גודל תצוגה"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:482
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Settings"
-msgstr "&הגדרות"
+msgstr "ה&גדרות"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:491
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Help"
 msgstr "ע&זרה"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:594
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Home"
-msgstr "בית"
+msgstr "&בית"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:602
 msgctxt "Marble::MainWindow|"
@@ -2864,16 +2769,14 @@ msgid "Default"
 msgstr "ברירת מחדל"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:718
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Ready"
-msgstr "מוכן"
+msgstr "בהמתנה"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:732
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Export Map"
-msgstr "ייצא מפה"
+msgstr "ייצוא מפה"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:734
 #, fuzzy
@@ -5152,19 +5055,19 @@ msgstr[3] ""
 #: src/lib/marble/DownloadRegionDialog.cpp:497
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Approximate size of the tiles to be downloaded"
-msgstr ""
+msgstr "גודל משוערך של אריחים להורדה"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:501
 #, qt-format
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Estimated download size: %1 MB"
-msgstr ""
+msgstr "גודל ההורדה המשוערך: %1 מ״ב"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:503
 #, qt-format
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Estimated download size: %1 kB"
-msgstr ""
+msgstr "גודל ההורדה המשוערך: %1 ק״ב"
 
 #: src/lib/marble/EditBookmarkDialog.ui:14
 #, fuzzy
@@ -5242,7 +5145,7 @@ msgstr "מפה רגילה"
 #: src/lib/marble/EditPlacemarkDialog.cpp:144
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Tags"
-msgstr ""
+msgstr "תגיות"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:149
 #, fuzzy
@@ -5259,7 +5162,7 @@ msgstr "גובה:"
 #: src/lib/marble/EditPlacemarkDialog.cpp:350
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "No name specified"
-msgstr ""
+msgstr "לא צוין שם"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:350
 #, fuzzy
@@ -5270,7 +5173,7 @@ msgstr "שם חלופי עבור המיקום."
 #: src/lib/marble/EditPlacemarkDialog.cpp:352
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "No ID specified"
-msgstr ""
+msgstr "לא צוין מזהה"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:352
 #, fuzzy
@@ -5281,7 +5184,7 @@ msgstr "שם חלופי עבור המיקום."
 #: src/lib/marble/EditPlacemarkDialog.cpp:354
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "ID is invalid"
-msgstr ""
+msgstr "המזהה שגוי"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:354
 #, fuzzy
@@ -5292,7 +5195,7 @@ msgstr "שם חלופי עבור המיקום."
 #: src/lib/marble/EditPlacemarkDialog.cpp:356
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "No image specified"
-msgstr ""
+msgstr "לא צוינה תמונה"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:356
 #, fuzzy
@@ -5303,7 +5206,7 @@ msgstr "שם חלופי עבור המיקום."
 #: src/lib/marble/EditPlacemarkDialog.cpp:358
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Invalid icon path"
-msgstr ""
+msgstr "נתיב סמל שגוי"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:358
 #, fuzzy
@@ -5331,18 +5234,18 @@ msgstr ""
 #: src/lib/marble/EditPlacemarkDialog.ui:55
 msgctxt "UiEditPlacemarkDialog|"
 msgid "Style, Color"
-msgstr ""
+msgstr "סגנון, צבע"
 
 #: src/lib/marble/EditPlacemarkDialog.ui:61
 msgctxt "UiEditPlacemarkDialog|"
 msgid "Label"
-msgstr ""
+msgstr "תווית"
 
 #: src/lib/marble/EditPlacemarkDialog.ui:74
 #: src/lib/marble/EditPlacemarkDialog.ui:186
 msgctxt "UiEditPlacemarkDialog|"
 msgid "Color:"
-msgstr ""
+msgstr "צבע:"
 
 #: src/lib/marble/EditPlacemarkDialog.ui:129
 #: src/lib/marble/EditPlacemarkDialog.ui:244
@@ -5354,7 +5257,7 @@ msgstr "מחוון קנה מידה"
 #: src/lib/marble/EditPlacemarkDialog.ui:170
 msgctxt "UiEditPlacemarkDialog|"
 msgid "Icon"
-msgstr ""
+msgstr "סמל"
 
 #: src/lib/marble/EditPlacemarkDialog.ui:285
 #, fuzzy
@@ -5366,7 +5269,7 @@ msgstr "מפה רגילה"
 #: src/lib/marble/EditPlacemarkDialog.ui:329
 msgctxt "UiEditPlacemarkDialog|"
 msgid "Bold"
-msgstr ""
+msgstr "מודגש"
 
 #: src/lib/marble/EditPlacemarkDialog.ui:341
 #: src/lib/marble/EditPlacemarkDialog.ui:344
@@ -5385,7 +5288,7 @@ msgstr "שורת חיפוש"
 #: src/lib/marble/EditPlacemarkDialog.ui:371
 msgctxt "UiEditPlacemarkDialog|"
 msgid "Add image"
-msgstr ""
+msgstr "הוספת תמונה"
 
 #: src/lib/marble/EditPlacemarkDialog.ui:380
 #: src/lib/marble/EditPlacemarkDialog.ui:383
@@ -5409,32 +5312,32 @@ msgstr "0 מ'"
 #: src/lib/marble/ElevationWidget.ui:36
 msgctxt "ElevationWidget|"
 msgid "above sea level"
-msgstr ""
+msgstr "מעל גובה פני הים"
 
 #: src/lib/marble/ExternalEditor.ui:14
 msgctxt "ExternalEditor|"
 msgid "External Map Editor Selection"
-msgstr ""
+msgstr "בחירת עורך מפה חיצוני"
 
 #: src/lib/marble/ExternalEditor.ui:22
 msgctxt "ExternalEditor|"
 msgid "External Map Editor"
-msgstr ""
+msgstr "עורך מפה חיצוני"
 
 #: src/lib/marble/ExternalEditor.ui:30
 msgctxt "ExternalEditor|"
 msgid "Web browser (iD)"
-msgstr ""
+msgstr "דפדפן (iD)"
 
 #: src/lib/marble/ExternalEditor.ui:35
 msgctxt "ExternalEditor|"
 msgid "Merkaartor"
-msgstr ""
+msgstr "Merkaartor"
 
 #: src/lib/marble/ExternalEditor.ui:40
 msgctxt "ExternalEditor|"
 msgid "JOSM"
-msgstr ""
+msgstr "JOSM"
 
 #: src/lib/marble/ExternalEditor.ui:48
 msgctxt "ExternalEditor|"
@@ -5459,7 +5362,7 @@ msgstr "הצג רשת"
 #: src/lib/marble/ExternalEditor.ui:81
 msgctxt "ExternalEditor|"
 msgid "Editor Preview"
-msgstr ""
+msgstr "תצוגת עורך מקדימה"
 
 #: src/lib/marble/ExternalEditor.ui:103
 msgctxt "ExternalEditor|"
@@ -5480,7 +5383,7 @@ msgstr ""
 #, qt-format
 msgctxt "Marble::ExternalEditorDialog|"
 msgid "Please ask your system administrator to install %1 on your system."
-msgstr ""
+msgstr "נא לבקש מהנהלת המערכת שלך להתקין את %1 במערכת שלך."
 
 #: src/lib/marble/ExternalEditorDialog.cpp:98
 msgctxt "Marble::ExternalEditorDialog|"
@@ -5501,12 +5404,12 @@ msgstr ""
 #: src/lib/marble/FileViewWidget.cpp:69
 msgctxt "QObject|"
 msgid "View Properties"
-msgstr ""
+msgstr "הצגת מאפיינים"
 
 #: src/lib/marble/FileViewWidget.cpp:130
 msgctxt "QObject|"
 msgid "Select filename for KML document"
-msgstr ""
+msgstr "נא לבחור שם קובץ למסמך KML"
 
 #: src/lib/marble/FileViewWidget.ui:14
 #, fuzzy
@@ -5535,22 +5438,22 @@ msgstr "מדינה"
 #: src/lib/marble/FlyToEditWidget.cpp:51
 msgctxt "Marble::FlyToEditWidget|seconds"
 msgid " s"
-msgstr ""
+msgstr " שנ׳"
 
 #: src/lib/marble/FlyToEditWidget.cpp:57
 msgctxt "Marble::FlyToEditWidget|"
 msgid "Mode:"
-msgstr ""
+msgstr "מצב:"
 
 #: src/lib/marble/FlyToEditWidget.cpp:62
 msgctxt "Marble::FlyToEditWidget|"
 msgid "Smooth"
-msgstr ""
+msgstr "חלק"
 
 #: src/lib/marble/FlyToEditWidget.cpp:63
 msgctxt "Marble::FlyToEditWidget|"
 msgid "Bounce"
-msgstr ""
+msgstr "קופצני"
 
 #: src/lib/marble/FlyToEditWidget.cpp:80
 #, fuzzy
@@ -5561,7 +5464,7 @@ msgstr "ייצא מפה"
 #: src/lib/marble/FormattedTextWidget.cpp:180
 msgctxt "Marble::FormattedTextWidget|"
 msgid "Choose image"
-msgstr ""
+msgstr "בחירת תמונה"
 
 #: src/lib/marble/FormattedTextWidget.cpp:180
 #, fuzzy
@@ -5574,17 +5477,17 @@ msgstr ""
 #: src/lib/marble/FormattedTextWidget.ui:46
 msgctxt "FormattedTextWidget|"
 msgid "Formatted text"
-msgstr ""
+msgstr "טקסט  מעוצב"
 
 #: src/lib/marble/FormattedTextWidget.ui:70
 msgctxt "FormattedTextWidget|"
 msgid "6"
-msgstr ""
+msgstr "6"
 
 #: src/lib/marble/FormattedTextWidget.ui:75
 msgctxt "FormattedTextWidget|"
 msgid "8"
-msgstr ""
+msgstr "8"
 
 #: src/lib/marble/FormattedTextWidget.ui:80
 #, fuzzy
@@ -5595,62 +5498,62 @@ msgstr "F9"
 #: src/lib/marble/FormattedTextWidget.ui:85
 msgctxt "FormattedTextWidget|"
 msgid "10"
-msgstr ""
+msgstr "10"
 
 #: src/lib/marble/FormattedTextWidget.ui:90
 msgctxt "FormattedTextWidget|"
 msgid "11"
-msgstr ""
+msgstr "11"
 
 #: src/lib/marble/FormattedTextWidget.ui:95
 msgctxt "FormattedTextWidget|"
 msgid "12"
-msgstr ""
+msgstr "12"
 
 #: src/lib/marble/FormattedTextWidget.ui:100
 msgctxt "FormattedTextWidget|"
 msgid "14"
-msgstr ""
+msgstr "14"
 
 #: src/lib/marble/FormattedTextWidget.ui:105
 msgctxt "FormattedTextWidget|"
 msgid "16"
-msgstr ""
+msgstr "16"
 
 #: src/lib/marble/FormattedTextWidget.ui:110
 msgctxt "FormattedTextWidget|"
 msgid "18"
-msgstr ""
+msgstr "18"
 
 #: src/lib/marble/FormattedTextWidget.ui:115
 msgctxt "FormattedTextWidget|"
 msgid "20"
-msgstr ""
+msgstr "20"
 
 #: src/lib/marble/FormattedTextWidget.ui:120
 msgctxt "FormattedTextWidget|"
 msgid "24"
-msgstr ""
+msgstr "24"
 
 #: src/lib/marble/FormattedTextWidget.ui:125
 msgctxt "FormattedTextWidget|"
 msgid "36"
-msgstr ""
+msgstr "36"
 
 #: src/lib/marble/FormattedTextWidget.ui:130
 msgctxt "FormattedTextWidget|"
 msgid "48"
-msgstr ""
+msgstr "48"
 
 #: src/lib/marble/FormattedTextWidget.ui:135
 msgctxt "FormattedTextWidget|"
 msgid "72"
-msgstr ""
+msgstr "72"
 
 #: src/lib/marble/FormattedTextWidget.ui:140
 msgctxt "FormattedTextWidget|"
 msgid "96"
-msgstr ""
+msgstr "96"
 
 #: src/lib/marble/FormattedTextWidget.ui:148
 msgctxt "FormattedTextWidget|"
@@ -5680,7 +5583,7 @@ msgstr "שורת חיפוש"
 #: src/lib/marble/FormattedTextWidget.ui:235
 msgctxt "FormattedTextWidget|"
 msgid "Add image"
-msgstr ""
+msgstr "הוספת תמונה"
 
 #: src/lib/marble/FormattedTextWidget.ui:244
 #: src/lib/marble/FormattedTextWidget.ui:247
@@ -5692,7 +5595,7 @@ msgstr "נתיב"
 #: src/lib/marble/FormattedTextWidget.ui:252
 msgctxt "FormattedTextWidget|"
 msgid "Color"
-msgstr ""
+msgstr "צבע"
 
 #: src/lib/marble/geodata/data/GeoDataCoordinates.cpp:432
 #, fuzzy
@@ -5721,7 +5624,7 @@ msgstr "ד"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:300
 msgctxt "GeoDataPlacemark|"
 msgid "Valley"
-msgstr ""
+msgstr "עמק"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:302
 #, fuzzy
@@ -5744,22 +5647,22 @@ msgstr "&חפש"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:308
 msgctxt "GeoDataPlacemark|"
 msgid "Manned Landing Site"
-msgstr ""
+msgstr "אתר נחיתה מאוישת"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:310
 msgctxt "GeoDataPlacemark|"
 msgid "Robotic Rover"
-msgstr ""
+msgstr "גשושית רובוטית"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:312
 msgctxt "GeoDataPlacemark|"
 msgid "Unmanned Soft Landing Site"
-msgstr ""
+msgstr "אתר נחיתה רכה בלתי מאוישת"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:314
 msgctxt "GeoDataPlacemark|"
 msgid "Unmanned Hard Landing Site"
-msgstr ""
+msgstr "אתר נחיתה קשה בלתי מאוישת"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:316
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:352
@@ -5851,7 +5754,7 @@ msgstr "מספנה"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:366
 msgctxt "GeoDataPlacemark|"
 msgid "Air Port"
-msgstr ""
+msgstr "נמל תעופה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:368
 #, fuzzy
@@ -5862,12 +5765,12 @@ msgstr "מיקום נוכחי"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:370
 msgctxt "GeoDataPlacemark|"
 msgid "Military Danger Area"
-msgstr ""
+msgstr "אזור צבאי מסוכן"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:372
 msgctxt "GeoDataPlacemark|"
 msgid "OSM Site"
-msgstr ""
+msgstr "אתר OSM"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:374
 #, fuzzy
@@ -5904,7 +5807,7 @@ msgstr "בירת מחוז"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:388
 msgctxt "GeoDataPlacemark|"
 msgid "Suburb"
-msgstr ""
+msgstr "פרבר"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:390
 msgctxt "GeoDataPlacemark|"
@@ -5950,17 +5853,17 @@ msgstr "0 מ' (מים)"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:408
 msgctxt "GeoDataPlacemark|"
 msgid "Reef"
-msgstr ""
+msgstr "שונית"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:410
 msgctxt "GeoDataPlacemark|"
 msgid "Wood"
-msgstr ""
+msgstr "יער"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:412
 msgctxt "GeoDataPlacemark|"
 msgid "Beach"
-msgstr ""
+msgstr "חוף"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:414
 msgctxt "GeoDataPlacemark|"
@@ -5976,7 +5879,7 @@ msgstr "קרח וקרחונים"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:418
 msgctxt "GeoDataPlacemark|"
 msgid "Ice Shelf"
-msgstr ""
+msgstr "מדף קרח"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:420
 msgctxt "GeoDataPlacemark|"
@@ -5986,7 +5889,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:422
 msgctxt "GeoDataPlacemark|"
 msgid "Cliff"
-msgstr ""
+msgstr "צוק"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:424
 #, fuzzy
@@ -5997,7 +5900,7 @@ msgstr "0 מ' (מים)"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:426
 msgctxt "GeoDataPlacemark|"
 msgid "Traffic Signals"
-msgstr ""
+msgstr "רמזורים"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:428
 #, fuzzy
@@ -6043,7 +5946,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:444
 msgctxt "GeoDataPlacemark|"
 msgid "Service Road"
-msgstr ""
+msgstr "דרך שירות"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:446
 msgctxt "GeoDataPlacemark|"
@@ -6053,12 +5956,12 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:448
 msgctxt "GeoDataPlacemark|"
 msgid "Residential Road"
-msgstr ""
+msgstr "דרך עירונית"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:450
 msgctxt "GeoDataPlacemark|"
 msgid "Living Street"
-msgstr ""
+msgstr "רחוב מגורים"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:452
 msgctxt "GeoDataPlacemark|"
@@ -6127,62 +6030,62 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:476
 msgctxt "GeoDataPlacemark|"
 msgid "Corridor"
-msgstr ""
+msgstr "מסדרון"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:478
 msgctxt "GeoDataPlacemark|"
 msgid "Building"
-msgstr ""
+msgstr "בניין"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:480
 msgctxt "GeoDataPlacemark|"
 msgid "Camping"
-msgstr ""
+msgstr "מחנאות"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:482
 msgctxt "GeoDataPlacemark|"
 msgid "Hostel"
-msgstr ""
+msgstr "אכסניה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:484
 msgctxt "GeoDataPlacemark|"
 msgid "Hotel"
-msgstr ""
+msgstr "מלון"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:486
 msgctxt "GeoDataPlacemark|"
 msgid "Motel"
-msgstr ""
+msgstr "מלון דרכים"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:488
 msgctxt "GeoDataPlacemark|"
 msgid "Youth Hostel"
-msgstr ""
+msgstr "בית הארחה לנוער"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:490
 msgctxt "GeoDataPlacemark|"
 msgid "Guest House"
-msgstr ""
+msgstr "בית הארחה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:492
 msgctxt "GeoDataPlacemark|"
 msgid "Library"
-msgstr ""
+msgstr "ספרייה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:494
 msgctxt "GeoDataPlacemark|"
 msgid "Kindergarten"
-msgstr ""
+msgstr "גן ילדים"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:496
 msgctxt "GeoDataPlacemark|"
 msgid "College"
-msgstr ""
+msgstr "מכללה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:498
 msgctxt "GeoDataPlacemark|"
 msgid "School"
-msgstr ""
+msgstr "בית ספר"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:500
 #, fuzzy
@@ -6204,32 +6107,32 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:506
 msgctxt "GeoDataPlacemark|"
 msgid "Cafe"
-msgstr ""
+msgstr "בית קפה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:508
 msgctxt "GeoDataPlacemark|"
 msgid "Fast Food"
-msgstr ""
+msgstr "מזון מהיר"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:510
 msgctxt "GeoDataPlacemark|"
 msgid "Pub"
-msgstr ""
+msgstr "פאב"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:512
 msgctxt "GeoDataPlacemark|"
 msgid "Restaurant"
-msgstr ""
+msgstr "מסעדה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:514
 msgctxt "GeoDataPlacemark|"
 msgid "Dentist"
-msgstr ""
+msgstr "מרפאת שיניים"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:516
 msgctxt "GeoDataPlacemark|"
 msgid "Doctors"
-msgstr ""
+msgstr "רופאים"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:518
 #, fuzzy
@@ -6240,7 +6143,7 @@ msgstr "עיר בירה"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:520
 msgctxt "GeoDataPlacemark|"
 msgid "Pharmacy"
-msgstr ""
+msgstr "בית מרקחת"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:522
 #, fuzzy
@@ -6251,27 +6154,27 @@ msgstr "מתחיל חיפוש"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:524
 msgctxt "GeoDataPlacemark|"
 msgid "ATM"
-msgstr ""
+msgstr "כספומט"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:526
 msgctxt "GeoDataPlacemark|"
 msgid "Bank"
-msgstr ""
+msgstr "בנק"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:528
 msgctxt "GeoDataPlacemark|"
 msgid "Archaeological Site"
-msgstr ""
+msgstr "אתר ארכיאולוגי"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:530
 msgctxt "GeoDataPlacemark|"
 msgid "Embassy"
-msgstr ""
+msgstr "שגרירות"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:532
 msgctxt "GeoDataPlacemark|"
 msgid "Emergency Phone"
-msgstr ""
+msgstr "טלפון חירום"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:534
 #, fuzzy
@@ -6288,7 +6191,7 @@ msgstr "0 מ' (מים)"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:538
 msgctxt "GeoDataPlacemark|"
 msgid "Community Centre"
-msgstr ""
+msgstr "מרכז קהילתי"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:540
 #, fuzzy
@@ -6305,12 +6208,12 @@ msgstr "ימינה"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:544
 msgctxt "GeoDataPlacemark|"
 msgid "Bench"
-msgstr ""
+msgstr "ספסל"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:546
 msgctxt "GeoDataPlacemark|"
 msgid "Court House"
-msgstr ""
+msgstr "בית משפט"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:548
 #, fuzzy
@@ -6321,47 +6224,47 @@ msgstr "שם חלופי"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:550
 msgctxt "GeoDataPlacemark|"
 msgid "Hunting Stand"
-msgstr ""
+msgstr "דוכן ציד"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:552
 msgctxt "GeoDataPlacemark|"
 msgid "Police"
-msgstr ""
+msgstr "משטרה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:554
 msgctxt "GeoDataPlacemark|"
 msgid "Post Box"
-msgstr ""
+msgstr "תיבת דואר"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:556
 msgctxt "GeoDataPlacemark|"
 msgid "Post Office"
-msgstr ""
+msgstr "משרד דואר"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:558
 msgctxt "GeoDataPlacemark|"
 msgid "Prison"
-msgstr ""
+msgstr "כלא"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:560
 msgctxt "GeoDataPlacemark|"
 msgid "Recycling"
-msgstr ""
+msgstr "מיחזור"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:562
 msgctxt "GeoDataPlacemark|"
 msgid "Shelter"
-msgstr ""
+msgstr "מחסה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:564
 msgctxt "GeoDataPlacemark|"
 msgid "Telephone"
-msgstr ""
+msgstr "טלפון"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:566
 msgctxt "GeoDataPlacemark|"
 msgid "Toilets"
-msgstr ""
+msgstr "שירותים"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:568
 #, fuzzy
@@ -6372,17 +6275,17 @@ msgstr "למטה"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:570
 msgctxt "GeoDataPlacemark|"
 msgid "Waste Basket"
-msgstr ""
+msgstr "סל אשפה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:572
 msgctxt "GeoDataPlacemark|"
 msgid "Drinking Water"
-msgstr ""
+msgstr "מים לשתייה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:574
 msgctxt "GeoDataPlacemark|"
 msgid "Graveyard"
-msgstr ""
+msgstr "בית קברות"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:576
 #, fuzzy
@@ -6411,12 +6314,12 @@ msgstr "עיר"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:584
 msgctxt "GeoDataPlacemark|"
 msgid "Gate"
-msgstr ""
+msgstr "שער"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:586
 msgctxt "GeoDataPlacemark|"
 msgid "Lift Gate"
-msgstr ""
+msgstr "שער כנף"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:588
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:1004
@@ -6428,12 +6331,12 @@ msgstr "עיר"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:592
 msgctxt "GeoDataPlacemark|"
 msgid "Peak"
-msgstr ""
+msgstr "פסגה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:594
 msgctxt "GeoDataPlacemark|"
 msgid "Tree"
-msgstr ""
+msgstr "עץ"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:596
 #, fuzzy
@@ -6444,32 +6347,32 @@ msgstr "עקוב אחר GPS"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:598
 msgctxt "GeoDataPlacemark|"
 msgid "Beverages"
-msgstr ""
+msgstr "משקאות"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:600
 msgctxt "GeoDataPlacemark|"
 msgid "Hifi"
-msgstr ""
+msgstr "ציוד שמע"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:602
 msgctxt "GeoDataPlacemark|"
 msgid "Supermarket"
-msgstr ""
+msgstr "סופרמרקט"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:604
 msgctxt "GeoDataPlacemark|"
 msgid "Liquor Store"
-msgstr ""
+msgstr "חנות משקאות"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:606
 msgctxt "GeoDataPlacemark|"
 msgid "Bakery"
-msgstr ""
+msgstr "מאפייה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:608
 msgctxt "GeoDataPlacemark|"
 msgid "Butcher"
-msgstr ""
+msgstr "קצבייה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:610
 #, fuzzy
@@ -6480,17 +6383,17 @@ msgstr "הגדר &מיקום בית"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:612
 msgctxt "GeoDataPlacemark|"
 msgid "Convenience Shop"
-msgstr ""
+msgstr "חנות נוחות"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:614
 msgctxt "GeoDataPlacemark|"
 msgid "Greengrocer"
-msgstr ""
+msgstr "חנות טבע"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:616
 msgctxt "GeoDataPlacemark|"
 msgid "Seafood Shop"
-msgstr ""
+msgstr "חנות מאכלי ים"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:618
 msgctxt "GeoDataPlacemark|"
@@ -6500,37 +6403,37 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:620
 msgctxt "GeoDataPlacemark|"
 msgid "Kiosk"
-msgstr ""
+msgstr "קיוסק"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:622
 msgctxt "GeoDataPlacemark|"
 msgid "Bag Shop"
-msgstr ""
+msgstr "חנות תיקים"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:624
 msgctxt "GeoDataPlacemark|"
 msgid "Clothes Shop"
-msgstr ""
+msgstr "חנות ביגוד"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:626
 msgctxt "GeoDataPlacemark|"
 msgid "Fashion Shop"
-msgstr ""
+msgstr "חנות אופנה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:628
 msgctxt "GeoDataPlacemark|"
 msgid "Jewelry Shop"
-msgstr ""
+msgstr "חנות תכשיטים"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:630
 msgctxt "GeoDataPlacemark|"
 msgid "Shoe Shop"
-msgstr ""
+msgstr "חנות נעליים"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:632
 msgctxt "GeoDataPlacemark|"
 msgid "Variety Store"
-msgstr ""
+msgstr "חנות כלבו"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:634
 #, fuzzy
@@ -6541,53 +6444,53 @@ msgstr "ייצא מפה"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:636
 msgctxt "GeoDataPlacemark|"
 msgid "Chemist"
-msgstr ""
+msgstr "כימיה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:638
 msgctxt "GeoDataPlacemark|"
 msgid "Cosmetics"
-msgstr ""
+msgstr "קוסמטיקה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:640
 msgctxt "GeoDataPlacemark|"
 msgid "Hairdresser"
-msgstr ""
+msgstr "מספרה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:642
 msgctxt "GeoDataPlacemark|"
 msgid "Optician"
-msgstr ""
+msgstr "אופטיקה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:644
 msgctxt "GeoDataPlacemark|"
 msgid "Perfumery"
-msgstr ""
+msgstr "חנות בשמים"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:646
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:650
 msgctxt "GeoDataPlacemark|"
 msgid "Hardware Store"
-msgstr ""
+msgstr "חנות אספקה טכנית"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:648
 msgctxt "GeoDataPlacemark|"
 msgid "Florist"
-msgstr ""
+msgstr "חנות פרחים"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:652
 msgctxt "GeoDataPlacemark|"
 msgid "Furniture Store"
-msgstr ""
+msgstr "חנות רהיטים"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:654
 msgctxt "GeoDataPlacemark|"
 msgid "Electronics Shop"
-msgstr ""
+msgstr "חנות מוצרי חשמל"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:656
 msgctxt "GeoDataPlacemark|"
 msgid "Mobile Phone Shop"
-msgstr ""
+msgstr "חנות טלפונים סלולריים"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:658
 #, fuzzy
@@ -6622,12 +6525,12 @@ msgstr "עקוב אחר GPS"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:668
 msgctxt "GeoDataPlacemark|"
 msgid "Outdoor Shop"
-msgstr ""
+msgstr "חנות ציוד מחנאות"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:670
 msgctxt "GeoDataPlacemark|"
 msgid "Sports Shop"
-msgstr ""
+msgstr "חנות ספורט"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:672
 #, fuzzy
@@ -6638,17 +6541,17 @@ msgstr "ייצא מפה"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:674
 msgctxt "GeoDataPlacemark|"
 msgid "Art Shop"
-msgstr ""
+msgstr "חנות אומנות"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:676
 msgctxt "GeoDataPlacemark|"
 msgid "Musical Instrument Shop"
-msgstr ""
+msgstr "חנות כלי מוזיקה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:678
 msgctxt "GeoDataPlacemark|"
 msgid "Photo Shop"
-msgstr ""
+msgstr "חנות תמונות"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:680
 #, fuzzy
@@ -6659,7 +6562,7 @@ msgstr "ייצא מפה"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:682
 msgctxt "GeoDataPlacemark|"
 msgid "Gift Shop"
-msgstr ""
+msgstr "חנות מתנות"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:684
 #, fuzzy
@@ -6670,32 +6573,32 @@ msgstr "מתחיל חיפוש"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:686
 msgctxt "GeoDataPlacemark|"
 msgid "Laundry"
-msgstr ""
+msgstr "מכבסה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:688
 msgctxt "GeoDataPlacemark|"
 msgid "Pet Shop"
-msgstr ""
+msgstr "חנות חיות מחמד"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:690
 msgctxt "GeoDataPlacemark|"
 msgid "Toy Store"
-msgstr ""
+msgstr "חנות צעצועים"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:692
 msgctxt "GeoDataPlacemark|"
 msgid "Travel Agency"
-msgstr ""
+msgstr "סוכנות נסיעות"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:694
 msgctxt "GeoDataPlacemark|"
 msgid "Deli"
-msgstr ""
+msgstr "מעדנייה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:696
 msgctxt "GeoDataPlacemark|"
 msgid "Tobacco Shop"
-msgstr ""
+msgstr "חנות טבק"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:698
 #, fuzzy
@@ -8119,33 +8022,29 @@ msgid "Equirectangular (crs:84)"
 msgstr ""
 
 #: src/lib/marble/MapWizard.cpp:394
-#, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
-msgstr "&היטל"
+msgstr "היטל אריח:"
 
 #: src/lib/marble/MapWizard.cpp:410
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
-msgstr ""
+msgstr "סדרת מטריצת אריחים:"
 
 #: src/lib/marble/MapWizard.cpp:453 src/lib/marble/MapWizard.cpp:928
-#, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
-msgstr "מפת סקירה"
+msgstr "תצוגה מקדימה של תמונה"
 
 #: src/lib/marble/MapWizard.cpp:457
-#, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
-msgstr "שמור קובץ"
+msgstr "אריח בסיס"
 
 #: src/lib/marble/MapWizard.cpp:461
-#, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
-msgstr "מקרא"
+msgstr "תמונת מקרא"
 
 #: src/lib/marble/MapWizard.cpp:467 src/lib/marble/MapWizard.cpp:477
 #, fuzzy, qt-format
@@ -8410,17 +8309,17 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:134
 msgctxt "MapWizard|"
 msgid "WMS Server:"
-msgstr ""
+msgstr "שרת WMS:"
 
 #: src/lib/marble/MapWizard.ui:145 src/lib/marble/MapWizard.ui:169
 msgctxt "MapWizard|"
 msgid "Custom"
-msgstr ""
+msgstr "מותאם אישית"
 
 #: src/lib/marble/MapWizard.ui:153
 msgctxt "MapWizard|"
 msgid "URL:"
-msgstr ""
+msgstr "כתובת:"
 
 #: src/lib/marble/MapWizard.ui:163
 msgctxt "MapWizard|"
@@ -8432,7 +8331,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:166 src/lib/marble/MapWizard.ui:465
 msgctxt "MapWizard|"
 msgid "https://"
-msgstr ""
+msgstr "https://"
 
 #: src/lib/marble/MapWizard.ui:218
 #, fuzzy
@@ -8443,18 +8342,17 @@ msgstr "ייצא מפה"
 #: src/lib/marble/MapWizard.ui:232
 msgctxt "MapWizard|"
 msgid "Layer Selection"
-msgstr ""
+msgstr "בחירת שכבה"
 
 #: src/lib/marble/MapWizard.ui:243
 msgctxt "MapWizard|"
 msgid "Choose your Layer(s):"
-msgstr ""
+msgstr "נא לבחור שכבה או שכבות:"
 
 #: src/lib/marble/MapWizard.ui:266
-#, fuzzy
 msgctxt "MapWizard|"
 msgid "Search:"
-msgstr "&חפש"
+msgstr "חיפוש:"
 
 #: src/lib/marble/MapWizard.ui:288
 msgctxt "MapWizard|"
@@ -8473,7 +8371,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:300
 msgctxt "MapWizard|"
 msgid "Multiple Selections"
-msgstr ""
+msgstr "בחירה במרוכז"
 
 #: src/lib/marble/MapWizard.ui:307
 msgctxt "MapWizard|"
@@ -8481,10 +8379,9 @@ msgid "Custom Backdrop"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:314
-#, fuzzy
 msgctxt "MapWizard|"
 msgid "Tile Projection:"
-msgstr "&היטל"
+msgstr "היטל אריח:"
 
 #: src/lib/marble/MapWizard.ui:321
 msgctxt "MapWizard|"
@@ -8504,13 +8401,12 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:383
 msgctxt "MapWizard|"
 msgid "Layer Info"
-msgstr ""
+msgstr "פרטי שכבה"
 
 #: src/lib/marble/MapWizard.ui:396
-#, fuzzy
 msgctxt "MapWizard|"
 msgid "Service Info"
-msgstr "&הגדרות"
+msgstr "פרטי שירות"
 
 #: src/lib/marble/MapWizard.ui:406
 msgctxt "MapWizard|"
@@ -9457,7 +9353,7 @@ msgstr ""
 #: src/lib/marble/MarbleAboutDialog.cpp:238
 msgctxt "QObject|"
 msgid "<b>2007</b>"
-msgstr ""
+msgstr "<b>2007</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:239
 msgctxt "QObject|"
@@ -9491,7 +9387,7 @@ msgstr ""
 #: src/lib/marble/MarbleAboutDialog.cpp:246
 msgctxt "QObject|"
 msgid "<b>Credits</b>"
-msgstr ""
+msgstr "<b>תודות</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:247
 msgctxt "QObject|"
@@ -9511,7 +9407,7 @@ msgstr ""
 #: src/lib/marble/MarbleAboutDialog.cpp:259
 msgctxt "QObject|"
 msgid "<b>Maps</b>"
-msgstr ""
+msgstr "<b>מפות</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:260
 msgctxt "QObject|"
@@ -9564,7 +9460,7 @@ msgstr ""
 #: src/lib/marble/MarbleAboutDialog.cpp:284
 msgctxt "QObject|"
 msgid "<b>Street Map</b>"
-msgstr ""
+msgstr "<b>מפת רחוב</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:285
 msgctxt "QObject|"
@@ -9635,7 +9531,7 @@ msgstr ""
 #: src/lib/marble/MarbleAboutDialog.cpp:319
 msgctxt "QObject|"
 msgid "<b>Cities and Locations</b>"
-msgstr ""
+msgstr "<b>ערים ומקומות</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:320
 msgctxt "QObject|"
@@ -9905,13 +9801,12 @@ msgstr ""
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:127
 msgctxt "MarbleCacheSettingsWidget|"
 msgid " MB"
-msgstr ""
+msgstr " מ״ב"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:73
-#, fuzzy
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "C&lear"
-msgstr "&חפש"
+msgstr "&פינוי"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:105
 msgctxt "MarbleCacheSettingsWidget|"
@@ -9963,29 +9858,28 @@ msgstr ""
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:200
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "P&ort:"
-msgstr ""
+msgstr "&פתחה:"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:256
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "Proxy type:"
-msgstr ""
+msgstr "סוג מתווך:"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:264
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "Http"
-msgstr ""
+msgstr "Http"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:269
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "Socks5"
-msgstr ""
+msgstr "Socks5"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:308
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:320
-#, fuzzy
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "Requires authentication"
-msgstr "יציאה מהתוכנית"
+msgstr "דורש אימות"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:326
 msgctxt "MarbleCacheSettingsWidget|"
@@ -10072,40 +9966,34 @@ msgid "Clear"
 msgstr "&חפש"
 
 #: src/lib/marble/MarbleLocale.cpp:115
-#, fuzzy
 msgctxt "QObject|means meter"
 msgid "m"
-msgstr "מ'"
+msgstr "מ׳"
 
 #: src/lib/marble/MarbleLocale.cpp:117
-#, fuzzy
 msgctxt "QObject|means milimeters"
 msgid "mm"
-msgstr "מ'"
+msgstr "מ״מ"
 
 #: src/lib/marble/MarbleLocale.cpp:119
-#, fuzzy
 msgctxt "QObject|means kilometers"
 msgid "km"
-msgstr "ק\"מ"
+msgstr "ק״מ"
 
 #: src/lib/marble/MarbleLocale.cpp:121
-#, fuzzy
 msgctxt "QObject|means centimeters"
 msgid "cm"
-msgstr "מ'"
+msgstr "ס״מ"
 
 #: src/lib/marble/MarbleLocale.cpp:123
-#, fuzzy
 msgctxt "QObject|means feet"
 msgid "ft"
-msgstr "שמאלה"
+msgstr "רגל"
 
 #: src/lib/marble/MarbleLocale.cpp:125
-#, fuzzy
 msgctxt "QObject|means inches"
 msgid "in"
-msgstr "פני שטח"
+msgstr "אינץ׳"
 
 #: src/lib/marble/MarbleLocale.cpp:127
 msgctxt "QObject|means yards"
@@ -12077,7 +11965,7 @@ msgstr ""
 #: src/lib/marble/routing/RoutingProfilesModel.cpp:143
 msgctxt "Marble::RoutingProfilesModel|"
 msgid "Unknown"
-msgstr ""
+msgstr "לא ידוע"
 
 #: src/lib/marble/routing/RoutingProfilesWidget.cpp:73
 #, fuzzy
@@ -12088,7 +11976,7 @@ msgstr "שיא גובה"
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
 msgid "&Add…"
-msgstr ""
+msgstr "הו&ספה…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
 #, fuzzy
@@ -12105,12 +11993,12 @@ msgstr "מפה רגילה"
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:65
 msgctxt "RoutingSettingsWidget|"
 msgid "Move &Up"
-msgstr ""
+msgstr "העלאה למ&עלה"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:75
 msgctxt "RoutingSettingsWidget|"
 msgid "Move &Down"
-msgstr ""
+msgstr "הורדה למ&טה"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:189
 #, fuzzy
@@ -12204,13 +12092,13 @@ msgstr "מפה רגילה"
 #: src/lib/marble/routing/RoutingWidget.cpp:558
 msgctxt "Marble::RoutingWidget|"
 msgid "No route found"
-msgstr ""
+msgstr "לא נמצא מסלול"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:640
 #, qt-format
 msgctxt "Marble::RoutingWidget|"
 msgid "routes found: %1"
-msgstr ""
+msgstr "מסלולים שנמצאו: %1"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:660
 #, fuzzy
@@ -12245,12 +12133,12 @@ msgstr "&ייצא מפה..."
 #: src/lib/marble/routing/RoutingWidget.ui:46
 msgctxt "RoutingWidget|"
 msgid "Car (fastest)"
-msgstr ""
+msgstr "מכונית (הכי מהיר)"
 
 #: src/lib/marble/routing/RoutingWidget.ui:51
 msgctxt "RoutingWidget|"
 msgid "Car (shortest)"
-msgstr ""
+msgstr "מכונית (הכי קצר)"
 
 #: src/lib/marble/routing/RoutingWidget.ui:56
 msgctxt "RoutingWidget|"
@@ -12260,7 +12148,7 @@ msgstr "אופניים"
 #: src/lib/marble/routing/RoutingWidget.ui:61
 msgctxt "RoutingWidget|"
 msgid "Pedestrian"
-msgstr ""
+msgstr "הליכה ברגל"
 
 #: src/lib/marble/routing/RoutingWidget.ui:86
 #, fuzzy
@@ -12318,7 +12206,7 @@ msgstr "מ'"
 #, qt-format
 msgctxt "Marble::RoutingRunner|journey duration"
 msgid "%1:%2 h"
-msgstr ""
+msgstr "%1:%2 שע׳"
 
 #: src/lib/marble/SearchInputWidget.cpp:73
 #: src/lib/marble/SearchInputWidget.cpp:96
@@ -13158,7 +13046,7 @@ msgstr "הורדת נתוני OpenStreetMap"
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:901
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Download OpenStreetMap data of the visible region"
-msgstr ""
+msgstr "הורדת נתוני OpenStreetMap של האזור הגלוי"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:980
 msgctxt "Marble::AnnotatePlugin|"
@@ -13244,10 +13132,9 @@ msgstr "הצג דגם גבהים"
 
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:31
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:34
-#, fuzzy
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "Download"
-msgstr "ההורדה הסתיימה."
+msgstr "הורדה"
 
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:69
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:114
@@ -13255,24 +13142,24 @@ msgstr "ההורדה הסתיימה."
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:125
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "ERROR"
-msgstr ""
+msgstr "שגיאה"
 
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:69
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "Unable to create temporary file to download OSM data to."
-msgstr ""
+msgstr "לא ניתן ליצור קובץ זמני כדי להוריד אליו נתוני OSM."
 
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:114
 msgctxt "Marble::DownloadOsmDialog|"
 msgid ""
 "The selected region contains too much data. Please select a smaller region "
 "and try again."
-msgstr ""
+msgstr "האזור הנבחר מכיל יותר מדי נתונים. נא לבחור אזור קטן יותר ולנסות שוב."
 
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:119
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "The bandwidth limit exceeded. Please try again later."
-msgstr ""
+msgstr "הגעת למגבלת רוחב הפס. נא לנסות שוב מאוחר יותר."
 
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:126
 msgctxt "Marble::DownloadOsmDialog|"
@@ -13280,16 +13167,17 @@ msgid ""
 "Sorry, a network error occurred. Please check your internet connection or "
 "try again later."
 msgstr ""
+"אירעה שגיאת רשת. נא לבדוק שחיבור האינטרנט שלך תקין או לנסות שוב מאוחר יותר."
 
 #: src/plugins/render/annotate/DownloadOsmDialog.ui:14
 msgctxt "DownloadOsmDialog|"
 msgid "Dialog"
-msgstr ""
+msgstr "חלונית"
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.cpp:99
 msgctxt "Marble::EditGroundOverlayDialog|"
 msgid "No name specified"
-msgstr ""
+msgstr "לא צוין שם"
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.cpp:99
 #, fuzzy
@@ -13300,24 +13188,22 @@ msgstr "שם חלופי עבור המיקום."
 #: src/plugins/render/annotate/EditGroundOverlayDialog.cpp:101
 msgctxt "Marble::EditGroundOverlayDialog|"
 msgid "No image specified"
-msgstr ""
+msgstr "לא צוינה תמונה"
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.cpp:101
-#, fuzzy
 msgctxt "Marble::EditGroundOverlayDialog|"
 msgid "Please specify an image file."
-msgstr "שם חלופי עבור המיקום."
+msgstr "נא לציין קובץ תמונה."
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.cpp:103
 msgctxt "Marble::EditGroundOverlayDialog|"
 msgid "Invalid image path"
-msgstr ""
+msgstr "נתיב תמונה שגוי"
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.cpp:103
-#, fuzzy
 msgctxt "Marble::EditGroundOverlayDialog|"
 msgid "Please specify a valid path for the image file."
-msgstr "שם חלופי עבור המיקום."
+msgstr "נא לציין נתיב תקף לקובץ התמונה."
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.ui:14
 #, fuzzy
@@ -13326,89 +13212,79 @@ msgid "Edit ground overlay"
 msgstr "ה&סר נקודות מדידה"
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.ui:27
-#, fuzzy
 msgctxt "UiEditGroundOverlayDialog|"
 msgid "Description"
 msgstr "תיאור"
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.ui:37
-#, fuzzy
 msgctxt "UiEditGroundOverlayDialog|"
 msgid "Coordinates"
-msgstr "קואורדינטות:"
+msgstr "נקודות ציון"
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.ui:94
-#, fuzzy
 msgctxt "UiEditGroundOverlayDialog|"
 msgid "N"
-msgstr "צ"
+msgstr "צפ׳"
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.ui:194
-#, fuzzy
 msgctxt "UiEditGroundOverlayDialog|"
 msgid "W"
-msgstr "מע"
+msgstr "מע׳"
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.ui:263
-#, fuzzy
 msgctxt "UiEditGroundOverlayDialog|"
 msgid "E"
-msgstr "מז"
+msgstr "מז׳"
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.ui:364
-#, fuzzy
 msgctxt "UiEditGroundOverlayDialog|"
 msgid "S"
-msgstr "ד"
+msgstr "דר׳"
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.ui:457
-#, fuzzy
 msgctxt "UiEditGroundOverlayDialog|"
 msgid "Rotation"
-msgstr "מתחיל חיפוש"
+msgstr "הטיה"
 
 #: src/plugins/render/annotate/EditPolygonDialog.cpp:87
 msgctxt "Marble::EditPolygonDialog|"
 msgid "Tags"
-msgstr ""
+msgstr "תגיות"
 
 #: src/plugins/render/annotate/EditPolygonDialog.cpp:92
-#, fuzzy
 msgctxt "Marble::EditPolygonDialog|"
 msgid "Relations"
-msgstr "גובה:"
+msgstr "קשרים"
 
 #: src/plugins/render/annotate/EditPolygonDialog.cpp:107
-#, fuzzy
 msgctxt "Marble::EditPolygonDialog|"
 msgid "Untitled Polygon"
-msgstr "מפה רגילה"
+msgstr "מצולע ללא שם"
 
 #: src/plugins/render/annotate/EditPolygonDialog.cpp:271
 msgctxt "Marble::EditPolygonDialog|"
 msgid "No name specified"
-msgstr ""
+msgstr "לא צוין שם"
 
 #: src/plugins/render/annotate/EditPolygonDialog.cpp:271
-#, fuzzy
 msgctxt "Marble::EditPolygonDialog|"
 msgid "Please specify a name for this polygon."
-msgstr "שם חלופי עבור המיקום."
+msgstr "נא לציין שם למצולע הזה."
 
 #: src/plugins/render/annotate/EditPolygonDialog.cpp:276
 msgctxt "Marble::EditPolygonDialog|"
 msgid "Not enough nodes specified."
-msgstr ""
+msgstr "לא צוינו מספיק נקודות."
 
 #: src/plugins/render/annotate/EditPolygonDialog.cpp:276
 msgctxt "Marble::EditPolygonDialog|"
 msgid "Please specify at least 3 nodes for the polygon by clicking on the map."
-msgstr ""
+msgstr "נא לציין לפחות 3 נקודות למצולע על ידי לחיצה על המפה."
 
 #: src/plugins/render/annotate/EditPolygonDialog.ui:14
 msgctxt "UiEditPolygonDialog|"
 msgid "Add polygon"
-msgstr ""
+msgstr "הוספת מצולע"
 
 #: src/plugins/render/annotate/EditPolygonDialog.ui:25
 msgctxt "UiEditPolygonDialog|"
@@ -13423,23 +13299,23 @@ msgstr "תיאור"
 #: src/plugins/render/annotate/EditPolygonDialog.ui:55
 msgctxt "UiEditPolygonDialog|"
 msgid "Style, Color"
-msgstr ""
+msgstr "סגנון, צבע"
 
 #: src/plugins/render/annotate/EditPolygonDialog.ui:61
 msgctxt "UiEditPolygonDialog|"
 msgid "Lines"
-msgstr ""
+msgstr "קווים"
 
 #: src/plugins/render/annotate/EditPolygonDialog.ui:67
 #: src/plugins/render/annotate/EditPolygonDialog.ui:163
 msgctxt "UiEditPolygonDialog|"
 msgid "Color:"
-msgstr ""
+msgstr "צבע:"
 
 #: src/plugins/render/annotate/EditPolygonDialog.ui:118
 msgctxt "UiEditPolygonDialog|"
 msgid "Width:"
-msgstr ""
+msgstr "עובי:"
 
 #: src/plugins/render/annotate/EditPolygonDialog.ui:157
 msgctxt "UiEditPolygonDialog|"
@@ -13449,12 +13325,12 @@ msgstr "שטח"
 #: src/plugins/render/annotate/EditPolygonDialog.ui:206
 msgctxt "UiEditPolygonDialog|"
 msgid "Filled"
-msgstr ""
+msgstr "עם מילוי"
 
 #: src/plugins/render/annotate/EditPolygonDialog.ui:211
 msgctxt "UiEditPolygonDialog|"
 msgid "Not Filled"
-msgstr ""
+msgstr "בלי מילוי"
 
 #: src/plugins/render/annotate/EditPolygonDialog.ui:252
 msgctxt "UiEditPolygonDialog|"
@@ -13464,7 +13340,7 @@ msgstr "נקודות"
 #: src/plugins/render/annotate/EditPolylineDialog.cpp:82
 msgctxt "Marble::EditPolylineDialog|"
 msgid "Tags"
-msgstr ""
+msgstr "תגיות"
 
 #: src/plugins/render/annotate/EditPolylineDialog.cpp:87
 msgctxt "Marble::EditPolylineDialog|"
@@ -13472,15 +13348,14 @@ msgid "Relations"
 msgstr "קשרים"
 
 #: src/plugins/render/annotate/EditPolylineDialog.cpp:100
-#, fuzzy
 msgctxt "Marble::EditPolylineDialog|"
 msgid "Untitled Path"
-msgstr "מפה רגילה"
+msgstr "נתיב ללא שם"
 
 #: src/plugins/render/annotate/EditPolylineDialog.cpp:262
 msgctxt "Marble::EditPolylineDialog|"
 msgid "No name specified"
-msgstr ""
+msgstr "לא צוין שם"
 
 #: src/plugins/render/annotate/EditPolylineDialog.cpp:262
 #, fuzzy
@@ -13491,19 +13366,17 @@ msgstr "שם חלופי עבור המיקום."
 #: src/plugins/render/annotate/EditPolylineDialog.cpp:267
 msgctxt "Marble::EditPolylineDialog|"
 msgid "Not enough nodes specified."
-msgstr ""
+msgstr "לא צוינו מספיק נקודות."
 
 #: src/plugins/render/annotate/EditPolylineDialog.cpp:267
-#, fuzzy
 msgctxt "Marble::EditPolylineDialog|"
 msgid "Please specify at least 2 nodes for the path by clicking on the map."
-msgstr "שם חלופי עבור המיקום."
+msgstr "נא לציין לפחות 2 נקודות לנתיב על ידי לחיצה על המפה."
 
 #: src/plugins/render/annotate/EditPolylineDialog.ui:14
-#, fuzzy
 msgctxt "UiEditPolylineDialog|"
 msgid "Add path"
-msgstr "נתיב"
+msgstr "הוספת נתיב"
 
 #: src/plugins/render/annotate/EditPolylineDialog.ui:25
 msgctxt "UiEditPolylineDialog|"
@@ -13518,22 +13391,22 @@ msgstr "תיאור"
 #: src/plugins/render/annotate/EditPolylineDialog.ui:55
 msgctxt "UiEditPolylineDialog|"
 msgid "Style, Color"
-msgstr ""
+msgstr "סגנון, צבע"
 
 #: src/plugins/render/annotate/EditPolylineDialog.ui:61
 msgctxt "UiEditPolylineDialog|"
 msgid "Lines"
-msgstr ""
+msgstr "קווים"
 
 #: src/plugins/render/annotate/EditPolylineDialog.ui:67
 msgctxt "UiEditPolylineDialog|"
 msgid "Color:"
-msgstr ""
+msgstr "צבע:"
 
 #: src/plugins/render/annotate/EditPolylineDialog.ui:118
 msgctxt "UiEditPolylineDialog|"
 msgid "Width:"
-msgstr ""
+msgstr "עובי:"
 
 #: src/plugins/render/annotate/EditPolylineDialog.ui:171
 msgctxt "UiEditPolylineDialog|"
@@ -13543,7 +13416,7 @@ msgstr "נקודות"
 #: src/plugins/render/annotate/NodeModel.cpp:80
 msgctxt "Marble::NodeModel|"
 msgid "No."
-msgstr ""
+msgstr "מס׳"
 
 #: src/plugins/render/annotate/NodeModel.cpp:82
 msgctxt "Marble::NodeModel|"
@@ -13568,7 +13441,7 @@ msgstr "תוסף APRS"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:24
 msgctxt "AprsConfigWidget|"
 msgid "Display"
-msgstr ""
+msgstr "תצוגה"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:38
 msgctxt "AprsConfigWidget|"
@@ -13887,7 +13760,7 @@ msgstr "קו &רוחב"
 #: src/plugins/render/earthquake/EarthquakeItem.cpp:131
 msgctxt "Marble::EarthquakeItem|"
 msgid "Depth:"
-msgstr ""
+msgstr "עומק:"
 
 #: src/plugins/render/earthquake/EarthquakePlugin.cpp:55
 msgctxt "Marble::EarthquakePlugin|"
@@ -13900,21 +13773,19 @@ msgid "&Earthquakes"
 msgstr "&רעידות אדמה"
 
 #: src/plugins/render/earthquake/EarthquakePlugin.cpp:75
-#, fuzzy
 msgctxt "Marble::EarthquakePlugin|"
 msgid "Shows earthquakes on the map."
-msgstr "הצג את תיבות האודות של התוכנית"
+msgstr "הצגת רעידות אדמה על המפה."
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:14
-#, fuzzy
 msgctxt "EclipsesBrowserDialog|"
 msgid "Eclipse Browser"
-msgstr "דפדפן המיקומים"
+msgstr "דפדפן ליקויי חמה"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:35
 msgctxt "EclipsesBrowserDialog|"
 msgid "Show eclipses for year:"
-msgstr ""
+msgstr "הצגת ליקויי חמה לשנת:"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
 msgctxt "EclipsesBrowserDialog|"
@@ -13932,10 +13803,9 @@ msgid "&Go To Selected Eclipse"
 msgstr ""
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:17
-#, fuzzy
 msgctxt "EclipsesConfigDialog|"
 msgid "Eclipses Configuration"
-msgstr "מתחיל חיפוש"
+msgstr "הגדרת ליקויי חמה"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:30
 msgctxt "EclipsesConfigDialog|"
@@ -13945,7 +13815,7 @@ msgstr "ת&צוגה"
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:36
 msgctxt "EclipsesConfigDialog|"
 msgid "View &Options"
-msgstr ""
+msgstr "א&פשרויות תצוגה"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:45
 msgctxt "EclipsesConfigDialog|"
@@ -15459,7 +15329,7 @@ msgstr ""
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:32
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Moons"
-msgstr ""
+msgstr "ירחים"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:33
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -15479,12 +15349,12 @@ msgstr ""
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:37
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Moon"
-msgstr ""
+msgstr "ירח"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:38
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Sun"
-msgstr ""
+msgstr "שמש"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:39
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -15494,7 +15364,7 @@ msgstr "כוכב חמה"
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:40
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Venus"
-msgstr ""
+msgstr "נוגה"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:41
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -15509,22 +15379,22 @@ msgstr "מאדים"
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:43
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Jupiter"
-msgstr ""
+msgstr "צדק"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:44
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Saturn"
-msgstr ""
+msgstr "שבתאי"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:45
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Uranus"
-msgstr ""
+msgstr "אורון"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:46
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Neptune"
-msgstr ""
+msgstr "רהב"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:128
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -15549,17 +15419,17 @@ msgstr "הוספת מקור נתונים"
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:231
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "URL or File path:"
-msgstr ""
+msgstr "כתובת או נתיב לקובץ:"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:237
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Invalid data source input"
-msgstr ""
+msgstr "קלט מקור נתונים שגוי"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:237
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Please enter a valid URL or file path!"
-msgstr ""
+msgstr "נא למלא כתובת או נתיב קובץ תקפים!"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:260
 msgctxt "Marble::SatellitesConfigDialog|"
