@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-10-30 23:15+0200\n"
+"PO-Revision-Date: 2024-11-01 08:00+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -12289,11 +12289,14 @@ msgid ""
 msgstr ""
 
 #: src/lib/marble/SunControlWidget.ui:131
+#, fuzzy
 msgctxt "SunControlWidget|"
 msgid ""
 "<b>Lock</b> map view to <a href=\"https://en.wikipedia.org/wiki/"
 "Subsolar_point\">Subsolar Point</a>."
 msgstr ""
+"<b>נעילת</b> תצוגת המפה ל<a href=\"https://en.wikipedia.org/wiki/"
+"Subsolar_point\">זנית תחת השמש</a>."
 
 #: src/lib/marble/SunControlWidget.ui:205
 #, fuzzy
@@ -12430,7 +12433,7 @@ msgstr "מיקום נוכחי"
 #: src/lib/marble/TimeControlWidget.ui:136
 msgctxt "TimeControlWidget|"
 msgid "Time Speed"
-msgstr ""
+msgstr "מהירות זמן"
 
 #: src/lib/marble/TourCaptureDialog.cpp:58
 msgctxt "Marble::TourCaptureDialog|"
