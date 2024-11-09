@@ -11,14 +11,14 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-25 00:37+0000\n"
-"PO-Revision-Date: 2024-10-26 09:53+0300\n"
+"PO-Revision-Date: 2024-11-08 09:25+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 24.08.1\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
 
@@ -70,7 +70,7 @@ msgstr "תמיכה ב־WMS, ניידים, ביצועים"
 #: kdemain.cpp:95
 #, kde-format
 msgid "Thibaut Gridel"
-msgstr ""
+msgstr "טיבו גרידל"
 
 #: kdemain.cpp:95
 #, kde-format
@@ -80,7 +80,7 @@ msgstr "נתונים גאוגרפיים"
 #: kdemain.cpp:96
 #, kde-format
 msgid "Jens-Michael Hoffmann"
-msgstr ""
+msgstr "ינס-מיכאל הופמן"
 
 #: kdemain.cpp:96
 #, kde-format
@@ -499,7 +499,7 @@ msgstr "פלטפורמות והוצאה לאור"
 #: kdemain.cpp:199
 #, kde-format
 msgid "Sebastian Wiedenroth"
-msgstr ""
+msgstr "סבסטיאן וידנרות׳"
 
 #: kdemain.cpp:200
 #, kde-format
@@ -509,7 +509,7 @@ msgstr "טים סוטון"
 #: kdemain.cpp:201
 #, kde-format
 msgid "Christian Ehrlicher"
-msgstr ""
+msgstr "כריסטיאן ארלישר"
 
 #: kdemain.cpp:202
 #, kde-format
@@ -529,12 +529,12 @@ msgstr ""
 #: kdemain.cpp:205
 #, kde-format
 msgid "Marcus D. Hanwell"
-msgstr ""
+msgstr "מרקוס ד. האנוול"
 
 #: kdemain.cpp:206
 #, kde-format
 msgid "Chitlesh Goorah"
-msgstr ""
+msgstr "צ׳יטלש גורה"
 
 #: kdemain.cpp:207
 #, kde-format
@@ -685,17 +685,17 @@ msgstr ""
 #: kdemain.cpp:265
 #, kde-format
 msgid "Set the distance of the observer to the globe (in km)"
-msgstr ""
+msgstr "הגדרת מרחק הצופה מהגלובוס (בק״מ)"
 
 #: kdemain.cpp:267
 #, kde-format
 msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
-msgstr ""
+msgstr "להשתמש ב־<id> של המפה (למשל: „earth/openstreetmap/openstreetmap.dgml”)"
 
 #: kdemain.cpp:269
 #, kde-format
 msgid "One or more placemark files to be opened"
-msgstr ""
+msgstr "קובץ סמן מקום אחד או יותר לפתיחה"
 
 #. i18n: ectx: label, entry, group (Time)
 #: marble.kcfg:58
@@ -1024,32 +1024,32 @@ msgstr "הצגת או הסתרת הצל מהשמש."
 #: marble_part.cpp:799
 #, kde-format
 msgid "Show sun icon on the Sub-Solar Point"
-msgstr ""
+msgstr "הצגת סמל השמש בנקודת השמש מעל הזנית"
 
 #: marble_part.cpp:801
 #, kde-format
 msgid "Hide sun icon on the Sub-Solar Point"
-msgstr ""
+msgstr "הסתרת סמל השמש בנקודת השמש מעל הזנית"
 
 #: marble_part.cpp:802
 #, kde-format
 msgid "Show sun icon on the sub-solar point"
-msgstr ""
+msgstr "הצגת סמל השמש בנקודת השמש מעל הזנית"
 
 #: marble_part.cpp:806
 #, kde-format
 msgid "Lock Globe to the Sub-Solar Point"
-msgstr ""
+msgstr "נעילת הגלובוס לנקודת השמש מעל הזנית"
 
 #: marble_part.cpp:808
 #, kde-format
 msgid "Unlock Globe to the Sub-Solar Point"
-msgstr ""
+msgstr "שחרור הגלובוס לנקודת השמש מעל הזנית"
 
 #: marble_part.cpp:809
 #, kde-format
 msgid "Lock globe to the sub-solar point"
-msgstr ""
+msgstr "נעילת הגלובוס לנקודת השמש מעל הזנית"
 
 #: marble_part.cpp:823
 #, kde-format

@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-11-06 06:42+0200\n"
+"PO-Revision-Date: 2024-11-06 14:18+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -2638,10 +2638,9 @@ msgid "Show the Qt library's About box"
 msgstr "הצגת תיבת המידע על ספריית Qt"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:389
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
-msgstr "ייצא מפה"
+msgstr "הוס&פת סימנייה…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:391
 msgctxt "Marble::MainWindow|"
@@ -2650,16 +2649,14 @@ msgstr "הוספת סימנייה"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:394
 #: src/apps/marble-qt/QtMainWindow.cpp:395
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Set Home Location"
-msgstr "קבע &מיקום בית"
+msgstr "הגדרת &נקודת בית"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:398
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Show &Bookmarks"
-msgstr "ייצא מפה"
+msgstr "ה&צגת סימניות"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:399
 msgctxt "Marble::MainWindow|"
@@ -2667,16 +2664,14 @@ msgid "Toggle display of Bookmarks"
 msgstr "החלפת תצוגת הסימניות"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:403
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Manage Bookmarks..."
-msgstr "ייצא מפה"
+msgstr "&ניהול סימניות…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:404
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Manage Bookmarks"
-msgstr "ייצא מפה"
+msgstr "ניהול סימניות"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:408
 msgctxt "Marble::MainWindow|"
@@ -2779,10 +2774,9 @@ msgid "Export Map"
 msgstr "ייצוא מפה"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:734
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Images (*.jpg *.png)"
-msgstr "תמונות ‎(*.jpg *.png)‎"
+msgstr "תמונות (‎*.jpg‏ ‎*.png)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:748
 #, fuzzy
@@ -2791,41 +2785,40 @@ msgid "An error occurred while trying to save the file.\n"
 msgstr "אירעה שגיאה במהלך הניסיון לשמור את הקובץ.\n"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:870
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe %1"
-msgstr "‏Marble - גלובוס שולחני"
+msgstr "‏Marble - גלובוס וירטואלי %1"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:921
 #: src/apps/marble-qt/QtMainWindow.cpp:998
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Position: %1"
-msgstr "אוכלוסייה:"
+msgstr "מקום: %1"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:924
 #: src/apps/marble-qt/QtMainWindow.cpp:1005
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Altitude: %1"
-msgstr "קו &רוחב"
+msgstr "גובה: %1"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:927
 #: src/apps/marble-qt/QtMainWindow.cpp:1012
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Zoom: %1"
-msgstr "התקרבות: %1"
+msgstr "תקריב: %1"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:930
 #: src/apps/marble-qt/QtMainWindow.cpp:1019
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Time: %1"
-msgstr "ער&כת נושא"
+msgstr "זמן: %1"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:962
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "All Supported Files"
 msgstr ""
@@ -2833,10 +2826,9 @@ msgstr ""
 "kml)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:968
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Open File"
-msgstr "פתח קובץ"
+msgstr "פתיחת קובץ"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:989
 msgctxt "Marble::MainWindow|"
@@ -2849,10 +2841,9 @@ msgid "Unnamed"
 msgstr "ללא שם"
 
 #: src/apps/marble-ui/ControlView.cpp:76
-#, fuzzy
 msgctxt "Marble::ControlView|"
 msgid "Marble - Virtual Globe"
-msgstr "‏Marble - גלובוס שולחני"
+msgstr "‏Marble - גלובוס וירטואלי"
 
 #: src/apps/marble-ui/ControlView.cpp:263
 msgctxt "Marble::ControlView|"
@@ -2944,7 +2935,6 @@ msgid "Cannot start external editor"
 msgstr ""
 
 #: src/apps/marble-ui/ControlView.cpp:574
-#, fuzzy
 msgctxt "Marble::ControlView|"
 msgid "Legend"
 msgstr "מקרא"
@@ -2956,16 +2946,14 @@ msgid "Routing"
 msgstr "הר"
 
 #: src/apps/marble-ui/ControlView.cpp:598
-#, fuzzy
 msgctxt "Marble::ControlView|"
 msgid "Location"
-msgstr "מיקום"
+msgstr "מקום"
 
 #: src/apps/marble-ui/ControlView.cpp:606
-#, fuzzy
 msgctxt "Marble::ControlView|"
 msgid "Search"
-msgstr "&חפש"
+msgstr "חיפוש"
 
 #: src/apps/marble-ui/ControlView.cpp:619
 #, qt-format
@@ -2974,28 +2962,24 @@ msgid "Search for cities, addresses, points of interest and more (%1)"
 msgstr ""
 
 #: src/apps/marble-ui/ControlView.cpp:623
-#, fuzzy
 msgctxt "Marble::ControlView|"
 msgid "Map View"
 msgstr "תצוגת מפה"
 
 #: src/apps/marble-ui/ControlView.cpp:633
-#, fuzzy
 msgctxt "Marble::ControlView|"
 msgid "Files"
-msgstr "&קובץ"
+msgstr "קבצים"
 
 #: src/apps/marble-ui/ControlView.cpp:642
-#, fuzzy
 msgctxt "Marble::ControlView|"
 msgid "Tour"
-msgstr "עקוב אחר GPS"
+msgstr "סיור"
 
 #: src/apps/marble-ui/ControlView.cpp:655
-#, fuzzy
 msgctxt "QObject|"
 msgid "Edit Maps"
-msgstr "&עריכה"
+msgstr "עריכת מפות"
 
 #: src/apps/marble-ui/ControlView.cpp:704
 #: src/apps/marble-ui/ControlView.cpp:842
@@ -3019,74 +3003,67 @@ msgstr "הצג מיקומים"
 #: src/lib/marble/AbstractFloatItem.cpp:225
 msgctxt "Marble::AbstractFloatItem|"
 msgid "&Lock"
-msgstr ""
+msgstr "&נעילה"
 
 #: src/lib/marble/AbstractFloatItem.cpp:231
-#, fuzzy
 msgctxt "Marble::AbstractFloatItem|"
 msgid "&Hide"
-msgstr "&הסתר"
+msgstr "&סתרה"
 
 #: src/lib/marble/AbstractFloatItem.cpp:239
-#, fuzzy
 msgctxt "Marble::AbstractFloatItem|"
 msgid "&Configure..."
-msgstr "הגדרת פקד השליטה על השמש"
+msgstr "ה&גדרה…"
 
 #: src/lib/marble/AddLinkDialog.cpp:62
 msgctxt "Marble::AddLinkDialog|"
 msgid "No URL specified"
-msgstr ""
+msgstr "לא צוינה כתובת"
 
 #: src/lib/marble/AddLinkDialog.cpp:62
-#, fuzzy
 msgctxt "Marble::AddLinkDialog|"
 msgid "Please specify a URL for this link."
-msgstr "שם חלופי עבור המיקום."
+msgstr "נא לציין כתובת לקישור הזה."
 
 #: src/lib/marble/AddLinkDialog.cpp:64
 msgctxt "Marble::AddLinkDialog|"
 msgid "No name specified"
-msgstr ""
+msgstr "לא צוין שם"
 
 #: src/lib/marble/AddLinkDialog.cpp:64
-#, fuzzy
 msgctxt "Marble::AddLinkDialog|"
 msgid "Please specify a name for this link."
-msgstr "שם חלופי עבור המיקום."
+msgstr "נא לציין שם לקישור הזה."
 
 #: src/lib/marble/AddLinkDialog.ui:14
-#, fuzzy
 msgctxt "UiAddLinkDialog|"
 msgid "Add link"
-msgstr "נתיב"
+msgstr "הוספת קישור"
 
 #: src/lib/marble/AddLinkDialog.ui:22
 msgctxt "UiAddLinkDialog|"
 msgid "URL:"
-msgstr ""
+msgstr "כתובת:"
 
 #: src/lib/marble/AddLinkDialog.ui:32
-#, fuzzy
 msgctxt "UiAddLinkDialog|"
 msgid "Name:"
-msgstr "שם"
+msgstr "שם:"
 
 #: src/lib/marble/BookmarkManager.cpp:51
 msgctxt "QObject|"
 msgid "Default"
-msgstr ""
+msgstr "ברירת מחדל"
 
 #: src/lib/marble/BookmarkManager.cpp:55
-#, fuzzy
 msgctxt "QObject|"
 msgid "Bookmarks"
-msgstr "ייצא מפה"
+msgstr "סימניות"
 
 #: src/lib/marble/BookmarkManager.cpp:243
 msgctxt "Marble::BookmarkManager|"
 msgid "Default"
-msgstr ""
+msgstr "ברירת מחדל"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:179
 #, qt-format
@@ -3097,22 +3074,19 @@ msgid ""
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:181
-#, fuzzy
 msgctxt "BookmarkManagerDialogPrivate|"
 msgid "Remove Folder"
-msgstr "אודות Marble"
+msgstr "הסרת תיקייה"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:409
-#, fuzzy
 msgctxt "Marble::BookmarkManagerDialog|"
 msgid "Export Bookmarks"
-msgstr "ייצא מפה"
+msgstr "ייצוא סימניות"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:411
-#, fuzzy
 msgctxt "Marble::BookmarkManagerDialog|"
 msgid "KML files (*.kml)"
-msgstr "קובץ GpxFile ‏(‎*.gpx)"
+msgstr "קובצי KML‏ (‎*.kml)"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:416
 msgctxt "Marble::BookmarkManagerDialog|"
@@ -3120,22 +3094,19 @@ msgid "Unable to save bookmarks. Please check that the file is writable."
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:417
-#, fuzzy
 msgctxt "Marble::BookmarkManagerDialog|"
 msgid "Bookmark Export"
-msgstr "ייצא מפה"
+msgstr "ייצוא סימנייה"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:424
-#, fuzzy
 msgctxt "Marble::BookmarkManagerDialog|"
 msgid "Import Bookmarks"
-msgstr "ייצא מפה"
+msgstr "ייבוא סימניות"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:424
-#, fuzzy
 msgctxt "Marble::BookmarkManagerDialog|"
 msgid "KML Files (*.kml)"
-msgstr "קובץ GpxFile ‏(‎*.gpx)"
+msgstr "קובצי KML‏ (‎*.kml)"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:431
 #, fuzzy, qt-format
@@ -3144,10 +3115,9 @@ msgid "The file %1 cannot be opened as a KML file."
 msgstr "הקובץ הוא לא קובץ DGML 2.0 תקני"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:432
-#, fuzzy
 msgctxt "Marble::BookmarkManagerDialog|"
 msgid "Bookmark Import"
-msgstr "ייצא מפה"
+msgstr "ייבוא סימנייה"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:465
 msgctxt "BookmarkManagerDialogPrivate|"
@@ -3161,10 +3131,9 @@ msgid "Imported bookmark"
 msgstr "ייצא מפה"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:467
-#, fuzzy
 msgctxt "BookmarkManagerDialogPrivate|"
 msgid "Existing bookmark"
-msgstr "ייצא מפה"
+msgstr "סימנייה קיימת"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:468
 msgctxt "BookmarkManagerDialogPrivate|"
@@ -3172,16 +3141,14 @@ msgid "Do you want to replace the existing bookmark with the imported one?"
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:482
-#, fuzzy
 msgctxt "BookmarkManagerDialogPrivate|"
 msgid "Replace"
-msgstr "תבליט"
+msgstr "החלפה"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:483
-#, fuzzy
 msgctxt "BookmarkManagerDialogPrivate|"
 msgid "Replace All"
-msgstr "תבליט"
+msgstr "החלפה של הכול"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:484
 msgctxt "BookmarkManagerDialogPrivate|"
@@ -3194,27 +3161,24 @@ msgid "Skip All"
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:14
-#, fuzzy
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Bookmark Manager"
-msgstr "ייצא מפה"
+msgstr "מנהל סימניות"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:25
-#, fuzzy
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Import Bookmarks…"
-msgstr "ייצא מפה"
+msgstr "ייבוא סימניות…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
-#, fuzzy
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Export Bookmarks…"
-msgstr "ייצא מפה"
+msgstr "ייצוא סימניות…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Folders"
-msgstr ""
+msgstr "תיקיות"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
@@ -3233,16 +3197,14 @@ msgid "Delete"
 msgstr "מחיקה"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:118
-#, fuzzy
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Bookmarks"
-msgstr "ייצא מפה"
+msgstr "סימניות"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:141
-#, fuzzy
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Edit"
-msgstr "&עריכה"
+msgstr "עריכה"
 
 #: src/lib/marble/CacheStoragePolicy.cpp:31
 msgctxt "QObject|"
@@ -3266,10 +3228,9 @@ msgid "dwarf planet"
 msgstr ""
 
 #: src/lib/marble/cloudsync/BookmarkSyncManager.cpp:642
-#, fuzzy
 msgctxt "Marble::BookmarkSyncManager|"
 msgid "Bookmarks"
-msgstr "ייצא מפה"
+msgstr "סימניות"
 
 #: src/lib/marble/cloudsync/CloudRoutesDialog.ui:14
 #, fuzzy
@@ -3376,10 +3337,9 @@ msgstr "הכניסה הצליחה"
 
 #: src/lib/marble/cloudsync/RouteItemDelegate.cpp:183
 #: src/lib/marble/cloudsync/RouteItemDelegate.cpp:204
-#, fuzzy
 msgctxt "Marble::RouteItemDelegate|"
 msgid "Open"
-msgstr "&פתח..."
+msgstr "פתיחה"
 
 #: src/lib/marble/cloudsync/RouteItemDelegate.cpp:184
 #: src/lib/marble/cloudsync/RouteItemDelegate.cpp:209
@@ -3389,10 +3349,9 @@ msgstr "טעינה"
 
 #: src/lib/marble/cloudsync/RouteItemDelegate.cpp:185
 #: src/lib/marble/cloudsync/RouteItemDelegate.cpp:214
-#, fuzzy
 msgctxt "Marble::RouteItemDelegate|"
 msgid "Remove from device"
-msgstr "ה&סר נקודות מדידה"
+msgstr "הסרה מהתקן"
 
 #: src/lib/marble/cloudsync/RouteItemDelegate.cpp:186
 #: src/lib/marble/cloudsync/RouteItemDelegate.cpp:219
@@ -3421,61 +3380,53 @@ msgid "Waiting for current location information..."
 msgstr "בהמתנה לפרטי המקום הנוכחיים…"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:192
-#, fuzzy
 msgctxt "QObject|"
 msgid "Error when determining current location: "
-msgstr "אפשר לשונית המציגה את המיקום הנוכחי"
+msgstr "שגיאה באיתור המיקום הנוכחי: "
 
 #: src/lib/marble/CurrentLocationWidget.cpp:253
 #: src/plugins/render/weather/WeatherData.cpp:524
-#, fuzzy
 msgctxt "QObject|"
 msgid "km/h"
-msgstr "ק\"מ"
+msgstr "קמ״ש"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:255
 #: src/lib/marble/CurrentLocationWidget.cpp:256
 #: src/lib/marble/CurrentLocationWidget.cpp:277
-#, fuzzy
 msgctxt "QObject|"
 msgid "m"
-msgstr "מ'"
+msgstr "מ׳"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:259
-#, fuzzy
 msgctxt "QObject|"
 msgid "km"
-msgstr "ק\"מ"
+msgstr "ק״מ"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:265
-#, fuzzy
 msgctxt "QObject|"
 msgid "m/h"
-msgstr "ק\"מ"
+msgstr "מ׳ לשעה"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:267
 #: src/lib/marble/CurrentLocationWidget.cpp:268
-#, fuzzy
 msgctxt "QObject|"
 msgid "ft"
-msgstr "שמאלה"
+msgstr "רגל"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:275
 msgctxt "QObject|"
 msgid "kt"
-msgstr ""
+msgstr "קשר"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:278
-#, fuzzy
 msgctxt "QObject|"
 msgid "nm"
-msgstr "מ'"
+msgstr "מייל ימי"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:330
-#, fuzzy
 msgctxt "QObject|"
 msgid "Placemark"
-msgstr "מפה רגילה"
+msgstr "סמן מקום"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:367
 #, fuzzy
@@ -3485,10 +3436,9 @@ msgstr "עקוב אחר GPS"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:369
 #: src/lib/marble/CurrentLocationWidget.cpp:387
-#, fuzzy
 msgctxt "QObject|"
 msgid "KML File (*.kml)"
-msgstr "קובץ GpxFile ‏(‎*.gpx)"
+msgstr "קובץ KML‏ (‎*.kml)"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:385
 #, fuzzy
@@ -3595,10 +3545,9 @@ msgid "Converting data ..."
 msgstr "המרת נתונים…"
 
 #: src/lib/marble/DataMigrationWidget.ui:20
-#, fuzzy
 msgctxt "DataMigrationWidget|"
 msgid "Data Migration"
-msgstr "ניווט"
+msgstr "הסבת נתונים"
 
 #: src/lib/marble/DataMigrationWidget.ui:26
 msgctxt "DataMigrationWidget|"
@@ -3610,10 +3559,9 @@ msgstr ""
 #: src/lib/marble/declarative/MarbleQuickItem.cpp:195
 #: src/lib/marble/routing/RoutingManager.cpp:556
 #: src/lib/marble/routing/RoutingManager.cpp:559
-#, fuzzy
 msgctxt "QObject|"
 msgid "Current Location"
-msgstr "מיקום נוכחי"
+msgstr "מקום נוכחי"
 
 #: src/lib/marble/declarative/Placemark.cpp:93
 #, qt-format
@@ -3636,10 +3584,10 @@ msgstr[2] "%n מיטות"
 msgstr[3] "%n מיטות"
 
 #: src/lib/marble/declarative/Placemark.cpp:105
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 parking spaces"
-msgstr "עקוב אחר GPS"
+msgstr "%1 מקומות חנייה"
 
 #: src/lib/marble/declarative/Placemark.cpp:106
 #, qt-format
@@ -3653,11 +3601,10 @@ msgid "Computers available"
 msgstr "מחשבים זמינים"
 
 #: src/lib/marble/declarative/Placemark.cpp:144
-#, fuzzy
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide computers for customer use"
 msgid "No computers available"
-msgstr "הצג סרגל ניווט"
+msgstr "אין מחשבים זמינים"
 
 #: src/lib/marble/declarative/Placemark.cpp:148
 msgctxt "Marble::Placemark|A copy shop provides photocopying service"
@@ -3698,11 +3645,10 @@ msgid "No fax service"
 msgstr "אין שירות פקס"
 
 #: src/lib/marble/declarative/Placemark.cpp:172
-#, fuzzy
 msgctxt ""
 "Marble::Placemark|A copy shop provides a paid service to make phone calls"
 msgid "Phone service"
-msgstr "ייצא מפה"
+msgstr "שירות טלפון"
 
 #: src/lib/marble/declarative/Placemark.cpp:176
 msgctxt ""
@@ -3983,10 +3929,9 @@ msgid "Wood"
 msgstr "עץ"
 
 #: src/lib/marble/declarative/Placemark.cpp:309
-#, fuzzy
 msgctxt "Marble::Placemark|An active volcano"
 msgid "Active"
-msgstr "מדינה"
+msgstr "פעיל"
 
 #: src/lib/marble/declarative/Placemark.cpp:313
 msgctxt ""
@@ -4019,10 +3964,9 @@ msgid "Scoria cone"
 msgstr ""
 
 #: src/lib/marble/declarative/Placemark.cpp:322
-#, fuzzy
 msgctxt "Marble::Placemark|"
 msgid "Alternative medicine"
-msgstr "שם חלופי"
+msgstr "רפואה אלטרנטיבית"
 
 #: src/lib/marble/declarative/Placemark.cpp:323
 msgctxt "Marble::Placemark|"
@@ -4060,10 +4004,9 @@ msgid "Medical practitioner"
 msgstr ""
 
 #: src/lib/marble/declarative/Placemark.cpp:330
-#, fuzzy
 msgctxt "Marble::Placemark|"
 msgid "Hospital"
-msgstr "עיר בירה"
+msgstr "בית חולים"
 
 #: src/lib/marble/declarative/Placemark.cpp:331
 msgctxt "Marble::Placemark|"
@@ -4091,10 +4034,9 @@ msgid "Psychotherapist"
 msgstr "פסיכותרפיה"
 
 #: src/lib/marble/declarative/Placemark.cpp:336
-#, fuzzy
 msgctxt "Marble::Placemark|"
 msgid "Rehabilitation"
-msgstr "גובה:"
+msgstr "שיקום"
 
 #: src/lib/marble/declarative/Placemark.cpp:337
 msgctxt "Marble::Placemark|"
@@ -4619,10 +4561,9 @@ msgid "Bicycle transportation impossible"
 msgstr ""
 
 #: src/lib/marble/declarative/Placemark.cpp:537
-#, fuzzy
 msgctxt "Marble::Placemark|"
 msgid "Lit at night"
-msgstr "כדור הארץ בלילה"
+msgstr "מואר בלילה"
 
 #: src/lib/marble/declarative/Placemark.cpp:538
 msgctxt "Marble::Placemark|"
@@ -4630,10 +4571,9 @@ msgid "Lit in winter"
 msgstr ""
 
 #: src/lib/marble/declarative/Placemark.cpp:539
-#, fuzzy
 msgctxt "Marble::Placemark|A ski piste with trees (gladed)"
 msgid "Contains trees"
-msgstr "הר"
+msgstr "מכיל עצים"
 
 #: src/lib/marble/declarative/Placemark.cpp:540
 #, fuzzy
@@ -4689,10 +4629,9 @@ msgid "Collection times %1"
 msgstr ""
 
 #: src/lib/marble/declarative/Placemark.cpp:570
-#, fuzzy
 msgctxt "Marble::Placemark|Entry station of an aerialway"
 msgid "Entry"
-msgstr "מדינה:"
+msgstr "כניסה"
 
 #: src/lib/marble/declarative/Placemark.cpp:571
 msgctxt "Marble::Placemark|Exit station of an aerialway"
@@ -4705,10 +4644,9 @@ msgid "Entry and exit"
 msgstr ""
 
 #: src/lib/marble/declarative/Placemark.cpp:579
-#, fuzzy
 msgctxt "Marble::Placemark|Transit only station of an aerialway"
 msgid "No entry or exit"
-msgstr "גבול מדינה"
+msgstr "אין כניסה או יציאה"
 
 #: src/lib/marble/declarative/Placemark.cpp:583
 msgctxt "Marble::Placemark|Entry station of an aerialway during summer"
@@ -4836,11 +4774,10 @@ msgid "Designated wheelchair access"
 msgstr ""
 
 #: src/lib/marble/declarative/Placemark.cpp:758
-#, fuzzy
 msgctxt ""
 "Marble::Placemark|This location does not provide public Internet access"
 msgid "No public Internet access"
-msgstr "הצג את ה־twitts הפומביים במקומות שלהם"
+msgstr "אין גישה ציבורית לאינטרנט"
 
 #: src/lib/marble/declarative/Placemark.cpp:762
 msgctxt ""
@@ -4893,16 +4830,14 @@ msgid "%1 %2"
 msgstr ""
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:19
-#, fuzzy
 msgctxt "Marble::RouteRelationModel|"
 msgid "International walking route"
-msgstr "שם חלופי"
+msgstr "מסלול הליכה בינלאומי"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:20
-#, fuzzy
 msgctxt "Marble::RouteRelationModel|"
 msgid "National walking route"
-msgstr "בירת מחוז"
+msgstr "מסלול הליכה לאומי"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:21
 msgctxt "Marble::RouteRelationModel|"
@@ -4915,10 +4850,9 @@ msgid "Local walking route"
 msgstr ""
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:23
-#, fuzzy
 msgctxt "Marble::RouteRelationModel|"
 msgid "International cycling route"
-msgstr "שם חלופי"
+msgstr "מסלול אופניים בינלאומי"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:24
 msgctxt "Marble::RouteRelationModel|"
@@ -5005,10 +4939,9 @@ msgid "Offset from route:"
 msgstr ""
 
 #: src/lib/marble/DownloadRegionDialog.cpp:181
-#, fuzzy
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Selection Method"
-msgstr "הצג דגם גבהים"
+msgstr "שיטת בחירה"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:189
 msgctxt "Marble::DownloadRegionDialog|"
@@ -5016,10 +4949,9 @@ msgid "Number of tiles to download:"
 msgstr ""
 
 #: src/lib/marble/DownloadRegionDialog.cpp:238
-#, fuzzy
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Download Region"
-msgstr "ההורדה הסתיימה."
+msgstr "הורדת אזור"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:240
 msgctxt "Marble::DownloadRegionDialog|"
@@ -5032,10 +4964,9 @@ msgid "Texture tiles"
 msgstr ""
 
 #: src/lib/marble/DownloadRegionDialog.cpp:243
-#, fuzzy
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Vector tiles"
-msgstr "תצוגת מפה"
+msgstr "אריחים וקטוריים"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:244
 msgctxt "Marble::DownloadRegionDialog|"
@@ -5070,19 +5001,16 @@ msgid "Estimated download size: %1 kB"
 msgstr "גודל ההורדה המשוערך: %1 ק״ב"
 
 #: src/lib/marble/EditBookmarkDialog.ui:14
-#, fuzzy
 msgctxt "UiEditBookmarkDialog|"
 msgid "Edit Bookmark"
-msgstr "ייצא מפה"
+msgstr "עריכת סימנייה"
 
 #: src/lib/marble/EditBookmarkDialog.ui:25
-#, fuzzy
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Description:"
-msgstr "תיאור"
+msgstr "&תיאור:"
 
 #: src/lib/marble/EditBookmarkDialog.ui:41
-#, fuzzy
 msgctxt "UiEditBookmarkDialog|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -5106,41 +5034,41 @@ msgid ""
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
 "family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
-"p, li { white-space: pre-wrap; }\n"
+"p, li { white-space: pre-wrap; direction: rtl; }\n"
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
-"weight:400; font-style:normal; text-decoration:none;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
-"p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, The Marble "
-"Project</p>\n"
+"weight:400; font-style:normal;\">\n"
+"<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+"bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+"<tr>\n"
+"<td style=\"border: none;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
-"style:italic;\"></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/marble</"
-"p></body></html>"
+"family:'Ubuntu';\"><br /></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"family:'Ubuntu';\"><br /></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
 
 #: src/lib/marble/EditBookmarkDialog.ui:57
-#, fuzzy
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Folder:"
-msgstr "הצג דגם גבהים"
+msgstr "&תיקייה:"
 
 #: src/lib/marble/EditBookmarkDialog.ui:79
-#, fuzzy
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Add Folder…"
-msgstr "הצג דגם גבהים"
+msgstr "הו&ספת תיקייה…"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
-#, fuzzy
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Untitled Placemark"
-msgstr "מפה רגילה"
+msgstr "סמן מקום ללא שם"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:144
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -5165,10 +5093,9 @@ msgid "No name specified"
 msgstr "לא צוין שם"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:350
-#, fuzzy
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a name for this placemark."
-msgstr "שם חלופי עבור המיקום."
+msgstr "נא לציין שם לסמן המקום הזה."
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:352
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -5176,10 +5103,9 @@ msgid "No ID specified"
 msgstr "לא צוין מזהה"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:352
-#, fuzzy
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a ID for this placemark."
-msgstr "שם חלופי עבור המיקום."
+msgstr "נא לציין מזהה לסמן המקום הזה."
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:354
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -5187,10 +5113,9 @@ msgid "ID is invalid"
 msgstr "המזהה שגוי"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:354
-#, fuzzy
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a valid ID for this placemark."
-msgstr "שם חלופי עבור המיקום."
+msgstr "נא לציין מזהה תקף לסמן המקום הזה."
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:356
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -5198,10 +5123,9 @@ msgid "No image specified"
 msgstr "לא צוינה תמונה"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:356
-#, fuzzy
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify an icon for this placemark or add a valid tag."
-msgstr "שם חלופי עבור המיקום."
+msgstr "נא לציין סמל לסמן המקום הזה או להוסיף תגית תקפה."
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:358
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -5209,10 +5133,9 @@ msgid "Invalid icon path"
 msgstr "נתיב סמל שגוי"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:358
-#, fuzzy
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a valid path for the icon file."
-msgstr "שם חלופי עבור המיקום."
+msgstr "נא לציין נתיב תקף לקובץ סמל."
 
 #: src/lib/marble/EditPlacemarkDialog.ui:20
 msgctxt "UiEditPlacemarkDialog|"
