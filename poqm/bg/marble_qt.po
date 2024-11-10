@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-10-26 18:54+0200\n"
+"PO-Revision-Date: 2024-11-09 20:06+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Lokalize 24.11.70\n"
+"X-Generator: Lokalize 24.08.2\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -7298,7 +7298,7 @@ msgctxt "QObject|"
 msgid "Could not convert <maximum> child text content to integer. Was: '%1'"
 msgstr ""
 "Не може да се конвертира <maximum>  текстът на дъщерното съдържание в цяло "
-"число. То беше: \"%1\""
+"число. То беше: „%1“"
 
 #: src/lib/marble/geodata/handlers/dgml/DgmlMinimumTagHandler.cpp:35
 #, qt-format
@@ -7306,7 +7306,7 @@ msgctxt "QObject|"
 msgid "Could not convert <minimum> child text content to integer. Was: '%1'"
 msgstr ""
 "Не може да се конвертира <minimum>  текстът на дъщерното съдържание в цяло "
-"число. То беше: \"%1\""
+"число. То беше: „%1“"
 
 #: src/lib/marble/geodata/parser/GeoParser.cpp:86
 #, qt-format
@@ -7633,7 +7633,7 @@ msgstr "Marble"
 #, qt-format
 msgctxt "Marble::MapViewWidget|"
 msgid "Are you sure that you want to delete \"%1\"?"
-msgstr "Наистина ли искате да изтриете \"%1\"?"
+msgstr "Наистина ли искате да изтриете „%1“?"
 
 #: src/lib/marble/MapViewWidget.ui:14
 msgctxt "MapViewWidget|"
@@ -7866,7 +7866,7 @@ msgctxt "Marble::MapWizard|"
 msgid ""
 "Please specify another map name, since there is already a map named \"%1\"."
 msgstr ""
-"Моля, посочете друго име на картата, тъй като вече има карта с име \"%1\"."
+"Моля, посочете друго име на картата, тъй като вече има карта с име „%1“."
 
 #: src/lib/marble/MapWizard.cpp:928
 msgctxt "Marble::MapWizard|"
@@ -12162,7 +12162,7 @@ msgstr "Резултати от търсенето"
 #, qt-format
 msgctxt "QObject|"
 msgid "Search for '%1'"
-msgstr "Търсене за \"%1 \""
+msgstr "Търсене за „%1“ "
 
 #: src/lib/marble/SoundCueEditWidget.cpp:37
 msgctxt "Marble::SoundCueEditWidget|"
