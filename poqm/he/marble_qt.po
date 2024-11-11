@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-11-06 14:18+0200\n"
+"PO-Revision-Date: 2024-11-10 03:21+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -14016,12 +14016,13 @@ msgstr "תוסף המציג את השמיים מלאים בכוכבים."
 #: src/plugins/render/graticule/GraticulePlugin.cpp:200
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the coordinate grid."
-msgstr ""
+msgstr "נא לבחור את הצבע לרשת נקודות הציון."
 
 #: src/plugins/render/graticule/GraticulePlugin.cpp:211
+#, fuzzy
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the tropic circles."
-msgstr ""
+msgstr "נא לבחור את הצבע לעיגולים הטרופיים."
 
 #: src/plugins/render/graticule/GraticulePlugin.cpp:222
 #, fuzzy
@@ -14032,7 +14033,7 @@ msgstr "שם חלופי עבור המיקום."
 #: src/plugins/render/graticule/GraticulePlugin.cpp:293
 msgctxt "Marble::GraticulePlugin|"
 msgid "Equator"
-msgstr ""
+msgstr "קו המשווה"
 
 #: src/plugins/render/graticule/GraticulePlugin.cpp:298
 msgctxt "Marble::GraticulePlugin|"
@@ -14175,7 +14176,7 @@ msgstr "הגדרת כלי מדידה"
 #: src/plugins/render/measure/MeasureConfigDialog.ui:20
 msgctxt "MeasureConfigDialog|"
 msgid "Ruler Type"
-msgstr ""
+msgstr "סוג סרגל"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:28
 #: src/plugins/render/measure/MeasureConfigDialog.ui:45
@@ -14187,12 +14188,12 @@ msgstr "מצולע"
 #: src/plugins/render/measure/MeasureConfigDialog.ui:127
 msgctxt "MeasureConfigDialog|"
 msgid "Circle"
-msgstr ""
+msgstr "עיגול"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:51
 msgctxt "MeasureConfigDialog|"
 msgid "Segment labels"
-msgstr ""
+msgstr "תוויות מקטעים"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:60
 msgctxt "MeasureConfigDialog|"
@@ -14212,7 +14213,7 @@ msgstr ""
 #: src/plugins/render/measure/MeasureConfigDialog.ui:90
 msgctxt "MeasureConfigDialog|"
 msgid "Perimeter"
-msgstr ""
+msgstr "היקף"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:100
 #: src/plugins/render/measure/MeasureConfigDialog.ui:159
@@ -14223,17 +14224,17 @@ msgstr "שטח"
 #: src/plugins/render/measure/MeasureConfigDialog.ui:133
 msgctxt "MeasureConfigDialog|"
 msgid "Labels"
-msgstr ""
+msgstr "תוויות"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:142
 msgctxt "MeasureConfigDialog|"
 msgid "Radius"
-msgstr ""
+msgstr "רדיוס"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:152
 msgctxt "MeasureConfigDialog|"
 msgid "Circumference"
-msgstr ""
+msgstr "היקף"
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:86
 msgctxt "Marble::MeasureToolPlugin|"
@@ -14248,7 +14249,7 @@ msgstr "&כלי מדידה"
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:106
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Measure distances between two or more points."
-msgstr ""
+msgstr "מדידת מרחקים בין שתי נקודות או יותר."
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:360
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:477

@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Yasen Pramatarov <yasen@lindeas.com>, 2009, 2011.
-# SPDX-FileCopyrightText: 2022, 2023 Mincho Kondarev <mkondarev@yahoo.de>
+# SPDX-FileCopyrightText: 2022, 2023, 2024 Mincho Kondarev <mkondarev@yahoo.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-25 00:37+0000\n"
-"PO-Revision-Date: 2023-12-22 22:55+0100\n"
+"PO-Revision-Date: 2024-11-10 20:12+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Poedit-Language: Bulgarian\n"
 "X-Poedit-Country: BULGARIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.11.70\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -872,8 +872,8 @@ msgid ""
 "Sorry, unable to open '%1':\n"
 "'%2'"
 msgstr ""
-"Съжалявам, не успях да отворя '%1':\n"
-"'%2'"
+"Съжалявам, не успях да отворя „%1“:\n"
+"„%2“"
 
 #: marble_part.cpp:163
 #, kde-format
@@ -888,7 +888,7 @@ msgstr "Настолен глобус"
 #: marble_part.cpp:224
 #, kde-format
 msgid "Sorry, unable to open '%1'. The file is not accessible."
-msgstr "Съжалявам, не успях да отворя '%1'. Файлът не е достъпен."
+msgstr "Съжалявам, не успях да отворя „%1“. Файлът не е достъпен."
 
 #: marble_part.cpp:224
 #, kde-format

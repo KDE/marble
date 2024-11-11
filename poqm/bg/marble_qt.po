@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-11-09 20:06+0100\n"
+"PO-Revision-Date: 2024-11-10 15:10+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 24.11.70\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -613,8 +613,8 @@ msgid ""
 "relief.</p>"
 msgstr ""
 "<p><i>Класическа топографска карта</i>.</p><p>Използва векторни линии за "
-"означаване набрегови линии, граници на държавите и др. и  растерната "
-"графика, за да пресъздаде височинниярелеф.</p>"
+"означаване на брегови линии, граници на държавите и др. и  растерната "
+"графика, за да пресъздаде височинният релеф.</p>"
 
 #. file data/maps/earth/srtm/srtm.dgml:201
 #. ----------
@@ -1721,8 +1721,8 @@ msgid ""
 "<i>Historical world map</i> from the year 1689 created by G. van Schagen in "
 "Amsterdam."
 msgstr ""
-"<i>Историческа карта на света</i> от 1689 г., създадена от Г. Ван Шаген "
-"вАмстердам."
+"<i>Историческа карта на света</i> от 1689 г., създадена от Г. Ван Шаген в "
+"Амстердам."
 
 #. file data/maps/earth/schagen1689/schagen1689.dgml:148
 msgctxt "DGML|"
@@ -4281,7 +4281,7 @@ msgstr "%1 щепсели CHAdeMO"
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Magne Charge plugs"
-msgstr "%1 шепсели Magne Charge"
+msgstr "%1 щепсели Magne Charge"
 
 #: src/lib/marble/declarative/Placemark.cpp:451
 #, qt-format
@@ -7547,7 +7547,7 @@ msgstr "Обновяване"
 #: src/lib/marble/MapThemeDownloadDialog.cpp:282
 msgctxt "Marble::MapItemDelegate|"
 msgid "Open"
-msgstr "Отворяне"
+msgstr "Отваряне"
 
 #: src/lib/marble/MapThemeDownloadDialog.ui:14
 msgctxt "MapThemeDownloadDialog|"
@@ -8462,7 +8462,7 @@ msgstr ""
 "за да създадете темата. </p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Моля, помислете за "
-"възможносттада предоставите темата на картата обратно на общността на "
+"възможността да предоставите темата на картата обратно на общността на "
 "Marble, ако лицензът и условията за използване позволяват това..</p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
@@ -9439,9 +9439,9 @@ msgstr ""
 "изтегляне се предоставят от  <a href=\"https://www.openstreetmap.org"
 "\">OpenStreetMap</a> Проект (\"OSM\").OSM е отворена общност, която създава "
 "безплатни редактируеми карти.<br /><i>Лиценз</i>: Данните за OpenStreetMap "
-"могат да се използват свободно според условиятана лиценза  <a href=\"https://"
-"wiki.openstreetmap.org/index.php/OpenStreetMap_License\">Creative Commons "
-"Attribution-ShareAlike 2.0 </a>.</p>"
+"могат да се използват свободно според условията на лиценза  <a href="
+"\"https://wiki.openstreetmap.org/index.php/OpenStreetMap_License\">Creative "
+"Commons Attribution-ShareAlike 2.0 </a>.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:292
 msgctxt "QObject|"
@@ -10747,7 +10747,7 @@ msgstr ""
 "картата което се показва по време на анимациите на картата (например при "
 "плъзгане на глобуса). </p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Особено при бавни машиние "
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Особено при бавни машини е "
 "препоръчително да настроите тази опция на \"ниско качество\", тъй като това "
 "ще осигурява по-добра скорост.</p></body></html>"
 
@@ -15953,7 +15953,7 @@ msgstr "Приставка, показваща  звездното небе и �
 #: src/plugins/render/stars/StarsPlugin.cpp:447
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the constellation lines."
-msgstr "Моля, изберете цвета за линиите на съзведията."
+msgstr "Моля, изберете цвета за линиите на съзвездията."
 
 #: src/plugins/render/stars/StarsPlugin.cpp:458
 msgctxt "Marble::StarsPlugin|"
