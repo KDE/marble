@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-11-10 03:21+0200\n"
+"PO-Revision-Date: 2024-11-11 08:22+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -13159,22 +13159,22 @@ msgstr ""
 #: src/plugins/render/aprs/AprsConfigWidget.ui:115
 msgctxt "AprsConfigWidget|"
 msgid "Server"
-msgstr ""
+msgstr "שרת"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:122
 msgctxt "AprsConfigWidget|"
 msgid "rotate.aprs.net"
-msgstr ""
+msgstr "rotate.aprs.net"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:139
 msgctxt "AprsConfigWidget|"
 msgid "Port"
-msgstr ""
+msgstr "פתחה"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:146
 msgctxt "AprsConfigWidget|"
 msgid "10253"
-msgstr ""
+msgstr "10253"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:155
 msgctxt "AprsConfigWidget|"
@@ -13194,27 +13194,27 @@ msgstr ""
 #: src/plugins/render/aprs/AprsConfigWidget.ui:184
 msgctxt "AprsConfigWidget|"
 msgid "Should information be gathered from a serial port?"
-msgstr ""
+msgstr "האם לאסוף נתונים מפתחה טורית?"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:187
 msgctxt "AprsConfigWidget|"
 msgid "Collect data from a serial TNC (In Text Mode)"
-msgstr ""
+msgstr "איסוף נתונים מ־TNC טורי (במצב טקסט)"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:202
 msgctxt "AprsConfigWidget|"
 msgid "TTY"
-msgstr ""
+msgstr "TTY"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:209
 msgctxt "AprsConfigWidget|"
 msgid "/dev/ttyUSB0"
-msgstr ""
+msgstr "/dev/ttyUSB0"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:218
 msgctxt "AprsConfigWidget|"
 msgid "Dump TTY records to the debug stream"
-msgstr ""
+msgstr "הטלת רשומות TTY לתזרים ניפוי השגיאות"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:229
 #: src/plugins/render/aprs/AprsConfigWidget.ui:235
@@ -13226,27 +13226,27 @@ msgstr "קובץ"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:241
 msgctxt "AprsConfigWidget|"
 msgid "Should information be gathered from a file?"
-msgstr ""
+msgstr "האם לאסוף את המידע מקובץ?"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:244
 msgctxt "AprsConfigWidget|"
 msgid "Collect data from a file"
-msgstr ""
+msgstr "איסוף נתונים מקובץ"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:275
 msgctxt "AprsConfigWidget|"
 msgid "Dump file records to the debug stream"
-msgstr ""
+msgstr "הטלת רשומות קבצים לתזרים ניפוי שגיאות"
 
 #: src/plugins/render/aprs/AprsPlugin.cpp:116
 msgctxt "Marble::AprsPlugin|"
 msgid "Amateur Radio Aprs Plugin"
-msgstr ""
+msgstr "תוסף Aprs לרדיו חובבים"
 
 #: src/plugins/render/aprs/AprsPlugin.cpp:121
 msgctxt "Marble::AprsPlugin|"
 msgid "Amateur Radio &Aprs Plugin"
-msgstr ""
+msgstr "תוסף Aprs לרדיו &חובבים"
 
 #: src/plugins/render/aprs/AprsPlugin.cpp:136
 msgctxt "Marble::AprsPlugin|"
@@ -13254,6 +13254,8 @@ msgid ""
 "This plugin displays APRS data gleaned from the Internet.  APRS is an "
 "Amateur Radio protocol for broadcasting location and other information."
 msgstr ""
+"התוסף הזה מציג נתוני APRS שלוקטו מרחבי האינטרנט. APRS הוא פרוטוקול רדיו "
+"חובבים לשידור מקום ופרטים נוספים."
 
 #: src/plugins/render/atmosphere/AtmospherePlugin.cpp:59
 msgctxt "Marble::AtmospherePlugin|"
@@ -13283,17 +13285,17 @@ msgstr "ערכת עיצוב"
 #: src/plugins/render/compass/CompassConfigWidget.ui:43
 msgctxt "CompassConfigWidget|"
 msgid "Default"
-msgstr ""
+msgstr "ברירת מחדל"
 
 #: src/plugins/render/compass/CompassConfigWidget.ui:52
 msgctxt "CompassConfigWidget|"
 msgid "Arrows"
-msgstr ""
+msgstr "חיצים"
 
 #: src/plugins/render/compass/CompassConfigWidget.ui:61
 msgctxt "CompassConfigWidget|"
 msgid "Atom"
-msgstr ""
+msgstr "אטום"
 
 #: src/plugins/render/compass/CompassConfigWidget.ui:70
 msgctxt "CompassConfigWidget|"
@@ -13339,37 +13341,37 @@ msgstr "ערכת עיצוב"
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:43
 msgctxt "CrosshairsConfigWidget|"
 msgid "Default"
-msgstr ""
+msgstr "ברירת מחדל"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:52
 msgctxt "CrosshairsConfigWidget|"
 msgid "Gun 1"
-msgstr ""
+msgstr "אקדח 1"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:61
 msgctxt "CrosshairsConfigWidget|"
 msgid "Gun 2"
-msgstr ""
+msgstr "אקדח 2"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:70
 msgctxt "CrosshairsConfigWidget|"
 msgid "Circled"
-msgstr ""
+msgstr "עגול"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:79
 msgctxt "CrosshairsConfigWidget|"
 msgid "German"
-msgstr ""
+msgstr "גרמני"
 
 #: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:71
 msgctxt "Marble::CrosshairsPlugin|"
 msgid "Crosshairs"
-msgstr ""
+msgstr "סמני צלב"
 
 #: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:76
 msgctxt "Marble::CrosshairsPlugin|"
 msgid "Cross&hairs"
-msgstr ""
+msgstr "סמני &צלב"
 
 #: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:91
 msgctxt "Marble::CrosshairsPlugin|"
@@ -13384,7 +13386,7 @@ msgstr "הגדרת תוסף רעידות אדמה"
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:20
 msgctxt "EarthquakeConfigWidget|"
 msgid "Filter"
-msgstr ""
+msgstr "מסנן"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:29
 msgctxt "EarthquakeConfigWidget|"
@@ -13400,27 +13402,27 @@ msgstr "קו &רוחב"
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:59
 msgctxt "EarthquakeConfigWidget|"
 msgid "Time Range"
-msgstr ""
+msgstr "טווח זמן"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:65
 msgctxt "EarthquakeConfigWidget|"
 msgid "Past"
-msgstr ""
+msgstr "עבר"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:78
 msgctxt "EarthquakeConfigWidget|"
 msgid "From"
-msgstr ""
+msgstr "מ־"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:107
 msgctxt "EarthquakeConfigWidget|"
 msgid "days"
-msgstr ""
+msgstr "ימים"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:150
 msgctxt "EarthquakeConfigWidget|"
 msgid "to"
-msgstr ""
+msgstr "עד"
 
 #: src/plugins/render/earthquake/EarthquakeItem.cpp:127
 msgctxt "Marble::EarthquakeItem|"
@@ -13551,7 +13553,7 @@ msgstr ""
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:171
 msgctxt "EclipsesConfigDialog|"
 msgid "&Reminder"
-msgstr ""
+msgstr "ת&זכורת"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:177
 msgctxt "EclipsesConfigDialog|"
@@ -13653,12 +13655,12 @@ msgstr ""
 #, qt-format
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Eclipses in %1"
-msgstr ""
+msgstr "ליקויי חמה ב־%1"
 
 #: src/plugins/render/eclipses/EclipsesReminderDialog.ui:14
 msgctxt "EclipsesReminderDialog|"
 msgid "Eclipse Event"
-msgstr ""
+msgstr "אירוע ליקוי חמה"
 
 #: src/plugins/render/eclipses/EclipsesReminderDialog.ui:20
 msgctxt "EclipsesReminderDialog|"
@@ -13672,7 +13674,7 @@ msgstr ""
 #: src/plugins/render/eclipses/EclipsesReminderDialog.ui:33
 msgctxt "EclipsesReminderDialog|"
 msgid "Do not remind me about eclipse events again"
-msgstr ""
+msgstr "לא להזכיר לי על אירועי ליקוי חמה שוב"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileConfigWidget.ui:14
 #, fuzzy
@@ -13698,7 +13700,7 @@ msgstr ""
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:65
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Route"
-msgstr ""
+msgstr "נתיב"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:77
 #, fuzzy
@@ -13745,7 +13747,7 @@ msgstr ""
 #, qt-format
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Difference: %1 %2"
-msgstr ""
+msgstr "הבדל: %1 %2"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfilePlotAxis.cpp:136
 msgctxt "Marble::ElevationProfilePlotAxis|"
@@ -13816,7 +13818,7 @@ msgstr "ת&צוגת קבצים"
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:65
 msgctxt "Marble::FileViewFloatItem|"
 msgid "A list of currently opened files"
-msgstr ""
+msgstr "רשימת הקבצים שפתוחים כרגע"
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:201
 msgctxt "Marble::FileViewFloatItem|"
@@ -13826,7 +13828,7 @@ msgstr "פתיחת קובץ…"
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:202
 msgctxt "Marble::FileViewFloatItem|"
 msgid "Close this file"
-msgstr ""
+msgstr "סגירת הקובץ הזה"
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:212
 msgctxt "Marble::FileViewFloatItem|"

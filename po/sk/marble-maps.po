@@ -2,28 +2,26 @@
 # Richard Fric <Richard.Fric@kdemail.net>, 2007, 2009.
 # Lubos Balazovic <balazovic@fns.uniba.sk>, 2009.
 # Lubos Balazovic <lubos.balazovic@gmail.com>, 2009, 2011, 2012.
-# SPDX-FileCopyrightText: 2012, 2013, 2014, 2015, 2016, 2017, 2021, 2023 Roman Paholík <wizzardsk@gmail.com>
+# SPDX-FileCopyrightText: 2012, 2013, 2014, 2015, 2016, 2017, 2021, 2023, 2024 Roman Paholík <wizzardsk@gmail.com>
 # Matej Mrenica <matejm98mthw@gmail.com>, 2019, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-04 00:36+0000\n"
-"PO-Revision-Date: 2023-12-06 19:04+0100\n"
-"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
+"PO-Revision-Date: 2024-11-11 17:54+0100\n"
+"Last-Translator: Roman Paholík <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.3\n"
+"X-Generator: Lokalize 24.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Qt-Contexts: true\n"
 
 #: Bookmarks.qml:20
-#, fuzzy, kde-format
-#| msgctxt "QObject|"
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "Záložky"
@@ -53,25 +51,19 @@ msgstr "Profil navigácie - Marble"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:23
-#, fuzzy, kde-format
-#| msgctxt "DGML|"
-#| msgid "Car"
+#, kde-format
 msgid "Car"
 msgstr "Auto"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:26 ProfileSelectorMenu.qml:134
-#, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Bicycle"
+#, kde-format
 msgid "Bicycle"
 msgstr "Bicyklom"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:29 ProfileSelectorMenu.qml:144
-#, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Pedestrian"
+#, kde-format
 msgid "Pedestrian"
 msgstr "Pešo"
 
@@ -84,51 +76,41 @@ msgid "Follow Current Position"
 msgstr "Sledovať aktuálnu polohu"
 
 #: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Marble Maps"
+#, kde-format
 msgid "Marble Maps"
 msgstr "Marble mapy"
 
 #: main.cpp:44
-#, fuzzy, kde-format
-#| msgctxt "QObject|"
-#| msgid "Edit Maps"
+#, kde-format
 msgid "Maps"
-msgstr "Upraviť mapy"
+msgstr "Mapy"
 
 #: main.cpp:46
 #, kde-format
 msgid "© KDE Community"
-msgstr ""
+msgstr "© KDE komunita"
 
 #: main.cpp:52
 #, kde-format
 msgid "Carl Schwan"
-msgstr ""
+msgstr "Carl Schwan"
 
 #: main.cpp:53
-#, fuzzy, kde-format
-#| msgctxt "PluginAuthor|"
-#| msgid "Developer"
+#, kde-format
 msgid "Developer"
 msgstr "Vývojár"
 
 #: main.cpp:58
-#, fuzzy, kde-format
-#| msgctxt "Marble::YoursPlugin|"
-#| msgid "Yours"
+#, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Yours"
+msgstr "Roman Paholík"
 
 #: main.cpp:58
-#, fuzzy, kde-format
-#| msgctxt "ExternalEditor|"
-#| msgid "Editor Details"
+#, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "Podrobnosti o editore"
+msgstr "wizzardsk@gmail.com"
 
 #: MainScreen.qml:87
 #, fuzzy, kde-format
@@ -145,25 +127,19 @@ msgid "Outdoor Activities"
 msgstr "Vonkajšie aktivity"
 
 #: MainScreen.qml:114
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Accessibility"
+#, kde-format
 msgctxt "@action:button"
 msgid "Accessibility"
 msgstr "Prístupnosť"
 
 #: MainScreen.qml:123
-#, fuzzy, kde-format
-#| msgctxt "Marble::PluginItemDelegate|"
-#| msgid "About"
+#, kde-format
 msgctxt "@action:button"
 msgid "About"
-msgstr "O programe"
+msgstr "O aplikácii"
 
 #: MainScreen.qml:134
-#, fuzzy, kde-format
-#| msgctxt "QObject|"
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@action:button"
 msgid "Bookmarks"
 msgstr "Záložky"
@@ -185,39 +161,29 @@ msgid "Theme Options"
 msgstr "Možnosti vrstiev"
 
 #: MainScreen.qml:167
-#, fuzzy, kde-format
-#| msgctxt "Marble::ControlView|"
-#| msgid "Routing"
+#, kde-format
 msgid "Routing"
 msgstr "Navigácia"
 
 #: MainScreen.qml:457
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "%1 km"
+#, kde-format
 msgid "%1 km"
 msgstr "%1 km"
 
 #: NavigationInfoBar.qml:20
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "%1 km"
+#, kde-format
 msgctxt "distance in km"
 msgid "%1 km"
 msgstr "%1 km"
 
 #: NavigationInfoBar.qml:22
-#, fuzzy, kde-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
+#, kde-format
 msgctxt "distance in m"
 msgid "%1 m"
 msgstr "%1 m"
 
 #: NavigationInfoBar.qml:24
-#, fuzzy, kde-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
+#, kde-format
 msgctxt "distance in m with decimals"
 msgid "%1 m"
 msgstr "%1 m"
@@ -239,41 +205,31 @@ msgid "Public Transport Layers"
 msgstr "<h4>Vrstvy verejnej dopravy</h4>"
 
 #: Options.qml:28
-#, fuzzy, kde-format
-#| msgctxt "GeoLineStringGraphicsItem|"
-#| msgid "Train"
+#, kde-format
 msgctxt "@option:check"
 msgid "Train"
 msgstr "Vlak"
 
 #: Options.qml:35
-#, fuzzy, kde-format
-#| msgctxt "DGML|"
-#| msgid "Subway"
+#, kde-format
 msgctxt "@option:check"
 msgid "Subway"
 msgstr "Metro"
 
 #: Options.qml:42
-#, fuzzy, kde-format
-#| msgctxt "GeoDataPlacemark|"
-#| msgid "Tram"
+#, kde-format
 msgctxt "@option:check"
 msgid "Tram"
 msgstr "Električka"
 
 #: Options.qml:49
-#, fuzzy, kde-format
-#| msgctxt "GeoLineStringGraphicsItem|"
-#| msgid "Bus"
+#, kde-format
 msgctxt "@option:check"
 msgid "Bus"
-msgstr "Zbernica"
+msgstr "Autobus"
 
 #: Options.qml:56
-#, fuzzy, kde-format
-#| msgctxt "GeoLineStringGraphicsItem|"
-#| msgid "Trolley Bus"
+#, kde-format
 msgctxt "@option:check"
 msgid "Trolley Bus"
 msgstr "Trolejbus"
@@ -334,12 +290,10 @@ msgid "Bridleways"
 msgstr "Cesty pre kone"
 
 #: PlacemarkDialog.qml:48
-#, fuzzy, kde-format
-#| msgctxt "Marble::GeoDataTreeModel|"
-#| msgid "Name"
+#, kde-format
 msgctxt "placeholder"
 msgid "No Name"
-msgstr "Názov"
+msgstr "Bez názvu"
 
 #: PlacemarkDialog.qml:168
 #, fuzzy, kde-format
@@ -350,16 +304,12 @@ msgid "Tags:"
 msgstr "Značky:"
 
 #: ProfileSelectorMenu.qml:124
-#, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Car (fastest)"
+#, kde-format
 msgid "Car (fastest)"
 msgstr "Autom (najrýchlejšie)"
 
 #: RouteEditorPage.qml:19
-#, fuzzy, kde-format
-#| msgctxt "Marble::ControlView|"
-#| msgid "Routing"
+#, kde-format
 msgctxt "@title"
 msgid "Routing"
 msgstr "Navigácia"
@@ -370,13 +320,13 @@ msgstr "Navigácia"
 #| msgid "Temperature"
 msgctxt "@label:textbox"
 msgid "Departure:"
-msgstr "Teplota"
+msgstr "%1 (odchod)"
 
 #: RouteEditorPage.qml:104
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@label:textbox"
 msgid "Arrival:"
-msgstr ""
+msgstr "%1 (príchod)"
 
 #: RouteEditorPage.qml:106
 #, kde-format
@@ -390,14 +340,12 @@ msgstr ""
 #| msgid "Alternative medicine"
 msgctxt "@label:listbox"
 msgid "Alternatives:"
-msgstr "Alternatívna medicína"
+msgstr "Alternatívy"
 
 #: SettingsDialog.qml:48
-#, fuzzy, kde-format
-#| msgctxt "SettingsDialog|"
-#| msgid "Network Settings"
+#, kde-format
 msgid "Network Settings"
-msgstr "Nastavenia siete"
+msgstr "Nastavenie siete"
 
 #: SettingsDialog.qml:53
 #, fuzzy, kde-format
@@ -407,12 +355,10 @@ msgid "Download Maps via WLAN only"
 msgstr "Prevziať mapy iba cez WLAN"
 
 #: ThemeConfigPage.qml:19
-#, fuzzy, kde-format
-#| msgctxt "CompassConfigWidget|"
-#| msgid "Theme"
+#, kde-format
 msgctxt "@title:window"
 msgid "Themes"
-msgstr "Téma"
+msgstr "Témy"
 
 #, fuzzy
 #~| msgctxt "RouteEditor|"
