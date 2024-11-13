@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-11-11 08:22+0200\n"
+"PO-Revision-Date: 2024-11-12 07:47+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -1038,10 +1038,9 @@ msgstr "גבול מנהלי"
 #. file data/maps/earth/vectorosm/vectorosm.dgml:194
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:200
-#, fuzzy
 msgctxt "DGML|"
 msgid "Bridge"
-msgstr "גבולות"
+msgstr "גשר"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:198
 #. ----------
@@ -1056,7 +1055,7 @@ msgstr "מנהרה"
 #, fuzzy
 msgctxt "DGML|"
 msgid "Forest"
-msgstr "גבולות"
+msgstr "יער"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:209
 #. ----------
@@ -1089,10 +1088,9 @@ msgstr "אזור מגורים"
 #. file data/maps/earth/vectorosm/vectorosm.dgml:225
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:231
-#, fuzzy
 msgctxt "DGML|"
 msgid "Tourist attraction"
-msgstr "מדינה"
+msgstr "מוקד עניין תיירותי"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:229
 #. ----------
@@ -1293,10 +1291,9 @@ msgstr "בית מרקחת"
 #. file data/maps/earth/vectorosm/vectorosm.dgml:353
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:359
-#, fuzzy
 msgctxt "DGML|"
 msgid "Veterinary"
-msgstr "מתחיל חיפוש"
+msgstr "שירותים וטרינריים"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:360
 #. ----------
@@ -1308,10 +1305,9 @@ msgstr "בית קולנוע"
 #. file data/maps/earth/vectorosm/vectorosm.dgml:364
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:370
-#, fuzzy
 msgctxt "DGML|"
 msgid "Theatre"
-msgstr "&שמור"
+msgstr "תיאטרון"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:371
 #. ----------
@@ -1386,18 +1382,16 @@ msgstr "מלון דרכים"
 #. file data/maps/earth/vectorosm/vectorosm.dgml:417
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:423
-#, fuzzy
 msgctxt "DGML|"
 msgid "Hospital"
-msgstr "עיר בירה"
+msgstr "בית חולים"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:421
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:427
-#, fuzzy
 msgctxt "DGML|"
 msgid "Fire station"
-msgstr "שם חלופי"
+msgstr "תחנת כיבוי אש"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:428
 #. ----------
@@ -1486,18 +1480,16 @@ msgstr "מאפייה"
 #. file data/maps/earth/vectorosm/vectorosm.dgml:482
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:488
-#, fuzzy
 msgctxt "DGML|"
 msgid "Books"
-msgstr "ייצא מפה"
+msgstr "ספרים"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:486
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:492
-#, fuzzy
 msgctxt "DGML|"
 msgid "Car"
-msgstr "&חפש"
+msgstr "מכונית"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:490
 #. ----------
@@ -1540,10 +1532,9 @@ msgid ""
 msgstr ""
 
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:12
-#, fuzzy
 msgctxt "DGML|"
 msgid "OpenStreetMap"
-msgstr "&פתיחת מפה..."
+msgstr "OpenStreetMap"
 
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:122
 msgctxt "DGML|"
@@ -4064,10 +4055,10 @@ msgid "No backrest"
 msgstr "בלי משענת"
 
 #: src/lib/marble/declarative/Placemark.cpp:358
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 km/h"
-msgstr "%1 מ'"
+msgstr "%1 קמ״ש"
 
 #: src/lib/marble/declarative/Placemark.cpp:364
 msgctxt "Marble::Placemark|Parking spaces are supervised by guards"
@@ -4080,22 +4071,22 @@ msgid "Not supervised"
 msgstr "ללא פיקוח"
 
 #: src/lib/marble/declarative/Placemark.cpp:372
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::Placemark|Parking spaces"
 msgid "%1 disabled spaces"
-msgstr "עקוב אחר GPS"
+msgstr "%1 מקומות לנכים"
 
 #: src/lib/marble/declarative/Placemark.cpp:376
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::Placemark|Parking spaces"
 msgid "%1 women spaces"
-msgstr "עקוב אחר GPS"
+msgstr "%1 מקומות לנשים"
 
 #: src/lib/marble/declarative/Placemark.cpp:380
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::Placemark|Parking spaces"
 msgid "%1 parent and child spaces"
-msgstr "עקוב אחר GPS"
+msgstr "%1 מקומות להורה וילד"
 
 #: src/lib/marble/declarative/Placemark.cpp:384
 #, qt-format
@@ -4528,22 +4519,19 @@ msgid "Has weather protection"
 msgstr ""
 
 #: src/lib/marble/declarative/Placemark.cpp:521
-#, fuzzy
 msgctxt "Marble::Placemark|A carriage is not protected from the weather"
 msgid "No weather protection"
-msgstr "שם המיקום"
+msgstr "אין הגנה מפני מזג אוויר"
 
 #: src/lib/marble/declarative/Placemark.cpp:522
-#, fuzzy
 msgctxt "Marble::Placemark|A carriage is heated"
 msgid "Is heated"
-msgstr "&שמור"
+msgstr "מחומם"
 
 #: src/lib/marble/declarative/Placemark.cpp:523
-#, fuzzy
 msgctxt "Marble::Placemark|A carriage is not heated"
 msgid "Not heated"
-msgstr "&שמור"
+msgstr "לא מחומם"
 
 #: src/lib/marble/declarative/Placemark.cpp:527
 msgctxt "Marble::Placemark|Bicycles can be transported"
@@ -4923,10 +4911,9 @@ msgid "Specify region"
 msgstr ""
 
 #: src/lib/marble/DownloadRegionDialog.cpp:134
-#, fuzzy
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Download Route"
-msgstr "ההורדה הסתיימה."
+msgstr "הורדת מסלול"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:136
 msgctxt "Marble::DownloadRegionDialog|"
@@ -6983,12 +6970,12 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:906
 msgctxt "GeoDataPlacemark|"
 msgid "Cable Car"
-msgstr ""
+msgstr "רכבל"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:908
 msgctxt "GeoDataPlacemark|"
 msgid "Gondola"
-msgstr ""
+msgstr "גונדולה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:910
 msgctxt "GeoDataPlacemark|"
@@ -7179,7 +7166,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:982
 msgctxt "GeoDataPlacemark|"
 msgid "Canal"
-msgstr ""
+msgstr "תעלה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:984
 #, fuzzy
@@ -7195,7 +7182,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:988
 msgctxt "GeoDataPlacemark|"
 msgid "Stream"
-msgstr ""
+msgstr "זרם"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:990
 msgctxt "GeoDataPlacemark|"
@@ -7205,14 +7192,14 @@ msgstr "נהר"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:992
 msgctxt "GeoDataPlacemark|"
 msgid "Weir"
-msgstr ""
+msgstr "מגלש"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:994
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:996
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:998
 msgctxt "GeoDataPlacemark|"
 msgid "Crosswalk"
-msgstr ""
+msgstr "מעבר חצייה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:1000
 msgctxt "GeoDataPlacemark|"
@@ -7222,12 +7209,12 @@ msgstr "חציית מסילת רכבת"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:1002
 msgctxt "GeoDataPlacemark|"
 msgid "Door"
-msgstr ""
+msgstr "דלת"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:1006
 msgctxt "GeoDataPlacemark|"
 msgid "Room"
-msgstr ""
+msgstr "חדר"
 
 #. See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Direction_terms
 #: src/lib/marble/geodata/data/LonLatParser.cpp:46
@@ -7284,30 +7271,29 @@ msgid "Ferry Route"
 msgstr "ייצא מפה"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:217
-#, fuzzy
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Train"
-msgstr "פני שטח"
+msgstr "רכבת"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:220
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Subway"
-msgstr ""
+msgstr "רכבת תחתית"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:223
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Tram"
-msgstr ""
+msgstr "חשמלית"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:226
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Bus"
-msgstr ""
+msgstr "אוטובוס"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:229
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Trolley Bus"
-msgstr ""
+msgstr "טרוליבוס"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:232
 #, fuzzy
@@ -7364,7 +7350,7 @@ msgstr "עקוב אחר GPS"
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:259
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Sled Trail"
-msgstr ""
+msgstr "מסלול מזחלת"
 
 #: src/lib/marble/geodata/handlers/dgml/DgmlMaximumTagHandler.cpp:35
 #, fuzzy, qt-format
@@ -7410,7 +7396,7 @@ msgstr "שם"
 #: src/lib/marble/GeoDataTreeModel.cpp:158
 msgctxt "Marble::GeoDataTreeModel|"
 msgid "Type"
-msgstr ""
+msgstr "סוג"
 
 #: src/lib/marble/GeoDataTreeModel.cpp:160
 msgctxt "Marble::GeoDataTreeModel|"
@@ -7425,7 +7411,7 @@ msgstr ""
 #: src/lib/marble/GeoDataTreeModel.cpp:232
 msgctxt "Marble::GeoDataTreeModel|"
 msgid "Playlist"
-msgstr ""
+msgstr "רשימת נגינה"
 
 #: src/lib/marble/GoToDialog.cpp:166
 #, qt-format
@@ -7441,7 +7427,7 @@ msgstr "בית"
 #: src/lib/marble/GoToDialog.cpp:358
 msgctxt "Marble::GoToDialog|"
 msgid "Address or search term"
-msgstr ""
+msgstr "כתובת או ביטוי לחיפוש"
 
 #: src/lib/marble/GoToDialog.cpp:436
 #, qt-format
@@ -7468,7 +7454,7 @@ msgstr ""
 #: src/lib/marble/GoToDialog.ui:93
 msgctxt "GoTo|"
 msgid "Browse"
-msgstr ""
+msgstr "עיון"
 
 #: src/lib/marble/GoToDialog.ui:103
 msgctxt "GoTo|"
@@ -7590,13 +7576,13 @@ msgstr "מקרא"
 #: src/lib/marble/LegendWidget.ui:21 src/lib/marble/NullLegendWidget.ui:21
 msgctxt "LegendWidget|"
 msgid "about:blank"
-msgstr ""
+msgstr "about:blank"
 
 #: src/lib/marble/MapThemeDownloadDialog.cpp:251
 #: src/lib/marble/MapThemeDownloadDialog.cpp:272
 msgctxt "Marble::MapItemDelegate|"
 msgid "Install"
-msgstr ""
+msgstr "התקנה"
 
 #: src/lib/marble/MapThemeDownloadDialog.cpp:252
 #: src/lib/marble/MapThemeDownloadDialog.cpp:290
@@ -7613,12 +7599,12 @@ msgstr "ביטול"
 #: src/lib/marble/MapThemeDownloadDialog.cpp:254
 msgctxt "Marble::MapItemDelegate|"
 msgid "Upgrade"
-msgstr ""
+msgstr "שדרוג"
 
 #: src/lib/marble/MapThemeDownloadDialog.cpp:277
 msgctxt "Marble::MapItemDelegate|"
 msgid "Update"
-msgstr ""
+msgstr "עדכון"
 
 #: src/lib/marble/MapThemeDownloadDialog.cpp:282
 msgctxt "Marble::MapItemDelegate|"
@@ -7920,16 +7906,14 @@ msgid "Please specify a map title."
 msgstr "נא לציין כותרת למפה."
 
 #: src/lib/marble/MapWizard.cpp:914 src/lib/marble/MapWizard.cpp:921
-#, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
-msgstr "שם"
+msgstr "שם המפה"
 
 #: src/lib/marble/MapWizard.cpp:914
-#, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
-msgstr "שם חלופי עבור המיקום."
+msgstr "נא לציין שם למפה."
 
 #: src/lib/marble/MapWizard.cpp:921
 #, qt-format
@@ -7939,10 +7923,9 @@ msgid ""
 msgstr ""
 
 #: src/lib/marble/MapWizard.cpp:928
-#, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
-msgstr "שם חלופי עבור המיקום."
+msgstr "נא לציין תמונת תצוגה מקדימה."
 
 #: src/lib/marble/MapWizard.cpp:1424
 msgctxt "Marble::MapWizard|"
@@ -8228,7 +8211,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:479
 msgctxt "MapWizard|"
 msgid "Color"
-msgstr ""
+msgstr "צבע"
 
 #: src/lib/marble/MapWizard.ui:498
 msgctxt "MapWizard|"
@@ -8289,7 +8272,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:573
 msgctxt "MapWizard|"
 msgid "Source Image:"
-msgstr ""
+msgstr "תמונת מקור:"
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
 msgctxt "MapWizard|"
@@ -8440,7 +8423,7 @@ msgstr "עריכה…"
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
 msgid "<b>Optional: Addition of a Map Key</b>"
-msgstr ""
+msgstr "<b>רשות: הוספת מפתח מפה</b>"
 
 #: src/lib/marble/MapWizard.ui:864
 msgctxt "MapWizard|"
@@ -8495,7 +8478,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:957
 msgctxt "MapWizard|"
 msgid "Map name goes here."
-msgstr ""
+msgstr "שם המפה לכאן."
 
 #: src/lib/marble/MapWizard.ui:970
 #, fuzzy
@@ -8506,7 +8489,7 @@ msgstr "שם"
 #: src/lib/marble/MapWizard.ui:977
 msgctxt "MapWizard|"
 msgid "Map theme goes here."
-msgstr ""
+msgstr "ערכת עיצוב המפה לכאן."
 
 #: src/lib/marble/MapWizard.ui:1002
 msgctxt "MapWizard|"
@@ -8527,7 +8510,7 @@ msgstr "הגלובוס הווירטואלי Marble"
 #: src/lib/marble/MarbleAboutDialog.cpp:74
 msgctxt "QObject|"
 msgid "<b>Active Development Team of Marble</b>"
-msgstr ""
+msgstr "<b>צוות הפיתוח הפעיל של Marble</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:75
 msgctxt "QObject|"
@@ -11209,10 +11192,9 @@ msgid ""
 msgstr ""
 
 #: src/lib/marble/projections/SphericalProjection.cpp:57
-#, fuzzy
 msgctxt "QObject|"
 msgid "Globe"
-msgstr "גלובוס ריק"
+msgstr "גלובוס"
 
 #: src/lib/marble/projections/SphericalProjection.cpp:62
 msgctxt "QObject|"
@@ -13760,16 +13742,14 @@ msgid "m"
 msgstr "מ׳"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfilePlotAxis.cpp:146
-#, fuzzy
 msgctxt "Marble::ElevationProfilePlotAxis|"
 msgid "mi"
-msgstr "מ'"
+msgstr "מייל"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfilePlotAxis.cpp:149
-#, fuzzy
 msgctxt "Marble::ElevationProfilePlotAxis|"
 msgid "ft"
-msgstr "שמאלה"
+msgstr "רגל"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfilePlotAxis.cpp:155
 msgctxt "Marble::ElevationProfilePlotAxis|"
@@ -13882,10 +13862,9 @@ msgid "mph"
 msgstr "ק\"מ"
 
 #: src/plugins/render/gpsinfo/GpsInfo.cpp:117
-#, fuzzy
 msgctxt "Marble::GpsInfo|"
 msgid "ft"
-msgstr "שמאלה"
+msgstr "רגל"
 
 #: src/plugins/render/gpsinfo/GpsInfo.cpp:124
 msgctxt "Marble::GpsInfo|"
@@ -13903,10 +13882,9 @@ msgid "kt"
 msgstr ""
 
 #: src/plugins/render/gpsinfo/GpsInfo.cpp:133
-#, fuzzy
 msgctxt "Marble::GpsInfo|"
 msgid "nm"
-msgstr "מ'"
+msgstr "מייל ימי"
 
 #: src/plugins/render/gpsinfo/GpsInfoPlugin.ui:29
 msgctxt "GpsInfoPlugin|"
@@ -14150,10 +14128,9 @@ msgid "m"
 msgstr "מ׳"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:233
-#, fuzzy
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "mi"
-msgstr "מ'"
+msgstr "מייל"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:243
 msgctxt "Marble::MapScaleFloatItem|"
@@ -14689,10 +14666,9 @@ msgstr ""
 
 #: src/plugins/render/photo/CoordinatesParser.cpp:34
 #: src/plugins/render/photo/FlickrParser.cpp:39
-#, fuzzy
 msgctxt "QObject|"
 msgid "The file is not a valid Flickr answer."
-msgstr "הקובץ הוא לא קובץ DGML 2.0 תקני"
+msgstr "הקובץ הוא לא תגובה תקנית של Flickr."
 
 #: src/plugins/render/photo/PhotoConfigWidget.ui:14
 msgctxt "PhotoConfigWidget|"
@@ -15418,10 +15394,9 @@ msgstr ""
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:492
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:540
-#, fuzzy
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Other"
-msgstr "0 מ' (מים)"
+msgstr "אחר"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:495
 msgctxt "Marble::SatellitesPlugin|"
@@ -15457,10 +15432,9 @@ msgid "Navy Navigation Satellite System (NNSS)"
 msgstr "הצג סרגל ניווט"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:512
-#, fuzzy
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Russian LEO Navigation"
-msgstr "ניווט"
+msgstr "ניווט LEO רוסי"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:515
 msgctxt "Marble::SatellitesPlugin|"
@@ -15758,10 +15732,9 @@ msgid "Show &Constellations"
 msgstr "הגדר &מיקום בית"
 
 #: src/plugins/render/stars/StarsPlugin.cpp:1391
-#, fuzzy
 msgctxt "Marble::StarsPlugin|"
 msgid "Show &Sun and Moon"
-msgstr "הצג רשת"
+msgstr "הצגת ה&שמש והירח"
 
 #: src/plugins/render/stars/StarsPlugin.cpp:1394
 #, fuzzy
@@ -17472,27 +17445,27 @@ msgstr ""
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:74
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
 msgid "Car (fastest way)"
-msgstr ""
+msgstr "מכונית (הדרך המהירה ביותר)"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:75
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
 msgid "Car (shortest way)"
-msgstr ""
+msgstr "מכונית (הדרך הקצרה ביותר)"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:76
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
 msgid "Pedestrian (shortest way)"
-msgstr ""
+msgstr "הליכה (הדרך הקצרה ביותר)"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:77
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
 msgid "Bicycle (shortest track)"
-msgstr ""
+msgstr "אופניים (המסלול הקצר ביותר)"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:78
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
 msgid "Bicycle (Mountainbike)"
-msgstr ""
+msgstr "אופניים (מסלול הרים)"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:79
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
@@ -17512,12 +17485,12 @@ msgstr ""
 #: src/plugins/runner/osm/OsmPlugin.cpp:18
 msgctxt "Marble::OsmPlugin|"
 msgid "Osm File Parser"
-msgstr ""
+msgstr "מפענח קובצי Osm"
 
 #: src/plugins/runner/osm/OsmPlugin.cpp:33
 msgctxt "Marble::OsmPlugin|"
 msgid "Create GeoDataDocument from Osm Files"
-msgstr ""
+msgstr "יצירת GeoDataDocument מקובצי Osm"
 
 #: src/plugins/runner/osm/OsmPlugin.cpp:49
 msgctxt "Marble::OsmPlugin|"
@@ -17527,7 +17500,7 @@ msgstr "נתוני OpenStreetMap"
 #: src/plugins/runner/pn2/Pn2Plugin.cpp:18
 msgctxt "Marble::Pn2Plugin|"
 msgid "Pn2 File Parser"
-msgstr ""
+msgstr "מפענח קובצי Pn2"
 
 #: src/plugins/runner/pn2/Pn2Plugin.cpp:33
 msgctxt "Marble::Pn2Plugin|"
