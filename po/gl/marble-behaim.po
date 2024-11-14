@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-04 00:36+0000\n"
-"PO-Revision-Date: 2024-09-28 13:33+0200\n"
+"PO-Revision-Date: 2024-11-13 21:46+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 24.08.3\n"
 
 #: About.qml:9
 #, kde-format
@@ -48,11 +48,17 @@ msgid ""
 "Ritter Martin Behaim nach den ältesten vorhandenen Urkunden\", Nuremberg "
 "1853. CC BY-SA 3.0."
 msgstr ""
+"Mapa dixitalizado baseado en goras ortofotográficas de TU Vienna, 1990. O "
+"Museo Nacional Xermánico e a Universidade Friedrich-Alexander en Erlangen-"
+"Nürnberg, CC BY-SA 3.0. Mapa de Ghillany baseado en dous globos planos "
+"fornecidos como suplementos de mapa da «Geschichte des Seefahrers Ritter "
+"Martin Behaim nach den ältesten vorhandenen Urkunden» de F.W. Ghillany, "
+"Nuremberg, 1853. CC BY-SA 3.0."
 
 #: main.cpp:32
 #, kde-format
 msgid "Marble Behaim"
-msgstr ""
+msgstr "Behaim de Marble"
 
 #: main.cpp:34
 #, kde-format
@@ -60,11 +66,13 @@ msgid ""
 "Digital reproduction of a globe crafted at the time of Columbus' first sea "
 "travel to the west."
 msgstr ""
+"Reprodución dixital dun globo creado na época da primeira viaxe de Colón a "
+"América."
 
 #: main.cpp:36
 #, kde-format
 msgid "© KDE Community"
-msgstr ""
+msgstr "© Comunidade KDE"
 
 #: main.cpp:37
 #, kde-format
@@ -77,108 +85,115 @@ msgid ""
 "German.</p><p>Please see <a href=\"https://en.wikipedia.org/wiki/Erdapfel"
 "\">Wikipedia: Erdapfel</a> for further information about the Behaim globe."
 msgstr ""
+"<p>Erdapfel de Martin Behaim</p><p>O globo terráqueo máis antigo. Martin "
+"Behaim e o seu equipo crearon o globo arredor de 1492, na época na que <a "
+"href=\"https://gl.wikipedia.org/wiki/Cristovo_Col%C3%B3n\">Colón</a> viaxou "
+"por vez primeira a América. É por iso que América non aparece no globo. "
+"Tamén hai inscricións detalladas en alemán moderno temperán.</p><p>Consulte "
+"<a href=\"https://gl.wikipedia.org/wiki/Erdapfel\">«Erdapfel» na Galipedia</"
+"a> para máis información sobre o globo de Behaim."
 
 #: main.cpp:51
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dennis Nienhüser"
-msgstr ""
+msgstr "Dennis Nienhüser"
 
 #: main.cpp:51
 #, kde-format
 msgctxt "@info:credit"
 msgid "Author"
-msgstr ""
+msgstr "Autoría"
 
 #: main.cpp:53
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "Adrián Chaves (Gallaecio)"
 
 #: main.cpp:53
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "adrian@chaves.io"
 
 #: MainScreen.qml:62
 #, kde-format
 msgctxt "@title"
 msgid "Marble"
-msgstr ""
+msgstr "Marble"
 
 #: MainScreen.qml:80
 #, kde-format
 msgctxt "@title:group"
 msgid "Globe Settings"
-msgstr ""
+msgstr "Configuración do globo"
 
 #: MainScreen.qml:86
 #, kde-format
 msgctxt "@option:check"
 msgid "Show Behaim places"
-msgstr ""
+msgstr "Amosar os lugares de Behaim."
 
 #: MainScreen.qml:91
 #, kde-format
 msgctxt "@option:check"
 msgid "Show texts and illustrations"
-msgstr ""
+msgstr "Amosar textos e ilustracións."
 
 #: MainScreen.qml:96
 #, kde-format
 msgctxt "@option:check"
 msgid "Show the accurate coastline"
-msgstr ""
+msgstr "Amosar a costa en detalle."
 
 #: MainScreen.qml:102
 #, kde-format
 msgctxt "@title:group"
 msgid "Globe Variant"
-msgstr ""
+msgstr "Variante do globo"
 
 #: MainScreen.qml:111
 #, kde-format
 msgctxt "@option:radio"
 msgid "Original (1492)"
-msgstr ""
+msgstr "Orixinal (1492)"
 
 #: MainScreen.qml:113
 #, kde-format
 msgid "Digital imagery taken directly from the original Behaim globe."
-msgstr ""
+msgstr "Imaxe dixital tomada directamente do globo orixinal de Behaim."
 
 #: MainScreen.qml:124
 #, kde-format
 msgctxt "@option:radio"
 msgid "Ghillany (1853)"
-msgstr ""
+msgstr "Ghillany (1853)"
 
 #: MainScreen.qml:125
 #, kde-format
 msgid "A (rough) facsimile created by Friedrich Wilhelm Ghillany in 1853."
-msgstr ""
+msgstr "Un facsímile aproximado creado por Friedrich Wilhelm Ghillany en 1853."
 
 #: MainScreen.qml:136
 #, kde-format
 msgctxt "@option:radio"
 msgid "Ravenstein (1908)"
-msgstr ""
+msgstr "Ravenstein (1908)"
 
 #: MainScreen.qml:137
 #, kde-format
 msgid "A (rough) facsimile created by Ernest George Ravenstein in 1908."
-msgstr ""
+msgstr "Un facsímile aproximado creado por Ernest George Ravenstein en 1908."
 
 #: MainScreen.qml:152
 #, kde-format
 msgctxt "@title:window"
 msgid "Behaim Globe"
-msgstr ""
+msgstr "Globo de Behaim"
 
 #: MainScreen.qml:160
 #, kde-format
 msgctxt "@action:button"
 msgid "Information"
-msgstr ""
+msgstr "Información"
