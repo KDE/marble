@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-11-12 07:47+0200\n"
+"PO-Revision-Date: 2024-11-15 17:03+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -13907,10 +13907,9 @@ msgid "Precision"
 msgstr "דיוק"
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:14
-#, fuzzy
 msgctxt "GraticuleConfigWidget|"
 msgid "Coordinate Grid Plugin"
-msgstr "רשת קואורדינטות"
+msgstr "תוסף רשת נקודות ציון"
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:20
 msgctxt "GraticuleConfigWidget|"
@@ -13923,10 +13922,9 @@ msgid "&Grid:"
 msgstr "&רשת:"
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:497
-#, fuzzy
 msgctxt "GraticuleConfigWidget|"
 msgid "Color of the coordinate grid."
-msgstr "רשת קואורדינטות"
+msgstr "צבע רשת נקודות הציון."
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:922
 msgctxt "GraticuleConfigWidget|"
@@ -13944,10 +13942,9 @@ msgid "&Equator:"
 msgstr ""
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1379
-#, fuzzy
 msgctxt "GraticuleConfigWidget|"
 msgid "Color of the equator."
-msgstr "תפקיד המיקום."
+msgstr "צבע קו המשווה."
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1392
 msgctxt "GraticuleConfigWidget|"
@@ -13970,10 +13967,9 @@ msgid "&Numerical Labels"
 msgstr ""
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1425
-#, fuzzy
 msgctxt "GraticuleConfigWidget|"
 msgid "Show numerical Labels."
-msgstr "הצג נהרות/אגמים"
+msgstr "הצגת תוויות מספריות."
 
 #: src/plugins/render/graticule/GraticulePlugin.cpp:71
 #, fuzzy
@@ -15341,10 +15337,9 @@ msgid "Communications Satellites"
 msgstr "לוייני תקשורת"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:462
-#, fuzzy
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Geostationary"
-msgstr "מתחיל חיפוש"
+msgstr "גאוסטציונרי"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:465
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
@@ -15377,10 +15372,9 @@ msgid "Orbcomm"
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:483
-#, fuzzy
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Globalstar"
-msgstr "&חפש"
+msgstr "גלובלסטאר"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:486
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
