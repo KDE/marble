@@ -11,14 +11,14 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-25 00:37+0000\n"
-"PO-Revision-Date: 2024-11-09 12:21+0200\n"
+"PO-Revision-Date: 2024-11-23 15:10+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.08.1\n"
+"X-Generator: Lokalize 24.08.3\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
 
@@ -90,7 +90,7 @@ msgstr "שילוב מול OpenStreetMap, מאתר שמות ב־OSM, ניהול �
 #: kdemain.cpp:97
 #, kde-format
 msgid "Florian E&szlig;er"
-msgstr ""
+msgstr "פלוריאן אסר"
 
 #: kdemain.cpp:97
 #, kde-format
@@ -100,7 +100,7 @@ msgstr "פרופיל עילוי"
 #: kdemain.cpp:98
 #, kde-format
 msgid "Wes Hardaker"
-msgstr ""
+msgstr "וס הרדאקר"
 
 #: kdemain.cpp:98
 #, kde-format
@@ -110,7 +110,7 @@ msgstr "תוסף APRS"
 #: kdemain.cpp:99 kdemain.cpp:153
 #, kde-format
 msgid "Bastian Holst"
-msgstr ""
+msgstr "בסטיאן הולסט"
 
 #: kdemain.cpp:99
 #, kde-format
@@ -120,7 +120,7 @@ msgstr "תמיכה בשירותים מקוונים"
 #: kdemain.cpp:100 kdemain.cpp:123
 #, kde-format
 msgid "Guillaume Martres"
-msgstr ""
+msgstr "גיום מאטרה"
 
 #: kdemain.cpp:100
 #, kde-format
@@ -130,7 +130,7 @@ msgstr "לוויינים"
 #: kdemain.cpp:101 kdemain.cpp:119
 #, kde-format
 msgid "Rene Kuettner"
-msgstr ""
+msgstr "רנה קוטנר"
 
 #: kdemain.cpp:101
 #, kde-format
@@ -150,7 +150,7 @@ msgstr "שילוב מול פלזמה, תיקוני תקלות"
 #: kdemain.cpp:103
 #, kde-format
 msgid "Dennis Nienhüser"
-msgstr ""
+msgstr "דניס נינהויזר"
 
 #: kdemain.cpp:103
 #, kde-format
@@ -200,7 +200,7 @@ msgstr "מפתח ליבה ומתחזק משנה"
 #: kdemain.cpp:111
 #, kde-format
 msgid "Henry de Valence"
-msgstr ""
+msgstr "הנרי דה ואלנס"
 
 #: kdemain.cpp:111
 #, kde-format
@@ -220,7 +220,7 @@ msgstr "תוספי רשת"
 #: kdemain.cpp:113
 #, kde-format
 msgid "Harshit Jain"
-msgstr ""
+msgstr "הארשיט ג׳אין"
 
 #: kdemain.cpp:113
 #, kde-format
@@ -250,25 +250,25 @@ msgstr "מפות היסטוריות"
 #: kdemain.cpp:116
 #, kde-format
 msgid "Médéric Boquien"
-msgstr ""
+msgstr "מדריק בוקווין"
 
 #: kdemain.cpp:116
 #, kde-format
 msgid "Astronomical Observatories"
-msgstr ""
+msgstr "מצפי כוכבים"
 
 #: kdemain.cpp:120
 #, kde-format
 msgid ""
 "ESA Summer of Code in Space 2012 Project: Visualization of planetary "
 "satellites"
-msgstr ""
+msgstr "מיזם של ESA Summer of Code בחלל 2012: המחשה של לויינים טבעיים"
 
 #: kdemain.cpp:124
 #, kde-format
 msgid ""
 "ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
-msgstr ""
+msgstr "מיזם של ESA Summer of Code בחלל 2011: המחשה של מסלולי לוויינים"
 
 #: kdemain.cpp:129
 #, kde-format
@@ -303,7 +303,7 @@ msgstr "מיזם של Google Summer of Code 2010: סימניות"
 #: kdemain.cpp:141
 #, kde-format
 msgid "Harshit Jain "
-msgstr ""
+msgstr "הארשיט ג׳אין"
 
 #: kdemain.cpp:142
 #, kde-format
@@ -383,7 +383,7 @@ msgstr "מיזם Google Summer of Code 2007: תמיכה ב־KML ל־Marble"
 #: kdemain.cpp:179
 #, kde-format
 msgid "Simon Schmeisser"
-msgstr ""
+msgstr "סיימון שמייסר"
 
 #: kdemain.cpp:179 kdemain.cpp:180 kdemain.cpp:181 kdemain.cpp:182
 #: kdemain.cpp:183 kdemain.cpp:184 kdemain.cpp:185 kdemain.cpp:186
@@ -519,12 +519,12 @@ msgstr "ראלף הבאקר"
 #: kdemain.cpp:203
 #, kde-format
 msgid "Steffen Joeris"
-msgstr ""
+msgstr "שטפן יוריס"
 
 #: kdemain.cpp:204
 #, kde-format
 msgid "Marcus Czeslinski"
-msgstr ""
+msgstr "מרקוס צ׳סלינקי"
 
 #: kdemain.cpp:205
 #, kde-format
@@ -675,12 +675,12 @@ msgstr "להשתמש בממשק שממוטב לרזולוציות גבוהות"
 #: kdemain.cpp:261
 #, kde-format
 msgid "Show map at given lat lon <coordinates>"
-msgstr ""
+msgstr "הצגת מפה ב<נקודות ציון> לפי קו אורך/גובה האלה"
 
 #: kdemain.cpp:263
 #, kde-format
 msgid "Show map at given geo <uri>"
-msgstr ""
+msgstr "הצגת מפה ב<כתובת מלאה> נתונה"
 
 #: kdemain.cpp:265
 #, kde-format
