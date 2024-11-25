@@ -30,6 +30,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QRegularExpression>
 
 #include "GeoDataIconStyle.h"
 #include "GeoDataLabelStyle.h"
@@ -39,6 +40,16 @@
 
 namespace Marble
 {
+
+/* Match the following types of colour strings:
+ * - RRGGBB (e.g. "c3c6d2")
+ * - #RRGGBB (e.g. "#ff557f")
+ * - RGB (e.g. "0a9")
+ * - #RGB (e.g. "#ff7")
+ * Where R, G and B are hexadecimal digits, case insensitive.
+ * See https://github.com/mapbox/simplestyle-spec/blob/master/1.1.0
+ */
+static const QRegularExpression colorRegex("^\\#?(?<color>[[:xdigit:]]{3}|[[:xdigit:]]{6})$", QRegularExpression::CaseInsensitiveOption);
 
 JsonParser::JsonParser()
     : m_document(nullptr)
@@ -250,10 +261,7 @@ bool JsonParser::parseGeoJsonTopLevel(const QJsonObject &jsonObject)
                 }
 
             } else if (propertyKey == QStringLiteral("marker-color")) {
-                // Even though the Simplestyle spec allows colors to omit the leading "#", this
-                // implementation assumes it is always present, as this then allows named colors
-                // understood by QColor as an extension
-                auto color = QColor(propertyValue);
+                auto color = parseSimpleStyleColor(propertyValue);
                 if (color.isValid()) {
                     iconStyle.setColor(color); // Currently ignored by Marble
                 } else {
@@ -514,4 +522,14 @@ bool JsonParser::parseGeoJsonSubLevel(const QJsonObject &jsonObject, QList<GeoDa
     }
 }
 
+QColor JsonParser::parseSimpleStyleColor(const QString &hexCode)
+{
+    QRegularExpressionMatch match = colorRegex.match(hexCode);
+
+    if (match.hasMatch()) {
+        return QColor("#" + match.captured("color"));
+    } else {
+        return QColor();
+    }
+}
 }

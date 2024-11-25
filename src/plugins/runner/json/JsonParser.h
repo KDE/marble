@@ -11,6 +11,7 @@
 class QIODevice;
 class QJsonObject;
 
+#include <QColor>
 #include <QList>
 
 namespace Marble
@@ -66,6 +67,13 @@ private:
      * @return true if parsing of the object was successful
      */
     bool parseGeoJsonSubLevel(const QJsonObject &, QList<GeoDataGeometry *> &, bool &);
+
+    /**
+     * @brief parse a hex colour code into a QColor according to the SimpleStyle spec
+     * @param hexCode  the hex colour code to parse
+     * @return the parsed QColor if successful, otherwise an empty QColor that won't be isValid()
+     */
+    QColor parseSimpleStyleColor(const QString &);
 };
 
 }
