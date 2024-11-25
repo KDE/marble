@@ -7,11 +7,14 @@ if(NOT OSMCONVERT_EXECUTABLE)
     message(STATUS "Building external osmconvert for tile generator tests!")
     FetchContent_Declare(osm-c-tools
         GIT_REPOSITORY https://gitlab.com/osm-c-tools/osmctools.git
-)
+    )
     FetchContent_Populate(osm-c-tools)
     add_executable(osmconvert ${osm-c-tools_SOURCE_DIR}/src/osmconvert.c)
     set_target_properties(osmconvert PROPERTIES C_STANDARD 99)
     target_link_libraries(osmconvert PRIVATE ZLIB::ZLIB)
+else()
+    add_executable(osmconvert IMPORTED)
+    set_target_properties(osmconvert PROPERTIES IMPORTED_LOCATION ${OSMCONVERT_EXECUTABLE})
 endif()
 
 add_test(NAME tirex-backend-test
