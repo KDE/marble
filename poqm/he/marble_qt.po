@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-11-23 15:26+0200\n"
+"PO-Revision-Date: 2024-11-25 22:39+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -14109,12 +14109,12 @@ msgstr "מרחק "
 #: src/plugins/render/measure/MeasureConfigDialog.ui:70
 msgctxt "MeasureConfigDialog|"
 msgid "Bearing"
-msgstr ""
+msgstr "תכווין"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:80
 msgctxt "MeasureConfigDialog|"
 msgid "Bearing Change"
-msgstr ""
+msgstr "שינוי תכווין"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:90
 msgctxt "MeasureConfigDialog|"
@@ -14175,6 +14175,8 @@ msgid ""
 "Circumference:\n"
 "%1"
 msgstr ""
+"קו מקיף:\n"
+"%1"
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:497
 #, qt-format
@@ -14183,16 +14185,18 @@ msgid ""
 "Perimeter:\n"
 "%1"
 msgstr ""
+"היקף:\n"
+"%1"
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:554
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Polygon Ruler"
-msgstr ""
+msgstr "סרגל מצולע"
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:556
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Circle Ruler"
-msgstr ""
+msgstr "סרגל עיגול"
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:559
 #, qt-format
@@ -14268,17 +14272,17 @@ msgstr "כפתור מקום נוכחי"
 #: src/plugins/render/navigation/NavigationFloatItem.cpp:234
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Home Button"
-msgstr ""
+msgstr "כפתור בית"
 
 #: src/plugins/render/notes/NotesItem.cpp:97
 msgctxt "Marble::NotesItem|The author name is not known"
 msgid "anonymous"
-msgstr ""
+msgstr "אלמוני"
 
 #: src/plugins/render/notes/NotesPlugin.cpp:34
 msgctxt "Marble::NotesPlugin|"
 msgid "OSM Mapper Notes"
-msgstr ""
+msgstr "הערות מיפוי ב־OSM"
 
 #: src/plugins/render/notes/NotesPlugin.cpp:64
 msgctxt "Marble::NotesPlugin|"
@@ -14288,12 +14292,12 @@ msgstr "הצגת הערות הממפים ב־OpenStreetMap."
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:14
 msgctxt "OpenCachingCacheDialog|"
 msgid "Dialog"
-msgstr ""
+msgstr "חלונית"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:24
 msgctxt "OpenCachingCacheDialog|"
 msgid "General"
-msgstr ""
+msgstr "כללי"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:36
 msgctxt "OpenCachingCacheDialog|"
@@ -14303,12 +14307,12 @@ msgstr "שם המטמון:"
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:56
 msgctxt "OpenCachingCacheDialog|"
 msgid "User name:"
-msgstr ""
+msgstr "שם משתמש:"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:76
 msgctxt "OpenCachingCacheDialog|"
 msgid "Type:"
-msgstr ""
+msgstr "סוג:"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:96
 msgctxt "OpenCachingCacheDialog|"
@@ -14323,12 +14327,12 @@ msgstr "מדינה:"
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:136
 msgctxt "OpenCachingCacheDialog|"
 msgid "Size:"
-msgstr ""
+msgstr "גודל:"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:156
 msgctxt "OpenCachingCacheDialog|"
 msgid "Difficulty:"
-msgstr ""
+msgstr "דרגת קושי:"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:176
 msgctxt "OpenCachingCacheDialog|"
@@ -14348,17 +14352,17 @@ msgstr "קו רוחב:"
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:236
 msgctxt "OpenCachingCacheDialog|"
 msgid "Date hidden:"
-msgstr ""
+msgstr "תאריך הסתרה:"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:256
 msgctxt "OpenCachingCacheDialog|"
 msgid "Date created:"
-msgstr ""
+msgstr "תאריך יצירה:"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:276
 msgctxt "OpenCachingCacheDialog|"
 msgid "Date last modified:"
-msgstr ""
+msgstr "תאריך השינוי האחרון:"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:291
 msgctxt "OpenCachingCacheDialog|"
@@ -14368,7 +14372,7 @@ msgstr "תיאור"
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:308
 msgctxt "OpenCachingCacheDialog|"
 msgid "Log"
-msgstr ""
+msgstr "תיעוד"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:346
 msgctxt "OpenCachingCacheDialog|"
@@ -14378,32 +14382,32 @@ msgstr "הקודם"
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:356
 msgctxt "OpenCachingCacheDialog|"
 msgid "Next"
-msgstr ""
+msgstr "הבא"
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:14
 msgctxt "OpenCachingConfigWidget|"
 msgid "Dialog"
-msgstr ""
+msgstr "חלונית"
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:20
 msgctxt "OpenCachingConfigWidget|"
 msgid "Filter"
-msgstr ""
+msgstr "מסנן"
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:26
 msgctxt "OpenCachingConfigWidget|"
 msgid "Maximum number of results:"
-msgstr ""
+msgstr "מספר התוצאות המרבי:"
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:36
 msgctxt "OpenCachingConfigWidget|"
 msgid "Minimum difficulty:"
-msgstr ""
+msgstr "דרגת הקושי המזערית:"
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:53
 msgctxt "OpenCachingConfigWidget|"
 msgid "Maximum difficulty:"
-msgstr ""
+msgstr "דרגת הקושי המרבית:"
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:70
 msgctxt "OpenCachingConfigWidget|"
@@ -14413,7 +14417,7 @@ msgstr "מרחק מרבי:"
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:87
 msgctxt "OpenCachingConfigWidget|"
 msgid "Time Range"
-msgstr ""
+msgstr "טווח זמן"
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:93
 msgctxt "OpenCachingConfigWidget|"
@@ -14423,52 +14427,52 @@ msgstr "התחלה:"
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:104
 msgctxt "OpenCachingConfigWidget|"
 msgid "End:"
-msgstr ""
+msgstr "סוף:"
 
 #: src/plugins/render/opencaching/OpenCachingItem.cpp:173
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Cache name</td>"
-msgstr ""
+msgstr "<tr><td align=\"left\">שם המטמון</td>"
 
 #: src/plugins/render/opencaching/OpenCachingItem.cpp:174
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">User name</td><td>"
-msgstr ""
+msgstr "<tr><td align=\"left\">שם משתמש</td><td>"
 
 #: src/plugins/render/opencaching/OpenCachingItem.cpp:177
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Date hidden</td><td>"
-msgstr ""
+msgstr "<tr><td align=\"left\">תאריך הסתרה</td><td>"
 
 #: src/plugins/render/opencaching/OpenCachingItem.cpp:179
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Difficulty</td><td>"
-msgstr ""
+msgstr "<tr><td align=\"left\">דרגת קושי</td><td>"
 
 #: src/plugins/render/opencaching/OpenCachingItem.cpp:180
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Size</td><td>"
-msgstr ""
+msgstr "<tr><td align=\"left\">גודל</td><td>"
 
 #: src/plugins/render/opencaching/OpenCachingPlugin.cpp:23
 msgctxt "Marble::OpenCachingPlugin|"
 msgid "Cache positions by opencaching.de."
-msgstr ""
+msgstr "שמירת מקומות במטמון על ידי opencaching.de"
 
 #: src/plugins/render/opencaching/OpenCachingPlugin.cpp:46
 msgctxt "Marble::OpenCachingPlugin|"
 msgid "OpenCaching"
-msgstr ""
+msgstr "OpenCaching"
 
 #: src/plugins/render/opencaching/OpenCachingPlugin.cpp:51
 msgctxt "Marble::OpenCachingPlugin|"
 msgid "&OpenCaching"
-msgstr ""
+msgstr "&OpenCaching"
 
 #: src/plugins/render/opencaching/OpenCachingPlugin.cpp:56
 msgctxt "Marble::OpenCachingPlugin|"
 msgid "Shows caches from OpenCaching.de on the screen."
-msgstr ""
+msgstr "הצגת מטמונים מ־OpenCaching.de על המסך."
 
 #: src/plugins/render/opendesktop/OpenDesktopConfigWidget.ui:14
 msgctxt "OpenDesktopConfigWidget|"
@@ -14478,17 +14482,17 @@ msgstr "הגדרת תוסף OpenDesktop"
 #: src/plugins/render/opendesktop/OpenDesktopConfigWidget.ui:22
 msgctxt "OpenDesktopConfigWidget|"
 msgid "Number of displayed items on the screen:"
-msgstr ""
+msgstr "מספר הפריטים שמופיעים על המסך:"
 
 #: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:46
 msgctxt "Marble::OpenDesktopPlugin|"
 msgid "OpenDesktop Items"
-msgstr ""
+msgstr "פריטי OpenDesktop"
 
 #: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:51
 msgctxt "Marble::OpenDesktopPlugin|"
 msgid "&OpenDesktop Community"
-msgstr ""
+msgstr "&קהילת OpenDesktop"
 
 #: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:66
 msgctxt "Marble::OpenDesktopPlugin|"
@@ -14540,7 +14544,7 @@ msgstr "&כוכב לכת:"
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:71
 msgctxt "OverviewMapConfigWidget|"
 msgid "&Size:"
-msgstr ""
+msgstr "&גודל:"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:97
 msgctxt "OverviewMapConfigWidget|"
@@ -14560,7 +14564,7 @@ msgstr "שם קובץ"
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:194
 msgctxt "OverviewMapConfigWidget|"
 msgid "C&olors"
-msgstr ""
+msgstr "&צבעים"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:200
 msgctxt "OverviewMapConfigWidget|"
