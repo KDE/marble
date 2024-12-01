@@ -1,14 +1,14 @@
 # Translation for marble_qt.po to Euskara/Basque (eu)
-# Copyrigth (C) 2021-2023 This file is copyright.
+# Copyrigth (C) 2021-2024 This file is copyright.
 # This file is distributed under the same licenses as the original file.
-# KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
+# SPDX-FileCopyrightText: 2024 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2021, 2023.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2021, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2023-02-03 23:56+0100\n"
+"PO-Revision-Date: 2024-11-30 21:30+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 24.08.3\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
 msgctxt "DGML|"
@@ -38,7 +38,7 @@ msgstr ""
 #. file data/maps/moon/clementine/clementine.dgml:111
 msgctxt "DGML|"
 msgid "Explore the Moon"
-msgstr "Miatu ilargia"
+msgstr "Ilargia esploratu"
 
 #. file data/maps/moon/clementine/clementine.dgml:118
 msgctxt "DGML|"
@@ -53,12 +53,12 @@ msgstr "Kraterrak"
 #. file data/maps/moon/clementine/clementine.dgml:147
 msgctxt "DGML|"
 msgid "Maria"
-msgstr "Itsasoa"
+msgstr "Maria"
 
 #. file data/maps/moon/clementine/clementine.dgml:151
 msgctxt "DGML|"
 msgid "Other features"
-msgstr "Beste elementu geografiko batzuk"
+msgstr "Beste ezaugarri batzuk"
 
 #. file data/maps/moon/clementine/clementine.dgml:169
 #. ----------
@@ -173,7 +173,7 @@ msgstr "Vallis, harana"
 #. file data/maps/moon/clementine/clementine.dgml:163
 msgctxt "DGML|"
 msgid "Other"
-msgstr "Bestelakoak"
+msgstr "Bestelakoa"
 
 #. file data/maps/moon/clementine/clementine.dgml:173
 msgctxt "DGML|"
@@ -183,7 +183,7 @@ msgstr "Polo selenografikoa"
 #. file data/maps/earth/temp-july/temp-july.dgml:11
 msgctxt "DGML|"
 msgid "Temperature (July)"
-msgstr "Tenperatura (Uztailan)"
+msgstr "Tenperatura (Uztaila)"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:21
 msgctxt "DGML|"
@@ -279,7 +279,7 @@ msgstr "Tenperatura"
 #. file data/maps/sky/nightsky/nightsky.dgml:125
 msgctxt "DGML|"
 msgid "Mountain"
-msgstr "mendia"
+msgstr "Mendia"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:173
 #. ----------
@@ -386,7 +386,7 @@ msgstr "Aireportua"
 #. file data/maps/sky/nightsky/nightsky.dgml:150
 msgctxt "DGML|"
 msgid "Shipwreck"
-msgstr "Ontzia hondoratzea"
+msgstr "Ontzi-hondakina"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:198
 #. ----------
@@ -552,7 +552,7 @@ msgstr "-69&deg;C"
 #. file data/maps/earth/citylights/citylights.dgml:11
 msgctxt "DGML|"
 msgid "Earth at Night"
-msgstr "Lurra gauean"
+msgstr "Lurra gauez"
 
 #. file data/maps/earth/citylights/citylights.dgml:21
 msgctxt "DGML|"
@@ -561,9 +561,9 @@ msgid ""
 "Defense Meteorological Satellite Program (DMSP) Operational Linescan System "
 "(OLS)."
 msgstr ""
-"<i>Lurreko hirietako argien</i> irudi hau DMSPko (Defentsako Meteorologia "
-"Satelite Programa / «Defense Meteorological Satellite Program») "
-"OLSaren(Operational Linescan System) datuekin sortu da."
+"<i>Lurreko hirietako argien</i> irudi hau DMSPren («Defense Meteorological "
+"Satellite Program» / Defentsako Meteorologia Satelite Programa) OLSaren "
+"(Operational Linescan System) datuekin sortu zen."
 
 #. file data/maps/earth/citylights/citylights.dgml:154
 #. ----------
@@ -584,7 +584,7 @@ msgstr "Populatutako lekuak"
 #. file data/maps/earth/citylights/citylights.dgml:162
 msgctxt "DGML|"
 msgid "Light terrain"
-msgstr "Lur argia"
+msgstr "Lurzoru argia"
 
 #. file data/maps/earth/citylights/citylights.dgml:166
 msgctxt "DGML|"
@@ -611,7 +611,7 @@ msgid ""
 "relief.</p>"
 msgstr ""
 "<p><i>Topografia-mapa klasiko</i> bat.</p><p>Bektore-lerroak erabiltzen ditu "
-"itsasertzeko lerroak, herrialdeetako mugak eta abar markatzeko eta bit-mapa "
+"itsasertz lerroak, herrialdeetako mugak eta abar markatzeko eta bit-mapa "
 "grafikoak altueraren erliebeak sortzeko.</p>"
 
 #. file data/maps/earth/srtm/srtm.dgml:201
@@ -787,7 +787,7 @@ msgstr ""
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:112
 msgctxt "DGML|"
 msgid "Explore the Earth"
-msgstr "Esploratu Lurra"
+msgstr "Lurra esploratu"
 
 #. file data/maps/earth/vectorosm-dev/vectorosm-dev.dgml:87
 #. ----------
@@ -830,7 +830,7 @@ msgstr "OSM bit-mapa lauzak"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:125
 msgctxt "DGML|"
 msgid "Transportation"
-msgstr "Garraioa"
+msgstr "Garraioak"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:202
 #. ----------
@@ -858,14 +858,14 @@ msgstr "Finantza"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:344
 msgctxt "DGML|"
 msgid "Healthcare"
-msgstr "Osasun-zaintza"
+msgstr "Osasun-laguntza"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:357
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:363
 msgctxt "DGML|"
 msgid "Entertainment"
-msgstr "Entretenimendua"
+msgstr "Entretenitzea"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:368
 #. ----------
@@ -956,7 +956,7 @@ msgstr "Asfaltatu gabeko errepidea"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:152
 msgctxt "DGML|"
 msgid "Track"
-msgstr "Aztarna"
+msgstr "Arrastoa"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:150
 #. ----------
@@ -970,7 +970,7 @@ msgstr "Bazterbidea"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:160
 msgctxt "DGML|"
 msgid "Bridleway"
-msgstr "Zaldun-bide"
+msgstr "Zaldun-bidea"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:158
 #. ----------
@@ -1026,7 +1026,7 @@ msgstr "Aireportuko pista, taxi-bidea"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:192
 msgctxt "DGML|"
 msgid "Airport apron, terminal"
-msgstr "Aireportuko geratzeko pista, terminala"
+msgstr "Aireportuan geratzeko pista, terminala"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:190
 #. ----------
@@ -1061,7 +1061,7 @@ msgstr "Basoa"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:215
 msgctxt "DGML|"
 msgid "Wood"
-msgstr "Basoa"
+msgstr "Zuhaiztia"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:213
 #. ----------
@@ -1201,7 +1201,7 @@ msgstr "Eskola, unibertsitatea"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:298
 msgctxt "DGML|"
 msgid "Significant Building"
-msgstr "Eraikin berezia"
+msgstr "Eraikin esanguratsua"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:296
 #. ----------
@@ -1453,7 +1453,7 @@ msgstr "Izozkia"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:469
 msgctxt "DGML|"
 msgid "Pub"
-msgstr "Pub-a"
+msgstr "Edaritegia"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:467
 #. ----------
@@ -1521,7 +1521,7 @@ msgstr "Oparia"
 #. file data/maps/earth/empty/empty.dgml:6
 msgctxt "DGML|"
 msgid "Empty globe"
-msgstr "Globoa hutsa"
+msgstr "Globoa hutsik"
 
 #. file data/maps/earth/empty/empty.dgml:11
 msgctxt "DGML|"
@@ -1553,13 +1553,13 @@ msgid ""
 "<p>A <i>plain map</i>.</p><p>It uses vector lines to mark coastlines and "
 "country borders, etc...</p>"
 msgstr ""
-"<p><i>Mapa xehe</i> bat.</p><p>Bektore-lerroak erabiltzen ditu itsasertzeko "
+"<p><i>Mapa soil</i> bat.</p><p>Bektore-lerroak erabiltzen ditu itsasertz "
 "lerroak eta herrialdeetako mugak eta abar markatzeko.</p>"
 
 #. file data/maps/earth/behaim1492/behaim1492.dgml:10
 msgctxt "DGML|"
 msgid "Behaim Globe 1492"
-msgstr "Behaim-en globoa 1492"
+msgstr "Behaim globoa 1492"
 
 #. file data/maps/earth/behaim1492/behaim1492.dgml:20
 msgctxt "DGML|"
@@ -1568,19 +1568,19 @@ msgid ""
 "Earth. <i>Credits: Germanisches Nationalmuseum, Nuremberg, License: CC BY-SA "
 "3.0.</i></p>"
 msgstr ""
-"<p> Martin Behaim-en <i>Erdapfel</i> existitzen den lurraren globorik "
+"<p>Martin Behaim-en <i>Erdapfel</i> existitzen den lurraren globorik "
 "zaharrena da. <i>Kredituak: Germanisches Nationalmuseum, Nuremberg, "
 "Lizentzia: CC BY-SA 3.0.</i></p>"
 
 #. file data/maps/earth/behaim1492/behaim1492.dgml:181
 msgctxt "DGML|"
 msgid "Places (in German)"
-msgstr "Tokiak (Alemanian)"
+msgstr "Lekuak (Alemanian)"
 
 #. file data/maps/earth/behaim1492/behaim1492.dgml:184
 msgctxt "DGML|"
 msgid "Behaim Places"
-msgstr "Behaim-en tokiak"
+msgstr "Behaim lekuak"
 
 #. file data/maps/earth/behaim1492/behaim1492.dgml:187
 msgctxt "DGML|"
@@ -1617,15 +1617,15 @@ msgstr "Itsasertzeko lerro zehatza"
 #. file data/maps/earth/precip-july/precip-july.dgml:11
 msgctxt "DGML|"
 msgid "Precipitation (July)"
-msgstr "Prezipitazioa (Uztailekoa)"
+msgstr "Prezipitazioa (Uztaila)"
 
 #. file data/maps/earth/precip-july/precip-july.dgml:21
 msgctxt "DGML|"
 msgid ""
 "A map which shows the average precipitation (rain/snow/hail/etc) in July."
 msgstr ""
-"Uztaileko batezbesteko prezipitazioa erakusten duen (euria/elurra/txingorra/"
-"etab.) erakusten duen mapa bat."
+"Uztaileko batezbesteko prezipitazioa (euria/elurra/txingorra/etab.) "
+"erakusten duen mapa bat."
 
 #. file data/maps/earth/precip-july/precip-july.dgml:229
 #. ----------
@@ -1700,7 +1700,7 @@ msgstr "1024 mm edo gehiago"
 #. file data/maps/earth/precip-dec/precip-dec.dgml:11
 msgctxt "DGML|"
 msgid "Precipitation (December)"
-msgstr "Prezipitazioa (Abenduan)"
+msgstr "Prezipitazioa (Abendua)"
 
 #. file data/maps/earth/precip-dec/precip-dec.dgml:21
 msgctxt "DGML|"
@@ -1710,7 +1710,7 @@ msgstr "Abenduko batezbesteko prezipitazioa erakusten duen mapa bat."
 #. file data/maps/earth/schagen1689/schagen1689.dgml:11
 msgctxt "DGML|"
 msgid "Historical Map 1689"
-msgstr "1689ko mapa historikoa"
+msgstr "Mapa historikoa 1689"
 
 #. file data/maps/earth/schagen1689/schagen1689.dgml:21
 msgctxt "DGML|"
@@ -1719,7 +1719,7 @@ msgid ""
 "Amsterdam."
 msgstr ""
 "1689 urteko <i>munduko mapa historikoa</i>, G. van Schagen-ek Amsterdam-en "
-"sortua."
+"sortutakoa."
 
 #. file data/maps/earth/schagen1689/schagen1689.dgml:148
 msgctxt "DGML|"
@@ -1741,7 +1741,7 @@ msgctxt "DGML|"
 msgid ""
 "<p>A <i>Political Map</i>.</p><p>The theme displays various countries.</p>"
 msgstr ""
-"<p><i>Mapa politiko</i> bat.</p><p>Gaia herrialderik gabe azaltzen da.</p>"
+"<p><i>Mapa politiko</i> bat.</p><p>Gaiak hainbat herrialde erakuste ditu.</p>"
 
 #. file data/maps/earth/political/political.dgml:114
 msgctxt "DGML|"
@@ -1751,7 +1751,7 @@ msgstr "Ibaiak"
 #. file data/maps/earth/sentinel2/sentinel2.dgml:5
 msgctxt "DGML|"
 msgid "Sentinel2 Satellite Map"
-msgstr "Sentinel2 Satelite bidezko Mapa"
+msgstr "Sentinel2 satelitearen Mapa"
 
 #. file data/maps/earth/sentinel2/sentinel2.dgml:11
 msgctxt "DGML|"
@@ -1763,7 +1763,7 @@ msgstr ""
 #. file data/maps/earth/temp-dec/temp-dec.dgml:11
 msgctxt "DGML|"
 msgid "Temperature (December)"
-msgstr "Tenperatura (Abendukoa)"
+msgstr "Tenperatura (Abendua)"
 
 #. file data/maps/earth/temp-dec/temp-dec.dgml:21
 msgctxt "DGML|"
@@ -1783,8 +1783,8 @@ msgid ""
 "p>"
 msgstr ""
 "<p>Lurra espaziotik ikusten den bezala.</p><p>Mapa NASAren \"Blue Marble "
-"Next Generation\" (Puxtarri urdinaren hurrengo belaunaldia) irudi ederrean "
-"oinarrituta dago. Kredituak: NASAren Lurraren behatokia</p>"
+"Next Generation\" (Puxtarri urdina hurrengo belaunaldia) irudi ederrean "
+"oinarrituta dago. Kreditua: NASAren Lurraren behatokia</p>"
 
 #. file data/maps/earth/bluemarble/bluemarble.dgml:252
 msgctxt "DGML|"
@@ -1812,8 +1812,8 @@ msgid ""
 "<p>The <i>night sky</i>.</p><p>Displays the stars and constellations at "
 "night.</p>"
 msgstr ""
-"<p><i>Gaueko zerua</i>.</p><p>Gaueko izarrak eta konstelazioak azaltzen ditu."
-"</p>"
+"<p><i>Gaueko zerua</i>.</p><p>Gaueko izarrak eta konstelazioak erakusten "
+"ditu.</p>"
 
 #. file data/legend.html
 msgctxt "Legends|"
@@ -1896,518 +1896,439 @@ msgid "Andromeda"
 msgstr "Andromeda"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Antlia"
-msgstr "Aire ponpa"
+msgstr "Antlia (Makina pneumatikoa)"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Apus"
-msgstr "Apus"
+msgstr "Apus (Paradisuko hegaztia)"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Aquarius"
-msgstr "Aquarius"
+msgstr "Aquarius (Akuarioa)"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Aquila"
-msgstr "Arranoa"
+msgstr "Aquila (Arranoa)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Ara"
-msgstr "Ara"
+msgstr "Ara (Aldarea)"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Aries"
-msgstr "Aries"
+msgstr "Aries (Aharia)"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Auriga"
-msgstr "Auriga"
+msgstr "Auriga (Gurdizaina)"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Boötes"
-msgstr ""
+msgstr "Boötes (Itzaina)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Caelum"
-msgstr "Zizela"
+msgstr "Caelum (Zizela)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Camelopardalis"
-msgstr "Jirafa"
+msgstr "Camelopardalis (Jirafa)"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Cancer"
-msgstr "Cancer"
+msgstr "Cancer (Karramarroa)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Canes Venatici"
-msgstr "Ehizarako zakurrak"
+msgstr "Canes venatici (Ehiza-txakurrak)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Canis Major"
-msgstr "Zakur handia"
+msgstr "Canis Maior (Txakur Handia)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Canis Minor"
-msgstr "Zakur txikia"
+msgstr "Canis Minor (Txakur Txikia)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Capricornus"
-msgstr "Aharia"
+msgstr "Capricornus (Kaprikornioa)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Carina"
-msgstr "Girla"
+msgstr "Carina (Gila)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Cassiopeia"
-msgstr "Kasiopea"
+msgstr "Cassiopeia (Kasiopea)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Centaurus"
-msgstr "Zentauroa"
+msgstr "Centaurus (Zentauroa)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Cepheus"
-msgstr "Zefeo"
+msgstr "Cepheus (Zefeo)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Cetus"
-msgstr "Balea"
+msgstr "Cetus (Balea)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Chamaeleon"
-msgstr "Kamaleoia"
+msgstr "Chamaeleo (Kameleoia)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Circinus"
-msgstr "Konpasa"
+msgstr "Circinus (Konpasa)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Columba"
-msgstr "Usoa"
+msgstr "Columba (Usoa)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Coma Berenices"
-msgstr "Berenizeren ilea"
+msgstr "Coma Berenices (Berenizeren adatsa)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Corona Australis"
-msgstr "Hegoaldeko koroa"
+msgstr "Corona Australis (Hego Koroa)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Corona Borealis"
-msgstr "Iparraldeko koroa"
+msgstr "Corona Borealis (Ipar Koroa)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Corvus"
-msgstr "Erroia"
+msgstr "Corvus (Belea)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Crater"
-msgstr "Kraterra"
+msgstr "Crater (Kopa)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Crux"
-msgstr "Hegoaldeko gurutzea"
+msgstr "Crux (Hego Gurutzea)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Cygnus"
-msgstr "Zisnea"
+msgstr "Cygnus (Zisnea)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Delphinus"
-msgstr "Izurdea"
+msgstr "Delphinus (Izurdea)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Dorado"
-msgstr "Dorado"
+msgstr "Dorado (Urrezko arraina)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Draco"
-msgstr "Herensugea"
+msgstr "Draco (Herensugea)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Equuleus"
-msgstr "Pottoka"
+msgstr "Equuleus (Zaldia)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Eridanus"
-msgstr "Ibaia"
+msgstr "Eridanus (Eridano)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Fornax"
-msgstr "Labea"
+msgstr "Fornax (Labea)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Gemini"
-msgstr "Gemini"
+msgstr "Gemini (Bikiak)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Grus"
-msgstr "Kurriloa"
+msgstr "Grus (Kurriloa)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Hercules"
-msgstr "Herkules"
+msgstr "Hercules (Herkules)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Horologium"
-msgstr "Erlojua"
+msgstr "Horologium (Erlojua)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Hydra"
-msgstr "Hydra emea"
+msgstr "Hydra (Hidra)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Hydrus"
-msgstr "Hydra arra"
+msgstr "Hydrus (Itsas suge arra)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Indus"
-msgstr "Indus"
+msgstr "Indus (Indiarra)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Lacerta"
-msgstr "Muskerra"
+msgstr "Lacerta (Muskerra)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Leo"
-msgstr "Leo"
+msgstr "Leo (Lehoia)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Leo Minor"
-msgstr "Leoi txikia"
+msgstr "Leo Minor (Lehoi Txikia)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Lepus"
-msgstr "Erbia"
+msgstr "Lepus (Erbia)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Libra"
-msgstr "Libra"
+msgstr "Libra (Balantza)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Lupus"
-msgstr "Otsoa"
+msgstr "Lupus (Otsoa)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Lynx"
-msgstr "Katamotza"
+msgstr "Lynx (Katamotza)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Lyra"
-msgstr "Lira"
+msgstr "Lyra (Lira)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Mensa"
-msgstr "Mahaia"
+msgstr "Mensa (Mahaia)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Microscopium"
-msgstr "Mikroskopioa"
+msgstr "Microscopium (Mikroskopioa)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Monoceros"
-msgstr "Adarbakarra"
+msgstr "Monoceros (Adarbakarra)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Musca"
-msgstr "Eulia"
+msgstr "Musca (Eulia)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Norma"
-msgstr "Eskuadra"
+msgstr "Norma (Erregela)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Octans"
-msgstr "Oktantea"
+msgstr "Octans (Oktantea)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Ophiuchus"
-msgstr "Sugekaria"
+msgstr "Ophiuchus (Ofiuko)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Orion"
-msgstr "Orion (ehiztaria)"
+msgstr "Orion (Ehiztaria)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Pavo"
-msgstr "Indioilarra"
+msgstr "Pavo (Pauma)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Pegasus"
-msgstr "Pegaso"
+msgstr "Pegasus (Pegaso)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Perseus"
-msgstr "Perseo"
+msgstr "Perseus (Pertseo)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Phoenix"
-msgstr "Phoenix"
+msgstr "Phoenix (Fenix)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Pictor"
-msgstr "Margolariaren astoa"
+msgstr "Pictor (Pintatzailea)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Pisces"
-msgstr "Piscis"
+msgstr "Pisces (Arrainak)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Piscis Austrinus"
-msgstr "Hegoaldeko arraina"
+msgstr "Piscis Austrinus (Hegoaldeko Arraina)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Puppis"
-msgstr "Popa (The stern)"
+msgstr "Puppis (Popa)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Pyxis"
-msgstr "Iparorratza"
+msgstr "Pyxis (Iparrorratza)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Reticulum"
-msgstr "Sarea"
+msgstr "Reticulum (Sarea)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Sagitta"
-msgstr "Gezia"
+msgstr "Sagitta (Gezia)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Sagittarius"
-msgstr "Sagitarius"
+msgstr "Sagittarius (Sagitarioa)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Scorpius"
-msgstr "Eskorpioia"
+msgstr "Scorpius (Eskorpioia)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Sculptor"
-msgstr "Irudigilea"
+msgstr "Sculptor (Eskultorea)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Scutum"
-msgstr "Ezkutua"
+msgstr "Scutumn (Ezkutua)"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Serpens"
-msgstr ""
+msgstr "Serpens (Sugea)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Sextans"
-msgstr "Sextantea"
+msgstr "Sextans (Sestantea)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Taurus"
-msgstr "Taurus"
+msgstr "Taurus (Zezena)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Telescopium"
-msgstr "Teleskopioa"
+msgstr "Telescopium (Teleskopioa)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Triangulum"
-msgstr "Triangelua"
+msgstr "Triangulum (Triangelua)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Triangulum Australe"
-msgstr "Hegoaldeko triangelua"
+msgstr "Triangulum Australe (Hegoaldeko Triangelua)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Tucana"
-msgstr "Tukana"
+msgstr "Tucana (Tukana)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Ursa Major"
-msgstr "Hartza handia"
+msgstr "Ursa Maior (Hartz Handia)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Ursa Minor"
-msgstr "Hartza txikia"
+msgstr "Ursa Minor (Hartz Txikia)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Vela"
-msgstr "Bela"
+msgstr "Vela (Bela)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Virgo"
-msgstr "Virgo"
+msgstr "Virgo (Birjina)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Volans"
-msgstr "Arrain hegalaria"
+msgstr "Volans (Arrain Hegalaria)"
 
 #. file data/stars/names.csv
-#, fuzzy
 msgctxt "StarNames|"
 msgid "Vulpecula"
-msgstr "Azeria"
+msgstr "Vulpecula (Azeria)"
 
 #: src/apps/marble-qt/qtmain.cpp:89
 msgctxt "Marble::MainWindow|"
@@ -2427,8 +2348,8 @@ msgid ""
 "Sorry, unable to open '%1':\n"
 "'%2'"
 msgstr ""
-"Sentitzen dugu, ezin da «%1» ireki:\n"
-"«%2»"
+"Sentitzen dut, ezin du '%1' ireki:\n"
+"'%2'"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:265
 msgctxt "Marble::MainWindow|"
@@ -2443,7 +2364,7 @@ msgstr "Ireki fitxategi bat, Marble-n ikusteko"
 #: src/apps/marble-qt/QtMainWindow.cpp:270
 msgctxt "Marble::MainWindow|"
 msgid "&Download Maps..."
-msgstr "&Zama-jaitsi mapak..."
+msgstr "Mapak &zama-jaitsi..."
 
 #: src/apps/marble-qt/QtMainWindow.cpp:273
 msgctxt "Marble::MainWindow|"
@@ -2464,7 +2385,7 @@ msgstr "Zama-jaitsi es&kualdea..."
 msgctxt "Marble::MainWindow|"
 msgid "Download a map region in different zoom levels for offline usage"
 msgstr ""
-"Zama-jaitsi mapa-eskualde bat zoom maila desberdinetan lerroz kanpo "
+"Mapa-eskualde bat zoom maila ezberdinetan zama-jaitsi lerroz kanpo "
 "erabiltzeko"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:283
@@ -2501,7 +2422,7 @@ msgstr "Ktrl+Q"
 #: src/apps/marble-qt/QtMainWindow.cpp:294
 msgctxt "Marble::MainWindow|"
 msgid "Quit the Application"
-msgstr "Aplikaziotik irtetea"
+msgstr "Irten aplikaziotik"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:297
 msgctxt "Marble::MainWindow|"
@@ -2514,9 +2435,6 @@ msgid "Copy a screenshot of the map"
 msgstr "Kopiatu maparen pantaila-argazki bat"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:302
-#, fuzzy
-#| msgctxt "Marble::MainWindow|"
-#| msgid "&Edit Map"
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
 msgstr "&Editatu mapa..."
@@ -2539,12 +2457,12 @@ msgstr "Globoaren pelikula bat grabatzen du"
 #: src/apps/marble-qt/QtMainWindow.cpp:314
 msgctxt "Marble::MainWindow|"
 msgid "&Stop Recording"
-msgstr "Grabatzeari ut&zi"
+msgstr "&Gelditu grabazioa"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:315
 msgctxt "Marble::MainWindow|"
 msgid "Stop recording a movie of the globe"
-msgstr "Utzi globoaren pelikula bat grabatzeari"
+msgstr "Gelditu globoaren pelikula bat grabatzeari"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:320
 msgctxt "Marble::MainWindow|"
@@ -2564,7 +2482,7 @@ msgstr "K&opiatu koordenatuak"
 #: src/apps/marble-qt/QtMainWindow.cpp:325
 msgctxt "Marble::MainWindow|"
 msgid "Copy the center coordinates as text"
-msgstr "Kopiatu zentroaren koordenatuak testu gisa"
+msgstr "Kopiatu erdiko koordenatuak testu gisa"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:328
 msgctxt "Marble::MainWindow|"
@@ -2604,7 +2522,7 @@ msgstr "&Hodeiak"
 #: src/apps/marble-qt/QtMainWindow.cpp:346
 msgctxt "Marble::MainWindow|"
 msgid "Show Real Time Cloud Cover"
-msgstr ""
+msgstr "Erakutsi hodei-estaldura denbora errealean"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:349
 msgctxt "Marble::MainWindow|"
@@ -2614,12 +2532,12 @@ msgstr "&Lerroz kanpo lan egin"
 #: src/apps/marble-qt/QtMainWindow.cpp:353
 msgctxt "Marble::MainWindow|"
 msgid "&Time Control..."
-msgstr "&Denbora-kontrola..."
+msgstr "&Denboraren kontrola..."
 
 #: src/apps/marble-qt/QtMainWindow.cpp:354
 msgctxt "Marble::MainWindow|"
 msgid "Configure Time Control "
-msgstr "Konfiguratu denboraren kontrola"
+msgstr "Konfiguratu denboraren kontrola "
 
 #: src/apps/marble-qt/QtMainWindow.cpp:357
 msgctxt "Marble::MainWindow|"
@@ -2679,12 +2597,12 @@ msgstr "Marble alegiazko globoari &buruz"
 #: src/apps/marble-qt/QtMainWindow.cpp:381
 msgctxt "Marble::MainWindow|"
 msgid "Show the application's About Box"
-msgstr "Erakutsi aplikazioaren «Honi buru» koadroa"
+msgstr "Erakutsi aplikazioaren «Honi buruz» koadroa"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:384
 msgctxt "Marble::MainWindow|"
 msgid "About &Qt"
-msgstr "&Qt-ri buruz"
+msgstr "&Qt-eri buruz"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:385
 msgctxt "Marble::MainWindow|"
@@ -2692,9 +2610,6 @@ msgid "Show the Qt library's About box"
 msgstr "Erakutsi Qt liburutegiaren «Honi buruz» koadroa"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:389
-#, fuzzy
-#| msgctxt "Marble::MarbleWidgetPopupMenu|"
-#| msgid "Add &Bookmark"
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
 msgstr "Gehitu &laster-markak..."
@@ -2708,7 +2623,7 @@ msgstr "Gehitu laster-marka"
 #: src/apps/marble-qt/QtMainWindow.cpp:395
 msgctxt "Marble::MainWindow|"
 msgid "&Set Home Location"
-msgstr "E&zarri etxearen kokapena"
+msgstr "E&zarri etxe-kokapena"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:398
 msgctxt "Marble::MainWindow|"
@@ -2721,9 +2636,6 @@ msgid "Toggle display of Bookmarks"
 msgstr "Txandakatu laster-markak azaltzea"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:403
-#, fuzzy
-#| msgctxt "Marble::MainWindow|"
-#| msgid "&Manage Bookmarks"
 msgctxt "Marble::MainWindow|"
 msgid "&Manage Bookmarks..."
 msgstr "&Kudeatu laster-markak..."
@@ -2744,10 +2656,9 @@ msgid "A wizard guides you through the creation of your own map theme."
 msgstr "Morroi batek gidatuko zaitu zure mapa-gai propioaren sorreran."
 
 #: src/apps/marble-qt/QtMainWindow.cpp:413
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Show Tile Zoom Level"
-msgstr "Erakutsi lauza zoom-maila"
+msgstr "Erakutsi lauzaren zoom-maila"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:420
 msgctxt "Marble::MainWindow|"
@@ -2762,7 +2673,7 @@ msgstr "Degree (hamartarra)"
 #: src/apps/marble-qt/QtMainWindow.cpp:430
 msgctxt "Marble::MainWindow|"
 msgid "Universal Transverse Mercator (UTM)"
-msgstr ""
+msgstr "UTM (Universal Transverse Mercator / Zeharkako Mercator Unibertsala)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:444
 msgctxt "Marble::MainWindow|"
@@ -2802,7 +2713,7 @@ msgstr "&Panelak"
 #: src/apps/marble-qt/QtMainWindow.cpp:479
 msgctxt "Marble::MainWindow|"
 msgid "&View Size"
-msgstr "Ik&uspegi-neurria"
+msgstr "Ik&uspegiaren neurria"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:482
 msgctxt "Marble::MainWindow|"
@@ -2891,7 +2802,7 @@ msgstr "Ireki fitxategia"
 #: src/apps/marble-qt/QtMainWindow.cpp:989
 msgctxt "Marble::MainWindow|"
 msgid "&Angle Display Unit"
-msgstr "&Angeluak azaltzeko unitatea"
+msgstr "&Angeluak erakusteko unitatea"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:1221
 msgctxt "Marble::MainWindow|"
@@ -2906,7 +2817,7 @@ msgstr "Marble (puxtarria) - alegiazko globoa"
 #: src/apps/marble-ui/ControlView.cpp:263
 msgctxt "Marble::ControlView|"
 msgid "Default (Resizable)"
-msgstr "Lehenetsia (neurria alda daiteke)"
+msgstr "Lehenetsia (neurria aldagarria)"
 
 #: src/apps/marble-ui/ControlView.cpp:272
 #, qt-format
@@ -2959,7 +2870,7 @@ msgstr "Digital Cinema (%1x%2)"
 #: src/apps/marble-ui/ControlView.cpp:467
 msgctxt "Marble::ControlView|"
 msgid "The Marble development team wishes you a pleasant and safe journey."
-msgstr "Marble garapen taldeak bidai atsegin eta segurua opa dizu."
+msgstr "Marble-ren garapen taldeak bidai atsegin eta segurua opa dizu."
 
 #: src/apps/marble-ui/ControlView.cpp:468
 msgctxt "Marble::ControlView|"
@@ -2982,7 +2893,7 @@ msgstr ""
 #: src/apps/marble-ui/ControlView.cpp:471
 msgctxt "Marble::ControlView|"
 msgid "Please use common sense while navigating."
-msgstr "Mesedez, erabili zentzua nabigatzerakoan."
+msgstr "Mesedez, erabili sen ona nabigatzen duzun bitartean."
 
 #: src/apps/marble-ui/ControlView.cpp:555
 #, qt-format
@@ -3498,7 +3409,7 @@ msgstr "Leku-marka"
 #: src/lib/marble/CurrentLocationWidget.cpp:367
 msgctxt "QObject|"
 msgid "Save Track"
-msgstr "Gorde aztarna"
+msgstr "Gorde arrastoa"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:369
 #: src/lib/marble/CurrentLocationWidget.cpp:387
@@ -3509,17 +3420,17 @@ msgstr "KML fitxategia (*.kml)"
 #: src/lib/marble/CurrentLocationWidget.cpp:385
 msgctxt "QObject|"
 msgid "Open Track"
-msgstr "Ireki aztarna"
+msgstr "Ireki arrastoa"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:398
 msgctxt "QObject|"
 msgid "Clear current track"
-msgstr "Garbitu uneko aztarna"
+msgstr "Garbitu uneko arrastoa"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:399
 msgctxt "QObject|"
 msgid "Are you sure you want to clear the current track?"
-msgstr "Ziur zaude uneko aztarna garbitu nahi duzula?"
+msgstr "Ziur zaude uneko arrastoa garbitu nahi duzula?"
 
 #: src/lib/marble/CurrentLocationWidget.ui:14
 msgctxt "CurrentLocationWidget|"
@@ -3539,12 +3450,12 @@ msgstr "Desgaituta"
 #: src/lib/marble/CurrentLocationWidget.ui:53
 msgctxt "CurrentLocationWidget|"
 msgid "Show Track"
-msgstr "Erakutsi aztarna"
+msgstr "Erakutsi arrastoa"
 
 #: src/lib/marble/CurrentLocationWidget.ui:66
 msgctxt "CurrentLocationWidget|"
 msgid "Clear Track"
-msgstr "Garbitu aztarna"
+msgstr "Garbitu arrastoa"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
@@ -5878,7 +5789,7 @@ msgstr "Oinezkoen bidea"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:832
 msgctxt "GeoDataPlacemark|"
 msgid "Track"
-msgstr "Aztarna"
+msgstr "Arrastoa"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:442
 #, fuzzy
@@ -7442,10 +7353,9 @@ msgid "Hiking Route"
 msgstr ""
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:244
-#, fuzzy
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Bridleway"
-msgstr "Zaldun-bide"
+msgstr "Zaldun-bidea"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:247
 msgctxt "GeoLineStringGraphicsItem|"
@@ -13724,12 +13634,14 @@ msgstr "Ibilbidea"
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:77
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Track: "
-msgstr "Aztarna: "
+msgstr "Arrastoa: "
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:90
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
+"Sortu ibilbide bat edo zamatu arrasto bat fitxategi batetik haren elebazio-"
+"profila ikusteko."
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:95
 msgctxt "Marble::ElevationProfileFloatItem|"
@@ -13750,6 +13662,8 @@ msgstr ""
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
+"Sortu ibilbide bat edo zamatu arrasto bat fitxategi batetik haren elebazio-"
+"profila ikusteko."
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:198
 msgctxt "Marble::ElevationProfileFloatItem|"
@@ -13855,16 +13769,14 @@ msgid ""
 msgstr ""
 
 #: src/plugins/render/foursquare/FoursquarePlugin.cpp:36
-#, fuzzy
 msgctxt "Marble::FoursquarePlugin|"
 msgid "Places"
 msgstr "Lekuak"
 
 #: src/plugins/render/foursquare/FoursquarePlugin.cpp:41
-#, fuzzy
 msgctxt "Marble::FoursquarePlugin|"
 msgid "&Places"
-msgstr "Lekuak"
+msgstr "&Lekuak"
 
 #: src/plugins/render/foursquare/FoursquarePlugin.cpp:56
 msgctxt "Marble::FoursquarePlugin|"
@@ -15455,6 +15367,8 @@ msgstr "Hondamendi gainbegiratzea"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Tracking and Data Relay Satellite System (TDRSS)"
 msgstr ""
+"TDRSS (Tracking and Data Relay Satellite System / Satelite bidezko datuen "
+"jarraipena eta transmisio sistema)"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:460
 msgctxt "Marble::SatellitesPlugin|"
@@ -17633,7 +17547,7 @@ msgstr "Oinezkoa (bide motzena)"
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:77
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
 msgid "Bicycle (shortest track)"
-msgstr "Bizikleta (pistarik motzena)"
+msgstr "Bizikleta (arrastorik motzena)"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:78
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
@@ -17648,7 +17562,7 @@ msgstr "Bizikleta (Lasterketakoa)"
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:80
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
 msgid "Bicycle (safest track)"
-msgstr "Bizikleta (pistarik seguruena)"
+msgstr "Bizikleta (arrastorik seguruena)"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:81
 msgctxt "Marble::OpenRouteServiceConfigWidget|"

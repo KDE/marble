@@ -1,16 +1,16 @@
 # Translation for marble_qt.po to Euskara/Basque (eu)
-# Copyrigth (C) 2021-2023 This file is copyright.
+# Copyrigth (C) 2021-2024 This file is copyright.
 # This file is distributed under the same licenses as the original file.
-# KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
+# SPDX-FileCopyrightText: 2024 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2021, 2023.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2021, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-04 00:36+0000\n"
-"PO-Revision-Date: 2023-02-03 23:56+0100\n"
+"PO-Revision-Date: 2024-11-30 19:18+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -19,20 +19,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 24.08.3\n"
 
 #: Bookmarks.qml:20
-#, fuzzy, kde-format
-#| msgctxt "QObject|"
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "Laster-markak"
 
 #: Bookmarks.qml:69
-#, fuzzy, kde-format
-#| msgctxt "Bookmarks|"
-#| msgid "Your bookmarks will appear here."
+#, kde-format
 msgid "Your bookmarks will appear here."
 msgstr "Zure laster-markak hemen agertuko dira."
 
@@ -40,268 +36,210 @@ msgstr "Zure laster-markak hemen agertuko dira."
 #: config.kcfg:14
 #, kde-format
 msgid "The marble theme id"
-msgstr ""
+msgstr "Marble-ren gaiaren IDa"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:20
-#, fuzzy, kde-format
-#| msgctxt "Marble::ControlView|"
-#| msgid "Routing"
+#, kde-format
 msgid "Routing profile"
-msgstr "Ibilbidea"
+msgstr "Bideratze-profila"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:23
-#, fuzzy, kde-format
-#| msgctxt "DGML|"
-#| msgid "Car"
+#, kde-format
 msgid "Car"
 msgstr "Autoa"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:26 ProfileSelectorMenu.qml:134
-#, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Bicycle"
+#, kde-format
 msgid "Bicycle"
 msgstr "Bizikleta"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:29 ProfileSelectorMenu.qml:144
-#, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Pedestrian"
+#, kde-format
 msgid "Pedestrian"
 msgstr "Oinezkoa"
 
 #: CurrentPosition.qml:54
-#, fuzzy, kde-format
-#| msgctxt "CurrentPosition|"
-#| msgid "Follow Current Position"
+#, kde-format
 msgctxt "@option:check"
 msgid "Follow Current Position"
-msgstr "Jarraitu uneko kokapena"
+msgstr "Jarraitu uneko kokapenari"
 
 #: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Marble Maps"
+#, kde-format
 msgid "Marble Maps"
-msgstr "Marble mapak"
+msgstr "Marble-ren mapak"
 
 #: main.cpp:44
-#, fuzzy, kde-format
-#| msgctxt "QObject|"
-#| msgid "Edit Maps"
+#, kde-format
 msgid "Maps"
-msgstr "Editatu mapak"
+msgstr "Mapak"
 
 #: main.cpp:46
 #, kde-format
 msgid "© KDE Community"
-msgstr ""
+msgstr "© KDE Komunitatea"
 
 #: main.cpp:52
 #, kde-format
 msgid "Carl Schwan"
-msgstr ""
+msgstr "Carl Schwan"
 
 #: main.cpp:53
-#, fuzzy, kde-format
-#| msgctxt "PluginAuthor|"
-#| msgid "Developer"
+#, kde-format
 msgid "Developer"
 msgstr "Garatzailea"
 
 #: main.cpp:58
-#, fuzzy, kde-format
-#| msgctxt "UiNewBookmarkFolderDialog|"
-#| msgid "&Folder Name"
+#, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Karpetaren izena:"
+msgstr "Iñigo Salvador Azurmendi"
 
 #: main.cpp:58
-#, fuzzy, kde-format
-#| msgctxt "RoutingWidget|"
-#| msgid "Show Details"
+#, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "Erakutsi zehaztasunak"
+msgstr "xalba@ni.eus"
 
 #: MainScreen.qml:87
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Public Transport"
+#, kde-format
 msgid "Public Transport"
 msgstr "Garraio publikoa"
 
 #: MainScreen.qml:102
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Outdoor Activities"
+#, kde-format
 msgid "Outdoor Activities"
-msgstr "Kanpoko jarduerak"
+msgstr "Aire zabaleko jarduerak"
 
 #: MainScreen.qml:114
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Accessibility"
+#, kde-format
 msgctxt "@action:button"
 msgid "Accessibility"
 msgstr "Irisgarritasuna"
 
 #: MainScreen.qml:123
-#, fuzzy, kde-format
-#| msgctxt "Marble::PluginItemDelegate|"
-#| msgid "About"
+#, kde-format
 msgctxt "@action:button"
 msgid "About"
 msgstr "Honi buruz"
 
 #: MainScreen.qml:134
-#, fuzzy, kde-format
-#| msgctxt "QObject|"
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@action:button"
 msgid "Bookmarks"
 msgstr "Laster-markak"
 
 #: MainScreen.qml:145
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
+#, kde-format
 msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "Geruzen aukerak"
 
 #: MainScreen.qml:156
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
+#, kde-format
 msgctxt "@action:button"
 msgid "Theme Options"
-msgstr "Geruzen aukerak"
+msgstr "Gaiaren aukerak"
 
 #: MainScreen.qml:167
-#, fuzzy, kde-format
-#| msgctxt "Marble::ControlView|"
-#| msgid "Routing"
+#, kde-format
 msgid "Routing"
-msgstr "Ibilbidea"
+msgstr "Bideratzea"
 
 #: MainScreen.qml:457
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "%1 km"
+#, kde-format
 msgid "%1 km"
 msgstr "%1 km"
 
 #: NavigationInfoBar.qml:20
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "%1 km"
+#, kde-format
 msgctxt "distance in km"
 msgid "%1 km"
 msgstr "%1 km"
 
 #: NavigationInfoBar.qml:22
-#, fuzzy, kde-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
+#, kde-format
 msgctxt "distance in m"
 msgid "%1 m"
 msgstr "%1 m"
 
 #: NavigationInfoBar.qml:24
-#, fuzzy, kde-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
+#, kde-format
 msgctxt "distance in m with decimals"
 msgid "%1 m"
 msgstr "%1 m"
 
 #: Options.qml:20
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
+#, kde-format
 msgctxt "@title:window"
 msgid "Layer Options"
 msgstr "Geruzen aukerak"
 
 #: Options.qml:23
-#, fuzzy, kde-format
-#| msgctxt "Options|"
-#| msgid "<h4>Public Transport Layers</h4>"
+#, kde-format
 msgctxt "@title:group"
 msgid "Public Transport Layers"
-msgstr "<h4>Garraio publikoko geruzak</h4>"
+msgstr "Garraio publikoko geruzak"
 
 #: Options.qml:28
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@option:check"
 msgid "Train"
 msgstr "Trena"
 
 #: Options.qml:35
-#, fuzzy, kde-format
-#| msgctxt "DGML|"
-#| msgid "Subway"
+#, kde-format
 msgctxt "@option:check"
 msgid "Subway"
 msgstr "Metroa"
 
 #: Options.qml:42
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@option:check"
 msgid "Tram"
 msgstr "Tranbia"
 
 #: Options.qml:49
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@option:check"
 msgid "Bus"
-msgstr "Busa"
+msgstr "Autobusa"
 
 #: Options.qml:56
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@option:check"
 msgid "Trolley Bus"
 msgstr "Trolebusa"
 
 #: Options.qml:64
-#, fuzzy, kde-format
-#| msgctxt "Options|"
-#| msgid "<h4>Outdoor Activities Layers</h4>"
+#, kde-format
 msgid "Outdoor Activities Layers"
-msgstr "<h4>Aire zabaleko jarduerak geruzak</h4>"
+msgstr "Aire zabaleko jardueren geruzak"
 
 #: Options.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Walkways"
-msgstr ""
+msgstr "Ibiltokiak"
 
 #: Options.qml:76
-#, fuzzy, kde-format
-#| msgctxt "QObject|"
-#| msgid "Open Route"
+#, kde-format
 msgctxt "@option:check"
 msgid "Hiking Routes"
-msgstr "Ireki ibilbidea"
+msgstr "Mendi ibilbideak"
 
 #: Options.qml:83
-#, fuzzy, kde-format
-#| msgctxt "OutdoorActivities|"
-#| msgid "Bicycle Routes"
+#, kde-format
 msgctxt "@option:check"
 msgid "Bicycle Routes"
-msgstr "Bizikleta Ibilbideak"
+msgstr "Bizikleta ibilbideak"
 
 #: Options.qml:90
-#, fuzzy, kde-format
-#| msgctxt "OutdoorActivities|"
-#| msgid "Mountainbike Routes"
+#, kde-format
 msgctxt "@option:check"
 msgid "Mountainbike Routes"
 msgstr "Mendiko bizikleta ibilbideak"
@@ -310,94 +248,76 @@ msgstr "Mendiko bizikleta ibilbideak"
 #, kde-format
 msgctxt "@option:check"
 msgid "Inline Skating Routes"
-msgstr ""
+msgstr "Lerroko patinaje ibilbideak"
 
 #: Options.qml:104
-#, fuzzy, kde-format
-#| msgctxt "DGML|"
-#| msgid "Bridleway"
+#, kde-format
 msgctxt "@option:check"
 msgid "Bridleways"
-msgstr "Zaldun-bide"
+msgstr "Zaldun ibilbideak"
 
 #: PlacemarkDialog.qml:48
-#, fuzzy, kde-format
-#| msgctxt "Marble::GeoDataTreeModel|"
-#| msgid "Name"
+#, kde-format
 msgctxt "placeholder"
 msgid "No Name"
-msgstr "Izena"
+msgstr "Izenik ez"
 
 #: PlacemarkDialog.qml:168
-#, fuzzy, kde-format
-#| msgctxt "Marble::EditPlacemarkDialog|"
-#| msgid "Tags"
+#, kde-format
 msgctxt "@title:group"
 msgid "Tags:"
-msgstr "Etiketak"
+msgstr "Etiketak:"
 
 #: ProfileSelectorMenu.qml:124
-#, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Car (fastest)"
+#, kde-format
 msgid "Car (fastest)"
 msgstr "Autoa (azkarrena)"
 
 #: RouteEditorPage.qml:19
-#, fuzzy, kde-format
-#| msgctxt "Marble::ControlView|"
-#| msgid "Routing"
+#, kde-format
 msgctxt "@title"
 msgid "Routing"
-msgstr "Ibilbidea"
+msgstr "Bideratzea"
 
 #: RouteEditorPage.qml:102
-#, fuzzy, kde-format
-#| msgctxt "DGML|"
-#| msgid "Temperature"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Departure:"
-msgstr "Tenperatura"
+msgstr "Irteera:"
 
 #: RouteEditorPage.qml:104
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Arrival:"
-msgstr ""
+msgstr "Iritsiera:"
 
 #: RouteEditorPage.qml:106
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Waypoint:"
-msgstr ""
+msgstr "Bideko puntua:"
 
 #: RouteEditorPage.qml:194
-#, fuzzy, kde-format
-#| msgctxt "Marble::Placemark|"
-#| msgid "Alternative medicine"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Alternatives:"
-msgstr "Medikuntza alternatiboa"
+msgstr "Alternatibak:"
 
 #: SettingsDialog.qml:48
-#, fuzzy, kde-format
-#| msgctxt "SettingsDialog|"
-#| msgid "Network Settings"
+#, kde-format
 msgid "Network Settings"
 msgstr "Sareko ezarpenak"
 
 #: SettingsDialog.qml:53
-#, fuzzy, kde-format
-#| msgctxt "SettingsDialog|"
-#| msgid "Download Maps via WLAN only"
+#, kde-format
 msgid "Download Maps via WLAN only"
-msgstr "Zama-jaitsi mapak, soilik, WLAN bidez"
+msgstr "Mapak WLAN bidez bakarrik zama-jaitsi"
 
 #: ThemeConfigPage.qml:19
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title:window"
 msgid "Themes"
-msgstr "Gaia"
+msgstr "Gaiak"
 
 #~ msgctxt "DGML|"
 #~ msgid "Moon"
