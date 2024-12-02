@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-11-25 22:39+0200\n"
+"PO-Revision-Date: 2024-12-01 09:30+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -10367,7 +10367,7 @@ msgstr ""
 #: src/lib/marble/MarbleViewSettingsWidget.ui:144
 msgctxt "MarbleViewSettingsWidget|"
 msgid "&Still image:"
-msgstr ""
+msgstr "תמונה &דוממת:"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:154
 #, fuzzy
@@ -10396,31 +10396,31 @@ msgstr ""
 #: src/lib/marble/MarbleViewSettingsWidget.ui:219
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Outline Quality"
-msgstr ""
+msgstr "איכות מתאר"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:169
 #: src/lib/marble/MarbleViewSettingsWidget.ui:224
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Low Quality"
-msgstr ""
+msgstr "איכות נמוכה"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:174
 #: src/lib/marble/MarbleViewSettingsWidget.ui:229
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Normal"
-msgstr ""
+msgstr "רגילה"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:179
 #: src/lib/marble/MarbleViewSettingsWidget.ui:234
 msgctxt "MarbleViewSettingsWidget|"
 msgid "High Quality"
-msgstr ""
+msgstr "איכות גבוהה"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:184
 #: src/lib/marble/MarbleViewSettingsWidget.ui:239
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Print Quality"
-msgstr ""
+msgstr "איכות הדפסה"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:198
 msgctxt "MarbleViewSettingsWidget|"
@@ -10466,7 +10466,7 @@ msgstr ""
 #: src/lib/marble/MarbleViewSettingsWidget.ui:266
 msgctxt "MarbleViewSettingsWidget|"
 msgid "&Text Labels"
-msgstr ""
+msgstr "תוויות &טקסט"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:286
 msgctxt "MarbleViewSettingsWidget|"
@@ -10500,22 +10500,22 @@ msgstr ""
 #: src/lib/marble/MarbleViewSettingsWidget.ui:306
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Custom & Native Language"
-msgstr ""
+msgstr "שפה מותאמת וטבעית"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:311
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Custom Language"
-msgstr ""
+msgstr "שפה מותאמת"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:316
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Native Language"
-msgstr ""
+msgstr "שפה טבעית"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:340
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Default map &font:"
-msgstr ""
+msgstr "&גופן ברירת מחדל למפה:"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:350
 msgctxt "MarbleViewSettingsWidget|"
@@ -10546,7 +10546,7 @@ msgstr "העתקה"
 #: src/lib/marble/MarbleWebView.cpp:21
 msgctxt "MarbleWebView|"
 msgid "Copy selected content"
-msgstr ""
+msgstr "העתקת התוכן הנבחר"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:113
 msgctxt "Marble::MarbleWidgetPopupMenu|"
@@ -10556,7 +10556,7 @@ msgstr "העתקת נקודות ציון"
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:114
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Copy geo: URL"
-msgstr ""
+msgstr "העתקת כתובת geo:‎"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:123
 msgctxt "Marble::MarbleWidgetPopupMenu|"
@@ -10591,7 +10591,7 @@ msgstr "פרטי &כתובת"
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:182
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "No description available."
-msgstr ""
+msgstr "אין תיאור זמין."
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:382
 msgctxt "Marble::MarbleWidgetPopupMenu|"
@@ -10621,22 +10621,22 @@ msgstr "בירה"
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:393
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Village"
-msgstr ""
+msgstr "כפר"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:536
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "&Info Boxes"
-msgstr ""
+msgstr "&תיבות מידע"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:885
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Address Details"
-msgstr ""
+msgstr "פרטי כתובת"
 
 #: src/lib/marble/MovieCapture.cpp:35
 msgctxt "QObject|"
 msgid "Missing encoding tools"
-msgstr ""
+msgstr "כלי קידוד חסרים"
 
 #: src/lib/marble/MovieCapture.cpp:36
 #, qt-format
@@ -10688,12 +10688,12 @@ msgstr "ה&תחלה"
 #: src/lib/marble/MovieCaptureDialog.cpp:49
 msgctxt "Marble::MovieCaptureDialog|"
 msgid "Codecs are unavailable"
-msgstr ""
+msgstr "אין מפענחים זמינים"
 
 #: src/lib/marble/MovieCaptureDialog.cpp:49
 msgctxt "Marble::MovieCaptureDialog|"
 msgid "Supported codecs are not found."
-msgstr ""
+msgstr "המפענחים הנתמכים לא נמצאו."
 
 #: src/lib/marble/MovieCaptureDialog.cpp:58
 msgctxt "Marble::MovieCaptureDialog|"
@@ -10714,7 +10714,7 @@ msgstr ""
 #: src/lib/marble/MovieCaptureDialog.cpp:95
 msgctxt "Marble::MovieCaptureDialog|"
 msgid "Missing filename"
-msgstr ""
+msgstr "שם הקובץ חסר"
 
 #: src/lib/marble/MovieCaptureDialog.cpp:96
 msgctxt "Marble::MovieCaptureDialog|"
@@ -10722,6 +10722,7 @@ msgid ""
 "Destination video file is not set. I don't know where to save recorded "
 "video. Please, specify one."
 msgstr ""
+"קובץ סרטון היעד לא הוגדר. לא ברור איפה לשמור את הסרטון המוקלט. נא לציין יעד."
 
 #: src/lib/marble/MovieCaptureDialog.ui:14
 msgctxt "MovieCaptureDialog|"
@@ -10741,7 +10742,7 @@ msgstr "פתיחה…"
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
 msgid "FPS (frames per second)"
-msgstr ""
+msgstr "FPS (תמוניות לשנייה)"
 
 #: src/lib/marble/NewBookmarkFolderDialog.ui:14
 msgctxt "UiNewBookmarkFolderDialog|"
@@ -10756,7 +10757,7 @@ msgstr "&שם התיקייה:"
 #: src/lib/marble/NewstuffModel.cpp:739 src/lib/marble/NewstuffModel.cpp:748
 msgctxt "Marble::NewstuffModel|"
 msgid "Installation aborted by user."
-msgstr ""
+msgstr "ההתקנה בוטלה על ידי המשתמש."
 
 #: src/lib/marble/osm/OsmRelationEditorDialog.cpp:36
 msgctxt "Marble::OsmRelationEditorDialog|"
@@ -10766,7 +10767,7 @@ msgstr "שם"
 #: src/lib/marble/osm/OsmRelationEditorDialog.cpp:80
 msgctxt "Marble::OsmRelationEditorDialog|"
 msgid "No name specified"
-msgstr ""
+msgstr "לא צוין שם"
 
 #: src/lib/marble/osm/OsmRelationEditorDialog.cpp:80
 #, fuzzy
@@ -10777,7 +10778,7 @@ msgstr "שם חלופי עבור המיקום."
 #: src/lib/marble/osm/OsmRelationEditorDialog.cpp:82
 msgctxt "Marble::OsmRelationEditorDialog|"
 msgid "No type tag specified"
-msgstr ""
+msgstr "לא צוינה תגית סוג"
 
 #: src/lib/marble/osm/OsmRelationEditorDialog.cpp:82
 #, fuzzy

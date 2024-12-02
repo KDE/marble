@@ -4,7 +4,7 @@
 # Niklas Laxström <niklas.laxstrom+kdetrans@gmail.com>, 2007, 2012.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016, 2023.
 # Jiri Grönroos <jiri.gronroos+kde@iki.fi>, 2012, 2013.
-# Tommi Nieminen <translator@legisign.org>, 2012, 2015, 2016, 2018, 2020, 2021, 2022, 2023, 2024.
+# SPDX-FileCopyrightText: 2012, 2015, 2016, 2018, 2020, 2021, 2022, 2023, 2024 Tommi Nieminen <translator@legisign.org>
 #
 # KDE Finnish translation sprint participants:
 # Author: Artnay
@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-04-18 18:09+0300\n"
+"PO-Revision-Date: 2024-11-29 09:51+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -23,8 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-POT-Import-Date: 2012-12-01 22:23:50+0000\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -814,7 +813,7 @@ msgstr ""
 #. file data/maps/earth/vectorosm/vectorosm.dgml:12
 msgctxt "DGML|"
 msgid "Vector OSM"
-msgstr ""
+msgstr "Vektori-OSM"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:17
 #. ----------
@@ -825,13 +824,14 @@ msgid ""
 "p><p>OSM is an open community which creates free editable maps. The OSM data "
 "was rendered using Mapnik.</p>"
 msgstr ""
+"<p><i>Maailmanlaajuisen tiekartan</i> on luonut OpenStreetMap-projekti (OSM)."
+"<p>OSM on avoin yhteisö, joka luo vapaasti muokattavia karttoja. OSM-tieto "
+"hahmonnetaan Mapnikillä.</p>"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:105
-#, fuzzy
-#| msgid "Map Title"
 msgctxt "DGML|"
 msgid "OSM Bitmap Tiles"
-msgstr "Kartan otsikko"
+msgstr "OSM-bittikarttatiilet"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:119
 #. ----------
@@ -978,7 +978,7 @@ msgstr "Sivutie"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:160
 msgctxt "DGML|"
 msgid "Bridleway"
-msgstr ""
+msgstr "Ratsastusreitti"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:158
 #. ----------
@@ -1167,7 +1167,7 @@ msgstr "Hautausmaa"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:271
 msgctxt "DGML|"
 msgid "Allotments"
-msgstr ""
+msgstr "Siirtolapuutarha"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:269
 #. ----------
@@ -3142,20 +3142,14 @@ msgid "Bookmark Manager"
 msgstr "Kirjanmerkkien hallinta"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:25
-#, fuzzy
-#| msgctxt "Marble::BookmarkManagerDialog|"
-#| msgid "Import Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Import Bookmarks…"
-msgstr "Tuo kirjanmerkit"
+msgstr "Tuo kirjanmerkkejä…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
-#, fuzzy
-#| msgctxt "Marble::BookmarkManagerDialog|"
-#| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Export Bookmarks…"
-msgstr "Vie kirjanmerkit"
+msgstr "Vie kirjanmerkkejä…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
@@ -3165,12 +3159,9 @@ msgstr "Kansiot"
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
 msgid "New…"
-msgstr ""
+msgstr "Uusi…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
-#, fuzzy
-#| msgctxt "UiBookmarkManagerDialog|"
-#| msgid "Rename..."
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Rename…"
 msgstr "Muuta nimeä…"
@@ -3348,7 +3339,7 @@ msgstr "Lähetä pilveen"
 #: src/lib/marble/CurrentLocationWidget.cpp:109
 msgctxt "Marble::CurrentLocationWidget|"
 msgid "<p>No Position Tracking Plugin installed.</p>"
-msgstr ""
+msgstr "<p>Sijaintiliitännäisiä ei ole asennettu.</p>"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:183
 msgctxt "QObject|"
@@ -3462,12 +3453,9 @@ msgstr "Tyhjennä jälki"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "CurrentLocationWidget|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
 msgctxt "CurrentLocationWidget|"
@@ -3897,7 +3885,7 @@ msgstr "Jäte"
 #: src/lib/marble/declarative/Placemark.cpp:306
 msgctxt "Marble::Placemark|"
 msgid "White goods"
-msgstr ""
+msgstr "Kodinkoneet"
 
 #: src/lib/marble/declarative/Placemark.cpp:307
 msgctxt "Marble::Placemark|"
@@ -3932,12 +3920,12 @@ msgstr "Kerrostulivuori"
 #: src/lib/marble/declarative/Placemark.cpp:319
 msgctxt "Marble::Placemark|"
 msgid "Shield volcano"
-msgstr ""
+msgstr "Kilpitulivuori"
 
 #: src/lib/marble/declarative/Placemark.cpp:320
 msgctxt "Marble::Placemark|A scoria cone volcano."
 msgid "Scoria cone"
-msgstr ""
+msgstr "Tuhkakartio"
 
 #: src/lib/marble/declarative/Placemark.cpp:322
 msgctxt "Marble::Placemark|"
@@ -4374,7 +4362,7 @@ msgstr "Katos"
 #: src/lib/marble/declarative/Placemark.cpp:471
 msgctxt "Marble::Placemark|"
 msgid "Ambulatory care"
-msgstr ""
+msgstr "Avohoito"
 
 #: src/lib/marble/declarative/Placemark.cpp:472
 msgctxt "Marble::Placemark|"
@@ -4389,12 +4377,12 @@ msgstr "Työmahdollisuus rikoksiin syyllistyneille tai vammaisille"
 #: src/lib/marble/declarative/Placemark.cpp:480
 msgctxt "Marble::Placemark|"
 msgid "Pre-packaged food for free or below market price"
-msgstr ""
+msgstr "Valmiiksi pakattua ruokaa ilmaiseksi tai alle markkinahintojen"
 
 #: src/lib/marble/declarative/Placemark.cpp:484
 msgctxt "Marble::Placemark|"
 msgid "Prepared meals for free or below market price"
-msgstr ""
+msgstr "Valmiit ateriat ilmaiseksi tai alle markkinahintojen"
 
 #: src/lib/marble/declarative/Placemark.cpp:488
 msgctxt "Marble::Placemark|"
@@ -4481,7 +4469,7 @@ msgstr "Omistus: %1"
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 places per carriage"
-msgstr ""
+msgstr "%1 paikkaa/vaunu"
 
 #: src/lib/marble/declarative/Placemark.cpp:511
 #, qt-format
@@ -4595,7 +4583,7 @@ msgstr "Ei katettu"
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Collection times %1"
-msgstr ""
+msgstr "Keruuajat %1"
 
 #: src/lib/marble/declarative/Placemark.cpp:570
 msgctxt "Marble::Placemark|Entry station of an aerialway"
@@ -4919,30 +4907,24 @@ msgid "Download Region"
 msgstr "Lataa alue"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:240
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "The base tile could not be downloaded."
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Tile type to be downloaded:"
-msgstr "Perustiiltä ei voitu ladata."
+msgstr "Ladattava tiilityyppi:"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:242
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Texture tiles"
-msgstr ""
+msgstr "Pintakuviotiilet"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:243
-#, fuzzy
-#| msgctxt "Marble::MapViewWidget|"
-#| msgid "Mercator View"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Vector tiles"
-msgstr "Mercatorin projektio"
+msgstr "Vektoritiilet"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:244
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Allows selection between layer types that are visibly being rendered."
-msgstr ""
+msgstr "Mahdollistaa valinnan hahmonnettavien tasotyyppien väliltä."
 
 #: src/lib/marble/DownloadRegionDialog.cpp:491
 #, qt-format
@@ -5010,12 +4992,9 @@ msgid "&Folder:"
 msgstr "&Kansio:"
 
 #: src/lib/marble/EditBookmarkDialog.ui:79
-#, fuzzy
-#| msgctxt "UiEditBookmarkDialog|"
-#| msgid "&Add Folder..."
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Add Folder…"
-msgstr "&Lisää kansio…"
+msgstr "Lisää &kansio…"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -5515,18 +5494,14 @@ msgid "Robotic Rover"
 msgstr "Robottimönkijä"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:312
-#, fuzzy
-#| msgid "Landing Site"
 msgctxt "GeoDataPlacemark|"
 msgid "Unmanned Soft Landing Site"
-msgstr "Laskeutumispaikka"
+msgstr "Miehittämätön pehmeä laskeutumispaikka"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:314
-#, fuzzy
-#| msgid "Landing Site"
 msgctxt "GeoDataPlacemark|"
 msgid "Unmanned Hard Landing Site"
-msgstr "Laskeutumispaikka"
+msgstr "Miehittämätön kova laskeutumispaikka"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:316
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:352
@@ -6925,11 +6900,9 @@ msgid "Power Tower"
 msgstr "Voimatorni"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:902
-#, fuzzy
-#| msgid "train station"
 msgctxt "GeoDataPlacemark|"
 msgid "Aerialway Station"
-msgstr "rautatieasema"
+msgstr "Köysirata-asema"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:904
 msgctxt ""
@@ -6982,11 +6955,9 @@ msgid "Platter"
 msgstr "Laituri"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:922
-#, fuzzy
-#| msgid "Water Bodies"
 msgctxt "GeoDataPlacemark|"
 msgid "Rope Tow"
-msgstr "Vesialueet"
+msgstr "Köysihinaus"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:924
 msgctxt "GeoDataPlacemark|"
@@ -7004,7 +6975,7 @@ msgstr "Viivat"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:928
 msgctxt "GeoDataPlacemark|"
 msgid "Goods"
-msgstr ""
+msgstr "Tarvikkeet"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:930
 msgctxt "GeoDataPlacemark|"
@@ -7293,11 +7264,9 @@ msgid "Bridleway"
 msgstr "Ratsastusreitti"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:247
-#, fuzzy
-#| msgid "Save Route"
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Inline Skates Route"
-msgstr "Tallenna reitti"
+msgstr "Rullaluistelureitti"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:250
 msgctxt "GeoLineStringGraphicsItem|"
@@ -7310,11 +7279,9 @@ msgid "Nordic Ski Trail"
 msgstr "Hiihtolatu"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:256
-#, fuzzy
-#| msgid "Save tour"
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Skitour"
-msgstr "Tallenna kierros"
+msgstr "Hiihtoreitti"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:259
 msgctxt "GeoLineStringGraphicsItem|"
@@ -7411,9 +7378,6 @@ msgstr[0] "Löytyi %n osuma."
 msgstr[1] "Löytyi %n osumaa."
 
 #: src/lib/marble/GoToDialog.ui:14
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid "Go To..."
 msgctxt "GoTo|"
 msgid "Go To…"
 msgstr "Siirry…"
@@ -7753,12 +7717,9 @@ msgid "Wizard cannot parse server's response"
 msgstr "Opastettu toiminto ei voi jäsentää palvelimen vastausta"
 
 #: src/lib/marble/MapWizard.cpp:291
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "Server is not a Web Map Server."
 msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
-msgstr "Palvelin ei ole Web Map -palvelin."
+msgstr "Palvelin ei ole OWS-palvelin."
 
 #: src/lib/marble/MapWizard.cpp:381 src/lib/marble/MapWizard.cpp:398
 #: src/lib/marble/MapWizard.cpp:1091
@@ -7774,20 +7735,14 @@ msgstr "Tasavälinen lieriö (epsg:4326)"
 
 #: src/lib/marble/MapWizard.cpp:383 src/lib/marble/MapWizard.cpp:814
 #: src/lib/marble/MapWizard.cpp:938
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "Equirectangular (epsg:4326)"
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (crs:84)"
-msgstr "Tasavälinen lieriö (epsg:4326)"
+msgstr "Tasavälinen lieriö (crs:84)"
 
 #: src/lib/marble/MapWizard.cpp:394
-#, fuzzy
-#| msgctxt "MapViewWidget|"
-#| msgid "&Projection"
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
-msgstr "&Projektio"
+msgstr "Tiili&projektio:"
 
 #: src/lib/marble/MapWizard.cpp:410
 msgctxt "Marble::MapWizard|"
@@ -7816,29 +7771,22 @@ msgid "%1"
 msgstr "%1"
 
 #: src/lib/marble/MapWizard.cpp:467
-#, fuzzy, qt-format
-#| msgctxt "Marble::MapWizard|"
-#| msgid "The base tile could not be downloaded."
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
-msgstr "Perustiiltä ei voitu ladata."
+msgstr "Ei voitu ladata: %1."
 
 #: src/lib/marble/MapWizard.cpp:478
-#, fuzzy, qt-format
-#| msgctxt "Marble::MapWizard|"
-#| msgid ""
-#| "The base tile could not be downloaded successfully. The server replied:\n"
-#| "\n"
-#| "%1"
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The %1 could not be downloaded successfully. The server replied:\n"
 "\n"
 "%2"
 msgstr ""
-"Perustiilen lataus ei onnistunut. Palvelin vastasi:\n"
+"Lataaminen ei onnistunut: %1. Palvelin vastasi:\n"
 "\n"
-"%1"
+"%2"
 
 #: src/lib/marble/MapWizard.cpp:557 src/lib/marble/MapWizard.cpp:1480
 #: src/lib/marble/MapWizard.cpp:1481 src/lib/marble/MapWizard.cpp:1490
@@ -8057,24 +8005,6 @@ msgid "Online map providing indexed tiles (e.g. Open Street Map)"
 msgstr "Indeksoituja ruutuja tarjoava verkkokartta (esim. Open Street Map)"
 
 #: src/lib/marble/MapWizard.ui:104
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid ""
-#| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#| "REC-html40/strict.dtd\">\n"
-#| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#| "css\">\n"
-#| "p, li { white-space: pre-wrap; }\n"
-#| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
-#| "font-weight:400; font-style:normal;\">\n"
-#| "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
-#| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#| "weight:600;\">WMS Server</span></p>\n"
-#| "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
-#| "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose a <a href="
-#| "\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
-#| "decoration: underline; color:#0057ae;\">WMS</span></a> server or enter a "
-#| "custom server URL.</p></body></html>"
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8104,10 +8034,10 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 "weight:600;\">WMS-palvelin</span></p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Valitse <a href=\"http://"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Valitse <a href=\"https://"
 "en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-decoration: "
-"underline; color:#0057ae;\">WMS</span></a>-palvelin tai anna oma "
-"palvelinosoite.</p></body></html>"
+"underline; color:#0057ae;\">WMS</span></a>-palvelin kirjoita oman palvelimen "
+"verkko-osoite.</p></body></html>"
 
 #: src/lib/marble/MapWizard.ui:134
 msgctxt "MapWizard|"
@@ -8168,11 +8098,6 @@ msgstr ""
 "hahmonnusjärjestykseen."
 
 #: src/lib/marble/MapWizard.ui:297
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid ""
-#| "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-#| "Ctrl, Ctrl+A, ...)"
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
@@ -8190,27 +8115,24 @@ msgid "Custom Backdrop"
 msgstr "Taustakuva"
 
 #: src/lib/marble/MapWizard.ui:314
-#, fuzzy
-#| msgctxt "MapViewWidget|"
-#| msgid "&Projection"
 msgctxt "MapWizard|"
 msgid "Tile Projection:"
-msgstr "&Projektio"
+msgstr "Tiili&projektio:"
 
 #: src/lib/marble/MapWizard.ui:321
 msgctxt "MapWizard|"
 msgid "Indicates the projection in which the tiles are rendered."
-msgstr ""
+msgstr "Osoittaa tiilten hahmonnuksen projektion."
 
 #: src/lib/marble/MapWizard.ui:344
 msgctxt "MapWizard|"
 msgid "Tile Format:"
-msgstr ""
+msgstr "Tiilen tiedostomuoto:"
 
 #: src/lib/marble/MapWizard.ui:351
 msgctxt "MapWizard|"
 msgid "Indicates the file format of the tiles."
-msgstr ""
+msgstr "Osoittaa tiilten tiedostomuodon."
 
 #: src/lib/marble/MapWizard.ui:383
 msgctxt "MapWizard|"
@@ -8240,7 +8162,7 @@ msgstr "OpenStreetMap"
 #: src/lib/marble/MapWizard.ui:452
 msgctxt "MapWizard|"
 msgid "XYZ Server Url"
-msgstr ""
+msgstr "XYZ-palvelimen verkko-osoite"
 
 #: src/lib/marble/MapWizard.ui:462
 msgctxt "MapWizard|"
@@ -8263,32 +8185,6 @@ msgid "Select Color"
 msgstr "Valitse väri"
 
 #: src/lib/marble/MapWizard.ui:554
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid ""
-#| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#| "REC-html40/strict.dtd\">\n"
-#| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#| "css\">\n"
-#| "p, li { white-space: pre-wrap; }\n"
-#| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
-#| "font-weight:400; font-style:normal;\">\n"
-#| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#| "weight:600;\">World Map Bitmap Image</span></p>\n"
-#| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
-#| "font-weight:600;\"></p>\n"
-#| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#| "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
-#| "location of a world map that is stored in a single image file (JPG, PNG, "
-#| "etc.). It needs to be provided in <a href=\"http://en.wikipedia.org/wiki/"
-#| "Equirectangular_projection\"><span style=\" text-decoration: underline; "
-#| "color:#0057ae;\">Equirectangular projection</span></a>, so the shape "
-#| "should look like this (size ratio: 2:1):</p>\n"
-#| "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
-#| "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
-#| "worldmap.svg\" width=\"150\" /></p></body></html>"
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8329,11 +8225,12 @@ msgstr ""
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
 "weight:600;\"></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Valitse yksittäisenä "
-"kuvatiedostona (JPG, PNG tms.) tallennetun maailmankartan sijainti. Kartan "
-"tulee olla <a href=\"http://en.wikipedia.org/wiki/Equirectangular_projection"
-"\"><span style=\" text-decoration: underline; color:#0057ae;\">tasavälinen "
-"lieriöprojektio</span></a> eli tulisi näyttää tältä (kokosuhde (2:1):</p>\n"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Valitse maailmankartalta "
+"sijainti, joka on talletettu yksittäiseen kuvatiedostoon (JPG, PNG tms.). "
+"Sen tulee olla <a href=\"https://en.wikipedia.org/wiki/"
+"Equirectangular_projection\"><span style=\" text-decoration: underline; "
+"color:#0057ae;\">tasavälisessä lieriöprojektiossa</span></a> eli sen tulisi "
+"näyttää tältä (kokosuhde: 2:1):</p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
 "worldmap.svg\" width=\"150\" /></p></body></html>"
@@ -8344,12 +8241,9 @@ msgid "Source Image:"
 msgstr "Lähdekuva"
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "MapWizard|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/lib/marble/MapWizard.ui:615
 msgctxt "MapWizard|"
@@ -8494,12 +8388,9 @@ msgid "preview image"
 msgstr "esikatselukuva"
 
 #: src/lib/marble/MapWizard.ui:825
-#, fuzzy
-#| msgctxt "Marble::ConflictDialog|"
-#| msgid "Changed"
 msgctxt "MapWizard|"
 msgid "Change…"
-msgstr "Muutettu"
+msgstr "Muuta…"
 
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
@@ -10317,12 +10208,9 @@ msgstr "Kallistaa maapallon akselia käyttäjää kohden."
 #: src/lib/marble/MarbleNavigator.ui:103 src/lib/marble/MarbleNavigator.ui:122
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "MarbleNavigator|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
 msgctxt "MarbleNavigator|"
@@ -11125,12 +11013,9 @@ msgid "Destination video:"
 msgstr "Kohdevideo:"
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
-#, fuzzy
-#| msgctxt "Marble::RouteItemDelegate|"
-#| msgid "Open"
 msgctxt "MovieCaptureDialog|"
 msgid "Open…"
-msgstr "Avaa"
+msgstr "Avaa…"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -11282,12 +11167,9 @@ msgid "All Supported Files (*.png)"
 msgstr "Kaikki tuetut tiedostot (*.png)"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid "Browse"
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Browse…"
-msgstr "Selaa"
+msgstr "Selaa…"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -11670,18 +11552,15 @@ msgid "Enter the roundabout."
 msgstr "Aja kiertoliittymään."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:257
-#, fuzzy
-#| msgid "Take the exit."
 msgctxt "QObject|"
 msgid "Take the exit."
-msgstr "Poistu rampista."
+msgstr "Poistu."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:259
-#, fuzzy, qt-format
-#| msgid "Take the exit towards %1."
+#, qt-format
 msgctxt "QObject|"
 msgid "Take the exit towards %1."
-msgstr "Poistu rampista suuntaan %1."
+msgstr "Poistu suuntaan %1."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:263
 #, fuzzy
@@ -11691,15 +11570,13 @@ msgid "Take the ramp."
 msgstr "Aja rampista."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:265
-#, fuzzy, qt-format
-#| msgid "Take the ramp towards %1."
+#, qt-format
 msgctxt "QObject|"
 msgid "Take the ramp towards %1."
 msgstr "Aja rampista suuntaan %1."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:321
-#, fuzzy, qt-format
-#| msgid "Follow the road for %1 %2."
+#, qt-format
 msgctxt "QObject|"
 msgid "Follow the road for %1 %2."
 msgstr "Seuraa tietä %1 %2."
@@ -11856,15 +11733,13 @@ msgid "Exit the roundabout into %2."
 msgstr "Poistu kiertoliittymästä suuntaan %2."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:448
-#, fuzzy, qt-format
-#| msgid "Take the exit to the left onto %1."
+#, qt-format
 msgctxt "QObject|"
 msgid "Take the exit to the left onto %1."
 msgstr "Poistu vasemmalle suuntaan %1."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:450
-#, fuzzy, qt-format
-#| msgid "Take the exit to the right onto %1."
+#, qt-format
 msgctxt "QObject|"
 msgid "Take the exit to the right onto %1."
 msgstr "Poistu oikealle suuntaan %1."
@@ -11952,11 +11827,6 @@ msgid "Caution: Driving instructions may be incomplete or wrong."
 msgstr "Varoitus: Ajo-opasteet saattavat olla puutteellisia tai vääriä."
 
 #: src/lib/marble/routing/RoutingManager.cpp:509
-#, fuzzy
-#| msgid ""
-#| "Road construction, weather and other unforeseen variables can result in "
-#| "the suggested route not to be the most expedient or safest route to your "
-#| "destination."
 msgctxt "Marble::RoutingManager|"
 msgid ""
 "Road construction, weather and other unforeseen variables can result in the "
@@ -12063,12 +11933,9 @@ msgid "&Add…"
 msgstr ""
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
-#, fuzzy
-#| msgctxt "RoutingSettingsWidget|"
-#| msgid "&Configure"
 msgctxt "RoutingSettingsWidget|"
 msgid "&Configure…"
-msgstr "&Asetukset"
+msgstr "&Asetukset…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 msgctxt "RoutingSettingsWidget|"
@@ -12407,12 +12274,12 @@ msgstr "Lähennys"
 #: src/lib/marble/TileLevelRangeWidget.ui:37
 msgctxt "TileLevelRangeWidget|"
 msgid "&Tile level range:"
-msgstr ""
+msgstr "Tiilitaso&väli:"
 
 #: src/lib/marble/TileLevelRangeWidget.ui:47
 msgctxt "TileLevelRangeWidget|"
 msgid "Minimum Tile Level"
-msgstr ""
+msgstr "Tiilen vähimmäistaso"
 
 #: src/lib/marble/TileLevelRangeWidget.ui:63
 msgctxt "TileLevelRangeWidget|"
@@ -12422,7 +12289,7 @@ msgstr "mihin"
 #: src/lib/marble/TileLevelRangeWidget.ui:70
 msgctxt "TileLevelRangeWidget|"
 msgid "Maximum Tile Level"
-msgstr ""
+msgstr "Tiilen enimmäistaso"
 
 #: src/lib/marble/TimeControlWidget.ui:14
 msgctxt "TimeControlWidget|"
@@ -12475,6 +12342,8 @@ msgid ""
 "Supported codecs are not found. (ffmpeg/avconv needs to be installed and in "
 "PATH.)"
 msgstr ""
+"Ei löytynyt tuettuja koodekkeja. (ffmpeg tai avconv tulee asentaa ja "
+"sijoittaa PATH-hakupolkuun.)"
 
 #: src/lib/marble/TourCaptureDialog.cpp:67
 msgctxt "Marble::TourCaptureDialog|"
@@ -12539,12 +12408,9 @@ msgid "Destination video"
 msgstr "Määränpäävideo"
 
 #: src/lib/marble/TourCaptureDialog.ui:81
-#, fuzzy
-#| msgctxt "Marble::RouteItemDelegate|"
-#| msgid "Open"
 msgctxt "TourCaptureDialog|"
 msgid "Open…"
-msgstr "Avaa"
+msgstr "Avaa…"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
@@ -12793,11 +12659,9 @@ msgid " s"
 msgstr " s "
 
 #: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:27
-#, fuzzy
-#| msgid "FlightGear position provider Plugin"
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
 msgid "FlightGear position provider Plugin"
-msgstr "FlightGear-sijaintiliitännäinen"
+msgstr "FlightGear-sijaintitarjontaliitännäinen"
 
 #: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:37
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
@@ -12805,8 +12669,6 @@ msgid "FlightGear"
 msgstr "FlightGear"
 
 #: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:47
-#, fuzzy
-#| msgid "Reports the position of running flightgear application."
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
 msgid "Reports the position of running flightgear application."
 msgstr "Ilmaisee käynnissä olevan FlightGear-sovelluksen sijainnin."
@@ -12822,11 +12684,9 @@ msgid "GeoClue"
 msgstr "GeoClue"
 
 #: src/plugins/positionprovider/geoclue/GeoCluePositionProviderPlugin.cpp:29
-#, fuzzy
-#| msgid "Reports the position via the GeoClue Location Framework."
 msgctxt "Marble::GeoCluePositionProviderPlugin|"
 msgid "Reports the position via the GeoClue Location Framework."
-msgstr "Ilmoittaa sijainnin käyttäen GeoClue-sijaintikehysverkkoa"
+msgstr "Ilmoittaa sijainnin GeoClue-sijaintikehysverkon avulla."
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:66
 msgctxt "Marble::GpsdConnection|"
@@ -12896,11 +12756,9 @@ msgid "Reports the GPS position of a QtPositioning compatible device."
 msgstr "Ilmaisee QtPositioning-yhteensopivan laitteen GPS-sijainnin."
 
 #: src/plugins/positionprovider/wlocate/WlocatePositionProviderPlugin.cpp:70
-#, fuzzy
-#| msgid "Wlocate Position Provider Plugin"
 msgctxt "Marble::WlocatePositionProviderPlugin|"
 msgid "Wlocate Position Provider Plugin"
-msgstr "Wlocaten liitännäinen sijainnin ilmoittamiseen"
+msgstr "Wlocate-sijaintitarjontaliitännäinen"
 
 #: src/plugins/positionprovider/wlocate/WlocatePositionProviderPlugin.cpp:80
 msgctxt "Marble::WlocatePositionProviderPlugin|"
@@ -12991,38 +12849,27 @@ msgid "Operation not permitted"
 msgstr "Toimintoa ei sallita"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:751
-#, fuzzy
-#| msgid ""
-#| "Cannot merge a node from polygon's outer boundary with a node from one of "
-#| "its inner boundaries."
 msgctxt "Marble::AnnotatePlugin|"
 msgid ""
 "Cannot merge a node from polygon's outer boundary with a node from one of "
 "its inner boundaries."
 msgstr ""
-"Ei voida yhdistää monikulmion ulkoreunan pistettä sen sisäreunan pisteeseen."
+"Monikulmion ulkoreunan pistettä ei voi yhdistää sen sisäreunan pisteeseen."
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:756
-#, fuzzy
-#| msgid "Cannot merge two nodes from two different inner boundaries."
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Cannot merge two nodes from two different inner boundaries."
 msgstr ""
-"Ei voida yhdistää kahta pistettä, jotka ovat kahdesta erilaisesta "
-"sisäreunasta."
+"Ei voida yhdistää kahta pistettä, jotka ovat kahdesta eri sisäreunasta."
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:761
-#, fuzzy
-#| msgid ""
-#| "Cannot merge the selected nodes. Most probably this would make the "
-#| "polygon's outer boundary not contain all its inner boundary nodes."
 msgctxt "Marble::AnnotatePlugin|"
 msgid ""
 "Cannot merge the selected nodes. Most probably this would make the polygon's "
 "outer boundary not contain all its inner boundary nodes."
 msgstr ""
-"Valittuja pisteitä ei voida yhdistää. Todennäköisesti tämä johtaisi siihen, "
-"että monikulmion ulkoreuna ei sisällä kaikkia sisäreunan pisteitä."
+"Valittuja pisteitä ei voida yhdistää. Tämä johtaisi todennäköisesti siihen, "
+"ettei monikulmion ulkoreuna sisältäisi kaikkia sisäreunan pisteitä."
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:862
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:940
@@ -13312,12 +13159,9 @@ msgid "Not enough nodes specified."
 msgstr "Ei ole määritetty riittävän montaa solmua."
 
 #: src/plugins/render/annotate/EditPolygonDialog.cpp:276
-#, fuzzy
-#| msgid ""
-#| "Please specify at least 3 nodes for the polygon by clicking on the map."
 msgctxt "Marble::EditPolygonDialog|"
 msgid "Please specify at least 3 nodes for the polygon by clicking on the map."
-msgstr "Määritä ainakin kolme monikulmion solmua napsauttamalla karttaa."
+msgstr "Aseta karttaa napsauttamalla ainakin kolme monikulmion pistettä."
 
 #: src/plugins/render/annotate/EditPolygonDialog.ui:14
 msgctxt "UiEditPolygonDialog|"
@@ -13406,11 +13250,9 @@ msgid "Not enough nodes specified."
 msgstr "Ei ole määritetty riittävän montaa solmua."
 
 #: src/plugins/render/annotate/EditPolylineDialog.cpp:267
-#, fuzzy
-#| msgid "Please specify at least 2 nodes for the path by clicking on the map."
 msgctxt "Marble::EditPolylineDialog|"
 msgid "Please specify at least 2 nodes for the path by clicking on the map."
-msgstr "Määritä ainakin kaksi solmua polulle napsauttamalla karttaa."
+msgstr "Aseta karttaa napsauttamalla polulle ainakin kaksi pistettä."
 
 #: src/plugins/render/annotate/EditPolylineDialog.ui:14
 msgctxt "UiEditPolylineDialog|"
@@ -13611,16 +13453,12 @@ msgid "Amateur Radio &Aprs Plugin"
 msgstr "Amatööriradion &APRS-liitännäinen"
 
 #: src/plugins/render/aprs/AprsPlugin.cpp:136
-#, fuzzy
-#| msgid ""
-#| "This plugin displays APRS data gleaned from the Internet.  APRS is an "
-#| "Amateur Radio protocol for broadcasting location and other information."
 msgctxt "Marble::AprsPlugin|"
 msgid ""
 "This plugin displays APRS data gleaned from the Internet.  APRS is an "
 "Amateur Radio protocol for broadcasting location and other information."
 msgstr ""
-"Tämä liitännäinen näyttää Internetistä kerättyä APRS-tietoa. APRS on "
+"Liitännäinen esittää internetistä kerättyä APRS-tietoa. APRS on "
 "amatööriradioyhteyskäytäntö sijainti- ja muun tiedon lähettämiseen."
 
 #: src/plugins/render/atmosphere/AtmospherePlugin.cpp:59
@@ -13634,8 +13472,6 @@ msgid "&Atmosphere"
 msgstr "&Ilmakehä"
 
 #: src/plugins/render/atmosphere/AtmospherePlugin.cpp:79
-#, fuzzy
-#| msgid "Shows the atmosphere around the earth."
 msgctxt "Marble::AtmospherePlugin|"
 msgid "Shows the atmosphere around the earth."
 msgstr "Näyttää maata ympäröivän ilmakehän."
@@ -13833,12 +13669,9 @@ msgid "Show eclipses for year:"
 msgstr "Näytä pimennykset vuodelle:"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
-#, fuzzy
-#| msgctxt "Marble::MainWindow|"
-#| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
 msgid "&Settings…"
-msgstr "&Asetukset"
+msgstr "&Asetukset…"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 msgctxt "EclipsesBrowserDialog|"
@@ -14928,7 +14761,7 @@ msgstr "OpenDesktop-liitännäisen asetukset"
 #: src/plugins/render/opendesktop/OpenDesktopConfigWidget.ui:22
 msgctxt "OpenDesktopConfigWidget|"
 msgid "Number of displayed items on the screen:"
-msgstr ""
+msgstr "Näytettävien kohteiden määrä näytöllä:"
 
 #: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:46
 msgctxt "Marble::OpenDesktopPlugin|"
@@ -15056,7 +14889,7 @@ msgstr "Valokuvaliitännäisen asetukset"
 #: src/plugins/render/photo/PhotoConfigWidget.ui:24
 msgctxt "PhotoConfigWidget|"
 msgid "Number of items on the screen"
-msgstr ""
+msgstr "Kohteiden määrä näytöllä"
 
 #: src/plugins/render/photo/PhotoConfigWidget.ui:49
 msgctxt "PhotoConfigWidget|"
@@ -15163,11 +14996,9 @@ msgid "Please choose a color"
 msgstr "Valitse väri"
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:14
-#, fuzzy
-#| msgid "Position Marker Plugin"
 msgctxt "PositionMarkerConfigWidget|"
 msgid "Configure Position Marker Plugin"
-msgstr "Sijaintimerkkiliitännäinen"
+msgstr "Sijaintimerkkiliitännäisen asetukset"
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:20
 msgctxt "PositionMarkerConfigWidget|"
@@ -15195,6 +15026,8 @@ msgctxt "PositionMarkerConfigWidget|"
 msgid ""
 "Position marker images indicating the direction should point north (top)."
 msgstr ""
+"Sijaintimerkkikuvat, jotka osoittavat, että suunnan tulisi olla pohjoiseen "
+"(ylhäällä)."
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:150
 msgctxt "PositionMarkerConfigWidget|"
@@ -15214,7 +15047,7 @@ msgstr "&Tarkkuus:"
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:191
 msgctxt "PositionMarkerConfigWidget|"
 msgid "Color of the position marker's accuracy indicator."
-msgstr ""
+msgstr "Sijaintimerkin tarkkuusosoittimen väri."
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:201
 msgctxt "PositionMarkerConfigWidget|"
@@ -15224,7 +15057,7 @@ msgstr "Jälki:"
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:220
 msgctxt "PositionMarkerConfigWidget|"
 msgid "Color of the position marker's trail."
-msgstr ""
+msgstr "Sijaintimerkin jättämän jäljen väri."
 
 #: src/plugins/render/postalcode/PostalCodePlugin.cpp:33
 #: src/plugins/render/postalcode/PostalCodePlugin.cpp:38
@@ -15570,12 +15403,9 @@ msgid "Remove selected data source."
 msgstr "Poista valittu tietolähde."
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "SatellitesConfigDialog|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
 msgctxt "SatellitesConfigDialog|"
@@ -15609,6 +15439,7 @@ msgid ""
 "Configuration options not available since the plugin is disabled at the "
 "moment."
 msgstr ""
+"Asetukset eivät ole käytettävissä, koska liitännäinen on poistettu käytöstä."
 
 #: src/plugins/render/satellites/SatellitesConfigModel.cpp:147
 msgctxt "Marble::SatellitesConfigModel|"
@@ -16217,6 +16048,13 @@ msgid ""
 "Marble will only show the condition if this information is available.</p></"
 "body></html>\n"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
+"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
+"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Tässä voi valita, haluaako "
+"sääolosuhteet (esim. pilvisyyden tai poudan) näytettävän. Marble näyttää "
+"tiedon vain, jos se on saatavilla.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:33
 msgctxt "WeatherConfigWidget|"
@@ -16234,6 +16072,13 @@ msgid ""
 "temperature to be shown. The temperature will only be shown for the stations "
 "it is available for.</p></body></html>\n"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
+"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
+"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Valitsee, halutaanko "
+"näyttää lämpötila. Lämpötilatieto näytetään vain, jos se on saatavilla.</p></"
+"body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:44
 #: src/plugins/render/weather/WeatherConfigWidget.ui:84
@@ -16252,6 +16097,13 @@ msgid ""
 "wind direction to be shown. The wind direction will only be shown if it is "
 "available for the particular station.</p></body></html>\n"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
+"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
+"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Valitsee, näytetäänkö "
+"tieto tuulista. Tuulitieto näytetään vain, jos se on saatavilla.</p></body></"
+"html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:55
 msgctxt "WeatherConfigWidget|"
@@ -16269,6 +16121,13 @@ msgid ""
 "wind speed to be shown. The wind speed will only be shown if it is available "
 "for the particular station.</p></body></html>\n"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
+"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
+"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Valitsee, näytetäänkö "
+"tuulen nopeus. Tuulennopeustieto näytetään vain, jos se on saatavilla.</p></"
+"body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:66
 #: src/plugins/render/weather/WeatherConfigWidget.ui:113
@@ -17542,7 +17401,7 @@ msgstr "Asennetaan %1"
 #, qt-format
 msgctxt "Marble::MonavConfigWidget|"
 msgid "%1/%2 MB"
-msgstr ""
+msgstr "%1/%2 Mt"
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:610
 msgctxt "QObject|"
@@ -17668,7 +17527,7 @@ msgstr "Päiväys"
 #, qt-format
 msgctxt "Marble::MonavMapsModel|"
 msgid "%1 MB"
-msgstr ""
+msgstr "%1 Mt"
 
 #: src/plugins/runner/monav/MonavPlugin.cpp:217
 msgctxt "Marble::MonavPlugin|"

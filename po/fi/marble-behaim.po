@@ -1,30 +1,27 @@
-# Translation for marble-behaim.po to Euskara/Basque (eu).
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the marble package.
-# KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>.
+# SPDX-FileCopyrightText: 2024 Tommi Nieminen <translator@legisign.org>
 #
-# Translators:
-# SPDX-FileCopyrightText: 2024 Iñigo Salvador Azurmendi <xalba@ni.eus>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-04 00:36+0000\n"
-"PO-Revision-Date: 2024-11-30 18:58+0100\n"
-"Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
-"Language-Team: Basque <kde-i18n-eu@kde.org>\n"
-"Language: eu\n"
+"PO-Revision-Date: 2024-10-26 11:03+0300\n"
+"Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
+"Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: About.qml:9
 #, kde-format
 msgctxt "@title:group"
 msgid "Germanisches Nationalmuseum"
-msgstr "Germanisches Nationalmuseum"
+msgstr "Saksan kansallismuseo"
 
 #: About.qml:14
 #, kde-format
@@ -32,14 +29,14 @@ msgid ""
 "The original Behaim globe can be visited in the <a href=\"https://www.gnm.de/"
 "\">Germanisches Nationalmuseum</a> in Nuremberg, Germany."
 msgstr ""
-"Jatorrizko Behaim globoa <a href=\"https://www.gnm.de/\">Germanisches "
-"Nationalmuseum</a>ean, bisitatu daiteke, Nurenberg, Alemania."
+"Alkuperäisen Behaimin karttapallon voi nähdä <a href=\"https://www.gnm.de/"
+"\">Saksan kansallismuseossa</a> Nürnbergissä."
 
 #: About.qml:20
 #, kde-format
 msgctxt "@title:group"
 msgid "Map Content"
-msgstr "Maparen edukia"
+msgstr "Karttasisältö"
 
 #: About.qml:25
 #, kde-format
@@ -51,18 +48,11 @@ msgid ""
 "Ritter Martin Behaim nach den ältesten vorhandenen Urkunden\", Nuremberg "
 "1853. CC BY-SA 3.0."
 msgstr ""
-"TU Vienna-k eginiko ortoargazkietan oinarritutako mapa digitalizatua, 1990. "
-"Germanisches Nationalmuseum eta Friedrich-Alexander-Universität Erlangen-"
-"Nürnberg, CC BY-SA 3.0. Ghillany mapa bi planiglobotan oinarritua, F.W. "
-"Ghillany-ren \"Geschichte des Seefahrers Ritter Martin Behaim nach den "
-"ältesten vorhandenen Urkunden\" (\"Martin Behaim zaldun marinelaren "
-"historia, dauden dokumentu zaharrenen arabera\"), Nurenberg 1853. CC BY-SA "
-"3.0."
 
 #: main.cpp:32
 #, kde-format
 msgid "Marble Behaim"
-msgstr "Marble Behaim"
+msgstr "Marblen Behaim"
 
 #: main.cpp:34
 #, kde-format
@@ -70,13 +60,13 @@ msgid ""
 "Digital reproduction of a globe crafted at the time of Columbus' first sea "
 "travel to the west."
 msgstr ""
-"Kolonen mendebalderako lehen itsas bidaiaren garaian egindako globo baten "
-"erreprodukzio digitala."
+"Digijäljennös karttapallosta, joka luotiin Kolumbuksen ensimmäisen länteen "
+"suuntautuneen merimatkan aikaan."
 
 #: main.cpp:36
 #, kde-format
 msgid "© KDE Community"
-msgstr "© KDE Komunitatea"
+msgstr "© KDE-yhteisö"
 
 #: main.cpp:37
 #, kde-format
@@ -89,15 +79,13 @@ msgid ""
 "German.</p><p>Please see <a href=\"https://en.wikipedia.org/wiki/Erdapfel"
 "\">Wikipedia: Erdapfel</a> for further information about the Behaim globe."
 msgstr ""
-"<p>Martin Behaim-en Erdapfel (Lur-sagarra)</p><p>Existitzen den lurraren "
-"globorik zaharrena. Martin Behaim-ek eta haren kolaboratzaileek globoa 1492 "
-"inguruan sortu zuten, <a href=\"https://en.wikipedia.org/wiki/"
-"Voyages_of_Christopher_Columbus\">Kolon</a>en mendebalderako lehen itsas "
-"bidaiaren garaiaren inguruan. Horregatik, globo honetan Amerika kontinentea "
-"falta da. Ohartu, halaber, Aleman moderno goiztiarrean eginiko inskripzio "
-"zehatzak.</p><p>Mesedez, begiratu <a href=\"https://en.wikipedia.org/wiki/"
-"Erdapfel\">Wikipedia: Erdapfel</a> Behaim globoaren gaineko informazio "
-"zabalagorako."
+"<p>Martin Behaimin Erdapfel</p><p>Vanhin tunnettu karttapallo. Martin Behaim "
+"avustajineen teki karttapallon <a href=\"https://fi.wikipedia.org/wiki/"
+"Kristoffer_Kolumbus\">Kolumbuksen</a> ensimmäisen länteen suuntautuneen "
+"merimatkan aikana vuonna 1492. Tämän vuoksi kartasta puuttuu Amerikan "
+"manner. Huomaa myös tarkat kuvaukset varhaisesta nyky-Saksasta.</"
+"p><p>Lisätietoa Behaimin karttapallosta löytyy <a href=\"https://en."
+"wikipedia.org/wiki/Erdapfel\">englanninkielisestä Wikipediasta</a>."
 
 #: main.cpp:51
 #, kde-format
@@ -109,19 +97,19 @@ msgstr "Dennis Nienhüser"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Author"
-msgstr "Egilea"
+msgstr "Tekijä"
 
 #: main.cpp:53
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Iñigo Salvador Azurmendi"
+msgstr "Tommi Nieminen"
 
 #: main.cpp:53
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "xalba@ni.eus"
+msgstr "translator@legisign.org"
 
 #: MainScreen.qml:62
 #, kde-format
@@ -133,42 +121,42 @@ msgstr "Marble"
 #, kde-format
 msgctxt "@title:group"
 msgid "Globe Settings"
-msgstr "Globoaren ezarpenak"
+msgstr "Karttapalloasetukset"
 
 #: MainScreen.qml:86
 #, kde-format
 msgctxt "@option:check"
 msgid "Show Behaim places"
-msgstr "Behaim lekuak erakutsi"
+msgstr "Näytä Behaimin paikat"
 
 #: MainScreen.qml:91
 #, kde-format
 msgctxt "@option:check"
 msgid "Show texts and illustrations"
-msgstr "Testua eta ilustrazioak erakutsi"
+msgstr "Näytä tekstit ja kuvat"
 
 #: MainScreen.qml:96
 #, kde-format
 msgctxt "@option:check"
 msgid "Show the accurate coastline"
-msgstr "Itsasertz zehatza erakutsi"
+msgstr "Näytä tarkka rantaviiva"
 
 #: MainScreen.qml:102
 #, kde-format
 msgctxt "@title:group"
 msgid "Globe Variant"
-msgstr "Globoaren aldaera"
+msgstr "Karttapallon muunnelma"
 
 #: MainScreen.qml:111
 #, kde-format
 msgctxt "@option:radio"
 msgid "Original (1492)"
-msgstr "Jatorrizkoa (1492)"
+msgstr "Alkuperäinen (1492)"
 
 #: MainScreen.qml:113
 #, kde-format
 msgid "Digital imagery taken directly from the original Behaim globe."
-msgstr "Jatorrizko Behaim globotik zuzenean ateratako irudi digitalak."
+msgstr "Suoraan alkuperäisestä Behaim-karttapallosta otetut digikuvat."
 
 #: MainScreen.qml:124
 #, kde-format
@@ -179,7 +167,7 @@ msgstr "Ghillany (1853)"
 #: MainScreen.qml:125
 #, kde-format
 msgid "A (rough) facsimile created by Friedrich Wilhelm Ghillany in 1853."
-msgstr "Friedrich Wilhelm Ghillany-k 1853an sortutako faksimile (zakar) bat."
+msgstr "Friedrich Wilhem Ghillanyn vuonna 1853 tekemä (karkea) jäljennös."
 
 #: MainScreen.qml:136
 #, kde-format
@@ -190,16 +178,16 @@ msgstr "Ravenstein (1908)"
 #: MainScreen.qml:137
 #, kde-format
 msgid "A (rough) facsimile created by Ernest George Ravenstein in 1908."
-msgstr "Ernest George Ravenstein-ek 1908an sortutako faksimile (zakar) bat."
+msgstr "Ernest George Ravensteinin vuonna 1908 tekemä (karkea) jäljennös."
 
 #: MainScreen.qml:152
 #, kde-format
 msgctxt "@title:window"
 msgid "Behaim Globe"
-msgstr "Behaim globoa"
+msgstr "Behaimin karttapallo"
 
 #: MainScreen.qml:160
 #, kde-format
 msgctxt "@action:button"
 msgid "Information"
-msgstr "Informazioa"
+msgstr "Tietoa"
