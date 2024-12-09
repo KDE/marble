@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-11-10 12:46+0100\n"
+"PO-Revision-Date: 2024-12-08 15:42+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -9599,7 +9599,7 @@ msgid ""
 "<br />(c) 2007-%1 by the authors of Marble Virtual Globe<br /><br /><a href="
 "\"https://edu.kde.org/marble\">https://edu.kde.org/marble</a>"
 msgstr ""
-"<br />(c) 2007-%1 Os autores do Globo Virtual Marble<br /><br /><a href="
+"<br />© 2007-%1 Os autores do Globo Virtual Marble<br /><br /><a href="
 "\"https://edu.kde.org/marble\">https://edu.kde.org/marble</a>"
 
 #: src/lib/marble/MarbleAboutDialog.ui:14
@@ -10193,7 +10193,7 @@ msgstr "Arriba"
 #: src/lib/marble/MarbleNavigator.ui:65
 msgctxt "MarbleNavigator|"
 msgid "Tilts the globe's axis towards the user."
-msgstr "Inclina o eixo de rotación da terra cara o usuario."
+msgstr "Inclina o eixo de rotación da terra cara ao usuario."
 
 #: src/lib/marble/MarbleNavigator.ui:68 src/lib/marble/MarbleNavigator.ui:84
 #: src/lib/marble/MarbleNavigator.ui:103 src/lib/marble/MarbleNavigator.ui:122
@@ -10613,7 +10613,7 @@ msgstr ""
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Indica a notación dos "
 "ángulos nas coordenadas: úsase de maneira predeterminada a notación Graos "
-"Minutos Segundos  (p.ex. 54°30'00\"). Tamén se pode escoller graos decimais "
+"Minutos Segundos  (p.ex. 54° 30′ 00″). Tamén se pode escoller graos decimais "
 "(p.ex. 54.5°).</p></body></html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:105
@@ -10911,7 +10911,7 @@ msgstr "Faltan ferramentas de codificación."
 msgctxt "QObject|"
 msgid ""
 "Marble requires additional software in order to create movies. Please get %1 "
-msgstr "Marble necesita software adicional para crear filmes. Instale %1 "
+msgstr "Marble necesita programas adicionais para crear filmes. Instale %1 "
 
 #: src/lib/marble/MovieCapture.cpp:62
 msgctxt "Marble::MovieCapture|"
@@ -11379,7 +11379,7 @@ msgid ""
 "De facto standard for global texture data sets for computer software.</p>"
 msgstr ""
 "<p><b>Proxección equirectangular</b> (\"Plate carrée\")</p> <p>Aplicacións: "
-"estándar de facto para grupos de datos de texturas globais para software de "
+"estándar de facto para grupos de datos de texturas globais para programas de "
 "computador.</p>"
 
 #: src/lib/marble/projections/GnomonicProjection.cpp:55
