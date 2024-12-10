@@ -1046,7 +1046,7 @@
 
     <sect1 id="marble-mainwindow">
     <title
->Menús y teclas de acceso rápido</title>
+>Menús y atajos de teclado</title>
 
       <sect2>
       <title
@@ -1087,7 +1087,7 @@
 ></term>
             <listitem
 ><para
->Existe un acceso rápido de teclado para volver a abrir los mapas que haya usado recientemente. Si pulsa sobre este elemento se mostrará una lista al lado del menú con varios de los archivos usados recientemente. Si pulsa sobre alguno de ellos, se abrirá en &marble; (si el archivo continúa todavía en la misma ubicación).</para
+>Existe un atajo de teclado para volver a abrir los mapas que haya usado recientemente. Si pulsa sobre este elemento se mostrará una lista al lado del menú con varios de los archivos usados recientemente. Si pulsa sobre alguno de ellos, se abrirá en &marble; (si el archivo continúa todavía en la misma ubicación).</para
 ></listitem>
           </varlistentry>
 
