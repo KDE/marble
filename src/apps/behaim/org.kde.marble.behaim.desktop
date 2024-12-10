@@ -35,3 +35,4 @@ Name[zh_CN]=Marble 贝海姆地球仪
 Name[zh_TW]=Marble 倍海姆
 Exec=marble-behaim
 Icon=org.kde.marble.behaim
+Categories=Qt;KDE;Education;Geoscience;Geography;Science;Maps;
