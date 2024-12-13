@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-09-19 09:48+0400\n"
+"PO-Revision-Date: 2024-12-12 10:35+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -3120,20 +3120,14 @@ msgid "Bookmark Manager"
 msgstr "مدير العلامات"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:25
-#, fuzzy
-#| msgctxt "Marble::BookmarkManagerDialog|"
-#| msgid "Import Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Import Bookmarks…"
-msgstr "استورد العلامات"
+msgstr "استورد العلامات…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
-#, fuzzy
-#| msgctxt "Marble::BookmarkManagerDialog|"
-#| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Export Bookmarks…"
-msgstr "صدّر العلامات"
+msgstr "صدّر العلامات…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
@@ -3146,12 +3140,9 @@ msgid "New…"
 msgstr ""
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
-#, fuzzy
-#| msgctxt "UiBookmarkManagerDialog|"
-#| msgid "Rename..."
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Rename…"
-msgstr "أعد التسمية..."
+msgstr "أعد التسمية…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
 #: src/lib/marble/BookmarkManagerDialog.ui:151
@@ -3378,13 +3369,12 @@ msgstr "ق"
 #: src/lib/marble/CurrentLocationWidget.cpp:275
 msgctxt "QObject|"
 msgid "kt"
-msgstr ""
+msgstr "عقدة"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:278
-#, fuzzy
 msgctxt "QObject|"
 msgid "nm"
-msgstr " 1991 NM4"
+msgstr "ميل بحري"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:330
 #, fuzzy
@@ -3421,10 +3411,9 @@ msgid "Are you sure you want to clear the current track?"
 msgstr ""
 
 #: src/lib/marble/CurrentLocationWidget.ui:14
-#, fuzzy
 msgctxt "CurrentLocationWidget|"
 msgid "Current Location"
-msgstr "الحالي الموقع"
+msgstr "الموقع الحالي"
 
 #: src/lib/marble/CurrentLocationWidget.ui:26
 #, fuzzy
@@ -3524,10 +3513,9 @@ msgstr ""
 #: src/lib/marble/declarative/MarbleQuickItem.cpp:195
 #: src/lib/marble/routing/RoutingManager.cpp:556
 #: src/lib/marble/routing/RoutingManager.cpp:559
-#, fuzzy
 msgctxt "QObject|"
 msgid "Current Location"
-msgstr "الحالي الموقع"
+msgstr "الموقع الحالي"
 
 #: src/lib/marble/declarative/Placemark.cpp:93
 #, qt-format
@@ -4800,16 +4788,14 @@ msgid "%1 %2"
 msgstr ""
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:19
-#, fuzzy
 msgctxt "Marble::RouteRelationModel|"
 msgid "International walking route"
-msgstr "عالمي"
+msgstr "مسار مشي عالمي"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:20
-#, fuzzy
 msgctxt "Marble::RouteRelationModel|"
 msgid "National walking route"
-msgstr "ريجيونال REMOVE"
+msgstr "مسار مشي وطني"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:21
 msgctxt "Marble::RouteRelationModel|"
@@ -4822,10 +4808,9 @@ msgid "Local walking route"
 msgstr ""
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:23
-#, fuzzy
 msgctxt "Marble::RouteRelationModel|"
 msgid "International cycling route"
-msgstr "عالمي"
+msgstr "مسار دراجات عالمي"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:24
 msgctxt "Marble::RouteRelationModel|"
@@ -4835,12 +4820,12 @@ msgstr ""
 #: src/lib/marble/declarative/RouteRelationModel.cpp:25
 msgctxt "Marble::RouteRelationModel|"
 msgid "Regional cycling route"
-msgstr ""
+msgstr "مسار درجات إقليمي"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:26
 msgctxt "Marble::RouteRelationModel|"
 msgid "Local cycling route"
-msgstr ""
+msgstr "مسار درجات محليّ"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:27
 msgctxt "Marble::RouteRelationModel|State or county road in Texas, USA"
@@ -4860,18 +4845,17 @@ msgstr "طريق وطنية"
 #: src/lib/marble/declarative/RouteRelationModel.cpp:30
 msgctxt "Marble::RouteRelationModel|"
 msgid "Municipal route"
-msgstr ""
+msgstr "مسار بلدي"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:31
 msgctxt "Marble::RouteRelationModel|"
 msgid "Territorial route"
-msgstr ""
+msgstr "مسار إقليمي"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:32
-#, fuzzy
 msgctxt "Marble::RouteRelationModel|"
 msgid "Local route"
-msgstr "اطبع صفحة"
+msgstr "مسار محليّ"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:33
 msgctxt "Marble::RouteRelationModel|"
@@ -7444,7 +7428,7 @@ msgstr "خط العرض"
 #: src/lib/marble/LatLonBoxWidget.ui:151 src/lib/marble/LatLonBoxWidget.ui:203
 msgctxt "LatLonBoxWidget|"
 msgid "°"
-msgstr ""
+msgstr "°"
 
 #: src/lib/marble/LatLonBoxWidget.ui:66
 #, fuzzy
@@ -7491,17 +7475,17 @@ msgstr " ث"
 #: src/lib/marble/LatLonEdit.cpp:142
 msgctxt "Marble::LatLonEdit|"
 msgid "°"
-msgstr ""
+msgstr "°"
 
 #: src/lib/marble/LatLonEdit.cpp:192 src/lib/marble/LatLonEdit.cpp:351
 msgctxt "Marble::LatLonEdit|"
 msgid "'"
-msgstr ""
+msgstr "'"
 
 #: src/lib/marble/LatLonEdit.cpp:193
 msgctxt "Marble::LatLonEdit|"
 msgid "\""
-msgstr ""
+msgstr "\""
 
 #: src/lib/marble/LatLonEdit.cpp:541
 #, fuzzy
@@ -7530,17 +7514,17 @@ msgstr "ج"
 #: src/lib/marble/LatLonEdit.ui:28
 msgctxt "LatLonEditPrivate|"
 msgid "°"
-msgstr ""
+msgstr "°"
 
 #: src/lib/marble/LatLonEdit.ui:38
 msgctxt "LatLonEditPrivate|"
 msgid "′"
-msgstr ""
+msgstr "′"
 
 #: src/lib/marble/LatLonEdit.ui:54
 msgctxt "LatLonEditPrivate|"
 msgid "″"
-msgstr ""
+msgstr "″"
 
 #: src/lib/marble/LegendWidget.ui:14 src/lib/marble/NullLegendWidget.ui:14
 msgctxt "LegendWidget|"
@@ -8118,12 +8102,9 @@ msgid "Wms-Service:"
 msgstr "خدمة فاكس"
 
 #: src/lib/marble/MapWizard.ui:232
-#, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
 msgctxt "MapWizard|"
 msgid "Layer Selection"
-msgstr "خيارات الطبقات"
+msgstr "تحديد الطّبقة"
 
 #: src/lib/marble/MapWizard.ui:243
 msgctxt "MapWizard|"
@@ -8131,12 +8112,9 @@ msgid "Choose your Layer(s):"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:266
-#, fuzzy
-#| msgctxt "SearchField|"
-#| msgid "Search"
 msgctxt "MapWizard|"
 msgid "Search:"
-msgstr "ابحث"
+msgstr "ابحث:"
 
 #: src/lib/marble/MapWizard.ui:288
 msgctxt "MapWizard|"
@@ -8213,9 +8191,6 @@ msgid "Preset Layers"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:437
-#, fuzzy
-#| msgctxt "DGML|"
-#| msgid "OpenStreetMap"
 msgctxt "MapWizard|"
 msgid "OpenStreetMap"
 msgstr "خريطة الشّوارع المفتوحة"
@@ -8231,9 +8206,6 @@ msgid "The XYZ server needs to provide map tiles in Mercator projection."
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:479
-#, fuzzy
-#| msgctxt "FormattedTextWidget|"
-#| msgid "Color"
 msgctxt "MapWizard|"
 msgid "Color"
 msgstr "اللون"
@@ -8429,12 +8401,9 @@ msgid "preview image"
 msgstr "اطبع صفحة"
 
 #: src/lib/marble/MapWizard.ui:825
-#, fuzzy
-#| msgctxt "Marble::ConflictDialog|"
-#| msgid "Changed"
 msgctxt "MapWizard|"
 msgid "Change…"
-msgstr "مُغير"
+msgstr "غيّر…"
 
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
@@ -8508,7 +8477,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:1002
 msgctxt "MapWizard|"
 msgid "Thumbnail"
-msgstr ""
+msgstr "المصغّرة"
 
 #: src/lib/marble/MapWizard.ui:1012
 #, fuzzy
@@ -9775,10 +9744,9 @@ msgid "mi"
 msgstr "مي"
 
 #: src/lib/marble/MarbleLocale.cpp:131
-#, fuzzy
 msgctxt "QObject|means nautical miles"
 msgid "nm"
-msgstr " 1991 NM4"
+msgstr "ميل بحري"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:17
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10857,10 +10825,9 @@ msgid "Edit"
 msgstr "حرّر"
 
 #: src/lib/marble/osm/OsmRelationManagerWidget.ui:23
-#, fuzzy
 msgctxt "OsmRelationManagerWidgetPrivate|"
 msgid "Current Relations"
-msgstr "الحالي الموقع"
+msgstr "العلاقات الحالية"
 
 #: src/lib/marble/osm/OsmRelationManagerWidget.ui:34
 msgctxt "OsmRelationManagerWidgetPrivate|"
@@ -10878,10 +10845,9 @@ msgid "Role"
 msgstr "الدّور"
 
 #: src/lib/marble/osm/OsmRelationManagerWidget.ui:67
-#, fuzzy
 msgctxt "OsmRelationManagerWidgetPrivate|"
 msgid "Add Relation"
-msgstr "الارتفاع :"
+msgstr "أضف علاقة"
 
 #: src/lib/marble/osm/OsmRelationManagerWidget_p.cpp:75
 msgctxt "QObject|"
@@ -10948,12 +10914,9 @@ msgid "All Supported Files (*.png)"
 msgstr "الكل مدعوم ملفات GPS البيانات جوجل الأرض"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid "Browse"
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Browse…"
-msgstr "تصفح"
+msgstr "تصفّح…"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -10987,10 +10950,9 @@ msgid "Placemark position provider Plugin"
 msgstr "ابحث سطر"
 
 #: src/lib/marble/PlacemarkPositionProviderPlugin.cpp:42
-#, fuzzy
 msgctxt "Marble::PlacemarkPositionProviderPlugin|"
 msgid "Placemark"
-msgstr "ابحث سطر"
+msgstr "علامة مكانية"
 
 #: src/lib/marble/PlacemarkPositionProviderPlugin.cpp:52
 msgctxt "Marble::PlacemarkPositionProviderPlugin|"
@@ -11058,10 +11020,9 @@ msgid "Sky"
 msgstr "السماء"
 
 #: src/lib/marble/PlanetFactory.cpp:248
-#, fuzzy
 msgctxt "QObject|a planet without data"
 msgid "Unknown Planet"
-msgstr "الإصدار مجهول"
+msgstr "كوكب مجهول"
 
 #: src/lib/marble/PluginAboutDialog.cpp:51
 #, qt-format
@@ -11531,16 +11492,14 @@ msgid "&Center Map here"
 msgstr "&وسط الخريطة هنا"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:186
-#, fuzzy
 msgctxt "QObject|"
 msgid "Current &Location"
-msgstr "الحالي الموقع"
+msgstr "الموقع ال&حالي"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:189
-#, fuzzy
 msgctxt "QObject|"
 msgid "From &Map..."
-msgstr "افتح الخريطة."
+msgstr "من ال&خريطة..."
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:193
 #, fuzzy
@@ -11572,16 +11531,14 @@ msgid "&Remove this Destination"
 msgstr "مسطح الخريطة"
 
 #: src/lib/marble/routing/RoutingLayer.cpp:190
-#, fuzzy
 msgctxt "QObject|"
 msgid "&Export Route..."
-msgstr "صدِّر الخريطة."
+msgstr "&صدِّر المسار..."
 
 #: src/lib/marble/routing/RoutingLayer.cpp:754
-#, fuzzy
 msgctxt "Marble::RoutingLayer|"
 msgid "Export Route"
-msgstr "صدِّر الخريطة"
+msgstr "صدِّر المسار"
 
 #: src/lib/marble/routing/RoutingLayer.cpp:756
 msgctxt "Marble::RoutingLayer|"
@@ -11612,16 +11569,14 @@ msgid "The Marble development team wishes you a pleasant and safe journey."
 msgstr ""
 
 #: src/lib/marble/routing/RoutingManager.cpp:513
-#, fuzzy
 msgctxt "Marble::RoutingManager|"
 msgid "Guidance Mode"
-msgstr "حول رخامي"
+msgstr "وضع التوجيه"
 
 #: src/lib/marble/routing/RoutingManager.cpp:514
-#, fuzzy
 msgctxt "Marble::RoutingManager|"
 msgid "Show again"
-msgstr "عرض الشبكة"
+msgstr "اعرض مجددًا"
 
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:14
 #, fuzzy
@@ -11698,13 +11653,12 @@ msgstr "حساب جديد"
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
 msgid "&Add…"
-msgstr ""
+msgstr "أ&ضف…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
-#, fuzzy
 msgctxt "RoutingSettingsWidget|"
 msgid "&Configure…"
-msgstr "الملاحة عنصر تحكم"
+msgstr "ا&ضبط…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 msgctxt "RoutingSettingsWidget|"
@@ -11722,10 +11676,9 @@ msgid "Move &Down"
 msgstr "انقل لأ&سفل"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:189
-#, fuzzy
 msgctxt "QObject|"
 msgid "Get Directions"
-msgstr "حول رخامي"
+msgstr "احصل على الاتجاهات"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:190
 msgctxt "QObject|"
@@ -11743,22 +11696,19 @@ msgid "Find places matching the search term"
 msgstr ""
 
 #: src/lib/marble/routing/RoutingWidget.cpp:224
-#, fuzzy
 msgctxt "QObject|"
 msgid "Open Route"
-msgstr "صدِّر الخريطة"
+msgstr "افتح المسار"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:229
-#, fuzzy
 msgctxt "QObject|"
 msgid "Save Route"
-msgstr "صدِّر الخريطة"
+msgstr "احفظ المسار"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:234
-#, fuzzy
 msgctxt "QObject|"
 msgid "Preview Route"
-msgstr "صدِّر الخريطة"
+msgstr "عاين المسار"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:239
 #: src/lib/marble/routing/RoutingWidget.cpp:240
@@ -11785,10 +11735,9 @@ msgid "Reverse Route"
 msgstr "اعكس الطريق"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:259
-#, fuzzy
 msgctxt "QObject|"
 msgid "Clear Route"
-msgstr "صدِّر الخريطة"
+msgstr "امسح المسار"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:266
 msgctxt "QObject|"
@@ -11808,10 +11757,9 @@ msgid "No placemark found"
 msgstr "ابحث سطر"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:558
-#, fuzzy
 msgctxt "Marble::RoutingWidget|"
 msgid "No route found"
-msgstr "ابحث سطر"
+msgstr "لم يعثر على مسار"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:640
 #, fuzzy, qt-format
@@ -11820,10 +11768,9 @@ msgid "routes found: %1"
 msgstr "ابحث سطر"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:660
-#, fuzzy
 msgctxt "Marble::RoutingWidget|"
 msgid "Open Route"
-msgstr "صدِّر الخريطة"
+msgstr "افتح المسار"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:660
 msgctxt "Marble::RoutingWidget|"
@@ -11831,10 +11778,9 @@ msgid "KML Files (*.kml)"
 msgstr ""
 
 #: src/lib/marble/routing/RoutingWidget.cpp:692
-#, fuzzy
 msgctxt "Marble::RoutingWidget|"
 msgid "Save Route"
-msgstr "صدِّر الخريطة"
+msgstr "احفظ المسار"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:694
 msgctxt "Marble::RoutingWidget|"
@@ -11842,10 +11788,9 @@ msgid "KML files (*.kml)"
 msgstr ""
 
 #: src/lib/marble/routing/RoutingWidget.cpp:712
-#, fuzzy
 msgctxt "Marble::RoutingWidget|"
 msgid "Uploading route..."
-msgstr "صدِّر الخريطة."
+msgstr "يرفع المسار..."
 
 #: src/lib/marble/routing/RoutingWidget.ui:46
 msgctxt "RoutingWidget|"
@@ -11908,10 +11853,9 @@ msgid "km"
 msgstr "كم"
 
 #: src/lib/marble/RoutingRunner.cpp:57
-#, fuzzy
 msgctxt "Marble::RoutingRunner|"
 msgid "nm"
-msgstr " 1991 NM4"
+msgstr "ميل بحري"
 
 #: src/lib/marble/RoutingRunner.cpp:69
 #, qt-format
@@ -11921,17 +11865,15 @@ msgstr "%1:%2 س"
 
 #: src/lib/marble/SearchInputWidget.cpp:73
 #: src/lib/marble/SearchInputWidget.cpp:96
-#, fuzzy
 msgctxt "Marble::SearchInputWidget|"
 msgid "Global Search"
-msgstr "إ&بحث"
+msgstr "بحث عام"
 
 #: src/lib/marble/SearchInputWidget.cpp:76
 #: src/lib/marble/SearchInputWidget.cpp:96
-#, fuzzy
 msgctxt "Marble::SearchInputWidget|"
 msgid "Area Search"
-msgstr "إ&بحث"
+msgstr "منطقة البحث"
 
 #: src/lib/marble/SearchWidget.cpp:57
 msgctxt "QObject|"
@@ -11945,16 +11887,14 @@ msgid "Search for '%1'"
 msgstr "بحث عن '%1'"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:37
-#, fuzzy
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Audio location"
-msgstr "الارتفاع :"
+msgstr "موقع الصوتيات"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:67
-#, fuzzy
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Select sound files..."
-msgstr "اعرض شكل ، نموذج"
+msgstr "حدد ملفات الصوت..."
 
 #: src/lib/marble/SoundCueEditWidget.cpp:67
 #, fuzzy
@@ -12029,10 +11969,9 @@ msgstr ""
 "weight:600;\"> رخامي سطح المكتب الكرة الأرضية</span></p></body></html>"
 
 #: src/lib/marble/TileCreatorDialog.ui:20
-#, fuzzy
 msgctxt "TileCreatorDialog|"
 msgid "Creating Map"
-msgstr "جاري الإنشاء الخريطة"
+msgstr "ينشئ الخريطة"
 
 #: src/lib/marble/TileCreatorDialog.ui:507
 #, fuzzy
@@ -12211,12 +12150,9 @@ msgid "Destination video"
 msgstr "الوصف حقل"
 
 #: src/lib/marble/TourCaptureDialog.ui:81
-#, fuzzy
-#| msgctxt "Marble::RouteItemDelegate|"
-#| msgid "Open"
 msgctxt "TourCaptureDialog|"
 msgid "Open…"
-msgstr "افتح"
+msgstr "افتح…"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
@@ -12244,16 +12180,14 @@ msgid "Pause"
 msgstr "ألبث"
 
 #: src/lib/marble/TourItemDelegate.cpp:93
-#, fuzzy
 msgctxt "Marble::TourItemDelegate|"
 msgid "Play the tour"
-msgstr "المقطوعة"
+msgstr "شغّل الجولة"
 
 #: src/lib/marble/TourItemDelegate.cpp:95
-#, fuzzy
 msgctxt "Marble::TourItemDelegate|"
 msgid "Pause the tour"
-msgstr "المقطوعة"
+msgstr "ألبث الجولة"
 
 #: src/lib/marble/TourItemDelegate.cpp:127
 #, qt-format
@@ -12262,10 +12196,10 @@ msgid "Wait for %1 seconds"
 msgstr ""
 
 #: src/lib/marble/TourItemDelegate.cpp:171
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::TourItemDelegate|"
 msgid "Create item %1"
-msgstr "مسطح الخريطة"
+msgstr "أنشئ العنصر %1"
 
 #: src/lib/marble/TourItemDelegate.cpp:176
 #, qt-format
@@ -12302,10 +12236,9 @@ msgid "Add FlyTo"
 msgstr ""
 
 #: src/lib/marble/TourWidget.cpp:143
-#, fuzzy
 msgctxt "QObject|"
 msgid "Add Wait"
-msgstr "المسار"
+msgstr "أضف انتظار"
 
 #: src/lib/marble/TourWidget.cpp:145
 #, fuzzy
@@ -12314,22 +12247,19 @@ msgid "Add SoundCue"
 msgstr "اعرض شكل ، نموذج"
 
 #: src/lib/marble/TourWidget.cpp:148
-#, fuzzy
 msgctxt "QObject|"
 msgid "Add Placemark"
-msgstr "ابحث سطر"
+msgstr "أضف علامة مكانية"
 
 #: src/lib/marble/TourWidget.cpp:150
-#, fuzzy
 msgctxt "QObject|"
 msgid "Remove placemark"
-msgstr "ابحث سطر"
+msgstr "احذف علامة مكانية"
 
 #: src/lib/marble/TourWidget.cpp:152
-#, fuzzy
 msgctxt "QObject|"
 msgid "Change placemark"
-msgstr "ابحث سطر"
+msgstr "غير علامة مكانية"
 
 #: src/lib/marble/TourWidget.cpp:154
 msgctxt "QObject|"
@@ -12337,10 +12267,9 @@ msgid "Loop"
 msgstr "حلقة"
 
 #: src/lib/marble/TourWidget.cpp:329
-#, fuzzy
 msgctxt "QObject|"
 msgid "Save tour"
-msgstr "المقطوعة"
+msgstr "احفظ الجولة"
 
 #: src/lib/marble/TourWidget.cpp:330
 msgctxt "QObject|"
@@ -12348,10 +12277,9 @@ msgid "There are unsaved Tours. Do you want to save your changes?"
 msgstr ""
 
 #: src/lib/marble/TourWidget.cpp:358
-#, fuzzy
 msgctxt "QObject|"
 msgid "Open Tour"
-msgstr "المقطوعة"
+msgstr "افتح جولة"
 
 #: src/lib/marble/TourWidget.cpp:358 src/lib/marble/TourWidget.cpp:820
 msgctxt "QObject|"
@@ -12359,10 +12287,9 @@ msgid "KML Tours (*.kml)"
 msgstr ""
 
 #: src/lib/marble/TourWidget.cpp:536
-#, fuzzy
 msgctxt "QObject|"
 msgid "Remove Selected Items"
-msgstr "مسطح الخريطة"
+msgstr "أزل العناصر المحددة"
 
 #: src/lib/marble/TourWidget.cpp:537
 msgctxt "QObject|"
@@ -12370,10 +12297,9 @@ msgid "Are you sure want to remove selected items?"
 msgstr ""
 
 #: src/lib/marble/TourWidget.cpp:820
-#, fuzzy
 msgctxt "QObject|"
 msgid "Save Tour as"
-msgstr "المقطوعة"
+msgstr "احفظ الجولة كـ"
 
 #: src/lib/marble/TourWidget.cpp:880
 msgctxt "QObject|"
@@ -12417,28 +12343,24 @@ msgid "Delete"
 msgstr "احذف"
 
 #: src/lib/marble/TourWidget.ui:123
-#, fuzzy
 msgctxt "TourWidget|"
 msgid "New Tour"
-msgstr "المقطوعة"
+msgstr "جولة جديدة"
 
 #: src/lib/marble/TourWidget.ui:135
-#, fuzzy
 msgctxt "TourWidget|"
 msgid "Save Tour"
-msgstr "المقطوعة"
+msgstr "احفظ الجولة"
 
 #: src/lib/marble/TourWidget.ui:147
-#, fuzzy
 msgctxt "TourWidget|"
 msgid "Save Tour As"
-msgstr "المقطوعة"
+msgstr "احفظ الجولة كـ"
 
 #: src/lib/marble/TourWidget.ui:156
-#, fuzzy
 msgctxt "TourWidget|"
 msgid "Open Tour"
-msgstr "المقطوعة"
+msgstr "افتح جولة"
 
 #: src/lib/marble/TourWidget.ui:168
 msgctxt "TourWidget|"
@@ -12461,10 +12383,9 @@ msgid "Stops touring (playing again will start tour from the start)"
 msgstr ""
 
 #: src/lib/marble/TourWidget.ui:192
-#, fuzzy
 msgctxt "TourWidget|"
 msgid "Record tour"
-msgstr "المقطوعة"
+msgstr "سجّل جولة"
 
 #: src/lib/marble/TourWidget.ui:195
 msgctxt "TourWidget|"
@@ -12472,10 +12393,9 @@ msgid "Converts the loaded tour into a movie"
 msgstr ""
 
 #: src/lib/marble/WaitEditWidget.cpp:36
-#, fuzzy
 msgctxt "Marble::WaitEditWidget|"
 msgid "Wait duration:"
-msgstr "الملاحة"
+msgstr "مدة الانتظار:"
 
 #: src/lib/marble/WaitEditWidget.cpp:41
 msgctxt "Marble::WaitEditWidget|seconds"
@@ -12630,10 +12550,9 @@ msgid "Are you sure you want to remove the current item?"
 msgstr ""
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:342
-#, fuzzy
 msgctxt "QObject|"
 msgid "Clear all annotations"
-msgstr "ابحث سطر"
+msgstr "أمحو كل الشروح"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:343
 msgctxt "QObject|"
@@ -12720,10 +12639,9 @@ msgid "Add Nodes"
 msgstr "إضافة العقد"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:879
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Placemark"
-msgstr "ابحث سطر"
+msgstr "أضف علامة مكانية"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:882
 msgctxt "Marble::AnnotatePlugin|"
@@ -12829,22 +12747,19 @@ msgstr ""
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1403
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1423
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Select Node"
-msgstr "اعرض شكل ، نموذج"
+msgstr "حدد عقدة"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1407
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Delete Node"
-msgstr "اعرض شكل ، نموذج"
+msgstr "احذف عقدة"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1423
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Deselect Node"
-msgstr "اعرض شكل ، نموذج"
+msgstr "أزل تحديد العقدة"
 
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:31
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:34
@@ -13487,28 +13402,24 @@ msgid "Depth:"
 msgstr "العمق:"
 
 #: src/plugins/render/earthquake/EarthquakePlugin.cpp:55
-#, fuzzy
 msgctxt "Marble::EarthquakePlugin|"
 msgid "Earthquakes"
-msgstr "الأرض"
+msgstr "الزلازل"
 
 #: src/plugins/render/earthquake/EarthquakePlugin.cpp:60
-#, fuzzy
 msgctxt "Marble::EarthquakePlugin|"
 msgid "&Earthquakes"
-msgstr "الأرض"
+msgstr "ال&زلازل"
 
 #: src/plugins/render/earthquake/EarthquakePlugin.cpp:75
-#, fuzzy
 msgctxt "Marble::EarthquakePlugin|"
 msgid "Shows earthquakes on the map."
-msgstr "اعرض تطبيق s حول صندوق"
+msgstr "تعرض الزلازل على الخريطة"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:14
-#, fuzzy
 msgctxt "EclipsesBrowserDialog|"
 msgid "Eclipse Browser"
-msgstr "الموقع المتصفح"
+msgstr "متصفح الكسوف"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:35
 msgctxt "EclipsesBrowserDialog|"
@@ -13516,12 +13427,9 @@ msgid "Show eclipses for year:"
 msgstr ""
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
-#, fuzzy
-#| msgctxt "Marble::MainWindow|"
-#| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
 msgid "&Settings…"
-msgstr "إ&عدادات"
+msgstr "إ&عدادات…"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 msgctxt "EclipsesBrowserDialog|"
@@ -13534,10 +13442,9 @@ msgid "&Go To Selected Eclipse"
 msgstr ""
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:17
-#, fuzzy
 msgctxt "EclipsesConfigDialog|"
 msgid "Eclipses Configuration"
-msgstr "ابحث سطر"
+msgstr "ضبط الخسوف"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:30
 msgctxt "EclipsesConfigDialog|"
@@ -13819,10 +13726,9 @@ msgid "ft"
 msgstr "ق"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfilePlotAxis.cpp:155
-#, fuzzy
 msgctxt "Marble::ElevationProfilePlotAxis|"
 msgid "nm"
-msgstr " 1991 NM4"
+msgstr "ميل بحري"
 
 #: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:65
 #, fuzzy
@@ -13945,13 +13851,12 @@ msgstr "م"
 #: src/plugins/render/gpsinfo/GpsInfo.cpp:131
 msgctxt "Marble::GpsInfo|"
 msgid "kt"
-msgstr ""
+msgstr "عقدة"
 
 #: src/plugins/render/gpsinfo/GpsInfo.cpp:133
-#, fuzzy
 msgctxt "Marble::GpsInfo|"
 msgid "nm"
-msgstr " 1991 NM4"
+msgstr "ميل بحري"
 
 #: src/plugins/render/gpsinfo/GpsInfoPlugin.ui:29
 msgctxt "GpsInfoPlugin|"
@@ -14195,10 +14100,9 @@ msgid "mi"
 msgstr "ميل"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:243
-#, fuzzy
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "nm"
-msgstr " 1991 NM4"
+msgstr "ميل بحري"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:349
 msgctxt "Marble::MapScaleFloatItem|"
@@ -14296,12 +14200,14 @@ msgstr ""
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:360
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:477
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid ""
 "Area:\n"
 "%1"
-msgstr "الأطلس"
+msgstr ""
+"المساحة:\n"
+"%1"
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:380
 #, qt-format
@@ -14407,7 +14313,7 @@ msgstr "الحالي الموقع"
 #: src/plugins/render/navigation/NavigationFloatItem.cpp:234
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Home Button"
-msgstr ""
+msgstr "زر المنزل"
 
 #: src/plugins/render/notes/NotesItem.cpp:97
 msgctxt "Marble::NotesItem|The author name is not known"
@@ -14685,7 +14591,6 @@ msgid "&Size:"
 msgstr "ال&حجم:"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:97
-#, fuzzy
 msgctxt "OverviewMapConfigWidget|"
 msgid "x"
 msgstr "×"
@@ -14810,16 +14715,14 @@ msgid "No known copyright restrictions"
 msgstr ""
 
 #: src/plugins/render/positionmarker/PositionMarker.cpp:79
-#, fuzzy
 msgctxt "Marble::PositionMarker|"
 msgid "Position Marker"
-msgstr "الموضع: %1"
+msgstr "علامة موضع"
 
 #: src/plugins/render/positionmarker/PositionMarker.cpp:84
-#, fuzzy
 msgctxt "Marble::PositionMarker|"
 msgid "&Position Marker"
-msgstr "الموضع: %1"
+msgstr "&علامة موضع"
 
 #: src/plugins/render/positionmarker/PositionMarker.cpp:99
 msgctxt "Marble::PositionMarker|"
@@ -14844,10 +14747,9 @@ msgid "Please choose a color"
 msgstr "الرجاء اختيار لون"
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:14
-#, fuzzy
 msgctxt "PositionMarkerConfigWidget|"
 msgid "Configure Position Marker Plugin"
-msgstr "الموضع: %1"
+msgstr "اضبط ملحقة علامة الموضع"
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:20
 msgctxt "PositionMarkerConfigWidget|"
@@ -14897,10 +14799,9 @@ msgid "Color of the position marker's accuracy indicator."
 msgstr ""
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:201
-#, fuzzy
 msgctxt "PositionMarkerConfigWidget|"
 msgid "Trail:"
-msgstr "مسلك"
+msgstr "المسلك:"
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:220
 msgctxt "PositionMarkerConfigWidget|"
@@ -15608,7 +15509,7 @@ msgstr "كم/سا"
 #: src/plugins/render/speedometer/Speedometer.cpp:131
 msgctxt "Marble::Speedometer|"
 msgid "kt"
-msgstr ""
+msgstr "عقدة"
 
 #: src/plugins/render/speedometer/Speedometer.ui:45
 msgctxt "Speedometer|"
