@@ -1,0 +1,318 @@
+# Sanskrit translations for marble package.
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the marble package.
+# Kali <EMAIL@ADDRESS>, 2024.
+#
+# SPDX-FileCopyrightText: 2024 kali <skkalwar999@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: marble\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-10-04 00:36+0000\n"
+"PO-Revision-Date: 2024-12-13 20:20+0530\n"
+"Last-Translator: kali <skkalwar999@gmail.com>\n"
+"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
+"Language: sa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 24.08.2\n"
+
+#: Bookmarks.qml:20
+#, kde-format
+msgctxt "@title:window"
+msgid "Bookmarks"
+msgstr ""
+
+#: Bookmarks.qml:69
+#, kde-format
+msgid "Your bookmarks will appear here."
+msgstr "भवतः पुस्तकचिह्नानि अत्र दृश्यन्ते।"
+
+#. i18n: ectx: label, entry (MapThemeId), group (General)
+#: config.kcfg:14
+#, kde-format
+msgid "The marble theme id"
+msgstr "संगमरमरस्य विषयः id"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, kde-format
+msgid "Routing profile"
+msgstr "रूटिंग प्रोफाइल"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, kde-format
+msgid "Car"
+msgstr "कारयानम्‌"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, kde-format
+msgid "Bicycle"
+msgstr "द्विचक्रिका"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, kde-format
+msgid "Pedestrian"
+msgstr "पदयात्री"
+
+#: CurrentPosition.qml:54
+#, kde-format
+msgctxt "@option:check"
+msgid "Follow Current Position"
+msgstr ""
+
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
+#, kde-format
+msgid "Marble Maps"
+msgstr "संगमरमर मानचित्र"
+
+#: main.cpp:44
+#, kde-format
+msgid "Maps"
+msgstr "मानचित्र"
+
+#: main.cpp:46
+#, kde-format
+msgid "© KDE Community"
+msgstr "© KDE समुदाय"
+
+#: main.cpp:52
+#, kde-format
+msgid "Carl Schwan"
+msgstr "कार्ल स्वान्"
+
+#: main.cpp:53
+#, kde-format
+msgid "Developer"
+msgstr "विकासकः"
+
+#: main.cpp:58
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+
+#: main.cpp:58
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+
+#: MainScreen.qml:87
+#, kde-format
+msgid "Public Transport"
+msgstr "सार्वजनिक परिवहन"
+
+#: MainScreen.qml:102
+#, kde-format
+msgid "Outdoor Activities"
+msgstr "बहिः क्रियाकलापाः"
+
+#: MainScreen.qml:114
+#, kde-format
+msgctxt "@action:button"
+msgid "Accessibility"
+msgstr ""
+
+#: MainScreen.qml:123
+#, kde-format
+msgctxt "@action:button"
+msgid "About"
+msgstr ""
+
+#: MainScreen.qml:134
+#, kde-format
+msgctxt "@action:button"
+msgid "Bookmarks"
+msgstr ""
+
+#: MainScreen.qml:145
+#, kde-format
+msgctxt "@action:button"
+msgid "Layer Options"
+msgstr ""
+
+#: MainScreen.qml:156
+#, kde-format
+msgctxt "@action:button"
+msgid "Theme Options"
+msgstr ""
+
+#: MainScreen.qml:167
+#, kde-format
+msgid "Routing"
+msgstr "मार्गनिर्धारणम्"
+
+#: MainScreen.qml:457
+#, kde-format
+msgid "%1 km"
+msgstr "%1 कि.मी"
+
+#: NavigationInfoBar.qml:20
+#, kde-format
+msgctxt "distance in km"
+msgid "%1 km"
+msgstr "%1 कि.मी"
+
+#: NavigationInfoBar.qml:22
+#, kde-format
+msgctxt "distance in m"
+msgid "%1 m"
+msgstr ""
+
+#: NavigationInfoBar.qml:24
+#, kde-format
+msgctxt "distance in m with decimals"
+msgid "%1 m"
+msgstr ""
+
+#: Options.qml:20
+#, kde-format
+msgctxt "@title:window"
+msgid "Layer Options"
+msgstr ""
+
+#: Options.qml:23
+#, kde-format
+msgctxt "@title:group"
+msgid "Public Transport Layers"
+msgstr ""
+
+#: Options.qml:28
+#, kde-format
+msgctxt "@option:check"
+msgid "Train"
+msgstr ""
+
+#: Options.qml:35
+#, kde-format
+msgctxt "@option:check"
+msgid "Subway"
+msgstr ""
+
+#: Options.qml:42
+#, kde-format
+msgctxt "@option:check"
+msgid "Tram"
+msgstr ""
+
+#: Options.qml:49
+#, kde-format
+msgctxt "@option:check"
+msgid "Bus"
+msgstr ""
+
+#: Options.qml:56
+#, kde-format
+msgctxt "@option:check"
+msgid "Trolley Bus"
+msgstr ""
+
+#: Options.qml:64
+#, kde-format
+msgid "Outdoor Activities Layers"
+msgstr "बहिः क्रियाकलापाः स्तराः"
+
+#: Options.qml:69
+#, kde-format
+msgctxt "@option:check"
+msgid "Walkways"
+msgstr ""
+
+#: Options.qml:76
+#, kde-format
+msgctxt "@option:check"
+msgid "Hiking Routes"
+msgstr ""
+
+#: Options.qml:83
+#, kde-format
+msgctxt "@option:check"
+msgid "Bicycle Routes"
+msgstr ""
+
+#: Options.qml:90
+#, kde-format
+msgctxt "@option:check"
+msgid "Mountainbike Routes"
+msgstr ""
+
+#: Options.qml:97
+#, kde-format
+msgctxt "@option:check"
+msgid "Inline Skating Routes"
+msgstr ""
+
+#: Options.qml:104
+#, kde-format
+msgctxt "@option:check"
+msgid "Bridleways"
+msgstr ""
+
+#: PlacemarkDialog.qml:48
+#, kde-format
+msgctxt "placeholder"
+msgid "No Name"
+msgstr ""
+
+#: PlacemarkDialog.qml:168
+#, kde-format
+msgctxt "@title:group"
+msgid "Tags:"
+msgstr ""
+
+#: ProfileSelectorMenu.qml:124
+#, kde-format
+msgid "Car (fastest)"
+msgstr "कार (वेगतम) २."
+
+#: RouteEditorPage.qml:19
+#, kde-format
+msgctxt "@title"
+msgid "Routing"
+msgstr "मार्गनिर्धारणम्"
+
+#: RouteEditorPage.qml:102
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr ""
+
+#: RouteEditorPage.qml:104
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Arrival:"
+msgstr ""
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr ""
+
+#: RouteEditorPage.qml:194
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Alternatives:"
+msgstr ""
+
+#: SettingsDialog.qml:48
+#, kde-format
+msgid "Network Settings"
+msgstr "संजालसेटिंग्स्"
+
+#: SettingsDialog.qml:53
+#, kde-format
+msgid "Download Maps via WLAN only"
+msgstr "केवलं WLAN मार्गेण नक्शाः डाउनलोड् कुर्वन्तु"
+
+#: ThemeConfigPage.qml:19
+#, kde-format
+msgctxt "@title:window"
+msgid "Themes"
+msgstr ""
