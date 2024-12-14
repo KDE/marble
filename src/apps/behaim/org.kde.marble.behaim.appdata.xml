@@ -32,6 +32,7 @@
   <name xml:lang="pt">Globo Behaim</name>
   <name xml:lang="pt-BR">Globo de Behaim</name>
   <name xml:lang="ru">Глобус Бехайма</name>
+  <name xml:lang="sa">बेहैम ग्लोब</name>
   <name xml:lang="sk">Behaim Globe</name>
   <name xml:lang="sl">Behaim Globe</name>
   <name xml:lang="sv">Behaim-jordgloben</name>
@@ -64,6 +65,7 @@
   <summary xml:lang="pt">Erdapfel de Martin Behaim</summary>
   <summary xml:lang="pt-BR">Erdapfel de Martin Behaim</summary>
   <summary xml:lang="ru">«Земное яблоко» Мартина Бехайма</summary>
+  <summary xml:lang="sa">मार्टिन् बेहैमस्य एर्डाप्फेल्</summary>
   <summary xml:lang="sk">Martin Behaim Erdapfel</summary>
   <summary xml:lang="sl">Martin Behaim's Erdapfel</summary>
   <summary xml:lang="sv">Martin Behaims Erdapfel</summary>
@@ -97,6 +99,7 @@
     <p xml:lang="pt">O globo Terrestre mais antigo existente. O Martin Behaim e os seus colaboradores criaram o globo por volta de 1492, na altura da primeira travessia marítima para Oeste por Colombo.</p>
     <p xml:lang="pt-BR">O globo mais antigo existente na Terra. Martin Behaim e colaboradores criaram o globo por volta de 1492 na época da primeira viagem marítima de Colombo para o oeste.</p>
     <p xml:lang="ru">Самый старый существующий глобус Земли, был создан под руководством Мартина Бехайма примерно в 1492 году во время первого морского путешествия Колумба на запад.</p>
+    <p xml:lang="sa">पृथिव्याः प्राचीनतमः विद्यमानः भूमण्डलः । मार्टिन् बेहैम् इत्यनेन सहकारिभिः सह कोलम्बसस्य पश्चिमदिशि प्रथमसमुद्रयात्रायाः समये १४९२ तमे वर्षे एव भूमण्डलस्य निर्माणं कृतम् ।</p>
     <p xml:lang="sk">Najstarší existujúci glóbus Zeme. Martin Behaim a spolupracovníci vytvorili glóbus okolo roku 1492 v čase Kolumbovej plavby na západ.</p>
     <p xml:lang="sl">Najstarejši obstoječi globus sveta. Martin Behaim in sodelavci so ustvarili globus okoli leta 1492 ob času Kolumbovega prvega potovanja na zahod.</p>
     <p xml:lang="sv">Den äldsta kända jordgloben. Martin Behaim och hans medarbetare skapade jordgloben cirka 1492 vid tiden för Columbus första sjöresa västerut.</p>
@@ -157,6 +160,7 @@
       <caption xml:lang="lv">Digitāls attēls, kas ir tiešā veidā iegūts no Behaima globusa oriģināla</caption>
       <caption xml:lang="nl">Digitaal beeldmateriaal direct genomen van de originele globe van Behaim.</caption>
       <caption xml:lang="pl">Cyfrowe obrazy zdjęte bezpośrednio z oryginalnego globusu Behaim.</caption>
+      <caption xml:lang="sa">मूल बेहैम ग्लोबतः प्रत्यक्षतया गृहीताः अङ्कीयप्रतिबिम्बाः ।</caption>
       <caption xml:lang="sl">Digitalni posnetki, posneti neposredno iz originalnega Behaimovega globusa.</caption>
       <caption xml:lang="sv">Digitala bilder tagna direkt från den ursprungliga Behaim-jordgloben.</caption>
       <caption xml:lang="tr">Doğrudan özgün Behaim küresinden alınan sayısal görüntüleme.</caption>
@@ -182,6 +186,7 @@
       <caption xml:lang="lv">Rupjš faksimils, ko 1853. gadā izveidoja Frīdrihs Vilhelms Gilanī</caption>
       <caption xml:lang="nl">Een (ruwe) facsimile gemaakt door Friedrich Wilhelm Ghillany in 1853.</caption>
       <caption xml:lang="pl">(zgrubna) podobizna stworzona przez Friedricha Wilhelma Ghillany w 1853.</caption>
+      <caption xml:lang="sa">१८५३ तमे वर्षे फ्रेडरिक विल्हेल्म घ्लानी इत्यनेन निर्मितं (रूक्षं) प्रतिरूपम् ।</caption>
       <caption xml:lang="sl">(Grobi) faksimile, ki ga je ustvaril Friedrich Wilhelm Ghillany leta 1853.</caption>
       <caption xml:lang="sv">En (grov) faksimil skapad av Friedrich Wilhelm Ghillany 1853.</caption>
       <caption xml:lang="tr">1853 yılında Friedrich Wilhelm Ghillany tarafından oluşturulmuş (kaba) bir faksimile.</caption>
@@ -207,6 +212,7 @@
       <caption xml:lang="lv">Rupjš faksimils, ko 1908. gadā izveidoja Ernests Georgs Ravenštains.</caption>
       <caption xml:lang="nl">Een (ruwe) facsimile gemaakt door Ernest George Ravenstein in 1908.</caption>
       <caption xml:lang="pl">(zgrubna) podobizna stworzona przez Ernesta George Ravensteina w 1908.</caption>
+      <caption xml:lang="sa">१९०८ तमे वर्षे अर्नेस्ट् जार्ज रेवेन्स्टीन् इत्यनेन निर्मितं (रूक्षं) प्रतिरूपम् ।</caption>
       <caption xml:lang="sl">(Grobi) faksimile, ki ga je ustvaril Ernest George Ravenstein leta 1908.</caption>
       <caption xml:lang="sv">En (grov) faksimil skapad av Ernest George Ravenstein 1908.</caption>
       <caption xml:lang="tr">1908 yılında Ernest George Ravenstein tarafından oluşturulmuş (kaba) bir faksimile.</caption>
