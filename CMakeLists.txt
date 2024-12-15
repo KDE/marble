@@ -110,8 +110,6 @@ set_package_properties(KF6 PROPERTIES
     TYPE RECOMMENDED
 )
 
-qt_policy(SET QTP0001 NEW)
-
 find_package(Protobuf)
 set_package_properties(Protobuf PROPERTIES TYPE OPTIONAL PURPOSE "Parsing of OSM PBF files.")
 
