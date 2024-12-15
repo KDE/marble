@@ -22,7 +22,7 @@ if(NOT ANDROID)
     target_link_libraries(marble-maps PUBLIC KF6::Crash)
 endif()
 
-qt_add_qml_module(marble-maps
+ecm_add_qml_module(marble-maps
     URI org.kde.marble.maps
     QML_FILES
         MainScreen.qml

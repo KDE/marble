@@ -19,7 +19,7 @@ if(NOT MARBLE_NO_WEBKITWIDGETS)
     add_definitions(-DMARBLE_WEBKITWIDGETS=1)
 endif()
 
-qt_add_qml_module(marble-behaim
+ecm_add_qml_module(marble-behaim
     URI org.kde.marble.behaim
     QML_FILES
         MainScreen.qml
