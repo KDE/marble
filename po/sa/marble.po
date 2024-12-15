@@ -22,12 +22,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "भवतः नामानि"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "भवतः ईमेलपत्राणि"
 
 #: kdemain.cpp:84
 #, kde-format
@@ -893,13 +893,13 @@ msgstr "सर्वाणि समर्थितसञ्चिकाः"
 #, kde-format
 msgctxt "@title:window"
 msgid "Open File"
-msgstr ""
+msgstr "सञ्चिकां उद्घाटयन्तु"
 
 #: marble_part.cpp:267
 #, kde-format
 msgctxt "@title:window"
 msgid "Export Map"
-msgstr ""
+msgstr "निर्यात मानचित्र"
 
 #: marble_part.cpp:267
 #, kde-format
@@ -910,7 +910,7 @@ msgstr "चित्राणि *.jpg *.png"
 #, kde-format
 msgctxt "Application name"
 msgid "Marble"
-msgstr ""
+msgstr "संगमरवरः"
 
 #: marble_part.cpp:279
 #, kde-format
@@ -926,85 +926,85 @@ msgstr "अनामिका"
 #, kde-format
 msgctxt "Action for downloading an entire region of a map"
 msgid "Download Region..."
-msgstr ""
+msgstr "Download क्षेत्र..."
 
 #: marble_part.cpp:693
 #, kde-format
 msgctxt "Action for saving the map to a file"
 msgid "&Export Map..."
-msgstr ""
+msgstr "&निर्यात मानचित्र..."
 
 #: marble_part.cpp:701
 #, kde-format
 msgctxt "Action for toggling offline mode"
 msgid "&Work Offline"
-msgstr ""
+msgstr "&अफलाइन कार्यं कुर्वन्तु"
 
 #: marble_part.cpp:709
 #, kde-format
 msgctxt "Action for copying the map to the clipboard"
 msgid "&Copy Map"
-msgstr ""
+msgstr "&नक्शा प्रतिलिपि कुर्वन्तु"
 
 #: marble_part.cpp:714
 #, kde-format
 msgctxt "Action for copying the coordinates to the clipboard"
 msgid "C&opy Coordinates"
-msgstr ""
+msgstr "C&opy निर्देशांक"
 
 #: marble_part.cpp:720
 #, kde-format
 msgctxt "Action for opening a file"
 msgid "&Open..."
-msgstr ""
+msgstr "&उद्घाटित..."
 
 #: marble_part.cpp:726
 #, kde-format
 msgctxt "Action for downloading maps (GHNS)"
 msgid "Download Maps..."
-msgstr ""
+msgstr "नक्शे डाउनलोड करें..."
 
 #: marble_part.cpp:729
 #, kde-format
 msgctxt "Status tip"
 msgid "Download new maps"
-msgstr ""
+msgstr "नवीन मानचित्रं डाउनलोड् कुर्वन्तु"
 
 #: marble_part.cpp:734
 #, kde-format
 msgctxt "Action for creating new maps"
 msgid "&Create a New Map..."
-msgstr ""
+msgstr "&नवीन मानचित्रं रचयन्तु..."
 
 #: marble_part.cpp:737
 #, kde-format
 msgctxt "Status tip"
 msgid "A wizard guides you through the creation of your own map theme."
-msgstr ""
+msgstr "एकः जादूगरः भवन्तं स्वस्य नक्शाविषयस्य निर्माणस्य माध्यमेन मार्गदर्शनं करोति ।"
 
 #: marble_part.cpp:761
 #, kde-format
 msgctxt "Action for toggling clouds"
 msgid "&Clouds"
-msgstr ""
+msgstr "&मेघाः"
 
 #: marble_part.cpp:767
 #, kde-format
 msgctxt "Action for sun control dialog"
 msgid "S&un Control..."
-msgstr ""
+msgstr "S&un Control..."
 
 #: marble_part.cpp:776
 #, kde-format
 msgctxt "Action for time control dialog"
 msgid "&Time Control..."
-msgstr ""
+msgstr "&समय नियन्त्रण..."
 
 #: marble_part.cpp:782
 #, kde-format
 msgctxt "Action for locking float items on the map"
 msgid "Lock Position"
-msgstr ""
+msgstr "ताला पदम्"
 
 #: marble_part.cpp:791
 #, kde-format
@@ -1055,13 +1055,13 @@ msgstr "उपसौरबिन्दुपर्यन्तं ग्लो�
 #, kde-format
 msgctxt "Add Bookmark"
 msgid "Add &Bookmark..."
-msgstr ""
+msgstr "Add &Bookmark..."
 
 #: marble_part.cpp:830
 #, kde-format
 msgctxt "Show Bookmarks"
 msgid "Show &Bookmarks"
-msgstr ""
+msgstr "&पुस्तकचिह्नं दर्शयतु"
 
 #: marble_part.cpp:831
 #, kde-format
@@ -1077,13 +1077,13 @@ msgstr "&गृहस्थानं सेट् कुर्वन्तु"
 #, kde-format
 msgctxt "Manage Bookmarks"
 msgid "&Manage Bookmarks..."
-msgstr ""
+msgstr "&बुकमार्कं प्रबन्धयतु..."
 
 #: marble_part.cpp:853
 #, kde-format
 msgctxt "Edit the map in an external application"
 msgid "&Edit Map..."
-msgstr ""
+msgstr "&नक्शा सम्पादयतु..."
 
 #: marble_part.cpp:859
 #, kde-format
@@ -1109,31 +1109,31 @@ msgstr "भूमण्डलस्य चलच्चित्रस्य र�
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Position"
-msgstr ""
+msgstr "स्थितिं दर्शयतु"
 
 #: marble_part.cpp:1204
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Date and Time"
-msgstr ""
+msgstr "तिथिं समयं च दर्शयतु"
 
 #: marble_part.cpp:1205
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Altitude"
-msgstr ""
+msgstr "ऊर्ध्वता दर्शयतु"
 
 #: marble_part.cpp:1206
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Tile Zoom Level"
-msgstr ""
+msgstr "टाइल् जूम स्तरं दर्शयतु"
 
 #: marble_part.cpp:1207
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Download Progress Bar"
-msgstr ""
+msgstr "डाउनलोड् प्रगतिपट्टिकां दर्शयतु"
 
 #: marble_part.cpp:1298
 #, kde-format

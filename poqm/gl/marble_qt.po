@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-12-08 15:42+0100\n"
+"PO-Revision-Date: 2024-12-14 11:21+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -4047,7 +4047,7 @@ msgstr "Non está supervisado"
 #, qt-format
 msgctxt "Marble::Placemark|Parking spaces"
 msgid "%1 disabled spaces"
-msgstr "%1 espazos para discapacitados"
+msgstr "%1 espazos para xente con discapacidade"
 
 #: src/lib/marble/declarative/Placemark.cpp:376
 #, qt-format
@@ -17434,7 +17434,7 @@ msgstr ""
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:639
 msgctxt "Marble::MonavConfigWidget|"
 msgid "Are you sure you want to delete this map from the system?"
-msgstr "Seguro que quere retirar o mapa do sistema?"
+msgstr "Seguro que quere eliminar o mapa do sistema?"
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:640
 msgctxt "Marble::MonavConfigWidget|"

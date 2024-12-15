@@ -20,7 +20,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:group"
 msgid "Germanisches Nationalmuseum"
-msgstr ""
+msgstr "जर्मनिक राष्ट्रीय संग्रहालय"
 
 #: About.qml:14
 #, kde-format
@@ -35,7 +35,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:group"
 msgid "Map Content"
-msgstr ""
+msgstr "नक्शा सामग्री"
 
 #: About.qml:25
 #, kde-format
@@ -93,67 +93,67 @@ msgstr ""
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dennis Nienhüser"
-msgstr ""
+msgstr "डेनिस निएनहुसर"
 
 #: main.cpp:51
 #, kde-format
 msgctxt "@info:credit"
 msgid "Author"
-msgstr ""
+msgstr "लेखकः"
 
 #: main.cpp:53
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "भवतः नामानि"
 
 #: main.cpp:53
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "भवतः ईमेलपत्राणि"
 
 #: MainScreen.qml:62
 #, kde-format
 msgctxt "@title"
 msgid "Marble"
-msgstr ""
+msgstr "संगमरवरः"
 
 #: MainScreen.qml:80
 #, kde-format
 msgctxt "@title:group"
 msgid "Globe Settings"
-msgstr ""
+msgstr "ग्लोब सेटिंग्स्"
 
 #: MainScreen.qml:86
 #, kde-format
 msgctxt "@option:check"
 msgid "Show Behaim places"
-msgstr ""
+msgstr "बेहैम स्थानानि दर्शयतु"
 
 #: MainScreen.qml:91
 #, kde-format
 msgctxt "@option:check"
 msgid "Show texts and illustrations"
-msgstr ""
+msgstr "ग्रन्थान् दृष्टान्तान् च दर्शयतु"
 
 #: MainScreen.qml:96
 #, kde-format
 msgctxt "@option:check"
 msgid "Show the accurate coastline"
-msgstr ""
+msgstr "सटीकं तटरेखां दर्शयतु"
 
 #: MainScreen.qml:102
 #, kde-format
 msgctxt "@title:group"
 msgid "Globe Variant"
-msgstr ""
+msgstr "ग्लोब वैरिएंट"
 
 #: MainScreen.qml:111
 #, kde-format
 msgctxt "@option:radio"
 msgid "Original (1492)"
-msgstr ""
+msgstr "मूल (१४९२) २."
 
 #: MainScreen.qml:113
 #, kde-format
@@ -164,7 +164,7 @@ msgstr "मूल बेहैम ग्लोबतः प्रत्यक्
 #, kde-format
 msgctxt "@option:radio"
 msgid "Ghillany (1853)"
-msgstr ""
+msgstr "गिलानी (१८५३) २."
 
 #: MainScreen.qml:125
 #, kde-format
@@ -175,7 +175,7 @@ msgstr "१८५३ तमे वर्षे फ्रेडरिक वि�
 #, kde-format
 msgctxt "@option:radio"
 msgid "Ravenstein (1908)"
-msgstr ""
+msgstr "रेवेन्स्टीन (१९०८) २."
 
 #: MainScreen.qml:137
 #, kde-format
@@ -186,10 +186,10 @@ msgstr "१९०८ तमे वर्षे अर्नेस्ट् ज�
 #, kde-format
 msgctxt "@title:window"
 msgid "Behaim Globe"
-msgstr ""
+msgstr "बेहैम ग्लोब"
 
 #: MainScreen.qml:160
 #, kde-format
 msgctxt "@action:button"
 msgid "Information"
-msgstr ""
+msgstr "सूचना"
