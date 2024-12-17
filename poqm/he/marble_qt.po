@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-12-01 09:30+0200\n"
+"PO-Revision-Date: 2024-12-16 07:55+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -9950,10 +9950,9 @@ msgid "Reset View"
 msgstr "איפוס תצוגה"
 
 #: src/lib/marble/MarbleNavigator.ui:100
-#, fuzzy
 msgctxt "MarbleNavigator|"
 msgid "Click this button to restore the original zoom level and view angle."
-msgstr "לחץ על כפתור זה כדי לשחזר את רמת ההתקרבות וזווית הצפייה המקורית."
+msgstr "לחיצה על כפתור תשחזר את המרחק ואת וזווית הצפייה המקורית."
 
 #: src/lib/marble/MarbleNavigator.ui:109
 msgctxt "MarbleNavigator|"
