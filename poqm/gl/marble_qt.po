@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-12-16 00:24+0100\n"
+"PO-Revision-Date: 2024-12-17 22:23+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -8371,9 +8371,9 @@ msgid ""
 "about the purpose, origin, copyright and license of the data used in your "
 "map theme."
 msgstr ""
-"Unha descrición breve do tema do mapa. Pódese indicar información sobre o "
-"obxectivo, orixe, dereitos de autor e licenza dos datos empregados no tema "
-"do mapa."
+"Unha descrición breve do tema do mapa. Pódese fornecer información sobre o "
+"obxectivo, orixe, dereitos de autor e licenza dos datos usados no tema do "
+"mapa."
 
 #: src/lib/marble/MapWizard.ui:775
 msgctxt "MapWizard|"
@@ -9409,6 +9409,7 @@ msgctxt "QObject|"
 msgid "<b>Street Map</b>"
 msgstr "<b>Mapa urbano</b>"
 
+# skip-rule: trasno-provide
 #: src/lib/marble/MarbleAboutDialog.cpp:285
 msgctxt "QObject|"
 msgid ""
@@ -9422,7 +9423,7 @@ msgid ""
 msgstr ""
 "<p><i>OpenStreetMap</i><br />Os mapas urbanos usados en Marble descárganse "
 "do Proxecto <a href=\"https://www.openstreetmap.org\">OpenStreetMap</a> "
-"(\"OSM\"). OSM é unha comunidade aberta que crea mapas libres modificábeis. "
+"(«OSM»). OSM é unha comunidade aberta que crea mapas libres modificábeis. "
 "<i>Licenza</i>: Os datos de OpenStreetMap pódense usar libremente baixo os "
 "termos da <a href=\"https://wiki.openstreetmap.org/index.php/"
 "OpenStreetMap_License\">licenza Creative Commons Atribución-Compartir igual "
@@ -11525,6 +11526,7 @@ msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Last synchronization: %1"
 msgstr "Última sincronización: %1"
 
+# skip-rule: trasno-item
 #: src/lib/marble/RemoveItemEditWidget.cpp:34
 msgctxt "Marble::RemoveItemEditWidget|"
 msgid "Choose item:"
@@ -13532,10 +13534,11 @@ msgctxt "Marble::CompassFloatItem|"
 msgid "&Compass"
 msgstr "&Compás"
 
+# skip-rule: trasno-item, trasno-provide
 #: src/plugins/render/compass/CompassFloatItem.cpp:77
 msgctxt "Marble::CompassFloatItem|"
 msgid "This is a float item that provides a compass."
-msgstr "Esta é un compás móbil."
+msgstr "Este é un compás móbil."
 
 #: src/plugins/render/compass/CompassFloatItem.cpp:137
 msgctxt "Marble::CompassFloatItem|"
@@ -15502,6 +15505,7 @@ msgctxt "Marble::SatellitesPlugin|"
 msgid "Special-Interest Satellites"
 msgstr "Satélites de especial interese"
 
+# skip-rule: trasno-gl_lanzar
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:419
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Last 30 Days' Launches"
