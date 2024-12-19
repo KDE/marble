@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Youssef Chahibi <chahibi@gmail.com>, 2007.
 # Ali S AlNoaimi <me@the-ghost.com>, 2010.
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2022.
+# SPDX-FileCopyrightText: 2022, 2024 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-25 00:37+0000\n"
-"PO-Revision-Date: 2022-01-22 21:09+0400\n"
+"PO-Revision-Date: 2024-12-18 17:21+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -18,6 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -395,7 +396,7 @@ msgid "Claudiu Covaci"
 msgstr ""
 
 #: kdemain.cpp:181
-#, fuzzy, kde-format
+#, kde-format
 msgid "David Roberts"
 msgstr "ديفيد روبرتس"
 
@@ -542,7 +543,7 @@ msgid "Artwork"
 msgstr "العمل الفنّي"
 
 #: kdemain.cpp:211
-#, fuzzy, kde-format
+#, kde-format
 msgid "Luis Silva"
 msgstr "لويس سيلفا"
 
@@ -559,7 +560,7 @@ msgid "Stefan Jordan"
 msgstr ""
 
 #: kdemain.cpp:213
-#, fuzzy, kde-format
+#, kde-format
 msgid "Robert Scott"
 msgstr "روبرت سكوت"
 
@@ -895,12 +896,12 @@ msgid "Export Map"
 msgstr "صدِّر الخريطة"
 
 #: marble_part.cpp:267
-#, fuzzy, kde-format
+#, kde-format
 msgid "Images *.jpg *.png"
-msgstr "الصور (*.png *.jpeg)"
+msgstr "صور *.jpg *.png"
 
 #: marble_part.cpp:279
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Application name"
 msgid "Marble"
 msgstr "ماربل"
@@ -916,10 +917,10 @@ msgid "Unnamed"
 msgstr "غير مسمًّى"
 
 #: marble_part.cpp:681
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Action for downloading an entire region of a map"
 msgid "Download Region..."
-msgstr "نزّل &منطقة…"
+msgstr "نزّل منطقة…"
 
 #: marble_part.cpp:693
 #, kde-format
@@ -952,10 +953,10 @@ msgid "&Open..."
 msgstr "ا&فتح..."
 
 #: marble_part.cpp:726
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Action for downloading maps (GHNS)"
 msgid "Download Maps..."
-msgstr "&نزل الخرائط..."
+msgstr "نزل الخرائط..."
 
 #: marble_part.cpp:729
 #, fuzzy, kde-format
