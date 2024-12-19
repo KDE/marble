@@ -5,6 +5,7 @@
             {
                 "Email": "kossebau@kde.org",
                 "Name": "Friedrich W. H. Kossebau",
+                "Name[ar]": "فريدريش دبليو اتش كوسباو",
                 "Name[bg]": "Friedrich W. H. Kossebau",
                 "Name[ca@valencia]": "Friedrich W. H. Kossebau",
                 "Name[ca]": "Friedrich W. H. Kossebau",
@@ -60,6 +61,7 @@
         "Id": "org.kde.plasma.worldclock",
         "License": "LGPL",
         "Name": "World Clock",
+        "Name[ar]": "الساعة العالمية",
         "Name[bg]": "Световен часовник",
         "Name[ca@valencia]": "Rellotge mundial",
         "Name[ca]": "Rellotge mundial",

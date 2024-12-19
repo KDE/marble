@@ -5,6 +5,7 @@
             {
                 "Email": "kossebau@kde.org",
                 "Name": "Friedrich W. H. Kossebau",
+                "Name[ar]": "فريدريش دبليو اتش كوسباو",
                 "Name[bg]": "Friedrich W. H. Kossebau",
                 "Name[ca@valencia]": "Friedrich W. H. Kossebau",
                 "Name[ca]": "Friedrich W. H. Kossebau",
@@ -59,6 +60,7 @@
         "Id": "org.kde.plasma.worldmap",
         "License": "LGPL",
         "Name": "World Map",
+        "Name[ar]": "خريطة العالم",
         "Name[bg]": "Карта на света",
         "Name[ca@valencia]": "Mapa mundial",
         "Name[ca]": "Mapa mundial",
