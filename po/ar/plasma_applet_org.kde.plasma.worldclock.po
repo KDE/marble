@@ -1,74 +1,74 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the marble package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SPDX-FileCopyrightText: 2024 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-28 00:36+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Arabic <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2024-12-18 17:22+0400\n"
+"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
+"Language-Team: ar\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: package/contents/config/config.qml:12
 #, kde-format
 msgid "Map Display"
-msgstr ""
+msgstr "عرض الخريطة"
 
 #: package/contents/ui/configMapDisplay.qml:26
 #, kde-format
 msgid "Projection:"
-msgstr ""
+msgstr "الإسقاط:"
 
 #: package/contents/ui/configMapDisplay.qml:28
 #, kde-format
 msgid "Equirectangular"
-msgstr ""
+msgstr "متساوي المستطيلات"
 
 #: package/contents/ui/configMapDisplay.qml:29
 #, kde-format
 msgid "Mercator"
-msgstr ""
+msgstr "ميراكور"
 
 #: package/contents/ui/configMapDisplay.qml:42
 #, kde-format
 msgid "Center on:"
-msgstr ""
+msgstr "وسط في:"
 
 #: package/contents/ui/configMapDisplay.qml:44
 #, kde-format
 msgid "Daylight"
-msgstr ""
+msgstr "ضوء النّهار"
 
 #: package/contents/ui/configMapDisplay.qml:45
 #, kde-format
 msgid "Longitude"
-msgstr ""
+msgstr "خطّ الطول"
 
 #: package/contents/ui/configMapDisplay.qml:46
 #, kde-format
 msgid "Location"
-msgstr ""
+msgstr "المكان"
 
 #: package/contents/ui/configMapDisplay.qml:62
 #, kde-format
 msgid "Longitude:"
-msgstr ""
+msgstr "خط الطول:"
 
 #: package/contents/ui/configMapDisplay.qml:95
 #, kde-format
 msgid "Show date:"
-msgstr ""
+msgstr "أعرض التاريخ:"
 
 #: package/contents/ui/configTimeZones.qml:17
 #, kde-format
 msgid "Use custom time zone selection:"
-msgstr ""
+msgstr "استخدم اختيار المنطقة الزمنية المخصصة:"

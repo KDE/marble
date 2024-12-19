@@ -1,59 +1,59 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the marble package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SPDX-FileCopyrightText: 2024 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:24+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Arabic <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2024-12-18 17:22+0400\n"
+"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
+"Language-Team: ar\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: contents/ui/config.qml:22
 #, kde-format
 msgid "Projection:"
-msgstr ""
+msgstr "الإسقاط:"
 
 #: contents/ui/config.qml:24
 #, kde-format
 msgid "Equirectangular"
-msgstr ""
+msgstr "متساوي المستطيلات"
 
 #: contents/ui/config.qml:25
 #, kde-format
 msgid "Mercator"
-msgstr ""
+msgstr "ميراكور"
 
 #: contents/ui/config.qml:37
 #, kde-format
 msgid "Center on:"
-msgstr ""
+msgstr "وسط في:"
 
 #: contents/ui/config.qml:39
 #, kde-format
 msgid "Daylight"
-msgstr ""
+msgstr "ضوء النّهار"
 
 #: contents/ui/config.qml:40
 #, kde-format
 msgid "Longitude"
-msgstr ""
+msgstr "خطّ الطول"
 
 #: contents/ui/config.qml:41
 #, kde-format
 msgid "Location"
-msgstr ""
+msgstr "المكان"
 
 #: contents/ui/config.qml:53
 #, kde-format
 msgid "Longitude:"
-msgstr ""
+msgstr "خط الطول:"
