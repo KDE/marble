@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-12-14 01:13+0530\n"
+"PO-Revision-Date: 2024-12-20 22:01+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
@@ -177,7 +177,7 @@ msgstr "सेलेनोग्राफिक पोल"
 #. file data/maps/earth/temp-july/temp-july.dgml:11
 msgctxt "DGML|"
 msgid "Temperature (July)"
-msgstr "तापमान (जुलाई) ९."
+msgstr "तापमान (जुलाई)"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:21
 msgctxt "DGML|"
@@ -726,7 +726,7 @@ msgstr "० मी"
 #. file data/maps/earth/srtm/srtm.dgml:346
 msgctxt "DGML|"
 msgid "0 m (Water)"
-msgstr "० मी (जल) २."
+msgstr "० मी (जल)"
 
 #. file data/maps/earth/srtm/srtm.dgml:350
 msgctxt "DGML|"
@@ -1567,7 +1567,7 @@ msgstr ""
 #. file data/maps/earth/behaim1492/behaim1492.dgml:181
 msgctxt "DGML|"
 msgid "Places (in German)"
-msgstr "स्थानानि (जर्मनभाषायां) २."
+msgstr "स्थानानि (जर्मनभाषायां)"
 
 #. file data/maps/earth/behaim1492/behaim1492.dgml:184
 msgctxt "DGML|"
@@ -1587,12 +1587,12 @@ msgstr "प्रतिकृति रेखाचित्रम्"
 #. file data/maps/earth/behaim1492/behaim1492.dgml:193
 msgctxt "DGML|"
 msgid "Ravenstein (1908)"
-msgstr "रेवेन्स्टीन (१९०८) २."
+msgstr "रेवेन्स्टीन (१९०८)"
 
 #. file data/maps/earth/behaim1492/behaim1492.dgml:196
 msgctxt "DGML|"
 msgid "Ghillany (1853)"
-msgstr "गिलानी (१८५३) २."
+msgstr "गिलानी (१८५३)"
 
 #. file data/maps/earth/behaim1492/behaim1492.dgml:199
 msgctxt "DGML|"
@@ -1609,7 +1609,7 @@ msgstr "सटीक तटरेखा"
 #. file data/maps/earth/precip-july/precip-july.dgml:11
 msgctxt "DGML|"
 msgid "Precipitation (July)"
-msgstr "वर्षा (जुलाई) ९."
+msgstr "वर्षा (जुलाई)"
 
 #. file data/maps/earth/precip-july/precip-july.dgml:21
 msgctxt "DGML|"
@@ -1690,7 +1690,7 @@ msgstr "१०२४ मि.मी"
 #. file data/maps/earth/precip-dec/precip-dec.dgml:11
 msgctxt "DGML|"
 msgid "Precipitation (December)"
-msgstr "वर्षा (दिसम्बर) २."
+msgstr "वर्षा (दिसम्बर)"
 
 #. file data/maps/earth/precip-dec/precip-dec.dgml:21
 msgctxt "DGML|"
@@ -1752,7 +1752,7 @@ msgstr "<p>ईएसए इत्यस्य सेन्टिनेल् २
 #. file data/maps/earth/temp-dec/temp-dec.dgml:11
 msgctxt "DGML|"
 msgid "Temperature (December)"
-msgstr "तापमान (दिसम्बर) २."
+msgstr "तापमान (दिसम्बर)"
 
 #. file data/maps/earth/temp-dec/temp-dec.dgml:21
 msgctxt "DGML|"
@@ -1850,7 +1850,7 @@ msgstr "<br/>"
 #. file data/legend.html
 msgctxt "Legends|"
 msgid "Capitals:"
-msgstr "राजधानी : १."
+msgstr "राजधानी :"
 
 #. file data/legend.html
 msgctxt "Legends|"
@@ -2648,12 +2648,12 @@ msgstr "टाइल् जूम स्तरं दर्शयतु"
 #: src/apps/marble-qt/QtMainWindow.cpp:420
 msgctxt "Marble::MainWindow|"
 msgid "Degree (DMS)"
-msgstr "डिग्री (DMS) ९."
+msgstr "डिग्री (DMS)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:425
 msgctxt "Marble::MainWindow|"
 msgid "Degree (Decimal)"
-msgstr "डिग्री (दशमलव) ९."
+msgstr "डिग्री (दशमलव)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:430
 msgctxt "Marble::MainWindow|"
@@ -2808,37 +2808,37 @@ msgstr "पूर्वनिर्धारित (Resizable) ."
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC (%1x%2)"
-msgstr "एनटीएससी (%1x%2) २."
+msgstr "एनटीएससी (%1x%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:273
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL (%1x%2)"
-msgstr "पाल (%1x%2) २."
+msgstr "पाल (%1x%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:274
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC 16:9 (%1x%2)"
-msgstr "एनटीएससी १६:९ (%1x%2) २."
+msgstr "एनटीएससी १६:९ (%1x%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:275
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL 16:9 (%1x%2)"
-msgstr "PAL १६:९ (%1x%2) २."
+msgstr "PAL १६:९ (%1x%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:277
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "DVD (%1x%2p)"
-msgstr "डीवीडी (%1x%2p) २."
+msgstr "डीवीडी (%1x%2p)"
 
 #: src/apps/marble-ui/ControlView.cpp:279
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "HD (%1x%2p)"
-msgstr "एच् डी (%1x%2प) २."
+msgstr "एच् डी (%1x%2प)"
 
 #: src/apps/marble-ui/ControlView.cpp:281
 #, qt-format
@@ -2850,7 +2850,7 @@ msgstr "पूर्ण एचडी (%1x%2p)"
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Digital Cinema (%1x%2)"
-msgstr "अङ्कीयचलचित्रम् (%1x%2) २."
+msgstr "अङ्कीयचलचित्रम् (%1x%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:467
 msgctxt "Marble::ControlView|"
@@ -3043,7 +3043,7 @@ msgstr "निर्यात बुकमार्क्स"
 #: src/lib/marble/BookmarkManagerDialog.cpp:411
 msgctxt "Marble::BookmarkManagerDialog|"
 msgid "KML files (*.kml)"
-msgstr "केएमएल सञ्चिकाः (*.kml) २."
+msgstr "केएमएल सञ्चिकाः (*.kml)"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:416
 msgctxt "Marble::BookmarkManagerDialog|"
@@ -3063,7 +3063,7 @@ msgstr "आयात बुकमार्क"
 #: src/lib/marble/BookmarkManagerDialog.cpp:424
 msgctxt "Marble::BookmarkManagerDialog|"
 msgid "KML Files (*.kml)"
-msgstr "केएमएल सञ्चिकाः (*.kml) २."
+msgstr "केएमएल सञ्चिकाः (*.kml)"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:431
 #, qt-format
@@ -3388,7 +3388,7 @@ msgstr "Track रक्षतु"
 #: src/lib/marble/CurrentLocationWidget.cpp:387
 msgctxt "QObject|"
 msgid "KML File (*.kml)"
-msgstr "के एम एल सञ्चिका (*.kml) २."
+msgstr "के एम एल सञ्चिका (*.kml)"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:385
 msgctxt "QObject|"
@@ -4363,7 +4363,7 @@ msgstr "निःशुल्कं वा विपण्यमूल्या�
 #: src/lib/marble/declarative/Placemark.cpp:488
 msgctxt "Marble::Placemark|"
 msgid "Free dairy food (subject to local regulations)"
-msgstr "निःशुल्कं दुग्धभोजनं (स्थानीयविनियमानाम् अधीनम्) २."
+msgstr "निःशुल्कं दुग्धभोजनं (स्थानीयविनियमानाम् अधीनम्)"
 
 #: src/lib/marble/declarative/Placemark.cpp:490
 msgctxt "Marble::Placemark|"
@@ -4543,7 +4543,7 @@ msgstr "लघुतरेन हिमवाहनेन सज्जीकृ�
 #: src/lib/marble/declarative/Placemark.cpp:557
 msgctxt "Marble::Placemark|"
 msgid "Unmarked piste (backcountry touring)"
-msgstr "अचिह्नित पिस्टे (पृष्ठभूमि भ्रमण) २."
+msgstr "अचिह्नित पिस्टे (पृष्ठभूमि भ्रमण)"
 
 #: src/lib/marble/declarative/Placemark.cpp:561
 msgctxt "Marble::Placemark|A parking space is covered"
@@ -4865,7 +4865,7 @@ msgstr "यदा मार्गः अस्ति तदा सक्षम�
 #: src/lib/marble/DownloadRegionDialog.cpp:149
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Offset from route:"
-msgstr "मार्गात् ऑफसेट् : १."
+msgstr "मार्गात् ऑफसेट् :"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:181
 msgctxt "Marble::DownloadRegionDialog|"
@@ -4875,7 +4875,7 @@ msgstr "चयनविधिः"
 #: src/lib/marble/DownloadRegionDialog.cpp:189
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Number of tiles to download:"
-msgstr "डाउनलोड् कर्तुं टाइल्-सङ्ख्या : १."
+msgstr "डाउनलोड् कर्तुं टाइल्-सङ्ख्या :"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:238
 msgctxt "Marble::DownloadRegionDialog|"
@@ -4885,7 +4885,7 @@ msgstr "Download क्षेत्र"
 #: src/lib/marble/DownloadRegionDialog.cpp:240
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Tile type to be downloaded:"
-msgstr "डाउनलोड् कर्तव्यः टाइल् प्रकारः : १."
+msgstr "डाउनलोड् कर्तव्यः टाइल् प्रकारः :"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:242
 msgctxt "Marble::DownloadRegionDialog|"
@@ -4985,7 +4985,7 @@ msgstr ""
 #: src/lib/marble/EditBookmarkDialog.ui:57
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Folder:"
-msgstr "&फोल्डर: १."
+msgstr "&फोल्डर:"
 
 #: src/lib/marble/EditBookmarkDialog.ui:79
 msgctxt "UiEditBookmarkDialog|"
@@ -5142,7 +5142,7 @@ msgstr "लिङ्कं योजयन्तु"
 #: src/lib/marble/ElevationWidget.ui:19
 msgctxt "ElevationWidget|"
 msgid "Elevation:"
-msgstr "ऊर्ध्वता : १."
+msgstr "ऊर्ध्वता :"
 
 #: src/lib/marble/ElevationWidget.ui:26
 msgctxt "ElevationWidget|"
@@ -5167,7 +5167,7 @@ msgstr "बाह्य मानचित्र सम्पादक"
 #: src/lib/marble/ExternalEditor.ui:30
 msgctxt "ExternalEditor|"
 msgid "Web browser (iD)"
-msgstr "जालपुटम् (iD) २."
+msgstr "जालपुटम् (iD)"
 
 #: src/lib/marble/ExternalEditor.ui:35
 msgctxt "ExternalEditor|"
@@ -5291,7 +5291,7 @@ msgstr " स"
 #: src/lib/marble/FlyToEditWidget.cpp:57
 msgctxt "Marble::FlyToEditWidget|"
 msgid "Mode:"
-msgstr "मोडः : १."
+msgstr "मोडः :"
 
 #: src/lib/marble/FlyToEditWidget.cpp:62
 msgctxt "Marble::FlyToEditWidget|"
@@ -7003,27 +7003,27 @@ msgstr "स्की जम्प"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:950
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 1)"
-msgstr "व्यवस्थापक सीमा (स्तर १) २."
+msgstr "व्यवस्थापक सीमा (स्तर १)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:952
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 2)"
-msgstr "व्यवस्थापक सीमा (स्तर २) २."
+msgstr "व्यवस्थापक सीमा (स्तर २)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:954
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 3)"
-msgstr "व्यवस्थापक सीमा (स्तर ३) २."
+msgstr "व्यवस्थापक सीमा (स्तर ३)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:956
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 4)"
-msgstr "व्यवस्थापक सीमा (स्तरः ४) २."
+msgstr "व्यवस्थापक सीमा (स्तरः ४)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:958
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 5)"
-msgstr "व्यवस्थापक सीमा (स्तर ५) २."
+msgstr "व्यवस्थापक सीमा (स्तर ५)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:960
 msgctxt "GeoDataPlacemark|"
@@ -7033,32 +7033,32 @@ msgstr "व्यवस्थापक सीमा (स्तर 6) 1.1."
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:962
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 7)"
-msgstr "व्यवस्थापक सीमा (स्तरः ७) २."
+msgstr "व्यवस्थापक सीमा (स्तरः ७)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:964
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 8)"
-msgstr "व्यवस्थापक सीमा (स्तर ८) २."
+msgstr "व्यवस्थापक सीमा (स्तर ८)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:966
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 9)"
-msgstr "व्यवस्थापक सीमा (स्तर ९) ९."
+msgstr "व्यवस्थापक सीमा (स्तर ९)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:968
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 10)"
-msgstr "व्यवस्थापक सीमा (स्तर १०) २."
+msgstr "व्यवस्थापक सीमा (स्तर १०)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:970
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 11)"
-msgstr "व्यवस्थापक सीमा (स्तर ११) २."
+msgstr "व्यवस्थापक सीमा (स्तर ११)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:972
 msgctxt "GeoDataPlacemark|"
 msgid "Boundary (Maritime)"
-msgstr "सीमा (समुद्री) ९."
+msgstr "सीमा (समुद्री)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:974
 msgctxt "GeoDataPlacemark|"
@@ -7136,43 +7136,43 @@ msgstr "कक्ष"
 #: src/lib/marble/geodata/data/LonLatParser.cpp:46
 msgctxt "GeoDataCoordinates|North direction terms"
 msgid "*"
-msgstr "* २."
+msgstr "*"
 
 #. See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Direction_terms
 #: src/lib/marble/geodata/data/LonLatParser.cpp:48
 msgctxt "GeoDataCoordinates|East direction terms"
 msgid "*"
-msgstr "* २."
+msgstr "*"
 
 #. See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Direction_terms
 #: src/lib/marble/geodata/data/LonLatParser.cpp:50
 msgctxt "GeoDataCoordinates|South direction terms"
 msgid "*"
-msgstr "* २."
+msgstr "*"
 
 #. See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Direction_terms
 #: src/lib/marble/geodata/data/LonLatParser.cpp:52
 msgctxt "GeoDataCoordinates|West direction terms"
 msgid "*"
-msgstr "* २."
+msgstr "*"
 
 #. See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Coordinate_symbols
 #: src/lib/marble/geodata/data/LonLatParser.cpp:80
 msgctxt "GeoDataCoordinates|Degree symbol terms"
 msgid "*"
-msgstr "* २."
+msgstr "*"
 
 #. See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Coordinate_symbols
 #: src/lib/marble/geodata/data/LonLatParser.cpp:82
 msgctxt "GeoDataCoordinates|Minutes symbol terms"
 msgid "*"
-msgstr "* २."
+msgstr "*"
 
 #. See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Coordinate_symbols
 #: src/lib/marble/geodata/data/LonLatParser.cpp:84
 msgctxt "GeoDataCoordinates|Seconds symbol terms"
 msgid "*"
-msgstr "* २."
+msgstr "*"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:211
 msgctxt "GeoLineStringGraphicsItem|"
@@ -7465,7 +7465,7 @@ msgstr "′ ."
 #: src/lib/marble/LatLonEdit.ui:54
 msgctxt "LatLonEditPrivate|"
 msgid "″"
-msgstr "′′ २."
+msgstr "′′"
 
 #: src/lib/marble/LegendWidget.ui:14 src/lib/marble/NullLegendWidget.ui:14
 msgctxt "LegendWidget|"
@@ -7697,12 +7697,12 @@ msgstr "सम आयताकार (epsg:4326)"
 #: src/lib/marble/MapWizard.cpp:938
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (crs:84)"
-msgstr "सम आयताकार (crs:84) २."
+msgstr "सम आयताकार (crs:84)"
 
 #: src/lib/marble/MapWizard.cpp:394
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
-msgstr "टाइल प्रक्षेपण : १."
+msgstr "टाइल प्रक्षेपण :"
 
 #: src/lib/marble/MapWizard.cpp:410
 msgctxt "Marble::MapWizard|"
@@ -7928,7 +7928,7 @@ msgstr "अन्तर्जालस्य सर्वरेण सह सम
 #: src/lib/marble/MapWizard.ui:57
 msgctxt "MapWizard|"
 msgid "Web Map Service (WMS)"
-msgstr "जालमानचित्रसेवा (WMS) २."
+msgstr "जालमानचित्रसेवा (WMS)"
 
 #: src/lib/marble/MapWizard.ui:70
 msgctxt "MapWizard|"
@@ -7994,7 +7994,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:134
 msgctxt "MapWizard|"
 msgid "WMS Server:"
-msgstr "WMS सर्वरः : १."
+msgstr "WMS सर्वरः :"
 
 #: src/lib/marble/MapWizard.ui:145 src/lib/marble/MapWizard.ui:169
 msgctxt "MapWizard|"
@@ -8023,7 +8023,7 @@ msgstr "https://"
 #: src/lib/marble/MapWizard.ui:218
 msgctxt "MapWizard|"
 msgid "Wms-Service:"
-msgstr "Wms-सेवा : १."
+msgstr "Wms-सेवा :"
 
 #: src/lib/marble/MapWizard.ui:232
 msgctxt "MapWizard|"
@@ -8070,7 +8070,7 @@ msgstr "कस्टम पृष्ठभूमि"
 #: src/lib/marble/MapWizard.ui:314
 msgctxt "MapWizard|"
 msgid "Tile Projection:"
-msgstr "टाइल प्रक्षेपण : १."
+msgstr "टाइल प्रक्षेपण :"
 
 #: src/lib/marble/MapWizard.ui:321
 msgctxt "MapWizard|"
@@ -8080,7 +8080,7 @@ msgstr "यस्मिन् प्रक्षेपणं सूचयति 
 #: src/lib/marble/MapWizard.ui:344
 msgctxt "MapWizard|"
 msgid "Tile Format:"
-msgstr "टाइल प्रारूपः : १."
+msgstr "टाइल प्रारूपः :"
 
 #: src/lib/marble/MapWizard.ui:351
 msgctxt "MapWizard|"
@@ -8188,7 +8188,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:573
 msgctxt "MapWizard|"
 msgid "Source Image:"
-msgstr "स्रोतः चित्रम् : १."
+msgstr "स्रोतः चित्रम् :"
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
 msgctxt "MapWizard|"
@@ -8243,7 +8243,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:651
 msgctxt "MapWizard|"
 msgid "URL Scheme:"
-msgstr "URL योजना : १."
+msgstr "URL योजना :"
 
 #: src/lib/marble/MapWizard.ui:690
 msgctxt "MapWizard|"
@@ -8281,7 +8281,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:707
 msgctxt "MapWizard|"
 msgid "Map Title:"
-msgstr "मानचित्रस्य शीर्षकम् : १."
+msgstr "मानचित्रस्य शीर्षकम् :"
 
 #: src/lib/marble/MapWizard.ui:720
 msgctxt "MapWizard|"
@@ -8291,7 +8291,7 @@ msgstr "भवतः नक्शाविषये लघु संक्षि
 #: src/lib/marble/MapWizard.ui:727 src/lib/marble/MapWizard.ui:950
 msgctxt "MapWizard|"
 msgid "Map Name:"
-msgstr "मानचित्र नाम : १."
+msgstr "मानचित्र नाम :"
 
 #: src/lib/marble/MapWizard.ui:737
 msgctxt "MapWizard|"
@@ -8326,7 +8326,7 @@ msgstr "इदं टूल् टिप् मध्ये दृश्यत�
 #: src/lib/marble/MapWizard.ui:788 src/lib/marble/MapWizard.ui:990
 msgctxt "MapWizard|"
 msgid "Preview Image:"
-msgstr "पूर्वावलोकन चित्रम् : १."
+msgstr "पूर्वावलोकन चित्रम् :"
 
 #: src/lib/marble/MapWizard.ui:803
 msgctxt "MapWizard|"
@@ -8346,7 +8346,7 @@ msgstr "<b>वैकल्पिकम् : नक्शाकुंजीया
 #: src/lib/marble/MapWizard.ui:864
 msgctxt "MapWizard|"
 msgid "Legend Image:"
-msgstr "आख्यायिका चित्रम् : १."
+msgstr "आख्यायिका चित्रम् :"
 
 #: src/lib/marble/MapWizard.ui:925
 msgctxt "MapWizard|"
@@ -8400,7 +8400,7 @@ msgstr "नक्शानाम अत्र गच्छति।"
 #: src/lib/marble/MapWizard.ui:970
 msgctxt "MapWizard|"
 msgid "Map Theme:"
-msgstr "मानचित्र विषयः : १."
+msgstr "मानचित्र विषयः :"
 
 #: src/lib/marble/MapWizard.ui:977
 msgctxt "MapWizard|"
@@ -9705,7 +9705,7 @@ msgstr "C&ache"
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:41
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "&Physical memory:"
-msgstr "&भौतिकस्मृति: १."
+msgstr "&भौतिकस्मृति:"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:54
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:127
@@ -9721,7 +9721,7 @@ msgstr "स्पष्टः"
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:105
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "&Hard disc:"
-msgstr "&हार्ड डिस्क : १."
+msgstr "&हार्ड डिस्क :"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:124
 msgctxt "MarbleCacheSettingsWidget|"
@@ -9762,7 +9762,7 @@ msgstr "&प्रॉक्सी"
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:183
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "&Proxy:"
-msgstr "&प्रॉक्सी : १."
+msgstr "&प्रॉक्सी :"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:200
 msgctxt "MarbleCacheSettingsWidget|"
@@ -9772,7 +9772,7 @@ msgstr "पोताश्रय:"
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:256
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "Proxy type:"
-msgstr "प्रॉक्सी प्रकारः : १."
+msgstr "प्रॉक्सी प्रकारः :"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:264
 msgctxt "MarbleCacheSettingsWidget|"
@@ -9793,7 +9793,7 @@ msgstr "प्रमाणीकरणस्य आवश्यकता भव�
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:326
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "U&sername:"
-msgstr "उ&उपनामः १."
+msgstr "उ&उपनामः"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:336
 msgctxt "MarbleCacheSettingsWidget|"
@@ -9842,7 +9842,7 @@ msgstr "प्रमाणपत्राणि"
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:153
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Server:"
-msgstr "सर्वरः : १."
+msgstr "सर्वरः :"
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:160
 msgctxt "MarbleCloudSyncSettingsWidget|"
@@ -9852,7 +9852,7 @@ msgstr "दूरस्थसर्वरस्य URL, उदा. myserver.com/
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:167
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Username:"
-msgstr "उपयोक्तृनाम : १."
+msgstr "उपयोक्तृनाम :"
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:181
 msgctxt "MarbleCloudSyncSettingsWidget|"
@@ -9927,7 +9927,7 @@ msgstr "कर्षण एवं एनिमेशन"
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:37
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "&Drag location:"
-msgstr "&कर्षणं स्थानम् : १."
+msgstr "&कर्षणं स्थानम् :"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:50
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10023,7 +10023,7 @@ msgstr "&मूषकदृश्य परिभ्रमणम्"
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:142
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "&On startup:"
-msgstr "&प्रारम्भकाले : १."
+msgstr "&प्रारम्भकाले :"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:152
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10062,7 +10062,7 @@ msgstr "अन्तिमस्थानं गतं प्रति प्र
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:184
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "&External editor:"
-msgstr "&बाह्य सम्पादक: १."
+msgstr "&बाह्य सम्पादक:"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:194
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10084,7 +10084,7 @@ msgstr "सदा पृच्छतु"
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:203
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Potlatch (Web browser)"
-msgstr "पोट्लाच् (जालपुटम्) २."
+msgstr "पोट्लाच् (जालपुटम्)"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:208
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10197,7 +10197,7 @@ msgstr "न्यूनविवरणं द्रष्टुं एतत् 
 #: src/lib/marble/MarbleNavigator.ui:221
 msgctxt "MarbleNavigator|"
 msgid "-"
-msgstr "- ९."
+msgstr "-"
 
 #: src/lib/marble/MarblePluginSettingsWidget.cpp:58
 #, qt-format
@@ -10524,12 +10524,12 @@ msgstr ""
 #: src/lib/marble/MarbleViewSettingsWidget.ui:105
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Degree (DMS)"
-msgstr "डिग्री (DMS) ९."
+msgstr "डिग्री (DMS)"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:110
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Degree (Decimal)"
-msgstr "डिग्री (दशमलव) ९."
+msgstr "डिग्री (दशमलव)"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:115
 msgctxt "MarbleViewSettingsWidget|"
@@ -10544,7 +10544,7 @@ msgstr "नक्शा &गुणवत्ता"
 #: src/lib/marble/MarbleViewSettingsWidget.ui:144
 msgctxt "MarbleViewSettingsWidget|"
 msgid "&Still image:"
-msgstr "&स्थिरचित्रम् : १."
+msgstr "&स्थिरचित्रम् :"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:154
 msgctxt "MarbleViewSettingsWidget|"
@@ -10601,7 +10601,7 @@ msgstr "मुद्रण गुणवत्ता"
 #: src/lib/marble/MarbleViewSettingsWidget.ui:198
 msgctxt "MarbleViewSettingsWidget|"
 msgid "During &animations:"
-msgstr "&एनिमेशनस्य समये : १."
+msgstr "&एनिमेशनस्य समये :"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:208
 msgctxt "MarbleViewSettingsWidget|"
@@ -10640,7 +10640,7 @@ msgstr "&पाठ लेबल"
 #: src/lib/marble/MarbleViewSettingsWidget.ui:286
 msgctxt "MarbleViewSettingsWidget|"
 msgid "&Place names:"
-msgstr "&स्थाननामः : १."
+msgstr "&स्थाननामः :"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:299
 msgctxt "MarbleViewSettingsWidget|"
@@ -10817,7 +10817,7 @@ msgstr ""
 #: src/lib/marble/MovieCapture.cpp:62
 msgctxt "Marble::MovieCapture|"
 msgid "AVI (mpeg4)"
-msgstr "अवि (mpeg4) ९."
+msgstr "अवि (mpeg4)"
 
 #: src/lib/marble/MovieCapture.cpp:63
 msgctxt "Marble::MovieCapture|"
@@ -10902,7 +10902,7 @@ msgstr "चलचित्रस्य अभिलेखनम्"
 #: src/lib/marble/MovieCaptureDialog.ui:20
 msgctxt "MovieCaptureDialog|"
 msgid "Destination video:"
-msgstr "गन्तव्यस्य विडियो: १."
+msgstr "गन्तव्यस्य विडियो:"
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
 msgctxt "MovieCaptureDialog|"
@@ -10912,7 +10912,7 @@ msgstr "उद्घाटित…"
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
 msgid "FPS (frames per second)"
-msgstr "FPS (प्रति सेकण्ड् फ्रेम्स) २."
+msgstr "FPS (प्रति सेकण्ड् फ्रेम्स)"
 
 #: src/lib/marble/NewBookmarkFolderDialog.ui:14
 msgctxt "UiNewBookmarkFolderDialog|"
@@ -11071,17 +11071,17 @@ msgstr "नामः:"
 #: src/lib/marble/PlacemarkEditHeader.ui:81
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Icon link:"
-msgstr "चिह्नलिङ्कः : १."
+msgstr "चिह्नलिङ्कः :"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:91
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "ID:"
-msgstr "आईडी : १."
+msgstr "आईडी :"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:104
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Target ID:"
-msgstr "लक्ष्यपरिचयः : १."
+msgstr "लक्ष्यपरिचयः :"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:115
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -11418,7 +11418,7 @@ msgstr "अन्तिमसमन्वयनम्: %1"
 #: src/lib/marble/RemoveItemEditWidget.cpp:34
 msgctxt "Marble::RemoveItemEditWidget|"
 msgid "Choose item:"
-msgstr "मदं चिनोतु : १."
+msgstr "मदं चिनोतु :"
 
 #: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:29
 msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
@@ -11773,17 +11773,17 @@ msgstr "विन्यस्तं कुर्वन्तु"
 #: src/lib/marble/routing/RoutingProfilesModel.cpp:131
 msgctxt "Marble::RoutingProfilesModel|"
 msgid "Car (fastest)"
-msgstr "कार (वेगतम) २."
+msgstr "कार (वेगतम)"
 
 #: src/lib/marble/routing/RoutingProfilesModel.cpp:133
 msgctxt "Marble::RoutingProfilesModel|"
 msgid "Car (shortest)"
-msgstr "कार (लघुतम) २."
+msgstr "कार (लघुतम)"
 
 #: src/lib/marble/routing/RoutingProfilesModel.cpp:135
 msgctxt "Marble::RoutingProfilesModel|"
 msgid "Car (ecological)"
-msgstr "कार (पारिस्थितिकी) ९."
+msgstr "कार (पारिस्थितिकी)"
 
 #: src/lib/marble/routing/RoutingProfilesModel.cpp:137
 msgctxt "Marble::RoutingProfilesModel|"
@@ -11927,7 +11927,7 @@ msgstr "Open Route इति मार्गः"
 #: src/lib/marble/routing/RoutingWidget.cpp:660
 msgctxt "Marble::RoutingWidget|"
 msgid "KML Files (*.kml)"
-msgstr "केएमएल सञ्चिकाः (*.kml) २."
+msgstr "केएमएल सञ्चिकाः (*.kml)"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:692
 msgctxt "Marble::RoutingWidget|"
@@ -11937,7 +11937,7 @@ msgstr "मार्गं रक्षतु"
 #: src/lib/marble/routing/RoutingWidget.cpp:694
 msgctxt "Marble::RoutingWidget|"
 msgid "KML files (*.kml)"
-msgstr "केएमएल सञ्चिकाः (*.kml) २."
+msgstr "केएमएल सञ्चिकाः (*.kml)"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:712
 msgctxt "Marble::RoutingWidget|"
@@ -11947,12 +11947,12 @@ msgstr "अपलोड् करणं मार्ग..."
 #: src/lib/marble/routing/RoutingWidget.ui:46
 msgctxt "RoutingWidget|"
 msgid "Car (fastest)"
-msgstr "कार (वेगतम) २."
+msgstr "कार (वेगतम)"
 
 #: src/lib/marble/routing/RoutingWidget.ui:51
 msgctxt "RoutingWidget|"
 msgid "Car (shortest)"
-msgstr "कार (लघुतम) २."
+msgstr "कार (लघुतम)"
 
 #: src/lib/marble/routing/RoutingWidget.ui:56
 msgctxt "RoutingWidget|"
@@ -12202,7 +12202,7 @@ msgstr "कालः"
 #: src/lib/marble/TimeControlWidget.ui:26
 msgctxt "TimeControlWidget|"
 msgid "&New date and time:"
-msgstr "&नवीनतिथिः समयः च : १."
+msgstr "&नवीनतिथिः समयः च :"
 
 #: src/lib/marble/TimeControlWidget.ui:36
 msgctxt "TimeControlWidget|"
@@ -12222,7 +12222,7 @@ msgstr "अधुना"
 #: src/lib/marble/TimeControlWidget.ui:123
 msgctxt "TimeControlWidget|"
 msgid "Current &date and time:"
-msgstr "वर्तमान &तिथिः समयः च : १."
+msgstr "वर्तमान &तिथिः समयः च :"
 
 #: src/lib/marble/TimeControlWidget.ui:136
 msgctxt "TimeControlWidget|"
@@ -12312,7 +12312,7 @@ msgstr "उद्घाटित…"
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
 msgid "FPS (frames per second)"
-msgstr "FPS (प्रति सेकण्ड् फ्रेम्स) २."
+msgstr "FPS (प्रति सेकण्ड् फ्रेम्स)"
 
 #: src/lib/marble/TourCaptureDialog.ui:189
 msgctxt "TourCaptureDialog|"
@@ -12436,7 +12436,7 @@ msgstr "खुला भ्रमण"
 #: src/lib/marble/TourWidget.cpp:358 src/lib/marble/TourWidget.cpp:820
 msgctxt "QObject|"
 msgid "KML Tours (*.kml)"
-msgstr "के एम एल भ्रमण (*.kml) २."
+msgstr "के एम एल भ्रमण (*.kml)"
 
 #: src/lib/marble/TourWidget.cpp:536
 msgctxt "QObject|"
@@ -12549,7 +12549,7 @@ msgstr "लोड् कृतं भ्रमणं चलचित्रे �
 #: src/lib/marble/WaitEditWidget.cpp:36
 msgctxt "Marble::WaitEditWidget|"
 msgid "Wait duration:"
-msgstr "प्रतीक्षायाः अवधिः : १."
+msgstr "प्रतीक्षायाः अवधिः :"
 
 #: src/lib/marble/WaitEditWidget.cpp:41
 msgctxt "Marble::WaitEditWidget|seconds"
@@ -12659,7 +12659,7 @@ msgstr "Wlocate स्थिति प्रदाता प्लगिन्"
 #: src/plugins/positionprovider/wlocate/WlocatePositionProviderPlugin.cpp:80
 msgctxt "Marble::WlocatePositionProviderPlugin|"
 msgid "WLAN (Open WLAN Map)"
-msgstr "WLAN (Open WLAN Map) २."
+msgstr "WLAN (Open WLAN Map)"
 
 #: src/plugins/positionprovider/wlocate/WlocatePositionProviderPlugin.cpp:90
 msgctxt "Marble::WlocatePositionProviderPlugin|"
@@ -13486,12 +13486,12 @@ msgstr "फ़िल्टर"
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:29
 msgctxt "EarthquakeConfigWidget|"
 msgid "Maximum number of results:"
-msgstr "अधिकतमं परिणामानां संख्या : १."
+msgstr "अधिकतमं परिणामानां संख्या :"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:39
 msgctxt "EarthquakeConfigWidget|"
 msgid "Minimum magnitude:"
-msgstr "न्यूनतमं परिमाणम् : १."
+msgstr "न्यूनतमं परिमाणम् :"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:59
 msgctxt "EarthquakeConfigWidget|"
@@ -13526,7 +13526,7 @@ msgstr "दिनाङ्कः:"
 #: src/plugins/render/earthquake/EarthquakeItem.cpp:130
 msgctxt "Marble::EarthquakeItem|"
 msgid "Magnitude:"
-msgstr "परिमाणम् : १."
+msgstr "परिमाणम् :"
 
 #: src/plugins/render/earthquake/EarthquakeItem.cpp:131
 msgctxt "Marble::EarthquakeItem|"
@@ -13556,7 +13556,7 @@ msgstr "ग्रहण ब्राउजर"
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:35
 msgctxt "EclipsesBrowserDialog|"
 msgid "Show eclipses for year:"
-msgstr "वर्षस्य कृते ग्रहणानि दर्शयन्तु : १."
+msgstr "वर्षस्य कृते ग्रहणानि दर्शयन्तु :"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
 msgctxt "EclipsesBrowserDialog|"
@@ -14034,7 +14034,7 @@ msgstr "निर्देशांकजालस्य वर्णः ।"
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:922
 msgctxt "GraticuleConfigWidget|"
 msgid "&Tropics:"
-msgstr "&उष्णकटिबंधाः : १."
+msgstr "&उष्णकटिबंधाः :"
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:938
 msgctxt "GraticuleConfigWidget|"
@@ -14044,7 +14044,7 @@ msgstr "उष्णकटिबंधीयवृत्तानां वर�
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1363
 msgctxt "GraticuleConfigWidget|"
 msgid "&Equator:"
-msgstr "&विषुववृत्तः : १."
+msgstr "&विषुववृत्तः :"
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1379
 msgctxt "GraticuleConfigWidget|"
@@ -14465,12 +14465,12 @@ msgstr "सामान्य"
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:36
 msgctxt "OpenCachingCacheDialog|"
 msgid "Cache name:"
-msgstr "संग्रहनाम : १."
+msgstr "संग्रहनाम :"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:56
 msgctxt "OpenCachingCacheDialog|"
 msgid "User name:"
-msgstr "उपयोक्तृनाम : १."
+msgstr "उपयोक्तृनाम :"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:76
 msgctxt "OpenCachingCacheDialog|"
@@ -14495,37 +14495,37 @@ msgstr "आकृति:"
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:156
 msgctxt "OpenCachingCacheDialog|"
 msgid "Difficulty:"
-msgstr "कठिनता : १."
+msgstr "कठिनता :"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:176
 msgctxt "OpenCachingCacheDialog|"
 msgid "Terrain:"
-msgstr "भूभागः : १."
+msgstr "भूभागः :"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:196
 msgctxt "OpenCachingCacheDialog|"
 msgid "Longitude:"
-msgstr "देशान्तर : १."
+msgstr "देशान्तर :"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:216
 msgctxt "OpenCachingCacheDialog|"
 msgid "Latitude:"
-msgstr "अक्षांशः : १."
+msgstr "अक्षांशः :"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:236
 msgctxt "OpenCachingCacheDialog|"
 msgid "Date hidden:"
-msgstr "निगूढतिथिः : १."
+msgstr "निगूढतिथिः :"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:256
 msgctxt "OpenCachingCacheDialog|"
 msgid "Date created:"
-msgstr "निर्मिततिथिः : १."
+msgstr "निर्मिततिथिः :"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:276
 msgctxt "OpenCachingCacheDialog|"
 msgid "Date last modified:"
-msgstr "अन्तिमपरिवर्तिततिथिः : १."
+msgstr "अन्तिमपरिवर्तिततिथिः :"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:291
 msgctxt "OpenCachingCacheDialog|"
@@ -14560,22 +14560,22 @@ msgstr "फ़िल्टर"
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:26
 msgctxt "OpenCachingConfigWidget|"
 msgid "Maximum number of results:"
-msgstr "अधिकतमं परिणामानां संख्या : १."
+msgstr "अधिकतमं परिणामानां संख्या :"
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:36
 msgctxt "OpenCachingConfigWidget|"
 msgid "Minimum difficulty:"
-msgstr "न्यूनतम कठिनता : १."
+msgstr "न्यूनतम कठिनता :"
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:53
 msgctxt "OpenCachingConfigWidget|"
 msgid "Maximum difficulty:"
-msgstr "अधिकतम कठिनता : १."
+msgstr "अधिकतम कठिनता :"
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:70
 msgctxt "OpenCachingConfigWidget|"
 msgid "Maximum Distance:"
-msgstr "अधिकतमं दूरम् : १."
+msgstr "अधिकतमं दूरम् :"
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:87
 msgctxt "OpenCachingConfigWidget|"
@@ -14645,7 +14645,7 @@ msgstr "OpenDesktop प्लगिन् विन्यासः"
 #: src/plugins/render/opendesktop/OpenDesktopConfigWidget.ui:22
 msgctxt "OpenDesktopConfigWidget|"
 msgid "Number of displayed items on the screen:"
-msgstr "पर्दायां प्रदर्शितानां वस्तूनाम् संख्या : १."
+msgstr "पर्दायां प्रदर्शितानां वस्तूनाम् संख्या :"
 
 #: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:46
 msgctxt "Marble::OpenDesktopPlugin|"
@@ -14702,7 +14702,7 @@ msgstr "नक्शा &प्रतिबिम्ब"
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:28
 msgctxt "OverviewMapConfigWidget|"
 msgid "&Planet:"
-msgstr "&ग्रहः : १."
+msgstr "&ग्रहः :"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:71
 msgctxt "OverviewMapConfigWidget|"
@@ -14732,7 +14732,7 @@ msgstr "वर्णाः"
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:200
 msgctxt "OverviewMapConfigWidget|"
 msgid "Position I&ndicator:"
-msgstr "पद I&सूचकः : १."
+msgstr "पद I&सूचकः :"
 
 #: src/plugins/render/panoramio/PanoramioPlugin.cpp:33
 msgctxt "Marble::PanoramioPlugin|"
@@ -15043,7 +15043,7 @@ msgstr "Zoom Out इति"
 #: src/plugins/render/routing/RoutingPlugin.ui:190
 msgctxt "RoutingPlugin|"
 msgid "-"
-msgstr "- ९."
+msgstr "-"
 
 #: src/plugins/render/routing/RoutingPlugin.ui:219
 msgctxt "RoutingPlugin|"
@@ -15233,7 +15233,7 @@ msgstr ""
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:164
 msgctxt "SatellitesConfigDialog|"
 msgid "-"
-msgstr "- ९."
+msgstr "-"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:104
 msgctxt "SatellitesConfigDialog|"
@@ -15243,7 +15243,7 @@ msgstr "&सर्वं दत्तांशस्रोताः पुनः
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:127
 msgctxt "SatellitesConfigDialog|"
 msgid "Satellite Data Sources:"
-msgstr "उपग्रहदत्तांशस्रोताः : १."
+msgstr "उपग्रहदत्तांशस्रोताः :"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:147
 msgctxt "SatellitesConfigDialog|"
@@ -16594,7 +16594,7 @@ msgstr "संगमरमरस्य संग्रहसञ्चिका�
 #: src/plugins/runner/cyclestreets/CycleStreetsConfigWidget.ui:20
 msgctxt "CycleStreetsConfigWidget|"
 msgid "Route type:"
-msgstr "मार्गप्रकारः : १."
+msgstr "मार्गप्रकारः :"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsConfigWidget.ui:30
 msgctxt "CycleStreetsConfigWidget|"
@@ -16619,32 +16619,32 @@ msgstr "शान्ततमम्"
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:41
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "slow (16 km/h)"
-msgstr "मन्द (१६ कि.मी./घण्टा) २."
+msgstr "मन्द (१६ कि.मी./घण्टा)"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:42
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "normal (20 km/h)"
-msgstr "सामान्यम् (२० कि.मी./घण्टा) २."
+msgstr "सामान्यम् (२० कि.मी./घण्टा)"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:43
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "fast (24 km/h)"
-msgstr "द्रुत (२४ कि.मी./घण्टा) २."
+msgstr "द्रुत (२४ कि.मी./घण्टा)"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:45
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "slow (10 mph)"
-msgstr "मन्द (१० मील प्रतिघण्टा) २."
+msgstr "मन्द (१० मील प्रतिघण्टा)"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:46
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "normal (12 mph)"
-msgstr "सामान्यम् (१२ मील प्रतिघण्टा) २."
+msgstr "सामान्यम् (१२ मील प्रतिघण्टा)"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:47
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "fast (15 mph)"
-msgstr "द्रुतम् (१५ मील प्रतिघण्टा) २."
+msgstr "द्रुतम् (१५ मील प्रतिघण्टा)"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:84
 msgctxt "Marble::CycleStreetsPlugin|"
@@ -17161,12 +17161,12 @@ msgstr "नौकायानं परिहरन्तु"
 #: src/plugins/runner/mapquest/MapQuestConfigWidget.ui:64
 msgctxt "MapQuestConfigWidget|"
 msgid "Ascending slope:"
-msgstr "आरोही प्रवणता : १."
+msgstr "आरोही प्रवणता :"
 
 #: src/plugins/runner/mapquest/MapQuestConfigWidget.ui:77
 msgctxt "MapQuestConfigWidget|"
 msgid "Descending slope:"
-msgstr "अवरोही प्रवणता : १."
+msgstr "अवरोही प्रवणता :"
 
 #: src/plugins/runner/mapquest/MapQuestConfigWidget.ui:96
 msgctxt "MapQuestConfigWidget|"
@@ -17202,12 +17202,12 @@ msgstr "mapquest.org इत्यस्य उपयोगेन विश्व
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:73
 msgctxt "Marble::MapQuestConfigWidget|"
 msgid "Car (fastest way)"
-msgstr "कार (वेगतमः मार्गः) २."
+msgstr "कार (वेगतमः मार्गः)"
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:74
 msgctxt "Marble::MapQuestConfigWidget|"
 msgid "Car (shortest way)"
-msgstr "कार (लघुतमः मार्गः) २."
+msgstr "कार (लघुतमः मार्गः)"
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:75
 msgctxt "Marble::MapQuestConfigWidget|"
@@ -17222,7 +17222,7 @@ msgstr "द्विचक्रिका"
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:77
 msgctxt "Marble::MapQuestConfigWidget|"
 msgid "Transit (Public Transport)"
-msgstr "पारगमन (सार्वजनिक परिवहन) ९."
+msgstr "पारगमन (सार्वजनिक परिवहन)"
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:79
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:83
@@ -17298,7 +17298,7 @@ msgstr "विन्यस्तं कुर्वन्तु"
 #: src/plugins/runner/monav/MonavConfigWidget.ui:51
 msgctxt "MonavConfigWidget|"
 msgid "Transport Type:"
-msgstr "परिवहनप्रकारः : १."
+msgstr "परिवहनप्रकारः :"
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:62
 msgctxt "MonavConfigWidget|"
@@ -17519,47 +17519,47 @@ msgstr "openrouteservice.org इत्यस्य उपयोगेन यू�
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:73
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
 msgid "Car (recommended way)"
-msgstr "कार (अनुशंसितः मार्गः) २."
+msgstr "कार (अनुशंसितः मार्गः)"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:74
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
 msgid "Car (fastest way)"
-msgstr "कार (वेगतमः मार्गः) २."
+msgstr "कार (वेगतमः मार्गः)"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:75
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
 msgid "Car (shortest way)"
-msgstr "कार (लघुतमः मार्गः) २."
+msgstr "कार (लघुतमः मार्गः)"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:76
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
 msgid "Pedestrian (shortest way)"
-msgstr "पदयात्री (लघुतमः मार्गः) २."
+msgstr "पदयात्री (लघुतमः मार्गः)"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:77
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
 msgid "Bicycle (shortest track)"
-msgstr "द्विचक्रिका (लघुतमः पटलः) २."
+msgstr "द्विचक्रिका (लघुतमः पटलः)"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:78
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
 msgid "Bicycle (Mountainbike)"
-msgstr "द्विचक्रिका (माउंटेनबाइक) २."
+msgstr "द्विचक्रिका (माउंटेनबाइक)"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:79
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
 msgid "Bicycle (Racer)"
-msgstr "द्विचक्रिका (रेसर) ९."
+msgstr "द्विचक्रिका (रेसर)"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:80
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
 msgid "Bicycle (safest track)"
-msgstr "द्विचक्रिका (सुरक्षिततमः पटलः) २."
+msgstr "द्विचक्रिका (सुरक्षिततमः पटलः)"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:81
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
 msgid "Bicycle (preferred Cycleway/-route)"
-msgstr "द्विचक्रिका (प्राथमिकता सायकलमार्ग/-मार्गः) २."
+msgstr "द्विचक्रिका (प्राथमिकता सायकलमार्ग/-मार्गः)"
 
 #: src/plugins/runner/osm/OsmPlugin.cpp:18
 msgctxt "Marble::OsmPlugin|"

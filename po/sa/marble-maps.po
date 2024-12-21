@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-04 00:36+0000\n"
-"PO-Revision-Date: 2024-12-14 01:12+0530\n"
+"PO-Revision-Date: 2024-12-20 21:53+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
@@ -269,7 +269,7 @@ msgstr "टैग्स:"
 #: ProfileSelectorMenu.qml:124
 #, kde-format
 msgid "Car (fastest)"
-msgstr "कार (वेगतम) २."
+msgstr "कार (वेगतम)"
 
 #: RouteEditorPage.qml:19
 #, kde-format
@@ -293,13 +293,13 @@ msgstr "आगमन:"
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Waypoint:"
-msgstr "मार्गबिन्दुः १."
+msgstr "मार्गबिन्दुः"
 
 #: RouteEditorPage.qml:194
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Alternatives:"
-msgstr "विकल्पाः : १."
+msgstr "विकल्पाः :"
 
 #: SettingsDialog.qml:48
 #, kde-format
