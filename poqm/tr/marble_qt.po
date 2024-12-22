@@ -3274,7 +3274,7 @@ msgstr ""
 #: src/lib/marble/cloudsync/ConflictDialog.cpp:176
 msgctxt "Marble::ConflictDialog|"
 msgid "Synchronization Conflict"
-msgstr "Eşitleme Çakışması"
+msgstr "Eşzamanlama Çakışması"
 
 #: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:286
 #, qt-format
@@ -9828,12 +9828,12 @@ msgstr "&Vekil Sunucu"
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:183
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "&Proxy:"
-msgstr "&Vekil Sunucu:"
+msgstr "&Vekil sunucu:"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:200
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "P&ort:"
-msgstr "P&ort:"
+msgstr "K&apı:"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:256
 msgctxt "MarbleCacheSettingsWidget|"
@@ -9869,7 +9869,7 @@ msgstr "&Parola:"
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:17
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Enable synchronization"
-msgstr "Eşitlemeyi etkinleştir"
+msgstr "Eşzamanlamayı etkinleştir"
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:48
 msgctxt "MarbleCloudSyncSettingsWidget|"
@@ -9883,7 +9883,7 @@ msgstr ""
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:51
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Enable route synchronization"
-msgstr "Rota eşitlemeyi etkinleştir"
+msgstr "Rota eşzamanlamasını etkinleştir"
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:84
 msgctxt "MarbleCloudSyncSettingsWidget|"
@@ -9893,12 +9893,12 @@ msgstr "Tüm yer imlerini sunucuya otomatik olarak eşitle."
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:87
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Enable bookmark synchronization"
-msgstr "Yer imi eşitlemeyi etkinleştir"
+msgstr "Yer imi eşzamanlamasını etkinleştir"
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:119
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Sync now"
-msgstr "Şimdi eşitle"
+msgstr "Şimdi Eşzamanla"
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:147
 msgctxt "MarbleCloudSyncSettingsWidget|"
@@ -9933,7 +9933,7 @@ msgstr "Oturumu Sına"
 #: src/lib/marble/MarbleGlobal.h:243
 msgctxt "Marble|"
 msgid "not available"
-msgstr "kullanılabilir değil"
+msgstr "Kullanılamıyor"
 
 #: src/lib/marble/MarbleLineEdit.cpp:56
 msgctxt "QObject|"
@@ -10122,12 +10122,12 @@ msgstr ""
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:159
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Show Home Location"
-msgstr "Başlangıç Konumunu Göster"
+msgstr "Başlangıç konumunu göster"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:164
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Return to Last Location Visited"
-msgstr "Son Ziyaret Edilen Konuma Dön"
+msgstr "Son ziyaret edilen konuma dön"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:184
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10509,7 +10509,7 @@ msgstr "Orta Afrika Zamanı"
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:231
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "When Marble starts"
-msgstr "Bilye başladığında"
+msgstr "Bilye Başlatıldığında"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:237
 msgctxt "MarbleTimeSettingsWidget|"
@@ -11486,18 +11486,18 @@ msgstr "Eklentiler"
 #: src/lib/marble/QtMarbleConfigDialog.cpp:146
 msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Synchronization"
-msgstr "Eşitleme"
+msgstr "Eşzamanlama"
 
 #: src/lib/marble/QtMarbleConfigDialog.cpp:251
 msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Never synchronized."
-msgstr "Hiçbir zaman eşitlenmemiş."
+msgstr "Daha önce eşzamanlanmamış."
 
 #: src/lib/marble/QtMarbleConfigDialog.cpp:255
 #, qt-format
 msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Last synchronization: %1"
-msgstr "Son eşitleme: %1"
+msgstr "Son eşzamanlama: %1"
 
 #: src/lib/marble/RemoveItemEditWidget.cpp:34
 msgctxt "Marble::RemoveItemEditWidget|"
@@ -12726,7 +12726,7 @@ msgstr "Bir GPS aygıtının konumunu raporlar."
 #: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:48
 msgctxt "Marble::QtPositioningPositionProviderPlugin|"
 msgid "Qt Positioning Position Provider Plugin"
-msgstr "Qt Konumlandırma Konumu Sağlayıcı Eklenti"
+msgstr "Qt Konumlandırma Konumu Sağlayıcısı Eklenti"
 
 #: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:58
 msgctxt "Marble::QtPositioningPositionProviderPlugin|"
@@ -13840,7 +13840,7 @@ msgstr "Tutulmanın En Fazlası"
 #, qt-format
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Eclipses in %1"
-msgstr "%1 içinde Tutulmalar"
+msgstr "%1 Yılındaki Tutulmalar"
 
 #: src/plugins/render/eclipses/EclipsesReminderDialog.ui:14
 msgctxt "EclipsesReminderDialog|"
@@ -15841,12 +15841,12 @@ msgstr "Adlar"
 #: src/plugins/render/stars/StarsConfigWidget.ui:401
 msgctxt "StarsConfigWidget|"
 msgid "Latin Name"
-msgstr "Latince Adı"
+msgstr "Latince adı"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:406
 msgctxt "StarsConfigWidget|"
 msgid "Native Translation"
-msgstr "Doğal Çeviri"
+msgstr "Doğal çeviri"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:411
 msgctxt "StarsConfigWidget|"
@@ -15866,7 +15866,7 @@ msgstr "Gök Ekvatoru"
 #: src/plugins/render/stars/StarsConfigWidget.ui:483
 msgctxt "StarsConfigWidget|"
 msgid "Celestial Poles"
-msgstr "Gök Kutpu"
+msgstr "Gök Kutupları"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:525
 msgctxt "StarsConfigWidget|"
@@ -17899,346 +17899,3 @@ msgstr "Yüzen nesne ve Şablon"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Bu, yüzen nesneler için bir şablon sınıftır."
-
-#~ msgctxt "UiBookmarkManagerDialog|"
-#~ msgid "Import Bookmarks..."
-#~ msgstr "Yer İmleri İçe Aktar…"
-
-#~ msgctxt "UiBookmarkManagerDialog|"
-#~ msgid "Export Bookmarks..."
-#~ msgstr "Yer İmlerini Dışa Aktar…"
-
-#~ msgctxt "UiBookmarkManagerDialog|"
-#~ msgid "New..."
-#~ msgstr "Yeni…"
-
-#~ msgctxt "CurrentLocationWidget|"
-#~ msgid "..."
-#~ msgstr "…"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "..."
-#~ msgstr "…"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Change..."
-#~ msgstr "Değiştir…"
-
-#~ msgctxt "MarbleNavigator|"
-#~ msgid "..."
-#~ msgstr "…"
-
-#~ msgctxt "MovieCaptureDialog|"
-#~ msgid "Open..."
-#~ msgstr "Aç…"
-
-#~ msgctxt "PlacemarkEditHeaderPrivate|"
-#~ msgid "Browse..."
-#~ msgstr "Göz At…"
-
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Add..."
-#~ msgstr "&Ekle…"
-
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Configure..."
-#~ msgstr "&Yapılandır…"
-
-#~ msgctxt "TourCaptureDialog|"
-#~ msgid "Open..."
-#~ msgstr "Aç…"
-
-#~ msgctxt "EclipsesBrowserDialog|"
-#~ msgid "&Settings..."
-#~ msgstr "Ayar&lar…"
-
-#~ msgctxt "SatellitesConfigDialog|"
-#~ msgid "..."
-#~ msgstr "…"
-
-#~ msgctxt "AboutDialog|"
-#~ msgid ""
-#~ "<h3>Marble Maps</h3><p>Find your way! Marble Maps brings the highly "
-#~ "detailed OpenStreetMap to your mobile devices. It features a crisp, "
-#~ "beautiful map with an intuitive user interface. It's open source, "
-#~ "entirely based on free data and open standards and respects your privacy."
-#~ "</p>"
-#~ msgstr ""
-#~ "<h3>Bilye Haritalar</h3><p>Yolunu bul! Bilye Haritalar, çok ayrıntılı "
-#~ "olan OpenStreetMap'ı taşınabilir aygıtlarınıza getirir. Sezgisel bir "
-#~ "kullanıcı arayüzü ile net, güzel bir haritaya sahiptir. Açık kaynak, "
-#~ "tamamen özgür verilere ve açık standartlara dayanır ve gizliliğinize "
-#~ "saygı duyar.</p>"
-
-#~ msgctxt "AboutDialog|"
-#~ msgid ""
-#~ "<h3>Support</h3><p>Do you have a question? Want to file a suggestion for "
-#~ "improvement? Please use the <a href=\"https://forum.kde.org/viewforum.php?"
-#~ "f=217\">Marble forum</a> to get in touch with fellow Marble users and "
-#~ "developers. Further support channels are listed at <a href=\"https://"
-#~ "marble.kde.org/support.php\">marble.kde.org</a>. We are looking forward "
-#~ "to your feedback!</p>"
-#~ msgstr ""
-#~ "<h3>Destek</h3><p>Sorunuz mu var? Bir dosyada iyileştirme öneriniz mi "
-#~ "var? Lütfen Bilye kullanıcılarının ve geliştiricilerinin bulunduğu, <a "
-#~ "href=\"https://forum.kde.org/viewforum.php?f=217\">Bilye forum</a>'u "
-#~ "kullanın. Diğer destek kanalları <a href=\"https://marble.kde.oro/support."
-#~ "php\">marble.kde.org</a> üzerinde listelenmişir. Geri bildirimlerinizi "
-#~ "bekliyoruz!</p>"
-
-#~ msgctxt "AboutDialog|"
-#~ msgid ""
-#~ "<h3>Development Team</h3><p>The main developers of this app are Dennis "
-#~ "Nienhüser, Torsten Rahn, Sanjiban Bairagya, Friedrich W. H. Kossebau, "
-#~ "Gábor Péterffy and Mikhail Ivchenko. They are part of more than 200 "
-#~ "developers who already contributed to the Marble project. <br> Contact us "
-#~ "via <a href=\"https://mail.kde.org/mailman/listinfo/marble-devel\">marble-"
-#~ "devel@kde.org</a>.</p>"
-#~ msgstr ""
-#~ "<h3>Geliştirici Ekibi</h3><p>Bu uygulamanın ana geliştiricileri Dennis "
-#~ "Nienhüser, Torsten Rahn, Sanjiban Bairagya, Friedrich W. H. Kossebau, "
-#~ "Gábor Péterffy ve Mikhail Ivchenko. Onlar, hali hazırda Bilye projesine "
-#~ "katkıda bulunan 200'den fazla geliştiricinin bir parçasıdır. <br> Bizimle "
-#~ "<a href=\"https://mail.kde.org/mailman/listinfo/marble-devel\">marble-"
-#~ "devel@kde.org</a> üzerinden iletişime geçebilirsiniz.</p>"
-
-#~ msgctxt "AboutDialog|"
-#~ msgid ""
-#~ "<h3>Attribution</h3><p>The map is based on data from the <a href="
-#~ "\"https://www.openstreetmap.org\">OpenStreetMap</a> project, available "
-#~ "under the <a href=\"https://opendatacommons.org/licenses/odbl/\">Open "
-#~ "Database License</a>. Additionally public domain data from the <a href="
-#~ "\"https://www.naturalearthdata.com/\">Natural Earth</a> project is used. "
-#~ "The map style is influenced by and uses icons from <a href=\"https://"
-#~ "github.com/gravitystorm/openstreetmap-carto\">OpenStreetMap Carto</a> (<a "
-#~ "href=\"https://creativecommons.org/publicdomain/zero/1.0/\">CC0 Public "
-#~ "Domain)</a>.</p>"
-#~ msgstr ""
-#~ "<h3>Öznitelik</h3><p>Harita, <a href=\"https://www.openstreetmap.org"
-#~ "\">OpenStreetMap</a> tabanlı olup, <a href=\"http://opendatacommons.org/"
-#~ "licenses/odbl/\">Open Database License</a> ile kullanılabilir. Ek olarak "
-#~ "<a href=\"http://www.naturalearthdata.com/\">Natural Earth</a> projesi de "
-#~ "kullanılmaktadır. Harita türü, <a href=\"https://github.com/gravitystorm/"
-#~ "openstreetmap-carto\">OpenStreetMap Carto</a> 'dan esinlenerek simgeleri "
-#~ "kullanmıştır. (<a href=\"http://creativecommons.org/publicdomain/zero/1.0/"
-#~ "\">CC0 Public Domain)</a>.</p>"
-
-#~ msgctxt "Bookmarks|"
-#~ msgid "Removed"
-#~ msgstr "Kaldırıldı"
-
-#~ msgctxt "Bookmarks|"
-#~ msgid "Your bookmarks will appear here."
-#~ msgstr "Yer imleriniz burada görünecektir."
-
-#~ msgctxt "CurrentPosition|"
-#~ msgid "Follow Current Position"
-#~ msgstr "Geçerli Konumu İzle"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Marble Maps"
-#~ msgstr "Bilye Haritaları"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Settings"
-#~ msgstr "Ayarlar"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Public Transport"
-#~ msgstr "Toplu Taşıma"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Outdoor Activities"
-#~ msgstr "Açık Hava Etklinlikleri"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Accessibility"
-#~ msgstr "Erişilebilirlik"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "About"
-#~ msgstr "Hakkında"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Bookmarks"
-#~ msgstr "Yer İmleri"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Layer Options"
-#~ msgstr "Katman Seçenekleri"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Routing"
-#~ msgstr "Rotalama"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "%1 km"
-#~ msgstr "%1 km"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Press again to close."
-#~ msgstr "Kapatmak için takrar basın."
-
-#~ msgctxt "NavigationInfoBar|"
-#~ msgid "%1 km"
-#~ msgstr "%1 km"
-
-#~ msgctxt "NavigationInfoBar|"
-#~ msgid "%1 m"
-#~ msgstr "%1 m"
-
-#~ msgctxt "Options|"
-#~ msgid "<h3>Layer Options</h3>"
-#~ msgstr "<h3>Katman Seçenekleri</h3>"
-
-#~ msgctxt "Options|"
-#~ msgid "<h4>Public Transport Layers</h4>"
-#~ msgstr "<h4>Toplu Taşıma Katmanları</h4>"
-
-#~ msgctxt "Options|"
-#~ msgid "<h4>Outdoor Activities Layers</h4>"
-#~ msgstr "<h4>Açık Hava Etkinliği Katmanları</h4>"
-
-#~ msgctxt "OutdoorActivities|"
-#~ msgid "Walkways"
-#~ msgstr "Yürüme Yolları"
-
-#~ msgctxt "OutdoorActivities|"
-#~ msgid "Hiking Routes"
-#~ msgstr "Yürüyüş Rotaları"
-
-#~ msgctxt "OutdoorActivities|"
-#~ msgid "Bicycle Routes"
-#~ msgstr "Bisiklet Rotaları"
-
-#~ msgctxt "OutdoorActivities|"
-#~ msgid "Mountainbike Routes"
-#~ msgstr "Dağ Bisikleti Rotaları"
-
-#~ msgctxt "OutdoorActivities|"
-#~ msgid "Inline Skating Routes"
-#~ msgstr "Tekerlekli Paten Rotaları"
-
-#~ msgctxt "OutdoorActivities|"
-#~ msgid "Bridleways"
-#~ msgstr "At Binme Yolları"
-
-#~ msgctxt "PlacemarkDialog|"
-#~ msgid "<h2>Routes</h2>"
-#~ msgstr "<h2>Yollar</h2>"
-
-#~ msgctxt "ProfileSelectorMenu|"
-#~ msgid "Car (fastest)"
-#~ msgstr "Araba (en hızlı)"
-
-#~ msgctxt "ProfileSelectorMenu|"
-#~ msgid "Bicycle"
-#~ msgstr "Bisiklet"
-
-#~ msgctxt "ProfileSelectorMenu|"
-#~ msgid "Pedestrian"
-#~ msgstr "Yaya"
-
-#~ msgctxt "PublicTransport|"
-#~ msgid "Train"
-#~ msgstr "Tren"
-
-#~ msgctxt "PublicTransport|"
-#~ msgid "Subway"
-#~ msgstr "Metro"
-
-#~ msgctxt "PublicTransport|"
-#~ msgid "Tram"
-#~ msgstr "Tramvay"
-
-#~ msgctxt "PublicTransport|"
-#~ msgid "Bus"
-#~ msgstr "Otobüs"
-
-#~ msgctxt "PublicTransport|"
-#~ msgid "Trolley Bus"
-#~ msgstr "Troleybüs"
-
-#~ msgctxt "RouteEditor|"
-#~ msgid "Search for places to integrate them into a route."
-#~ msgstr "Bir rota ile bütünleştirmek için konumları arayın."
-
-#~ msgctxt "Search|"
-#~ msgid "Your bookmarks will appear here."
-#~ msgstr "Yer imleriniz burada görünecektir."
-
-#~ msgctxt "SearchField|"
-#~ msgid "Search"
-#~ msgstr "Ara"
-
-#~ msgctxt "SettingsDialog|"
-#~ msgid "Network Settings"
-#~ msgstr "Ağ Ayarları"
-
-#~ msgctxt "SettingsDialog|"
-#~ msgid "Download Maps via WLAN only"
-#~ msgstr "Haritaları Yalnızca Kablosuz ile İndir"
-
-#~ msgctxt "SidePanel|"
-#~ msgid "Public Transport"
-#~ msgstr "Toplu Taşıma"
-
-#~ msgctxt "SidePanel|"
-#~ msgid "Outdoor Activities"
-#~ msgstr "Açık Hava Etklinlikleri"
-
-#~ msgctxt "SidePanel|"
-#~ msgid "Accessibility"
-#~ msgstr "Erişilebilirlik"
-
-#~ msgctxt "SidePanel|"
-#~ msgid "About Marble Maps…"
-#~ msgstr "Bilye Haritaları Hakkında…"
-
-#~ msgctxt "OpenCachingCacheDialog|KDE::DoNotExtract"
-#~ msgid "TextLabel"
-#~ msgstr "&MetinEtiketi"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+O"
-#~ msgstr "Ctrl+O"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+S"
-#~ msgstr "Ctrl+S"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+C"
-#~ msgstr "Ctrl+C"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+E"
-#~ msgstr "Ctrl+E"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+Shift+F"
-#~ msgstr "Ctrl+Shift+F"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "F5"
-#~ msgstr "F5"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "F1"
-#~ msgstr "F1"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Shift+F1"
-#~ msgstr "Shift+F1"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+B"
-#~ msgstr "Ctrl+B"
-
-#~ msgctxt "DGML|"
-#~ msgid "Hillshading"
-#~ msgstr "Gölge Rölyefi"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Available Layers:"
-#~ msgstr "Kullanılabilir Katmanlar:"

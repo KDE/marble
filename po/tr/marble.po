@@ -39,12 +39,12 @@ msgstr ""
 #: kdemain.cpp:84
 #, kde-format
 msgid "Marble Virtual Globe"
-msgstr "Marble Sanal Küre"
+msgstr "Bilye Sanal Küre"
 
 #: kdemain.cpp:86
 #, kde-format
 msgid "A World Atlas."
-msgstr "Bir Dünya Atlası."
+msgstr "Bir dünya atlası."
 
 #: kdemain.cpp:88
 #, kde-format
