@@ -118,6 +118,8 @@ if(ANDROID)
     find_package(Qt6Multimedia ${REQUIRED_QT_VERSION} REQUIRED)
 
    set(MARBLE_NO_WEBKITWIDGETS TRUE)
+
+   set(ANDROID_API_LEVEL 24)
 else()
     find_package(Qt6WebChannel ${REQUIRED_QT_VERSION})
     find_package(Qt6WebEngineWidgets ${REQUIRED_QT_VERSION})
