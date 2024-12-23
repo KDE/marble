@@ -26,6 +26,7 @@ int main(int argc, char **argv)
 #ifdef MARBLE_WEBKITWIDGETS
     QtWebEngineQuick::initialize();
 #endif
+    KLocalizedString::setApplicationDomain(QByteArrayLiteral("marble-behaim"));
     QApplication app(argc, argv);
 
     KAboutData about(QStringLiteral("marble-behaim"),
