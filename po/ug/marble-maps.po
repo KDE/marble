@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-04 00:36+0000\n"
+"POT-Creation-Date: 2024-12-24 02:29+0000\n"
 "PO-Revision-Date: 2013-09-08 07:05+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -71,42 +71,42 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "نۆۋەتتىكى ئورۇن"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
+#: main.cpp:44 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgid "&Manage Bookmarks"
 msgid "Marble Maps"
 msgstr "خەتكۈچلەرنى باشقۇر(&M)"
 
-#: main.cpp:44
+#: main.cpp:46
 #, fuzzy, kde-format
 #| msgid "&Edit Map"
 msgid "Maps"
 msgstr "خەرىتە تەھرىرى(&E)"
 
-#: main.cpp:46
+#: main.cpp:48
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
 
-#: main.cpp:52
+#: main.cpp:54
 #, kde-format
 msgid "Carl Schwan"
 msgstr ""
 
-#: main.cpp:53
+#: main.cpp:55
 #, fuzzy, kde-format
 #| msgid "Developer"
 msgid "Developer"
 msgstr "ئىجادىيەتچى"
 
-#: main.cpp:58
+#: main.cpp:60
 #, fuzzy, kde-format
 #| msgid "User: "
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "ئىشلەتكۈچى: "
 
-#: main.cpp:58
+#: main.cpp:60
 #, fuzzy, kde-format
 #| msgid "&Show Details"
 msgctxt "EMAIL OF TRANSLATORS"

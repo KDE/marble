@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-04 00:36+0000\n"
+"POT-Creation-Date: 2024-12-24 02:29+0000\n"
 "PO-Revision-Date: 2011-08-10 23:32+0200\n"
 "Last-Translator: Marko Dimjašević <marko@dimjasevic.net>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -74,40 +74,40 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Izvezi rutu"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
+#: main.cpp:44 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgid "Routing"
 msgid "Marble Maps"
 msgstr "Usmjeravanje"
 
-#: main.cpp:44
+#: main.cpp:46
 #, kde-format
 msgid "Maps"
 msgstr ""
 
-#: main.cpp:46
+#: main.cpp:48
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
 
-#: main.cpp:52
+#: main.cpp:54
 #, kde-format
 msgid "Carl Schwan"
 msgstr ""
 
-#: main.cpp:53
+#: main.cpp:55
 #, kde-format
 msgid "Developer"
 msgstr ""
 
-#: main.cpp:58
+#: main.cpp:60
 #, fuzzy, kde-format
 #| msgid "Routing"
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Usmjeravanje"
 
-#: main.cpp:58
+#: main.cpp:60
 #, fuzzy, kde-format
 #| msgctxt "a planet without data"
 #| msgid "Unknown Planet"

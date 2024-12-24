@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-04 00:36+0000\n"
+"POT-Creation-Date: 2024-12-24 02:29+0000\n"
 "PO-Revision-Date: 2024-10-04 10:41+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -66,38 +66,38 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Seguix la posició actual"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
+#: main.cpp:44 MainScreen.qml:21 MainScreen.qml:190
 #, kde-format
 msgid "Marble Maps"
 msgstr "Mapes de Marble"
 
-#: main.cpp:44
+#: main.cpp:46
 #, kde-format
 msgid "Maps"
 msgstr "Mapes"
 
-#: main.cpp:46
+#: main.cpp:48
 #, kde-format
 msgid "© KDE Community"
 msgstr "© Comunitat KDE"
 
-#: main.cpp:52
+#: main.cpp:54
 #, kde-format
 msgid "Carl Schwan"
 msgstr "Carl Schwan"
 
-#: main.cpp:53
+#: main.cpp:55
 #, kde-format
 msgid "Developer"
 msgstr "Desenvolupador"
 
-#: main.cpp:58
+#: main.cpp:60
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Josep M. Ferrer"
 
-#: main.cpp:58
+#: main.cpp:60
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"

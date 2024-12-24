@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-04 00:36+0000\n"
+"POT-Creation-Date: 2024-12-24 02:29+0000\n"
 "PO-Revision-Date: 2024-04-23 21:12+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -84,38 +84,38 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Sekvi Nunan Pozicion"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
+#: main.cpp:44 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Marble Maps"
 msgid "Marble Maps"
 msgstr "Marble Mapoj"
 
-#: main.cpp:44
+#: main.cpp:46
 #, fuzzy, kde-format
 #| msgctxt "QObject|"
 #| msgid "Edit Maps"
 msgid "Maps"
 msgstr "Redakti Mapojn"
 
-#: main.cpp:46
+#: main.cpp:48
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
 
-#: main.cpp:52
+#: main.cpp:54
 #, kde-format
 msgid "Carl Schwan"
 msgstr ""
 
-#: main.cpp:53
+#: main.cpp:55
 #, fuzzy, kde-format
 #| msgctxt "PluginAuthor|"
 #| msgid "Developer"
 msgid "Developer"
 msgstr "Ellaboranto"
 
-#: main.cpp:58
+#: main.cpp:60
 #, fuzzy, kde-format
 #| msgctxt "Marble::YoursPlugin|"
 #| msgid "Yours"
@@ -123,7 +123,7 @@ msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Yours"
 
-#: main.cpp:58
+#: main.cpp:60
 #, fuzzy, kde-format
 #| msgctxt "ExternalEditor|"
 #| msgid "Editor Details"

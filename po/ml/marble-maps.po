@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-04 00:36+0000\n"
+"POT-Creation-Date: 2024-12-24 02:29+0000\n"
 "PO-Revision-Date: 2019-12-01 18:32+0000\n"
 "Last-Translator: Subin Siby <subins2000@gmail.com>\n"
 "Language-Team: Swathanthra|സ്വതന്ത്ര Malayalam|മലയാളം Computing|കമ്പ്യൂട്ടിങ്ങ് <smc-"
@@ -66,32 +66,32 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "ഇപ്പോളെവിടെ"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
+#: main.cpp:44 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 msgid "Marble Maps"
 msgstr "സ്ഥലം &ചേര്‍ക്കുക"
 
-#: main.cpp:44
+#: main.cpp:46
 #, fuzzy, kde-format
 msgid "Maps"
 msgstr "&ചിട്ടപ്പെടുത്തുക"
 
-#: main.cpp:46
+#: main.cpp:48
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
 
-#: main.cpp:52
+#: main.cpp:54
 #, kde-format
 msgid "Carl Schwan"
 msgstr ""
 
-#: main.cpp:53
+#: main.cpp:55
 #, fuzzy, kde-format
 msgid "Developer"
 msgstr "യഥാര്‍ത്ഥ രചയിതാവു്, ഡവലപ്പര്‍, പാലകന്‍"
 
-#: main.cpp:58
+#: main.cpp:60
 #, fuzzy, kde-format
 #| msgctxt "EMAIL OF TRANSLATORS"
 #| msgid "Your emails"
@@ -99,7 +99,7 @@ msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "apeter@redhat.com"
 
-#: main.cpp:58
+#: main.cpp:60
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
