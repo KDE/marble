@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-04 00:36+0000\n"
+"POT-Creation-Date: 2024-12-24 00:37+0000\n"
 "PO-Revision-Date: 2024-09-29 09:34+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -56,12 +56,12 @@ msgstr ""
 "W. Ghillany's \"Geschichte des Seefahrers Ritter Martin Behaim nach den "
 "ältesten vorhandenen Urkunden\", Norymberga 1853. CC BY-SA 3.0."
 
-#: main.cpp:32
+#: main.cpp:33
 #, kde-format
 msgid "Marble Behaim"
 msgstr "Marble Behaim"
 
-#: main.cpp:34
+#: main.cpp:35
 #, kde-format
 msgid ""
 "Digital reproduction of a globe crafted at the time of Columbus' first sea "
@@ -70,12 +70,12 @@ msgstr ""
 "Cyfrowa reprodukcja globusu stworzonego za czasów pierwszych morskich "
 "podróży Kolumba na zachód."
 
-#: main.cpp:36
+#: main.cpp:37
 #, kde-format
 msgid "© KDE Community"
 msgstr "© Społeczność KDE"
 
-#: main.cpp:37
+#: main.cpp:38
 #, kde-format
 msgid ""
 "<p>Martin Behaim's Erdapfel</p><p>The oldest existent globe of the Earth. "
@@ -95,25 +95,25 @@ msgstr ""
 "Behaim zajrzyj na <a href=\"https://en.wikipedia.org/wiki/Erdapfel"
 "\">Wikipedia: Erdapfel</a>."
 
-#: main.cpp:51
+#: main.cpp:52
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dennis Nienhüser"
 msgstr "Dennis Nienhüser"
 
-#: main.cpp:51
+#: main.cpp:52
 #, kde-format
 msgctxt "@info:credit"
 msgid "Author"
 msgstr "Autor"
 
-#: main.cpp:53
+#: main.cpp:54
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Łukasz Wojniłowicz"
 
-#: main.cpp:53
+#: main.cpp:54
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"

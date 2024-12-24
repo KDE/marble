@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-04 00:36+0000\n"
+"POT-Creation-Date: 2024-12-24 00:37+0000\n"
 "PO-Revision-Date: 2013-11-01 04:04+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -71,42 +71,42 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Назардағы орын"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
+#: main.cpp:44 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgid "Manage Bookmarks"
 msgid "Marble Maps"
 msgstr "Бетбелгілерін басқару"
 
-#: main.cpp:44
+#: main.cpp:46
 #, fuzzy, kde-format
 #| msgid "&Edit Map"
 msgid "Maps"
 msgstr "Картаны &өңдеу"
 
-#: main.cpp:46
+#: main.cpp:48
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
 
-#: main.cpp:52
+#: main.cpp:54
 #, kde-format
 msgid "Carl Schwan"
 msgstr ""
 
-#: main.cpp:53
+#: main.cpp:55
 #, fuzzy, kde-format
 #| msgid "Developer"
 msgid "Developer"
 msgstr "Құрастырушысы"
 
-#: main.cpp:58
+#: main.cpp:60
 #, fuzzy, kde-format
 #| msgid "Yours"
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "YOURS"
 
-#: main.cpp:58
+#: main.cpp:60
 #, fuzzy, kde-format
 #| msgid "Address Details"
 msgctxt "EMAIL OF TRANSLATORS"

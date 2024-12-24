@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-04 00:36+0000\n"
+"POT-Creation-Date: 2024-12-24 00:37+0000\n"
 "PO-Revision-Date: 2009-07-14 22:38+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -71,42 +71,42 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "現在位置"
 
-#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:190
+#: main.cpp:44 MainScreen.qml:21 MainScreen.qml:190
 #, fuzzy, kde-format
 #| msgid "Placemarks Plugin"
 msgid "Marble Maps"
 msgstr "プレースマークプラグイン"
 
-#: main.cpp:44
+#: main.cpp:46
 #, fuzzy, kde-format
 #| msgid "&Edit"
 msgid "Maps"
 msgstr "編集(&E)"
 
-#: main.cpp:46
+#: main.cpp:48
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
 
-#: main.cpp:52
+#: main.cpp:54
 #, kde-format
 msgid "Carl Schwan"
 msgstr ""
 
-#: main.cpp:53
+#: main.cpp:55
 #, fuzzy, kde-format
 #| msgid "Developer"
 msgid "Developer"
 msgstr "開発者"
 
-#: main.cpp:58
+#: main.cpp:60
 #, fuzzy, kde-format
 #| msgid "Placemarks Plugin"
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "プレースマークプラグイン"
 
-#: main.cpp:58
+#: main.cpp:60
 #, fuzzy, kde-format
 #| msgid "Show Navigation Panel"
 msgctxt "EMAIL OF TRANSLATORS"

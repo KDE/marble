@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-04 00:36+0000\n"
+"POT-Creation-Date: 2024-12-24 00:37+0000\n"
 "PO-Revision-Date: 2024-10-10 15:27\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -53,24 +53,24 @@ msgstr ""
 "德里希·W·吉兰尼“航海家骑士马丁·比海姆的历史”（1853年纽伦堡出版）的地图补充。"
 "CC BY-SA 3.0。"
 
-#: main.cpp:32
+#: main.cpp:33
 #, kde-format
 msgid "Marble Behaim"
 msgstr "Marble 贝海姆地球仪"
 
-#: main.cpp:34
+#: main.cpp:35
 #, kde-format
 msgid ""
 "Digital reproduction of a globe crafted at the time of Columbus' first sea "
 "travel to the west."
 msgstr "哥伦布首次西行航海时制作的地球仪的数字化复刻。"
 
-#: main.cpp:36
+#: main.cpp:37
 #, kde-format
 msgid "© KDE Community"
 msgstr "© KDE Community"
 
-#: main.cpp:37
+#: main.cpp:38
 #, kde-format
 msgid ""
 "<p>Martin Behaim's Erdapfel</p><p>The oldest existent globe of the Earth. "
@@ -88,25 +88,25 @@ msgstr ""
 "信息，请参见 <a href=\"https://en.wikipedia.org/wiki/Erdapfel\">维基百科：贝"
 "海姆地球仪 (英文)</a>。"
 
-#: main.cpp:51
+#: main.cpp:52
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dennis Nienhüser"
 msgstr "Dennis Nienhüser"
 
-#: main.cpp:51
+#: main.cpp:52
 #, kde-format
 msgctxt "@info:credit"
 msgid "Author"
 msgstr "作者"
 
-#: main.cpp:53
+#: main.cpp:54
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Tyson Tan"
 
-#: main.cpp:53
+#: main.cpp:54
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"

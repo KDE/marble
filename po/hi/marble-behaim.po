@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-04 00:36+0000\n"
+"POT-Creation-Date: 2024-12-24 00:37+0000\n"
 "PO-Revision-Date: 2024-12-15 15:58+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
@@ -47,24 +47,24 @@ msgid ""
 "1853. CC BY-SA 3.0."
 msgstr ""
 
-#: main.cpp:32
+#: main.cpp:33
 #, kde-format
 msgid "Marble Behaim"
 msgstr ""
 
-#: main.cpp:34
+#: main.cpp:35
 #, kde-format
 msgid ""
 "Digital reproduction of a globe crafted at the time of Columbus' first sea "
 "travel to the west."
 msgstr ""
 
-#: main.cpp:36
+#: main.cpp:37
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
 
-#: main.cpp:37
+#: main.cpp:38
 #, kde-format
 msgid ""
 "<p>Martin Behaim's Erdapfel</p><p>The oldest existent globe of the Earth. "
@@ -76,25 +76,25 @@ msgid ""
 "\">Wikipedia: Erdapfel</a> for further information about the Behaim globe."
 msgstr ""
 
-#: main.cpp:51
+#: main.cpp:52
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dennis Nienhüser"
 msgstr ""
 
-#: main.cpp:51
+#: main.cpp:52
 #, kde-format
 msgctxt "@info:credit"
 msgid "Author"
 msgstr ""
 
-#: main.cpp:53
+#: main.cpp:54
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
 
-#: main.cpp:53
+#: main.cpp:54
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
