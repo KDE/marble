@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-12-20 22:01+0530\n"
-"Last-Translator: kali <skkalwar999@gmail.com>\n"
+"PO-Revision-Date: 2024-12-25 19:37+0530\n"
+"Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
 "MIME-Version: 1.0\n"
@@ -13317,7 +13317,7 @@ msgstr "TTY अभिलेखान् त्रुटिनिवारणध�
 #: src/plugins/render/aprs/AprsConfigWidget.ui:259
 msgctxt "AprsConfigWidget|"
 msgid "File"
-msgstr "संचिका"
+msgstr "सञ्चिका"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:241
 msgctxt "AprsConfigWidget|"
