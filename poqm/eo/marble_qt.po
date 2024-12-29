@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-04-23 21:12+0100\n"
+"PO-Revision-Date: 2024-12-28 20:45+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -3134,20 +3134,14 @@ msgid "Bookmark Manager"
 msgstr "Legomarko-Manaĝero"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:25
-#, fuzzy
-#| msgctxt "Marble::BookmarkManagerDialog|"
-#| msgid "Import Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Import Bookmarks…"
-msgstr "Importi legosignojn"
+msgstr "Importi Legosignojn…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
-#, fuzzy
-#| msgctxt "Marble::BookmarkManagerDialog|"
-#| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Export Bookmarks…"
-msgstr "Exporti legosignojn"
+msgstr "Elporti Legosignojn…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
@@ -3157,15 +3151,12 @@ msgstr "Dosierujoj"
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
 msgid "New…"
-msgstr ""
+msgstr "Nova…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
-#, fuzzy
-#| msgctxt "UiBookmarkManagerDialog|"
-#| msgid "Rename..."
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Rename…"
-msgstr "Alinomi..."
+msgstr "Alinomi…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
 #: src/lib/marble/BookmarkManagerDialog.ui:151
@@ -3340,7 +3331,7 @@ msgstr "Alŝuti al la nelokdependa konservado"
 #: src/lib/marble/CurrentLocationWidget.cpp:109
 msgctxt "Marble::CurrentLocationWidget|"
 msgid "<p>No Position Tracking Plugin installed.</p>"
-msgstr ""
+msgstr "<p>Neniu Lokspura Kromprogramo instalita.</p>"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:183
 msgctxt "QObject|"
@@ -3454,12 +3445,9 @@ msgstr "Viŝi Trakon"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "CurrentLocationWidget|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
 msgctxt "CurrentLocationWidget|"
@@ -5013,12 +5001,9 @@ msgid "&Folder:"
 msgstr "&Dosierujo:"
 
 #: src/lib/marble/EditBookmarkDialog.ui:79
-#, fuzzy
-#| msgctxt "UiEditBookmarkDialog|"
-#| msgid "&Add Folder..."
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Add Folder…"
-msgstr "&Aldoni dosierujon..."
+msgstr "&Aldoni dosierujon…"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -7377,26 +7362,18 @@ msgstr[0] "trovis %n rezulto(j)n."
 msgstr[1] "trovis %n rezulto(j)n."
 
 #: src/lib/marble/GoToDialog.ui:14
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid "Go To..."
 msgctxt "GoTo|"
 msgid "Go To…"
-msgstr "Iri al..."
+msgstr "Iri al…"
 
 #: src/lib/marble/GoToDialog.ui:78
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid ""
-#| "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-#| "Marble/Search\">Details...</a>"
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
 "Marble/Search\">Details…</a>"
 msgstr ""
 "Enigu serĉan terminon kaj premu Enen. <a href=\"https://userbase.kde.org/"
-"Marble/Search\">Detaloj...</a>"
+"Marble/Search\">Detaloj…</a>"
 
 #: src/lib/marble/GoToDialog.ui:93
 msgctxt "GoTo|"
@@ -8105,18 +8082,13 @@ msgstr ""
 "ordon."
 
 #: src/lib/marble/MapWizard.ui:297
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid ""
-#| "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-#| "Ctrl, Ctrl+A, ...)"
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
 "Ctrl, Ctrl+A, …)"
 msgstr ""
 "Ebligu tion por elekti plurajn tavolojn sen klavaraj ŝparvojoj (Shift, Ctrl, "
-"Ctrl+A, ...)"
+"Ctrl+A, …)"
 
 #: src/lib/marble/MapWizard.ui:300
 msgctxt "MapWizard|"
@@ -8255,12 +8227,9 @@ msgid "Source Image:"
 msgstr "Fonta bildo:"
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "MapWizard|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/lib/marble/MapWizard.ui:615
 msgctxt "MapWizard|"
@@ -8406,12 +8375,9 @@ msgid "preview image"
 msgstr "antaŭrigarda bildo"
 
 #: src/lib/marble/MapWizard.ui:825
-#, fuzzy
-#| msgctxt "Marble::ConflictDialog|"
-#| msgid "Changed"
 msgctxt "MapWizard|"
 msgid "Change…"
-msgstr "Ŝanĝita"
+msgstr "Ŝanĝi…"
 
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
@@ -10204,12 +10170,9 @@ msgstr "Klinas la globan akson al la uzanto."
 #: src/lib/marble/MarbleNavigator.ui:103 src/lib/marble/MarbleNavigator.ui:122
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "MarbleNavigator|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
 msgctxt "MarbleNavigator|"
@@ -11011,12 +10974,9 @@ msgid "Destination video:"
 msgstr "Celvideo:"
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
-#, fuzzy
-#| msgctxt "Marble::RouteItemDelegate|"
-#| msgid "Open"
 msgctxt "MovieCaptureDialog|"
 msgid "Open…"
-msgstr "Malfermi"
+msgstr "Malfermi…"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -11168,12 +11128,9 @@ msgid "All Supported Files (*.png)"
 msgstr "Ĉiuj subtenataj Dosieroj (*.png)"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid "Browse"
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Browse…"
-msgstr "Foliumi"
+msgstr "Foliumi…"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -11920,15 +11877,12 @@ msgstr "Nova Profilo"
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
 msgid "&Add…"
-msgstr ""
+msgstr "&Aldoni…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
-#, fuzzy
-#| msgctxt "Marble::PluginItemDelegate|"
-#| msgid "Configure"
 msgctxt "RoutingSettingsWidget|"
 msgid "&Configure…"
-msgstr "Agordi"
+msgstr "A&gordi…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 msgctxt "RoutingSettingsWidget|"
@@ -12154,12 +12108,9 @@ msgid "Search for '%1'"
 msgstr "Serĉo de '%1'"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:37
-#, fuzzy
-#| msgctxt "OsmRelationManagerWidgetPrivate|"
-#| msgid "Add Relation"
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Audio location"
-msgstr "Aldoni Rilaton"
+msgstr "Loko de aŭdaĵo"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:67
 msgctxt "Marble::SoundCueEditWidget|"
@@ -12243,9 +12194,9 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 "weight:600;\">Atentu: Ŝovumo de la mapo nun estas malŝaltita! </span></p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Malmarku la opcion \"Ŝlosi "
-"mapvidon al Subsuna Punkto\" por permesi denove vidi alian lokon sur la "
-"terglobo.</p></body></html>"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Malmarku la elekteblon "
+"\"Ŝlosi mapvidon al Subsuna Punkto\" por permesi denove vidi alian lokon sur "
+"la terglobo.</p></body></html>"
 
 #: src/lib/marble/TileCreatorDialog.ui:20
 msgctxt "TileCreatorDialog|"
@@ -12427,12 +12378,9 @@ msgid "Destination video"
 msgstr "Cela video"
 
 #: src/lib/marble/TourCaptureDialog.ui:81
-#, fuzzy
-#| msgctxt "Marble::RouteItemDelegate|"
-#| msgid "Open"
 msgctxt "TourCaptureDialog|"
 msgid "Open…"
-msgstr "Malfermi"
+msgstr "Malfermi…"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
@@ -13688,12 +13636,9 @@ msgid "Show eclipses for year:"
 msgstr "Montri eklipsojn por jaro:"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
-#, fuzzy
-#| msgctxt "Marble::MainWindow|"
-#| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
 msgid "&Settings…"
-msgstr "A&gordo"
+msgstr "A&gordo…"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 msgctxt "EclipsesBrowserDialog|"
@@ -13718,7 +13663,7 @@ msgstr "&Rigardi"
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:36
 msgctxt "EclipsesConfigDialog|"
 msgid "View &Options"
-msgstr "Rigardi &Opciojn"
+msgstr "Elektebl&oj pri Vido"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:45
 msgctxt "EclipsesConfigDialog|"
@@ -15402,12 +15347,9 @@ msgid "Remove selected data source."
 msgstr "Forigi elektitan datumfonton."
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "SatellitesConfigDialog|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
 msgctxt "SatellitesConfigDialog|"
@@ -17401,7 +17343,7 @@ msgstr "Instalas %1"
 #, qt-format
 msgctxt "Marble::MonavConfigWidget|"
 msgid "%1/%2 MB"
-msgstr ""
+msgstr "%1/%2 MB"
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:610
 msgctxt "QObject|"
@@ -17527,7 +17469,7 @@ msgstr "Dato"
 #, qt-format
 msgctxt "Marble::MonavMapsModel|"
 msgid "%1 MB"
-msgstr ""
+msgstr "%1 MB"
 
 #: src/plugins/runner/monav/MonavPlugin.cpp:217
 msgctxt "Marble::MonavPlugin|"
@@ -17933,303 +17875,3 @@ msgstr "Gli&tera Ŝablono"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "tio estas ŝablono por gliteroj."
-
-#~ msgctxt "UiBookmarkManagerDialog|"
-#~ msgid "Import Bookmarks..."
-#~ msgstr "Importi legosignojn..."
-
-#~ msgctxt "UiBookmarkManagerDialog|"
-#~ msgid "Export Bookmarks..."
-#~ msgstr "Exporti legosignojn..."
-
-#~ msgctxt "UiBookmarkManagerDialog|"
-#~ msgid "New..."
-#~ msgstr "Nova..."
-
-#~ msgctxt "CurrentLocationWidget|"
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgctxt "MapWizard|"
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Change..."
-#~ msgstr "Ŝanĝi..."
-
-#~ msgctxt "MarbleNavigator|"
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgctxt "MovieCaptureDialog|"
-#~ msgid "Open..."
-#~ msgstr "Malfermi..."
-
-#~ msgctxt "PlacemarkEditHeaderPrivate|"
-#~ msgid "Browse..."
-#~ msgstr "Foliumi..."
-
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Add..."
-#~ msgstr "&Aldoni..."
-
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Configure..."
-#~ msgstr "A&gordi"
-
-#~ msgctxt "TourCaptureDialog|"
-#~ msgid "Open..."
-#~ msgstr "Malfermi..."
-
-#~ msgctxt "EclipsesBrowserDialog|"
-#~ msgid "&Settings..."
-#~ msgstr "A&gordo..."
-
-#~ msgctxt "SatellitesConfigDialog|"
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgctxt "AboutDialog|"
-#~ msgid ""
-#~ "<h3>Marble Maps</h3><p>Find your way! Marble Maps brings the highly "
-#~ "detailed OpenStreetMap to your mobile devices. It features a crisp, "
-#~ "beautiful map with an intuitive user interface. It's open source, "
-#~ "entirely based on free data and open standards and respects your privacy."
-#~ "</p>"
-#~ msgstr ""
-#~ "<h3>Marble Mapoj</h3><p>Trovu vian vojon! Marble Maps alportas la tre "
-#~ "detalan OpenStreetMap al viaj porteblaj aparatoj. Ĝi havas klaran, belan "
-#~ "mapon kun intuicia uzantinterfaco. Ĝi estas malferma fonto, tute bazita "
-#~ "sur senpagaj datumoj kaj malfermaj normoj kaj respektas vian privatecon.</"
-#~ "p>"
-
-#~ msgctxt "AboutDialog|"
-#~ msgid ""
-#~ "<h3>Support</h3><p>Do you have a question? Want to file a suggestion for "
-#~ "improvement? Please use the <a href=\"https://forum.kde.org/viewforum.php?"
-#~ "f=217\">Marble forum</a> to get in touch with fellow Marble users and "
-#~ "developers. Further support channels are listed at <a href=\"https://"
-#~ "marble.kde.org/support.php\">marble.kde.org</a>. We are looking forward "
-#~ "to your feedback!</p>"
-#~ msgstr ""
-#~ "<h3>Subteno</h3><p>Ĉu vi havas demandon? Ĉu vi volas prezenti sugeston "
-#~ "por plibonigo? Bonvolu uzi la <a href=\"https://forum.kde.org/viewforum."
-#~ "php?f=217\">Marble-forumon</a> por kontakti kun aliaj Marble-uzantoj kaj "
-#~ "programistoj. Pliaj subtenaj kanaloj estas listigitaj ĉe <a href="
-#~ "\"https://marble.kde.org/support.php\">marble.kde.org</a>. Ni antaŭĝojas "
-#~ "viajn komentojn!</p>"
-
-#~ msgctxt "AboutDialog|"
-#~ msgid ""
-#~ "<h3>Development Team</h3><p>The main developers of this app are Dennis "
-#~ "Nienhüser, Torsten Rahn, Sanjiban Bairagya, Friedrich W. H. Kossebau, "
-#~ "Gábor Péterffy and Mikhail Ivchenko. They are part of more than 200 "
-#~ "developers who already contributed to the Marble project. <br> Contact us "
-#~ "via <a href=\"https://mail.kde.org/mailman/listinfo/marble-devel\">marble-"
-#~ "devel@kde.org</a>.</p>"
-#~ msgstr ""
-#~ "<h3>Evolua teamo</h3><p>La ĉefaj programistoj de ĉi tiu programo estas "
-#~ "Dennis Nienhüser, Torsten Rahn, Sanjiban Bairagya, Friedrich W. H. "
-#~ "Kossebau, Gábor Péterffy kaj Mikhail Ivchenko. Ili estas parto de pli ol "
-#~ "200 programistoj, kiuj jam kontribuis al la projekto Marble. <br> "
-#~ "Kontaktu nin per <a href=\"https://mail.kde.org/mailman/listinfo/marble-"
-#~ "devel\">marble-devel@kde.org</a>.</p>"
-
-#~ msgctxt "AboutDialog|"
-#~ msgid ""
-#~ "<h3>Attribution</h3><p>The map is based on data from the <a href="
-#~ "\"https://www.openstreetmap.org\">OpenStreetMap</a> project, available "
-#~ "under the <a href=\"https://opendatacommons.org/licenses/odbl/\">Open "
-#~ "Database License</a>. Additionally public domain data from the <a href="
-#~ "\"https://www.naturalearthdata.com/\">Natural Earth</a> project is used. "
-#~ "The map style is influenced by and uses icons from <a href=\"https://"
-#~ "github.com/gravitystorm/openstreetmap-carto\">OpenStreetMap Carto</a> (<a "
-#~ "href=\"https://creativecommons.org/publicdomain/zero/1.0/\">CC0 Public "
-#~ "Domain)</a>.</p>"
-#~ msgstr ""
-#~ "<h3>Atribuo</h3><p>La mapo baziĝas sur datumoj de la projekto <a href="
-#~ "\"https://www.openstreetmap.org\">OpenStreetMap</a>, disponebla sub la <a "
-#~ "href =\"https://opendatacommons.org/licenses/odbl/\">Malfermi Datumbazan "
-#~ "Licencon</a>. Aldone estas uzataj publikaj datumoj de la projekto <a href="
-#~ "\"https://www.naturalearthdata.com/\">Natura Tero</a>. La mapo-stilo "
-#~ "estas influita de kaj uzas piktogramojn de <a href=\"https://github.com/"
-#~ "gravitystorm/openstreetmap-carto\">OpenStreetMap Carto</a> (<a href="
-#~ "\"https://creativecommons.org/publicdomain/zero/1.0/\">CC0 Publika "
-#~ "Domajno)</a>.</p>"
-
-#~ msgctxt "Bookmarks|"
-#~ msgid "Removed"
-#~ msgstr "Forigita"
-
-#~ msgctxt "Bookmarks|"
-#~ msgid "Your bookmarks will appear here."
-#~ msgstr "Viaj legosignoj aperos ĉi tie."
-
-#~ msgctxt "CurrentPosition|"
-#~ msgid "Follow Current Position"
-#~ msgstr "Sekvi Nunan Pozicion"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Marble Maps"
-#~ msgstr "Marble Mapoj"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Settings"
-#~ msgstr "Agordoj"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Public Transport"
-#~ msgstr "Publika transporto"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Outdoor Activities"
-#~ msgstr "Subĉielaj Agadoj"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Accessibility"
-#~ msgstr "Alirebleco"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "About"
-#~ msgstr "Pri"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Bookmarks"
-#~ msgstr "Legosignoj"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Layer Options"
-#~ msgstr "Tavolaj Ebloj"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Routing"
-#~ msgstr "Naviganta"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "%1 km"
-#~ msgstr "%1 km"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Press again to close."
-#~ msgstr "Premu denove por fermi."
-
-#~ msgctxt "NavigationInfoBar|"
-#~ msgid "%1 km"
-#~ msgstr "%1 km"
-
-#~ msgctxt "NavigationInfoBar|"
-#~ msgid "%1 m"
-#~ msgstr "%1 m"
-
-#~ msgctxt "Options|"
-#~ msgid "<h3>Layer Options</h3>"
-#~ msgstr "<h3>Tavolaj opcioj</h3>"
-
-#~ msgctxt "Options|"
-#~ msgid "<h4>Public Transport Layers</h4>"
-#~ msgstr "<h4>Tavoloj de Publika Transporto</h4>"
-
-#~ msgctxt "Options|"
-#~ msgid "<h4>Outdoor Activities Layers</h4>"
-#~ msgstr "<h4>Tavoloj de Eksteraj Agadoj</h4>"
-
-#~ msgctxt "OutdoorActivities|"
-#~ msgid "Walkways"
-#~ msgstr "Vojetoj"
-
-#~ msgctxt "OutdoorActivities|"
-#~ msgid "Hiking Routes"
-#~ msgstr "Migrandaj Itineroj"
-
-#~ msgctxt "OutdoorActivities|"
-#~ msgid "Bicycle Routes"
-#~ msgstr "Biciklovojoj"
-
-#~ msgctxt "OutdoorActivities|"
-#~ msgid "Mountainbike Routes"
-#~ msgstr "Montbiciklaj Itineroj"
-
-#~ msgctxt "OutdoorActivities|"
-#~ msgid "Inline Skating Routes"
-#~ msgstr "Enlinia Sketado Itineroj"
-
-#~ msgctxt "OutdoorActivities|"
-#~ msgid "Bridleways"
-#~ msgstr "Bridvojoj"
-
-#~ msgctxt "PlacemarkDialog|"
-#~ msgid "<h2>Routes</h2>"
-#~ msgstr "<h2>Itineroj</h2>"
-
-#~ msgctxt "ProfileSelectorMenu|"
-#~ msgid "Car (fastest)"
-#~ msgstr "Aŭte (plej rapida)"
-
-#~ msgctxt "ProfileSelectorMenu|"
-#~ msgid "Bicycle"
-#~ msgstr "Bicikle"
-
-#~ msgctxt "ProfileSelectorMenu|"
-#~ msgid "Pedestrian"
-#~ msgstr "Piede"
-
-#~ msgctxt "PublicTransport|"
-#~ msgid "Train"
-#~ msgstr "Trajno"
-
-#~ msgctxt "PublicTransport|"
-#~ msgid "Subway"
-#~ msgstr "Metroo"
-
-#~ msgctxt "PublicTransport|"
-#~ msgid "Tram"
-#~ msgstr "Tramo"
-
-#~ msgctxt "PublicTransport|"
-#~ msgid "Bus"
-#~ msgstr "Buso"
-
-#~ msgctxt "PublicTransport|"
-#~ msgid "Trolley Bus"
-#~ msgstr "Trolebuso"
-
-#~ msgctxt "RouteEditor|"
-#~ msgid "Search for places to integrate them into a route."
-#~ msgstr "Serĉi lokojn por integri ilin en itineron."
-
-#~ msgctxt "Search|"
-#~ msgid "Your bookmarks will appear here."
-#~ msgstr "Viaj legosignoj aperos ĉi tie."
-
-#~ msgctxt "SearchField|"
-#~ msgid "Search"
-#~ msgstr "Serĉi"
-
-#~ msgctxt "SettingsDialog|"
-#~ msgid "Network Settings"
-#~ msgstr "Retaj Agordoj"
-
-#~ msgctxt "SettingsDialog|"
-#~ msgid "Download Maps via WLAN only"
-#~ msgstr "Elŝuti Mapojn nur per WLAN"
-
-#~ msgctxt "SidePanel|"
-#~ msgid "Public Transport"
-#~ msgstr "Publika transporto"
-
-#~ msgctxt "SidePanel|"
-#~ msgid "Outdoor Activities"
-#~ msgstr "Subĉielaj Agadoj"
-
-#~ msgctxt "SidePanel|"
-#~ msgid "Accessibility"
-#~ msgstr "Alirebleco"
-
-#~ msgctxt "SidePanel|"
-#~ msgid "About Marble Maps…"
-#~ msgstr "Pri Marble Mapoj..."
-
-#~ msgctxt "OpenCachingCacheDialog|KDE::DoNotExtract"
-#~ msgid "TextLabel"
-#~ msgstr "TextLabel"
