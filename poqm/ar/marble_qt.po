@@ -2,13 +2,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Youssef Chahibi <chahibi@gmail.com>, 2007.
-# SPDX-FileCopyrightText: 2022, 2024 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
+# SPDX-FileCopyrightText: 2022, 2024, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-12-12 10:35+0400\n"
+"PO-Revision-Date: 2025-01-01 17:35+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -481,70 +481,70 @@ msgstr "النهر"
 #. file data/maps/earth/temp-dec/temp-dec.dgml:232
 msgctxt "DGML|"
 msgid "42&deg;C"
-msgstr ""
+msgstr "42&deg;د"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:237
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:236
 msgctxt "DGML|"
 msgid "32&deg;C"
-msgstr ""
+msgstr "32&deg;د"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:241
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:240
 msgctxt "DGML|"
 msgid "23&deg;C"
-msgstr ""
+msgstr "23&deg;د"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:245
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:244
 msgctxt "DGML|"
 msgid "12&deg;C"
-msgstr ""
+msgstr "12&deg;د"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:249
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:248
 msgctxt "DGML|"
 msgid "1&deg;C"
-msgstr ""
+msgstr "1&deg;د"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:253
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:252
 msgctxt "DGML|"
 msgid "-10&deg;C"
-msgstr ""
+msgstr "-10&deg;د"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:257
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:256
 msgctxt "DGML|"
 msgid "-21&deg;C"
-msgstr ""
+msgstr "-21&deg;د"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:261
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:260
 msgctxt "DGML|"
 msgid "-32&deg;C"
-msgstr ""
+msgstr "-32&deg;د"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:265
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:264
 msgctxt "DGML|"
 msgid "-41&deg;C"
-msgstr ""
+msgstr "-41&deg;د"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:269
 #. ----------
 #. file data/maps/earth/temp-dec/temp-dec.dgml:268
 msgctxt "DGML|"
 msgid "-69&deg;C"
-msgstr ""
+msgstr "-69&deg;د"
 
 #. file data/maps/earth/citylights/citylights.dgml:11
 #, fuzzy
@@ -1760,10 +1760,9 @@ msgid "A map which shows the average temperature in December."
 msgstr ""
 
 #. file data/maps/earth/bluemarble/bluemarble.dgml:11
-#, fuzzy
 msgctxt "DGML|"
 msgid "Satellite View"
-msgstr "قمر اصتناعي عرض"
+msgstr "عرض قمر اصطناعي"
 
 #. file data/maps/earth/bluemarble/bluemarble.dgml:21
 #, fuzzy
@@ -2812,49 +2811,49 @@ msgstr ""
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC (%1x%2)"
-msgstr ""
+msgstr "NTSC (%1x%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:273
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL (%1x%2)"
-msgstr ""
+msgstr "PAL (%1x%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:274
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC 16:9 (%1x%2)"
-msgstr ""
+msgstr "NTSC 16:9 (%1x%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:275
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL 16:9 (%1x%2)"
-msgstr ""
+msgstr "PAL 16:9 (%1x%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:277
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "DVD (%1x%2p)"
-msgstr ""
+msgstr "DVD (%1x%2p)"
 
 #: src/apps/marble-ui/ControlView.cpp:279
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "HD (%1x%2p)"
-msgstr ""
+msgstr "HD (%1x%2p)"
 
 #: src/apps/marble-ui/ControlView.cpp:281
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Full HD (%1x%2p)"
-msgstr ""
+msgstr "Full HD (%1x%2p)"
 
 #: src/apps/marble-ui/ControlView.cpp:282
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Digital Cinema (%1x%2)"
-msgstr ""
+msgstr "Digital Cinema (%1x%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:467
 msgctxt "Marble::ControlView|"
@@ -3137,7 +3136,7 @@ msgstr "المجلّدات"
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
 msgid "New…"
-msgstr ""
+msgstr "جديد…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
 msgctxt "UiBookmarkManagerDialog|"
@@ -3377,10 +3376,9 @@ msgid "nm"
 msgstr "ميل بحري"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:330
-#, fuzzy
 msgctxt "QObject|"
 msgid "Placemark"
-msgstr "ابحث سطر"
+msgstr "علامة مكانية"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:367
 #, fuzzy
@@ -3442,7 +3440,7 @@ msgstr "المقطوعة"
 #: src/lib/marble/CurrentLocationWidget.ui:91
 msgctxt "CurrentLocationWidget|"
 msgid "…"
-msgstr ""
+msgstr "…"
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
 msgctxt "CurrentLocationWidget|"
@@ -5016,12 +5014,9 @@ msgid "&Folder:"
 msgstr "الم&جلّد:"
 
 #: src/lib/marble/EditBookmarkDialog.ui:79
-#, fuzzy
-#| msgctxt "UiEditBookmarkDialog|"
-#| msgid "&Add Folder..."
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Add Folder…"
-msgstr "أضف مجلدًا..."
+msgstr "أ&ضف مجلدًا…"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
 #, fuzzy
@@ -7361,10 +7356,10 @@ msgid "Playlist"
 msgstr "قائمة التشغيل"
 
 #: src/lib/marble/GoToDialog.cpp:166
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::TargetModel|"
 msgid "Current Location: %1"
-msgstr "الحالي الموقع"
+msgstr "الموقع الحالي: %1"
 
 #: src/lib/marble/GoToDialog.cpp:199
 msgctxt "Marble::TargetModel|"
@@ -7389,12 +7384,9 @@ msgstr[4] ""
 msgstr[5] ""
 
 #: src/lib/marble/GoToDialog.ui:14
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid "Go To..."
 msgctxt "GoTo|"
 msgid "Go To…"
-msgstr "اذهب إلى..."
+msgstr "اذهب إلى…"
 
 #: src/lib/marble/GoToDialog.ui:78
 msgctxt "GoTo|"
@@ -7431,10 +7423,9 @@ msgid "°"
 msgstr "°"
 
 #: src/lib/marble/LatLonBoxWidget.ui:66
-#, fuzzy
 msgctxt "LatLonBoxWidget|"
 msgid "&N"
-msgstr "ش"
+msgstr "&ش"
 
 #: src/lib/marble/LatLonBoxWidget.ui:93
 #, fuzzy
@@ -7443,10 +7434,9 @@ msgid "Western Longitude"
 msgstr "خط الطول"
 
 #: src/lib/marble/LatLonBoxWidget.ui:118
-#, fuzzy
 msgctxt "LatLonBoxWidget|"
 msgid "&W"
-msgstr "غ"
+msgstr "&غ"
 
 #: src/lib/marble/LatLonBoxWidget.ui:145
 #, fuzzy
@@ -7455,10 +7445,9 @@ msgid "Eastern Longitude"
 msgstr "خط الطول"
 
 #: src/lib/marble/LatLonBoxWidget.ui:170
-#, fuzzy
 msgctxt "LatLonBoxWidget|"
 msgid "&E"
-msgstr "شر"
+msgstr "&شر"
 
 #: src/lib/marble/LatLonBoxWidget.ui:197
 #, fuzzy
@@ -7467,10 +7456,9 @@ msgid "Southern Latitude"
 msgstr "خط العرض"
 
 #: src/lib/marble/LatLonBoxWidget.ui:222
-#, fuzzy
 msgctxt "LatLonBoxWidget|"
 msgid "&S"
-msgstr " ث"
+msgstr "&ج"
 
 #: src/lib/marble/LatLonEdit.cpp:142
 msgctxt "Marble::LatLonEdit|"
@@ -7488,25 +7476,21 @@ msgid "\""
 msgstr "\""
 
 #: src/lib/marble/LatLonEdit.cpp:541
-#, fuzzy
 msgctxt "Marble::LatLonEdit|East, the direction"
 msgid "E"
 msgstr "شر"
 
 #: src/lib/marble/LatLonEdit.cpp:542
-#, fuzzy
 msgctxt "Marble::LatLonEdit|West, the direction"
 msgid "W"
 msgstr "غ"
 
 #: src/lib/marble/LatLonEdit.cpp:545
-#, fuzzy
 msgctxt "Marble::LatLonEdit|North, the direction"
 msgid "N"
 msgstr "ش"
 
 #: src/lib/marble/LatLonEdit.cpp:546
-#, fuzzy
 msgctxt "Marble::LatLonEdit|South, the direction"
 msgid "S"
 msgstr "ج"
@@ -7800,12 +7784,10 @@ msgid "Legend Image"
 msgstr "مفتاح الرسم البياني"
 
 #: src/lib/marble/MapWizard.cpp:467 src/lib/marble/MapWizard.cpp:477
-#, fuzzy, qt-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "%1"
-msgstr "%1 م"
+msgstr "%1"
 
 #: src/lib/marble/MapWizard.cpp:467
 #, qt-format
@@ -9854,7 +9836,7 @@ msgstr ""
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:142
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "&On startup:"
-msgstr ""
+msgstr "&عند البدء:"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:152
 #, fuzzy
@@ -10753,12 +10735,9 @@ msgid "Destination video:"
 msgstr ""
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
-#, fuzzy
-#| msgctxt "Marble::RouteItemDelegate|"
-#| msgid "Open"
 msgctxt "MovieCaptureDialog|"
 msgid "Open…"
-msgstr "افتح"
+msgstr "افتح…"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -11513,10 +11492,9 @@ msgid "&Home"
 msgstr "الصفحة الأ&ولى"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:307
-#, fuzzy
 msgctxt "Marble::RoutingInputWidget|"
 msgid "Current Location"
-msgstr "الحالي الموقع"
+msgstr "الموقع الحالي"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:481
 #, fuzzy
@@ -11618,7 +11596,7 @@ msgstr "اضبط"
 #: src/lib/marble/routing/RoutingProfilesModel.cpp:131
 msgctxt "Marble::RoutingProfilesModel|"
 msgid "Car (fastest)"
-msgstr ""
+msgstr "سيارة (الأسرع)"
 
 #: src/lib/marble/routing/RoutingProfilesModel.cpp:133
 msgctxt "Marble::RoutingProfilesModel|"
@@ -11795,7 +11773,7 @@ msgstr "يرفع المسار..."
 #: src/lib/marble/routing/RoutingWidget.ui:46
 msgctxt "RoutingWidget|"
 msgid "Car (fastest)"
-msgstr ""
+msgstr "سيارة (الأسرع)"
 
 #: src/lib/marble/routing/RoutingWidget.ui:51
 msgctxt "RoutingWidget|"
@@ -12666,10 +12644,9 @@ msgid "Load Annotation File"
 msgstr "ابحث سطر"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:898
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Clear all Annotations"
-msgstr "ابحث سطر"
+msgstr "امح كل الشروح"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:899
 #, fuzzy
@@ -14062,16 +14039,14 @@ msgid "Minimize"
 msgstr "صغّر"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:65
-#, fuzzy
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "Scale Bar"
-msgstr "المقياس عمود"
+msgstr "شريط المقياس"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:70
-#, fuzzy
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Scale Bar"
-msgstr "المقياس عمود"
+msgstr "&شريط المقياس"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:85
 msgctxt "Marble::MapScaleFloatItem|"
@@ -14243,10 +14218,10 @@ msgstr "المجموع المسافة m"
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:561
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:570
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Area: %1<br/>\n"
-msgstr "الأطلس"
+msgstr "المساحة: %1<br/>\n"
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:563
 #, fuzzy, qt-format
@@ -14909,10 +14884,9 @@ msgid "Routing information and navigation controls"
 msgstr ""
 
 #: src/plugins/render/routing/RoutingPlugin.ui:129
-#, fuzzy
 msgctxt "RoutingPlugin|"
 msgid "Guidance Mode"
-msgstr "حول رخامي"
+msgstr "وضع التوجيه"
 
 #: src/plugins/render/routing/RoutingPlugin.ui:132
 #, fuzzy
@@ -16321,13 +16295,13 @@ msgstr "درجة الحرارة: %1<br>"
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Max temperature: %1<br>"
-msgstr ""
+msgstr "أعلى درجة: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:755
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Min temperature: %1<br>"
-msgstr ""
+msgstr "أدنى درجة: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:758
 #, qt-format
@@ -17194,7 +17168,7 @@ msgstr "يثبّت %1"
 #, qt-format
 msgctxt "Marble::MonavConfigWidget|"
 msgid "%1/%2 MB"
-msgstr ""
+msgstr "%1/%2 م.بايت"
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:610
 msgctxt "QObject|"
@@ -17324,7 +17298,7 @@ msgstr "التاريخ"
 #, qt-format
 msgctxt "Marble::MonavMapsModel|"
 msgid "%1 MB"
-msgstr ""
+msgstr "%1 م.ب"
 
 #: src/plugins/runner/monav/MonavPlugin.cpp:217
 msgctxt "Marble::MonavPlugin|"
