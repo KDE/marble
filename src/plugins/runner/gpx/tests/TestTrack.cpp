@@ -3,8 +3,9 @@
 // SPDX-FileCopyrightText: 2011 Niko Sams <niko.sams@gmail.com>
 //
 
+#include <QBuffer>
 #include <QObject>
-#include <QtTest>
+#include <QTest>
 
 #include "GeoDataLinearRing.h"
 #include "GeoDataMultiGeometry.h"
