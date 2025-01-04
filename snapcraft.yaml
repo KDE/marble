@@ -37,6 +37,10 @@ parts:
     plugin: cmake
     source: .
     source-type: local
+    build-packages:
+      - libpulse0
+    stage-packages:
+      - libpulse0
     cmake-parameters:
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DCMAKE_BUILD_TYPE=Release
