@@ -18,14 +18,14 @@ apps:
       - audio-record
       - browser-support
     environment:
-      - QT_PLUGIN_PATH: "$QT_PLUGIN_PATH:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/marble"
+      QT_PLUGIN_PATH: "$QT_PLUGIN_PATH:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/marble"
 layout:
-    /usr/share/marble:
-        symlink: $SNAP/usr/share/marble
-    /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/marble:
-        symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/marble
-    /usr/share/qt6:
-        bind: $SNAP/usr/share/qt6
+  /usr/share/marble:
+    symlink: $SNAP/usr/share/marble
+  /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/marble:
+    symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/marble
+  /usr/share/qt6:
+    bind: $SNAP/kf6/usr/share/qt6
 slots:
   session-dbus-interface:
     interface: dbus
