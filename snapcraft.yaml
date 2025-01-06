@@ -24,8 +24,6 @@ layout:
     symlink: $SNAP/usr/share/marble
   /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/marble:
     symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/marble
-  /usr/share/qt6:
-    bind: $SNAP/kf6/usr/share/qt6
 slots:
   session-dbus-interface:
     interface: dbus
