@@ -1,23 +1,23 @@
 # Translation of marble_qt.po to Catalan (Valencian)
-# Copyright (C) 2007-2024 This_file_is_part_of_KDE
+# Copyright (C) 2007-2025 This_file_is_part_of_KDE
 #
 # Orestes Mas Casals <orestes@tsc.upc.edu>, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014.
-# SPDX-FileCopyrightText: 2008, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Josep M. Ferrer <txemaq@gmail.com>
 # Joan Maspons <joanmaspons@gmail.com>, 2011.
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2012, 2013, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2023.
+# Josep M. Ferrer <txemaq@gmail.com>, 2008, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-10-26 22:33+0200\n"
+"PO-Revision-Date: 2025-01-05 17:26+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 "X-Qt-Contexts: true\n"
@@ -10847,10 +10847,11 @@ msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Copy Coordinates"
 msgstr "Copia les coordenades"
 
+# skip-rule: punctuation-colon-no 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:114
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Copy geo: URL"
-msgstr "Copia la geolocalització: URL"
+msgstr "Copia l'URL geo:"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:123
 msgctxt "Marble::MarbleWidgetPopupMenu|"
