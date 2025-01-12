@@ -7,13 +7,13 @@
 # H. İbrahim Güngör <ibrahim@pardus.org.tr>, 2011.
 # Hasan Kiran <sunder67@hotmail.com>, 2013.
 # Volkan Gezer <volkangezer@gmail.com>, 2013, 2014, 2017.
-# SPDX-FileCopyrightText: 2022, 2023, 2024 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-11-07 16:35+0300\n"
+"PO-Revision-Date: 2025-01-11 17:20+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 25.03.70\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -3830,12 +3830,12 @@ msgstr "Boya"
 #: src/lib/marble/declarative/Placemark.cpp:296
 msgctxt "Marble::Placemark|"
 msgid "Paper"
-msgstr "Kağıt"
+msgstr "Kâğıt"
 
 #: src/lib/marble/declarative/Placemark.cpp:297
 msgctxt "Marble::Placemark|"
 msgid "Paper packaging"
-msgstr "Kağıt ambalaj"
+msgstr "Kâğıt ambalaj"
 
 #: src/lib/marble/declarative/Placemark.cpp:298
 msgctxt "Marble::Placemark|"
@@ -6441,7 +6441,7 @@ msgstr "Su Kulesi"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:714
 msgctxt "GeoDataPlacemark|"
 msgid "Wind Mill"
-msgstr "Rüzgar Değirmeni"
+msgstr "Yel Değirmeni"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:716
 msgctxt "GeoDataPlacemark|"
@@ -16074,14 +16074,14 @@ msgstr ""
 "\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
 "family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
 "style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Rüzgar yönünün "
-"gösterilmesini isteyip istemediğinizi seçin. Rüzgar yönü, o istasyon için "
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Rüzgâr yönünün "
+"gösterilmesini isteyip istemediğinizi seçin. Rüzgâr yönü, o istasyon için "
 "kullanılabilirse gösterilir.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:55
 msgctxt "WeatherConfigWidget|"
 msgid "Wind direction"
-msgstr "Rüzgar yönü"
+msgstr "Rüzgâr yönü"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:62
 msgctxt "WeatherConfigWidget|"
@@ -16098,15 +16098,15 @@ msgstr ""
 "\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
 "family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
 "style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Rüzgar hızının "
-"gösterilmesini isteyip istemediğinizi seçin. Rüzgar hızı yalnızca belirli "
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Rüzgâr hızının "
+"gösterilmesini isteyip istemediğinizi seçin. Rüzgâr hızı yalnızca belirli "
 "istasyon için kullanılabilirse gösterilecektir.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:66
 #: src/plugins/render/weather/WeatherConfigWidget.ui:113
 msgctxt "WeatherConfigWidget|"
 msgid "Wind speed"
-msgstr "Rüzgar hızı"
+msgstr "Rüzgâr hızı"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:76
 msgctxt "WeatherConfigWidget|"
@@ -16154,7 +16154,7 @@ msgstr ""
 "\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
 "family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
 "style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Rüzgar hızını ölçmek için "
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Rüzgâr hızını ölçmek için "
 "kullanılacak olan birim.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:125
@@ -16513,13 +16513,13 @@ msgstr "En düşük sıcaklık: %1<br>"
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Wind direction: %1<br>"
-msgstr "Rüzgar yönü: %1<br>"
+msgstr "Rüzgâr yönü: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:761
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Wind speed: %1<br>"
-msgstr "Rüzgar hızı: %1<br>"
+msgstr "Rüzgâr hızı: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:764
 #, qt-format
@@ -16554,19 +16554,19 @@ msgstr "İstasyon: %1\n"
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindSpeed, WindDirection"
 msgid "Wind: %4, %5\n"
-msgstr "Rüzgar: %4, %5\n"
+msgstr "Rüzgâr: %4, %5\n"
 
 #: src/plugins/render/weather/WeatherItem.cpp:109
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindSpeed"
 msgid "Wind: %4\n"
-msgstr "Rüzgar: %4\n"
+msgstr "Rüzgâr: %4\n"
 
 #: src/plugins/render/weather/WeatherItem.cpp:111
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindDirection"
 msgid "Wind: %4\n"
-msgstr "Rüzgar: %4\n"
+msgstr "Rüzgâr: %4\n"
 
 #: src/plugins/render/weather/WeatherItem.cpp:114
 #, qt-format
