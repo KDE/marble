@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2025-01-01 17:35+0400\n"
+"PO-Revision-Date: 2025-01-12 21:03+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -83,10 +83,9 @@ msgstr "مزايا أخرى"
 #. file data/maps/earth/bluemarble/bluemarble.dgml:210
 #. ----------
 #. file data/maps/sky/nightsky/nightsky.dgml:134
-#, fuzzy
 msgctxt "DGML|"
 msgid "Places of Interest"
-msgstr "أماكن من الإهتمام"
+msgstr "أماكن مثيرة للاهتمام"
 
 #. file data/maps/moon/clementine/clementine.dgml:179
 #. ----------
@@ -547,10 +546,9 @@ msgid "-69&deg;C"
 msgstr "-69&deg;د"
 
 #. file data/maps/earth/citylights/citylights.dgml:11
-#, fuzzy
 msgctxt "DGML|"
 msgid "Earth at Night"
-msgstr "الأرض عند ليلاً"
+msgstr "الأرض في الليل"
 
 #. file data/maps/earth/citylights/citylights.dgml:21
 #, fuzzy
@@ -575,10 +573,9 @@ msgstr "سطح"
 #. file data/maps/earth/citylights/citylights.dgml:158
 #. ----------
 #. file data/maps/earth/schagen1689/schagen1689.dgml:144
-#, fuzzy
 msgctxt "DGML|"
 msgid "Populated Places"
-msgstr "مأهول بالسكان أماكن"
+msgstr "أماكن مأهول بالسكان"
 
 #. file data/maps/earth/citylights/citylights.dgml:162
 #, fuzzy
@@ -665,14 +662,14 @@ msgstr ""
 #. file data/maps/earth/plain/plain.dgml:263
 msgctxt "DGML|"
 msgid "Historic Lake"
-msgstr ""
+msgstr "بحيرة تاريخية"
 
 #. file data/maps/earth/srtm/srtm.dgml:281
 #. ----------
 #. file data/maps/earth/plain/plain.dgml:267
 msgctxt "DGML|"
 msgid "Playa"
-msgstr ""
+msgstr "بلايا"
 
 #. file data/maps/earth/srtm/srtm.dgml:293
 #. ----------
@@ -1815,10 +1812,9 @@ msgid "<a href=\"checkbox:cities\"/>"
 msgstr ""
 
 #. file data/legend.html
-#, fuzzy
 msgctxt "Legends|"
 msgid "Populated Places"
-msgstr "مأهول بالسكان أماكن"
+msgstr "أماكن مأهول بالسكان"
 
 #. file data/legend.html
 msgctxt "Legends|"
@@ -3354,10 +3350,9 @@ msgid "km"
 msgstr "كم"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:265
-#, fuzzy
 msgctxt "QObject|"
 msgid "m/h"
-msgstr "كم"
+msgstr "م/س"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:267
 #: src/lib/marble/CurrentLocationWidget.cpp:268
@@ -3381,10 +3376,9 @@ msgid "Placemark"
 msgstr "علامة مكانية"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:367
-#, fuzzy
 msgctxt "QObject|"
 msgid "Save Track"
-msgstr "المقطوعة"
+msgstr "احفظ المسار"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:369
 #: src/lib/marble/CurrentLocationWidget.cpp:387
@@ -3393,10 +3387,9 @@ msgid "KML File (*.kml)"
 msgstr ""
 
 #: src/lib/marble/CurrentLocationWidget.cpp:385
-#, fuzzy
 msgctxt "QObject|"
 msgid "Open Track"
-msgstr "فتح المسار"
+msgstr "افتح مسار"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:398
 msgctxt "QObject|"
@@ -3414,10 +3407,9 @@ msgid "Current Location"
 msgstr "الموقع الحالي"
 
 #: src/lib/marble/CurrentLocationWidget.ui:26
-#, fuzzy
 msgctxt "CurrentLocationWidget|"
 msgid "Position Tracking"
-msgstr "الموضع: %1"
+msgstr "تتبع الموضع"
 
 #: src/lib/marble/CurrentLocationWidget.ui:37
 msgctxt "CurrentLocationWidget|"
@@ -3425,16 +3417,14 @@ msgid "Disabled"
 msgstr "معطّل"
 
 #: src/lib/marble/CurrentLocationWidget.ui:53
-#, fuzzy
 msgctxt "CurrentLocationWidget|"
 msgid "Show Track"
-msgstr "المقطوعة"
+msgstr "أظهر المسار"
 
 #: src/lib/marble/CurrentLocationWidget.ui:66
-#, fuzzy
 msgctxt "CurrentLocationWidget|"
 msgid "Clear Track"
-msgstr "المقطوعة"
+msgstr "امسح المسار"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
@@ -3496,10 +3486,9 @@ msgid "Converting data ..."
 msgstr ""
 
 #: src/lib/marble/DataMigrationWidget.ui:20
-#, fuzzy
 msgctxt "DataMigrationWidget|"
 msgid "Data Migration"
-msgstr "الملاحة"
+msgstr "نقل البيانات"
 
 #: src/lib/marble/DataMigrationWidget.ui:26
 msgctxt "DataMigrationWidget|"
@@ -3540,10 +3529,10 @@ msgstr[4] ""
 msgstr[5] ""
 
 #: src/lib/marble/declarative/Placemark.cpp:105
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 parking spaces"
-msgstr "المقطوعة"
+msgstr "%1 مساحة وقوف"
 
 #: src/lib/marble/declarative/Placemark.cpp:106
 #, qt-format
@@ -4037,22 +4026,22 @@ msgid "Not supervised"
 msgstr "بدون إشراف"
 
 #: src/lib/marble/declarative/Placemark.cpp:372
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::Placemark|Parking spaces"
 msgid "%1 disabled spaces"
-msgstr "المقطوعة"
+msgstr "%1 مساحة وقوف للمعاقين"
 
 #: src/lib/marble/declarative/Placemark.cpp:376
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::Placemark|Parking spaces"
 msgid "%1 women spaces"
-msgstr "المقطوعة"
+msgstr "%1 مساحة وقوف للنساء"
 
 #: src/lib/marble/declarative/Placemark.cpp:380
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::Placemark|Parking spaces"
 msgid "%1 parent and child spaces"
-msgstr "المقطوعة"
+msgstr "%1 مساحة وقوف للآباء والأبناء"
 
 #: src/lib/marble/declarative/Placemark.cpp:384
 #, qt-format
@@ -4482,22 +4471,19 @@ msgid "Has weather protection"
 msgstr ""
 
 #: src/lib/marble/declarative/Placemark.cpp:521
-#, fuzzy
 msgctxt "Marble::Placemark|A carriage is not protected from the weather"
 msgid "No weather protection"
-msgstr "الاسم من موقع"
+msgstr "لا يوجد حماية من الطقس"
 
 #: src/lib/marble/declarative/Placemark.cpp:522
-#, fuzzy
 msgctxt "Marble::Placemark|A carriage is heated"
 msgid "Is heated"
-msgstr "الحالة"
+msgstr "مدفئ"
 
 #: src/lib/marble/declarative/Placemark.cpp:523
-#, fuzzy
 msgctxt "Marble::Placemark|A carriage is not heated"
 msgid "Not heated"
-msgstr "الحالة"
+msgstr "غير مدفئ"
 
 #: src/lib/marble/declarative/Placemark.cpp:527
 msgctxt "Marble::Placemark|Bicycles can be transported"
@@ -4515,10 +4501,9 @@ msgid "Bicycle transportation impossible"
 msgstr ""
 
 #: src/lib/marble/declarative/Placemark.cpp:537
-#, fuzzy
 msgctxt "Marble::Placemark|"
 msgid "Lit at night"
-msgstr "الأرض عند ليلاً"
+msgstr "مضاءً ليلًا"
 
 #: src/lib/marble/declarative/Placemark.cpp:538
 msgctxt "Marble::Placemark|"
@@ -4526,10 +4511,9 @@ msgid "Lit in winter"
 msgstr ""
 
 #: src/lib/marble/declarative/Placemark.cpp:539
-#, fuzzy
 msgctxt "Marble::Placemark|A ski piste with trees (gladed)"
 msgid "Contains trees"
-msgstr "الجبل"
+msgstr "يحتوي أشجار"
 
 #: src/lib/marble/declarative/Placemark.cpp:540
 #, fuzzy
@@ -4670,7 +4654,7 @@ msgstr "بدون رسوم"
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "formerly <i>%1</i>"
-msgstr ""
+msgstr "سابقا <i>%1</i>"
 
 #: src/lib/marble/declarative/Placemark.cpp:623
 #, qt-format
@@ -4876,10 +4860,9 @@ msgid "Specify region"
 msgstr ""
 
 #: src/lib/marble/DownloadRegionDialog.cpp:134
-#, fuzzy
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Download Route"
-msgstr "نزّل إنتهيت."
+msgstr "نزّل المسار"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:136
 msgctxt "Marble::DownloadRegionDialog|"
@@ -4892,10 +4875,9 @@ msgid "Offset from route:"
 msgstr ""
 
 #: src/lib/marble/DownloadRegionDialog.cpp:181
-#, fuzzy
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Selection Method"
-msgstr "اعرض شكل ، نموذج"
+msgstr "طريقة التحديد"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:189
 msgctxt "Marble::DownloadRegionDialog|"
@@ -4918,10 +4900,9 @@ msgid "Texture tiles"
 msgstr ""
 
 #: src/lib/marble/DownloadRegionDialog.cpp:243
-#, fuzzy
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Vector tiles"
-msgstr "الخريطة عرض"
+msgstr "قطع متجهة"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:244
 msgctxt "Marble::DownloadRegionDialog|"
@@ -4968,7 +4949,6 @@ msgid "&Description:"
 msgstr "الو&صف:"
 
 #: src/lib/marble/EditBookmarkDialog.ui:41
-#, fuzzy
 msgctxt "UiEditBookmarkDialog|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -4992,21 +4972,26 @@ msgid ""
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
 "family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\"> أبيض فراغ\n"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
-"weight:400; font-style:normal; text-decoration:none;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
-"p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\"> c الـ رخامي مشروع</p>\n"
+"weight:400; font-style:normal;\">\n"
+"<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+"bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+"<tr>\n"
+"<td style=\"border: none;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
-"style:italic;\"></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/marble</"
-"p></body></html>"
+"family:'Ubuntu';\"><br /></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"family:'Ubuntu';\"><br /></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
 
 #: src/lib/marble/EditBookmarkDialog.ui:57
 msgctxt "UiEditBookmarkDialog|"
@@ -5019,10 +5004,9 @@ msgid "&Add Folder…"
 msgstr "أ&ضف مجلدًا…"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
-#, fuzzy
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Untitled Placemark"
-msgstr "ابحث سطر"
+msgstr "علامة مكانية دون عنوان"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:144
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -5045,10 +5029,9 @@ msgid "No name specified"
 msgstr "لم يحدّد الاسم"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:350
-#, fuzzy
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a name for this placemark."
-msgstr "بديل الاسم من موقع."
+msgstr "من فضلك حدد اسم لهذه العلامة المكانية."
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:352
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -5095,10 +5078,9 @@ msgid "Please specify a valid path for the icon file."
 msgstr "بديل الاسم من موقع."
 
 #: src/lib/marble/EditPlacemarkDialog.ui:20
-#, fuzzy
 msgctxt "UiEditPlacemarkDialog|"
 msgid "Edit placemark"
-msgstr "ابحث سطر"
+msgstr "حرّر علامة مكانية"
 
 #: src/lib/marble/EditPlacemarkDialog.ui:38
 msgctxt "UiEditPlacemarkDialog|"
@@ -5138,10 +5120,9 @@ msgid "Icon"
 msgstr "الأيقونة"
 
 #: src/lib/marble/EditPlacemarkDialog.ui:285
-#, fuzzy
 msgctxt "UiEditPlacemarkDialog|"
 msgid "Show placemark"
-msgstr "ابحث سطر"
+msgstr "أظهر علامة مكانية"
 
 #: src/lib/marble/EditPlacemarkDialog.ui:326
 #: src/lib/marble/EditPlacemarkDialog.ui:329
@@ -5228,10 +5209,9 @@ msgid "Make my selection the default map editor"
 msgstr ""
 
 #: src/lib/marble/ExternalEditor.ui:69
-#, fuzzy
 msgctxt "ExternalEditor|"
 msgid "Editor Details"
-msgstr "عرض الشبكة"
+msgstr "محرر التفاصيل"
 
 #: src/lib/marble/ExternalEditor.ui:81
 msgctxt "ExternalEditor|"
@@ -5286,10 +5266,9 @@ msgid "Select filename for KML document"
 msgstr ""
 
 #: src/lib/marble/FileViewWidget.ui:14
-#, fuzzy
 msgctxt "FileViewWidget|"
 msgid "File View"
-msgstr "ملف عرض"
+msgstr "عرض الملف"
 
 #: src/lib/marble/FileViewWidget.ui:78
 msgctxt "FileViewWidget|"
@@ -7554,10 +7533,9 @@ msgid "Open"
 msgstr "افتح"
 
 #: src/lib/marble/MapThemeDownloadDialog.ui:14
-#, fuzzy
 msgctxt "MapThemeDownloadDialog|"
 msgid "Install Maps"
-msgstr "رخامي سطح المكتب الكرة الأرضية"
+msgstr "ثبّت الخرائط"
 
 #: src/lib/marble/MapThemeManager.cpp:374
 msgctxt "QObject|"
@@ -7565,10 +7543,9 @@ msgid "Name"
 msgstr "الاسم"
 
 #: src/lib/marble/MapViewWidget.cpp:114
-#, fuzzy
 msgctxt "Marble::MapViewWidget|"
 msgid "Globe View"
-msgstr "ملف عرض"
+msgstr "عرض الكرة الأرضية"
 
 #: src/lib/marble/MapViewWidget.cpp:118
 #, fuzzy
@@ -7714,10 +7691,9 @@ msgid "Here you can choose the preferred map view from different topics."
 msgstr "هنا اختيار مفضًل خريطة اعرض من مختلف."
 
 #: src/lib/marble/MapWizard.cpp:168
-#, fuzzy
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
-msgstr "اطبع صفحة"
+msgstr "معاينة الخريطة"
 
 #: src/lib/marble/MapWizard.cpp:287 src/lib/marble/MapWizard.cpp:291
 msgctxt "Marble::MapWizard|"
@@ -7766,10 +7742,9 @@ msgid "Tile Matrix Set:"
 msgstr ""
 
 #: src/lib/marble/MapWizard.cpp:453 src/lib/marble/MapWizard.cpp:928
-#, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
-msgstr "اطبع صفحة"
+msgstr "معاينة الصورة"
 
 #: src/lib/marble/MapWizard.cpp:457
 #, fuzzy
@@ -8147,20 +8122,14 @@ msgid "Indicates the file format of the tiles."
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:383
-#, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
 msgctxt "MapWizard|"
 msgid "Layer Info"
-msgstr "خيارات الطبقات"
+msgstr "معلومات الطبقة"
 
 #: src/lib/marble/MapWizard.ui:396
-#, fuzzy
-#| msgctxt "GeoDataPlacemark|"
-#| msgid "Service Road"
 msgctxt "MapWizard|"
 msgid "Service Info"
-msgstr "طريق خدمة"
+msgstr "معلومات الخدمة"
 
 #: src/lib/marble/MapWizard.ui:406
 msgctxt "MapWizard|"
@@ -8371,16 +8340,14 @@ msgid "It will appear in a tool tip and may contain HTML formatting."
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:788 src/lib/marble/MapWizard.ui:990
-#, fuzzy
 msgctxt "MapWizard|"
 msgid "Preview Image:"
-msgstr "اطبع صفحة"
+msgstr "معاينة الصورة:"
 
 #: src/lib/marble/MapWizard.ui:803
-#, fuzzy
 msgctxt "MapWizard|"
 msgid "preview image"
-msgstr "اطبع صفحة"
+msgstr "معاينة الصورة"
 
 #: src/lib/marble/MapWizard.ui:825
 msgctxt "MapWizard|"
@@ -8462,10 +8429,9 @@ msgid "Thumbnail"
 msgstr "المصغّرة"
 
 #: src/lib/marble/MapWizard.ui:1012
-#, fuzzy
 msgctxt "MapWizard|"
 msgid "Preview Map"
-msgstr "اطبع صفحة"
+msgstr "معاينة الخريطة"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:57
 msgctxt "QObject|"
@@ -8653,7 +8619,7 @@ msgstr ""
 #: src/lib/marble/MarbleAboutDialog.cpp:124
 msgctxt "QObject|"
 msgid "<b>Join us</b>"
-msgstr ""
+msgstr "<b>انضم إلينا</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:125
 msgctxt "QObject|"
@@ -9598,10 +9564,9 @@ msgstr "Socks5"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:308
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:320
-#, fuzzy
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "Requires authentication"
-msgstr "اخرج تطبيق"
+msgstr "يحتاج  إلى استيثاق"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:326
 msgctxt "MarbleCacheSettingsWidget|"
@@ -9643,7 +9608,7 @@ msgstr ""
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:119
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Sync now"
-msgstr ""
+msgstr "مزامنة الآن"
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:147
 msgctxt "MarbleCloudSyncSettingsWidget|"
@@ -10013,20 +9978,19 @@ msgid "Zoom out by pressing this button to see less detail."
 msgstr "تكبير خارج أداء زر إلى تفاصيل."
 
 #: src/lib/marble/MarbleNavigator.ui:221
-#, fuzzy
 msgctxt "MarbleNavigator|"
 msgid "-"
 msgstr "-"
 
 #: src/lib/marble/MarblePluginSettingsWidget.cpp:58
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "QObject|"
 msgid ""
 "<br/>(c) %1 The Marble Project<br /><br/><a href=\"https://edu.kde.org/marble"
 "\">https://edu.kde.org/marble</a>"
 msgstr ""
-"<br /> c الـ رخامي مشروع<br /><br /><a href=\"http://edu.kde.org/marble"
-"\">http://edu.kde.org/marble</a>"
+"<br/>(ج) %1 مشروع ماربل<br /><br/><a href=\"https://edu.kde.org/marble"
+"\">https://edu.kde.org/marble</a>"
 
 #: src/lib/marble/MarblePluginSettingsWidget.ui:17
 #, fuzzy
@@ -10090,10 +10054,9 @@ msgid "System time zone"
 msgstr "منطقة النظام الزمنية"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:51
-#, fuzzy
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Choose Time zone"
-msgstr "ابحث سطر"
+msgstr "اختر المنطقة الزمنيّة"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:68
 #, fuzzy
@@ -10416,10 +10379,9 @@ msgstr "جودة عالية"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:184
 #: src/lib/marble/MarbleViewSettingsWidget.ui:239
-#, fuzzy
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Print Quality"
-msgstr "اطبع صفحة"
+msgstr "جودة الطباعة"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:198
 #, fuzzy
@@ -13614,10 +13576,9 @@ msgid "Do not remind me about eclipse events again"
 msgstr ""
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileConfigWidget.ui:14
-#, fuzzy
 msgctxt "ElevationProfileConfigWidget|"
 msgid "Configure Elevation Profile Plugin"
-msgstr "ابحث سطر"
+msgstr "بحث سطر"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileConfigWidget.ui:20
 msgctxt "ElevationProfileConfigWidget|"
@@ -13736,16 +13697,14 @@ msgid "ft"
 msgstr "ق"
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:50
-#, fuzzy
 msgctxt "Marble::FileViewFloatItem|"
 msgid "File View"
-msgstr "ملف عرض"
+msgstr "عرض الملف"
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:55
-#, fuzzy
 msgctxt "Marble::FileViewFloatItem|"
 msgid "&File View"
-msgstr "ملف عرض"
+msgstr "&عرض الملف"
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:65
 msgctxt "Marble::FileViewFloatItem|"
@@ -15010,16 +14969,14 @@ msgid "&Data Sources"
 msgstr "&مصادر البيانات"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:131
-#, fuzzy
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Activate Plugin"
-msgstr "ابحث سطر"
+msgstr "&فعّل الملحقة"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:231
-#, fuzzy
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Add Data Source"
-msgstr "البيانات ورقة"
+msgstr "أضف مصدر البيانات"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:231
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -15101,7 +15058,6 @@ msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:81
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:164
-#, fuzzy
 msgctxt "SatellitesConfigDialog|"
 msgid "-"
 msgstr "-"
@@ -15124,7 +15080,6 @@ msgid "Add a new data source (URL)."
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:150
-#, fuzzy
 msgctxt "SatellitesConfigDialog|"
 msgid "+"
 msgstr "+"
@@ -15167,10 +15122,9 @@ msgid "Plugin Inactive"
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:289
-#, fuzzy
 msgctxt "SatellitesConfigDialog|"
 msgid "&Activate Plugin"
-msgstr "ابحث سطر"
+msgstr "&فعّل الملحقة"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:315
 msgctxt "SatellitesConfigDialog|"
@@ -15620,16 +15574,14 @@ msgid "Names"
 msgstr "الأسماء:"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:401
-#, fuzzy
 msgctxt "StarsConfigWidget|"
 msgid "Latin Name"
-msgstr "الاسم"
+msgstr "الاسم اللاتيني"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:406
-#, fuzzy
 msgctxt "StarsConfigWidget|"
 msgid "Native Translation"
-msgstr "عالمي"
+msgstr "الترجمة الأصلية"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:411
 msgctxt "StarsConfigWidget|"
@@ -16339,10 +16291,10 @@ msgid "Weather"
 msgstr "الطقس"
 
 #: src/plugins/render/weather/WeatherItem.cpp:98
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "WeatherItemPrivate|"
 msgid "Station: %1\n"
-msgstr "الموضع: %1"
+msgstr "المحطة: %1\n"
 
 #: src/plugins/render/weather/WeatherItem.cpp:107
 #, qt-format
@@ -17186,10 +17138,9 @@ msgid "Are you sure you want to delete this map from the system?"
 msgstr ""
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:640
-#, fuzzy
 msgctxt "Marble::MonavConfigWidget|"
 msgid "Remove Map"
-msgstr "مسطح الخريطة"
+msgstr "أزل الخريطة"
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:671
 msgctxt "QObject|"
@@ -17218,10 +17169,9 @@ msgid "Any"
 msgstr "أيّ"
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:107
-#, fuzzy
 msgctxt "MonavConfigWidget|"
 msgid "Manage Maps"
-msgstr "ابحث سطر"
+msgstr "أدر الخرائط"
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:142
 msgctxt "MonavConfigWidget|"
