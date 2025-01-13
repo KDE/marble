@@ -6,14 +6,14 @@
 # Xosé <xosecalvo@gmail.com>, 2009, 2010, 2011, 2012, 2013.
 # Marce Villarino <mvillarino@kde-espana.es>, 2012, 2013, 2014.
 # Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2015, 2016.
-# SPDX-FileCopyrightText: 2018, 2019, 2023, 2024 Adrian Chaves <adrian@chaves.io>
+# SPDX-FileCopyrightText: 2018, 2019, 2023, 2024, 2025 Adrian Chaves <adrian@chaves.io>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-24 00:37+0000\n"
-"PO-Revision-Date: 2024-10-07 01:46+0200\n"
+"PO-Revision-Date: 2025-01-12 15:52+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.1\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #: Bookmarks.qml:20
 #, kde-format
@@ -313,7 +313,7 @@ msgstr "Configuración da rede"
 #: SettingsDialog.qml:53
 #, kde-format
 msgid "Download Maps via WLAN only"
-msgstr "Descargar mapas só desde puntos de acceso"
+msgstr "Descargar mapas só por redes sen cables"
 
 #: ThemeConfigPage.qml:19
 #, kde-format
