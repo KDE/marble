@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Youssef Chahibi <chahibi@gmail.com>, 2007.
 # Ali S AlNoaimi <me@the-ghost.com>, 2010.
-# SPDX-FileCopyrightText: 2022, 2024 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
+# SPDX-FileCopyrightText: 2022, 2024, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-25 00:37+0000\n"
-"PO-Revision-Date: 2024-12-18 17:21+0400\n"
+"PO-Revision-Date: 2025-01-14 17:38+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -1001,14 +1001,14 @@ msgid "Lock Position"
 msgstr "اقفل الموقع"
 
 #: marble_part.cpp:791
-#, fuzzy, kde-format
+#, kde-format
 msgid "Show Shadow"
-msgstr "ضل"
+msgstr "أظهر الظل"
 
 #: marble_part.cpp:794
-#, fuzzy, kde-format
+#, kde-format
 msgid "Hide Shadow"
-msgstr "ضل"
+msgstr "أخف الظل"
 
 #: marble_part.cpp:795
 #, kde-format
@@ -1100,10 +1100,10 @@ msgid "Stop recording a movie of the globe"
 msgstr "أوقف تسجيل فلم الكرة الأرضية"
 
 #: marble_part.cpp:1203
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Action for toggling"
 msgid "Show Position"
-msgstr "الموقع"
+msgstr "أظهر الموقع"
 
 #: marble_part.cpp:1204
 #, fuzzy, kde-format
@@ -1112,10 +1112,10 @@ msgid "Show Date and Time"
 msgstr "اعرض إطار معدل"
 
 #: marble_part.cpp:1205
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Action for toggling"
 msgid "Show Altitude"
-msgstr "الإرتفاع 1"
+msgstr "أظهر الارتفاع"
 
 #: marble_part.cpp:1206
 #, kde-format

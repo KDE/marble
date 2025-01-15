@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2025-01-13 18:10+0100\n"
+"PO-Revision-Date: 2025-01-14 20:38+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.12.0\n"
+"X-Generator: Lokalize 24.12.1\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
 msgctxt "DGML|"
@@ -5738,9 +5738,10 @@ msgid "Ice Shelf"
 msgstr "Izotz geruza"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:420
+#, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Scrub"
-msgstr ""
+msgstr "Sasia"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:422
 msgctxt "GeoDataPlacemark|"
@@ -6062,7 +6063,7 @@ msgstr "Suhiltzaile-etxea"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:550
 msgctxt "GeoDataPlacemark|"
 msgid "Hunting Stand"
-msgstr ""
+msgstr "Ehiza-postua"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:552
 msgctxt "GeoDataPlacemark|"
@@ -6193,7 +6194,7 @@ msgstr "Supermerkatua"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:604
 msgctxt "GeoDataPlacemark|"
 msgid "Liquor Store"
-msgstr "Likore denda"
+msgstr "Likore-denda"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:606
 msgctxt "GeoDataPlacemark|"
@@ -6223,12 +6224,12 @@ msgstr "Barazki-saltzailea"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:616
 msgctxt "GeoDataPlacemark|"
 msgid "Seafood Shop"
-msgstr "Itsaski denda"
+msgstr "Itsaski-denda"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:618
 msgctxt "GeoDataPlacemark|"
 msgid "Department Store"
-msgstr ""
+msgstr "Saltoki handia"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:620
 msgctxt "GeoDataPlacemark|"
@@ -6238,37 +6239,37 @@ msgstr "Kioskoa"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:622
 msgctxt "GeoDataPlacemark|"
 msgid "Bag Shop"
-msgstr ""
+msgstr "Poltsa-denda"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:624
 msgctxt "GeoDataPlacemark|"
 msgid "Clothes Shop"
-msgstr "Arropa denda"
+msgstr "Arropa-denda"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:626
 msgctxt "GeoDataPlacemark|"
 msgid "Fashion Shop"
-msgstr ""
+msgstr "Moda-denda"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:628
 msgctxt "GeoDataPlacemark|"
 msgid "Jewelry Shop"
-msgstr ""
+msgstr "Bitxi-denda"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:630
 msgctxt "GeoDataPlacemark|"
 msgid "Shoe Shop"
-msgstr ""
+msgstr "Zapata-denda"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:632
 msgctxt "GeoDataPlacemark|"
 msgid "Variety Store"
-msgstr ""
+msgstr "Askotariko-denda"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:634
 msgctxt "GeoDataPlacemark|"
 msgid "Beauty Services"
-msgstr ""
+msgstr "Edertasun-zerbitzuak"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:636
 msgctxt "GeoDataPlacemark|"
@@ -6314,7 +6315,7 @@ msgstr "Altzari saltokia"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:654
 msgctxt "GeoDataPlacemark|"
 msgid "Electronics Shop"
-msgstr "Elektronika denda"
+msgstr "Elektronika-denda"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:656
 msgctxt "GeoDataPlacemark|"
@@ -6324,37 +6325,37 @@ msgstr "Telefono mugikor denda"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:658
 msgctxt "GeoDataPlacemark|"
 msgid "Bicycle Shop"
-msgstr "Bizikleta denda"
+msgstr "Bizikleta-denda"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:660
 msgctxt "GeoDataPlacemark|"
 msgid "Car Dealer"
-msgstr ""
+msgstr "Autoen kontzesionarioa"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:662
 msgctxt "GeoDataPlacemark|"
 msgid "Car Repair Shop"
-msgstr ""
+msgstr "Autoak konpontzeko tailerra"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:664
 msgctxt "GeoDataPlacemark|"
 msgid "Car Parts"
-msgstr ""
+msgstr "Autoen piezak"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:666
 msgctxt "GeoDataPlacemark|"
 msgid "Motorcycle Shop"
-msgstr "Motozikleta denda"
+msgstr "Motozikleta-denda"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:668
 msgctxt "GeoDataPlacemark|"
 msgid "Outdoor Shop"
-msgstr ""
+msgstr "Aire zabaleko denda"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:670
 msgctxt "GeoDataPlacemark|"
 msgid "Sports Shop"
-msgstr "Kirol denda"
+msgstr "Kirol-denda"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:672
 msgctxt "GeoDataPlacemark|"
@@ -6364,7 +6365,7 @@ msgstr "Inprimatze zerbitzuak"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:674
 msgctxt "GeoDataPlacemark|"
 msgid "Art Shop"
-msgstr "Arte denda"
+msgstr "Arte-denda"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:676
 msgctxt "GeoDataPlacemark|"
@@ -6374,22 +6375,23 @@ msgstr "Musika tresna denda"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:678
 msgctxt "GeoDataPlacemark|"
 msgid "Photo Shop"
-msgstr "Argazki denda"
+msgstr "Argazki-denda"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:680
 msgctxt "GeoDataPlacemark|"
 msgid "Bookshop"
-msgstr "Liburu denda"
+msgstr "Liburu-denda"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:682
 msgctxt "GeoDataPlacemark|"
 msgid "Gift Shop"
-msgstr "Opari denda"
+msgstr "Opari-denda"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:684
+#, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Stationery"
-msgstr ""
+msgstr "Bulegoko materiala"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:686
 msgctxt "GeoDataPlacemark|"
@@ -6399,7 +6401,7 @@ msgstr "Arropa garbitegia"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:688
 msgctxt "GeoDataPlacemark|"
 msgid "Pet Shop"
-msgstr "Maskota denda"
+msgstr "Maskota-denda"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:690
 msgctxt "GeoDataPlacemark|"
@@ -6414,27 +6416,27 @@ msgstr "Bidaia agentzia"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:694
 msgctxt "GeoDataPlacemark|"
 msgid "Deli"
-msgstr ""
+msgstr "Delicatessen"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:696
 msgctxt "GeoDataPlacemark|"
 msgid "Tobacco Shop"
-msgstr "Tabako denda"
+msgstr "Tabako-denda"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:698
 msgctxt "GeoDataPlacemark|"
 msgid "Tea Shop"
-msgstr ""
+msgstr "Te-denda"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:700
 msgctxt "GeoDataPlacemark|"
 msgid "Computer Shop"
-msgstr "Ordenagailua denda"
+msgstr "Ordenagailu-denda"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:702
 msgctxt "GeoDataPlacemark|"
 msgid "Garden Centre"
-msgstr ""
+msgstr "Lorategi zentroa"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:704
 msgctxt "GeoDataPlacemark|"
@@ -6633,9 +6635,10 @@ msgid "Ski Rental"
 msgstr "Eski alokairua"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:782
+#, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Taxi Rank"
-msgstr ""
+msgstr "Taxi geralekua"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:784
 msgctxt "GeoDataPlacemark|"
@@ -6675,7 +6678,7 @@ msgstr "Gurtza lekua"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:798
 msgctxt "GeoDataPlacemark|"
 msgid "Bahai"
-msgstr ""
+msgstr "Bahaista"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:800
 msgctxt "GeoDataPlacemark|"
@@ -6730,7 +6733,7 @@ msgstr "Golf zelaia"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:820
 msgctxt "GeoDataPlacemark|"
 msgid "Marina"
-msgstr ""
+msgstr "Kirol-portu"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:822
 msgctxt "GeoDataPlacemark|"
@@ -6743,10 +6746,9 @@ msgid "Playground"
 msgstr "Jolastokia"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:826
-#, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Pitch"
-msgstr "Tonua:"
+msgstr "Kirol-zelaia"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:828
 msgctxt "GeoDataPlacemark|"
@@ -6786,7 +6788,7 @@ msgstr "Hilerria"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:844
 msgctxt "GeoDataPlacemark|"
 msgid "Commercial"
-msgstr ""
+msgstr "Merkataritza"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:846
 msgctxt "GeoDataPlacemark|"
@@ -6794,20 +6796,19 @@ msgid "Construction"
 msgstr "Eraikuntza"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:848
-#, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Farmland"
-msgstr "Soroa"
+msgstr "Labore-lurra"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:850
 msgctxt "GeoDataPlacemark|"
 msgid "Farmyard"
-msgstr ""
+msgstr "Eskorta"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:852
 msgctxt "GeoDataPlacemark|"
 msgid "Garages"
-msgstr ""
+msgstr "Garajeak"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:854
 msgctxt "GeoDataPlacemark|"
@@ -6861,15 +6862,14 @@ msgid "Retail"
 msgstr "Txikizkaria"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:874
-#, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Orchard"
-msgstr "Arboladia"
+msgstr "Baratzea"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:876
 msgctxt "GeoDataPlacemark|"
 msgid "Vineyard"
-msgstr ""
+msgstr "Mahastia"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:878
 msgctxt "GeoDataPlacemark|"
@@ -6887,9 +6887,10 @@ msgid "Tram"
 msgstr "Tranbia"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:884
+#, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Light Rail"
-msgstr ""
+msgstr "Tren arina"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:886
 msgctxt "GeoDataPlacemark|"
@@ -6897,7 +6898,6 @@ msgid "Abandoned Railway"
 msgstr ""
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:888
-#, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Subway"
 msgstr "Metroa"
@@ -6951,7 +6951,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:908
 msgctxt "GeoDataPlacemark|"
 msgid "Gondola"
-msgstr ""
+msgstr "Gondola"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:910
 msgctxt "GeoDataPlacemark|"
@@ -7041,17 +7041,17 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:944
 msgctxt "GeoDataPlacemark|"
 msgid "Snow Park"
-msgstr ""
+msgstr "Elur parketa"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:946
 msgctxt "GeoDataPlacemark|"
 msgid "Ski Playground"
-msgstr ""
+msgstr "Eski jolastokia"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:948
 msgctxt "GeoDataPlacemark|"
 msgid "Ski Jump"
-msgstr ""
+msgstr "Eski jauzia"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:950
 msgctxt "GeoDataPlacemark|"
@@ -7116,7 +7116,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:974
 msgctxt "GeoDataPlacemark|"
 msgid "Land Mass"
-msgstr ""
+msgstr "Lur masa"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:976
 msgctxt "GeoDataPlacemark|"
@@ -7136,7 +7136,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:982
 msgctxt "GeoDataPlacemark|"
 msgid "Canal"
-msgstr ""
+msgstr "Ubidea"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:984
 #, fuzzy
@@ -7150,21 +7150,20 @@ msgid "Ditch"
 msgstr ""
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:988
-#, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Stream"
-msgstr "Korrontea"
+msgstr "Erreka"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:990
-#, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "River"
 msgstr "Ibaia"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:992
+#, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Weir"
-msgstr ""
+msgstr "Urtegia"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:994
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:996
@@ -7182,55 +7181,55 @@ msgstr ""
 #, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Door"
-msgstr "atea"
+msgstr "Atea"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:1006
 #, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Room"
-msgstr "gela"
+msgstr "Gela"
 
 #. See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Direction_terms
 #: src/lib/marble/geodata/data/LonLatParser.cpp:46
 msgctxt "GeoDataCoordinates|North direction terms"
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #. See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Direction_terms
 #: src/lib/marble/geodata/data/LonLatParser.cpp:48
 msgctxt "GeoDataCoordinates|East direction terms"
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #. See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Direction_terms
 #: src/lib/marble/geodata/data/LonLatParser.cpp:50
 msgctxt "GeoDataCoordinates|South direction terms"
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #. See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Direction_terms
 #: src/lib/marble/geodata/data/LonLatParser.cpp:52
 msgctxt "GeoDataCoordinates|West direction terms"
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #. See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Coordinate_symbols
 #: src/lib/marble/geodata/data/LonLatParser.cpp:80
 msgctxt "GeoDataCoordinates|Degree symbol terms"
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #. See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Coordinate_symbols
 #: src/lib/marble/geodata/data/LonLatParser.cpp:82
 msgctxt "GeoDataCoordinates|Minutes symbol terms"
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #. See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Coordinate_symbols
 #: src/lib/marble/geodata/data/LonLatParser.cpp:84
 msgctxt "GeoDataCoordinates|Seconds symbol terms"
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:211
 msgctxt "GeoLineStringGraphicsItem|"
@@ -7243,31 +7242,26 @@ msgid "Ferry Route"
 msgstr ""
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:217
-#, fuzzy
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Train"
 msgstr "Trena"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:220
-#, fuzzy
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Subway"
 msgstr "Metroa"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:223
-#, fuzzy
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Tram"
 msgstr "Tranbia"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:226
-#, fuzzy
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Bus"
-msgstr "Busa"
+msgstr "Autobusa"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:229
-#, fuzzy
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Trolley Bus"
 msgstr "Trolebusa"
@@ -7280,12 +7274,12 @@ msgstr ""
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:235
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Mountainbike Route"
-msgstr ""
+msgstr "Mendiko bizikleta ibilbidea"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:238
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Walking Route"
-msgstr ""
+msgstr "Oinezko ibilbidea"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:241
 msgctxt "GeoLineStringGraphicsItem|"
@@ -7404,12 +7398,9 @@ msgstr[0] "Emaitza %n aurkitu da."
 msgstr[1] "%n emaitza aurkitu dira."
 
 #: src/lib/marble/GoToDialog.ui:14
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid "Go To..."
 msgctxt "GoTo|"
 msgid "Go To…"
-msgstr "Joan hona..."
+msgstr "Joan horra..."
 
 #: src/lib/marble/GoToDialog.ui:78
 #, fuzzy
@@ -8042,16 +8033,14 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:134
 msgctxt "MapWizard|"
 msgid "WMS Server:"
-msgstr ""
+msgstr "WMS zerbitzaria:"
 
 #: src/lib/marble/MapWizard.ui:145 src/lib/marble/MapWizard.ui:169
-#, fuzzy
 msgctxt "MapWizard|"
 msgid "Custom"
-msgstr "Pertsonalizatua"
+msgstr "Neurrikoa"
 
 #: src/lib/marble/MapWizard.ui:153
-#, fuzzy
 msgctxt "MapWizard|"
 msgid "URL:"
 msgstr "URLa:"
@@ -8062,43 +8051,33 @@ msgid ""
 "Enter the base Url of the WMS service (e.g. <i>https://www.wms.nrw.de/"
 "geobasis/wms_nw_dop_overlay</i>)"
 msgstr ""
+"Sartu WMS zerbitzuaren oinarri URLa (adib. <i>https://www.wms.nrw.de/"
+"geobasis/wms_nw_dop_overlay</i>)"
 
 #: src/lib/marble/MapWizard.ui:166 src/lib/marble/MapWizard.ui:465
-#, fuzzy
 msgctxt "MapWizard|"
 msgid "https://"
 msgstr "https://"
 
 #: src/lib/marble/MapWizard.ui:218
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop provides a service to send documents "
-#| "through fax"
-#| msgid "Fax service"
 msgctxt "MapWizard|"
 msgid "Wms-Service:"
-msgstr "Fax zerbitzua"
+msgstr "WMS zerbitzua:"
 
 #: src/lib/marble/MapWizard.ui:232
-#, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
 msgctxt "MapWizard|"
 msgid "Layer Selection"
-msgstr "Geruzen aukerak"
+msgstr "Geruza hautapena"
 
 #: src/lib/marble/MapWizard.ui:243
 msgctxt "MapWizard|"
 msgid "Choose your Layer(s):"
-msgstr ""
+msgstr "Hautatu zure geruza(k):"
 
 #: src/lib/marble/MapWizard.ui:266
-#, fuzzy
-#| msgctxt "SearchField|"
-#| msgid "Search"
 msgctxt "MapWizard|"
 msgid "Search:"
-msgstr "Bilatu"
+msgstr "Bilatu:"
 
 #: src/lib/marble/MapWizard.ui:288
 msgctxt "MapWizard|"
@@ -8125,43 +8104,34 @@ msgid "Custom Backdrop"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:314
-#, fuzzy
-#| msgctxt "MapViewWidget|"
-#| msgid "&Projection"
 msgctxt "MapWizard|"
 msgid "Tile Projection:"
-msgstr "&Proiekzioa"
+msgstr "Lauz proiekzioa:"
 
 #: src/lib/marble/MapWizard.ui:321
 msgctxt "MapWizard|"
 msgid "Indicates the projection in which the tiles are rendered."
-msgstr ""
+msgstr "Lauzak errendatzen diren proiekzioa adierazten du."
 
 #: src/lib/marble/MapWizard.ui:344
 msgctxt "MapWizard|"
 msgid "Tile Format:"
-msgstr ""
+msgstr "Lauza-formatua:"
 
 #: src/lib/marble/MapWizard.ui:351
 msgctxt "MapWizard|"
 msgid "Indicates the file format of the tiles."
-msgstr ""
+msgstr "Lauzen fitxategi-formatua adierazten du."
 
 #: src/lib/marble/MapWizard.ui:383
-#, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
 msgctxt "MapWizard|"
 msgid "Layer Info"
-msgstr "Geruzen aukerak"
+msgstr "Geruzen informazioa"
 
 #: src/lib/marble/MapWizard.ui:396
-#, fuzzy
-#| msgctxt "GeoDataPlacemark|"
-#| msgid "Service Road"
 msgctxt "MapWizard|"
 msgid "Service Info"
-msgstr "Zerbitzu-galtzada"
+msgstr "Zerbitzuaren informazioa"
 
 #: src/lib/marble/MapWizard.ui:406
 msgctxt "MapWizard|"
@@ -8171,12 +8141,9 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:417
 msgctxt "MapWizard|"
 msgid "Preset Layers"
-msgstr ""
+msgstr "Aurrezarritako geruzak"
 
 #: src/lib/marble/MapWizard.ui:437
-#, fuzzy
-#| msgctxt "DGML|"
-#| msgid "OpenStreetMap"
 msgctxt "MapWizard|"
 msgid "OpenStreetMap"
 msgstr "OpenStreetMap"
@@ -8184,17 +8151,14 @@ msgstr "OpenStreetMap"
 #: src/lib/marble/MapWizard.ui:452
 msgctxt "MapWizard|"
 msgid "XYZ Server Url"
-msgstr ""
+msgstr "XYZ zerbitzariaren URLa"
 
 #: src/lib/marble/MapWizard.ui:462
 msgctxt "MapWizard|"
 msgid "The XYZ server needs to provide map tiles in Mercator projection."
-msgstr ""
+msgstr "XYZ zerbitzariak mapa lauzak Mercator proiekzioan hornitu behar ditu."
 
 #: src/lib/marble/MapWizard.ui:479
-#, fuzzy
-#| msgctxt "FormattedTextWidget|"
-#| msgid "Color"
 msgctxt "MapWizard|"
 msgid "Color"
 msgstr "Kolorea"
@@ -8202,15 +8166,12 @@ msgstr "Kolorea"
 #: src/lib/marble/MapWizard.ui:498
 msgctxt "MapWizard|"
 msgid "#87CEFA"
-msgstr ""
+msgstr "#87CEFA"
 
 #: src/lib/marble/MapWizard.ui:511
-#, fuzzy
-#| msgctxt "UiEditPlacemarkDialog|"
-#| msgid "Style, Color"
 msgctxt "MapWizard|"
 msgid "Select Color"
-msgstr "Estiloa, kolorea"
+msgstr "Hautatu kolorea"
 
 #: src/lib/marble/MapWizard.ui:554
 msgctxt "MapWizard|"
@@ -8241,18 +8202,14 @@ msgid ""
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:573
-#, fuzzy
 msgctxt "MapWizard|"
 msgid "Source Image:"
-msgstr "Sorburu-irudia"
+msgstr "Sorburu-irudia:"
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "MapWizard|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/lib/marble/MapWizard.ui:615
 msgctxt "MapWizard|"
@@ -8283,7 +8240,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:651
 msgctxt "MapWizard|"
 msgid "URL Scheme:"
-msgstr ""
+msgstr "URL antolaera:"
 
 #: src/lib/marble/MapWizard.ui:690
 msgctxt "MapWizard|"
@@ -8306,37 +8263,34 @@ msgid ""
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:707
-#, fuzzy
 msgctxt "MapWizard|"
 msgid "Map Title:"
-msgstr "Maparen titulua"
+msgstr "Maparen titulua:"
 
 #: src/lib/marble/MapWizard.ui:720
 msgctxt "MapWizard|"
 msgid "A short concise name for your map theme."
-msgstr ""
+msgstr "Zure mapa-gairako izen labur eta zehatz bat."
 
 #: src/lib/marble/MapWizard.ui:727 src/lib/marble/MapWizard.ui:950
-#, fuzzy
 msgctxt "MapWizard|"
 msgid "Map Name:"
-msgstr "Maparen ize&na..."
+msgstr "Maparen izena:"
 
 #: src/lib/marble/MapWizard.ui:737
 msgctxt "MapWizard|"
 msgid "The lowercase map theme id."
-msgstr ""
+msgstr "Mapa gaiaren letra-xeheko IDa."
 
 #: src/lib/marble/MapWizard.ui:740
 msgctxt "MapWizard|"
 msgid "The folder name of your new theme."
-msgstr ""
+msgstr "Zure gai berriaren karpeta-izena."
 
 #: src/lib/marble/MapWizard.ui:753
-#, fuzzy
 msgctxt "MapWizard|"
 msgid "Description:"
-msgstr "Azalpena:"
+msgstr "Deskribapena:"
 
 #: src/lib/marble/MapWizard.ui:772
 msgctxt "MapWizard|"
@@ -8349,27 +8303,22 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:775
 msgctxt "MapWizard|"
 msgid "It will appear in a tool tip and may contain HTML formatting."
-msgstr ""
+msgstr "Tresna-argibide batean agertuko da eta HTML formatua izango du."
 
 #: src/lib/marble/MapWizard.ui:788 src/lib/marble/MapWizard.ui:990
-#, fuzzy
 msgctxt "MapWizard|"
 msgid "Preview Image:"
-msgstr "Aurreikusi irudia"
+msgstr "Aurreikusi irudia:"
 
 #: src/lib/marble/MapWizard.ui:803
-#, fuzzy
 msgctxt "MapWizard|"
 msgid "preview image"
-msgstr "Aurreikusi irudia"
+msgstr "aurreikusi irudia"
 
 #: src/lib/marble/MapWizard.ui:825
-#, fuzzy
-#| msgctxt "Marble::ConflictDialog|"
-#| msgid "Changed"
 msgctxt "MapWizard|"
 msgid "Change…"
-msgstr "Aldatuta"
+msgstr "Aldatu..."
 
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
@@ -8426,7 +8375,7 @@ msgstr "Maparen gaia hemen doa."
 #: src/lib/marble/MapWizard.ui:1002
 msgctxt "MapWizard|"
 msgid "Thumbnail"
-msgstr ""
+msgstr "Koadro txikia"
 
 #: src/lib/marble/MapWizard.ui:1012
 msgctxt "MapWizard|"
@@ -8441,7 +8390,7 @@ msgstr "Marble alegiazko globoa"
 #: src/lib/marble/MarbleAboutDialog.cpp:74
 msgctxt "QObject|"
 msgid "<b>Active Development Team of Marble</b>"
-msgstr ""
+msgstr "<b>Marble-ren garapen talde aktiboa</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:75
 msgctxt "QObject|"
@@ -8512,6 +8461,8 @@ msgid ""
 "<p>Wes Hardaker <a href=\"mailto:marble@hardakers.net\">marble@hardakers."
 "net</a><br /><i>Amateur Radio Support</i></p>"
 msgstr ""
+"<p>Wes Hardaker <a href=\"mailto:marble@hardakers.net\">marble@hardakers."
+"net</a><br /><i>Irratizale euskarria</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:91
 msgctxt "QObject|"
@@ -8519,6 +8470,8 @@ msgid ""
 "<p>Bastian Holst, <a href=\"mailto:bastianholst@gmx.de\">bastianholst@gmx."
 "de</a><br /><i>Online Services Support</i></p>"
 msgstr ""
+"<p>Bastian Holst, <a href=\"mailto:bastianholst@gmx.de\">bastianholst@gmx."
+"de</a><br /><i>Lerroko zerbitzuen euskarria</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:93
 msgctxt "QObject|"
@@ -8526,6 +8479,8 @@ msgid ""
 "<p>Guillaume Martres, <a href=\"mailto:smarter@ubuntu.com\">smarter@ubuntu."
 "com</a><br /><i>Satellites</i></p>"
 msgstr ""
+"<p>Guillaume Martres, <a href=\"mailto:smarter@ubuntu.com\">smarter@ubuntu."
+"com</a><br /><i>Sateliteak</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:95
 msgctxt "QObject|"
@@ -8533,6 +8488,8 @@ msgid ""
 "<p>Ren&#xE9; K&#xFC;ttner, <a href=\"mailto:rene@bitkanal.net"
 "\">rene@bitkanal.net</a><br /><i>Planetary Satellites</i></p>"
 msgstr ""
+"<p>Ren&#xE9; K&#xFC;ttner, <a href=\"mailto:rene@bitkanal.net"
+"\">rene@bitkanal.net</a><br /><i>Satelite planetarioak</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:97
 msgctxt "QObject|"
@@ -8540,6 +8497,8 @@ msgid ""
 "<p>Niko Sams <a href=\"mailto:niko.sams@gmail.com\">niko.sams@gmail.com</"
 "a><br /><i>Routing, Elevation Profile</i></p>"
 msgstr ""
+"<p>Niko Sams <a href=\"mailto:niko.sams@gmail.com\">niko.sams@gmail.com</"
+"a><br /><i>Bideratzea, elebazio profila</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:99
 msgctxt "QObject|"
@@ -8547,6 +8506,8 @@ msgid ""
 "<p>Patrick Spendrin <a href=\"pspendrin@gmail.com\">pspendrin@gmail.com</"
 "a><br /><i>KML and Windows Support</i></p>"
 msgstr ""
+"<p>Patrick Spendrin <a href=\"pspendrin@gmail.com\">pspendrin@gmail.com</"
+"a><br /><i>KML eta Windows euskarria</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:101
 msgctxt "QObject|"
@@ -8554,12 +8515,13 @@ msgid ""
 "<p>Eckhart W&ouml;rner <a href=\"mailto:kde@ewsoftware.de\">kde@ewsoftware."
 "de</a><br /><i>Bugfixes</i></p>"
 msgstr ""
+"<p>Eckhart W&ouml;rner <a href=\"mailto:kde@ewsoftware.de\">kde@ewsoftware."
+"de</a><br /><i>Akatsak konpontzea</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:103
-#, fuzzy
 msgctxt "QObject|"
 msgid "<b>Developers</b>"
-msgstr "Garatzaileak"
+msgstr "<b>Garatzaileak</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:104
 msgctxt "QObject|"
@@ -8567,6 +8529,8 @@ msgid ""
 "<p>M&eacute;d&eacute;ric Boquien <a href=\"mailto:mboquien@free.fr"
 "\">mboquien@free.fr</a><br /><i>Astronomical Observatories</i></p>"
 msgstr ""
+"<p>M&eacute;d&eacute;ric Boquien <a href=\"mailto:mboquien@free.fr"
+"\">mboquien@free.fr</a><br /><i>Astronomia-behatokiak</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:106
 msgctxt "QObject|"
@@ -8574,6 +8538,9 @@ msgid ""
 "<p>Harshit Jain <a href=\"mailto:sonu.itbhu@googlemail.com\">sonu."
 "itbhu@googlemail.com</a><br /><i>Planet Filter, Bugfixes</i></p>"
 msgstr ""
+"<p>Harshit Jain <a href=\"mailto:sonu.itbhu@googlemail.com\">sonu."
+"itbhu@googlemail.com</a><br /><i>Planeta iragazkia, akatsak konpontzea</i></"
+"p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:108
 msgctxt "QObject|"
@@ -8581,6 +8548,8 @@ msgid ""
 "<p>Andrew Manson <a href=\"mailto:g.real.ate@gmail.com\">g.real.ate@gmail."
 "com</a><br /><i>Proxy Support</i></p>"
 msgstr ""
+"<p>Andrew Manson <a href=\"mailto:g.real.ate@gmail.com\">g.real.ate@gmail."
+"com</a><br /><i>Ordezkari euskarria</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:110
 msgctxt "QObject|"
@@ -8588,6 +8557,8 @@ msgid ""
 "<p>Pino Toscano <a href=\"mailto:pino@kde.org\">pino@kde.org</a><br /"
 "><i>Network plugins</i></p>"
 msgstr ""
+"<p>Pino Toscano <a href=\"mailto:pino@kde.org\">pino@kde.org</a><br /"
+"><i>Sare pluginak</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:112
 msgctxt "QObject|"
@@ -8595,11 +8566,13 @@ msgid ""
 "<p>Henry de Valence <a href=\"mailto:hdevalence@gmail.com\">hdevalence@gmail."
 "com</a><br /><i>Marble Runners, World-Clock Plasmoid</i></p>"
 msgstr ""
+"<p>Henry de Valence <a href=\"mailto:hdevalence@gmail.com\">hdevalence@gmail."
+"com</a><br /><i>Marble exekutatzaileak, Munduko erloju Plasmoidea</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:114
 msgctxt "QObject|"
 msgid "<p>Magnus Valle<br /><i>Historical Maps</i></p>"
-msgstr ""
+msgstr "<p>Magnus Valle<br /><i>Mapa historikoak</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:115
 msgctxt "QObject|"
@@ -8607,6 +8580,8 @@ msgid ""
 "<p>Inge Wallin <a href=\"mailto:inge@lysator.liu.se\">inge@lysator.liu.se</"
 "a><br /><i>Original Co-Maintainer</i></p>"
 msgstr ""
+"<p>Inge Wallin <a href=\"mailto:inge@lysator.liu.se\">inge@lysator.liu.se</"
+"a><br /><i>Jatorrizko mantentzaileetako bat</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:117
 msgctxt "QObject|"
@@ -8617,6 +8592,11 @@ msgid ""
 "Frederik Gladhorn, Fredrik H&ouml;glund, Albert Astals Cid, Thomas Zander, "
 "Joseph Wenninger, Kris Thomsen, Daniel Molkentin  </p>"
 msgstr ""
+"<p><i>Garapena&amp; Adabakiak:</i> Simon Schmeisser, Claudiu Covaci, David "
+"Roberts, Nikolas Zimmermann, Jan Becker, Stefan Asserh&auml;ll, Laurent "
+"Montel, Prashanth Udupa, Anne-Marie Mahfouf, Josef Spillner, Frerich Raabe, "
+"Frederik Gladhorn, Fredrik H&ouml;glund, Albert Astals Cid, Thomas Zander, "
+"Joseph Wenninger, Kris Thomsen, Daniel Molkentin  </p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:121
 msgctxt "QObject|"
@@ -8625,16 +8605,19 @@ msgid ""
 "Ralf Habacker, Steffen Joeris, Marcus Czeslinski, Marcus D. Hanwell, "
 "Chitlesh Goorah, Sebastian Wiedenroth, Christophe Leske</p>"
 msgstr ""
+"<p><i>Plataformak eta banaketa:</i> Tim Sutton, Christian Ehrlicher, Ralf "
+"Habacker, Steffen Joeris, Marcus Czeslinski, Marcus D. Hanwell, Chitlesh "
+"Goorah, Sebastian Wiedenroth, Christophe Leske</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:124
 msgctxt "QObject|"
 msgid "<p><i>Artwork:</i> Nuno Pinheiro, Torsten Rahn</p>"
-msgstr ""
+msgstr "<p><i>Artelana:</i> Nuno Pinheiro, Torsten Rahn</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:124
 msgctxt "QObject|"
 msgid "<b>Join us</b>"
-msgstr ""
+msgstr "<b>Elkartu gurekin</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:125
 msgctxt "QObject|"
@@ -8642,11 +8625,13 @@ msgid ""
 "<p>You can reach the developers of the Marble Project at <a href=\"mailto:"
 "marble-devel@kde.org\">marble-devel@kde.org</a></p>"
 msgstr ""
+"<p>Marble proiektuaren garatzaileengana iristeko <a href=\"mailto:marble-"
+"devel@kde.org\">marble-devel@kde.org</a></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:126
 msgctxt "QObject|"
 msgid "<b>ESA - Summer of Code in Space</b>"
-msgstr ""
+msgstr "<b>ESA - Summer of Code in Space</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:127
 msgctxt "QObject|"
@@ -8659,7 +8644,7 @@ msgstr ""
 #: src/lib/marble/MarbleAboutDialog.cpp:181
 msgctxt "QObject|"
 msgid "<p><b>2016</b></p>"
-msgstr ""
+msgstr "<p><b>2016</b></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:130
 msgctxt "QObject|"
@@ -8673,7 +8658,7 @@ msgstr ""
 #: src/lib/marble/MarbleAboutDialog.cpp:186
 msgctxt "QObject|"
 msgid "<p><b>2015</b></p>"
-msgstr ""
+msgstr "<p><b>2015</b></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:133
 msgctxt "QObject|"
@@ -8688,7 +8673,7 @@ msgstr ""
 #: src/lib/marble/MarbleAboutDialog.cpp:193
 msgctxt "QObject|"
 msgid "<p><b>2014</b></p>"
-msgstr ""
+msgstr "<p><b>2014</b></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:136
 msgctxt "QObject|"
@@ -8703,7 +8688,7 @@ msgstr ""
 #: src/lib/marble/MarbleAboutDialog.cpp:200
 msgctxt "QObject|"
 msgid "<p><b>2013</b></p>"
-msgstr ""
+msgstr "<p><b>2013</b></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:139
 msgctxt "QObject|"
@@ -8718,7 +8703,7 @@ msgstr ""
 #: src/lib/marble/MarbleAboutDialog.cpp:209
 msgctxt "QObject|"
 msgid "<p><b>2012</b></p>"
-msgstr ""
+msgstr "<p><b>2012</b></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:142
 msgctxt "QObject|"
@@ -8733,7 +8718,7 @@ msgstr ""
 #: src/lib/marble/MarbleAboutDialog.cpp:216
 msgctxt "QObject|"
 msgid "<p><b>2011</b></p>"
-msgstr ""
+msgstr "<p><b>2011</b></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:145
 msgctxt "QObject|"
@@ -8762,6 +8747,8 @@ msgid ""
 "Ilya Kowalewski <a href=\"mailto:illya.kovalevskyy@gmail.com\">illya."
 "kovalevskyy@gmail.com</a><br />"
 msgstr ""
+"Ilya Kowalewski <a href=\"mailto:illya.kovalevskyy@gmail.com\">illya."
+"kovalevskyy@gmail.com</a><br />"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:154
 #: src/lib/marble/MarbleAboutDialog.cpp:160
@@ -8770,6 +8757,8 @@ msgid ""
 "Mikhail Ivchenko <a href=\"mailto:ematirov@gmail.com\">ematirov@gmail.com</"
 "a><br />"
 msgstr ""
+"Mikhail Ivchenko <a href=\"mailto:ematirov@gmail.com\">ematirov@gmail.com</"
+"a><br />"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:155
 msgctxt "QObject|"
@@ -8777,6 +8766,8 @@ msgid ""
 "Sergey Popov <a href=\"mailto:sergobot256@gmail.com\">sergobot256@gmail.com</"
 "a><br />"
 msgstr ""
+"Sergey Popov <a href=\"mailto:sergobot256@gmail.com\">sergobot256@gmail.com</"
+"a><br />"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:156
 msgctxt "QObject|"
@@ -8784,12 +8775,15 @@ msgid ""
 "Daniel Pastushchak <a href=\"mailto:danikpastushchak90@gmail.com"
 "\">danikpastushchak90@gmail.com</a><br />"
 msgstr ""
+"Daniel Pastushchak <a href=\"mailto:danikpastushchak90@gmail.com"
+"\">danikpastushchak90@gmail.com</a><br />"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:161
 msgctxt "QObject|"
 msgid ""
 "Levente Kurusa <a href=\"mailto:levex@linux.com\">levex@linux.com</a><br />"
 msgstr ""
+"Levente Kurusa <a href=\"mailto:levex@linux.com\">levex@linux.com</a><br />"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:162
 msgctxt "QObject|"
@@ -8797,6 +8791,8 @@ msgid ""
 "Benjamin Kaiser <a href=\"mailto:benjaminjkaiser@gmail.com"
 "\">benjaminjkaiser@gmail.com</a><br />"
 msgstr ""
+"Benjamin Kaiser <a href=\"mailto:benjaminjkaiser@gmail.com"
+"\">benjaminjkaiser@gmail.com</a><br />"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:165
 msgctxt "QObject|"
@@ -8804,6 +8800,8 @@ msgid ""
 "Mohammed Nafees <a href=\"mailto:nafees.technocool@gmail.com\">nafees."
 "technocool@gmail.com</a></p><br />"
 msgstr ""
+"Mohammed Nafees <a href=\"mailto:nafees.technocool@gmail.com\">nafees."
+"technocool@gmail.com</a></p><br />"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:166
 msgctxt "QObject|"
@@ -8811,12 +8809,15 @@ msgid ""
 "Mayank Madan <a href=\"mailto:maddiemadan@gmail.com\">maddiemadan@gmail.com</"
 "a><br />"
 msgstr ""
+"Mayank Madan <a href=\"mailto:maddiemadan@gmail.com\">maddiemadan@gmail.com</"
+"a><br />"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:167
 msgctxt "QObject|"
 msgid ""
 "Timothy Lanzi <a href=\"mailto:trlanzi@gmail.com\">trlanzi@gmail.com</a></p>"
 msgstr ""
+"Timothy Lanzi <a href=\"mailto:trlanzi@gmail.com\">trlanzi@gmail.com</a></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:168
 msgctxt "QObject|"
@@ -8824,6 +8825,8 @@ msgid ""
 "<p>Utku Ayd&#x131;n <a href=\"mailto:utkuaydin34@gmail.com"
 "\">utkuaydin34@gmail.com</a><br />"
 msgstr ""
+"<p>Utku Ayd&#x131;n <a href=\"mailto:utkuaydin34@gmail.com"
+"\">utkuaydin34@gmail.com</a><br />"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:169
 msgctxt "QObject|"
@@ -8831,6 +8834,8 @@ msgid ""
 "Daniel Marth <a href=\"mailto:danielmarth@gmx.at\">danielmarth@gmx.at</"
 "a><br />"
 msgstr ""
+"Daniel Marth <a href=\"mailto:danielmarth@gmx.at\">danielmarth@gmx.at</"
+"a><br />"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:170
 msgctxt "QObject|"
@@ -8838,6 +8843,8 @@ msgid ""
 "Cezar Mocan <a href=\"mailto:mocancezar@gmail.com\">mocancezar@gmail.com</"
 "a><br />"
 msgstr ""
+"Cezar Mocan <a href=\"mailto:mocancezar@gmail.com\">mocancezar@gmail.com</"
+"a><br />"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:171
 msgctxt "QObject|"
@@ -8845,11 +8852,13 @@ msgid ""
 "Furkan &Uuml;z&uuml;mc&uuml; <a href=\"mailto:furkanuzumcu@gmail.com"
 "\">furkanuzumcu@gmail.com</a></p>"
 msgstr ""
+"Furkan &Uuml;z&uuml;mc&uuml; <a href=\"mailto:furkanuzumcu@gmail.com"
+"\">furkanuzumcu@gmail.com</a></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:173
 msgctxt "QObject|"
 msgid "<b>Google Summer of Code</b>"
-msgstr ""
+msgstr "<b>Google Summer of Code</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:174
 msgctxt "QObject|"
@@ -8861,7 +8870,7 @@ msgstr ""
 #: src/lib/marble/MarbleAboutDialog.cpp:176
 msgctxt "QObject|"
 msgid "<p><b>2017</b></p>"
-msgstr ""
+msgstr "<p><b>2017</b></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:177
 msgctxt "QObject|"
@@ -9004,7 +9013,7 @@ msgstr ""
 #: src/lib/marble/MarbleAboutDialog.cpp:221
 msgctxt "QObject|"
 msgid "<p><b>2010</b></p>"
-msgstr ""
+msgstr "<p><b>2010</b></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:222
 msgctxt "QObject|"
@@ -9032,7 +9041,7 @@ msgstr ""
 #: src/lib/marble/MarbleAboutDialog.cpp:228
 msgctxt "QObject|"
 msgid "<p><b>2009</b></p>"
-msgstr ""
+msgstr "<p><b>2009</b></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:229
 msgctxt "QObject|"
@@ -9040,6 +9049,8 @@ msgid ""
 "<p>Andrew Manson <a href=\"mailto:g.real.ate@gmail.com\">g.real.ate@gmail."
 "com</a><br /><i>Project: OSM Annotation</i></p>"
 msgstr ""
+"<p>Andrew Manson <a href=\"mailto:g.real.ate@gmail.com\">g.real.ate@gmail."
+"com</a><br /><i>Proiektua: OSM idatzoharra</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:231
 msgctxt "QObject|"
@@ -9047,11 +9058,13 @@ msgid ""
 "<p>Bastian Holst <a href=\"mailto:bastianholst@gmx.de\">bastianholst@gmx.de</"
 "a><br /><i>Project: Online Services</i></p>"
 msgstr ""
+"<p>Bastian Holst <a href=\"mailto:bastianholst@gmx.de\">bastianholst@gmx.de</"
+"a><br /><i>Proiektua: Lerroko zerbitzuak</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:233
 msgctxt "QObject|"
 msgid "<p><b>2008</b></p>"
-msgstr ""
+msgstr "<p><b>2008</b></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:234
 msgctxt "QObject|"
@@ -9071,7 +9084,7 @@ msgstr ""
 #: src/lib/marble/MarbleAboutDialog.cpp:238
 msgctxt "QObject|"
 msgid "<b>2007</b>"
-msgstr ""
+msgstr "<b>2007</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:239
 msgctxt "QObject|"
@@ -9103,10 +9116,9 @@ msgid ""
 msgstr ""
 
 #: src/lib/marble/MarbleAboutDialog.cpp:246
-#, fuzzy
 msgctxt "QObject|"
 msgid "<b>Credits</b>"
-msgstr "Merituak"
+msgstr "<b>Merituak</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:247
 msgctxt "QObject|"
@@ -9124,10 +9136,9 @@ msgid ""
 msgstr ""
 
 #: src/lib/marble/MarbleAboutDialog.cpp:259
-#, fuzzy
 msgctxt "QObject|"
 msgid "<b>Maps</b>"
-msgstr "Mapak"
+msgstr "<b>Mapak</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:260
 msgctxt "QObject|"
@@ -9180,7 +9191,7 @@ msgstr ""
 #: src/lib/marble/MarbleAboutDialog.cpp:284
 msgctxt "QObject|"
 msgid "<b>Street Map</b>"
-msgstr ""
+msgstr "<b>Kaleko mapa</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:285
 msgctxt "QObject|"
@@ -9251,7 +9262,7 @@ msgstr ""
 #: src/lib/marble/MarbleAboutDialog.cpp:319
 msgctxt "QObject|"
 msgid "<b>Cities and Locations</b>"
-msgstr ""
+msgstr "<b>Hiriak eta kokalekuak</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:320
 msgctxt "QObject|"
@@ -9259,6 +9270,8 @@ msgid ""
 "<p><i>World Gazetteer</i><br />Stefan Helders <a href=\"http://www.world-"
 "gazetteer.com\">http://www.world-gazetteer.com</a></p>"
 msgstr ""
+"<p><i>World Gazetteer</i><br />Stefan Helders <a href=\"http://www.world-"
+"gazetteer.com\">http://www.world-gazetteer.com</a></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:322
 msgctxt "QObject|"
@@ -9275,12 +9288,13 @@ msgid ""
 "<p><i>Czech Statistical Office</i><br />Public database <a href=\"https://"
 "vdb.czso.cz/vdbvo2\">https://www.czso.cz</a></p>"
 msgstr ""
+"<p><i>Txekiako estatistiko bulegoa</i><br />Datu-base publikoa <a href="
+"\"https://vdb.czso.cz/vdbvo2\">https://www.czso.cz</a></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:328
-#, fuzzy
 msgctxt "QObject|"
 msgid "<b>Flags</b>"
-msgstr "Banderak"
+msgstr "<b>Banderak</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:329
 msgctxt "QObject|"
@@ -9293,10 +9307,9 @@ msgid ""
 msgstr ""
 
 #: src/lib/marble/MarbleAboutDialog.cpp:334
-#, fuzzy
 msgctxt "QObject|"
 msgid "<b>Stars</b>"
-msgstr "Izarrak"
+msgstr "<b>Izarrak</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:335
 msgctxt "QObject|"
@@ -9311,7 +9324,7 @@ msgstr ""
 #, qt-format
 msgctxt "Marble::MarbleAboutDialog|"
 msgid "Using Marble Library version %1"
-msgstr ""
+msgstr "Marble liburutegiaren %1 bertsioa erabiltzen ari da"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:375
 #, qt-format
@@ -9320,11 +9333,13 @@ msgid ""
 "<br />(c) 2007-%1 by the authors of Marble Virtual Globe<br /><br /><a href="
 "\"https://edu.kde.org/marble\">https://edu.kde.org/marble</a>"
 msgstr ""
+"<br />(c) 2007-%1 Marble Alegiazko Globoaren egileak<br /><br /><a href="
+"\"https://edu.kde.org/marble\">https://edu.kde.org/marble</a>"
 
 #: src/lib/marble/MarbleAboutDialog.ui:14
 msgctxt "MarbleAboutDialog|"
 msgid "About Marble"
-msgstr ""
+msgstr "Marble-ri buruz"
 
 #: src/lib/marble/MarbleAboutDialog.ui:49
 msgctxt "MarbleAboutDialog|"
@@ -9338,21 +9353,26 @@ msgid ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 "weight:600;\">Marble Virtual Globe</span></p></body></html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal; text-decoration:none;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Marble Alegiazko Globoa</span></p></body></html>"
 
 #: src/lib/marble/MarbleAboutDialog.ui:59
-#, fuzzy
 msgctxt "MarbleAboutDialog|"
 msgid "Version Unknown"
-msgstr "Bertsioa: ezezaguna"
+msgstr "Bertsio ezezaguna"
 
 #: src/lib/marble/MarbleAboutDialog.ui:86
-#, fuzzy
 msgctxt "MarbleAboutDialog|"
 msgid "&About"
 msgstr "&Honi buruz"
 
 #: src/lib/marble/MarbleAboutDialog.ui:98
-#, fuzzy
 msgctxt "MarbleAboutDialog|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -9380,21 +9400,28 @@ msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
-"p></body></html>"
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"size:9pt;\"></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"size:9pt;\">(c) 2007, Marble Proiektua</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"size:9pt; font-style:italic;\"></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"size:9pt;\">https://marble.kde.org/</span></p></body></html>"
 
 #: src/lib/marble/MarbleAboutDialog.ui:116
-#, fuzzy
 msgctxt "MarbleAboutDialog|"
 msgid "A&uthors"
-msgstr "&Egileak"
+msgstr "E&gileak"
 
 #: src/lib/marble/MarbleAboutDialog.ui:128
 #: src/lib/marble/MarbleAboutDialog.ui:155
-#, fuzzy
 msgctxt "MarbleAboutDialog|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -9413,26 +9440,23 @@ msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; font-"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-"\"><br /></p></body></html>"
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"size:9pt;\"></p></body></html>"
 
 #: src/lib/marble/MarbleAboutDialog.ui:143
-#, fuzzy
 msgctxt "MarbleAboutDialog|"
 msgid "&Data"
-msgstr "Datuak"
+msgstr "&Datuak"
 
 #: src/lib/marble/MarbleAboutDialog.ui:170
-#, fuzzy
 msgctxt "MarbleAboutDialog|"
 msgid "&License Agreement"
-msgstr "Lizentzia hitzarmena"
+msgstr "&Lizentzia hitzarmena"
 
 #: src/lib/marble/MarbleAboutDialog.ui:182
-#, fuzzy
 msgctxt "MarbleAboutDialog|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -9451,11 +9475,11 @@ msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; font-"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-"\"><br /></p></body></html>"
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:17
 msgctxt "MarbleCacheSettingsWidget|"
@@ -9476,20 +9500,17 @@ msgid ""
 msgstr ""
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:23
-#, fuzzy
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "C&ache"
-msgstr "Cachea"
+msgstr "C&achea"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:41
-#, fuzzy
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "&Physical memory:"
-msgstr "Memoria fisikoa"
+msgstr "Memoria &fisikoa:"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:54
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:127
-#, fuzzy
 msgctxt "MarbleCacheSettingsWidget|"
 msgid " MB"
 msgstr " MB"
@@ -9526,6 +9547,15 @@ msgid ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Proxy settings for your "
 "local intranet. Please leave empty if there is no proxy.</p></body></html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Zure intranet lokalerako "
+"ordezkariaren ezarpenak. Mesedez, hutsik utzi ordezkaririk ez badago.</p></"
+"body></html>"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:175
 msgctxt "MarbleCacheSettingsWidget|"
@@ -9561,7 +9591,7 @@ msgstr "SOCKS5"
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:320
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "Requires authentication"
-msgstr ""
+msgstr "Autentifikazioa behar du"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:326
 msgctxt "MarbleCacheSettingsWidget|"
@@ -9636,7 +9666,7 @@ msgstr "Pasahitza:"
 #, fuzzy
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Test Login"
-msgstr "Probatu saio-hasiera"
+msgstr "Probatu saio-hastea..."
 
 #: src/lib/marble/MarbleGlobal.h:243
 msgctxt "Marble|"
@@ -9777,9 +9807,10 @@ msgid "&Mouse view rotation"
 msgstr ""
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:142
+#, fuzzy
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "&On startup:"
-msgstr ""
+msgstr "Abiatzean:"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:152
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10196,7 +10227,7 @@ msgstr "Unitateak"
 #, fuzzy
 msgctxt "MarbleViewSettingsWidget|"
 msgid "&Distance:"
-msgstr "&Distantzia:"
+msgstr "Distantzia"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:54
 msgctxt "MarbleViewSettingsWidget|"
@@ -10230,7 +10261,7 @@ msgstr ""
 #, fuzzy
 msgctxt "MarbleViewSettingsWidget|"
 msgid "An&gle:"
-msgstr "An&gelua:"
+msgstr "Angelua"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:98
 msgctxt "MarbleViewSettingsWidget|"
@@ -10260,9 +10291,10 @@ msgid "Degree (Decimal)"
 msgstr "Degree (hamartarra)"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:115
+#, fuzzy
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Universal Transverse Mercator (UTM)"
-msgstr ""
+msgstr "UTM (Universal Transverse Mercator / Zeharkako Mercator Unibertsala)"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:126
 msgctxt "MarbleViewSettingsWidget|"
@@ -10460,7 +10492,7 @@ msgstr "Ez dago azalpen erabilgarririk."
 #, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "National Capital"
-msgstr "Hiriburu Politikoa"
+msgstr "Hiriburu nazionala"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:384
 msgctxt "Marble::MarbleWidgetPopupMenu|"
@@ -10474,9 +10506,10 @@ msgid "State Capital"
 msgstr "Estatuko hiriburua"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:388
+#, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "County Capital"
-msgstr ""
+msgstr "Konderri hiriburua"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:390
 msgctxt "Marble::MarbleWidgetPopupMenu|"
@@ -10606,7 +10639,7 @@ msgstr ""
 #| msgid "Open"
 msgctxt "MovieCaptureDialog|"
 msgid "Open…"
-msgstr "Ireki"
+msgstr "Ireki…"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -10766,7 +10799,7 @@ msgstr "Onartutako fitxategi guztiak (*.png)"
 #| msgid "Browse"
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Browse…"
-msgstr "Arakatu"
+msgstr "Arakatu..."
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -11419,18 +11452,19 @@ msgstr ""
 #, fuzzy
 msgctxt "Marble::RoutingManager|"
 msgid "Please use common sense while navigating."
-msgstr "Mesedez, erabili zentzua nabigatzerakoan."
+msgstr "Mesedez, erabili sen ona nabigatzen duzun bitartean."
 
 #: src/lib/marble/routing/RoutingManager.cpp:512
 #, fuzzy
 msgctxt "Marble::RoutingManager|"
 msgid "The Marble development team wishes you a pleasant and safe journey."
-msgstr "Marble garapen taldeak bidai atsegin eta segurua opa dizu."
+msgstr "Marble-ren garapen taldeak bidai atsegin eta segurua opa dizu."
 
 #: src/lib/marble/routing/RoutingManager.cpp:513
+#, fuzzy
 msgctxt "Marble::RoutingManager|"
 msgid "Guidance Mode"
-msgstr ""
+msgstr "Gidatzeko modua"
 
 #: src/lib/marble/routing/RoutingManager.cpp:514
 msgctxt "Marble::RoutingManager|"
@@ -11508,9 +11542,10 @@ msgid "New Profile"
 msgstr "Profil berria"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
+#, fuzzy
 msgctxt "RoutingSettingsWidget|"
 msgid "&Add…"
-msgstr ""
+msgstr "&Gehitu..."
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
 #, fuzzy
@@ -11518,7 +11553,7 @@ msgstr ""
 #| msgid "&Configure"
 msgctxt "RoutingSettingsWidget|"
 msgid "&Configure…"
-msgstr "&Konfiguratu"
+msgstr "Konfiguratu"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 msgctxt "RoutingSettingsWidget|"
@@ -11765,7 +11800,7 @@ msgstr "Onartutako soinu fitxategiak (*.mp3 *.ogg *.wav)"
 #, fuzzy
 msgctxt "SunControlWidget|"
 msgid "Sun Control"
-msgstr "Eg&uzkiaren agintea..."
+msgstr "Eg&uzkiaren kontrola..."
 
 #: src/lib/marble/SunControlWidget.ui:26
 msgctxt "SunControlWidget|"
@@ -11866,7 +11901,7 @@ msgstr ""
 #, fuzzy
 msgctxt "TileLevelRangeWidget|"
 msgid "to"
-msgstr "hona:"
+msgstr "Nori:"
 
 #: src/lib/marble/TileLevelRangeWidget.ui:70
 msgctxt "TileLevelRangeWidget|"
@@ -11877,13 +11912,13 @@ msgstr ""
 #, fuzzy
 msgctxt "TimeControlWidget|"
 msgid "Time Control"
-msgstr "&Denboraren agintea..."
+msgstr "&Denboraren kontrola..."
 
 #: src/lib/marble/TimeControlWidget.ui:20
 #, fuzzy
 msgctxt "TimeControlWidget|"
 msgid "Time"
-msgstr "Denbora"
+msgstr "Ordua"
 
 #: src/lib/marble/TimeControlWidget.ui:26
 msgctxt "TimeControlWidget|"
@@ -12000,7 +12035,7 @@ msgstr ""
 #| msgid "Open"
 msgctxt "TourCaptureDialog|"
 msgid "Open…"
-msgstr "Ireki"
+msgstr "Ireki…"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
@@ -12160,9 +12195,10 @@ msgstr ""
 "Ziur zaude aldaketa guztiak baztertu eta uneko dokumentua itxi nahi duzula?"
 
 #: src/lib/marble/TourWidget.ui:14
+#, fuzzy
 msgctxt "TourWidget|"
 msgid "Tour"
-msgstr ""
+msgstr "Bisitaldia"
 
 #: src/lib/marble/TourWidget.ui:20 src/lib/marble/TourWidget.ui:45
 msgctxt "TourWidget|"
@@ -12462,7 +12498,7 @@ msgstr ""
 #, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Select Item"
-msgstr "Hautatu elementua"
+msgstr "hautatu elementua"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:866
 msgctxt "Marble::AnnotatePlugin|"
@@ -12701,13 +12737,13 @@ msgstr "Koordenatuak"
 #, fuzzy
 msgctxt "UiEditGroundOverlayDialog|"
 msgid "N"
-msgstr "N"
+msgstr "I"
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.ui:194
 #, fuzzy
 msgctxt "UiEditGroundOverlayDialog|"
 msgid "W"
-msgstr "W"
+msgstr "M"
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.ui:263
 #, fuzzy
@@ -12719,7 +12755,7 @@ msgstr "E"
 #, fuzzy
 msgctxt "UiEditGroundOverlayDialog|"
 msgid "S"
-msgstr "S"
+msgstr "H"
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.ui:457
 #, fuzzy
@@ -12817,7 +12853,7 @@ msgstr "Azalera"
 #, fuzzy
 msgctxt "UiEditPolygonDialog|"
 msgid "Filled"
-msgstr "Beteta: % %1"
+msgstr "Betea"
 
 #: src/plugins/render/annotate/EditPolygonDialog.ui:211
 #, fuzzy
@@ -12948,7 +12984,7 @@ msgstr "APRS plugina"
 #, fuzzy
 msgctxt "AprsConfigWidget|"
 msgid "Display"
-msgstr "Bistaratu"
+msgstr "Azaldu"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:38
 msgctxt "AprsConfigWidget|"
@@ -12991,7 +13027,7 @@ msgstr ""
 #, fuzzy
 msgctxt "AprsConfigWidget|"
 msgid "Server"
-msgstr "&Zerbitzaria:"
+msgstr "Zerbitzaria"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:122
 msgctxt "AprsConfigWidget|"
@@ -13039,7 +13075,7 @@ msgstr ""
 #, fuzzy
 msgctxt "AprsConfigWidget|"
 msgid "TTY"
-msgstr "TTY"
+msgstr "tty"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:209
 msgctxt "AprsConfigWidget|"
@@ -13075,15 +13111,14 @@ msgid "Dump file records to the debug stream"
 msgstr ""
 
 #: src/plugins/render/aprs/AprsPlugin.cpp:116
-#, fuzzy
 msgctxt "Marble::AprsPlugin|"
 msgid "Amateur Radio Aprs Plugin"
-msgstr "Amateur irrati &APRS plugina"
+msgstr "Irratizaleak &APRS plugina"
 
 #: src/plugins/render/aprs/AprsPlugin.cpp:121
 msgctxt "Marble::AprsPlugin|"
 msgid "Amateur Radio &Aprs Plugin"
-msgstr "Amateur irrati &APRS plugina"
+msgstr "Irratizale &APRS plugina"
 
 #: src/plugins/render/aprs/AprsPlugin.cpp:136
 msgctxt "Marble::AprsPlugin|"
@@ -13092,14 +13127,14 @@ msgid ""
 "Amateur Radio protocol for broadcasting location and other information."
 msgstr ""
 "Plugin honek Internetetik ateratako APRS datuak azaltzen ditu. APRS, "
-"kokapena eta bestelako informazio batzuk igortzeko, amateur irrati "
-"protokoloa bat da."
+"kokapena eta bestelako informazio batzuk igortzeko, Irratizaleak protokoloa "
+"bat da."
 
 #: src/plugins/render/atmosphere/AtmospherePlugin.cpp:59
 #, fuzzy
 msgctxt "Marble::AtmospherePlugin|"
 msgid "Atmosphere"
-msgstr "Atmore"
+msgstr "atmosfera %1"
 
 #: src/plugins/render/atmosphere/AtmospherePlugin.cpp:64
 #, fuzzy
@@ -13166,13 +13201,13 @@ msgstr ""
 #, fuzzy
 msgctxt "Marble::CompassFloatItem|"
 msgid "N"
-msgstr "N"
+msgstr "I"
 
 #: src/plugins/render/compass/CompassFloatItem.cpp:138
 #, fuzzy
 msgctxt "Marble::CompassFloatItem|"
 msgid "S"
-msgstr "S"
+msgstr "H"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:14
 msgctxt "CrosshairsConfigWidget|"
@@ -13238,7 +13273,7 @@ msgstr ""
 #, fuzzy
 msgctxt "EarthquakeConfigWidget|"
 msgid "Filter"
-msgstr "Iragazkia"
+msgstr "Iragazi"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:29
 msgctxt "EarthquakeConfigWidget|"
@@ -13259,7 +13294,7 @@ msgstr ""
 #, fuzzy
 msgctxt "EarthquakeConfigWidget|"
 msgid "Past"
-msgstr "Iraganekoa"
+msgstr "Iragana"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:78
 #, fuzzy
@@ -13277,7 +13312,7 @@ msgstr "egun"
 #, fuzzy
 msgctxt "EarthquakeConfigWidget|"
 msgid "to"
-msgstr "hona:"
+msgstr "Nori:"
 
 #: src/plugins/render/earthquake/EarthquakeItem.cpp:127
 #, fuzzy
@@ -13289,7 +13324,7 @@ msgstr "Data:"
 #, fuzzy
 msgctxt "Marble::EarthquakeItem|"
 msgid "Magnitude:"
-msgstr "Magnitudea:"
+msgstr "Magnitudea"
 
 #: src/plugins/render/earthquake/EarthquakeItem.cpp:131
 #, fuzzy
@@ -13328,7 +13363,7 @@ msgstr ""
 #| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
 msgid "&Settings…"
-msgstr "E&zarpenak"
+msgstr "Ezarpenak"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 #, fuzzy
@@ -13356,7 +13391,7 @@ msgstr "&Ikusi"
 #, fuzzy
 msgctxt "EclipsesConfigDialog|"
 msgid "View &Options"
-msgstr "Ikuspegiaren aukerak"
+msgstr "Ikuspegi aukerak"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:45
 msgctxt "EclipsesConfigDialog|"
@@ -13479,7 +13514,7 @@ msgstr "Hasi"
 #, fuzzy
 msgctxt "Marble::EclipsesModel|"
 msgid "End"
-msgstr "Amaitu"
+msgstr "Bukaera"
 
 #: src/plugins/render/eclipses/EclipsesModel.cpp:173
 #, fuzzy
@@ -13670,14 +13705,16 @@ msgid "ft"
 msgstr "ft"
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:50
+#, fuzzy
 msgctxt "Marble::FileViewFloatItem|"
 msgid "File View"
-msgstr ""
+msgstr "Fitxategiaren ikuspegia"
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:55
+#, fuzzy
 msgctxt "Marble::FileViewFloatItem|"
 msgid "&File View"
-msgstr ""
+msgstr "Fitxategiaren ikuspegia"
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:65
 msgctxt "Marble::FileViewFloatItem|"
@@ -13688,7 +13725,7 @@ msgstr ""
 #, fuzzy
 msgctxt "Marble::FileViewFloatItem|"
 msgid "Open file..."
-msgstr "Ireki fitxategia..."
+msgstr "Ireki fitxategia"
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:202
 msgctxt "Marble::FileViewFloatItem|"
@@ -13789,7 +13826,7 @@ msgstr "Norabidea"
 #, fuzzy
 msgctxt "GpsInfoPlugin|"
 msgid "Altitude"
-msgstr "Altitudea"
+msgstr "Altitudea: %1"
 
 #: src/plugins/render/gpsinfo/GpsInfoPlugin.ui:71
 #, fuzzy
@@ -13806,7 +13843,7 @@ msgstr ""
 #, fuzzy
 msgctxt "GraticuleConfigWidget|"
 msgid "C&olors"
-msgstr "Koloreak"
+msgstr "K&oloreak"
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:444
 #, fuzzy
@@ -13944,7 +13981,7 @@ msgstr "Lizentzia"
 #, fuzzy
 msgctxt "Marble::License|"
 msgid "&License"
-msgstr "Lizentzia:"
+msgstr "Lizentzia"
 
 #: src/plugins/render/license/License.cpp:112
 msgctxt "Marble::License|"
@@ -14034,7 +14071,7 @@ msgstr "nm"
 #, fuzzy
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Configure..."
-msgstr "&Konfiguratu..."
+msgstr "Konfiguratu"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:355
 msgctxt "Marble::MapScaleFloatItem|"
@@ -14074,7 +14111,7 @@ msgstr ""
 #, fuzzy
 msgctxt "MeasureConfigDialog|"
 msgid "Distance "
-msgstr "Distantzia:"
+msgstr "Distantzia"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:70
 msgctxt "MeasureConfigDialog|"
@@ -14219,13 +14256,13 @@ msgstr ""
 #, fuzzy
 msgctxt "Navigation|"
 msgid "Navigation"
-msgstr "Nabigatzea"
+msgstr "Nabigazioa"
 
 #: src/plugins/render/navigation/NavigationFloatItem.cpp:60
 #, fuzzy
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Navigation"
-msgstr "Nabigatzea"
+msgstr "Nabigazioa"
 
 #: src/plugins/render/navigation/NavigationFloatItem.cpp:65
 #, fuzzy
@@ -14247,7 +14284,7 @@ msgstr ""
 #, fuzzy
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Home Button"
-msgstr "Etxea botoia"
+msgstr "Etxea botoia (~)"
 
 #: src/plugins/render/notes/NotesItem.cpp:97
 #, fuzzy
@@ -14385,7 +14422,7 @@ msgstr "Elkarrizketa-koadroa"
 #, fuzzy
 msgctxt "OpenCachingConfigWidget|"
 msgid "Filter"
-msgstr "Iragazkia"
+msgstr "Iragazi"
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:26
 msgctxt "OpenCachingConfigWidget|"
@@ -14422,7 +14459,7 @@ msgstr "Hasiera:"
 #, fuzzy
 msgctxt "OpenCachingConfigWidget|"
 msgid "End:"
-msgstr "Amaiera:"
+msgstr "Bukatu:"
 
 #: src/plugins/render/opencaching/OpenCachingItem.cpp:173
 msgctxt "Marble::OpenCachingItem|"
@@ -15318,7 +15355,7 @@ msgstr "Globalstar"
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:486
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Amateur radio"
-msgstr "Irrati zaleak"
+msgstr "Irratizaleak"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:489
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
