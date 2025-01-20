@@ -1,14 +1,14 @@
 # Translation for marble_qt.po to Euskara/Basque (eu)
-# Copyrigth (C) 2021-2024 This file is copyright.
+# Copyrigth (C) 2021-2025 This file is copyright.
 # This file is distributed under the same licenses as the original file.
 # SPDX-FileCopyrightText: 2024, 2025 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2021, 2023, 2024.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2021, 2023, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2025-01-14 20:38+0100\n"
+"PO-Revision-Date: 2025-01-19 09:53+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -7403,17 +7403,12 @@ msgid "Go To…"
 msgstr "Joan horra..."
 
 #: src/lib/marble/GoToDialog.ui:78
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid ""
-#| "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-#| "Marble/Search\">Details...</a>"
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
 "Marble/Search\">Details…</a>"
 msgstr ""
-"Sartu bilatzeko termino bat eta sakatu Sartu. <a href=\"https://userbase.kde."
+"Sartu bilatzeko termino bat eta Sartu sakatu. <a href=\"https://userbase.kde."
 "org/Marble/Search\">Xehetasunak...</a>"
 
 #: src/lib/marble/GoToDialog.ui:93
@@ -7739,43 +7734,37 @@ msgid "Wizard cannot parse server's response"
 msgstr "Morroiak ezin du aztertu zerbitzariaren erantzuna"
 
 #: src/lib/marble/MapWizard.cpp:291
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "Server is not a Web Map Server."
 msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
-msgstr "Zerbitzaria ez da web-mapa zerbitzaria."
+msgstr "Zerbitzaria ez da OWS zerbitzaria."
 
 #: src/lib/marble/MapWizard.cpp:381 src/lib/marble/MapWizard.cpp:398
 #: src/lib/marble/MapWizard.cpp:1091
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
-msgstr ""
+msgstr "Web Mercator (epsg:3857)"
 
 #: src/lib/marble/MapWizard.cpp:382 src/lib/marble/MapWizard.cpp:812
 #: src/lib/marble/MapWizard.cpp:936
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
-msgstr ""
+msgstr "Proiekzio zilindriko distantziakidea (epsg:4326)"
 
 #: src/lib/marble/MapWizard.cpp:383 src/lib/marble/MapWizard.cpp:814
 #: src/lib/marble/MapWizard.cpp:938
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (crs:84)"
-msgstr ""
+msgstr "Zilindriko distantziakidea (crs:84)"
 
 #: src/lib/marble/MapWizard.cpp:394
-#, fuzzy
-#| msgctxt "MapViewWidget|"
-#| msgid "&Projection"
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
-msgstr "&Proiekzioa"
+msgstr "Lauza-proiekzioa:"
 
 #: src/lib/marble/MapWizard.cpp:410
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
-msgstr ""
+msgstr "Lauza matrize multzoa:"
 
 #: src/lib/marble/MapWizard.cpp:453 src/lib/marble/MapWizard.cpp:928
 msgctxt "Marble::MapWizard|"
@@ -7785,31 +7774,24 @@ msgstr "Aurreikusi irudia"
 #: src/lib/marble/MapWizard.cpp:457
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
-msgstr ""
+msgstr "Oinarri lauza"
 
 #: src/lib/marble/MapWizard.cpp:461
-#, fuzzy
-#| msgctxt "Marble::ControlView|"
-#| msgid "Legend"
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
-msgstr "Legenda"
+msgstr "Legendaren irudia"
 
 #: src/lib/marble/MapWizard.cpp:467 src/lib/marble/MapWizard.cpp:477
-#, fuzzy, qt-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "%1"
-msgstr "%1 m"
+msgstr "%1"
 
 #: src/lib/marble/MapWizard.cpp:467
-#, fuzzy, qt-format
-#| msgctxt "Marble::DownloadRegionDialog|"
-#| msgid "Number of tiles to download:"
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
-msgstr "Zama-jaitsi beharreko lauza kopurua:"
+msgstr "%1 ezin izan da zama-jaitsi."
 
 #: src/lib/marble/MapWizard.cpp:478
 #, qt-format
@@ -7819,16 +7801,18 @@ msgid ""
 "\n"
 "%2"
 msgstr ""
+"%1 ezin izan da zama-jaitsi. Zerbitzariaren erantzun du:\n"
+"\n"
+"%2"
 
 #: src/lib/marble/MapWizard.cpp:557 src/lib/marble/MapWizard.cpp:1480
 #: src/lib/marble/MapWizard.cpp:1481 src/lib/marble/MapWizard.cpp:1490
 #: src/lib/marble/MapWizard.cpp:1491
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
-msgstr "Norberak finkatua"
+msgstr "Neurrira"
 
 #: src/lib/marble/MapWizard.cpp:766 src/lib/marble/MapWizard.cpp:769
-#, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "Artxibatzea huts egin du"
@@ -7836,12 +7820,12 @@ msgstr "Artxibatzea huts egin du"
 #: src/lib/marble/MapWizard.cpp:766
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
-msgstr ""
+msgstr "Artxibatzeko prozesua ezin da hasi."
 
 #: src/lib/marble/MapWizard.cpp:769
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
-msgstr ""
+msgstr "Artxibatzeko prozesua kraskatu egin da."
 
 #: src/lib/marble/MapWizard.cpp:862 src/lib/marble/MapWizard.cpp:868
 #: src/lib/marble/MapWizard.cpp:876
@@ -7860,6 +7844,7 @@ msgid ""
 "The source image you specified does not exist. Please specify a different "
 "one."
 msgstr ""
+"Zehaztu duzun sorburu-irudia ez da existitzen. Mesedez zehaztu beste bat."
 
 #: src/lib/marble/MapWizard.cpp:877
 msgctxt "Marble::MapWizard|"
@@ -7867,6 +7852,8 @@ msgid ""
 "The source image you specified does not seem to be an image. Please specify "
 "a different image file."
 msgstr ""
+"Zehaztu duzun sorburu-irudia ez dirudi irudia denik. Mesedez, zehaztu beste "
+"irudi-fitxategi bat."
 
 #: src/lib/marble/MapWizard.cpp:907
 msgctxt "Marble::MapWizard|"
@@ -7912,10 +7899,9 @@ msgid "Check if a theme with the same name exists."
 msgstr "Egiaztatu izen bereko gairik dagoen."
 
 #: src/lib/marble/MapWizard.cpp:1475
-#, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
-msgstr "&Zerbitzaria:"
+msgstr "WMS zerbitzaria"
 
 #: src/lib/marble/MapWizard.cpp:1477
 msgctxt "Marble::MapWizard|"
@@ -7923,12 +7909,14 @@ msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>WMS zerbitzaria</h4>Mesedez aukeratu <a href=\"https://en.wikipedia.org/"
+"wiki/Web_Map_Service\">WMS</a> zerbitzaria edo sartu neurrira ipinitako "
+"zerbitzari baten URLa."
 
 #: src/lib/marble/MapWizard.cpp:1484
-#, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
-msgstr "&Zerbitzaria:"
+msgstr "WMTS zerbitzaria"
 
 #: src/lib/marble/MapWizard.cpp:1486
 msgctxt "Marble::MapWizard|"
@@ -7936,6 +7924,9 @@ msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
 "Web_Map_Tile_Service\">WMTS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>WMTS zerbitzaria</h4>Mesedez, aukeratu <a href=\"https://de.wikipedia."
+"org/wiki/Web_Map_Tile_Service\">WMTS</a> zerbitzaria edo sartu neurrira "
+"ipinitako zerbitzari baten URLa."
 
 #: src/lib/marble/MapWizard.ui:20
 msgctxt "MapWizard|"
@@ -7969,6 +7960,29 @@ msgid ""
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
 "p></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Ongi etorri Map sortzeko morroira!</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Marble-rako mapa gai bat "
+"sortzeko prozesuan gidatuko zaitugu. Bukatzean Marble-n ikus dezakezun zure "
+"mapa propioa izango duzu.</p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Mesedez aukeratu zure "
+"maparen gairako erabili nahi duzun datuen sorburua:</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p></body></html>"
 
 #: src/lib/marble/MapWizard.ui:54 src/lib/marble/MapWizard.ui:67
 msgctxt "MapWizard|"
@@ -7976,27 +7990,31 @@ msgid ""
 "Connects to a server on the Internet. The map data is queried via the WMS "
 "protocol."
 msgstr ""
+"Interneteko zerbitzari batera konektatzen da. Maparen datuak WMS "
+"protokoloaren bidez itauntzen dira."
 
 #: src/lib/marble/MapWizard.ui:57
 msgctxt "MapWizard|"
 msgid "Web Map Service (WMS)"
-msgstr ""
+msgstr "Web Mapa Zerbitzua (WMS)"
 
 #: src/lib/marble/MapWizard.ui:70
 msgctxt "MapWizard|"
 msgid "Web Map Tile Service (WMTS)"
-msgstr ""
+msgstr "Web Mapa Lauza Zerbitzua (WMTS)"
 
 #: src/lib/marble/MapWizard.ui:80
 msgctxt "MapWizard|"
 msgid ""
 "You need to provide a bitmap image of a world map that is stored on disk."
 msgstr ""
+"Disko batean biltegiratuta dagoen munduko mapa baten bit-mapa irudia hornitu "
+"behar duzu."
 
 #: src/lib/marble/MapWizard.ui:83
 msgctxt "MapWizard|"
 msgid "A single image showing the whole world"
-msgstr ""
+msgstr "Mundu osoa erakusten duen irudi bakar bat"
 
 #: src/lib/marble/MapWizard.ui:90
 msgctxt "MapWizard|"
@@ -8004,11 +8022,14 @@ msgid ""
 "Connects to a server on the Internet. The map data is queried via a static "
 "URL."
 msgstr ""
+"Interneteko zerbitzari batera konektatzen da. Maparen datuak URL estatiko "
+"baten bidez itauntzen da."
 
 #: src/lib/marble/MapWizard.ui:93
 msgctxt "MapWizard|"
 msgid "Online map providing indexed tiles (e.g. Open Street Map)"
 msgstr ""
+"Indexatutako lauzak hornitzen dituen lerroko mapa (adib. Open Street Map)"
 
 #: src/lib/marble/MapWizard.ui:104
 msgctxt "MapWizard|"
@@ -8029,6 +8050,21 @@ msgid ""
 "decoration: underline; color:#0057ae;\">WMS</span></a> server or enter a "
 "custom server URL.</p></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">WMS zerbitzaria</span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Mesedez, aukeratu <a href="
+"\"https://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+"decoration: underline; color:#0057ae;\">WMS</span></a> zerbitzaria edo sartu "
+"neurrira ipinitako zerbitzari baten URLa.</p></body></html>"
 
 #: src/lib/marble/MapWizard.ui:134
 msgctxt "MapWizard|"
@@ -8085,6 +8121,8 @@ msgid ""
 "The order in which multiple layers are selected directly affects their "
 "rendering order."
 msgstr ""
+"Geruza anizkoitzak hautatzeko ordenak haien errendatzeko ordenari zuzenean "
+"eragiten dio."
 
 #: src/lib/marble/MapWizard.ui:297
 msgctxt "MapWizard|"
@@ -8092,21 +8130,23 @@ msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
 "Ctrl, Ctrl+A, …)"
 msgstr ""
+"Gaitu hau teklatuko lasterbiderik gabe (Maius, Ktrl, Ktrl+A, ...) geruza "
+"anizkoitzak hautatzeko"
 
 #: src/lib/marble/MapWizard.ui:300
 msgctxt "MapWizard|"
 msgid "Multiple Selections"
-msgstr ""
+msgstr "Hautapen anizkoitzak"
 
 #: src/lib/marble/MapWizard.ui:307
 msgctxt "MapWizard|"
 msgid "Custom Backdrop"
-msgstr ""
+msgstr "Neurriko atzeko-oihala"
 
 #: src/lib/marble/MapWizard.ui:314
 msgctxt "MapWizard|"
 msgid "Tile Projection:"
-msgstr "Lauz proiekzioa:"
+msgstr "Lauza-proiekzioa:"
 
 #: src/lib/marble/MapWizard.ui:321
 msgctxt "MapWizard|"
@@ -8136,7 +8176,7 @@ msgstr "Zerbitzuaren informazioa"
 #: src/lib/marble/MapWizard.ui:406
 msgctxt "MapWizard|"
 msgid "Customize Backdrop"
-msgstr ""
+msgstr "Atze-oihala neurrira ipini"
 
 #: src/lib/marble/MapWizard.ui:417
 msgctxt "MapWizard|"
@@ -8200,6 +8240,30 @@ msgid ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
 "worldmap.svg\" width=\"150\" /></p></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Muduko maparen bit-mapa irudia</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"weight:600;\"></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Mesedez, aukeratu irudi-"
+"fitxategi (JPG, PNG, etab.) bakarrean biltegiratuta dagoen munduko mapa "
+"baten kokalekua. <a href=\"https://en.wikipedia.org/wiki/"
+"Equirectangular_projection\"><span style=\" text-decoration: underline; "
+"color:#0057ae;\">Proiekzio zilindriko distantziakidean</span></a> eman behar "
+"da; beraz, formak itxura hau izan beharko luke (neurri proportzioa: 2:1):</"
+"p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+"worldmap.svg\" width=\"150\" /></p></body></html>"
 
 #: src/lib/marble/MapWizard.ui:573
 msgctxt "MapWizard|"
@@ -9093,6 +9157,9 @@ msgid ""
 "licea@kdemail.net</a><br /><i>Project: Equirectangular Projection (\"Flat Map"
 "\")</i></p>"
 msgstr ""
+"<p>Carlos Licea <a href=\"mailto:carlos.licea@kdemail.net\">carlos."
+"licea@kdemail.net</a><br /><i>Proiektua: Proiekzio zilindriko "
+"distantziakidea (\"Mapa laua\")</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:241
 msgctxt "QObject|"
@@ -9807,10 +9874,9 @@ msgid "&Mouse view rotation"
 msgstr ""
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:142
-#, fuzzy
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "&On startup:"
-msgstr "Abiatzean:"
+msgstr "&Abiatzean:"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:152
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -9830,20 +9896,17 @@ msgstr ""
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:159
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Show Home Location"
-msgstr ""
+msgstr "Erakutsi etxe kokalekua"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:164
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Return to Last Location Visited"
-msgstr ""
+msgstr "Itzuli bisitatutako azken kokalekura"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:184
-#, fuzzy
-#| msgctxt "MarbleNavigationSettingsWidget|"
-#| msgid "&External Editor:"
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "&External editor:"
-msgstr "&Kanpoko editorea"
+msgstr "&Kanpoko editorea:"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:194
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -9853,6 +9916,10 @@ msgid ""
 "josm or merkaartor, make sure that the respective application is installed.</"
 "p>"
 msgstr ""
+"<p>Mapak editatzeko abiarazten den aplikazioa. Potlatch-ek (lehenetsia) "
+"flash euskarria duen web-arakatzaile bat instalatzea behar du. Josm edo "
+"merkaartor aukeratzean, ziurtatu haiei dagokien aplikazioa instalatuta "
+"dagoela.</p>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:198
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -9862,7 +9929,7 @@ msgstr "Galdetu beti"
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:203
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Potlatch (Web browser)"
-msgstr ""
+msgstr "Potlatch (Web arakatzailea)"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:208
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -9870,13 +9937,11 @@ msgid "JOSM"
 msgstr "JOSM"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:213
-#, fuzzy
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Merkaartor"
 msgstr "Merkaartor"
 
 #: src/lib/marble/MarbleNavigator.ui:62
-#, fuzzy
 msgctxt "MarbleNavigator|"
 msgid "Up"
 msgstr "Gora"
@@ -9884,32 +9949,29 @@ msgstr "Gora"
 #: src/lib/marble/MarbleNavigator.ui:65
 msgctxt "MarbleNavigator|"
 msgid "Tilts the globe's axis towards the user."
-msgstr ""
+msgstr "Globoaren ardatza erabiltzailearengana gerturatuz makurtzen du."
 
 #: src/lib/marble/MarbleNavigator.ui:68 src/lib/marble/MarbleNavigator.ui:84
 #: src/lib/marble/MarbleNavigator.ui:103 src/lib/marble/MarbleNavigator.ui:122
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "MarbleNavigator|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
-#, fuzzy
 msgctxt "MarbleNavigator|"
 msgid "Left"
-msgstr "Ezkerrean"
+msgstr "Ezkerrera"
 
 #: src/lib/marble/MarbleNavigator.ui:81
 msgctxt "MarbleNavigator|"
 msgid "Rotates the globe counterclockwise around its axis."
 msgstr ""
+"Globoa bere ardatzaren inguruan erloju-orratzen aurkako noranzkoan biratzen "
+"du."
 
 #: src/lib/marble/MarbleNavigator.ui:97
-#, fuzzy
 msgctxt "MarbleNavigator|"
 msgid "Reset View"
 msgstr "Berrezarri ikuspegia"
@@ -9918,26 +9980,26 @@ msgstr "Berrezarri ikuspegia"
 msgctxt "MarbleNavigator|"
 msgid "Click this button to restore the original zoom level and view angle."
 msgstr ""
+"Egin klik botoi honi jatorrizko zoom maila eta ikuspegi angelua "
+"lehengoratzeko."
 
 #: src/lib/marble/MarbleNavigator.ui:109
-#, fuzzy
 msgctxt "MarbleNavigator|"
 msgid "Home"
 msgstr "Etxea"
 
 #: src/lib/marble/MarbleNavigator.ui:116 src/lib/marble/MarbleNavigator.ui:128
-#, fuzzy
 msgctxt "MarbleNavigator|"
 msgid "Right"
-msgstr "Eskuinean"
+msgstr "Eskuinera"
 
 #: src/lib/marble/MarbleNavigator.ui:119
 msgctxt "MarbleNavigator|"
 msgid "Rotates the globe clockwise around its axis."
 msgstr ""
+"Globoa bere ardatzaren inguruan erloju-orratzen noranzkoan biratzen du."
 
 #: src/lib/marble/MarbleNavigator.ui:135
-#, fuzzy
 msgctxt "MarbleNavigator|"
 msgid "Down"
 msgstr "Behera"
@@ -9945,7 +10007,7 @@ msgstr "Behera"
 #: src/lib/marble/MarbleNavigator.ui:138
 msgctxt "MarbleNavigator|"
 msgid "Tilts the globe's axis away from the user."
-msgstr ""
+msgstr "Globoaren ardatza erabiltzailearengandik urrunduz makurtzen du."
 
 #: src/lib/marble/MarbleNavigator.ui:151
 msgctxt "MarbleNavigator|"
@@ -9955,7 +10017,7 @@ msgstr "Zooma gerturatu"
 #: src/lib/marble/MarbleNavigator.ui:154
 msgctxt "MarbleNavigator|"
 msgid "Zoom in by pressing this button to see more detail."
-msgstr ""
+msgstr "Zooma gerturatu botoi hau sakatuz xehetasun gehiago ikusteko."
 
 #: src/lib/marble/MarbleNavigator.ui:163
 msgctxt "MarbleNavigator|"
@@ -9980,7 +10042,7 @@ msgstr "Zooma urrundu"
 #: src/lib/marble/MarbleNavigator.ui:212
 msgctxt "MarbleNavigator|"
 msgid "Zoom out by pressing this button to see less detail."
-msgstr ""
+msgstr "Zooma urrundu botoi hau sakatuz xehetasun gutxiago ikusteko."
 
 #: src/lib/marble/MarbleNavigator.ui:221
 msgctxt "MarbleNavigator|"
@@ -10050,77 +10112,78 @@ msgstr "Hautatu ordu-eremua"
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:68
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Universal Time Coordinated"
-msgstr ""
+msgstr "UTC - Denbora unibertsal koordinatua"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:73
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "European Central Time"
-msgstr ""
+msgstr "Europa erdialdeko ordua"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:78
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Eastern European Time"
-msgstr ""
+msgstr "Ekialdeko Europako ordua"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:83
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Egypt Standard Time"
-msgstr ""
+msgstr "Egiptoko ordu estandarra"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:88
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Eastern African Time"
-msgstr ""
+msgstr "Afrika ekialdeko ordua"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:93
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Middle East Time"
-msgstr ""
+msgstr "Ekialde Hurbileko ordua"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:98
+#, fuzzy
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Near East Time"
-msgstr ""
+msgstr "Ekialde Hurbileko ordua"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:103
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Pakistan Lahore Time"
-msgstr ""
+msgstr "Pakistan Lahore ordua"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:108
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "India Standard Time"
-msgstr ""
+msgstr "Indiako ordu estandarra"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:113
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Bangladesh Standard Time"
-msgstr ""
+msgstr "Bangladesheko ordu estandarra"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:118
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Vietnam Standard Time"
-msgstr ""
+msgstr "Vietnameko ordu estandarra"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:123
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "China Taiwan Time"
-msgstr ""
+msgstr "Txina Taiwan ordua"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:128
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Japan Standard Time"
-msgstr ""
+msgstr "Japoniako ordu estandarra"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:133
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Australia Central Time"
-msgstr ""
+msgstr "Australia erdiko ordua"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:138
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Australia Eastern Time"
-msgstr ""
+msgstr "Australia ekialdeko ordua"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:143
 msgctxt "MarbleTimeSettingsWidget|"
@@ -10130,7 +10193,7 @@ msgstr ""
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:148
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "New Zealand Standard Time"
-msgstr ""
+msgstr "Zeelanda Berriko ordu estandarra"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:153
 msgctxt "MarbleTimeSettingsWidget|"
@@ -10140,47 +10203,47 @@ msgstr ""
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:158
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Hawaii Standard Time"
-msgstr ""
+msgstr "Hawaiiko ordu estandarra"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:163
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Alaska Standard Time"
-msgstr ""
+msgstr "Alaskako ordu estandarra"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:168
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Pacific Standard Time"
-msgstr ""
+msgstr "Bareko ordu estandarra"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:173
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Phoenix Standard Time"
-msgstr ""
+msgstr "Phoenix-eko ordu estandarra"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:178
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Mountain Standard Time"
-msgstr ""
+msgstr "Mendialdeko ordu estandarra"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:183
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Central Standard Time"
-msgstr ""
+msgstr "Erdialdeko ordu estandarra"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:188
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Eastern Standard Time"
-msgstr ""
+msgstr "Ekialdeko ordu estandarra"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:193
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Indiana Eastern Standard Time"
-msgstr ""
+msgstr "Indiana ekialdeko ordu estandarra"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:198
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Puerto Rico and US Virgin Islands Time"
-msgstr ""
+msgstr "Puerto Rico eta AEBko Birjina uharteetako ordua"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:203
 msgctxt "MarbleTimeSettingsWidget|"
@@ -10190,44 +10253,42 @@ msgstr ""
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:208
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Argentina Standard Time"
-msgstr ""
+msgstr "Argentinako ordu estandarra"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:213
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Brazil Eastern Time"
-msgstr ""
+msgstr "Brasil ekialdeko ordua"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:218
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Central African Time"
-msgstr ""
+msgstr "Afrika erdialdeko ordua"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:231
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "When Marble starts"
-msgstr ""
+msgstr "Marble abiatzen denean"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:237
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Load system time"
-msgstr ""
+msgstr "Zamatu sistemaren ordua"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:247
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Load last session time"
-msgstr ""
+msgstr "Zamatu azken saioko ordua"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:17
-#, fuzzy
 msgctxt "MarbleViewSettingsWidget|"
 msgid "&Units"
-msgstr "Unitateak"
+msgstr "&Unitateak"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:35
-#, fuzzy
 msgctxt "MarbleViewSettingsWidget|"
 msgid "&Distance:"
-msgstr "Distantzia"
+msgstr "&Distantzia:"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:54
 msgctxt "MarbleViewSettingsWidget|"
@@ -10241,27 +10302,35 @@ msgid ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\">The unit that gets used to "
 "measure altitude, lengths and distances (e.g. km, mi, ft).</p></body></html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Latitudea, longitudeak eta "
+"distantziak neurtzeko erabiltzen den unitatea (adib. km, mi, ft).</p></"
+"body></html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:61
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Kilometer, Meter"
-msgstr ""
+msgstr "Kilometro, metro"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:66
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Miles, Feet"
-msgstr ""
+msgstr "Milia, oin"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:71
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Nautical miles, Knots"
-msgstr ""
+msgstr "Itsas milia, korapiloa"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:85
-#, fuzzy
 msgctxt "MarbleViewSettingsWidget|"
 msgid "An&gle:"
-msgstr "Angelua"
+msgstr "An&gelua:"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:98
 msgctxt "MarbleViewSettingsWidget|"
@@ -10277,34 +10346,41 @@ msgid ""
 "54°30'00\" ) gets used. As an alternative you can choose decimal degrees (e."
 "g. 54.5°).</p></body></html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Koordenatuetako angeluen "
+"notazioa zehazten du: Era lehenetsian Gradu-Minutu-Segundo notazioa (adib. "
+"54°30'00\" ) erabiltzen da. Alternatiba gisa gradu hamartarrak erabil "
+"ditzakezu (adib. 54.5°).</p></body></html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:105
-#, fuzzy
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Degree (DMS)"
 msgstr "Gradu (GMS)"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:110
-#, fuzzy
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Degree (Decimal)"
-msgstr "Degree (hamartarra)"
+msgstr "Gradu (hamartarra)"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:115
-#, fuzzy
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Universal Transverse Mercator (UTM)"
-msgstr "UTM (Universal Transverse Mercator / Zeharkako Mercator Unibertsala)"
+msgstr "Zeharkako Mercator Unibertsala (UTM)"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:126
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Map &Quality"
-msgstr ""
+msgstr "Maparen &kalitatea"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:144
 msgctxt "MarbleViewSettingsWidget|"
 msgid "&Still image:"
-msgstr ""
+msgstr "Irudi &finkoa:"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:154
 msgctxt "MarbleViewSettingsWidget|"
@@ -10319,19 +10395,28 @@ msgid ""
 "that gets displayed while there is no user input. Usually this allows for "
 "high map quality as speed is no concern.</p></body></html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Erabiltzailearen "
+"sarrerarik ez dagoen bitartean azaldutako maparen kalitatea zehazten du. "
+"Honek mapen kalitatea handia ahalbidetzen du, abiadura ez baita kezka bat.</"
+"p></body></html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:164
 #: src/lib/marble/MarbleViewSettingsWidget.ui:219
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Outline Quality"
-msgstr ""
+msgstr "Zirriborro kalitatea"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:169
 #: src/lib/marble/MarbleViewSettingsWidget.ui:224
-#, fuzzy
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Low Quality"
-msgstr "4:2:0 (kalitate baxua)"
+msgstr "Kalitate baxua"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:174
 #: src/lib/marble/MarbleViewSettingsWidget.ui:229
@@ -10349,12 +10434,12 @@ msgstr "Kalitate altua"
 #: src/lib/marble/MarbleViewSettingsWidget.ui:239
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Print Quality"
-msgstr ""
+msgstr "Inprimatzeko kalitatea"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:198
 msgctxt "MarbleViewSettingsWidget|"
 msgid "During &animations:"
-msgstr ""
+msgstr "&Animazioa zehar:"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:208
 msgctxt "MarbleViewSettingsWidget|"
@@ -10373,16 +10458,29 @@ msgid ""
 "machines it is advisable to set this option to \"low quality\" as this will "
 "give better speed.</p></body></html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Maparen animazioan zehar "
+"azaltzen den maparen kalitatea zehazten du (adib. globoa arrastatu "
+"bitartean).</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Makina moteletan "
+"berezikigomendagarria da aukera hau \"kalitate baxua\" gisa ipintzea, "
+"abiadura hobea emango baitu.</p></body></html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:266
 msgctxt "MarbleViewSettingsWidget|"
 msgid "&Text Labels"
-msgstr ""
+msgstr "&Testu etiketak"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:286
 msgctxt "MarbleViewSettingsWidget|"
 msgid "&Place names:"
-msgstr ""
+msgstr "&Leku-izenak:"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:299
 msgctxt "MarbleViewSettingsWidget|"
@@ -10398,11 +10496,21 @@ msgid ""
 "name in the user's language. Alternatively it can display the name in the "
 "official language and glyphs of that place. </p></body></html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Lekuek hizkuntza "
+"ezberdinetan izen ezberdinak izan ohi dituzte. Mapako etiketak izena "
+"erabiltzailearen hizkuntzan erakuts dezake. Alternatiba gisa, izena lekuaren "
+"hizkuntza eta glifo ofizialetan azal ditzake. </p></body></html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:306
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Custom & Native Language"
-msgstr ""
+msgstr "Neurriko eta tokiko hizkuntza"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:311
 msgctxt "MarbleViewSettingsWidget|"
@@ -10417,7 +10525,7 @@ msgstr "Berezko hizkuntza"
 #: src/lib/marble/MarbleViewSettingsWidget.ui:340
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Default map &font:"
-msgstr ""
+msgstr "Mapetako letra-ti&po lehenetsia:"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:350
 msgctxt "MarbleViewSettingsWidget|"
@@ -10431,6 +10539,14 @@ msgid ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\">The default font that gets "
 "used on the map.</p></body></html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Mapetan erabiltzen den "
+"letra-tipo lehenetsia.</p></body></html>"
 
 #: src/lib/marble/MarbleWebView.cpp:18
 msgctxt "MarbleWebView|"
@@ -10450,17 +10566,17 @@ msgstr "Kopiatu koordenatuak"
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:114
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Copy geo: URL"
-msgstr ""
+msgstr "Kopiatu geo: URL"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:123
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Directions &from here"
-msgstr ""
+msgstr "Jarraibideak hemen&dik"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:124
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Directions &to here"
-msgstr ""
+msgstr "Jarraibideak honai&no"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:131
 msgctxt "Marble::MarbleWidgetPopupMenu|"
@@ -10480,16 +10596,14 @@ msgstr "&Honi buruz"
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:153
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "&Address Details"
-msgstr ""
+msgstr "&Helbidearen xehetasunak"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:182
-#, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "No description available."
-msgstr "Ez dago azalpen erabilgarririk."
+msgstr "Ez dago azalpenik erabilgarri."
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:382
-#, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "National Capital"
 msgstr "Hiriburu nazionala"
@@ -10500,13 +10614,11 @@ msgid "City"
 msgstr "Hiria"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:386
-#, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "State Capital"
 msgstr "Estatuko hiriburua"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:388
-#, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "County Capital"
 msgstr "Konderri hiriburua"
@@ -10523,7 +10635,6 @@ msgid "Village"
 msgstr "{Herritxoa}"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:536
-#, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "&Info Boxes"
 msgstr "&Informazio-koadroak"
@@ -10544,6 +10655,7 @@ msgctxt "QObject|"
 msgid ""
 "Marble requires additional software in order to create movies. Please get %1 "
 msgstr ""
+"Filmak sortzeko Marble-k software gehigarria behar du. Mesedez, %1 lortu"
 
 #: src/lib/marble/MovieCapture.cpp:62
 msgctxt "Marble::MovieCapture|"
@@ -10588,12 +10700,12 @@ msgstr "&Hasi"
 #: src/lib/marble/MovieCaptureDialog.cpp:49
 msgctxt "Marble::MovieCaptureDialog|"
 msgid "Codecs are unavailable"
-msgstr ""
+msgstr "Kodekak ez daude erabilgarri"
 
 #: src/lib/marble/MovieCaptureDialog.cpp:49
 msgctxt "Marble::MovieCaptureDialog|"
 msgid "Supported codecs are not found."
-msgstr ""
+msgstr "Onartutako kodekak ez dira aurkitu."
 
 #: src/lib/marble/MovieCaptureDialog.cpp:58
 msgctxt "Marble::MovieCaptureDialog|"
@@ -10603,18 +10715,18 @@ msgstr "Gorde bideo-fitxategia"
 #: src/lib/marble/MovieCaptureDialog.cpp:78
 msgctxt "Marble::MovieCaptureDialog|"
 msgid "Filename is not valid"
-msgstr ""
+msgstr "Fitxategi-izenak ez du balio"
 
 #: src/lib/marble/MovieCaptureDialog.cpp:79
 #, qt-format
 msgctxt "Marble::MovieCaptureDialog|"
 msgid "This file format is not supported. Please, use %1 instead"
-msgstr ""
+msgstr "Fitxategi-formatu hau ez da onartzen. Mesedez, horren ordez %1 erabili"
 
 #: src/lib/marble/MovieCaptureDialog.cpp:95
 msgctxt "Marble::MovieCaptureDialog|"
 msgid "Missing filename"
-msgstr ""
+msgstr "Fitxategi-izena falta da"
 
 #: src/lib/marble/MovieCaptureDialog.cpp:96
 msgctxt "Marble::MovieCaptureDialog|"
@@ -10622,21 +10734,20 @@ msgid ""
 "Destination video file is not set. I don't know where to save recorded "
 "video. Please, specify one."
 msgstr ""
+"Jomugako bideo fitxategia ezarri gabe dago. Ez dakit grabatutako bideo non "
+"gorde. Mesedez, bat ezarri."
 
 #: src/lib/marble/MovieCaptureDialog.ui:14
 msgctxt "MovieCaptureDialog|"
 msgid "Movie Recording"
-msgstr ""
+msgstr "Filma grabazioa"
 
 #: src/lib/marble/MovieCaptureDialog.ui:20
 msgctxt "MovieCaptureDialog|"
 msgid "Destination video:"
-msgstr ""
+msgstr "Jomuga bideoa:"
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
-#, fuzzy
-#| msgctxt "Marble::RouteItemDelegate|"
-#| msgid "Open"
 msgctxt "MovieCaptureDialog|"
 msgid "Open…"
 msgstr "Ireki…"
@@ -10652,17 +10763,14 @@ msgid "New Bookmark Folder"
 msgstr "Laster-marken karpeta berria"
 
 #: src/lib/marble/NewBookmarkFolderDialog.ui:22
-#, fuzzy
-#| msgctxt "UiNewBookmarkFolderDialog|"
-#| msgid "&Folder Name"
 msgctxt "UiNewBookmarkFolderDialog|"
 msgid "&Folder name:"
-msgstr "Karpetaren izena:"
+msgstr "&Karpetaren izena:"
 
 #: src/lib/marble/NewstuffModel.cpp:739 src/lib/marble/NewstuffModel.cpp:748
 msgctxt "Marble::NewstuffModel|"
 msgid "Installation aborted by user."
-msgstr ""
+msgstr "Erabiltzaileak instalazioa bertan behera utzi du."
 
 #: src/lib/marble/osm/OsmRelationEditorDialog.cpp:36
 msgctxt "Marble::OsmRelationEditorDialog|"
@@ -10677,22 +10785,22 @@ msgstr "Ez da izenik zehaztu"
 #: src/lib/marble/osm/OsmRelationEditorDialog.cpp:80
 msgctxt "Marble::OsmRelationEditorDialog|"
 msgid "Please specify a name for this relation."
-msgstr ""
+msgstr "Mesedez, zehaztu erlazio honetarako izen bat."
 
 #: src/lib/marble/osm/OsmRelationEditorDialog.cpp:82
 msgctxt "Marble::OsmRelationEditorDialog|"
 msgid "No type tag specified"
-msgstr ""
+msgstr "Ez da etiketa motarik zehaztu"
 
 #: src/lib/marble/osm/OsmRelationEditorDialog.cpp:82
 msgctxt "Marble::OsmRelationEditorDialog|"
 msgid "Please add a type tag for this relation."
-msgstr ""
+msgstr "Mesedez, gehitu erlazio honetarako etiketa mota bat."
 
 #: src/lib/marble/osm/OsmRelationManagerWidget.cpp:59
 msgctxt "Marble::OsmRelationManagerWidget|"
 msgid "New Relation"
-msgstr ""
+msgstr "Erlazio berria"
 
 #: src/lib/marble/osm/OsmRelationManagerWidget.cpp:136
 #: src/lib/marble/osm/OsmRelationManagerWidget.cpp:142
@@ -10709,7 +10817,7 @@ msgstr "Editatu"
 #: src/lib/marble/osm/OsmRelationManagerWidget.ui:23
 msgctxt "OsmRelationManagerWidgetPrivate|"
 msgid "Current Relations"
-msgstr ""
+msgstr "Uneko erlazioak"
 
 #: src/lib/marble/osm/OsmRelationManagerWidget.ui:34
 msgctxt "OsmRelationManagerWidgetPrivate|"
@@ -10729,12 +10837,12 @@ msgstr "Rola"
 #: src/lib/marble/osm/OsmRelationManagerWidget.ui:67
 msgctxt "OsmRelationManagerWidgetPrivate|"
 msgid "Add Relation"
-msgstr ""
+msgstr "Gehitu erlazioa"
 
 #: src/lib/marble/osm/OsmRelationManagerWidget_p.cpp:75
 msgctxt "QObject|"
 msgid "New Relation"
-msgstr ""
+msgstr "Erlazio berria"
 
 #: src/lib/marble/osm/OsmTagEditorWidget.cpp:86
 msgctxt "Marble::OsmTagEditorWidget|"
@@ -10744,7 +10852,7 @@ msgstr "balioa"
 #: src/lib/marble/osm/OsmTagEditorWidget.ui:25
 msgctxt "OsmTagEditorWidgetPrivate|"
 msgid "Current Tags"
-msgstr ""
+msgstr "Uneko etiketak"
 
 #: src/lib/marble/osm/OsmTagEditorWidget.ui:33
 #: src/lib/marble/osm/OsmTagEditorWidget.ui:88
@@ -10771,12 +10879,12 @@ msgstr ">>"
 #: src/lib/marble/osm/OsmTagEditorWidget.ui:80
 msgctxt "OsmTagEditorWidgetPrivate|"
 msgid "Related Tags"
-msgstr ""
+msgstr "Erlazioa duten etiketak"
 
 #: src/lib/marble/osm/OsmTagEditorWidget_p.cpp:30
 msgctxt "QObject|"
 msgid "Add custom tag..."
-msgstr ""
+msgstr "Gehitu neurriko etiketa..."
 
 #: src/lib/marble/osm/OsmTagEditorWidget_p.cpp:100
 msgctxt "QObject|"
@@ -10794,9 +10902,6 @@ msgid "All Supported Files (*.png)"
 msgstr "Onartutako fitxategi guztiak (*.png)"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid "Browse"
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Browse…"
 msgstr "Arakatu..."
@@ -10809,7 +10914,7 @@ msgstr "Izena:"
 #: src/lib/marble/PlacemarkEditHeader.ui:81
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Icon link:"
-msgstr ""
+msgstr "Ikono-esteka:"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:91
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -10819,10 +10924,9 @@ msgstr "ID:"
 #: src/lib/marble/PlacemarkEditHeader.ui:104
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Target ID:"
-msgstr ""
+msgstr "Jomuga ID:"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:115
-#, fuzzy
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Position:"
 msgstr "Kokapena:"
@@ -10830,7 +10934,7 @@ msgstr "Kokapena:"
 #: src/lib/marble/PlacemarkPositionProviderPlugin.cpp:32
 msgctxt "Marble::PlacemarkPositionProviderPlugin|"
 msgid "Placemark position provider Plugin"
-msgstr ""
+msgstr "Leku-marka kokalekua hornitzeko plugina"
 
 #: src/lib/marble/PlacemarkPositionProviderPlugin.cpp:42
 msgctxt "Marble::PlacemarkPositionProviderPlugin|"
@@ -10840,7 +10944,7 @@ msgstr "Leku-marka"
 #: src/lib/marble/PlacemarkPositionProviderPlugin.cpp:52
 msgctxt "Marble::PlacemarkPositionProviderPlugin|"
 msgid "Reports the position of a placemark"
-msgstr ""
+msgstr "Leku-marka baten kokalekuaren berri ematen du"
 
 #: src/lib/marble/PlanetFactory.cpp:221
 msgctxt "QObject|the planet"
@@ -10985,16 +11089,14 @@ msgid "Driving Instructions"
 msgstr "Gidatzeko jarraibideak"
 
 #: src/lib/marble/PrintOptions.ui:118
-#, fuzzy
 msgctxt "PrintOptions|"
 msgid "Footer"
 msgstr "Orri-oina"
 
 #: src/lib/marble/projections/AzimuthalEquidistantProjection.cpp:54
-#, fuzzy
 msgctxt "QObject|"
 msgid "Azimuthal Equidistant"
-msgstr "&Azimutal distantziakidea"
+msgstr "Azimutal distantziakidea"
 
 #: src/lib/marble/projections/AzimuthalEquidistantProjection.cpp:59
 msgctxt "QObject|"
@@ -11003,6 +11105,9 @@ msgid ""
 "p><p>Applications: Display of seismic and radio data and for use in digital "
 "planetariums.</p>"
 msgstr ""
+"<p><b>Proiekzio distantziakide azimutala</b> (\"Arrain begia\")</"
+"p><p>Aplikazioak: Datu sismikoak eta irrati-datuak azaltzea eta planetario "
+"digitaletan erabiltzea.</p>"
 
 #: src/lib/marble/projections/EquirectProjection.cpp:31
 msgctxt "QObject|"
@@ -11015,6 +11120,9 @@ msgid ""
 "<p><b>Equirectangular Projection</b> (\"Plate carrée\")</p><p>Applications: "
 "De facto standard for global texture data sets for computer software.</p>"
 msgstr ""
+"<p><b>Proiekzio zilindriko distantziakidea</b> (\"Plaka karratua\")</"
+"p><p>Aplikazioak: Ordenagailuko softwarerako ehundura datu-multzo "
+"globaletarako izatezko estandarra.</p>"
 
 #: src/lib/marble/projections/GnomonicProjection.cpp:55
 msgctxt "QObject|"
