@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2025-01-06 12:43+0100\n"
+"PO-Revision-Date: 2025-01-19 11:51+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -8513,7 +8513,7 @@ msgid ""
 "tu-berlin.de</a><br /><i>WMS Support, Mobile, Performance</i></p>"
 msgstr ""
 "<p>Bernhard Beschow <a href=\"mailto:bbeschow@cs.tu-berlin.de\">bbeschow@cs."
-"tu-berlin.de</a><br /><i>Soporte de WMS, móbil, desempeño</i></p>"
+"tu-berlin.de</a><br /><i>Compatibilidade con WMS, móbil, rendemento.</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:81
 msgctxt "QObject|"
@@ -8541,7 +8541,7 @@ msgid ""
 "a><br /><i>OpenStreetMap Support, Download Management</i></p>"
 msgstr ""
 "<p>Jens-Michael Hoffmann <a href=\"mailto:jensmh@gmx.de\">jensmh@gmx.de</"
-"a><br /><i>Soporte de OpenStreetMap; xestor de descargas</i></p>"
+"a><br /><i>Compatibilidade con OpenStreetMap; xestor de descargas.</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:87
 msgctxt "QObject|"
@@ -8559,7 +8559,7 @@ msgid ""
 "net</a><br /><i>Amateur Radio Support</i></p>"
 msgstr ""
 "<p>Wes Hardaker <a href=\"mailto:marble@hardakers.net\">marble@hardakers."
-"net</a><br /><i>Radio afeccionada</i></p>"
+"net</a><br /><i>Compatibilidade con radio afeccionada.</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:91
 msgctxt "QObject|"
@@ -8568,7 +8568,7 @@ msgid ""
 "de</a><br /><i>Online Services Support</i></p>"
 msgstr ""
 "<p>Bastian Holst, <a href=\"mailto:bastianholst@gmx.de\">bastianholst@gmx."
-"de</a><br /><i>Axuda nos servizos na Rede</i></p>"
+"de</a><br /><i>Compatibilidade con servizos por Internet.</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:93
 msgctxt "QObject|"
@@ -8604,7 +8604,7 @@ msgid ""
 "a><br /><i>KML and Windows Support</i></p>"
 msgstr ""
 "<p>Patrick Spendrin <a href=\"pspendrin@gmail.com\">pspendrin@gmail.com</"
-"a><br /><i>KML e Windows</i></p>"
+"a><br /><i>Compatibilidade con KML e Windows.</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:101
 msgctxt "QObject|"
@@ -8646,7 +8646,7 @@ msgid ""
 "com</a><br /><i>Proxy Support</i></p>"
 msgstr ""
 "<p>Andrew Manson <a href=\"mailto:g.real.ate@gmail.com\">g.real.ate@gmail."
-"com</a><br /><i>Proxies</i></p>"
+"com</a><br /><i>Compatibilidade con mandatarios.</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:110
 msgctxt "QObject|"
@@ -9199,7 +9199,7 @@ msgid ""
 "com</a><br /><i>Project: Time Support</i></p>"
 msgstr ""
 "<p>Harshit Jain <a href=\"mailto:hjain.itbhu@gmail.com\">hjain.itbhu@gmail."
-"com</a><br /><i>Proxecto: Horas</i></p>"
+"com</a><br /><i>Proxecto: compatibilidade con horas.</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:226
 msgctxt "QObject|"
@@ -9255,8 +9255,8 @@ msgid ""
 "for Marble</i></p>"
 msgstr ""
 "<p>Shashank Singh <a href=\"mailto:shashank.personal@gmail.com\">shashank."
-"personal@gmail.com</a><br /><i>Proxecto: Panoramio / Wikipedia -fotografías "
-"dentro de Marble</i></p>"
+"personal@gmail.com</a><br /><i>Proxecto: Panoramio / Wikipedia — "
+"compatibilidade con fotografías para Marble.</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:238
 msgctxt "QObject|"
@@ -9281,7 +9281,7 @@ msgid ""
 "com</a><br /><i>Project: GPS Support for Marble</i></p>"
 msgstr ""
 "<p>Andrew Manson <a href=\"mailto:g.real.ate@gmail.com\">g.real.ate@gmail."
-"com</a><br /><i>Proxecto: Utilización do GPS en Marble</i></p>"
+"com</a><br /><i>Proxecto: compatibilidade con GPS para Marble.</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:243
 msgctxt "QObject|"
@@ -9290,7 +9290,7 @@ msgid ""
 "a><br /><i>Project: KML Support for Marble</i></p>"
 msgstr ""
 "<p>Murad Tagirov <a href=\"mailto:tmurad@gmail.com\">tmurad@gmail.com</"
-"a><br /><i>Proxecto: Utilización de KML en Marble</i></p>"
+"a><br /><i>Proxecto: compatibilidade con KML para Marble.</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:245
 msgctxt "QObject|"
@@ -10163,9 +10163,9 @@ msgid ""
 "p>"
 msgstr ""
 "<p>A aplicación que se inicia para editar os mapas. Potlatch "
-"(predeterminado) require un navegador web con flash instalado. Se selecciona "
-"josm ou merkaartor verifique que a aplicación correspondente estea instalada."
-"</p>"
+"(predeterminado) require ter instalado un navegador web compatíbel con "
+"Flash. Se selecciona josm ou merkaartor verifique que a aplicación "
+"correspondente estea instalada.</p>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:198
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10979,7 +10979,7 @@ msgstr "A ruta do ficheiro non é válida"
 #, qt-format
 msgctxt "Marble::MovieCaptureDialog|"
 msgid "This file format is not supported. Please, use %1 instead"
-msgstr "Non é posíbel usar este formato de ficheiro. Use %1 no seu lugar."
+msgstr "O formato de ficheiro non é compatíbel. Use %1 no seu lugar."
 
 #: src/lib/marble/MovieCaptureDialog.cpp:95
 msgctxt "Marble::MovieCaptureDialog|"
@@ -12374,7 +12374,7 @@ msgstr "A ruta do ficheiro non é válida"
 #, qt-format
 msgctxt "Marble::TourCaptureDialog|"
 msgid "This file format is not supported. Please, use %1 instead"
-msgstr "Non é posíbel usar este formato de ficheiro. Use %1 no seu lugar."
+msgstr "O formato de ficheiro non é compatíbel. Use %1 no seu lugar."
 
 #: src/lib/marble/TourCaptureDialog.cpp:100
 #: src/lib/marble/TourCaptureDialog.cpp:120
@@ -16020,7 +16020,7 @@ msgid ""
 "Supported by <a href=\"https://www.bbc.co.uk/blogs/bbcbackstage\" target="
 "\"_BLANK\">backstage.bbc.co.uk</a>.<br>Weather data from UK MET Office"
 msgstr ""
-"Baseado en <a href=\"https://www.bbc.co.uk/blogs/bbcbackstage\" target="
+"Apoiada en <a href=\"https://www.bbc.co.uk/blogs/bbcbackstage\" target="
 "\"_BLANK\">backstage.bbc.co.uk</a>.<br>Datos meteorolóxicos da Oficina "
 "Meteorolóxica do Reino Unido"
 
@@ -16678,7 +16678,7 @@ msgid ""
 "Supported by backstage.bbc.co.uk.\n"
 "Weather data from UK MET Office"
 msgstr ""
-"Baseado en backstage.bbc.co.uk.\n"
+"Apoiada en backstage.bbc.co.uk.\n"
 "Datos meteorolóxicos da Oficina Meteorolóxica do Reino Unido"
 
 #: src/plugins/render/wikipedia/GeonamesParser.cpp:36
