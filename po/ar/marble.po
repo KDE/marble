@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-25 00:37+0000\n"
-"PO-Revision-Date: 2025-01-14 17:38+0400\n"
+"PO-Revision-Date: 2025-01-20 22:43+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -36,9 +36,9 @@ msgid "Marble Virtual Globe"
 msgstr "ماربل - الكرة الأرضية"
 
 #: kdemain.cpp:86
-#, fuzzy, kde-format
+#, kde-format
 msgid "A World Atlas."
-msgstr "A العالم الأطلس."
+msgstr "أطلس العالم."
 
 #: kdemain.cpp:88
 #, kde-format
@@ -63,17 +63,17 @@ msgstr "Bernhard Beschow"
 #: kdemain.cpp:94
 #, kde-format
 msgid "WMS Support, Mobile, Performance"
-msgstr ""
+msgstr "دعم WMS، الجوال، الأداء"
 
 #: kdemain.cpp:95
 #, kde-format
 msgid "Thibaut Gridel"
-msgstr ""
+msgstr "تيبو جريديل"
 
 #: kdemain.cpp:95
 #, kde-format
 msgid "Geodata"
-msgstr ""
+msgstr "البيانات الجغرافية"
 
 #: kdemain.cpp:96
 #, kde-format
@@ -83,12 +83,12 @@ msgstr "جِنز-ميكائل هوفّمانّ"
 #: kdemain.cpp:96
 #, kde-format
 msgid "OpenStreetMap Integration, OSM Namefinder, Download Management"
-msgstr ""
+msgstr "تكامل OpenStreetMap، OSM Namefinder، إدارة التنزيلات"
 
 #: kdemain.cpp:97
 #, kde-format
 msgid "Florian E&szlig;er"
-msgstr ""
+msgstr "فلوريان إي"
 
 #: kdemain.cpp:97
 #, kde-format
@@ -98,12 +98,12 @@ msgstr "ملف تعريف الارتفاع"
 #: kdemain.cpp:98
 #, kde-format
 msgid "Wes Hardaker"
-msgstr ""
+msgstr "ويس هارداكر"
 
 #: kdemain.cpp:98
-#, fuzzy, kde-format
+#, kde-format
 msgid "APRS Plugin"
-msgstr "ابحث سطر"
+msgstr "ملحق APRS"
 
 #: kdemain.cpp:99 kdemain.cpp:153
 #, kde-format
@@ -118,7 +118,7 @@ msgstr "دعم الخدمة على الإنترنت"
 #: kdemain.cpp:100 kdemain.cpp:123
 #, kde-format
 msgid "Guillaume Martres"
-msgstr ""
+msgstr "غيوم مارتريس"
 
 #: kdemain.cpp:100
 #, kde-format
@@ -128,12 +128,12 @@ msgstr "الأقمار الصناعية"
 #: kdemain.cpp:101 kdemain.cpp:119
 #, kde-format
 msgid "Rene Kuettner"
-msgstr ""
+msgstr "رينيه كويتنر"
 
 #: kdemain.cpp:101
-#, fuzzy, kde-format
+#, kde-format
 msgid "Satellites, Eclipses"
-msgstr "قمر اصتناعي عرض"
+msgstr "الأقمار الصناعية، الكسوفات"
 
 #: kdemain.cpp:102
 #, kde-format
@@ -143,17 +143,17 @@ msgstr "Friedrich W. H. Kossebau"
 #: kdemain.cpp:102
 #, kde-format
 msgid "Plasma Integration, Bugfixes"
-msgstr ""
+msgstr "تكامل البلازما، إصلاح الأخطاء"
 
 #: kdemain.cpp:103
 #, kde-format
 msgid "Dennis Nienhüser"
-msgstr ""
+msgstr "دينيس نينهوسر"
 
 #: kdemain.cpp:103
-#, fuzzy, kde-format
+#, kde-format
 msgid "Routing, Navigation, Mobile"
-msgstr "الملاحة"
+msgstr "التوجيه، الملاحة، الجوال"
 
 #: kdemain.cpp:104
 #, kde-format
@@ -161,9 +161,9 @@ msgid "Niko Sams"
 msgstr "Niko Sams"
 
 #: kdemain.cpp:104
-#, fuzzy, kde-format
+#, kde-format
 msgid "Routing, Elevation Profile"
-msgstr "الملاحة عنصر تحكم"
+msgstr "التوجيه، ملف تعريف الارتفاع"
 
 #: kdemain.cpp:105 kdemain.cpp:157
 #, kde-format
@@ -178,12 +178,12 @@ msgstr "مطور رئيسي: KML و دعم النوافذ"
 #: kdemain.cpp:106
 #, kde-format
 msgid "Eckhart Wörner"
-msgstr ""
+msgstr "إيكهارت وورنر"
 
 #: kdemain.cpp:106
 #, kde-format
 msgid "Bugfixes"
-msgstr ""
+msgstr "إصلاحات علل"
 
 #: kdemain.cpp:110
 #, kde-format
@@ -191,9 +191,9 @@ msgid "Inge Wallin"
 msgstr "Inge Wallin"
 
 #: kdemain.cpp:110
-#, fuzzy, kde-format
+#, kde-format
 msgid "Core Developer and Co-Maintainer"
-msgstr "الأصلي المؤلف المطور و المشرف"
+msgstr "المطور الأساسي والمسؤول المشارك عن الصيانة"
 
 #: kdemain.cpp:111
 #, kde-format
@@ -203,7 +203,7 @@ msgstr "هِنري دا فالينس"
 #: kdemain.cpp:111
 #, kde-format
 msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
-msgstr ""
+msgstr "المطور الأساسي: Marble Runners، بلازمويد على مدار الساعة العالمية"
 
 #: kdemain.cpp:112
 #, kde-format
@@ -223,7 +223,7 @@ msgstr "هارشِت جين"
 #: kdemain.cpp:113
 #, kde-format
 msgid "Planet filter"
-msgstr ""
+msgstr "مرشح الكواكب"
 
 #: kdemain.cpp:114
 #, kde-format
@@ -231,29 +231,29 @@ msgid "Simon Edwards"
 msgstr "سَيمون إدووردز"
 
 #: kdemain.cpp:114
-#, fuzzy, kde-format
+#, kde-format
 msgid "Marble Python Bindings"
-msgstr "إ&عدادات"
+msgstr "ربط بيثون لماربل"
 
 #: kdemain.cpp:115
 #, kde-format
 msgid "Magnus Valle"
-msgstr ""
+msgstr "ماغنوس فالي"
 
 #: kdemain.cpp:115
 #, kde-format
 msgid "Historical Maps"
-msgstr ""
+msgstr "الخرائط التاريخية"
 
 #: kdemain.cpp:116
 #, kde-format
 msgid "Médéric Boquien"
-msgstr ""
+msgstr "ميديريك بوكوين"
 
 #: kdemain.cpp:116
 #, kde-format
 msgid "Astronomical Observatories"
-msgstr ""
+msgstr "المراصد الفلكية"
 
 #: kdemain.cpp:120
 #, kde-format
@@ -261,42 +261,46 @@ msgid ""
 "ESA Summer of Code in Space 2012 Project: Visualization of planetary "
 "satellites"
 msgstr ""
+"مشروع صيف البرمجة في الفضاء التابع لوكالة الفضاء الأوروبية 2012: تصور "
+"الأقمار الصناعية الكوكبية"
 
 #: kdemain.cpp:124
 #, kde-format
 msgid ""
 "ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
 msgstr ""
+"مشروع صيف البرمجة في الفضاء 2011 التابع لوكالة الفضاء الأوروبية: تصور مدارات "
+"الأقمار الصناعية"
 
 #: kdemain.cpp:129
 #, kde-format
 msgid "Konstantin Oblaukhov"
-msgstr ""
+msgstr "كونستانتين أوبلاخوف"
 
 #: kdemain.cpp:130
 #, kde-format
 msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
-msgstr ""
+msgstr "مشروع صيف برمجة غوغل 2011: عرض المتجهات لخريطة الشارع المفتوحة"
 
 #: kdemain.cpp:133
 #, kde-format
 msgid "Daniel Marth"
-msgstr ""
+msgstr "دانييل مارث"
 
 #: kdemain.cpp:134
 #, kde-format
 msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
-msgstr ""
+msgstr "مشروع صيف غوغل للبرمجة 2011: لمسة رخامية على MeeGo"
 
 #: kdemain.cpp:137
 #, kde-format
 msgid "Gaurav Gupta"
-msgstr ""
+msgstr "جاراف جوبتا"
 
 #: kdemain.cpp:138
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Bookmarks"
-msgstr ""
+msgstr "صيف غوغل للبرمجة 2010: الإشارات المرجعية"
 
 #: kdemain.cpp:141
 #, kde-format
@@ -306,80 +310,80 @@ msgstr "Harshit Jain "
 #: kdemain.cpp:142
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Time Support"
-msgstr ""
+msgstr "صيف غوغل للبرمجة 2010: دعم الوقت"
 
 #: kdemain.cpp:145
 #, kde-format
 msgid "Siddharth Srivastava"
-msgstr ""
+msgstr "سيدهارث سريفاستافا"
 
 #: kdemain.cpp:146
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
-msgstr ""
+msgstr "صيف غوغل للبرمجة 2010: توجيه التنقل خطوة بخطوة"
 
 #: kdemain.cpp:149 kdemain.cpp:169
 #, kde-format
 msgid "Andrew Manson"
-msgstr ""
+msgstr "أندرو مانسون"
 
 #: kdemain.cpp:150
 #, kde-format
 msgid "Google Summer of Code 2009 Project: OSM Annotation"
-msgstr ""
+msgstr "صيف غوغل للبرمجة 2009: شروحات OSM"
 
 #: kdemain.cpp:154
 #, kde-format
 msgid "Google Summer of Code 2009 Project: Online Services"
-msgstr ""
+msgstr "صيف غوغل للبرمجة 2009: الخدمات المباشرة"
 
 #: kdemain.cpp:158
 #, kde-format
 msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
-msgstr ""
+msgstr "مشروع صيف غوغل للبرمجة 2008: القطع المتجهة لماربل"
 
 #: kdemain.cpp:161
 #, kde-format
 msgid "Shashank Singh"
-msgstr ""
+msgstr "شاشانك سينغ"
 
 #: kdemain.cpp:162
 #, kde-format
 msgid ""
 "Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
 "Marble"
-msgstr ""
+msgstr "مشروع صيف غوغل للبرمجة 2008: Panoramio / Wikipedia - دعم الصور لماربل"
 
 #: kdemain.cpp:165
 #, kde-format
 msgid "Carlos Licea"
-msgstr ""
+msgstr "كارلوس ليسيا"
 
 #: kdemain.cpp:166
 #, kde-format
 msgid ""
 "Google Summer of Code 2007 Project: Equirectangular Projection (\"Flat Map\")"
-msgstr ""
+msgstr "مشروع صيف غوغل للبرمجة 2007: إسقاط متساوي المستطيلات (\"خريطة مسطحة\")"
 
 #: kdemain.cpp:170
 #, kde-format
 msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
-msgstr ""
+msgstr "مشروع صيف غوغل للبرمجة 2007: دعم GPS لماربل"
 
 #: kdemain.cpp:173
 #, kde-format
 msgid "Murad Tagirov"
-msgstr ""
+msgstr "مراد تاجيروف"
 
 #: kdemain.cpp:174
 #, kde-format
 msgid "Google Summer of Code 2007 Project: KML Support for Marble"
-msgstr ""
+msgstr "مشروع صيف غوغل للبرمجة 2007: دعم KML لماربل"
 
 #: kdemain.cpp:179
 #, kde-format
 msgid "Simon Schmeisser"
-msgstr ""
+msgstr "سيمون شميسر"
 
 #: kdemain.cpp:179 kdemain.cpp:180 kdemain.cpp:181 kdemain.cpp:182
 #: kdemain.cpp:183 kdemain.cpp:184 kdemain.cpp:185 kdemain.cpp:186
@@ -388,12 +392,12 @@ msgstr ""
 #: kdemain.cpp:195 kdemain.cpp:196 kdemain.cpp:197
 #, kde-format
 msgid "Development & Patches"
-msgstr ""
+msgstr "تطوير ورقع"
 
 #: kdemain.cpp:180
 #, kde-format
 msgid "Claudiu Covaci"
-msgstr ""
+msgstr "كلاوديو كوفاسي"
 
 #: kdemain.cpp:181
 #, kde-format
@@ -408,7 +412,7 @@ msgstr "Nikolas Zimmermann"
 #: kdemain.cpp:183
 #, kde-format
 msgid "Jan Becker"
-msgstr ""
+msgstr "جان بيكر"
 
 #: kdemain.cpp:184
 #, kde-format
@@ -423,12 +427,12 @@ msgstr "Laurent Montel"
 #: kdemain.cpp:186
 #, kde-format
 msgid "Mayank Madan"
-msgstr ""
+msgstr "مايانك مادان"
 
 #: kdemain.cpp:187
 #, kde-format
 msgid "Prashanth Udupa"
-msgstr ""
+msgstr "براشانث أودوبا"
 
 #: kdemain.cpp:188
 #, kde-format
@@ -438,7 +442,7 @@ msgstr "Anne-Marie Mahfouf"
 #: kdemain.cpp:189
 #, kde-format
 msgid "Josef Spillner"
-msgstr ""
+msgstr "جوزيف سبيلنر"
 
 #: kdemain.cpp:190
 #, kde-format
@@ -448,7 +452,7 @@ msgstr "Frerich Raabe"
 #: kdemain.cpp:191
 #, kde-format
 msgid "Frederik Gladhorn"
-msgstr ""
+msgstr "فريدريك جلادورن"
 
 #: kdemain.cpp:192
 #, kde-format
@@ -483,29 +487,29 @@ msgstr "Daniel Molkentin"
 #: kdemain.cpp:198
 #, kde-format
 msgid "Christophe Leske"
-msgstr ""
+msgstr "كريستوف ليسكي"
 
 #: kdemain.cpp:198 kdemain.cpp:199 kdemain.cpp:200 kdemain.cpp:201
 #: kdemain.cpp:202 kdemain.cpp:203 kdemain.cpp:204 kdemain.cpp:205
 #: kdemain.cpp:206
 #, kde-format
 msgid "Platforms & Distributions"
-msgstr ""
+msgstr "المنصات والتوزيعات"
 
 #: kdemain.cpp:199
 #, kde-format
 msgid "Sebastian Wiedenroth"
-msgstr ""
+msgstr "سيباستيان ويدنروث"
 
 #: kdemain.cpp:200
 #, kde-format
 msgid "Tim Sutton"
-msgstr ""
+msgstr "تيم سوتون"
 
 #: kdemain.cpp:201
 #, kde-format
 msgid "Christian Ehrlicher"
-msgstr ""
+msgstr "كريستيان إيرليشر"
 
 #: kdemain.cpp:202
 #, kde-format
@@ -515,12 +519,12 @@ msgstr "Ralf Habacker"
 #: kdemain.cpp:203
 #, kde-format
 msgid "Steffen Joeris"
-msgstr ""
+msgstr "ستيفن جويريس"
 
 #: kdemain.cpp:204
 #, kde-format
 msgid "Marcus Czeslinski"
-msgstr ""
+msgstr "ماركوس تشيسلينسكي"
 
 #: kdemain.cpp:205
 #, kde-format
@@ -530,7 +534,7 @@ msgstr "Marcus D. Hanwell"
 #: kdemain.cpp:206
 #, kde-format
 msgid "Chitlesh Goorah"
-msgstr ""
+msgstr "تشيتليش جورا"
 
 #: kdemain.cpp:207
 #, kde-format
@@ -552,12 +556,12 @@ msgstr "لويس سيلفا"
 #: kdemain.cpp:219 kdemain.cpp:220
 #, kde-format
 msgid "Various Suggestions & Testing"
-msgstr ""
+msgstr "اقتراحات واختبارات مختلفة"
 
 #: kdemain.cpp:212
 #, kde-format
 msgid "Stefan Jordan"
-msgstr ""
+msgstr "ستيفان جوردان"
 
 #: kdemain.cpp:213
 #, kde-format
@@ -567,17 +571,17 @@ msgstr "روبرت سكوت"
 #: kdemain.cpp:214
 #, kde-format
 msgid "Lubos Petrovic"
-msgstr ""
+msgstr "لوبوس بيتروفيتش"
 
 #: kdemain.cpp:215
 #, kde-format
 msgid "Benoit Sigoure"
-msgstr ""
+msgstr "بينوا سيجور"
 
 #: kdemain.cpp:216
-#, fuzzy, kde-format
+#, kde-format
 msgid "Martin Konold"
-msgstr "شريط الأدوات الرئيسي"
+msgstr "مارتن كونولد"
 
 #: kdemain.cpp:217
 #, kde-format
@@ -587,22 +591,22 @@ msgstr "Matthias Welwarsky"
 #: kdemain.cpp:218
 #, kde-format
 msgid "Rainer Endres"
-msgstr ""
+msgstr "راينر اندريس"
 
 #: kdemain.cpp:219
 #, kde-format
 msgid "Ralf Gesellensetter"
-msgstr ""
+msgstr "رالف جيزيلينسيتر"
 
 #: kdemain.cpp:220
-#, fuzzy, kde-format
+#, kde-format
 msgid "Tim Alder"
-msgstr "تكبير مزلق"
+msgstr "تيم ألدر"
 
 #: kdemain.cpp:221
 #, kde-format
 msgid "John Layt"
-msgstr ""
+msgstr "جون لايت"
 
 #: kdemain.cpp:222
 #, kde-format
@@ -610,224 +614,227 @@ msgid ""
 "Special thanks for providing an important source of inspiration by creating "
 "Marble's predecessor \"Kartographer\"."
 msgstr ""
+"شكر خاص لتوفير مصدر مهم للإلهام من خلال إنشاء سلف ماربل \"Kartographer\"."
 
 #: kdemain.cpp:238
 #, kde-format
 msgid "Enable debug output"
-msgstr ""
+msgstr "مكّن من مخرجات تصحيح"
 
 #: kdemain.cpp:241
 #, kde-format
 msgid "Display OSM placemarks according to the level selected"
-msgstr ""
+msgstr "عرض علامات مكان OSM وفقًا للمستوى المحدد"
 
 #: kdemain.cpp:243
-#, fuzzy, kde-format
+#, kde-format
 msgid "Make a time measurement to check performance"
-msgstr "Make a وقت قياس إلى تفقّد"
+msgstr "قم بإجراء قياس زمني للتحقق من الأداء"
 
 #: kdemain.cpp:245
-#, fuzzy, kde-format
+#, kde-format
 msgid "Show frame rate"
-msgstr "اعرض إطار معدل"
+msgstr "أظهر معدل الإطار"
 
 #: kdemain.cpp:247
-#, fuzzy, kde-format
+#, kde-format
 msgid "Show tile IDs"
-msgstr "اعرض"
+msgstr "أظهر معرف القطعة"
 
 #: kdemain.cpp:249
 #, kde-format
 msgid "Show time spent in each layer"
-msgstr ""
+msgstr "أظهر الوقت المستغرق في كل طبقة"
 
 #: kdemain.cpp:252
 #, kde-format
 msgid "Use a different directory <directory> which contains map data."
-msgstr ""
+msgstr "استخدم دليلًا مختلفًا <directory> يحتوي على بيانات الخريطة."
 
 #: kdemain.cpp:255
 #, kde-format
 msgid "Do not use the interface optimized for small screens"
-msgstr ""
+msgstr "لا تستخدم الواجهة المُحسَّنة للشاشات الصغيرة"
 
 #: kdemain.cpp:256
 #, kde-format
 msgid "Use the interface optimized for small screens"
-msgstr ""
+msgstr "استخدم الواجهة المُحسَّنة للشاشات الصغيرة"
 
 #: kdemain.cpp:258
 #, kde-format
 msgid "Do not use the interface optimized for high resolutions"
-msgstr ""
+msgstr "لا تستخدم الواجهة المُحسَّنة للدقة العالية"
 
 #: kdemain.cpp:259
 #, kde-format
 msgid "Use the interface optimized for high resolutions"
-msgstr ""
+msgstr "استخدم الواجهة المُحسَّنة للدقة العالية"
 
 #: kdemain.cpp:261
 #, kde-format
 msgid "Show map at given lat lon <coordinates>"
-msgstr ""
+msgstr "أظهر الخريطة عند خط العرض والطول المحدد <coordinates>"
 
 #: kdemain.cpp:263
 #, kde-format
 msgid "Show map at given geo <uri>"
-msgstr ""
+msgstr "أظهر الخريطة في الموقع الجغرافي المحدد <uri>"
 
 #: kdemain.cpp:265
 #, kde-format
 msgid "Set the distance of the observer to the globe (in km)"
-msgstr ""
+msgstr "عيّن مسافة المراقب إلى الكرة الأرضية (بالكيلومتر)"
 
 #: kdemain.cpp:267
 #, kde-format
 msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgstr ""
+"استخدم الخريطة <id> (على سبيل المثال \"earth/openstreetmap/openstreetmap.dgml"
+"\")"
 
 #: kdemain.cpp:269
 #, kde-format
 msgid "One or more placemark files to be opened"
-msgstr ""
+msgstr "واحد أو أكثر من ملفات العلامات المكانية التي ستفتح"
 
 #. i18n: ectx: label, entry, group (Time)
 #: marble.kcfg:58
 #, kde-format
 msgid "The date and time of marble clock"
-msgstr ""
+msgstr "تاريخ ووقت ساعة ماربل"
 
 #. i18n: ectx: label, entry, group (Time)
 #: marble.kcfg:61
 #, kde-format
 msgid "The speed of marble clock"
-msgstr ""
+msgstr "سرعة ساعة ماربل"
 
 #. i18n: ectx: label, entry, group (View)
 #: marble.kcfg:107
 #, kde-format
 msgid "The unit chosen to measure distances."
-msgstr ""
+msgstr "الوحدة المختارة لقياس المسافات."
 
 #. i18n: ectx: label, entry, group (View)
 #: marble.kcfg:115
 #, kde-format
 msgid "The unit chosen to measure angles."
-msgstr ""
+msgstr "الوحدة المختارة لقياس الزوايا."
 
 #. i18n: ectx: label, entry, group (View)
 #: marble.kcfg:124
 #, kde-format
 msgid "The quality at which a still map gets painted."
-msgstr ""
+msgstr "الجودة المرسوم بها الخريطة الثابتة."
 
 #. i18n: ectx: label, entry, group (View)
 #: marble.kcfg:135
 #, kde-format
 msgid "The quality at which an animated map gets painted."
-msgstr ""
+msgstr "الجودة المرسوم بها الخريطة المتحركة."
 
 #. i18n: ectx: label, entry, group (View)
 #: marble.kcfg:146
 #, kde-format
 msgid "The localization of the labels."
-msgstr ""
+msgstr "تعريب التسميات."
 
 #. i18n: ectx: label, entry (mapFont), group (View)
 #: marble.kcfg:155
 #, kde-format
 msgid "The general font used on the map."
-msgstr ""
+msgstr "الخط العام المستخدم في الخريطة."
 
 #. i18n: ectx: label, entry (lastFileOpenDir), group (View)
 #: marble.kcfg:159
 #, kde-format
 msgid "The last directory that was opened by File->Open."
-msgstr ""
+msgstr "الدليل الأخير المفتوح بواسطة ملف->فتح."
 
 #. i18n: ectx: label, entry, group (Navigation)
 #: marble.kcfg:179
 #, kde-format
 msgid "The behaviour of the planet's axis on mouse dragging."
-msgstr ""
+msgstr "سلوك محور الكوكب عند السحب بالفأرة."
 
 #. i18n: ectx: label, entry, group (Navigation)
 #: marble.kcfg:187
 #, kde-format
 msgid "The location shown on application startup."
-msgstr ""
+msgstr "الموقع المعروض عند بدء تشغيل التطبيق."
 
 #. i18n: ectx: label, entry, group (Navigation)
 #: marble.kcfg:201
 #, kde-format
 msgid "Display animation on voyage to target."
-msgstr ""
+msgstr "اعرض الرسوم المتحركة في الرحلة إلى الهدف."
 
 #. i18n: ectx: label, entry, group (Navigation)
 #: marble.kcfg:205
 #, kde-format
 msgid "The external OpenStreetMap editor application"
-msgstr ""
+msgstr "تطبيق محرر OpenStreetMap الخارجي"
 
 #. i18n: ectx: label, entry, group (Cache)
 #: marble.kcfg:211
 #, kde-format
 msgid "Cache for tiles reserved in the physical memory."
-msgstr ""
+msgstr "خبيئة القطع المحجوزة في الذاكرة الفعلية."
 
 #. i18n: ectx: label, entry, group (Cache)
 #: marble.kcfg:217
 #, kde-format
 msgid "Maximum space on the hard disk that can be used to store tiles."
-msgstr ""
+msgstr "المساحة القصوى على القرص الصلب التي يمكن استخدامها لتخزين القطع."
 
 #. i18n: ectx: label, entry (proxyUrl), group (Cache)
 #: marble.kcfg:223
 #, kde-format
 msgid "URL for the proxy server."
-msgstr ""
+msgstr "عنوان URL للخادم الوكيل."
 
 #. i18n: ectx: label, entry, group (Cache)
 #: marble.kcfg:227
 #, kde-format
 msgid "Port for the proxy server."
-msgstr ""
+msgstr "منفذ للخادم الوكيل."
 
 #. i18n: ectx: label, entry (proxyUser), group (Cache)
 #: marble.kcfg:233
-#, fuzzy, kde-format
+#, kde-format
 msgid "Username for authorization."
-msgstr "بديل الاسم من موقع."
+msgstr "اسم المستخدم للمصادقة."
 
 #. i18n: ectx: label, entry (proxyPass), group (Cache)
 #: marble.kcfg:236
-#, fuzzy, kde-format
+#, kde-format
 msgid "Password for authorization."
-msgstr "بديل الاسم من موقع."
+msgstr "كلمة السر المصادقة."
 
 #. i18n: ectx: label, entry (proxyHttp), group (Cache)
 #: marble.kcfg:239
 #, kde-format
 msgid "Proxy type is HTTP"
-msgstr ""
+msgstr "نوع الوكيل هو HTTP"
 
 #. i18n: ectx: label, entry (proxySocks5), group (Cache)
 #: marble.kcfg:250
 #, kde-format
 msgid "Proxy type is Socks5"
-msgstr ""
+msgstr "نوع الوكيل هو Socks5"
 
 #. i18n: ectx: label, entry (proxyAuth), group (Cache)
 #: marble.kcfg:254
-#, fuzzy, kde-format
+#, kde-format
 msgid "Proxy requires Authentication"
-msgstr "اخرج تطبيق"
+msgstr "الوكيل يطلب المصادقة"
 
 #. i18n: ectx: label, entry (activePositionTrackingPlugin), group (Plugins)
 #: marble.kcfg:260
 #, kde-format
 msgid "The position tracking plugin used to determine the current location"
-msgstr ""
+msgstr "ملحق لتتبع الموقع المستخدم لتحديد الموقع الحالي"
 
 #: marble_part.cpp:101
 #, kde-format
@@ -842,7 +849,7 @@ msgstr "الارتفاع: %1"
 #: marble_part.cpp:103
 #, kde-format
 msgid "Tile Zoom Level: %1"
-msgstr ""
+msgstr "مستوى تكبير للقطعة: %1"
 
 #: marble_part.cpp:104
 #, kde-format
@@ -861,22 +868,22 @@ msgstr ""
 #: marble_part.cpp:163
 #, kde-format
 msgid "File not readable"
-msgstr ""
+msgstr "الملف غير قابل للقراءة"
 
 #: marble_part.cpp:211
-#, fuzzy, kde-format
+#, kde-format
 msgid "A Virtual Globe"
-msgstr "A سطح المكتب الكرة الأرضية"
+msgstr "الكرة الأرضية الافتراضية"
 
 #: marble_part.cpp:224
 #, kde-format
 msgid "Sorry, unable to open '%1'. The file is not accessible."
-msgstr ""
+msgstr "عذرًا، غير قادر على فتح '%1'. غير متاح."
 
 #: marble_part.cpp:224
 #, kde-format
 msgid "File not accessible"
-msgstr ""
+msgstr "الملف غير قابل للوصول"
 
 #: marble_part.cpp:245
 #, kde-format
@@ -959,10 +966,10 @@ msgid "Download Maps..."
 msgstr "نزل الخرائط..."
 
 #: marble_part.cpp:729
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Status tip"
 msgid "Download new maps"
-msgstr "نزّل إنتهيت."
+msgstr "حمّل خرائط جديدة"
 
 #: marble_part.cpp:734
 #, kde-format
@@ -974,7 +981,7 @@ msgstr "أنشئ &خريطة جديدة…"
 #, kde-format
 msgctxt "Status tip"
 msgid "A wizard guides you through the creation of your own map theme."
-msgstr ""
+msgstr "يرشدك المعالج خلال عملية إنشاء سمة الخريطة الخاصة بك."
 
 #: marble_part.cpp:761
 #, kde-format
@@ -1013,37 +1020,37 @@ msgstr "أخف الظل"
 #: marble_part.cpp:795
 #, kde-format
 msgid "Shows and hides the shadow of the sun"
-msgstr ""
+msgstr "أظهر وأخف ظل الشمس"
 
 #: marble_part.cpp:799
 #, kde-format
 msgid "Show sun icon on the Sub-Solar Point"
-msgstr ""
+msgstr "أظهر أيقونة الشمس على النقطة الفرعية الشمسية"
 
 #: marble_part.cpp:801
 #, kde-format
 msgid "Hide sun icon on the Sub-Solar Point"
-msgstr ""
+msgstr "أخف أيقونة الشمس على النقطة الفرعية الشمسية"
 
 #: marble_part.cpp:802
 #, kde-format
 msgid "Show sun icon on the sub-solar point"
-msgstr ""
+msgstr "أظهر أيقونة الشمس على النقطة تحت الشمسية"
 
 #: marble_part.cpp:806
 #, kde-format
 msgid "Lock Globe to the Sub-Solar Point"
-msgstr ""
+msgstr "اقفل الكرة الأرضية إلى النقطة تحت الشمسية"
 
 #: marble_part.cpp:808
 #, kde-format
 msgid "Unlock Globe to the Sub-Solar Point"
-msgstr ""
+msgstr "افتح الكرة الأرضية إلى النقطة تحت الشمسية"
 
 #: marble_part.cpp:809
 #, kde-format
 msgid "Lock globe to the sub-solar point"
-msgstr ""
+msgstr "اقفل الكرة الأرضية إلى النقطة تحت الشمسية"
 
 #: marble_part.cpp:823
 #, kde-format
@@ -1060,7 +1067,7 @@ msgstr "أ&ظهر العلامات"
 #: marble_part.cpp:831
 #, kde-format
 msgid "Show or hide bookmarks in the map"
-msgstr ""
+msgstr "أظهر أو أخف العلامات في الخريطة"
 
 #: marble_part.cpp:838
 #, kde-format
@@ -1106,10 +1113,10 @@ msgid "Show Position"
 msgstr "أظهر الموقع"
 
 #: marble_part.cpp:1204
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Action for toggling"
 msgid "Show Date and Time"
-msgstr "اعرض إطار معدل"
+msgstr "أظهر التاريخ والوقت"
 
 #: marble_part.cpp:1205
 #, kde-format
@@ -1127,7 +1134,7 @@ msgstr "اعرض مستوى تكبير القطعة"
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Download Progress Bar"
-msgstr ""
+msgstr "أظهر شريط تقدم التنزيل"
 
 #: marble_part.cpp:1298
 #, kde-format
