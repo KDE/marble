@@ -7,21 +7,21 @@
 # Jaap Woldringh <jjhwoldringh@kde.nl>, 2007, 2011, 2012.
 # Kristof Bal <kristof.bal@gmail.com>, 2008, 2009.
 # Jaap Woldringh <jjhwoldringh@kde.nl>, 2008, 2009, 2010, 2011.
-# SPDX-FileCopyrightText: 2009, 2010, 2011, 2016, 2018, 2020, 2021, 2022, 2023, 2024 Freek de Kruijf <freekdekruijf@kde.nl>
+# SPDX-FileCopyrightText: 2009, 2010, 2011, 2016, 2018, 2020, 2021, 2022, 2023, 2024, 2025 Freek de Kruijf <freekdekruijf@kde.nl>
 # Jaap Woldringh <jjhwoldringh@kde.nl>, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-12-17 15:30+0100\n"
+"PO-Revision-Date: 2025-01-14 12:08+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.12.0\n"
+"X-Generator: Lokalize 24.12.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Qt-Contexts: true\n"
 
@@ -16829,7 +16829,7 @@ msgstr "Invoer geografische coördinaten met geo het URI-schema"
 #: src/plugins/runner/gosmore-reversegeocoding/GosmoreReverseGeocodingPlugin.cpp:26
 msgctxt "Marble::GosmorePlugin|"
 msgid "Gosmore Reverse Geocoding"
-msgstr "Gosmore Reverse Geocoding"
+msgstr "Gosmore omgekeerde geo-codering"
 
 #: src/plugins/runner/gosmore-reversegeocoding/GosmoreReverseGeocodingPlugin.cpp:31
 #: src/plugins/runner/gosmore-routing/GosmoreRoutingPlugin.cpp:31

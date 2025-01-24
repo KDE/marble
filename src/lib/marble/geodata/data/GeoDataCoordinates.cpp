@@ -487,7 +487,7 @@ QString GeoDataCoordinates::lonToString(qreal lon, GeoDataCoordinates::Notation 
         if (notation == DMS) {
             // Includes -1 case!
             if (precision < 5) {
-                lonString += QStringLiteral(" %3\"").arg(lonSec, 2, 'f', 0, QLatin1Char('0'));
+                lonString += QStringLiteral(" %3\"").arg((double)lonSec, 2, 'f', 0, QLatin1Char('0'));
                 return lonString + weString;
             }
 
@@ -544,7 +544,7 @@ QString GeoDataCoordinates::lonToString(qreal lon, GeoDataCoordinates::Notation 
 
         // Includes -1 case!
         if (precision < 5) {
-            lonString += QStringLiteral(" %3\"").arg(lonSec, 2, 'f', 0, QLatin1Char('0'));
+            lonString += QStringLiteral(" %3\"").arg((double)lonSec, 2, 'f', 0, QLatin1Char('0'));
             return lonString;
         }
 
@@ -649,7 +649,7 @@ QString GeoDataCoordinates::latToString(qreal lat, GeoDataCoordinates::Notation 
         if (notation == DMS || notation == Astro) {
             // Includes -1 case!
             if (precision < 5) {
-                latString += QStringLiteral(" %3\"").arg(latSec, 2, 'f', 0, QLatin1Char('0'));
+                latString += QStringLiteral(" %3\"").arg((double)latSec, 2, 'f', 0, QLatin1Char('0'));
                 return latString + nsString;
             }
 

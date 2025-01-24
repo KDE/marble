@@ -32,6 +32,7 @@
             }
         ],
         "Description": "Lookup places in OpenStreetMap with Marble",
+        "Description[ar]": "ابحث عن الأماكن في خريطة  الشّوارع المفتوحة بواسطة ماربل",
         "Description[bg]": "Потърсете места в OpenStreetMap с Marble",
         "Description[ca@valencia]": "Busca llocs en OpenStreetMap amb Marble",
         "Description[ca]": "Cerca llocs a l'OpenStreetMaps amb el Marble",
@@ -60,6 +61,7 @@
         "Id": "marble",
         "License": "LGPL",
         "Name": "OpenStreetMap with Marble",
+        "Name[ar]": " خريطة  الشّوارع المفتوحة بواسطة ماربل",
         "Name[bg]": "OpenStreetMap с Marble",
         "Name[ca@valencia]": "OpenStreetMap amb Marble",
         "Name[ca]": "OpenStreetMap amb el Marble",
