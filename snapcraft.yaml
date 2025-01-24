@@ -1,11 +1,11 @@
-# SPDX-FileCopyrightText: 2024 Scarlett Moore <sgmoore@kde.org>
+# SPDX-FileCopyrightText: 2024, 2025 Scarlett Moore <sgmoore@kde.org>
 #
 # SPDX-License-Identifier: CC0-1.0
 ---
 name: marble
 confinement: strict
 grade: stable
-base: core22
+base: core24
 adopt-info: marble
 apps:
   marble:
@@ -19,6 +19,7 @@ apps:
       - browser-support
     environment:
       QT_PLUGIN_PATH: "$QT_PLUGIN_PATH:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/marble"
+      QTWEBENGINE_DISABLE_SANDBOX: 1
 layout:
   /usr/share/marble:
     symlink: $SNAP/usr/share/marble
@@ -34,7 +35,7 @@ package-repositories:
     components:
       - main
     suites:
-      - jammy
+      - noble
     key-id: 444DABCF3667D0283F894EDDE6D4736255751E5D
     url: http://origin.archive.neon.kde.org/user
     key-server: keyserver.ubuntu.com
@@ -66,6 +67,13 @@ parts:
       - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR
       - --log-level=STATUS
       - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR
+    build-environment: &buildenvironment
+      - PATH: /snap/kde-qt6-core24-sdk/current/usr/bin${PATH:+:$PATH}
+      - PKG_CONFIG_PATH: /snap/kde-qt6-core24-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}
+      - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kde-qt6-core24-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+      - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kde-qt6-core24-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+      - LD_LIBRARY_PATH: "/snap/kde-qt6-core24-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}:/snap/kde-qt6-core24-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/libproxy:/snap/kde-qt6-core24-sdk/current/usr/lib:/snap/kf6-core24-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}:/snap/kf6-core24-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+      - PYTHONPATH: ${CRAFT_STAGE}/lib/python3.12/site-packages:${CRAFT_STAGE}/usr/lib/python3/dist-packages
     prime:
       - -usr/lib/*/cmake/*
       - -usr/include/*
@@ -80,11 +88,11 @@ parts:
       - marble
     plugin: nil
     build-snaps:
-      - core22
-      - kf6-core22
+      - core24
+      - kf6-core24
     override-prime: |
       set -eux
-      for snap in "core22" "kf6-core22"; do
+      for snap in "core24" "kf6-core24"; do
           cd "/snap/$snap/current" && find . -type f,l -exec rm -rf "${CRAFT_PRIME}/{}" \;
       done
 
