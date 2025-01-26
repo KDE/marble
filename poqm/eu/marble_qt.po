@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2025-01-19 09:53+0100\n"
+"PO-Revision-Date: 2025-01-25 09:18+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -563,7 +563,7 @@ msgid ""
 msgstr ""
 "<i>Lurreko hirietako argien</i> irudi hau DMSPren («Defense Meteorological "
 "Satellite Program» / Defentsako Meteorologia Satelite Programa) OLSaren "
-"(Operational Linescan System) datuekin sortu zen."
+"(Operational Linescan System) datuekin sortu da."
 
 #. file data/maps/earth/citylights/citylights.dgml:154
 #. ----------
@@ -1124,7 +1124,7 @@ msgstr "Merkataritza eremua"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:251
 msgctxt "DGML|"
 msgid "Heathland"
-msgstr "Txilardia"
+msgstr "Txilardi eremua"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:249
 #. ----------
@@ -5676,7 +5676,6 @@ msgid "Hamlet"
 msgstr "Herrixka"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:392
-#, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Locality"
 msgstr "Herria"
@@ -5692,15 +5691,14 @@ msgid "Town Capital"
 msgstr "Herriburua"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:400
-#, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Village"
-msgstr "{Herritxoa}"
+msgstr "Herrixka"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:402
 msgctxt "GeoDataPlacemark|"
 msgid "Village Capital"
-msgstr ""
+msgstr "Herriburua"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:406
 msgctxt "GeoDataPlacemark|"
@@ -5725,7 +5723,7 @@ msgstr "Hondartza"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:414
 msgctxt "GeoDataPlacemark|"
 msgid "Wetland"
-msgstr ""
+msgstr "Hezegunea"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:416
 msgctxt "GeoDataPlacemark|"
@@ -5738,10 +5736,9 @@ msgid "Ice Shelf"
 msgstr "Izotz geruza"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:420
-#, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Scrub"
-msgstr "Sasia"
+msgstr "Sastraka"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:422
 msgctxt "GeoDataPlacemark|"
@@ -5751,7 +5748,7 @@ msgstr "Labarra"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:424
 msgctxt "GeoDataPlacemark|"
 msgid "Heath"
-msgstr ""
+msgstr "Txilardi"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:426
 msgctxt "GeoDataPlacemark|"
@@ -5813,7 +5810,7 @@ msgstr "Bizitegietarako errepidea"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:450
 msgctxt "GeoDataPlacemark|"
 msgid "Living Street"
-msgstr ""
+msgstr "Bizitegi kalea"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:452
 msgctxt "GeoDataPlacemark|"
@@ -5853,7 +5850,7 @@ msgstr "Lehen mailako errepidea"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:466
 msgctxt "GeoDataPlacemark|"
 msgid "Raceway"
-msgstr ""
+msgstr "Lasterketa pista"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:468
 msgctxt "GeoDataPlacemark|"
@@ -5878,7 +5875,7 @@ msgstr "Autobidea"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:476
 msgctxt "GeoDataPlacemark|"
 msgid "Corridor"
-msgstr ""
+msgstr "Korridorea"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:478
 msgctxt "GeoDataPlacemark|"
@@ -6388,7 +6385,6 @@ msgid "Gift Shop"
 msgstr "Opari-denda"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:684
-#, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Stationery"
 msgstr "Bulegoko materiala"
@@ -6635,7 +6631,6 @@ msgid "Ski Rental"
 msgstr "Eski alokairua"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:782
-#, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Taxi Rank"
 msgstr "Taxi geralekua"
@@ -6853,7 +6848,7 @@ msgstr "Urtegia"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:870
 msgctxt "GeoDataPlacemark|"
 msgid "Residential"
-msgstr ""
+msgstr "Bizitegia-auzoa"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:872
 #, fuzzy
@@ -6874,12 +6869,12 @@ msgstr "Mahastia"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:878
 msgctxt "GeoDataPlacemark|"
 msgid "Rail"
-msgstr ""
+msgstr "Erraila"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:880
 msgctxt "GeoDataPlacemark|"
 msgid "Narrow Gauge"
-msgstr ""
+msgstr "Zabalera estua"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:882
 msgctxt "GeoDataPlacemark|"
@@ -6887,7 +6882,6 @@ msgid "Tram"
 msgstr "Tranbia"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:884
-#, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Light Rail"
 msgstr "Tren arina"
@@ -6895,7 +6889,7 @@ msgstr "Tren arina"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:886
 msgctxt "GeoDataPlacemark|"
 msgid "Abandoned Railway"
-msgstr ""
+msgstr "Trenbide abandonatua"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:888
 msgctxt "GeoDataPlacemark|"
@@ -6905,48 +6899,48 @@ msgstr "Metroa"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:890
 msgctxt "GeoDataPlacemark|"
 msgid "Preserved Railway"
-msgstr ""
+msgstr "Kontserbatutako trenbidea"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:892
 msgctxt "GeoDataPlacemark|"
 msgid "Miniature Railway"
-msgstr ""
+msgstr "Miniaturazko trenbidea"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:894
 msgctxt "GeoDataPlacemark|"
 msgid "Railway Construction"
-msgstr ""
+msgstr "Trenbide-eraikuntza"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:896
 msgctxt "GeoDataPlacemark|"
 msgid "Monorail"
-msgstr ""
+msgstr "Errailbakarra"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:898
 msgctxt "GeoDataPlacemark|"
 msgid "Funicular Railway"
-msgstr ""
+msgstr "Funikularraren trenbidea"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:900
 msgctxt "GeoDataPlacemark|"
 msgid "Power Tower"
-msgstr ""
+msgstr "Argindar dorrea"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:902
 msgctxt "GeoDataPlacemark|"
 msgid "Aerialway Station"
-msgstr ""
+msgstr "Teleferiko estazioa"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:904
 msgctxt ""
 "GeoDataPlacemark|A pylon supporting the aerialway cable e.g. on a ski lift"
 msgid "Pylon"
-msgstr ""
+msgstr "Zutabea"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:906
 msgctxt "GeoDataPlacemark|"
 msgid "Cable Car"
-msgstr ""
+msgstr "Teleferikoa"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:908
 msgctxt "GeoDataPlacemark|"
@@ -6956,42 +6950,42 @@ msgstr "Gondola"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:910
 msgctxt "GeoDataPlacemark|"
 msgid "Chair Lift"
-msgstr ""
+msgstr "Teleaulkia"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:912
 msgctxt "GeoDataPlacemark|"
 msgid "Mixed Lift"
-msgstr ""
+msgstr "Erremonte mistoa"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:914
 msgctxt "GeoDataPlacemark|"
 msgid "Drag Lift"
-msgstr ""
+msgstr "Teleskia"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:916
 msgctxt "GeoDataPlacemark|"
 msgid "T-Bar"
-msgstr ""
+msgstr "Teleski (T)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:918
 msgctxt "GeoDataPlacemark|"
 msgid "J-Bar"
-msgstr ""
+msgstr "Teleski (J)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:920
 msgctxt "GeoDataPlacemark|"
 msgid "Platter"
-msgstr ""
+msgstr "Teleski (diskoa)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:922
 msgctxt "GeoDataPlacemark|"
 msgid "Rope Tow"
-msgstr ""
+msgstr "Telesoka"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:924
 msgctxt "GeoDataPlacemark|"
 msgid "Magic Carpet"
-msgstr ""
+msgstr "Zinta garraiatzailea"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:926
 msgctxt "GeoDataPlacemark|"
@@ -7056,82 +7050,82 @@ msgstr "Eski jauzia"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:950
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 1)"
-msgstr ""
+msgstr "Muga admin. (1. maila)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:952
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 2)"
-msgstr ""
+msgstr "Muga admin. (2. maila)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:954
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 3)"
-msgstr ""
+msgstr "Muga admin. (3. maila)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:956
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 4)"
-msgstr ""
+msgstr "Muga admin. (4. maila)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:958
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 5)"
-msgstr ""
+msgstr "Muga admin. (5. maila)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:960
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 6)"
-msgstr ""
+msgstr "Muga admin. (6. maila)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:962
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 7)"
-msgstr ""
+msgstr "Muga admin. (7. maila)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:964
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 8)"
-msgstr ""
+msgstr "Muga admin. (8. maila)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:966
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 9)"
-msgstr ""
+msgstr "Muga admin. (9. maila)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:968
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 10)"
-msgstr ""
+msgstr "Muga admin. (10. maila)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:970
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 11)"
-msgstr ""
+msgstr "Muga admin. (11. maila)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:972
 msgctxt "GeoDataPlacemark|"
 msgid "Boundary (Maritime)"
-msgstr ""
+msgstr "Muga (itsasokoa)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:974
 msgctxt "GeoDataPlacemark|"
 msgid "Land Mass"
-msgstr "Lur masa"
+msgstr "Lur-masa"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:976
 msgctxt "GeoDataPlacemark|"
 msgid "Urban Area"
-msgstr ""
+msgstr "Hirigunea"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:978
 msgctxt "GeoDataPlacemark|"
 msgid "International Date Line"
-msgstr ""
+msgstr "Nazioarteko data-lerroa"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:980
 msgctxt "GeoDataPlacemark|"
 msgid "Bathymetry"
-msgstr ""
+msgstr "Batimetria"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:982
 msgctxt "GeoDataPlacemark|"
@@ -7139,10 +7133,9 @@ msgid "Canal"
 msgstr "Ubidea"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:984
-#, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Drain"
-msgstr "hustubidea"
+msgstr "Hustubidea"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:986
 msgctxt "GeoDataPlacemark|"
@@ -7178,13 +7171,11 @@ msgid "Railway Crossing"
 msgstr ""
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:1002
-#, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Door"
 msgstr "Atea"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:1006
-#, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Room"
 msgstr "Gela"
@@ -7234,12 +7225,12 @@ msgstr "*"
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:211
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Detour"
-msgstr ""
+msgstr "Saihesbidea"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:214
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Ferry Route"
-msgstr ""
+msgstr "Ferry ibilbidea"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:217
 msgctxt "GeoLineStringGraphicsItem|"
@@ -7269,7 +7260,7 @@ msgstr "Trolebusa"
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:232
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Bicycle Route"
-msgstr ""
+msgstr "Bizikleta ibilbidea"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:235
 msgctxt "GeoLineStringGraphicsItem|"
@@ -7284,7 +7275,7 @@ msgstr "Oinezko ibilbidea"
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:241
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Hiking Route"
-msgstr ""
+msgstr "Mendi ibilbidea"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:244
 msgctxt "GeoLineStringGraphicsItem|"
@@ -7294,7 +7285,7 @@ msgstr "Zaldun-bidea"
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:247
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Inline Skates Route"
-msgstr ""
+msgstr "Lerro-patinen ibilbidea"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:250
 msgctxt "GeoLineStringGraphicsItem|"
@@ -7687,21 +7678,19 @@ msgid "Stereographic"
 msgstr "Estereografikoa"
 
 #: src/lib/marble/MapViewWidget.ui:86
-#, fuzzy
 msgctxt "MapViewWidget|"
 msgid "Lambert Azimuthal Equal Area"
-msgstr "&Lambert-en azimutal baliokidearen area"
+msgstr "Lambert-en azalera baliokide azimutala"
 
 #: src/lib/marble/MapViewWidget.ui:95
-#, fuzzy
 msgctxt "MapViewWidget|"
 msgid "Azimuthal Equidistant"
-msgstr "&Azimutal distantziakidea"
+msgstr "Azimutal distantziakidea"
 
 #: src/lib/marble/MapViewWidget.ui:104
 msgctxt "MapViewWidget|"
 msgid "Vertical Perspective Globe"
-msgstr ""
+msgstr "Perspektiba bertikaleko globoa"
 
 #: src/lib/marble/MapViewWidget.ui:126
 msgctxt "MapViewWidget|"
@@ -8300,6 +8289,27 @@ msgid ""
 "\" font-family:'Sans Serif';\"> to reference a tile from the index.</span></"
 "p></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+"size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"family:'Sans Serif'; font-weight:600;\">Indexatutako lauzetarako URL "
+"antolaera</span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"family:'Sans Serif';\">Mesedez, sartu banakako lauzak zama-jaisteko "
+"erabilitako URLa. Erabili </span><span style=\" font-family:'Sans Serif'; "
+"font-style:italic;\">{x}</span><span style=\" font-family:'Sans Serif';\">, "
+"</span><span style=\" font-family:'Sans Serif'; font-style:italic;\">{y}</"
+"span><span style=\" font-family:'Sans Serif';\">, eta </span><span style=\" "
+"font-family:'Sans Serif'; font-style:italic;\">{zoomLevel}</span><span style="
+"\" font-family:'Sans Serif';\"> indizeko lauza bat aipatzeko.</span></p></"
+"body></html>"
 
 #: src/lib/marble/MapWizard.ui:651
 msgctxt "MapWizard|"
@@ -8325,6 +8335,20 @@ msgid ""
 "new map. Add a description to let users know what your map is about. </"
 "span></p></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+"size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"family:'Sans Serif'; font-weight:600;\">Informazio orokorra</span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"family:'Sans Serif';\">Mesedez, zure mapa berrirako titulu bat, izen bat edo "
+"ikono bat zehaztu. </span></p></body></html>"
 
 #: src/lib/marble/MapWizard.ui:707
 msgctxt "MapWizard|"
@@ -8363,6 +8387,9 @@ msgid ""
 "about the purpose, origin, copyright and license of the data used in your "
 "map theme."
 msgstr ""
+"Zure mapa-gaiaren deskribapen labur bat. Hemen zure mapa-gaian erabilitako "
+"datuen helburuari, jatorriari, egile-eskubideei eta lizentziari buruzko "
+"informazioa eman dezakezu."
 
 #: src/lib/marble/MapWizard.ui:775
 msgctxt "MapWizard|"
@@ -8387,12 +8414,12 @@ msgstr "Aldatu..."
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
 msgid "<b>Optional: Addition of a Map Key</b>"
-msgstr ""
+msgstr "<b>Aukerakoa: Maparen gako bat gehitzea</b>"
 
 #: src/lib/marble/MapWizard.ui:864
 msgctxt "MapWizard|"
 msgid "Legend Image:"
-msgstr ""
+msgstr "Legenda-irudia:"
 
 #: src/lib/marble/MapWizard.ui:925
 msgctxt "MapWizard|"
@@ -8420,6 +8447,27 @@ msgid ""
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
 "p></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Laburpena</span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Zorionak! Zure mapa-gaia "
+"sortzeko beharrezkoak diren datu guztiak sartu dituzu. Egiaztatu beheko "
+"laburpena arretaz eta sakatu &quot;Bukatu&quot; botoia gaia sortzeko.</p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Mesedez, pentsa ezazu mapa-"
+"gaia Marble komunitateari emateko aukera, lizentziak eta erabilera-"
+"baldintzek horretarako aukera ematen badute.</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p></body></html>"
 
 #: src/lib/marble/MapWizard.ui:957
 msgctxt "MapWizard|"
@@ -8703,6 +8751,8 @@ msgid ""
 "<p> The Marble Team would like to thank its members who participated in ESA "
 "SoCiS for their successful work on Marble:</p>"
 msgstr ""
+"<p>Marble taldeak eskerrak eman nahi dizkie ESA SoCiS-an parte hartu duten "
+"kideei, Marble-n egindako lan arrakastatsuagatik:</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:129
 #: src/lib/marble/MarbleAboutDialog.cpp:181
@@ -8717,6 +8767,9 @@ msgid ""
 "judit@gmail.com </a><br /><i>Project: Improving Marble's Satellite maps "
 "using Sentinel-2 mission data</i></p>"
 msgstr ""
+"<p>Judit Bartha, <a href=\"mailto:bartha.m.judit@gmail.com\"> bartha.m."
+"judit@gmail.com </a><br /><i>Proiektua: Sentilen-2 misioaren datuak erabiliz "
+"Marble-ren satelite mapa hobetzea</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:132
 #: src/lib/marble/MarbleAboutDialog.cpp:186
@@ -8731,6 +8784,9 @@ msgid ""
 "emacs@gmail.com </a><br /><i>Project: Integrate data provided by the "
 "Sentinel missions</i></p>"
 msgstr ""
+"<p>Ana Badescu, <a href=\"mailto:anabee.emacs@gmail.com\"> anabee."
+"emacs@gmail.com </a><br /><i>Proiektua: Sentinel misioek hornitutako datuak "
+"bateratzea</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:135
 #: src/lib/marble/MarbleAboutDialog.cpp:152
@@ -8746,6 +8802,9 @@ msgid ""
 "peterffy95@gmail.com </a><br /><i>Project: Panoramic Picture Support for "
 "celestial bodies in Marble   </i></p>"
 msgstr ""
+"<p>G&#xE1;bor P&#xE9;terffy, <a href=\"mailto:peterffy95@gmail.com\"> "
+"peterffy95@gmail.com </a><br /><i>Proiektua: Marble-n, zeruko gorputzen "
+"irudi panoramikoen euskarria</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:138
 #: src/lib/marble/MarbleAboutDialog.cpp:158
@@ -8761,6 +8820,9 @@ msgid ""
 "marek@gmail.com</a><br /><i>Project: Displaying Solar / Lunar Eclipses in "
 "Marble </i></p>"
 msgstr ""
+"<p>Marek Hakala, <a href=\"mailto:hakala.marek@gmail.com\">hakala."
+"marek@gmail.com</a><br /><i>Proiektua: Eguzki / ilargiak Marble-n azaltzea</"
+"i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:141
 #: src/lib/marble/MarbleAboutDialog.cpp:163
@@ -8776,6 +8838,9 @@ msgid ""
 "\">rene@bitkanal.net</a><br /><i>Project: Visualization of planetary "
 "satellites</i></p>"
 msgstr ""
+"<p>Ren&#xE9; K&#xFC;ttner, <a href=\"mailto:rene@bitkanal.net"
+"\">rene@bitkanal.net</a><br /><i>Proiektua: Satelite planetarioen "
+"bistaratzea</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:144
 #: src/lib/marble/MarbleAboutDialog.cpp:167
@@ -9223,6 +9288,9 @@ msgid ""
 "and Christopher Elvidge of NOAA NGDC. Image by Craig Mayhew and Robert "
 "Simmon, NASA GSFC.</p>"
 msgstr ""
+"<p><i>Lurreko hirien argiak</i><br />NASA GSFCko Marc Imhoff eta NOAA NGDCko "
+"Christopher Elvidge-ek utzitako datuak. Craig Mayhew eta Robert Simmon-en "
+"irudia, NASA GSFC.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:267
 msgctxt "QObject|"
@@ -9730,10 +9798,9 @@ msgid "Password:"
 msgstr "Pasahitza:"
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:197
-#, fuzzy
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Test Login"
-msgstr "Probatu saio-hastea..."
+msgstr "Probatu saio-hastea"
 
 #: src/lib/marble/MarbleGlobal.h:243
 msgctxt "Marble|"
@@ -9836,12 +9903,9 @@ msgid "Use kinetic spinning when dragging the map"
 msgstr ""
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:76
-#, fuzzy
-#| msgctxt "Marble::MainWindow|"
-#| msgid "&Set Home Location"
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "&Inertial globe rotation"
-msgstr "E&zarri etxearen kokapena"
+msgstr "Globoaren biratze &inertziala"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:83
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -9871,7 +9935,7 @@ msgstr "Erabili saguaren eskuineko botoia kamara inguruan biratzeko"
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:99
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "&Mouse view rotation"
-msgstr ""
+msgstr "&Saguarekin ikuspegia biratzea"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:142
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10629,10 +10693,9 @@ msgid "Capital"
 msgstr "Hiriburua"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:393
-#, fuzzy
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Village"
-msgstr "{Herritxoa}"
+msgstr "Herrixka"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:536
 msgctxt "Marble::MarbleWidgetPopupMenu|"
@@ -10642,7 +10705,7 @@ msgstr "&Informazio-koadroak"
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:885
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Address Details"
-msgstr ""
+msgstr "Helbidearen xehetasunak"
 
 #: src/lib/marble/MovieCapture.cpp:35
 msgctxt "QObject|"
@@ -12588,11 +12651,13 @@ msgid ""
 "Cannot merge a node from polygon's outer boundary with a node from one of "
 "its inner boundaries."
 msgstr ""
+"Ezin da bateratu poligonoaren kanpoko mugako nodo bat haren barneko mugako "
+"nodo batekin."
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:756
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Cannot merge two nodes from two different inner boundaries."
-msgstr ""
+msgstr "Ezin dira barneko muga ezberdinetako bi nodo bateratu."
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:761
 msgctxt "Marble::AnnotatePlugin|"
@@ -12600,18 +12665,19 @@ msgid ""
 "Cannot merge the selected nodes. Most probably this would make the polygon's "
 "outer boundary not contain all its inner boundary nodes."
 msgstr ""
+"Ezin dira hautatutako nodoak bateratu. Horrek, ziurrenik, poligonoaren "
+"kanpoko mugak barneko mugetako nodo guztiak ez edukitzea eragingo luke."
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:862
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:940
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Select Item"
-msgstr "hautatu elementua"
+msgstr "Hautatu elementua"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:866
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Polygon"
-msgstr ""
+msgstr "Gehitu poligonoa"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:869
 msgctxt "Marble::AnnotatePlugin|"
@@ -12730,6 +12796,8 @@ msgid ""
 "Cannot delete one of the selected nodes. Most probably this would make the "
 "polygon's outer boundary not contain all its inner boundary nodes."
 msgstr ""
+"Ezin dira hautatutako nodoak ezabatu. Horrek, ziurrenik, poligonoaren "
+"kanpoko mugak barneko mugetako nodo guztiak ez edukitzea eragingo luke."
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1403
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1423
@@ -13010,7 +13078,7 @@ msgstr "Ez da zehaztu behar adina nodo."
 #: src/plugins/render/annotate/EditPolylineDialog.cpp:267
 msgctxt "Marble::EditPolylineDialog|"
 msgid "Please specify at least 2 nodes for the path by clicking on the map."
-msgstr ""
+msgstr "Mesedez, mapan klik eginez, ibilbiderako gutxienez 2 nodo zehaztu."
 
 #: src/plugins/render/annotate/EditPolylineDialog.ui:14
 msgctxt "UiEditPolylineDialog|"
@@ -13054,25 +13122,21 @@ msgid "Width:"
 msgstr "Zabalera:"
 
 #: src/plugins/render/annotate/EditPolylineDialog.ui:171
-#, fuzzy
 msgctxt "UiEditPolylineDialog|"
 msgid "Nodes"
 msgstr "Nodoak"
 
 #: src/plugins/render/annotate/NodeModel.cpp:80
-#, fuzzy
 msgctxt "Marble::NodeModel|"
 msgid "No."
-msgstr "Ez"
+msgstr "No."
 
 #: src/plugins/render/annotate/NodeModel.cpp:82
-#, fuzzy
 msgctxt "Marble::NodeModel|"
 msgid "Longitude"
 msgstr "Longitudea"
 
 #: src/plugins/render/annotate/NodeModel.cpp:84
-#, fuzzy
 msgctxt "Marble::NodeModel|"
 msgid "Latitude"
 msgstr "Latitudea"
@@ -14446,10 +14510,9 @@ msgid "Status:"
 msgstr "Egoera:"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:116
-#, fuzzy
 msgctxt "OpenCachingCacheDialog|"
 msgid "Country:"
-msgstr "Herrialdea:"
+msgstr "Herrialdea"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:136
 #, fuzzy
@@ -14781,32 +14844,32 @@ msgstr ""
 #: src/plugins/render/photo/PhotoPlugin.cpp:111
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NonCommercial-ShareAlike License"
-msgstr ""
+msgstr "Aitortza-EzKomertziala-BerdinPartekatu lizentzia"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:118
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NonCommercial License"
-msgstr ""
+msgstr "Aitortza-EzKomertziala lizentzia"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:125
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NonCommercial-NoDerivs License"
-msgstr ""
+msgstr "Aitortza-EzKomertziala-EratorpenikEz lizentzia"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:132
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution License"
-msgstr ""
+msgstr "Aitortza lizentzia"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:139
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-ShareAlike License"
-msgstr ""
+msgstr "Aitortza-BerdinPartekatu lizentzia"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:146
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NoDerivs License"
-msgstr ""
+msgstr "Aitortza-EratorpenikEz lizentzia"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:153
 msgctxt "Marble::PhotoPlugin|"
@@ -14876,6 +14939,8 @@ msgctxt "PositionMarkerConfigWidget|"
 msgid ""
 "Position marker images indicating the direction should point north (top)."
 msgstr ""
+"Norabideak iparraldea erakutsi (gora) beharko lukeela adierazten duten "
+"norabidea markatzeko irudiak."
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:150
 msgctxt "PositionMarkerConfigWidget|"
