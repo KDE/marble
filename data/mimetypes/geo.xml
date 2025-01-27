@@ -23,6 +23,7 @@ Notes:
     <comment xml:lang="fr">Données « OSM »</comment>
     <comment xml:lang="gl">Datos de OSM</comment>
     <comment xml:lang="he">נתוני OSM</comment>
+    <comment xml:lang="hu">OSM adat</comment>
     <comment xml:lang="id">Data OSM</comment>
     <comment xml:lang="is">OSM-gögn</comment>
     <comment xml:lang="it">Dati OSM</comment>
@@ -73,6 +74,7 @@ Notes:
     <comment xml:lang="fr">Fichier de formes « ESRI »</comment>
     <comment xml:lang="gl">Ficheiro shapefile de ESRI</comment>
     <comment xml:lang="he">קובץ צורה של ESRI</comment>
+    <comment xml:lang="hu">ESRI alakzatfájl</comment>
     <comment xml:lang="id">Shapefile ESRI</comment>
     <comment xml:lang="is">ESRI Shapefile-skrá</comment>
     <comment xml:lang="it">Shapefile ESRI</comment>
@@ -117,6 +119,7 @@ Notes:
     <comment xml:lang="fr">Index du fichier de formes « ESRI »</comment>
     <comment xml:lang="gl">Índice de ficheiro shapefile de ESRI</comment>
     <comment xml:lang="he">מפתח קובץ צורה של ESRI</comment>
+    <comment xml:lang="hu">ESRI alakzatfájlindex</comment>
     <comment xml:lang="id">Indeks Shapefile ESRI</comment>
     <comment xml:lang="is">ESRI Shapefile-atriðaskrá</comment>
     <comment xml:lang="it">Indice Shapefile ESRI</comment>
