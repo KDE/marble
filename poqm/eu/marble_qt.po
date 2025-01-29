@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2025-01-25 09:18+0100\n"
+"PO-Revision-Date: 2025-01-27 19:10+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -7312,12 +7312,16 @@ msgstr ""
 msgctxt "QObject|"
 msgid "Could not convert <maximum> child text content to integer. Was: '%1'"
 msgstr ""
+"Ezin izan du <maximum> ume-testuaren edukia zenbaki oso bihurtu. Hau izan "
+"da: '%1'"
 
 #: src/lib/marble/geodata/handlers/dgml/DgmlMinimumTagHandler.cpp:35
 #, qt-format
 msgctxt "QObject|"
 msgid "Could not convert <minimum> child text content to integer. Was: '%1'"
 msgstr ""
+"Ezin izan du <minimum> ume-testuaren edukia zenbaki oso bihurtu. Hau izan "
+"da: '%1'"
 
 #: src/lib/marble/geodata/parser/GeoParser.cpp:86
 #, qt-format
@@ -7609,7 +7613,7 @@ msgstr ""
 #: src/lib/marble/MapViewWidget.cpp:155
 msgctxt "Marble::MapViewWidget|"
 msgid "Perspective Globe view"
-msgstr ""
+msgstr "Perspektiba Globo ikuspegia"
 
 #: src/lib/marble/MapViewWidget.cpp:611
 msgctxt "Marble::MapViewWidget|"
@@ -8855,11 +8859,13 @@ msgid ""
 "<p>Guillaume Martres, <a href=\"mailto:smarter@ubuntu.com\">smarter@ubuntu."
 "com</a><br /><i>Project: Visualization of Satellite Orbits</i></p>"
 msgstr ""
+"<p>Guillaume Martres, <a href=\"mailto:smarter@ubuntu.com\">smarter@ubuntu."
+"com</a><br /><i>Proiektua: Satelite-orbitak bistaratzea</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:149
 msgctxt "QObject|"
 msgid "<b>Google Code-in</b>"
-msgstr ""
+msgstr "<b>Google Code-in</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:150
 msgctxt "QObject|"
@@ -8867,6 +8873,8 @@ msgid ""
 "<p> The Marble Team would like to thank its members who participated in the "
 "Google Code-in for their successful work on Marble:</p>"
 msgstr ""
+"<p>Marble taldeak eskerrak eman nahi dizkie «Google Code-in»ean parte hartu "
+"duten kideei, Marble-n egindako lan arrakastatsuagatik:</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:153
 #: src/lib/marble/MarbleAboutDialog.cpp:159
@@ -8995,6 +9003,8 @@ msgid ""
 "<p> The Marble Team would like to thank its members who participated in the "
 "Google Summer of Code for their successful work on Marble:</p>"
 msgstr ""
+"<p>Marble taldeak eskerrak eman nahi dizkie Google Summer of Code»ean parte "
+"hartu duten kideei, Marble-n egindako lan arrakastatsuagatik:</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:176
 msgctxt "QObject|"
@@ -9440,6 +9450,11 @@ msgid ""
 "openclipart.org</a> and reworked them. All flags are under the public domain "
 "(see comments inside the svg files).</p>"
 msgstr ""
+"<p><i>Munduko banderak</i><br />Banderak Wikipediatik hartu dira (<a href="
+"\"https://www.wikipedia.org\">https://www.wikipedia.org</a>) zeinek aldi "
+"berean <a href=\"https://www.openclipart.org\">https://www.openclipart.org</"
+"a>en azpimultzo bat hartu eta berregin egin zituen. Bandera guztiak domeinu "
+"publikoaren pean daude (ikusi svg fitxategien barruko iruzkinak).</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:334
 msgctxt "QObject|"
@@ -9454,6 +9469,10 @@ msgid ""
 "(1991)<a href=\"https://heasarc.gsfc.nasa.gov/W3Browse/star-catalog/bsc5p."
 "html\"> https://heasarc.gsfc.nasa.gov</a></p>"
 msgstr ""
+"<p><i>The Bright Star Catalogue</i><br />5. argitalpen berrikusia "
+"(Aurretiazko bertsioa) Hoffleit D., Warren Jr W.H., Astronomical Data "
+"Center, NSSDC/ADC (1991)<a href=\"https://heasarc.gsfc.nasa.gov/W3Browse/"
+"star-catalog/bsc5p.html\"> https://heasarc.gsfc.nasa.gov</a></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:366
 #, qt-format
