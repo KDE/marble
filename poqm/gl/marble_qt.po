@@ -10053,7 +10053,7 @@ msgstr ""
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:58
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Keep Planet Axis Vertically"
-msgstr "Manter vertical o eixo do planeta"
+msgstr "Manter vertical o eixe do planeta"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:63
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10195,7 +10195,7 @@ msgstr "Arriba"
 #: src/lib/marble/MarbleNavigator.ui:65
 msgctxt "MarbleNavigator|"
 msgid "Tilts the globe's axis towards the user."
-msgstr "Inclina o eixo de rotación da terra cara ao usuario."
+msgstr "Inclina o eixe de rotación da terra cara ao usuario."
 
 #: src/lib/marble/MarbleNavigator.ui:68 src/lib/marble/MarbleNavigator.ui:84
 #: src/lib/marble/MarbleNavigator.ui:103 src/lib/marble/MarbleNavigator.ui:122
@@ -10213,7 +10213,7 @@ msgstr "Esquerda"
 #: src/lib/marble/MarbleNavigator.ui:81
 msgctxt "MarbleNavigator|"
 msgid "Rotates the globe counterclockwise around its axis."
-msgstr "Rotar o globo en sentido antihorario arredor do seu eixo."
+msgstr "Rotar o globo en sentido antihorario arredor do seu eixe."
 
 #: src/lib/marble/MarbleNavigator.ui:97
 msgctxt "MarbleNavigator|"
@@ -10239,7 +10239,7 @@ msgstr "Dereita"
 #: src/lib/marble/MarbleNavigator.ui:119
 msgctxt "MarbleNavigator|"
 msgid "Rotates the globe clockwise around its axis."
-msgstr "Rotar a terra en sentido horario arredor do seu eixo."
+msgstr "Rotar a terra en sentido horario arredor do seu eixe."
 
 #: src/lib/marble/MarbleNavigator.ui:135
 msgctxt "MarbleNavigator|"
@@ -10249,7 +10249,7 @@ msgstr "Abaixo"
 #: src/lib/marble/MarbleNavigator.ui:138
 msgctxt "MarbleNavigator|"
 msgid "Tilts the globe's axis away from the user."
-msgstr "Inclina o eixo de rotación da Terra afastándoo do usuario."
+msgstr "Inclina o eixe de rotación da Terra afastándoo do usuario."
 
 #: src/lib/marble/MarbleNavigator.ui:151
 msgctxt "MarbleNavigator|"

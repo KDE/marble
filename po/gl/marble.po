@@ -771,7 +771,7 @@ msgstr "O último directorio aberto mediante Ficheiro->Abrir."
 #: marble.kcfg:179
 #, kde-format
 msgid "The behaviour of the planet's axis on mouse dragging."
-msgstr "O comportamento do eixo do planeta ao arrastrar o rato."
+msgstr "O comportamento do eixe do planeta ao arrastrar o rato."
 
 #. i18n: ectx: label, entry, group (Navigation)
 #: marble.kcfg:187
