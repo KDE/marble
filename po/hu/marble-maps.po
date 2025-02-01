@@ -3,25 +3,25 @@
 #
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2012.
 # Balázs Úr <urbalazs@gmail.com>, 2012, 2013, 2014.
+# SPDX-FileCopyrightText: 2025 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-24 02:29+0000\n"
-"PO-Revision-Date: 2014-01-22 22:32+0100\n"
-"Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
+"PO-Revision-Date: 2025-01-31 21:15+0100\n"
+"Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Lokalize 24.12.1\n"
 "X-Qt-Contexts: true\n"
 
 #: Bookmarks.qml:20
-#, fuzzy, kde-format
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "Könyvjelzők"
@@ -29,246 +29,219 @@ msgstr "Könyvjelzők"
 #: Bookmarks.qml:69
 #, kde-format
 msgid "Your bookmarks will appear here."
-msgstr ""
+msgstr "A könyvjelzői itt fognak megjelenni."
 
 #. i18n: ectx: label, entry (MapThemeId), group (General)
 #: config.kcfg:14
 #, kde-format
 msgid "The marble theme id"
-msgstr ""
+msgstr "A Marble témaazonosító"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:20
-#, fuzzy, kde-format
-#| msgid "Routing Profile - Marble"
+#, kde-format
 msgid "Routing profile"
-msgstr "Útválasztás profil - Marble"
+msgstr "Útválasztás profil"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:23
-#, fuzzy, kde-format
-#| msgid "Clear"
+#, kde-format
 msgid "Car"
-msgstr "Törlés"
+msgstr "Autó"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:26 ProfileSelectorMenu.qml:134
-#, fuzzy, kde-format
-#| msgid "Bicycle"
+#, kde-format
 msgid "Bicycle"
 msgstr "Kerékpár"
 
 #. i18n: ectx: label, entry (Profile), group (Routing)
 #: config.kcfg:29 ProfileSelectorMenu.qml:144
-#, fuzzy, kde-format
-#| msgid "Pedestrian"
+#, kde-format
 msgid "Pedestrian"
-msgstr "Gyalog"
+msgstr "Gyalogos"
 
 #: CurrentPosition.qml:54
-#, fuzzy, kde-format
-#| msgid "Current Location"
+#, kde-format
 msgctxt "@option:check"
 msgid "Follow Current Position"
-msgstr "Jelenlegi hely"
+msgstr "Jelenlegi pozíció követése"
 
 #: main.cpp:44 MainScreen.qml:21 MainScreen.qml:190
-#, fuzzy, kde-format
-#| msgid "Manage Bookmarks"
+#, kde-format
 msgid "Marble Maps"
-msgstr "Könyvjelzők kezelése"
+msgstr "Marble Térkép"
 
 #: main.cpp:46
-#, fuzzy, kde-format
-#| msgid "&Edit Map"
+#, kde-format
 msgid "Maps"
-msgstr "Térkép sz&erkesztése"
+msgstr "Térképek"
 
 #: main.cpp:48
 #, kde-format
 msgid "© KDE Community"
-msgstr ""
+msgstr "© A KDE közösség"
 
 #: main.cpp:54
 #, kde-format
 msgid "Carl Schwan"
-msgstr ""
+msgstr "Carl Schwan"
 
 #: main.cpp:55
-#, fuzzy, kde-format
-#| msgid "<b>Developers</b>"
+#, kde-format
 msgid "Developer"
-msgstr "<b>Fejlesztők</b>"
+msgstr "Fejlesztő"
 
 #: main.cpp:60
-#, fuzzy, kde-format
-#| msgid "Yours"
+#, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Yours"
+msgstr "Kiszel Kristóf"
 
 #: main.cpp:60
-#, fuzzy, kde-format
-#| msgid "Address Details"
+#, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "Cím részletek"
+msgstr "ulysses@fsf.hu"
 
 #: MainScreen.qml:87
-#, fuzzy, kde-format
-#| msgid "Transport"
+#, kde-format
 msgid "Public Transport"
-msgstr "Szállítás"
+msgstr "Tömegközlekedés"
 
 #: MainScreen.qml:102
 #, kde-format
 msgid "Outdoor Activities"
-msgstr ""
+msgstr "Szabadtéri tevékenységek"
 
 #: MainScreen.qml:114
 #, kde-format
 msgctxt "@action:button"
 msgid "Accessibility"
-msgstr ""
+msgstr "Akadálymentesítés"
 
 #: MainScreen.qml:123
-#, fuzzy, kde-format
-#| msgid "About"
+#, kde-format
 msgctxt "@action:button"
 msgid "About"
 msgstr "Névjegy"
 
 #: MainScreen.qml:134
-#, fuzzy, kde-format
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@action:button"
 msgid "Bookmarks"
 msgstr "Könyvjelzők"
 
 #: MainScreen.qml:145
-#, fuzzy, kde-format
-#| msgid "New Profile"
+#, kde-format
 msgctxt "@action:button"
 msgid "Layer Options"
-msgstr "Új profil"
+msgstr "Rétegbeállítások"
 
 #: MainScreen.qml:156
-#, fuzzy, kde-format
-#| msgid "New Profile"
+#, kde-format
 msgctxt "@action:button"
 msgid "Theme Options"
-msgstr "Új profil"
+msgstr "Témabeállítások"
 
 #: MainScreen.qml:167
-#, fuzzy, kde-format
-#| msgid "Routing"
+#, kde-format
 msgid "Routing"
 msgstr "Útválasztás"
 
 #: MainScreen.qml:457
-#, fuzzy, kde-format
-#| msgid "%1 km"
+#, kde-format
 msgid "%1 km"
 msgstr "%1 km"
 
 #: NavigationInfoBar.qml:20
-#, fuzzy, kde-format
-#| msgid "%1 km"
+#, kde-format
 msgctxt "distance in km"
 msgid "%1 km"
 msgstr "%1 km"
 
 #: NavigationInfoBar.qml:22
-#, fuzzy, kde-format
-#| msgid "%1 m"
+#, kde-format
 msgctxt "distance in m"
 msgid "%1 m"
 msgstr "%1 m"
 
 #: NavigationInfoBar.qml:24
-#, fuzzy, kde-format
-#| msgid "%1 m"
+#, kde-format
 msgctxt "distance in m with decimals"
 msgid "%1 m"
 msgstr "%1 m"
 
 #: Options.qml:20
-#, fuzzy, kde-format
-#| msgid "New Profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "Layer Options"
-msgstr "Új profil"
+msgstr "Rétegbeállítások"
 
 #: Options.qml:23
-#, fuzzy, kde-format
-#| msgid "Transport"
+#, kde-format
 msgctxt "@title:group"
 msgid "Public Transport Layers"
-msgstr "Szállítás"
+msgstr "Tömegközlekedési rétegek"
 
 #: Options.qml:28
-#, fuzzy, kde-format
-#| msgid "rain"
+#, kde-format
 msgctxt "@option:check"
 msgid "Train"
-msgstr "eső"
+msgstr "Vonat"
 
 #: Options.qml:35
 #, kde-format
 msgctxt "@option:check"
 msgid "Subway"
-msgstr ""
+msgstr "Földalatti"
 
 #: Options.qml:42
-#, fuzzy, kde-format
-#| msgid "tram stop"
+#, kde-format
 msgctxt "@option:check"
 msgid "Tram"
-msgstr "villamosmegálló"
+msgstr "Villamos"
 
 #: Options.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Bus"
-msgstr ""
+msgstr "Busz"
 
 #: Options.qml:56
 #, kde-format
 msgctxt "@option:check"
 msgid "Trolley Bus"
-msgstr ""
+msgstr "Trolibusz"
 
 #: Options.qml:64
 #, kde-format
 msgid "Outdoor Activities Layers"
-msgstr ""
+msgstr "Szabadtéri tevékenységek rétegek"
 
 #: Options.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Walkways"
-msgstr ""
+msgstr "Járdák"
 
 #: Options.qml:76
-#, fuzzy, kde-format
-#| msgid "Open Route"
+#, kde-format
 msgctxt "@option:check"
 msgid "Hiking Routes"
-msgstr "Útvonal megnyitása"
+msgstr "Turistautak"
 
 #: Options.qml:83
-#, fuzzy, kde-format
-#| msgid "bicycle rental"
+#, kde-format
 msgctxt "@option:check"
 msgid "Bicycle Routes"
-msgstr "biciklikölcsönző"
+msgstr "Kerékpárutak"
 
 #: Options.qml:90
-#, fuzzy, kde-format
-#| msgid "Mountain"
+#, kde-format
 msgctxt "@option:check"
 msgid "Mountainbike Routes"
-msgstr "Hegység"
+msgstr "Hegyikerékpáros utak"
 
 #: Options.qml:97
 #, fuzzy, kde-format
@@ -284,44 +257,39 @@ msgid "Bridleways"
 msgstr ""
 
 #: PlacemarkDialog.qml:48
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "placeholder"
 msgid "No Name"
-msgstr "Név"
+msgstr "Névtelen"
 
 #: PlacemarkDialog.qml:168
-#, fuzzy, kde-format
-#| msgid "Tags:"
+#, kde-format
 msgctxt "@title:group"
 msgid "Tags:"
 msgstr "Címkék:"
 
 #: ProfileSelectorMenu.qml:124
-#, fuzzy, kde-format
-#| msgid "Car (fastest)"
+#, kde-format
 msgid "Car (fastest)"
 msgstr "Autó (leggyorsabb)"
 
 #: RouteEditorPage.qml:19
-#, fuzzy, kde-format
-#| msgid "Routing"
+#, kde-format
 msgctxt "@title"
 msgid "Routing"
 msgstr "Útválasztás"
 
 #: RouteEditorPage.qml:102
-#, fuzzy, kde-format
-#| msgid "Temperature: %1<br>"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Departure:"
-msgstr "Hőmérséklet: %1<br>"
+msgstr "Indulás:"
 
 #: RouteEditorPage.qml:104
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Arrival:"
-msgstr ""
+msgstr "Érkezés:"
 
 #: RouteEditorPage.qml:106
 #, kde-format
@@ -333,26 +301,23 @@ msgstr ""
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Alternatives:"
-msgstr ""
+msgstr "Alternatívák:"
 
 #: SettingsDialog.qml:48
-#, fuzzy, kde-format
-#| msgid "Settings"
+#, kde-format
 msgid "Network Settings"
-msgstr "Beállítások"
+msgstr "Hálózati beállítások"
 
 #: SettingsDialog.qml:53
-#, fuzzy, kde-format
-#| msgid "Download Region"
+#, kde-format
 msgid "Download Maps via WLAN only"
-msgstr "Régió letöltése"
+msgstr "Térképek letöltése csak WLAN kapcsolaton"
 
 #: ThemeConfigPage.qml:19
-#, fuzzy, kde-format
-#| msgid "theme park"
+#, kde-format
 msgctxt "@title:window"
 msgid "Themes"
-msgstr "vidámpark"
+msgstr "Témák"
 
 #, fuzzy
 #~| msgid "Moon"

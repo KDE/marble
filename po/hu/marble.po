@@ -5,30 +5,31 @@
 # Kiszel Kristóf <ulysses@kubuntu.org>, 2010.
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2010, 2012.
 # Balázs Úr <urbalazs@gmail.com>, 2012, 2013, 2014.
+# SPDX-FileCopyrightText: 2025 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-25 00:37+0000\n"
-"PO-Revision-Date: 2014-01-22 22:18+0100\n"
-"Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
+"PO-Revision-Date: 2025-01-31 21:10+0100\n"
+"Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Lokalize 24.12.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Úr Balázs"
+msgstr "Kiszel Kristóf,Úr Balázs"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "urbalazs@gmail.com"
+msgstr "ulysses@fsf.hu,ur.balazs@fsf.hu"
 
 #: kdemain.cpp:84
 #, kde-format
@@ -41,10 +42,9 @@ msgid "A World Atlas."
 msgstr "Egy világatlasz."
 
 #: kdemain.cpp:88
-#, fuzzy, kde-format
-#| msgid "(c) 2007-2014"
+#, kde-format
 msgid "(c) 2007-%1"
-msgstr "© 2007-2014"
+msgstr "© 2007-%1."
 
 #: kdemain.cpp:93 kdemain.cpp:208
 #, kde-format
@@ -54,7 +54,7 @@ msgstr "Torsten Rahn"
 #: kdemain.cpp:93
 #, kde-format
 msgid "Developer and Original Author"
-msgstr "Fő fejlesztő és eredeti szerző"
+msgstr "Fejlesztő és eredeti szerző"
 
 #: kdemain.cpp:94
 #, kde-format
@@ -74,7 +74,7 @@ msgstr "Thibaut Gridel"
 #: kdemain.cpp:95
 #, kde-format
 msgid "Geodata"
-msgstr "Geoadat"
+msgstr "Geoadatok"
 
 #: kdemain.cpp:96
 #, kde-format
@@ -89,7 +89,7 @@ msgstr "OpenStreetMap integráció, OSM névkereső, letöltéskezelés"
 #: kdemain.cpp:97
 #, kde-format
 msgid "Florian E&szlig;er"
-msgstr "Florian Eßer"
+msgstr "Florian E&szlig;er"
 
 #: kdemain.cpp:97
 #, kde-format
@@ -204,7 +204,7 @@ msgstr "Henry de Valence"
 #: kdemain.cpp:111
 #, kde-format
 msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
-msgstr "Fő fejlesztő: Marble Runners, World-Clock Plasmoid"
+msgstr "Fő fejlesztő: Marble Runners, Világóra plasmoid"
 
 #: kdemain.cpp:112
 #, kde-format
@@ -224,7 +224,7 @@ msgstr "Harshit Jain"
 #: kdemain.cpp:113
 #, kde-format
 msgid "Planet filter"
-msgstr "Bolygó szűrő"
+msgstr "Bolygószűrő"
 
 #: kdemain.cpp:114
 #, kde-format
@@ -234,7 +234,7 @@ msgstr "Simon Edwards"
 #: kdemain.cpp:114
 #, kde-format
 msgid "Marble Python Bindings"
-msgstr "Marble Python hozzárendelés"
+msgstr "Marble Python kötések"
 
 #: kdemain.cpp:115
 #, kde-format
@@ -262,7 +262,7 @@ msgid ""
 "ESA Summer of Code in Space 2012 Project: Visualization of planetary "
 "satellites"
 msgstr ""
-"ESA Summer of Code in Space  2012 projekt: A műholdak pályájának képi "
+"ESA Summer of Code in Space  2012 projekt: A bolygóműholdak képi "
 "megjelenítése"
 
 #: kdemain.cpp:124
@@ -270,8 +270,7 @@ msgstr ""
 msgid ""
 "ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
 msgstr ""
-"ESA Summer of Code in Space  2011 projekt: A műholdak pályájának képi "
-"megjelenítése"
+"ESA Summer of Code in Space  2011 projekt: A műholdpályák képi megjelenítése"
 
 #: kdemain.cpp:129
 #, kde-format
@@ -619,6 +618,8 @@ msgid ""
 "Special thanks for providing an important source of inspiration by creating "
 "Marble's predecessor \"Kartographer\"."
 msgstr ""
+"Külön köszönet a Marble elődje, a „Kartographer” elkészítése által nyújtott "
+"fontos inspiráció miatt."
 
 #: kdemain.cpp:238
 #, kde-format
@@ -628,7 +629,7 @@ msgstr "Hibakereső kimenet engedélyezése"
 #: kdemain.cpp:241
 #, kde-format
 msgid "Display OSM placemarks according to the level selected"
-msgstr ""
+msgstr "OSM helymegjelölések megjelenítése a kiválasztott szintnek megfelelően"
 
 #: kdemain.cpp:243
 #, kde-format
@@ -651,10 +652,10 @@ msgid "Show time spent in each layer"
 msgstr "Az eltöltött idő megjelenítése minden rétegen"
 
 #: kdemain.cpp:252
-#, fuzzy, kde-format
-#| msgid "Use a different directory which contains map data"
+#, kde-format
 msgid "Use a different directory <directory> which contains map data."
-msgstr "Eltérő könyvtár használata, amely térképadatot tartalmaz"
+msgstr ""
+"Eltérő könyvtár <directory> használata, amely térképadatokat tartalmaz."
 
 #: kdemain.cpp:255
 #, kde-format
@@ -677,16 +678,14 @@ msgid "Use the interface optimized for high resolutions"
 msgstr "Használja a nagy felbontásra optimalizált felületet"
 
 #: kdemain.cpp:261
-#, fuzzy, kde-format
-#| msgid "Show map at given lat lon coordinates"
+#, kde-format
 msgid "Show map at given lat lon <coordinates>"
-msgstr "Térkép megjelenítése a megadott szélesség, hosszúság koordinátákon"
+msgstr "Térkép megjelenítése a megadott szélesség, hosszúság <coordinates>"
 
 #: kdemain.cpp:263
-#, fuzzy, kde-format
-#| msgid "Show map at given geo uri"
+#, kde-format
 msgid "Show map at given geo <uri>"
-msgstr "Térkép megjelenítése a megadott földrajzi URI-n"
+msgstr "Térkép megjelenítése a megadott földrajzi <uri>-n"
 
 #: kdemain.cpp:265
 #, kde-format
@@ -694,12 +693,10 @@ msgid "Set the distance of the observer to the globe (in km)"
 msgstr "Távolság megadása a megfigyelő és a földgömb között (km-ben)"
 
 #: kdemain.cpp:267
-#, fuzzy, kde-format
-#| msgid "Use map id (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
+#, kde-format
 msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgstr ""
-"Térkép azonosító használata (például „earth/openstreetmap/openstreetmap."
-"dgml”)"
+"Térkép <id> használata (például „earth/openstreetmap/openstreetmap.dgml”)"
 
 #: kdemain.cpp:269
 #, kde-format
@@ -746,7 +743,7 @@ msgstr "Az animált térképek megrajzolásának minősége."
 #: marble.kcfg:146
 #, kde-format
 msgid "The localization of the labels."
-msgstr "A címkéké honosítása."
+msgstr "A címkék honosítása."
 
 #. i18n: ectx: label, entry (mapFont), group (View)
 #: marble.kcfg:155
@@ -770,7 +767,7 @@ msgstr "A bolygók tengelyének viselkedése az egérrel való húzáskor."
 #: marble.kcfg:187
 #, kde-format
 msgid "The location shown on application startup."
-msgstr "Az alkalmazás indításkor megjelenített hely."
+msgstr "Az alkalmazás indításakor megjelenített hely."
 
 #. i18n: ectx: label, entry, group (Navigation)
 #: marble.kcfg:201
@@ -857,7 +854,7 @@ msgstr "Magasság: %1"
 #: marble_part.cpp:103
 #, kde-format
 msgid "Tile Zoom Level: %1"
-msgstr "Csempe nagyítási szint: %1"
+msgstr "Csempenagyítási szint: %1"
 
 #: marble_part.cpp:104
 #, kde-format
@@ -870,12 +867,13 @@ msgid ""
 "Sorry, unable to open '%1':\n"
 "'%2'"
 msgstr ""
+"A(z) „%1” nem nyitható meg:\n"
+"„%2”"
 
 #: marble_part.cpp:163
-#, fuzzy, kde-format
-#| msgid "File not accessible"
+#, kde-format
 msgid "File not readable"
-msgstr "A fájl nem érhető el"
+msgstr "A fájl nem olvasható"
 
 #: marble_part.cpp:211
 #, kde-format
@@ -885,7 +883,7 @@ msgstr "Virtuális földgömb"
 #: marble_part.cpp:224
 #, kde-format
 msgid "Sorry, unable to open '%1'. The file is not accessible."
-msgstr "Elnézést, „%1” nem nyitható meg. A fájl nem érhető el."
+msgstr "A(z) „%1” nem nyitható meg. A fájl nem érhető el."
 
 #: marble_part.cpp:224
 #, kde-format
@@ -895,18 +893,16 @@ msgstr "A fájl nem érhető el"
 #: marble_part.cpp:245
 #, kde-format
 msgid "All Supported Files"
-msgstr "Összes támogatott fájltípus"
+msgstr "Minden támogatott fájltípus"
 
 #: marble_part.cpp:251
-#, fuzzy, kde-format
-#| msgid "Open File"
+#, kde-format
 msgctxt "@title:window"
 msgid "Open File"
 msgstr "Fájl megnyitása"
 
 #: marble_part.cpp:267
-#, fuzzy, kde-format
-#| msgid "Export Map"
+#, kde-format
 msgctxt "@title:window"
 msgid "Export Map"
 msgstr "Térkép exportálása"
@@ -925,7 +921,7 @@ msgstr "Marble"
 #: marble_part.cpp:279
 #, kde-format
 msgid "An error occurred while trying to save the file.\n"
-msgstr "Hiba történt a fájl mentése során.\n"
+msgstr "Hiba történt a fájl mentésére tett kísérlet során.\n"
 
 #: marble_part.cpp:461
 #, kde-format
@@ -1035,40 +1031,38 @@ msgstr "Megjeleníti vagy elrejti a Nap árnyékát"
 #: marble_part.cpp:799
 #, kde-format
 msgid "Show sun icon on the Sub-Solar Point"
-msgstr ""
+msgstr "Nap ikon megjelenítése a Nap alatti ponton"
 
 #: marble_part.cpp:801
 #, kde-format
 msgid "Hide sun icon on the Sub-Solar Point"
-msgstr ""
+msgstr "Nap ikon elrejtése a Nap alatti ponton"
 
 #: marble_part.cpp:802
 #, kde-format
 msgid "Show sun icon on the sub-solar point"
-msgstr ""
+msgstr "Nap ikon megjelenítése a Nap alatti ponton"
 
 #: marble_part.cpp:806
 #, kde-format
 msgid "Lock Globe to the Sub-Solar Point"
-msgstr ""
+msgstr "Földgömb rögzítése a Nap alatti ponthoz"
 
 #: marble_part.cpp:808
 #, kde-format
 msgid "Unlock Globe to the Sub-Solar Point"
-msgstr ""
+msgstr "Földgömb feloldása a Nap alatti pontról"
 
 #: marble_part.cpp:809
 #, kde-format
 msgid "Lock globe to the sub-solar point"
-msgstr ""
+msgstr "Földgömb rögzítése a Nap alatti ponthoz"
 
 #: marble_part.cpp:823
-#, fuzzy, kde-format
-#| msgctxt "Add Bookmark"
-#| msgid "&Add Bookmark"
+#, kde-format
 msgctxt "Add Bookmark"
 msgid "Add &Bookmark..."
-msgstr "Könyvjelző hozzá&adása"
+msgstr "Könyvjelző hozzá&adása…"
 
 #: marble_part.cpp:830
 #, kde-format
@@ -1087,40 +1081,36 @@ msgid "&Set Home Location"
 msgstr "Otthoni hely &beállítása"
 
 #: marble_part.cpp:844
-#, fuzzy, kde-format
-#| msgctxt "Manage Bookmarks"
-#| msgid "&Manage Bookmarks"
+#, kde-format
 msgctxt "Manage Bookmarks"
 msgid "&Manage Bookmarks..."
-msgstr "Kö&nyvjelzők kezelése"
+msgstr "Kö&nyvjelzők kezelése…"
 
 #: marble_part.cpp:853
-#, fuzzy, kde-format
-#| msgctxt "Edit the map in an external application"
-#| msgid "&Edit Map"
+#, kde-format
 msgctxt "Edit the map in an external application"
 msgid "&Edit Map..."
-msgstr "Térkép sz&erkesztése"
+msgstr "Térkép sz&erkesztése…"
 
 #: marble_part.cpp:859
 #, kde-format
 msgid "&Record Movie"
-msgstr ""
+msgstr "Film &felvétele"
 
 #: marble_part.cpp:861
 #, kde-format
 msgid "Records a movie of the globe"
-msgstr ""
+msgstr "Film felvétele a földgömbről"
 
 #: marble_part.cpp:866
 #, kde-format
 msgid "&Stop Recording"
-msgstr ""
+msgstr "Felvétel leállítá&sa"
 
 #: marble_part.cpp:868
 #, kde-format
 msgid "Stop recording a movie of the globe"
-msgstr ""
+msgstr "A földgömb filmfelvételének leállítása"
 
 #: marble_part.cpp:1203
 #, kde-format
@@ -1231,10 +1221,9 @@ msgstr "&Panelek"
 
 #. i18n: ectx: Menu (viewSize)
 #: marble_part.rc:65
-#, fuzzy, kde-format
-#| msgid "&View"
+#, kde-format
 msgid "&View Size"
-msgstr "&Nézet"
+msgstr "&Nézetméret"
 
 #. i18n: ectx: Menu (bookmarks)
 #: marble_part.rc:73 marbleui.rc:29
