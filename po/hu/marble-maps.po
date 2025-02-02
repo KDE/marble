@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-24 02:29+0000\n"
-"PO-Revision-Date: 2025-01-31 21:15+0100\n"
+"PO-Revision-Date: 2025-02-01 21:52+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -244,17 +244,16 @@ msgid "Mountainbike Routes"
 msgstr "Hegyikerékpáros utak"
 
 #: Options.qml:97
-#, fuzzy, kde-format
-#| msgid "Save Route"
+#, kde-format
 msgctxt "@option:check"
 msgid "Inline Skating Routes"
-msgstr "Útvonal mentése"
+msgstr "Görkorcsolyás útvonalak"
 
 #: Options.qml:104
 #, kde-format
 msgctxt "@option:check"
 msgid "Bridleways"
-msgstr ""
+msgstr "Lovaglóutak"
 
 #: PlacemarkDialog.qml:48
 #, kde-format
@@ -295,7 +294,7 @@ msgstr "Érkezés:"
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Waypoint:"
-msgstr ""
+msgstr "Útvonalpont:"
 
 #: RouteEditorPage.qml:194
 #, kde-format
