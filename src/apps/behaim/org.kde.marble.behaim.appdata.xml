@@ -21,6 +21,7 @@
   <name xml:lang="fi">Behaimin karttapallo</name>
   <name xml:lang="fr">Behaim Globe</name>
   <name xml:lang="gl">Globo terráqueo de Behaim</name>
+  <name xml:lang="hu">Behaim földgömb</name>
   <name xml:lang="id">Globe Behaim</name>
   <name xml:lang="is">Behaim-hnöttur</name>
   <name xml:lang="it">Globo di Behaim</name>
@@ -53,6 +54,7 @@
   <summary xml:lang="fi">Martin Behaimin Erdapfel</summary>
   <summary xml:lang="fr">Martin Behaim Erdapfel</summary>
   <summary xml:lang="gl">Erdapfel de Martin Behaim.</summary>
+  <summary xml:lang="hu">Martin Behaim földgömbje</summary>
   <summary xml:lang="id">Erdapfel Martin Behaim</summary>
   <summary xml:lang="is">Erdapfel frá Martin Behaim</summary>
   <summary xml:lang="it">Erdapfel di Martin Behaim</summary>
@@ -86,6 +88,7 @@
     <p xml:lang="fi">Vanhin tunnettu karttapallo. Martin Behaim yhteistyökumppaneineen loi sen noin vuonna 1492 samoihin aikoihin Kolumbuksen ensimmäisen länteen suuntautuneen merimatkan kanssa.</p>
     <p xml:lang="fr">Le plus ancien globe existant de la Terre. Martin Behaim et ses collaborateurs ont créé ce globe aux environs de 1492, au moment de la première traversée de Christophe Colomb vers l'Ouest.</p>
     <p xml:lang="gl">O globo terráqueo máis antigo. Martin Behaim e o seu equipo creárono en 1492, no ano da primeira viaxe de Colón por mar ao oeste.</p>
+    <p xml:lang="hu">A Föld legrégebbi létező földgömbje. Martin Behaim és munkatársai 1492 körül készítették a földgömböt, Kolumbusz első nyugati tengeri útjának idején.</p>
     <p xml:lang="id">Bola dunia tertua yang ada di Bumi. Martin Behaim dan kolaboratornya menciptakan dunia sekitar 1492 pada saat perjalanan laut pertama Columbus ke barat.</p>
     <p xml:lang="is">Elsta hnattlíkanið af Jörðinni sem til er. Martin Behaim og samstarfsmenn hans útbjuggu þetta hnattlíkan árið 1492 á svipuðum tíma og Kólumbus fór fyrst vestur yfir úthafið.</p>
     <p xml:lang="it">Il più antico globo esistente della Terra. Martin Behaim e i suoi collaboratori crearono il globo intorno al 1492 all'epoca del primo viaggio per mare di Colombo verso ovest.</p>
@@ -155,6 +158,7 @@
       <caption xml:lang="fi">Suoraan alkuperäisestä Behaim-karttapallosta otetut digikuvat.</caption>
       <caption xml:lang="fr">Images numériques prises directement à partir du globe original de Behaim.</caption>
       <caption xml:lang="gl">Imaxes dixitais tomadas directamente do globo terráqueo orixinal de Behaim.</caption>
+      <caption xml:lang="hu">Közvetlenül az eredeti Behaim földgömbről készült digitális képek.</caption>
       <caption xml:lang="it">Immagini digitali prese direttamente dall'originale globo di Behaim.</caption>
       <caption xml:lang="ka">ციფრული გამოსახულებები აღებულია პირდაპირ ორიგინალური ბეჰაიმის გლობუსიდან.</caption>
       <caption xml:lang="lv">Digitāls attēls, kas ir tiešā veidā iegūts no Behaima globusa oriģināla</caption>
@@ -181,6 +185,7 @@
       <caption xml:lang="fi">Friedrich Wilhem Ghillanyn vuonna 1853 tekemä (karkea) jäljennös.</caption>
       <caption xml:lang="fr">Une copie (Brute) créé par Friedrich Wilhelm Ghillany en 1853.</caption>
       <caption xml:lang="gl">Un facsímile pouco exacto feito por Friedrich Wilhelm Ghillany en 1853.</caption>
+      <caption xml:lang="hu">Friedrich Wilhelm Ghillany által 1853-ban készített (durva) fakszimile.</caption>
       <caption xml:lang="it">Un facsimile (approssimativo) creato da Friedrich Wilhelm Ghillany nel 1853.</caption>
       <caption xml:lang="ka">(უხეში) ფაქსიმილი, რომელიც შეიქმნა ფრიდრიხ ვილჰელმ გილანის მიერ 1853 წელს.</caption>
       <caption xml:lang="lv">Rupjš faksimils, ko 1853. gadā izveidoja Frīdrihs Vilhelms Gilanī</caption>
@@ -207,6 +212,7 @@
       <caption xml:lang="fi">Ernest George Ravensteinin vuonna 1908 tekemä (karkea) jäljennös.</caption>
       <caption xml:lang="fr">Une copie (Brute) créé par Ernest George Ravenstein en 1908.</caption>
       <caption xml:lang="gl">Un facsímile pouco exacto feito por Ernest George Ravenstein en 1908.</caption>
+      <caption xml:lang="hu">Ernest George Ravenstein által 1908-ban készített (durva) fakszimile.</caption>
       <caption xml:lang="it">Un facsimile (approssimativo) creato da Ernest George Ravenstein nel 1908.</caption>
       <caption xml:lang="ka">(უხეში) ფაქსიმილი, რომელიც შეიქმნა ერნესტ ჯორჯ რავენშტეინის მიერ 1908 წელს.</caption>
       <caption xml:lang="lv">Rupjš faksimils, ko 1908. gadā izveidoja Ernests Georgs Ravenštains.</caption>
