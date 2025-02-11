@@ -11777,12 +11777,9 @@ msgid "Search for '%1'"
 msgstr "Vyhledat '%1'"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:37
-#, fuzzy
-#| msgctxt "OsmRelationManagerWidgetPrivate|"
-#| msgid "Add Relation"
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Audio location"
-msgstr "Přidat vztah"
+msgstr ""
 
 #: src/lib/marble/SoundCueEditWidget.cpp:67
 msgctxt "Marble::SoundCueEditWidget|"
