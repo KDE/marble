@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: marble\n"
+"Project-Id-Version: marble-behaim\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-04 00:36+0000\n"
 "PO-Revision-Date: 2024-10-11 10:59+0200\n"
