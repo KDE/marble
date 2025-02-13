@@ -15,7 +15,7 @@
 # Alois Spitzbart <spitz234@hotmail.com>, 2021.
 msgid ""
 msgstr ""
-"Project-Id-Version: marble_qt\n"
+"Project-Id-Version: marble-maps\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-24 00:37+0000\n"
 "PO-Revision-Date: 2024-07-17 21:30+0200\n"
