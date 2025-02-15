@@ -4,7 +4,7 @@
 # Niklas Laxström <niklas.laxstrom+kdetrans@gmail.com>, 2007, 2012.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016, 2023.
 # Jiri Grönroos <jiri.gronroos+kde@iki.fi>, 2012, 2013.
-# SPDX-FileCopyrightText: 2012, 2015, 2016, 2018, 2020, 2021, 2022, 2023, 2024 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2012, 2015, 2016, 2018, 2020, 2021, 2022, 2023, 2024, 2025 Tommi Nieminen <translator@legisign.org>
 #
 # KDE Finnish translation sprint participants:
 # Author: Artnay
@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-24 02:29+0000\n"
-"PO-Revision-Date: 2024-10-26 10:54+0300\n"
+"PO-Revision-Date: 2025-02-08 10:27+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -299,7 +299,7 @@ msgstr "Saapuminen:"
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Waypoint:"
-msgstr ""
+msgstr "Reittipiste:"
 
 #: RouteEditorPage.qml:194
 #, kde-format
