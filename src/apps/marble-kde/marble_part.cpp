@@ -264,7 +264,7 @@ bool MarblePart::openFile()
 
 void MarblePart::exportMapScreenShot()
 {
-    const QString fileName = QFileDialog::getSaveFileName(widget(), i18nc("@title:window", "Export Map"), QDir::homePath(), i18n("Images *.jpg *.png"));
+    const QString fileName = QFileDialog::getSaveFileName(widget(), i18nc("@title:window", "Export Map"), QDir::homePath(), i18n("Images (*.jpg *.png)"));
 
     if (!fileName.isEmpty()) {
         // Take the case into account where no file format is indicated
