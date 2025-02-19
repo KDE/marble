@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-25 00:37+0000\n"
+"POT-Creation-Date: 2025-02-19 00:38+0000\n"
 "PO-Revision-Date: 2009-11-08 18:25+0530\n"
 "Last-Translator: Danishka Navin <danishka@gmail.com>\n"
 "Language-Team: Sinhala <danishka@gmail.com>\n"
@@ -892,7 +892,7 @@ msgstr ""
 
 #: marble_part.cpp:267
 #, kde-format
-msgid "Images *.jpg *.png"
+msgid "Images (*.jpg *.png)"
 msgstr ""
 
 #: marble_part.cpp:279

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-25 00:37+0000\n"
+"POT-Creation-Date: 2025-02-19 00:38+0000\n"
 "PO-Revision-Date: 2024-09-19 09:12+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -911,8 +911,9 @@ msgid "Export Map"
 msgstr "რუკის გატანა"
 
 #: marble_part.cpp:267
-#, kde-format
-msgid "Images *.jpg *.png"
+#, fuzzy, kde-format
+#| msgid "Images *.jpg *.png"
+msgid "Images (*.jpg *.png)"
 msgstr "გამოსახულებები *.jpg *.png"
 
 #: marble_part.cpp:279

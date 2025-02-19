@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-25 00:37+0000\n"
+"POT-Creation-Date: 2025-02-19 00:38+0000\n"
 "PO-Revision-Date: 2017-09-15 17:30+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -919,8 +919,8 @@ msgstr "Εξαγωγή χάρτη"
 
 #: marble_part.cpp:267
 #, kde-format
-msgid "Images *.jpg *.png"
-msgstr "Εικόνες *.jpg *.png"
+msgid "Images (*.jpg *.png)"
+msgstr "Εικόνες (*.jpg *.png)"
 
 #: marble_part.cpp:279
 #, kde-format
@@ -1252,6 +1252,9 @@ msgstr "Κύρια γραμμή εργαλείων"
 #, kde-format
 msgid "Edit Toolbar"
 msgstr "Επεξεργασία γραμμής εργαλείων"
+
+#~ msgid "Images *.jpg *.png"
+#~ msgstr "Εικόνες *.jpg *.png"
 
 #~ msgid "marble_part"
 #~ msgstr "τμήμα_marble"
@@ -5930,9 +5933,6 @@ msgstr "Επεξεργασία γραμμής εργαλείων"
 
 #~ msgid "Ready"
 #~ msgstr "Έτοιμο"
-
-#~ msgid "Images (*.jpg *.png)"
-#~ msgstr "Εικόνες (*.jpg *.png)"
 
 #~ msgid ""
 #~ "All Supported Files (*.gpx *.kml);;GPS Data (*.gpx);;Google Earth KML (*."

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-25 00:37+0000\n"
+"POT-Creation-Date: 2025-02-19 00:38+0000\n"
 "PO-Revision-Date: 2013-11-01 23:04+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -908,8 +908,9 @@ msgid "Export Map"
 msgstr "Картаны экспорттау"
 
 #: marble_part.cpp:267
-#, kde-format
-msgid "Images *.jpg *.png"
+#, fuzzy, kde-format
+#| msgid "Images *.jpg *.png"
+msgid "Images (*.jpg *.png)"
 msgstr "*.jpg *.png кескіндері"
 
 #: marble_part.cpp:279

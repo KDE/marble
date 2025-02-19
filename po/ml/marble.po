@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-25 00:37+0000\n"
+"POT-Creation-Date: 2025-02-19 00:38+0000\n"
 "PO-Revision-Date: 2019-12-12 21:30+0000\n"
 "Last-Translator: Vivek KJ Pazhedath <vivekkj2004@gmail.com>\n"
 "Language-Team: Swathanthra|സ്വതന്ത്ര Malayalam|മലയാളം Computing|കമ്പ്യൂട്ടിങ്ങ് <smc-"
@@ -893,8 +893,8 @@ msgid "Export Map"
 msgstr "ഭൂപടം &തുറക്കുക..."
 
 #: marble_part.cpp:267
-#, fuzzy, kde-format
-msgid "Images *.jpg *.png"
+#, kde-format
+msgid "Images (*.jpg *.png)"
 msgstr "ചിത്രങ്ങള്‍ (*.jpg *.png)"
 
 #: marble_part.cpp:279
@@ -1227,6 +1227,10 @@ msgstr "പ്രധാന ഉപകരണപട്ട"
 #, fuzzy, kde-format
 msgid "Edit Toolbar"
 msgstr "പ്രധാന ഉപകരണപട്ട"
+
+#, fuzzy
+#~ msgid "Images *.jpg *.png"
+#~ msgstr "ചിത്രങ്ങള്‍ (*.jpg *.png)"
 
 #~ msgid "marble_part"
 #~ msgstr "marble_part"
@@ -4171,9 +4175,6 @@ msgstr "പ്രധാന ഉപകരണപട്ട"
 
 #~ msgid "Ready"
 #~ msgstr "തയ്യാര്‍"
-
-#~ msgid "Images (*.jpg *.png)"
-#~ msgstr "ചിത്രങ്ങള്‍ (*.jpg *.png)"
 
 #~ msgid ""
 #~ "All Supported Files (*.gpx *.kml);;GPS Data (*.gpx);;Google Earth KML (*."

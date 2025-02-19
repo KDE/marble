@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-25 00:37+0000\n"
+"POT-Creation-Date: 2025-02-19 00:38+0000\n"
 "PO-Revision-Date: 2025-01-31 21:10+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -908,8 +908,9 @@ msgid "Export Map"
 msgstr "Térkép exportálása"
 
 #: marble_part.cpp:267
-#, kde-format
-msgid "Images *.jpg *.png"
+#, fuzzy, kde-format
+#| msgid "Images *.jpg *.png"
+msgid "Images (*.jpg *.png)"
 msgstr "Képek *.jpg *.png"
 
 #: marble_part.cpp:279

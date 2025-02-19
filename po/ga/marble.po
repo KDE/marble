@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeedu/marble.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-25 00:37+0000\n"
+"POT-Creation-Date: 2025-02-19 00:38+0000\n"
 "PO-Revision-Date: 2007-06-27 10:27-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -897,8 +897,8 @@ msgstr "Easpórtáil mapa"
 
 #: marble_part.cpp:267
 #, kde-format
-msgid "Images *.jpg *.png"
-msgstr "Íomhánna *.jpg *.png"
+msgid "Images (*.jpg *.png)"
+msgstr "Íomhánna (*.jpg *.png)"
 
 # program name
 #: marble_part.cpp:279
@@ -1237,6 +1237,9 @@ msgstr "Príomhbharra Uirlisí"
 #, kde-format
 msgid "Edit Toolbar"
 msgstr "Cuir an Barra Uirlisí in Eagar"
+
+#~ msgid "Images *.jpg *.png"
+#~ msgstr "Íomhánna *.jpg *.png"
 
 #~ msgid "marble_part"
 #~ msgstr "marble_part"
@@ -4737,9 +4740,6 @@ msgstr "Cuir an Barra Uirlisí in Eagar"
 
 #~ msgid "Ready"
 #~ msgstr "Réidh"
-
-#~ msgid "Images (*.jpg *.png)"
-#~ msgstr "Íomhánna (*.jpg *.png)"
 
 #~ msgid ""
 #~ "All Supported Files (*.gpx *.kml);;GPS Data (*.gpx);;Google Earth KML (*."

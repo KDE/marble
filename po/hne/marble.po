@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-25 00:37+0000\n"
+"POT-Creation-Date: 2025-02-19 00:38+0000\n"
 "PO-Revision-Date: 2009-02-25 13:50+0530\n"
 "Last-Translator: Ravishankar Shrivastava <raviratlami@aol.in>\n"
 "Language-Team: Hindi <kde-i18n-doc@lists.kde.org>\n"
@@ -908,8 +908,8 @@ msgstr "नक्सा निर्यात करव"
 
 #: marble_part.cpp:267
 #, kde-format
-msgid "Images *.jpg *.png"
-msgstr "फोटू *.jpg *.png"
+msgid "Images (*.jpg *.png)"
+msgstr "फोटू (*.jpg *.png)"
 
 #: marble_part.cpp:279
 #, kde-format
@@ -1254,6 +1254,9 @@ msgstr "मुख्य औजार पट्टी"
 #| msgid "Main Toolbar"
 msgid "Edit Toolbar"
 msgstr "मुख्य औजार पट्टी"
+
+#~ msgid "Images *.jpg *.png"
+#~ msgstr "फोटू *.jpg *.png"
 
 #~ msgid "marble_part"
 #~ msgstr "मार्बल_पार्ट"
@@ -5328,9 +5331,6 @@ msgstr "मुख्य औजार पट्टी"
 
 #~ msgid "Ready"
 #~ msgstr "तैयार"
-
-#~ msgid "Images (*.jpg *.png)"
-#~ msgstr "फोटू (*.jpg *.png)"
 
 #~ msgid ""
 #~ "All Supported Files (*.gpx *.kml);;GPS Data (*.gpx);;Google Earth KML (*."

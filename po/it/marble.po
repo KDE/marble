@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-25 00:37+0000\n"
+"POT-Creation-Date: 2025-02-19 00:38+0000\n"
 "PO-Revision-Date: 2022-07-11 15:42+0200\n"
 "Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -916,8 +916,8 @@ msgstr "Esporta mappa"
 
 #: marble_part.cpp:267
 #, kde-format
-msgid "Images *.jpg *.png"
-msgstr "Immagini *.jpg *.png"
+msgid "Images (*.jpg *.png)"
+msgstr "Immagini (*.jpg *.png)"
 
 #: marble_part.cpp:279
 #, kde-format
@@ -1248,6 +1248,9 @@ msgstr "Barra principale"
 #, kde-format
 msgid "Edit Toolbar"
 msgstr "Barra di modifica"
+
+#~ msgid "Images *.jpg *.png"
+#~ msgstr "Immagini *.jpg *.png"
 
 #~ msgid "marble_part"
 #~ msgstr "marble_part"
@@ -5843,9 +5846,6 @@ msgstr "Barra di modifica"
 
 #~ msgid "Ready"
 #~ msgstr "Pronto"
-
-#~ msgid "Images (*.jpg *.png)"
-#~ msgstr "Immagini (*.jpg *.png)"
 
 #~ msgid ""
 #~ "All Supported Files (*.gpx *.kml);;GPS Data (*.gpx);;Google Earth KML (*."

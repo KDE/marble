@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble-gu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-25 00:37+0000\n"
+"POT-Creation-Date: 2025-02-19 00:38+0000\n"
 "PO-Revision-Date: 2009-10-20 20:58+0530\n"
 "Last-Translator: pragnesh radadiya <pg.radadia@gmail.com>\n"
 "Language-Team: Gujarati <kde-i18n-doc@kde.org>\n"
@@ -906,8 +906,8 @@ msgstr "નકશો આયાત કરો"
 
 #: marble_part.cpp:267
 #, kde-format
-msgid "Images *.jpg *.png"
-msgstr "ચિત્રો *.jpg *.png"
+msgid "Images (*.jpg *.png)"
+msgstr "ચિત્રો (*.jpg *.png)"
 
 #: marble_part.cpp:279
 #, kde-format
@@ -1255,6 +1255,9 @@ msgstr "મુખ્ય સાધનપટ્ટી"
 #| msgid "Main Toolbar"
 msgid "Edit Toolbar"
 msgstr "મુખ્ય સાધનપટ્ટી"
+
+#~ msgid "Images *.jpg *.png"
+#~ msgstr "ચિત્રો *.jpg *.png"
 
 #~ msgid "marble_part"
 #~ msgstr "માર્બલ_ભાગ"
@@ -5310,9 +5313,6 @@ msgstr "મુખ્ય સાધનપટ્ટી"
 
 #~ msgid "Ready"
 #~ msgstr "તૈયાર"
-
-#~ msgid "Images (*.jpg *.png)"
-#~ msgstr "ચિત્રો (*.jpg *.png)"
 
 #~ msgid ""
 #~ "All Supported Files (*.gpx *.kml);;GPS Data (*.gpx);;Google Earth KML (*."
