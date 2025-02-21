@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-19 00:38+0000\n"
-"PO-Revision-Date: 2025-01-20 22:43+0400\n"
+"PO-Revision-Date: 2025-02-20 09:19+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -903,10 +903,9 @@ msgid "Export Map"
 msgstr "صدِّر الخريطة"
 
 #: marble_part.cpp:267
-#, fuzzy, kde-format
-#| msgid "Images *.jpg *.png"
+#, kde-format
 msgid "Images (*.jpg *.png)"
-msgstr "صور *.jpg *.png"
+msgstr "صور (*.png *.jpeg)"
 
 #: marble_part.cpp:279
 #, kde-format
