@@ -896,7 +896,7 @@ msgstr "导出地图"
 #: marble_part.cpp:267
 #, kde-format
 msgid "Images (*.jpg *.png)"
-msgstr ""
+msgstr "图像文件 (*.jpg *.png)"
 
 #: marble_part.cpp:279
 #, kde-format
