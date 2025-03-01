@@ -97,7 +97,7 @@ void GpsdConnection::update()
 #if defined(GPSD_API_MAJOR_VERSION) && (GPSD_API_MAJOR_VERSION >= 12) && defined(PACKET_SET)
     gps_data_t *data = nullptr;
 
-    if (m_gpsd.waiting(gpsUpdateInterval * 1000)) {
+    while (m_gpsd.waiting(0)) {
         gps_data_t *currentData = m_gpsd.read();
 
         if (currentData && currentData->set & PACKET_SET) {
