@@ -26,12 +26,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Thorsten Mürell, Martin Ereth, Markus Slopianka"
+msgstr "Deutsches KDE-Übersetzungsteam"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "thorsten@muerell.de, martin.ereth@arcor.de, markus.s@kdemail.net"
+msgstr "kde-i18n-de@kde.org"
 
 #: kdemain.cpp:84
 #, kde-format
@@ -913,7 +913,8 @@ msgid "Export Map"
 msgstr "Karte exportieren"
 
 #: marble_part.cpp:267
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Images (*.jpg *.png)"
 msgid "Images (*.jpg *.png)"
 msgstr "Bilder (*.jpg *.png)"
 
