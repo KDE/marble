@@ -7,13 +7,13 @@
 # H. İbrahim Güngör <ibrahim@pardus.org.tr>, 2011.
 # Hasan Kiran <sunder67@hotmail.com>, 2013.
 # Volkan Gezer <volkangezer@gmail.com>, 2013, 2014, 2017.
-# SPDX-FileCopyrightText: 2022, 2023, 2024 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-11-07 16:35+0300\n"
+"PO-Revision-Date: 2025-03-04 12:53+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 25.03.70\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -2552,7 +2552,7 @@ msgstr "Güneş Denetimini Yapılandır"
 #: src/apps/marble-qt/QtMainWindow.cpp:361
 msgctxt "Marble::MainWindow|"
 msgid "&Redisplay"
-msgstr "&Tekrar Göster"
+msgstr "&Yeniden Görüntüle"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:363
 msgctxt "Marble::MainWindow|"
@@ -11376,7 +11376,7 @@ msgid ""
 "displaying panorama photography. Also used for navigation, radio and seismic "
 "work.</p>"
 msgstr ""
-"<p><b>Nomonik Yansıma</b> (“düz çizgili”)</p><p>Uygulamalar: Panoroma "
+"<p><b>Nomonik Yansıma</b> (“düz çizgili”)</p><p>Uygulamalar: Panorama "
 "fotoğrafları görüntülemek için kullanılır. Ayrıca gezinme, radyo ve sismik "
 "çalışmalar için de kullanılmaktadır.</p>"
 
@@ -11817,7 +11817,7 @@ msgstr "Kılavuz Kipi"
 #: src/lib/marble/routing/RoutingManager.cpp:514
 msgctxt "Marble::RoutingManager|"
 msgid "Show again"
-msgstr "Tekrar göster"
+msgstr "Yeniden göster"
 
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:14
 msgctxt "RoutingProfileSettingsDialog|"
@@ -12209,9 +12209,9 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 "weight:600;\">Dikkat: Harita kaydırma şuan devre dışı! </span></p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">&quot; Harita görünümünü "
-"Alt Güneş Noktası’na kilitle&quot; Seçenek, dünyadaki farklı bir yeri "
-"yeniden izlemenize olanak tanır.</p></body></html>"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">“Harita görünümünü Alt "
+"Güneş Noktası’na kilitle” seçeneği, dünyadaki farklı bir yeri yeniden "
+"izlemenize olanak tanır.</p></body></html>"
 
 #: src/lib/marble/TileCreatorDialog.ui:20
 msgctxt "TileCreatorDialog|"
@@ -13306,7 +13306,7 @@ msgstr "APRS Eklentisi"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:24
 msgctxt "AprsConfigWidget|"
 msgid "Display"
-msgstr "Göster"
+msgstr "Görüntüle"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:38
 msgctxt "AprsConfigWidget|"
@@ -13442,7 +13442,7 @@ msgid ""
 "This plugin displays APRS data gleaned from the Internet.  APRS is an "
 "Amateur Radio protocol for broadcasting location and other information."
 msgstr ""
-"Bu eklenti, Internet üzerinden toplanmış APRS verisini gösterir.  APRS, "
+"Bu eklenti, Internet üzerinden toplanmış APRS verisini görüntüler. APRS, "
 "konum yaymak ve diğer bilgiler için geliştirilmiş bir Amatör Radyo "
 "protokolüdür."
 
@@ -14042,7 +14042,7 @@ msgstr "&Mekanlar"
 #: src/plugins/render/foursquare/FoursquarePlugin.cpp:56
 msgctxt "Marble::FoursquarePlugin|"
 msgid "Displays trending Foursquare places"
-msgstr "Gündemdeki Foursquare mekanlarını gösterir"
+msgstr "Gündemdeki Foursquare mekanlarını görüntüler."
 
 #: src/plugins/render/gpsinfo/GpsInfo.cpp:41
 msgctxt "Marble::GpsInfo|"
@@ -14548,7 +14548,7 @@ msgstr "OSM Mapper Notları"
 #: src/plugins/render/notes/NotesPlugin.cpp:64
 msgctxt "Marble::NotesPlugin|"
 msgid "Display OpenStreetMap Mapper Notes."
-msgstr "OpenStreetMap Mapper Notlarını Göster."
+msgstr "OpenStreetMap Mapper notlarını görüntüleyin."
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:14
 msgctxt "OpenCachingCacheDialog|"
@@ -14743,7 +14743,7 @@ msgstr "OpenDesktop eklentisi yapılandırması"
 #: src/plugins/render/opendesktop/OpenDesktopConfigWidget.ui:22
 msgctxt "OpenDesktopConfigWidget|"
 msgid "Number of displayed items on the screen:"
-msgstr "Ekranda gösterilencek öge sayısı:"
+msgstr "Ekranda görüntülenecek öge sayısı:"
 
 #: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:46
 msgctxt "Marble::OpenDesktopPlugin|"
@@ -15426,7 +15426,7 @@ msgstr "Kullanılabilir bilgi yok."
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:40
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Display orbit"
-msgstr "Yörüngeyi göster"
+msgstr "Yörüngeyi görüntüle"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:44
 msgctxt "Marble::SatellitesPlugin|"
@@ -15446,7 +15446,7 @@ msgstr "&Uydular"
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:96
 msgctxt "Marble::SatellitesPlugin|"
 msgid "This plugin displays satellites and their orbits."
-msgstr "Bu eklenti, uyduları ve onların yörüngelerini gösterir."
+msgstr "Bu eklenti, uyduları ve onların yörüngelerini görüntüler."
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:113
 msgctxt "Marble::SatellitesPlugin|"
@@ -15691,7 +15691,7 @@ msgstr "&Hız ölçer"
 #: src/plugins/render/speedometer/Speedometer.cpp:69
 msgctxt "Marble::Speedometer|"
 msgid "Display the current cruising speed."
-msgstr "Geçerli seyir hızını göster."
+msgstr "Geçerli seyir hızını görüntüleyin."
 
 #: src/plugins/render/speedometer/Speedometer.cpp:120
 msgctxt "Marble::Speedometer|"
