@@ -1,0 +1,202 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the marble package.
+#
+# SPDX-FileCopyrightText: 2025 Olesya Gerasimenko <translation-team@basealt.ru>
+msgid ""
+msgstr ""
+"Project-Id-Version: marble\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-12-24 00:37+0000\n"
+"PO-Revision-Date: 2025-03-05 12:23+0300\n"
+"Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
+"Language-Team: Basealt Translation Team\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 23.08.5\n"
+
+#: About.qml:9
+#, kde-format
+msgctxt "@title:group"
+msgid "Germanisches Nationalmuseum"
+msgstr "Германский национальный музей"
+
+#: About.qml:14
+#, kde-format
+msgid ""
+"The original Behaim globe can be visited in the <a href=\"https://www.gnm.de/"
+"\">Germanisches Nationalmuseum</a> in Nuremberg, Germany."
+msgstr ""
+"Оригинальный глобус Бехайма можно увидеть в <a href=\"https://www.gnm.de/"
+"\">Германском национальном музее</a> (г. Нюрнберг, Германия)."
+
+#: About.qml:20
+#, kde-format
+msgctxt "@title:group"
+msgid "Map Content"
+msgstr "Содержание карты"
+
+#: About.qml:25
+#, kde-format
+msgid ""
+"Digitized map based on orthophotographic gores by TU Vienna, 1990. "
+"Germanisches Nationalmuseum and Friedrich-Alexander-Universität Erlangen-"
+"Nürnberg, CC BY-SA 3.0. Ghillany map based on two planiglobes which are "
+"provided as a map supplement to F.W. Ghillany's \"Geschichte des Seefahrers "
+"Ritter Martin Behaim nach den ältesten vorhandenen Urkunden\", Nuremberg "
+"1853. CC BY-SA 3.0."
+msgstr ""
+"Оцифрованная карта на основе ортофотографических глобусных сегментов "
+"Венского технического университета от 1990 года. Германский национальный "
+"музей и Университет Эрлангена — Нюрнберга, CC BY-SA 3.0. Карта Гиллани на "
+"основе двух полушарий из приложения к его книге «Geschichte des Seefahrers "
+"Ritter Martin Behaim nach den ältesten vorhandenen Urkunden», напечатанной в "
+"1853 году в Нюрнберге. CC BY-SA 3.0."
+
+#: main.cpp:33
+#, kde-format
+msgid "Marble Behaim"
+msgstr "Глобус Бехайма в Marble"
+
+#: main.cpp:35
+#, kde-format
+msgid ""
+"Digital reproduction of a globe crafted at the time of Columbus' first sea "
+"travel to the west."
+msgstr ""
+"Цифровая копия глобуса, созданного во время первого морского путешествия "
+"Колумба на запад."
+
+#: main.cpp:37
+#, kde-format
+msgid "© KDE Community"
+msgstr "© Сообщество KDE"
+
+#: main.cpp:38
+#, kde-format
+msgid ""
+"<p>Martin Behaim's Erdapfel</p><p>The oldest existent globe of the Earth. "
+"Martin Behaim and collaborators created the globe around 1492 at the time of "
+"<a href=\"https://en.wikipedia.org/wiki/Voyages_of_Christopher_Columbus"
+"\">Columbus'</a> first sea travel to the west.Hence the American continent "
+"is missing on this globe.Also note the detailed inscriptions in early modern "
+"German.</p><p>Please see <a href=\"https://en.wikipedia.org/wiki/Erdapfel"
+"\">Wikipedia: Erdapfel</a> for further information about the Behaim globe."
+msgstr ""
+"<p>«Земное яблоко» Мартина Бехайма</p><p>Старейший сохранившийся до наших "
+"дней глобус Земли, был создан под руководством Мартина Бехайма примерно в "
+"1492 году во время первого морского путешествия <a href=\"https://en."
+"wikipedia.org/wiki/Voyages_of_Christopher_Columbus\">Колумба</a> на запад; "
+"соответственно, на этом глобусе отсутствует Американский континент. Также "
+"примечательны подробные описания на немецком языке раннего Нового времени.</"
+"p><p>Дополнительные сведения о глобусе Бехайма доступны в <a href=\"https://"
+"ru.wikipedia.org/wiki/Земное_яблоко\">Википедии</a>."
+
+#: main.cpp:52
+#, kde-format
+msgctxt "@info:credit"
+msgid "Dennis Nienhüser"
+msgstr "Dennis Nienhüser"
+
+#: main.cpp:52
+#, kde-format
+msgctxt "@info:credit"
+msgid "Author"
+msgstr "Автор"
+
+#: main.cpp:54
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Олеся Герасименко"
+
+#: main.cpp:54
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "translation-team@basealt.ru"
+
+#: MainScreen.qml:62
+#, kde-format
+msgctxt "@title"
+msgid "Marble"
+msgstr "Marble"
+
+#: MainScreen.qml:80
+#, kde-format
+msgctxt "@title:group"
+msgid "Globe Settings"
+msgstr "Параметры глобуса"
+
+#: MainScreen.qml:86
+#, kde-format
+msgctxt "@option:check"
+msgid "Show Behaim places"
+msgstr "Показывать расположения Бехайма"
+
+#: MainScreen.qml:91
+#, kde-format
+msgctxt "@option:check"
+msgid "Show texts and illustrations"
+msgstr "Показывать текст и иллюстрации"
+
+#: MainScreen.qml:96
+#, kde-format
+msgctxt "@option:check"
+msgid "Show the accurate coastline"
+msgstr "Показывать точную береговую линию"
+
+#: MainScreen.qml:102
+#, kde-format
+msgctxt "@title:group"
+msgid "Globe Variant"
+msgstr "Вариант глобуса"
+
+#: MainScreen.qml:111
+#, kde-format
+msgctxt "@option:radio"
+msgid "Original (1492)"
+msgstr "Оригинал (1492)"
+
+#: MainScreen.qml:113
+#, kde-format
+msgid "Digital imagery taken directly from the original Behaim globe."
+msgstr ""
+"Цифровые изображения, источник — непосредственно оригинальный глобус Бехайма."
+
+#: MainScreen.qml:124
+#, kde-format
+msgctxt "@option:radio"
+msgid "Ghillany (1853)"
+msgstr "Гиллани (1853)"
+
+#: MainScreen.qml:125
+#, kde-format
+msgid "A (rough) facsimile created by Friedrich Wilhelm Ghillany in 1853."
+msgstr "(Грубая) копия от 1853 г., автор — Фридрих Вильгельм Гиллани."
+
+#: MainScreen.qml:136
+#, kde-format
+msgctxt "@option:radio"
+msgid "Ravenstein (1908)"
+msgstr "Равенштайн (1908)"
+
+#: MainScreen.qml:137
+#, kde-format
+msgid "A (rough) facsimile created by Ernest George Ravenstein in 1908."
+msgstr "(Грубая) копия от 1908 г., автор — Эрнст Георг Равенштайн."
+
+#: MainScreen.qml:152
+#, kde-format
+msgctxt "@title:window"
+msgid "Behaim Globe"
+msgstr "Глобус Бехайма"
+
+#: MainScreen.qml:160
+#, kde-format
+msgctxt "@action:button"
+msgid "Information"
+msgstr "Сведения"
