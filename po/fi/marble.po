@@ -915,7 +915,8 @@ msgid "Export Map"
 msgstr "Vie kartta"
 
 #: marble_part.cpp:267
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Images (*.jpg *.png)"
 msgid "Images (*.jpg *.png)"
 msgstr "Kuvat (*.jpg *.png)"
 
