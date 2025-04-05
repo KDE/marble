@@ -903,7 +903,6 @@ msgstr ""
 
 #: marble_part.cpp:267
 #, fuzzy, kde-format
-#| msgid "Images *.jpg *.png"
 msgid "Images (*.jpg *.png)"
 msgstr "Bilete *.jpg *.png"
 
