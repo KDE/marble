@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-19 00:38+0000\n"
-"PO-Revision-Date: 2025-02-20 09:25+0100\n"
+"PO-Revision-Date: 2025-04-11 15:05+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -27,7 +27,7 @@ msgstr ""
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 24.12.2\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -225,7 +225,7 @@ msgstr "Pino Toscano"
 #: kdemain.cpp:112
 #, kde-format
 msgid "Network plugins"
-msgstr "Modules réseau"
+msgstr "Modules de réseau"
 
 #: kdemain.cpp:113
 #, kde-format
@@ -245,7 +245,7 @@ msgstr "Simon Edwards"
 #: kdemain.cpp:114
 #, kde-format
 msgid "Marble Python Bindings"
-msgstr "Liaisons Python pour Marble"
+msgstr "Liaisons avec Python pour Marble"
 
 #: kdemain.cpp:115
 #, kde-format
@@ -273,16 +273,16 @@ msgid ""
 "ESA Summer of Code in Space 2012 Project: Visualization of planetary "
 "satellites"
 msgstr ""
-"Projet « Summer of Code in Space 2012 » de l'ESA : affichage des satellites "
-"planétaires"
+"Projet « Summer of Code in Space » de 2012 de l'ESA : affichage des "
+"satellites planétaires"
 
 #: kdemain.cpp:124
 #, kde-format
 msgid ""
 "ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
 msgstr ""
-"Projet « Summer of Code in Space 2011 » de l'ESA : affichage des orbites des "
-"satellites"
+"Projet « Summer of Code in Space » de 2011de l'ESA : affichage des orbites "
+"des satellites"
 
 #: kdemain.cpp:129
 #, kde-format
@@ -292,7 +292,8 @@ msgstr "Konstantin Oblaukhov"
 #: kdemain.cpp:130
 #, kde-format
 msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
-msgstr "Projet « Google Summer of Code 2009 » : rendu de vecteur OpenStreetMap"
+msgstr ""
+"Projet « Google Summer of Code 2009 » : rendu de vecteur pour OpenStreetMap"
 
 #: kdemain.cpp:133
 #, kde-format
@@ -312,7 +313,7 @@ msgstr "Gaurav Gupta"
 #: kdemain.cpp:138
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Bookmarks"
-msgstr "Projet Google Summer of Code 2010 : signets"
+msgstr "Projet « Google Summer of Code » de 2010 : signets"
 
 #: kdemain.cpp:141
 #, kde-format
@@ -322,7 +323,7 @@ msgstr "Harshit Jain"
 #: kdemain.cpp:142
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Time Support"
-msgstr "Projet Google Summer of Code 2010 : prise en charge de l'heure"
+msgstr "Projet « Google Summer of Code » de 2010 : prise en charge de l'heure"
 
 #: kdemain.cpp:145
 #, kde-format
@@ -332,7 +333,7 @@ msgstr "Siddharth Srivastava"
 #: kdemain.cpp:146
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
-msgstr "Projet Google Summer of Code 2010 : navigation pas-à-pas"
+msgstr "Projet « Google Summer of Code » de 2010 : navigation pas-à-pas"
 
 #: kdemain.cpp:149 kdemain.cpp:169
 #, kde-format
@@ -342,17 +343,20 @@ msgstr "Andrew Manson"
 #: kdemain.cpp:150
 #, kde-format
 msgid "Google Summer of Code 2009 Project: OSM Annotation"
-msgstr "Projet Google Summer of Code 2009 : annotation OSM"
+msgstr ""
+"Projet « Google Summer of Code » de 2009 : annotation pour OpenStreetMap "
+"(OSM)"
 
 #: kdemain.cpp:154
 #, kde-format
 msgid "Google Summer of Code 2009 Project: Online Services"
-msgstr "Projet Google Summer of Code 2009 : services en ligne"
+msgstr "Projet « Google Summer of Code » de 2009 : services en ligne"
 
 #: kdemain.cpp:158
 #, kde-format
 msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
-msgstr "Projet Google Summer of Code 2008 : tuiles vectorielles pour Marble"
+msgstr ""
+"Projet « Google Summer of Code » de 2008 : tuiles vectorielles pour Marble"
 
 #: kdemain.cpp:161
 #, kde-format
@@ -365,8 +369,8 @@ msgid ""
 "Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
 "Marble"
 msgstr ""
-"Projet Google Summer of Code 2008 : prise en charge par Marble des photos "
-"Panoramio / Wikipédia"
+"Projet « Google Summer of Code » de 2008 : prise en charge par Marble des "
+"photos de Panoramio / Wikipédia"
 
 #: kdemain.cpp:165
 #, kde-format
@@ -384,7 +388,9 @@ msgstr ""
 #: kdemain.cpp:170
 #, kde-format
 msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
-msgstr "Projet Google Summer of Code 2007 : prise en charge du GPS par Marble"
+msgstr ""
+"Projet « Google Summer of Code » de 2007 : prise en charge du format « GPS » "
+"par Marble"
 
 #: kdemain.cpp:173
 #, kde-format
@@ -394,7 +400,9 @@ msgstr "Murad Tagirov"
 #: kdemain.cpp:174
 #, kde-format
 msgid "Google Summer of Code 2007 Project: KML Support for Marble"
-msgstr "Projet Google Summer of Code 2007 : prise en charge du KML par Marble"
+msgstr ""
+"Projet « Google Summer of Code » de 2007 : prise en charge du format « KML » "
+"par Marble"
 
 #: kdemain.cpp:179
 #, kde-format
@@ -698,7 +706,7 @@ msgstr ""
 #: kdemain.cpp:263
 #, kde-format
 msgid "Show map at given geo <uri>"
-msgstr "Afficher la carte à l'<uri> « geo » donnée"
+msgstr "Afficher la carte à l'<uri> « géo » donnée"
 
 #: kdemain.cpp:265
 #, kde-format
