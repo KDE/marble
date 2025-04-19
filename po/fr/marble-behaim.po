@@ -1,11 +1,11 @@
 #
-# SPDX-FileCopyrightText: 2024 Xavier Besnard <xavier.besnard@kde.org>
+# SPDX-FileCopyrightText: 2024, 2025 Xavier Besnard <xavier.besnard@kde.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-24 00:37+0000\n"
-"PO-Revision-Date: 2024-10-16 18:39+0200\n"
+"PO-Revision-Date: 2025-04-16 14:26+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: About.qml:9
 #, kde-format
@@ -47,9 +47,9 @@ msgid ""
 "1853. CC BY-SA 3.0."
 msgstr ""
 "Carte numérisée reposant sur des images ortho-photographiques de TU Vienne, "
-"1990. Musée « Germanisches NationalMuseum » et université « Friedrich-"
+"1990. Musée « Germanisches National Museum » et l'université « Friedrich-"
 "Alexander-Universität Erlangen-Nürnberg », CC BY-SA 3.0. La carte de "
-"Ghillany est conçue à partir de deux planiglobes fournis en tant que "
+"Ghillany est conçue à partir de deux globes terrestres fournis en tant que "
 "supplément cartographique à la carte de F.W. Ghillany « Geschichte des "
 "Seefahrers Ritter Martin Behaim nach den ältesten vorhandenen Urkunden », "
 "Nuremberg 1853. CC BY-SA 3.0."
@@ -87,11 +87,11 @@ msgstr ""
 "<p>Martin Behaim, Erdapfel</p><p>Le plus ancien globe terrestre existant. "
 "Martin Behaim et ses collaborateurs ont créé le globe aux alentours de 1492, "
 "au moment de la première traversée vers l'Ouest de <a href=\"https://fr."
-"wikipedia.org/wiki/Christophe_Colomb\">Columb</a>. Par conséquent, le "
-"continent américain est absent sur ce globe. Veuillez noter également les "
-"inscriptions détaillées dans le début moderne en Allemand.</p><p>Voir <a "
-"href=\"https://fr.wikipedia.org/wiki/Erdapfel\">Wikipedia : page "
-"« Erdapfel »</a> pour plus d'informations sur le globe de Behaim."
+"wikipedia.org/wiki/Christophe_Colomb\">Christophe Colomb</a>. Par "
+"conséquent, le continent américain est absent sur ce globe. Veuillez noter "
+"également les inscriptions détaillées dans le début moderne en Allemand.</"
+"p><p>Voir <a href=\"https://fr.wikipedia.org/wiki/Erdapfel\">Wikipedia : "
+"page « Erdapfel »</a> pour plus d'informations sur le globe de Behaim."
 
 #: main.cpp:52
 #, kde-format
