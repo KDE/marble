@@ -1,12 +1,14 @@
-# Translation of marble-maps to Spanish
+# Spanish translations for marble-maps.po package.
+# Copyright (C) 2024-2025 This file is copyright:
+# This file is distributed under the same license as the marble package.
 #
-# SPDX-FileCopyrightText: 2024 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble-maps\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-24 00:37+0000\n"
-"PO-Revision-Date: 2024-10-06 01:37+0200\n"
+"PO-Revision-Date: 2025-05-20 02:08+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -313,6 +315,3 @@ msgstr "Descargar mapas solo mediante WLAN"
 msgctxt "@title:window"
 msgid "Themes"
 msgstr "Temas"
-
-#~ msgid "Search for places to integrate them into a route."
-#~ msgstr "Buscar lugares para integrarlos en una ruta."
