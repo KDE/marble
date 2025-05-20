@@ -1,9 +1,9 @@
-# Translation of marble to Spanish
-# Copyright (C) YEAR This_file_is_part_of_KDE
+# Spanish translations for marble_qt.po package.
+# Copyright (C) 2007-2025 This file is copyright:
 # This file is distributed under the same license as the marble package.
 #
 # SPDX-FileCopyrightText: 2007, 2008 Santiago Fernández Sancho <santi@kde-es.org>
-# SPDX-FileCopyrightText: 2007, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2007, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 # SPDX-FileCopyrightText: 2007 Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>
 # SPDX-FileCopyrightText: 2008 Jaime Robles <jaime@kde.org>
 # SPDX-FileCopyrightText: 2008 Pablo de Vicente <pablo.devicente@gmail.com>
@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-12-09 00:44+0100\n"
+"PO-Revision-Date: 2025-05-20 02:05+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -2360,7 +2360,7 @@ msgstr ""
 #: src/apps/marble-qt/QtMainWindow.cpp:265
 msgctxt "Marble::MainWindow|"
 msgid "&Open..."
-msgstr "&Abrir..."
+msgstr "&Abrir…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:267
 msgctxt "Marble::MainWindow|"
@@ -2370,12 +2370,12 @@ msgstr "Abrir un archivo para verlo en Marble"
 #: src/apps/marble-qt/QtMainWindow.cpp:270
 msgctxt "Marble::MainWindow|"
 msgid "&Download Maps..."
-msgstr "&Descargar mapas..."
+msgstr "&Descargar mapas…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:273
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
-msgstr "&Exportar mapa..."
+msgstr "&Exportar mapa…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:275
 msgctxt "Marble::MainWindow|"
@@ -2385,7 +2385,7 @@ msgstr "Guardar una captura de pantalla del mapa"
 #: src/apps/marble-qt/QtMainWindow.cpp:279
 msgctxt "Marble::MainWindow|"
 msgid "Download &Region..."
-msgstr "Descargar &región..."
+msgstr "Descargar &región…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:280
 msgctxt "Marble::MainWindow|"
@@ -2397,7 +2397,7 @@ msgstr ""
 #: src/apps/marble-qt/QtMainWindow.cpp:283
 msgctxt "Marble::MainWindow|"
 msgid "&Print..."
-msgstr "Im&primir..."
+msgstr "Im&primir…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:284
 msgctxt "Marble::MainWindow|"
@@ -2413,7 +2413,7 @@ msgstr "Imprimir una captura de pantalla del mapa"
 #: src/apps/marble-qt/QtMainWindow.cpp:288
 msgctxt "Marble::MainWindow|"
 msgid "Print Previe&w ..."
-msgstr "&Vista previa de la impresión..."
+msgstr "&Vista previa de la impresión…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:292
 msgctxt "Marble::MainWindow|"
@@ -2443,7 +2443,7 @@ msgstr "Copiar una captura de pantalla del mapa"
 #: src/apps/marble-qt/QtMainWindow.cpp:302
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
-msgstr "&Editar mapa..."
+msgstr "&Editar mapa…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:304
 msgctxt "Marble::MainWindow|"
@@ -2538,7 +2538,7 @@ msgstr "&Trabajar desconectado"
 #: src/apps/marble-qt/QtMainWindow.cpp:353
 msgctxt "Marble::MainWindow|"
 msgid "&Time Control..."
-msgstr "Con&trol del tiempo..."
+msgstr "Con&trol del tiempo…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:354
 msgctxt "Marble::MainWindow|"
@@ -2548,7 +2548,7 @@ msgstr "Configurar el control del tiempo "
 #: src/apps/marble-qt/QtMainWindow.cpp:357
 msgctxt "Marble::MainWindow|"
 msgid "S&un Control..."
-msgstr "Control del S&ol..."
+msgstr "Control del S&ol…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:358
 msgctxt "Marble::MainWindow|"
@@ -2618,7 +2618,7 @@ msgstr "Muestra el cuadro «Acerca de» de la biblioteca Qt"
 #: src/apps/marble-qt/QtMainWindow.cpp:389
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
-msgstr "Añadir &marcador..."
+msgstr "Añadir &marcador…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:391
 msgctxt "Marble::MainWindow|"
@@ -2644,7 +2644,7 @@ msgstr "Mostrar la visualización de los marcadores"
 #: src/apps/marble-qt/QtMainWindow.cpp:403
 msgctxt "Marble::MainWindow|"
 msgid "&Manage Bookmarks..."
-msgstr "Gestión de &marcadores..."
+msgstr "Gestión de &marcadores…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:404
 msgctxt "Marble::MainWindow|"
@@ -2654,7 +2654,7 @@ msgstr "Gestionar marcadores"
 #: src/apps/marble-qt/QtMainWindow.cpp:408
 msgctxt "Marble::MainWindow|"
 msgid "&Create a New Map..."
-msgstr "&Crear un nuevo mapa..."
+msgstr "&Crear un nuevo mapa…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:409
 msgctxt "Marble::MainWindow|"
@@ -2992,7 +2992,7 @@ msgstr "&Ocultar"
 #: src/lib/marble/AbstractFloatItem.cpp:239
 msgctxt "Marble::AbstractFloatItem|"
 msgid "&Configure..."
-msgstr "&Configurar..."
+msgstr "&Configurar…"
 
 #: src/lib/marble/AddLinkDialog.cpp:62
 msgctxt "Marble::AddLinkDialog|"
@@ -3150,12 +3150,12 @@ msgstr "Gestor de marcadores"
 #: src/lib/marble/BookmarkManagerDialog.ui:25
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Import Bookmarks…"
-msgstr "Importar marcadores..."
+msgstr "Importar marcadores…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Export Bookmarks…"
-msgstr "Exportar marcadores..."
+msgstr "Exportar marcadores…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
@@ -3165,12 +3165,12 @@ msgstr "Carpetas"
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
 msgid "New…"
-msgstr "Nuevo..."
+msgstr "Nuevo…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Rename…"
-msgstr "Cambiar nombre..."
+msgstr "Cambiar nombre…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
 #: src/lib/marble/BookmarkManagerDialog.ui:151
@@ -3356,7 +3356,7 @@ msgstr "Ninguna posición disponible."
 #: src/lib/marble/CurrentLocationWidget.cpp:186
 msgctxt "QObject|"
 msgid "Waiting for current location information..."
-msgstr "Esperando información de la posición actual..."
+msgstr "Esperando información de la posición actual…"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:192
 msgctxt "QObject|"
@@ -3462,7 +3462,7 @@ msgstr "Borrar rastro"
 #: src/lib/marble/CurrentLocationWidget.ui:91
 msgctxt "CurrentLocationWidget|"
 msgid "…"
-msgstr "..."
+msgstr "…"
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
 msgctxt "CurrentLocationWidget|"
@@ -3516,7 +3516,7 @@ msgstr "Conversión de datos de Marble"
 #: src/lib/marble/DataMigration.cpp:91
 msgctxt "Marble::DataMigration|"
 msgid "Converting data ..."
-msgstr "Convirtiendo datos..."
+msgstr "Convirtiendo datos…"
 
 #: src/lib/marble/DataMigrationWidget.ui:20
 msgctxt "DataMigrationWidget|"
@@ -5022,7 +5022,7 @@ msgstr "&Carpeta:"
 #: src/lib/marble/EditBookmarkDialog.ui:79
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Add Folder…"
-msgstr "&Añadir carpeta..."
+msgstr "&Añadir carpeta…"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -7386,7 +7386,7 @@ msgstr[1] "Se han encontrado %n resultados."
 #: src/lib/marble/GoToDialog.ui:14
 msgctxt "GoTo|"
 msgid "Go To…"
-msgstr "Ir a..."
+msgstr "Ir a…"
 
 #: src/lib/marble/GoToDialog.ui:78
 msgctxt "GoTo|"
@@ -7395,7 +7395,7 @@ msgid ""
 "Marble/Search\">Details…</a>"
 msgstr ""
 "Introduzca el término a buscar y pulse «Intro». <a href=\"https://userbase."
-"kde.org/Marble/Search\">Detalles...</a>"
+"kde.org/Marble/Search\">Detalles…</a>"
 
 #: src/lib/marble/GoToDialog.ui:93
 msgctxt "GoTo|"
@@ -7619,7 +7619,7 @@ msgstr "&Favorito"
 #: src/lib/marble/MapViewWidget.cpp:619
 msgctxt "Marble::MapViewWidget|"
 msgid "&Create a New Map..."
-msgstr "&Crear un nuevo mapa..."
+msgstr "&Crear un nuevo mapa…"
 
 #: src/lib/marble/MapViewWidget.cpp:621
 msgctxt "Marble::MapViewWidget|"
@@ -8259,7 +8259,7 @@ msgstr "Imagen de origen:"
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
 msgctxt "MapWizard|"
 msgid "…"
-msgstr "..."
+msgstr "…"
 
 #: src/lib/marble/MapWizard.ui:615
 msgctxt "MapWizard|"
@@ -8409,7 +8409,7 @@ msgstr "imagen de vista previa"
 #: src/lib/marble/MapWizard.ui:825
 msgctxt "MapWizard|"
 msgid "Change…"
-msgstr "Cambiar..."
+msgstr "Cambiar…"
 
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
@@ -9313,8 +9313,8 @@ msgid ""
 "<p>... and of course we'd like to thank the people at Google Inc. for making "
 "these projects possible.</p>"
 msgstr ""
-"<p>... y, por supuesto, estamos agradecidos a todos los integrantes de "
-"Google Inc. por hacer posibles estos proyectos.</p>"
+"<p>… y, por supuesto, estamos agradecidos a todos los integrantes de Google "
+"Inc. por hacer posibles estos proyectos.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:246
 msgctxt "QObject|"
@@ -10218,7 +10218,7 @@ msgstr "Inclina el eje del globo hacia el usuario."
 #: src/lib/marble/MarbleNavigator.ui:215
 msgctxt "MarbleNavigator|"
 msgid "…"
-msgstr "..."
+msgstr "…"
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
 msgctxt "MarbleNavigator|"
@@ -11029,7 +11029,7 @@ msgstr "Vídeo de destino:"
 #: src/lib/marble/MovieCaptureDialog.ui:36
 msgctxt "MovieCaptureDialog|"
 msgid "Open…"
-msgstr "Abrir..."
+msgstr "Abrir…"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -11163,7 +11163,7 @@ msgstr "Etiquetas relacionadas"
 #: src/lib/marble/osm/OsmTagEditorWidget_p.cpp:30
 msgctxt "QObject|"
 msgid "Add custom tag..."
-msgstr "Añadir etiqueta personalizada..."
+msgstr "Añadir etiqueta personalizada…"
 
 #: src/lib/marble/osm/OsmTagEditorWidget_p.cpp:100
 msgctxt "QObject|"
@@ -11183,7 +11183,7 @@ msgstr "Todos los archivos permitidos (*.png)"
 #: src/lib/marble/PlacemarkEditHeader.ui:46
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Browse…"
-msgstr "Explorar..."
+msgstr "Explorar…"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -11762,7 +11762,7 @@ msgstr "%2, %3"
 #: src/lib/marble/routing/RoutingInputWidget.cpp:135
 msgctxt "QObject|"
 msgid "Address or search term..."
-msgstr "Dirección o palabra a buscar..."
+msgstr "Dirección o palabra a buscar…"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:166
 msgctxt "QObject|"
@@ -11782,7 +11782,7 @@ msgstr "Posición actua&l"
 #: src/lib/marble/routing/RoutingInputWidget.cpp:189
 msgctxt "QObject|"
 msgid "From &Map..."
-msgstr "Desde &mapa..."
+msgstr "Desde &mapa…"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:193
 msgctxt "QObject|"
@@ -11812,7 +11812,7 @@ msgstr "Elimina&r este destino"
 #: src/lib/marble/routing/RoutingLayer.cpp:190
 msgctxt "QObject|"
 msgid "&Export Route..."
-msgstr "&Exportar ruta..."
+msgstr "&Exportar ruta…"
 
 #: src/lib/marble/routing/RoutingLayer.cpp:754
 msgctxt "Marble::RoutingLayer|"
@@ -11936,12 +11936,12 @@ msgstr "Nuevo perfil"
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
 msgid "&Add…"
-msgstr "&Añadir..."
+msgstr "&Añadir…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
 msgctxt "RoutingSettingsWidget|"
 msgid "&Configure…"
-msgstr "&Configurar..."
+msgstr "&Configurar…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 msgctxt "RoutingSettingsWidget|"
@@ -12070,7 +12070,7 @@ msgstr "Archivos KML (*.kml)"
 #: src/lib/marble/routing/RoutingWidget.cpp:712
 msgctxt "Marble::RoutingWidget|"
 msgid "Uploading route..."
-msgstr "Enviando ruta..."
+msgstr "Enviando ruta…"
 
 #: src/lib/marble/routing/RoutingWidget.ui:46
 msgctxt "RoutingWidget|"
@@ -12174,7 +12174,7 @@ msgstr "Ubicación del sonido"
 #: src/lib/marble/SoundCueEditWidget.cpp:67
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Select sound files..."
-msgstr "Seleccionar archivos de sonido..."
+msgstr "Seleccionar archivos de sonido…"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:67
 msgctxt "Marble::SoundCueEditWidget|"
@@ -12441,7 +12441,7 @@ msgstr "Vídeo de destino"
 #: src/lib/marble/TourCaptureDialog.ui:81
 msgctxt "TourCaptureDialog|"
 msgid "Open…"
-msgstr "Abrir..."
+msgstr "Abrir…"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
@@ -13711,7 +13711,7 @@ msgstr "Mostrar los eclipses del año:"
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
 msgctxt "EclipsesBrowserDialog|"
 msgid "&Settings…"
-msgstr "&Preferencias..."
+msgstr "&Preferencias…"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 msgctxt "EclipsesBrowserDialog|"
@@ -13886,7 +13886,7 @@ msgstr "Este complemento visualiza eclipses solares."
 #: src/plugins/render/eclipses/EclipsesPlugin.cpp:187
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Browse Ecli&pses..."
-msgstr "Explorar ecli&pses..."
+msgstr "Explorar ecli&pses…"
 
 #: src/plugins/render/eclipses/EclipsesPlugin.cpp:329
 msgctxt "Marble::EclipsesPlugin|"
@@ -13935,7 +13935,7 @@ msgstr "Ampliar al área de visión"
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:29
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Configure..."
-msgstr "&Configurar..."
+msgstr "&Configurar…"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:35
 msgctxt "Marble::ElevationProfileContextMenu|"
@@ -14066,7 +14066,7 @@ msgstr "Una lista de los archivos actualmente abiertos"
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:201
 msgctxt "Marble::FileViewFloatItem|"
 msgid "Open file..."
-msgstr "Abrir archivo..."
+msgstr "Abrir archivo…"
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:202
 msgctxt "Marble::FileViewFloatItem|"
@@ -14388,7 +14388,7 @@ msgstr "nm"
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:349
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Configure..."
-msgstr "&Configurar..."
+msgstr "&Configurar…"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:355
 msgctxt "Marble::MapScaleFloatItem|"
@@ -15147,7 +15147,7 @@ msgstr ""
 #: src/plugins/render/routing/RoutingPlugin.cpp:235
 msgctxt "QObject|"
 msgid "Starting guidance mode, please wait..."
-msgstr "Iniciando el modo guiado. Por favor, espere..."
+msgstr "Iniciando el modo guiado. Por favor, espere…"
 
 #: src/plugins/render/routing/RoutingPlugin.cpp:289
 msgctxt "QObject|"
@@ -15435,7 +15435,7 @@ msgstr "Eliminar la fuente de datos seleccionada."
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
 msgctxt "SatellitesConfigDialog|"
 msgid "…"
-msgstr "..."
+msgstr "…"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
 msgctxt "SatellitesConfigDialog|"
@@ -16007,7 +16007,7 @@ msgstr "Mostrar &objetos del espacio profundo"
 #: src/plugins/render/stars/StarsPlugin.cpp:1401
 msgctxt "Marble::StarsPlugin|"
 msgid "&Configure..."
-msgstr "&Configurar..."
+msgstr "&Configurar…"
 
 #: src/plugins/render/sun/SunPlugin.cpp:48
 #: src/plugins/render/sun/SunPlugin.cpp:53
@@ -17972,1604 +17972,3 @@ msgstr "Plan&tilla de elemento flotante"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Esta es una clase de plantilla para elementos flotantes."
-
-#~ msgctxt "UiBookmarkManagerDialog|"
-#~ msgid "Import Bookmarks..."
-#~ msgstr "Importar marcadores..."
-
-#~ msgctxt "UiBookmarkManagerDialog|"
-#~ msgid "Export Bookmarks..."
-#~ msgstr "Exportar marcadores..."
-
-#~ msgctxt "UiBookmarkManagerDialog|"
-#~ msgid "New..."
-#~ msgstr "Nuevo..."
-
-#~ msgctxt "CurrentLocationWidget|"
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgctxt "MapWizard|"
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Change..."
-#~ msgstr "Cambiar..."
-
-#~ msgctxt "MarbleNavigator|"
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgctxt "MovieCaptureDialog|"
-#~ msgid "Open..."
-#~ msgstr "Abrir..."
-
-#~ msgctxt "PlacemarkEditHeaderPrivate|"
-#~ msgid "Browse..."
-#~ msgstr "Explorar..."
-
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Add..."
-#~ msgstr "&Añadir..."
-
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Configure..."
-#~ msgstr "&Configurar..."
-
-#~ msgctxt "TourCaptureDialog|"
-#~ msgid "Open..."
-#~ msgstr "Abrir..."
-
-#~ msgctxt "EclipsesBrowserDialog|"
-#~ msgid "&Settings..."
-#~ msgstr "&Preferencias..."
-
-#~ msgctxt "SatellitesConfigDialog|"
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgctxt "AboutDialog|"
-#~ msgid ""
-#~ "<h3>Marble Maps</h3><p>Find your way! Marble Maps brings the highly "
-#~ "detailed OpenStreetMap to your mobile devices. It features a crisp, "
-#~ "beautiful map with an intuitive user interface. It's open source, "
-#~ "entirely based on free data and open standards and respects your privacy."
-#~ "</p>"
-#~ msgstr ""
-#~ "<h3>Mapas de Marble</h3><p>¡Encuentre el camino! Mapas de Marble le "
-#~ "ofrece en su dispositivo móvil todo el detalle de OpenStreetMap. Muestra "
-#~ "un nítido y bello mapa con una interfaz intuitiva. Es de código abierto, "
-#~ "completamente basado en datos libres y en estándares abiertos, y además "
-#~ "respeta su privacidad.</p>"
-
-#~ msgctxt "AboutDialog|"
-#~ msgid ""
-#~ "<h3>Support</h3><p>Do you have a question? Want to file a suggestion for "
-#~ "improvement? Please use the <a href=\"https://forum.kde.org/viewforum.php?"
-#~ "f=217\">Marble forum</a> to get in touch with fellow Marble users and "
-#~ "developers. Further support channels are listed at <a href=\"https://"
-#~ "marble.kde.org/support.php\">marble.kde.org</a>. We are looking forward "
-#~ "to your feedback!</p>"
-#~ msgstr ""
-#~ "<h3>Ayuda al usuario</h3><p>¿Tiene alguna pregunta? ¿Desea enviarnos una "
-#~ "sugerencia para mejorar algo? Use el <a href=\"https://forum.kde.org/"
-#~ "viewforum.php?f=217\">foro de Marble</a> para mantenerse en contacto con "
-#~ "otros usuarios de Marble y con sus desarrolladores. Dispone de más "
-#~ "canales de ayuda en <a href=\"https://marble.kde.org/support.php\">marble."
-#~ "kde.org</a>. Quedamos a la espera de sus comentarios.</p>"
-
-#~ msgctxt "AboutDialog|"
-#~ msgid ""
-#~ "<h3>Development Team</h3><p>The main developers of this app are Dennis "
-#~ "Nienhüser, Torsten Rahn, Sanjiban Bairagya, Friedrich W. H. Kossebau, "
-#~ "Gábor Péterffy and Mikhail Ivchenko. They are part of more than 200 "
-#~ "developers who already contributed to the Marble project. <br> Contact us "
-#~ "via <a href=\"https://mail.kde.org/mailman/listinfo/marble-devel\">marble-"
-#~ "devel@kde.org</a>.</p>"
-#~ msgstr ""
-#~ "<h3>Equipo de desarrollo</h3><p>Los desarrolladores principales de esta "
-#~ "aplicación son Dennis Nienhüser, Torsten Rahn, Sanjiban Bairagya, "
-#~ "Friedrich W. H. Kossebau, Gábor Péterffy y Mikhail Ivchenko. Ellos son "
-#~ "parte de los más de 200 desarrolladores han colaborado con Marble. "
-#~ "<br>Puede contactar con nosotros en <a href=\"https://mail.kde.org/"
-#~ "mailman/listinfo/marble-devel\">marble-devel@kde.org</a>.</p>"
-
-#~ msgctxt "AboutDialog|"
-#~ msgid ""
-#~ "<h3>Attribution</h3><p>The map is based on data from the <a href="
-#~ "\"https://www.openstreetmap.org\">OpenStreetMap</a> project, available "
-#~ "under the <a href=\"https://opendatacommons.org/licenses/odbl/\">Open "
-#~ "Database License</a>. Additionally public domain data from the <a href="
-#~ "\"https://www.naturalearthdata.com/\">Natural Earth</a> project is used. "
-#~ "The map style is influenced by and uses icons from <a href=\"https://"
-#~ "github.com/gravitystorm/openstreetmap-carto\">OpenStreetMap Carto</a> (<a "
-#~ "href=\"https://creativecommons.org/publicdomain/zero/1.0/\">CC0 Public "
-#~ "Domain)</a>.</p>"
-#~ msgstr ""
-#~ "<h3>Atribución</h3><p>El mapa se basa en datos del proyecto <a href="
-#~ "\"https://www.openstreetmap.org\">OpenStreetMap</a>, disponibles bajo la "
-#~ "<a href=\"https://opendatacommons.org/licenses/odbl/\">licencia Open "
-#~ "Database</a>. También se usan datos de dominio público del proyecto <a "
-#~ "href=\"https://www.naturalearthdata.com/\">Natural Earth</a>. El estilo "
-#~ "del mapa y los iconos que usa se basan en <a href=\"https://github.com/"
-#~ "gravitystorm/openstreetmap-carto\">OpenStreetMap Carto</a> (<a href="
-#~ "\"https://creativecommons.org/publicdomain/zero/1.0/\">CC0 de dominio "
-#~ "público)</a>.</p>"
-
-#~ msgctxt "Bookmarks|"
-#~ msgid "Removed"
-#~ msgstr "Eliminado"
-
-#~ msgctxt "Bookmarks|"
-#~ msgid "Your bookmarks will appear here."
-#~ msgstr "Aquí aparecerán sus marcadores."
-
-#~ msgctxt "CurrentPosition|"
-#~ msgid "Follow Current Position"
-#~ msgstr "Seguir la posición actual"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Marble Maps"
-#~ msgstr "Mapas de Marble"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Settings"
-#~ msgstr "Preferencias"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Public Transport"
-#~ msgstr "Transporte público"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Outdoor Activities"
-#~ msgstr "Actividades al aire libre"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Accessibility"
-#~ msgstr "Accesibilidad"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "About"
-#~ msgstr "Acerca de"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Bookmarks"
-#~ msgstr "Marcadores"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Layer Options"
-#~ msgstr "Opciones de capas"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Routing"
-#~ msgstr "Ruta"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "%1 km"
-#~ msgstr "%1 km"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Press again to close."
-#~ msgstr "Vuelva a pulsar para cerrar."
-
-#~ msgctxt "NavigationInfoBar|"
-#~ msgid "%1 km"
-#~ msgstr "%1 km"
-
-#~ msgctxt "NavigationInfoBar|"
-#~ msgid "%1 m"
-#~ msgstr "%1 m"
-
-#~ msgctxt "Options|"
-#~ msgid "<h3>Layer Options</h3>"
-#~ msgstr "<h3>Opciones de capas</h3>"
-
-#~ msgctxt "Options|"
-#~ msgid "<h4>Public Transport Layers</h4>"
-#~ msgstr "<h4>Capas de transporte público</h4>"
-
-#~ msgctxt "Options|"
-#~ msgid "<h4>Outdoor Activities Layers</h4>"
-#~ msgstr "<h4>Capas de actividades al aire libre</h4>"
-
-#~ msgctxt "OutdoorActivities|"
-#~ msgid "Walkways"
-#~ msgstr "Pasarelas peatonales"
-
-#~ msgctxt "OutdoorActivities|"
-#~ msgid "Hiking Routes"
-#~ msgstr "Rutas de senderismo"
-
-#~ msgctxt "OutdoorActivities|"
-#~ msgid "Bicycle Routes"
-#~ msgstr "Rutas ciclistas"
-
-#~ msgctxt "OutdoorActivities|"
-#~ msgid "Mountainbike Routes"
-#~ msgstr "Rutas para bicicleta de montaña"
-
-#~ msgctxt "OutdoorActivities|"
-#~ msgid "Inline Skating Routes"
-#~ msgstr "Rutas de patinaje en línea"
-
-#~ msgctxt "OutdoorActivities|"
-#~ msgid "Bridleways"
-#~ msgstr "Caminos ecuestres"
-
-#~ msgctxt "PlacemarkDialog|"
-#~ msgid "<h2>Routes</h2>"
-#~ msgstr "<h2>Rutas</h2>"
-
-#~ msgctxt "ProfileSelectorMenu|"
-#~ msgid "Car (fastest)"
-#~ msgstr "Automóvil (el más rápido)"
-
-#~ msgctxt "ProfileSelectorMenu|"
-#~ msgid "Bicycle"
-#~ msgstr "Bicicleta"
-
-#~ msgctxt "ProfileSelectorMenu|"
-#~ msgid "Pedestrian"
-#~ msgstr "A pie"
-
-#~ msgctxt "PublicTransport|"
-#~ msgid "Train"
-#~ msgstr "Tren"
-
-#~ msgctxt "PublicTransport|"
-#~ msgid "Subway"
-#~ msgstr "Metro"
-
-#~ msgctxt "PublicTransport|"
-#~ msgid "Tram"
-#~ msgstr "Tranvía"
-
-#~ msgctxt "PublicTransport|"
-#~ msgid "Bus"
-#~ msgstr "Autobús"
-
-#~ msgctxt "PublicTransport|"
-#~ msgid "Trolley Bus"
-#~ msgstr "Trolebús"
-
-#~ msgctxt "RouteEditor|"
-#~ msgid "Search for places to integrate them into a route."
-#~ msgstr "Buscar lugares para integrarlos en una ruta."
-
-#~ msgctxt "Search|"
-#~ msgid "Your bookmarks will appear here."
-#~ msgstr "Aquí aparecerán sus marcadores."
-
-#~ msgctxt "SearchField|"
-#~ msgid "Search"
-#~ msgstr "Buscar"
-
-#~ msgctxt "SettingsDialog|"
-#~ msgid "Network Settings"
-#~ msgstr "Preferencias de la red"
-
-#~ msgctxt "SettingsDialog|"
-#~ msgid "Download Maps via WLAN only"
-#~ msgstr "Descargar mapas solo mediante WLAN"
-
-#~ msgctxt "SidePanel|"
-#~ msgid "Public Transport"
-#~ msgstr "Transporte público"
-
-#~ msgctxt "SidePanel|"
-#~ msgid "Outdoor Activities"
-#~ msgstr "Actividades al aire libre"
-
-#~ msgctxt "SidePanel|"
-#~ msgid "Accessibility"
-#~ msgstr "Accesibilidad"
-
-#~ msgctxt "SidePanel|"
-#~ msgid "About Marble Maps…"
-#~ msgstr "Acerca de Mapas de Marble..."
-
-#~ msgctxt "OpenCachingCacheDialog|KDE::DoNotExtract"
-#~ msgid "TextLabel"
-#~ msgstr "Etiqueta de texto"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+O"
-#~ msgstr "Ctrl+O"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+S"
-#~ msgstr "Ctrl+S"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+C"
-#~ msgstr "Ctrl+C"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+E"
-#~ msgstr "Ctrl+E"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+Shift+F"
-#~ msgstr "Ctrl+Mayúsculas+F"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "F5"
-#~ msgstr "F5"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "F1"
-#~ msgstr "F1"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Shift+F1"
-#~ msgstr "Mayúsculas+F1"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+B"
-#~ msgstr "Ctrl+B"
-
-#~ msgctxt "DGML|"
-#~ msgid "Hillshading"
-#~ msgstr "Sombreado de relieve"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Available Layers:"
-#~ msgstr "Capas disponibles:"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Geographic Pole"
-#~ msgstr "Polo geográfico"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Magnetic Pole"
-#~ msgstr "Polo magnético"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Airport"
-#~ msgstr "Aeropuerto"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Shipwreck"
-#~ msgstr "Naufragio"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Observatory"
-#~ msgstr "Observatorio"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Mountain"
-#~ msgstr "Montaña"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Volcano"
-#~ msgstr "Volcán"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "International"
-#~ msgstr "Internacional"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "State"
-#~ msgstr "Estado"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Places of Interest"
-#~ msgstr "Lugares de interés"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Populated Places"
-#~ msgstr "Lugares habitados"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Terrain"
-#~ msgstr "Terreno"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Coordinate Grid"
-#~ msgstr "Rejilla de coordenadas"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Border Lines"
-#~ msgstr "Líneas de frontera"
-
-#, fuzzy
-#~| msgctxt "Marble::MapWizard|"
-#~| msgid "Equirectangular (epsg:4326)"
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Equirectangular (epsg:4326))"
-#~ msgstr "Equirrectangular (epsg:4326)"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "The preview image could not be downloaded."
-#~ msgstr "No se puede descargar la imagen de vista previa."
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid ""
-#~ "The preview image could not be downloaded successfully. The server "
-#~ "replied:\n"
-#~ "\n"
-#~ "%1"
-#~ msgstr ""
-#~ "La imagen de visa previa no se ha podido descargar con éxito. El servidor "
-#~ "ha respondido:\n"
-#~ "\n"
-#~ "%1"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Thumbnail image goes here."
-#~ msgstr "Aquí va la imagen de la miniatura."
-
-#~ msgctxt "Marble::TourCaptureDialog|"
-#~ msgid "Supported codecs are not found."
-#~ msgstr "No se han encontrado los códecs permitidos."
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "&Add Bookmark"
-#~ msgstr "&Añadir marcador"
-
-#~ msgctxt "UiBookmarkManagerDialog|"
-#~ msgid "New"
-#~ msgstr "Nuevo"
-
-#~ msgctxt "Marble::MapViewWidget|"
-#~ msgid "&Upload Map..."
-#~ msgstr "&Enviar mapa..."
-
-#~ msgctxt "QObject|"
-#~ msgid "File Parsing Error"
-#~ msgstr "Error analizando archivo"
-
-#~ msgctxt "PlacemarkDialog|"
-#~ msgid "Routes"
-#~ msgstr "Rutas"
-
-#~ msgctxt "TimeControlWidget|"
-#~ msgid "&New Date Time      :"
-#~ msgstr "&Nueva fecha y hora:"
-
-#~ msgctxt "MovieCaptureDialog|"
-#~ msgid "Cancel"
-#~ msgstr "Cancelar"
-
-#~ msgctxt "SunControlWidget|"
-#~ msgid "Shadow"
-#~ msgstr "Sombra"
-
-#~ msgctxt "SunControlWidget|"
-#~ msgid "OK"
-#~ msgstr "Aceptar"
-
-#~ msgctxt "SunControlWidget|"
-#~ msgid "Apply"
-#~ msgstr "Aplicar"
-
-#~ msgctxt "SunControlWidget|"
-#~ msgid "Cancel"
-#~ msgstr "Cancelar"
-
-#~ msgctxt "TileCreatorDialog|"
-#~ msgid "&Cancel"
-#~ msgstr "&Cancelar"
-
-#~ msgctxt "TimeControlWidget|"
-#~ msgid "OK"
-#~ msgstr "Aceptar"
-
-#~ msgctxt "TimeControlWidget|"
-#~ msgid "Apply"
-#~ msgstr "Aplicar"
-
-#~ msgctxt "TimeControlWidget|"
-#~ msgid "Cancel"
-#~ msgstr "Cancelar"
-
-#~ msgctxt "Marble::DownloadOsmDialog|"
-#~ msgid "Cancel"
-#~ msgstr "Cancelar"
-
-#~ msgctxt "CacheDetailsDialog|"
-#~ msgid "TextLabel"
-#~ msgstr "Etiqueta de texto"
-
-#~ msgctxt "CacheDetailsDialog|"
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgctxt "CacheDetailsDialog|"
-#~ msgid "General"
-#~ msgstr "General"
-
-#~ msgctxt "CacheDetailsDialog|"
-#~ msgid "Description"
-#~ msgstr "Descripción"
-
-#~ msgctxt "CacheDetailsDialog|"
-#~ msgid "Hint"
-#~ msgstr "Pista"
-
-#~ msgctxt "CacheDetailsDialog|"
-#~ msgid "Logs"
-#~ msgstr "Registros"
-
-#~ msgctxt "CacheDetailsDialog|"
-#~ msgid "&Close"
-#~ msgstr "&Cerrar"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "Cache Details for %1"
-#~ msgstr "Detalles de caché para %1"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "Click to open this cache's page in a browser"
-#~ msgstr "Pulse para abrir esta página de la caché en un navegador"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "Size:"
-#~ msgstr "Tamaño:"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "Difficulty:"
-#~ msgstr "Dificultad:"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "Terrain:"
-#~ msgstr "Terreno:"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "Awsomeness:"
-#~ msgstr "Belleza:"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "Hidden by:"
-#~ msgstr "Ocultado por:"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "Hidden:"
-#~ msgstr "Oculto:"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "Last found:"
-#~ msgstr "Visto por última vez:"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "Tags:"
-#~ msgstr "Etiquetas:"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "Series:"
-#~ msgstr "Serie:"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "number"
-#~ msgstr "número"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "chirp"
-#~ msgstr "chirp"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "qr code"
-#~ msgstr "código qr"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "code phrase"
-#~ msgstr "frase de código"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "Verification:"
-#~ msgstr "Verificación:"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "Distance:"
-#~ msgstr "Distancia:"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "Distance from home:"
-#~ msgstr "Distancia desde el inicio:"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "by <em>"
-#~ msgstr "por <em>"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "Difficulty"
-#~ msgstr "Dificultad"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "Terrain"
-#~ msgstr "Terreno"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "Awsomeness"
-#~ msgstr "Belleza"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "Size"
-#~ msgstr "Tamaño"
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "Last found: "
-#~ msgstr "Visto por última vez: "
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "User: "
-#~ msgstr "Usuario: "
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "Type: "
-#~ msgstr "Tipo: "
-
-#~ msgctxt "Marble::OpenCachingComItem|"
-#~ msgid "Date: "
-#~ msgstr "Fecha: "
-
-#~ msgctxt "Marble::OpenCachingComModel|"
-#~ msgid "Boat required"
-#~ msgstr "Se necesita barco"
-
-#~ msgctxt "Marble::OpenCachingComModel|"
-#~ msgid "Chirp"
-#~ msgstr "Chirp"
-
-#~ msgctxt "Marble::OpenCachingComModel|"
-#~ msgid "Diving"
-#~ msgstr "Bucear"
-
-#~ msgctxt "Marble::OpenCachingComModel|"
-#~ msgid "Exclusive"
-#~ msgstr "Exclusivo"
-
-#~ msgctxt "Marble::OpenCachingComModel|"
-#~ msgid "Historic site"
-#~ msgstr "Lugar histórico"
-
-#~ msgctxt "Marble::OpenCachingComModel|"
-#~ msgid "Letterbox"
-#~ msgstr "Letterbox"
-
-#~ msgctxt "Marble::OpenCachingComModel|"
-#~ msgid "Night"
-#~ msgstr "Noche"
-
-#~ msgctxt "Marble::OpenCachingComModel|"
-#~ msgid "Tree climbing"
-#~ msgstr "Trepar a un árbol"
-
-#~ msgctxt "Marble::OpenCachingComModel|"
-#~ msgid "UV light"
-#~ msgstr "Luz UV"
-
-#~ msgctxt "Marble::OpenCachingComModel|"
-#~ msgid "Traditional Cache"
-#~ msgstr "Tesoro tradicional"
-
-#~ msgctxt "Marble::OpenCachingComModel|"
-#~ msgid "Multi-cache"
-#~ msgstr "Tesoro encadenado"
-
-#~ msgctxt "Marble::OpenCachingComModel|"
-#~ msgid "Virtual Cache"
-#~ msgstr "Tesoro virtual"
-
-#~ msgctxt "Marble::OpenCachingComModel|"
-#~ msgid "Puzzle Cache"
-#~ msgstr "Tesoro rompecabezas"
-
-#~ msgctxt "Marble::OpenCachingComModel|"
-#~ msgid "Unknown Cache"
-#~ msgstr "Tesoro desconocido"
-
-#~ msgctxt "Marble::OpenCachingComPlugin|"
-#~ msgid "OpenCaching.Com"
-#~ msgstr "OpenCaching.Com"
-
-#~ msgctxt "Marble::OpenCachingComPlugin|"
-#~ msgid "&OpenCaching.Com"
-#~ msgstr "&OpenCaching.Com"
-
-#~ msgctxt "Marble::OpenCachingComPlugin|"
-#~ msgid "Shows caches from OpenCaching.com on the map."
-#~ msgstr "Muestra tesoros de OpenCaching.com en el mapa."
-
-#~ msgctxt "BookmarkManagerDialogPrivate|"
-#~ msgid "Cancel"
-#~ msgstr "Cancelar"
-
-#~ msgctxt "Marble::NotesPlugin|"
-#~ msgid "Notes Plugin"
-#~ msgstr "Complemento de notas"
-
-#~ msgctxt "Marble::NotesPlugin|"
-#~ msgid "Notes"
-#~ msgstr "Notas"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "%1 m"
-#~ msgstr "%1 m"
-
-#~ msgctxt "Marble::CycleStreetsConfigWidget|"
-#~ msgid "shortest"
-#~ msgstr "el más corto"
-
-#, fuzzy
-#~| msgctxt "Marble::Placemark|Positive floor level"
-#~| msgid "Floor %1"
-#~| msgid_plural "Floor %1"
-#~ msgctxt "Marble::Placemark|Positive floor level"
-#~ msgid "Floor %n"
-#~ msgid_plural "Floor %n"
-#~ msgstr[0] "Planta %1"
-#~ msgstr[1] "Planta %1"
-
-#, fuzzy
-#~| msgctxt "Marble::Placemark|Negative floor level"
-#~| msgid "Basement %1"
-#~| msgid_plural "Basement %1"
-#~ msgctxt "Marble::Placemark|Negative floor level"
-#~ msgid "Basement %n"
-#~ msgid_plural "Basement %n"
-#~ msgstr[0] "Sótano %1"
-#~ msgstr[1] "Sótano %1"
-
-#, fuzzy
-#~| msgctxt "Marble::MarbleWidgetPopupMenu|"
-#~| msgid "National Capital"
-#~ msgctxt "GeoDataPlacemark|"
-#~ msgid "City National Capital"
-#~ msgstr "Capital de nación"
-
-#, fuzzy
-#~| msgctxt "Marble::MarbleWidgetPopupMenu|"
-#~| msgid "National Capital"
-#~ msgctxt "GeoDataPlacemark|"
-#~ msgid "Town National Capital"
-#~ msgstr "Capital de nación"
-
-#, fuzzy
-#~| msgctxt "Marble::MarbleWidgetPopupMenu|"
-#~| msgid "National Capital"
-#~ msgctxt "GeoDataPlacemark|"
-#~ msgid "Village National Capital"
-#~ msgstr "Capital de nación"
-
-#~ msgctxt "Marble::InhibitScreensaverPlugin|"
-#~ msgid "Inhibit Screensaver"
-#~ msgstr "Inhibir el salvapantallas"
-
-#~ msgctxt "Marble::InhibitScreensaverPlugin|"
-#~ msgid "&Inhibit Screensaver"
-#~ msgstr "&Inhibir el salvapantallas"
-
-#~ msgctxt "Marble::InhibitScreensaverPlugin|"
-#~ msgid "Inhibits the screensaver during turn-by-turn navigation"
-#~ msgstr "Inhibe el salvapantallas durante la navegación detallada"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Not wheelchair accessible"
-#~ msgstr "No es accesible con silla de ruedas"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "There is no reservation"
-#~ msgstr "No hay reserva"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "%1 Volt"
-#~ msgstr "%1 voltios"
-
-#~ msgctxt "GeoDataPlacemark|"
-#~ msgid "Alcohol"
-#~ msgstr "Bebidas alcohólicas"
-
-#~ msgctxt "GeoDataPlacemark|"
-#~ msgid "Bag"
-#~ msgstr "Bolsos"
-
-#~ msgctxt "GeoDataPlacemark|"
-#~ msgid "Shoes"
-#~ msgstr "Zapatería"
-
-#~ msgctxt "GeoDataPlacemark|"
-#~ msgid "Beauty"
-#~ msgstr "Belleza"
-
-#~ msgctxt "GeoDataPlacemark|"
-#~ msgid "Doit Yourself"
-#~ msgstr "Bricolaje"
-
-#~ msgctxt "GeoDataPlacemark|"
-#~ msgid "Car"
-#~ msgstr "Automóvil"
-
-#~| msgctxt "MarbleWebView|"
-#~| msgid "Copy"
-#~ msgctxt "GeoDataPlacemark|"
-#~ msgid "Copy"
-#~ msgstr "Copia"
-
-#~ msgctxt "GeoDataPlacemark|"
-#~ msgid "Book"
-#~ msgstr "Libros"
-
-#~ msgctxt "GeoDataPlacemark|"
-#~ msgid "Pet"
-#~ msgstr "Mascotas"
-
-#~ msgctxt "GeoDataPlacemark|"
-#~ msgid "Toys"
-#~ msgstr "Juguetes"
-
-#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
-#~ msgid "Routing Profile - Marble"
-#~ msgstr "Perfil de rutas - Marble"
-
-#~ msgctxt "Marble::RoutingWidget|"
-#~ msgid "Directions - Marble"
-#~ msgstr "Direcciones - Marble"
-
-#~ msgctxt "RoutingPlugin|"
-#~ msgid "zoom out"
-#~ msgstr "alejar"
-
-#~ msgctxt "RoutingPlugin|"
-#~ msgid "zoom in"
-#~ msgstr "acercar"
-
-#~ msgctxt "Marble::RoutinoConfigWidget|"
-#~ msgid "Foot"
-#~ msgstr "A pie"
-
-#~ msgctxt "Marble::YoursConfigWidget|"
-#~ msgid "Foot"
-#~ msgstr "A pie"
-
-#~ msgctxt "RoutinoConfigWidget|"
-#~ msgid "Profile:"
-#~ msgstr "Perfil:"
-
-#~ msgctxt ""
-#~ "GeoDataCoordinates|East direction terms, see http://techbase.kde.org/"
-#~ "Projects/Marble/GeoDataCoordinatesTranslation"
-#~ msgid "*"
-#~ msgstr "N"
-
-#~ msgctxt ""
-#~ "GeoDataCoordinates|South direction terms, see http://techbase.kde.org/"
-#~ "Projects/Marble/GeoDataCoordinatesTranslation"
-#~ msgid "*"
-#~ msgstr "N"
-
-#~ msgctxt ""
-#~ "GeoDataCoordinates|West direction terms, see http://techbase.kde.org/"
-#~ "Projects/Marble/GeoDataCoordinatesTranslation"
-#~ msgid "*"
-#~ msgstr "*"
-
-#~ msgctxt ""
-#~ "GeoDataCoordinates|Degree symbol terms, see http://techbase.kde.org/"
-#~ "Projects/Marble/GeoDataCoordinatesTranslation"
-#~ msgid "*"
-#~ msgstr "*"
-
-#~ msgctxt ""
-#~ "GeoDataCoordinates|Minutes symbol terms, see http://techbase.kde.org/"
-#~ "Projects/Marble/GeoDataCoordinatesTranslation"
-#~ msgid "*"
-#~ msgstr "*"
-
-#~ msgctxt ""
-#~ "GeoDataCoordinates|Seconds symbol terms, see http://techbase.kde.org/"
-#~ "Projects/Marble/GeoDataCoordinatesTranslation"
-#~ msgid "*"
-#~ msgstr "*"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Terrain"
-#~ msgstr "Terreno"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Crater"
-#~ msgstr "Cráter"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Mountain"
-#~ msgstr "Montaña"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Volcano"
-#~ msgstr "Volcán"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Geographic Pole"
-#~ msgstr "Polo geográfico"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Magnetic Pole"
-#~ msgstr "Polo magnético"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Folder"
-#~ msgstr "Carpeta"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Town"
-#~ msgstr "Ciudad"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Water"
-#~ msgstr "Agua"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Wood"
-#~ msgstr "Boscaje"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Footway"
-#~ msgstr "Camino peatonal"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Track"
-#~ msgstr "Senda"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Cycleway"
-#~ msgstr "Camino ciclista"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Motorway"
-#~ msgstr "Autopista"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Hotel"
-#~ msgstr "Hotel"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Motel"
-#~ msgstr "Motel"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Library"
-#~ msgstr "Biblioteca"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Kindergarten"
-#~ msgstr "Guardería"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "College"
-#~ msgstr "Instituto"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "School"
-#~ msgstr "Colegio"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "University"
-#~ msgstr "Universidad"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Bar"
-#~ msgstr "Bar"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Biergarten"
-#~ msgstr "Cervecería"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Cafe"
-#~ msgstr "Café"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Fast Food"
-#~ msgstr "Comida rápida"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Pub"
-#~ msgstr "Pub"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Restaurant"
-#~ msgstr "Restaurante"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Dentist"
-#~ msgstr "Dentista"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Doctors"
-#~ msgstr "Médico"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Hospital"
-#~ msgstr "Hospital"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Pharmacy"
-#~ msgstr "Farmacia"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Veterinary"
-#~ msgstr "Veterinario"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "ATM"
-#~ msgstr "Cajero automático"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Bank"
-#~ msgstr "Banco"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Embassy"
-#~ msgstr "Embajada"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Toilets"
-#~ msgstr "Aseos"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Alcohol"
-#~ msgstr "Bebidas alcohólicas"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Bakery"
-#~ msgstr "Panadería"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Clothes"
-#~ msgstr "Ropa"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Car"
-#~ msgstr "Automóvil"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Gift"
-#~ msgstr "Regalos"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Shop"
-#~ msgstr "Tienda"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Bridge"
-#~ msgstr "Puente"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Cinema"
-#~ msgstr "Cine"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Monument"
-#~ msgstr "Monumento"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Theatre"
-#~ msgstr "Teatro"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Park"
-#~ msgstr "Parque"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Playground"
-#~ msgstr "Parque infantil"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Allotments"
-#~ msgstr "Parcelas"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Cemetery"
-#~ msgstr "Cementerio"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Railway"
-#~ msgstr "Línea de ferrocarril"
-
-#~ msgctxt "GeoDataFeature|"
-#~ msgid "Subway"
-#~ msgstr "Línea de metro"
-
-#~ msgctxt "MapThemeDownloadDialog|"
-#~ msgid "Marble - Install Maps"
-#~ msgstr "Marble - Instalar mapas"
-
-#~ msgctxt "MarbleNavigationSettingsWidget|"
-#~ msgid "Marble Cache Settings"
-#~ msgstr "Preferencias de la caché de Marble"
-
-#~ msgctxt "EarthquakeConfigWidget|"
-#~ msgid "Dialog"
-#~ msgstr "Diálogo"
-
-#~ msgctxt "OverviewMapConfigWidget|"
-#~ msgid "Dialog"
-#~ msgstr "Diálogo"
-
-#~ msgctxt "Marble::BookmarkManagerDialog|"
-#~ msgid "Import Bookmarks - Marble"
-#~ msgstr "Importar marcadores - Marble"
-
-#~ msgctxt "UiEditBookmarkDialog|"
-#~ msgid "Edit Bookmark - Marble"
-#~ msgstr "Editar marcador - Marble"
-
-#~ msgctxt "Marble::RoutingManager|"
-#~ msgid "Guidance Mode - Marble"
-#~ msgstr "Modo guiado - Marble"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "City"
-#~ msgstr "Ciudad"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "County Capital"
-#~ msgstr "Capital de país"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "State Capital"
-#~ msgstr "Capital de estado"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Town"
-#~ msgstr "Población"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Village"
-#~ msgstr "Pueblo"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Mountain"
-#~ msgstr "Montaña"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Continent"
-#~ msgstr "Continente"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Geographic Pole"
-#~ msgstr "Polo geográfico"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Magnetic Pole"
-#~ msgstr "Polo magnético"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Observatory"
-#~ msgstr "Observatorio"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Water"
-#~ msgstr "Agua"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Footway"
-#~ msgstr "Acera"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Track"
-#~ msgstr "Pista"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Cycleway"
-#~ msgstr "Camino ciclista"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Motorway"
-#~ msgstr "Autopista"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Hotel"
-#~ msgstr "Hotel"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Motel"
-#~ msgstr "Motel"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Library"
-#~ msgstr "Biblioteca"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Kindergarten"
-#~ msgstr "Guardería"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "College"
-#~ msgstr "Instituto"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "School"
-#~ msgstr "Colegio"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "University"
-#~ msgstr "Universidad"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Bar"
-#~ msgstr "Bar"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Biergarten"
-#~ msgstr "Cervecería"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Cafe"
-#~ msgstr "Café"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Fast Food"
-#~ msgstr "Comida rápida"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Pub"
-#~ msgstr "Pub"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Restaurant"
-#~ msgstr "Restaurante"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Doctors"
-#~ msgstr "Médico"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Pharmacy"
-#~ msgstr "Farmacia"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Veterinary"
-#~ msgstr "Veterinario"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "ATM"
-#~ msgstr "Cajero automático"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Bank"
-#~ msgstr "Banco"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Embassy"
-#~ msgstr "Embajada"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Toilets"
-#~ msgstr "Aseos"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Alcohol"
-#~ msgstr "Bebidas alcohólicas"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Bakery"
-#~ msgstr "Panadería"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Bicycle"
-#~ msgstr "Bicicleta"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Car"
-#~ msgstr "Automóvil"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Gift"
-#~ msgstr "Regalos"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Shop"
-#~ msgstr "Tienda"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Bridge"
-#~ msgstr "Puente"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Cinema"
-#~ msgstr "Cine"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Information"
-#~ msgstr "Información"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Monument"
-#~ msgstr "Monumento"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Theatre"
-#~ msgstr "Teatro"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Park"
-#~ msgstr "Parque"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Playground"
-#~ msgstr "Parque infantil"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Allotments"
-#~ msgstr "Parcelas"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Cemetery"
-#~ msgstr "Cementerio"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Railway"
-#~ msgstr "Línea de ferrocarril"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Subway"
-#~ msgstr "Metro"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Terrain"
-#~ msgstr "Terreno"
-
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Crater"
-#~ msgstr "Cráter"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Marble Virtual Globe"
-#~ msgstr "Globo virtual Marble"
-
-#~| msgctxt "Marble::WikipediaPlugin|"
-#~| msgid "&Wikipedia"
-#~ msgctxt "Marble::Placemark|"
-#~ msgid "Wikipedia"
-#~ msgstr "Wikipedia"
-
-#~ msgctxt "Marble::MaemoPositionProviderPlugin|"
-#~ msgid "Maemo Position Provider Plugin"
-#~ msgstr "Complemento para proporcionar posiciones de Maemo"
-
-#~ msgctxt "Marble::MaemoPositionProviderPlugin|"
-#~ msgid "Maemo"
-#~ msgstr "Maemo"
-
-#~ msgctxt "Marble::MaemoPositionProviderPlugin|"
-#~ msgid "Reports the GPS position of a Maemo device (e.g. Nokia N900)."
-#~ msgstr ""
-#~ "Informa de la posición GPS de un dispositivo Maemo (por ej., Nokia N900)."
-
-#~ msgctxt "MarbleViewSettingsWidget|"
-#~ msgid "G&raphics system:"
-#~ msgstr "Sistema g&ráfico:"
-
-#~ msgctxt "MarbleViewSettingsWidget|"
-#~ msgid "OpenGL"
-#~ msgstr "OpenGL"
-
-#~ msgctxt "Marble::QtMarbleConfigDialog|"
-#~ msgid "Native"
-#~ msgstr "Nativa"
-
-#~ msgctxt "Marble::QtMarbleConfigDialog|"
-#~ msgid "Native (X11)"
-#~ msgstr "Nativa (X11)"
-
-#~ msgctxt "Marble::QtMarbleConfigDialog|"
-#~ msgid "Native (Mac OS X Core Graphics)"
-#~ msgstr "Nativa (Gráficos esenciales de Mac OS X)"
-
-#~ msgctxt "Marble::QtMarbleConfigDialog|"
-#~ msgid "Graphics System Change"
-#~ msgstr "Cambio del sistema gráfico"
-
-#~ msgctxt "Marble::QtMarbleConfigDialog|"
-#~ msgid ""
-#~ "You have decided to run Marble with a different graphics system.\n"
-#~ "For this change to become effective, Marble has to be restarted.\n"
-#~ "Please close the application and start Marble again."
-#~ msgstr ""
-#~ "Ha decidido ejecutar Marble con un sistema gráfico distinto.\n"
-#~ "Para que este cambio sea efectivo deberá reiniciar Marble.\n"
-#~ "Cierre la aplicación e inicie Marble de nuevo."
-
-#~ msgctxt ""
-#~ "East direction terms, see http://techbase.kde.org/Projects/Marble/"
-#~ "GeoDataCoordinatesTranslation"
-#~ msgid "*"
-#~ msgstr "E"
-
-#~ msgctxt ""
-#~ "South direction terms, see http://techbase.kde.org/Projects/Marble/"
-#~ "GeoDataCoordinatesTranslation"
-#~ msgid "*"
-#~ msgstr "S"
-
-#~ msgctxt ""
-#~ "West direction terms, see http://techbase.kde.org/Projects/Marble/"
-#~ "GeoDataCoordinatesTranslation"
-#~ msgid "*"
-#~ msgstr "O"
-
-#~ msgctxt ""
-#~ "Degree symbol terms, see http://techbase.kde.org/Projects/Marble/"
-#~ "GeoDataCoordinatesTranslation"
-#~ msgid "*"
-#~ msgstr "º"
-
-#~ msgctxt ""
-#~ "Minutes symbol terms, see http://techbase.kde.org/Projects/Marble/"
-#~ "GeoDataCoordinatesTranslation"
-#~ msgid "*"
-#~ msgstr "´"
-
-#~ msgctxt ""
-#~ "Seconds symbol terms, see http://techbase.kde.org/Projects/Marble/"
-#~ "GeoDataCoordinatesTranslation"
-#~ msgid "*"
-#~ msgstr "´´"
-
-#~ msgctxt "East, the direction"
-#~ msgid "E"
-#~ msgstr "E"
-
-#~ msgctxt "West, the direction"
-#~ msgid "W"
-#~ msgstr "O"
-
-#~ msgctxt "North, the direction"
-#~ msgid "N"
-#~ msgstr "N"
-
-#~ msgctxt "South, the direction"
-#~ msgid "S"
-#~ msgstr "S"
-
-#~ msgctxt "means meter"
-#~ msgid "m"
-#~ msgstr "m"
-
-#~ msgctxt "means kilometers"
-#~ msgid "km"
-#~ msgstr "km"
-
-#~ msgctxt "means feet"
-#~ msgid "ft"
-#~ msgstr "ft"
-
-#~ msgctxt "means miles"
-#~ msgid "mi"
-#~ msgstr "mi"
-
-#~ msgctxt "means nautical miles"
-#~ msgid "nm"
-#~ msgstr "nm"
-
-#~ msgctxt "the planet"
-#~ msgid "Mercury"
-#~ msgstr "Mercurio"
-
-#~ msgctxt "the planet"
-#~ msgid "Venus"
-#~ msgstr "Venus"
-
-#~ msgctxt "the planet"
-#~ msgid "Earth"
-#~ msgstr "Tierra"
-
-#~ msgctxt "the planet"
-#~ msgid "Mars"
-#~ msgstr "Marte"
-
-#~ msgctxt "the planet"
-#~ msgid "Jupiter"
-#~ msgstr "Júpiter"
-
-#~ msgctxt "the planet"
-#~ msgid "Saturn"
-#~ msgstr "Saturno"
-
-#~ msgctxt "the planet"
-#~ msgid "Uranus"
-#~ msgstr "Urano"
-
-#~ msgctxt "the planet"
-#~ msgid "Neptune"
-#~ msgstr "Neptuno"
-
-#~ msgctxt "the earth's star"
-#~ msgid "Sun"
-#~ msgstr "Sol"
-
-#~ msgctxt "the earth's moon"
-#~ msgid "Moon"
-#~ msgstr "Luna"
-
-#~ msgid "type"
-#~ msgstr "tipo"
-
-#~ msgctxt "Name of a satellite group"
-#~ msgid "Weather"
-#~ msgstr "Meteorología"
-
-#~ msgctxt "Name of a satellite group"
-#~ msgid "Other"
-#~ msgstr "Otros"
-
-#~ msgctxt "Wind: WindDirection"
-#~ msgid "Wind: %4\n"
-#~ msgstr "Viento: %4\n"
-
-#~ msgid "PAL (720x576)"
-#~ msgstr "PAL (720x576)"
-
-#~ msgid "Paste Graphic Item"
-#~ msgstr "Pegar elemento gráfico"
-
-#~ msgid "No url specified"
-#~ msgstr "No se ha indicado ningún URL"
-
-#~ msgid "Please specify a name url this link."
-#~ msgstr "Por favor, indique un URL para este enlace."
-
-#, fuzzy
-#~| msgid "Remove Item"
-#~ msgid "Remove item"
-#~ msgstr "Eliminar elemento"
-
-#~ msgid "Supported video (*.mp4 *.webm *.ogg)"
-#~ msgstr "Vídeos permitidos (*.mp4 *.webm *.ogg)"
-
-#~ msgid "Total Distance: %1 km"
-#~ msgstr "Distancia total: %1 km"
-
-#~ msgid "Initializing current location service..."
-#~ msgstr "Inicializando el servicio de posición actual..."
-
-#~ msgid "Merge Nodes"
-#~ msgstr "Fusionar nodos."
-
-#~ msgid "All Supported Files (*.kml);;KML file (*.kml)"
-#~ msgstr "Todos los archivos permitidos (*.kml);;Archivo KML (*.kml)"
-
-#~ msgid "Remove Ground Overlay"
-#~ msgstr "Eliminar capa de terreno"
-
-#~ msgid "Remove Polygon"
-#~ msgstr "Eliminar polígono"
-
-#~ msgid "Enable Moving Map"
-#~ msgstr "Activar mover el mapa"
-
-#~ msgid "Show Constellation &Labels"
-#~ msgstr "Mostrar &etiquetas de constelaciones"
-
-#~ msgid "Show &Sun"
-#~ msgstr "Mostrar el &Sol"
-
-#~ msgctxt "journey duration, where %1=%n hours and %2=%m minutes"
-#~ msgid "%1, %2"
-#~ msgstr "%1, %2"
-
-#~ msgid "NMEA files"
-#~ msgstr "Archivos NMEA"
-
-#~ msgid "Json File Parser"
-#~ msgstr "Analizador de archivos Json"
-
-#~ msgid "Create GeoDataDocument from Json Files"
-#~ msgstr "Crear documento GeoData desde archivos Json"
-
-#~ msgid "Json or GeoJson"
-#~ msgstr "Json o GeoJson"
-
-#~ msgid "Map View - Marble"
-#~ msgstr "Vista del mapa - Marble"
-
-#~ msgid "Open Route..."
-#~ msgstr "Abrir ruta..."
-
-#~ msgid "Save Route..."
-#~ msgstr "Guardar ruta..."
-
-#~ msgid "Tracking - Marble"
-#~ msgstr "Seguimiento - Marble"
