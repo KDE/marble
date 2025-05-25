@@ -2909,7 +2909,7 @@ msgid ""
 "different external editor in the settings dialog."
 msgstr ""
 "No s'ha pogut iniciar l'editor extern. Comproveu que %1 està instal·lat o bé "
-"escolliu un editor extern diferent en el diàleg de configuració."
+"trieu un editor extern diferent en el diàleg de configuració."
 
 #: src/apps/marble-ui/ControlView.cpp:557
 msgctxt "Marble::ControlView|"
@@ -5224,8 +5224,8 @@ msgid ""
 "the Marble Settings."
 msgstr ""
 "Desactiva que es torne a sol·licitar la selecció de l'editor de mapes. Si "
-"no, el què escolliu es recordarà i s'utilitzarà automàticament en el futur. "
-"Si més avant voleu canviar l'editor de mapes predeterminat, podeu fer-ho als "
+"no, el què trieu es recordarà i s'utilitzarà automàticament en el futur. Si "
+"més avant voleu canviar l'editor de mapes predeterminat, podeu fer-ho als "
 "configuracions de Marble."
 
 #: src/lib/marble/ExternalEditor.ui:51
@@ -5703,7 +5703,7 @@ msgstr "Aigua"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:408
 msgctxt "GeoDataPlacemark|"
 msgid "Reef"
-msgstr "Trieu"
+msgstr "Tria"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:410
 msgctxt "GeoDataPlacemark|"
@@ -7973,8 +7973,8 @@ msgstr ""
 "guiarà a través del procés de creació d'un tema de mapa per a Marble. al "
 "final obtindreu un mapa que podreu visualitzar en Marble.</p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Escolliu la font de dades "
-"que voleu utilitzar per al vostre tema de mapa:</p>\n"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Trieu la font de dades que "
+"voleu utilitzar per al vostre tema de mapa:</p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
 "p></body></html>"
@@ -8101,7 +8101,7 @@ msgstr "Seleccioneu les capes"
 #: src/lib/marble/MapWizard.ui:243
 msgctxt "MapWizard|"
 msgid "Choose your Layer(s):"
-msgstr "Escolliu les capes:"
+msgstr "Trieu les capes:"
 
 #: src/lib/marble/MapWizard.ui:266
 msgctxt "MapWizard|"
@@ -8249,9 +8249,9 @@ msgstr ""
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
 "weight:600;\"></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Escolliu l'emplaçament "
-"d'un mapamundi que estiga guardat en un únic fitxer d'imatge (JPG, PNG, "
-"etc.). Cal que estiga en <a href=\"https://en.wikipedia.org/wiki/"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Trieu l'emplaçament d'un "
+"mapamundi que estiga guardat en un únic fitxer d'imatge (JPG, PNG, etc.). "
+"Cal que estiga en <a href=\"https://en.wikipedia.org/wiki/"
 "Equirectangular_projection\"><span style=\" text-decoration: underline; "
 "color:#0057ae;\">Projecció cilíndrica equidistant</span></a>, per la qual "
 "cosa la forma serà pareixent a esta (ràtio: 2:1):</p>\n"
@@ -10246,8 +10246,8 @@ msgstr "Restaura la vista"
 msgctxt "MarbleNavigator|"
 msgid "Click this button to restore the original zoom level and view angle."
 msgstr ""
-"Cliqueu este botó per a restablir el nivell de zoom i l'angle de visió "
-"originals."
+"Cliqueu damunt d'este botó per a restablir el nivell de zoom i l'angle de "
+"visió originals."
 
 #: src/lib/marble/MarbleNavigator.ui:109
 msgctxt "MarbleNavigator|"
@@ -10393,7 +10393,7 @@ msgstr "Zona horària del sistema"
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:51
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Choose Time zone"
-msgstr "Escolliu la zona horària"
+msgstr "Trieu la zona horària"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:68
 msgctxt "MarbleTimeSettingsWidget|"
@@ -10594,7 +10594,7 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">La unitat que s'acostuma a "
-"utilitzar per a mesurar altituds, longituds i distàncies (p. ex., km, mi, "
+"utilitzar per a mesurar altituds, llargàries i distàncies (p. ex., km, mi, "
 "canes).</p></body></html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:61
@@ -11021,7 +11021,7 @@ msgid ""
 "video. Please, specify one."
 msgstr ""
 "No s'ha establit el fitxer de vídeo de destinació. Es desconeix a on s'ha de "
-"guardar el vídeo enregistrat. Especifiqueu-ne un."
+"guardar el vídeo gravat. Especifiqueu-ne un."
 
 #: src/lib/marble/MovieCaptureDialog.ui:14
 msgctxt "MovieCaptureDialog|"
@@ -11550,7 +11550,7 @@ msgstr "Última sincronització: %1"
 #: src/lib/marble/RemoveItemEditWidget.cpp:34
 msgctxt "Marble::RemoveItemEditWidget|"
 msgid "Choose item:"
-msgstr "Escolliu un element:"
+msgstr "Trieu un element:"
 
 #: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:29
 msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
@@ -12119,7 +12119,7 @@ msgstr "Mostra els detalls"
 #: src/lib/marble/routing/RoutingWidget.ui:149
 msgctxt "RoutingWidget|"
 msgid "Choose alternative routes"
-msgstr "Trieu itineraris alternatius"
+msgstr "Tria itineraris alternatius"
 
 #: src/lib/marble/RoutingRunner.cpp:29
 msgctxt "Marble::RoutingRunner|"
@@ -12425,7 +12425,7 @@ msgid ""
 "video. Please, specify one."
 msgstr ""
 "No s'ha establit el fitxer de vídeo de destinació. Es desconeix a on s'ha de "
-"guardar el vídeo enregistrat. Especifiqueu-ne un."
+"guardar el vídeo gravat. Especifiqueu-ne un."
 
 #: src/lib/marble/TourCaptureDialog.cpp:138
 msgctxt "Marble::TourCaptureDialog|"
@@ -13211,7 +13211,8 @@ msgstr "No s'han especificat prou nodes."
 #: src/plugins/render/annotate/EditPolygonDialog.cpp:276
 msgctxt "Marble::EditPolygonDialog|"
 msgid "Please specify at least 3 nodes for the polygon by clicking on the map."
-msgstr "Especifiqueu 3 nodes com a mínim per al polígon clicant en el mapa."
+msgstr ""
+"Especifiqueu 3 nodes com a mínim per al polígon clicant damunt del mapa."
 
 #: src/plugins/render/annotate/EditPolygonDialog.ui:14
 msgctxt "UiEditPolygonDialog|"
@@ -13302,7 +13303,7 @@ msgstr "No s'han especificat prou nodes."
 #: src/plugins/render/annotate/EditPolylineDialog.cpp:267
 msgctxt "Marble::EditPolylineDialog|"
 msgid "Please specify at least 2 nodes for the path by clicking on the map."
-msgstr "Especifiqueu 2 nodes com a mínim per al camí clicant en el mapa."
+msgstr "Especifiqueu 2 nodes com a mínim per al camí clicant damunt del mapa."
 
 #: src/plugins/render/annotate/EditPolylineDialog.ui:14
 msgctxt "UiEditPolylineDialog|"
@@ -13352,7 +13353,7 @@ msgstr "No."
 #: src/plugins/render/annotate/NodeModel.cpp:82
 msgctxt "Marble::NodeModel|"
 msgid "Longitude"
-msgstr "Llargària"
+msgstr "Longitud"
 
 #: src/plugins/render/annotate/NodeModel.cpp:84
 msgctxt "Marble::NodeModel|"
@@ -13924,7 +13925,7 @@ msgstr ""
 "<html><head/><body><p>Marble ha detectat que ocorreran els <span style=\" "
 "font-weight:600;\">esdeveniments d'eclipsi</span> següents en el futur "
 "pròxim. Si voleu més informació quant a un esdeveniment específic, "
-"seleccioneu-lo i cliqueu «D'acord».</p></body></html>"
+"seleccioneu-lo i cliqueu damunt «D'acord».</p></body></html>"
 
 #: src/plugins/render/eclipses/EclipsesReminderDialog.ui:33
 msgctxt "EclipsesReminderDialog|"
@@ -14261,17 +14262,17 @@ msgstr "Un connector que mostra una quadrícula de coordenades."
 #: src/plugins/render/graticule/GraticulePlugin.cpp:200
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the coordinate grid."
-msgstr "Escolliu el color de la quadrícula de coordenades."
+msgstr "Trieu el color de la quadrícula de coordenades."
 
 #: src/plugins/render/graticule/GraticulePlugin.cpp:211
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the tropic circles."
-msgstr "Escolliu el color dels cercles dels tròpics."
+msgstr "Trieu el color dels cercles dels tròpics."
 
 #: src/plugins/render/graticule/GraticulePlugin.cpp:222
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the equator."
-msgstr "Escolliu el color de la línia de l'equador."
+msgstr "Trieu el color de la línia de l'equador."
 
 #: src/plugins/render/graticule/GraticulePlugin.cpp:293
 msgctxt "Marble::GraticulePlugin|"
@@ -14851,12 +14852,12 @@ msgstr "És un element flotant que mostra un mapa global resumit."
 #: src/plugins/render/overviewmap/OverviewMap.cpp:453
 msgctxt "Marble::OverviewMap|"
 msgid "Choose Overview Map"
-msgstr "Trieu un mapa general"
+msgstr "Tria un mapa general"
 
 #: src/plugins/render/overviewmap/OverviewMap.cpp:482
 msgctxt "Marble::OverviewMap|"
 msgid "Please choose the color for the position indicator"
-msgstr "Escolliu el color de l'indicador de posició"
+msgstr "Trieu el color de l'indicador de posició"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:14
 msgctxt "OverviewMapConfigWidget|"
@@ -15028,12 +15029,12 @@ msgstr "Mida del cursor: %1"
 #: src/plugins/render/positionmarker/PositionMarker.cpp:367
 msgctxt "Marble::PositionMarker|"
 msgid "Choose Custom Cursor"
-msgstr "Escolliu un cursor personalitzat"
+msgstr "Trieu un cursor personalitzat"
 
 #: src/plugins/render/positionmarker/PositionMarker.cpp:406
 msgctxt "Marble::PositionMarker|"
 msgid "Please choose a color"
-msgstr "Escolliu un color"
+msgstr "Trieu un color"
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:14
 msgctxt "PositionMarkerConfigWidget|"
@@ -15967,28 +15968,28 @@ msgstr "Un connector que mostra el cel estrelat i el Sol."
 #: src/plugins/render/stars/StarsPlugin.cpp:447
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the constellation lines."
-msgstr "Escolliu el color de les línies de les constel·lacions."
+msgstr "Trieu el color de les línies de les constel·lacions."
 
 #: src/plugins/render/stars/StarsPlugin.cpp:458
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the constellation labels."
-msgstr "Escolliu el color de les etiquetes de les constel·lacions."
+msgstr "Trieu el color de les etiquetes de les constel·lacions."
 
 #: src/plugins/render/stars/StarsPlugin.cpp:469
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the dso labels."
-msgstr "Escolliu el color de les etiquetes dels OCP."
+msgstr "Trieu el color de les etiquetes dels OCP."
 
 #: src/plugins/render/stars/StarsPlugin.cpp:480
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the ecliptic."
-msgstr "Escolliu el color de la línia de l'eclíptica."
+msgstr "Trieu el color de la línia de l'eclíptica."
 
 #: src/plugins/render/stars/StarsPlugin.cpp:491
 #: src/plugins/render/stars/StarsPlugin.cpp:502
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the celestial equator."
-msgstr "Escolliu el color de la línia de l'equador celeste."
+msgstr "Trieu el color de la línia de l'equador celeste."
 
 #: src/plugins/render/stars/StarsPlugin.cpp:1108
 msgctxt "Marble::StarsPlugin|"
@@ -16126,7 +16127,7 @@ msgstr ""
 "\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
 "family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
 "style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Escolliu si voleu que es "
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Trieu si voleu que es "
 "mostre la temperatura. Esta només es mostrarà per a les estacions en què "
 "estiga disponible.</p></body></html>\n"
 
@@ -16151,7 +16152,7 @@ msgstr ""
 "\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
 "family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
 "style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Escolliu si voleu que es "
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Trieu si voleu que es "
 "mostre la direcció del vent. Només es mostrarà si està disponible per a esta "
 "estació particular.</p></body></html>\n"
 
@@ -16175,7 +16176,7 @@ msgstr ""
 "\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
 "family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
 "style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Escolliu si voleu que es "
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Trieu si voleu que es "
 "mostre la velocitat del vent. Només es mostrarà si està disponible per a "
 "esta estació particular.</p></body></html>\n"
 
@@ -16937,8 +16938,8 @@ msgstr "Hostip.info"
 msgctxt "Marble::HostipPlugin|"
 msgid "Host name and IP geolocation search using the hostip.info service"
 msgstr ""
-"Busca de nom d'amfitrió i la geolocalització IP utilitzant el servei hostip."
-"info"
+"Busca del nom de l'amfitrió i la geolocalització IP utilitzant el servei "
+"hostip.info"
 
 #: src/plugins/runner/json/JsonPlugin.cpp:21
 msgctxt "Marble::JsonPlugin|"
