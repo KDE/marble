@@ -15556,7 +15556,7 @@ msgstr "Estacions espacials"
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:425
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "100 (or so) Brightest"
-msgstr "Brillantor 100 (o similar)"
+msgstr "Brillant 100 (o similar)"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:428
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
