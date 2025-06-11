@@ -19,8 +19,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Lokalize 25.04.1\n"
-"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && n "
-"% 10 == 0) ? 2 : 3));\n"
+"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
+"n % 10 == 0) ? 2 : 3));\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -903,7 +903,6 @@ msgstr "ייצוא מפה"
 
 #: marble_part.cpp:267
 #, kde-format
-#| msgid "Images *.jpg *.png"
 msgid "Images (*.jpg *.png)"
 msgstr "תמונות (‎*.jpg‏ ‎*.png)"
 
