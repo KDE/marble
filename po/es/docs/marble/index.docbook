@@ -799,7 +799,7 @@
 > para cambiar el archivo <acronym
 >gpx</acronym
 > exportado por &marble; a un formato adecuado. La exportación de una ruta en &marble; se inicia desde el menú de contexto de la ruta en el mapa. Pulse con el &RMB; en cualquier punto de la ruta en el mapa. En el menú de contexto que aparecerá, seleccione <guimenuitem
->Exportar ruta...</guimenuitem
+>Exportar ruta…</guimenuitem
 >: </para>
 
       <screenshot>
@@ -918,7 +918,7 @@
 ><guilabel
 >Archivo</guilabel
 > <guilabel
->Descargar región...</guilabel
+>Descargar región…</guilabel
 ></menuchoice
 > paraabrir el diálogo <guilabel
 >Descargar región</guilabel
@@ -1065,7 +1065,7 @@
 > <guimenu
 >Archivo</guimenu
 > <guimenuitem
->Abrir...</guimenuitem
+>Abrir…</guimenuitem
 ></menuchoice
 ></term>
             <listitem
@@ -1103,7 +1103,7 @@
 > <guimenu
 >Archivo</guimenu
 > <guimenuitem
->Descargar mapas...</guimenuitem
+>Descargar mapas…</guimenuitem
 ></menuchoice
 ></term>
             <listitem
@@ -1122,7 +1122,7 @@
 ><guimenu
 >Archivo</guimenu
 > <guimenuitem
->Crear un nuevo mapa...r</guimenuitem
+>Crear un nuevo mapa…r</guimenuitem
 ></menuchoice
 ></term>
             <listitem
@@ -1141,7 +1141,7 @@
 ><guimenu
 >Archivo</guimenu
 > <guimenuitem
->Descargar región...</guimenuitem
+>Descargar región…</guimenuitem
 ></menuchoice
 ></term>
             <listitem
@@ -1168,7 +1168,7 @@
 > <guimenu
 >Archivo</guimenu
 > <guimenuitem
->Exportar mapa...</guimenuitem
+>Exportar mapa…</guimenuitem
 ></menuchoice
 ></term>
             <listitem
@@ -1191,7 +1191,7 @@
 > <guimenu
 >Archivo</guimenu
 > <guimenuitem
->Imprimir...</guimenuitem
+>Imprimir…</guimenuitem
 ></menuchoice
 ></term>
             <listitem
@@ -1314,7 +1314,7 @@
 > <guimenu
 >Editar</guimenu
 > <guimenuitem
->Editar mapa...</guimenuitem
+>Editar mapa…</guimenuitem
 ></menuchoice
 ></term>
             <listitem
@@ -1524,7 +1524,7 @@
 ><guimenu
 >Vista</guimenu
 > <guimenuitem
->Control del Sol...</guimenuitem
+>Control del Sol…</guimenuitem
 ></menuchoice
 ></term>
             <listitem
@@ -1545,7 +1545,7 @@
 ><guimenu
 >Vista</guimenu
 > <guimenuitem
->Control del tiempo...</guimenuitem
+>Control del tiempo…</guimenuitem
 ></menuchoice
 ></term>
             <listitem
@@ -1577,7 +1577,7 @@
 ><guimenu
 >Vista</guimenu
 > <guimenuitem
->Explorar eclipses...</guimenuitem
+>Explorar eclipses…</guimenuitem
 ></menuchoice
 >.</para>
 
@@ -1594,7 +1594,7 @@
 ><guimenu
 >Vista</guimenu
 > <guimenuitem
->Explorar eclipses...</guimenuitem
+>Explorar eclipses…</guimenuitem
 ></menuchoice
 ></term>
             <listitem
@@ -1632,7 +1632,7 @@
 > <guimenu
 >Marcadores</guimenu
 > <guimenuitem
->Añadir marcador...</guimenuitem
+>Añadir marcador…</guimenuitem
 ></menuchoice
 ></term>
             <listitem
@@ -1685,7 +1685,7 @@
 ><guimenu
 >Marcadores</guimenu
 > <guimenuitem
->Gestionar marcadores...</guimenuitem
+>Gestionar marcadores…</guimenuitem
 ></menuchoice
 ></term>
             <listitem
@@ -1836,7 +1836,7 @@
 ><guimenu
 >Preferencias</guimenu
 > <guimenuitem
->Configurar el Globo virtual &marble;...</guimenuitem
+>Configurar el Globo virtual &marble;…</guimenuitem
 ></menuchoice
 ></term>
             <listitem
@@ -2211,7 +2211,7 @@
         <varlistentry>
           <term
 ><guibutton
->Añadir...</guibutton
+>Añadir…</guibutton
 ></term>
           <listitem
 ><para
@@ -2222,7 +2222,7 @@
         <varlistentry>
           <term
 ><guibutton
->Configurar...</guibutton
+>Configurar…</guibutton
 ></term>
           <listitem
 ><para
