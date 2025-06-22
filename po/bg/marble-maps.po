@@ -317,6 +317,3 @@ msgstr "Изтегляне на карти само през WLAN"
 msgctxt "@title:window"
 msgid "Themes"
 msgstr "Теми"
-
-#~ msgid "Search for places to integrate them into a route."
-#~ msgstr "Търсене за места, които да бъдат интегрирани в маршрута."
