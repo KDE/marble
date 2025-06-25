@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the marble package.
-# SPDX-FileCopyrightText: 2024 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2024, 2025 Tommi Nieminen <translator@legisign.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-24 00:37+0000\n"
-"PO-Revision-Date: 2024-10-26 11:03+0300\n"
+"PO-Revision-Date: 2025-06-03 19:51+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -38,6 +38,7 @@ msgctxt "@title:group"
 msgid "Map Content"
 msgstr "Karttasisältö"
 
+# ”Planiglobus” vaikuttaa lähinnä saksaksi käytetyltä termiltä, joka viittaisi puolipallokarttaan: ”Planiglobus (Mehrzahl: Planigloben) – das ist die Abbildung einer Halbkugel der Erde in einem Kreisnetz.” (saksankielinen Wikipedia). En tiedä, onko sanalla mitään virallista käännöstä.
 #: About.qml:25
 #, kde-format
 msgid ""
@@ -48,6 +49,12 @@ msgid ""
 "Ritter Martin Behaim nach den ältesten vorhandenen Urkunden\", Nuremberg "
 "1853. CC BY-SA 3.0."
 msgstr ""
+"TÜ Wienin ortofotografisiin segmentteihin (1990) perustuva digitoitu kartta. "
+"Germanisches Nationalmuseum and Friedrich-Alexander-Universität Erlangen-"
+"Nürnberg, CC BY-SA 3.0. Kartta perustuu kahteen puolipallokarttaan, jotka "
+"tarjottiin F. W. Ghillanyn teoksessa ”Geschichte des Seefahrers Ritter "
+"Martin Behaim nach den ältesten vorhandenen Urkunden” (Nürnberg 1853) kartan "
+"lisäaineistoksi. CC BY-SA 3.0."
 
 #: main.cpp:33
 #, kde-format
