@@ -1887,13 +1887,13 @@
 
       <screenshot>
         <screeninfo
->Het configuartiescherm voor Beeld</screeninfo>
+>De configuratiedialoog voor Beeld</screeninfo>
         <mediaobject>
           <imageobject
 ><imagedata fileref="configure-view.png" format="PNG"/></imageobject>
           <textobject
 ><phrase
->Het configuartiescherm voor Beeld</phrase
+>De configuratiedialoog voor Beeld</phrase
 ></textobject>
         </mediaobject>
       </screenshot>
