@@ -6,7 +6,6 @@ Dependencies:
   'require':
     'frameworks/extra-cmake-modules': '@stable-kf6'
     'frameworks/kio': '@stable-kf6'
-    'frameworks/kwallet': '@stable-kf6'
     'frameworks/kcrash': '@stable-kf6'
     'frameworks/ki18n': '@stable-kf6'
     'frameworks/kcoreaddons': '@stable-kf6'
