@@ -365,25 +365,26 @@ void VoiceNavigationModel::update(const Route &route, qreal distanceManuever, qr
         d->reset();
     }
 
-    int index = route.indexOf(route.currentSegment());
-
     qreal const distanceTraversed = route.currentSegment().distance() - distanceManuever;
     bool const minDistanceTraversed = d->m_lastDistanceTraversed < 40 && distanceTraversed >= 40;
     bool const announcementAfterTurn = minDistanceTraversed && distanceManuever >= 75;
     bool const announcement = (d->m_lastDistance > 850 || announcementAfterTurn) && distanceManuever <= 850;
     bool const turn = (d->m_lastDistance == 0 || d->m_lastDistance > 75) && distanceManuever <= 75;
 
-    bool const announcementDone = d->m_announcementList[index].announcementDone;
-    bool const turnInstructionDone = d->m_announcementList[index].turnInstructionDone;
+    if (route.size() > 0) {
+        int const index = route.indexOf(route.currentSegment());
+        bool const announcementDone = d->m_announcementList[index].announcementDone;
+        bool const turnInstructionDone = d->m_announcementList[index].turnInstructionDone;
 
-    if ((announcement && !announcementDone) || (turn && !turnInstructionDone)) {
-        d->updateInstruction(route.currentSegment(), distanceManuever, turnType);
-        VoiceNavigationModelPrivate::Announcement &curAnnouncement = d->m_announcementList[index];
-        if (announcement) {
-            curAnnouncement.announcementDone = true;
-        }
-        if (turn) {
-            curAnnouncement.turnInstructionDone = true;
+        if ((announcement && !announcementDone) || (turn && !turnInstructionDone)) {
+            d->updateInstruction(route.currentSegment(), distanceManuever, turnType);
+            VoiceNavigationModelPrivate::Announcement &curAnnouncement = d->m_announcementList[index];
+            if (announcement) {
+                curAnnouncement.announcementDone = true;
+            }
+            if (turn) {
+                curAnnouncement.turnInstructionDone = true;
+            }
         }
     }
 
