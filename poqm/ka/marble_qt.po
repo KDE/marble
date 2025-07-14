@@ -2726,7 +2726,7 @@ msgstr "&სახლი"
 #: src/apps/marble-qt/QtMainWindow.cpp:602
 msgctxt "Marble::MainWindow|"
 msgid "Default"
-msgstr "ნაგულისხმები"
+msgstr "ნაგულისხმევი"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:718
 msgctxt "Marble::MainWindow|"
@@ -3017,7 +3017,7 @@ msgstr "სახელი:"
 #: src/lib/marble/BookmarkManager.cpp:51
 msgctxt "QObject|"
 msgid "Default"
-msgstr "ნაგულისხმები"
+msgstr "ნაგულისხმევი"
 
 #: src/lib/marble/BookmarkManager.cpp:55
 msgctxt "QObject|"
@@ -3027,7 +3027,7 @@ msgstr "სანიშნები"
 #: src/lib/marble/BookmarkManager.cpp:243
 msgctxt "Marble::BookmarkManager|"
 msgid "Default"
-msgstr "ნაგულისხმები"
+msgstr "ნაგულისხმევი"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:179
 #, qt-format
@@ -13475,7 +13475,7 @@ msgstr "თემა"
 #: src/plugins/render/compass/CompassConfigWidget.ui:43
 msgctxt "CompassConfigWidget|"
 msgid "Default"
-msgstr "ნაგულისხმები"
+msgstr "ნაგულისხმევი"
 
 #: src/plugins/render/compass/CompassConfigWidget.ui:52
 msgctxt "CompassConfigWidget|"
@@ -13530,7 +13530,7 @@ msgstr "თემა"
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:43
 msgctxt "CrosshairsConfigWidget|"
 msgid "Default"
-msgstr "ნაგულისხმები"
+msgstr "ნაგულისხმევი"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:52
 msgctxt "CrosshairsConfigWidget|"
