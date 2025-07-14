@@ -2049,7 +2049,7 @@ msgstr "თემები"
 
 #~ msgctxt "Marble::MainWindow|"
 #~ msgid "Default"
-#~ msgstr "ნაგულისხმები"
+#~ msgstr "ნაგულისხმევი"
 
 #~ msgctxt "Marble::MainWindow|"
 #~ msgid "Ready"
@@ -2262,11 +2262,11 @@ msgstr "თემები"
 
 #~ msgctxt "QObject|"
 #~ msgid "Default"
-#~ msgstr "ნაგულისხმები"
+#~ msgstr "ნაგულისხმევი"
 
 #~ msgctxt "Marble::BookmarkManager|"
 #~ msgid "Default"
-#~ msgstr "ნაგულისხმები"
+#~ msgstr "ნაგულისხმევი"
 
 #~ msgctxt "BookmarkManagerDialogPrivate|"
 #~ msgid ""
@@ -10719,7 +10719,7 @@ msgstr "თემები"
 
 #~ msgctxt "CompassConfigWidget|"
 #~ msgid "Default"
-#~ msgstr "ნაგულისხმები"
+#~ msgstr "ნაგულისხმევი"
 
 #~ msgctxt "CompassConfigWidget|"
 #~ msgid "Arrows"
@@ -10763,7 +10763,7 @@ msgstr "თემები"
 
 #~ msgctxt "CrosshairsConfigWidget|"
 #~ msgid "Default"
-#~ msgstr "ნაგულისხმები"
+#~ msgstr "ნაგულისხმევი"
 
 #~ msgctxt "CrosshairsConfigWidget|"
 #~ msgid "Gun 1"
