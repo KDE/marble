@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-10-24 07:19+0200\n"
+"PO-Revision-Date: 2025-07-18 07:26+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
 "%100<=4 ? 2 : 3);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -11992,12 +11992,12 @@ msgstr "zaznamki najdeni: %1"
 #: src/lib/marble/routing/RoutingWidget.cpp:446
 msgctxt "Marble::RoutingWidget|"
 msgid "No placemark found"
-msgstr "Najden ni bil noben zaznamek"
+msgstr "Najdeno ni bilo nobenega zaznamka"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:558
 msgctxt "Marble::RoutingWidget|"
 msgid "No route found"
-msgstr "Najdena ni bila nobena pot"
+msgstr "Najdene ni bilo nobene poti"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:640
 #, qt-format
