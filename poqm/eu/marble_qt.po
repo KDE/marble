@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2025-07-27 01:54+0200\n"
+"PO-Revision-Date: 2025-07-27 12:17+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -2567,7 +2567,7 @@ msgstr "Marble alegiazko globoaren es&kuliburua"
 #: src/apps/marble-qt/QtMainWindow.cpp:368
 msgctxt "Marble::MainWindow|"
 msgid "Show the Handbook for Marble Virtual Globe"
-msgstr "Erakutsi Marble alegiazko globoaren eskuliburua"
+msgstr "Erakutsi Marble Alegiazko Globoaren eskuliburua"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:371
 msgctxt "Marble::MainWindow|"
@@ -7327,13 +7327,17 @@ msgid "Parsing failed line %1. Still %n unclosed tag(s) after document end. "
 msgid_plural ""
 "Parsing failed line %1. Still %n unclosed tag(s) after document end. "
 msgstr[0] ""
+"Azterketa sintaktikoak huts egin du %1 lerroan. Dokumentuaren bukaerara "
+"iritsita itxi gabeko etiketa %n dago."
 msgstr[1] ""
+"Azterketa sintaktikoak huts egin du %1 lerroan. Dokumentuaren bukaerara "
+"iritsita itxi gabeko %n etiketa daude."
 
 #: src/lib/marble/geodata/parser/GeoParser.cpp:123
 #, qt-format
 msgctxt "QObject|"
 msgid "Error parsing file at line: %1 and column %2 . "
-msgstr ""
+msgstr "Errorea fitxategia analizatzean, lerroa: %1 eta zutabea %2."
 
 #: src/lib/marble/geodata/parser/GeoParser.cpp:124
 msgctxt "QObject|"
@@ -7964,7 +7968,7 @@ msgstr ""
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
 "p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Marble-rako mapa gai bat "
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Marble(r)ako mapa gai bat "
 "sortzeko prozesuan gidatuko zaitugu. Bukatzean Marble-n ikus dezakezun zure "
 "mapa propioa izango duzu.</p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
@@ -9133,11 +9137,10 @@ msgid ""
 "a><br /><i>Project: ownCloud storage and synchronization for Marble </i></p>"
 msgstr ""
 "<p>Utku Ayd&#x131;n <a href=\"utkuaydin34@gmail.com\">utkuaydin34@gmail.com</"
-"a><br /><i>Proiektua: Marble(r)entzat ownCloud biltegiratzea eta "
+"a><br /><i>Proiektua: Marble(r)erako ownCloud biltegiratzea eta "
 "sinkronizatzea</i> </p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:207
-#, fuzzy
 msgctxt "QObject|"
 msgid ""
 "<p>Ren&#xE9; K&#xFC;ttner <a href=\"rene@bitkanal.net\">rene@bitkanal.net</"
@@ -9171,10 +9174,9 @@ msgid ""
 "berlin.de</a><br /><i>Project: OpenGL Mode for Marble</i></p>"
 msgstr ""
 "<p>Bernhard Beschow <a href=\"bbeschow@cs.tu-berlin.de\">bbeschow@cs.tu-"
-"berlin.de</a><br /><i>Proiektua: Marble(r)en OpenGL modua</i></p>"
+"berlin.de</a><br /><i>Proiektua: Marble(r)ako OpenGL modua</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:217
-#, fuzzy
 msgctxt "QObject|"
 msgid ""
 "<p>Konstantin Oblaukhov <a href=\"oblaukhov.konstantin@gmail.com\">oblaukhov."
@@ -9191,6 +9193,8 @@ msgid ""
 "<p>Daniel Marth <a href=\"danielmarth@gmx.at\">danielmarth@gmx.at</a><br /"
 "><i>Project: Marble Touch on MeeGo</i></p>"
 msgstr ""
+"<p>Daniel Marth <a href=\"danielmarth@gmx.at\">danielmarth@gmx.at</a><br /"
+"><i>Proiektua: Marble Touch MeeGo-n</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:221
 msgctxt "QObject|"
@@ -9216,14 +9220,14 @@ msgstr ""
 "com</a><br /><i>Proiektua: Denbora-euskarria</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:226
-#, fuzzy
 msgctxt "QObject|"
 msgid ""
 "<p>Siddharth Srivastava <a href=\"mailto:akssps011@gmail.com"
 "\">akssps011@gmail.com</a><br /><i>Project: Turn-by-turn Navigation</i></p>"
 msgstr ""
 "<p>Siddharth Srivastava <a href=\"mailto:akssps011@gmail.com"
-"\">akssps011@gmail.com</a><br /><i>Proiektua: Turn-by-turn Navigation</i></p>"
+"\">akssps011@gmail.com</a><br /><i>Proiektua: urratsez-urrats nabigatzea</"
+"i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:228
 msgctxt "QObject|"
@@ -9260,7 +9264,7 @@ msgid ""
 "a><br /><i>Project: Vector Tiles for Marble</i></p>"
 msgstr ""
 "<p>Patrick Spendrin <a href=\"pspendrin@gmail.com\">pspendrin@gmail.com</"
-"a><br /><i>Proiektua: Marble(r)entzako bektore-lauzak</i></p>"
+"a><br /><i>Proiektua: Marble(r)ako bektore-lauzak</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:236
 msgctxt "QObject|"
@@ -9269,6 +9273,9 @@ msgid ""
 "personal@gmail.com</a><br /><i>Project: Panoramio / Wikipedia -photo support "
 "for Marble</i></p>"
 msgstr ""
+"<p>Shashank Singh <a href=\"mailto:shashank.personal@gmail.com\">shashank."
+"personal@gmail.com</a><br /><i>Proiektua: Marble(r)ako Panoramio / Wikipedia "
+"argazkien euskarria</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:238
 msgctxt "QObject|"
@@ -9292,6 +9299,8 @@ msgid ""
 "<p>Andrew Manson <a href=\"mailto:g.real.ate@gmail.com\">g.real.ate@gmail."
 "com</a><br /><i>Project: GPS Support for Marble</i></p>"
 msgstr ""
+"<p>Andrew Manson <a href=\"mailto:g.real.ate@gmail.com\">g.real.ate@gmail."
+"com</a><br /><i>Proiektua: Marble(r)ako GPS euskarria</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:243
 msgctxt "QObject|"
@@ -9299,6 +9308,8 @@ msgid ""
 "<p>Murad Tagirov <a href=\"mailto:tmurad@gmail.com\">tmurad@gmail.com</"
 "a><br /><i>Project: KML Support for Marble</i></p>"
 msgstr ""
+"<p>Murad Tagirov <a href=\"mailto:tmurad@gmail.com\">tmurad@gmail.com</"
+"a><br /><i>Proiektua: Marble(r)ako KML euskarria</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:245
 msgctxt "QObject|"
