@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2025-07-27 12:17+0200\n"
+"PO-Revision-Date: 2025-07-29 12:47+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -10284,7 +10284,6 @@ msgid "Middle East Time"
 msgstr "Ekialde Hurbileko ordua"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:98
-#, fuzzy
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Near East Time"
 msgstr "Ekialde Hurbileko ordua"
