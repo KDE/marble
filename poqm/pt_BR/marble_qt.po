@@ -4,7 +4,7 @@
 #
 # André Marcelo Alvarenga <alvarenga@kde.org>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2019.
 # Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2009, 2010, 2011, 2012, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2023.
-# Marcus Vinícius de Andrade Gama <marcus.gama@gmail.com>, 2010.
+# SPDX-FileCopyrightText: 2010, 2025 Marcus Vinícius de Andrade Gama <marcus.gama@gmail.com>
 # Aracele Torres <araceletorres@gmail.com>, 2010.
 # Marcus Gama <marcus.gama@gmail.com>, 2011, 2012.
 # Frederico Gonçalves Guimarães <frederico@teia.bio.br>, 2018.
@@ -13,15 +13,15 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-02-14 09:24-0300\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
-"Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
+"PO-Revision-Date: 2025-08-02 15:15-0300\n"
+"Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
+"Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 25.04.3\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -2436,12 +2436,9 @@ msgid "Copy a screenshot of the map"
 msgstr "Copia uma captura de tela do mapa"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:302
-#, fuzzy
-#| msgctxt "Marble::MainWindow|"
-#| msgid "&Edit Map"
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
-msgstr "&Editar mapa"
+msgstr "&Editar mapa..."
 
 #: src/apps/marble-qt/QtMainWindow.cpp:304
 msgctxt "Marble::MainWindow|"
@@ -2614,12 +2611,9 @@ msgid "Show the Qt library's About box"
 msgstr "Exibir a caixa sobre da biblioteca Qt"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:389
-#, fuzzy
-#| msgctxt "Marble::MarbleWidgetPopupMenu|"
-#| msgid "Add &Bookmark"
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
-msgstr "&Adicionar favorito"
+msgstr "&Adicionar favorito..."
 
 #: src/apps/marble-qt/QtMainWindow.cpp:391
 msgctxt "Marble::MainWindow|"
@@ -2643,12 +2637,9 @@ msgid "Toggle display of Bookmarks"
 msgstr "Alternar a visualização dos favoritos"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:403
-#, fuzzy
-#| msgctxt "Marble::MainWindow|"
-#| msgid "&Manage Bookmarks"
 msgctxt "Marble::MainWindow|"
 msgid "&Manage Bookmarks..."
-msgstr "&Gerenciar favoritos"
+msgstr "&Gerenciar favoritos..."
 
 #: src/apps/marble-qt/QtMainWindow.cpp:404
 msgctxt "Marble::MainWindow|"
@@ -3152,20 +3143,14 @@ msgid "Bookmark Manager"
 msgstr "Gerenciador de favoritos"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:25
-#, fuzzy
-#| msgctxt "Marble::BookmarkManagerDialog|"
-#| msgid "Import Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Import Bookmarks…"
-msgstr "Importar favoritos"
+msgstr "Importar favoritos..."
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
-#, fuzzy
-#| msgctxt "Marble::BookmarkManagerDialog|"
-#| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Export Bookmarks…"
-msgstr "Exportar favoritos"
+msgstr "Exportar favoritos..."
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
@@ -3175,15 +3160,12 @@ msgstr "Pastas"
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
 msgid "New…"
-msgstr ""
+msgstr "Novo…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
-#, fuzzy
-#| msgctxt "UiBookmarkManagerDialog|"
-#| msgid "Rename"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Rename…"
-msgstr "Renomear"
+msgstr "Renomear..."
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
 #: src/lib/marble/BookmarkManagerDialog.ui:151
@@ -3358,7 +3340,7 @@ msgstr "Enviar para a nuvem"
 #: src/lib/marble/CurrentLocationWidget.cpp:109
 msgctxt "Marble::CurrentLocationWidget|"
 msgid "<p>No Position Tracking Plugin installed.</p>"
-msgstr ""
+msgstr "<p>Nenhum plugin de seguimento de posição instalado.</p>"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:183
 msgctxt "QObject|"
@@ -3472,12 +3454,9 @@ msgstr "Limpar trilha"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "CurrentLocationWidget|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
 msgctxt "CurrentLocationWidget|"
@@ -4931,30 +4910,25 @@ msgid "Download Region"
 msgstr "Baixar região"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:240
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "The base tile could not be downloaded."
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Tile type to be downloaded:"
-msgstr "Não foi possível baixar o bloco base."
+msgstr "Tipo de bloco a baixar:"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:242
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Texture tiles"
-msgstr ""
+msgstr "Blocos de textura"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:243
-#, fuzzy
-#| msgctxt "Marble::MapViewWidget|"
-#| msgid "Mercator View"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Vector tiles"
-msgstr "Visualização do Mercator"
+msgstr "Blocos de vetor"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:244
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Allows selection between layer types that are visibly being rendered."
 msgstr ""
+"Permite a seleção entre tipos de camadas que são visíveis ao renderizar."
 
 #: src/lib/marble/DownloadRegionDialog.cpp:491
 #, qt-format
@@ -4987,12 +4961,9 @@ msgid "Edit Bookmark"
 msgstr "Editar favorito"
 
 #: src/lib/marble/EditBookmarkDialog.ui:25
-#, fuzzy
-#| msgctxt "UiEditBookmarkDialog|"
-#| msgid "&Description"
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Description:"
-msgstr "&Descrição"
+msgstr "&Descrição:"
 
 #: src/lib/marble/EditBookmarkDialog.ui:41
 msgctxt "UiEditBookmarkDialog|"
@@ -5022,7 +4993,7 @@ msgstr ""
 "REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
-"p, li { white-space: pre-wrap; }\n"
+"p, li { espaço em branco: pré-encapsulamento; }\n"
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
@@ -5040,20 +5011,14 @@ msgstr ""
 "family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
 
 #: src/lib/marble/EditBookmarkDialog.ui:57
-#, fuzzy
-#| msgctxt "UiEditBookmarkDialog|"
-#| msgid "&Folder"
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Folder:"
-msgstr "&Pasta"
+msgstr "&Pasta:"
 
 #: src/lib/marble/EditBookmarkDialog.ui:79
-#, fuzzy
-#| msgctxt "UiEditBookmarkDialog|"
-#| msgid "&Add Folder"
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Add Folder…"
-msgstr "&Adicionar pasta"
+msgstr "&Adicionar pasta..."
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -7036,7 +7001,7 @@ msgstr "Esqui alpinismo"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:936
 msgctxt "GeoDataPlacemark|"
 msgid "Sled Piste"
-msgstr ""
+msgstr "Pista de trenó"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:938
 msgctxt "GeoDataPlacemark|"
@@ -7046,7 +7011,7 @@ msgstr "Escalada de inverno"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:940
 msgctxt "GeoDataPlacemark|"
 msgid "Sleigh Piste"
-msgstr ""
+msgstr "Pista de trenó puxado por animal"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:942
 msgctxt "GeoDataPlacemark|"
@@ -7061,12 +7026,12 @@ msgstr "Parque temático de neve"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:946
 msgctxt "GeoDataPlacemark|"
 msgid "Ski Playground"
-msgstr ""
+msgstr "Parque de esqui"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:948
 msgctxt "GeoDataPlacemark|"
 msgid "Ski Jump"
-msgstr ""
+msgstr "Salto de esqui"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:950
 msgctxt "GeoDataPlacemark|"
@@ -7131,7 +7096,7 @@ msgstr "Limite (Marítimo)"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:974
 msgctxt "GeoDataPlacemark|"
 msgid "Land Mass"
-msgstr ""
+msgstr "Massa de terra"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:976
 msgctxt "GeoDataPlacemark|"
@@ -7154,21 +7119,19 @@ msgid "Canal"
 msgstr "Canal"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:984
-#, fuzzy
-#| msgid "rain"
 msgctxt "GeoDataPlacemark|"
 msgid "Drain"
-msgstr "chuva"
+msgstr "Dreno"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:986
 msgctxt "GeoDataPlacemark|"
 msgid "Ditch"
-msgstr ""
+msgstr "Vala"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:988
 msgctxt "GeoDataPlacemark|"
 msgid "Stream"
-msgstr ""
+msgstr "Curso de água"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:990
 msgctxt "GeoDataPlacemark|"
@@ -7178,24 +7141,19 @@ msgstr "Rio"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:992
 msgctxt "GeoDataPlacemark|"
 msgid "Weir"
-msgstr ""
+msgstr "Açude"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:994
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:996
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:998
-#, fuzzy
-#| msgctxt "Marble::CrosshairsPlugin|"
-#| msgid "Crosshairs"
 msgctxt "GeoDataPlacemark|"
 msgid "Crosswalk"
-msgstr "Mira"
+msgstr "Faixa de pedestre"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:1000
-#, fuzzy
-#| msgid "train station"
 msgctxt "GeoDataPlacemark|"
 msgid "Railway Crossing"
-msgstr "estação de trem"
+msgstr "Cruzamento de ferrovia"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:1002
 msgctxt "GeoDataPlacemark|"
@@ -7250,12 +7208,9 @@ msgid "*"
 msgstr "*"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:211
-#, fuzzy
-#| msgctxt "QObject|"
-#| msgid "Save tour"
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Detour"
-msgstr "Salvar viagem"
+msgstr "Desvio"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:214
 msgctxt "GeoLineStringGraphicsItem|"
@@ -7303,12 +7258,9 @@ msgid "Walking Route"
 msgstr "Rota para pedestre"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:241
-#, fuzzy
-#| msgctxt "QObject|"
-#| msgid "Open Route"
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Hiking Route"
-msgstr "Abrir rota"
+msgstr "Rota de caminhada"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:244
 msgctxt "GeoLineStringGraphicsItem|"
@@ -7316,12 +7268,9 @@ msgid "Bridleway"
 msgstr "Picada"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:247
-#, fuzzy
-#| msgctxt "QObject|"
-#| msgid "Save Route"
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Inline Skates Route"
-msgstr "Salvar rota"
+msgstr "Rota de patinação"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:250
 msgctxt "GeoLineStringGraphicsItem|"
@@ -7331,17 +7280,17 @@ msgstr "Pista de downhill"
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:253
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Nordic Ski Trail"
-msgstr ""
+msgstr "Trilha de esqui nórdico"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:256
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Skitour"
-msgstr "Esqui alpinismo"
+msgstr "Passeio de esqui"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:259
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Sled Trail"
-msgstr ""
+msgstr "Trilha para trenó"
 
 #: src/lib/marble/geodata/handlers/dgml/DgmlMaximumTagHandler.cpp:35
 #, qt-format
@@ -7366,7 +7315,11 @@ msgid "Parsing failed line %1. Still %n unclosed tag(s) after document end. "
 msgid_plural ""
 "Parsing failed line %1. Still %n unclosed tag(s) after document end. "
 msgstr[0] ""
+"Falha na análise da linha %1. Ainda %n tag(s) não fechadas após o final do "
+"documento. "
 msgstr[1] ""
+"Falha na análise da linha %1. Ainda %n tag(s) não fechadas após o final do "
+"documento. "
 
 #: src/lib/marble/geodata/parser/GeoParser.cpp:123
 #, qt-format
@@ -7429,9 +7382,6 @@ msgstr[0] "%n resultado encontrado."
 msgstr[1] "%n resultados encontrados."
 
 #: src/lib/marble/GoToDialog.ui:14
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid "Go To..."
 msgctxt "GoTo|"
 msgid "Go To…"
 msgstr "Ir para..."
@@ -7442,6 +7392,8 @@ msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
 "Marble/Search\">Details…</a>"
 msgstr ""
+"Digite um termo de pesquisa e pressione Enter. <a href=\"https://userbase."
+"kde.org/Marble/Search\">Detalhes…</a>"
 
 #: src/lib/marble/GoToDialog.ui:93
 msgctxt "GoTo|"
@@ -7766,43 +7718,37 @@ msgid "Wizard cannot parse server's response"
 msgstr "O assistente não consegue processar a resposta do servidor"
 
 #: src/lib/marble/MapWizard.cpp:291
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "Server is not a Web Map Server."
 msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
-msgstr "O servidor não funciona no protocolo WMS."
+msgstr "O servidor não é um servidor OWS."
 
 #: src/lib/marble/MapWizard.cpp:381 src/lib/marble/MapWizard.cpp:398
 #: src/lib/marble/MapWizard.cpp:1091
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
-msgstr ""
+msgstr "Web Mercator (epsg:3857)"
 
 #: src/lib/marble/MapWizard.cpp:382 src/lib/marble/MapWizard.cpp:812
 #: src/lib/marble/MapWizard.cpp:936
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
-msgstr ""
+msgstr "Equiretangular (epsg:4326)"
 
 #: src/lib/marble/MapWizard.cpp:383 src/lib/marble/MapWizard.cpp:814
 #: src/lib/marble/MapWizard.cpp:938
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (crs:84)"
-msgstr ""
+msgstr "Equiretangular (crs:84)"
 
 #: src/lib/marble/MapWizard.cpp:394
-#, fuzzy
-#| msgctxt "MapViewWidget|"
-#| msgid "&Projection"
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
-msgstr "&Projeção"
+msgstr "Projeção do bloco:"
 
 #: src/lib/marble/MapWizard.cpp:410
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
-msgstr ""
+msgstr "Conjunto de matriz do bloco:"
 
 #: src/lib/marble/MapWizard.cpp:453 src/lib/marble/MapWizard.cpp:928
 msgctxt "Marble::MapWizard|"
@@ -7815,45 +7761,33 @@ msgid "Base Tile"
 msgstr "Bloco base"
 
 #: src/lib/marble/MapWizard.cpp:461
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Legend Image:"
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
-msgstr "Legenda da imagem:"
+msgstr "Legenda da imagem"
 
 #: src/lib/marble/MapWizard.cpp:467 src/lib/marble/MapWizard.cpp:477
-#, fuzzy, qt-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "%1"
-msgstr "%1 m"
+msgstr "%1"
 
 #: src/lib/marble/MapWizard.cpp:467
-#, fuzzy, qt-format
-#| msgctxt "Marble::MapWizard|"
-#| msgid "The base tile could not be downloaded."
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
-msgstr "Não foi possível baixar o bloco base."
+msgstr "Não foi possível baixar %1."
 
 #: src/lib/marble/MapWizard.cpp:478
-#, fuzzy, qt-format
-#| msgctxt "Marble::MapWizard|"
-#| msgid ""
-#| "The base tile could not be downloaded successfully. The server replied:\n"
-#| "\n"
-#| "%1"
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The %1 could not be downloaded successfully. The server replied:\n"
 "\n"
 "%2"
 msgstr ""
-"Não foi possível baixar o bloco base com sucesso. O servidor respondeu:\n"
+"Não foi possível baixar %1 com sucesso. O servidor respondeu:\n"
 "\n"
-"%1"
+"%2"
 
 #: src/lib/marble/MapWizard.cpp:557 src/lib/marble/MapWizard.cpp:1480
 #: src/lib/marble/MapWizard.cpp:1481 src/lib/marble/MapWizard.cpp:1490
@@ -7948,9 +7882,6 @@ msgid "Check if a theme with the same name exists."
 msgstr "Verifique se já existe um tema com o mesmo nome."
 
 #: src/lib/marble/MapWizard.cpp:1475
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
 msgstr "Servidor WMS"
@@ -7961,14 +7892,14 @@ msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>Servidor WMS</h4>Escolha um <a href=\"https://en.wikipedia.org/wiki/"
+"Web_Map_Service\">servidor WMS</a> ou insira um URL de servidor "
+"personalizado."
 
 #: src/lib/marble/MapWizard.cpp:1484
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
-msgstr "Servidor WMS"
+msgstr "Servidor WMTS"
 
 #: src/lib/marble/MapWizard.cpp:1486
 msgctxt "Marble::MapWizard|"
@@ -7976,6 +7907,9 @@ msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
 "Web_Map_Tile_Service\">WMTS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>Servidor WMTS</h4>Escolha um <a href=\"https://de.wikipedia.org/wiki/"
+"Web_Map_Tile_Service\">servidor WMTS</a> ou insira um URL de servidor "
+"personalizado."
 
 #: src/lib/marble/MapWizard.ui:20
 msgctxt "MapWizard|"
@@ -8013,7 +7947,7 @@ msgstr ""
 "REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
-"p, li { white-space: pre-wrap; }\n"
+"p, li { espaço em branco: pré-encapsulamento; }\n"
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
@@ -8040,6 +7974,8 @@ msgid ""
 "Connects to a server on the Internet. The map data is queried via the WMS "
 "protocol."
 msgstr ""
+"Conecta-se a um servidor na internet. Os dados do mapa são consultados "
+"através do protocolo WMS."
 
 #: src/lib/marble/MapWizard.ui:57
 msgctxt "MapWizard|"
@@ -8047,12 +7983,9 @@ msgid "Web Map Service (WMS)"
 msgstr "Web Map Service (WMS)"
 
 #: src/lib/marble/MapWizard.ui:70
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Web Map Service (WMS)"
 msgctxt "MapWizard|"
 msgid "Web Map Tile Service (WMTS)"
-msgstr "Web Map Service (WMS)"
+msgstr "Serviço de Blocos de Mapa Web (WMTS)"
 
 #: src/lib/marble/MapWizard.ui:80
 msgctxt "MapWizard|"
@@ -8073,6 +8006,8 @@ msgid ""
 "Connects to a server on the Internet. The map data is queried via a static "
 "URL."
 msgstr ""
+"Conecta-se a um servidor na internet. Os dados do mapa são consultados por "
+"meio de uma URL estática."
 
 #: src/lib/marble/MapWizard.ui:93
 msgctxt "MapWizard|"
@@ -8102,7 +8037,7 @@ msgstr ""
 "REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
-"p, li { white-space: pre-wrap; }\n"
+"p, li { espaço em branco: pré-encapsulamento; }\n"
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
@@ -8135,6 +8070,8 @@ msgid ""
 "Enter the base Url of the WMS service (e.g. <i>https://www.wms.nrw.de/"
 "geobasis/wms_nw_dop_overlay</i>)"
 msgstr ""
+"Insira a URL base do serviço WMS (por exemplo, <i>https://www.wms.nrw.de/"
+"geobasis/wms_nw_dop_overlay</i>)"
 
 #: src/lib/marble/MapWizard.ui:166 src/lib/marble/MapWizard.ui:465
 msgctxt "MapWizard|"
@@ -8142,35 +8079,24 @@ msgid "https://"
 msgstr "https://"
 
 #: src/lib/marble/MapWizard.ui:218
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop provides a service to send documents "
-#| "through fax"
-#| msgid "Fax service"
 msgctxt "MapWizard|"
 msgid "Wms-Service:"
-msgstr "Serviço de fax"
+msgstr "Serviço Wms:"
 
 #: src/lib/marble/MapWizard.ui:232
-#, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
 msgctxt "MapWizard|"
 msgid "Layer Selection"
-msgstr "Opções da camada"
+msgstr "Seleção de camada"
 
 #: src/lib/marble/MapWizard.ui:243
 msgctxt "MapWizard|"
 msgid "Choose your Layer(s):"
-msgstr ""
+msgstr "Selecione sua(s) camada(s):"
 
 #: src/lib/marble/MapWizard.ui:266
-#, fuzzy
-#| msgctxt "SearchField|"
-#| msgid "Search"
 msgctxt "MapWizard|"
 msgid "Search:"
-msgstr "Pesquisar"
+msgstr "Pesquisar:"
 
 #: src/lib/marble/MapWizard.ui:288
 msgctxt "MapWizard|"
@@ -8178,6 +8104,8 @@ msgid ""
 "The order in which multiple layers are selected directly affects their "
 "rendering order."
 msgstr ""
+"A ordem em que várias camadas são selecionadas afeta diretamente sua ordem "
+"de renderização."
 
 #: src/lib/marble/MapWizard.ui:297
 msgctxt "MapWizard|"
@@ -8185,70 +8113,60 @@ msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
 "Ctrl, Ctrl+A, …)"
 msgstr ""
+"Habilite esta opção para selecionar múltiplas camadas sem atalhos de teclado "
+"(Shift, Ctrl, Ctrl+A, …)"
 
 #: src/lib/marble/MapWizard.ui:300
 msgctxt "MapWizard|"
 msgid "Multiple Selections"
-msgstr ""
+msgstr "Seleções múltiplas"
 
 #: src/lib/marble/MapWizard.ui:307
 msgctxt "MapWizard|"
 msgid "Custom Backdrop"
-msgstr ""
+msgstr "Cenário personalizado"
 
 #: src/lib/marble/MapWizard.ui:314
-#, fuzzy
-#| msgctxt "MapViewWidget|"
-#| msgid "&Projection"
 msgctxt "MapWizard|"
 msgid "Tile Projection:"
-msgstr "&Projeção"
+msgstr "Projeção do bloco:"
 
 #: src/lib/marble/MapWizard.ui:321
 msgctxt "MapWizard|"
 msgid "Indicates the projection in which the tiles are rendered."
-msgstr ""
+msgstr "Indica a projeção em que os blocos serão renderizados."
 
 #: src/lib/marble/MapWizard.ui:344
 msgctxt "MapWizard|"
 msgid "Tile Format:"
-msgstr ""
+msgstr "Formato do bloco:"
 
 #: src/lib/marble/MapWizard.ui:351
 msgctxt "MapWizard|"
 msgid "Indicates the file format of the tiles."
-msgstr ""
+msgstr "Indica o formato de arquivo dos blocos."
 
 #: src/lib/marble/MapWizard.ui:383
-#, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
 msgctxt "MapWizard|"
 msgid "Layer Info"
-msgstr "Opções da camada"
+msgstr "Informações da camada"
 
 #: src/lib/marble/MapWizard.ui:396
-#, fuzzy
-#| msgctxt "GeoDataPlacemark|"
-#| msgid "Service Road"
 msgctxt "MapWizard|"
 msgid "Service Info"
-msgstr "Estrada de serviço"
+msgstr "Informações do serviço"
 
 #: src/lib/marble/MapWizard.ui:406
 msgctxt "MapWizard|"
 msgid "Customize Backdrop"
-msgstr ""
+msgstr "Cenário personalizado"
 
 #: src/lib/marble/MapWizard.ui:417
 msgctxt "MapWizard|"
 msgid "Preset Layers"
-msgstr ""
+msgstr "Camadas presentes"
 
 #: src/lib/marble/MapWizard.ui:437
-#, fuzzy
-#| msgctxt "DGML|"
-#| msgid "OpenStreetMap"
 msgctxt "MapWizard|"
 msgid "OpenStreetMap"
 msgstr "OpenStreetMap"
@@ -8256,17 +8174,14 @@ msgstr "OpenStreetMap"
 #: src/lib/marble/MapWizard.ui:452
 msgctxt "MapWizard|"
 msgid "XYZ Server Url"
-msgstr ""
+msgstr "URL do Servidor XYZ"
 
 #: src/lib/marble/MapWizard.ui:462
 msgctxt "MapWizard|"
 msgid "The XYZ server needs to provide map tiles in Mercator projection."
-msgstr ""
+msgstr "O servidor XYZ precisa fornecer blocos de mapa na projeção Mercator."
 
 #: src/lib/marble/MapWizard.ui:479
-#, fuzzy
-#| msgctxt "FormattedTextWidget|"
-#| msgid "Color"
 msgctxt "MapWizard|"
 msgid "Color"
 msgstr "Cor"
@@ -8274,15 +8189,12 @@ msgstr "Cor"
 #: src/lib/marble/MapWizard.ui:498
 msgctxt "MapWizard|"
 msgid "#87CEFA"
-msgstr ""
+msgstr "#87CEFA"
 
 #: src/lib/marble/MapWizard.ui:511
-#, fuzzy
-#| msgctxt "UiEditPlacemarkDialog|"
-#| msgid "Style, Color"
 msgctxt "MapWizard|"
 msgid "Select Color"
-msgstr "Estilo, cor"
+msgstr "Selecione a cor"
 
 #: src/lib/marble/MapWizard.ui:554
 msgctxt "MapWizard|"
@@ -8311,6 +8223,29 @@ msgid ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
 "worldmap.svg\" width=\"150\" /></p></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { espaço em branco: pré-encapsulamento; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Imagem de bitmap de mapa-múndi</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"weight:600;\"></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Escolha o local de um mapa-"
+"múndi armazenado em um único arquivo de imagem (JPG, PNG, etc.). Ele precisa "
+"ser fornecido em <a href=\"https://en.wikipedia.org/wiki/"
+"Equirectangular_projection\"><span style=\" text-decoration: underline; "
+"color:#0057ae;\">Projeção equiretangular</span></a>, então o formato "
+"deveficar assim (proporção de tamanho: 2:1):</p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+"worldmap.svg\" width=\"150\" /></p></body></html>"
 
 #: src/lib/marble/MapWizard.ui:573
 msgctxt "MapWizard|"
@@ -8318,12 +8253,9 @@ msgid "Source Image:"
 msgstr "Imagem de origem"
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "MapWizard|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/lib/marble/MapWizard.ui:615
 msgctxt "MapWizard|"
@@ -8354,7 +8286,7 @@ msgstr ""
 "REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
-"p, li { white-space: pre-wrap; }\n"
+"p, li { espaço em branco: pré-encapsulamento; }\n"
 "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
 "size:9pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
@@ -8400,7 +8332,7 @@ msgstr ""
 "REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
-"p, li { white-space: pre-wrap; }\n"
+"p, li { espaço em branco: pré-encapsulamento; }\n"
 "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
 "size:9pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
@@ -8420,7 +8352,7 @@ msgstr "Título do mapa"
 #: src/lib/marble/MapWizard.ui:720
 msgctxt "MapWizard|"
 msgid "A short concise name for your map theme."
-msgstr ""
+msgstr "Um nome curto e conciso para seu tema de mapa."
 
 #: src/lib/marble/MapWizard.ui:727 src/lib/marble/MapWizard.ui:950
 msgctxt "MapWizard|"
@@ -8430,7 +8362,7 @@ msgstr "Nome do mapa:"
 #: src/lib/marble/MapWizard.ui:737
 msgctxt "MapWizard|"
 msgid "The lowercase map theme id."
-msgstr ""
+msgstr "A id do tema de map em minúsculas."
 
 #: src/lib/marble/MapWizard.ui:740
 msgctxt "MapWizard|"
@@ -8449,11 +8381,14 @@ msgid ""
 "about the purpose, origin, copyright and license of the data used in your "
 "map theme."
 msgstr ""
+"Uma breve descrição do tema do seu mapa. Aqui você pode fornecer informações "
+"sobre a finalidade, origem, direitos autorais e licença dos dados usados no "
+"seu tema de mapa."
 
 #: src/lib/marble/MapWizard.ui:775
 msgctxt "MapWizard|"
 msgid "It will appear in a tool tip and may contain HTML formatting."
-msgstr ""
+msgstr "Aparecerá em uma dica e pode conter formatação HTML."
 
 #: src/lib/marble/MapWizard.ui:788 src/lib/marble/MapWizard.ui:990
 msgctxt "MapWizard|"
@@ -8466,17 +8401,14 @@ msgid "preview image"
 msgstr "visualização da imagem"
 
 #: src/lib/marble/MapWizard.ui:825
-#, fuzzy
-#| msgctxt "Marble::ConflictDialog|"
-#| msgid "Changed"
 msgctxt "MapWizard|"
 msgid "Change…"
-msgstr "Alterado"
+msgstr "Alterar..."
 
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
 msgid "<b>Optional: Addition of a Map Key</b>"
-msgstr ""
+msgstr "<b>Opcional: Adição de uma chave de mapa</b>"
 
 #: src/lib/marble/MapWizard.ui:864
 msgctxt "MapWizard|"
@@ -8509,6 +8441,28 @@ msgid ""
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
 "p></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { espaço em branco: pré-encapsulamento; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Resumo</span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Parabéns! Você inseriu "
+"todos os dados necessários para criar o tema do seu mapa. Verifique o resumo "
+"abaixo com atenção e pressione o botão &quot;Concluir&quot; para criar o "
+"tema. </p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Considere contribuir com o "
+"tema do mapa de volta para a comunidade Marble se a licença e os termos de "
+"uso permitirem.</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p></body></html>"
 
 #: src/lib/marble/MapWizard.ui:957
 msgctxt "MapWizard|"
@@ -8528,7 +8482,7 @@ msgstr "O tema do mapa vai aqui."
 #: src/lib/marble/MapWizard.ui:1002
 msgctxt "MapWizard|"
 msgid "Thumbnail"
-msgstr ""
+msgstr "Miniatura"
 
 #: src/lib/marble/MapWizard.ui:1012
 msgctxt "MapWizard|"
@@ -9678,7 +9632,7 @@ msgid ""
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
-"p, li { white-space: pre-wrap; }\n"
+"p, li { espaço em branco: pré-encapsulamento; }\n"
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal; text-decoration:none;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
@@ -9696,28 +9650,6 @@ msgid "&About"
 msgstr "&Sobre"
 
 #: src/lib/marble/MarbleAboutDialog.ui:98
-#, fuzzy
-#| msgctxt "MarbleAboutDialog|"
-#| msgid ""
-#| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#| "REC-html40/strict.dtd\">\n"
-#| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#| "css\">\n"
-#| "p, li { white-space: pre-wrap; }\n"
-#| "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
-#| "font-weight:400; font-style:normal;\">\n"
-#| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
-#| "font-size:9pt;\"></p>\n"
-#| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#| "size:9pt;\">(c) 2007, The Marble Project</span></p>\n"
-#| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
-#| "font-size:9pt; font-style:italic;\"></p>\n"
-#| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#| "size:9pt;\">https://edu.kde.org/marble</span></p></body></html>"
 msgctxt "MarbleAboutDialog|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -9744,7 +9676,7 @@ msgstr ""
 "REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
-"p, li { white-space: pre-wrap; }\n"
+"p, li { espaço em branco: pré-encapsulamento; }\n"
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
@@ -9752,13 +9684,13 @@ msgstr ""
 "size:9pt;\"></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"size:9pt;\">(c) 2007, O projeto Marble</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
-"size:9pt; font-style:italic;\"></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"size:9pt;\">https://edu.kde.org/marble</span></p></body></html>"
+"size:9pt;\">(c) 2007, O Projeto Marble</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margem-superior:0px; margem-"
+"inferior:0px;margem-esquerda:0px; margem-direita:0px; -qt-block-indent:0; "
+"recuo-do-texto:0px; tamanho-da-fonte:9pt; estilo-da-fonte:itálico;\"></p>\n"
+"<p style=\" margem-superior:0px; margem-inferior:0px; margem-esquerda:0px; "
+"margem-direita:0px; -qt-block-indent:0; recuo-do-texto:0px;\"><span style=\" "
+"tamanho-da-fonte:9pt;\">https://marble.kde.org/</span></p></body></html>"
 
 #: src/lib/marble/MarbleAboutDialog.ui:116
 msgctxt "MarbleAboutDialog|"
@@ -9784,7 +9716,7 @@ msgstr ""
 "REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
-"p, li { white-space: pre-wrap; }\n"
+"p, li { espaço em branco: pré-encapsulamento; }\n"
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
@@ -9819,7 +9751,7 @@ msgstr ""
 "REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
-"p, li { white-space: pre-wrap; }\n"
+"p, li { espaço em branco: pré-encapsulamento; }\n"
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
@@ -9845,7 +9777,7 @@ msgid ""
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
-"p, li { white-space: pre-wrap; }\n"
+"p, li { espaço em branco: pré-encapsulamento; }\n"
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
@@ -9907,7 +9839,7 @@ msgid ""
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
-"p, li { white-space: pre-wrap; }\n"
+"p, li { espaço em branco: pré-encapsulamento; }\n"
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
@@ -9972,6 +9904,8 @@ msgid ""
 "Allows you to store routes in owncloud. Each route must be uploaded/"
 "downloaded manually."
 msgstr ""
+"Permite armazenar rotas na OwnCloud. Cada rota deve ser carregada/baixada "
+"manualmente."
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:51
 msgctxt "MarbleCloudSyncSettingsWidget|"
@@ -10079,11 +10013,9 @@ msgid "nm"
 msgstr "nm"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:17
-#, fuzzy
-#| msgid "rain and snow"
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Dragging and Animation"
-msgstr "chuva e neve"
+msgstr "Arrastando e Animação"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:37
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10109,11 +10041,26 @@ msgid ""
 "location below the mouse pointer slightly \"detaches\" from the cursor. </"
 "p></body></html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { espaço em branco: pré-encapsulamento; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Ao arrastar o mouse, há "
+"dois comportamentos padrão ao lidar com um globo virtual:</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">A localização abaixo do "
+"ponteiro do mouse seguirá o cursor exatamente: como resultado, por exemplo, "
+"o polo norte não ficará no topo, o que pode causar confusão. Por padrão, o "
+"Marble garante que o norte esteja sempre para cima, o que resulta em um "
+"comportamento de arrastar em que o local abaixo do ponteiro do mouse se "
+"\"desprende\" ligeiramente do cursor. </p></body></html>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:58
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Keep Planet Axis Vertically"
-msgstr ""
+msgstr "Manter o eixo do planeta verticalmente"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:63
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10126,12 +10073,9 @@ msgid "Use kinetic spinning when dragging the map"
 msgstr "Usar rotação cinética ao arrastar o mapa"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:76
-#, fuzzy
-#| msgctxt "MarbleNavigationSettingsWidget|"
-#| msgid "&Inertial Globe Rotation"
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "&Inertial globe rotation"
-msgstr "&Rotação de inércia do globo"
+msgstr "Rotação &inercial do globo"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:83
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10147,6 +10091,15 @@ msgid ""
 "a travel animation from the previous place to the new place.</p></body></"
 "html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Ao pesquisar um local, o "
+"Marble pode se mover instantaneamente para o novo local ou exibir uma "
+"animação de viagem do local anterior para o novo.</p></body></html>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:89
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10156,12 +10109,12 @@ msgstr "&Animar a viagem até o destino"
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:96
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Use right mouse button to rotate the camera around"
-msgstr ""
+msgstr "Use o botão direito do mouse para rotacionar a câmera pelo globo"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:99
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "&Mouse view rotation"
-msgstr ""
+msgstr "Rotação da visão com o &mouse"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:142
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10182,6 +10135,16 @@ msgid ""
 "an alternative it can also show the last position that was active when the "
 "user left the application. </p></body></html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { espaço em branco: pré-encapsulamento; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Por padrão, o Marble exibe "
+"o local inicial imediatamente após o aplicativo ser iniciado. Como "
+"alternativa, ele também pode mostrar a última posição que estava ativa "
+"quando o usuário saiu do aplicativo. </p></body></html>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:159
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10194,9 +10157,6 @@ msgid "Return to Last Location Visited"
 msgstr "Retornar para última localização visitada"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:184
-#, fuzzy
-#| msgctxt "MarbleNavigationSettingsWidget|"
-#| msgid "&External Editor:"
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "&External editor:"
 msgstr "&Editor externo:"
@@ -10209,6 +10169,10 @@ msgid ""
 "josm or merkaartor, make sure that the respective application is installed.</"
 "p>"
 msgstr ""
+"<p>O aplicativo que é iniciado para editar mapas. Potlatch (padrão) requer "
+"um navegador web com suporte a Flash para ser instalado. Ao selecionar josm "
+"ou merkaartor, certifique-se de que o respectivo aplicativo esteja instalado."
+"</p>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:198
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10238,18 +10202,15 @@ msgstr "Para cima"
 #: src/lib/marble/MarbleNavigator.ui:65
 msgctxt "MarbleNavigator|"
 msgid "Tilts the globe's axis towards the user."
-msgstr ""
+msgstr "Inclina o eixo do globo em direção ao usuário."
 
 #: src/lib/marble/MarbleNavigator.ui:68 src/lib/marble/MarbleNavigator.ui:84
 #: src/lib/marble/MarbleNavigator.ui:103 src/lib/marble/MarbleNavigator.ui:122
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "MarbleNavigator|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
 msgctxt "MarbleNavigator|"
@@ -10259,7 +10220,7 @@ msgstr "Esquerda"
 #: src/lib/marble/MarbleNavigator.ui:81
 msgctxt "MarbleNavigator|"
 msgid "Rotates the globe counterclockwise around its axis."
-msgstr ""
+msgstr "Gira o globo no sentido anti-horário em torno de seu eixo."
 
 #: src/lib/marble/MarbleNavigator.ui:97
 msgctxt "MarbleNavigator|"
@@ -10284,7 +10245,7 @@ msgstr "Direita"
 #: src/lib/marble/MarbleNavigator.ui:119
 msgctxt "MarbleNavigator|"
 msgid "Rotates the globe clockwise around its axis."
-msgstr ""
+msgstr "Gira o globo no sentido horário em torno de seu eixo."
 
 #: src/lib/marble/MarbleNavigator.ui:135
 msgctxt "MarbleNavigator|"
@@ -10294,7 +10255,7 @@ msgstr "Para baixo"
 #: src/lib/marble/MarbleNavigator.ui:138
 msgctxt "MarbleNavigator|"
 msgid "Tilts the globe's axis away from the user."
-msgstr ""
+msgstr "Inclina o eixo do globo para longe do usuário."
 
 #: src/lib/marble/MarbleNavigator.ui:151
 msgctxt "MarbleNavigator|"
@@ -10304,7 +10265,7 @@ msgstr "Ampliar"
 #: src/lib/marble/MarbleNavigator.ui:154
 msgctxt "MarbleNavigator|"
 msgid "Zoom in by pressing this button to see more detail."
-msgstr ""
+msgstr "Aumenta o zoom pressionando este botão para ver mais detalhes."
 
 #: src/lib/marble/MarbleNavigator.ui:163
 msgctxt "MarbleNavigator|"
@@ -10314,12 +10275,12 @@ msgstr "+"
 #: src/lib/marble/MarbleNavigator.ui:178
 msgctxt "MarbleNavigator|"
 msgid "Zoom Slider"
-msgstr ""
+msgstr "Manipulador de ampliação"
 
 #: src/lib/marble/MarbleNavigator.ui:181
 msgctxt "MarbleNavigator|"
 msgid "Use this slider to adjust the zoom level of the map."
-msgstr ""
+msgstr "Use este manipulador para ajustar o nível de ampliação do mapa."
 
 #: src/lib/marble/MarbleNavigator.ui:209
 msgctxt "MarbleNavigator|"
@@ -10329,7 +10290,7 @@ msgstr "Reduzir"
 #: src/lib/marble/MarbleNavigator.ui:212
 msgctxt "MarbleNavigator|"
 msgid "Zoom out by pressing this button to see less detail."
-msgstr ""
+msgstr "Diminua a ampliação pressionando este botão para ver menos detalhes."
 
 #: src/lib/marble/MarbleNavigator.ui:221
 msgctxt "MarbleNavigator|"
@@ -10370,6 +10331,26 @@ msgid ""
 "family:'Sans Serif';\">Also some of the plugins might allow for tweaking "
 "their configuration a bit. </span></p></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { espaço em branco: pré-encapsulamento; }\n"
+"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"family:'Sans Serif';\">Esta é a sala de máquinas do Marble para usuários "
+"avançados. Aqui você pode selecionar e desmarcar a funcionalidade fornecida "
+"pelos plugins. </span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"family:'Sans Serif';\">Desmarcar um plugin removerá a funcionalidade do "
+"mapa, dos menus e das barras de ferramentas. </span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"family:'Sans Serif';\">Alguns plugins também podem permitir pequenos ajustes "
+"em sua configuração. </span></p></body></html>"
 
 #: src/lib/marble/MarblePluginSettingsWidget.ui:26
 msgctxt "MarblePluginSettingsWidget|"
@@ -10590,7 +10571,7 @@ msgid ""
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
-"p, li { white-space: pre-wrap; }\n"
+"p, li { espaço em branco: pré-encapsulamento; }\n"
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
@@ -10634,7 +10615,7 @@ msgid ""
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
-"p, li { white-space: pre-wrap; }\n"
+"p, li { espaço em branco: pré-encapsulamento; }\n"
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
@@ -10683,7 +10664,7 @@ msgid ""
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
-"p, li { white-space: pre-wrap; }\n"
+"p, li { espaço em branco: pré-encapsulamento; }\n"
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
@@ -10744,6 +10725,19 @@ msgid ""
 "machines it is advisable to set this option to \"low quality\" as this will "
 "give better speed.</p></body></html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { espaço em branco: pré-encapsulamento; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Especifica a qualidade do "
+"mapa que é exibida durante as animações do mapa (por exemplo, ao arrastar o "
+"globo). </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Especialmente em máquinas "
+"lentas, é aconselhável definir esta opção como \"baixa  qualidade\", pois "
+"isso proporcionará maior velocidade.</p></body></html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:266
 msgctxt "MarbleViewSettingsWidget|"
@@ -10769,6 +10763,16 @@ msgid ""
 "name in the user's language. Alternatively it can display the name in the "
 "official language and glyphs of that place. </p></body></html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { espaço em branco: pré-encapsulamento; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Lugares costumam ter nomes "
+"diferentes em idiomas diferentes. O rótulo no mapa pode mostrar o nome no "
+"idioma do usuário. Alternativamente, pode exibir o nome no idioma oficial e "
+"na grafia do local. </p></body></html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:306
 msgctxt "MarbleViewSettingsWidget|"
@@ -10804,7 +10808,7 @@ msgid ""
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
-"p, li { white-space: pre-wrap; }\n"
+"p, li { espaço em branco: pré-encapsulamento; }\n"
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
@@ -10829,7 +10833,7 @@ msgstr "Copiar coordenadas"
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:114
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Copy geo: URL"
-msgstr ""
+msgstr "Copiar URL geográfica"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:123
 msgctxt "Marble::MarbleWidgetPopupMenu|"
@@ -11011,12 +11015,9 @@ msgid "Destination video:"
 msgstr "Vídeo de destino:"
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
-#, fuzzy
-#| msgctxt "Marble::RouteItemDelegate|"
-#| msgid "Open"
 msgctxt "MovieCaptureDialog|"
 msgid "Open…"
-msgstr "Abrir"
+msgstr "Abrir…"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -11029,12 +11030,9 @@ msgid "New Bookmark Folder"
 msgstr "Nova pasta de favoritos"
 
 #: src/lib/marble/NewBookmarkFolderDialog.ui:22
-#, fuzzy
-#| msgctxt "UiNewBookmarkFolderDialog|"
-#| msgid "&Folder Name"
 msgctxt "UiNewBookmarkFolderDialog|"
 msgid "&Folder name:"
-msgstr "&Nome da pasta"
+msgstr "&Nome da pasta:"
 
 #: src/lib/marble/NewstuffModel.cpp:739 src/lib/marble/NewstuffModel.cpp:748
 msgctxt "Marble::NewstuffModel|"
@@ -11171,12 +11169,9 @@ msgid "All Supported Files (*.png)"
 msgstr "Todos os arquivos suportados (*.png)"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid "Browse"
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Browse…"
-msgstr "Navegar"
+msgstr "Navegar..."
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -11184,9 +11179,6 @@ msgid "Name:"
 msgstr "Nome:"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:81
-#, fuzzy
-#| msgctxt "PlacemarkEditHeaderPrivate|"
-#| msgid "Icon Link:"
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Icon link:"
 msgstr "Link do ícone:"
@@ -11341,7 +11333,7 @@ msgstr "Região visível do globo"
 #: src/lib/marble/PrintOptions.ui:52
 msgctxt "PrintOptions|"
 msgid "Outer Space"
-msgstr ""
+msgstr "Vista do espaço"
 
 #: src/lib/marble/PrintOptions.ui:72
 msgctxt "PrintOptions|"
@@ -11801,17 +11793,11 @@ msgid "Choose Placemark"
 msgstr "Escolher marcador"
 
 #: src/lib/marble/routing/RoutingLayer.cpp:187
-#, fuzzy
-#| msgctxt "QObject|"
-#| msgid "&Remove this destination"
 msgctxt "QObject|"
 msgid "&Remove this Destination"
 msgstr "&Remover este destino"
 
 #: src/lib/marble/routing/RoutingLayer.cpp:190
-#, fuzzy
-#| msgctxt "QObject|"
-#| msgid "&Export route..."
 msgctxt "QObject|"
 msgid "&Export Route..."
 msgstr "&Exportar rota..."
@@ -11936,15 +11922,12 @@ msgstr "Novo perfil"
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
 msgid "&Add…"
-msgstr ""
+msgstr "&Adicionar…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
-#, fuzzy
-#| msgctxt "RoutingSettingsWidget|"
-#| msgid "&Configure"
 msgctxt "RoutingSettingsWidget|"
 msgid "&Configure…"
-msgstr "Configurar"
+msgstr "&Configurar…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 msgctxt "RoutingSettingsWidget|"
@@ -12170,12 +12153,9 @@ msgid "Search for '%1'"
 msgstr "Pesquisar por '%1'"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:37
-#, fuzzy
-#| msgctxt "OsmRelationManagerWidgetPrivate|"
-#| msgid "Add Relation"
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Audio location"
-msgstr "Adicionar relação"
+msgstr "Localização do áudio"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:67
 msgctxt "Marble::SoundCueEditWidget|"
@@ -12195,7 +12175,7 @@ msgstr "Controle do Sol"
 #: src/lib/marble/SunControlWidget.ui:26
 msgctxt "SunControlWidget|"
 msgid "S&un Shading"
-msgstr ""
+msgstr "Proteção s&olar"
 
 #: src/lib/marble/SunControlWidget.ui:41
 msgctxt "SunControlWidget|"
@@ -12210,7 +12190,7 @@ msgstr "Mapa &noturno"
 #: src/lib/marble/SunControlWidget.ui:64
 msgctxt "SunControlWidget|"
 msgid "Subsolar Point"
-msgstr ""
+msgstr "Ponto subsolar"
 
 #: src/lib/marble/SunControlWidget.ui:88
 msgctxt "SunControlWidget|"
@@ -12218,6 +12198,8 @@ msgid ""
 "Display <a href=\"https://en.wikipedia.org/wiki/Subsolar_point\">Subsolar "
 "Point</a> icon"
 msgstr ""
+"Exibe o ícone de <a href=\"https://en.wikipedia.org/wiki/Subsolar_point"
+"\">Ponto subsolar</a>"
 
 #: src/lib/marble/SunControlWidget.ui:131
 msgctxt "SunControlWidget|"
@@ -12225,6 +12207,8 @@ msgid ""
 "<b>Lock</b> map view to <a href=\"https://en.wikipedia.org/wiki/"
 "Subsolar_point\">Subsolar Point</a>."
 msgstr ""
+"<b>Bloqueia</b> a visão do mapa para o <a href=\"https://en.wikipedia.org/"
+"wiki/Subsolar_point\">Ponto subsolar</a>."
 
 #: src/lib/marble/SunControlWidget.ui:205
 msgctxt "SunControlWidget|"
@@ -12244,6 +12228,21 @@ msgid ""
 "view to Subsolar Point&quot; option to allow for viewing a different place "
 "on the globe again.</p></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { espaço em branco: pré-encapsulamento; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Atenção: A panorâmica do mapa está desativada agora! </span></"
+"p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Desmarque a opção &quot;"
+"Bloquear visualização do mapa para o Ponto  Subsolar&quot; para permitir a "
+"visualização de um local diferente no globo novamente.</p></body></html>"
 
 #: src/lib/marble/TileCreatorDialog.ui:20
 msgctxt "TileCreatorDialog|"
@@ -12285,12 +12284,9 @@ msgstr ""
 #: src/lib/marble/TileLevelRangeWidget.ui:29
 msgctxt "TileLevelRangeWidget|"
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
 #: src/lib/marble/TileLevelRangeWidget.ui:37
-#, fuzzy
-#| msgctxt "TileLevelRangeWidget|"
-#| msgid "&Tile Level Range:"
 msgctxt "TileLevelRangeWidget|"
 msgid "&Tile level range:"
 msgstr "&Intervalo de níveis dos blocos:"
@@ -12348,7 +12344,7 @@ msgstr "&Data e hora atual:"
 #: src/lib/marble/TimeControlWidget.ui:136
 msgctxt "TimeControlWidget|"
 msgid "Time Speed"
-msgstr ""
+msgstr "Velocidade do tempo"
 
 #: src/lib/marble/TourCaptureDialog.cpp:58
 msgctxt "Marble::TourCaptureDialog|"
@@ -12361,6 +12357,8 @@ msgid ""
 "Supported codecs are not found. (ffmpeg/avconv needs to be installed and in "
 "PATH.)"
 msgstr ""
+"Os codecs suportados não foram encontrados. (ffmpeg/avconv precisa estar "
+"instalado e no PATH.)"
 
 #: src/lib/marble/TourCaptureDialog.cpp:67
 msgctxt "Marble::TourCaptureDialog|"
@@ -12425,12 +12423,9 @@ msgid "Destination video"
 msgstr "Vídeo de destino"
 
 #: src/lib/marble/TourCaptureDialog.ui:81
-#, fuzzy
-#| msgctxt "Marble::RouteItemDelegate|"
-#| msgid "Open"
 msgctxt "TourCaptureDialog|"
 msgid "Open…"
-msgstr "Abrir"
+msgstr "Abrir…"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
@@ -12647,7 +12642,7 @@ msgstr "Reproduzir"
 #: src/lib/marble/TourWidget.ui:171
 msgctxt "TourWidget|"
 msgid "Begins touring"
-msgstr ""
+msgstr "Inicia o passeio"
 
 #: src/lib/marble/TourWidget.ui:180
 msgctxt "TourWidget|"
@@ -12658,6 +12653,7 @@ msgstr "Parar"
 msgctxt "TourWidget|"
 msgid "Stops touring (playing again will start tour from the start)"
 msgstr ""
+"Interrompe o passeio (reproduzir novamente iniciará o passeio do início)"
 
 #: src/lib/marble/TourWidget.ui:192
 msgctxt "TourWidget|"
@@ -13050,6 +13046,7 @@ msgstr "ERRO"
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "Unable to create temporary file to download OSM data to."
 msgstr ""
+"Não é possível criar um arquivo temporário para baixar os dados do OSM."
 
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:114
 msgctxt "Marble::DownloadOsmDialog|"
@@ -13348,7 +13345,7 @@ msgstr "Exibir"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:38
 msgctxt "AprsConfigWidget|"
 msgid "Fade data older than (minutes)"
-msgstr ""
+msgstr "Dados de fade mais antigos que (minutos)"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:45
 #: src/plugins/render/aprs/AprsConfigWidget.ui:69
@@ -13404,7 +13401,7 @@ msgstr "10253"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:155
 msgctxt "AprsConfigWidget|"
 msgid "Dump TCP/IP records to the debug stream"
-msgstr ""
+msgstr "Despejar registros TCP/IP no fluxo de depuração"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:166
 msgctxt "AprsConfigWidget|"
@@ -13414,7 +13411,7 @@ msgstr "Dispositivo"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:178
 msgctxt "AprsConfigWidget|"
 msgid "TNC Terminal Port"
-msgstr ""
+msgstr "Porta do terminal TNC"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:184
 msgctxt "AprsConfigWidget|"
@@ -13424,7 +13421,7 @@ msgstr "A informação deve ser obtida de uma porta serial?"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:187
 msgctxt "AprsConfigWidget|"
 msgid "Collect data from a serial TNC (In Text Mode)"
-msgstr ""
+msgstr "Coleta dados de um TNC seria (no modo texto)"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:202
 msgctxt "AprsConfigWidget|"
@@ -13439,7 +13436,7 @@ msgstr "/dev/ttyUSB0"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:218
 msgctxt "AprsConfigWidget|"
 msgid "Dump TTY records to the debug stream"
-msgstr ""
+msgstr "Despejar registros TTY no fluxo de depuração"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:229
 #: src/plugins/render/aprs/AprsConfigWidget.ui:235
@@ -13461,7 +13458,7 @@ msgstr "Coletar dados de um arquivo"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:275
 msgctxt "AprsConfigWidget|"
 msgid "Dump file records to the debug stream"
-msgstr ""
+msgstr "Despejar registros do arquivo no fluxo de depuração"
 
 #: src/plugins/render/aprs/AprsPlugin.cpp:116
 msgctxt "Marble::AprsPlugin|"
@@ -13555,7 +13552,7 @@ msgstr "S"
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:14
 msgctxt "CrosshairsConfigWidget|"
 msgid "Configure Crosshairs Plugin"
-msgstr ""
+msgstr "Configurar plugin de retículo"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:20
 msgctxt "CrosshairsConfigWidget|"
@@ -13570,19 +13567,17 @@ msgstr "Padrão"
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:52
 msgctxt "CrosshairsConfigWidget|"
 msgid "Gun 1"
-msgstr ""
+msgstr "Arma 1"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:61
 msgctxt "CrosshairsConfigWidget|"
 msgid "Gun 2"
-msgstr ""
+msgstr "Arma 2"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:70
-#, fuzzy
-#| msgid "Circle Ruler"
 msgctxt "CrosshairsConfigWidget|"
 msgid "Circled"
-msgstr "Régua de círculo"
+msgstr "Círculo"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:79
 msgctxt "CrosshairsConfigWidget|"
@@ -13602,7 +13597,7 @@ msgstr "&Mira"
 #: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:91
 msgctxt "Marble::CrosshairsPlugin|"
 msgid "A plugin that shows crosshairs."
-msgstr "Um plugin que exibe uma mira."
+msgstr "Um plugin que exibe um retículo."
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:14
 msgctxt "EarthquakeConfigWidget|"
@@ -13630,11 +13625,9 @@ msgid "Time Range"
 msgstr "Intervalo de data"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:65
-#, fuzzy
-#| msgid "Paste"
 msgctxt "EarthquakeConfigWidget|"
 msgid "Past"
-msgstr "Colar"
+msgstr "Passado"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:78
 msgctxt "EarthquakeConfigWidget|"
@@ -13682,24 +13675,19 @@ msgid "Shows earthquakes on the map."
 msgstr "Mostra os terremotos no mapa."
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:14
-#, fuzzy
-#| msgid "Eclipses"
 msgctxt "EclipsesBrowserDialog|"
 msgid "Eclipse Browser"
-msgstr "Eclipses"
+msgstr "Navegador de eclipses"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:35
 msgctxt "EclipsesBrowserDialog|"
 msgid "Show eclipses for year:"
-msgstr ""
+msgstr "Mostra os eclipses por ano:"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
-#, fuzzy
-#| msgctxt "Marble::MainWindow|"
-#| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
 msgid "&Settings…"
-msgstr "&Configurações"
+msgstr "&Configurações..."
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 msgctxt "EclipsesBrowserDialog|"
@@ -13709,7 +13697,7 @@ msgstr "Fe&char"
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:171
 msgctxt "EclipsesBrowserDialog|"
 msgid "&Go To Selected Eclipse"
-msgstr ""
+msgstr "&Ir para o eclipse selecionado"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:17
 msgctxt "EclipsesConfigDialog|"
@@ -13734,7 +13722,7 @@ msgstr "Habilitar eclipses &lunares"
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:55
 msgctxt "EclipsesConfigDialog|"
 msgid "Show Eclipse Control &Widget"
-msgstr ""
+msgstr "Mostrar o &elemento de controle de eclipse"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:65
 msgctxt "EclipsesConfigDialog|"
@@ -13742,50 +13730,44 @@ msgid "&Eclipse Elements"
 msgstr "Elementos do &eclipse"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:74
-#, fuzzy
-#| msgid "Moon, Penumbral"
 msgctxt "EclipsesConfigDialog|"
 msgid "&Northern Penumbra"
-msgstr "Lunar penumbral"
+msgstr "Penumbra do &norte"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:84
 msgctxt "EclipsesConfigDialog|"
 msgid "&Umbra"
-msgstr ""
+msgstr "&Umbra"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:94
 msgctxt "EclipsesConfigDialog|"
 msgid "Position of Eclipse &Maximum"
-msgstr ""
+msgstr "Posição do eclipse &máximo"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:104
 msgctxt "EclipsesConfigDialog|"
 msgid "Central &Line"
-msgstr ""
+msgstr "&Linha central"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:114
-#, fuzzy
-#| msgid "Moon, Penumbral"
 msgctxt "EclipsesConfigDialog|"
 msgid "Full &Penumbra"
-msgstr "Lunar penumbral"
+msgstr "&Penumbra completa"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:124
 msgctxt "EclipsesConfigDialog|"
 msgid "Sunrise and Sunset &Boundaries"
-msgstr ""
+msgstr "&Limites do nasce e pôr do sol"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:134
-#, fuzzy
-#| msgid "Moon, Penumbral"
 msgctxt "EclipsesConfigDialog|"
 msgid "&Southern Penumbra"
-msgstr "Lunar penumbral"
+msgstr "Penumbra &meridional"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:144
 msgctxt "EclipsesConfigDialog|"
 msgid "Penumbra with 60% Ma&gnitude"
-msgstr ""
+msgstr "Penumbra com 60% de ma&gnitude"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:171
 msgctxt "EclipsesConfigDialog|"
@@ -13906,6 +13888,10 @@ msgid ""
 "you want more information on a specific event, select it and click OK.</p></"
 "body></html>"
 msgstr ""
+"<html><head/><body><p>O Marble detectou que os seguintes <span style=\"font-"
+"weight:600;\">eventos de eclipse</span> ocorrerão em um futuro próximo. Se "
+"quiser mais informações sobre um evento específico, selecione-o e clique em "
+"OK.</p></body></html>"
 
 #: src/plugins/render/eclipses/EclipsesReminderDialog.ui:33
 msgctxt "EclipsesReminderDialog|"
@@ -14209,7 +14195,7 @@ msgstr "&Etiquetas nomeadas"
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1408
 msgctxt "GraticuleConfigWidget|"
 msgid "Show Labels for Prime meridian, Equator, Tropics."
-msgstr ""
+msgstr "Mostrar rótulos para Meridiano principal, Equador e Trópicos."
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1415
 msgctxt "GraticuleConfigWidget|"
@@ -14318,11 +14304,9 @@ msgid "Configure Scale Bar Plugin"
 msgstr "Configurar plugin da barra de escala"
 
 #: src/plugins/render/mapscale/MapScaleConfigWidget.ui:20
-#, fuzzy
-#| msgid "&Ratio Scale"
 msgctxt "MapScaleConfigWidget|"
 msgid "Show Ratio Scale"
-msgstr "Escala p&roporcional"
+msgstr "Mostrar escala de proporção"
 
 #: src/plugins/render/mapscale/MapScaleConfigWidget.ui:30
 msgctxt "MapScaleConfigWidget|"
@@ -14410,7 +14394,7 @@ msgstr "Círculo"
 #: src/plugins/render/measure/MeasureConfigDialog.ui:51
 msgctxt "MeasureConfigDialog|"
 msgid "Segment labels"
-msgstr ""
+msgstr "Rótulos de segmento"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:60
 msgctxt "MeasureConfigDialog|"
@@ -14418,18 +14402,14 @@ msgid "Distance "
 msgstr "Distância"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:70
-#, fuzzy
-#| msgid "Carina"
 msgctxt "MeasureConfigDialog|"
 msgid "Bearing"
-msgstr "Quilha"
+msgstr "Rumo"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:80
-#, fuzzy
-#| msgid "Discard Changes"
 msgctxt "MeasureConfigDialog|"
 msgid "Bearing Change"
-msgstr "Descartar alterações"
+msgstr "Mudança de rumo"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:90
 msgctxt "MeasureConfigDialog|"
@@ -14844,18 +14824,14 @@ msgid "Please choose the color for the position indicator"
 msgstr "Escolha a cor para o indicador de posição"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:14
-#, fuzzy
-#| msgid "Choose Overview Map"
 msgctxt "OverviewMapConfigWidget|"
 msgid "Configure Overview Map"
-msgstr "Escolher o mapa global"
+msgstr "Configurar a visão geral do mapa"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:20
-#, fuzzy
-#| msgid "Map Name"
 msgctxt "OverviewMapConfigWidget|"
 msgid "Map &Image"
-msgstr "Nome do mapa"
+msgstr "&Imagem do mapa"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:28
 msgctxt "OverviewMapConfigWidget|"
@@ -14888,11 +14864,9 @@ msgid "C&olors"
 msgstr "C&ores"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:200
-#, fuzzy
-#| msgid "Position Marker"
 msgctxt "OverviewMapConfigWidget|"
 msgid "Position I&ndicator:"
-msgstr "Marcador de posição"
+msgstr "I&ndicador de posição:"
 
 #: src/plugins/render/panoramio/PanoramioPlugin.cpp:33
 msgctxt "Marble::PanoramioPlugin|"
@@ -15027,11 +15001,9 @@ msgid "Please choose a color"
 msgstr "Escolha uma cor"
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:14
-#, fuzzy
-#| msgid "Wlocate Position Provider Plugin"
 msgctxt "PositionMarkerConfigWidget|"
 msgid "Configure Position Marker Plugin"
-msgstr "Plugin de fornecimento de posição do Wlocate"
+msgstr "Configurar o plugin do marcador de posição"
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:20
 msgctxt "PositionMarkerConfigWidget|"
@@ -15059,6 +15031,8 @@ msgctxt "PositionMarkerConfigWidget|"
 msgid ""
 "Position marker images indicating the direction should point north (top)."
 msgstr ""
+"As imagens dos marcadores de posição que indicam a direção devem apontar "
+"para o norte (acima)."
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:150
 msgctxt "PositionMarkerConfigWidget|"
@@ -15078,7 +15052,7 @@ msgstr "&Precisão"
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:191
 msgctxt "PositionMarkerConfigWidget|"
 msgid "Color of the position marker's accuracy indicator."
-msgstr ""
+msgstr "Cor do indicador de precisão do marcador de posição."
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:201
 msgctxt "PositionMarkerConfigWidget|"
@@ -15088,7 +15062,7 @@ msgstr "Trilha:"
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:220
 msgctxt "PositionMarkerConfigWidget|"
 msgid "Color of the position marker's trail."
-msgstr ""
+msgstr "Cor do rastro do marcador de posição."
 
 #: src/plugins/render/postalcode/PostalCodePlugin.cpp:33
 #: src/plugins/render/postalcode/PostalCodePlugin.cpp:38
@@ -15125,7 +15099,7 @@ msgstr "Configuração de roteamento"
 #: src/plugins/render/routing/RoutingConfigDialog.ui:20
 msgctxt "RoutingConfigDialog|"
 msgid "Audible Turn Instructions"
-msgstr ""
+msgstr "Instruções de curva audíveis"
 
 #: src/plugins/render/routing/RoutingConfigDialog.ui:50
 msgctxt "RoutingConfigDialog|"
@@ -15135,7 +15109,7 @@ msgstr "Reproduzir um som"
 #: src/plugins/render/routing/RoutingConfigDialog.ui:62
 msgctxt "RoutingConfigDialog|"
 msgid "Use this speaker"
-msgstr ""
+msgstr "Use este narrador"
 
 #: src/plugins/render/routing/RoutingConfigDialog.ui:88
 msgctxt "RoutingConfigDialog|"
@@ -15143,6 +15117,8 @@ msgid ""
 "<a href=\"https://userbase.kde.org/Marble/CustomSpeakers\">Get more "
 "speakers</a>"
 msgstr ""
+"<a href=\"https://userbase.kde.org/Marble/CustomSpeakers\">Obtenha mais "
+"narradores</a>"
 
 #: src/plugins/render/routing/RoutingPlugin.cpp:235
 msgctxt "QObject|"
@@ -15194,12 +15170,12 @@ msgstr "Modo de condução"
 #: src/plugins/render/routing/RoutingPlugin.ui:132
 msgctxt "RoutingPlugin|"
 msgid "R"
-msgstr ""
+msgstr "R"
 
 #: src/plugins/render/routing/RoutingPlugin.ui:158
 msgctxt "RoutingPlugin|"
 msgid "Toggle GPS"
-msgstr ""
+msgstr "Liga/desliga GPS"
 
 #: src/plugins/render/routing/RoutingPlugin.ui:187
 msgctxt "RoutingPlugin|"
@@ -15432,17 +15408,14 @@ msgid "Remove selected data source."
 msgstr "Excluir a fonte de dados selecionada."
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "SatellitesConfigDialog|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
 msgctxt "SatellitesConfigDialog|"
 msgid "(Built-in Data Sources for Earth Satellites)"
-msgstr ""
+msgstr "(Fontes de dados integradas para satélites)"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:232
 msgctxt "SatellitesConfigDialog|"
@@ -15454,6 +15427,12 @@ msgid ""
 "decoration: underline; color:#0000ff;\">Two-Line-Element Set</span></a></p></"
 "body></html>"
 msgstr ""
+"<html><head/><body><p>Formatos suportados: <a href=\"https://techbase.kde."
+"org/Projects/Marble/SatelliteCatalogFormat\"><span style=\" text-decoration: "
+"underline; color:#0000ff;\">Catálogo de Satélite do Marble</span></a>, <a "
+"href=\"https://en.wikipedia.org/wiki/Two-line_element_set\"><span style=\" "
+"text-decoration: underline; color:#0000ff;\">Conjunto de elemento de duas "
+"linhas</span></a></p></body></html>"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:255
 msgctxt "SatellitesConfigDialog|"
@@ -15675,9 +15654,6 @@ msgid "Glonass Operational"
 msgstr "Glonass operacional"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:503
-#, fuzzy
-#| msgctxt "Name of a satellite group"
-#| msgid "Galileo"
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Galileo"
 msgstr "Galileu"
@@ -15788,16 +15764,14 @@ msgid "Celestial Objects"
 msgstr "Objetos celestes"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:30
-#, fuzzy
-#| msgid "Magnitude"
 msgctxt "StarsConfigWidget|"
 msgid "Star Magnitude Limit"
-msgstr "Magnitude"
+msgstr "Limite de magnitude de estrela"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:58
 msgctxt "StarsConfigWidget|"
 msgid " mag"
-msgstr ""
+msgstr " mag"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:74
 msgctxt "StarsConfigWidget|"
@@ -15860,11 +15834,9 @@ msgid "Use name labels"
 msgstr "Usar etiquetas nomeadas"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:177
-#, fuzzy
-#| msgid "Show &Sun and Moon"
 msgctxt "StarsConfigWidget|"
 msgid "Magnify Sun and Moon"
-msgstr "Mostrar &Sol e Lua"
+msgstr "Ampliar sol e lua"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:190
 msgctxt "StarsConfigWidget|"
@@ -15872,18 +15844,14 @@ msgid "Other"
 msgstr "Outros"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:196
-#, fuzzy
-#| msgid "Show &Deep Sky Objects"
 msgctxt "StarsConfigWidget|"
 msgid "Deep Sky Objects"
-msgstr "Mostrar os objetos &distantes"
+msgstr "Objetos do espaço profundo"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:219
-#, fuzzy
-#| msgid "Show &Deep Sky Objects"
 msgctxt "StarsConfigWidget|"
 msgid "Deep Sky Object Labels"
-msgstr "Mostrar os objetos &distantes"
+msgstr "Rótulos dos objetos do espaço profundo"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:278
 msgctxt "StarsConfigWidget|"
@@ -15911,18 +15879,14 @@ msgid "Names"
 msgstr "Nomes"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:401
-#, fuzzy
-#| msgid "Map Name"
 msgctxt "StarsConfigWidget|"
 msgid "Latin Name"
-msgstr "Nome do mapa"
+msgstr "Nome em latim"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:406
-#, fuzzy
-#| msgid "train station"
 msgctxt "StarsConfigWidget|"
 msgid "Native Translation"
-msgstr "estação de trem"
+msgstr "Tradução para o idioma nativo"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:411
 msgctxt "StarsConfigWidget|"
@@ -15945,11 +15909,9 @@ msgid "Celestial Poles"
 msgstr "Polos celestes"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:525
-#, fuzzy
-#| msgid "Eclipses"
 msgctxt "StarsConfigWidget|"
 msgid "Ecliptic"
-msgstr "Eclipses"
+msgstr "Eclíptica"
 
 #: src/plugins/render/stars/StarsPlugin.cpp:109
 msgctxt "Marble::StarsPlugin|"
@@ -16078,11 +16040,9 @@ msgid "The file is not a valid file."
 msgstr "O arquivo não é válido."
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:14
-#, fuzzy
-#| msgid "&Configure Marble"
 msgctxt "WeatherConfigWidget|"
 msgid "Configure Weather Plugin"
-msgstr "&Configurar o Marble"
+msgstr "Configurar plugin de clima"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:23
 msgctxt "WeatherConfigWidget|"
@@ -16101,6 +16061,14 @@ msgid ""
 "Marble will only show the condition if this information is available.</p></"
 "body></html>\n"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\\np, li { espaço em branco: pré-encapsulamento; }\\n</style></head><body "
+"style=\" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-"
+"style:normal;\"><pstyle=\" margin-top:0px; margin-bottom:0px; margin-"
+"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Aqui você "
+"pode escolher se deseja que a condição climática seja exibida (por exemplo, "
+"nuvens ou céu limpo). O Marble só mostrará a condição se essa informação "
+"estiver disponível.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:33
 msgctxt "WeatherConfigWidget|"
@@ -16118,6 +16086,13 @@ msgid ""
 "temperature to be shown. The temperature will only be shown for the stations "
 "it is available for.</p></body></html>\n"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\\np, li { espaço em branco: pré-encapsulamento; }\\n</style></head><body "
+"style=\" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-"
+"style:normal;\"><pstyle=\" margin-top:0px; margin-bottom:0px; margin-"
+"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Seleciona "
+"se você deseja que a temperatura seja exibida. A temperatura será exibida "
+"apenas para as estações para as quais está disponível.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:44
 #: src/plugins/render/weather/WeatherConfigWidget.ui:84
@@ -16136,6 +16111,13 @@ msgid ""
 "wind direction to be shown. The wind direction will only be shown if it is "
 "available for the particular station.</p></body></html>\n"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\\np, li { espaço em branco: pré-encapsulamento; }\\n</style></head><body "
+"style=\" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-"
+"style:normal;\"><pstyle=\" margin-top:0px; margin-bottom:0px; margin-"
+"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Selecione "
+"se deseja que a direção do vento seja exibida. A direção do vento só será "
+"exibida se estiver disponível para a estação específica.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:55
 msgctxt "WeatherConfigWidget|"
@@ -16153,6 +16135,14 @@ msgid ""
 "wind speed to be shown. The wind speed will only be shown if it is available "
 "for the particular station.</p></body></html>\n"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\\np, li { espaço em branco: pré-encapsulamento; }\\n</style></head><body "
+"style=\" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-"
+"style:normal;\"><pstyle=\" margin-top:0px; margin-bottom:0px; margin-"
+"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Selecione "
+"se deseja que a velocidade do vento seja exibida. A velocidade do vento só "
+"será exibida se estiver disponível para a estação específica.</p></body></"
+"html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:66
 #: src/plugins/render/weather/WeatherConfigWidget.ui:113
@@ -16176,11 +16166,11 @@ msgid ""
 "the temperature.</p></body></html>\n"
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
-"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
-"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">A unidade usada para medir "
-"a temperatura.</p></body></html>\n"
+"\">\\np, li { espaço em branco: pré-encapsulamento; }\\n</style></head><body "
+"style=\" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-"
+"style:normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">A unidade "
+"usada para medir a temperatura.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:96
 msgctxt "WeatherConfigWidget|"
@@ -16203,11 +16193,11 @@ msgid ""
 "the wind speed.</p></body></html>\n"
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
-"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
-"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">A unidade usada para medir "
-"a velocidade do vento.</p></body></html>\n"
+"\">\\np, li { espaço em branco: pré-encapsulamento; }\\n</style></head><body "
+"style=\" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-"
+"style:normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">A unidade "
+"usada para medir a velocidade do vento.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:125
 msgctxt "WeatherConfigWidget|"
@@ -16250,11 +16240,11 @@ msgid ""
 "the air pressure.</p></body></html>\n"
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
-"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
-"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">A unidade usada para medir "
-"a pressão do ar.</p></body></html>\n"
+"\">\\np, li { espaço em branco: pré-encapsulamento; }\\n</style></head><body "
+"style=\" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-"
+"style:normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">A unidade "
+"usada para medir a pressão do ar.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:169
 msgctxt "WeatherConfigWidget|"
@@ -16294,7 +16284,7 @@ msgstr "Mostrar apenas os itens favoritos"
 #: src/plugins/render/weather/WeatherConfigWidget.ui:217
 msgctxt "WeatherConfigWidget|"
 msgid "Weather update interval"
-msgstr ""
+msgstr "Intervalo de atualização do clima"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:224
 msgctxt "WeatherConfigWidget|"
@@ -16826,23 +16816,19 @@ msgid "Bicycle routing for the United Kingdom using cyclestreets.net"
 msgstr "Rotas de bicicleta para o Reino Unido com o cyclestreets.net"
 
 #: src/plugins/runner/geouri/GeoUriPlugin.cpp:20
-#, fuzzy
-#| msgid "Global Search"
 msgctxt "Marble::GeoUriPlugin|"
 msgid "Geo URI Search"
-msgstr "Pesquisa global"
+msgstr "Pesquisa de URI geográfica"
 
 #: src/plugins/runner/geouri/GeoUriPlugin.cpp:25
 msgctxt "Marble::GeoUriPlugin|"
 msgid "Geo URI"
-msgstr ""
+msgstr "URI geográfica"
 
 #: src/plugins/runner/geouri/GeoUriPlugin.cpp:40
-#, fuzzy
-#| msgid "Direct input of geographic coordinates"
 msgctxt "Marble::GeoUriPlugin|"
 msgid "Input of geographic coordinates by the geo URI scheme"
-msgstr "Introdução direta das coordenadas geográficas"
+msgstr "Entrada de coordenadas geográficas pelo esquema de URI geográfico"
 
 #: src/plugins/runner/gosmore-reversegeocoding/GosmoreReverseGeocodingPlugin.cpp:26
 msgctxt "Marble::GosmorePlugin|"
@@ -17020,7 +17006,7 @@ msgstr "bar"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:87
 msgctxt "QObject|"
 msgid "biergarten"
-msgstr ""
+msgstr "cervejaria"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:89
 msgctxt "QObject|"
@@ -17133,25 +17119,19 @@ msgid "airport"
 msgstr "aeroporto"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:133
-#, fuzzy
-#| msgid "airport"
 msgctxt "QObject|"
 msgid "airport runway"
-msgstr "aeroporto"
+msgstr "pista de aeroporto"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:135
-#, fuzzy
-#| msgid "airport"
 msgctxt "QObject|"
 msgid "airport apron"
-msgstr "aeroporto"
+msgstr "pátio de aeroporto"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:137
-#, fuzzy
-#| msgid "airport"
 msgctxt "QObject|"
 msgid "airport taxiway"
-msgstr "aeroporto"
+msgstr "pista de taxiamento de aeroporto"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:139
 msgctxt "QObject|"
@@ -17317,27 +17297,27 @@ msgstr "Preferencias:"
 #: src/plugins/runner/mapquest/MapQuestConfigWidget.ui:43
 msgctxt "MapQuestConfigWidget|"
 msgid "Avoid motorways"
-msgstr ""
+msgstr "Evitar auto-estradas"
 
 #: src/plugins/runner/mapquest/MapQuestConfigWidget.ui:50
 msgctxt "MapQuestConfigWidget|"
 msgid "Avoid tollways"
-msgstr ""
+msgstr "Evitar vias pedagiadas"
 
 #: src/plugins/runner/mapquest/MapQuestConfigWidget.ui:57
 msgctxt "MapQuestConfigWidget|"
 msgid "Avoid ferries"
-msgstr ""
+msgstr "Evitar ferrovias"
 
 #: src/plugins/runner/mapquest/MapQuestConfigWidget.ui:64
 msgctxt "MapQuestConfigWidget|"
 msgid "Ascending slope:"
-msgstr ""
+msgstr "Rampa de subida:"
 
 #: src/plugins/runner/mapquest/MapQuestConfigWidget.ui:77
 msgctxt "MapQuestConfigWidget|"
 msgid "Descending slope:"
-msgstr ""
+msgstr "Rampa de decida:"
 
 #: src/plugins/runner/mapquest/MapQuestConfigWidget.ui:96
 msgctxt "MapQuestConfigWidget|"
@@ -17346,6 +17326,9 @@ msgid ""
 "href=\"https://developer.mapquest.com/plan_purchase/steps/business_edition/"
 "business_edition_free/register\">here</a>."
 msgstr ""
+"Uma AppKey é necessária para que o roteamento do MapQuest funcione. Você "
+"pode registrar uma <ahref=\"https://developer.mapquest.com/plan_purchase/"
+"steps/business_edition/business_edition_free/register\">aqui</a>."
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:19
 msgctxt "Marble::MapQuestPlugin|"
@@ -17426,7 +17409,7 @@ msgstr "Instalando %1"
 #, qt-format
 msgctxt "Marble::MonavConfigWidget|"
 msgid "%1/%2 MB"
-msgstr ""
+msgstr "%1/%2 MB"
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:610
 msgctxt "QObject|"
@@ -17553,7 +17536,7 @@ msgstr "Data"
 #, qt-format
 msgctxt "Marble::MonavMapsModel|"
 msgid "%1 MB"
-msgstr ""
+msgstr "%1 MB"
 
 #: src/plugins/runner/monav/MonavPlugin.cpp:217
 msgctxt "Marble::MonavPlugin|"
@@ -17654,17 +17637,17 @@ msgstr "Preferencias:"
 #: src/plugins/runner/openrouteservice/OpenRouteServiceConfigWidget.ui:27
 msgctxt "OpenRouteServiceConfigWidget|"
 msgid "Avoid motorways"
-msgstr ""
+msgstr "Evitar auto-estradas"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServiceConfigWidget.ui:34
 msgctxt "OpenRouteServiceConfigWidget|"
 msgid "Avoid tollways"
-msgstr ""
+msgstr "Evitar vias pedagiadas"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServiceConfigWidget.ui:41
 msgctxt "OpenRouteServiceConfigWidget|"
 msgid "Avoid ferries"
-msgstr ""
+msgstr "Evitar ferrovias"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:19
 msgctxt "Marble::OpenRouteServicePlugin|"
@@ -17834,36 +17817,32 @@ msgstr "Bicicleta"
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:77
 msgctxt "Marble::RoutinoConfigWidget|"
 msgid "Moped"
-msgstr ""
+msgstr "Ciclomotor"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:78
-#, fuzzy
-#| msgid "Bicycle (Racer)"
 msgctxt "Marble::RoutinoConfigWidget|"
 msgid "Motorbike"
-msgstr "Bicicleta (corrida)"
+msgstr "Motocicleta"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:79
-#, fuzzy
-#| msgid "Bicycle (Racer)"
 msgctxt "Marble::RoutinoConfigWidget|"
 msgid "Motorcar"
-msgstr "Bicicleta (corrida)"
+msgstr "Carro"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:80
 msgctxt "Marble::RoutinoConfigWidget|"
 msgid "Small lorry"
-msgstr ""
+msgstr "Caminhão pequeno"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:81
 msgctxt "Marble::RoutinoConfigWidget|"
 msgid "Large lorry"
-msgstr ""
+msgstr "Caminhão grande"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:82
 msgctxt "Marble::RoutinoConfigWidget|"
 msgid "Public Service Vehicle"
-msgstr ""
+msgstr "Veículo de serviço público"
 
 #: src/plugins/runner/shp/ShpPlugin.cpp:18
 msgctxt "Marble::ShpPlugin|"
@@ -17946,11 +17925,9 @@ msgid "Bicycle"
 msgstr "Bicicleta"
 
 #: src/plugins/runner/yours/YoursPlugin.cpp:76
-#, fuzzy
-#| msgid "Bicycle (Racer)"
 msgctxt "Marble::YoursConfigWidget|"
 msgid "Motorcar"
-msgstr "Bicicleta (corrida)"
+msgstr "Carro"
 
 #: src/plugins/templates/floatitem/FITemplateFloatItem.cpp:44
 msgctxt "Marble::FITemplateFloatItem|"
