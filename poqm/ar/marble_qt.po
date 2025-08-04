@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2025-06-28 17:37+0400\n"
+"PO-Revision-Date: 2025-08-03 14:25+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -2379,7 +2379,7 @@ msgstr "نزّل &منطقة…"
 #: src/apps/marble-qt/QtMainWindow.cpp:280
 msgctxt "Marble::MainWindow|"
 msgid "Download a map region in different zoom levels for offline usage"
-msgstr "نزل خريطة للمنطقة في مستويات تكبير مختلفة لاستخدامها بدون اتصال"
+msgstr "نزل خريطة للمنطقة في مستويات تكبير مختلفة لاستخدامها بلا اتصال"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:283
 msgctxt "Marble::MainWindow|"
@@ -3406,7 +3406,7 @@ msgstr "افتح مسار"
 #: src/lib/marble/CurrentLocationWidget.cpp:398
 msgctxt "QObject|"
 msgid "Clear current track"
-msgstr "امسح المسار الحالي"
+msgstr "امحُ المسار الحالي"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:399
 msgctxt "QObject|"
@@ -3436,7 +3436,7 @@ msgstr "أظهر المسار"
 #: src/lib/marble/CurrentLocationWidget.ui:66
 msgctxt "CurrentLocationWidget|"
 msgid "Clear Track"
-msgstr "امسح المسار"
+msgstr "امحُ المسار"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
@@ -4021,7 +4021,7 @@ msgstr "لديه مسند ظهر"
 #: src/lib/marble/declarative/Placemark.cpp:354
 msgctxt "Marble::Placemark|A bench provides no backrest to lean against"
 msgid "No backrest"
-msgstr "بدون مسند ظهر"
+msgstr "بلا مسند ظهر"
 
 #: src/lib/marble/declarative/Placemark.cpp:358
 #, qt-format
@@ -4037,7 +4037,7 @@ msgstr "فيها إشراف"
 #: src/lib/marble/declarative/Placemark.cpp:368
 msgctxt "Marble::Placemark|Parking spaces are not supervised by guards"
 msgid "Not supervised"
-msgstr "بدون إشراف"
+msgstr "بلا إشراف"
 
 #: src/lib/marble/declarative/Placemark.cpp:372
 #, qt-format
@@ -4086,7 +4086,7 @@ msgstr "فيه دش"
 #: src/lib/marble/declarative/Placemark.cpp:404
 msgctxt "Marble::Placemark|A hut does not provide showers inside or aside"
 msgid "Has no shower"
-msgstr "بدون دش"
+msgstr "بلا دش"
 
 #: src/lib/marble/declarative/Placemark.cpp:405
 msgctxt "Marble::Placemark|A hut provides mattress"
@@ -4096,7 +4096,7 @@ msgstr "فيه مرتبة"
 #: src/lib/marble/declarative/Placemark.cpp:406
 msgctxt "Marble::Placemark|A hut does not provide mattress"
 msgid "Has no mattress"
-msgstr "بدون مرتبة"
+msgstr "بلا مرتبة"
 
 #: src/lib/marble/declarative/Placemark.cpp:407
 msgctxt "Marble::Placemark|Water is available inside or aside"
@@ -4106,7 +4106,7 @@ msgstr "فيه ماء"
 #: src/lib/marble/declarative/Placemark.cpp:411
 msgctxt "Marble::Placemark|Water is not available inside nor aside"
 msgid "Has no water"
-msgstr "بدون ماء"
+msgstr "بلا ماء"
 
 #: src/lib/marble/declarative/Placemark.cpp:412
 msgctxt "Marble::Placemark|A hut provides toilets"
@@ -4116,7 +4116,7 @@ msgstr "فيه مرحاض"
 #: src/lib/marble/declarative/Placemark.cpp:413
 msgctxt "Marble::Placemark|A hut does not provide toilets"
 msgid "Has no toilets"
-msgstr "بدون مرحاض"
+msgstr "بلا مرحاض"
 
 #: src/lib/marble/declarative/Placemark.cpp:414
 msgctxt "Marble::Placemark|"
@@ -4126,7 +4126,7 @@ msgstr "الحجز ممكن"
 #: src/lib/marble/declarative/Placemark.cpp:415
 msgctxt "Marble::Placemark|"
 msgid "No reservation possible"
-msgstr "بدون حجز"
+msgstr "بلا حجز"
 
 #: src/lib/marble/declarative/Placemark.cpp:416
 msgctxt "Marble::Placemark|"
@@ -4651,7 +4651,7 @@ msgctxt ""
 "Marble::Placemark|Open to general traffic but permission can be revoked by "
 "the owner"
 msgid "Open to general traffic"
-msgstr "مفتوح أمام حركة المرور العامة"
+msgstr "مفتوح أمام حركة السر العامة"
 
 #: src/lib/marble/declarative/Placemark.cpp:615
 msgctxt "Marble::Placemark|No access for the general public"
@@ -4661,7 +4661,7 @@ msgstr "ممنوع الوصول"
 #: src/lib/marble/declarative/Placemark.cpp:617
 msgctxt "Marble::Placemark|"
 msgid "no fee"
-msgstr "بدون رسوم"
+msgstr "بلا رسوم"
 
 #: src/lib/marble/declarative/Placemark.cpp:619
 #, qt-format
@@ -8098,8 +8098,8 @@ msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
 "Ctrl, Ctrl+A, …)"
 msgstr ""
-"تمكين هذا لتحديد طبقات متعددة بدون اختصارات لوحة المفاتيح (Shift، Ctrl، Ctrl "
-"A، ...)"
+"مكّن هذا لتحديد طبقات متعددة دون استخدام اختصارات لوحة المفاتيح (Shift، Ctrl، "
+"Ctrl A، ...)"
 
 #: src/lib/marble/MapWizard.ui:300
 msgctxt "MapWizard|"
@@ -9789,7 +9789,7 @@ msgstr "غير محدود"
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:146
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "Cl&ear"
-msgstr "امسح"
+msgstr "امحُ"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:169
 msgctxt "MarbleCacheSettingsWidget|"
@@ -9914,7 +9914,7 @@ msgstr "اسم المستخدم:"
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:181
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Password:"
-msgstr "كلمة المرور:"
+msgstr "كلمة السر:"
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:197
 msgctxt "MarbleCloudSyncSettingsWidget|"
@@ -9929,7 +9929,7 @@ msgstr "غير متوفّر"
 #: src/lib/marble/MarbleLineEdit.cpp:56
 msgctxt "QObject|"
 msgid "Clear"
-msgstr "امسح"
+msgstr "امحُ"
 
 #: src/lib/marble/MarbleLocale.cpp:115
 msgctxt "QObject|means meter"
@@ -11953,7 +11953,7 @@ msgstr "اعكس الطريق"
 #: src/lib/marble/routing/RoutingWidget.cpp:259
 msgctxt "QObject|"
 msgid "Clear Route"
-msgstr "امسح المسار"
+msgstr "امحُ المسار"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:266
 msgctxt "QObject|"
@@ -12885,7 +12885,7 @@ msgstr "حمّل ملف الشروح"
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:898
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Clear all Annotations"
-msgstr "امح كل الشروح"
+msgstr "امحُ كل الشروح"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:899
 msgctxt "Marble::AnnotatePlugin|"
