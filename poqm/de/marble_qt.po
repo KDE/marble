@@ -8616,7 +8616,7 @@ msgstr "Marble – Virtueller Globus"
 #: src/lib/marble/MarbleAboutDialog.cpp:74
 msgctxt "QObject|"
 msgid "<b>Active Development Team of Marble</b>"
-msgstr "<b>Aktuelles Entwicklerteam für Marble</b>"
+msgstr "<b>Aktuelles Entwicklungsteam für Marble</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:75
 msgctxt "QObject|"

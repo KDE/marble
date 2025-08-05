@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2025-08-03 14:25+0400\n"
+"PO-Revision-Date: 2025-08-04 19:53+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -145,7 +145,7 @@ msgstr "موقع هبوط مأهول"
 #. file data/maps/moon/clementine/clementine.dgml:125
 msgctxt "DGML|"
 msgid "Robotic rover"
-msgstr "متجول آلي"
+msgstr "متجول آليّ"
 
 #. file data/maps/moon/clementine/clementine.dgml:129
 msgctxt "DGML|"
@@ -1251,7 +1251,7 @@ msgstr "جامعة"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:332
 msgctxt "DGML|"
 msgid "ATM"
-msgstr "آلة الصرف الآلي"
+msgstr "آلة الصرف الآليّ"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:330
 #. ----------
@@ -3480,12 +3480,12 @@ msgstr "عند الاقتضاء"
 #: src/lib/marble/CurrentLocationWidget.ui:186
 msgctxt "CurrentLocationWidget|Auto Zoom to appropriate zoom level"
 msgid "Auto Zoom to appropriate zoom level"
-msgstr "تكبير تلقائي إلى مستوى التكبير المناسب"
+msgstr "تكبير آليّ إلى مستوى التكبير المناسب"
 
 #: src/lib/marble/CurrentLocationWidget.ui:189
 msgctxt "CurrentLocationWidget|"
 msgid "Auto Zoom"
-msgstr "تكبير آلي"
+msgstr "تكبير آليّ"
 
 #: src/lib/marble/DataMigration.cpp:90
 msgctxt "Marble::DataMigration|"
@@ -4321,7 +4321,7 @@ msgstr "لا يوجد خدمة ذاتية"
 #: src/lib/marble/declarative/Placemark.cpp:460
 msgctxt "Marble::Placemark|"
 msgid "Automated"
-msgstr "آلي"
+msgstr "آليّ"
 
 #: src/lib/marble/declarative/Placemark.cpp:461
 msgctxt "Marble::Placemark|"
@@ -5212,13 +5212,13 @@ msgid ""
 "the Marble Settings."
 msgstr ""
 "ألغِ تنشيط الخيار حتى تُطالب باختيار محرر الخرائط في المرة التالية. وإلا، "
-"فسيحفظ اختيارك ويستخدم تلقائيًا في المستقبل. إذا كنت تريد تغيير محرر الخرائط "
-"الافتراضي لاحقًا، فيمكنك القيام بذلك في إعدادات ماربل."
+"فسيحفظ اختيارك ويستخدم آليًّا في المستقبل. إذا كنت تريد تغيير محرر الخرائط "
+"المبدئي لاحقًا، فيمكنك القيام بذلك في إعدادات ماربل."
 
 #: src/lib/marble/ExternalEditor.ui:51
 msgctxt "ExternalEditor|"
 msgid "Make my selection the default map editor"
-msgstr "اجعل اختياري هو محرر الخريطة الافتراضي"
+msgstr "اجعل اختياري هو محرر الخريطة المبدئي"
 
 #: src/lib/marble/ExternalEditor.ui:69
 msgctxt "ExternalEditor|"
@@ -5509,7 +5509,7 @@ msgstr "موقع هبوط مأهول"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:310
 msgctxt "GeoDataPlacemark|"
 msgid "Robotic Rover"
-msgstr "متجول آلي"
+msgstr "متجول آليّ"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:312
 msgctxt "GeoDataPlacemark|"
@@ -5973,7 +5973,7 @@ msgstr "بيطري"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:524
 msgctxt "GeoDataPlacemark|"
 msgid "ATM"
-msgstr "آلة الصرف الآلي"
+msgstr "آلة الصرف الآليّ"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:526
 msgctxt "GeoDataPlacemark|"
@@ -9774,7 +9774,7 @@ msgstr " م.بايت"
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:73
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "C&lear"
-msgstr "ام&سح"
+msgstr "ام&حُ"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:105
 msgctxt "MarbleCacheSettingsWidget|"
@@ -9879,7 +9879,7 @@ msgstr "مكن مزامنة المسار"
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:84
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Automatically sync all bookmarks to the server."
-msgstr "زامن كل العلامات إلى الخادم آليا."
+msgstr "زامن كل العلامات إلى الخادم آليّا."
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:87
 msgctxt "MarbleCloudSyncSettingsWidget|"
@@ -10016,7 +10016,7 @@ msgstr ""
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">سيتبع الموقع الموجود أسفل "
 "مؤشر الفأرة المؤشر تمامًا: ونتيجة لذلك، لن يظل القطب الشمالي في الأعلى، مما "
-"قد يؤدي إلى حدوث ارتباك. بشكل افتراضي، يتأكد ماربل من أن الشمال دائمًا في "
+"قد يؤدي إلى حدوث ارتباك. بشكل مبدئي، يتأكد ماربل من أن الشمال دائمًا في "
 "الأعلى، مما يؤدي إلى سلوك سحب حيث ينفصل الموقع الموجود أسفل مؤشر الفأرة "
 "قليلاً عن المؤشر.</p></body></html>"
 
@@ -10104,9 +10104,9 @@ msgstr ""
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">افتراضيًا، سيعرض برنامج "
-"ماربل موقع المنزل مباشرة بعد بدء التطبيق. وكبديل لذلك، يمكنه أيضًا عرض آخر "
-"موضع كان نشطًا عندما غادر المستخدم التطبيق.</p></body></html>"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">مبدئيًا، سيعرض برنامج ماربل "
+"موقع المنزل مباشرة بعد بدء التطبيق. وكبديل لذلك، يمكنه أيضًا عرض آخر موضع كان "
+"نشطًا عندما غادر المستخدم التطبيق.</p></body></html>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:159
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10131,9 +10131,9 @@ msgid ""
 "josm or merkaartor, make sure that the respective application is installed.</"
 "p>"
 msgstr ""
-"<p>التطبيق الذي يتم تشغيله لتحرير الخرائط. يتطلب Potlatch (افتراضيًا)متصفح "
-"ويب يدعم الفلاش ليتم تثبيته. عند تحديد josm أو merkaartor، تأكد من تثبيت "
-"التطبيق المعني.</p>"
+"<p>التطبيق الذي يتم تشغيله لتحرير الخرائط. يتطلب Potlatch (مبدئيًا)متصفح ويب "
+"يدعم الفلاش ليتم تثبيته. عند تحديد josm أو merkaartor، تأكد من تثبيت التطبيق "
+"المعني.</p>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:198
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10186,7 +10186,7 @@ msgstr "تدوير الكرة الأرضية عكس اتجاه عقارب الس
 #: src/lib/marble/MarbleNavigator.ui:97
 msgctxt "MarbleNavigator|"
 msgid "Reset View"
-msgstr "إعادة تعيين عرض"
+msgstr "صفّر العرض"
 
 #: src/lib/marble/MarbleNavigator.ui:100
 msgctxt "MarbleNavigator|"
@@ -10580,7 +10580,7 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">يحدد تدوين الزوايا في "
-"الإحداثيات: بشكل افتراضي، سيستخدم تدوين الدرجة-الدقيقة-الثانية (على سبيل "
+"الإحداثيات: بشكل مبدئي، سيستخدم تدوين الدرجة-الدقيقة-الثانية (على سبيل "
 "المثال 54°30'00\" ). كبديل، يمكنك اختيار الدرجات العشرية (على سبيل المثال "
 "54.5°).</p></body></html>"
 
@@ -14823,7 +14823,7 @@ msgctxt "Marble::PanoramioPlugin|"
 msgid ""
 "Automatically downloads images from around the world in preference to their "
 "popularity"
-msgstr "يقوم بتنزيل الصور تلقائيًا من جميع أنحاء العالم وفقًا لشعبيتها"
+msgstr "يقوم بتنزيل الصور آليًّا من جميع أنحاء العالم وفقًا لشعبيتها"
 
 #: src/plugins/render/photo/CoordinatesParser.cpp:31
 #: src/plugins/render/photo/FlickrParser.cpp:36
@@ -14867,7 +14867,7 @@ msgctxt "Marble::PhotoPlugin|"
 msgid ""
 "Automatically downloads images from around the world in preference to their "
 "popularity"
-msgstr "يقوم بتنزيل الصور تلقائيًا من جميع أنحاء العالم وفقًا لشعبيتها"
+msgstr "يقوم بتنزيل الصور آليًّا من جميع أنحاء العالم وفقًا لشعبيتها"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:111
 msgctxt "Marble::PhotoPlugin|"
@@ -16640,8 +16640,7 @@ msgctxt "Marble::WikipediaPlugin|"
 msgid ""
 "Automatically downloads Wikipedia articles and shows them on the right "
 "position on the map"
-msgstr ""
-"يقوم بتنزيل مقالات ويكيبيديا تلقائيًا ويظهرها في الموضع الصحيح على الخريطة"
+msgstr "يقوم بتنزيل مقالات ويكيبيديا آليًّا ويظهرها في الموضع الصحيح على الخريطة"
 
 #: src/plugins/render/wikipedia/WikipediaPlugin.cpp:96
 msgctxt "Marble::WikipediaPlugin|"
@@ -17092,7 +17091,7 @@ msgstr "محطة قطار"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:151
 msgctxt "QObject|"
 msgid "atm"
-msgstr "آلة الصرف الآلي"
+msgstr "آلة الصرف الآليّ"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:153
 msgctxt "QObject|"
