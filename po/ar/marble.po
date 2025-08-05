@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-19 00:38+0000\n"
-"PO-Revision-Date: 2025-02-20 09:19+0400\n"
+"PO-Revision-Date: 2025-08-04 20:15+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -873,7 +873,7 @@ msgstr "الملف غير قابل للقراءة"
 #: marble_part.cpp:211
 #, kde-format
 msgid "A Virtual Globe"
-msgstr "الكرة الأرضية الافتراضية"
+msgstr "كرة أرضية افتراضية"
 
 #: marble_part.cpp:224
 #, kde-format
