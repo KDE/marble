@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2025-07-29 12:47+0200\n"
+"PO-Revision-Date: 2025-08-06 11:34+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -7604,7 +7604,7 @@ msgstr "Ikuspegi estereografikoa"
 #: src/lib/marble/MapViewWidget.cpp:147
 msgctxt "Marble::MapViewWidget|"
 msgid "Lambert Azimuthal Equal-Area view"
-msgstr "Lambert azimutal eremu-berdineko ikuspegia"
+msgstr "Lambert azimutal eremu-baliokideko ikuspegia"
 
 #: src/lib/marble/MapViewWidget.cpp:151
 msgctxt "Marble::MapViewWidget|"
@@ -7685,7 +7685,7 @@ msgstr "Estereografikoa"
 #: src/lib/marble/MapViewWidget.ui:86
 msgctxt "MapViewWidget|"
 msgid "Lambert Azimuthal Equal Area"
-msgstr "Lambert-en azalera baliokide azimutala"
+msgstr "Lambert azimutal eremu-baliokidea"
 
 #: src/lib/marble/MapViewWidget.ui:95
 msgctxt "MapViewWidget|"
@@ -9317,6 +9317,8 @@ msgid ""
 "<p>... and of course we'd like to thank the people at Google Inc. for making "
 "these projects possible.</p>"
 msgstr ""
+"<p>... eta noski, Google Inc.-eko jendeari eskerrak eman nahi dizkiegu "
+"proiektu hau posible egiteagatik.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:246
 msgctxt "QObject|"
@@ -9330,6 +9332,9 @@ msgid ""
 "Lubos Petrovic, Benoit Sigoure, Martin Konold, Matthias Welwarsky, Rainer "
 "Endres, Luis Silva, Ralf Gesellensetter, Tim Alder</p>"
 msgstr ""
+"<p><i>Hainbat iradokizun eta proba:</i> Stefan Jordan, Robert Scott, Lubos "
+"Petrovic, Benoit Sigoure, Martin Konold, Matthias Welwarsky, Rainer Endres, "
+"Luis Silva, Ralf Gesellensetter, Tim Alder</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:249
 msgctxt "QObject|"
@@ -9337,6 +9342,9 @@ msgid ""
 "<p> We'd especially like to thank John Layt who provided an important source "
 "of inspiration by creating Marble's predecessor \"Kartographer\".</p>"
 msgstr ""
+"<p>Bereziki eskerrak eman nahi dizkiogu John Layt(e)(r)i inspirazio iturri "
+"garrantzitsu bat eman zuelako Marble(r)(e)n aitzindaria izan zen "
+"\"Kartographer\" sortuz.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:259
 msgctxt "QObject|"
@@ -9351,6 +9359,10 @@ msgid ""
 "gov/Newsroom/BlueMarble/\">http://earthobservatory.nasa.gov/Newsroom/"
 "BlueMarble/</a></p>"
 msgstr ""
+"<p><i>Blue Marble Next Generation (500 m / pixel)</i><br />NASA Goddard "
+"Space Flight Center Earth Observatory <a href=\"http://earthobservatory.nasa."
+"gov/Newsroom/BlueMarble/\">http://earthobservatory.nasa.gov/Newsroom/"
+"BlueMarble/</a></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:264
 msgctxt "QObject|"
@@ -9370,6 +9382,9 @@ msgid ""
 "Jet Propulsion Laboratory <a href=\"https://www2.jpl.nasa.gov/srtm/"
 "\">https://www2.jpl.nasa.gov/srtm/</a></p>"
 msgstr ""
+"<p><i>Shuttle Radar Topography Mission (SRTM30, 1 km / pixel )</i><br />NASA "
+"Jet Propulsion Laboratory <a href=\"https://www2.jpl.nasa.gov/srtm/"
+"\">https://www2.jpl.nasa.gov/srtm/</a></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:270
 msgctxt "QObject|"
@@ -9377,6 +9392,8 @@ msgid ""
 "<p><i>Micro World Data Bank in Polygons (\"MWDB-POLY / MWDBII\")</i><br /"
 ">CIA ; Global Associates, Ltd.; Fred Pospeschil and Antonio Rivera</p>"
 msgstr ""
+"<p><i>Micro World Data Bank in Polygons (\"MWDB-POLY / MWDBII\")</i><br /"
+">CIA ; Global Associates, Ltd.; Fred Pospeschil and Antonio Rivera</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:272
 msgctxt "QObject|"
@@ -9410,6 +9427,13 @@ msgid ""
 "OpenStreetMap_License\">Creative Commons Attribution-ShareAlike 2.0 license</"
 "a>.</p>"
 msgstr ""
+"<p><i>OpenStreetMap</i><br />Marblen zama-jaitsiera bidez erabilitako "
+"kaleetako mapak <a href=\"https://www.openstreetmap.org\">OpenStreetMap</a> "
+"Proiektuak (\"OSM\") hornitzen ditu. OSM mapa editagarriak sortzen dituen "
+"komunitate ireki bat dira.<br /><i>Lizentzia</i>: OpenStreetMap-en datuak <a "
+"href=\"https://wiki.openstreetmap.org/index.php/OpenStreetMap_License"
+"\">Creative Commons Attribution-ShareAlike 2.0 lizentziaren</a> "
+"baldintzapean askatasunez erabil daitezke.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:292
 msgctxt "QObject|"
@@ -9420,6 +9444,11 @@ msgid ""
 "href=\"https://creativecommons.org/publicdomain/zero/1.0/\">CC0 1.0 "
 "Universal</a> license.</p>"
 msgstr ""
+"<p><i>Ikonoak</i><br />Ikono batzuk <a href=\"https://www.sjjb.co.uk/mapicons"
+"\">SJJB Management</a>etik eta <a href=\"https://thenounproject.com"
+"\">NounProject</a>etik hartu dira. Ikono horiek <a href=\"https://"
+"creativecommons.org/publicdomain/zero/1.0/\">CC0 1.0 Universal</a> "
+"lizentziaren baldintzapean askatasunez erabil daitezke.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:297
 msgctxt "QObject|"
@@ -9429,6 +9458,10 @@ msgid ""
 "of the <a href=\"https://creativecommons.org/licenses/by/3.0/\">CC BY 3.0</"
 "a> license.</p>"
 msgstr ""
+"<p>Ikono batzuk <a href=\"https://fortawesome.github.com/Font-Awesome\">Font "
+"Awesome</a>tik hartu dira. Ikono horiek <a href=\"https://creativecommons."
+"org/licenses/by/3.0/\">CC BY 3.0</a> lizentziaren baldintzapean askatasunez "
+"erabil daitezke.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:300
 msgctxt "QObject|"
@@ -9487,6 +9520,11 @@ msgid ""
 "under the terms of the <a href=\"https://creativecommons.org/licenses/by/3.0/"
 "\">Creative Commons Attribution 3.0 license</a>.</p>"
 msgstr ""
+"<p><i>Geonames.org</i><br /><a href=\"https://www.geonames.org/\">https://"
+"www.geonames.org/</a><i>Lizentzia</i>: Geonames.org-eko datuak <a href="
+"\"https://creativecommons.org/licenses/by/3.0/\">Creative Commons "
+"Attribution 3.0 license</a> lizentziaren baldintzapean askatasunez erabil "
+"daitezke.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:326
 msgctxt "QObject|"
@@ -9713,6 +9751,19 @@ msgid ""
 "to save space on the hard disc and if high usage of the Internet is not an "
 "issue. </p></body></html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Marble(r)(e)kin bi cache "
+"erabiltzen dira: Memoria fisikoa, mapen datuak ordenagailuaren memorian "
+"mantentzeko behar dena. Balioa handitzeak aplikazioa erantzunkorragoa egingo "
+"du. Disko-zurruneko cache-memoria Internetetik zama-jaitsitako edukirako "
+"erabiltzen da (adib. Wikipediako datuak edo mapen datuak). Txikiagotu balio "
+"hau disko-zurrunean lekua aurreztu nahi baduzu eta Interneten erabilera "
+"handia arazoa ez bada.</p></body></html>"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:23
 msgctxt "MarbleCacheSettingsWidget|"
@@ -9966,6 +10017,21 @@ msgid ""
 "location below the mouse pointer slightly \"detaches\" from the cursor. </"
 "p></body></html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Sagua arrastatzean bi "
+"jokabide estandar daude alegiazko globo batekin lan egitean:</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Saguaren erakuslearen "
+"azpiko kokapenak kurtsoreari zehatz-mehatz jarraituko dio: Ondorioz, "
+"adibidez, ipar poloa ez da goian geratuko, eta horrek nahasmena sor dezake. "
+"Era lehenetsian, Marblek iparraldea beti gora begira dagoela ziurtatzen du, "
+"horren ondorio da saguaren erakuslearen azpiko kokapena kurtsoretik "
+"zertxobait \"urruntzen\" den arrastatze jokabidea.</p></body></html>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:58
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -9980,7 +10046,7 @@ msgstr "Jarraitu saguaren erakusleari"
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:73
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Use kinetic spinning when dragging the map"
-msgstr ""
+msgstr "Erabili biraketa zinetikoa mapa arrastatzean"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:76
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10001,6 +10067,15 @@ msgid ""
 "a travel animation from the previous place to the new place.</p></body></"
 "html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Kokaleku bat bilatzean, "
+"Marble berehala mugitu daiteke kokaleku berrira edo aurreko lekutik leku "
+"berrira bidaiatzeko animazioa erakuts dezake.</p></body></html>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:89
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10036,6 +10111,16 @@ msgid ""
 "an alternative it can also show the last position that was active when the "
 "user left the application. </p></body></html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Era lehenetsian, Mable "
+"aplikazioa abiatu bezain laster etxeko kokalekua azalduko du. Alternatiba "
+"gisa, erabiltzaileak aplikazioa utzi zuenean zegoen azken kokalekua ere "
+"erakuts dezake. </p></body></html>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:159
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10227,6 +10312,26 @@ msgid ""
 "family:'Sans Serif';\">Also some of the plugins might allow for tweaking "
 "their configuration a bit. </span></p></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"family:'Sans Serif';\">Hau erabiltzaile aurreratuentzako Marble(r)(e)n "
+"makina-gela da. Hemen pluginen bidez ematen den funtzionaltasuna hautatu eta "
+"desautatu dezakezu.</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"family:'Sans Serif';\">Plugin bat desautatzean funtzionalitatea mapatik, "
+"menuetatik eta tresna-barretatik kenduko da.</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"family:'Sans Serif';\">Gainera, pluginetako batzuek haien konfigurazioa "
+"pixka bat doitzeko aukera eman dezakete. </span></p></body></html>"
 
 #: src/lib/marble/MarblePluginSettingsWidget.ui:26
 msgctxt "MarblePluginSettingsWidget|"
@@ -10331,7 +10436,7 @@ msgstr "Australia ekialdeko ordua"
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:143
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Solomon Standard Time"
-msgstr ""
+msgstr "Salomon(e)ko ordu estandarra"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:148
 msgctxt "MarbleTimeSettingsWidget|"
@@ -10341,7 +10446,7 @@ msgstr "Zeelanda Berriko ordu estandarra"
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:153
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Midway Islands Time"
-msgstr ""
+msgstr "Midway Uhartediko ordua"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:158
 msgctxt "MarbleTimeSettingsWidget|"
@@ -10391,7 +10496,7 @@ msgstr "Puerto Rico eta AEBko Birjina uharteetako ordua"
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:203
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Canada Newfoundland Time"
-msgstr ""
+msgstr "Kanadako Ternuako ordua"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:208
 msgctxt "MarbleTimeSettingsWidget|"
@@ -10789,7 +10894,7 @@ msgstr "Helbidearen xehetasunak"
 #: src/lib/marble/MovieCapture.cpp:35
 msgctxt "QObject|"
 msgid "Missing encoding tools"
-msgstr ""
+msgstr "Kodetzeko tresnak falta dira"
 
 #: src/lib/marble/MovieCapture.cpp:36
 #, qt-format
@@ -11278,12 +11383,14 @@ msgid ""
 "displaying panorama photography. Also used for navigation, radio and seismic "
 "work.</p>"
 msgstr ""
+"<p><b>Proiekzio gnomonikoa</b> (\"lerrozuzena\")</p><p>Aplikazioak: Argazki "
+"panoramikoak erakusteko erabiltzen da. Nabigaziorako, irratirako eta lan "
+"sismikorako ere erabiltzen da.</p>"
 
 #: src/lib/marble/projections/LambertAzimuthalProjection.cpp:55
-#, fuzzy
 msgctxt "QObject|"
 msgid "Lambert Azimuthal Equal-Area"
-msgstr "&Lambert-en azimutal baliokidearen area"
+msgstr "Lambert azimutal eremu-baliokidea"
 
 #: src/lib/marble/projections/LambertAzimuthalProjection.cpp:60
 msgctxt "QObject|"
@@ -11291,6 +11398,8 @@ msgid ""
 "<p><b>Lambert Azimuthal Equal-Area Projection</b></p><p>Applications: Used "
 "in structural geology to plot directional data.</p>"
 msgstr ""
+"<p><b>Lambert proiekzio azimutal eremu-baliokidea</b></p><p>Aplikazioak: "
+"Geologia estrukturalean norabide-datuak marrazteko erabiltzen da.</p>"
 
 #: src/lib/marble/projections/MercatorProjection.cpp:33
 msgctxt "QObject|"
@@ -11303,6 +11412,8 @@ msgid ""
 "<p><b>Mercator Projection</b></p><p>Applications: popular standard map "
 "projection for navigation.</p>"
 msgstr ""
+"<p><b>Mercator(r)en proiekzioa</b></p><p>Aplikazioak: nabigaziorako mapa-"
+"proiekzio estandar ezaguna.</p>"
 
 #: src/lib/marble/projections/SphericalProjection.cpp:57
 msgctxt "QObject|"
@@ -11316,6 +11427,9 @@ msgid ""
 "perspective projection that is used to display the hemisphere of a globe as "
 "it appears from outer space.</p>"
 msgstr ""
+"<p><b>Proiekzio ortografikoa</b> (\"ortogonala\")</p><p>Aplikazioak: "
+"Perspektiba proiekzio bat, globo baten hemisferioa kanpoko espaziotik "
+"agertzen den bezala erakusteko erabiltzen dena.</p>"
 
 #: src/lib/marble/projections/StereographicProjection.cpp:55
 msgctxt "QObject|"
@@ -11328,11 +11442,14 @@ msgid ""
 "<p><b>Stereographic Projection</b> (\"orthogonal\")</p><p>Applications: Used "
 "for planetary cartography, geology and panorama photography.</p>"
 msgstr ""
+"<p><b>Proiekzio estereografikoa</b> (\"ortogonala\")</p><p>Aplikazioak: "
+"Plana-kartografiarako, geologiarako eta argazki-panoramikoetarako erabiltzen "
+"da.</p>"
 
 #: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:68
 msgctxt "QObject|"
 msgid "Vertical Perspective Projection"
-msgstr ""
+msgstr "Perspektiba bertikaleko proiekzioa"
 
 #: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:73
 msgctxt "QObject|"
@@ -11341,6 +11458,9 @@ msgid ""
 "earth as it appears from a relatively short distance above the surface. "
 "Applications: Used for Virtual Globes.</p>"
 msgstr ""
+"<p><b>Perspektiba bertikaleko proiekzioa</b> (\"ortogonala\")</p><p> Lurra "
+"gainazaletik nahiko hurbileko distantziatik ikusten den bezala erakusten du. "
+"Aplikazioak: Alegiazko globoetan erabiltzen da.</p>"
 
 #: src/lib/marble/QtMarbleConfigDialog.cpp:99
 msgctxt "Marble::QtMarbleConfigDialog|"
@@ -11459,10 +11579,9 @@ msgid "Continue."
 msgstr "Jarraitu."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:387
-#, fuzzy
 msgctxt "QObject|"
 msgid "Merge."
-msgstr "Bateratu"
+msgstr "Bateratu."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:389
 msgctxt "QObject|"
