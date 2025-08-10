@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2025-08-04 19:53+0400\n"
+"PO-Revision-Date: 2025-08-09 15:12+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -685,7 +685,7 @@ msgstr "أنهار جليدية"
 #. file data/maps/earth/plain/plain.dgml:283
 msgctxt "DGML|"
 msgid "Antarctic Iceshelves"
-msgstr "الأرفف الجليدية في القطب الجنوبي"
+msgstr "الجرف الجليدي في القارة القطبية الجنوبية"
 
 #. file data/maps/earth/srtm/srtm.dgml:310
 msgctxt "DGML|"
@@ -1006,7 +1006,7 @@ msgstr "سكة حديدية"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:180
 msgctxt "DGML|"
 msgid "Subway"
-msgstr "مترو انفاق"
+msgstr "مترو أنفاق"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:178
 #. ----------
@@ -2013,12 +2013,12 @@ msgstr "الذؤابة"
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Corona Australis"
-msgstr "الأكليل الجنوبي"
+msgstr "الإكليل الجنوبي"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Corona Borealis"
-msgstr "الأكليل الشمالي"
+msgstr "الإكليل الشمالي"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
@@ -3277,7 +3277,7 @@ msgstr "تعذر الوصول إلى الخادم '%1'"
 #: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:304
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "The Marble app is not installed on the ownCloud server"
-msgstr "لم يتم تثبيت تطبيق ماربل على خادم ownCloud"
+msgstr "لم يُثبت تطبيق ماربل على خادم ownCloud"
 
 #: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:306
 msgctxt "Marble::OwncloudSyncBackend|"
@@ -3805,7 +3805,7 @@ msgstr "نفايات الحدائق"
 #: src/lib/marble/declarative/Placemark.cpp:291
 msgctxt "Marble::Placemark|"
 msgid "Electrical items"
-msgstr "أغراض الكترونية"
+msgstr "أغراض إلكترونية"
 
 #: src/lib/marble/declarative/Placemark.cpp:292
 msgctxt "Marble::Placemark|"
@@ -4373,7 +4373,7 @@ msgstr "التوظيف وورش العمل للمخالفين وذوي الإع�
 #: src/lib/marble/declarative/Placemark.cpp:480
 msgctxt "Marble::Placemark|"
 msgid "Pre-packaged food for free or below market price"
-msgstr "الأغذية المعبأة مجاناً أو بأقل من سعر السوق"
+msgstr "الأغذية المعبئة مجاناً أو بأقل من سعر السوق"
 
 #: src/lib/marble/declarative/Placemark.cpp:484
 msgctxt "Marble::Placemark|"
@@ -4744,14 +4744,14 @@ msgctxt ""
 "Marble::Placemark|Public wireless Internet access is available here for a "
 "fee."
 msgid "Charged public wifi available"
-msgstr "تتوفر خدمة الواي فاي العامة المشحونة"
+msgstr "تتوفر خدمة واي فاي العامة المشحونة"
 
 #: src/lib/marble/declarative/Placemark.cpp:773
 msgctxt ""
 "Marble::Placemark|Public wireless Internet access is available here for no "
 "cost."
 msgid "Free public wifi available"
-msgstr "تتوفر خدمة الواي فاي العامة المجانية"
+msgstr "تتوفر خدمة واي فاي العامة المجانية"
 
 #: src/lib/marble/declarative/Placemark.cpp:778
 msgctxt "Marble::Placemark|Public wireless Internet access is available here."
@@ -4772,7 +4772,7 @@ msgstr "شبكة واي فاي عامة متاحة"
 msgctxt ""
 "Marble::Placemark|Public wireless Internet is available here for no cost."
 msgid "Free public wifi available"
-msgstr "تتوفر خدمة الواي فاي العامة مجانًا"
+msgstr "تتوفر خدمة واي فاي العامة مجانًا"
 
 #: src/lib/marble/declarative/Placemark.cpp:897
 #, qt-format
@@ -4920,7 +4920,7 @@ msgstr "قطع متجهة"
 #: src/lib/marble/DownloadRegionDialog.cpp:244
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Allows selection between layer types that are visibly being rendered."
-msgstr "يسمح بالاختيار بين أنواع الطبقات التي يتم عرضها بشكل واضح."
+msgstr "يسمح بالاختيار بين أنواع الطبقات التي تظهر بشكل واضح."
 
 #: src/lib/marble/DownloadRegionDialog.cpp:491
 #, qt-format
@@ -4943,7 +4943,7 @@ msgstr "الحجم التقريبي للقطع التي ستُنزل"
 #, qt-format
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Estimated download size: %1 MB"
-msgstr "حجم التنزيل المقدر: %1 ميجابايت"
+msgstr "حجم التنزيل المقدر: %1 ميغابايت"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:503
 #, qt-format
@@ -5716,7 +5716,7 @@ msgstr "جرف جليدي"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:420
 msgctxt "GeoDataPlacemark|"
 msgid "Scrub"
-msgstr "فيضة/روضة"
+msgstr "عِيص"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:422
 msgctxt "GeoDataPlacemark|"
@@ -5726,7 +5726,7 @@ msgstr "جُرف"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:424
 msgctxt "GeoDataPlacemark|"
 msgid "Heath"
-msgstr "براح/قفار ( أراضي الأشجار القمئية)"
+msgstr "براح/قفار ( أراضي الأشجار القميئة)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:426
 msgctxt "GeoDataPlacemark|"
@@ -6450,7 +6450,7 @@ msgstr "برج اتصالات"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:718
 msgctxt "GeoDataPlacemark|"
 msgid "Tourist Attraction"
-msgstr "جذب سياحى"
+msgstr "جذب سياحي"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:720
 msgctxt "GeoDataPlacemark|"
@@ -6495,7 +6495,7 @@ msgstr "مسرح"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:736
 msgctxt "GeoDataPlacemark|"
 msgid "Theme Park"
-msgstr "حديقه"
+msgstr "حديقة"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:738
 msgctxt "GeoDataPlacemark|"
@@ -6870,7 +6870,7 @@ msgstr "سكة الحديد المهجورة"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:888
 msgctxt "GeoDataPlacemark|"
 msgid "Subway"
-msgstr "مترو انفاق"
+msgstr "مترو أنفاق"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:890
 msgctxt "GeoDataPlacemark|"
@@ -7200,7 +7200,7 @@ msgstr "*"
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:211
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Detour"
-msgstr "تحويلة مرورية"
+msgstr "تحويل مروري"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:214
 msgctxt "GeoLineStringGraphicsItem|"
@@ -7215,7 +7215,7 @@ msgstr "قطار"
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:220
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Subway"
-msgstr "مترو انفاق"
+msgstr "مترو أنفاق"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:223
 msgctxt "GeoLineStringGraphicsItem|"
@@ -7962,8 +7962,7 @@ msgctxt "MapWizard|"
 msgid ""
 "Connects to a server on the Internet. The map data is queried via the WMS "
 "protocol."
-msgstr ""
-"يتصل بخادم على الإنترنت. يتم الاستعلام عن بيانات الخريطة عبر بروتوكول WMS."
+msgstr "يتصل بخادم على الإنترنت. يستعلم عن بيانات الخريطة عبر ميفاق WMS."
 
 #: src/lib/marble/MapWizard.ui:57
 msgctxt "MapWizard|"
@@ -7991,8 +7990,7 @@ msgctxt "MapWizard|"
 msgid ""
 "Connects to a server on the Internet. The map data is queried via a static "
 "URL."
-msgstr ""
-"يتصل بخادم على الإنترنت. يتم الاستعلام عن بيانات الخريطة عبر عنوان URL ثابت."
+msgstr "يتصل بخادم على الإنترنت. يستعلم عن بيانات الخريطة عبر عنوان URL ثابت."
 
 #: src/lib/marble/MapWizard.ui:93
 msgctxt "MapWizard|"
@@ -8089,8 +8087,7 @@ msgid ""
 "The order in which multiple layers are selected directly affects their "
 "rendering order."
 msgstr ""
-"الترتيب الذي يتم به تحديد الطبقات المتعددة يؤثر بشكل مباشر على ترتيب العرض "
-"الخاص بها."
+"الترتيب الذي يُحدد الطبقات المتعددة يؤثر بشكل مباشر على ترتيب العرض الخاص بها."
 
 #: src/lib/marble/MapWizard.ui:297
 msgctxt "MapWizard|"
@@ -8724,7 +8721,7 @@ msgid ""
 "<p> The Marble Team would like to thank its members who participated in ESA "
 "SoCiS for their successful work on Marble:</p>"
 msgstr ""
-"<p>يرغب فريق ماربل في توجيه الشكر إلى أعضائه الذين شاركوا في ESA SoCkS "
+"<p>يرغب فريق ماربل في توجيه الشكر إلى أعضائه الذين شاركوا في ESA SoCiS "
 "لعملهم الناجح على ماربل:</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:129
@@ -9373,15 +9370,15 @@ msgid ""
 msgstr ""
 "<p><i>خرائط درجات الحرارة وهطول الأمطار (يوليو وديسمبر)</i><br />مزيج من "
 "مجموعتي بيانات:<ul><li>Legates, D.R. وWillmott, C.J. 1989. متوسط الهواء "
-"السطحي الشهريدرجة الحرارة وهطول الأمطار. البيانات النقطية الرقمية على درجة "
-"جغرافية 0.5(خطوط العرض/الطول) شبكة مقاس 361 × 721 (النقطه الوسطى مسجلة على "
-"خطوط الطول بمقدار 0.5 درجة).شركة بولدر: المركز الوطني لأبحاث الغلاف الجوي. "
-"<أhref=\"http://www.ngdc.noaa.gov/ecosys/cdroms/ged_iia/datasets/a04/lw.htm"
+"السطحي الشهري درجة الحرارة وهطول الأمطار. البيانات النقطية الرقمية على درجة "
+"جغرافية 0.5(خطوط العرض/الطول) شبكة مقاس 361 × 721 (النقطة الوسطى مسجلة على "
+"خطوط الطول بمقدار 0.5 ).شركة بولدر: المركز الوطني لأبحاث الغلاف الجوي. <a "
+"href=\"http://www.ngdc.noaa.gov/ecosys/cdroms/ged_iia/datasets/a04/lw.htm"
 "\">http://www.ngdc.noaa.gov/ecosys/cdroms/ged_iia/datasets/a04/lw.htm</a></"
 "li><li>CRU CL 2.0: New, M., Lister, D., Hulme, M. and Makin, I., 2002: "
-"Aمجموعة بيانات عالية الدقة للمناخ السطحي على مساحات اليابسة العالمية. "
-"ClimateResearch 21.<a href=\"https://crudata.uea.ac.uk/cru/data/hrg"
-"\">https://crudata.uea.ac.uk/cru/data/hrg</a></li></ul></p>"
+"مجموعة بيانات عالية الدقة للمناخ السطحي على مساحات اليابسة العالمية. Climate "
+"Research 21.<a href=\"https://crudata.uea.ac.uk/cru/data/hrg\">https://"
+"crudata.uea.ac.uk/cru/data/hrg</a></li></ul></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:284
 msgctxt "QObject|"
@@ -9399,7 +9396,7 @@ msgid ""
 "OpenStreetMap_License\">Creative Commons Attribution-ShareAlike 2.0 license</"
 "a>.</p>"
 msgstr ""
-"<p><i>OpenStreetMap</i><br />يتم توفير خرائط الشوارع المستخدمة في Marble عبر "
+"<p><i>OpenStreetMap</i><br />توفر خرائط الشوارع المستخدمة في ماربل عبر "
 "التنزيل بواسطة مشروع <ahref=\"https://www.openstreetmap.org\">OpenStreetMap</"
 "a> (\"OSM\").OSM هو مجتمع مفتوح ينشئ خرائط مجانية قابلة للتعديل.<br /"
 "><i>الترخيص</i>: يمكن استخدام بيانات OpenStreetMap بحرية بموجب شروط<a href="
@@ -9429,7 +9426,7 @@ msgid ""
 "of the <a href=\"https://creativecommons.org/licenses/by/3.0/\">CC BY 3.0</"
 "a> license.</p>"
 msgstr ""
-"<p>تم أخذ بعض الأيقونات من <a href=\"https://fortawesome.github.com/Font-"
+"<p>أخذت بعض الأيقونات من <a href=\"https://fortawesome.github.com/Font-"
 "Awesome\">Font Awesome</a>. ويمكن استخدام هذه الأيقونات بحرية بموجب شروط "
 "ترخيص <a href=\"https://creativecommons.org/licenses/by/3.0/\">CC BY 3.0</a>."
 "</p>"
@@ -9461,10 +9458,10 @@ msgid ""
 "href=\"https://wiki.openstreetmap.org/index.php/OpenStreetMap_License"
 "\">Creative Commons Attribution-ShareAlike 2.0 license</a>.</p>"
 msgstr ""
-"<p><i>آلة التوجيه مفتوحة المصدر</i><br />يتم توفير بعض المسارات المستخدمة في "
+"<p><i>آلة التوجيه مفتوحة المصدر</i><br />تُوفر بعض المسارات المستخدمة في "
 "ماربل عبر التنزيل بواسطة مشروع <ahref=\"http://project-osrm.org\">آلة "
 "التوجيه مفتوحة المصدر</a>(\"OSRM\"). <br /><i>الترخيص</i>: يمكن استخدام "
-"بيانات آلة التوجيه مفتوحة المصدر بحرية بموجبشروط <a href=\"https://wiki."
+"بيانات آلة التوجيه مفتوحة المصدر بحرية بموجب شروط <a href=\"https://wiki."
 "openstreetmap.org/index.php/OpenStreetMap_License\">رخصة Creative Commons "
 "Attribution-ShareAlike 2.0</a>.</p>"
 
@@ -9480,14 +9477,14 @@ msgid ""
 "MapQuest routing service is subject to the <a href=\"https://info.mapquest."
 "com/terms-of-use/\">MapQuest terms of use</a>.</p>"
 msgstr ""
-"<p><i>MapQuest</i><br />يتم توفير بعض الطرق المستخدمة في Marble عبر التنزيل "
-"بواسطة <ahref=\"https://www.mapquest.com/\">MapQuest</a> وواجهات برمجة "
-"تطبيقات الخرائط المفتوحة للبياناتوخدمات الويب.<br />التوجيهات مقدمة من "
-"MapQuest التي تعمل على بيانات OpenStreetMap والتي يمكن استخدامهابحرية بموجب "
-"شروط <a href=\"https://wiki.openstreetmap.org/index.php/OpenStreetMap_License"
-"\">رخصة Creative Commons Attribution-ShareAlike 2.0</a>. يخضع استخدام خدمة "
-"التوجيه MapQuest لـ <ahref=\"https://info.mapquest.com/terms-of-use/\">شروط "
-"استخدام MapQuest</a>.</p>"
+"<p><i>MapQuest</i><br />تُوفر بعض الطرق المستخدمة في ماربل عبر التنزيل بواسطة "
+"<ahref=\"https://www.mapquest.com/\">MapQuest</a> وواجهات برمجة تطبيقات "
+"الخرائط المفتوحة للبيانات وخدمات الويب.<br />التوجيهات مقدمة من MapQuest "
+"التي تعمل على بيانات OpenStreetMap والتي يمكن استخدامها بحرية بموجب شروط <a "
+"href=\"https://wiki.openstreetmap.org/index.php/OpenStreetMap_License\">رخصة "
+"Creative Commons Attribution-ShareAlike 2.0</a>. يخضع استخدام خدمة التوجيه "
+"MapQuest لـ <ahref=\"https://info.mapquest.com/terms-of-use/\">شروط استخدام "
+"MapQuest</a>.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:319
 msgctxt "QObject|"
@@ -9514,7 +9511,7 @@ msgstr ""
 "<p><i>Geonames.org</i><br /><a href=\"https://www.geonames.org/\">https://"
 "www.geonames.org/</a><i>الترخيص</i>: يمكن استخدام بيانات Geonames.org بحرية "
 "بموجب شروط <ahref=\"https://creativecommons.org/licenses/by/3.0/\">ترخيص "
-"Creative CommonsAttribution 3.0</a>.</p>"
+"Creative Commons Attribution 3.0</a>.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:326
 msgctxt "QObject|"
@@ -9539,8 +9536,8 @@ msgid ""
 "openclipart.org</a> and reworked them. All flags are under the public domain "
 "(see comments inside the svg files).</p>"
 msgstr ""
-"<p><i>أعلام العالم</i><br />تم أخذ الأعلام من ويكيبيديا (<a href=\"https://"
-"www.wikipedia.org\">https://www.wikipedia.org</a>) والتي أخذت بدورها مجموعة "
+"<p><i>أعلام العالم</i><br />أُخذت الأعلام من ويكيبيديا (<a href=\"https://www."
+"wikipedia.org\">https://www.wikipedia.org</a>) والتي أخذت بدورها مجموعة "
 "فرعية من <ahref=\"https://www.openclipart.org\">https://www.openclipart.org</"
 "a> وأعادت صياغتها. جميع الأعلام خاضعة للملكية العامة (انظر التعليقات داخل "
 "ملفات svg).</p>"
@@ -9749,11 +9746,11 @@ msgstr ""
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">هناك نوعان من ذاكرات "
 "التخزين المؤقت المستخدمة في ماربل: الذاكرة الفعلية المطلوبة للاحتفاظ ببيانات "
-"الخريطة في ذاكرة الحاسوب. زيادة القيمة ستجعل التطبيق أكثر استجابة. يتم "
-"استخدام ذاكرة التخزين المؤقت لذاكرة القرص الصلب من خلال تنزيل المحتويات من "
-"الإنترنت (على سبيل المثال بيانات ويكيبيديا أو بيانات الخريطة).  اخفض هذه "
-"القيمة إذا كنت تريد توفير مساحة على القرص الصلب وإذا لم يكن الاستخدام "
-"المرتفع للإنترنت يمثل مشكلة. </p></body></html>"
+"الخريطة في ذاكرة الحاسوب. زيادة القيمة ستجعل التطبيق أكثر استجابة. تُستخدم "
+"ذاكرة التخزين المؤقت لذاكرة القرص الصلب من خلال تنزيل المحتويات من الإنترنت "
+"(على سبيل المثال بيانات ويكيبيديا أو بيانات الخريطة).  اخفض هذه القيمة إذا "
+"كنت تريد توفير مساحة على القرص الصلب وإذا لم يكن الاستخدام المرتفع للإنترنت "
+"يمثل مشكلة. </p></body></html>"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:23
 msgctxt "MarbleCacheSettingsWidget|"
@@ -10131,9 +10128,8 @@ msgid ""
 "josm or merkaartor, make sure that the respective application is installed.</"
 "p>"
 msgstr ""
-"<p>التطبيق الذي يتم تشغيله لتحرير الخرائط. يتطلب Potlatch (مبدئيًا)متصفح ويب "
-"يدعم الفلاش ليتم تثبيته. عند تحديد josm أو merkaartor، تأكد من تثبيت التطبيق "
-"المعني.</p>"
+"<p>التطبيق الذي يُشغل لتحرير الخرائط. يتطلب Potlatch (مبدئيًا)متصفح ويب يدعم "
+"الفلاش ليثبت. عند تحديد josm أو merkaartor، تأكد من تثبيت التطبيق المعني.</p>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:198
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10153,7 +10149,7 @@ msgstr "جوسم"
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:213
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Merkaartor"
-msgstr "مركارتور"
+msgstr "ميركاتور"
 
 #: src/lib/marble/MarbleNavigator.ui:62
 msgctxt "MarbleNavigator|"
@@ -10302,14 +10298,14 @@ msgstr ""
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 "family:'Sans Serif';\">هذه هي غرفة آلات ماربل للمستخدمين المتقدمين.هنا يمكنك "
-"تحديد وإلغاء تحديد الوظائف التي توفّر من خلالالملحقات. </span></p>\n"
+"تحديد وإلغاء تحديد الوظائف التي توفّر من خلال الملحقات. </span></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"family:'Sans Serif';\">إلغاء تحديد أحد الملحقات سيؤدي إلى إزالة الوظائفمن "
+"family:'Sans Serif';\">إلغاء تحديد أحد الملحقات سيؤدي إلى إزالة الوظائف من "
 "الخريطة والقوائم وأشرطة الأدوات. </span></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"family:'Sans Serif';\">كما أن بعض الملحقات قد تسمح بتعديلضبطها قليلاً. </"
+"family:'Sans Serif';\">كما أن بعض الملحقات قد تسمح بتعديل ضبطها قليلاً. </"
 "span></p></body></html>"
 
 #: src/lib/marble/MarblePluginSettingsWidget.ui:26
@@ -10690,8 +10686,8 @@ msgstr ""
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">يحدد جودة الخريطة التي يتم "
-"عرضها أثناء رسوم الخريطة المتحركة (على سبيل المثال أثناء سحب الكرة الأرضية). "
+"right:0px; -qt-block-indent:0; text-indent:0px;\">يحدد جودة الخريطة التي  "
+"تُعرض أثناء رسوم الخريطة المتحركة (على سبيل المثال أثناء سحب الكرة الأرضية). "
 "</p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">من المستحسن، وخاصةً على "
@@ -12217,7 +12213,7 @@ msgstr ""
 "indent:0; text-indent:0px;\"><span style=\"font-weight:600;\">منظر القمر "
 "الصناعي</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
 "left:0px;margin-right:0px; -qt-block-indent:0; text-indent:0px;\">الأرض كما "
-"نراها منالفضاء. تعتمد الخريطة على صور \"الجيل القادم من الرخام الأزرق\" "
+"نراها من الفضاء. تعتمد الخريطة على صور \"الجيل القادم من الرخام الأزرق\" "
 "الجميلة التي نشرتها وكالة ناسا. حقوق النشر: مرصد الأرض التابع لوكالة ناسا</"
 "p></body></html>"
 
@@ -12683,7 +12679,7 @@ msgstr "خطأ داخلي في نظام تحديد المواقع العالمي
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:81
 msgctxt "Marble::GpsdConnection|"
 msgid "No GPS device found by gpsd."
-msgstr "لم يتم العثور على جهاز GPS بواسطة GPSD."
+msgstr "لم يعثر على جهاز GPS بواسطة GPSD."
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:84
 msgctxt "Marble::GpsdConnection|"
@@ -14126,7 +14122,7 @@ msgstr "لون خط الاستواء."
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1392
 msgctxt "GraticuleConfigWidget|"
 msgid "Labels"
-msgstr "اللصاقات"
+msgstr "اللاصقات"
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1398
 msgctxt "GraticuleConfigWidget|"
@@ -14365,7 +14361,7 @@ msgstr "المساحة"
 #: src/plugins/render/measure/MeasureConfigDialog.ui:133
 msgctxt "MeasureConfigDialog|"
 msgid "Labels"
-msgstr "اللصاقات"
+msgstr "اللاصقات"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:142
 msgctxt "MeasureConfigDialog|"
@@ -15157,7 +15153,7 @@ msgstr "المركبات الفضائية"
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:35
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Spaceprobes"
-msgstr "مسبارات الفضاء"
+msgstr "مسابر الفضاء"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:37
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -15429,7 +15425,7 @@ msgid ""
 msgstr ""
 "عناصر مدارات أقمار صناعية للأرض من <ul><li><a href=\"https://www.celestrak."
 "com\">https://www.celestrak.com</a></li></ul>عناصر مدارات أقمار صناعية "
-"للكواكبمن <ul><li><a href=\"https://ssd.jpl.nasa.gov/?horizons\">JPL "
+"للكواكب من <ul><li><a href=\"https://ssd.jpl.nasa.gov/?horizons\">JPL "
 "Horizons</a></li></ul>"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:417
@@ -15761,7 +15757,7 @@ msgstr "نبتون"
 #: src/plugins/render/stars/StarsConfigWidget.ui:167
 msgctxt "StarsConfigWidget|"
 msgid "Use name labels"
-msgstr "استخدم طوابع الاسماء"
+msgstr "استخدم طوابع الأسماء"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:177
 msgctxt "StarsConfigWidget|"
@@ -15801,7 +15797,7 @@ msgstr "الخطوط"
 #: src/plugins/render/stars/StarsConfigWidget.ui:332
 msgctxt "StarsConfigWidget|"
 msgid "Labels"
-msgstr "اللصاقات"
+msgstr "اللاصقات"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:390
 msgctxt "StarsConfigWidget|"
@@ -15993,8 +15989,8 @@ msgid ""
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
-"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"
-"\"><pstyle=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
+"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">هنا يمكنك اختيار ما إذا "
 "كنت تريد عرض حالة الطقس (على سبيل المثال، السحب أو السماء الصافية).سيعرض "
 "ماربل الحالة فقط إذا كانت هذه المعلومات متاحة.</p></body></html>\n"
@@ -16017,11 +16013,10 @@ msgid ""
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
-"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"
-"\"><pstyle=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
+"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">يحدد ما إذا كنت تريد عرض "
-"درجة الحرارة. سيتم عرض درجة الحرارة فقط للمحطاتالمتاحة لها.</p></body></"
-"html>\n"
+"درجة الحرارة. ستُعرض درجة الحرارة فقط للمحطات المتاحة لها.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:44
 #: src/plugins/render/weather/WeatherConfigWidget.ui:84
@@ -16042,8 +16037,8 @@ msgid ""
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
-"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"
-"\"><pstyle=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
+"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">حدد هذا الخيار إذا كنت "
 "تريد عرض اتجاه الرياح. لن يعرض اتجاه الرياح إلا إذا كان متاحًا للمحطة المعينة."
 "</p></body></html>\n"
@@ -16066,10 +16061,10 @@ msgid ""
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
-"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"
-"\"><pstyle=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
+"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">حدد هذا الخيار إذا كنت "
-"تريد عرض سرعة الرياح. لن تعرض سرعة الرياح إلا إذا كانت متوفرةللمحطة المعينة."
+"تريد عرض سرعة الرياح. لن تعرض سرعة الرياح إلا إذا كانت متوفرة للمحطة المعينة."
 "</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:66
@@ -16095,10 +16090,10 @@ msgid ""
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
-"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"
-"\"><pstyle=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">الوحدة المستخدمة لقياسدرجة "
-"الحرارة.</p></body></html>\n"
+"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
+"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">الوحدة المستخدمة لقياس "
+"درجة الحرارة.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:96
 msgctxt "WeatherConfigWidget|"
@@ -16122,10 +16117,10 @@ msgid ""
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
-"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"
-"\"><pstyle=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">الوحدة المستخدمة لقياسسرعة "
-"الرياح.</p></body></html>\n"
+"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
+"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">الوحدة المستخدمة لقياس "
+"سرعة الرياح.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:125
 msgctxt "WeatherConfigWidget|"
@@ -16150,7 +16145,7 @@ msgstr "عقدة"
 #: src/plugins/render/weather/WeatherConfigWidget.ui:145
 msgctxt "WeatherConfigWidget|"
 msgid "Beaufort"
-msgstr "Beaufort"
+msgstr "بوفورت"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:157
 msgctxt "WeatherConfigWidget|"
@@ -16169,9 +16164,9 @@ msgid ""
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
-"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"
-"\"><pstyle=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">الوحدة المستخدمة لقياسضغط "
+"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
+"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">الوحدة المستخدمة لقياس ضغط "
 "الهواء.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:169
@@ -16648,7 +16643,7 @@ msgid ""
 "Geo positions by geonames.org\n"
 "Texts by wikipedia.org"
 msgstr ""
-"المواقع الجغرافية بواسطة Geonames.org\n"
+"المواقع الجغرافية بواسطة geonames.org\n"
 "النصوص بواسطة wikipedia.org"
 
 #: src/plugins/runner/cache/CachePlugin.cpp:18
@@ -16729,7 +16724,7 @@ msgstr "تتطلب هذه الخدمة اتصالاً بالإنترنت."
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:89
 msgctxt "Marble::CycleStreetsPlugin|"
 msgid "CycleStreets Routing"
-msgstr "توجيه سيكل ستريتس"
+msgstr "توجيه CycleStreets"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:94
 msgctxt "Marble::CycleStreetsPlugin|"
@@ -16866,7 +16861,7 @@ msgstr "بحث إحداثيات جغرافية"
 #: src/plugins/runner/latlon/LatLonPlugin.cpp:24
 msgctxt "Marble::LatLonPlugin|"
 msgid "Geographic Coordinates"
-msgstr "احداثيات جغرافية"
+msgstr "إحداثيات جغرافية"
 
 #: src/plugins/runner/latlon/LatLonPlugin.cpp:39
 msgctxt "Marble::LatLonPlugin|"
@@ -17026,7 +17021,7 @@ msgstr "مسرح"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:125
 msgctxt "QObject|"
 msgid "theme park"
-msgstr "حديقه"
+msgstr "حديقة"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:127
 msgctxt "QObject|"
@@ -17270,7 +17265,7 @@ msgstr "ماب كويست"
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:44
 msgctxt "Marble::MapQuestPlugin|"
 msgid "Worldwide routing using mapquest.org"
-msgstr "التوجيه العالمي باستخدام Mapquest.org"
+msgstr "التوجيه العالمي باستخدام mapquest.org"
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:73
 msgctxt "Marble::MapQuestConfigWidget|"
@@ -17416,7 +17411,7 @@ msgstr "لا شيء لأفعله."
 #: src/plugins/runner/monav/MonavConfigWidget.ui:244
 msgctxt "MonavConfigWidget|"
 msgid "%v/%m MB"
-msgstr "%v/%m ميجابايت"
+msgstr "%v/%m ميغابايت"
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:251
 msgctxt "MonavConfigWidget|"
