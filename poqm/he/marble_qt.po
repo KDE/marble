@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2025-08-02 23:25+0300\n"
+"PO-Revision-Date: 2025-08-07 22:54+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -950,10 +950,9 @@ msgstr "דרך לא סלולה"
 #. file data/maps/earth/vectorosm/vectorosm.dgml:146
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:152
-#, fuzzy
 msgctxt "DGML|"
 msgid "Track"
-msgstr "עקוב אחר GPS"
+msgstr "מסלול"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:150
 #. ----------
@@ -987,10 +986,9 @@ msgstr ""
 #. file data/maps/earth/vectorosm/vectorosm.dgml:166
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:172
-#, fuzzy
 msgctxt "DGML|"
 msgid "Railway station"
-msgstr "שם חלופי"
+msgstr "תחנת רכבת"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:170
 #. ----------
@@ -1052,7 +1050,6 @@ msgstr "מנהרה"
 #. file data/maps/earth/vectorosm/vectorosm.dgml:205
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:211
-#, fuzzy
 msgctxt "DGML|"
 msgid "Forest"
 msgstr "יער"
@@ -1542,10 +1539,9 @@ msgid "Humanitarian OSM Team"
 msgstr "צוות OSM ההומניטרי"
 
 #. file data/maps/earth/plain/plain.dgml:11
-#, fuzzy
 msgctxt "DGML|"
 msgid "Plain Map"
-msgstr "מפה רגילה"
+msgstr "מפה פשוטה"
 
 #. file data/maps/earth/plain/plain.dgml:21
 #, fuzzy
@@ -1828,25 +1824,21 @@ msgid "Population:"
 msgstr "אוכלוסיה:"
 
 #. file data/legend.html
-#, fuzzy
 msgctxt "Legends|"
 msgid "&gt; 1&nbsp;000&nbsp;000"
 msgstr "&gt; 1,000,000"
 
 #. file data/legend.html
-#, fuzzy
 msgctxt "Legends|"
 msgid "&ge; 100&nbsp;000"
 msgstr "&ge; 100,000"
 
 #. file data/legend.html
-#, fuzzy
 msgctxt "Legends|"
 msgid "&ge; 10&nbsp;000"
 msgstr "&ge; 10,000"
 
 #. file data/legend.html
-#, fuzzy
 msgctxt "Legends|"
 msgid "&lt; 10&nbsp;000"
 msgstr "&lt; 10,000"
@@ -2499,10 +2491,9 @@ msgid "Show Status Bar"
 msgstr "הצגת שורת מצב"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:339
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Lock Position"
-msgstr "אוכלוסייה:"
+msgstr "נעילת מקום"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:341
 msgctxt "Marble::MainWindow|"
@@ -2510,16 +2501,14 @@ msgid "Lock Position of Floating Items"
 msgstr "נעילת מקום הפריטים הצפים"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:344
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Clouds"
 msgstr "&עננים"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:346
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Show Real Time Cloud Cover"
-msgstr "הצג את עטיפת העננים בזמן אמת"
+msgstr "הצגת כיסוי עננים בזמן אמת"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:349
 #, fuzzy
@@ -4634,10 +4623,10 @@ msgid "No entry or exit during summer"
 msgstr "אין כניסה או יציאה במהלך הקיץ"
 
 #: src/lib/marble/declarative/Placemark.cpp:599
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Elevation: %1 m"
-msgstr "גובה:"
+msgstr "עילוי: %1 מ׳"
 
 #: src/lib/marble/declarative/Placemark.cpp:602
 msgctxt "Marble::Placemark|"
@@ -8027,7 +8016,6 @@ msgid "Online map providing indexed tiles (e.g. Open Street Map)"
 msgstr "מפה מקוונת שמספקת אריחים מסודרים לפי מפתח (למשל: Open Street Map)"
 
 #: src/lib/marble/MapWizard.ui:104
-#, fuzzy
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8046,14 +8034,21 @@ msgid ""
 "decoration: underline; color:#0057ae;\">WMS</span></a> server or enter a "
 "custom server URL.</p></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
-"weight:400; font-style:normal; text-decoration:none;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"weight:600;\">הגלובוס השולחני Marble</span></p></body></html>"
+"weight:600;\">שרת WMS</span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">נא לבחור שרת <a href="
+"\"https://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+"decoration: underline; color:#0057ae;\">WMS</span></a> או לספק כתובת שרת "
+"משלך.</p></body></html>"
 
 #: src/lib/marble/MapWizard.ui:134
 msgctxt "MapWizard|"
@@ -8083,10 +8078,9 @@ msgid "https://"
 msgstr "https://"
 
 #: src/lib/marble/MapWizard.ui:218
-#, fuzzy
 msgctxt "MapWizard|"
 msgid "Wms-Service:"
-msgstr "ייצא מפה"
+msgstr "שירות WMS:"
 
 #: src/lib/marble/MapWizard.ui:232
 msgctxt "MapWizard|"
@@ -8198,7 +8192,6 @@ msgid "Select Color"
 msgstr "בחירת צבע"
 
 #: src/lib/marble/MapWizard.ui:554
-#, fuzzy
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8225,23 +8218,6 @@ msgid ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
 "worldmap.svg\" width=\"150\" /></p></body></html>"
 msgstr ""
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
-"weight:400; font-style:normal; text-decoration:none;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
-"p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, The Marble "
-"Project</p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
-"style:italic;\"></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/marble</"
-"p></body></html>"
 
 #: src/lib/marble/MapWizard.ui:573
 msgctxt "MapWizard|"
@@ -8405,7 +8381,6 @@ msgid "Legend Image:"
 msgstr "תמונת מקרא:"
 
 #: src/lib/marble/MapWizard.ui:925
-#, fuzzy
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8431,22 +8406,25 @@ msgid ""
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
 "p></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
-"weight:400; font-style:normal; text-decoration:none;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">תקציר</span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">ברכותינו! סיפקת את כל "
+"הנתונים שנחוצים ליצירת ערכת המפה שלך. נא לעיין בתקציר שלהלן בקפידה וללחוץ על "
+"הכפתור &quot;סיום&quot; כדי ליצור את הערכה. </p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">נא לשקול לתרום את המפה "
+"בחזרה לקהילת Marble אם הרישיון ותנאי השימוש מאפשרים זאת.</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
-"p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, The Marble "
-"Project</p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
-"style:italic;\"></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/marble</"
 "p></body></html>"
 
 #: src/lib/marble/MapWizard.ui:957
@@ -9503,7 +9481,6 @@ msgid "&License Agreement"
 msgstr "ה&סכם רישיוי"
 
 #: src/lib/marble/MarbleAboutDialog.ui:182
-#, fuzzy
 msgctxt "MarbleAboutDialog|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -9517,17 +9494,18 @@ msgid ""
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
 "family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
-"weight:400; font-style:normal; text-decoration:none;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"weight:600;\">הגלובוס השולחני Marble</span></p></body></html>"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:17
-#, fuzzy
 msgctxt "MarbleCacheSettingsWidget|"
 msgid ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
@@ -9544,23 +9522,6 @@ msgid ""
 "to save space on the hard disc and if high usage of the Internet is not an "
 "issue. </p></body></html>"
 msgstr ""
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
-"weight:400; font-style:normal; text-decoration:none;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
-"p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, The Marble "
-"Project</p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
-"style:italic;\"></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/marble</"
-"p></body></html>"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:23
 msgctxt "MarbleCacheSettingsWidget|"
@@ -9599,7 +9560,6 @@ msgid "Cl&ear"
 msgstr "&פינוי"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:169
-#, fuzzy
 msgctxt "MarbleCacheSettingsWidget|"
 msgid ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
@@ -9611,14 +9571,6 @@ msgid ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Proxy settings for your "
 "local intranet. Please leave empty if there is no proxy.</p></body></html>"
 msgstr ""
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
-"weight:400; font-style:normal; text-decoration:none;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:"
-"italic;\">תפקיד</span></p></body></html>"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:175
 msgctxt "MarbleCacheSettingsWidget|"
@@ -9794,7 +9746,6 @@ msgid "&Drag location:"
 msgstr "&גרירת מקום:"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:50
-#, fuzzy
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
@@ -9813,23 +9764,6 @@ msgid ""
 "location below the mouse pointer slightly \"detaches\" from the cursor. </"
 "p></body></html>"
 msgstr ""
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
-"weight:400; font-style:normal; text-decoration:none;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
-"p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, The Marble "
-"Project</p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
-"style:italic;\"></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/marble</"
-"p></body></html>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:58
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -15871,7 +15805,6 @@ msgid "Wind direction"
 msgstr "כיוון הרוח"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:62
-#, fuzzy
 msgctxt "WeatherConfigWidget|"
 msgid ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
@@ -15883,13 +15816,11 @@ msgid ""
 "for the particular station.</p></body></html>\n"
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
-"weight:400; font-style:normal; text-decoration:none;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:"
-"italic;\">תפקיד</span></p></body></html>"
+"\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
+"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
+"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">יש לבחור כדי שמהירות הרוח "
+"תוצג. מהירות הרוח תוצג רק עם היא זמינה לתחנה המסוימת.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:66
 #: src/plugins/render/weather/WeatherConfigWidget.ui:113
@@ -15903,7 +15834,6 @@ msgid "Units"
 msgstr "יחידות"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:91
-#, fuzzy
 msgctxt "WeatherConfigWidget|"
 msgid ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
@@ -15914,13 +15844,11 @@ msgid ""
 "the temperature.</p></body></html>\n"
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
-"weight:400; font-style:normal; text-decoration:none;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:"
-"italic;\">תפקיד</span></p></body></html>"
+"\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
+"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
+"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">היחידה המשמשת למדידת "
+"הטמפרטורה.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:96
 msgctxt "WeatherConfigWidget|"
@@ -15933,7 +15861,6 @@ msgid "Fahrenheit"
 msgstr "פרנהייט"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:120
-#, fuzzy
 msgctxt "WeatherConfigWidget|"
 msgid ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
@@ -15944,13 +15871,11 @@ msgid ""
 "the wind speed.</p></body></html>\n"
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
-"weight:400; font-style:normal; text-decoration:none;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:"
-"italic;\">תפקיד</span></p></body></html>"
+"\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
+"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
+"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">היחידה המשמשת למדידת "
+"מהירות הרוח.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:125
 msgctxt "WeatherConfigWidget|"
@@ -17551,7 +17476,7 @@ msgstr ""
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:75
 msgctxt "Marble::RoutinoConfigWidget|"
 msgid "Wheelchair"
-msgstr ""
+msgstr "כיסא גלגלים"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:76
 msgctxt "Marble::RoutinoConfigWidget|"
@@ -17561,12 +17486,12 @@ msgstr "אופניים"
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:77
 msgctxt "Marble::RoutinoConfigWidget|"
 msgid "Moped"
-msgstr ""
+msgstr "טוסטוס"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:78
 msgctxt "Marble::RoutinoConfigWidget|"
 msgid "Motorbike"
-msgstr ""
+msgstr "אופנוע"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:79
 msgctxt "Marble::RoutinoConfigWidget|"
@@ -17576,12 +17501,12 @@ msgstr "רכב ממונע"
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:80
 msgctxt "Marble::RoutinoConfigWidget|"
 msgid "Small lorry"
-msgstr ""
+msgstr "משאית קטנה"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:81
 msgctxt "Marble::RoutinoConfigWidget|"
 msgid "Large lorry"
-msgstr ""
+msgstr "משאית גדולה"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:82
 msgctxt "Marble::RoutinoConfigWidget|"
@@ -17591,7 +17516,7 @@ msgstr ""
 #: src/plugins/runner/shp/ShpPlugin.cpp:18
 msgctxt "Marble::ShpPlugin|"
 msgid "Shp File Parser"
-msgstr ""
+msgstr "מפענח קובצי Shp"
 
 #: src/plugins/runner/shp/ShpPlugin.cpp:33
 msgctxt "Marble::ShpPlugin|"
@@ -17601,12 +17526,12 @@ msgstr ""
 #: src/plugins/runner/shp/ShpPlugin.cpp:48
 msgctxt "Marble::ShpPlugin|"
 msgid "Shapefile Map Files"
-msgstr ""
+msgstr "קובצי מפת Shapefile"
 
 #: src/plugins/runner/traveling-salesman/TravelingSalesmanPlugin.cpp:18
 msgctxt "Marble::TravelingSalesmanPlugin|"
 msgid "Traveling Salesman"
-msgstr ""
+msgstr "הסוכן הנוסע"
 
 #: src/plugins/runner/traveling-salesman/TravelingSalesmanPlugin.cpp:20
 msgctxt "Marble::TravelingSalesmanPlugin|"
@@ -17626,12 +17551,12 @@ msgstr "תעבורה:"
 #: src/plugins/runner/yours/YoursConfigWidget.ui:27
 msgctxt "YoursConfigWidget|"
 msgid "Method"
-msgstr ""
+msgstr "שיטה"
 
 #: src/plugins/runner/yours/YoursConfigWidget.ui:33
 msgctxt "YoursConfigWidget|"
 msgid "Fastest"
-msgstr ""
+msgstr "המהירה ביותר"
 
 #: src/plugins/runner/yours/YoursConfigWidget.ui:40
 msgctxt "YoursConfigWidget|"
@@ -17641,7 +17566,7 @@ msgstr "הקצר ביותר"
 #: src/plugins/runner/yours/YoursPlugin.cpp:20
 msgctxt "Marble::YoursPlugin|"
 msgid "This service requires an Internet connection."
-msgstr ""
+msgstr "השירות הזה דורש חיבור לאינטרנט."
 
 #: src/plugins/runner/yours/YoursPlugin.cpp:25
 msgctxt "Marble::YoursPlugin|"
@@ -17656,12 +17581,12 @@ msgstr "שלך"
 #: src/plugins/runner/yours/YoursPlugin.cpp:45
 msgctxt "Marble::YoursPlugin|"
 msgid "Worldwide routing using a YOURS server"
-msgstr ""
+msgstr "ניווט ברחבי העולם עם שרת YOURS"
 
 #: src/plugins/runner/yours/YoursPlugin.cpp:74
 msgctxt "Marble::YoursConfigWidget|"
 msgid "Pedestrian"
-msgstr ""
+msgstr "הליכה ברגל"
 
 #: src/plugins/runner/yours/YoursPlugin.cpp:75
 msgctxt "Marble::YoursConfigWidget|"
