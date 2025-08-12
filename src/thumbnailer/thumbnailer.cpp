@@ -18,8 +18,8 @@ static const int timeoutTime = 5000; // in msec
 namespace Marble
 {
 
-GeoDataThumbnailer::GeoDataThumbnailer()
-    : ThumbnailCreator(nullptr, QVariantList())
+GeoDataThumbnailer::GeoDataThumbnailer(QObject *parent)
+    : ThumbnailCreator(parent, QVariantList())
 {
     m_marbleMap.setMapThemeId(QStringLiteral("earth/openstreetmap/openstreetmap.dgml"));
     m_marbleMap.setProjection(Equirectangular);

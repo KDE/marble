@@ -21,8 +21,8 @@ endif()
 # install again once part is fixed to load and show the passed file
 # install(FILES marble_part_shp.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
 
-# register thumbnail plugin as handler
-install(FILES marble_thumbnail_shp.desktop DESTINATION ${KDE_INSTALL_APPDIR})
+kcoreaddons_add_plugin(marble_thumbnail_shp SOURCES thumbnail.cpp INSTALL_NAMESPACE "kf6/thumbcreator")
+target_link_libraries(marble_thumbnail_shp PRIVATE marblethumbnail)
 
 if(NOT WIN32 AND NOT APPLE)
     # register marble app as handler

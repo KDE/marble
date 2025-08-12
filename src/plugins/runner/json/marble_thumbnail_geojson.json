@@ -1,0 +1,8 @@
+{
+    "KPlugin": {
+        "MimeTypes": [
+            "application/geo+json"
+        ],
+        "Name": "GeoJSON Geographic Data"
+    }
+}

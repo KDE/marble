@@ -9,11 +9,9 @@ endif()
 set(marblethumbnail_SRCS
   thumbnailer.cpp
   thumbnailer.h
-  main.cpp
 )
-add_library(marblethumbnail MODULE ${marblethumbnail_SRCS})
+add_library(marblethumbnail STATIC ${marblethumbnail_SRCS})
 target_link_libraries(marblethumbnail
   marblewidget
   KF6::KIOGui
 )
-install(TARGETS marblethumbnail  DESTINATION ${KDE_INSTALL_PLUGINDIR})

@@ -1,0 +1,8 @@
+{
+    "KPlugin": {
+        "MimeTypes": [
+            "application/gpx+xml"
+        ],
+        "Name": "GPX Geographic Data"
+    }
+}

@@ -26,7 +26,7 @@ class GeoDataThumbnailer : public ThumbnailCreator
     Q_OBJECT
 
 public:
-    GeoDataThumbnailer();
+    GeoDataThumbnailer(QObject *parent);
     ~GeoDataThumbnailer() override;
 
     ThumbnailResult create(const ThumbnailRequest &request) override;

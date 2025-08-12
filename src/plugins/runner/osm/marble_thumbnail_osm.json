@@ -1,0 +1,8 @@
+{
+    "KPlugin": {
+        "MimeTypes": [
+            "application/x-osm+xml"
+        ],
+        "Name": "OSM Data"
+    }
+}

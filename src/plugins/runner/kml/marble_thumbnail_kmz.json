@@ -1,0 +1,8 @@
+{
+    "KPlugin": {
+        "MimeTypes": [
+            "application/vnd.google-earth.kmz"
+        ],
+        "Name": "KML Geographic Compressed Data"
+    }
+}

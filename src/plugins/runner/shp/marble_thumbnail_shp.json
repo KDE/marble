@@ -1,0 +1,8 @@
+{
+    "KPlugin": {
+        "MimeTypes": [
+            "application/x-esri-shape"
+        ],
+        "Name": "ESRI Shapefile"
+    }
+}

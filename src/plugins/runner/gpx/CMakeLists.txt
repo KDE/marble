@@ -74,6 +74,9 @@ if(NOT KF6_FOUND)
     return()
 endif()
 
+kcoreaddons_add_plugin(marble_thumbnail_gpx SOURCES thumbnail.cpp INSTALL_NAMESPACE "kf6/thumbcreator")
+target_link_libraries(marble_thumbnail_gpx PRIVATE marblethumbnail)
+
 # register marble part as handler
 # install again once part is fixed to load and show the passed file
 # install(FILES marble_part_gpx.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})

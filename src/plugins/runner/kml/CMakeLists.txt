@@ -20,9 +20,11 @@ endif()
 # install(FILES marble_part_kml.desktop DESTINATION ${KDE_INSTALL_FULL_KSERVICESDIR})
 # install(FILES marble_part_kmz.desktop DESTINATION ${KDE_INSTALL_FULL_KSERVICESDIR})
 
-# register thumbnail plugin as handler
-install(FILES marble_thumbnail_kml.desktop DESTINATION ${KDE_INSTALL_FULL_APPDIR})
-install(FILES marble_thumbnail_kmz.desktop DESTINATION ${KDE_INSTALL_FULL_APPDIR})
+kcoreaddons_add_plugin(marble_thumbnail_kml SOURCES thumbnail_kml.cpp INSTALL_NAMESPACE "kf6/thumbcreator")
+target_link_libraries(marble_thumbnail_kml PRIVATE marblethumbnail)
+
+kcoreaddons_add_plugin(marble_thumbnail_kmz SOURCES thumbnail_kmz.cpp INSTALL_NAMESPACE "kf6/thumbcreator")
+target_link_libraries(marble_thumbnail_kmz PRIVATE marblethumbnail)
 
 if(NOT WIN32 AND NOT APPLE)
     # register marble app as handler
