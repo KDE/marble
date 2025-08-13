@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2025-08-07 22:54+0300\n"
+"PO-Revision-Date: 2025-08-12 15:16+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -2511,34 +2511,29 @@ msgid "Show Real Time Cloud Cover"
 msgstr "הצגת כיסוי עננים בזמן אמת"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:349
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Work Off&line"
-msgstr "&עבוד באופן לא מקוון"
+msgstr "עבודה באופן &לא מקוון"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:353
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "&Time Control..."
-msgstr "&שליטה על השמש..."
+msgstr "בקרת &זמן…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:354
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Configure Time Control "
-msgstr "הגדרת פקד השליטה על השמש"
+msgstr "הגדרת בקרת זמן "
 
 #: src/apps/marble-qt/QtMainWindow.cpp:357
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "S&un Control..."
-msgstr "&שליטה על השמש..."
+msgstr "&בקרת שמש…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:358
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Configure Sun Control"
-msgstr "הגדרת פקד השליטה על השמש"
+msgstr "הגדרת בקרת שמש"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:361
 msgctxt "Marble::MainWindow|"
@@ -2546,16 +2541,14 @@ msgid "&Redisplay"
 msgstr "הצגה מ&חדש"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:363
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Reload Current Map"
-msgstr "מפה רגילה"
+msgstr "ריענון המפה הנוכחית"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:366
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe &Handbook"
-msgstr "הגלובוס השולחני Marble"
+msgstr "&ספרון ההדרכה של ‏Marble - גלובוס וירטואלי"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:368
 msgctxt "Marble::MainWindow|"
@@ -2744,10 +2737,9 @@ msgid "Images (*.jpg *.png)"
 msgstr "תמונות (‎*.jpg‏ ‎*.png)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:748
-#, fuzzy
 msgctxt "Marble::MainWindow|"
 msgid "An error occurred while trying to save the file.\n"
-msgstr "אירעה שגיאה במהלך הניסיון לשמור את הקובץ.\n"
+msgstr "אירעה שגיאה במהלך ניסיון לשמור את הקובץ.\n"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:870
 #, qt-format
@@ -4825,7 +4817,7 @@ msgstr "מסלול רכיבה מקומי"
 #: src/lib/marble/declarative/RouteRelationModel.cpp:27
 msgctxt "Marble::RouteRelationModel|State or county road in Texas, USA"
 msgid "Farm to Market Road"
-msgstr ""
+msgstr "דרך מהחווה אל השוק"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:28
 #, fuzzy
@@ -5028,10 +5020,9 @@ msgid "Tags"
 msgstr "תגיות"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:149
-#, fuzzy
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Relations"
-msgstr "גובה:"
+msgstr "קשרים"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:157
 #, fuzzy
@@ -10754,10 +10745,9 @@ msgid "No name specified"
 msgstr "לא צוין שם"
 
 #: src/lib/marble/osm/OsmRelationEditorDialog.cpp:80
-#, fuzzy
 msgctxt "Marble::OsmRelationEditorDialog|"
 msgid "Please specify a name for this relation."
-msgstr "שם חלופי עבור המיקום."
+msgstr "נא לציין שם לקשר הזה."
 
 #: src/lib/marble/osm/OsmRelationEditorDialog.cpp:82
 msgctxt "Marble::OsmRelationEditorDialog|"
@@ -10765,16 +10755,14 @@ msgid "No type tag specified"
 msgstr "לא צוינה תגית סוג"
 
 #: src/lib/marble/osm/OsmRelationEditorDialog.cpp:82
-#, fuzzy
 msgctxt "Marble::OsmRelationEditorDialog|"
 msgid "Please add a type tag for this relation."
-msgstr "שם חלופי עבור המיקום."
+msgstr "נא להוסיף תגית סוג לקשר הזה."
 
 #: src/lib/marble/osm/OsmRelationManagerWidget.cpp:59
-#, fuzzy
 msgctxt "Marble::OsmRelationManagerWidget|"
 msgid "New Relation"
-msgstr "מדינה"
+msgstr "קשר חדש"
 
 #: src/lib/marble/osm/OsmRelationManagerWidget.cpp:136
 #: src/lib/marble/osm/OsmRelationManagerWidget.cpp:142
@@ -10789,10 +10777,9 @@ msgid "Edit"
 msgstr "עריכה"
 
 #: src/lib/marble/osm/OsmRelationManagerWidget.ui:23
-#, fuzzy
 msgctxt "OsmRelationManagerWidgetPrivate|"
 msgid "Current Relations"
-msgstr "מיקום נוכחי"
+msgstr "קשרים נוכחיים"
 
 #: src/lib/marble/osm/OsmRelationManagerWidget.ui:34
 msgctxt "OsmRelationManagerWidgetPrivate|"
@@ -10810,16 +10797,14 @@ msgid "Role"
 msgstr "תפקיד"
 
 #: src/lib/marble/osm/OsmRelationManagerWidget.ui:67
-#, fuzzy
 msgctxt "OsmRelationManagerWidgetPrivate|"
 msgid "Add Relation"
-msgstr "גובה:"
+msgstr "הוספת קשר"
 
 #: src/lib/marble/osm/OsmRelationManagerWidget_p.cpp:75
-#, fuzzy
 msgctxt "QObject|"
 msgid "New Relation"
-msgstr "מדינה"
+msgstr "קשר חדש"
 
 #: src/lib/marble/osm/OsmTagEditorWidget.cpp:86
 msgctxt "Marble::OsmTagEditorWidget|"
@@ -10984,10 +10969,9 @@ msgid "Sky"
 msgstr "שמיים"
 
 #: src/lib/marble/PlanetFactory.cpp:248
-#, fuzzy
 msgctxt "QObject|a planet without data"
 msgid "Unknown Planet"
-msgstr "הצג מיקומים"
+msgstr "כוכב לכב לא ידוע"
 
 #: src/lib/marble/PluginAboutDialog.cpp:51
 #, qt-format
@@ -12668,17 +12652,15 @@ msgstr "ה&סר נקודות מדידה"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1228
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1470
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Deselect All Nodes"
-msgstr "מפה רגילה"
+msgstr "ביטול בחירת כל הנקודות"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1232
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1474
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Delete All Selected Nodes"
-msgstr "מפה רגילה"
+msgstr "מחיקת כל הנקודות הנבחרות"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1375
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1459
@@ -12690,22 +12672,19 @@ msgstr ""
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1403
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1423
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Select Node"
-msgstr "הצג דגם גבהים"
+msgstr "בחירת נקודה"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1407
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Delete Node"
-msgstr "הצג דגם גבהים"
+msgstr "מחיקת נקודה"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1423
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Deselect Node"
-msgstr "הצג דגם גבהים"
+msgstr "ביטול בחירת נקודה"
 
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:31
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:34
@@ -12757,10 +12736,9 @@ msgid "No name specified"
 msgstr "לא צוין שם"
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.cpp:99
-#, fuzzy
 msgctxt "Marble::EditGroundOverlayDialog|"
 msgid "Please specify a name for this ground overlay."
-msgstr "שם חלופי עבור המיקום."
+msgstr "נא לציין שם לשכבת הקרקע הזאת."
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.cpp:101
 msgctxt "Marble::EditGroundOverlayDialog|"
@@ -13576,10 +13554,9 @@ msgid "Do not remind me about eclipse events again"
 msgstr "לא להזכיר לי על אירועי ליקוי חמה שוב"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileConfigWidget.ui:14
-#, fuzzy
 msgctxt "ElevationProfileConfigWidget|"
 msgid "Configure Elevation Profile Plugin"
-msgstr "מתחיל חיפוש"
+msgstr "הגדרת תוסף פרופיל עילוי"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileConfigWidget.ui:20
 msgctxt "ElevationProfileConfigWidget|"
@@ -13613,22 +13590,19 @@ msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:95
-#, fuzzy
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Elevation Profile"
-msgstr "שיא גובה"
+msgstr "פרופיל עילוי"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:100
-#, fuzzy
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "&Elevation Profile"
-msgstr "שיא גובה"
+msgstr "&פרופיל עילוי"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:115
-#, fuzzy
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "A float item that shows the elevation profile of the current route."
-msgstr "זהו פריט צף שמספק סקירה של המפה."
+msgstr "פריט צף שמציג את פרופיל העילוי של הנתיב הנוכחי."
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:191
 msgctxt "Marble::ElevationProfileFloatItem|"
@@ -13674,22 +13648,19 @@ msgid "nm"
 msgstr "מייל ימי"
 
 #: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:65
-#, fuzzy
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "Elevation Profile Marker"
-msgstr "שיא גובה"
+msgstr "סמן פרופיל עילוי"
 
 #: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:70
-#, fuzzy
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "&Elevation Profile Marker"
-msgstr "שיא גובה"
+msgstr "&סמן פרופיל עילוי"
 
 #: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:85
-#, fuzzy
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "Marks the current elevation of the elevation profile on the map."
-msgstr "זהו פריט צף שמספק סקירה של המפה."
+msgstr "סימון העילוי הנוכחי של פרופיל העילוי במפה."
 
 #: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:134
 msgctxt "Marble::ElevationProfileMarker|"
@@ -14015,10 +13986,9 @@ msgid "&Scale Bar"
 msgstr "&מחוון קנה מידה"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:85
-#, fuzzy
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "This is a float item that provides a map scale."
-msgstr "זהו פריט צף שמספק קנה מידה של המפה."
+msgstr "זהו פריט צף שמספק את המפה בקנה מידה."
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:95
 msgctxt "Marble::MapScaleFloatItem|"
@@ -14564,12 +14534,11 @@ msgid "&Panoramio"
 msgstr "&Panoramio"
 
 #: src/plugins/render/panoramio/PanoramioPlugin.cpp:43
-#, fuzzy
 msgctxt "Marble::PanoramioPlugin|"
 msgid ""
 "Automatically downloads images from around the world in preference to their "
 "popularity"
-msgstr "מוריד תמונות מכל רחבי תבל בהתאם לפופולאריות שלהן"
+msgstr "להוריד אוטומטית תמונות מכל רחבי העולם כתלות בנפוצות שלהם"
 
 #: src/plugins/render/photo/CoordinatesParser.cpp:31
 #: src/plugins/render/photo/FlickrParser.cpp:36
@@ -14609,12 +14578,11 @@ msgid "&Photos"
 msgstr ""
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:82
-#, fuzzy
 msgctxt "Marble::PhotoPlugin|"
 msgid ""
 "Automatically downloads images from around the world in preference to their "
 "popularity"
-msgstr "מוריד תמונות מכל רחבי תבל בהתאם לפופולאריות שלהן"
+msgstr "להוריד אוטומטית תמונות מכל רחבי העולם כתלות בנפוצות שלהם"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:111
 msgctxt "Marble::PhotoPlugin|"
@@ -14684,10 +14652,9 @@ msgid "Please choose a color"
 msgstr ""
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:14
-#, fuzzy
 msgctxt "PositionMarkerConfigWidget|"
 msgid "Configure Position Marker Plugin"
-msgstr "אוכלוסייה:"
+msgstr "תוסף הגדרת סמן מקום"
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:20
 msgctxt "PositionMarkerConfigWidget|"
@@ -14773,10 +14740,9 @@ msgid "Shows a pie chart download progress indicator"
 msgstr ""
 
 #: src/plugins/render/routing/RoutingConfigDialog.ui:14
-#, fuzzy
 msgctxt "RoutingConfigDialog|"
 msgid "Routing Configuration"
-msgstr "אודות Marble"
+msgstr ""
 
 #: src/plugins/render/routing/RoutingConfigDialog.ui:20
 msgctxt "RoutingConfigDialog|"
@@ -14811,10 +14777,9 @@ msgid "Calculate a route to get directions."
 msgstr ""
 
 #: src/plugins/render/routing/RoutingPlugin.cpp:292
-#, fuzzy
 msgctxt "QObject|"
 msgid "Route left."
-msgstr "ייצא מפה"
+msgstr ""
 
 #: src/plugins/render/routing/RoutingPlugin.cpp:295
 msgctxt "QObject|"
@@ -15336,10 +15301,9 @@ msgid "Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)"
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:509
-#, fuzzy
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Navy Navigation Satellite System (NNSS)"
-msgstr "הצג סרגל ניווט"
+msgstr "מערכת לווייני הניווט של חיל הים האמריקאי (NNSS - טרנזיט)"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:512
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
@@ -15521,12 +15485,12 @@ msgstr "אחר"
 #: src/plugins/render/stars/StarsConfigWidget.ui:196
 msgctxt "StarsConfigWidget|"
 msgid "Deep Sky Objects"
-msgstr ""
+msgstr "גרמי שמיים עמוקים"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:219
 msgctxt "StarsConfigWidget|"
 msgid "Deep Sky Object Labels"
-msgstr ""
+msgstr "תוויות גרמי שמיים עמוקים"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:278
 msgctxt "StarsConfigWidget|"
@@ -15586,7 +15550,7 @@ msgstr ""
 #: src/plugins/render/stars/StarsConfigWidget.ui:525
 msgctxt "StarsConfigWidget|"
 msgid "Ecliptic"
-msgstr ""
+msgstr "קו הלקות"
 
 #: src/plugins/render/stars/StarsPlugin.cpp:109
 msgctxt "Marble::StarsPlugin|"
@@ -15599,36 +15563,35 @@ msgid "&Stars"
 msgstr "&כוכבים"
 
 #: src/plugins/render/stars/StarsPlugin.cpp:129
-#, fuzzy
 msgctxt "Marble::StarsPlugin|"
 msgid "A plugin that shows the Starry Sky and the Sun."
-msgstr "תוסף המציג את השמיים מלאים בכוכבים."
+msgstr "תוסף המציג את השמיים מלאים בכוכבים ואת השמש."
 
 #: src/plugins/render/stars/StarsPlugin.cpp:447
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the constellation lines."
-msgstr ""
+msgstr "נא לבחור את צבע קווי קבוצות הכוכבים."
 
 #: src/plugins/render/stars/StarsPlugin.cpp:458
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the constellation labels."
-msgstr ""
+msgstr "נא לבחור את צבע תוויות קבוצות הכוכבים."
 
 #: src/plugins/render/stars/StarsPlugin.cpp:469
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the dso labels."
-msgstr ""
+msgstr "נא לבחור את צבע תוויות קבוצות הכוכבים."
 
 #: src/plugins/render/stars/StarsPlugin.cpp:480
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the ecliptic."
-msgstr ""
+msgstr "נא לבחור את צבע קו הלקות."
 
 #: src/plugins/render/stars/StarsPlugin.cpp:491
 #: src/plugins/render/stars/StarsPlugin.cpp:502
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the celestial equator."
-msgstr ""
+msgstr "נא לבחור את צבע קו המשווה השמימי."
 
 #: src/plugins/render/stars/StarsPlugin.cpp:1108
 msgctxt "Marble::StarsPlugin|"
@@ -15636,10 +15599,9 @@ msgid "Sun"
 msgstr "השמש"
 
 #: src/plugins/render/stars/StarsPlugin.cpp:1388
-#, fuzzy
 msgctxt "Marble::StarsPlugin|"
 msgid "Show &Constellations"
-msgstr "הגדר &מיקום בית"
+msgstr "הצגת &קבוצות כוכבים"
 
 #: src/plugins/render/stars/StarsPlugin.cpp:1391
 msgctxt "Marble::StarsPlugin|"
@@ -15647,15 +15609,14 @@ msgid "Show &Sun and Moon"
 msgstr "הצגת ה&שמש והירח"
 
 #: src/plugins/render/stars/StarsPlugin.cpp:1394
-#, fuzzy
 msgctxt "Marble::StarsPlugin|"
 msgid "Show &Planets"
-msgstr "הצג מיקומים"
+msgstr "הצגת &כוכבי לכת"
 
 #: src/plugins/render/stars/StarsPlugin.cpp:1397
 msgctxt "Marble::StarsPlugin|"
 msgid "Show &Deep Sky Objects"
-msgstr ""
+msgstr "הצגת &גרמי שמיים עמוקים"
 
 #: src/plugins/render/stars/StarsPlugin.cpp:1401
 msgctxt "Marble::StarsPlugin|"
@@ -15752,7 +15713,6 @@ msgid "Weather condition"
 msgstr "תנאי מזג אוויר"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:40
-#, fuzzy
 msgctxt "WeatherConfigWidget|"
 msgid ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
@@ -15764,13 +15724,11 @@ msgid ""
 "it is available for.</p></body></html>\n"
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
-"weight:400; font-style:normal; text-decoration:none;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:"
-"italic;\">תפקיד</span></p></body></html>"
+"\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
+"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
+"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">ניתן לבחור כדי שהטמפרטורות "
+"תופענה. הטמפרטורות תופענה רק בתחנות שבהן הן זמינות.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:44
 #: src/plugins/render/weather/WeatherConfigWidget.ui:84
@@ -15779,7 +15737,6 @@ msgid "Temperature"
 msgstr "טמפרטורה"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:51
-#, fuzzy
 msgctxt "WeatherConfigWidget|"
 msgid ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
@@ -15791,13 +15748,11 @@ msgid ""
 "available for the particular station.</p></body></html>\n"
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
-"weight:400; font-style:normal; text-decoration:none;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:"
-"italic;\">תפקיד</span></p></body></html>"
+"\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
+"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
+"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">ניתן לבחור כדי שכיוון הרוח "
+"יוצג. כיוון הרוח יוצג רק אם הוא זמין בתחנה המסוימת.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:55
 msgctxt "WeatherConfigWidget|"
@@ -15908,7 +15863,6 @@ msgid "Pressure"
 msgstr "לחץ"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:164
-#, fuzzy
 msgctxt "WeatherConfigWidget|"
 msgid ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
@@ -15919,13 +15873,11 @@ msgid ""
 "the air pressure.</p></body></html>\n"
 msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
-"weight:400; font-style:normal; text-decoration:none;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:"
-"italic;\">תפקיד</span></p></body></html>"
+"\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
+"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
+"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">היחידה שמשמשת למדידת לחץ "
+"האוויר.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:169
 msgctxt "WeatherConfigWidget|"
@@ -16165,12 +16117,12 @@ msgstr "ביופורט"
 #: src/plugins/render/weather/WeatherData.cpp:670
 msgctxt "WeatherData|"
 msgid "hPa"
-msgstr ""
+msgstr "הקטופסקל"
 
 #: src/plugins/render/weather/WeatherData.cpp:673
 msgctxt "WeatherData|"
 msgid "kPa"
-msgstr ""
+msgstr "קילופסקל"
 
 #: src/plugins/render/weather/WeatherData.cpp:676
 msgctxt "WeatherData|"
@@ -16180,7 +16132,7 @@ msgstr "בר"
 #: src/plugins/render/weather/WeatherData.cpp:679
 msgctxt "WeatherData|"
 msgid "mmHg"
-msgstr ""
+msgstr "מילימטר כספית"
 
 #: src/plugins/render/weather/WeatherData.cpp:682
 msgctxt "WeatherData|"
@@ -16339,7 +16291,7 @@ msgstr "מזג &אוויר"
 msgctxt "Marble::WeatherPlugin|"
 msgid ""
 "Download weather information from many weather stations all around the world"
-msgstr ""
+msgstr "הורדת פרטי מזג אוויר ממגוון תחנות מזג אוויר מכל רחבי העולם"
 
 #: src/plugins/render/weather/WeatherPlugin.cpp:109
 msgctxt "Marble::WeatherPlugin|"
@@ -16366,7 +16318,7 @@ msgstr ""
 #: src/plugins/render/wikipedia/WikipediaConfigWidget.ui:32
 msgctxt "WikipediaConfigWidget|"
 msgid "Number of items on the screen"
-msgstr ""
+msgstr "מספר הפריטים על המסך"
 
 #: src/plugins/render/wikipedia/WikipediaItem.cpp:223
 #, qt-format
@@ -16423,57 +16375,57 @@ msgstr "סוג נתיב:"
 #: src/plugins/runner/cyclestreets/CycleStreetsConfigWidget.ui:30
 msgctxt "CycleStreetsConfigWidget|"
 msgid "Speed:"
-msgstr ""
+msgstr "מהירות:"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:36
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "balanced"
-msgstr ""
+msgstr "מאוזנת"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:37
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "fastest"
-msgstr ""
+msgstr "המהירה ביותר"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:38
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "quietest"
-msgstr ""
+msgstr "השקטה ביותר"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:41
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "slow (16 km/h)"
-msgstr ""
+msgstr "איטית (16 קמ״ש)"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:42
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "normal (20 km/h)"
-msgstr ""
+msgstr "רגילה (20 קמ״ש)"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:43
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "fast (24 km/h)"
-msgstr ""
+msgstr "מהירה (24 קמ״ש)"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:45
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "slow (10 mph)"
-msgstr ""
+msgstr "איטית (10 מייל לשעה)"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:46
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "normal (12 mph)"
-msgstr ""
+msgstr "רגילה (12 מייל לשעה)"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:47
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "fast (15 mph)"
-msgstr ""
+msgstr "מהירה (15 מייל לשעה)"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:84
 msgctxt "Marble::CycleStreetsPlugin|"
 msgid "This service requires an Internet connection."
-msgstr ""
+msgstr "השירות הזה דורש חיבור לאינטרנט."
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:89
 msgctxt "Marble::CycleStreetsPlugin|"
@@ -16491,21 +16443,19 @@ msgid "Bicycle routing for the United Kingdom using cyclestreets.net"
 msgstr ""
 
 #: src/plugins/runner/geouri/GeoUriPlugin.cpp:20
-#, fuzzy
 msgctxt "Marble::GeoUriPlugin|"
 msgid "Geo URI Search"
-msgstr "&חפש"
+msgstr "חיפוש Geo URI"
 
 #: src/plugins/runner/geouri/GeoUriPlugin.cpp:25
 msgctxt "Marble::GeoUriPlugin|"
 msgid "Geo URI"
-msgstr ""
+msgstr "Geo URI"
 
 #: src/plugins/runner/geouri/GeoUriPlugin.cpp:40
-#, fuzzy
 msgctxt "Marble::GeoUriPlugin|"
 msgid "Input of geographic coordinates by the geo URI scheme"
-msgstr "העתק קואורדינטות"
+msgstr "קלט של נקודות ציון גאוגרפיות לפי סכמת geo URI"
 
 #: src/plugins/runner/gosmore-reversegeocoding/GosmoreReverseGeocodingPlugin.cpp:26
 #, fuzzy
@@ -16547,17 +16497,17 @@ msgstr ""
 #: src/plugins/runner/gpsbabel/GpsbabelPlugin.cpp:48
 msgctxt "Marble::GpsbabelPlugin|"
 msgid "GPSBabel files"
-msgstr ""
+msgstr "קובצי GPSBabel"
 
 #: src/plugins/runner/gpx/GpxPlugin.cpp:18
 msgctxt "Marble::GpxPlugin|"
 msgid "Gpx File Parser"
-msgstr ""
+msgstr "מפענח קובצי Gpx"
 
 #: src/plugins/runner/gpx/GpxPlugin.cpp:33
 msgctxt "Marble::GpxPlugin|"
 msgid "Create GeoDataDocument from Gpx Files"
-msgstr ""
+msgstr "יצירת GeoDataDocument מקובצי Gpx"
 
 #: src/plugins/runner/gpx/GpxPlugin.cpp:48
 msgctxt "Marble::GpxPlugin|"
@@ -16567,12 +16517,12 @@ msgstr "נתוני נווטן"
 #: src/plugins/runner/hostip/HostipPlugin.cpp:22
 msgctxt "Marble::HostipPlugin|"
 msgid "Hostip.info Search"
-msgstr ""
+msgstr "חיפוש ב־Hostip.info"
 
 #: src/plugins/runner/hostip/HostipPlugin.cpp:27
 msgctxt "Marble::HostipPlugin|"
 msgid "Hostip.info"
-msgstr ""
+msgstr "Hostip.info"
 
 #: src/plugins/runner/hostip/HostipPlugin.cpp:42
 msgctxt "Marble::HostipPlugin|"
@@ -16582,32 +16532,32 @@ msgstr ""
 #: src/plugins/runner/json/JsonPlugin.cpp:21
 msgctxt "Marble::JsonPlugin|"
 msgid "GeoJSON File Parser"
-msgstr ""
+msgstr "מפענח קובצי GeoJSON"
 
 #: src/plugins/runner/json/JsonPlugin.cpp:36
 msgctxt "Marble::JsonPlugin|"
 msgid "Create GeoDataDocument from GeoJSON Files"
-msgstr ""
+msgstr "יצירת GeoDataDocument מקובצי GeoJSON"
 
 #: src/plugins/runner/json/JsonPlugin.cpp:52
 msgctxt "Marble::JsonPlugin|"
 msgid "GeoJSON"
-msgstr ""
+msgstr "GeoJSON"
 
 #: src/plugins/runner/kml/KmlPlugin.cpp:19
 msgctxt "Marble::KmlPlugin|"
 msgid "KML File Parser"
-msgstr ""
+msgstr "מפענח קובצי KML"
 
 #: src/plugins/runner/kml/KmlPlugin.cpp:34
 msgctxt "Marble::KmlPlugin|"
 msgid "Create GeoDataDocument from KML and KMZ Files"
-msgstr ""
+msgstr "יצירת GeoDataDocument מקובצי KML ו־KMZ"
 
 #: src/plugins/runner/kml/KmlPlugin.cpp:50
 msgctxt "Marble::KmlPlugin|"
 msgid "Google Earth KML"
-msgstr ""
+msgstr "KML של Google Earth"
 
 #: src/plugins/runner/latlon/LatLonPlugin.cpp:19
 msgctxt "Marble::LatLonPlugin|"
@@ -16632,82 +16582,82 @@ msgstr ""
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:67
 msgctxt "QObject|"
 msgid "camping"
-msgstr ""
+msgstr "מחנאות"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:69
 msgctxt "QObject|"
 msgid "hostel"
-msgstr ""
+msgstr "אכסניה"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:71
 msgctxt "QObject|"
 msgid "hotel"
-msgstr ""
+msgstr "מלון"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:73
 msgctxt "QObject|"
 msgid "motel"
-msgstr ""
+msgstr "מלון דרכים"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:75
 msgctxt "QObject|"
 msgid "youth hostel"
-msgstr ""
+msgstr "בית הארחה לנוער"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:77
 msgctxt "QObject|"
 msgid "library"
-msgstr ""
+msgstr "ספרייה"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:79
 msgctxt "QObject|"
 msgid "college"
-msgstr ""
+msgstr "מכללה"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:81
 msgctxt "QObject|"
 msgid "school"
-msgstr ""
+msgstr "בית ספר"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:83
 msgctxt "QObject|"
 msgid "university"
-msgstr ""
+msgstr "אוניברסיטה"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:85
 msgctxt "QObject|"
 msgid "bar"
-msgstr ""
+msgstr "בר"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:87
 msgctxt "QObject|"
 msgid "biergarten"
-msgstr ""
+msgstr "גינת בירה"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:89
 msgctxt "QObject|"
 msgid "cafe"
-msgstr ""
+msgstr "בית קפה"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:91
 msgctxt "QObject|"
 msgid "fast food"
-msgstr ""
+msgstr "מזון מהיר"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:93
 msgctxt "QObject|"
 msgid "pub"
-msgstr ""
+msgstr "פאב"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:95
 msgctxt "QObject|"
 msgid "restaurant"
-msgstr ""
+msgstr "מסעדה"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:97
 msgctxt "QObject|"
 msgid "doctor"
-msgstr ""
+msgstr "מרפאה"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:99
 msgctxt "QObject|"
@@ -16717,27 +16667,27 @@ msgstr "בית חולים"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:101
 msgctxt "QObject|"
 msgid "pharmacy"
-msgstr ""
+msgstr "בית מרקחת"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:103
 msgctxt "QObject|"
 msgid "bank"
-msgstr ""
+msgstr "בנק"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:105
 msgctxt "QObject|"
 msgid "beverages"
-msgstr ""
+msgstr "משקאות"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:107
 msgctxt "QObject|"
 msgid "hifi"
-msgstr ""
+msgstr "ציוד שמע"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:109
 msgctxt "QObject|"
 msgid "supermarket"
-msgstr ""
+msgstr "סופרמרקט"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:111
 msgctxt "QObject|"
@@ -16747,22 +16697,22 @@ msgstr "מוקד עניין"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:113
 msgctxt "QObject|"
 msgid "castle"
-msgstr ""
+msgstr "טירה"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:115
 msgctxt "QObject|"
 msgid "cinema"
-msgstr ""
+msgstr "בית קולנוע"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:117
 msgctxt "QObject|"
 msgid "monument"
-msgstr ""
+msgstr "אתר מורשת"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:119
 msgctxt "QObject|"
 msgid "museum"
-msgstr ""
+msgstr "מוזיאון"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:121
 msgctxt "QObject|"
@@ -16777,7 +16727,7 @@ msgstr "תיאטרון"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:125
 msgctxt "QObject|"
 msgid "theme park"
-msgstr ""
+msgstr "פארק שעשועים"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:127
 msgctxt "QObject|"
@@ -16787,17 +16737,17 @@ msgstr "נקודת תצפית"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:129
 msgctxt "QObject|"
 msgid "zoo"
-msgstr ""
+msgstr "גן חיות"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:131
 msgctxt "QObject|"
 msgid "airport"
-msgstr ""
+msgstr "נמל תעופה"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:133
 msgctxt "QObject|"
 msgid "airport runway"
-msgstr ""
+msgstr "מסלול המראה בנמל תעופה"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:135
 msgctxt "QObject|"
@@ -16807,7 +16757,7 @@ msgstr "רחבת חניית מטוסים"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:137
 msgctxt "QObject|"
 msgid "airport taxiway"
-msgstr ""
+msgstr "מסלול הסעה בנמל התעופה"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:139
 msgctxt "QObject|"
@@ -16817,17 +16767,17 @@ msgstr "תחנת אוטובוס"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:141
 msgctxt "QObject|"
 msgid "bus stop"
-msgstr ""
+msgstr "תחנת אוטובוס"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:143
 msgctxt "QObject|"
 msgid "car share"
-msgstr ""
+msgstr "שיתוף מכוניות"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:145
 msgctxt "QObject|"
 msgid "fuel"
-msgstr ""
+msgstr "דלק"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:147
 msgctxt "QObject|"
@@ -16842,37 +16792,37 @@ msgstr "תחנת רכבת"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:151
 msgctxt "QObject|"
 msgid "atm"
-msgstr ""
+msgstr "כספומט"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:153
 msgctxt "QObject|"
 msgid "tram stop"
-msgstr ""
+msgstr "תחנת חשמלית"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:155
 msgctxt "QObject|"
 msgid "bicycle rental"
-msgstr ""
+msgstr "השכרת אופניים"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:157
 msgctxt "QObject|"
 msgid "car rental"
-msgstr ""
+msgstr "השכרת רכב"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:159
 msgctxt "QObject|"
 msgid "speed camera"
-msgstr ""
+msgstr "מצלמת מהירות"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:161
 msgctxt "QObject|"
 msgid "taxi"
-msgstr ""
+msgstr "מונית"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:163
 msgctxt "QObject|"
 msgid "memorial"
-msgstr ""
+msgstr "אתר הנצחה"
 
 #: src/plugins/runner/local-osm-search/LocalOsmSearchPlugin.cpp:40
 msgctxt "Marble::LocalOsmSearchPlugin|"
@@ -17341,7 +17291,7 @@ msgstr ""
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:73
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
 msgid "Car (recommended way)"
-msgstr ""
+msgstr "מכונית (דרך מומלצת)"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:74
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
@@ -17406,17 +17356,17 @@ msgstr "מפענח קובצי Pn2"
 #: src/plugins/runner/pn2/Pn2Plugin.cpp:33
 msgctxt "Marble::Pn2Plugin|"
 msgid "Create GeoDataDocument from Pn2 Files"
-msgstr ""
+msgstr "יצירת GeoDataDocument מקובצי Pn2"
 
 #: src/plugins/runner/pn2/Pn2Plugin.cpp:48
 msgctxt "Marble::Pn2Plugin|"
 msgid "Compressed Pnt"
-msgstr ""
+msgstr "Pnt דחוס"
 
 #: src/plugins/runner/pnt/PntPlugin.cpp:18
 msgctxt "Marble::PntPlugin|"
 msgid "Pnt File Parser"
-msgstr ""
+msgstr "מפענח קובצי Pnt"
 
 #: src/plugins/runner/pnt/PntPlugin.cpp:33
 msgctxt "Marble::PntPlugin|"
@@ -17431,7 +17381,7 @@ msgstr ""
 #: src/plugins/runner/routino/RoutinoConfigWidget.ui:17
 msgctxt "RoutinoConfigWidget|"
 msgid "Transport:"
-msgstr ""
+msgstr "תעבורה:"
 
 #: src/plugins/runner/routino/RoutinoConfigWidget.ui:27
 msgctxt "RoutinoConfigWidget|"
@@ -17441,7 +17391,7 @@ msgstr "שיטה"
 #: src/plugins/runner/routino/RoutinoConfigWidget.ui:33
 msgctxt "RoutinoConfigWidget|"
 msgid "Fastest"
-msgstr ""
+msgstr "המהירה ביותר"
 
 #: src/plugins/runner/routino/RoutinoConfigWidget.ui:40
 msgctxt "RoutinoConfigWidget|"
@@ -17466,12 +17416,12 @@ msgstr ""
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:73
 msgctxt "Marble::RoutinoConfigWidget|"
 msgid "Pedestrian"
-msgstr ""
+msgstr "הליכה ברגל"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:74
 msgctxt "Marble::RoutinoConfigWidget|"
 msgid "Horse"
-msgstr ""
+msgstr "סוס"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:75
 msgctxt "Marble::RoutinoConfigWidget|"
@@ -17511,7 +17461,7 @@ msgstr "משאית גדולה"
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:82
 msgctxt "Marble::RoutinoConfigWidget|"
 msgid "Public Service Vehicle"
-msgstr ""
+msgstr "רכב בשירות ציבורי"
 
 #: src/plugins/runner/shp/ShpPlugin.cpp:18
 msgctxt "Marble::ShpPlugin|"
@@ -17521,7 +17471,7 @@ msgstr "מפענח קובצי Shp"
 #: src/plugins/runner/shp/ShpPlugin.cpp:33
 msgctxt "Marble::ShpPlugin|"
 msgid "Create GeoDataDocument from Shp Files"
-msgstr ""
+msgstr "יצירת GeoDataDocument מקובצי Shp"
 
 #: src/plugins/runner/shp/ShpPlugin.cpp:48
 msgctxt "Marble::ShpPlugin|"
