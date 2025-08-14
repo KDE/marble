@@ -3,6 +3,7 @@
         "MimeTypes": [
             "application/x-osm+xml"
         ],
-        "Name": "OSM Data"
+        "Name": "OSM Data",
+        "Name[x-test]": "xxOSM Dataxx"
     }
 }

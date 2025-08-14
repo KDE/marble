@@ -3,6 +3,7 @@
         "MimeTypes": [
             "application/x-esri-shape"
         ],
-        "Name": "ESRI Shapefile"
+        "Name": "ESRI Shapefile",
+        "Name[x-test]": "xxESRI Shapefilexx"
     }
 }

@@ -3,6 +3,7 @@
         "MimeTypes": [
             "application/geo+json"
         ],
-        "Name": "GeoJSON Geographic Data"
+        "Name": "GeoJSON Geographic Data",
+        "Name[x-test]": "xxGeoJSON Geographic Dataxx"
     }
 }

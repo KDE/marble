@@ -3,6 +3,7 @@
         "MimeTypes": [
             "application/gpx+xml"
         ],
-        "Name": "GPX Geographic Data"
+        "Name": "GPX Geographic Data",
+        "Name[x-test]": "xxGPX Geographic Dataxx"
     }
 }

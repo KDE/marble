@@ -3,6 +3,7 @@
         "MimeTypes": [
             "application/vnd.google-earth.kmz"
         ],
-        "Name": "KML Geographic Compressed Data"
+        "Name": "KML Geographic Compressed Data",
+        "Name[x-test]": "xxKML Geographic Compressed Dataxx"
     }
 }

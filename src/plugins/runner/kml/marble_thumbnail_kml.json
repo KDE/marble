@@ -3,6 +3,7 @@
         "MimeTypes": [
             "application/vnd.google-earth.kml+xml"
         ],
-        "Name": "KML Geographic Data"
+        "Name": "KML Geographic Data",
+        "Name[x-test]": "xxKML Geographic Dataxx"
     }
 }
