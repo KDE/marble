@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2025-08-09 15:12+0400\n"
+"PO-Revision-Date: 2025-08-13 22:00+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -8501,7 +8501,7 @@ msgid ""
 "tu-berlin.de</a><br /><i>WMS Support, Mobile, Performance</i></p>"
 msgstr ""
 "<p>برنهارد بيشو <a href=\"mailto:bbeschow@cs.tu-berlin.de\">bbeschow@cs.tu-"
-"berlin.de</a><br /><i>دعم WMS، الهاتف المحمول، الأداء</i></p>"
+"berlin.de</a><br /><i>إتاحة WMS، الهاتف المحمول، الأداء</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:81
 msgctxt "QObject|"
@@ -8528,7 +8528,7 @@ msgid ""
 "a><br /><i>OpenStreetMap Support, Download Management</i></p>"
 msgstr ""
 "<p>Jens-Michael Hoffmann <a href=\"mailto:jensmh@gmx.de\">jensmh@gmx.de</"
-"a><br /><i>دعم OpenStreetMap وإدارة التنزيل</i></p>"
+"a><br /><i>إتاحة OpenStreetMap وإدارة التنزيل</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:87
 msgctxt "QObject|"
@@ -8546,7 +8546,7 @@ msgid ""
 "net</a><br /><i>Amateur Radio Support</i></p>"
 msgstr ""
 "<p>ويس هارداكر <a href=\"mailto:marble@hardakers.net\">marble@hardakers.net</"
-"a><br /><i>دعم راديو الهواة</i></p>"
+"a><br /><i>إتاحة راديو الهواة</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:91
 msgctxt "QObject|"
@@ -8555,7 +8555,7 @@ msgid ""
 "de</a><br /><i>Online Services Support</i></p>"
 msgstr ""
 "<p>باستيان هولست، <a href=\"mailto:bastian holst@gmx.de\">bastian holst@gmx."
-"de</a><br /><i>دعم الخدمات عبر الإنترنت</i></p>"
+"de</a><br /><i>إتاحة الخدمات عبر الإنترنت</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:93
 msgctxt "QObject|"
@@ -8591,7 +8591,7 @@ msgid ""
 "a><br /><i>KML and Windows Support</i></p>"
 msgstr ""
 "<p>باتريك سبندرين <a href=\"pspendrin@gmail.com\">pspendrin@gmail.com</"
-"a><br /><i>دعم KML وWindows</i></p>"
+"a><br /><i>إتاحة KML وWindows</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:101
 msgctxt "QObject|"
@@ -8632,7 +8632,7 @@ msgid ""
 "com</a><br /><i>Proxy Support</i></p>"
 msgstr ""
 "<p>أندرو مانسون <a href=\"mailto:g.real.ate@gmail.com\">g.real.ate@gmail."
-"com</a><br /><i>دعم الوكيل</i></p>"
+"com</a><br /><i>التعامل مع الوكيل</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:110
 msgctxt "QObject|"
@@ -8773,8 +8773,8 @@ msgid ""
 "celestial bodies in Marble   </i></p>"
 msgstr ""
 "<p>جبور بيرتيرفي، <a href=\"mailto:peterffy95@gmail.com\"> peterffy95@gmail."
-"com </a><br /><i>المشروع: دعم الصور البانورامية للأجرام السماوية من الرخام </"
-"i></p>"
+"com </a><br /><i>المشروع: إتاحة الصور البانورامية للأجرام السماوية في ماربل "
+"</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:138
 #: src/lib/marble/MarbleAboutDialog.cpp:158
@@ -9012,8 +9012,8 @@ msgid ""
 "tile levels in the OSM Vector Map of Marble</i></p>"
 msgstr ""
 "<p>أكشات تاندون <a href=\"akshat.tandon@research.iiit.ac.in\">akshat."
-"tandon@research.iiit.ac.in</a><br /><i>المشروع: دعم مستويات القطع المتوسطة "
-"والمنخفضة في خريطة OSM المتجهة للرخام</i></p>"
+"tandon@research.iiit.ac.in</a><br /><i>المشروع: إتاحة مستويات القطع المتوسطة "
+"والمنخفضة في خريطة OSM المتجهة لماربل</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:187
 msgctxt "QObject|"
@@ -9022,7 +9022,7 @@ msgid ""
 "a><br /><i>Project: Improve Marble's OSM vector rendering support</i></p>"
 msgstr ""
 "<p>ديفيد كولوزفاري <a href=\"freedawson@gmail.com\">freedawson@gmail.com</"
-"a><br /><i>المشروع: تحسين دعم عرض متجه OSM في ماربل</i></p>"
+"a><br /><i>المشروع: تحسين العرض متجه OSM في ماربل</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:189
 msgctxt "QObject|"
@@ -9041,7 +9041,7 @@ msgid ""
 "support and improving Edit Mode for Marble</i></p>"
 msgstr ""
 "<p>ماريوس فاليريو ستانسيو <a href=\"stanciumarius94@gmail.com"
-"\">stanciumarius94@gmail.com</a><br /><i>المشروع: تقديم دعم OpenStreetMap "
+"\">stanciumarius94@gmail.com</a><br /><i> المشروع: إتاحة OpenStreetMap "
 "وتحسين وضع التحرير لـ لماربل </i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:194
@@ -9176,7 +9176,7 @@ msgid ""
 "com</a><br /><i>Project: Time Support</i></p>"
 msgstr ""
 "<p>هارشيت جين <a href=\"mailto:hjain.itbhu@gmail.com\">hjain.itbhu@gmail."
-"com</a><br /><i>المشروع: دعم الوقت</i></p>"
+"com</a><br /><i>المشروع: إتاحة الوقت</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:226
 msgctxt "QObject|"
@@ -9232,7 +9232,7 @@ msgid ""
 "for Marble</i></p>"
 msgstr ""
 "<p>شاشانك سينغ <a href=\"mailto:shashank.personal@gmail.com\">shashank."
-"personal@gmail.com</a><br /><i>المشروع: بانوراميو / ويكيبيديا - دعم الصور "
+"personal@gmail.com</a><br /><i>المشروع: بانوراميو / ويكيبيديا - إتاحة الصور "
 "لماربل</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:238
@@ -9258,7 +9258,8 @@ msgid ""
 "com</a><br /><i>Project: GPS Support for Marble</i></p>"
 msgstr ""
 "<p>أندرو مانسون <a href=\"mailto:g.real.ate@gmail.com\">g.real.ate@gmail."
-"com</a><br /><i>المشروع: دعم نظام تحديد المواقع العالمي (GPS) لماربل</i></p>"
+"com</a><br /><i>المشروع: إتاحة نظام تحديد المواقع العالمي (GPS) لماربل</i></"
+"p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:243
 msgctxt "QObject|"
@@ -9267,7 +9268,7 @@ msgid ""
 "a><br /><i>Project: KML Support for Marble</i></p>"
 msgstr ""
 "<p>مراد تاجيروف <a href=\"mailto:tmurad@gmail.com\">tmurad@gmail.com</a><br/"
-"><i>المشروع: دعم KML لماربل</i></p>"
+"><i> المشروع: إتاحة KML لماربل</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:245
 msgctxt "QObject|"
@@ -10128,8 +10129,9 @@ msgid ""
 "josm or merkaartor, make sure that the respective application is installed.</"
 "p>"
 msgstr ""
-"<p>التطبيق الذي يُشغل لتحرير الخرائط. يتطلب Potlatch (مبدئيًا)متصفح ويب يدعم "
-"الفلاش ليثبت. عند تحديد josm أو merkaartor، تأكد من تثبيت التطبيق المعني.</p>"
+"<p> التطبيق الذي يُشغل لتحرير الخرائط. يتطلب Potlatch (مبدئيًا) متصفح ويب "
+"يمكنه يتعامل الفلاش ليثبت. عند تحديد josm أو merkaartor، تأكد من تثبيت "
+"التطبيق المعني.</p>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:198
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10543,7 +10545,7 @@ msgstr "الكيلومتر، المتر"
 #: src/lib/marble/MarbleViewSettingsWidget.ui:66
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Miles, Feet"
-msgstr "ميل ، قدم"
+msgstr "ميل، قدم"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:71
 msgctxt "MarbleViewSettingsWidget|"
