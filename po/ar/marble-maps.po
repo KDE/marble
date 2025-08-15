@@ -309,7 +309,7 @@ msgstr "إعدادات الشّبكة"
 #: SettingsDialog.qml:53
 #, kde-format
 msgid "Download Maps via WLAN only"
-msgstr "قم بتنزيل الخرائط عبر WLAN فقط"
+msgstr "نزّل الخرائط عبر WLAN فقط"
 
 #: ThemeConfigPage.qml:19
 #, kde-format
