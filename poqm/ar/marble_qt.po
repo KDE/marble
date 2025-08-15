@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2025-08-13 22:00+0400\n"
+"PO-Revision-Date: 2025-08-14 13:26+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -134,8 +134,8 @@ msgid ""
 "<a href=\"tour://moon/clementine/tour.kml\">Play a tour of different landing "
 "sites.</a>"
 msgstr ""
-"<a href=\"tour://moon/clementine/tour.kml\">قم بجولة في مواقع الهبوط "
-"المختلفة.</a>"
+"<a href=\"tour://moon/clementine/tour.kml\">تجول في مواقع الهبوط المختلفة.</"
+"a>"
 
 #. file data/maps/moon/clementine/clementine.dgml:121
 msgctxt "DGML|"
@@ -779,7 +779,7 @@ msgid ""
 "p><p>OSM is an open community which creates free editable maps.</p>"
 msgstr ""
 "<p><i>خريطة طريق عالمية</i> أنشئت بواسطة مشروع OpenStreetMap (OSM).</"
-"p><p>OSM هو مجتمع مفتوح يقوم بإنشاء خرائط مجانية قابلة للتحرير.</p>"
+"p><p>OSM هو مجتمع مفتوح ينشئ خرائط مجانية قابلة للتحرير.</p>"
 
 #. file data/maps/earth/vectorosm-dev/vectorosm-dev.dgml:85
 #. ----------
@@ -818,8 +818,8 @@ msgid ""
 "was rendered using Mapnik.</p>"
 msgstr ""
 "<p><i>خريطة طريق عالمية</i> أنشئت بواسطة مشروع OpenStreetMap (OSM).</"
-"p><p>OSM هو مجتمع مفتوح يقوم بإنشاء خرائط مجانية قابلة للتحرير. صُيرت بيانات "
-"OSM باستخدام Mapnik.</p>"
+"p><p>OSM هو مجتمع مفتوح ينشئ خرائط مجانية قابلة للتحرير. صُيرت بيانات OSM "
+"باستخدام Mapnik.</p>"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:105
 msgctxt "DGML|"
@@ -14821,7 +14821,7 @@ msgctxt "Marble::PanoramioPlugin|"
 msgid ""
 "Automatically downloads images from around the world in preference to their "
 "popularity"
-msgstr "يقوم بتنزيل الصور آليًّا من جميع أنحاء العالم وفقًا لشعبيتها"
+msgstr "ينزل الصور آليًّا من جميع أنحاء العالم وفقًا لشعبيتها"
 
 #: src/plugins/render/photo/CoordinatesParser.cpp:31
 #: src/plugins/render/photo/FlickrParser.cpp:36
@@ -14865,7 +14865,7 @@ msgctxt "Marble::PhotoPlugin|"
 msgid ""
 "Automatically downloads images from around the world in preference to their "
 "popularity"
-msgstr "يقوم بتنزيل الصور آليًّا من جميع أنحاء العالم وفقًا لشعبيتها"
+msgstr "ينزل الصور آليًّا من جميع أنحاء العالم وفقًا لشعبيتها"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:111
 msgctxt "Marble::PhotoPlugin|"
@@ -16637,7 +16637,7 @@ msgctxt "Marble::WikipediaPlugin|"
 msgid ""
 "Automatically downloads Wikipedia articles and shows them on the right "
 "position on the map"
-msgstr "يقوم بتنزيل مقالات ويكيبيديا آليًّا ويظهرها في الموضع الصحيح على الخريطة"
+msgstr "ينزل مقالات ويكيبيديا آليًّا ويظهرها في الموضع الصحيح على الخريطة"
 
 #: src/plugins/render/wikipedia/WikipediaPlugin.cpp:96
 msgctxt "Marble::WikipediaPlugin|"

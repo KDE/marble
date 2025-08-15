@@ -1,0 +1,184 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the marble package.
+#
+# SPDX-FileCopyrightText: 2025 Yaron Shahrabani <sh.yaron@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: marble\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-12-24 00:37+0000\n"
+"PO-Revision-Date: 2025-08-14 13:43+0300\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 25.04.3\n"
+
+#: About.qml:9
+#, kde-format
+msgctxt "@title:group"
+msgid "Germanisches Nationalmuseum"
+msgstr "המוזיאון הלאומי הגרמני"
+
+#: About.qml:14
+#, kde-format
+msgid ""
+"The original Behaim globe can be visited in the <a href=\"https://www.gnm.de/"
+"\">Germanisches Nationalmuseum</a> in Nuremberg, Germany."
+msgstr ""
+"אפשר לבקר את גלובוס בהיים המקורי ב<a href=\"https://www.gnm.de/\">מוזיאון "
+"הלאומי הגרמני</a> בנירנברג שבגרמניה."
+
+#: About.qml:20
+#, kde-format
+msgctxt "@title:group"
+msgid "Map Content"
+msgstr "תוכן מפה"
+
+#: About.qml:25
+#, kde-format
+msgid ""
+"Digitized map based on orthophotographic gores by TU Vienna, 1990. "
+"Germanisches Nationalmuseum and Friedrich-Alexander-Universität Erlangen-"
+"Nürnberg, CC BY-SA 3.0. Ghillany map based on two planiglobes which are "
+"provided as a map supplement to F.W. Ghillany's \"Geschichte des Seefahrers "
+"Ritter Martin Behaim nach den ältesten vorhandenen Urkunden\", Nuremberg "
+"1853. CC BY-SA 3.0."
+msgstr ""
+
+#: main.cpp:33
+#, kde-format
+msgid "Marble Behaim"
+msgstr "Marble Behaim"
+
+#: main.cpp:35
+#, kde-format
+msgid ""
+"Digital reproduction of a globe crafted at the time of Columbus' first sea "
+"travel to the west."
+msgstr ""
+
+#: main.cpp:37
+#, kde-format
+msgid "© KDE Community"
+msgstr "© קהילת KDE"
+
+#: main.cpp:38
+#, kde-format
+msgid ""
+"<p>Martin Behaim's Erdapfel</p><p>The oldest existent globe of the Earth. "
+"Martin Behaim and collaborators created the globe around 1492 at the time of "
+"<a href=\"https://en.wikipedia.org/wiki/Voyages_of_Christopher_Columbus"
+"\">Columbus'</a> first sea travel to the west.Hence the American continent "
+"is missing on this globe.Also note the detailed inscriptions in early modern "
+"German.</p><p>Please see <a href=\"https://en.wikipedia.org/wiki/Erdapfel"
+"\">Wikipedia: Erdapfel</a> for further information about the Behaim globe."
+msgstr ""
+
+#: main.cpp:52
+#, kde-format
+msgctxt "@info:credit"
+msgid "Dennis Nienhüser"
+msgstr "דניס ניינהוזר"
+
+#: main.cpp:52
+#, kde-format
+msgctxt "@info:credit"
+msgid "Author"
+msgstr "יוצר"
+
+#: main.cpp:54
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "צוות התרגום של KDE ישראל"
+
+#: main.cpp:54
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "kde-l10n-he@kde.org"
+
+#: MainScreen.qml:62
+#, kde-format
+msgctxt "@title"
+msgid "Marble"
+msgstr "Marble"
+
+#: MainScreen.qml:80
+#, kde-format
+msgctxt "@title:group"
+msgid "Globe Settings"
+msgstr "הגדרות גלובוס"
+
+#: MainScreen.qml:86
+#, kde-format
+msgctxt "@option:check"
+msgid "Show Behaim places"
+msgstr "הצגת מקומות לפי בהיים"
+
+#: MainScreen.qml:91
+#, kde-format
+msgctxt "@option:check"
+msgid "Show texts and illustrations"
+msgstr "הצגת טקסטים ואיורים"
+
+#: MainScreen.qml:96
+#, kde-format
+msgctxt "@option:check"
+msgid "Show the accurate coastline"
+msgstr "הצגת קו החוף במדויק"
+
+#: MainScreen.qml:102
+#, kde-format
+msgctxt "@title:group"
+msgid "Globe Variant"
+msgstr "הגוון גלובוס"
+
+#: MainScreen.qml:111
+#, kde-format
+msgctxt "@option:radio"
+msgid "Original (1492)"
+msgstr "מקורי (1492)"
+
+#: MainScreen.qml:113
+#, kde-format
+msgid "Digital imagery taken directly from the original Behaim globe."
+msgstr "הצילום הדיגיטלי לקוח ישירות מגלובוס בהיים המקורי."
+
+#: MainScreen.qml:124
+#, kde-format
+msgctxt "@option:radio"
+msgid "Ghillany (1853)"
+msgstr "גילני (1853)"
+
+#: MainScreen.qml:125
+#, kde-format
+msgid "A (rough) facsimile created by Friedrich Wilhelm Ghillany in 1853."
+msgstr "עותק (גס) שנוצר על ידי פרידריך וילהלם גילני בשנת 1853."
+
+#: MainScreen.qml:136
+#, kde-format
+msgctxt "@option:radio"
+msgid "Ravenstein (1908)"
+msgstr "רוונסטין (1908)"
+
+#: MainScreen.qml:137
+#, kde-format
+msgid "A (rough) facsimile created by Ernest George Ravenstein in 1908."
+msgstr "עותק (גס) שנוצר על ידי ארנסט ג׳ורג׳ רוונסטין בשנת 1908."
+
+#: MainScreen.qml:152
+#, kde-format
+msgctxt "@title:window"
+msgid "Behaim Globe"
+msgstr "גלובוס בהיים"
+
+#: MainScreen.qml:160
+#, kde-format
+msgctxt "@action:button"
+msgid "Information"
+msgstr "פרטים"
