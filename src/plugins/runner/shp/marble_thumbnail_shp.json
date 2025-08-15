@@ -4,6 +4,14 @@
             "application/x-esri-shape"
         ],
         "Name": "ESRI Shapefile",
+        "Name[ca]": "Fitxers de formes ESRI",
+        "Name[es]": "Archivo de formas ESRI",
+        "Name[ka]": "ESRI Shapefile",
+        "Name[pt_BR]": "Arquivo de forma ESRI",
+        "Name[sl]": "ESRI Shapefile",
+        "Name[sv]": "ESRI-formfil",
+        "Name[tr]": "ESRI Shapefile",
+        "Name[uk]": "файл форми ESRI",
         "Name[x-test]": "xxESRI Shapefilexx"
     }
 }

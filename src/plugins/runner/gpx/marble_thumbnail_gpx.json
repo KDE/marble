@@ -4,6 +4,14 @@
             "application/gpx+xml"
         ],
         "Name": "GPX Geographic Data",
+        "Name[ca]": "Dades geogràfiques GPX",
+        "Name[es]": "Datos geográficos GPX",
+        "Name[ka]": "GPX გეოგრაფიული მონაცემები",
+        "Name[pt_BR]": "Dados geográficos em GPX",
+        "Name[sl]": "Geografski podatki GPX",
+        "Name[sv]": "GPX geografisk data",
+        "Name[tr]": "GPX Coğrafi Verisi",
+        "Name[uk]": "географічні дані GPX",
         "Name[x-test]": "xxGPX Geographic Dataxx"
     }
 }
