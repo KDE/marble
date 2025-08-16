@@ -4,14 +4,20 @@
             "application/vnd.google-earth.kmz"
         ],
         "Name": "KML Geographic Compressed Data",
+        "Name[ca@valencia]": "Dades geogràfiques comprimides KML",
         "Name[ca]": "Dades geogràfiques comprimides KML",
         "Name[es]": "Datos geográficos comprimidos KML",
+        "Name[eu]": "KML datu geografiko konprimatuak",
+        "Name[he]": "נתוני KML גאוגרפיים דחוסים",
+        "Name[it]": "Dati geografici compressi KML",
         "Name[ka]": "KML შეკუმშული გეოგრაფიული მონაცემები",
+        "Name[nl]": "KML Geographic Compressed Data",
         "Name[pt_BR]": "Dados geográficos compactados em KML",
         "Name[sl]": "Stisnjeni geografski podatki KML",
         "Name[sv]": "KML komprimerad geografisk data",
         "Name[tr]": "Sıkıştırılmış KML Coğrafi Verisi",
         "Name[uk]": "стиснені географічні дані KML",
-        "Name[x-test]": "xxKML Geographic Compressed Dataxx"
+        "Name[x-test]": "xxKML Geographic Compressed Dataxx",
+        "Name[zh_CN]": "KML 压缩地理数据"
     }
 }

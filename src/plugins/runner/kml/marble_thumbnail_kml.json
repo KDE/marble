@@ -4,14 +4,20 @@
             "application/vnd.google-earth.kml+xml"
         ],
         "Name": "KML Geographic Data",
+        "Name[ca@valencia]": "Dades geogràfiques KML",
         "Name[ca]": "Dades geogràfiques KML",
         "Name[es]": "Datos geográficos KML",
+        "Name[eu]": "KML datu geografikoak",
+        "Name[he]": "נתוני KML גאוגרפיים",
+        "Name[it]": "Dati geografici KML",
         "Name[ka]": "KML გეოგრაფიული მონაცემები",
+        "Name[nl]": "KML Geographic Data",
         "Name[pt_BR]": "Dados geográficos em KML",
         "Name[sl]": "Geografski podatki KML",
         "Name[sv]": "KML geografisk data",
         "Name[tr]": "KML Coğrafi Verisi",
         "Name[uk]": "географічні дані KML",
-        "Name[x-test]": "xxKML Geographic Dataxx"
+        "Name[x-test]": "xxKML Geographic Dataxx",
+        "Name[zh_CN]": "KML 地理数据"
     }
 }
