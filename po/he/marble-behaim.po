@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-24 00:37+0000\n"
-"PO-Revision-Date: 2025-08-14 13:43+0300\n"
+"PO-Revision-Date: 2025-08-15 16:09+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -48,6 +48,13 @@ msgid ""
 "Ritter Martin Behaim nach den ältesten vorhandenen Urkunden\", Nuremberg "
 "1853. CC BY-SA 3.0."
 msgstr ""
+"מפה שעברה המרה דיגיטלית ומבוססת על סהרונים אורתוגרפיים מאת האוניברסיטה "
+"הטכנולוגית של וינה, 1990. המוזיאון הלאומי הגרמני ואוניברסיטת פרידריך אלכסנדר "
+"ארלנגן-נירנברג, קריאייטיב קומונז שיתוף דומה 3.0. מפת גילני שמבוססת על שני "
+"פאניגלובוסים ומסופקת כהשלמה ל־„Geschichte des Seefahrers Ritter Martin "
+"Behaim nach den ältesten vorhandenen Urkunden” (תולדות הימאי האביר מרטין "
+"בהיים על פי המסמכים הקדומים ביותר הקיימים), נירנברג 1853. קריאייטיב קומונז "
+"שיתוף דומה 3.0."
 
 #: main.cpp:33
 #, kde-format
@@ -60,6 +67,8 @@ msgid ""
 "Digital reproduction of a globe crafted at the time of Columbus' first sea "
 "travel to the west."
 msgstr ""
+"הפקה דיגיטלית מחודשת של גלובוס שנוצר בתקופת המסע הימי הראשון של קלומובוס "
+"למערב."
 
 #: main.cpp:37
 #, kde-format
@@ -77,6 +86,13 @@ msgid ""
 "German.</p><p>Please see <a href=\"https://en.wikipedia.org/wiki/Erdapfel"
 "\">Wikipedia: Erdapfel</a> for further information about the Behaim globe."
 msgstr ""
+"<p>הארדאפפל (תפוח הארץ) של מרטין בהיים</p><p>הגלובוס הישן ביותר של כדור הארץ "
+"שעדיין קיים. מרטין בהיים ושותפיו יצרו את הגלובוס סביב 1492 בתקופת המסע הימי "
+"הראשון של <a href=\"https://he.wikipedia.org/"
+"wiki/מסעותיו_של_כריסטופר_קולומבוס\">קולומבוס</a> למערב. לכן היבשת האמריקאית "
+"חסרה בגלובוס. כדאי גם לשים לב לרישומים המפורטים בגרמנית מודרנית מוקדמת. </"
+"p><p>אפשר לעיין ב<a href=\"https://he.wikipedia.org/wiki/ארדאפפל"
+"\">וויקיפדיה: ארדאפפל</a> למידע נוסף על הגלובוס של בהיים."
 
 #: main.cpp:52
 #, kde-format
