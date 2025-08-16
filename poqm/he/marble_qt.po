@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2025-08-12 15:16+0300\n"
+"PO-Revision-Date: 2025-08-15 16:14+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -7117,10 +7117,9 @@ msgid "Canal"
 msgstr "תעלה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:984
-#, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Drain"
-msgstr "פני שטח"
+msgstr "ניקוז"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:986
 msgctxt "GeoDataPlacemark|"
@@ -7207,16 +7206,14 @@ msgid "*"
 msgstr ""
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:211
-#, fuzzy
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Detour"
-msgstr "עקוב אחר GPS"
+msgstr "מעקף"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:214
-#, fuzzy
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Ferry Route"
-msgstr "ייצא מפה"
+msgstr "מסלול מעבורת"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:217
 msgctxt "GeoLineStringGraphicsItem|"
@@ -7244,28 +7241,24 @@ msgid "Trolley Bus"
 msgstr "טרוליבוס"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:232
-#, fuzzy
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Bicycle Route"
-msgstr "עקוב אחר GPS"
+msgstr "מסלול אופניים"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:235
-#, fuzzy
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Mountainbike Route"
-msgstr "הר"
+msgstr "מסלול אופני הרים"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:238
-#, fuzzy
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Walking Route"
-msgstr "ייצא מפה"
+msgstr "מסלול הליכה"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:241
-#, fuzzy
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Hiking Route"
-msgstr "ייצא מפה"
+msgstr "מסלול טיול"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:244
 #, fuzzy
@@ -11876,14 +11869,13 @@ msgid ""
 msgstr ""
 
 #: src/lib/marble/SunControlWidget.ui:131
-#, fuzzy
 msgctxt "SunControlWidget|"
 msgid ""
 "<b>Lock</b> map view to <a href=\"https://en.wikipedia.org/wiki/"
 "Subsolar_point\">Subsolar Point</a>."
 msgstr ""
 "<b>נעילת</b> תצוגת המפה ל<a href=\"https://en.wikipedia.org/wiki/"
-"Subsolar_point\">זנית תחת השמש</a>."
+"Subsolar_point\">זניט תחת השמש</a>."
 
 #: src/lib/marble/SunControlWidget.ui:205
 #, fuzzy
@@ -12149,10 +12141,10 @@ msgid "Remove item %1"
 msgstr "הסרת פריט %1"
 
 #: src/lib/marble/TourItemDelegate.cpp:180
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::TourItemDelegate|"
 msgid "Change item %1"
-msgstr "מפה רגילה"
+msgstr "החלפת הפריט %1"
 
 #: src/lib/marble/TourItemDelegate.cpp:185
 msgctxt "Marble::TourItemDelegate|"
@@ -13190,10 +13182,9 @@ msgid "&Compass"
 msgstr "מ&צפן"
 
 #: src/plugins/render/compass/CompassFloatItem.cpp:77
-#, fuzzy
 msgctxt "Marble::CompassFloatItem|"
 msgid "This is a float item that provides a compass."
-msgstr "זהו פריט צף המספק מצפן."
+msgstr "זה פריט צף שמספק מצפן."
 
 #: src/plugins/render/compass/CompassFloatItem.cpp:137
 msgctxt "Marble::CompassFloatItem|"
@@ -13271,10 +13262,9 @@ msgid "Maximum number of results:"
 msgstr ""
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:39
-#, fuzzy
 msgctxt "EarthquakeConfigWidget|"
 msgid "Minimum magnitude:"
-msgstr "קו &רוחב"
+msgstr "עוצמה מזערית:"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:59
 msgctxt "EarthquakeConfigWidget|"
@@ -13307,10 +13297,9 @@ msgid "Date:"
 msgstr "תאריך:"
 
 #: src/plugins/render/earthquake/EarthquakeItem.cpp:130
-#, fuzzy
 msgctxt "Marble::EarthquakeItem|"
 msgid "Magnitude:"
-msgstr "קו &רוחב"
+msgstr "עוצמה:"
 
 #: src/plugins/render/earthquake/EarthquakeItem.cpp:131
 msgctxt "Marble::EarthquakeItem|"
@@ -13498,10 +13487,9 @@ msgid "Type"
 msgstr "סוג"
 
 #: src/plugins/render/eclipses/EclipsesModel.cpp:175
-#, fuzzy
 msgctxt "Marble::EclipsesModel|"
 msgid "Magnitude"
-msgstr "קו &רוחב"
+msgstr "עוצמה"
 
 #: src/plugins/render/eclipses/EclipsesPlugin.cpp:94
 msgctxt "Marble::EclipsesPlugin|"

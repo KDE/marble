@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2025-08-06 11:34+0200\n"
+"PO-Revision-Date: 2025-08-15 23:34+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -2623,7 +2623,7 @@ msgstr "Gehitu laster-marka"
 #: src/apps/marble-qt/QtMainWindow.cpp:395
 msgctxt "Marble::MainWindow|"
 msgid "&Set Home Location"
-msgstr "E&zarri etxe-kokapena"
+msgstr "E&zarri Etxeko kokapena"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:398
 msgctxt "Marble::MainWindow|"
@@ -2728,7 +2728,7 @@ msgstr "&Laguntza"
 #: src/apps/marble-qt/QtMainWindow.cpp:594
 msgctxt "Marble::MainWindow|"
 msgid "&Home"
-msgstr "&Hasiera"
+msgstr "&Etxea"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:602
 msgctxt "Marble::MainWindow|"
@@ -9410,6 +9410,18 @@ msgid ""
 "Climate Research 21.<a href=\"https://crudata.uea.ac.uk/cru/data/hrg"
 "\">https://crudata.uea.ac.uk/cru/data/hrg</a></li></ul></p>"
 msgstr ""
+"<p><i>Tenperatura eta prezipitazio mapak (uztaila eta abendua)</i><br /> Bi "
+"datu-multzoren konbinazioa:<ul><li>Legates, D.R. and Willmott, C.J. 1989. "
+"Gainazaleko airearen tenperatura eta prezipitazioaren hileroko "
+"batezbestekoa. Raster datu digitalak 0,5 graduko 361x721 sareta geografiko "
+"(lat/long) batean (0,5 graduko meridianoetan erregistratutako zentroidea). "
+"Boulder, Colorado: Ikerketa Atmosferikorako Zentro Nazionala. <a href="
+"\"http://www.ngdc.noaa.gov/ecosys/cdroms/ged_iia/datasets/a04/lw.htm"
+"\">http://www.ngdc.noaa.gov/ecosys/cdroms/ged_iia/datasets/a04/lw.htm</a></"
+"li><li>CRU CL 2.0: New, M., Lister, D., Hulme, M. eta Makin, I., 2002: "
+"Lurrazalera globaletako gainazaleko klimaren bereizmen handiko datu-multzoa. "
+"Climate Research 21. <a href=\"https://crudata.uea.ac.uk/cru/data/hrg"
+"\">https://crudata.uea.ac.uk/cru/data/hrg</a></li></ul></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:284
 msgctxt "QObject|"
@@ -9473,6 +9485,13 @@ msgid ""
 "\"https://wiki.openstreetmap.org/index.php/OpenStreetMap_License\">Creative "
 "Commons Attribution-ShareAlike 2.0 license</a>.</p>"
 msgstr ""
+"<p><i>OpenRouteService</i><br />Marblen zama-jaitsiera bidez erabilitako "
+"ibilbide batzuk <a href=\"https://maps.openrouteservice.org\"> "
+"OpenRouteService</a> Proiektuak (\"OSR\") eskaintzen ditu.<br /"
+"><i>Lizentzia</i>: OpenRouteService datuak askatasunez erabil daitezke <a "
+"href=\"https://wiki.openstreetmap.org/index.php/OpenStreetMap_License"
+"\">Creative Commons Attribution-ShareAlike 2.0 lizentziaren</a> baldintzen "
+"arabera.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:306
 msgctxt "QObject|"
@@ -9484,6 +9503,13 @@ msgid ""
 "href=\"https://wiki.openstreetmap.org/index.php/OpenStreetMap_License"
 "\">Creative Commons Attribution-ShareAlike 2.0 license</a>.</p>"
 msgstr ""
+"<p><i>Open Source Routing Machine</i><br />Marblen zama-jaitsiera bidez "
+"erabilitako ibilbideetako batzuk <a href=\"http://project-osrm.org\">Open "
+"Source Routing Machine</a>proiektuak (\"OSRM\") eskaintzen ditu.<br /"
+"><i>Lizentzia</i>: Open Source Routing Machine datuak askatasunez erabil "
+"daitezke <a href=\"https://wiki.openstreetmap.org/index.php/"
+"OpenStreetMap_License\">Creative Commons Attribution-ShareAlike 2.0 "
+"lizentziaren</a> baldintzen arabera.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:312
 msgctxt "QObject|"
@@ -9497,6 +9523,15 @@ msgid ""
 "MapQuest routing service is subject to the <a href=\"https://info.mapquest."
 "com/terms-of-use/\">MapQuest terms of use</a>.</p>"
 msgstr ""
+"<p><i>MapQuest</i><br />Marblen zama-jaitsiera bidez erabilitako "
+"ibilbideetako batzuk <a href=\"https://www.mapquest.com/\">MapQuest</a> eta "
+"haien datu irekiko mapen APIek eta web-zerbitzuek eskaintzen dituzte.<br /"
+">Jarraibideak MapQuest-en eskutik, OpenStreetMap datuetan lanean, "
+"askatasunez erabil daitezke <a href=\"https://wiki.openstreetmap.org/index."
+"php/OpenStreetMap_License\">Creative Commons Attribution-ShareAlike 2.0 "
+"Lizentziaren</a> baldintzak jarraituz. MapQuest bideratze zerbitzuaren "
+"erabilera <a href=\"https://info.mapquest.com/terms-of-use/\">MapQuest "
+"erabilera baldintzen</a> menpe dago.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:319
 msgctxt "QObject|"
@@ -10125,7 +10160,7 @@ msgstr ""
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:159
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Show Home Location"
-msgstr "Erakutsi etxe kokalekua"
+msgstr "Erakutsi Etxea kokalekua"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:164
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -11516,7 +11551,7 @@ msgstr "Hautatu elementua:"
 #: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:29
 msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
 msgid "Current Route Position Provider Plugin"
-msgstr ""
+msgstr "Uneko ibilbidearen kokapen hornitzailearen plugina"
 
 #: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:39
 msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
@@ -11526,12 +11561,12 @@ msgstr "Uneko ibilbidea"
 #: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:49
 msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
 msgid "Simulates traveling along the current route."
-msgstr ""
+msgstr "Uneko ibilbidean zehar bidaiatzea simulatzen du."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:249
 msgctxt "QObject|"
 msgid "Enter the roundabout."
-msgstr "Sartu biribilgunea."
+msgstr "Sartu biribilgunean."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:257
 msgctxt "QObject|"
@@ -11547,13 +11582,13 @@ msgstr "Hartu %1(e)rako irteera."
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:263
 msgctxt "QObject|"
 msgid "Take the ramp."
-msgstr ""
+msgstr "Hartu arrapala."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:265
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the ramp towards %1."
-msgstr ""
+msgstr "Hartu %1 noranzko arrapala."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:321
 #, qt-format
@@ -11565,13 +11600,13 @@ msgstr "Jarraitu %1 %2 bideari."
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the %1. exit in the roundabout."
-msgstr "Hartu biribilguneko %1. irteera."
+msgstr "Biribilgunean hartu %1. irteera."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:377
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the %1. exit in the roundabout into %2."
-msgstr ""
+msgstr "Biribilgunean hartu %1. irteera %2 aldera."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:385
 msgctxt "QObject|"
@@ -11581,17 +11616,17 @@ msgstr "Jarraitu."
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:387
 msgctxt "QObject|"
 msgid "Merge."
-msgstr "Bateratu."
+msgstr "Sartu errepidean."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:389
 msgctxt "QObject|"
 msgid "Turn around."
-msgstr ""
+msgstr "Buelta eman."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:391
 msgctxt "QObject|"
 msgid "Turn sharp left."
-msgstr ""
+msgstr "Bira itxia ezkerrera."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:393
 msgctxt "QObject|"
@@ -11601,17 +11636,17 @@ msgstr "Biratu ezkerrera."
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:395
 msgctxt "QObject|"
 msgid "Keep slightly left."
-msgstr ""
+msgstr "Mantendu pixka bat ezkerrera."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:397
 msgctxt "QObject|"
 msgid "Go straight ahead."
-msgstr "Joan zuzen aurrera."
+msgstr "Jarraitu zuzen."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:399
 msgctxt "QObject|"
 msgid "Keep slightly right."
-msgstr ""
+msgstr "Mantendu pixka bat eskuinera."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:401
 msgctxt "QObject|"
@@ -11621,7 +11656,7 @@ msgstr "Biratu eskuinera."
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:403
 msgctxt "QObject|"
 msgid "Turn sharp right."
-msgstr ""
+msgstr "Bira itxia eskuinera."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:405
 msgctxt "QObject|"
@@ -11642,79 +11677,79 @@ msgstr "Hartu eskuineko irteera."
 #, qt-format
 msgctxt "QObject|"
 msgid "Continue onto %1."
-msgstr ""
+msgstr "Jarraitu %1 bidean."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:422
 #, qt-format
 msgctxt "QObject|"
 msgid "Merge onto %1."
-msgstr ""
+msgstr "Sartu %1 bidean."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:424
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn around onto %1."
-msgstr ""
+msgstr "Biratu %1(e)ra."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:426
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn sharp left on %1."
-msgstr ""
+msgstr "Bira itxia ezkerrera %1(e)an."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:428
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn left into %1."
-msgstr ""
+msgstr "Biratu ezkerrera %1(e)ra."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:430
 #, qt-format
 msgctxt "QObject|"
 msgid "Keep slightly left on %1."
-msgstr ""
+msgstr "Mantendu pixka bat ezkerrera %1(e)an."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:432
 #, qt-format
 msgctxt "QObject|"
 msgid "Continue on %1."
-msgstr ""
+msgstr "Jarraitu %1(e)an."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:434
 #, qt-format
 msgctxt "QObject|"
 msgid "Keep slightly right on %1."
-msgstr ""
+msgstr "Mantendu pixka bat eskuinean %1(e)an."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:436
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn right into %1."
-msgstr ""
+msgstr "Biratu eskuinera %1(e)ra."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:438
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn sharp right into %1."
-msgstr ""
+msgstr "Bira itxia eskuinera %1(e)an."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:440
 #, qt-format
 msgctxt "QObject|"
 msgid "Exit the roundabout into %2."
-msgstr ""
+msgstr "Irten biribilgunetik %2(e)ra."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:448
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the exit to the left onto %1."
-msgstr ""
+msgstr "Hartu ezkerreko irteera %1(e)ra."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:450
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the exit to the right onto %1."
-msgstr ""
+msgstr "Hartu eskuineko irteera %1(e)ra."
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:114
 #, qt-format
@@ -11729,32 +11764,29 @@ msgid "%2, %3"
 msgstr "%2, %3"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:135
-#, fuzzy
 msgctxt "QObject|"
 msgid "Address or search term..."
-msgstr "Helbidea edo bilatzeko terminoa"
+msgstr "Helbidea edo bilaketa-terminoa..."
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:166
 msgctxt "QObject|"
 msgid "Remove via point"
-msgstr ""
+msgstr "Kendu bide-puntua"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:183
-#, fuzzy
 msgctxt "QObject|"
 msgid "&Center Map here"
 msgstr "Er&diratu mapa hemen"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:186
-#, fuzzy
 msgctxt "QObject|"
 msgid "Current &Location"
-msgstr "Uneko kokalekua"
+msgstr "Uneko &kokalekua"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:189
 msgctxt "QObject|"
 msgid "From &Map..."
-msgstr ""
+msgstr "&Mapatik..."
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:193
 msgctxt "QObject|"
@@ -11762,13 +11794,11 @@ msgid "From &Bookmark"
 msgstr "&Laster-markatik"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:202
-#, fuzzy
 msgctxt "QObject|"
 msgid "&Home"
-msgstr "&Hasiera"
+msgstr "&Etxea"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:307
-#, fuzzy
 msgctxt "Marble::RoutingInputWidget|"
 msgid "Current Location"
 msgstr "Uneko kokalekua"
@@ -11776,35 +11806,32 @@ msgstr "Uneko kokalekua"
 #: src/lib/marble/routing/RoutingInputWidget.cpp:481
 msgctxt "Marble::RoutingInputWidget|"
 msgid "Choose Placemark"
-msgstr ""
+msgstr "Hautatu leku-marka"
 
 #: src/lib/marble/routing/RoutingLayer.cpp:187
 msgctxt "QObject|"
 msgid "&Remove this Destination"
-msgstr ""
+msgstr "&Kendu helmuga hau"
 
 #: src/lib/marble/routing/RoutingLayer.cpp:190
-#, fuzzy
-#| msgctxt "Marble::MainWindow|"
-#| msgid "&Export Map..."
 msgctxt "QObject|"
 msgid "&Export Route..."
-msgstr "&Esportatu mapa..."
+msgstr "&Esportatu ibilbidea..."
 
 #: src/lib/marble/routing/RoutingLayer.cpp:754
 msgctxt "Marble::RoutingLayer|"
 msgid "Export Route"
-msgstr ""
+msgstr "Esportatu ibilbidea"
 
 #: src/lib/marble/routing/RoutingLayer.cpp:756
 msgctxt "Marble::RoutingLayer|"
 msgid "GPX and KML files (*.gpx *.kml)"
-msgstr ""
+msgstr "GPX eta KML fitxategiak (*.gpx *.kml)"
 
 #: src/lib/marble/routing/RoutingManager.cpp:508
 msgctxt "Marble::RoutingManager|"
 msgid "Caution: Driving instructions may be incomplete or wrong."
-msgstr ""
+msgstr "Kontuz: Gidatzeko argibideak osatu gabe edo oker egon daitezke."
 
 #: src/lib/marble/routing/RoutingManager.cpp:509
 msgctxt "Marble::RoutingManager|"
@@ -11818,19 +11845,16 @@ msgstr ""
 "izatea eragin dezakete."
 
 #: src/lib/marble/routing/RoutingManager.cpp:511
-#, fuzzy
 msgctxt "Marble::RoutingManager|"
 msgid "Please use common sense while navigating."
-msgstr "Mesedez, erabili sen ona nabigatzen duzun bitartean."
+msgstr "Mesedez, sen ona erabili nabigatzen duzun bitartean."
 
 #: src/lib/marble/routing/RoutingManager.cpp:512
-#, fuzzy
 msgctxt "Marble::RoutingManager|"
 msgid "The Marble development team wishes you a pleasant and safe journey."
-msgstr "Marble-ren garapen taldeak bidai atsegin eta segurua opa dizu."
+msgstr "Marble(r)en garapen taldeak bidaia atsegin eta segurua opa dizu."
 
 #: src/lib/marble/routing/RoutingManager.cpp:513
-#, fuzzy
 msgctxt "Marble::RoutingManager|"
 msgid "Guidance Mode"
 msgstr "Gidatzeko modua"
@@ -11838,12 +11862,12 @@ msgstr "Gidatzeko modua"
 #: src/lib/marble/routing/RoutingManager.cpp:514
 msgctxt "Marble::RoutingManager|"
 msgid "Show again"
-msgstr ""
+msgstr "Erakutsi berriz"
 
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:14
 msgctxt "RoutingProfileSettingsDialog|"
 msgid "Configure Routing Profile"
-msgstr ""
+msgstr "Konfiguratu ibilbide profila"
 
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:25
 msgctxt "RoutingProfileSettingsDialog|"
@@ -12473,12 +12497,12 @@ msgstr "Eguneratu elementuak"
 #: src/lib/marble/TourItemDelegate.cpp:403
 msgctxt "QObject|"
 msgid "Add Placemark to Tour"
-msgstr ""
+msgstr "Gehitu leku-marka bidaiara"
 
 #: src/lib/marble/TourItemDelegate.cpp:405
 msgctxt "QObject|"
 msgid "Change Placemark in Tour"
-msgstr ""
+msgstr "Aldatu leku-marka bidaian"
 
 #: src/lib/marble/TourWidget.cpp:136 src/lib/marble/TourWidget.cpp:141
 msgctxt "QObject|"
@@ -12758,12 +12782,14 @@ msgstr ""
 #: src/plugins/positionprovider/wlocate/WlocatePositionProviderPlugin.cpp:80
 msgctxt "Marble::WlocatePositionProviderPlugin|"
 msgid "WLAN (Open WLAN Map)"
-msgstr ""
+msgstr "WLAN (Open WLAN Map)"
 
 #: src/plugins/positionprovider/wlocate/WlocatePositionProviderPlugin.cpp:90
 msgctxt "Marble::WlocatePositionProviderPlugin|"
 msgid "Reports the current position based on nearby WLAN access points"
 msgstr ""
+"Inguruko WLAN sarbide puntuetan oinarritutako uneko kokapenaren berri ematen "
+"du"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:125
 msgctxt "Marble::AnnotatePlugin|"
@@ -12778,7 +12804,7 @@ msgstr "&Idatzoharra"
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:140
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Draws annotations on maps with placemarks or polygons."
-msgstr ""
+msgstr "Mapatan idatzoharrak marrazten ditu leku-markekin edo poligonoekin."
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:183
 msgctxt "Marble::AnnotatePlugin|"
@@ -12880,7 +12906,7 @@ msgstr "Gehitu poligonoa"
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:869
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Polygon Hole"
-msgstr ""
+msgstr "Gehitu poligono-zuloa"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:874
 msgctxt "Marble::AnnotatePlugin|"
@@ -13015,15 +13041,14 @@ msgstr "Zama-jaitsi"
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:114
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:119
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:125
-#, fuzzy
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "ERROR"
-msgstr "Errorea"
+msgstr "ERROREA"
 
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:69
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "Unable to create temporary file to download OSM data to."
-msgstr ""
+msgstr "Ezin du OSM datuak zama-jaisteko aldi baterako fitxategia sortu."
 
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:114
 msgctxt "Marble::DownloadOsmDialog|"
@@ -13031,11 +13056,13 @@ msgid ""
 "The selected region contains too much data. Please select a smaller region "
 "and try again."
 msgstr ""
+"Hautatutako eremuak datu gehiegi ditu. Mesedez, hautatu eremu txikiagoa eta "
+"berriz saiatu."
 
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:119
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "The bandwidth limit exceeded. Please try again later."
-msgstr ""
+msgstr "Banda-zabalera muga gainditu da. Mesedez, berriz beranduago saiatu."
 
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:126
 msgctxt "Marble::DownloadOsmDialog|"
@@ -13043,9 +13070,10 @@ msgid ""
 "Sorry, a network error occurred. Please check your internet connection or "
 "try again later."
 msgstr ""
+"Barkatu, sareko errore bat gertatu da. Mesedez, egiaztatu zure interneterako "
+"konexioa edo berriz beranduago saiatu."
 
 #: src/plugins/render/annotate/DownloadOsmDialog.ui:14
-#, fuzzy
 msgctxt "DownloadOsmDialog|"
 msgid "Dialog"
 msgstr "Elkarrizketa-koadroa"
@@ -13136,7 +13164,6 @@ msgid "Untitled Polygon"
 msgstr "Izenik gabeko poligonoa"
 
 #: src/plugins/render/annotate/EditPolygonDialog.cpp:271
-#, fuzzy
 msgctxt "Marble::EditPolygonDialog|"
 msgid "No name specified"
 msgstr "Ez da izenik zehaztu"
@@ -13144,7 +13171,7 @@ msgstr "Ez da izenik zehaztu"
 #: src/plugins/render/annotate/EditPolygonDialog.cpp:271
 msgctxt "Marble::EditPolygonDialog|"
 msgid "Please specify a name for this polygon."
-msgstr ""
+msgstr "Mesedez zehatu poligono honetarako izen bat."
 
 #: src/plugins/render/annotate/EditPolygonDialog.cpp:276
 msgctxt "Marble::EditPolygonDialog|"
@@ -13351,10 +13378,9 @@ msgstr "Informazioa Interneteko APRS datu sorburuetatik bildu behar dira?"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:97
 msgctxt "AprsConfigWidget|"
 msgid "Collect data from an APRS Internet server"
-msgstr ""
+msgstr "Bildu datuak Interneteko APRS zerbitzari batetik"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:115
-#, fuzzy
 msgctxt "AprsConfigWidget|"
 msgid "Server"
 msgstr "Zerbitzaria"
@@ -13362,10 +13388,9 @@ msgstr "Zerbitzaria"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:122
 msgctxt "AprsConfigWidget|"
 msgid "rotate.aprs.net"
-msgstr ""
+msgstr "rotate.aprs.net"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:139
-#, fuzzy
 msgctxt "AprsConfigWidget|"
 msgid "Port"
 msgstr "Ataka"
@@ -13373,15 +13398,14 @@ msgstr "Ataka"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:146
 msgctxt "AprsConfigWidget|"
 msgid "10253"
-msgstr ""
+msgstr "10253"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:155
 msgctxt "AprsConfigWidget|"
 msgid "Dump TCP/IP records to the debug stream"
-msgstr ""
+msgstr "TCP/IP erregistroak arazketa-jariora bota"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:166
-#, fuzzy
 msgctxt "AprsConfigWidget|"
 msgid "Device"
 msgstr "Gailua"
@@ -13389,38 +13413,36 @@ msgstr "Gailua"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:178
 msgctxt "AprsConfigWidget|"
 msgid "TNC Terminal Port"
-msgstr ""
+msgstr "TNC terminalaren ataka"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:184
 msgctxt "AprsConfigWidget|"
 msgid "Should information be gathered from a serial port?"
-msgstr ""
+msgstr "Informazioa serieko ataka batetik bildu beharko litzateke?"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:187
 msgctxt "AprsConfigWidget|"
 msgid "Collect data from a serial TNC (In Text Mode)"
-msgstr ""
+msgstr "Bildu datua serieko TNC batetik (testu moduan)"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:202
-#, fuzzy
 msgctxt "AprsConfigWidget|"
 msgid "TTY"
-msgstr "tty"
+msgstr "TTY"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:209
 msgctxt "AprsConfigWidget|"
 msgid "/dev/ttyUSB0"
-msgstr ""
+msgstr "/dev/ttyUSB0"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:218
 msgctxt "AprsConfigWidget|"
 msgid "Dump TTY records to the debug stream"
-msgstr ""
+msgstr "TTY erregistroak arazketa-jariora bota"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:229
 #: src/plugins/render/aprs/AprsConfigWidget.ui:235
 #: src/plugins/render/aprs/AprsConfigWidget.ui:259
-#, fuzzy
 msgctxt "AprsConfigWidget|"
 msgid "File"
 msgstr "Fitxategia"
@@ -13428,17 +13450,17 @@ msgstr "Fitxategia"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:241
 msgctxt "AprsConfigWidget|"
 msgid "Should information be gathered from a file?"
-msgstr ""
+msgstr "Informazioa fitxategi batetik bildu beharko litzateke?"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:244
 msgctxt "AprsConfigWidget|"
 msgid "Collect data from a file"
-msgstr ""
+msgstr "Bildu datuak fitxategi batetik"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:275
 msgctxt "AprsConfigWidget|"
 msgid "Dump file records to the debug stream"
-msgstr ""
+msgstr "Fitxategi-erregistroak arazketa-jariora bota"
 
 #: src/plugins/render/aprs/AprsPlugin.cpp:116
 msgctxt "Marble::AprsPlugin|"
@@ -13461,80 +13483,71 @@ msgstr ""
 "bat da."
 
 #: src/plugins/render/atmosphere/AtmospherePlugin.cpp:59
-#, fuzzy
 msgctxt "Marble::AtmospherePlugin|"
 msgid "Atmosphere"
-msgstr "atmosfera %1"
+msgstr "Atmosfera"
 
 #: src/plugins/render/atmosphere/AtmospherePlugin.cpp:64
-#, fuzzy
 msgctxt "Marble::AtmospherePlugin|"
 msgid "&Atmosphere"
-msgstr "atmosfera %1"
+msgstr "&Atmosfera"
 
 #: src/plugins/render/atmosphere/AtmospherePlugin.cpp:79
 msgctxt "Marble::AtmospherePlugin|"
 msgid "Shows the atmosphere around the earth."
-msgstr ""
+msgstr "Lurraren inguruko atmosfera erakusten du."
 
 #: src/plugins/render/compass/CompassConfigWidget.ui:14
 msgctxt "CompassConfigWidget|"
 msgid "Configure Compass Plugin"
-msgstr ""
+msgstr "Konfiguratu iparrorratz plugina"
 
 #: src/plugins/render/compass/CompassConfigWidget.ui:20
-#, fuzzy
 msgctxt "CompassConfigWidget|"
 msgid "Theme"
 msgstr "Gaia"
 
 #: src/plugins/render/compass/CompassConfigWidget.ui:43
-#, fuzzy
 msgctxt "CompassConfigWidget|"
 msgid "Default"
 msgstr "Lehenetsia"
 
 #: src/plugins/render/compass/CompassConfigWidget.ui:52
-#, fuzzy
 msgctxt "CompassConfigWidget|"
 msgid "Arrows"
 msgstr "Geziak"
 
 #: src/plugins/render/compass/CompassConfigWidget.ui:61
-#, fuzzy
 msgctxt "CompassConfigWidget|"
 msgid "Atom"
 msgstr "Atomoa"
 
 #: src/plugins/render/compass/CompassConfigWidget.ui:70
-#, fuzzy
 msgctxt "CompassConfigWidget|"
 msgid "Magnet"
-msgstr "imana"
+msgstr "Imana"
 
 #: src/plugins/render/compass/CompassFloatItem.cpp:57
 msgctxt "Marble::CompassFloatItem|"
 msgid "Compass"
-msgstr ""
+msgstr "Iparrorratza"
 
 #: src/plugins/render/compass/CompassFloatItem.cpp:62
 msgctxt "Marble::CompassFloatItem|"
 msgid "&Compass"
-msgstr ""
+msgstr "&Iparrorratza"
 
 #: src/plugins/render/compass/CompassFloatItem.cpp:77
 msgctxt "Marble::CompassFloatItem|"
 msgid "This is a float item that provides a compass."
-msgstr ""
+msgstr "Hau iparrorratz bat eskaintzen duen elementu higikor bat da."
 
 #: src/plugins/render/compass/CompassFloatItem.cpp:137
-#, fuzzy
 msgctxt "Marble::CompassFloatItem|"
 msgid "N"
 msgstr "I"
 
 #: src/plugins/render/compass/CompassFloatItem.cpp:138
-#, fuzzy
 msgctxt "Marble::CompassFloatItem|"
 msgid "S"
 msgstr "H"
@@ -13545,13 +13558,11 @@ msgid "Configure Crosshairs Plugin"
 msgstr ""
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:20
-#, fuzzy
 msgctxt "CrosshairsConfigWidget|"
 msgid "Theme"
 msgstr "Gaia"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:43
-#, fuzzy
 msgctxt "CrosshairsConfigWidget|"
 msgid "Default"
 msgstr "Lehenetsia"
@@ -13597,7 +13608,7 @@ msgstr ""
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:14
 msgctxt "EarthquakeConfigWidget|"
 msgid "Configure Earthquakes Plugin"
-msgstr ""
+msgstr "Konfiguratu Lurrikaren plugina"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:20
 msgctxt "EarthquakeConfigWidget|"
@@ -13607,56 +13618,49 @@ msgstr "Iragazkia"
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:29
 msgctxt "EarthquakeConfigWidget|"
 msgid "Maximum number of results:"
-msgstr ""
+msgstr "Emaitza kopurua gehienez:"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:39
 msgctxt "EarthquakeConfigWidget|"
 msgid "Minimum magnitude:"
-msgstr ""
+msgstr "Gutxieneko magnitudea:"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:59
 msgctxt "EarthquakeConfigWidget|"
 msgid "Time Range"
-msgstr ""
+msgstr "Denbora barrutia"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:65
-#, fuzzy
 msgctxt "EarthquakeConfigWidget|"
 msgid "Past"
 msgstr "Iragana"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:78
-#, fuzzy
 msgctxt "EarthquakeConfigWidget|"
 msgid "From"
-msgstr "Nork"
+msgstr "Nondik"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:107
-#, fuzzy
 msgctxt "EarthquakeConfigWidget|"
 msgid "days"
 msgstr "egun"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:150
-#, fuzzy
 msgctxt "EarthquakeConfigWidget|"
 msgid "to"
-msgstr "Nori:"
+msgstr "nora"
 
 #: src/plugins/render/earthquake/EarthquakeItem.cpp:127
-#, fuzzy
 msgctxt "Marble::EarthquakeItem|"
 msgid "Date:"
 msgstr "Data:"
 
 #: src/plugins/render/earthquake/EarthquakeItem.cpp:130
-#, fuzzy
 msgctxt "Marble::EarthquakeItem|"
 msgid "Magnitude:"
-msgstr "Magnitudea"
+msgstr "Magnitudea:"
 
 #: src/plugins/render/earthquake/EarthquakeItem.cpp:131
-#, fuzzy
 msgctxt "Marble::EarthquakeItem|"
 msgid "Depth:"
 msgstr "Sakonera:"
@@ -13664,27 +13668,27 @@ msgstr "Sakonera:"
 #: src/plugins/render/earthquake/EarthquakePlugin.cpp:55
 msgctxt "Marble::EarthquakePlugin|"
 msgid "Earthquakes"
-msgstr ""
+msgstr "Lurrikarak"
 
 #: src/plugins/render/earthquake/EarthquakePlugin.cpp:60
 msgctxt "Marble::EarthquakePlugin|"
 msgid "&Earthquakes"
-msgstr ""
+msgstr "&Lurrikarak"
 
 #: src/plugins/render/earthquake/EarthquakePlugin.cpp:75
 msgctxt "Marble::EarthquakePlugin|"
 msgid "Shows earthquakes on the map."
-msgstr ""
+msgstr "Lurrikarak mapan erakusten ditu."
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:14
 msgctxt "EclipsesBrowserDialog|"
 msgid "Eclipse Browser"
-msgstr ""
+msgstr "Eklipse arakatzailea"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:35
 msgctxt "EclipsesBrowserDialog|"
 msgid "Show eclipses for year:"
-msgstr ""
+msgstr "Erakutsi urteko eklipseak:"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
 msgctxt "EclipsesBrowserDialog|"
@@ -13719,12 +13723,12 @@ msgstr "Ikuspegi au&kerak"
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:45
 msgctxt "EclipsesConfigDialog|"
 msgid "Enable &Lunar Eclipses"
-msgstr ""
+msgstr "Gaitu i&largi eklipseak"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:55
 msgctxt "EclipsesConfigDialog|"
 msgid "Show Eclipse Control &Widget"
-msgstr ""
+msgstr "Erakutsi Eklipse aginte &trepeta"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:65
 msgctxt "EclipsesConfigDialog|"
@@ -17557,7 +17561,7 @@ msgstr "Zerbitzu honek Interneteko konexio bat behar du."
 msgctxt "Marble::OSRMPlugin|"
 msgid "Open Source Routing Machine (OSRM) Routing"
 msgstr ""
-"OSRM (Open Source Routing Machine / Sorburu irekiko bideratze makina) "
+"Open Source Routing Machine (OSRM, Sorburu irekiko bideratze makina) "
 "bideratzea"
 
 #: src/plugins/runner/open-source-routing-machine/OSRMPlugin.cpp:27
