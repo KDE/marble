@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2025-08-15 23:34+0200\n"
+"PO-Revision-Date: 2025-08-17 02:20+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -1783,7 +1783,7 @@ msgid ""
 "p>"
 msgstr ""
 "<p>Lurra espaziotik ikusten den bezala.</p><p>Mapa NASAren \"Blue Marble "
-"Next Generation\" (Puxtarri urdina hurrengo belaunaldia) irudi ederrean "
+"Next Generation\" (Puxtarri urdinaren hurrengo belaunaldia) irudi ederretan "
 "oinarrituta dago. Kreditua: NASAren Lurraren behatokia</p>"
 
 #. file data/maps/earth/bluemarble/bluemarble.dgml:252
@@ -11216,7 +11216,7 @@ msgstr "Kokapena:"
 #: src/lib/marble/PlacemarkPositionProviderPlugin.cpp:32
 msgctxt "Marble::PlacemarkPositionProviderPlugin|"
 msgid "Placemark position provider Plugin"
-msgstr "Leku-marka kokalekua hornitzeko plugina"
+msgstr "Placemark kokapen hornitzailearen plugina"
 
 #: src/lib/marble/PlacemarkPositionProviderPlugin.cpp:42
 msgctxt "Marble::PlacemarkPositionProviderPlugin|"
@@ -11877,22 +11877,22 @@ msgstr "Izena:"
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:41
 msgctxt "RoutingProfileSettingsDialog|"
 msgid "Active Route Services"
-msgstr ""
+msgstr "Ibilbideen zerbitzu aktiboak"
 
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:65
 msgctxt "RoutingProfileSettingsDialog|"
 msgid "Service Settings"
-msgstr ""
+msgstr "Zerbitzuaren ezarpenak"
 
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:117
 msgctxt "RoutingProfileSettingsDialog|"
 msgid "No configuration available"
-msgstr ""
+msgstr "Ez dago konfiguraziorik erabilgarri"
 
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:128
 msgctxt "RoutingProfileSettingsDialog|"
 msgid "Select Service to Configure"
-msgstr ""
+msgstr "Hautatu konfiguratu beharreko zerbitzua"
 
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:142
 msgctxt "RoutingProfileSettingsDialog|"
@@ -11935,18 +11935,14 @@ msgid "New Profile"
 msgstr "Profil berria"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
-#, fuzzy
 msgctxt "RoutingSettingsWidget|"
 msgid "&Add…"
-msgstr "&Gehitu..."
+msgstr "&Gehitu…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
-#, fuzzy
-#| msgctxt "RoutingSettingsWidget|"
-#| msgid "&Configure"
 msgctxt "RoutingSettingsWidget|"
 msgid "&Configure…"
-msgstr "Konfiguratu"
+msgstr "&Konfiguratu…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 msgctxt "RoutingSettingsWidget|"
@@ -11966,12 +11962,12 @@ msgstr "Eraman &behera"
 #: src/lib/marble/routing/RoutingWidget.cpp:189
 msgctxt "QObject|"
 msgid "Get Directions"
-msgstr ""
+msgstr "Lortu jarraibideak"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:190
 msgctxt "QObject|"
 msgid "Retrieve routing instructions for the selected destinations."
-msgstr ""
+msgstr "Hautatutako helmugen ibilbide-argibideak eskuratu."
 
 #: src/lib/marble/routing/RoutingWidget.cpp:200
 msgctxt "QObject|"
@@ -12013,7 +12009,7 @@ msgstr "Kudeatu hodeiko ibilbideak"
 #: src/lib/marble/routing/RoutingWidget.cpp:249
 msgctxt "QObject|"
 msgid "Add Via"
-msgstr ""
+msgstr "Gehitu Galtzada"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:254
 msgctxt "QObject|"
@@ -12158,7 +12154,7 @@ msgstr "Bilaketa globala"
 #: src/lib/marble/SearchInputWidget.cpp:96
 msgctxt "Marble::SearchInputWidget|"
 msgid "Area Search"
-msgstr ""
+msgstr "Eremuan bilatzea"
 
 #: src/lib/marble/SearchWidget.cpp:57
 msgctxt "QObject|"
@@ -12172,12 +12168,9 @@ msgid "Search for '%1'"
 msgstr "Bilatu «%1»"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:37
-#, fuzzy
-#| msgctxt "Marble::ControlView|"
-#| msgid "Location"
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Audio location"
-msgstr "Kokalekua"
+msgstr "Audioaren kokapena"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:67
 msgctxt "Marble::SoundCueEditWidget|"
@@ -12190,21 +12183,19 @@ msgid "Supported Sound Files (*.mp3 *.ogg *.wav)"
 msgstr "Onartutako soinu fitxategiak (*.mp3 *.ogg *.wav)"
 
 #: src/lib/marble/SunControlWidget.ui:20
-#, fuzzy
 msgctxt "SunControlWidget|"
 msgid "Sun Control"
-msgstr "Eg&uzkiaren kontrola..."
+msgstr "Eguzkiaren agintea"
 
 #: src/lib/marble/SunControlWidget.ui:26
 msgctxt "SunControlWidget|"
 msgid "S&un Shading"
-msgstr ""
+msgstr "Eg&uzkiaren itzala"
 
 #: src/lib/marble/SunControlWidget.ui:41
-#, fuzzy
 msgctxt "SunControlWidget|"
 msgid "Sha&dow"
-msgstr "Itz&ala"
+msgstr "It&zala"
 
 #: src/lib/marble/SunControlWidget.ui:54
 msgctxt "SunControlWidget|"
@@ -12214,7 +12205,7 @@ msgstr "&Gaueko mapa"
 #: src/lib/marble/SunControlWidget.ui:64
 msgctxt "SunControlWidget|"
 msgid "Subsolar Point"
-msgstr ""
+msgstr "Eguzkiaren azpiko puntua"
 
 #: src/lib/marble/SunControlWidget.ui:88
 msgctxt "SunControlWidget|"
@@ -12222,6 +12213,8 @@ msgid ""
 "Display <a href=\"https://en.wikipedia.org/wiki/Subsolar_point\">Subsolar "
 "Point</a> icon"
 msgstr ""
+"<a href=\"https://en.wikipedia.org/wiki/Subsolar_point\">Eguzkiaren azpiko "
+"puntua</a>ren ikonoa azaldu"
 
 #: src/lib/marble/SunControlWidget.ui:131
 msgctxt "SunControlWidget|"
@@ -12229,6 +12222,8 @@ msgid ""
 "<b>Lock</b> map view to <a href=\"https://en.wikipedia.org/wiki/"
 "Subsolar_point\">Subsolar Point</a>."
 msgstr ""
+"<b>Giltzatu</b> maparen ikuspegia <a href=\"https://en.wikipedia.org/wiki/"
+"Subsolar_point\">Eguzkiaren azpiko puntura</a>."
 
 #: src/lib/marble/SunControlWidget.ui:205
 msgctxt "SunControlWidget|"
@@ -12248,6 +12243,21 @@ msgid ""
 "view to Subsolar Point&quot; option to allow for viewing a different place "
 "on the globe again.</p></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Adi: Maparen panorama mugitzea, orain, ezgaituta dago!</span></"
+"p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Kendu marka &quot;Giltzatu "
+"maparen ikuspegia Eguzkiaren azpiko puntura&quot; aukerari globoan berriz "
+"beste lekuak ikusteko aukera emateko.</p></body></html>"
 
 #: src/lib/marble/TileCreatorDialog.ui:20
 msgctxt "TileCreatorDialog|"
@@ -12267,6 +12277,16 @@ msgid ""
 "seen from Space. The map is based on NASA's beautiful \"Blue Marble Next "
 "Generation\" pictures. Credits: NASA's Earth Observatory</p></body></html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style=\" "
+"white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+"weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+"top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+"indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Satelite-"
+"ikuspegia</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Lurra "
+"espaziotik ikusten den bezala. Mapa NASAren \"Blue Marble Next Generation"
+"\" (Puxtarri urdinaren hurrengo belaunaldia) irudi ederretan oinarrituta "
+"dago. Kreditua: NASAren Lurraren behatokia</p></body></html>"
 
 #: src/lib/marble/TileCreatorDialog.ui:517
 msgctxt "TileCreatorDialog|"
@@ -12274,6 +12294,8 @@ msgid ""
 "Marble needs to create this map. This only needs to be done once and may "
 "take a few seconds."
 msgstr ""
+"Marblek mapa hau sortu beharra du. Hau behin bakarrik egin behar da eta "
+"segundo batzuk iraun dezake."
 
 #: src/lib/marble/TileLevelRangeWidget.ui:29
 msgctxt "TileLevelRangeWidget|"
@@ -12283,74 +12305,67 @@ msgstr "Zooma"
 #: src/lib/marble/TileLevelRangeWidget.ui:37
 msgctxt "TileLevelRangeWidget|"
 msgid "&Tile level range:"
-msgstr ""
+msgstr "&Lauzaren maila barrutia:"
 
 #: src/lib/marble/TileLevelRangeWidget.ui:47
 msgctxt "TileLevelRangeWidget|"
 msgid "Minimum Tile Level"
-msgstr ""
+msgstr "Lauzaren gutxieneko maila"
 
 #: src/lib/marble/TileLevelRangeWidget.ui:63
-#, fuzzy
 msgctxt "TileLevelRangeWidget|"
 msgid "to"
-msgstr "Nori:"
+msgstr "->"
 
 #: src/lib/marble/TileLevelRangeWidget.ui:70
 msgctxt "TileLevelRangeWidget|"
 msgid "Maximum Tile Level"
-msgstr ""
+msgstr "Lauzaren gehieneko maila"
 
 #: src/lib/marble/TimeControlWidget.ui:14
-#, fuzzy
 msgctxt "TimeControlWidget|"
 msgid "Time Control"
-msgstr "&Denboraren kontrola..."
+msgstr "Denboraren agintzea"
 
 #: src/lib/marble/TimeControlWidget.ui:20
-#, fuzzy
 msgctxt "TimeControlWidget|"
 msgid "Time"
-msgstr "Ordua"
+msgstr "Denbora"
 
 #: src/lib/marble/TimeControlWidget.ui:26
 msgctxt "TimeControlWidget|"
 msgid "&New date and time:"
-msgstr ""
+msgstr "Data eta ordu &berria:"
 
 #: src/lib/marble/TimeControlWidget.ui:36
-#, fuzzy
 msgctxt "TimeControlWidget|"
 msgid "Refresh &interval:"
-msgstr "Freskatzeko bitartea:"
+msgstr "Berritzeko b&itartea:"
 
 #: src/lib/marble/TimeControlWidget.ui:46
-#, fuzzy
 msgctxt "TimeControlWidget|"
 msgid " seconds"
 msgstr " segundo"
 
 #: src/lib/marble/TimeControlWidget.ui:65
-#, fuzzy
 msgctxt "TimeControlWidget|"
 msgid "Now"
 msgstr "Orain"
 
 #: src/lib/marble/TimeControlWidget.ui:123
-#, fuzzy
 msgctxt "TimeControlWidget|"
 msgid "Current &date and time:"
-msgstr "Uneko data eta ordua"
+msgstr "Uneko &data eta ordua:"
 
 #: src/lib/marble/TimeControlWidget.ui:136
 msgctxt "TimeControlWidget|"
 msgid "Time Speed"
-msgstr ""
+msgstr "Denboraren abiadura"
 
 #: src/lib/marble/TourCaptureDialog.cpp:58
 msgctxt "Marble::TourCaptureDialog|"
 msgid "Codecs are unavailable"
-msgstr ""
+msgstr "Kodekak erabilgarri daude"
 
 #: src/lib/marble/TourCaptureDialog.cpp:58
 msgctxt "Marble::TourCaptureDialog|"
@@ -12358,9 +12373,10 @@ msgid ""
 "Supported codecs are not found. (ffmpeg/avconv needs to be installed and in "
 "PATH.)"
 msgstr ""
+"Onartutako kodekak ez dira aurkitu. (ffmpeg/avconv instalatu beharra dago "
+"eta PATH-en egon behar da)"
 
 #: src/lib/marble/TourCaptureDialog.cpp:67
-#, fuzzy
 msgctxt "Marble::TourCaptureDialog|"
 msgid "Save video file"
 msgstr "Gorde bideo-fitxategia"
@@ -12368,24 +12384,22 @@ msgstr "Gorde bideo-fitxategia"
 #: src/lib/marble/TourCaptureDialog.cpp:87
 msgctxt "Marble::TourCaptureDialog|"
 msgid "Filename is not valid"
-msgstr ""
+msgstr "Fitxategi-izenak ez du balio"
 
 #: src/lib/marble/TourCaptureDialog.cpp:88
 #, qt-format
 msgctxt "Marble::TourCaptureDialog|"
 msgid "This file format is not supported. Please, use %1 instead"
-msgstr ""
+msgstr "Fitxategi-formatu hau ez da onartzen. Mesedez, horren ordez %1 erabili"
 
 #: src/lib/marble/TourCaptureDialog.cpp:100
 #: src/lib/marble/TourCaptureDialog.cpp:120
 #: src/lib/marble/TourCaptureDialog.cpp:155
-#, fuzzy
 msgctxt "Marble::TourCaptureDialog|"
 msgid "Start"
 msgstr "Hasi"
 
 #: src/lib/marble/TourCaptureDialog.cpp:101
-#, fuzzy
 msgctxt "Marble::TourCaptureDialog|"
 msgid "Cancel"
 msgstr "Utzi"
@@ -12393,7 +12407,7 @@ msgstr "Utzi"
 #: src/lib/marble/TourCaptureDialog.cpp:107
 msgctxt "Marble::TourCaptureDialog|"
 msgid "Missing filename"
-msgstr ""
+msgstr "Fitxategi-izena falta da"
 
 #: src/lib/marble/TourCaptureDialog.cpp:108
 msgctxt "Marble::TourCaptureDialog|"
@@ -12401,31 +12415,30 @@ msgid ""
 "Destination video file is not set. I don't know where to save recorded "
 "video. Please, specify one."
 msgstr ""
+"Helburuko bideo-fitxategia ez da ezarri. Ez dakit grabatutako bideoa non "
+"gorde. Mesedez, zehaztu."
 
 #: src/lib/marble/TourCaptureDialog.cpp:138
 msgctxt "Marble::TourCaptureDialog|"
 msgid "Video writing failed."
-msgstr ""
+msgstr "Bideoa idaztea huts egin du."
 
 #: src/lib/marble/TourCaptureDialog.cpp:156
 msgctxt "Marble::TourCaptureDialog|"
 msgid "Video export completed."
-msgstr ""
+msgstr "Bideoa esportatzea osatu da."
 
 #: src/lib/marble/TourCaptureDialog.ui:20
 msgctxt "TourCaptureDialog|"
 msgid "Movie Recording"
-msgstr ""
+msgstr "Filma grabatzea"
 
 #: src/lib/marble/TourCaptureDialog.ui:65
 msgctxt "TourCaptureDialog|"
 msgid "Destination video"
-msgstr ""
+msgstr "Helburuko bideoa"
 
 #: src/lib/marble/TourCaptureDialog.ui:81
-#, fuzzy
-#| msgctxt "Marble::RouteItemDelegate|"
-#| msgid "Open"
 msgctxt "TourCaptureDialog|"
 msgid "Open…"
 msgstr "Ireki…"
@@ -12458,18 +12471,18 @@ msgstr "Eten"
 #: src/lib/marble/TourItemDelegate.cpp:93
 msgctxt "Marble::TourItemDelegate|"
 msgid "Play the tour"
-msgstr ""
+msgstr "Jo bidaia"
 
 #: src/lib/marble/TourItemDelegate.cpp:95
 msgctxt "Marble::TourItemDelegate|"
 msgid "Pause the tour"
-msgstr ""
+msgstr "Etenaldia bidaian"
 
 #: src/lib/marble/TourItemDelegate.cpp:127
 #, qt-format
 msgctxt "Marble::TourItemDelegate|"
 msgid "Wait for %1 seconds"
-msgstr ""
+msgstr "Itxoin %1 segundoz"
 
 #: src/lib/marble/TourItemDelegate.cpp:171
 #, qt-format
@@ -12507,17 +12520,17 @@ msgstr "Aldatu leku-marka bidaian"
 #: src/lib/marble/TourWidget.cpp:136 src/lib/marble/TourWidget.cpp:141
 msgctxt "QObject|"
 msgid "Add FlyTo"
-msgstr ""
+msgstr "Gehitu hegaldia"
 
 #: src/lib/marble/TourWidget.cpp:143
 msgctxt "QObject|"
 msgid "Add Wait"
-msgstr ""
+msgstr "Gehitu itxaronaldia"
 
 #: src/lib/marble/TourWidget.cpp:145
 msgctxt "QObject|"
 msgid "Add SoundCue"
-msgstr ""
+msgstr "Gehitu soinu-seinalea"
 
 #: src/lib/marble/TourWidget.cpp:148
 msgctxt "QObject|"
@@ -12535,7 +12548,6 @@ msgid "Change placemark"
 msgstr "Aldatu leku-marka"
 
 #: src/lib/marble/TourWidget.cpp:154
-#, fuzzy
 msgctxt "QObject|"
 msgid "Loop"
 msgstr "Begizta"
@@ -12543,22 +12555,22 @@ msgstr "Begizta"
 #: src/lib/marble/TourWidget.cpp:329
 msgctxt "QObject|"
 msgid "Save tour"
-msgstr ""
+msgstr "Gorde bidaia"
 
 #: src/lib/marble/TourWidget.cpp:330
 msgctxt "QObject|"
 msgid "There are unsaved Tours. Do you want to save your changes?"
-msgstr ""
+msgstr "Gorde gabeko bidaiak daude. Zure aldaketak gorde nahi dituzu?"
 
 #: src/lib/marble/TourWidget.cpp:358
 msgctxt "QObject|"
 msgid "Open Tour"
-msgstr ""
+msgstr "Ireki bidaia"
 
 #: src/lib/marble/TourWidget.cpp:358 src/lib/marble/TourWidget.cpp:820
 msgctxt "QObject|"
 msgid "KML Tours (*.kml)"
-msgstr ""
+msgstr "KML bidaiak (*.kml)"
 
 #: src/lib/marble/TourWidget.cpp:536
 msgctxt "QObject|"
@@ -12573,7 +12585,7 @@ msgstr "Ziur zaude hautatutako elementuak kendu nahi dituzula?"
 #: src/lib/marble/TourWidget.cpp:820
 msgctxt "QObject|"
 msgid "Save Tour as"
-msgstr ""
+msgstr "Gorde bidaia honela"
 
 #: src/lib/marble/TourWidget.cpp:880
 msgctxt "QObject|"
@@ -12588,10 +12600,9 @@ msgstr ""
 "Ziur zaude aldaketa guztiak baztertu eta uneko dokumentua itxi nahi duzula?"
 
 #: src/lib/marble/TourWidget.ui:14
-#, fuzzy
 msgctxt "TourWidget|"
 msgid "Tour"
-msgstr "Bisitaldia"
+msgstr "Bidaia"
 
 #: src/lib/marble/TourWidget.ui:20 src/lib/marble/TourWidget.ui:45
 msgctxt "TourWidget|"
@@ -12621,25 +12632,24 @@ msgstr "Ezabatu"
 #: src/lib/marble/TourWidget.ui:123
 msgctxt "TourWidget|"
 msgid "New Tour"
-msgstr ""
+msgstr "Bidai berria"
 
 #: src/lib/marble/TourWidget.ui:135
 msgctxt "TourWidget|"
 msgid "Save Tour"
-msgstr ""
+msgstr "Gorde bidaia"
 
 #: src/lib/marble/TourWidget.ui:147
 msgctxt "TourWidget|"
 msgid "Save Tour As"
-msgstr ""
+msgstr "Gorde bidaia honela"
 
 #: src/lib/marble/TourWidget.ui:156
 msgctxt "TourWidget|"
 msgid "Open Tour"
-msgstr ""
+msgstr "Ireki bidaia"
 
 #: src/lib/marble/TourWidget.ui:168
-#, fuzzy
 msgctxt "TourWidget|"
 msgid "Play"
 msgstr "Jo"
@@ -12647,7 +12657,7 @@ msgstr "Jo"
 #: src/lib/marble/TourWidget.ui:171
 msgctxt "TourWidget|"
 msgid "Begins touring"
-msgstr ""
+msgstr "Bira hasten da"
 
 #: src/lib/marble/TourWidget.ui:180
 msgctxt "TourWidget|"
@@ -12657,22 +12667,22 @@ msgstr "Gelditu"
 #: src/lib/marble/TourWidget.ui:183
 msgctxt "TourWidget|"
 msgid "Stops touring (playing again will start tour from the start)"
-msgstr ""
+msgstr "Bira gelditzen du (berriz jotzea bidaia berriz hasieratik hasiko du)"
 
 #: src/lib/marble/TourWidget.ui:192
 msgctxt "TourWidget|"
 msgid "Record tour"
-msgstr ""
+msgstr "Grabatu bidaia"
 
 #: src/lib/marble/TourWidget.ui:195
 msgctxt "TourWidget|"
 msgid "Converts the loaded tour into a movie"
-msgstr ""
+msgstr "Zamatutako bidaia pelikula bihurtzen du"
 
 #: src/lib/marble/WaitEditWidget.cpp:36
 msgctxt "Marble::WaitEditWidget|"
 msgid "Wait duration:"
-msgstr ""
+msgstr "Itxaronaldiaren iraupena:"
 
 #: src/lib/marble/WaitEditWidget.cpp:41
 msgctxt "Marble::WaitEditWidget|seconds"
@@ -12682,102 +12692,105 @@ msgstr " s"
 #: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:27
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
 msgid "FlightGear position provider Plugin"
-msgstr ""
+msgstr "FlightGear kokapen hornitzailearen plugina"
 
 #: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:37
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
 msgid "FlightGear"
-msgstr ""
+msgstr "FlightGear"
 
 #: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:47
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
 msgid "Reports the position of running flightgear application."
 msgstr ""
+"Exekutatzen ari den flightgear aplikazioaren kokapenaren berri ematen du."
 
 #: src/plugins/positionprovider/geoclue/GeoCluePositionProviderPlugin.cpp:14
 msgctxt "Marble::GeoCluePositionProviderPlugin|"
 msgid "GeoClue position provider Plugin"
-msgstr ""
+msgstr "GeoClue kokapen hornitzailearen plugina"
 
 #: src/plugins/positionprovider/geoclue/GeoCluePositionProviderPlugin.cpp:24
 msgctxt "Marble::GeoCluePositionProviderPlugin|"
 msgid "GeoClue"
-msgstr ""
+msgstr "GeoClue"
 
 #: src/plugins/positionprovider/geoclue/GeoCluePositionProviderPlugin.cpp:29
 msgctxt "Marble::GeoCluePositionProviderPlugin|"
 msgid "Reports the position via the GeoClue Location Framework."
-msgstr ""
+msgstr "Kokapena GeoClue Location Framework-aren bidez jakinarazten du."
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:66
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (cannot get service entry)"
-msgstr ""
+msgstr "Gpsd barneko errorea (ezin du zerbitzuaren sarrera lortu)"
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:69
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (cannot get host entry)"
-msgstr ""
+msgstr "Gpsd barneko errorea (ezin du ostalariaren sarrera lortu)"
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:72
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (cannot get protocol entry)"
-msgstr ""
+msgstr "Gpsd barneko errorea (ezin du protokoloaren sarrera lortu)"
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:75
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (unable to create socket)"
-msgstr ""
+msgstr "Gpsd barneko errorea (ez da hargunea sortzeko gai)"
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:78
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (unable to set socket option)"
-msgstr ""
+msgstr "Gpsd barneko errorea (ez da hartune-aukera ezartzeko gai)"
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:81
 msgctxt "Marble::GpsdConnection|"
 msgid "No GPS device found by gpsd."
-msgstr ""
+msgstr "Gpsd(e)k ez du GPS gailurik aurkitu."
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:84
 msgctxt "Marble::GpsdConnection|"
 msgid "Unknown error when opening gpsd connection"
-msgstr ""
+msgstr "Errore ezezaguna gpsd konexioa irekitzean"
 
 #: src/plugins/positionprovider/gpsd/GpsdPositionProviderPlugin.cpp:20
 msgctxt "Marble::GpsdPositionProviderPlugin|"
 msgid "Gpsd position provider Plugin"
-msgstr ""
+msgstr "Gpsd kokapen hornitzailearen plugina"
 
 #: src/plugins/positionprovider/gpsd/GpsdPositionProviderPlugin.cpp:30
 msgctxt "Marble::GpsdPositionProviderPlugin|"
 msgid "gpsd"
-msgstr ""
+msgstr "gpsd"
 
 #: src/plugins/positionprovider/gpsd/GpsdPositionProviderPlugin.cpp:40
 msgctxt "Marble::GpsdPositionProviderPlugin|"
 msgid "Reports the position of a GPS device."
-msgstr ""
+msgstr "GPS gailuaren kokapenaren berri ematen du."
 
 #: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:48
 msgctxt "Marble::QtPositioningPositionProviderPlugin|"
 msgid "Qt Positioning Position Provider Plugin"
-msgstr ""
+msgstr "Qt Positioning kokapen hornitzailearen plugina"
 
 #: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:58
 msgctxt "Marble::QtPositioningPositionProviderPlugin|"
 msgid "Qt Positioning Location"
-msgstr ""
+msgstr "Qt Positioning(e)n kokapena"
 
 #: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:68
 msgctxt "Marble::QtPositioningPositionProviderPlugin|"
 msgid "Reports the GPS position of a QtPositioning compatible device."
 msgstr ""
+"QtPositioning(e)kin bateragarria den gailuaren GPS kokapenaren berri ematen "
+"du."
 
 #: src/plugins/positionprovider/wlocate/WlocatePositionProviderPlugin.cpp:70
 msgctxt "Marble::WlocatePositionProviderPlugin|"
 msgid "Wlocate Position Provider Plugin"
-msgstr ""
+msgstr "Wlocate kokapen hornitzailearen plugina"
 
 #: src/plugins/positionprovider/wlocate/WlocatePositionProviderPlugin.cpp:80
 msgctxt "Marble::WlocatePositionProviderPlugin|"
@@ -13555,7 +13568,7 @@ msgstr "H"
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:14
 msgctxt "CrosshairsConfigWidget|"
 msgid "Configure Crosshairs Plugin"
-msgstr ""
+msgstr "Konfiguratu Crosshairs plugina"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:20
 msgctxt "CrosshairsConfigWidget|"
@@ -13570,40 +13583,37 @@ msgstr "Lehenetsia"
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:52
 msgctxt "CrosshairsConfigWidget|"
 msgid "Gun 1"
-msgstr ""
+msgstr "Arma 1"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:61
 msgctxt "CrosshairsConfigWidget|"
 msgid "Gun 2"
-msgstr ""
+msgstr "Arma 2"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:70
 msgctxt "CrosshairsConfigWidget|"
 msgid "Circled"
-msgstr ""
+msgstr "Zirkuluduna"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:79
-#, fuzzy
 msgctxt "CrosshairsConfigWidget|"
 msgid "German"
-msgstr "Alemana"
+msgstr "Alemaniarra"
 
 #: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:71
-#, fuzzy
 msgctxt "Marble::CrosshairsPlugin|"
 msgid "Crosshairs"
-msgstr "Gurutzabidea"
+msgstr "Gurutze marka"
 
 #: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:76
-#, fuzzy
 msgctxt "Marble::CrosshairsPlugin|"
 msgid "Cross&hairs"
-msgstr "Gurutzabidea"
+msgstr "Gurutze &marka"
 
 #: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:91
 msgctxt "Marble::CrosshairsPlugin|"
 msgid "A plugin that shows crosshairs."
-msgstr ""
+msgstr "Gurutze marka erakusten duen plugin bat."
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:14
 msgctxt "EarthquakeConfigWidget|"
@@ -13728,52 +13738,52 @@ msgstr "Gaitu i&largi eklipseak"
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:55
 msgctxt "EclipsesConfigDialog|"
 msgid "Show Eclipse Control &Widget"
-msgstr "Erakutsi Eklipse aginte &trepeta"
+msgstr "Erakutsi Eklipsearen aginte &trepeta"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:65
 msgctxt "EclipsesConfigDialog|"
 msgid "&Eclipse Elements"
-msgstr "&Eklipse elementuak"
+msgstr "&Eklipsearen elementuak"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:74
 msgctxt "EclipsesConfigDialog|"
 msgid "&Northern Penumbra"
-msgstr ""
+msgstr "&Iparraldeko Penunbra"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:84
 msgctxt "EclipsesConfigDialog|"
 msgid "&Umbra"
-msgstr ""
+msgstr "&Unbra"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:94
 msgctxt "EclipsesConfigDialog|"
 msgid "Position of Eclipse &Maximum"
-msgstr ""
+msgstr "Eklipse &maximoaren posizioa"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:104
 msgctxt "EclipsesConfigDialog|"
 msgid "Central &Line"
-msgstr ""
+msgstr "Erdiko &lerroa"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:114
 msgctxt "EclipsesConfigDialog|"
 msgid "Full &Penumbra"
-msgstr ""
+msgstr "&Penunbra osoa"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:124
 msgctxt "EclipsesConfigDialog|"
 msgid "Sunrise and Sunset &Boundaries"
-msgstr ""
+msgstr "Egunsenti eta ilunabarreko &mugak"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:134
 msgctxt "EclipsesConfigDialog|"
 msgid "&Southern Penumbra"
-msgstr ""
+msgstr "&Hegoaldeko Penunbra"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:144
 msgctxt "EclipsesConfigDialog|"
 msgid "Penumbra with 60% Ma&gnitude"
-msgstr ""
+msgstr "% 60ko ma&gnitudeko penunbra"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:171
 msgctxt "EclipsesConfigDialog|"
@@ -13783,7 +13793,7 @@ msgstr "O&roigarria"
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:177
 msgctxt "EclipsesConfigDialog|"
 msgid "Remind about eclipse events"
-msgstr ""
+msgstr "Eklipse-gertaerei buruz gogoraraztea"
 
 #: src/plugins/render/eclipses/EclipsesItem.cpp:78
 msgctxt "Marble::EclipsesItem|"
@@ -13793,42 +13803,42 @@ msgstr "Ilargia, Osoa"
 #: src/plugins/render/eclipses/EclipsesItem.cpp:80
 msgctxt "Marble::EclipsesItem|"
 msgid "Moon, Partial"
-msgstr ""
+msgstr "Ilargia, partziala"
 
 #: src/plugins/render/eclipses/EclipsesItem.cpp:82
 msgctxt "Marble::EclipsesItem|"
 msgid "Moon, Penumbral"
-msgstr ""
+msgstr "Ilargia, penunbrala"
 
 #: src/plugins/render/eclipses/EclipsesItem.cpp:84
 msgctxt "Marble::EclipsesItem|"
 msgid "Sun, Partial"
-msgstr ""
+msgstr "Eguzkia, partziala"
 
 #: src/plugins/render/eclipses/EclipsesItem.cpp:86
 msgctxt "Marble::EclipsesItem|"
 msgid "Sun, non-central, Annular"
-msgstr ""
+msgstr "Eguzkia, ez-zentrala, eraztun-itxurakoa"
 
 #: src/plugins/render/eclipses/EclipsesItem.cpp:88
 msgctxt "Marble::EclipsesItem|"
 msgid "Sun, non-central, Total"
-msgstr ""
+msgstr "Eguzkia, ez-zentrala, osoa"
 
 #: src/plugins/render/eclipses/EclipsesItem.cpp:90
 msgctxt "Marble::EclipsesItem|"
 msgid "Sun, Annular"
-msgstr ""
+msgstr "Eguzkia, eraztun-itxurakoa"
 
 #: src/plugins/render/eclipses/EclipsesItem.cpp:92
 msgctxt "Marble::EclipsesItem|"
 msgid "Sun, Total"
-msgstr "Eguzkia, Osoa"
+msgstr "Eguzkia, osoa"
 
 #: src/plugins/render/eclipses/EclipsesItem.cpp:94
 msgctxt "Marble::EclipsesItem|"
 msgid "Sun, Annular/Total"
-msgstr ""
+msgstr "Eguzkia, eraztun-itxurakoa/osoa"
 
 #: src/plugins/render/eclipses/EclipsesModel.cpp:169
 msgctxt "Marble::EclipsesModel|"
@@ -13863,7 +13873,7 @@ msgstr "E&klipseak"
 #: src/plugins/render/eclipses/EclipsesPlugin.cpp:114
 msgctxt "Marble::EclipsesPlugin|"
 msgid "This plugin visualizes solar eclipses."
-msgstr ""
+msgstr "Plugin honek eguzki eklipseak bistaratzen ditu."
 
 #: src/plugins/render/eclipses/EclipsesPlugin.cpp:187
 msgctxt "Marble::EclipsesPlugin|"
@@ -13873,18 +13883,18 @@ msgstr "Arakatu ekli&pseak..."
 #: src/plugins/render/eclipses/EclipsesPlugin.cpp:329
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Maximum of Eclipse"
-msgstr ""
+msgstr "Eklipsearen maximoa"
 
 #: src/plugins/render/eclipses/EclipsesPlugin.cpp:411
 #, qt-format
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Eclipses in %1"
-msgstr ""
+msgstr "Eklipsea %1(e)an"
 
 #: src/plugins/render/eclipses/EclipsesReminderDialog.ui:14
 msgctxt "EclipsesReminderDialog|"
 msgid "Eclipse Event"
-msgstr ""
+msgstr "Eklipse gertaera"
 
 #: src/plugins/render/eclipses/EclipsesReminderDialog.ui:20
 msgctxt "EclipsesReminderDialog|"
@@ -13894,11 +13904,15 @@ msgid ""
 "you want more information on a specific event, select it and click OK.</p></"
 "body></html>"
 msgstr ""
+"<html><head/><body><p>Marblek etorkizun hurbilean ondoko <span style=\" font-"
+"weight:600;\">eklipse gertaerak</span> izango direla antzeman du. Gertaera "
+"jakin batean informazio zehatzagoa nahi baduzu, hura hautu eta Ados gainean "
+"klik egin.</p></body></html>"
 
 #: src/plugins/render/eclipses/EclipsesReminderDialog.ui:33
 msgctxt "EclipsesReminderDialog|"
 msgid "Do not remind me about eclipse events again"
-msgstr ""
+msgstr "Ez iezadazu berriz eklipse gertaerei buru gogorarazi"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileConfigWidget.ui:14
 msgctxt "ElevationProfileConfigWidget|"
@@ -13908,7 +13922,7 @@ msgstr "Konfiguratu elebazio profilaren plugina"
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileConfigWidget.ui:20
 msgctxt "ElevationProfileConfigWidget|"
 msgid "Zoom to viewport"
-msgstr ""
+msgstr "Zoom ikus-eremura"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:29
 msgctxt "Marble::ElevationProfileContextMenu|"
@@ -13918,7 +13932,7 @@ msgstr "&Konfiguratu..."
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:35
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Zoom to viewport"
-msgstr ""
+msgstr "&Zoom ikus-eremura"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:65
 msgctxt "Marble::ElevationProfileContextMenu|"
@@ -13951,6 +13965,7 @@ msgstr "&Elebazio profila"
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "A float item that shows the elevation profile of the current route."
 msgstr ""
+"Uneko ibilbidearen elebazio-profila erakusten duen elementu higikor bat."
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:191
 msgctxt "Marble::ElevationProfileFloatItem|"
@@ -13965,6 +13980,8 @@ msgid ""
 "Not enough points in the current viewport.\n"
 "Try to disable 'Zoom to viewport'."
 msgstr ""
+"Uneko ikus-eremuan ez dago puntu nahikorik.\n"
+"Saiatu 'Zoom ikus-eremura' ezgaitzen."
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:281
 #, qt-format
@@ -14000,17 +14017,17 @@ msgstr "nm"
 #: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:65
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "Elevation Profile Marker"
-msgstr ""
+msgstr "Elebazio-profilaren markatzailea"
 
 #: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:70
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "&Elevation Profile Marker"
-msgstr ""
+msgstr "&Elebazio-profilaren markatzailea"
 
 #: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:85
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "Marks the current elevation of the elevation profile on the map."
-msgstr ""
+msgstr "Mapan, elebazio-profilaren uneko elebazioa markatzen du."
 
 #: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:134
 msgctxt "Marble::ElevationProfileMarker|"
@@ -14039,10 +14056,9 @@ msgid "A list of currently opened files"
 msgstr "Irekita dauden fitxategien zerrenda."
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:201
-#, fuzzy
 msgctxt "Marble::FileViewFloatItem|"
 msgid "Open file..."
-msgstr "Ireki fitxategia"
+msgstr "Ireki fitxategia..."
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:202
 msgctxt "Marble::FileViewFloatItem|"
@@ -14076,7 +14092,7 @@ msgstr "&Lekuak"
 #: src/plugins/render/foursquare/FoursquarePlugin.cpp:56
 msgctxt "Marble::FoursquarePlugin|"
 msgid "Displays trending Foursquare places"
-msgstr ""
+msgstr "Foursquare-n joera diren lekuak azaltzen ditu"
 
 #: src/plugins/render/gpsinfo/GpsInfo.cpp:41
 msgctxt "Marble::GpsInfo|"
@@ -14191,12 +14207,12 @@ msgstr "Etiketak"
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1398
 msgctxt "GraticuleConfigWidget|"
 msgid "&Named Labels"
-msgstr ""
+msgstr "Ize&ndatutako etiketak"
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1408
 msgctxt "GraticuleConfigWidget|"
 msgid "Show Labels for Prime meridian, Equator, Tropics."
-msgstr ""
+msgstr "Erakutsi lehen meridianoaren, ekuatorearen eta tropikoen etiketak."
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1415
 msgctxt "GraticuleConfigWidget|"
@@ -14246,12 +14262,12 @@ msgstr "Ekuatorea"
 #: src/plugins/render/graticule/GraticulePlugin.cpp:298
 msgctxt "Marble::GraticulePlugin|"
 msgid "Prime Meridian"
-msgstr ""
+msgstr "Lehen meridianoa"
 
 #: src/plugins/render/graticule/GraticulePlugin.cpp:299
 msgctxt "Marble::GraticulePlugin|"
 msgid "Antimeridian"
-msgstr ""
+msgstr "Antimeridianoa"
 
 #: src/plugins/render/graticule/GraticulePlugin.cpp:365
 msgctxt "Marble::GraticulePlugin|"
@@ -14287,6 +14303,8 @@ msgstr "&Lizentzia"
 msgctxt "Marble::License|"
 msgid "This is a float item that provides copyright information."
 msgstr ""
+"Hau, egile-eskubideei (copyright) buruzko informazioa ematen duen elementu "
+"higikor bat da."
 
 #: src/plugins/render/license/License.cpp:229
 msgctxt "Marble::License|"
@@ -14301,12 +14319,12 @@ msgstr "&Erakutsi xehetasunak"
 #: src/plugins/render/mapscale/MapScaleConfigWidget.ui:14
 msgctxt "MapScaleConfigWidget|"
 msgid "Configure Scale Bar Plugin"
-msgstr ""
+msgstr "Konfiguratu Eskala-barra plugina"
 
 #: src/plugins/render/mapscale/MapScaleConfigWidget.ui:20
 msgctxt "MapScaleConfigWidget|"
 msgid "Show Ratio Scale"
-msgstr ""
+msgstr "Erakutsi eskala-erlazioa"
 
 #: src/plugins/render/mapscale/MapScaleConfigWidget.ui:30
 msgctxt "MapScaleConfigWidget|"
@@ -14321,17 +14339,17 @@ msgstr "Ikonotu"
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:65
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "Scale Bar"
-msgstr ""
+msgstr "Eskala-barra"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:70
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Scale Bar"
-msgstr ""
+msgstr "E&skala-barra"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:85
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "This is a float item that provides a map scale."
-msgstr ""
+msgstr "Hau, aaparen eskala ematen duen elementu higikor bat da."
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:95
 msgctxt "Marble::MapScaleFloatItem|"
@@ -14367,7 +14385,7 @@ msgstr "&Konfiguratu..."
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:355
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Ratio Scale"
-msgstr ""
+msgstr "Eskala-e&rlazioa"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:14
 msgctxt "MeasureConfigDialog|"
@@ -14404,12 +14422,12 @@ msgstr "Distantzia"
 #: src/plugins/render/measure/MeasureConfigDialog.ui:70
 msgctxt "MeasureConfigDialog|"
 msgid "Bearing"
-msgstr ""
+msgstr "Norabidea (azimuta)"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:80
 msgctxt "MeasureConfigDialog|"
 msgid "Bearing Change"
-msgstr ""
+msgstr "Norabide (azimut) aldaketa"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:90
 msgctxt "MeasureConfigDialog|"
@@ -14527,17 +14545,17 @@ msgstr "Zirkunferentzia: %1<br/>\n"
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:617
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Add &Measure Point"
-msgstr ""
+msgstr "Gehitu &neurketa puntua"
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:618
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Remove &Last Measure Point"
-msgstr ""
+msgstr "Kendu a&zken neurketa puntua"
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:620
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "&Remove Measure Points"
-msgstr ""
+msgstr "&Kendu neurketa puntuak"
 
 #: src/plugins/render/navigation/navigation.ui:14
 msgctxt "Navigation|"
@@ -14557,7 +14575,7 @@ msgstr "&Nabigatzea"
 #: src/plugins/render/navigation/NavigationFloatItem.cpp:80
 msgctxt "Marble::NavigationFloatItem|"
 msgid "A mouse control to zoom and move the map"
-msgstr ""
+msgstr "Saguaren aginte bat, mapa handitzeko eta mugitzeko"
 
 #: src/plugins/render/navigation/NavigationFloatItem.cpp:233
 msgctxt "Marble::NavigationFloatItem|"
@@ -14577,12 +14595,12 @@ msgstr "anonimoa"
 #: src/plugins/render/notes/NotesPlugin.cpp:34
 msgctxt "Marble::NotesPlugin|"
 msgid "OSM Mapper Notes"
-msgstr ""
+msgstr "OSM mapagileen oharrak"
 
 #: src/plugins/render/notes/NotesPlugin.cpp:64
 msgctxt "Marble::NotesPlugin|"
 msgid "Display OpenStreetMap Mapper Notes."
-msgstr ""
+msgstr "Azaldu OpenStreetMap mapagileen oharrak."
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:14
 msgctxt "OpenCachingCacheDialog|"
@@ -14752,22 +14770,22 @@ msgstr "<tr><td align=\"right\">Neurria</td><td>"
 #: src/plugins/render/opencaching/OpenCachingPlugin.cpp:23
 msgctxt "Marble::OpenCachingPlugin|"
 msgid "Cache positions by opencaching.de."
-msgstr ""
+msgstr "opencaching.de-ren cache kokapenak."
 
 #: src/plugins/render/opencaching/OpenCachingPlugin.cpp:46
 msgctxt "Marble::OpenCachingPlugin|"
 msgid "OpenCaching"
-msgstr ""
+msgstr "OpenCaching"
 
 #: src/plugins/render/opencaching/OpenCachingPlugin.cpp:51
 msgctxt "Marble::OpenCachingPlugin|"
 msgid "&OpenCaching"
-msgstr ""
+msgstr "&OpenCaching"
 
 #: src/plugins/render/opencaching/OpenCachingPlugin.cpp:56
 msgctxt "Marble::OpenCachingPlugin|"
 msgid "Shows caches from OpenCaching.de on the screen."
-msgstr ""
+msgstr "OpenCaching.de-ko cacheak pantailan erakusten ditu."
 
 #: src/plugins/render/opendesktop/OpenDesktopConfigWidget.ui:14
 msgctxt "OpenDesktopConfigWidget|"
@@ -15126,7 +15144,7 @@ msgstr "Gidatzeko modua abiatzen, itxoin mesedez..."
 #: src/plugins/render/routing/RoutingPlugin.cpp:289
 msgctxt "QObject|"
 msgid "Calculate a route to get directions."
-msgstr "Kalkulatu ibilbide bat norabideak lortzeko."
+msgstr "Kalkulatu ibilbide bat jarraibideak lortzeko."
 
 #: src/plugins/render/routing/RoutingPlugin.cpp:292
 msgctxt "QObject|"
@@ -15413,7 +15431,7 @@ msgstr "…"
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
 msgctxt "SatellitesConfigDialog|"
 msgid "(Built-in Data Sources for Earth Satellites)"
-msgstr ""
+msgstr "(Lurreko sateliteetarako datu-sorburu barneratuak)"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:232
 msgctxt "SatellitesConfigDialog|"
@@ -15495,6 +15513,10 @@ msgid ""
 "orbital elements from <ul><li><a href=\"https://ssd.jpl.nasa.gov/?horizons"
 "\">JPL Horizons</a></li></ul>"
 msgstr ""
+"Lurreko sateliteen orbita-elementuak <ul><li><a href=\"https://www.celestrak."
+"com\">https://www.celestrak.com</a>etik</li></ul>Planeta-sateliteen orbita-"
+"elementuak <ul><li><a href=\"https://ssd.jpl.nasa.gov/?horizons\">JPL "
+"Horizons</a>etik</li></ul>"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:417
 msgctxt "Marble::SatellitesPlugin|"
@@ -15657,13 +15679,14 @@ msgstr "Galileo"
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:506
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)"
-msgstr ""
+msgstr "Satelite bidezko gehitze-sistema (WAAS/EGNOS/MSAS)"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:509
-#, fuzzy
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Navy Navigation Satellite System (NNSS)"
-msgstr "Navy Navigation Satellite System (NNSS)"
+msgstr ""
+"Itsas armadako nabigazio satelite sistema (NNSS - Navy Navigation Satellite "
+"System)"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:512
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
@@ -15698,10 +15721,9 @@ msgstr "Hezkuntza"
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:529
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Miscellaneous Satellites"
-msgstr ""
+msgstr "Askotariko sateliteak"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:531
-#, fuzzy
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Miscellaneous Military"
 msgstr "Askotariko militarra"
@@ -15712,7 +15734,6 @@ msgid "Radar Calibration"
 msgstr "Radarraren kalibrazioa"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:537
-#, fuzzy
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "CubeSats"
 msgstr "CubeSats"
@@ -15730,7 +15751,7 @@ msgstr "&Abiadura-neurgailua"
 #: src/plugins/render/speedometer/Speedometer.cpp:69
 msgctxt "Marble::Speedometer|"
 msgid "Display the current cruising speed."
-msgstr ""
+msgstr "Azaldu uneko gurutzaldi-abiadura."
 
 #: src/plugins/render/speedometer/Speedometer.cpp:120
 msgctxt "Marble::Speedometer|"
@@ -16020,6 +16041,9 @@ msgid ""
 "Supported by <a href=\"https://www.bbc.co.uk/blogs/bbcbackstage\" target="
 "\"_BLANK\">backstage.bbc.co.uk</a>.<br>Weather data from UK MET Office"
 msgstr ""
+"<a href=\"https://www.bbc.co.uk/blogs/bbcbackstage\" target=\"_BLANK"
+"\">backstage.bbc.co.uk</a>ren babesarekin.<br>Eguraldi-datuak UK MET Office-"
+"tik"
 
 #: src/plugins/render/weather/GeoNamesWeatherItem.cpp:30
 msgctxt "Marble::GeoNamesWeatherItem|"
@@ -16027,6 +16051,8 @@ msgid ""
 "Supported by <a href=\"https://www.geonames.org/export/JSON-webservices.html"
 "\" target=\"_BLANK\">geonames.org</a>"
 msgstr ""
+"<a href=\"https://www.geonames.org/export/JSON-webservices.html\" target="
+"\"_BLANK\">geonames.org</a>en babesarekin."
 
 #: src/plugins/render/weather/StationListParser.cpp:42
 msgctxt "QObject|"
@@ -16055,6 +16081,14 @@ msgid ""
 "Marble will only show the condition if this information is available.</p></"
 "body></html>\n"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
+"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
+"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Hemen eguraldiaren egoera "
+"erakutsi nahi duzun ala ez aukera dezakezu (hodeiak edo zeru garbia "
+"adibidez). Marblek egoera erakutsiko du, soilik, informazioa hori "
+"erabilgarri badago.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:33
 msgctxt "WeatherConfigWidget|"
@@ -16072,6 +16106,13 @@ msgid ""
 "temperature to be shown. The temperature will only be shown for the stations "
 "it is available for.</p></body></html>\n"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
+"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
+"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Tenperatura erakustea nahi "
+"duzun aukeratzen du. Tenperatura eskuragarri dagoen estazioetarako bakarrik "
+"erakutsiko da.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:44
 #: src/plugins/render/weather/WeatherConfigWidget.ui:84
@@ -16090,6 +16131,13 @@ msgid ""
 "wind direction to be shown. The wind direction will only be shown if it is "
 "available for the particular station.</p></body></html>\n"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
+"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
+"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Aukeratu haizearen "
+"noranzkoa erakustea nahi duzun. Haizearen noranzkoa estazio jakin "
+"horretarako eskuragarri badago bakarrik erakutsiko da.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:55
 msgctxt "WeatherConfigWidget|"
@@ -16107,6 +16155,13 @@ msgid ""
 "wind speed to be shown. The wind speed will only be shown if it is available "
 "for the particular station.</p></body></html>\n"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
+"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
+"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Aukeratu haizearen "
+"abiadura erakustea nahi duzun. Haizearen abiadura estazio jakin horretarako "
+"erabilgarri badago bakarrik erakutsiko da.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:66
 #: src/plugins/render/weather/WeatherConfigWidget.ui:113
@@ -16631,6 +16686,8 @@ msgid ""
 "Supported by backstage.bbc.co.uk.\n"
 "Weather data from UK MET Office"
 msgstr ""
+"backstage.bbc.co.uk-en babesa.\n"
+"Eguraldi datuak UK MET Offfice-tik"
 
 #: src/plugins/render/wikipedia/GeonamesParser.cpp:36
 msgctxt "QObject|"
@@ -16913,7 +16970,7 @@ msgstr "Koordenatu geografikoak zuzeneko sarrera"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:65
 msgctxt "QObject|"
 msgid "pois"
-msgstr ""
+msgstr "interesguneak"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:67
 msgctxt "QObject|"
