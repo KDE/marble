@@ -4,6 +4,7 @@
             "application/geo+json"
         ],
         "Name": "GeoJSON Geographic Data",
+        "Name[bg]": "Географски данни – GeoJSON",
         "Name[ca@valencia]": "Dades geogràfiques GeoJSON",
         "Name[ca]": "Dades geogràfiques GeoJSON",
         "Name[es]": "Datos geográficos GeoJSON",

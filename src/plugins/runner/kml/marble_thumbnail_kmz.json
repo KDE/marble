@@ -4,6 +4,7 @@
             "application/vnd.google-earth.kmz"
         ],
         "Name": "KML Geographic Compressed Data",
+        "Name[bg]": "Географски данни – KML, компресирани",
         "Name[ca@valencia]": "Dades geogràfiques comprimides KML",
         "Name[ca]": "Dades geogràfiques comprimides KML",
         "Name[es]": "Datos geográficos comprimidos KML",

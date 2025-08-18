@@ -4,6 +4,7 @@
             "application/vnd.google-earth.kml+xml"
         ],
         "Name": "KML Geographic Data",
+        "Name[bg]": "Географски данни – KML",
         "Name[ca@valencia]": "Dades geogràfiques KML",
         "Name[ca]": "Dades geogràfiques KML",
         "Name[es]": "Datos geográficos KML",
