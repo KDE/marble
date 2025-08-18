@@ -16671,7 +16671,7 @@ msgstr "نوع الطريق:"
 #: src/plugins/runner/cyclestreets/CycleStreetsConfigWidget.ui:30
 msgctxt "CycleStreetsConfigWidget|"
 msgid "Speed:"
-msgstr "السّرعة:"
+msgstr "السرعة:"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:36
 msgctxt "Marble::CycleStreetsConfigWidget|"
