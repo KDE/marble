@@ -4,6 +4,7 @@
             "application/gpx+xml"
         ],
         "Name": "GPX Geographic Data",
+        "Name[ar]": "بيانات جغرافية GPX",
         "Name[bg]": "Географски данни – GPX",
         "Name[ca@valencia]": "Dades geogràfiques GPX",
         "Name[ca]": "Dades geogràfiques GPX",

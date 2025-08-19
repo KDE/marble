@@ -4,6 +4,7 @@
             "application/x-esri-shape"
         ],
         "Name": "ESRI Shapefile",
+        "Name[ar]": "شيب فايل ESRI",
         "Name[bg]": "Файл с форми ESRI",
         "Name[ca@valencia]": "Fitxers de formes ESRI",
         "Name[ca]": "Fitxers de formes ESRI",

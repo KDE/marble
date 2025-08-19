@@ -4,6 +4,7 @@
             "application/x-osm+xml"
         ],
         "Name": "OSM Data",
+        "Name[ar]": "بيانات OSM",
         "Name[bg]": "Данни OSM",
         "Name[ca@valencia]": "Dades OSM",
         "Name[ca]": "Dades OSM",
