@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2025-08-14 13:26+0400\n"
+"PO-Revision-Date: 2025-08-20 22:00+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -3172,7 +3172,7 @@ msgstr "حرّر"
 #: src/lib/marble/CacheStoragePolicy.cpp:31
 msgctxt "QObject|"
 msgid "Unable to insert data into cache"
-msgstr "غير قادر على إدراج البيانات في ذاكرة التخزين المؤقت"
+msgstr "غير قادر على إدراج البيانات في الخبيئة"
 
 #: src/lib/marble/CelestialSortFilterProxyModel.cpp:31
 #: src/lib/marble/CelestialSortFilterProxyModel.cpp:32
@@ -13325,7 +13325,7 @@ msgstr "اجمع البيانات من خادم إنترنت APRS"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:115
 msgctxt "AprsConfigWidget|"
 msgid "Server"
-msgstr "الخادوم"
+msgstr "الخادم"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:122
 msgctxt "AprsConfigWidget|"
