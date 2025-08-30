@@ -10,14 +10,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2025-08-15 16:14+0300\n"
+"PO-Revision-Date: 2025-08-28 20:17+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 25.08.0\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
 "X-Qt-Contexts: true\n"
@@ -6493,10 +6493,9 @@ msgid "Theatre"
 msgstr "תיאטרון"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:736
-#, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Theme Park"
-msgstr "ער&כת נושא"
+msgstr "פארק שעשועים"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:738
 msgctxt "GeoDataPlacemark|"
@@ -6885,10 +6884,9 @@ msgid "Miniature Railway"
 msgstr ""
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:894
-#, fuzzy
 msgctxt "GeoDataPlacemark|"
 msgid "Railway Construction"
-msgstr "שם חלופי"
+msgstr "מסילת רכבת בבנייה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:896
 msgctxt "GeoDataPlacemark|"
@@ -11209,10 +11207,9 @@ msgid "Current Route Position Provider Plugin"
 msgstr "תוסף GeoData"
 
 #: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:39
-#, fuzzy
 msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
 msgid "Current Route"
-msgstr "ייצא מפה"
+msgstr "מסלול נוכחי"
 
 #: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:49
 msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
@@ -12574,10 +12571,9 @@ msgid "Add Path"
 msgstr "הוספת נתיב"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:885
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Ground Overlay"
-msgstr "ה&סר נקודות מדידה"
+msgstr "הוספת שכבת על לקרקע"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:888
 msgctxt "Marble::AnnotatePlugin|"
@@ -12640,10 +12636,9 @@ msgid "Properties"
 msgstr "מאפיינים"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1138
-#, fuzzy
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Untitled Ground Overlay"
-msgstr "ה&סר נקודות מדידה"
+msgstr "שכבת קרקע ללא שם"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1228
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1470
@@ -12756,10 +12751,9 @@ msgid "Please specify a valid path for the image file."
 msgstr "נא לציין נתיב תקף לקובץ התמונה."
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.ui:14
-#, fuzzy
 msgctxt "UiEditGroundOverlayDialog|"
 msgid "Edit ground overlay"
-msgstr "ה&סר נקודות מדידה"
+msgstr "עריכת שכבת על לקרקע"
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.ui:27
 msgctxt "UiEditGroundOverlayDialog|"
@@ -15393,10 +15387,9 @@ msgid "Celestial Objects"
 msgstr ""
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:30
-#, fuzzy
 msgctxt "StarsConfigWidget|"
 msgid "Star Magnitude Limit"
-msgstr "קו &רוחב"
+msgstr "מגבלת עוצמת כוכב"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:58
 msgctxt "StarsConfigWidget|"
