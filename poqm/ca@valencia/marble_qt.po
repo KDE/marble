@@ -3474,8 +3474,8 @@ msgctxt ""
 "on map."
 msgid "Select the method to use to re-center your GPS location on map."
 msgstr ""
-"Seleccioneu el mètode que s'utilitzarà per a tornar a centrar la posició del "
-"GPS en el mapa."
+"Trieu el mètode que s'utilitzarà per a tornar a centrar la posició del GPS "
+"en el mapa."
 
 #: src/lib/marble/CurrentLocationWidget.ui:154
 msgctxt "CurrentLocationWidget|"
@@ -5193,7 +5193,7 @@ msgstr "sobre el nivell del mar"
 #: src/lib/marble/ExternalEditor.ui:14
 msgctxt "ExternalEditor|"
 msgid "External Map Editor Selection"
-msgstr "Seleccioneu l'editor de mapes extern"
+msgstr "Trieu l'editor de mapes extern"
 
 #: src/lib/marble/ExternalEditor.ui:22
 msgctxt "ExternalEditor|"
@@ -5301,7 +5301,7 @@ msgstr "Propietats de la vista"
 #: src/lib/marble/FileViewWidget.cpp:130
 msgctxt "QObject|"
 msgid "Select filename for KML document"
-msgstr "Seleccioneu el nom del fitxer per al document KML"
+msgstr "Trieu el nom del fitxer per al document KML"
 
 #: src/lib/marble/FileViewWidget.ui:14
 msgctxt "FileViewWidget|"
@@ -5351,7 +5351,7 @@ msgstr "Centre del mapa actual"
 #: src/lib/marble/FormattedTextWidget.cpp:180
 msgctxt "Marble::FormattedTextWidget|"
 msgid "Choose image"
-msgstr "Selecciona una imatge"
+msgstr "Tria una imatge"
 
 #: src/lib/marble/FormattedTextWidget.cpp:180
 msgctxt "Marble::FormattedTextWidget|"
@@ -7418,7 +7418,7 @@ msgstr "Busca"
 #: src/lib/marble/LatLonBoxWidget.ui:17
 msgctxt "LatLonBoxWidget|"
 msgid "Select a geographic region"
-msgstr "Seleccioneu una regió geogràfica"
+msgstr "Trieu una regió geogràfica"
 
 #: src/lib/marble/LatLonBoxWidget.ui:41
 msgctxt "LatLonBoxWidget|"
@@ -7903,9 +7903,8 @@ msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
-"<h4>Servidor WMS</h4>Seleccioneu un servidor <a href=\"https://en.wikipedia."
-"org/wiki/Web_Map_Service\">WMS</a> o introduïu l'URL d'un servidor "
-"personalitzat."
+"<h4>Servidor WMS</h4>Trieu un servidor <a href=\"https://en.wikipedia.org/"
+"wiki/Web_Map_Service\">WMS</a> o introduïu l'URL d'un servidor personalitzat."
 
 #: src/lib/marble/MapWizard.cpp:1484
 msgctxt "Marble::MapWizard|"
@@ -7918,8 +7917,8 @@ msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
 "Web_Map_Tile_Service\">WMTS</a> server or enter a custom server URL."
 msgstr ""
-"<h4>Servidor WMTS</h4>Seleccioneu un servidor <a href=\"https://de.wikipedia."
-"org/wiki/Web_Map_Tile_Service\">WMTS</a> o introduïu l'URL d'un servidor "
+"<h4>Servidor WMTS</h4>Trieu un servidor <a href=\"https://de.wikipedia.org/"
+"wiki/Web_Map_Tile_Service\">WMTS</a> o introduïu l'URL d'un servidor "
 "personalitzat."
 
 #: src/lib/marble/MapWizard.ui:20
@@ -8054,8 +8053,8 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 "weight:600;\">Servidor WMS</span></p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Seleccioneu un servidor <a "
-"href=\"https://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Trieu un servidor <a href="
+"\"https://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
 "decoration: underline; color:#0057ae;\">WMS</span></a> o introduïu l'URL "
 "d'un servidor personalitzat.</p></body></html>"
 
@@ -8096,7 +8095,7 @@ msgstr "Servei de WMS:"
 #: src/lib/marble/MapWizard.ui:232
 msgctxt "MapWizard|"
 msgid "Layer Selection"
-msgstr "Seleccioneu les capes"
+msgstr "Trieu les capes"
 
 #: src/lib/marble/MapWizard.ui:243
 msgctxt "MapWizard|"
@@ -8206,7 +8205,7 @@ msgstr "#87CEFA"
 #: src/lib/marble/MapWizard.ui:511
 msgctxt "MapWizard|"
 msgid "Select Color"
-msgstr "Seleccioneu un color"
+msgstr "Trieu un color"
 
 #: src/lib/marble/MapWizard.ui:554
 msgctxt "MapWizard|"
@@ -11810,7 +11809,7 @@ msgstr "Emplaçament actual"
 #: src/lib/marble/routing/RoutingInputWidget.cpp:481
 msgctxt "Marble::RoutingInputWidget|"
 msgid "Choose Placemark"
-msgstr "Seleccioneu la marca de lloc"
+msgstr "Trieu la marca de lloc"
 
 #: src/lib/marble/routing/RoutingLayer.cpp:187
 msgctxt "QObject|"
@@ -11899,7 +11898,7 @@ msgstr "No hi ha cap configuració disponible"
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:128
 msgctxt "RoutingProfileSettingsDialog|"
 msgid "Select Service to Configure"
-msgstr "Selecciona el servei que s'ha de configurar"
+msgstr "Tria el servei que s'ha de configurar"
 
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:142
 msgctxt "RoutingProfileSettingsDialog|"
@@ -12183,7 +12182,7 @@ msgstr "Ubicació de l'àudio"
 #: src/lib/marble/SoundCueEditWidget.cpp:67
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Select sound files..."
-msgstr "Selecciona els fitxers de so…"
+msgstr "Tria els fitxers de so…"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:67
 msgctxt "Marble::SoundCueEditWidget|"
@@ -12924,7 +12923,7 @@ msgstr ""
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:940
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Select Item"
-msgstr "Selecciona l'element"
+msgstr "Tria l'element"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:866
 msgctxt "Marble::AnnotatePlugin|"
@@ -13048,7 +13047,7 @@ msgstr ""
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1423
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Select Node"
-msgstr "Selecciona un node"
+msgstr "Tria un node"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1407
 msgctxt "Marble::AnnotatePlugin|"
@@ -13085,8 +13084,8 @@ msgid ""
 "The selected region contains too much data. Please select a smaller region "
 "and try again."
 msgstr ""
-"La regió seleccionada conté massa dades. Seleccioneu una regió més xicoteta "
-"i torneu-ho a provar."
+"La regió seleccionada conté massa dades. Trieu una regió més xicoteta i "
+"torneu-ho a provar."
 
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:119
 msgctxt "Marble::DownloadOsmDialog|"
@@ -13924,8 +13923,8 @@ msgid ""
 msgstr ""
 "<html><head/><body><p>Marble ha detectat que ocorreran els <span style=\" "
 "font-weight:600;\">esdeveniments d'eclipsi</span> següents en el futur "
-"pròxim. Si voleu més informació quant a un esdeveniment específic, "
-"seleccioneu-lo i cliqueu damunt «D'acord».</p></body></html>"
+"pròxim. Si voleu més informació quant a un esdeveniment específic, trieu-lo "
+"i cliqueu damunt «D'acord».</p></body></html>"
 
 #: src/plugins/render/eclipses/EclipsesReminderDialog.ui:33
 msgctxt "EclipsesReminderDialog|"

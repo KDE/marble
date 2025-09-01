@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2025-08-28 20:17+0300\n"
+"PO-Revision-Date: 2025-08-31 14:48+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -816,10 +816,9 @@ msgid ""
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:105
-#, fuzzy
 msgctxt "DGML|"
 msgid "OSM Bitmap Tiles"
-msgstr "תצוגת מפה"
+msgstr "אריחי מפת סיביות של OSM"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:119
 #. ----------
@@ -1571,10 +1570,9 @@ msgid "Places (in German)"
 msgstr "מקומות (בגרמנית)"
 
 #. file data/maps/earth/behaim1492/behaim1492.dgml:184
-#, fuzzy
 msgctxt "DGML|"
 msgid "Behaim Places"
-msgstr "תבליט"
+msgstr "מקומות בהיים"
 
 #. file data/maps/earth/behaim1492/behaim1492.dgml:187
 msgctxt "DGML|"
@@ -5025,10 +5023,9 @@ msgid "Relations"
 msgstr "קשרים"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:157
-#, fuzzy
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Elevation"
-msgstr "גובה:"
+msgstr "עילוי"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:350
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -5158,10 +5155,9 @@ msgid "Add link"
 msgstr "הוספת קישור"
 
 #: src/lib/marble/ElevationWidget.ui:19
-#, fuzzy
 msgctxt "ElevationWidget|"
 msgid "Elevation:"
-msgstr "גובה:"
+msgstr "עילוי:"
 
 #: src/lib/marble/ElevationWidget.ui:26
 msgctxt "ElevationWidget|"
@@ -15078,13 +15074,13 @@ msgstr ""
 #: src/plugins/render/satellites/SatellitesConfigModel.cpp:147
 msgctxt "Marble::SatellitesConfigModel|"
 msgid "Catalogs"
-msgstr ""
+msgstr "קטלוגים"
 
 #: src/plugins/render/satellites/SatellitesMSCItem.cpp:109
 #: src/plugins/render/satellites/SatellitesTLEItem.cpp:50
 msgctxt "QObject|"
 msgid "No info available."
-msgstr ""
+msgstr "אין מידע זמין."
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:40
 msgctxt "Marble::SatellitesPlugin|"
@@ -16960,22 +16956,22 @@ msgstr ""
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:73
 msgctxt "Marble::MapQuestConfigWidget|"
 msgid "Car (fastest way)"
-msgstr ""
+msgstr "מכונית (הדרך המהירה ביותר)"
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:74
 msgctxt "Marble::MapQuestConfigWidget|"
 msgid "Car (shortest way)"
-msgstr ""
+msgstr "מכונית (הדרך הקצרה ביותר)"
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:75
 msgctxt "Marble::MapQuestConfigWidget|"
 msgid "Pedestrian"
-msgstr ""
+msgstr "הליכה ברגל"
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:76
 msgctxt "Marble::MapQuestConfigWidget|"
 msgid "Bicycle"
-msgstr ""
+msgstr "אופניים"
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:77
 msgctxt "Marble::MapQuestConfigWidget|"
@@ -17010,7 +17006,7 @@ msgstr "%1 בהורדה"
 #, qt-format
 msgctxt "QObject|"
 msgid "Installing %1"
-msgstr ""
+msgstr "%1 מותקן"
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:531
 #, qt-format
@@ -17021,12 +17017,12 @@ msgstr "%1/%2 מ״ב"
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:610
 msgctxt "QObject|"
 msgid "An update is available. Click to install it."
-msgstr ""
+msgstr "יש עדכון. לחיצה תתקין אותו."
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:611
 msgctxt "QObject|"
 msgid "No update available. You are running the latest version."
-msgstr ""
+msgstr "אין עדכון זמין. הגרסה שפועלת אצלך היא הגרסה העדכנית ביותר."
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:639
 msgctxt "Marble::MonavConfigWidget|"
@@ -17198,7 +17194,7 @@ msgstr ""
 #: src/plugins/runner/open-source-routing-machine/OSRMPlugin.cpp:17
 msgctxt "Marble::OSRMPlugin|"
 msgid "This service requires an Internet connection."
-msgstr ""
+msgstr "השירות הזה דורש חיבור לאינטרנט."
 
 #: src/plugins/runner/open-source-routing-machine/OSRMPlugin.cpp:22
 msgctxt "Marble::OSRMPlugin|"
@@ -17250,7 +17246,7 @@ msgstr ""
 #: src/plugins/runner/openrouteservice/OpenRouteServiceConfigWidget.ui:41
 msgctxt "OpenRouteServiceConfigWidget|"
 msgid "Avoid ferries"
-msgstr ""
+msgstr "הימנעות ממעבורות"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:19
 msgctxt "Marble::OpenRouteServicePlugin|"
