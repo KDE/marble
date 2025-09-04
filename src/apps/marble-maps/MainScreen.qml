@@ -234,6 +234,7 @@ Kirigami.ApplicationWindow {
             background: Rectangle {
                 Kirigami.Theme.colorSet: Kirigami.Theme.View
                 Kirigami.Theme.inherit: false
+                color: Kirigami.Theme.backgroundColor
             }
 
             z: 2
