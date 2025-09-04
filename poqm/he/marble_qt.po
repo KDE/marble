@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2025-08-31 14:48+0300\n"
+"PO-Revision-Date: 2025-09-03 11:35+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -14715,27 +14715,27 @@ msgstr "הת&קדמות הורדה"
 #: src/plugins/render/progress/ProgressFloatItem.cpp:90
 msgctxt "Marble::ProgressFloatItem|"
 msgid "Shows a pie chart download progress indicator"
-msgstr ""
+msgstr "הצגות מחוון התקדמות הורדה כעוגה מתמלאת"
 
 #: src/plugins/render/routing/RoutingConfigDialog.ui:14
 msgctxt "RoutingConfigDialog|"
 msgid "Routing Configuration"
-msgstr ""
+msgstr "הגדרות ניווט"
 
 #: src/plugins/render/routing/RoutingConfigDialog.ui:20
 msgctxt "RoutingConfigDialog|"
 msgid "Audible Turn Instructions"
-msgstr ""
+msgstr "הנחיות פנייה קוליות"
 
 #: src/plugins/render/routing/RoutingConfigDialog.ui:50
 msgctxt "RoutingConfigDialog|"
 msgid "Play a sound"
-msgstr ""
+msgstr "להשמיע צליל"
 
 #: src/plugins/render/routing/RoutingConfigDialog.ui:62
 msgctxt "RoutingConfigDialog|"
 msgid "Use this speaker"
-msgstr ""
+msgstr "להשתמש ברמקול הזה"
 
 #: src/plugins/render/routing/RoutingConfigDialog.ui:88
 msgctxt "RoutingConfigDialog|"
@@ -14743,6 +14743,7 @@ msgid ""
 "<a href=\"https://userbase.kde.org/Marble/CustomSpeakers\">Get more "
 "speakers</a>"
 msgstr ""
+"<a href=\"https://userbase.kde.org/Marble/CustomSpeakers\">רמקולים נוספים</a>"
 
 #: src/plugins/render/routing/RoutingPlugin.cpp:235
 msgctxt "QObject|"
@@ -14752,7 +14753,7 @@ msgstr "מצב הנחיה מופעל, נא להמתין…"
 #: src/plugins/render/routing/RoutingPlugin.cpp:289
 msgctxt "QObject|"
 msgid "Calculate a route to get directions."
-msgstr ""
+msgstr "חישוב המסלול לקבלת הכוונות."
 
 #: src/plugins/render/routing/RoutingPlugin.cpp:292
 msgctxt "QObject|"
@@ -14800,7 +14801,7 @@ msgstr ""
 #: src/plugins/render/routing/RoutingPlugin.ui:158
 msgctxt "RoutingPlugin|"
 msgid "Toggle GPS"
-msgstr ""
+msgstr "הפעלת/כיבוי GPS"
 
 #: src/plugins/render/routing/RoutingPlugin.ui:187
 msgctxt "RoutingPlugin|"
@@ -14825,7 +14826,7 @@ msgstr "+"
 #: src/plugins/render/routing/RoutingPlugin.ui:260
 msgctxt "RoutingPlugin|"
 msgid "total time remaining"
-msgstr ""
+msgstr "הזמן הכולל שנותר"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:31
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -14970,7 +14971,7 @@ msgstr "מחיקת מקור הנתונים הנבחר"
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:290
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Do you really want to delete the selected data source?"
-msgstr ""
+msgstr "למחוק את מקור הנתונים הנבחר?"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:14
 msgctxt "SatellitesConfigDialog|"
@@ -15013,7 +15014,7 @@ msgstr "מקורות נתוני לוויינים:"
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:147
 msgctxt "SatellitesConfigDialog|"
 msgid "Add a new data source (URL)."
-msgstr ""
+msgstr "הוספת מקור נתונים חדש (כתובת)."
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:150
 msgctxt "SatellitesConfigDialog|"
@@ -15023,7 +15024,7 @@ msgstr "+"
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:161
 msgctxt "SatellitesConfigDialog|"
 msgid "Open a new data source from disk."
-msgstr ""
+msgstr "פתיחת מקור נתונים חדש מהכונן."
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:178
 msgctxt "SatellitesConfigDialog|"
@@ -15033,12 +15034,12 @@ msgstr "הסרת מקור הנתונים הנבחר."
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
 msgctxt "SatellitesConfigDialog|"
 msgid "…"
-msgstr ""
+msgstr "…"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
 msgctxt "SatellitesConfigDialog|"
 msgid "(Built-in Data Sources for Earth Satellites)"
-msgstr ""
+msgstr "(מקורות נתונים מובנים ללווייני כדור הארץ)"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:232
 msgctxt "SatellitesConfigDialog|"
@@ -15054,7 +15055,7 @@ msgstr ""
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:255
 msgctxt "SatellitesConfigDialog|"
 msgid "Plugin Inactive"
-msgstr ""
+msgstr "תוסף לא פעיל"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:289
 msgctxt "SatellitesConfigDialog|"
@@ -15066,7 +15067,7 @@ msgctxt "SatellitesConfigDialog|"
 msgid ""
 "Configuration options not available since the plugin is disabled at the "
 "moment."
-msgstr ""
+msgstr "אפשרויות התצורה אינן זמינות כיוון שהתוסף מושבת כרגע."
 
 #: src/plugins/render/satellites/SatellitesConfigModel.cpp:147
 msgctxt "Marble::SatellitesConfigModel|"
@@ -15087,7 +15088,7 @@ msgstr ""
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:44
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Keep centered"
-msgstr ""
+msgstr "להשאיר ממורכז"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:76
 msgctxt "Marble::SatellitesPlugin|"
