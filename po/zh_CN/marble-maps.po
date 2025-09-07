@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-24 00:37+0000\n"
+"POT-Creation-Date: 2025-09-07 00:38+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -146,7 +146,7 @@ msgstr "主题选项"
 msgid "Routing"
 msgstr "路线"
 
-#: MainScreen.qml:457
+#: MainScreen.qml:458
 #, kde-format
 msgid "%1 km"
 msgstr "%1 公里"

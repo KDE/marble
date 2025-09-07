@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-24 00:37+0000\n"
+"POT-Creation-Date: 2025-09-07 00:38+0000\n"
 "PO-Revision-Date: 2021-06-24 01:16+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -172,7 +172,7 @@ msgstr ""
 msgid "Routing"
 msgstr "길 찾기"
 
-#: MainScreen.qml:457
+#: MainScreen.qml:458
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "%1 km"

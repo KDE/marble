@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-24 00:37+0000\n"
+"POT-Creation-Date: 2025-09-07 00:38+0000\n"
 "PO-Revision-Date: 2017-09-22 19:28+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -169,7 +169,7 @@ msgstr "<h3>Επιλογές επιπέδων</h3>"
 msgid "Routing"
 msgstr "Δρομολόγηση"
 
-#: MainScreen.qml:457
+#: MainScreen.qml:458
 #, kde-format
 msgid "%1 km"
 msgstr "%1 km"

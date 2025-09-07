@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-24 00:37+0000\n"
+"POT-Creation-Date: 2025-09-07 00:38+0000\n"
 "PO-Revision-Date: 2024-10-04 07:17+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -147,7 +147,7 @@ msgstr "Параметри теми"
 msgid "Routing"
 msgstr "Маршрути"
 
-#: MainScreen.qml:457
+#: MainScreen.qml:458
 #, kde-format
 msgid "%1 km"
 msgstr "%1 км"

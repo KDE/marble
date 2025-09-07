@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-24 00:37+0000\n"
+"POT-Creation-Date: 2025-09-07 00:38+0000\n"
 "PO-Revision-Date: 2020-09-29 22:35+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -165,7 +165,7 @@ msgstr ""
 msgid "Routing"
 msgstr "Munte"
 
-#: MainScreen.qml:457
+#: MainScreen.qml:458
 #, fuzzy, kde-format
 #| msgid "%1 m"
 msgid "%1 km"
