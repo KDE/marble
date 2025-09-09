@@ -31,7 +31,6 @@
                 "Name[sv]": "Friedrich W. H. Kossebau",
                 "Name[tr]": "Friedrich W. H. Kossebau",
                 "Name[uk]": "Friedrich W. H. Kossebau",
-                "Name[x-test]": "xxFriedrich W. H. Kossebauxx",
                 "Name[zh_CN]": "Friedrich W. H. Kossebau"
             }
         ],
@@ -62,7 +61,6 @@
         "Description[sv]": "Visar tiden i olika delar av världen",
         "Description[tr]": "Dünyanın farklı bölgelerindeki zamanı gösterir",
         "Description[uk]": "Показує вам час у різних частинах світу",
-        "Description[x-test]": "xxShows the time in different parts of the worldxx",
         "Description[zh_CN]": "显示世界各地时间",
         "Icon": "marble",
         "Id": "org.kde.plasma.worldclock",
@@ -93,7 +91,6 @@
         "Name[sv]": "Världsklocka",
         "Name[tr]": "Dünya Saati",
         "Name[uk]": "Світовий годинник",
-        "Name[x-test]": "xxWorld Clockxx",
         "Name[zh_CN]": "世界时钟",
         "Version": "0.2",
         "Website": "https://marble.kde.org/"

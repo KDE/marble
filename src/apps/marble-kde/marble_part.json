@@ -29,7 +29,6 @@
         "Name[sv]": "Marble-delprogram",
         "Name[tr]": "Bilye Part",
         "Name[uk]": "Компонент Marble",
-        "Name[x-test]": "xxMarble Partxx",
         "Name[zh_CN]": "Marble 组件",
         "ServiceTypes": [
             "Browser/View",

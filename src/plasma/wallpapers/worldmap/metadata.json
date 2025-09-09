@@ -31,7 +31,6 @@
                 "Name[sv]": "Friedrich W. H. Kossebau",
                 "Name[tr]": "Friedrich W. H. Kossebau",
                 "Name[uk]": "Friedrich W. H. Kossebau",
-                "Name[x-test]": "xxFriedrich W. H. Kossebauxx",
                 "Name[zh_CN]": "Friedrich W. H. Kossebau"
             }
         ],
@@ -61,7 +60,6 @@
         "Description[sv]": "Vår vackra planet som skrivbordsunderlägg",
         "Description[tr]": "Güzel yerküremizi duvar kâğıdınız olarak kullanın",
         "Description[uk]": "Наша чудова планета на шпалерах вашої стільниці",
-        "Description[x-test]": "xxOur beautiful globe as your wallpaperxx",
         "Description[zh_CN]": "将这款地球仪的图像用作壁纸",
         "Icon": "marble",
         "Id": "org.kde.plasma.worldmap",
@@ -92,7 +90,6 @@
         "Name[sv]": "Världskarta",
         "Name[tr]": "Dünya Haritası",
         "Name[uk]": "Мапа світу",
-        "Name[x-test]": "xxWorld Mapxx",
         "Name[zh_CN]": "世界地图",
         "ServiceTypes": [
             "Plasma/Wallpaper"

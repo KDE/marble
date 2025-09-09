@@ -30,7 +30,6 @@
                 "Name[sv]": "Friedrich W. H. Kossebau",
                 "Name[tr]": "Friedrich W. H. Kossebau",
                 "Name[uk]": "Friedrich W. H. Kossebau",
-                "Name[x-test]": "xxFriedrich W. H. Kossebauxx",
                 "Name[zh_CN]": "Friedrich W. H. Kossebau"
             }
         ],
@@ -60,7 +59,6 @@
         "Description[sv]": "Slå upp platser i OpenStreetMap med Marble",
         "Description[tr]": "Bilye ile yerlere OpenStreetMap kullanarak bakın",
         "Description[uk]": "Пошук місць на картах OpenStreetMap за допомогою Marble",
-        "Description[x-test]": "xxLookup places in OpenStreetMap with Marblexx",
         "Description[zh_CN]": "用 Marble 查找 OpenStreetMap 中的位置",
         "EnabledByDefault": true,
         "Icon": "marble",
@@ -92,7 +90,6 @@
         "Name[sv]": "OpenStreetMap med Marble",
         "Name[tr]": "Bilye ile OpenStreetMap",
         "Name[uk]": "OpenStreetMap за допомогою Marble",
-        "Name[x-test]": "xxOpenStreetMap with Marblexx",
         "Name[zh_CN]": "通过 Marble 使用 OpenStreetMap",
         "ServiceTypes": [
             "Plasma/Runner"
