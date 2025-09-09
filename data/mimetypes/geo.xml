@@ -44,7 +44,6 @@ Notes:
     <comment xml:lang="sv">OSM-data</comment>
     <comment xml:lang="tr">OSM Verisi</comment>
     <comment xml:lang="uk">дані OSM</comment>
-    <comment xml:lang="x_test">xxOSM Dataxx</comment>
     <comment xml:lang="zh_CN">OSM 数据</comment>
     <comment xml:lang="zh_TW">OSM 資料</comment>
     <acronym>OSM</acronym>
@@ -95,7 +94,6 @@ Notes:
     <comment xml:lang="sv">ESRI-formfil</comment>
     <comment xml:lang="tr">ESRI Shapefile</comment>
     <comment xml:lang="uk">файл форм ESRI</comment>
-    <comment xml:lang="x_test">xxESRI Shapefilexx</comment>
     <comment xml:lang="zh_CN">ESRI 形状文件</comment>
     <comment xml:lang="zh_TW">ESRI Shapefile</comment>
     <generic-icon name="application-vnd-google-earth-kml"/>
@@ -141,7 +139,6 @@ Notes:
     <comment xml:lang="sv">ESRI-formfilindex</comment>
     <comment xml:lang="tr">ESRI Shapefile İndeksi</comment>
     <comment xml:lang="uk">покажчик файла форм ESRI</comment>
-    <comment xml:lang="x_test">xxESRI Shapefile Indexxx</comment>
     <comment xml:lang="zh_CN">ESRI 形状文件索引</comment>
     <comment xml:lang="zh_TW">ESRI Shapefile 索引</comment>
     <generic-icon name="application-octet-stream"/>
