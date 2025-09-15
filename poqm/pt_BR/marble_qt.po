@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2025-08-20 12:31-0300\n"
+"PO-Revision-Date: 2025-09-14 08:45-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 25.08.1\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -2488,12 +2488,12 @@ msgstr "Copiar as coordenadas centrais como texto"
 #: src/apps/marble-qt/QtMainWindow.cpp:328
 msgctxt "Marble::MainWindow|"
 msgid "&Full Screen Mode"
-msgstr "Modo de tela &inteira"
+msgstr "Modo de tela &cheia"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:331
 msgctxt "Marble::MainWindow|"
 msgid "Full Screen Mode"
-msgstr "Modo de tela inteira"
+msgstr "Modo de tela cheia"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:334
 msgctxt "Marble::MainWindow|"
@@ -10853,7 +10853,7 @@ msgstr "&Adicionar favorito"
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:132
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "&Full Screen Mode"
-msgstr "Modo de tela &inteira"
+msgstr "Modo de tela &cheia"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:135
 msgctxt "Marble::MarbleWidgetPopupMenu|"
