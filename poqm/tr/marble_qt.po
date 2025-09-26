@@ -7581,12 +7581,12 @@ msgstr "Stereografik görünüm"
 #: src/lib/marble/MapViewWidget.cpp:147
 msgctxt "Marble::MapViewWidget|"
 msgid "Lambert Azimuthal Equal-Area view"
-msgstr "Lambert Güneyaçısal Eşdeğer Alan görünümü"
+msgstr "Lambert Yancasal Eşdeğer Alan görünümü"
 
 #: src/lib/marble/MapViewWidget.cpp:151
 msgctxt "Marble::MapViewWidget|"
 msgid "Azimuthal Equidistant view"
-msgstr "Güneyaçısal Eşituzaklık görünümü"
+msgstr "Yancasal Eşituzaklık görünümü"
 
 #: src/lib/marble/MapViewWidget.cpp:155
 msgctxt "Marble::MapViewWidget|"
@@ -7662,12 +7662,12 @@ msgstr "Selenografik"
 #: src/lib/marble/MapViewWidget.ui:86
 msgctxt "MapViewWidget|"
 msgid "Lambert Azimuthal Equal Area"
-msgstr "Lambert Güneyaçısal Eşdeğer Alan"
+msgstr "Lambert Yancasal Eşdeğer Alan"
 
 #: src/lib/marble/MapViewWidget.ui:95
 msgctxt "MapViewWidget|"
 msgid "Azimuthal Equidistant"
-msgstr "Güneyaçısal Eşituzaklık"
+msgstr "Yancasal Eşituzaklık"
 
 #: src/lib/marble/MapViewWidget.ui:104
 msgctxt "MapViewWidget|"
@@ -11336,7 +11336,7 @@ msgstr "Alt Bilgi"
 #: src/lib/marble/projections/AzimuthalEquidistantProjection.cpp:54
 msgctxt "QObject|"
 msgid "Azimuthal Equidistant"
-msgstr "Güneyaçısal Eşituzaklık"
+msgstr "Yancasal Eşituzaklık"
 
 #: src/lib/marble/projections/AzimuthalEquidistantProjection.cpp:59
 msgctxt "QObject|"
@@ -11345,9 +11345,8 @@ msgid ""
 "p><p>Applications: Display of seismic and radio data and for use in digital "
 "planetariums.</p>"
 msgstr ""
-"<p><b>Güneyaçısal Eşituzaklık Yansıması</b> (“balık gözü”)</"
-"p><p>Uygulamalar: Sismik, radyo verilenin görüntüleri ve bunu kullanacak "
-"sayısal gökevi.</p>"
+"<p><b>Yancasal Eşituzaklık Yansıması</b> (“balık gözü”)</p><p>Uygulamalar: "
+"Sismik, radyo verilenin görüntüleri ve bunu kullanacak sayısal gökevi.</p>"
 
 #: src/lib/marble/projections/EquirectProjection.cpp:31
 msgctxt "QObject|"
@@ -11383,7 +11382,7 @@ msgstr ""
 #: src/lib/marble/projections/LambertAzimuthalProjection.cpp:55
 msgctxt "QObject|"
 msgid "Lambert Azimuthal Equal-Area"
-msgstr "Lambert Güneyaçısal Eşdeğer-Alan"
+msgstr "Lambert Yancasal Eşdeğer-Alan"
 
 #: src/lib/marble/projections/LambertAzimuthalProjection.cpp:60
 msgctxt "QObject|"
@@ -11391,7 +11390,7 @@ msgid ""
 "<p><b>Lambert Azimuthal Equal-Area Projection</b></p><p>Applications: Used "
 "in structural geology to plot directional data.</p>"
 msgstr ""
-"<p><b>Lambert Güneyaçısal Eşdeğer-Alan Yansıma</b></p><p>Uygulamalar: Yönlü "
+"<p><b>Lambert Yancasal Eşdeğer-Alan Yansıma</b></p><p>Uygulamalar: Yönlü "
 "veri çizmek için yapısal jeolojide kullanılır.</p>"
 
 #: src/lib/marble/projections/MercatorProjection.cpp:33
