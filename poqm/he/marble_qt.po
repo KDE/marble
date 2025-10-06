@@ -10,14 +10,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2025-09-03 11:35+0300\n"
+"PO-Revision-Date: 2025-10-05 12:22+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 25.08.1\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
 "X-Qt-Contexts: true\n"
@@ -2355,7 +2355,7 @@ msgstr "הו&רדת מפות…"
 #: src/apps/marble-qt/QtMainWindow.cpp:273
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
-msgstr "יי&צןא מפה…"
+msgstr "יי&צוא מפה…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:275
 msgctxt "Marble::MainWindow|"
@@ -5323,7 +5323,7 @@ msgstr "כל הקבצים הנתמכים (‎*.png‏ ‎*.jpg‏ ‎*.jpeg)"
 #: src/lib/marble/FormattedTextWidget.ui:46
 msgctxt "FormattedTextWidget|"
 msgid "Formatted text"
-msgstr "טקסט  מעוצב"
+msgstr "טקסט מעוצב"
 
 #: src/lib/marble/FormattedTextWidget.ui:70
 msgctxt "FormattedTextWidget|"
