@@ -1,5 +1,5 @@
-# Panagiotis Papadopoulos <pano_90@gmx.net>, 2011.
-# Frederik Schwarzer <schwarzer@kde.org>, 2012.
+# SPDX-FileCopyrightText: 2011 Panagiotis Papadopoulos <pano_90@gmx.net>
+# SPDX-FileCopyrightText: 2012 Frederik Schwarzer <schwarzer@kde.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_marble\n"
