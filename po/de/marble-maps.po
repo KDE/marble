@@ -1,18 +1,18 @@
 # SPDX-FileCopyrightText: 2024 Flori G <Renner03@protonmail.com>
-# Thorsten Mürell <thorsten@muerell.de>, 2006, 2007.
-# Thomas Reitelbach <tr@erdfunkstelle.de>, 2007, 2008.
-# Burkhard Lück <lueck@hube-lueck.de>, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021.
-# Frederik Schwarzer <schwarzer@kde.org>, 2008, 2010, 2011, 2012, 2013, 2014, 2016, 2022.
-# Martin Ereth <martin.ereth@arcor.de>, 2008.
-# Johannes Obermayr <johannesobermayr@gmx.de>, 2009, 2010.
-# Panagiotis Papadopoulos <pano_90@gmx.net>, 2010, 2011.
-# Markus Slopianka <markus.s@kdemail.net>, 2010, 2013.
-# Felix Schweighofer <felix.schweighofer@googlemail.com>, 2010.
-# Peter Rüthemann <peter.ruethemann@gmail.com>, 2010.
-# Rolf Eike Beer <kde@opensource.sf-tec.de>, 2011.
-# Friedrich W. H. Kossebau <kossebau@kde.org>, 2016.
-# Dennis Nienhüser <nienhueser@kde.org>, 2016, 2017.
-# Alois Spitzbart <spitz234@hotmail.com>, 2021.
+# SPDX-FileCopyrightText: 2006, 2007 Thorsten Mürell <thorsten@muerell.de>
+# SPDX-FileCopyrightText: 2007, 2008 Thomas Reitelbach <tr@erdfunkstelle.de>
+# SPDX-FileCopyrightText: 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021 Burkhard Lück <lueck@hube-lueck.de>
+# SPDX-FileCopyrightText: 2008, 2010, 2011, 2012, 2013, 2014, 2016, 2022 Frederik Schwarzer <schwarzer@kde.org>
+# SPDX-FileCopyrightText: 2008 Martin Ereth <martin.ereth@arcor.de>
+# SPDX-FileCopyrightText: 2009, 2010 Johannes Obermayr <johannesobermayr@gmx.de>
+# SPDX-FileCopyrightText: 2010, 2011 Panagiotis Papadopoulos <pano_90@gmx.net>
+# SPDX-FileCopyrightText: 2010, 2013 Markus Slopianka <markus.s@kdemail.net>
+# SPDX-FileCopyrightText: 2010 Felix Schweighofer <felix.schweighofer@googlemail.com>
+# SPDX-FileCopyrightText: 2010 Peter Rüthemann <peter.ruethemann@gmail.com>
+# SPDX-FileCopyrightText: 2011 Rolf Eike Beer <kde@opensource.sf-tec.de>
+# SPDX-FileCopyrightText: 2016 Friedrich W. H. Kossebau <kossebau@kde.org>
+# SPDX-FileCopyrightText: 2016, 2017 Dennis Nienhüser <nienhueser@kde.org>
+# SPDX-FileCopyrightText: 2021 Alois Spitzbart <spitz234@hotmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble-maps\n"
