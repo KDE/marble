@@ -91,9 +91,6 @@
         "Name[tr]": "Bilye ile OpenStreetMap",
         "Name[uk]": "OpenStreetMap за допомогою Marble",
         "Name[zh_CN]": "通过 Marble 使用 OpenStreetMap",
-        "ServiceTypes": [
-            "Plasma/Runner"
-        ],
         "Version": "0.1",
         "Website": "https://edu.kde.org/marble"
     },
