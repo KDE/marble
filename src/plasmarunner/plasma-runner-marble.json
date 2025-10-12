@@ -62,7 +62,6 @@
         "Description[zh_CN]": "用 Marble 查找 OpenStreetMap 中的位置",
         "EnabledByDefault": true,
         "Icon": "marble",
-        "Id": "marble",
         "License": "LGPL",
         "Name": "OpenStreetMap with Marble",
         "Name[ar]": " خريطة  الشّوارع المفتوحة بواسطة ماربل",
