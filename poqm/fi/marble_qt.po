@@ -4,7 +4,7 @@
 # Niklas Laxström <niklas.laxstrom+kdetrans@gmail.com>, 2007, 2012.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016, 2023.
 # Jiri Grönroos <jiri.gronroos+kde@iki.fi>, 2012, 2013.
-# SPDX-FileCopyrightText: 2012, 2015, 2016, 2018, 2020, 2021, 2022, 2023, 2024 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2012, 2015, 2016, 2018, 2020, 2021, 2022, 2023, 2024, 2025 Tommi Nieminen <translator@legisign.org>
 #
 # KDE Finnish translation sprint participants:
 # Author: Artnay
@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-11-29 09:51+0200\n"
+"PO-Revision-Date: 2025-07-28 10:42+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -8167,7 +8167,7 @@ msgstr "XYZ-palvelimen verkko-osoite"
 #: src/lib/marble/MapWizard.ui:462
 msgctxt "MapWizard|"
 msgid "The XYZ server needs to provide map tiles in Mercator projection."
-msgstr ""
+msgstr "XYZ-palvelimen tulee tarjota karttatiilet Mercator-projektiolla."
 
 #: src/lib/marble/MapWizard.ui:479
 msgctxt "MapWizard|"
@@ -9024,6 +9024,9 @@ msgid ""
 "tandon@research.iiit.ac.in</a><br /><i>Project: Support for medium and low "
 "tile levels in the OSM Vector Map of Marble</i></p>"
 msgstr ""
+"<p>Akshat Tandon <a href=\"akshat.tandon@research.iiit.ac.in\">akshat."
+"tandon@research.iiit.ac.in</a><br /><i>Projekti: Tuki keski- ja matalan "
+"tason tiilitasoille Marblen OSM-vektorikartalla</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:187
 msgctxt "QObject|"
@@ -10833,7 +10836,7 @@ msgstr "Kopioi koordinaatit"
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:114
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Copy geo: URL"
-msgstr ""
+msgstr "Kopioi sijaintitieto: verkko-osoite"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:123
 msgctxt "Marble::MarbleWidgetPopupMenu|"
@@ -11563,8 +11566,6 @@ msgid "Take the exit towards %1."
 msgstr "Poistu suuntaan %1."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:263
-#, fuzzy
-#| msgid "Take the ramp."
 msgctxt "QObject|"
 msgid "Take the ramp."
 msgstr "Aja rampista."
@@ -11582,18 +11583,16 @@ msgid "Follow the road for %1 %2."
 msgstr "Seuraa tietä %1 %2."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:375
-#, fuzzy, qt-format
-#| msgid "Take the %1. exit in the roundabout."
+#, qt-format
 msgctxt "QObject|"
 msgid "Take the %1. exit in the roundabout."
-msgstr "Poistu %1. liittymästä."
+msgstr "Poistu kiertoliittymästä %1. poistumissuuntaan."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:377
-#, fuzzy, qt-format
-#| msgid "Take the %1. exit in the roundabout into %2."
+#, qt-format
 msgctxt "QObject|"
 msgid "Take the %1. exit in the roundabout into %2."
-msgstr "Poistu %1. liittymästä suuntaan %2."
+msgstr "Poistu kiertoliittymästä %1. poistumissuuntaan kohteena %2."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:385
 msgctxt "QObject|"
@@ -11622,8 +11621,6 @@ msgid "Turn left."
 msgstr "Käänny vasempaan"
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:395
-#, fuzzy
-#| msgid "Keep slightly left."
 msgctxt "QObject|"
 msgid "Keep slightly left."
 msgstr "Pysy hieman vasemmalla."
@@ -11634,11 +11631,9 @@ msgid "Go straight ahead."
 msgstr "Jatka suoraan eteenpäin."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:399
-#, fuzzy
-#| msgid "Keep slightly right."
 msgctxt "QObject|"
 msgid "Keep slightly right."
-msgstr "Pysy hieman oikealle."
+msgstr "Pysy hieman oikealla."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:401
 msgctxt "QObject|"
@@ -11930,7 +11925,7 @@ msgstr "Uusi profiili"
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
 msgid "&Add…"
-msgstr ""
+msgstr "L&isää…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
 msgctxt "RoutingSettingsWidget|"
@@ -12161,12 +12156,9 @@ msgid "Search for '%1'"
 msgstr "Etsi: ”%1”"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:37
-#, fuzzy
-#| msgctxt "OsmRelationManagerWidgetPrivate|"
-#| msgid "Add Relation"
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Audio location"
-msgstr "Lisää suhde"
+msgstr "Äänen sijainti"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:67
 msgctxt "Marble::SoundCueEditWidget|"
@@ -12265,6 +12257,8 @@ msgid ""
 "Marble needs to create this map. This only needs to be done once and may "
 "take a few seconds."
 msgstr ""
+"Marblen on luotava tämä kartta. Tämä tarvitsee tehdä vain kerran ja kestää "
+"joitakin sekunteja."
 
 #: src/lib/marble/TileLevelRangeWidget.ui:29
 msgctxt "TileLevelRangeWidget|"
@@ -14561,7 +14555,7 @@ msgstr "nimetön"
 #: src/plugins/render/notes/NotesPlugin.cpp:34
 msgctxt "Marble::NotesPlugin|"
 msgid "OSM Mapper Notes"
-msgstr ""
+msgstr "OSM Mapperin muistiinpanot"
 
 #: src/plugins/render/notes/NotesPlugin.cpp:64
 msgctxt "Marble::NotesPlugin|"
@@ -14972,8 +14966,6 @@ msgid "&Position Marker"
 msgstr "&Sijaintimerkki"
 
 #: src/plugins/render/positionmarker/PositionMarker.cpp:99
-#, fuzzy
-#| msgid "draws a marker at the current position"
 msgctxt "Marble::PositionMarker|"
 msgid "draws a marker at the current position"
 msgstr "piirtää merkin nykyiseen sijaintiin"
@@ -17041,11 +17033,9 @@ msgid "beverages"
 msgstr "juomakauppa"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:107
-#, fuzzy
-#| msgid "hifi"
 msgctxt "QObject|"
 msgid "hifi"
-msgstr "elektroniikkakauppa"
+msgstr "hifi"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:109
 msgctxt "QObject|"
