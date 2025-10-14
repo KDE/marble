@@ -14,6 +14,7 @@
 
 #include <QApplication>
 #include <QCommandLineParser>
+#include <QDir>
 #include <QFile>
 #include <QLocale>
 #include <QStandardPaths>
@@ -344,12 +345,20 @@ int main(int argc, char *argv[])
             window->marbleWidget()->setDistance(distanceValue);
     }
 
-    // Read the files that are given on the command line.
-    for (const QString &file : parser.positionalArguments()) {
-        // FIXME: Use openUrl( args->url(i) ) instead?
-        if (QFile::exists(file)) {
-            window->marbleControl()->addGeoDataFile(file);
+    // Read the URLs that are given on the command line.
+    for (const QString &arg : parser.positionalArguments()) {
+        const auto url = QUrl::fromUserInput(arg, QDir::currentPath());
+        if (!url.isValid()) {
+            continue;
         }
+        if (url.isLocalFile()) {
+            const auto file = url.toLocalFile();
+            if (QFile::exists(file)) {
+                window->marbleControl()->addGeoDataFile(file);
+            }
+            continue;
+        }
+        window->marbleControl()->openGeoUri(url.toString());
     }
 
     return app.exec();

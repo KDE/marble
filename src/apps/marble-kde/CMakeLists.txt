@@ -56,9 +56,6 @@ install(TARGETS marble ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(PROGRAMS org.kde.marble.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES org.kde.marble.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 install(FILES marble.kcfg DESTINATION ${KDE_INSTALL_KCFGDIR})
-# register marble app as schemehandler
-install(FILES marble_geo.desktop DESTINATION ${KDE_INSTALL_APPDIR})
-install(FILES marble_worldwind.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 
 # Handle mo-targetted translation catalogs and translated user documentation
 # as added for release tarballs.
