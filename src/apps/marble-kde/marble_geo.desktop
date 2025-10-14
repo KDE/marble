@@ -62,4 +62,5 @@ Name[zh_CN]=Marble 虚拟地球仪
 Name[zh_TW]=地理_Marble
 MimeType=x-scheme-handler/geo;
 NoDisplay=true
+StartupNotify=true
 

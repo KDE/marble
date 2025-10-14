@@ -125,3 +125,4 @@ Comment[zh_CN]=查找路线
 Comment[zh_TW]=找到您的路
 Icon=org.kde.marble.maps
 Categories=Qt;KDE;Education;Geoscience;Geography;Science;Maps;
+StartupNotify=true
