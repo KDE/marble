@@ -1,10 +1,10 @@
 # Translation of marble_qt.po to Catalan (Valencian)
 # Copyright (C) 2007-2025 This_file_is_part_of_KDE
 #
-# Orestes Mas Casals <orestes@tsc.upc.edu>, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014.
-# Joan Maspons <joanmaspons@gmail.com>, 2011.
-# Antoni Bella Pérez <antonibella5@yahoo.com>, 2012, 2013, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2023.
-# Josep M. Ferrer <txemaq@gmail.com>, 2008, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025.
+# SPDX-FileCopyrightText: 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014 Orestes Mas Casals <orestes@tsc.upc.edu>
+# SPDX-FileCopyrightText: 2011 Joan Maspons <joanmaspons@gmail.com>
+# SPDX-FileCopyrightText: 2012, 2013, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2023 Antoni Bella Pérez <antonibella5@yahoo.com>
+# SPDX-FileCopyrightText: 2008, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
@@ -9444,7 +9444,7 @@ msgstr ""
 "baixades són proporcionats pel projecte <a href=\"https://www.openstreetmap."
 "org\">OpenStreetMap</a> («OSM»). OSM és una comunitat oberta que crea mapes "
 "editables lliures.<br /><i>Llicència</i>: les dades d'OpenStreetMap es poden "
-"utilitzar lliurement davall els termes de la <a href=\"https://wiki."
+"utilitzar lliurement d'acord amb els termes de la <a href=\"https://wiki."
 "openstreetmap.org/index.php/OpenStreetMap_License\">llicència Creative "
 "Commons Attribution-ShareAlike 2.0</a>.</p>"
 
@@ -9460,7 +9460,7 @@ msgstr ""
 "<p><i>Icones</i><br />Algunes icones s'han extret de <a href=\"https://www."
 "sjjb.co. uk/mapicons\">SJJB Management</a> i <a href=\"https://http://"
 "thenounproject.com\">NounProject</a>. Estes icones poden utilitzar-se "
-"lliurement davall els termes de la llicència <a href=\"https://"
+"lliurement d'acord amb els termes de la llicència <a href=\"https://"
 "creativecommons.org/publicdomain/zero/1.0/\">CC0 1.0 Universal</a>.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:297
@@ -9473,7 +9473,7 @@ msgid ""
 msgstr ""
 "<p>Algunes icones s'han extret de <a href=\"https://fortawesome.github.com/"
 "Font-Awesome\">Font Awesome</a>. Estes icones poden utilitzar-se lliurement "
-"davall els termes de la llicència <a href=\"https://creativecommons.org/"
+"d'acord amb els termes de la llicència <a href=\"https://creativecommons.org/"
 "licenses/by/3.0/\">CC BY 3.0</a>.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:300
@@ -9489,8 +9489,8 @@ msgstr ""
 "<p><i>OpenRouteService</i><br />Alguns dels itineraris utilitzats en Marble "
 "via descàrregues són proporcionats pel projecte <a href=\"https://maps."
 "openrouteservice.org\">OpenRouteService</a> («ORS»). <br /><i>Llicència</i>: "
-"les dades d'OpenRouteService es poden utilitzar lliurement davall els termes "
-"de la <a href=\"https://wiki.openstreetmap.org/index.php/"
+"les dades d'OpenRouteService es poden utilitzar lliurement d'acord amb els "
+"termes de la <a href=\"https://wiki.openstreetmap.org/index.php/"
 "OpenStreetMap_License\">llicència Creative Commons Attribution-ShareAlike "
 "2.0</a>.</p>"
 
@@ -9508,7 +9508,7 @@ msgstr ""
 "en Marble via descàrregues són proporcionats pel projecte <a href=\"https://"
 "project-osrm.org\">Open Source Routing Machine</a> («OSRM»). <br /"
 "><i>Llicència</i>: les dades d'Open Source Routing Machine es poden "
-"utilitzar lliurement davall els termes de la <a href=\"https://wiki."
+"utilitzar lliurement d'acord amb els termes de la <a href=\"https://wiki."
 "openstreetmap.org/index.php/OpenStreetMap_License\">llicència Creative "
 "Commons Attribution-ShareAlike 2.0</a>.</p>"
 
@@ -9529,11 +9529,11 @@ msgstr ""
 "\">MapQuest</a> i les seues API i els seus serveis web de dades "
 "cartogràfiques obertes.<br /> Estes indicacions que funcionen a "
 "OpenStreetMap són cortesia de MapQuest i poden utilitzar-se lliurement "
-"davall els termes de la <a href=\"https://wiki.openstreetmap.org/index.php/"
-"OpenStreetMap_License\">llicència Creative Commons Attribution-ShareAlike "
-"2.0</a>. La utilització del servei d'itineraris de MapQuest queda subjecte a "
-"les <a href=\"https://info.mapquest.com/terms-of-use/\">normes d'ús de "
-"MapQuest</a>.</p>"
+"d'acord amb els termes de la <a href=\"https://wiki.openstreetmap.org/index."
+"php/OpenStreetMap_License\">llicència Creative Commons Attribution-"
+"ShareAlike 2.0</a>. La utilització del servei d'itineraris de MapQuest queda "
+"subjecte a les <a href=\"https://info.mapquest.com/terms-of-use/\">normes "
+"d'ús de MapQuest</a>.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:319
 msgctxt "QObject|"
@@ -9559,7 +9559,7 @@ msgid ""
 msgstr ""
 "<p><i>Geonames.org</i><br /><a href=\"https://www.geonames.org/\">https://"
 "www.geonames.org/</a><i>Llicència</i>: Les dades de Geonames.org es poden "
-"utilitzar lliurement davall els termes de la <a href=\"https://"
+"utilitzar lliurement d'acord amb els termes de la <a href=\"https://"
 "creativecommons.org/licenses/by/3.0/\">llicència Creative Commons "
 "Attribution 3.0</a>.</p>"
 
@@ -12593,7 +12593,7 @@ msgstr "Segur que voleu eliminar els elements seleccionats?"
 #: src/lib/marble/TourWidget.cpp:820
 msgctxt "QObject|"
 msgid "Save Tour as"
-msgstr "Anomena i guarda el recorregut"
+msgstr "Anomeneu i guardeu el recorregut"
 
 #: src/lib/marble/TourWidget.cpp:880
 msgctxt "QObject|"
@@ -12651,7 +12651,7 @@ msgstr "Guarda el recorregut"
 #: src/lib/marble/TourWidget.ui:147
 msgctxt "TourWidget|"
 msgid "Save Tour As"
-msgstr "Anomena i guarda el recorregut"
+msgstr "Anomeneu i guardeu el recorregut"
 
 #: src/lib/marble/TourWidget.ui:156
 msgctxt "TourWidget|"
