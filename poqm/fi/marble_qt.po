@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2025-07-28 10:42+0300\n"
+"PO-Revision-Date: 2025-10-17 14:26+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.04.0\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -4985,6 +4985,26 @@ msgid ""
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
 "family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+"bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+"<tr>\n"
+"<td style=\"border: none;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"family:'Ubuntu';\"><br /></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"family:'Ubuntu';\"><br /></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
 
 #: src/lib/marble/EditBookmarkDialog.ui:57
 msgctxt "UiEditBookmarkDialog|"
@@ -5794,11 +5814,9 @@ msgid "Tertiary Road"
 msgstr "Kolmannen luokan tie"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:458
-#, fuzzy
-#| msgid "Unknown error"
 msgctxt "GeoDataPlacemark|"
 msgid "Secondary Link Road"
-msgstr "Tuntematon virhe"
+msgstr "Toissijainen yhdystie"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:460
 msgctxt "GeoDataPlacemark|"
@@ -6101,12 +6119,9 @@ msgid "Car Wash"
 msgstr "Autopesula"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:580
-#, fuzzy
-#| msgctxt "GeoDataPlacemark|"
-#| msgid "Locality"
 msgctxt "GeoDataPlacemark|"
 msgid "Social Facility"
-msgstr "Paikkakunta"
+msgstr "Sosiaalipalvelu"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:582
 msgctxt "GeoDataPlacemark|"
@@ -6232,7 +6247,7 @@ msgstr "Kenkäkauppa"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:632
 msgctxt "GeoDataPlacemark|"
 msgid "Variety Store"
-msgstr ""
+msgstr "Halpakauppa"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:634
 msgctxt "GeoDataPlacemark|"
@@ -6606,7 +6621,7 @@ msgstr "Suksivuokraamo"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:782
 msgctxt "GeoDataPlacemark|"
 msgid "Taxi Rank"
-msgstr ""
+msgstr "Taksijono"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:784
 msgctxt "GeoDataPlacemark|"
@@ -6965,12 +6980,9 @@ msgid "Magic Carpet"
 msgstr "Taikamatto"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:926
-#, fuzzy
-#| msgctxt "StarsConfigWidget|"
-#| msgid "Lines"
 msgctxt "GeoDataPlacemark|"
 msgid "Zip Line"
-msgstr "Viivat"
+msgstr "Köysirata"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:928
 msgctxt "GeoDataPlacemark|"
@@ -7018,11 +7030,9 @@ msgid "Snow Park"
 msgstr "Talviurheilupuisto"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:946
-#, fuzzy
-#| msgid "Play the tour"
 msgctxt "GeoDataPlacemark|"
 msgid "Ski Playground"
-msgstr "Toista kierros"
+msgstr "Hiihtomaasto"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:948
 msgctxt "GeoDataPlacemark|"
@@ -7289,20 +7299,18 @@ msgid "Sled Trail"
 msgstr "Kelkkareitti"
 
 #: src/lib/marble/geodata/handlers/dgml/DgmlMaximumTagHandler.cpp:35
-#, fuzzy, qt-format
-#| msgid "Could not convert <maximum> child text content to integer. Was: '%1'"
+#, qt-format
 msgctxt "QObject|"
 msgid "Could not convert <maximum> child text content to integer. Was: '%1'"
 msgstr ""
-"<maximum>-elementin sisältöä ei voitu muuntaa kokonaisluvuksi. Sisältö: %1"
+"<maximum>-alkion tekstisisältöä ei voitu muuntaa kokonaisluvuksi. Oli: ”%1”"
 
 #: src/lib/marble/geodata/handlers/dgml/DgmlMinimumTagHandler.cpp:35
-#, fuzzy, qt-format
-#| msgid "Could not convert <minimum> child text content to integer. Was: '%1'"
+#, qt-format
 msgctxt "QObject|"
 msgid "Could not convert <minimum> child text content to integer. Was: '%1'"
 msgstr ""
-"<minimum>-elementin sisältöä ei voitu muuntaa kokonaisluvuksi. Sisältö: %1"
+"<minimum>-alkion tekstisisältöä ei voitu muuntaa kokonaisluvuksi. Oli: ”%1”"
 
 #: src/lib/marble/geodata/parser/GeoParser.cpp:86
 #, qt-format
@@ -7383,11 +7391,6 @@ msgid "Go To…"
 msgstr "Siirry…"
 
 #: src/lib/marble/GoToDialog.ui:78
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid ""
-#| "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-#| "Marble/Search\">Details...</a>"
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
@@ -8147,7 +8150,7 @@ msgstr "Palvelun tiedot"
 #: src/lib/marble/MapWizard.ui:406
 msgctxt "MapWizard|"
 msgid "Customize Backdrop"
-msgstr ""
+msgstr "Mukauta taustakangasta"
 
 #: src/lib/marble/MapWizard.ui:417
 msgctxt "MapWizard|"
@@ -9629,28 +9632,6 @@ msgid "&About"
 msgstr "&Tietoa"
 
 #: src/lib/marble/MarbleAboutDialog.ui:98
-#, fuzzy
-#| msgctxt "MarbleAboutDialog|"
-#| msgid ""
-#| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#| "REC-html40/strict.dtd\">\n"
-#| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#| "css\">\n"
-#| "p, li { white-space: pre-wrap; }\n"
-#| "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
-#| "font-weight:400; font-style:normal;\">\n"
-#| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
-#| "font-size:9pt;\"></p>\n"
-#| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#| "size:9pt;\">(c) 2007, The Marble Project</span></p>\n"
-#| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
-#| "font-size:9pt; font-style:italic;\"></p>\n"
-#| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#| "size:9pt;\">https://edu.kde.org/marble</span></p></body></html>"
 msgctxt "MarbleAboutDialog|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -9691,7 +9672,7 @@ msgstr ""
 "size:9pt; font-style:italic;\"></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"size:9pt;\">https://edu.kde.org/marble</span></p></body></html>"
+"size:9pt;\">https://marble.kde.org/</span></p></body></html>"
 
 #: src/lib/marble/MarbleAboutDialog.ui:116
 msgctxt "MarbleAboutDialog|"
@@ -10019,11 +10000,9 @@ msgid "Dragging and Animation"
 msgstr "Vetäminen ja animointi"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:37
-#, fuzzy
-#| msgid "Duration:"
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "&Drag location:"
-msgstr "Kesto:"
+msgstr "&Vedon sijainti:"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:50
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10074,12 +10053,11 @@ msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Use kinetic spinning when dragging the map"
 msgstr "Käytä karttaa vedettäessä kineettistä pyörähdystä"
 
+# ”Hitaus” olisi esim. Wikipedian suosima käännös, mutta johtaa helpommin harhaan
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:76
-#, fuzzy
-#| msgid "&Set Home Location"
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "&Inertial globe rotation"
-msgstr "&Aseta kotisijainti"
+msgstr "Pallon pyörimisen &vitkaisuus"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:83
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -13551,11 +13529,9 @@ msgid "Gun 2"
 msgstr "Ase 2"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:70
-#, fuzzy
-#| msgid "Circle Ruler"
 msgctxt "CrosshairsConfigWidget|"
 msgid "Circled"
-msgstr "Ympyräviivain"
+msgstr "Ympyröity"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:79
 msgctxt "CrosshairsConfigWidget|"
@@ -13717,7 +13693,7 @@ msgstr "&Pohjoinen puolivarjopimennys"
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:84
 msgctxt "EclipsesConfigDialog|"
 msgid "&Umbra"
-msgstr ""
+msgstr "&Varjo"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:94
 msgctxt "EclipsesConfigDialog|"
@@ -14909,43 +14885,31 @@ msgstr ""
 "Lataa automaattisesti kuvia kaikkialta maailmasta niiden suosion perusteella."
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:111
-#, fuzzy
-#| msgid "Attribution-NonCommercial-ShareAlike License"
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NonCommercial-ShareAlike License"
 msgstr "Nimeä-Epäkaupallinen-JaaSamoin-lisenssi"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:118
-#, fuzzy
-#| msgid "Attribution-NonCommercial License"
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NonCommercial License"
-msgstr "Nimeä-Epäkaupallinen-JaaSamoin-lisenssi"
+msgstr "Nimeä-Epäkaupallinen-lisenssi"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:125
-#, fuzzy
-#| msgid "Attribution-NonCommercial-NoDerivs License"
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NonCommercial-NoDerivs License"
-msgstr "Nimeä-Ei muutoksia-Epäkaupallinen-lisenssi"
+msgstr "Nimeä-Epäkaupallinen-Ei muutoksia-lisenssi"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:132
-#, fuzzy
-#| msgid "Attribution License"
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution License"
 msgstr "Nimeä-lisenssi"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:139
-#, fuzzy
-#| msgid "Attribution-ShareAlike License"
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-ShareAlike License"
 msgstr "Nimeä-JaaSamoin-lisenssi"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:146
-#, fuzzy
-#| msgid "Attribution-NoDerivs License"
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NoDerivs License"
 msgstr "Nimeä-Ei muutoksia-lisenssi"
@@ -15414,6 +15378,12 @@ msgid ""
 "decoration: underline; color:#0000ff;\">Two-Line-Element Set</span></a></p></"
 "body></html>"
 msgstr ""
+"<html><head/><body><p>Tuetut tiedostomuodot: <a href=\"https://techbase.kde."
+"org/Projects/Marble/SatelliteCatalogFormat\"><span style=\" text-decoration: "
+"underline; color:#0000ff;\">Marblen satelliittiluettelo</span></a>, <a href="
+"\"https://en.wikipedia.org/wiki/Two-line_element_set\"><span style=\" text-"
+"decoration: underline; color:#0000ff;\">TLE (Two-Line-Element Set)</span></"
+"a></p></body></html>"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:255
 msgctxt "SatellitesConfigDialog|"

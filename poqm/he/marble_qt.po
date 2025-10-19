@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2025-10-05 12:22+0300\n"
+"PO-Revision-Date: 2025-10-18 18:18+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -2942,10 +2942,9 @@ msgstr "עריכת מפות"
 
 #: src/apps/marble-ui/ControlView.cpp:704
 #: src/apps/marble-ui/ControlView.cpp:842
-#, fuzzy
 msgctxt "Marble::ControlView|"
 msgid "Hide &All Panels"
-msgstr "הצג מיקומים"
+msgstr "ה&סתרת כל הלוחות"
 
 #: src/apps/marble-ui/ControlView.cpp:706
 msgctxt "Marble::ControlView|"
@@ -2953,10 +2952,9 @@ msgid "Show or hide all panels."
 msgstr "הצגת/הסתרת כל הסרגלים."
 
 #: src/apps/marble-ui/ControlView.cpp:831
-#, fuzzy
 msgctxt "Marble::ControlView|"
 msgid "Show &All Panels"
-msgstr "הצג מיקומים"
+msgstr "ה&צגת כל הלוחות"
 
 #: src/lib/marble/AbstractFloatItem.cpp:225
 msgctxt "Marble::AbstractFloatItem|"
@@ -3068,10 +3066,10 @@ msgid "KML Files (*.kml)"
 msgstr "קובצי KML‏ (‎*.kml)"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:431
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "Marble::BookmarkManagerDialog|"
 msgid "The file %1 cannot be opened as a KML file."
-msgstr "הקובץ הוא לא קובץ DGML 2.0 תקני"
+msgstr "לא ניתן לפתוח את הקובץ %1 כקובץ KML."
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:432
 msgctxt "Marble::BookmarkManagerDialog|"
@@ -9882,10 +9880,9 @@ msgid "Up"
 msgstr "למעלה"
 
 #: src/lib/marble/MarbleNavigator.ui:65
-#, fuzzy
 msgctxt "MarbleNavigator|"
 msgid "Tilts the globe's axis towards the user."
-msgstr "הטיית ציר כדור הארץ לעברך."
+msgstr "הטיית ציר כדור הארץ כלפיך."
 
 #: src/lib/marble/MarbleNavigator.ui:68 src/lib/marble/MarbleNavigator.ui:84
 #: src/lib/marble/MarbleNavigator.ui:103 src/lib/marble/MarbleNavigator.ui:122
@@ -9901,10 +9898,9 @@ msgid "Left"
 msgstr ""
 
 #: src/lib/marble/MarbleNavigator.ui:81
-#, fuzzy
 msgctxt "MarbleNavigator|"
 msgid "Rotates the globe counterclockwise around its axis."
-msgstr "סיבוב כדור הארץ סביב צירו נגד כיוון השעון."
+msgstr "סיבוב כדור הארץ נגד כיוון השעון."
 
 #: src/lib/marble/MarbleNavigator.ui:97
 msgctxt "MarbleNavigator|"
@@ -9927,10 +9923,9 @@ msgid "Right"
 msgstr "ימינה"
 
 #: src/lib/marble/MarbleNavigator.ui:119
-#, fuzzy
 msgctxt "MarbleNavigator|"
 msgid "Rotates the globe clockwise around its axis."
-msgstr "סיבוב כדור הארץ סביב צירו עם כיוון השעון."
+msgstr "סיבוב כדור הארץ עם כיוון השעון."
 
 #: src/lib/marble/MarbleNavigator.ui:135
 msgctxt "MarbleNavigator|"
@@ -9938,7 +9933,6 @@ msgid "Down"
 msgstr "למטה"
 
 #: src/lib/marble/MarbleNavigator.ui:138
-#, fuzzy
 msgctxt "MarbleNavigator|"
 msgid "Tilts the globe's axis away from the user."
 msgstr "הטיית ציר כדור הארץ הרחק ממך."
@@ -16473,7 +16467,7 @@ msgstr ""
 #: src/plugins/runner/gpsbabel/GpsbabelPlugin.cpp:33
 msgctxt "Marble::GpsbabelPlugin|"
 msgid "Allows loading of NMEA files through GPSBabel."
-msgstr ""
+msgstr "אפשרות לטעינת קובצי NMEA דרך GPSBabel."
 
 #: src/plugins/runner/gpsbabel/GpsbabelPlugin.cpp:48
 msgctxt "Marble::GpsbabelPlugin|"
@@ -16864,12 +16858,12 @@ msgstr "צפון־מזרח"
 #: src/plugins/runner/localdatabase/LocalDatabasePlugin.cpp:19
 msgctxt "Marble::LocalDatabasePlugin|"
 msgid "Local Database Search"
-msgstr ""
+msgstr "חיפוש במסד נתונים מקומי"
 
 #: src/plugins/runner/localdatabase/LocalDatabasePlugin.cpp:24
 msgctxt "Marble::LocalDatabasePlugin|"
 msgid "Local Database"
-msgstr ""
+msgstr "מסד נתונים מקומי"
 
 #: src/plugins/runner/localdatabase/LocalDatabasePlugin.cpp:39
 msgctxt "Marble::LocalDatabasePlugin|"
@@ -16889,7 +16883,7 @@ msgstr ""
 #: src/plugins/runner/log/LogPlugin.cpp:48
 msgctxt "Marble::LogfilePlugin|"
 msgid "TangoGPS Log Files"
-msgstr ""
+msgstr "קובצי יומן TangoGPS"
 
 #: src/plugins/runner/mapquest/MapQuestConfigWidget.ui:17
 msgctxt "MapQuestConfigWidget|"
@@ -16909,22 +16903,22 @@ msgstr ""
 #: src/plugins/runner/mapquest/MapQuestConfigWidget.ui:50
 msgctxt "MapQuestConfigWidget|"
 msgid "Avoid tollways"
-msgstr ""
+msgstr "הימנעות מכבישי אגרה"
 
 #: src/plugins/runner/mapquest/MapQuestConfigWidget.ui:57
 msgctxt "MapQuestConfigWidget|"
 msgid "Avoid ferries"
-msgstr ""
+msgstr "הימנעות ממעבורות"
 
 #: src/plugins/runner/mapquest/MapQuestConfigWidget.ui:64
 msgctxt "MapQuestConfigWidget|"
 msgid "Ascending slope:"
-msgstr ""
+msgstr "מדרון עולה:"
 
 #: src/plugins/runner/mapquest/MapQuestConfigWidget.ui:77
 msgctxt "MapQuestConfigWidget|"
 msgid "Descending slope:"
-msgstr ""
+msgstr "מדרון יורד:"
 
 #: src/plugins/runner/mapquest/MapQuestConfigWidget.ui:96
 msgctxt "MapQuestConfigWidget|"
@@ -16937,7 +16931,7 @@ msgstr ""
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:19
 msgctxt "Marble::MapQuestPlugin|"
 msgid "This service requires an Internet connection."
-msgstr ""
+msgstr "השירות הזה דורש חיבור לאינטרנט."
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:24
 msgctxt "Marble::MapQuestPlugin|"
@@ -16977,7 +16971,7 @@ msgstr "אופניים"
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:77
 msgctxt "Marble::MapQuestConfigWidget|"
 msgid "Transit (Public Transport)"
-msgstr ""
+msgstr "תעבורה (תחבורה ציבורית)"
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:79
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:83
@@ -17302,12 +17296,12 @@ msgstr "אופניים (מסלול הרים)"
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:79
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
 msgid "Bicycle (Racer)"
-msgstr ""
+msgstr "אופניים (מרוץ)"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:80
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
 msgid "Bicycle (safest track)"
-msgstr ""
+msgstr "אופניים (המסלול הבטוח ביותר)"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:81
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
@@ -17352,7 +17346,7 @@ msgstr "מפענח קובצי Pnt"
 #: src/plugins/runner/pnt/PntPlugin.cpp:33
 msgctxt "Marble::PntPlugin|"
 msgid "Create GeoDataDocument from Pnt Files"
-msgstr ""
+msgstr "יצירת GeoDataDocument מקובצי Pnt"
 
 #: src/plugins/runner/pnt/PntPlugin.cpp:48
 msgctxt "Marble::PntPlugin|"
