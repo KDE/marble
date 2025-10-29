@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-19 00:38+0000\n"
+"POT-Creation-Date: 2025-10-29 00:39+0000\n"
 "PO-Revision-Date: 2022-07-11 15:42+0200\n"
 "Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -30,236 +30,236 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "toscano.pino@tiscali.it"
 
-#: kdemain.cpp:84
+#: kdemain.cpp:85
 #, kde-format
 msgid "Marble Virtual Globe"
 msgstr "Globo virtuale Marble"
 
-#: kdemain.cpp:86
+#: kdemain.cpp:87
 #, kde-format
 msgid "A World Atlas."
 msgstr "Atlante del mondo."
 
-#: kdemain.cpp:88
+#: kdemain.cpp:89
 #, kde-format
 msgid "(c) 2007-%1"
 msgstr "(c) 2007-%1"
 
-#: kdemain.cpp:93 kdemain.cpp:208
+#: kdemain.cpp:94 kdemain.cpp:209
 #, kde-format
 msgid "Torsten Rahn"
 msgstr "Torsten Rahn"
 
-#: kdemain.cpp:93
+#: kdemain.cpp:94
 #, kde-format
 msgid "Developer and Original Author"
 msgstr "Sviluppatore e autore originale"
 
-#: kdemain.cpp:94
+#: kdemain.cpp:95
 #, kde-format
 msgid "Bernhard Beschow"
 msgstr "Bernhard Beschow"
 
-#: kdemain.cpp:94
+#: kdemain.cpp:95
 #, kde-format
 msgid "WMS Support, Mobile, Performance"
 msgstr ""
 "Supporto WMS, supporto a dispositivi mobili, miglioramenti alle prestazioni"
 
-#: kdemain.cpp:95
+#: kdemain.cpp:96
 #, kde-format
 msgid "Thibaut Gridel"
 msgstr "Thibaut Gridel"
 
-#: kdemain.cpp:95
+#: kdemain.cpp:96
 #, kde-format
 msgid "Geodata"
 msgstr "Dati geografici"
 
-#: kdemain.cpp:96
+#: kdemain.cpp:97
 #, kde-format
 msgid "Jens-Michael Hoffmann"
 msgstr "Jens-Michael Hoffmann"
 
-#: kdemain.cpp:96
+#: kdemain.cpp:97
 #, kde-format
 msgid "OpenStreetMap Integration, OSM Namefinder, Download Management"
 msgstr ""
 "Integrazione e ricerca dei nomi di OpenStreetMap, gestione scaricamenti"
 
-#: kdemain.cpp:97
+#: kdemain.cpp:98
 #, kde-format
 msgid "Florian E&szlig;er"
 msgstr "Florian E&szlig;er"
 
-#: kdemain.cpp:97
+#: kdemain.cpp:98
 #, kde-format
 msgid "Elevation Profile"
 msgstr "Profilo altimetrico"
 
-#: kdemain.cpp:98
+#: kdemain.cpp:99
 #, kde-format
 msgid "Wes Hardaker"
 msgstr "Wes Hardaker"
 
-#: kdemain.cpp:98
+#: kdemain.cpp:99
 #, kde-format
 msgid "APRS Plugin"
 msgstr "Estensione APRS"
 
-#: kdemain.cpp:99 kdemain.cpp:153
+#: kdemain.cpp:100 kdemain.cpp:154
 #, kde-format
 msgid "Bastian Holst"
 msgstr "Bastian Holst"
 
-#: kdemain.cpp:99
+#: kdemain.cpp:100
 #, kde-format
 msgid "Online Services support"
 msgstr "Supporto per servizi online"
 
-#: kdemain.cpp:100 kdemain.cpp:123
+#: kdemain.cpp:101 kdemain.cpp:124
 #, kde-format
 msgid "Guillaume Martres"
 msgstr "Guillaume Martres"
 
-#: kdemain.cpp:100
+#: kdemain.cpp:101
 #, kde-format
 msgid "Satellites"
 msgstr "Satelliti"
 
-#: kdemain.cpp:101 kdemain.cpp:119
+#: kdemain.cpp:102 kdemain.cpp:120
 #, kde-format
 msgid "Rene Kuettner"
 msgstr "Rene Kuettner"
 
-#: kdemain.cpp:101
+#: kdemain.cpp:102
 #, kde-format
 msgid "Satellites, Eclipses"
 msgstr "Satelliti, eclissi"
 
-#: kdemain.cpp:102
+#: kdemain.cpp:103
 #, kde-format
 msgid "Friedrich W. H. Kossebau"
 msgstr "Friedrich W. H. Kossebau"
 
-#: kdemain.cpp:102
+#: kdemain.cpp:103
 #, kde-format
 msgid "Plasma Integration, Bugfixes"
 msgstr "Integrazione con Plasma, correzioni di bug"
 
-#: kdemain.cpp:103
+#: kdemain.cpp:104
 #, kde-format
 msgid "Dennis Nienhüser"
 msgstr "Dennis Nienhüser"
 
-#: kdemain.cpp:103
+#: kdemain.cpp:104
 #, kde-format
 msgid "Routing, Navigation, Mobile"
 msgstr "Itinerari, navigazione, supporto per dispositivi mobili"
 
-#: kdemain.cpp:104
+#: kdemain.cpp:105
 #, kde-format
 msgid "Niko Sams"
 msgstr "Niko Sams"
 
-#: kdemain.cpp:104
+#: kdemain.cpp:105
 #, kde-format
 msgid "Routing, Elevation Profile"
 msgstr "Itinerari, profilo altimetrico"
 
-#: kdemain.cpp:105 kdemain.cpp:157
+#: kdemain.cpp:106 kdemain.cpp:158
 #, kde-format
 msgid "Patrick Spendrin"
 msgstr "Patrick Spendrin"
 
-#: kdemain.cpp:105
+#: kdemain.cpp:106
 #, kde-format
 msgid "Core Developer: KML and Windows support"
 msgstr "Sviluppatore principale: supporto KML e a Windows"
 
-#: kdemain.cpp:106
+#: kdemain.cpp:107
 #, kde-format
 msgid "Eckhart Wörner"
 msgstr "Eckhart Wörner"
 
-#: kdemain.cpp:106
+#: kdemain.cpp:107
 #, kde-format
 msgid "Bugfixes"
 msgstr "Correzioni di bug"
 
-#: kdemain.cpp:110
+#: kdemain.cpp:111
 #, kde-format
 msgid "Inge Wallin"
 msgstr "Inge Wallin"
 
-#: kdemain.cpp:110
+#: kdemain.cpp:111
 #, kde-format
 msgid "Core Developer and Co-Maintainer"
 msgstr "Sviluppatore principale e responsabile"
 
-#: kdemain.cpp:111
+#: kdemain.cpp:112
 #, kde-format
 msgid "Henry de Valence"
 msgstr "Henry de Valence"
 
-#: kdemain.cpp:111
+#: kdemain.cpp:112
 #, kde-format
 msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
 msgstr ""
 "Sviluppatore principale: esecutori di Marble, oggetto «Orologio del mondo» "
 "per Plasma "
 
-#: kdemain.cpp:112
+#: kdemain.cpp:113
 #, kde-format
 msgid "Pino Toscano"
 msgstr "Pino Toscano"
 
-#: kdemain.cpp:112
+#: kdemain.cpp:113
 #, kde-format
 msgid "Network plugins"
 msgstr "Estensioni di rete"
 
-#: kdemain.cpp:113
+#: kdemain.cpp:114
 #, kde-format
 msgid "Harshit Jain"
 msgstr "Harshit Jain"
 
-#: kdemain.cpp:113
+#: kdemain.cpp:114
 #, kde-format
 msgid "Planet filter"
 msgstr "Filtro dei pianeti"
 
-#: kdemain.cpp:114
+#: kdemain.cpp:115
 #, kde-format
 msgid "Simon Edwards"
 msgstr "Simon Edwards"
 
-#: kdemain.cpp:114
+#: kdemain.cpp:115
 #, kde-format
 msgid "Marble Python Bindings"
 msgstr "Binding Python per Marble"
 
-#: kdemain.cpp:115
+#: kdemain.cpp:116
 #, kde-format
 msgid "Magnus Valle"
 msgstr "Magnus Valle"
 
-#: kdemain.cpp:115
+#: kdemain.cpp:116
 #, kde-format
 msgid "Historical Maps"
 msgstr "Mappe storiche"
 
-#: kdemain.cpp:116
+#: kdemain.cpp:117
 #, kde-format
 msgid "Médéric Boquien"
 msgstr "Médéric Boquien"
 
-#: kdemain.cpp:116
+#: kdemain.cpp:117
 #, kde-format
 msgid "Astronomical Observatories"
 msgstr "Osservatori astronomici"
 
-#: kdemain.cpp:120
+#: kdemain.cpp:121
 #, kde-format
 msgid ""
 "ESA Summer of Code in Space 2012 Project: Visualization of planetary "
@@ -268,7 +268,7 @@ msgstr ""
 "Progetto ESA Summer of Code in Space 2011: visualizzazione dei satelliti "
 "planetari"
 
-#: kdemain.cpp:124
+#: kdemain.cpp:125
 #, kde-format
 msgid ""
 "ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
@@ -276,84 +276,84 @@ msgstr ""
 "Progetto ESA Summer of Code in Space 2011: visualizzazione delle orbite di "
 "satelliti"
 
-#: kdemain.cpp:129
+#: kdemain.cpp:130
 #, kde-format
 msgid "Konstantin Oblaukhov"
 msgstr "Konstantin Oblaukhov"
 
-#: kdemain.cpp:130
+#: kdemain.cpp:131
 #, kde-format
 msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
 msgstr ""
 "Progetto Google Summer of Code 2011: visualizzazione vettoriale di "
 "OpenStreetMap"
 
-#: kdemain.cpp:133
+#: kdemain.cpp:134
 #, kde-format
 msgid "Daniel Marth"
 msgstr "Daniel Marth"
 
-#: kdemain.cpp:134
+#: kdemain.cpp:135
 #, kde-format
 msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
 msgstr "Progetto Google Summer of Code 2011: Marble Touch su MeeGo"
 
-#: kdemain.cpp:137
+#: kdemain.cpp:138
 #, kde-format
 msgid "Gaurav Gupta"
 msgstr "Gaurav Gupta"
 
-#: kdemain.cpp:138
+#: kdemain.cpp:139
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Bookmarks"
 msgstr "Progetto Google Summer of Code 2010: segnalibri"
 
-#: kdemain.cpp:141
+#: kdemain.cpp:142
 #, kde-format
 msgid "Harshit Jain "
 msgstr "Harshit Jain "
 
-#: kdemain.cpp:142
+#: kdemain.cpp:143
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Time Support"
 msgstr "Progetto Google Summer of Code 2010: supporto per il tempo"
 
-#: kdemain.cpp:145
+#: kdemain.cpp:146
 #, kde-format
 msgid "Siddharth Srivastava"
 msgstr "Siddharth Srivastava"
 
-#: kdemain.cpp:146
+#: kdemain.cpp:147
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
 msgstr "Progetto Google Summer of Code 2010: navigazione passo dopo passo"
 
-#: kdemain.cpp:149 kdemain.cpp:169
+#: kdemain.cpp:150 kdemain.cpp:170
 #, kde-format
 msgid "Andrew Manson"
 msgstr "Andrew Manson"
 
-#: kdemain.cpp:150
+#: kdemain.cpp:151
 #, kde-format
 msgid "Google Summer of Code 2009 Project: OSM Annotation"
 msgstr "Progetto Google Summer of Code 2009: annotazioni OSM"
 
-#: kdemain.cpp:154
+#: kdemain.cpp:155
 #, kde-format
 msgid "Google Summer of Code 2009 Project: Online Services"
 msgstr "Progetto Google Summer of Code 2009: servizi in linea"
 
-#: kdemain.cpp:158
+#: kdemain.cpp:159
 #, kde-format
 msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
 msgstr "Progetto Google Summer of Code 2008: tessere vettoriali per Marble"
 
-#: kdemain.cpp:161
+#: kdemain.cpp:162
 #, kde-format
 msgid "Shashank Singh"
 msgstr "Shashank Singh"
 
-#: kdemain.cpp:162
+#: kdemain.cpp:163
 #, kde-format
 msgid ""
 "Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
@@ -362,12 +362,12 @@ msgstr ""
 "Progetto Google Summer of Code 2008: Supporto per foto di Panoramio e "
 "Wikipedia per Marble"
 
-#: kdemain.cpp:165
+#: kdemain.cpp:166
 #, kde-format
 msgid "Carlos Licea"
 msgstr "Carlos Licea"
 
-#: kdemain.cpp:166
+#: kdemain.cpp:167
 #, kde-format
 msgid ""
 "Google Summer of Code 2007 Project: Equirectangular Projection (\"Flat Map\")"
@@ -375,250 +375,250 @@ msgstr ""
 "Progetto Google Summer of Code 2007: proiezione piana rettangolare (\"mappa "
 "piana\")"
 
-#: kdemain.cpp:170
+#: kdemain.cpp:171
 #, kde-format
 msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
 msgstr "Progetto Google Summer of Code 2007: supporto GPS per Marble"
 
-#: kdemain.cpp:173
+#: kdemain.cpp:174
 #, kde-format
 msgid "Murad Tagirov"
 msgstr "Murad Tagirov"
 
-#: kdemain.cpp:174
+#: kdemain.cpp:175
 #, kde-format
 msgid "Google Summer of Code 2007 Project: KML Support for Marble"
 msgstr "Progetto Google Summer of Code 2007: supporto KML per Marble"
 
-#: kdemain.cpp:179
+#: kdemain.cpp:180
 #, kde-format
 msgid "Simon Schmeisser"
 msgstr "Simon Schmeisser"
 
-#: kdemain.cpp:179 kdemain.cpp:180 kdemain.cpp:181 kdemain.cpp:182
-#: kdemain.cpp:183 kdemain.cpp:184 kdemain.cpp:185 kdemain.cpp:186
-#: kdemain.cpp:187 kdemain.cpp:188 kdemain.cpp:189 kdemain.cpp:190
-#: kdemain.cpp:191 kdemain.cpp:192 kdemain.cpp:193 kdemain.cpp:194
-#: kdemain.cpp:195 kdemain.cpp:196 kdemain.cpp:197
+#: kdemain.cpp:180 kdemain.cpp:181 kdemain.cpp:182 kdemain.cpp:183
+#: kdemain.cpp:184 kdemain.cpp:185 kdemain.cpp:186 kdemain.cpp:187
+#: kdemain.cpp:188 kdemain.cpp:189 kdemain.cpp:190 kdemain.cpp:191
+#: kdemain.cpp:192 kdemain.cpp:193 kdemain.cpp:194 kdemain.cpp:195
+#: kdemain.cpp:196 kdemain.cpp:197 kdemain.cpp:198
 #, kde-format
 msgid "Development & Patches"
 msgstr "Sviluppo e patch"
 
-#: kdemain.cpp:180
+#: kdemain.cpp:181
 #, kde-format
 msgid "Claudiu Covaci"
 msgstr "Claudiu Covaci"
 
-#: kdemain.cpp:181
+#: kdemain.cpp:182
 #, kde-format
 msgid "David Roberts"
 msgstr "David Roberts"
 
-#: kdemain.cpp:182
+#: kdemain.cpp:183
 #, kde-format
 msgid "Nikolas Zimmermann"
 msgstr "Nikolas Zimmermann"
 
-#: kdemain.cpp:183
+#: kdemain.cpp:184
 #, kde-format
 msgid "Jan Becker"
 msgstr "Jan Becker"
 
-#: kdemain.cpp:184
+#: kdemain.cpp:185
 #, kde-format
 msgid "Stefan Asserhäll"
 msgstr "Stefan Asserhäll"
 
-#: kdemain.cpp:185
+#: kdemain.cpp:186
 #, kde-format
 msgid "Laurent Montel"
 msgstr "Laurent Montel"
 
-#: kdemain.cpp:186
+#: kdemain.cpp:187
 #, kde-format
 msgid "Mayank Madan"
 msgstr "Mayank Madan"
 
-#: kdemain.cpp:187
+#: kdemain.cpp:188
 #, kde-format
 msgid "Prashanth Udupa"
 msgstr "Prashanth Udupa"
 
-#: kdemain.cpp:188
+#: kdemain.cpp:189
 #, kde-format
 msgid "Anne-Marie Mahfouf"
 msgstr "Anne-Marie Mahfouf"
 
-#: kdemain.cpp:189
+#: kdemain.cpp:190
 #, kde-format
 msgid "Josef Spillner"
 msgstr "Josef Spillner"
 
-#: kdemain.cpp:190
+#: kdemain.cpp:191
 #, kde-format
 msgid "Frerich Raabe"
 msgstr "Frerich Raabe"
 
-#: kdemain.cpp:191
+#: kdemain.cpp:192
 #, kde-format
 msgid "Frederik Gladhorn"
 msgstr "Frederik Gladhorn"
 
-#: kdemain.cpp:192
+#: kdemain.cpp:193
 #, kde-format
 msgid "Fredrik Höglund"
 msgstr "Fredrik Höglund"
 
-#: kdemain.cpp:193
+#: kdemain.cpp:194
 #, kde-format
 msgid "Albert Astals Cid"
 msgstr "Albert Astals Cid"
 
-#: kdemain.cpp:194
+#: kdemain.cpp:195
 #, kde-format
 msgid "Thomas Zander"
 msgstr "Thomas Zander"
 
-#: kdemain.cpp:195
+#: kdemain.cpp:196
 #, kde-format
 msgid "Joseph Wenninger"
 msgstr "Joseph Wenninger"
 
-#: kdemain.cpp:196
+#: kdemain.cpp:197
 #, kde-format
 msgid "Kris Thomsen"
 msgstr "Kris Thomsen"
 
-#: kdemain.cpp:197
+#: kdemain.cpp:198
 #, kde-format
 msgid "Daniel Molkentin"
 msgstr "Daniel Molkentin"
 
-#: kdemain.cpp:198
+#: kdemain.cpp:199
 #, kde-format
 msgid "Christophe Leske"
 msgstr "Christophe Leske"
 
-#: kdemain.cpp:198 kdemain.cpp:199 kdemain.cpp:200 kdemain.cpp:201
-#: kdemain.cpp:202 kdemain.cpp:203 kdemain.cpp:204 kdemain.cpp:205
-#: kdemain.cpp:206
+#: kdemain.cpp:199 kdemain.cpp:200 kdemain.cpp:201 kdemain.cpp:202
+#: kdemain.cpp:203 kdemain.cpp:204 kdemain.cpp:205 kdemain.cpp:206
+#: kdemain.cpp:207
 #, kde-format
 msgid "Platforms & Distributions"
 msgstr "Piattaforme e distribuzioni"
 
-#: kdemain.cpp:199
+#: kdemain.cpp:200
 #, kde-format
 msgid "Sebastian Wiedenroth"
 msgstr "Sebastian Wiedenroth"
 
-#: kdemain.cpp:200
+#: kdemain.cpp:201
 #, kde-format
 msgid "Tim Sutton"
 msgstr "Tim Sutton"
 
-#: kdemain.cpp:201
+#: kdemain.cpp:202
 #, kde-format
 msgid "Christian Ehrlicher"
 msgstr "Christian Ehrlicher"
 
-#: kdemain.cpp:202
+#: kdemain.cpp:203
 #, kde-format
 msgid "Ralf Habacker"
 msgstr "Ralf Habacker"
 
-#: kdemain.cpp:203
+#: kdemain.cpp:204
 #, kde-format
 msgid "Steffen Joeris"
 msgstr "Steffen Joeris"
 
-#: kdemain.cpp:204
+#: kdemain.cpp:205
 #, kde-format
 msgid "Marcus Czeslinski"
 msgstr "Marcus Czeslinski"
 
-#: kdemain.cpp:205
+#: kdemain.cpp:206
 #, kde-format
 msgid "Marcus D. Hanwell"
 msgstr "Marcus D. Hanwell"
 
-#: kdemain.cpp:206
+#: kdemain.cpp:207
 #, kde-format
 msgid "Chitlesh Goorah"
 msgstr "Chitlesh Goorah"
 
-#: kdemain.cpp:207
+#: kdemain.cpp:208
 #, kde-format
 msgid "Nuno Pinheiro"
 msgstr "Nuno Pinheiro"
 
-#: kdemain.cpp:207 kdemain.cpp:208
+#: kdemain.cpp:208 kdemain.cpp:209
 #, kde-format
 msgid "Artwork"
 msgstr "Grafica"
 
-#: kdemain.cpp:211
+#: kdemain.cpp:212
 #, kde-format
 msgid "Luis Silva"
 msgstr "Luis Silva"
 
-#: kdemain.cpp:211 kdemain.cpp:212 kdemain.cpp:213 kdemain.cpp:214
-#: kdemain.cpp:215 kdemain.cpp:216 kdemain.cpp:217 kdemain.cpp:218
-#: kdemain.cpp:219 kdemain.cpp:220
+#: kdemain.cpp:212 kdemain.cpp:213 kdemain.cpp:214 kdemain.cpp:215
+#: kdemain.cpp:216 kdemain.cpp:217 kdemain.cpp:218 kdemain.cpp:219
+#: kdemain.cpp:220 kdemain.cpp:221
 #, kde-format
 msgid "Various Suggestions & Testing"
 msgstr "Suggerimenti vari e testing"
 
-#: kdemain.cpp:212
+#: kdemain.cpp:213
 #, kde-format
 msgid "Stefan Jordan"
 msgstr "Stefan Jordan"
 
-#: kdemain.cpp:213
+#: kdemain.cpp:214
 #, kde-format
 msgid "Robert Scott"
 msgstr "Robert Scott"
 
-#: kdemain.cpp:214
+#: kdemain.cpp:215
 #, kde-format
 msgid "Lubos Petrovic"
 msgstr "Lubos Petrovic"
 
-#: kdemain.cpp:215
+#: kdemain.cpp:216
 #, kde-format
 msgid "Benoit Sigoure"
 msgstr "Benoit Sigoure"
 
-#: kdemain.cpp:216
+#: kdemain.cpp:217
 #, kde-format
 msgid "Martin Konold"
 msgstr "Martin Konold"
 
-#: kdemain.cpp:217
+#: kdemain.cpp:218
 #, kde-format
 msgid "Matthias Welwarsky"
 msgstr "Matthias Welwarsky"
 
-#: kdemain.cpp:218
+#: kdemain.cpp:219
 #, kde-format
 msgid "Rainer Endres"
 msgstr "Rainer Endres"
 
-#: kdemain.cpp:219
+#: kdemain.cpp:220
 #, kde-format
 msgid "Ralf Gesellensetter"
 msgstr "Ralf Gesellensetter"
 
-#: kdemain.cpp:220
+#: kdemain.cpp:221
 #, kde-format
 msgid "Tim Alder"
 msgstr "Tim Alder"
 
-#: kdemain.cpp:221
+#: kdemain.cpp:222
 #, kde-format
 msgid "John Layt"
 msgstr "John Layt"
 
-#: kdemain.cpp:222
+#: kdemain.cpp:223
 #, kde-format
 msgid ""
 "Special thanks for providing an important source of inspiration by creating "
@@ -627,82 +627,82 @@ msgstr ""
 "Speciali ringraziamenti per aver fornito un'importante fonte di inspirazione "
 "creando il predecessore di Marble, \"Kartographer\"."
 
-#: kdemain.cpp:238
+#: kdemain.cpp:239
 #, kde-format
 msgid "Enable debug output"
 msgstr "Abilita output di debug"
 
-#: kdemain.cpp:241
+#: kdemain.cpp:242
 #, kde-format
 msgid "Display OSM placemarks according to the level selected"
 msgstr "Mostra segnaposti di OSM in base al livello selezionato"
 
-#: kdemain.cpp:243
+#: kdemain.cpp:244
 #, kde-format
 msgid "Make a time measurement to check performance"
 msgstr "Misura il tempo per controllare le prestazioni"
 
-#: kdemain.cpp:245
+#: kdemain.cpp:246
 #, kde-format
 msgid "Show frame rate"
 msgstr "Mostra il numero di fotogrammi al secondo"
 
-#: kdemain.cpp:247
+#: kdemain.cpp:248
 #, kde-format
 msgid "Show tile IDs"
 msgstr "Mostra gli ID delle tessere"
 
-#: kdemain.cpp:249
+#: kdemain.cpp:250
 #, kde-format
 msgid "Show time spent in each layer"
 msgstr "Mostra il tempo impiegato in ogni livello"
 
-#: kdemain.cpp:252
+#: kdemain.cpp:253
 #, kde-format
 msgid "Use a different directory <directory> which contains map data."
 msgstr "Usa una diversa directory <directory> con i dati delle mappe."
 
-#: kdemain.cpp:255
+#: kdemain.cpp:256
 #, kde-format
 msgid "Do not use the interface optimized for small screens"
 msgstr "Non usare l'interfaccia ottimizzata per schermi piccoli"
 
-#: kdemain.cpp:256
+#: kdemain.cpp:257
 #, kde-format
 msgid "Use the interface optimized for small screens"
 msgstr "Usare l'interfaccia ottimizzata per schermi piccoli"
 
-#: kdemain.cpp:258
+#: kdemain.cpp:259
 #, kde-format
 msgid "Do not use the interface optimized for high resolutions"
 msgstr "Non usare l'interfaccia ottimizzata per alte risoluzioni"
 
-#: kdemain.cpp:259
+#: kdemain.cpp:260
 #, kde-format
 msgid "Use the interface optimized for high resolutions"
 msgstr "Usa l'interfaccia ottimizzata per alte risoluzioni"
 
-#: kdemain.cpp:261
+#: kdemain.cpp:262
 #, kde-format
 msgid "Show map at given lat lon <coordinates>"
 msgstr "Mostra mappa alle <coordinate> latitudine/longitudine specificate"
 
-#: kdemain.cpp:263
+#: kdemain.cpp:264
 #, kde-format
 msgid "Show map at given geo <uri>"
 msgstr "Mostra mappa all'URI geografico <uri> specificato"
 
-#: kdemain.cpp:265
+#: kdemain.cpp:266
 #, kde-format
 msgid "Set the distance of the observer to the globe (in km)"
 msgstr "Imposta la distanza dell'osservatore dal globo (in km)"
 
-#: kdemain.cpp:267
+#: kdemain.cpp:268
 #, kde-format
 msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgstr "Usa la mappa <id> (ad es. \"earth/openstreetmap/openstreetmap.dgml\")"
 
-#: kdemain.cpp:269
+#: kdemain.cpp:270
 #, kde-format
 msgid "One or more placemark files to be opened"
 msgstr "Uno o più file di segnaposti da aprire"
