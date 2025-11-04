@@ -2488,7 +2488,7 @@ msgstr "&Configurer Marble"
 #: src/apps/marble-qt/QtMainWindow.cpp:321
 msgctxt "Marble::MainWindow|"
 msgid "Show the configuration dialog"
-msgstr "Afficher la boîte de dialogue de configuration"
+msgstr "Afficher la boite de dialogue de configuration"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:324
 msgctxt "Marble::MainWindow|"
@@ -2613,7 +2613,7 @@ msgstr "&À propos du globe virtuel Marble"
 #: src/apps/marble-qt/QtMainWindow.cpp:381
 msgctxt "Marble::MainWindow|"
 msgid "Show the application's About Box"
-msgstr "Affiche la boîte « À propos de » de l'application"
+msgstr "Affiche la boite « À propos de » de l'application"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:384
 msgctxt "Marble::MainWindow|"
@@ -2623,7 +2623,7 @@ msgstr "À propos de &Qt"
 #: src/apps/marble-qt/QtMainWindow.cpp:385
 msgctxt "Marble::MainWindow|"
 msgid "Show the Qt library's About box"
-msgstr "Affiche la boîte « À propos de » de la bibliothèque Qt"
+msgstr "Affiche la boite « À propos de » de la bibliothèque Qt"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:389
 msgctxt "Marble::MainWindow|"
@@ -2922,7 +2922,7 @@ msgid ""
 "different external editor in the settings dialog."
 msgstr ""
 "Impossible de démarrer l'éditeur externe. Vérifiez que %1 est installé ou "
-"sélectionnez un autre éditeur externe depuis la boîte de dialogue de "
+"sélectionnez un autre éditeur externe depuis la boite de dialogue de "
 "configuration."
 
 #: src/apps/marble-ui/ControlView.cpp:557
@@ -8412,7 +8412,7 @@ msgstr ""
 msgctxt "MapWizard|"
 msgid "It will appear in a tool tip and may contain HTML formatting."
 msgstr ""
-"Il apparaîtra dans une info-bulle et pourrait contenir un format « HTML »."
+"Il apparaitra dans une info-bulle et pourrait contenir un format « HTML »."
 
 #: src/lib/marble/MapWizard.ui:788 src/lib/marble/MapWizard.ui:990
 msgctxt "MapWizard|"
@@ -11486,7 +11486,7 @@ msgid ""
 "it appears from outer space.</p>"
 msgstr ""
 "<p><b>Projection orthographique</b> (« orthogonale »)</p><p>Applications : "
-"une projection en perspective affichant un hémisphère tel qu'il apparaît "
+"une projection en perspective affichant un hémisphère tel qu'il apparait "
 "depuis l'espace.</p>"
 
 #: src/lib/marble/projections/StereographicProjection.cpp:55
@@ -11517,7 +11517,7 @@ msgid ""
 "Applications: Used for Virtual Globes.</p>"
 msgstr ""
 "<p><b>Projection en perspective verticale</b> (« orthogonale »)</"
-"p><p>Affiche la Terre telle qu'elle apparaît depuis une courte distance au-"
+"p><p>Affiche la Terre telle qu'elle apparait depuis une courte distance au-"
 "dessus de sa surface. Applications : utilisée par les globes virtuels.</p>"
 
 #: src/lib/marble/QtMarbleConfigDialog.cpp:99
