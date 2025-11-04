@@ -42,7 +42,7 @@ msgstr "Signets"
 #: Bookmarks.qml:69
 #, kde-format
 msgid "Your bookmarks will appear here."
-msgstr "Vos signets apparaîtront ici."
+msgstr "Vos signets apparaitront ici."
 
 #. i18n: ectx: label, entry (MapThemeId), group (General)
 #: config.kcfg:14
