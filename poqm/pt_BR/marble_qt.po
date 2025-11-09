@@ -8,20 +8,21 @@
 # Aracele Torres <araceletorres@gmail.com>, 2010.
 # Marcus Gama <marcus.gama@gmail.com>, 2011, 2012.
 # Frederico Gonçalves Guimarães <frederico@teia.bio.br>, 2018.
+# SPDX-FileCopyrightText: 2025 Guilherme Marçal Silva <guimarcalsilva@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2025-09-14 08:45-0300\n"
-"Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
+"PO-Revision-Date: 2025-11-08 21:16-0300\n"
+"Last-Translator: Guilherme Marçal Silva <guimarcalsilva@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 25.08.2\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -3145,12 +3146,12 @@ msgstr "Gerenciador de favoritos"
 #: src/lib/marble/BookmarkManagerDialog.ui:25
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Import Bookmarks…"
-msgstr "Importar favoritos..."
+msgstr "Importar favoritos…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Export Bookmarks…"
-msgstr "Exportar favoritos..."
+msgstr "Exportar favoritos…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
@@ -3165,7 +3166,7 @@ msgstr "Novo…"
 #: src/lib/marble/BookmarkManagerDialog.ui:81
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Rename…"
-msgstr "Renomear..."
+msgstr "Renomear…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
 #: src/lib/marble/BookmarkManagerDialog.ui:151
@@ -5018,7 +5019,7 @@ msgstr "&Pasta:"
 #: src/lib/marble/EditBookmarkDialog.ui:79
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Add Folder…"
-msgstr "&Adicionar pasta..."
+msgstr "&Adicionar pasta…"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:106
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -7384,7 +7385,7 @@ msgstr[1] "%n resultados encontrados."
 #: src/lib/marble/GoToDialog.ui:14
 msgctxt "GoTo|"
 msgid "Go To…"
-msgstr "Ir para..."
+msgstr "Ir para…"
 
 #: src/lib/marble/GoToDialog.ui:78
 msgctxt "GoTo|"
@@ -8403,7 +8404,7 @@ msgstr "visualização da imagem"
 #: src/lib/marble/MapWizard.ui:825
 msgctxt "MapWizard|"
 msgid "Change…"
-msgstr "Alterar..."
+msgstr "Alterar…"
 
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
@@ -11171,7 +11172,7 @@ msgstr "Todos os arquivos suportados (*.png)"
 #: src/lib/marble/PlacemarkEditHeader.ui:46
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Browse…"
-msgstr "Navegar..."
+msgstr "Navegar…"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -13687,7 +13688,7 @@ msgstr "Mostra os eclipses por ano:"
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
 msgctxt "EclipsesBrowserDialog|"
 msgid "&Settings…"
-msgstr "&Configurações..."
+msgstr "&Configurações…"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 msgctxt "EclipsesBrowserDialog|"
