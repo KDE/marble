@@ -10409,7 +10409,7 @@ msgstr "Intian vakioaika"
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:113
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Bangladesh Standard Time"
-msgstr "Bangladešin vakioaika"
+msgstr "Bangladeshin vakioaika"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:118
 msgctxt "MarbleTimeSettingsWidget|"
