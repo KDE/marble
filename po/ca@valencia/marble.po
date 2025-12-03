@@ -926,7 +926,7 @@ msgstr "Marble"
 #: marble_part.cpp:279
 #, kde-format
 msgid "An error occurred while trying to save the file.\n"
-msgstr "S'ha produït un error en intentar guardar el fitxer.\n"
+msgstr "S'ha produït un error mentre s'intentava guardar el fitxer.\n"
 
 #: marble_part.cpp:461
 #, kde-format

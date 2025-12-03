@@ -2757,7 +2757,7 @@ msgstr "Imatges (*.jpg *.png)"
 #: src/apps/marble-qt/QtMainWindow.cpp:748
 msgctxt "Marble::MainWindow|"
 msgid "An error occurred while trying to save the file.\n"
-msgstr "S'ha produït un error en intentar guardar el fitxer.\n"
+msgstr "S'ha produït un error mentre s'intentava guardar el fitxer.\n"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:870
 #, qt-format
@@ -3360,7 +3360,7 @@ msgstr "S'està esperant la informació de l'emplaçament actual…"
 #: src/lib/marble/CurrentLocationWidget.cpp:192
 msgctxt "QObject|"
 msgid "Error when determining current location: "
-msgstr "S'ha produït un error en determinar l'emplaçament actual: "
+msgstr "S'ha produït un error mentre es determinava l'emplaçament actual: "
 
 #: src/lib/marble/CurrentLocationWidget.cpp:253
 #: src/plugins/render/weather/WeatherData.cpp:524
@@ -7719,7 +7719,7 @@ msgstr "Vista prèvia del mapa"
 #: src/lib/marble/MapWizard.cpp:287 src/lib/marble/MapWizard.cpp:291
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
-msgstr "S'ha produït un error en l'anàlisi sintàctica de"
+msgstr "S'ha produït un error durant l'anàlisi"
 
 #: src/lib/marble/MapWizard.cpp:287
 msgctxt "Marble::MapWizard|"
