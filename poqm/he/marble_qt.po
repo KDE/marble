@@ -10,14 +10,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2025-11-14 20:02+0200\n"
+"PO-Revision-Date: 2025-12-18 12:10+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.08.3\n"
+"X-Generator: Lokalize 25.12.0\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
 "X-Qt-Contexts: true\n"
@@ -3082,10 +3082,9 @@ msgid "The file contains a bookmark that already exists among your Bookmarks."
 msgstr "הקובץ מכיל סימנייה שכבר קיימת בין הסימניות שלך."
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:466
-#, fuzzy
 msgctxt "BookmarkManagerDialogPrivate|"
 msgid "Imported bookmark"
-msgstr "ייצא מפה"
+msgstr "סימנייה מיובאת"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:467
 msgctxt "BookmarkManagerDialogPrivate|"
@@ -7400,10 +7399,9 @@ msgid "Select a geographic region"
 msgstr "נא לבחור אזור גאוגרפי"
 
 #: src/lib/marble/LatLonBoxWidget.ui:41
-#, fuzzy
 msgctxt "LatLonBoxWidget|"
 msgid "Northern Latitude"
-msgstr "קו &רוחב"
+msgstr "קו רוחב צפוני"
 
 #: src/lib/marble/LatLonBoxWidget.ui:47 src/lib/marble/LatLonBoxWidget.ui:99
 #: src/lib/marble/LatLonBoxWidget.ui:151 src/lib/marble/LatLonBoxWidget.ui:203
@@ -7412,28 +7410,24 @@ msgid "°"
 msgstr ""
 
 #: src/lib/marble/LatLonBoxWidget.ui:66
-#, fuzzy
 msgctxt "LatLonBoxWidget|"
 msgid "&N"
-msgstr "צ"
+msgstr "&צפ׳"
 
 #: src/lib/marble/LatLonBoxWidget.ui:93
-#, fuzzy
 msgctxt "LatLonBoxWidget|"
 msgid "Western Longitude"
-msgstr "קו &אורך"
+msgstr "קו אורך מערבי"
 
 #: src/lib/marble/LatLonBoxWidget.ui:118
-#, fuzzy
 msgctxt "LatLonBoxWidget|"
 msgid "&W"
-msgstr "מע"
+msgstr "מ&ע׳"
 
 #: src/lib/marble/LatLonBoxWidget.ui:145
-#, fuzzy
 msgctxt "LatLonBoxWidget|"
 msgid "Eastern Longitude"
-msgstr "קו &אורך"
+msgstr "קו אורך מזרחי"
 
 #: src/lib/marble/LatLonBoxWidget.ui:170
 msgctxt "LatLonBoxWidget|"
@@ -7441,10 +7435,9 @@ msgid "&E"
 msgstr "מ&ז׳"
 
 #: src/lib/marble/LatLonBoxWidget.ui:197
-#, fuzzy
 msgctxt "LatLonBoxWidget|"
 msgid "Southern Latitude"
-msgstr "קו &רוחב"
+msgstr "קו רוחב דרומי"
 
 #: src/lib/marble/LatLonBoxWidget.ui:222
 msgctxt "LatLonBoxWidget|"
