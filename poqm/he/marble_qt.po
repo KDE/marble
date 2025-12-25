@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2025-12-18 12:10+0200\n"
+"PO-Revision-Date: 2025-12-24 18:25+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -13544,10 +13544,9 @@ msgid "Route"
 msgstr "נתיב"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:77
-#, fuzzy
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Track: "
-msgstr "עקוב אחר GPS"
+msgstr "מסלול: "
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:90
 msgctxt "Marble::ElevationProfileContextMenu|"
