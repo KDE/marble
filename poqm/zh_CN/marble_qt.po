@@ -9933,9 +9933,9 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\">在对虚拟地球仪拖动鼠标时，"
 "可以设置 Marble 使用两种标准行为之一：</p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">鼠标光标下方的位置将精确跟"
-"随光标，北极点将不会锁定在画面顶端，这会造成一些不便。Marble 的默认设置则是将"
-"北极点锁定到画面顶端，但这又会造成鼠标在每次拖动时都会稍微偏离光标的实际行"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">鼠标指针下方的位置将精确跟"
+"随指针，北极点将不会锁定在画面顶端，这会造成一些不便。Marble 的默认设置则是将"
+"北极点锁定到画面顶端，但这又会造成鼠标在每次拖动时都会稍微偏离指针的实际行"
 "程。</p></body></html>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:58
@@ -9946,7 +9946,7 @@ msgstr "保持极轴垂直"
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:63
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Follow Mouse Pointer"
-msgstr "跟随鼠标光标"
+msgstr "跟随鼠标指针"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:73
 msgctxt "MarbleNavigationSettingsWidget|"
