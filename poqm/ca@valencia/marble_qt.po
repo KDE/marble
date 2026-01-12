@@ -3291,7 +3291,7 @@ msgstr "Conflicte de sincronització"
 #, qt-format
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "Server '%1' could not be reached"
-msgstr "No s'ha pogut accedir a l'amfitrió «%1»"
+msgstr "No s'ha pogut accedir al servidor «%1»"
 
 #: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:304
 msgctxt "Marble::OwncloudSyncBackend|"
