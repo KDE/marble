@@ -6,18 +6,18 @@
 # Diego Iastrubni <elcuco@kde.org>, 2008, 2012.
 # Elkana Bardugo <ttv200@gmail.com>, 2016.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
-# SPDX-FileCopyrightText: 2024, 2025 Yaron Shahrabani <sh.yaron@gmail.com>
+# SPDX-FileCopyrightText: 2024, 2025, 2026 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2025-12-24 18:25+0200\n"
+"PO-Revision-Date: 2026-01-16 11:07+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.12.0\n"
+"X-Generator: Lokalize 25.12.1\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
 "X-Qt-Contexts: true\n"
@@ -34,6 +34,9 @@ msgid ""
 "(UVVIS Basemap Mosaic). Credits: NASA/SDIO, Courtesy <a href=\"http://"
 "astrogeology.usgs.gov\">USGS Astrogeology Research Program</a></p>"
 msgstr ""
+"<p>הירח.</p><p>המפה מבוססת על נתונים ממשימת הירח קלמנטיין (UVVIS Basemap "
+"Mosaic). זכויות יוצרים: NASA/SDIO, באדיבות <a href=\"http://astrogeology."
+"usgs.gov\">תוכנית חקר האסטרולוגיה USGS</a></p>"
 
 #. file data/maps/moon/clementine/clementine.dgml:111
 msgctxt "DGML|"
@@ -133,6 +136,7 @@ msgid ""
 "<a href=\"tour://moon/clementine/tour.kml\">Play a tour of different landing "
 "sites.</a>"
 msgstr ""
+"<a href=\"tour://moon/clementine/tour.kml\">הפעלת סיור באתרי נחיתה שונים.</a>"
 
 #. file data/maps/moon/clementine/clementine.dgml:121
 msgctxt "DGML|"
@@ -157,7 +161,7 @@ msgstr "נחיתה קשה בלתי מאוישת"
 #. file data/maps/moon/clementine/clementine.dgml:142
 msgctxt "DGML|"
 msgid "Crater, impact crater"
-msgstr ""
+msgstr "מכתש, מכתש פגיעה"
 
 #. file data/maps/moon/clementine/clementine.dgml:155
 #, fuzzy
@@ -994,14 +998,14 @@ msgstr "תחנת רכבת"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:176
 msgctxt "DGML|"
 msgid "Railway"
-msgstr ""
+msgstr "מסילת רכבת"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:174
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:180
 msgctxt "DGML|"
 msgid "Subway"
-msgstr ""
+msgstr "רכבת תחתית"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:178
 #. ----------
@@ -1100,7 +1104,7 @@ msgstr ""
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:239
 msgctxt "DGML|"
 msgid "Retail area"
-msgstr ""
+msgstr "אזור קמעונאות"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:237
 #. ----------
@@ -1114,7 +1118,7 @@ msgstr "אזור תעשיה"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:247
 msgctxt "DGML|"
 msgid "Commercial Area"
-msgstr ""
+msgstr "אזור מסחר"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:245
 #. ----------
@@ -1163,7 +1167,7 @@ msgstr ""
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:275
 msgctxt "DGML|"
 msgid "Sports pitch"
-msgstr ""
+msgstr "מגרש ספורט"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:273
 #. ----------
@@ -1415,7 +1419,7 @@ msgstr "בר"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:449
 msgctxt "DGML|"
 msgid "Biergarten"
-msgstr ""
+msgstr "גינת בירה"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:447
 #. ----------
@@ -1597,7 +1601,7 @@ msgstr "גילני (1853)"
 #. file data/maps/earth/behaim1492/behaim1492.dgml:199
 msgctxt "DGML|"
 msgid "Reference lines"
-msgstr ""
+msgstr "קווי סימוכין"
 
 #. file data/maps/earth/behaim1492/behaim1492.dgml:202
 #. ----------
@@ -5406,13 +5410,13 @@ msgstr ""
 #: src/lib/marble/FormattedTextWidget.ui:193
 msgctxt "FormattedTextWidget|"
 msgid "Bold"
-msgstr ""
+msgstr "מודגש"
 
 #: src/lib/marble/FormattedTextWidget.ui:205
 #: src/lib/marble/FormattedTextWidget.ui:208
 msgctxt "FormattedTextWidget|"
 msgid "Italics"
-msgstr ""
+msgstr "נטוי"
 
 #: src/lib/marble/FormattedTextWidget.ui:220
 #: src/lib/marble/FormattedTextWidget.ui:223
@@ -5633,7 +5637,7 @@ msgstr "פרבר"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:390
 msgctxt "GeoDataPlacemark|"
 msgid "Hamlet"
-msgstr ""
+msgstr "כפריר"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:392
 #, fuzzy
@@ -5688,7 +5692,7 @@ msgstr "חוף"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:414
 msgctxt "GeoDataPlacemark|"
 msgid "Wetland"
-msgstr ""
+msgstr "בית גידול לח"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:416
 msgctxt "GeoDataPlacemark|"
@@ -5729,7 +5733,7 @@ msgstr "מעלית"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:430
 msgctxt "GeoDataPlacemark|"
 msgid "Steps"
-msgstr ""
+msgstr "מדרגות"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:432
 #, fuzzy
@@ -5767,7 +5771,7 @@ msgstr "דרך שירות"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:446
 msgctxt "GeoDataPlacemark|"
 msgid "Road"
-msgstr ""
+msgstr "כביש"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:448
 msgctxt "GeoDataPlacemark|"
@@ -5782,7 +5786,7 @@ msgstr "רחוב מגורים"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:452
 msgctxt "GeoDataPlacemark|"
 msgid "Unclassified Road"
-msgstr ""
+msgstr "דרך לא מסווגת"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:454
 #, fuzzy
@@ -5799,27 +5803,27 @@ msgstr "הצג מיקומים"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:458
 msgctxt "GeoDataPlacemark|"
 msgid "Secondary Link Road"
-msgstr ""
+msgstr "דרך קישור משנית"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:460
 msgctxt "GeoDataPlacemark|"
 msgid "Secondary Road"
-msgstr ""
+msgstr "דרך משנית"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:462
 msgctxt "GeoDataPlacemark|"
 msgid "Primary Link Road"
-msgstr ""
+msgstr "דרך קישור ראשית"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:464
 msgctxt "GeoDataPlacemark|"
 msgid "Primary Road"
-msgstr ""
+msgstr "דרך ראשית"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:466
 msgctxt "GeoDataPlacemark|"
 msgid "Raceway"
-msgstr ""
+msgstr "מסלול מרוצים"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:468
 #, fuzzy
@@ -5836,7 +5840,7 @@ msgstr "הצג מיקומים"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:472
 msgctxt "GeoDataPlacemark|"
 msgid "Motorway Link Road"
-msgstr ""
+msgstr "דרך קישור לכביש"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:474
 msgctxt "GeoDataPlacemark|"
@@ -5916,7 +5920,7 @@ msgstr "בר"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:504
 msgctxt "GeoDataPlacemark|"
 msgid "Biergarten"
-msgstr ""
+msgstr "גינת בירה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:506
 msgctxt "GeoDataPlacemark|"
@@ -6197,7 +6201,7 @@ msgstr "חנות מאכלי ים"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:618
 msgctxt "GeoDataPlacemark|"
 msgid "Department Store"
-msgstr ""
+msgstr "כלבו"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:620
 msgctxt "GeoDataPlacemark|"
@@ -6398,12 +6402,12 @@ msgstr "חנות תה"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:700
 msgctxt "GeoDataPlacemark|"
 msgid "Computer Shop"
-msgstr ""
+msgstr "חנות מחשבים"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:702
 msgctxt "GeoDataPlacemark|"
 msgid "Garden Centre"
-msgstr ""
+msgstr "ציוד לגינה"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:704
 msgctxt "GeoDataPlacemark|"
@@ -6448,7 +6452,7 @@ msgstr "מוקד עניין תיירותי"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:720
 msgctxt "GeoDataPlacemark|"
 msgid "Artwork"
-msgstr ""
+msgstr "יצירת אומנות"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:722
 msgctxt "GeoDataPlacemark|"
@@ -6508,7 +6512,7 @@ msgstr "בקתה אלפינית"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:744
 msgctxt "GeoDataPlacemark|"
 msgid "Wilderness Hut"
-msgstr ""
+msgstr "בקתת יער"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:746
 msgctxt "GeoDataPlacemark|"
@@ -6563,7 +6567,7 @@ msgstr "תחנת עצירת אוטובוס"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:766
 msgctxt "GeoDataPlacemark|"
 msgid "Car Sharing"
-msgstr ""
+msgstr "שיתוף מכוניות"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:768
 msgctxt "GeoDataPlacemark|"
