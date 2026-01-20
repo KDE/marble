@@ -4,7 +4,7 @@
 # Niklas Laxström <niklas.laxstrom+kdetrans@gmail.com>, 2007.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016.
 # Jiri Grönroos <jiri.gronroos+kde@iki.fi>, 2010, 2012.
-# Tommi Nieminen <translator@legisign.org>, 2012, 2015, 2021, 2023.
+# SPDX-FileCopyrightText: 2012, 2015, 2021, 2023, 2026 Tommi Nieminen <translator@legisign.org>
 #
 # KDE Finnish translation sprint participants:
 # Author: Artnay
@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:48+0000\n"
-"PO-Revision-Date: 2023-05-18 14:07+0300\n"
+"PO-Revision-Date: 2026-01-16 19:57+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -22,6 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -915,8 +916,7 @@ msgid "Export Map"
 msgstr "Vie kartta"
 
 #: marble_part.cpp:267
-#, fuzzy, kde-format
-#| msgid "Images (*.jpg *.png)"
+#, kde-format
 msgid "Images (*.jpg *.png)"
 msgstr "Kuvat (*.jpg *.png)"
 
