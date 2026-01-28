@@ -2672,7 +2672,7 @@ msgstr "Graus (GMS)"
 #: src/apps/marble-qt/QtMainWindow.cpp:425
 msgctxt "Marble::MainWindow|"
 msgid "Degree (Decimal)"
-msgstr "Graus (Decimal)"
+msgstr "Graus (decimal)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:430
 msgctxt "Marble::MainWindow|"
@@ -2851,19 +2851,19 @@ msgstr "PAL 16:9 (%1x%2)"
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "DVD (%1x%2p)"
-msgstr "DVD (%1x%2p)"
+msgstr "DVD (%1x%2 p)"
 
 #: src/apps/marble-ui/ControlView.cpp:279
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "HD (%1x%2p)"
-msgstr "HD (%1x%2p)"
+msgstr "HD (%1x%2 p)"
 
 #: src/apps/marble-ui/ControlView.cpp:281
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Full HD (%1x%2p)"
-msgstr "Full HD (%1x%2p)"
+msgstr "Full HD (%1x%2 p)"
 
 #: src/apps/marble-ui/ControlView.cpp:282
 #, qt-format
@@ -8123,7 +8123,7 @@ msgid ""
 "Ctrl, Ctrl+A, …)"
 msgstr ""
 "Activeu-la per a seleccionar múltiples capes sense dreceres de teclat "
-"(«Majúscules», «Ctrl», Ctrl+A…)"
+"(«Majúscules», «Ctrl», «Ctrl+A»…)"
 
 #: src/lib/marble/MapWizard.ui:300
 msgctxt "MapWizard|"
@@ -10649,7 +10649,7 @@ msgstr "Graus (GMS)"
 #: src/lib/marble/MarbleViewSettingsWidget.ui:110
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Degree (Decimal)"
-msgstr "Graus (Decimal)"
+msgstr "Graus (decimal)"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:115
 msgctxt "MarbleViewSettingsWidget|"
