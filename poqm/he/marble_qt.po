@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2026-01-16 11:07+0200\n"
+"PO-Revision-Date: 2026-02-13 18:17+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -967,10 +967,9 @@ msgstr ""
 #. file data/maps/earth/vectorosm/vectorosm.dgml:154
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:160
-#, fuzzy
 msgctxt "DGML|"
 msgid "Bridleway"
-msgstr "גבולות"
+msgstr "שביל רכיבה"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:158
 #. ----------
@@ -1010,10 +1009,9 @@ msgstr "רכבת תחתית"
 #. file data/maps/earth/vectorosm/vectorosm.dgml:178
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:184
-#, fuzzy
 msgctxt "DGML|"
 msgid "Lightrail, tram"
-msgstr "פני שטח"
+msgstr "רכבת קלה, חשמלית"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:182
 #. ----------
@@ -1742,10 +1740,9 @@ msgid "Rivers"
 msgstr "נהרות"
 
 #. file data/maps/earth/sentinel2/sentinel2.dgml:5
-#, fuzzy
 msgctxt "DGML|"
 msgid "Sentinel2 Satellite Map"
-msgstr "לווינים"
+msgstr "מפת לוויין Sentinel2"
 
 #. file data/maps/earth/sentinel2/sentinel2.dgml:11
 msgctxt "DGML|"
@@ -9014,7 +9011,7 @@ msgstr ""
 #: src/lib/marble/MarbleAboutDialog.cpp:221
 msgctxt "QObject|"
 msgid "<p><b>2010</b></p>"
-msgstr ""
+msgstr "<p><b>2010</b></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:222
 msgctxt "QObject|"
@@ -9022,6 +9019,8 @@ msgid ""
 "<p>Gaurav Gupta <a href=\"mailto:1989.gaurav@gmail.com\">1989.gaurav@gmail."
 "com</a><br /><i>Project: Bookmarks</i></p>"
 msgstr ""
+"<p>גאורב גופטה <a href=\"mailto:1989.gaurav@gmail.com\">1989.gaurav@gmail."
+"com</a><br /><i>מיזם: סימניות</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:224
 msgctxt "QObject|"
@@ -9029,6 +9028,8 @@ msgid ""
 "<p>Harshit Jain <a href=\"mailto:hjain.itbhu@gmail.com\">hjain.itbhu@gmail."
 "com</a><br /><i>Project: Time Support</i></p>"
 msgstr ""
+"<p>הארשית ג׳איין <a href=\"mailto:hjain.itbhu@gmail.com\">hjain.itbhu@gmail."
+"com</a><br /><i>מיזם: תמיכה בזמן</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:226
 msgctxt "QObject|"
@@ -9036,11 +9037,13 @@ msgid ""
 "<p>Siddharth Srivastava <a href=\"mailto:akssps011@gmail.com"
 "\">akssps011@gmail.com</a><br /><i>Project: Turn-by-turn Navigation</i></p>"
 msgstr ""
+"<p>סידארת סריבסטבה<a href=\"mailto:akssps011@gmail.com\">akssps011@gmail."
+"com</a><br /><i>מיזם: ניווט פנייה אחר פנייה</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:228
 msgctxt "QObject|"
 msgid "<p><b>2009</b></p>"
-msgstr ""
+msgstr "<p><b>2009</b></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:229
 msgctxt "QObject|"
@@ -9048,6 +9051,8 @@ msgid ""
 "<p>Andrew Manson <a href=\"mailto:g.real.ate@gmail.com\">g.real.ate@gmail."
 "com</a><br /><i>Project: OSM Annotation</i></p>"
 msgstr ""
+"<p>אנדרו מנסון <a href=\"mailto:g.real.ate@gmail.com\">g.real.ate@gmail.com</"
+"a><br /><i>מיזם: פרשנויות מ־OSM</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:231
 msgctxt "QObject|"
@@ -9097,6 +9102,8 @@ msgid ""
 "<p>Andrew Manson <a href=\"mailto:g.real.ate@gmail.com\">g.real.ate@gmail."
 "com</a><br /><i>Project: GPS Support for Marble</i></p>"
 msgstr ""
+"<p>אנדרו מנסון <a href=\"mailto:g.real.ate@gmail.com\">g.real.ate@gmail.com</"
+"a><br /><i>מיזם: תמיכה ב־GPS ל־Marble</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:243
 msgctxt "QObject|"
@@ -9104,6 +9111,8 @@ msgid ""
 "<p>Murad Tagirov <a href=\"mailto:tmurad@gmail.com\">tmurad@gmail.com</"
 "a><br /><i>Project: KML Support for Marble</i></p>"
 msgstr ""
+"<p>מוראד טגירוב <a href=\"mailto:tmurad@gmail.com\">tmurad@gmail.com</a><br /"
+"><i>מיזם: תמיכה ב־KML ל־Marble</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:245
 msgctxt "QObject|"
@@ -9231,6 +9240,12 @@ msgid ""
 "\"https://wiki.openstreetmap.org/index.php/OpenStreetMap_License\">Creative "
 "Commons Attribution-ShareAlike 2.0 license</a>.</p>"
 msgstr ""
+"<p><i>OpenRouteService</i><br />חלק מהמסלולים לשימוש ב־Marble דרך הורדה "
+"מסופקים על ידי מיזם <a href=\"https://maps.openrouteservice.org"
+"\">OpenRouteService</a> („ORS”). <br /><i>רישיון</i>: אפשר להשתמש בנתונים של "
+"OpenRouteService באופן חופשי בכפוף <a href=\"https://wiki.openstreetmap.org/"
+"index.php/OpenStreetMap_License\">לרישיון Creative Commons Attribution-"
+"ShareAlike 2.0</a>.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:306
 msgctxt "QObject|"
@@ -9276,6 +9291,10 @@ msgid ""
 "under the terms of the <a href=\"https://creativecommons.org/licenses/by/3.0/"
 "\">Creative Commons Attribution 3.0 license</a>.</p>"
 msgstr ""
+"<p><i>Geonames.org</i><br /><a href=\"https://www.geonames.org/\">https://"
+"www.geonames.org/</a><i>רישיון</i>: אפשר להשתמש בנתונים של Geonames.org "
+"באופן חופשי בכפוף <a href=\"https://creativecommons.org/licenses/by/3.0/"
+"\">לרישיון Creative Commons Attribution 3.0</a>.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:326
 msgctxt "QObject|"
@@ -9283,6 +9302,8 @@ msgid ""
 "<p><i>Czech Statistical Office</i><br />Public database <a href=\"https://"
 "vdb.czso.cz/vdbvo2\">https://www.czso.cz</a></p>"
 msgstr ""
+"<p><i>משרד הסטטיסטיקה הצ׳כי</i><br />מסד נתונים ציבורי <a href=\"https://vdb."
+"czso.cz/vdbvo2\">https://www.czso.cz</a></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:328
 msgctxt "QObject|"
@@ -9601,17 +9622,17 @@ msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid ""
 "Allows you to store routes in owncloud. Each route must be uploaded/"
 "downloaded manually."
-msgstr ""
+msgstr "מאפשר לך לאחסן מסלולים ב־ownCloud. יש להעלות/להוריד כל מסלול ידנית."
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:51
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Enable route synchronization"
-msgstr ""
+msgstr "הפעלת סנכרון מסלולים"
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:84
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Automatically sync all bookmarks to the server."
-msgstr ""
+msgstr "לסנכרן את כל הסימניות מול השרת אוטומטית."
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:87
 msgctxt "MarbleCloudSyncSettingsWidget|"
@@ -14664,7 +14685,7 @@ msgstr ""
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:169
 msgctxt "PositionMarkerConfigWidget|"
 msgid "&Accuracy:"
-msgstr ""
+msgstr "&דיוק:"
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:191
 msgctxt "PositionMarkerConfigWidget|"
@@ -14685,7 +14706,7 @@ msgstr ""
 #: src/plugins/render/postalcode/PostalCodePlugin.cpp:38
 msgctxt "Marble::PostalCodePlugin|"
 msgid "Postal Codes"
-msgstr ""
+msgstr "מיקודים"
 
 #: src/plugins/render/postalcode/PostalCodePlugin.cpp:63
 msgctxt "Marble::PostalCodePlugin|"
@@ -14821,7 +14842,7 @@ msgstr "הזמן הכולל שנותר"
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:31
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Comets"
-msgstr ""
+msgstr "כוכבי שביט"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:32
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -15153,7 +15174,7 @@ msgstr "מזג אוויר"
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:442
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "NOAA"
-msgstr ""
+msgstr "NOAA"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:445
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
