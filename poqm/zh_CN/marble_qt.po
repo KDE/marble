@@ -1569,7 +1569,7 @@ msgstr "倍海姆地点"
 #. file data/maps/earth/behaim1492/behaim1492.dgml:187
 msgctxt "DGML|"
 msgid "Texts and illustrations"
-msgstr "文字和图画"
+msgstr "文本和插图"
 
 #. file data/maps/earth/behaim1492/behaim1492.dgml:190
 msgctxt "DGML|"
@@ -10613,7 +10613,7 @@ msgstr ""
 #: src/lib/marble/MarbleViewSettingsWidget.ui:266
 msgctxt "MarbleViewSettingsWidget|"
 msgid "&Text Labels"
-msgstr "文字标记(&T)"
+msgstr "文本标记(&T)"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:286
 msgctxt "MarbleViewSettingsWidget|"
@@ -10641,7 +10641,7 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">地点通常在不同的语言中有不"
-"同的名称。地图上的文字标记可以按照用户的语言显示，也可以按照当地的官方语言显"
+"同的名称。地图上的文本标记可以按照用户的语言显示，也可以按照当地的官方语言显"
 "示。</p></body></html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:306
@@ -14019,12 +14019,12 @@ msgstr "标记"
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1398
 msgctxt "GraticuleConfigWidget|"
 msgid "&Named Labels"
-msgstr "文字标记(&N)"
+msgstr "文本标记(&N)"
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1408
 msgctxt "GraticuleConfigWidget|"
 msgid "Show Labels for Prime meridian, Equator, Tropics."
-msgstr "显示本初子午线、赤道、回归线的文字标记。"
+msgstr "显示本初子午线、赤道、回归线的文本标记。"
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1415
 msgctxt "GraticuleConfigWidget|"
@@ -16528,7 +16528,7 @@ msgid ""
 "Texts by wikipedia.org"
 msgstr ""
 "地理位置数据由 geonames.org 提供\n"
-"文字内容由 wikipedia.org 提供"
+"文本内容由 wikipedia.org 提供"
 
 #: src/plugins/runner/cache/CachePlugin.cpp:18
 msgctxt "Marble::CachePlugin|"

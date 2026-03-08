@@ -134,7 +134,7 @@ msgstr "显示贝海姆地点"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show texts and illustrations"
-msgstr "显示文字和插图"
+msgstr "显示文本和插图"
 
 #: MainScreen.qml:96
 #, kde-format
