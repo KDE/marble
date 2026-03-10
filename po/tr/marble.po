@@ -8,13 +8,13 @@
 # Renan Cakirerk, 2010.
 # obsoleteman <tulliana@gmail.com>, 2008-2009,2012.
 # Volkan Gezer <volkangezer@gmail.com>, 2013-2014, 2017.
-# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025, 2026 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeedu-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:48+0000\n"
-"PO-Revision-Date: 2025-02-19 11:07+0300\n"
+"PO-Revision-Date: 2026-03-09 22:22+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.03.70\n"
+"X-Generator: Lokalize 25.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -79,7 +79,7 @@ msgstr "Thibaut Gridel"
 #: kdemain.cpp:96
 #, kde-format
 msgid "Geodata"
-msgstr "Coğrafi veri"
+msgstr "Coğrafî veri"
 
 #: kdemain.cpp:97
 #, kde-format
@@ -119,7 +119,7 @@ msgstr "Bastian Holst"
 #: kdemain.cpp:100
 #, kde-format
 msgid "Online Services support"
-msgstr "Çevrimiçi hizmetler desteği"
+msgstr "Çevrim içi hizmetler desteği"
 
 #: kdemain.cpp:101 kdemain.cpp:124
 #, kde-format
@@ -341,7 +341,7 @@ msgstr "Google Summer of Code 2009 Projesi: OSM bilgi notu"
 #: kdemain.cpp:155
 #, kde-format
 msgid "Google Summer of Code 2009 Project: Online Services"
-msgstr "Google Summer of Code 2009 Projesi: Çevrimiçi hizmetler"
+msgstr "Google Summer of Code 2009 Projesi: Çevrim içi hizmetler"
 
 #: kdemain.cpp:159
 #, kde-format
@@ -947,7 +947,7 @@ msgstr "&Haritayı Dışa Aktar…"
 #, kde-format
 msgctxt "Action for toggling offline mode"
 msgid "&Work Offline"
-msgstr "Çevrim&dışı Çalış"
+msgstr "Çevrim &Dışı Çalış"
 
 #: marble_part.cpp:709
 #, kde-format
@@ -1207,7 +1207,7 @@ msgstr "&Bilgi Kutucukları"
 #: marble_part.rc:42
 #, kde-format
 msgid "&Online Services"
-msgstr "&Çevrimiçi Hizmetler"
+msgstr "&Çevrim İçi Hizmetler"
 
 #. i18n: ectx: Menu (settings)
 #: marble_part.rc:55 marbleui.rc:31

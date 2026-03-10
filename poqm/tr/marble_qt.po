@@ -7,13 +7,13 @@
 # H. İbrahim Güngör <ibrahim@pardus.org.tr>, 2011.
 # Hasan Kiran <sunder67@hotmail.com>, 2013.
 # Volkan Gezer <volkangezer@gmail.com>, 2013, 2014, 2017.
-# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025, 2026 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2025-12-23 11:50+0300\n"
+"PO-Revision-Date: 2026-03-09 22:23+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.12.0\n"
+"X-Generator: Lokalize 25.12.2\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -328,7 +328,7 @@ msgstr "Volkan"
 #. file data/maps/sky/nightsky/nightsky.dgml:138
 msgctxt "DGML|"
 msgid "Geographic Pole"
-msgstr "Coğrafi Kutup"
+msgstr "Coğrafî Kutup"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:186
 #. ----------
@@ -1535,7 +1535,7 @@ msgid ""
 "maps).</p>"
 msgstr ""
 "<p><i>Boş küre</i> .osm dosyalarını görüntülemek ve yüklemek için kullanılır "
-"(çevrimdışı haritalar).</p>"
+"(çevrim dışı haritalar).</p>"
 
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:12
 msgctxt "DGML|"
@@ -2385,7 +2385,7 @@ msgstr "&Bölge İndir…"
 msgctxt "Marble::MainWindow|"
 msgid "Download a map region in different zoom levels for offline usage"
 msgstr ""
-"Çevrimiçi kullanım için farklı yakılaştırma düzeylerinde bir bölge haritası "
+"Çevrim içi kullanım için farklı yakılaştırma düzeylerinde bir bölge haritası "
 "indir"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:283
@@ -2527,7 +2527,7 @@ msgstr "Gerçek Zamanlı Bulut Kaplamasını Göster"
 #: src/apps/marble-qt/QtMainWindow.cpp:349
 msgctxt "Marble::MainWindow|"
 msgid "Work Off&line"
-msgstr "Çevrim&dışı Çalış"
+msgstr "Çevrim &Dışı Çalış"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:353
 msgctxt "Marble::MainWindow|"
@@ -2698,7 +2698,7 @@ msgstr "&Bilgi Kutuları"
 #: src/apps/marble-qt/QtMainWindow.cpp:467
 msgctxt "Marble::MainWindow|"
 msgid "&Online Services"
-msgstr "Çevrim&içi Hizmetler"
+msgstr "Çevrim &İçi Hizmetler"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:470
 msgctxt "Marble::MainWindow|"
@@ -5585,7 +5585,7 @@ msgstr "Okyanus"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:360
 msgctxt "GeoDataPlacemark|"
 msgid "Geographic Pole"
-msgstr "Coğrafik Kutup"
+msgstr "Coğrafî Kutup"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:362
 msgctxt "GeoDataPlacemark|"
@@ -7397,7 +7397,7 @@ msgstr "Ara"
 #: src/lib/marble/LatLonBoxWidget.ui:17
 msgctxt "LatLonBoxWidget|"
 msgid "Select a geographic region"
-msgstr "Coğrafi bir bölge seçin"
+msgstr "Coğrafî bir bölge seçin"
 
 #: src/lib/marble/LatLonBoxWidget.ui:41
 msgctxt "LatLonBoxWidget|"
@@ -7997,7 +7997,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:93
 msgctxt "MapWizard|"
 msgid "Online map providing indexed tiles (e.g. Open Street Map)"
-msgstr "İndekslenmiş karolar sağlayan çevrimiçi harita (örn. OpenStreetMap)"
+msgstr "İndekslenmiş karolar sağlayan çevrim içi harita (örn. OpenStreetMap)"
 
 #: src/lib/marble/MapWizard.ui:104
 msgctxt "MapWizard|"
@@ -8527,7 +8527,7 @@ msgid ""
 "><i>Geodata</i></p>"
 msgstr ""
 "<p>Thibaut Gridel <a href=\"mailto:tgridel@free.fr\">tgridel@free.fr</a><br /"
-"><i>Coğrafi veri</i></p>"
+"><i>Coğrafî veri</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:85
 msgctxt "QObject|"
@@ -8563,7 +8563,7 @@ msgid ""
 "de</a><br /><i>Online Services Support</i></p>"
 msgstr ""
 "<p>Bastian Holst, <a href=\"mailto:bastianholst@gmx.de\">bastianholst@gmx."
-"de</a><br /><i>Çevrimiçi Hizmetler Desteği</i></p>"
+"de</a><br /><i>Çevrim içi hizmetler desteği</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:93
 msgctxt "QObject|"
@@ -9219,7 +9219,7 @@ msgid ""
 "a><br /><i>Project: Online Services</i></p>"
 msgstr ""
 "<p>Bastian Holst <a href=\"mailto:bastianholst@gmx.de\">bastianholst@gmx.de</"
-"a><br /><i>Proje: Çevrimiçi hizmetler</i></p>"
+"a><br /><i>Proje: Çevrim içi hizmetler</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:233
 msgctxt "QObject|"
@@ -9381,7 +9381,7 @@ msgstr ""
 "<p>İki veri kümesinin birleştirilmesiyle oluşturulan <i>Sıcaklık ve Yağış "
 "Haritaları(Temmuz ve Aralık)</i><br />:<ul><li>Legates, D.R. and Willmott, C."
 "J. 1989. Aylık ortalama yüzey sıcaklık ve yağış miktarı. 0.5 derecelik "
-"Coğrafik (enlem/boylam) 361 × 721’lik ızgarada sayısal tarama örüntüsü "
+"Coğrafî (enlem/boylam) 361 × 721’lik ızgarada sayısal tarama örüntüsü "
 "verisi. Boulder CO: National Center for Atmospheric Research. <a href="
 "\"https://www.ngdc.noaa.gov/ecosys/cdroms/ged_iia/datasets/a04/lw.htm"
 "\">http://www.ngdc.noaa.gov/ecosys/cdroms/ged_iia/datasets/a04/lw.htm</a></"
@@ -16679,7 +16679,7 @@ msgid ""
 "Geo positions by geonames.org\n"
 "Texts by wikipedia.org"
 msgstr ""
-"Coğrafik konumlar: geonames.org\n"
+"Coğrafî konumlar: geonames.org\n"
 "Yazılar: wikipedia.org"
 
 #: src/plugins/runner/cache/CachePlugin.cpp:18
@@ -16775,23 +16775,22 @@ msgstr "Cyclestreets.net kullanarak Birleşik Krallık için bisiklet rotası"
 #: src/plugins/runner/geouri/GeoUriPlugin.cpp:20
 msgctxt "Marble::GeoUriPlugin|"
 msgid "Geo URI Search"
-msgstr "Coğrafik URI Arama"
+msgstr "Coğrafî URI Arama"
 
 #: src/plugins/runner/geouri/GeoUriPlugin.cpp:25
 msgctxt "Marble::GeoUriPlugin|"
 msgid "Geo URI"
-msgstr "Coğrafik URI"
+msgstr "Coğrafî URI"
 
 #: src/plugins/runner/geouri/GeoUriPlugin.cpp:40
 msgctxt "Marble::GeoUriPlugin|"
 msgid "Input of geographic coordinates by the geo URI scheme"
-msgstr ""
-"Coğrafik URI şeması tarafından sağlanan koordinatların doğrudan girdisi"
+msgstr "Coğrafî URI şeması tarafından sağlanan koordinatların doğrudan girdisi"
 
 #: src/plugins/runner/gosmore-reversegeocoding/GosmoreReverseGeocodingPlugin.cpp:26
 msgctxt "Marble::GosmorePlugin|"
 msgid "Gosmore Reverse Geocoding"
-msgstr "Gosmore Ters Coğrafi Kodlama"
+msgstr "Gosmore Ters Coğrafî Kodlama"
 
 #: src/plugins/runner/gosmore-reversegeocoding/GosmoreReverseGeocodingPlugin.cpp:31
 #: src/plugins/runner/gosmore-routing/GosmoreRoutingPlugin.cpp:31
@@ -16802,7 +16801,7 @@ msgstr "Gosmore"
 #: src/plugins/runner/gosmore-reversegeocoding/GosmoreReverseGeocodingPlugin.cpp:46
 msgctxt "Marble::GosmorePlugin|"
 msgid "Offline reverse geocoding using Gosmore."
-msgstr "Gosmore kullanarak çevrimdışı ters coğrafi kodlama."
+msgstr "Gosmore kullanarak çevrim dışı ters coğrafî kodlama."
 
 #: src/plugins/runner/gosmore-routing/GosmoreRoutingPlugin.cpp:26
 msgctxt "Marble::GosmorePlugin|"
@@ -16812,7 +16811,7 @@ msgstr "Gosmore Rotalama"
 #: src/plugins/runner/gosmore-routing/GosmoreRoutingPlugin.cpp:46
 msgctxt "Marble::GosmorePlugin|"
 msgid "Offline route retrieval using Gosmore"
-msgstr "Gosmore kullanarak çevrimdışı rota düzeltme"
+msgstr "Gosmore kullanarak çevrim dışı rota düzeltme"
 
 #: src/plugins/runner/gpsbabel/GpsbabelPlugin.cpp:18
 msgctxt "Marble::GpsbabelPlugin|"
@@ -16858,7 +16857,7 @@ msgstr "Hostip.info"
 msgctxt "Marble::HostipPlugin|"
 msgid "Host name and IP geolocation search using the hostip.info service"
 msgstr ""
-"Hostip.info hizmetini kullanarak makine adı ve IP coğrafi konum araması"
+"Hostip.info hizmetini kullanarak makine adı ve IP coğrafî konum araması"
 
 #: src/plugins/runner/json/JsonPlugin.cpp:21
 msgctxt "Marble::JsonPlugin|"
@@ -16898,7 +16897,7 @@ msgstr "Çoğrafik Koordinat Arama"
 #: src/plugins/runner/latlon/LatLonPlugin.cpp:24
 msgctxt "Marble::LatLonPlugin|"
 msgid "Geographic Coordinates"
-msgstr "Coğrafi Koordinatlar"
+msgstr "Coğrafî Koordinatlar"
 
 #: src/plugins/runner/latlon/LatLonPlugin.cpp:39
 msgctxt "Marble::LatLonPlugin|"
@@ -17163,12 +17162,12 @@ msgstr "Yerel OSM Arama"
 #: src/plugins/runner/local-osm-search/LocalOsmSearchPlugin.cpp:45
 msgctxt "Marble::LocalOsmSearchPlugin|"
 msgid "Offline OpenStreetMap Search"
-msgstr "Çevrimdışı OpenStreetMap Arama"
+msgstr "Çevrim Dışı OpenStreetMap Arama"
 
 #: src/plugins/runner/local-osm-search/LocalOsmSearchPlugin.cpp:60
 msgctxt "Marble::LocalOsmSearchPlugin|"
 msgid "Searches for addresses and points of interest in offline maps."
-msgstr "Çevrimdışı haritalarda adresler ve ilgi alanları için aramalar."
+msgstr "Çevrim dışı haritalarda adresler ve ilgi alanları için aramalar."
 
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:265
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:267
@@ -17496,7 +17495,7 @@ msgstr "%1 MB"
 #: src/plugins/runner/monav/MonavPlugin.cpp:217
 msgctxt "Marble::MonavPlugin|"
 msgid "No offline maps installed yet."
-msgstr "Henüz bir çevrimdışı harita kurulmamış."
+msgstr "Henüz bir çevrim dışı harita kurulmamış."
 
 #: src/plugins/runner/monav/MonavPlugin.cpp:220
 msgctxt "Marble::MonavPlugin|"
@@ -17516,12 +17515,12 @@ msgstr "Monav"
 #: src/plugins/runner/monav/MonavPlugin.cpp:253
 msgctxt "Marble::MonavPlugin|"
 msgid "Offline routing using the monav daemon"
-msgstr "Monav ardalan sürecini kullanarak çevrimdışı rotalama"
+msgstr "Monav ardalan sürecini kullanarak çevrim dışı rotalama"
 
 #: src/plugins/runner/nominatim-reversegeocoding/NominatimReverseGeocodingPlugin.cpp:22
 msgctxt "Marble::NominatimPlugin|"
 msgid "OpenStreetMap Nominatim Reverse Geocoding"
-msgstr "OpenStreetMap Nominatim Ter Coğrafik Kodlama"
+msgstr "OpenStreetMap Nominatim Ters Coğrafî Kodlama"
 
 #: src/plugins/runner/nominatim-reversegeocoding/NominatimReverseGeocodingPlugin.cpp:27
 #: src/plugins/runner/nominatim-search/NominatimSearchPlugin.cpp:27
@@ -17533,7 +17532,7 @@ msgstr "OpenStreetMap Nominatim"
 msgctxt "Marble::NominatimPlugin|"
 msgid "Online reverse geocoding using the OpenStreetMap Nominatim service"
 msgstr ""
-"OpenStreetMap Nominatim hizmetini kullanan çevrimiçi ters coğrafik kodlama"
+"OpenStreetMap Nominatim hizmetini kullanan çevrim içi ters coğrafî kodlama"
 
 #: src/plugins/runner/nominatim-search/NominatimSearchPlugin.cpp:22
 msgctxt "Marble::NominatimPlugin|"
@@ -17544,7 +17543,7 @@ msgstr "OpenStreetMap Nominatim Arama"
 msgctxt "Marble::NominatimPlugin|"
 msgid "Online search for placemarks using the OpenStreetMap Nominatim service"
 msgstr ""
-"OpenStreetMap Nominatim hizmetini kullanan, yer işaretleri için çevrimiçi "
+"OpenStreetMap Nominatim hizmetini kullanan, yer işaretleri için çevrim içi "
 "arama"
 
 #: src/plugins/runner/open-source-routing-machine/OSRMPlugin.cpp:17
