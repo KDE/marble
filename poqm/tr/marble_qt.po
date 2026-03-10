@@ -7,13 +7,13 @@
 # H. İbrahim Güngör <ibrahim@pardus.org.tr>, 2011.
 # Hasan Kiran <sunder67@hotmail.com>, 2013.
 # Volkan Gezer <volkangezer@gmail.com>, 2013, 2014, 2017.
-# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025, 2026 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2025-12-23 11:50+0300\n"
+"PO-Revision-Date: 2026-03-09 21:54+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.12.0\n"
+"X-Generator: Lokalize 25.12.2\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -1535,7 +1535,7 @@ msgid ""
 "maps).</p>"
 msgstr ""
 "<p><i>Boş küre</i> .osm dosyalarını görüntülemek ve yüklemek için kullanılır "
-"(çevrimdışı haritalar).</p>"
+"(çevrim dışı haritalar).</p>"
 
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:12
 msgctxt "DGML|"
@@ -2385,7 +2385,7 @@ msgstr "&Bölge İndir…"
 msgctxt "Marble::MainWindow|"
 msgid "Download a map region in different zoom levels for offline usage"
 msgstr ""
-"Çevrimiçi kullanım için farklı yakılaştırma düzeylerinde bir bölge haritası "
+"Çevrim içi kullanım için farklı yakılaştırma düzeylerinde bir bölge haritası "
 "indir"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:283
@@ -2527,7 +2527,7 @@ msgstr "Gerçek Zamanlı Bulut Kaplamasını Göster"
 #: src/apps/marble-qt/QtMainWindow.cpp:349
 msgctxt "Marble::MainWindow|"
 msgid "Work Off&line"
-msgstr "Çevrim&dışı Çalış"
+msgstr "Çevrim &Dışı Çalış"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:353
 msgctxt "Marble::MainWindow|"
@@ -2698,7 +2698,7 @@ msgstr "&Bilgi Kutuları"
 #: src/apps/marble-qt/QtMainWindow.cpp:467
 msgctxt "Marble::MainWindow|"
 msgid "&Online Services"
-msgstr "Çevrim&içi Hizmetler"
+msgstr "Çevrim &İçi Hizmetler"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:470
 msgctxt "Marble::MainWindow|"
@@ -8563,7 +8563,7 @@ msgid ""
 "de</a><br /><i>Online Services Support</i></p>"
 msgstr ""
 "<p>Bastian Holst, <a href=\"mailto:bastianholst@gmx.de\">bastianholst@gmx."
-"de</a><br /><i>Çevrimiçi Hizmetler Desteği</i></p>"
+"de</a><br /><i>Çevrim içi hizmetler desteği</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:93
 msgctxt "QObject|"
@@ -9219,7 +9219,7 @@ msgid ""
 "a><br /><i>Project: Online Services</i></p>"
 msgstr ""
 "<p>Bastian Holst <a href=\"mailto:bastianholst@gmx.de\">bastianholst@gmx.de</"
-"a><br /><i>Proje: Çevrimiçi hizmetler</i></p>"
+"a><br /><i>Proje: Çevrim içi hizmetler</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:233
 msgctxt "QObject|"
@@ -16802,7 +16802,7 @@ msgstr "Gosmore"
 #: src/plugins/runner/gosmore-reversegeocoding/GosmoreReverseGeocodingPlugin.cpp:46
 msgctxt "Marble::GosmorePlugin|"
 msgid "Offline reverse geocoding using Gosmore."
-msgstr "Gosmore kullanarak çevrimdışı ters coğrafi kodlama."
+msgstr "Gosmore kullanarak çevrim dışı ters coğrafi kodlama."
 
 #: src/plugins/runner/gosmore-routing/GosmoreRoutingPlugin.cpp:26
 msgctxt "Marble::GosmorePlugin|"
@@ -16812,7 +16812,7 @@ msgstr "Gosmore Rotalama"
 #: src/plugins/runner/gosmore-routing/GosmoreRoutingPlugin.cpp:46
 msgctxt "Marble::GosmorePlugin|"
 msgid "Offline route retrieval using Gosmore"
-msgstr "Gosmore kullanarak çevrimdışı rota düzeltme"
+msgstr "Gosmore kullanarak çevrim dışı rota düzeltme"
 
 #: src/plugins/runner/gpsbabel/GpsbabelPlugin.cpp:18
 msgctxt "Marble::GpsbabelPlugin|"
@@ -17163,12 +17163,12 @@ msgstr "Yerel OSM Arama"
 #: src/plugins/runner/local-osm-search/LocalOsmSearchPlugin.cpp:45
 msgctxt "Marble::LocalOsmSearchPlugin|"
 msgid "Offline OpenStreetMap Search"
-msgstr "Çevrimdışı OpenStreetMap Arama"
+msgstr "Çevrim Dışı OpenStreetMap Arama"
 
 #: src/plugins/runner/local-osm-search/LocalOsmSearchPlugin.cpp:60
 msgctxt "Marble::LocalOsmSearchPlugin|"
 msgid "Searches for addresses and points of interest in offline maps."
-msgstr "Çevrimdışı haritalarda adresler ve ilgi alanları için aramalar."
+msgstr "Çevrim dışı haritalarda adresler ve ilgi alanları için aramalar."
 
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:265
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:267
@@ -17496,7 +17496,7 @@ msgstr "%1 MB"
 #: src/plugins/runner/monav/MonavPlugin.cpp:217
 msgctxt "Marble::MonavPlugin|"
 msgid "No offline maps installed yet."
-msgstr "Henüz bir çevrimdışı harita kurulmamış."
+msgstr "Henüz bir çevrim dışı harita kurulmamış."
 
 #: src/plugins/runner/monav/MonavPlugin.cpp:220
 msgctxt "Marble::MonavPlugin|"
@@ -17516,7 +17516,7 @@ msgstr "Monav"
 #: src/plugins/runner/monav/MonavPlugin.cpp:253
 msgctxt "Marble::MonavPlugin|"
 msgid "Offline routing using the monav daemon"
-msgstr "Monav ardalan sürecini kullanarak çevrimdışı rotalama"
+msgstr "Monav ardalan sürecini kullanarak çevrim dışı rotalama"
 
 #: src/plugins/runner/nominatim-reversegeocoding/NominatimReverseGeocodingPlugin.cpp:22
 msgctxt "Marble::NominatimPlugin|"
