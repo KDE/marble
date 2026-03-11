@@ -316,6 +316,3 @@ msgstr "Descarrega mapes només via WLAN"
 msgctxt "@title:window"
 msgid "Themes"
 msgstr "Temes"
-
-#~ msgid "Search for places to integrate them into a route."
-#~ msgstr "Cerca llocs per a integrar-los a la ruta."

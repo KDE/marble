@@ -1246,6 +1246,3 @@ msgstr "Barra d'eines principal"
 #, kde-format
 msgid "Edit Toolbar"
 msgstr "Barra d'eines d'edició"
-
-#~ msgid "marble_part"
-#~ msgstr "marble_part"
