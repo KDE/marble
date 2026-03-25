@@ -2,13 +2,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Youssef Chahibi <chahibi@gmail.com>, 2007.
-# SPDX-FileCopyrightText: 2022, 2024, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
+# SPDX-FileCopyrightText: 2022, 2024, 2025, 2026 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2025-10-15 19:05+0400\n"
+"PO-Revision-Date: 2026-03-24 13:16+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -10493,7 +10493,7 @@ msgstr "توقيت وسط أفريقيا"
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:231
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "When Marble starts"
-msgstr "عندما يبدأ الرخام"
+msgstr "عندما يبدأ ماربل"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:237
 msgctxt "MarbleTimeSettingsWidget|"
