@@ -2086,13 +2086,13 @@
         <varlistentry>
           <term
 ><guilabel
->Zona horària</guilabel
+>Fus horari</guilabel
 ></term>
           <listitem
 ><para
->Aquí, podeu escollir la zona horària per al &marble;: <ulink url="https://ca.wikipedia.org/wiki/Temps_universal_coordinat"
+>Aquí, podeu escollir el fus horari per al &marble;: <ulink url="https://ca.wikipedia.org/wiki/Temps_universal_coordinat"
 >UTC</ulink
->, zona horària del sistema o escollir una zona horària personalitzada. L'opció triada només canviarà la vista del mapa si el mapa pot mostrar les condicions de llum a la superfície.</para
+>, fus horari del sistema o escollir un fus horari personalitzat. L'opció triada només canviarà la vista del mapa si el mapa pot mostrar les condicions de llum a la superfície.</para
 ></listitem>
         </varlistentry>
 

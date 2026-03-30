@@ -1,16 +1,16 @@
 # Translation of plasma_applet_org.kde.plasma.worldclock.po to Catalan
-# Copyright (C) 2016-2021 This_file_is_part_of_KDE
+# Copyright (C) 2016-2026 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
 # SPDX-FileCopyrightText: 2016, 2020, 2021 Antoni Bella Pérez <antonibella5@yahoo.com>
-# SPDX-FileCopyrightText: 2021 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2021, 2026 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:48+0000\n"
-"PO-Revision-Date: 2021-11-03 17:32+0100\n"
+"PO-Revision-Date: 2026-03-29 13:07+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: package/contents/config/config.qml:12
 #, kde-format
@@ -74,4 +74,4 @@ msgstr "Mostra la data:"
 #: package/contents/ui/configTimeZones.qml:17
 #, kde-format
 msgid "Use custom time zone selection:"
-msgstr "Usa la selecció personalitzada de la zona horària:"
+msgstr "Usa la selecció personalitzada del fus horari:"
