@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 23.08.3\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -3130,17 +3130,11 @@ msgid "Bookmark Manager"
 msgstr "Správca záložiek"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:25
-#, fuzzy
-#| msgctxt "Marble::BookmarkManagerDialog|"
-#| msgid "Import Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Import Bookmarks…"
 msgstr "Importovať záložky"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
-#, fuzzy
-#| msgctxt "Marble::BookmarkManagerDialog|"
-#| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Export Bookmarks…"
 msgstr "Exportovať záložky"
@@ -3153,12 +3147,9 @@ msgstr "Priečinky"
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
 msgid "New…"
-msgstr ""
+msgstr "New…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
-#, fuzzy
-#| msgctxt "UiBookmarkManagerDialog|"
-#| msgid "Rename..."
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Rename…"
 msgstr "Premenovať..."
@@ -3336,7 +3327,7 @@ msgstr "Nahrať na cloud"
 #: src/lib/marble/CurrentLocationWidget.cpp:109
 msgctxt "Marble::CurrentLocationWidget|"
 msgid "<p>No Position Tracking Plugin installed.</p>"
-msgstr ""
+msgstr "<p>No Position Tracking Plugin installed.</p>"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:183
 msgctxt "QObject|"
@@ -3450,9 +3441,6 @@ msgstr "Vyčistiť trasu"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "CurrentLocationWidget|"
 msgid "…"
 msgstr "′"
@@ -4907,9 +4895,6 @@ msgid "Download Region"
 msgstr "Získať región"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:240
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "The base tile could not be downloaded."
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Tile type to be downloaded:"
 msgstr "Nemožno prebrať základnú dlaždicu."
@@ -4917,12 +4902,9 @@ msgstr "Nemožno prebrať základnú dlaždicu."
 #: src/lib/marble/DownloadRegionDialog.cpp:242
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Texture tiles"
-msgstr ""
+msgstr "Texture tiles"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:243
-#, fuzzy
-#| msgctxt "Marble::MapViewWidget|"
-#| msgid "Mercator View"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Vector tiles"
 msgstr "Mercatorovo zobrazenie"
@@ -4930,7 +4912,7 @@ msgstr "Mercatorovo zobrazenie"
 #: src/lib/marble/DownloadRegionDialog.cpp:244
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Allows selection between layer types that are visibly being rendered."
-msgstr ""
+msgstr "Allows selection between layer types that are visibly being rendered."
 
 #: src/lib/marble/DownloadRegionDialog.cpp:491
 #, qt-format
@@ -5019,9 +5001,6 @@ msgid "&Folder:"
 msgstr "&Priečinok:"
 
 #: src/lib/marble/EditBookmarkDialog.ui:79
-#, fuzzy
-#| msgctxt "UiEditBookmarkDialog|"
-#| msgid "&Add Folder..."
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Add Folder…"
 msgstr "&Pridať priečinok..."
@@ -7393,19 +7372,11 @@ msgstr[1] "%n výsledkov sa našlo."
 msgstr[2] "%n výsledkov sa našlo."
 
 #: src/lib/marble/GoToDialog.ui:14
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid "Go To..."
 msgctxt "GoTo|"
 msgid "Go To…"
 msgstr "Prejsť na..."
 
 #: src/lib/marble/GoToDialog.ui:78
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid ""
-#| "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
-#| "Marble/Search\">Details...</a>"
 msgctxt "GoTo|"
 msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
@@ -7735,9 +7706,6 @@ msgid "Wizard cannot parse server's response"
 msgstr "Sprievodca nedokáže prečítať odpoveď zo servera"
 
 #: src/lib/marble/MapWizard.cpp:291
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "Server is not a Web Map Server."
 msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
 msgstr "Server nie je webový mapový server."
@@ -7746,24 +7714,21 @@ msgstr "Server nie je webový mapový server."
 #: src/lib/marble/MapWizard.cpp:1091
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
-msgstr ""
+msgstr "Web Mercator (epsg:3857)"
 
 #: src/lib/marble/MapWizard.cpp:382 src/lib/marble/MapWizard.cpp:812
 #: src/lib/marble/MapWizard.cpp:936
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
-msgstr ""
+msgstr "Equirectangular (epsg:4326)"
 
 #: src/lib/marble/MapWizard.cpp:383 src/lib/marble/MapWizard.cpp:814
 #: src/lib/marble/MapWizard.cpp:938
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (crs:84)"
-msgstr ""
+msgstr "Equirectangular (crs:84)"
 
 #: src/lib/marble/MapWizard.cpp:394
-#, fuzzy
-#| msgctxt "MapViewWidget|"
-#| msgid "&Projection"
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
 msgstr "&Zobrazenie"
@@ -7771,7 +7736,7 @@ msgstr "&Zobrazenie"
 #: src/lib/marble/MapWizard.cpp:410
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
-msgstr ""
+msgstr "Tile Matrix Set:"
 
 #: src/lib/marble/MapWizard.cpp:453 src/lib/marble/MapWizard.cpp:928
 msgctxt "Marble::MapWizard|"
@@ -7789,37 +7754,28 @@ msgid "Legend Image"
 msgstr "Obrázok s vysvetlivkami"
 
 #: src/lib/marble/MapWizard.cpp:467 src/lib/marble/MapWizard.cpp:477
-#, fuzzy, qt-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "%1"
 msgstr "%1 m"
 
 #: src/lib/marble/MapWizard.cpp:467
-#, fuzzy, qt-format
-#| msgctxt "Marble::MapWizard|"
-#| msgid "The base tile could not be downloaded."
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
-msgstr "Nemožno prebrať základnú dlaždicu."
+msgstr "The %1 could not be downloaded."
 
 #: src/lib/marble/MapWizard.cpp:478
-#, fuzzy, qt-format
-#| msgctxt "Marble::MapWizard|"
-#| msgid ""
-#| "The base tile could not be downloaded successfully. The server replied:\n"
-#| "\n"
-#| "%1"
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The %1 could not be downloaded successfully. The server replied:\n"
 "\n"
 "%2"
 msgstr ""
-"Základná dlaždica nebola úspešne prebratá. Odpoveď servera: \n"
+"The %1 could not be downloaded successfully. The server replied:\n"
 "\n"
-"%1"
+"%2"
 
 #: src/lib/marble/MapWizard.cpp:557 src/lib/marble/MapWizard.cpp:1480
 #: src/lib/marble/MapWizard.cpp:1481 src/lib/marble/MapWizard.cpp:1490
@@ -7923,11 +7879,10 @@ msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
+"Web_Map_Service\">WMS</a> server or enter a vlastné server URL."
 
 #: src/lib/marble/MapWizard.cpp:1484
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
 msgstr "WMS Server:"
@@ -7938,6 +7893,8 @@ msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
 "Web_Map_Tile_Service\">WMTS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
+"Web_Map_Tile_Service\">WMTS</a> server or enter a vlastné server URL."
 
 #: src/lib/marble/MapWizard.ui:20
 msgctxt "MapWizard|"
@@ -8010,9 +7967,6 @@ msgid "Web Map Service (WMS)"
 msgstr "Webová Mapová Služba (WMS)"
 
 #: src/lib/marble/MapWizard.ui:70
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Web Map Service (WMS)"
 msgctxt "MapWizard|"
 msgid "Web Map Tile Service (WMTS)"
 msgstr "Webová Mapová Služba (WMS)"
@@ -8100,6 +8054,8 @@ msgid ""
 "Enter the base Url of the WMS service (e.g. <i>https://www.wms.nrw.de/"
 "geobasis/wms_nw_dop_overlay</i>)"
 msgstr ""
+"Zadajte the base Url of the WMS service (e.g. <i>https://www.wms.nrw.de/"
+"geobasis/wms_nw_dop_overlay</i>)"
 
 #: src/lib/marble/MapWizard.ui:166 src/lib/marble/MapWizard.ui:465
 msgctxt "MapWizard|"
@@ -8107,11 +8063,6 @@ msgid "https://"
 msgstr "https://"
 
 #: src/lib/marble/MapWizard.ui:218
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop provides a service to send documents "
-#| "through fax"
-#| msgid "Fax service"
 msgctxt "MapWizard|"
 msgid "Wms-Service:"
 msgstr "Faxová služba"
@@ -8124,7 +8075,7 @@ msgstr "Výber vrstvy"
 #: src/lib/marble/MapWizard.ui:243
 msgctxt "MapWizard|"
 msgid "Choose your Layer(s):"
-msgstr ""
+msgstr "Vyberte your Layer(s):"
 
 #: src/lib/marble/MapWizard.ui:266
 msgctxt "MapWizard|"
@@ -8137,6 +8088,8 @@ msgid ""
 "The order in which multiple layers are selected directly affects their "
 "rendering order."
 msgstr ""
+"The order in which multiple layers are vybrané directly affects their "
+"rendering order."
 
 #: src/lib/marble/MapWizard.ui:297
 msgctxt "MapWizard|"
@@ -8144,21 +8097,20 @@ msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
 "Ctrl, Ctrl+A, …)"
 msgstr ""
+"Povoliť this to select multiple layers without keyboard shortcuts (Shift, "
+"Ctrl, Ctrl+A, …)"
 
 #: src/lib/marble/MapWizard.ui:300
 msgctxt "MapWizard|"
 msgid "Multiple Selections"
-msgstr ""
+msgstr "Multiple Selections"
 
 #: src/lib/marble/MapWizard.ui:307
 msgctxt "MapWizard|"
 msgid "Custom Backdrop"
-msgstr ""
+msgstr "Custom Backdrop"
 
 #: src/lib/marble/MapWizard.ui:314
-#, fuzzy
-#| msgctxt "MapViewWidget|"
-#| msgid "&Projection"
 msgctxt "MapWizard|"
 msgid "Tile Projection:"
 msgstr "&Zobrazenie"
@@ -8166,30 +8118,24 @@ msgstr "&Zobrazenie"
 #: src/lib/marble/MapWizard.ui:321
 msgctxt "MapWizard|"
 msgid "Indicates the projection in which the tiles are rendered."
-msgstr ""
+msgstr "Indicates the projection in which the tiles are rendered."
 
 #: src/lib/marble/MapWizard.ui:344
 msgctxt "MapWizard|"
 msgid "Tile Format:"
-msgstr ""
+msgstr "Tile Format:"
 
 #: src/lib/marble/MapWizard.ui:351
 msgctxt "MapWizard|"
 msgid "Indicates the file format of the tiles."
-msgstr ""
+msgstr "Indicates súbor format of the tiles."
 
 #: src/lib/marble/MapWizard.ui:383
-#, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
 msgctxt "MapWizard|"
 msgid "Layer Info"
 msgstr "Možnosti vrstiev"
 
 #: src/lib/marble/MapWizard.ui:396
-#, fuzzy
-#| msgctxt "GeoDataPlacemark|"
-#| msgid "Service Road"
 msgctxt "MapWizard|"
 msgid "Service Info"
 msgstr "Služobná cesta"
@@ -8197,12 +8143,12 @@ msgstr "Služobná cesta"
 #: src/lib/marble/MapWizard.ui:406
 msgctxt "MapWizard|"
 msgid "Customize Backdrop"
-msgstr ""
+msgstr "Customize Backdrop"
 
 #: src/lib/marble/MapWizard.ui:417
 msgctxt "MapWizard|"
 msgid "Preset Layers"
-msgstr ""
+msgstr "Preset Layers"
 
 #: src/lib/marble/MapWizard.ui:437
 msgctxt "MapWizard|"
@@ -8212,12 +8158,12 @@ msgstr "OpenStreetMap"
 #: src/lib/marble/MapWizard.ui:452
 msgctxt "MapWizard|"
 msgid "XYZ Server Url"
-msgstr ""
+msgstr "XYZ Server Url"
 
 #: src/lib/marble/MapWizard.ui:462
 msgctxt "MapWizard|"
 msgid "The XYZ server needs to provide map tiles in Mercator projection."
-msgstr ""
+msgstr "The XYZ server needs to provide map tiles in Mercator projection."
 
 #: src/lib/marble/MapWizard.ui:479
 msgctxt "MapWizard|"
@@ -8227,7 +8173,7 @@ msgstr "Farba"
 #: src/lib/marble/MapWizard.ui:498
 msgctxt "MapWizard|"
 msgid "#87CEFA"
-msgstr ""
+msgstr "#87CEFA"
 
 #: src/lib/marble/MapWizard.ui:511
 msgctxt "MapWizard|"
@@ -8291,9 +8237,6 @@ msgid "Source Image:"
 msgstr "Zdroj obrázku:"
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "MapWizard|"
 msgid "…"
 msgstr "′"
@@ -8441,9 +8384,6 @@ msgid "preview image"
 msgstr "náhľad"
 
 #: src/lib/marble/MapWizard.ui:825
-#, fuzzy
-#| msgctxt "Marble::ConflictDialog|"
-#| msgid "Changed"
 msgctxt "MapWizard|"
 msgid "Change…"
 msgstr "Zmenené"
@@ -8451,7 +8391,7 @@ msgstr "Zmenené"
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
 msgid "<b>Optional: Addition of a Map Key</b>"
-msgstr ""
+msgstr "<b>Optional: Addition of a Map Key</b>"
 
 #: src/lib/marble/MapWizard.ui:864
 msgctxt "MapWizard|"
@@ -9685,28 +9625,6 @@ msgid "&About"
 msgstr "&O programe"
 
 #: src/lib/marble/MarbleAboutDialog.ui:98
-#, fuzzy
-#| msgctxt "MarbleAboutDialog|"
-#| msgid ""
-#| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#| "REC-html40/strict.dtd\">\n"
-#| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#| "css\">\n"
-#| "p, li { white-space: pre-wrap; }\n"
-#| "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
-#| "font-weight:400; font-style:normal;\">\n"
-#| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
-#| "font-size:9pt;\"></p>\n"
-#| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#| "size:9pt;\">(c) 2007, The Marble Project</span></p>\n"
-#| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
-#| "font-size:9pt; font-style:italic;\"></p>\n"
-#| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#| "size:9pt;\">https://edu.kde.org/marble</span></p></body></html>"
 msgctxt "MarbleAboutDialog|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -10261,9 +10179,6 @@ msgstr "Nakláňa zemskú os smerom k užívateľovi."
 #: src/lib/marble/MarbleNavigator.ui:103 src/lib/marble/MarbleNavigator.ui:122
 #: src/lib/marble/MarbleNavigator.ui:141 src/lib/marble/MarbleNavigator.ui:157
 #: src/lib/marble/MarbleNavigator.ui:215
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "MarbleNavigator|"
 msgid "…"
 msgstr "′"
@@ -11073,9 +10988,6 @@ msgid "Destination video:"
 msgstr "Cieľové video:"
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
-#, fuzzy
-#| msgctxt "Marble::RouteItemDelegate|"
-#| msgid "Open"
 msgctxt "MovieCaptureDialog|"
 msgid "Open…"
 msgstr "Otvoriť"
@@ -11230,9 +11142,6 @@ msgid "All Supported Files (*.png)"
 msgstr "Všetky podporované súbory (*.png)"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid "Browse"
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Browse…"
 msgstr "Prehliadať"
@@ -11985,12 +11894,9 @@ msgstr "Nový profil"
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
 msgid "&Add…"
-msgstr ""
+msgstr "Pridať…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
-#, fuzzy
-#| msgctxt "RoutingSettingsWidget|"
-#| msgid "&Configure"
 msgctxt "RoutingSettingsWidget|"
 msgid "&Configure…"
 msgstr "&Nastaviť"
@@ -12219,9 +12125,6 @@ msgid "Search for '%1'"
 msgstr "Hľadať '%1'"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:37
-#, fuzzy
-#| msgctxt "OsmRelationManagerWidgetPrivate|"
-#| msgid "Add Relation"
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Audio location"
 msgstr "Pridať vzťah"
@@ -12425,6 +12328,8 @@ msgid ""
 "Supported codecs are not found. (ffmpeg/avconv needs to be installed and in "
 "PATH.)"
 msgstr ""
+"Supported codecs are not found. (ffmpeg/avconv needs to be installed and in "
+"PATH.)"
 
 #: src/lib/marble/TourCaptureDialog.cpp:67
 msgctxt "Marble::TourCaptureDialog|"
@@ -12489,9 +12394,6 @@ msgid "Destination video"
 msgstr "Cieľové video"
 
 #: src/lib/marble/TourCaptureDialog.ui:81
-#, fuzzy
-#| msgctxt "Marble::RouteItemDelegate|"
-#| msgid "Open"
 msgctxt "TourCaptureDialog|"
 msgid "Open…"
 msgstr "Otvoriť"
@@ -13748,9 +13650,6 @@ msgid "Show eclipses for year:"
 msgstr "Zobraziť zatmenia pre rok:"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
-#, fuzzy
-#| msgctxt "Marble::MainWindow|"
-#| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
 msgid "&Settings…"
 msgstr "&Nastavenia"
@@ -15465,9 +15364,6 @@ msgid "Remove selected data source."
 msgstr "Odstrániť vybraný zdroj údajov."
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "SatellitesConfigDialog|"
 msgid "…"
 msgstr "′"
@@ -17462,7 +17358,7 @@ msgstr "Inštaluje sa %1"
 #, qt-format
 msgctxt "Marble::MonavConfigWidget|"
 msgid "%1/%2 MB"
-msgstr ""
+msgstr "%1/%2 MB"
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:610
 msgctxt "QObject|"
@@ -17589,7 +17485,7 @@ msgstr "Dátum"
 #, qt-format
 msgctxt "Marble::MonavMapsModel|"
 msgid "%1 MB"
-msgstr ""
+msgstr "%1 MB"
 
 #: src/plugins/runner/monav/MonavPlugin.cpp:217
 msgctxt "Marble::MonavPlugin|"
@@ -18335,8 +18231,6 @@ msgstr "Toto je trieda šablóny pre plávajúce položky."
 #~ msgstr "Tieňovanie reliéfu"
 
 #, fuzzy
-#~| msgctxt "MapWizard|"
-#~| msgid "Available Maps:"
 #~ msgctxt "MapWizard|"
 #~ msgid "Available Layers:"
 #~ msgstr "Dostupné mapy:"
@@ -18398,18 +18292,11 @@ msgstr "Toto je trieda šablóny pre plávajúce položky."
 #~ msgstr "Hranice"
 
 #, fuzzy
-#~| msgctxt "Marble::MapWizard|"
-#~| msgid "The base tile could not be downloaded."
 #~ msgctxt "Marble::MapWizard|"
 #~ msgid "The preview image could not be downloaded."
 #~ msgstr "Nemožno prebrať základnú dlaždicu."
 
 #, fuzzy
-#~| msgctxt "Marble::MapWizard|"
-#~| msgid ""
-#~| "The base tile could not be downloaded successfully. The server replied:\n"
-#~| "\n"
-#~| "%1"
 #~ msgctxt "Marble::MapWizard|"
 #~ msgid ""
 #~ "The preview image could not be downloaded successfully. The server "
@@ -18450,8 +18337,6 @@ msgstr "Toto je trieda šablóny pre plávajúce položky."
 #~ msgstr "Smerovania"
 
 #, fuzzy
-#~| msgctxt "TimeControlWidget|"
-#~| msgid "New Date Time      :"
 #~ msgctxt "TimeControlWidget|"
 #~ msgid "&New Date Time      :"
 #~ msgstr "Nový dátum a čas   :"
@@ -18493,8 +18378,6 @@ msgstr "Toto je trieda šablóny pre plávajúce položky."
 #~ msgstr "Zrušiť"
 
 #, fuzzy
-#~| msgctxt "Marble::MapItemDelegate|"
-#~| msgid "Cancel"
 #~ msgctxt "Marble::DownloadOsmDialog|"
 #~ msgid "Cancel"
 #~ msgstr "Zrušiť"
@@ -18704,15 +18587,11 @@ msgstr "Toto je trieda šablóny pre plávajúce položky."
 #~ msgstr "Ukáže na mape skrýše z OpenCaching.com."
 
 #, fuzzy
-#~| msgctxt "Marble::BookmarkManagerDialog|"
-#~| msgid "Cancel"
 #~ msgctxt "BookmarkManagerDialogPrivate|"
 #~ msgid "Cancel"
 #~ msgstr "Zrušiť"
 
 #, fuzzy
-#~| msgctxt "Marble::SatellitesConfigDialog|"
-#~| msgid "&Activate Plugin"
 #~ msgctxt "Marble::NotesPlugin|"
 #~ msgid "Notes Plugin"
 #~ msgstr "Aktivovať plugin"
@@ -18726,22 +18605,16 @@ msgstr "Toto je trieda šablóny pre plávajúce položky."
 #~ msgstr "najkratšie"
 
 #, fuzzy
-#~| msgctxt "Marble::MarbleWidgetPopupMenu|"
-#~| msgid "National Capital"
 #~ msgctxt "GeoDataPlacemark|"
 #~ msgid "City National Capital"
 #~ msgstr "Hlavné mesto"
 
 #, fuzzy
-#~| msgctxt "Marble::MarbleWidgetPopupMenu|"
-#~| msgid "National Capital"
 #~ msgctxt "GeoDataPlacemark|"
 #~ msgid "Town National Capital"
 #~ msgstr "Hlavné mesto"
 
 #, fuzzy
-#~| msgctxt "Marble::MarbleWidgetPopupMenu|"
-#~| msgid "National Capital"
 #~ msgctxt "GeoDataPlacemark|"
 #~ msgid "Village National Capital"
 #~ msgstr "Hlavné mesto"
@@ -18783,8 +18656,6 @@ msgstr "Toto je trieda šablóny pre plávajúce položky."
 #~ msgstr "Auto"
 
 #, fuzzy
-#~| msgctxt "MarbleWebView|"
-#~| msgid "Copy"
 #~ msgctxt "GeoDataPlacemark|"
 #~ msgid "Copy"
 #~ msgstr "Kopírovať"
@@ -19090,317 +18961,261 @@ msgstr "Toto je trieda šablóny pre plávajúce položky."
 #~ msgstr "Dialóg"
 
 #, fuzzy
-#~| msgid "Import Bookmarks - Marble"
 #~ msgctxt "Marble::BookmarkManagerDialog|"
 #~ msgid "Import Bookmarks - Marble"
 #~ msgstr "Importovať záložky - Marble"
 
 #, fuzzy
-#~| msgid "Import Bookmarks - Marble"
 #~ msgctxt "UiEditBookmarkDialog|"
 #~ msgid "Edit Bookmark - Marble"
 #~ msgstr "Importovať záložky - Marble"
 
 #, fuzzy
-#~| msgid "Guidance Mode - Marble"
 #~ msgctxt "Marble::RoutingManager|"
 #~ msgid "Guidance Mode - Marble"
 #~ msgstr "Predvádzací režim - Marble"
 
 #, fuzzy
-#~| msgid "City"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "City"
 #~ msgstr "Mesto"
 
 #, fuzzy
-#~| msgid "County Capital"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "County Capital"
 #~ msgstr "Hlavné mesto okrsku"
 
 #, fuzzy
-#~| msgid "State Capital"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "State Capital"
 #~ msgstr "Hlavné mesto"
 
 #, fuzzy
-#~| msgid "Village"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Village"
 #~ msgstr "Obec"
 
 #, fuzzy
-#~| msgid "Mountain"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Mountain"
 #~ msgstr "Pohorie"
 
 #, fuzzy
-#~| msgid "Continue."
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Continent"
 #~ msgstr "Pokračovať."
 
 #, fuzzy
-#~| msgid "Geographic Pole"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Geographic Pole"
 #~ msgstr "Zemepisný pól"
 
 #, fuzzy
-#~| msgid "Magnetic Pole"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Magnetic Pole"
 #~ msgstr "Magnetický pól"
 
 #, fuzzy
-#~| msgid "Observatory"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Observatory"
 #~ msgstr "Hvezdáreň"
 
 #, fuzzy
-#~| msgid "Crater"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Water"
 #~ msgstr "Kráter"
 
 #, fuzzy
-#~| msgid "Track: "
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Track"
 #~ msgstr "Stopa:"
 
 #, fuzzy
-#~| msgid "hotel"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Hotel"
 #~ msgstr "hotel"
 
 #, fuzzy
-#~| msgid "hotel"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Motel"
 #~ msgstr "hotel"
 
 #, fuzzy
-#~| msgid "library"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Library"
 #~ msgstr "knižnica"
 
 #, fuzzy
-#~| msgid "biergarten"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Kindergarten"
 #~ msgstr "pivná záhrada"
 
 #, fuzzy
-#~| msgid "college"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "College"
 #~ msgstr "stredná škola"
 
 #, fuzzy
-#~| msgid "school"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "School"
 #~ msgstr "škola"
 
 #, fuzzy
-#~| msgid "university"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "University"
 #~ msgstr "univerzita"
 
 #, fuzzy
-#~| msgid "Bar"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Bar"
 #~ msgstr "Barov"
 
 #, fuzzy
-#~| msgid "biergarten"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Biergarten"
 #~ msgstr "pivná záhrada"
 
 #, fuzzy
-#~| msgid "fast food"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Fast Food"
 #~ msgstr "rýchle občerstvenie"
 
 #, fuzzy
-#~| msgid "pub"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Pub"
 #~ msgstr "krčma"
 
 #, fuzzy
-#~| msgid "restaurant"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Restaurant"
 #~ msgstr "reštaurácia"
 
 #, fuzzy
-#~| msgid "doctor"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Doctors"
 #~ msgstr "doktor"
 
 #, fuzzy
-#~| msgid "pharmacy"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Pharmacy"
 #~ msgstr "lekáreň"
 
 #, fuzzy
-#~| msgctxt "Name of a satellite group"
-#~| msgid "Geostationary"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Veterinary"
 #~ msgstr "Geostacionárne"
 
 #, fuzzy
-#~| msgid "Bicycle"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Bicycle"
 #~ msgstr "Bicyklom"
 
 #, fuzzy
-#~| msgid "Clear"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Car"
 #~ msgstr "Vyčistiť"
 
 #, fuzzy
-#~| msgid "cinema"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Cinema"
 #~ msgstr "kino"
 
 #, fuzzy
-#~| msgid "International"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Information"
 #~ msgstr "Medzinárodné"
 
 #, fuzzy
-#~| msgid "monument"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Monument"
 #~ msgstr "pamiatka"
 
 #, fuzzy
-#~| msgid "theatre"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Theatre"
 #~ msgstr "divadlo"
 
 #, fuzzy
-#~| msgid "Play the tour"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Playground"
 #~ msgstr "Spustiť prehliadku"
 
 #, fuzzy
-#~| msgid "Speedometer"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Cemetery"
 #~ msgstr "Rýchlomer"
 
 #, fuzzy
-#~| msgid "train station"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Railway"
 #~ msgstr "železničná stanica"
 
 #, fuzzy
-#~| msgid "Terrain"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Terrain"
 #~ msgstr "Terén"
 
 #, fuzzy
-#~| msgid "Crater"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Crater"
 #~ msgstr "Kráter"
 
 #, fuzzy
-#~| msgid "Marble Virtual Globe"
 #~ msgctxt "Marble::MainWindow|"
 #~ msgid "Marble Virtual Globe"
 #~ msgstr "Marble - virtuálny glóbus"
 
 #, fuzzy
-#~| msgid "&Wikipedia"
 #~ msgctxt "Marble::Placemark|"
 #~ msgid "Wikipedia"
 #~ msgstr "Wikipédia"
 
 #, fuzzy
-#~| msgid "Maemo Position Provider Plugin"
 #~ msgctxt "Marble::MaemoPositionProviderPlugin|"
 #~ msgid "Maemo Position Provider Plugin"
 #~ msgstr "Modul pre určovanie polohy Maemo"
 
 #, fuzzy
-#~| msgid "Maemo"
 #~ msgctxt "Marble::MaemoPositionProviderPlugin|"
 #~ msgid "Maemo"
 #~ msgstr "Maemo"
 
 #, fuzzy
-#~| msgid "Reports the GPS position of a Maemo device (e.g. Nokia N900)."
 #~ msgctxt "Marble::MaemoPositionProviderPlugin|"
 #~ msgid "Reports the GPS position of a Maemo device (e.g. Nokia N900)."
 #~ msgstr "Udáva polohu Maemo zariadenia GPS (napr. Nokia N900)."
 
 #, fuzzy
-#~| msgid "Graphics System Change"
 #~ msgctxt "MarbleViewSettingsWidget|"
 #~ msgid "G&raphics system:"
 #~ msgstr "Zmena grafického systému"
 
 #, fuzzy
-#~| msgid "Open"
 #~ msgctxt "MarbleViewSettingsWidget|"
 #~ msgid "OpenGL"
 #~ msgstr "Otvoriť"
 
 #, fuzzy
-#~| msgid "Native"
 #~ msgctxt "Marble::QtMarbleConfigDialog|"
 #~ msgid "Native"
 #~ msgstr "Natívny"
 
 #, fuzzy
-#~| msgid "Native (X11)"
 #~ msgctxt "Marble::QtMarbleConfigDialog|"
 #~ msgid "Native (X11)"
 #~ msgstr "Natívny (X11)"
 
 #, fuzzy
-#~| msgid "Native (Mac OS X Core Graphics)"
 #~ msgctxt "Marble::QtMarbleConfigDialog|"
 #~ msgid "Native (Mac OS X Core Graphics)"
 #~ msgstr "Natívny (Mac OS X systémová grafika)"
 
 #, fuzzy
-#~| msgid "Graphics System Change"
 #~ msgctxt "Marble::QtMarbleConfigDialog|"
 #~ msgid "Graphics System Change"
 #~ msgstr "Zmena grafického systému"
 
 #, fuzzy
-#~| msgid ""
-#~| "You have decided to run Marble with a different graphics system.\n"
-#~| "For this change to become effective, Marble has to be restarted.\n"
-#~| "Please close the application and start Marble again."
 #~ msgctxt "Marble::QtMarbleConfigDialog|"
 #~ msgid ""
 #~ "You have decided to run Marble with a different graphics system.\n"
