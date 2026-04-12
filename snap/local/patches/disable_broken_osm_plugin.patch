@@ -1,0 +1,52 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index b9deaa5ac..d1f626a00 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -110,8 +110,8 @@ set_package_properties(KF6 PROPERTIES
+     TYPE RECOMMENDED
+ )
+
+-find_package(Protobuf)
+-set_package_properties(Protobuf PROPERTIES TYPE OPTIONAL PURPOSE "Parsing of OSM PBF files.")
++# find_package(Protobuf)
++# set_package_properties(Protobuf PROPERTIES TYPE OPTIONAL PURPOSE "Parsing of OSM PBF files.")
+
+ if(ANDROID)
+     find_package(Qt6Positioning ${REQUIRED_QT_VERSION} REQUIRED)
+diff --git a/src/plugins/runner/osm/CMakeLists.txt b/src/plugins/runner/osm/CMakeLists.txt
+index e69a1e8b0..1d394f057 100644
+--- a/src/plugins/runner/osm/CMakeLists.txt
++++ b/src/plugins/runner/osm/CMakeLists.txt
+@@ -9,19 +9,19 @@ INCLUDE_DIRECTORIES(
+  ${ZLIB_INCLUDE_DIRS}
+ )
+
+-if(Protobuf_FOUND AND Protobuf_PROTOC_EXECUTABLE AND NOT MSVC) # FIXME linking issue on Windows
+-    find_package( absl REQUIRED)
+-    protobuf_generate_cpp(pbf_srcs pbf_hdrs
+-        ${CMAKE_SOURCE_DIR}/tools/osm-addresses/pbf/fileformat.proto
+-        ${CMAKE_SOURCE_DIR}/tools/osm-addresses/pbf/osmformat.proto
+-)
+-    set(EXTRA_LIBS protobuf::libprotobuf protobuf::libprotoc ${ZLIB_LIBRARIES} absl::log_internal_message absl::log_internal_check_op)
+-    add_definitions(-DHAVE_PROTOBUF)
+-
+-       if(MSVC)
+-       add_definitions(-DPROTOBUF_USE_DLLS)
+-       endif()
+-endif()
++# if(Protobuf_FOUND AND Protobuf_PROTOC_EXECUTABLE AND NOT MSVC) # FIXME linking issue on Windows
++#     find_package( absl REQUIRED)
++#     protobuf_generate_cpp(pbf_srcs pbf_hdrs
++#         ${CMAKE_SOURCE_DIR}/tools/osm-addresses/pbf/fileformat.proto
++#         ${CMAKE_SOURCE_DIR}/tools/osm-addresses/pbf/osmformat.proto
++# )
++#     set(EXTRA_LIBS protobuf::libprotobuf protobuf::libprotoc ${ZLIB_LIBRARIES} absl::log_internal_message absl::log_internal_check_op)
++#     add_definitions(-DHAVE_PROTOBUF)
++#
++#      if(MSVC)
++#      add_definitions(-DPROTOBUF_USE_DLLS)
++#      endif()
++# endif()
+
+ set(osm_writers_SRCS
+         writers/OsmObjectAttributeWriter.cpp
