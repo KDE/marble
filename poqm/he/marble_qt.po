@@ -10,14 +10,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2026-02-13 18:17+0200\n"
+"PO-Revision-Date: 2026-04-18 16:13+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.12.1\n"
+"X-Generator: Lokalize 25.12.3\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
 "X-Qt-Contexts: true\n"
@@ -13907,12 +13907,12 @@ msgstr ""
 #: src/plugins/render/graticule/GraticulePlugin.cpp:369
 msgctxt "Marble::GraticulePlugin|"
 msgid "Arctic Circle"
-msgstr ""
+msgstr "החוג הארקטי"
 
 #: src/plugins/render/graticule/GraticulePlugin.cpp:370
 msgctxt "Marble::GraticulePlugin|"
 msgid "Antarctic Circle"
-msgstr ""
+msgstr "החוג האנטארקטי"
 
 #: src/plugins/render/license/License.cpp:92
 msgctxt "Marble::License|"
@@ -14465,7 +14465,7 @@ msgstr "בחירת מפת סקירה"
 #: src/plugins/render/overviewmap/OverviewMap.cpp:482
 msgctxt "Marble::OverviewMap|"
 msgid "Please choose the color for the position indicator"
-msgstr ""
+msgstr "נא לבחור צבע למחוון המקום"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:14
 msgctxt "OverviewMapConfigWidget|"
@@ -14533,7 +14533,7 @@ msgstr "להוריד אוטומטית תמונות מכל רחבי העולם כ
 #: src/plugins/render/photo/FlickrParser.cpp:36
 msgctxt "QObject|"
 msgid "Query failed"
-msgstr ""
+msgstr "השאילתה נכשלה"
 
 #: src/plugins/render/photo/CoordinatesParser.cpp:34
 #: src/plugins/render/photo/FlickrParser.cpp:39
@@ -14549,7 +14549,7 @@ msgstr "הגדרת תוסף תמונות"
 #: src/plugins/render/photo/PhotoConfigWidget.ui:24
 msgctxt "PhotoConfigWidget|"
 msgid "Number of items on the screen"
-msgstr ""
+msgstr "מספר הפריטים על המסך"
 
 #: src/plugins/render/photo/PhotoConfigWidget.ui:49
 msgctxt "PhotoConfigWidget|"
@@ -14559,12 +14559,12 @@ msgstr "רישיון"
 #: src/plugins/render/photo/PhotoPlugin.cpp:62
 msgctxt "Marble::PhotoPlugin|"
 msgid "Photos"
-msgstr ""
+msgstr "תמונות"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:67
 msgctxt "Marble::PhotoPlugin|"
 msgid "&Photos"
-msgstr ""
+msgstr "&תמונות"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:82
 msgctxt "Marble::PhotoPlugin|"
@@ -14576,37 +14576,37 @@ msgstr "להוריד אוטומטית תמונות מכל רחבי העולם כ
 #: src/plugins/render/photo/PhotoPlugin.cpp:111
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NonCommercial-ShareAlike License"
-msgstr ""
+msgstr "רישיון ייחוס שימוש לא מסחרי שיתוף זהה"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:118
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NonCommercial License"
-msgstr ""
+msgstr "רישיון ייחוס שימוש לא מסחרי"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:125
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NonCommercial-NoDerivs License"
-msgstr ""
+msgstr "רישיון ייחוס שימוש לא מסחרי ללא נגזרות"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:132
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution License"
-msgstr ""
+msgstr "רישיון ייחוס"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:139
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-ShareAlike License"
-msgstr ""
+msgstr "רישיון ייחוס שיתוף זהה"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:146
 msgctxt "Marble::PhotoPlugin|"
 msgid "Attribution-NoDerivs License"
-msgstr ""
+msgstr "רישיון ייחוס ללא נגזרות"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:153
 msgctxt "Marble::PhotoPlugin|"
 msgid "No known copyright restrictions"
-msgstr ""
+msgstr "אין מגבלות זכויות יוצרים ידועות"
 
 #: src/plugins/render/positionmarker/PositionMarker.cpp:79
 msgctxt "Marble::PositionMarker|"
@@ -14628,7 +14628,7 @@ msgstr ""
 #, qt-format
 msgctxt "Marble::PositionMarker|"
 msgid "Cursor Size: %1"
-msgstr ""
+msgstr "גודל סמן: %1"
 
 #: src/plugins/render/positionmarker/PositionMarker.cpp:367
 msgctxt "Marble::PositionMarker|"
@@ -14638,7 +14638,7 @@ msgstr ""
 #: src/plugins/render/positionmarker/PositionMarker.cpp:406
 msgctxt "Marble::PositionMarker|"
 msgid "Please choose a color"
-msgstr ""
+msgstr "נא לבחור צבע"
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:14
 msgctxt "PositionMarkerConfigWidget|"
@@ -14648,12 +14648,12 @@ msgstr "תוסף הגדרת סמן מקום"
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:20
 msgctxt "PositionMarkerConfigWidget|"
 msgid "Cursor Shape"
-msgstr ""
+msgstr "צורת סמן"
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:28
 msgctxt "PositionMarkerConfigWidget|"
 msgid "&Arrow"
-msgstr ""
+msgstr "&חץ"
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:34
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:44
@@ -14680,7 +14680,7 @@ msgstr ""
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:163
 msgctxt "PositionMarkerConfigWidget|"
 msgid "C&olors"
-msgstr ""
+msgstr "&צבעים"
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:169
 msgctxt "PositionMarkerConfigWidget|"
