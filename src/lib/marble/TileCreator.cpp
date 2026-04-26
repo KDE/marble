@@ -166,7 +166,7 @@ TileCreator::TileCreator(const QString &sourceDir, const QString &installMap, co
     d->m_source = new TileCreatorSourceImage(sourcePath);
 
     if (d->m_targetDir.isNull())
-        d->m_targetDir = MarbleDirs::localPath() + QLatin1StringView("/maps/") + sourcePath.section(QLatin1Char('/'), -3, -2) + QLatin1Char('/');
+        d->m_targetDir = MarbleDirs::cachePath() + QLatin1StringView("/maps/") + sourcePath.section(QLatin1Char('/'), -3, -2) + QLatin1Char('/');
 
     setTerminationEnabled(true);
 }

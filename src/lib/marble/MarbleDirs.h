@@ -23,29 +23,39 @@ namespace Marble
  * Given that the MarbleWidget is a Qt6-only library and given that it
  * comes with its own model and data we need this class.
  *
- * The class needs to respect the requirements of the different plattforms,
- * so to avoid very different implementations for each plattform we
+ * The class needs to respect the requirements of the different platforms,
+ * so to avoid very different implementations for each platform we
  * specify how data should get looked up:
  *
- * Generally there are two places of which Marble will draw it's data from:
+ * Generally there are three places from which Marble will draw its data
+ * from: "cachePath", "localPath" and "systemPath".
  *
- * "localPath" and "systemPath".
+ * Map tiles are generated or downloaded into the cachePath.  Map tile
+ * data should be looked up in the cachePath first, and then if it is
+ * not present there then in the localPath and finally the systemPath.
+ * Other map data - DGML definition files, level zero map tiles, preview
+ * and legend images - are not stored in the cache but in either the
+ * systemPath for maps provided as standard with Marble, or the localPath
+ * for maps installed by the user or created via the map wizard.
  *
- * look-up of the data should happen in the localPath first.
- * Only if the look-up in the localPath failed then MarbleDirs should
- * look up the data in the systemPath.
+ * cachePath:
+ * The place for cachePath should match space that is fully accessible to
+ * the user, but which may be cleared at any time. On Unix-like platforms
+ * this is specified by the XDG_CACHE_HOME environment variable, or if that
+ * is not set then the default is ".cache/marble" in the user's home directory.
  *
  * localPath:
  * The place for localPath should match space that is fully accessible to
- * the user. On Unix-like plattforms this matches
- * QDir::homePath() + "/.marble/data"
+ * the user, but is permanent. On Unix-like platforms this is specified by
+ * the XDG_DATA_HOME environment variable, or if that is not set then the
+ * default is ".local/share/marble" in the user's home directory.
  *
  * systemPath:
- * Ideally the systemPath should match the place where cmake installed the
- * data for marble. However this doesn't work for all plattforms:
+ * Ideally the systemPath should match the place where CMake installed the
+ * data for Marble. However this doesn't work for all platforms:
  *
  * - For Linux and Mac non-bundle deployment the location can be
- *   chosen using the cmake MARBLE_DATA_PATH option at compile time.
+ *   chosen using the CMake MARBLE_DATA_PATH option at compile time.
  * - For Mac bundle deployment the location inside the bundle gets
  *   chosen as the default location.
  * - For Windows a path relative to the application binary can be chosen
@@ -60,9 +70,9 @@ namespace Marble
  * as soon as MarbleDataPath contains a valid path the path specified by
  * cmake will get ignored.
  *
- * ( Possible future extension: if the MarbleDataPath contains several
+ * (Possible future extension: if the MarbleDataPath contains several
  * valid paths separated by a colon then each of these paths should be
- * used for look up in the same order as for the KDE kiosk framework. )
+ * used for look up in the same order as for the KDE kiosk framework.)
  *
  * It's the duty of each application that uses the MarbleWidget to retrieve
  * the value of the MarbleDataPath from the MarbleWidget and to save it
@@ -70,13 +80,18 @@ namespace Marble
  *
  */
 
+// TODO: no private data, this can be just a namespace
 class MARBLE_EXPORT MarbleDirs
 {
 public:
     MarbleDirs();
 
+    // TODO: rename this to "dataFilePath" to make its function explicit
     static QString path(const QString &relativePath);
 
+    static QString cacheFilePath(const QString &relativePath);
+
+    // TODO: rename this to "pluginFilePath" for consistency
     static QString pluginPath(const QString &relativePath);
 
     static QStringList entryList(const QString &relativePath, QDir::Filters filters = QDir::NoFilter);
@@ -88,6 +103,8 @@ public:
     static QString pluginSystemPath();
 
     static QString localPath();
+
+    static QString cachePath();
 
     static QStringList oldLocalPaths();
 

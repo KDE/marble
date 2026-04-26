@@ -238,7 +238,7 @@ QString TileLoader::tileFileName(GeoSceneTileDataset const *tileData, TileId con
 {
     QString const fileName = tileData->relativeTileFileName(tileId);
     QFileInfo const dirInfo(fileName);
-    return dirInfo.isAbsolute() ? fileName : MarbleDirs::path(fileName);
+    return dirInfo.isAbsolute() ? fileName : MarbleDirs::cacheFilePath(fileName);
 }
 
 void TileLoader::triggerDownload(GeoSceneTileDataset const *tileData, TileId const &id, DownloadUsage const usage)

@@ -24,7 +24,8 @@ FileStoragePolicy::FileStoragePolicy(const QString &dataDirectory, QObject *pare
     , m_dataDirectory(dataDirectory)
 {
     if (m_dataDirectory.isEmpty())
-        m_dataDirectory = MarbleDirs::localPath() + QLatin1StringView("/cache/");
+        m_dataDirectory = MarbleDirs::cachePath();
+    mDebug() << "using data directory" << m_dataDirectory;
 
     if (!QDir(m_dataDirectory).exists())
         QDir::root().mkpath(m_dataDirectory);
