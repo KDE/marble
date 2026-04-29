@@ -12852,7 +12852,7 @@ msgid ""
 "Cannot merge the selected nodes. Most probably this would make the polygon's "
 "outer boundary not contain all its inner boundary nodes."
 msgstr ""
-"Nemôžem zlúčiť vybrané vrcholy. Pravdepodobne by to spôsobilo, že vonkajšie "
+"Nedá sa zlúčiť vybrané vrcholy. Pravdepodobne by to spôsobilo, že vonkajšie "
 "hranice polygónu by neobsahovali všetky jeho vnútorné vrcholy."
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:862
@@ -12975,7 +12975,7 @@ msgid ""
 "Cannot delete one of the selected nodes. Most probably this would make the "
 "polygon's outer boundary not contain all its inner boundary nodes."
 msgstr ""
-"Nemôžem vymazať jeden z vybraných vrcholov. Pravdepodobne by to spôsobilo, "
+"Nedá sa vymazať jeden z vybraných vrcholov. Pravdepodobne by to spôsobilo, "
 "že vonkajšie hranice polygónu by neobsahovali všetky jeho vnútorné vrcholy."
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1403
