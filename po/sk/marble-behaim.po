@@ -46,12 +46,12 @@ msgid ""
 "Ritter Martin Behaim nach den ältesten vorhandenen Urkunden\", Nuremberg "
 "1853. CC BY-SA 3.0."
 msgstr ""
-"Digitized map na základe orthophotographic gores by TU Vienna, 1990. "
-"Germanisches Nationalmuseum and Friedrich-Alexander-Universität Erlangen-"
-"Nürnberg, CC BY-SA 3.0. Ghillany map na základe two planiglobes which are "
-"provided as a map supplement to F.W. Ghillany's \"Geschichte des Seefahrers "
-"Ritter Martin Behaim nach den ältesten vorhandenen Urkunden\", Nuremberg "
-"1853. CC BY-SA 3.0."
+"Digitalizovaná mapa na základe ortofotografických výsečí od TU Viedeň, 1990. "
+"Germanisches Nationalmuseum a Friedrich-Alexander-Universität Erlangen-"
+"Nürnberg, CC BY-SA 3.0. Ghillanyho mapa na základe dvoch planiglobulov, "
+"ktoré sú poskytnuté ako mapová príloha ku knihe F.W. Ghillanyho \"Geschichte "
+"des Seefahrers Ritter Martin Behaim nach den ältesten vorhandenen Urkunden"
+"\", Norimberg 1853. CC BY-SA 3.0."
 
 #: main.cpp:33
 #, kde-format
