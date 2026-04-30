@@ -1410,7 +1410,7 @@ msgstr "Pozostatky"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:445
 msgctxt "DGML|"
 msgid "Bar"
-msgstr "Barov"
+msgstr "bar"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:443
 #. ----------
@@ -3437,7 +3437,7 @@ msgstr "Zobraziť trasu"
 #: src/lib/marble/CurrentLocationWidget.ui:66
 msgctxt "CurrentLocationWidget|"
 msgid "Clear Track"
-msgstr "Vyčistiť trasu"
+msgstr "Vyčistiť stopu"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
@@ -3800,7 +3800,7 @@ msgstr "Záhradný odpad"
 #: src/lib/marble/declarative/Placemark.cpp:291
 msgctxt "Marble::Placemark|"
 msgid "Electrical items"
-msgstr "Elektronika"
+msgstr "Elektrické spotrebiče"
 
 #: src/lib/marble/declarative/Placemark.cpp:292
 msgctxt "Marble::Placemark|"
@@ -4807,7 +4807,7 @@ msgstr "Národná cyklistická trasa"
 #: src/lib/marble/declarative/RouteRelationModel.cpp:25
 msgctxt "Marble::RouteRelationModel|"
 msgid "Regional cycling route"
-msgstr "Miestna cyklistická trasa"
+msgstr "Regionálna cyklistická trasa"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:26
 msgctxt "Marble::RouteRelationModel|"
@@ -4907,7 +4907,7 @@ msgstr "Texture tiles"
 #: src/lib/marble/DownloadRegionDialog.cpp:243
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Vector tiles"
-msgstr "Mercatorovo zobrazenie"
+msgstr "Vektorové dlaždice"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:244
 msgctxt "Marble::DownloadRegionDialog|"
@@ -5544,7 +5544,7 @@ msgstr "Hlavné mesto okrsku"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:346
 msgctxt "GeoDataPlacemark|"
 msgid "State Capital"
-msgstr "Hlavné mesto"
+msgstr "Hlavné mesto spolkovej krajiny"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:324
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:332
@@ -5552,7 +5552,7 @@ msgstr "Hlavné mesto"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:348
 msgctxt "GeoDataPlacemark|"
 msgid "Nation Capital"
-msgstr "Hlavné mesto"
+msgstr "Hlavné mesto štátu"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:350
 msgctxt "GeoDataPlacemark|"
@@ -5628,7 +5628,7 @@ msgstr "Satelit"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:384
 msgctxt "GeoDataPlacemark|"
 msgid "City Capital"
-msgstr "Hlavné mesto"
+msgstr "Hlavné mesto kraja"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:386
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:398
@@ -5660,7 +5660,7 @@ msgstr "Mesto"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:396
 msgctxt "GeoDataPlacemark|"
 msgid "Town Capital"
-msgstr "Hlavné mesto"
+msgstr "Hlavné mestečko"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:400
 msgctxt "GeoDataPlacemark|"
@@ -6022,7 +6022,7 @@ msgstr "Lavička"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:546
 msgctxt "GeoDataPlacemark|"
 msgid "Court House"
-msgstr "Súd"
+msgstr "Súdna budova"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:548
 msgctxt "GeoDataPlacemark|"
@@ -6213,7 +6213,7 @@ msgstr "Obchod s taškami"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:624
 msgctxt "GeoDataPlacemark|"
 msgid "Clothes Shop"
-msgstr "Oblečenie"
+msgstr "Obchod s oblečením"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:626
 msgctxt "GeoDataPlacemark|"
@@ -7731,7 +7731,7 @@ msgstr "Equirectangular (crs:84)"
 #: src/lib/marble/MapWizard.cpp:394
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
-msgstr "&Zobrazenie"
+msgstr "Projekcia dlaždíc:"
 
 #: src/lib/marble/MapWizard.cpp:410
 msgctxt "Marble::MapWizard|"
@@ -7885,7 +7885,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.cpp:1484
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
-msgstr "WMS Server:"
+msgstr "WMTS Server:"
 
 #: src/lib/marble/MapWizard.cpp:1486
 msgctxt "Marble::MapWizard|"
@@ -7969,7 +7969,7 @@ msgstr "Webová Mapová Služba (WMS)"
 #: src/lib/marble/MapWizard.ui:70
 msgctxt "MapWizard|"
 msgid "Web Map Tile Service (WMTS)"
-msgstr "Webová Mapová Služba (WMS)"
+msgstr "Webová Mapová Dlaždicová Služba (WMTS)"
 
 #: src/lib/marble/MapWizard.ui:80
 msgctxt "MapWizard|"
@@ -8065,7 +8065,7 @@ msgstr "https://"
 #: src/lib/marble/MapWizard.ui:218
 msgctxt "MapWizard|"
 msgid "Wms-Service:"
-msgstr "Faxová služba"
+msgstr "WMS-Služba:"
 
 #: src/lib/marble/MapWizard.ui:232
 msgctxt "MapWizard|"
@@ -8138,7 +8138,7 @@ msgstr "Možnosti vrstiev"
 #: src/lib/marble/MapWizard.ui:396
 msgctxt "MapWizard|"
 msgid "Service Info"
-msgstr "Služobná cesta"
+msgstr "Informácie o servise"
 
 #: src/lib/marble/MapWizard.ui:406
 msgctxt "MapWizard|"
@@ -8386,7 +8386,7 @@ msgstr "náhľad"
 #: src/lib/marble/MapWizard.ui:825
 msgctxt "MapWizard|"
 msgid "Change…"
-msgstr "Zmenené"
+msgstr "Zmeniť…"
 
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
@@ -8465,7 +8465,7 @@ msgstr "Sem ide mapová téma."
 #: src/lib/marble/MapWizard.ui:1002
 msgctxt "MapWizard|"
 msgid "Thumbnail"
-msgstr "Náhľad"
+msgstr "Miniatúra"
 
 #: src/lib/marble/MapWizard.ui:1012
 msgctxt "MapWizard|"
@@ -9219,8 +9219,8 @@ msgid ""
 "<p>Bastian Holst <a href=\"mailto:bastianholst@gmx.de\">bastianholst@gmx.de</"
 "a><br /><i>Project: Online Services</i></p>"
 msgstr ""
-"<p>Bastian Holst, <a href=\"mailto:bastianholst@gmx.de\">bastianholst@gmx."
-"de</a><br /><i>Podpora online služieb</i></p>"
+"<p>Bastian Holst <a href=\"mailto:bastianholst@gmx.de\">bastianholst@gmx.de</"
+"a><br /><i>Projekt: Online služby</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:233
 msgctxt "QObject|"
@@ -11316,7 +11316,7 @@ msgstr "Vysvetlivky"
 #: src/lib/marble/PrintOptions.ui:98
 msgctxt "PrintOptions|"
 msgid "Route"
-msgstr "Cesta"
+msgstr "Trasa"
 
 #: src/lib/marble/PrintOptions.ui:104
 msgctxt "PrintOptions|"
@@ -12127,7 +12127,7 @@ msgstr "Hľadať '%1'"
 #: src/lib/marble/SoundCueEditWidget.cpp:37
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Audio location"
-msgstr "Pridať vzťah"
+msgstr "Zvuková poloha"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:67
 msgctxt "Marble::SoundCueEditWidget|"
@@ -12772,7 +12772,7 @@ msgstr "Vykreslí na mapách poznámky so značkami miesta alebo polygónov."
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:183
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Annotations"
-msgstr "Vysvetlivky"
+msgstr "Anotácie"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:305
 msgctxt "QObject|"
@@ -13225,7 +13225,7 @@ msgstr "Nezadaný žiadny názov"
 #: src/plugins/render/annotate/EditPolylineDialog.cpp:262
 msgctxt "Marble::EditPolylineDialog|"
 msgid "Please specify a name for this polyline."
-msgstr "Prosím, zadajte názov pre tento polygón."
+msgstr "Prosím, zadajte názov pre túto polylíniu."
 
 #: src/plugins/render/annotate/EditPolylineDialog.cpp:267
 msgctxt "Marble::EditPolylineDialog|"
@@ -14443,7 +14443,7 @@ msgid ""
 "Perimeter:\n"
 "%1"
 msgstr ""
-"Obvod:\n"
+"Obvod (perimeter):\n"
 "%1"
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:554
@@ -14473,7 +14473,7 @@ msgstr "Plocha: %1<br/>\n"
 #, qt-format
 msgctxt "Marble::MeasureToolPlugin|"
 msgid "Perimeter: %1<br/>\n"
-msgstr "Obvod: %1<br/>\n"
+msgstr "Obvod (perimeter): %1<br/>\n"
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:566
 #, qt-format
@@ -14788,7 +14788,7 @@ msgstr "Prosím vyberte farbu pre ukazovateľ polohy"
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:14
 msgctxt "OverviewMapConfigWidget|"
 msgid "Configure Overview Map"
-msgstr "Vybrať orientačnú mapu"
+msgstr "Nastaviť orientačnú mapu"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:20
 msgctxt "OverviewMapConfigWidget|"
