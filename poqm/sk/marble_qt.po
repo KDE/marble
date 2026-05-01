@@ -1277,7 +1277,7 @@ msgstr "Zubár"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:351
 msgctxt "DGML|"
 msgid "Doctors"
-msgstr "Lekár"
+msgstr "Lekári"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:349
 #. ----------
@@ -1410,7 +1410,7 @@ msgstr "Pozostatky"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:445
 msgctxt "DGML|"
 msgid "Bar"
-msgstr "bar"
+msgstr "Bar"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:443
 #. ----------
@@ -2225,7 +2225,7 @@ msgstr "Korma"
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Pyxis"
-msgstr "Kompas"
+msgstr "Pyxis"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
@@ -3132,12 +3132,12 @@ msgstr "Správca záložiek"
 #: src/lib/marble/BookmarkManagerDialog.ui:25
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Import Bookmarks…"
-msgstr "Importovať záložky"
+msgstr "Importovať záložky…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Export Bookmarks…"
-msgstr "Exportovať záložky"
+msgstr "Exportovať záložky…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
@@ -3954,7 +3954,7 @@ msgstr "Zubár"
 #: src/lib/marble/declarative/Placemark.cpp:329
 msgctxt "Marble::Placemark|"
 msgid "Medical practitioner"
-msgstr "Lekár"
+msgstr "Praktický lekár"
 
 #: src/lib/marble/declarative/Placemark.cpp:330
 msgctxt "Marble::Placemark|"
@@ -5544,7 +5544,7 @@ msgstr "Hlavné mesto okrsku"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:346
 msgctxt "GeoDataPlacemark|"
 msgid "State Capital"
-msgstr "Hlavné mesto spolkovej krajiny"
+msgstr "Hlavné mesto štátu"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:324
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:332
@@ -5635,7 +5635,7 @@ msgstr "Hlavné mesto kraja"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:404
 msgctxt "GeoDataPlacemark|"
 msgid "National Capital"
-msgstr "Hlavné mesto"
+msgstr "Národné hlavné mesto"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:388
 msgctxt "GeoDataPlacemark|"
@@ -5715,7 +5715,7 @@ msgstr "Krovie"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:422
 msgctxt "GeoDataPlacemark|"
 msgid "Cliff"
-msgstr "Útes"
+msgstr "Zráz"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:424
 msgctxt "GeoDataPlacemark|"
@@ -13652,7 +13652,7 @@ msgstr "Zobraziť zatmenia pre rok:"
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
 msgctxt "EclipsesBrowserDialog|"
 msgid "&Settings…"
-msgstr "&Nastavenia"
+msgstr "Nastavenia…"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 msgctxt "EclipsesBrowserDialog|"
@@ -13891,7 +13891,7 @@ msgstr "Cesta"
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:77
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Track: "
-msgstr "Stopa:"
+msgstr "Stopa: "
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:90
 msgctxt "Marble::ElevationProfileContextMenu|"
@@ -16211,7 +16211,7 @@ msgstr "kilopaskaly"
 #: src/plugins/render/weather/WeatherConfigWidget.ui:179
 msgctxt "WeatherConfigWidget|"
 msgid "Bars"
-msgstr "Barov"
+msgstr "Bary"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:184
 msgctxt "WeatherConfigWidget|"
