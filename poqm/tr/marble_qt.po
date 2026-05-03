@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2026-03-09 22:23+0300\n"
+"PO-Revision-Date: 2026-05-02 19:14+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.12.2\n"
+"X-Generator: Lokalize 25.12.3\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -3094,7 +3094,7 @@ msgstr "Yer imi İçe Aktarma"
 #: src/lib/marble/BookmarkManagerDialog.cpp:465
 msgctxt "BookmarkManagerDialogPrivate|"
 msgid "The file contains a bookmark that already exists among your Bookmarks."
-msgstr "Dosya, halihazırda Yer İmleri’nde bulunan bir yer imini içeriyor."
+msgstr "Dosya, hâlihazırda Yer İmleri’nde bulunan bir yer imini içeriyor."
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:466
 msgctxt "BookmarkManagerDialogPrivate|"
@@ -7851,7 +7851,7 @@ msgctxt "Marble::MapWizard|"
 msgid ""
 "Please specify another map name, since there is already a map named \"%1\"."
 msgstr ""
-"Lütfen başka bir harita adı belirtin, “%1” adında bir harita halihazırda var."
+"Lütfen başka bir harita adı belirtin, “%1” adında bir harita hâlihazırda var."
 
 #: src/lib/marble/MapWizard.cpp:928
 msgctxt "Marble::MapWizard|"
@@ -10744,7 +10744,7 @@ msgstr ""
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Yerler farklı dillerde "
 "farklı adlara sahiptir. Harita üzerindeki etiket, kullanıcının dilindeki adı "
-"gösterebilir. Alternatif olarak, adı resmi dilde ve o yerin gliflerinde "
+"gösterebilir. Alternatif olarak, adı resmî dilde ve o yerin gliflerinde "
 "görüntüleyebilir.</p></body></html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:306
