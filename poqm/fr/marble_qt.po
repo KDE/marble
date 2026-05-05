@@ -6,7 +6,7 @@
 # Jean-Jacques FINAZZI <mrjay01@users.sourceforge.net>, 2008.
 # Mickael Sibelle <kimael@gmail.com>, 2008, 2009, 2010, 2011, 2012.
 # Sébastien Renard <Sebastien.Renard@digitalfox.org>, 2008.
-# SPDX-FileCopyrightText: 2012, 2020, 2021, 2022, 2023, 2024, 2025 Xavier Besnard <xavier.besnard@kde.org>
+# SPDX-FileCopyrightText: 2012, 2020, 2021, 2022, 2023, 2024, 2025, 2026 Xavier Besnard <xavier.besnard@kde.org>
 # Pierre Buard <pierre.buard@gmail.com>, 2013, 2014, 2015.
 # Sebastien Renard <renard@kde.org>, 2013.
 # Simon Depiets <sdepiets@gmail.com>, 2018.
@@ -19,9 +19,9 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2025-05-14 17:09+0200\n"
+"PO-Revision-Date: 2026-05-03 11:46+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
-"Language-Team: French <French <kde-francophone@kde.org>>\n"
+"Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 25.12.3\n"
 "X-Qt-Contexts: true\n"
 "X-Text-Markup: qtrich\n"
 
@@ -2390,7 +2390,7 @@ msgstr "&Exporter la carte…"
 #: src/apps/marble-qt/QtMainWindow.cpp:275
 msgctxt "Marble::MainWindow|"
 msgid "Save a screenshot of the map"
-msgstr "Enregistrer une copie d'écran de la carte"
+msgstr "Enregistrer une capture d'écran de la carte"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:279
 msgctxt "Marble::MainWindow|"
@@ -2418,7 +2418,7 @@ msgstr "Ctrl+P"
 #: src/apps/marble-qt/QtMainWindow.cpp:289
 msgctxt "Marble::MainWindow|"
 msgid "Print a screenshot of the map"
-msgstr "Imprimer une copie d'écran de la carte"
+msgstr "Imprimer une capture d'écran de la carte"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:288
 msgctxt "Marble::MainWindow|"
@@ -2448,7 +2448,7 @@ msgstr "&Copier la carte"
 #: src/apps/marble-qt/QtMainWindow.cpp:299
 msgctxt "Marble::MainWindow|"
 msgid "Copy a screenshot of the map"
-msgstr "Réaliser une copie d'écran de la carte"
+msgstr "Réaliser une capture d'écran de la carte"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:302
 msgctxt "Marble::MainWindow|"
@@ -2503,12 +2503,12 @@ msgstr "Copier les coordonnées centrales au format texte"
 #: src/apps/marble-qt/QtMainWindow.cpp:328
 msgctxt "Marble::MainWindow|"
 msgid "&Full Screen Mode"
-msgstr "Mode &plein écran"
+msgstr "Mode « &Plein écran »"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:331
 msgctxt "Marble::MainWindow|"
 msgid "Full Screen Mode"
-msgstr "Mode plein écran"
+msgstr "Mode « Plein écran »"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:334
 msgctxt "Marble::MainWindow|"
@@ -3601,7 +3601,7 @@ msgstr "Service de photocopie"
 #: src/lib/marble/declarative/Placemark.cpp:152
 msgctxt "Marble::Placemark|A copy shop does not provide photocopying service"
 msgid "No photocopying service"
-msgstr "Pas de service de photocopie"
+msgstr "Aucun service de photocopie"
 
 #: src/lib/marble/declarative/Placemark.cpp:156
 msgctxt ""
@@ -10888,7 +10888,7 @@ msgstr "Ajouter un signet"
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:132
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "&Full Screen Mode"
-msgstr "Mode &plein écran"
+msgstr "Mode « &Plein écran »"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:135
 msgctxt "Marble::MarbleWidgetPopupMenu|"
