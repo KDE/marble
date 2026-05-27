@@ -7756,7 +7756,7 @@ msgstr "Équi-rectangulaire (epsg : 4326)"
 #: src/lib/marble/MapWizard.cpp:938
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (crs:84)"
-msgstr "Équi-rectangulaire (crs : 84)"
+msgstr "Équi-rectangulaire (crs : 84)"
 
 #: src/lib/marble/MapWizard.cpp:394
 msgctxt "Marble::MapWizard|"
