@@ -8,24 +8,25 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:48+0000\n"
-"PO-Revision-Date: 2013-09-08 07:05+0900\n"
-"Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
+"PO-Revision-Date: 2026-05-31 20:24-0400\n"
+"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.9\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "ئابدۇقادىر ئابلىز, غەيرەت كەنجى"
+msgstr "ئابدۇقادىر ئابلىز، غەيرەت كەنجى"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "sahran.ug@gmail.com,  gheyret@gmail.com"
+msgstr "sahranbay@gmail.com, gheyret@gmail.com"
 
 #: kdemain.cpp:85
 #, kde-format
@@ -45,7 +46,7 @@ msgstr ""
 #: kdemain.cpp:94 kdemain.cpp:209
 #, kde-format
 msgid "Torsten Rahn"
-msgstr "Torsten Rahn"
+msgstr ""
 
 #: kdemain.cpp:94
 #, kde-format
@@ -55,7 +56,7 @@ msgstr ""
 #: kdemain.cpp:95
 #, kde-format
 msgid "Bernhard Beschow"
-msgstr "Bernhard Beschow"
+msgstr ""
 
 #: kdemain.cpp:95
 #, kde-format
@@ -115,7 +116,7 @@ msgstr ""
 #: kdemain.cpp:101 kdemain.cpp:124
 #, kde-format
 msgid "Guillaume Martres"
-msgstr "Guillaume Martres"
+msgstr ""
 
 #: kdemain.cpp:101
 #, kde-format
@@ -155,7 +156,7 @@ msgstr ""
 #: kdemain.cpp:105
 #, kde-format
 msgid "Niko Sams"
-msgstr "Niko Sams"
+msgstr ""
 
 #: kdemain.cpp:105
 #, kde-format
@@ -165,7 +166,7 @@ msgstr ""
 #: kdemain.cpp:106 kdemain.cpp:158
 #, kde-format
 msgid "Patrick Spendrin"
-msgstr "Patrick Spendrin"
+msgstr ""
 
 #: kdemain.cpp:106
 #, kde-format
@@ -175,7 +176,7 @@ msgstr ""
 #: kdemain.cpp:107
 #, kde-format
 msgid "Eckhart Wörner"
-msgstr "Eckhart Wörner"
+msgstr ""
 
 #: kdemain.cpp:107
 #, kde-format
@@ -185,7 +186,7 @@ msgstr ""
 #: kdemain.cpp:111
 #, kde-format
 msgid "Inge Wallin"
-msgstr "Inge Wallin"
+msgstr ""
 
 #: kdemain.cpp:111
 #, kde-format
@@ -215,7 +216,7 @@ msgstr ""
 #: kdemain.cpp:114
 #, kde-format
 msgid "Harshit Jain"
-msgstr "Harshit Jain"
+msgstr ""
 
 #: kdemain.cpp:114
 #, kde-format
@@ -225,7 +226,7 @@ msgstr ""
 #: kdemain.cpp:115
 #, kde-format
 msgid "Simon Edwards"
-msgstr "Simon Edwards"
+msgstr ""
 
 #: kdemain.cpp:115
 #, kde-format
@@ -298,7 +299,7 @@ msgstr ""
 #: kdemain.cpp:142
 #, kde-format
 msgid "Harshit Jain "
-msgstr "Harshit Jain "
+msgstr ""
 
 #: kdemain.cpp:143
 #, kde-format
@@ -350,7 +351,7 @@ msgstr ""
 #: kdemain.cpp:166
 #, kde-format
 msgid "Carlos Licea"
-msgstr "Carlos Licea"
+msgstr ""
 
 #: kdemain.cpp:167
 #, kde-format
@@ -400,7 +401,7 @@ msgstr ""
 #: kdemain.cpp:183
 #, kde-format
 msgid "Nikolas Zimmermann"
-msgstr "Nikolas Zimmermann"
+msgstr ""
 
 #: kdemain.cpp:184
 #, kde-format
@@ -410,7 +411,7 @@ msgstr ""
 #: kdemain.cpp:185
 #, kde-format
 msgid "Stefan Asserhäll"
-msgstr "Stefan Asserhäll"
+msgstr ""
 
 #: kdemain.cpp:186
 #, kde-format
@@ -450,7 +451,7 @@ msgstr "Frederik Gladhorn"
 #: kdemain.cpp:193
 #, kde-format
 msgid "Fredrik Höglund"
-msgstr "Fredrik Höglund"
+msgstr ""
 
 #: kdemain.cpp:194
 #, kde-format
@@ -470,7 +471,7 @@ msgstr "Joseph Wenninger"
 #: kdemain.cpp:197
 #, kde-format
 msgid "Kris Thomsen"
-msgstr "Kris Thomsen"
+msgstr ""
 
 #: kdemain.cpp:198
 #, kde-format
@@ -507,7 +508,7 @@ msgstr ""
 #: kdemain.cpp:203
 #, kde-format
 msgid "Ralf Habacker"
-msgstr "Ralf Habacker"
+msgstr ""
 
 #: kdemain.cpp:204
 #, kde-format
@@ -522,7 +523,7 @@ msgstr ""
 #: kdemain.cpp:206
 #, kde-format
 msgid "Marcus D. Hanwell"
-msgstr "Marcus D. Hanwell"
+msgstr ""
 
 #: kdemain.cpp:207
 #, kde-format
@@ -599,7 +600,7 @@ msgstr ""
 #: kdemain.cpp:222
 #, kde-format
 msgid "John Layt"
-msgstr "John Layt"
+msgstr ""
 
 #: kdemain.cpp:223
 #, kde-format
@@ -611,7 +612,7 @@ msgstr ""
 #: kdemain.cpp:239
 #, kde-format
 msgid "Enable debug output"
-msgstr "سازلاش نەتىجىلىرىنى چىقىرىشنى ئىناۋەتلىك قىلىش"
+msgstr "سازلاش نەتىجىلىرىنى چىقىرىشنى قوزغات"
 
 #: kdemain.cpp:242
 #, kde-format
@@ -876,21 +877,19 @@ msgstr ""
 #: marble_part.cpp:245
 #, kde-format
 msgid "All Supported Files"
-msgstr "قوللايدىغان ھەممە ھۆججەتلەر"
+msgstr "قوللايدىغان ھەممە ھۆججەت"
 
 #: marble_part.cpp:251
-#, fuzzy, kde-format
-#| msgid "Open File"
+#, kde-format
 msgctxt "@title:window"
 msgid "Open File"
 msgstr "ھۆججەت ئاچ"
 
 #: marble_part.cpp:267
-#, fuzzy, kde-format
-#| msgid "Export Map"
+#, kde-format
 msgctxt "@title:window"
 msgid "Export Map"
-msgstr "خەرىتىنى ئېكسپورت قىلىش"
+msgstr ""
 
 #: marble_part.cpp:267
 #, kde-format
@@ -901,7 +900,7 @@ msgstr ""
 #, kde-format
 msgctxt "Application name"
 msgid "Marble"
-msgstr "Marble"
+msgstr ""
 
 #: marble_part.cpp:279
 #, kde-format
@@ -909,10 +908,9 @@ msgid "An error occurred while trying to save the file.\n"
 msgstr "ھۆججەتنى ساقلاشتا خاتالىق كۆرۈلدى.\n"
 
 #: marble_part.cpp:461
-#, fuzzy, kde-format
-#| msgid "Username:"
+#, kde-format
 msgid "Unnamed"
-msgstr "ئىشلەتكۈچى ئاتى:"
+msgstr "ئاتسىز"
 
 #: marble_part.cpp:681
 #, kde-format
@@ -1044,12 +1042,10 @@ msgid "Lock globe to the sub-solar point"
 msgstr ""
 
 #: marble_part.cpp:823
-#, fuzzy, kde-format
-#| msgctxt "Add Bookmark"
-#| msgid "&Add Bookmark"
+#, kde-format
 msgctxt "Add Bookmark"
 msgid "Add &Bookmark..."
-msgstr "خەتكۈش قوش(&A)"
+msgstr ""
 
 #: marble_part.cpp:830
 #, kde-format
@@ -1063,26 +1059,21 @@ msgid "Show or hide bookmarks in the map"
 msgstr ""
 
 #: marble_part.cpp:838
-#, fuzzy, kde-format
-#| msgid "Current Location"
+#, kde-format
 msgid "&Set Home Location"
-msgstr "نۆۋەتتىكى ئورۇن"
+msgstr ""
 
 #: marble_part.cpp:844
-#, fuzzy, kde-format
-#| msgctxt "Manage Bookmarks"
-#| msgid "&Manage Bookmarks"
+#, kde-format
 msgctxt "Manage Bookmarks"
 msgid "&Manage Bookmarks..."
-msgstr "خەتكۈچلەرنى باشقۇر(&M)"
+msgstr ""
 
 #: marble_part.cpp:853
-#, fuzzy, kde-format
-#| msgctxt "Edit the map in an external application"
-#| msgid "&Edit Map"
+#, kde-format
 msgctxt "Edit the map in an external application"
 msgid "&Edit Map..."
-msgstr "خەرىتە تەھرىرى(&E)"
+msgstr ""
 
 #: marble_part.cpp:859
 #, kde-format
@@ -1213,16 +1204,15 @@ msgstr "تاختايلار(&P)"
 
 #. i18n: ectx: Menu (viewSize)
 #: marble_part.rc:65
-#, fuzzy, kde-format
-#| msgid "&View"
+#, kde-format
 msgid "&View Size"
-msgstr "كۆرۈنۈش(&V)"
+msgstr ""
 
 #. i18n: ectx: Menu (bookmarks)
 #: marble_part.rc:73 marbleui.rc:29
 #, kde-format
 msgid "&Bookmarks"
-msgstr "خەتكۈچلەر(&B)"
+msgstr "خەتكۈچ(&B)"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: marble_part.rc:84 marbleui.rc:36
@@ -1257,7 +1247,6 @@ msgstr "قورال بالداق تەھرىرلەش"
 #~ msgid "Airport"
 #~ msgstr "ئايرودروم"
 
-#, fuzzy
 #~| msgid "Areas"
 #~ msgid "Urban Areas"
 #~ msgstr "رايونلار"
@@ -1346,7 +1335,6 @@ msgstr "قورال بالداق تەھرىرلەش"
 #~ msgid "Desert"
 #~ msgstr "قۇملۇق"
 
-#, fuzzy
 #~| msgid "River"
 #~ msgid "Rivers"
 #~ msgstr "دەريا"
@@ -1360,7 +1348,6 @@ msgstr "قورال بالداق تەھرىرلەش"
 #~ msgid "Population:"
 #~ msgstr "نوپۇسى:"
 
-#, fuzzy
 #~| msgid "Marble"
 #~ msgid "Marble - Game"
 #~ msgstr "Marble"
@@ -1423,7 +1410,6 @@ msgstr "قورال بالداق تەھرىرلەش"
 #~ msgid "&Folder"
 #~ msgstr "قىسقۇچ(&F)"
 
-#, fuzzy
 #~| msgid "Edit Toolbar"
 #~ msgid "Edit placemark"
 #~ msgstr "قورال بالداق تەھرىرلەش"
@@ -1431,22 +1417,18 @@ msgstr "قورال بالداق تەھرىرلەش"
 #~ msgid "Description"
 #~ msgstr "چۈشەندۈرۈش"
 
-#, fuzzy
 #~| msgid "Labels"
 #~ msgid "Label"
 #~ msgstr "ئەنلەر"
 
-#, fuzzy
 #~| msgid "C&olors"
 #~ msgid "Color:"
 #~ msgstr "رەڭ(&O)"
 
-#, fuzzy
 #~| msgid "Edit Toolbar"
 #~ msgid "Show placemark"
 #~ msgstr "قورال بالداق تەھرىرلەش"
 
-#, fuzzy
 #~| msgid "Population:"
 #~ msgid "Elevation:"
 #~ msgstr "نوپۇسى:"
@@ -1466,7 +1448,6 @@ msgstr "قورال بالداق تەھرىرلەش"
 #~ msgid "10"
 #~ msgstr "10"
 
-#, fuzzy
 #~| msgid "C&olors"
 #~ msgid "Color"
 #~ msgstr "رەڭ(&O)"
@@ -1501,7 +1482,6 @@ msgstr "قورال بالداق تەھرىرلەش"
 #~ msgid "Mercator"
 #~ msgstr "مېركاتور"
 
-#, fuzzy
 #~| msgid "Geographic Pole"
 #~ msgid "Stereographic"
 #~ msgstr "جەنۇبىي ۋە —شىمالىي قۇتۇپ"
@@ -1629,7 +1609,6 @@ msgstr "قورال بالداق تەھرىرلەش"
 #~ msgid "OpenGL"
 #~ msgstr "OpenGL"
 
-#, fuzzy
 #~| msgctxt "Action for opening a file"
 #~| msgid "&Open..."
 #~ msgid "Open..."
@@ -1638,22 +1617,18 @@ msgstr "قورال بالداق تەھرىرلەش"
 #~ msgid "Cancel"
 #~ msgstr "ئەمەلدىن قالدۇر"
 
-#, fuzzy
 #~| msgid "Start:"
 #~ msgid "Start"
 #~ msgstr "باشلاش:"
 
-#, fuzzy
 #~| msgid "Current Location"
 #~ msgid "Current Relations"
 #~ msgstr "نۆۋەتتىكى ئورۇن"
 
-#, fuzzy
 #~| msgid "&Name"
 #~ msgid "Name"
 #~ msgstr "ئاتى(&N)"
 
-#, fuzzy
 #~| msgid "Type:"
 #~ msgid "Type"
 #~ msgstr "تىپى:"
@@ -1661,22 +1636,18 @@ msgstr "قورال بالداق تەھرىرلەش"
 #~ msgid "Role"
 #~ msgstr "رول"
 
-#, fuzzy
 #~| msgid "Population:"
 #~ msgid "Add Relation"
 #~ msgstr "نوپۇسى:"
 
-#, fuzzy
 #~| msgid "Current Location"
 #~ msgid "Current Tags"
 #~ msgstr "نۆۋەتتىكى ئورۇن"
 
-#, fuzzy
 #~| msgid "Browse"
 #~ msgid "Browse..."
 #~ msgstr "كۆز يۈگۈرت"
 
-#, fuzzy
 #~| msgid "&Position"
 #~ msgid "Position:"
 #~ msgstr "ئورنى(&P)"
@@ -1753,22 +1724,18 @@ msgstr "قورال بالداق تەھرىرلەش"
 #~ msgid "Now"
 #~ msgstr "ھازىرلا"
 
-#, fuzzy
 #~| msgid "&Close"
 #~ msgid "Close"
 #~ msgstr "ياپ(&C)"
 
-#, fuzzy
 #~| msgid "Move &Up"
 #~ msgid "Move up"
 #~ msgstr "يۇقىرىغا(&U)"
 
-#, fuzzy
 #~| msgid "Move &Down"
 #~ msgid "Move down"
 #~ msgstr "تۆۋەنگە(&D)"
 
-#, fuzzy
 #~| msgid "OpenGL"
 #~ msgid "Open Tour"
 #~ msgstr "OpenGL"
@@ -1776,22 +1743,18 @@ msgstr "قورال بالداق تەھرىرلەش"
 #~ msgid "Time Zones"
 #~ msgstr "ۋاقىت رايونلىرى"
 
-#, fuzzy
 #~| msgid "Coordinates:"
 #~ msgid "Coordinates"
 #~ msgstr "كوئوردېناتلار:"
 
-#, fuzzy
 #~| msgid "&N"
 #~ msgid "N"
 #~ msgstr "&N"
 
-#, fuzzy
 #~| msgid "Population:"
 #~ msgid "Rotation"
 #~ msgstr "نوپۇسى:"
 
-#, fuzzy
 #~| msgid "Areas"
 #~ msgid "Area"
 #~ msgstr "رايونلار"
@@ -1844,12 +1807,10 @@ msgstr "قورال بالداق تەھرىرلەش"
 #~ msgid "Filter"
 #~ msgstr "سۈزگۈچ"
 
-#, fuzzy
 #~| msgid "&Settings"
 #~ msgid "&Settings..."
 #~ msgstr "تەڭشەك(&S)"
 
-#, fuzzy
 #~| msgid "&Remove"
 #~ msgid "&Reminder"
 #~ msgstr "چىقىرىۋەت(&R)"
@@ -1878,7 +1839,6 @@ msgstr "قورال بالداق تەھرىرلەش"
 #~ msgid "Minimize"
 #~ msgstr "كىچىكلەت"
 
-#, fuzzy
 #~| msgid "Diameter:"
 #~ msgid "Perimeter"
 #~ msgstr "دىئامېتىر:"
@@ -1982,12 +1942,10 @@ msgstr "قورال بالداق تەھرىرلەش"
 #~ msgid "Moon"
 #~ msgstr "ئاي"
 
-#, fuzzy
 #~| msgid "Mercator"
 #~ msgid "Mercury"
 #~ msgstr "مېركاتور"
 
-#, fuzzy
 #~| msgid "User name:"
 #~ msgid "Use name labels"
 #~ msgstr "ئىشلەتكۈچى ئاتى:"
@@ -1995,7 +1953,6 @@ msgstr "قورال بالداق تەھرىرلەش"
 #~ msgid "Other"
 #~ msgstr "باشقا"
 
-#, fuzzy
 #~| msgid "&Name"
 #~ msgid "Names"
 #~ msgstr "ئاتى(&N)"
@@ -2042,7 +1999,6 @@ msgstr "قورال بالداق تەھرىرلەش"
 #~ msgid " hours"
 #~ msgstr " سائەت"
 
-#, fuzzy
 #~| msgid "Speed"
 #~ msgid "Speed:"
 #~ msgstr "سۈرئىتى"
@@ -2080,32 +2036,26 @@ msgstr "قورال بالداق تەھرىرلەش"
 #~ msgid "&Name"
 #~ msgstr "ئاتى(&N)"
 
-#, fuzzy
 #~| msgid "Areas"
 #~ msgid "Ara"
 #~ msgstr "رايونلار"
 
-#, fuzzy
 #~| msgid "Cancel"
 #~ msgid "Cancer"
 #~ msgstr "ئەمەلدىن قالدۇر"
 
-#, fuzzy
 #~| msgid "Water"
 #~ msgid "Crater"
 #~ msgstr "سۇ"
 
-#, fuzzy
 #~| msgid "Log"
 #~ msgid "Leo"
 #~ msgstr "خاتىرە"
 
-#, fuzzy
 #~| msgid "Library"
 #~ msgid "Libra"
 #~ msgstr "ئامبار"
 
-#, fuzzy
 #~| msgid "Normal"
 #~ msgid "Norma"
 #~ msgstr "نورمال"
