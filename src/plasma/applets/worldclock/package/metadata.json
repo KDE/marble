@@ -30,6 +30,7 @@
                 "Name[sl]": "Friedrich W. H. Kossebau",
                 "Name[sv]": "Friedrich W. H. Kossebau",
                 "Name[tr]": "Friedrich W. H. Kossebau",
+                "Name[ug]": "Friedrich W. H. Kossebau",
                 "Name[uk]": "Friedrich W. H. Kossebau",
                 "Name[zh_CN]": "Friedrich W. H. Kossebau"
             }
@@ -92,6 +93,7 @@
         "Name[sl]": "Svetovna ura",
         "Name[sv]": "Världsklocka",
         "Name[tr]": "Dünya Saati",
+        "Name[ug]": "دۇنيا سائىتى",
         "Name[uk]": "Світовий годинник",
         "Name[zh_CN]": "世界时钟",
         "Version": "0.2",

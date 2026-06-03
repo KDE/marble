@@ -30,6 +30,7 @@
                 "Name[sl]": "Friedrich W. H. Kossebau",
                 "Name[sv]": "Friedrich W. H. Kossebau",
                 "Name[tr]": "Friedrich W. H. Kossebau",
+                "Name[ug]": "Friedrich W. H. Kossebau",
                 "Name[uk]": "Friedrich W. H. Kossebau",
                 "Name[zh_CN]": "Friedrich W. H. Kossebau"
             }
@@ -91,6 +92,7 @@
         "Name[sl]": "Zemljevid sveta",
         "Name[sv]": "Världskarta",
         "Name[tr]": "Dünya Haritası",
+        "Name[ug]": "دۇنيا خەرىتىسى",
         "Name[uk]": "Мапа світу",
         "Name[zh_CN]": "世界地图",
         "ServiceTypes": [
