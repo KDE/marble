@@ -42,7 +42,12 @@ MarbleDirs::MarbleDirs()
 {
 }
 
-QString MarbleDirs::path(const QString &relativePath)
+/* deprecated */ QString MarbleDirs::path(const QString &relativePath)
+{
+    return dataFilePath(relativePath);
+}
+
+QString MarbleDirs::dataFilePath(const QString &relativePath)
 {
     QString fullpath = localPath() + QLatin1Char('/') + relativePath; // local path
     if (!QFile::exists(fullpath)) {
@@ -65,7 +70,12 @@ QString MarbleDirs::cacheFilePath(const QString &relativePath)
     return QDir(fullpath).canonicalPath();
 }
 
-QString MarbleDirs::pluginPath(const QString &relativePath)
+/* deprecated */ QString MarbleDirs::pluginPath(const QString &relativePath)
+{
+    return pluginFilePath(relativePath);
+}
+
+QString MarbleDirs::pluginFilePath(const QString &relativePath)
 {
     const QString localpath = pluginLocalPath() + QDir::separator() + relativePath; // local path
     const QString systempath = pluginSystemPath() + QDir::separator() + relativePath; // system path

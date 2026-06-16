@@ -80,19 +80,20 @@ namespace Marble
  *
  */
 
-// TODO: no private data, this can be just a namespace
 class MARBLE_EXPORT MarbleDirs
 {
 public:
     MarbleDirs();
 
-    // TODO: rename this to "dataFilePath" to make its function explicit
-    static QString path(const QString &relativePath);
+    static QString dataFilePath(const QString &relativePath);
+
+    Q_DECL_DEPRECATED_X("Use dataFilePath()") static QString path(const QString &relativePath);
 
     static QString cacheFilePath(const QString &relativePath);
 
-    // TODO: rename this to "pluginFilePath" for consistency
-    static QString pluginPath(const QString &relativePath);
+    static QString pluginFilePath(const QString &relativePath);
+
+    Q_DECL_DEPRECATED_X("Use pluginFilePath()") static QString pluginPath(const QString &relativePath);
 
     static QStringList entryList(const QString &relativePath, QDir::Filters filters = QDir::NoFilter);
 
