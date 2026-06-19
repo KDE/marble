@@ -3,13 +3,13 @@
 #
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2012.
 # Balázs Úr <urbalazs@gmail.com>, 2012, 2013, 2014.
-# SPDX-FileCopyrightText: 2024 Kristof Kiszel <ulysses@fsf.hu>
+# SPDX-FileCopyrightText: 2024, 2026 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-10-03 21:47+0200\n"
+"PO-Revision-Date: 2026-06-18 21:43+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 26.04.2\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -8747,11 +8747,9 @@ msgstr "Eltávolítás"
 
 #: src/lib/marble/MapThemeDownloadDialog.cpp:253
 #: src/lib/marble/MapThemeDownloadDialog.cpp:287
-#, fuzzy
-#| msgid "Cancel"
 msgctxt "Marble::MapItemDelegate|"
 msgid "Cancel"
-msgstr "Mégsem"
+msgstr "Mégse"
 
 #: src/lib/marble/MapThemeDownloadDialog.cpp:254
 #, fuzzy
@@ -14155,11 +14153,9 @@ msgid "Start"
 msgstr "Kezdés"
 
 #: src/lib/marble/TourCaptureDialog.cpp:101
-#, fuzzy
-#| msgid "Cancel"
 msgctxt "Marble::TourCaptureDialog|"
 msgid "Cancel"
-msgstr "Mégsem"
+msgstr "Mégse"
 
 #: src/lib/marble/TourCaptureDialog.cpp:107
 #, fuzzy
