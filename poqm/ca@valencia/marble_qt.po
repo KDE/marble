@@ -17238,12 +17238,12 @@ msgstr "monument commemoratiu"
 #: src/plugins/runner/local-osm-search/LocalOsmSearchPlugin.cpp:40
 msgctxt "Marble::LocalOsmSearchPlugin|"
 msgid "Local OSM Search"
-msgstr "Busca a OSM local"
+msgstr "Busca en OSM local"
 
 #: src/plugins/runner/local-osm-search/LocalOsmSearchPlugin.cpp:45
 msgctxt "Marble::LocalOsmSearchPlugin|"
 msgid "Offline OpenStreetMap Search"
-msgstr "Busca a OpenStreetMap mentre s'està desconnectat"
+msgstr "Busca en OpenStreetMap mentre s'està desconnectat"
 
 #: src/plugins/runner/local-osm-search/LocalOsmSearchPlugin.cpp:60
 msgctxt "Marble::LocalOsmSearchPlugin|"
@@ -17709,7 +17709,7 @@ msgstr "OpenRouteService"
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:44
 msgctxt "Marble::OpenRouteServicePlugin|"
 msgid "Routing in Europe using openrouteservice.org"
-msgstr "Els itineraris a Europa es calculen utilitzant openrouteservice.org"
+msgstr "Els itineraris en Europa es calculen utilitzant openrouteservice.org"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:73
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
