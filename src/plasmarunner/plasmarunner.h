@@ -6,7 +6,6 @@
 
 // Plasma
 #include <KRunner/AbstractRunner>
-#include <krunner_version.h>
 
 namespace Marble
 {
