@@ -9,7 +9,6 @@
 #include "GeoDataCoordinates.h"
 #include <QObject>
 #include <QQuickItem>
-#include <QtQml>
 
 /**
  * Binds a QML item to a specific geodetic location in screen coordinates.

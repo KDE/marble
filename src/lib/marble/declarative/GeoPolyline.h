@@ -10,7 +10,6 @@
 #include "GeoDataLineString.h"
 #include <QObject>
 #include <QQuickItem>
-#include <QtQml>
 
 /**
  * Represents a coordinate with the properties of a name and coordinates

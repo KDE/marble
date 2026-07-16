@@ -7,7 +7,7 @@
 #define MARBLE_DECLARATIVE_NAVIGATION_H
 
 #include <QObject>
-#include <QtQml>
+#include <qqmlintegration.h>
 
 namespace Marble
 {
