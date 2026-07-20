@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2026-06-08 09:24+0300\n"
+"PO-Revision-Date: 2026-07-19 09:32+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -558,15 +558,14 @@ msgid "Earth at Night"
 msgstr "כדור הארץ בלילה"
 
 #. file data/maps/earth/citylights/citylights.dgml:21
-#, fuzzy
 msgctxt "DGML|"
 msgid ""
 "This image of <i>Earth's city lights</i> was created with data from the "
 "Defense Meteorological Satellite Program (DMSP) Operational Linescan System "
 "(OLS)."
 msgstr ""
-"תמונה זו של אורות הערים על פני כדור הארץ נוצרה באמצעות נתונים ממערכת קווי "
-"הסריקה הביצועית (OLS) של תוכנית הלוויינים המטאורולוגיים להגנה (DMSP)."
+"תמונה זו של <i>אורות הערים על פני כדור הארץ</i> נוצרה באמצעות נתונים ממערכת "
+"קווי הסריקה הביצועית (OLS) של תוכנית הלוויינים המטאורולוגיים להגנה (DMSP)."
 
 #. file data/maps/earth/citylights/citylights.dgml:154
 #. ----------
@@ -1129,7 +1128,7 @@ msgstr ""
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:255
 msgctxt "DGML|"
 msgid "Lake, reservoir"
-msgstr ""
+msgstr "אגם, מאגר"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:253
 #. ----------
@@ -11339,16 +11338,16 @@ msgid "Take the exit to the right."
 msgstr "לצאת ביציאה הימנית."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:420
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "QObject|"
 msgid "Continue onto %1."
-msgstr "הגדרת פקד השליטה על השמש"
+msgstr "להמשיך אל %1."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:422
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "QObject|"
 msgid "Merge onto %1."
-msgstr "הגדרת פקד השליטה על השמש"
+msgstr "לפנות אל %1."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:424
 #, qt-format
@@ -11375,10 +11374,10 @@ msgid "Keep slightly left on %1."
 msgstr "להיצמד לשמאל ב%1."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:432
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "QObject|"
 msgid "Continue on %1."
-msgstr "הגדרת פקד השליטה על השמש"
+msgstr "להמשיך על %1."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:434
 #, qt-format
@@ -11943,13 +11942,13 @@ msgstr ""
 "תודות למצפה כדור הארץ של נאסא.</p></body></html>"
 
 #: src/lib/marble/TileCreatorDialog.ui:517
-#, fuzzy
 msgctxt "TileCreatorDialog|"
 msgid ""
 "Marble needs to create this map. This only needs to be done once and may "
 "take a few seconds."
 msgstr ""
-"‏Marble צריך ליצור מפה זו. הדבר יתבצע פעם אחת בלבד ועשוי להימשך מספר שניות."
+"‏Marble צריך ליצור את המפה הזאת. זה יתבצע פעם אחת בלבד ועשוי להימשך מספר "
+"שניות."
 
 #: src/lib/marble/TileLevelRangeWidget.ui:29
 msgctxt "TileLevelRangeWidget|"
@@ -13735,10 +13734,9 @@ msgid "This is a float item that provides Gps Information."
 msgstr "זה פריט צף שמספק פרטי Gps."
 
 #: src/plugins/render/gpsinfo/GpsInfo.cpp:115
-#, fuzzy
 msgctxt "Marble::GpsInfo|"
 msgid "mph"
-msgstr "ק\"מ"
+msgstr "מיילים לשעה"
 
 #: src/plugins/render/gpsinfo/GpsInfo.cpp:117
 msgctxt "Marble::GpsInfo|"
