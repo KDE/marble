@@ -79,7 +79,7 @@ msgstr "Mapes"
 #: main.cpp:48
 #, kde-format
 msgid "© KDE Community"
-msgstr "© Comunitat KDE"
+msgstr "© La comunitat KDE"
 
 #: main.cpp:54
 #, kde-format

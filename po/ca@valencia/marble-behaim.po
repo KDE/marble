@@ -74,7 +74,7 @@ msgstr ""
 #: main.cpp:37
 #, kde-format
 msgid "© KDE Community"
-msgstr "© Comunitat KDE"
+msgstr "© La comunitat KDE"
 
 #: main.cpp:38
 #, kde-format
