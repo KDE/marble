@@ -757,7 +757,7 @@ msgstr "La lletra general utilitzada en el mapa."
 #: marble.kcfg:159
 #, kde-format
 msgid "The last directory that was opened by File->Open."
-msgstr "L'últim directori que s'ha obert via Fitxer->Obri."
+msgstr "L'últim directori que s'ha obert via «Fitxer → Obri»."
 
 #. i18n: ectx: label, entry, group (Navigation)
 #: marble.kcfg:179
