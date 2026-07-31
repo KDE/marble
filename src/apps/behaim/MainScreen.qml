@@ -2,6 +2,9 @@
 //
 // SPDX-FileCopyrightText: 2015 Dennis Nienhüser <nienhueser@kde.org>
 //
+
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Controls as Controls
 import QtQuick.Window
@@ -21,11 +24,11 @@ Kirigami.ApplicationWindow {
     globalDrawer: Kirigami.OverlayDrawer {
         id: drawer
 
-        edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.RightEdge : Qt.LeftEdge
-        modal: Kirigami.Settings.isMobile || (applicationWindow().width < Kirigami.Units.gridUnit * 50 && !collapsed) // Only modal when not collapsed, otherwise collapsed won't show.
+        edge: Application.layoutDirection === Qt.RightToLeft ? Qt.RightEdge : Qt.LeftEdge
+        modal: Kirigami.Settings.isMobile || (root.width < Kirigami.Units.gridUnit * 50 && !collapsed) // Only modal when not collapsed, otherwise collapsed won't show.
         z: modal ? Math.round(position * 10000000) : 100
         drawerOpen: !Kirigami.Settings.isMobile && enabled
-        enabled: pageStack.currentItem
+        enabled: root.pageStack.currentItem
         onEnabledChanged: drawerOpen = !Kirigami.Settings.isMobile && enabled
         width: Kirigami.Units.gridUnit * 16
         Behavior on width {
@@ -170,9 +173,9 @@ Kirigami.ApplicationWindow {
 
             anchors.fill: parent
             enabled: true
-            onPinchStarted: marbleMaps.handlePinchStarted(pinch.center)
-            onPinchFinished: marbleMaps.handlePinchFinished(pinch.center)
-            onPinchUpdated: marbleMaps.handlePinchUpdated(pinch.center, pinch.scale);
+            onPinchStarted: pinch => marbleMaps.handlePinchStarted(pinch.center)
+            onPinchFinished: pinch => marbleMaps.handlePinchFinished(pinch.center)
+            onPinchUpdated: pinch => marbleMaps.handlePinchUpdated(pinch.center, pinch.scale);
 
             MarbleItem {
                 id: marbleMaps
