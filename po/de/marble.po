@@ -696,7 +696,7 @@ msgstr "Entfernung (in km) des Beobachters zum Globus festlegen"
 #, kde-format
 msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgstr ""
-"Kartenkennung <id> verwenden, z. B. „earth/openstreetmap/openstreetmap.dgml“"
+"Kartenkennung <id> verwenden, z. B. „earth/openstreetmap/openstreetmap.dgml“"
 
 #: kdemain.cpp:270
 #, kde-format
