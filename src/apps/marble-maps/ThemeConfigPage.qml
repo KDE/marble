@@ -5,6 +5,7 @@ import QtQuick
 import QtQuick.Controls as Controls
 import QtQuick.Layouts
 
+import org.kde.ki18n
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.delegates as Delegates
 
@@ -16,7 +17,7 @@ Kirigami.ScrollablePage {
 
     property MarbleItem marbleMaps
 
-    title: i18nc("@title:window", "Themes")
+    title: KI18n.i18nc("@title:window", "Themes")
 
     ListView {
         model: MapThemeModel {}

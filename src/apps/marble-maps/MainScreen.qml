@@ -12,13 +12,14 @@ import QtQuick.Layouts
 
 import org.kde.marble as Marble
 import org.kde.marble.maps
+import org.kde.ki18n
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.delegates as Delegates
 import org.kde.kirigamiaddons.components as Components
 
 Kirigami.ApplicationWindow {
     id: app
-    title: i18n("Marble Maps")
+    title: KI18n.i18n("Marble Maps")
 
     width: 600
     height: 400
@@ -84,7 +85,7 @@ Kirigami.ApplicationWindow {
         actions: [
             Kirigami.Action {
                 id: publicTransportAction
-                text: i18n("Public Transport")
+                text: KI18n.i18n("Public Transport")
                 checkable: true
                 checked: marbleMaps.showPublicTransport
                 icon.source: Qt.resolvedUrl("images/transport-mode-bus.svg")
@@ -99,7 +100,7 @@ Kirigami.ApplicationWindow {
                 id: outdoorActivitiesAction
                 checkable: true
                 checked: marbleMaps.showOutdoorActivities
-                text: i18n("Outdoor Activities")
+                text: KI18n.i18n("Outdoor Activities")
                 visible: true
                 icon.source: Qt.resolvedUrl("images/transport-mode-walk.svg")
                 onTriggered: {
@@ -111,7 +112,7 @@ Kirigami.ApplicationWindow {
                 id: accessibilityAction
                 checkable: true
                 checked: settings.value("MarbleMaps", "showAccessibility", "false") === "true"
-                text: i18nc("@action:button", "Accessibility")
+                text: KI18n.i18nc("@action:button", "Accessibility")
                 visible: true
                 icon.name: 'preferences-desktop-accessibility-symbolic'
                 onTriggered: {
@@ -120,7 +121,7 @@ Kirigami.ApplicationWindow {
             },
             Kirigami.Action{ separator: true },
             Kirigami.Action {
-                text: i18nc("@action:button", "About")
+                text: KI18n.i18nc("@action:button", "About")
                 icon.name: 'help-about-symbolic'
                 visible: true
                 onTriggered: {
@@ -131,7 +132,7 @@ Kirigami.ApplicationWindow {
                 }
             },
             Kirigami.Action {
-                text: i18nc("@action:button", "Bookmarks")
+                text: KI18n.i18nc("@action:button", "Bookmarks")
                 icon.name: 'bookmarks-symbolic'
                 onTriggered: {
                     app.state = "bookmarks"
@@ -142,7 +143,7 @@ Kirigami.ApplicationWindow {
                 }
             },
             Kirigami.Action {
-                text: i18nc("@action:button", "Layer Options")
+                text: KI18n.i18nc("@action:button", "Layer Options")
                 icon.name: 'settings-configure-symbolic'
                 onTriggered: {
                     app.state = "options"
@@ -153,7 +154,7 @@ Kirigami.ApplicationWindow {
                 }
             },
             Kirigami.Action {
-                text: i18nc("@action:button", "Theme Options")
+                text: KI18n.i18nc("@action:button", "Theme Options")
                 icon.name: 'settings-configure-symbolic'
                 onTriggered: {
                     app.state = "options"
@@ -164,7 +165,7 @@ Kirigami.ApplicationWindow {
                 }
             },
             Kirigami.Action {
-                text: i18n("Routing")
+                text: KI18n.i18n("Routing")
                 icon.source: Qt.resolvedUrl("images/directions.svg")
                 onTriggered: {
                     app.state = "route"
@@ -187,7 +188,7 @@ Kirigami.ApplicationWindow {
         leftPadding: 0
         rightPadding: 0
         bottomPadding: 0
-        title: i18n("Marble Maps")
+        title: KI18n.i18n("Marble Maps")
 
         titleDelegate: Kirigami.SearchField {
             id: searchField
@@ -455,7 +456,7 @@ Kirigami.ApplicationWindow {
 
             BoxedText {
                 id: distanceIndicator
-                text: i18n("%1 km", zoomToPositionButton.distance < 10 ? zoomToPositionButton.distance.toFixed(1) : zoomToPositionButton.distance.toFixed(0))
+                text: KI18n.i18n("%1 km", zoomToPositionButton.distance < 10 ? zoomToPositionButton.distance.toFixed(1) : zoomToPositionButton.distance.toFixed(0))
                 anchors {
                     bottom: zoomToPositionButton.top
                     horizontalCenter: zoomToPositionButton.horizontalCenter
@@ -613,7 +614,7 @@ Kirigami.ApplicationWindow {
         /* BoxedText {
             id: quitHelper
             visible: false
-            text: i18n("Press again to close.")
+            text: KI18n.i18n("Press again to close.")
             anchors.bottom: parent.bottom
             anchors.bottomMargin: Screen.pixelDensity * 5
             anchors.horizontalCenter: parent.horizontalCenter

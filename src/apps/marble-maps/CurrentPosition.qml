@@ -8,6 +8,7 @@ import QtQuick.Controls
 import QtQuick.Window
 import QtQuick.Layouts
 
+import org.kde.ki18n
 import org.kde.marble
 
 Item {
@@ -51,7 +52,7 @@ Item {
                     root.navigationManager.guidanceModeEnabled = checked
                 }
             }
-            text: i18nc("@option:check", "Follow Current Position")
+            text: KI18n.i18nc("@option:check", "Follow Current Position")
         }
     }
 }

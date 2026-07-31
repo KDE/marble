@@ -7,6 +7,7 @@ import QtQuick.Controls as Controls
 import QtQuick.Window
 import QtQuick.Layouts
 
+import org.kde.ki18n
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.formcard as FormCard
 import org.kde.marble
@@ -59,7 +60,7 @@ Kirigami.ApplicationWindow {
                 bottomPadding: Kirigami.Units.smallSpacing
 
                 contentItem: Kirigami.Heading {
-                    text: i18nc("@title", "Marble")
+                    text: KI18n.i18nc("@title", "Marble")
                 }
             }
 
@@ -77,29 +78,29 @@ Kirigami.ApplicationWindow {
                 }
 
                 FormCard.FormHeader {
-                    title: i18nc("@title:group", "Globe Settings")
+                    title: KI18n.i18nc("@title:group", "Globe Settings")
                     Layout.fillWidth: true
                 }
 
                 FormCard.FormCard {
                     FormCard.FormCheckDelegate {
-                        text: i18nc("@option:check", "Show Behaim places")
+                        text: KI18n.i18nc("@option:check", "Show Behaim places")
                         onCheckedChanged: marbleMaps.setPropertyEnabled("cities", checked)
                     }
 
                     FormCard.FormCheckDelegate {
-                        text: i18nc("@option:check", "Show texts and illustrations")
+                        text: KI18n.i18nc("@option:check", "Show texts and illustrations")
                         onCheckedChanged: marbleMaps.setPropertyEnabled("otherplaces", checked)
                     }
 
                     FormCard.FormCheckDelegate {
-                        text: i18nc("@option:check", "Show the accurate coastline")
+                        text: KI18n.i18nc("@option:check", "Show the accurate coastline")
                         onCheckedChanged: marbleMaps.setPropertyEnabled("coastlines", checked)
                     }
                 }
 
                 FormCard.FormHeader {
-                    title: i18nc("@title:group", "Globe Variant")
+                    title: KI18n.i18nc("@title:group", "Globe Variant")
                     Layout.fillWidth: true
                 }
 
@@ -108,9 +109,9 @@ Kirigami.ApplicationWindow {
                     FormCard.FormRadioDelegate {
                         Controls.ButtonGroup.group: mapGroup
 
-                        text: i18nc("@option:radio", "Original (1492)")
+                        text: KI18n.i18nc("@option:radio", "Original (1492)")
                         checked: true
-                        description: i18n("Digital imagery taken directly from the original Behaim globe.")
+                        description: KI18n.i18n("Digital imagery taken directly from the original Behaim globe.")
 
                         onToggled: if (checked) {
                             marbleMaps.setPropertyEnabled("ravenstein", false)
@@ -121,8 +122,8 @@ Kirigami.ApplicationWindow {
                     FormCard.FormRadioDelegate {
                         Controls.ButtonGroup.group: mapGroup
 
-                        text: i18nc("@option:radio", "Ghillany (1853)")
-                        description: i18n("A (rough) facsimile created by Friedrich Wilhelm Ghillany in 1853.")
+                        text: KI18n.i18nc("@option:radio", "Ghillany (1853)")
+                        description: KI18n.i18n("A (rough) facsimile created by Friedrich Wilhelm Ghillany in 1853.")
 
                         onToggled: if (checked) {
                             marbleMaps.setPropertyEnabled("ravenstein", false)
@@ -133,8 +134,8 @@ Kirigami.ApplicationWindow {
                     FormCard.FormRadioDelegate {
                         Controls.ButtonGroup.group: mapGroup
 
-                        text: i18nc("@option:radio", "Ravenstein (1908)")
-                        description: i18n("A (rough) facsimile created by Ernest George Ravenstein in 1908.")
+                        text: KI18n.i18nc("@option:radio", "Ravenstein (1908)")
+                        description: KI18n.i18n("A (rough) facsimile created by Ernest George Ravenstein in 1908.")
 
                         onToggled: if (checked) {
                             marbleMaps.setPropertyEnabled("ghillany", false)
@@ -149,7 +150,7 @@ Kirigami.ApplicationWindow {
     pageStack.initialPage: Kirigami.Page {
         id: page
 
-        title: mapGroup.checkedButton?.text ?? i18nc("@title:window", "Behaim Globe")
+        title: mapGroup.checkedButton?.text ?? KI18n.i18nc("@title:window", "Behaim Globe")
 
         leftPadding: 0
         rightPadding: 0
@@ -157,7 +158,7 @@ Kirigami.ApplicationWindow {
         bottomPadding: 0
 
         actions: Kirigami.Action {
-            text: i18nc("@action:button", "Information")
+            text: KI18n.i18nc("@action:button", "Information")
             onTriggered: {
                 root.pageStack.pushDialogLayer(Qt.createComponent('org.kde.marble.behaim', 'About'));
             }

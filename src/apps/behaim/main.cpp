@@ -9,7 +9,7 @@
 
 #include <KAboutData>
 #include <KCrash>
-#include <KLocalizedContext>
+#include <KLocalizedQmlContext>
 #include <KLocalizedString>
 
 #include <marble_version.h>
@@ -67,7 +67,7 @@ int main(int argc, char **argv)
     about.processCommandLine(&parser);
 
     QQmlApplicationEngine engine;
-    engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
+    KLocalization::setupLocalizedContext(&engine);
     engine.loadFromModule("org.kde.marble.behaim", "MainScreen");
 
     if (engine.rootObjects().isEmpty()) {

@@ -7,6 +7,7 @@ target_link_libraries(marble-behaim PUBLIC
     Qt::Quick
     Qt::Widgets
     KF6::I18n
+    KF6::I18nQml
     KF6::CoreAddons
 )
 
@@ -26,6 +27,7 @@ ecm_add_qml_module(marble-behaim
         About.qml
     DEPENDENCIES
         org.kde.marble
+        org.kde.ki18n
 )
 
 install(TARGETS marble-behaim ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})

@@ -9,6 +9,7 @@ import QtQuick.Controls as Controls
 import QtQuick.Layouts
 import QtQuick.Dialogs
 
+import org.kde.ki18n
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.components as Components
 
@@ -45,7 +46,7 @@ Components.BottomDrawer {
                     } else if (placemark.description) {
                         return placemark.description;
                     } else {
-                        return i18nc("placeholder", "No Name");
+                        return KI18n.i18nc("placeholder", "No Name");
                     }
                     wrapMode: Text.WordWrap
                     Layout.fillWidth: true
@@ -165,7 +166,7 @@ Components.BottomDrawer {
 
             Kirigami.Heading {
                 level: 4
-                text: i18nc("@title:group", "Tags:")
+                text: KI18n.i18nc("@title:group", "Tags:")
                 visible: tagsView.count > 0
                 Layout.topMargin: Kirigami.Units.mediumSpacing
             }
@@ -196,7 +197,7 @@ Components.BottomDrawer {
     //        Kirigami.Heading {
     //            Layout.fillWidth: true
     //            level: 2
-    //            text: i18nc("@title", "Routes")
+    //            text: KI18n.i18nc("@title", "Routes")
 
     //        }
     //        RoutesItem {

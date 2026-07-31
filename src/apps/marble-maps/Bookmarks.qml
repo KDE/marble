@@ -9,6 +9,7 @@ import QtQuick.Window
 import QtQuick.Layouts
 import QtQml.Models
 
+import org.kde.ki18n
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.delegates as Delegates
 
@@ -17,7 +18,7 @@ import org.kde.marble as Marble
 Kirigami.ScrollablePage {
     id: root
 
-    title: i18nc("@title:window", "Bookmarks")
+    title: KI18n.i18nc("@title:window", "Bookmarks")
 
     property var marbleMaps
 
@@ -66,7 +67,7 @@ Kirigami.ScrollablePage {
 
         Kirigami.PlaceholderMessage {
             anchors.centerIn: parent
-            text: i18n("Your bookmarks will appear here.")
+            text: KI18n.i18n("Your bookmarks will appear here.")
             visible: bookmarksView.count === 0
             width: parent.width - Kirigami.Units.gridUnit * 4
         }

@@ -7,6 +7,7 @@ import QtQuick
 import QtQuick.Controls as Controls
 import QtQuick.Layouts
 
+import org.kde.ki18n
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.formcard as FormCard
 import org.kde.kirigamiaddons.components as Components
@@ -16,7 +17,7 @@ import org.kde.marble as Marble
 FormCard.FormCardPage {
     id: root
 
-    title: i18nc("@title", "Routing")
+    title: KI18n.i18nc("@title", "Routing")
 
     property alias currentProfileIcon: profileSelector.profileIcon
 
@@ -99,11 +100,11 @@ FormCard.FormCardPage {
                     id: field
 
                     label: if (routeDelegate.index === 0) {
-                        return i18nc("@label:textbox", "Departure:");
+                        return KI18n.i18nc("@label:textbox", "Departure:");
                     } else if (routeDelegate.index === repeater.count - 1) {
-                        return i18nc("@label:textbox", "Arrival:");
+                        return KI18n.i18nc("@label:textbox", "Arrival:");
                     } else {
-                        return i18nc("@label:textbox", "Waypoint:");
+                        return KI18n.i18nc("@label:textbox", "Waypoint:");
                     }
                     onPressed: searchResultPopup.index = routeDelegate.index;
                     text: routeDelegate.name
@@ -191,7 +192,7 @@ FormCard.FormCardPage {
             leftPadding: Kirigami.Units.largeSpacing
             rightPadding: Kirigami.Units.largeSpacing
 
-            text: i18nc("@label:listbox", "Alternatives:")
+            text: KI18n.i18nc("@label:listbox", "Alternatives:")
             model: routingManager.alternativeRoutesModel
             textRole: "routeName"
             currentIndex: 0

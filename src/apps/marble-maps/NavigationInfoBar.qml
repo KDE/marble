@@ -8,6 +8,9 @@ import QtQuick 2.3
 import QtQuick.Controls
 import QtQuick.Window 2.2
 
+
+import org.kde.ki18n
+
 Item {
     id: root
 
@@ -17,11 +20,11 @@ Item {
 
     function formatDistance(distance):string {
         if (distance > 1000) {
-            return i18nc("distance in km", "%1 km", (0.001 * distance).toFixed(1))
+            return KI18n.i18nc("distance in km", "%1 km", (0.001 * distance).toFixed(1))
         } else if (distance > 100) {
-            return i18nc("distance in m", "%1 m", (distance*0.01).toFixed(0)*100)
+            return KI18n.i18nc("distance in m", "%1 m", (distance*0.01).toFixed(0)*100)
         } else {
-            return i18nc("distance in m with decimals", "%1 m", (distance*0.1).toFixed(0)*10)
+            return KI18n.i18nc("distance in m with decimals", "%1 m", (distance*0.1).toFixed(0)*10)
         }
     }
 

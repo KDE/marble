@@ -6,6 +6,8 @@
 import QtQuick 2.1
 import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.5 as QQC2
+
+import org.kde.ki18n
 import org.kde.kirigami 2.5 as Kirigami
 
 
@@ -19,10 +21,10 @@ Kirigami.FormLayout {
 
     QQC2.ComboBox {
         id: projectionComboBox
-        Kirigami.FormData.label: i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Projection:")
+        Kirigami.FormData.label: KI18n.i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Projection:")
         model: [
-            i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Equirectangular"),
-            i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Mercator")
+            KI18n.i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Equirectangular"),
+            KI18n.i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Mercator")
         ]
         onCurrentIndexChanged: {
             cfg_projection = currentIndex;
@@ -34,11 +36,11 @@ Kirigami.FormLayout {
 
     QQC2.ComboBox {
         id: centerModeComboBox
-        Kirigami.FormData.label: i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Center on:")
+        Kirigami.FormData.label: KI18n.i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Center on:")
         model: [
-            i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Daylight"),
-            i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Longitude"),
-            i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Location")
+            KI18n.i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Daylight"),
+            KI18n.i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Longitude"),
+            KI18n.i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Location")
         ]
         onCurrentIndexChanged: {
             cfg_centerMode = currentIndex;
@@ -50,7 +52,7 @@ Kirigami.FormLayout {
 
     QQC2.SpinBox {
         id: longitudeSpinBox
-        Kirigami.FormData.label: i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Longitude:")
+        Kirigami.FormData.label: KI18n.i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Longitude:")
         from: -180
         to: 180
         enabled: (cfg_centerMode === 1)

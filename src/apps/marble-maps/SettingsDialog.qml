@@ -8,6 +8,7 @@ import QtQuick.Controls
 import QtQuick.Window
 import QtQuick.Layouts
 
+import org.kde.ki18n
 import org.kde.marble
 
 Item {
@@ -45,12 +46,12 @@ Item {
 
         Text {
             id: text
-            text: i18n("Network Settings")
+            text: KI18n.i18n("Network Settings")
         }
 
         CheckBox {
             id: wlanOnly
-            text: i18n("Download Maps via WLAN only")
+            text: KI18n.i18n("Download Maps via WLAN only")
             checked: settings.value("Network", "wlanOnly") === "true"
             onCheckedChanged: marbleMaps.wlanOnly = checked
         }

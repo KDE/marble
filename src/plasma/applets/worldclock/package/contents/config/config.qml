@@ -5,18 +5,19 @@
 
 import QtQuick
 
+import org.kde.ki18n
 import org.kde.plasma.configuration
 
 ConfigModel {
     ConfigCategory {
-        name: i18n("Map Display")
+        name: KI18n.i18n("Map Display")
         icon: "preferences-desktop-display"
         source: "configMapDisplay.qml"
     }
 
 /* TODO: readd later
     ConfigCategory {
-        name: i18n("Time Zones")
+        name: KI18n.i18n("Time Zones")
         icon: "preferences-system-time"
         source: "configTimeZones.qml"
     }

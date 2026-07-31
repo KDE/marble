@@ -10,6 +10,7 @@ target_link_libraries(marble-maps PUBLIC
     Qt::Widgets
     KF6::CoreAddons
     KF6::I18n
+    KF6::I18nQml
     KF6::ConfigGui
 )
 
@@ -65,6 +66,7 @@ ecm_add_qml_module(marble-maps
         images/backdrop.png
     DEPENDENCIES
         org.kde.marble
+        org.kde.ki18n
         org.kde.kirigami
         org.kde.kirigamiaddons.formcard
         org.kde.kirigamiaddons.delegates

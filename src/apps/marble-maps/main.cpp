@@ -8,7 +8,7 @@
 #include <QtQuick>
 
 #include <KAboutData>
-#include <KLocalizedContext>
+#include <KLocalizedQmlContext>
 #include <KLocalizedString>
 
 #include "MarbleMaps.h"
@@ -73,7 +73,7 @@ int main(int argc, char **argv)
     about.processCommandLine(&parser);
 
     QQmlApplicationEngine engine;
-    engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
+    KLocalization::setupLocalizedContext(&engine);
     engine.loadFromModule("org.kde.marble.maps", "MainScreen");
 
     if (engine.rootObjects().isEmpty()) {

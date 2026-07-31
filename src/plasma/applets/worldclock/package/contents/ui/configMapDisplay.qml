@@ -6,6 +6,8 @@
 import QtQuick
 import QtQuick.Controls as Controls
 import QtQuick.Layouts
+
+import org.kde.ki18n
 import org.kde.kirigami as Kirigami
 import org.kde.kcmutils as KCM
 import org.kde.kirigamiaddons.formcard as FormCard
@@ -23,10 +25,10 @@ KCM.SimpleKCM {
         Layout.topMargin: Kirigami.Units.largeSpacing
 
         FormCard.FormComboBoxDelegate {
-            text: i18n("Projection:")
+            text: KI18n.i18n("Projection:")
             model: [
-                i18n("Equirectangular"),
-                i18n("Mercator")
+                KI18n.i18n("Equirectangular"),
+                KI18n.i18n("Mercator")
             ]
             onCurrentIndexChanged: {
                 cfg_projection = currentIndex;
@@ -39,11 +41,11 @@ KCM.SimpleKCM {
         FormCard.FormDelegateSeparator {}
 
         FormCard.FormComboBoxDelegate {
-            text: i18n("Center on:")
+            text: KI18n.i18n("Center on:")
             model: [
-                i18n("Daylight"),
-                i18n("Longitude"),
-                i18n("Location")
+                KI18n.i18n("Daylight"),
+                KI18n.i18n("Longitude"),
+                KI18n.i18n("Location")
             ]
             onCurrentIndexChanged: {
                 cfg_centerMode = currentIndex;
@@ -59,7 +61,7 @@ KCM.SimpleKCM {
             id: longitudeSpinBox
 
             enabled: (cfg_centerMode === 1)
-            label: i18n("Longitude:")
+            label: KI18n.i18n("Longitude:")
             to: decimalToInt(180.0)
             from: decimalToInt(-180.0)
             stepSize: decimalFactor
@@ -92,7 +94,7 @@ KCM.SimpleKCM {
 
         FormCard.FormCheckDelegate {
             id: showDateCheckBox
-            text: i18n("Show date:")
+            text: KI18n.i18n("Show date:")
         }
     }
 }

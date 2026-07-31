@@ -8,6 +8,7 @@ import QtQuick
 import QtQuick.Controls as Controls
 import QtQuick.Layouts
 
+import org.kde.ki18n
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.formcard as FormCard
 
@@ -121,7 +122,7 @@ Controls.Control {
 
         SelectionDelegate {
             profile: Config.Car
-            text: i18n("Car (fastest)")
+            text: KI18n.i18n("Car (fastest)")
             icon.source: Qt.resolvedUrl("images/transport-mode-car.svg")
         }
 
@@ -131,7 +132,7 @@ Controls.Control {
 
         SelectionDelegate {
             profile: Config.Bicycle
-            text: i18n("Bicycle")
+            text: KI18n.i18n("Bicycle")
             icon.source: Qt.resolvedUrl("images/transport-mode-bike.svg")
         }
 
@@ -141,7 +142,7 @@ Controls.Control {
 
         SelectionDelegate {
             profile: Config.Pedestrian
-            text: i18n("Pedestrian")
+            text: KI18n.i18n("Pedestrian")
             icon.source: Qt.resolvedUrl("images/transport-mode-walk.svg")
         }
     }
