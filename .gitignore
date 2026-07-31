@@ -10,3 +10,5 @@ enpo
 .idea
 /cmake-build*
 /build*/
+.kdev4/
+*.kdev4
