@@ -3506,7 +3506,7 @@ msgctxt ""
 "on map."
 msgid "Select the method to use to re-center your GPS location on map."
 msgstr ""
-"Wählen Sie die Methode aus, die benutzt werden soll, um die Karte anhand "
+"Wählen Sie die Methode aus, die verwendet werden soll, um die Karte anhand "
 "Ihrer GPS-Position zu zentrieren."
 
 #: src/lib/marble/CurrentLocationWidget.ui:154
@@ -3563,7 +3563,7 @@ msgid ""
 msgstr ""
 "Marble hat Kartendaten gefunden, die durch eine vorherige Marble-Version "
 "angelegt wurden.<br/>Sollen die Daten umgewandelt werden, um von der "
-"aktuellen Version benutzt werden zu können?"
+"aktuellen Version verwendet werden zu können?"
 
 #: src/lib/marble/declarative/MarbleQuickItem.cpp:195
 #: src/lib/marble/routing/RoutingManager.cpp:556
@@ -8122,7 +8122,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:93
 msgctxt "MapWizard|"
 msgid "Online map providing indexed tiles (e.g. Open Street Map)"
-msgstr "Online-Karte mit indizierten Kacheln (z. B. Open Street Map)"
+msgstr "Online-Karte mit indizierten Kacheln (z. B. Open Street Map)"
 
 #: src/lib/marble/MapWizard.ui:104
 msgctxt "MapWizard|"
@@ -8434,7 +8434,7 @@ msgstr ""
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 "family:'Sans Serif';\">Bitte geben Sie eine URL für das Herunterladen "
-"einzelner Kacheln ein. Benutzen Sie die Platzhalter </span><span style=\" "
+"einzelner Kacheln ein. Verwenden Sie die Platzhalter </span><span style=\" "
 "font-family:'Sans Serif'; font-style:italic;\">{x}</span><span style=\" font-"
 "family:'Sans Serif';\">, </span><span style=\" font-family:'Sans Serif'; "
 "font-style:italic;\">{y}</span><span style=\" font-family:'Sans Serif';\">, "
@@ -9923,7 +9923,7 @@ msgstr ""
 "Zwischenspeicher: Den Arbeitsspeicher, um die Kartendaten im Speicher des "
 "Rechners vorzuhalten. Wenn Sie diesen Speicher vergrößern, wird die "
 "Anwendung flüssiger reagieren. Zusätzlich wird der Festplattenspeicher zum "
-"Herunterladen von Inhalten aus dem Internet verwendet (z. B. Wikipedia-Daten "
+"Herunterladen von Inhalten aus dem Internet verwendet (z. B. Wikipedia-Daten "
 "oder Kartenmaterial). Verkleinern Sie diesen Speicher, wenn Sie Platz auf "
 "der Festplatte sparen möchten und das Herunterladen von Daten aus dem "
 "Internet nur eine untergeordnete Rolle spielt.</p></body></html>"
@@ -10079,7 +10079,7 @@ msgstr "Server:"
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:160
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Remote server URL, e.g. myserver.com/owncloud"
-msgstr "Adresse (URL) des entfernten Servers z. B. myserver.com/owncloud"
+msgstr "Adresse (URL) des entfernten Servers z. B. myserver.com/owncloud"
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:167
 msgctxt "MarbleCloudSyncSettingsWidget|"
@@ -10210,7 +10210,7 @@ msgstr "Mauszeiger folgen"
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:73
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Use kinetic spinning when dragging the map"
-msgstr "Kinetisches Drehen beim Ziehen der Karte benutzen"
+msgstr "Kinetisches Drehen beim Ziehen der Karte verwenden"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:76
 #, fuzzy
@@ -10432,7 +10432,7 @@ msgstr "Vergrößerungsregler"
 msgctxt "MarbleNavigator|"
 msgid "Use this slider to adjust the zoom level of the map."
 msgstr ""
-"Benutzen Sie diesen Regler, um die Vergrößerungsstufe der Karte anzupassen."
+"Verwenden Sie diesen Regler, um die Vergrößerungsstufe der Karte anzupassen."
 
 #: src/lib/marble/MarbleNavigator.ui:209
 msgctxt "MarbleNavigator|"
@@ -10729,7 +10729,7 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Die Einheit, die zum "
-"Messen von Höhe, Länge und Entfernungen verwendet wird (z. B. km, mi, ft).</"
+"Messen von Höhe, Länge und Entfernungen verwendet wird (z. B. km, mi, ft).</"
 "p></body></html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:61
@@ -10773,9 +10773,9 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Legt fest, wie Winkel in "
-"Koordinaten angegeben werden: Voreingestellt ist Grad-Minute-Sekunde (z. B. "
-"54°30'00\"). Alternativ können auch dezimale Gradzahlen verwendet werden (z. "
-"B. 54,4°)</p></body></html>"
+"Koordinaten angegeben werden: Voreingestellt ist Grad-Minute-Sekunde (z. B. "
+"54°30'00\"). Alternativ können auch dezimale Gradzahlen verwendet werden "
+"(z. B. 54,4°)</p></body></html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:105
 msgctxt "MarbleViewSettingsWidget|"
@@ -10884,7 +10884,7 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Legt die Qualität der "
-"Karte während der Animation fest (z. B. beim Ziehen des Globus).</p>\n"
+"Karte während der Animation fest (z. B. beim Ziehen des Globus).</p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Besonders auf langsamen "
 "Rechnern ist es ratsam, diese auf „niedrige Qualität“ zu stellen, da so eine "
