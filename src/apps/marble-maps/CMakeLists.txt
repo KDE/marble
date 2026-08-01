@@ -66,6 +66,7 @@ ecm_add_qml_module(marble-maps
         images/backdrop.png
     DEPENDENCIES
         org.kde.marble
+        org.kde.marble.imageprovider
         org.kde.ki18n
         org.kde.kirigami
         org.kde.kirigamiaddons.formcard
