@@ -3,26 +3,28 @@
 // SPDX-FileCopyrightText: 2015 Dennis Nienhüser <nienhueser@kde.org>
 //
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Window
 import QtQuick.Controls as Controls
 import QtQuick.Layouts
-import QtQuick.Dialogs
 
 import org.kde.ki18n
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.components as Components
 
-import org.kde.marble
+import org.kde.marble as Marble
 
 Components.BottomDrawer {
     id: root
 
+    required property MainScreen app
     property var placemark: null
     property variant map
     property alias showOsmTags: tagsView.visible
     property bool showAccessibility: false
-    property Bookmarks bookmarks
+    property Marble.Bookmarks bookmarks
 
     onMapChanged: bookmarks.map = root.map
 
@@ -39,12 +41,12 @@ Components.BottomDrawer {
                 spacing: Kirigami.Units.smallSpacing
 
                 Kirigami.Heading {
-                    text: if (!placemark) {
+                    text: if (!root.placemark) {
                         return '';
-                    } else if (placemark.name.length > 0) {
-                        return placemark.name;
-                    } else if (placemark.description) {
-                        return placemark.description;
+                    } else if (root.placemark.name.length > 0) {
+                        return root.placemark.name;
+                    } else if (root.placemark.description) {
+                        return root.placemark.description;
                     } else {
                         return KI18n.i18nc("placeholder", "No Name");
                     }
@@ -55,17 +57,17 @@ Components.BottomDrawer {
                 Controls.ToolButton {
                     id: bookmarkButton
 
-                    property bool bookmark: placemark && bookmarks.isBookmark(root.placemark.longitude, root.placemark.latitude)
+                    property bool bookmark: root.placemark && root.bookmarks.isBookmark(root.placemark.longitude, root.placemark.latitude)
                     onBookmarkChanged: checked = bookmark;
 
                     icon.name: bookmark ? 'starred-symbolic' : 'non-starred-symbolic'
                     onClicked: {
                         if (bookmarkButton.bookmark) {
-                            bookmarks.removeBookmark(app.selectedPlacemark.longitude, app.selectedPlacemark.latitude)
+                            root.bookmarks.removeBookmark(root.app.selectedPlacemark.longitude, root.app.selectedPlacemark.latitude)
                         } else {
-                            bookmarks.addBookmark(app.selectedPlacemark, "Default")
+                            root.bookmarks.addBookmark(root.app.selectedPlacemark, "Default")
                         }
-                        checked = placemark && bookmarks.isBookmark(root.placemark.longitude, root.placemark.latitude);
+                        checked = root.placemark && root.bookmarks.isBookmark(root.placemark.longitude, root.placemark.latitude);
                     }
                 }
             }
@@ -73,9 +75,9 @@ Components.BottomDrawer {
             IconText {
                 Layout.fillWidth: true
 
-                visible: text.length > 0 && placemark && placemark.name.length > 0
+                visible: text.length > 0 && root.placemark && root.placemark.name.length > 0
                 icon: 'description-symbolic'
-                text: placemark?.description ?? ''
+                text: root.placemark?.description ?? ''
             }
 
             IconText {
@@ -83,7 +85,7 @@ Components.BottomDrawer {
 
                 visible: text.length > 0
                 icon: 'mark-location-symbolic'
-                text: placemark?.address ?? ''
+                text: root.placemark?.address ?? ''
                 maximumLineCount: 4
             }
 
@@ -101,40 +103,40 @@ Components.BottomDrawer {
                 Layout.fillWidth: true
 
                 visible: url.length > 0
-                property string url: placemark === null ? "" : placemark.website
+                property string url: root.placemark === null ? "" : root.placemark.website
                 text: "<a href=\"" + url + "\">" + url + "</a>"
                 icon: 'internet-web-browser-symbolic'
                 maximumLineCount: 4
-                onLinkActivated: Qt.openUrlExternally(link)
+                onLinkActivated: link => Qt.openUrlExternally(link)
             }
 
             IconText {
                 Layout.fillWidth: true
 
                 visible: phone.length > 0
-                property string phone: placemark?.phone ?? ''
+                property string phone: root.placemark?.phone ?? ''
                 text: "<a href=\"tel:" + phone + "\">" + phone + "</a>"
                 icon: 'phone-symbolic'
                 maximumLineCount: 1
-                onLinkActivated: Qt.openUrlExternally(link)
+                onLinkActivated: link => Qt.openUrlExternally(link)
             }
 
             IconText {
                 Layout.fillWidth: true
 
                 visible: url.length > 0
-                property string url: placemark?.wikipedia ?? ''
+                property string url: root.placemark?.wikipedia ?? ''
                 text:  "<a href=\"" + url + "\">Wikipedia</a>"
                 icon: 'internet-web-browser-symbolic'
                 maximumLineCount: 4
-                onLinkActivated: Qt.openUrlExternally(link)
+                onLinkActivated: link => Qt.openUrlExternally(link)
             }
 
             IconText {
                 Layout.fillWidth: true
 
                 visible: text.length > 0
-                text: placemark?.openingHours ?? ''
+                text: root.placemark?.openingHours ?? ''
                 icon: 'accept_time_event-symbolic'
             }
 
@@ -142,7 +144,7 @@ Components.BottomDrawer {
                 Layout.fillWidth: true
 
                 visible: root.showAccessibility && text.length > 0
-                text: placemark?.wheelchairInfo ?? ''
+                text: root.placemark?.wheelchairInfo ?? ''
                 icon: 'preferences-desktop-accessibility-symbolic'
             }
 
@@ -150,7 +152,7 @@ Components.BottomDrawer {
                 Layout.fillWidth: true
 
                 visible: text.length > 0
-                text: placemark?.wifiAvailable ?? ''
+                text: root.placemark?.wifiAvailable ?? ''
                 icon: 'network-wireless-symbolic'
             }
 
@@ -158,10 +160,10 @@ Components.BottomDrawer {
                 Layout.fillWidth: true
 
                 visible: text.length > 0
-                property string coordinates: placemark?.coordinates ?? ''
+                property string coordinates: root.placemark?.coordinates ?? ''
                 text: "<a href=\"#\"#>" + coordinates + "</a>"
                 icon: 'add-placemark-symbolic'
-                onLinkActivated: marbleMaps.centerOnCoordinates(placemark.longitude, placemark.latitude)
+                onLinkActivated: root.map.centerOnCoordinates(root.placemark.longitude, root.placemark.latitude)
             }
 
             Kirigami.Heading {
@@ -177,8 +179,10 @@ Components.BottomDrawer {
                 spacing: Kirigami.Units.smallSpacing
                 Repeater {
                     id: tagsView
-                    model: visible && placemark ? placemark.tags : undefined
+                    model: visible && root.placemark ? root.placemark.tags : undefined
                     delegate: Kirigami.Chip {
+                        required property string modelData
+
                         text: modelData
                         checkable: false
                         closable: false
@@ -203,7 +207,7 @@ Components.BottomDrawer {
     //        RoutesItem {
     //            id: routesItem
     //            Layout.fillWidth: true
-    //            model: placemark === null ? undefined : placemark.routeRelationModel
+    //            placemark: root.placemark
     //            onHighlightChanged: map.highlightRouteRelation(oid, enabled)
     //        }
 

@@ -3,6 +3,8 @@
 // SPDX-FileCopyrightText: 2017 Dennis Nienhüser <nienhueser@kde.org>
 //
 
+pragma ComponentBehavior: Bound
+
 import QtQuick 2.3
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.3
@@ -48,7 +50,7 @@ Item {
                 id: image
                 sourceSize.height: text.height
                 fillMode: Image.PreserveAspectFit
-                anchors.verticalCenter: parent.verticalCenter
+                Layout.alignment: Qt.AlignVCenter
             }
 
             Text {

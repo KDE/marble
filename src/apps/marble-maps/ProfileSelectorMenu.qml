@@ -4,6 +4,8 @@
 // SPDX-FileCopyrightText: 2015 Dennis Nienhüser <nienhueser@kde.org>
 //
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Controls as Controls
 import QtQuick.Layouts
@@ -12,7 +14,7 @@ import org.kde.ki18n
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.formcard as FormCard
 
-import org.kde.marble
+import org.kde.marble.maps
 
 Controls.Control {
     id: root
@@ -39,7 +41,7 @@ Controls.Control {
         checked: Config.profile === profile
         background: FormCard.FormDelegateBackground {
             control: selectionDelegate
-            color:  if (selectionDelegate.highlighted || selectionDelegate.checked || (selectionDelegate.down && !root.checked) || selectionDelegate.visualFocus) {
+            color:  if (selectionDelegate.highlighted || selectionDelegate.checked || selectionDelegate.down || selectionDelegate.visualFocus) {
                 const highlight = Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor, Kirigami.Theme.highlightColor, 0.3);
                 if (selectionDelegate.hovered) {
                     return Kirigami.ColorUtils.tintWithAlpha(highlight, Kirigami.Theme.textColor, 0.10);
@@ -53,10 +55,10 @@ Controls.Control {
             }
 
             corners {
-                topLeftRadius: profile === Config.Car ? Kirigami.Units.cornerRadius + 1: 0
-                topRightRadius: profile === Config.Pedestrian ? Kirigami.Units.cornerRadius + 1: 0
-                bottomLeftRadius: profile === Config.Car ? Kirigami.Units.cornerRadius + 1: 0
-                bottomRightRadius: profile === Config.Pedestrian ? Kirigami.Units.cornerRadius + 1: 0
+                topLeftRadius: selectionDelegate.profile === Config.Car ? Kirigami.Units.cornerRadius + 1: 0
+                topRightRadius: selectionDelegate.profile === Config.Pedestrian ? Kirigami.Units.cornerRadius + 1: 0
+                bottomLeftRadius: selectionDelegate.profile === Config.Car ? Kirigami.Units.cornerRadius + 1: 0
+                bottomRightRadius: selectionDelegate.profile === Config.Pedestrian ? Kirigami.Units.cornerRadius + 1: 0
             }
         }
         icon {

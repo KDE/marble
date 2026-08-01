@@ -3,6 +3,8 @@
 // SPDX-FileCopyrightText: 2015 Gábor Péterffy <peterffy95@gmail.com>
 //
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 
 import org.kde.marble
@@ -10,10 +12,17 @@ import org.kde.marble
 Routing {
     id: root
 
+    required property MainScreen app
     property var marbleItem: null
+    required property PlacemarkDialog placemarkDialog
 
     marbleMap: marbleItem.marbleMap
-    waypointDelegate: Waypoint {visible: false}
+    waypointDelegate: Waypoint {
+        id: waypoint
+        visible: false
+        app: root.app
+        placemarkDialog: root.placemarkDialog
+    }
     onRoutingProfileChanged: { updateRoute(); }
 
     function addSearchResultAsPlacemark(placemark)

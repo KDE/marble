@@ -5,6 +5,8 @@
 // SPDX-FileCopyrightText: 2015 Mikhail Ivchenko <ematirov@gmail.com>
 //
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Window
@@ -14,8 +16,6 @@ import org.kde.marble as Marble
 import org.kde.marble.maps
 import org.kde.ki18n
 import org.kde.kirigami as Kirigami
-import org.kde.kirigamiaddons.delegates as Delegates
-import org.kde.kirigamiaddons.components as Components
 
 Kirigami.ApplicationWindow {
     id: app
@@ -42,7 +42,7 @@ Kirigami.ApplicationWindow {
 
     property bool aboutToQuit: false
 
-    onClosing: {
+    onClosing: close => {
         if (app.aboutToQuit || Qt.platform.os !== "android") {
             close.accepted = true // we will quit
             return
@@ -54,15 +54,8 @@ Kirigami.ApplicationWindow {
             navigationManager.visible = false
         } else if (app.state !== "none") {
             app.state = "none"
-        } else if(search.searchResultsVisible.visible){
-            search.searchResultsVisible = false
-        }
-        else {
-            if(search.searchResultsVisible){
-                search.searchResultsVisible = false
-            }
+        } else {
             app.aboutToQuit = true
-            quitHelper.visible = true
         }
         close.accepted = false
     }
@@ -93,7 +86,6 @@ Kirigami.ApplicationWindow {
                 onTriggered: {
                     sidePanel.close()
                     marbleMaps.showPublicTransport = checked
-                    publicTransportDialog.open()
                 }
             },
             Kirigami.Action {
@@ -116,7 +108,7 @@ Kirigami.ApplicationWindow {
                 visible: true
                 icon.name: 'preferences-desktop-accessibility-symbolic'
                 onTriggered: {
-                    sidePanelSettings.value("MarbleMaps", "showAccessibility", "false") === "true"
+                    sidePanelSettings.setValue("MarbleMaps", "showAccessibility", checked ? "true" : "false")
                 }
             },
             Kirigami.Action{ separator: true },
@@ -127,7 +119,6 @@ Kirigami.ApplicationWindow {
                 onTriggered: {
                     app.state = "about"
                     sidePanel.close()
-                    source = ""
                     app.pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutPage"))
                 }
             },
@@ -226,7 +217,7 @@ Kirigami.ApplicationWindow {
             searchBackend: Marble.SearchBackend {
                 id: backend
                 marbleQuickItem: marbleMaps
-                onSearchResultChanged: {
+                onSearchResultChanged: model => {
                     searchResultPopup.searchResults.model = model;
                     searchResultPopup.visible = true;
                 }
@@ -254,9 +245,9 @@ Kirigami.ApplicationWindow {
                 anchors.fill: parent
                 enabled: true
 
-                onPinchStarted: marbleMaps.handlePinchStarted(pinch.center)
-                onPinchFinished: marbleMaps.handlePinchFinished(pinch.center)
-                onPinchUpdated: marbleMaps.handlePinchUpdated(pinch.center, pinch.scale);
+                onPinchStarted: pinch => marbleMaps.handlePinchStarted(pinch.center)
+                onPinchFinished: pinch => marbleMaps.handlePinchFinished(pinch.center)
+                onPinchUpdated: pinch => marbleMaps.handlePinchUpdated(pinch.center, pinch.scale);
 
                 MarbleMapsApplication {
                     id: marbleMapsApplication
@@ -291,7 +282,6 @@ Kirigami.ApplicationWindow {
                     showPublicTransport: settings.value("MarbleMaps", "showPublicTransport", "false") === "true"
                     positionProvider: marbleMapsApplication.suspended ? "" : currentPositionProvider
                     showPositionMarker: false
-                    animationViewContext: dialogAnimation.running
 
                     placemarkDelegate: Kirigami.Icon {
                         id: balloon
@@ -305,7 +295,9 @@ Kirigami.ApplicationWindow {
 
                         Connections {
                             target: app
-                            onSelectedPlacemarkChanged: balloonAnimation.restart()
+                            function onSelectedPlacemarkChanged() {
+                                balloonAnimation.restart()
+                            }
                         }
 
                         NumberAnimation {
@@ -360,9 +352,9 @@ Kirigami.ApplicationWindow {
                     Component.onDestruction: marbleMaps.writeSettings()
 
                     Connections {
-                        target: Qt.application
-                        onStateChanged: {
-                            if (Qt.application.state === Qt.ApplicationInactive || Qt.application.state === Qt.ApplicationSuspended) {
+                        target: Application
+                        function onStateChanged() {
+                            if (Application.state === Qt.ApplicationInactive || Application.state === Qt.ApplicationSuspended) {
                                 marbleMaps.writeSettings()
                             }
                         }
@@ -377,7 +369,11 @@ Kirigami.ApplicationWindow {
                     RoutingManager {
                         id: routingManager
                         anchors.fill: parent
+
                         marbleItem: marbleMaps
+                        app: app
+                        placemarkDialog: placemarkDialog
+
                         visible: hasRoute
 
                         routingProfile: switch (Config.profile) {
@@ -392,13 +388,13 @@ Kirigami.ApplicationWindow {
 
                         function addToRoute() {
                             ensureRouteHasDeparture()
-                            routingManager.addViaByPlacemarkAtIndex(routingManager.waypointCount(), selectedPlacemark)
+                            routingManager.addViaByPlacemarkAtIndex(routingManager.waypointCount(), app.selectedPlacemark)
                             routingManager.clearSearchResultPlacemarks()
-                            selectedPlacemark = null
+                            app.selectedPlacemark = null
                             app.state = "route"
                         }
                         function ensureRouteHasDeparture() {
-                            if (routingManager.routeRequestModel.count === 0) {
+                            if (routingManager.routeRequestModel.rowCount() === 0) {
                                 if (marbleMaps.positionAvailable) {
                                     routingManager.addViaByPlacemark(marbleMaps.currentPosition)
                                 }
@@ -437,7 +433,7 @@ Kirigami.ApplicationWindow {
                     MouseArea {
                         anchors.fill: parent
                         propagateComposedEvents: true
-                        onPressed: {
+                        onPressed: mouse => {
                             marbleMaps.focus = true;
                             mouse.accepted = false;
                         }
@@ -483,7 +479,7 @@ Kirigami.ApplicationWindow {
                 property real distance: 0
 
                 function updateIndicator(): void {
-                    const point = marbleMaps.mapFromItem(zoomToPositionButton, diameter * 0.5, diameter * 0.5);
+                    const point = marbleMaps.mapFromItem(zoomToPositionButton, radius, radius);
                     distance = 0.001 * marbleMaps.distanceFromPointToCurrentLocation(point);
                     angle = marbleMaps.angleFromPointToCurrentLocation(point);
                 }
@@ -496,6 +492,7 @@ Kirigami.ApplicationWindow {
             id: placemarkDialog
 
             visible: false
+            app: app
             placemark: app.selectedPlacemark
             bookmarks: bookmarks
             showOsmTags: app.showOsmTags

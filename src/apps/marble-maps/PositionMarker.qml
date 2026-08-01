@@ -3,6 +3,7 @@
 // SPDX-FileCopyrightText: 2015 Gábor Péterffy <peterffy95@gmail.com>
 //
 
+pragma ComponentBehavior: Bound
 
 import QtQuick 2.3
 import QtQuick.Window 2.2
@@ -20,7 +21,7 @@ Item {
     property real speed: 0
 
     Behavior on radius {
-        enabled: allowRadiusAnimation
+        enabled: root.allowRadiusAnimation
         NumberAnimation { duration: 200 }
     }
 
@@ -31,11 +32,11 @@ Item {
         }
     }
     Behavior on x {
-        enabled: allowPositionAnimation
+        enabled: root.allowPositionAnimation
         SmoothedAnimation { duration: 200 }
     }
     Behavior on y {
-        enabled: allowPositionAnimation
+        enabled: root.allowPositionAnimation
         SmoothedAnimation { duration: 200 }
     }
 

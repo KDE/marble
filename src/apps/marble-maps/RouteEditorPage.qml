@@ -3,6 +3,8 @@
 // SPDX-FileCopyrightText: 2024 Carl Schwan <carl@carlschwan.eu>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Controls as Controls
 import QtQuick.Layouts
@@ -57,17 +59,17 @@ FormCard.FormCardPage {
             bottomPadding: 1
 
             onClicked: (placemark, name) => {
-                routingManager.routeRequestModel.setPosition(searchResultPopup.index, placemark.longitude, placemark.latitude, name);
-                repeater.itemAt(searchResultPopup.index).field.text = name;
+                root.routingManager.routeRequestModel.setPosition(searchResultPopup.index, placemark.longitude, placemark.latitude, name);
+                (repeater.itemAt(searchResultPopup.index) as RoutingDelegate).field.text = name;
                 searchResultPopup.close();
-                routingManager.updateRoute();
+                root.routingManager.updateRoute();
             }
 
             searchBackend: Marble.SearchBackend {
                 id: backend
 
                 marbleQuickItem: root.marbleMaps
-                onSearchResultChanged: {
+                onSearchResultChanged: model => {
                     searchResultView.searchResults.model = model;
                     searchResultPopup.open();
                 }
@@ -81,9 +83,10 @@ FormCard.FormCardPage {
         Repeater {
             id: repeater
 
-            model: routingManager.routeRequestModel
+            model: root.routingManager.routeRequestModel
 
-            delegate: ColumnLayout {
+            delegate: RoutingDelegate {}
+            component RoutingDelegate : ColumnLayout {
                 id: routeDelegate
 
                 required property int index
@@ -93,7 +96,7 @@ FormCard.FormCardPage {
                 spacing: 0
 
                 FormCard.FormDelegateSeparator {
-                    visible: index !== 0
+                    visible: routeDelegate.index !== 0
                 }
 
                 FormCard.FormTextFieldDelegate {
@@ -169,11 +172,11 @@ FormCard.FormCardPage {
                             }
                             onClicked: {
                                 if (routeDelegate.index === 0) {
-                                    routingManager.addViaByPlacemark(marbleMaps.currentPosition)
+                                    root.routingManager.addViaByPlacemark(root.marbleMaps.currentPosition)
                                 } else if (routeDelegate.index === repeater.count - 1) {
-                                    routingManager.routeRequestModel.reverse();
+                                    root.routingManager.routeRequestModel.reverse();
                                 } else {
-                                    routingManager.removeVia(routeDelegate.index);
+                                    root.routingManager.removeVia(routeDelegate.index);
                                 }
                             }
                         }
@@ -193,10 +196,10 @@ FormCard.FormCardPage {
             rightPadding: Kirigami.Units.largeSpacing
 
             text: KI18n.i18nc("@label:listbox", "Alternatives:")
-            model: routingManager.alternativeRoutesModel
+            model: root.routingManager.alternativeRoutesModel
             textRole: "routeName"
             currentIndex: 0
-            onCurrentIndexChanged: routingManager.alternativeRoutesModel.setCurrentRoute(currentIndex);
+            onCurrentIndexChanged: root.routingManager.alternativeRoutesModel.setCurrentRoute(currentIndex);
         }
     }
 }

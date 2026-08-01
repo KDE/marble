@@ -3,6 +3,8 @@
 // SPDX-FileCopyrightText: 2015 Gábor Péterffy <peterffy95@gmail.com>
 //
 
+pragma ComponentBehavior: Bound
+
 import QtQuick 2.3
 import QtQuick.Window 2.2
 

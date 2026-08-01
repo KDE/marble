@@ -3,16 +3,22 @@
 // SPDX-FileCopyrightText: 2015 Dennis Nienhüser <nienhueser@kde.org>
 //
 
+pragma ComponentBehavior: Bound
+
+import QtCore
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Window
-import QtQuick.Layouts
 import QtQuick.Dialogs
 
-import org.kde.marble
+import org.kde.marble as Marble
 
 Item {
     id: root
+
+    required property MainScreen app
+    required property Marble.MarbleItem marbleMaps
+
     height: swipeView.height + Screen.pixelDensity * 4
 
     SystemPalette {
@@ -24,17 +30,16 @@ Item {
         id: settings
 
         Component.onDestruction: {
-            settings.setValue("MarbleMaps", "mapThemeId", marbleMaps.mapThemeId)
+            settings.setValue("MarbleMaps", "mapThemeId", root.marbleMaps.mapThemeId)
             settings.setValue("localization", "translationsDisabled", ignoreTranslations.checked ? "true" : "false")
             settings.setValue("localization", "translationFile", localizationItem.translationFile)
-            settings.setValue("Developer", "inertialGlobeRotation", marbleMaps.inertialGlobeRotation)
-            settings.setValue("Developer", "positionProvider", marbleMaps.currentPositionProvider)
+            settings.setValue("Developer", "inertialGlobeRotation", root.marbleMaps.inertialGlobeRotation)
+            settings.setValue("Developer", "positionProvider", root.marbleMaps.positionProvider)
             settings.setValue("Developer", "runtimeTrace", runtimeTrace.checked ? "true" : "false")
             settings.setValue("Developer", "debugTags", debugTags.checked ? "true" : "false")
             settings.setValue("Developer", "debugPlacemarks", debugPlacemarks.checked ? "true" : "false")
             settings.setValue("Developer", "debugPolygons", debugPolygons.checked ? "true" : "false")
             settings.setValue("Developer", "debugBatches", debugBatches.checked ? "true" : "false")
-            settings.setValue("Developer", "debugOutput", debugOutputEnabled ? "true" : "false")
         }
     }
 
@@ -78,12 +83,12 @@ Item {
                             id: mapTheme
                             text: "Development Tiles"
                             checked: settings.value("MarbleMaps", "mapThemeId") === "earth/vectorosm-dev/vectorosm-dev.dgml"
-                            onCheckedChanged: marbleMaps.mapThemeId = checked ? "earth/vectorosm-dev/vectorosm-dev.dgml" : "earth/vectorosm/vectorosm.dgml"
+                            onCheckedChanged: root.marbleMaps.mapThemeId = checked ? "earth/vectorosm-dev/vectorosm-dev.dgml" : "earth/vectorosm/vectorosm.dgml"
                         }
 
                         Button {
                             text: "Reload Tiles"
-                            onClicked: marbleMaps.reloadTiles()
+                            onClicked: root.marbleMaps.reloadTiles()
                         }
                     }
                 }
@@ -117,7 +122,7 @@ Item {
                             id: debugTags
                             text: "OSM Tags"
                             checked: settings.value("Developer", "debugTags") === "true"
-                            onCheckedChanged: app.showOsmTags = checked
+                            onCheckedChanged: root.app.showOsmTags = checked
                         }
 
                         CheckBox {
@@ -129,13 +134,13 @@ Item {
                         CheckBox {
                             text: "Inertial Rotation"
                             checked: settings.value("Developer", "inertialGlobeRotation") === "true"
-                            onCheckedChanged: marbleMaps.inertialGlobeRotation = checked
+                            onCheckedChanged: root.marbleMaps.inertialGlobeRotation = checked
                         }
 
                         CheckBox {
                             text: "GPS Simulation"
                             checked: settings.value("Developer", "positionProvider") === "RouteSimulationPositionProviderPlugin"
-                            onCheckedChanged: marbleMaps.currentPositionProvider = checked ? "RouteSimulationPositionProviderPlugin" : "QtPositioning"
+                            onCheckedChanged: root.marbleMaps.currentPositionProvider = checked ? "RouteSimulationPositionProviderPlugin" : "QtPositioning"
                         }
                     }
                 }
@@ -170,28 +175,28 @@ Item {
                             id: runtimeTrace
                             text: "Performance"
                             checked: settings.value("Developer", "runtimeTrace") === "true"
-                            onCheckedChanged: marbleMaps.setShowRuntimeTrace(checked)
+                            onCheckedChanged: root.marbleMaps.setShowRuntimeTrace(checked)
                         }
 
                         CheckBox {
                             id: debugBatches
                             text: "Batches"
                             checked: settings.value("Developer", "debugBatches") === "true"
-                            onCheckedChanged: marbleMaps.setShowDebugBatches(checked)
+                            onCheckedChanged: root.marbleMaps.setShowDebugBatches(checked)
                         }
 
                         CheckBox {
                             id: debugPolygons
                             text: "Polygons"
                             checked: settings.value("Developer", "debugPolygons") === "true"
-                            onCheckedChanged: marbleMaps.setShowDebugPolygons(checked)
+                            onCheckedChanged: root.marbleMaps.setShowDebugPolygons(checked)
                         }
 
                         CheckBox {
                             id: debugPlacemarks
                             text: "Placemarks"
                             checked: settings.value("Developer", "debugPlacemarks") === "true"
-                            onCheckedChanged: marbleMaps.setShowDebugPlacemarks(checked)
+                            onCheckedChanged: root.marbleMaps.setShowDebugPlacemarks(checked)
                         }
                     }
                 }
@@ -273,9 +278,8 @@ Item {
     FileDialog {
         id: fileDialog
         title: "Choose a translation file"
-        folder: shortcuts.home
-        sidebarVisible: false
+        currentFolder: StandardPaths.standardLocations(StandardPaths.HomeLocation)[0]
         nameFilters: [ "Translation files (*.qm)" ]
-        onAccepted: localizationItem.translationFile = fileUrl
+        onAccepted: localizationItem.translationFile = selectedFile
     }
 }

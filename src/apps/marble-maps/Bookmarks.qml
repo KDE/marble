@@ -3,11 +3,12 @@
 // SPDX-FileCopyrightText: 2016 Dennis Nienhüser <nienhueser@kde.org>
 //
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Controls as Controls
 import QtQuick.Window
 import QtQuick.Layouts
-import QtQml.Models
 
 import org.kde.ki18n
 import org.kde.kirigami as Kirigami
@@ -20,11 +21,11 @@ Kirigami.ScrollablePage {
 
     title: KI18n.i18nc("@title:window", "Bookmarks")
 
-    property var marbleMaps
+    required property Marble.MarbleItem marbleMaps
 
     Marble.Bookmarks {
         id: bookmarks
-        map: marbleMaps
+        map: root.marbleMaps
     }
 
     ListView {
@@ -44,7 +45,7 @@ Kirigami.ScrollablePage {
 
             onClicked: {
                 root.marbleMaps.centerOn(coordinate)
-                root.Controls.ApplicationWindow.window.pageStack.layers.pop();
+                (root.Kirigami.PageStack.pageStack as Kirigami.PageRow).layers.pop();
             }
 
             contentItem: RowLayout {
@@ -58,7 +59,7 @@ Kirigami.ScrollablePage {
                 Controls.ToolButton {
                     icon.name: 'delete-symbolic'
                     onClicked: {
-                        const currentBookmark = bookmarks.placemark(index)
+                        const currentBookmark = bookmarks.placemark(bookmarkDelegate.index)
                         bookmarks.removeBookmark(currentBookmark.longitude, currentBookmark.latitude)
                     }
                 }

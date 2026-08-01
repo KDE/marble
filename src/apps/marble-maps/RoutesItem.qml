@@ -3,16 +3,20 @@
 // SPDX-FileCopyrightText: 2017 Dennis Nienhüser <nienhueser@kde.org>
 //
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Window
 import QtQuick.Controls
-import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects
+
+import org.kde.marble
 
 Item {
     id: root
     property alias model: listView.model
     property alias count: listView.count
+    property Placemark placemark
 
     implicitHeight: Math.min(0.75 * Screen.height, listView.contentHeight)
 
@@ -23,12 +27,26 @@ Item {
         anchors.fill: parent
         contentWidth: width
 
-        model: placemark ? placemark.routeRelationModel : undefined
+        model: root.placemark ? root.placemark.routeRelationModel : undefined
         clip: true
         spacing: Screen.pixelDensity * 2
 
         delegate: Item {
             id: routeCard
+
+            required property int index
+            required property string iconSource
+            required property string description;
+            required property string network
+            required property string routeColor
+            required property string textColor
+            required property string routeFrom
+            required property string routeTo
+            required property string routeRef
+            required property list<string> routeVia
+            required property int oid
+            required property bool routeVisible
+
             property bool expanded: false
 
             width: parent.width
@@ -56,7 +74,7 @@ Item {
                         Image {
                             id: icon
                             anchors.left: parent.left
-                            source: iconSource
+                            source: routeCard.iconSource
                             height: Screen.pixelDensity * 6
                             width: height
                             sourceSize.height: Screen.pixelDensity * 6
@@ -72,14 +90,14 @@ Item {
                             Rectangle {
                                 width: parent.width
                                 height: childrenRect.height
-                                color: routeColor
+                                color: routeCard.routeColor
                                 Text {
                                     anchors.left: parent.left
                                     anchors.margins: Screen.pixelDensity * 0.5
                                     clip: true
                                     font.pointSize: 16
-                                    text: routeRef
-                                    color: textColor
+                                    text: routeCard.routeRef
+                                    color: routeCard.textColor
                                     width: parent.width
                                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                                 }
@@ -88,14 +106,16 @@ Item {
                             Text {
                                 visible: text.length > 2
                                 font.pointSize: 16
-                                text: "● " + routeFrom
+                                text: "● " + routeCard.routeFrom
                                 width: parent.width
                                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                             }
 
                             Repeater {
-                                model: routeCard.expanded ? routeVia : undefined
+                                model: routeCard.expanded ? routeCard.routeVia : undefined
                                 Text {
+                                    required property string modelData
+
                                     font.pointSize: 16
                                     text: "○ " + modelData
                                     width: parent.width
@@ -106,7 +126,7 @@ Item {
                             Text {
                                 visible: text.length > 2
                                 font.pointSize: 16
-                                text: "● " + routeTo
+                                text: "● " + routeCard.routeTo
                                 width: parent.width
                                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                             }
@@ -114,7 +134,7 @@ Item {
                             Text {
                                 visible: routeCard.expanded
                                 font.pointSize: 14
-                                text: "Network: " + network
+                                text: "Network: " + routeCard.network
                                 width: parent.width
                                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                             }
@@ -122,7 +142,7 @@ Item {
                             Text {
                                 visible: routeCard.expanded
                                 font.pointSize: 14
-                                text: description
+                                text: routeCard.description
                                 width: parent.width
                                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                             }
@@ -132,7 +152,7 @@ Item {
                             anchors.fill: parent
                             onClicked: {
                                 routeCard.expanded = !routeCard.expanded
-                                listView.currentIndex = index
+                                listView.currentIndex = routeCard.index
                             }
                         }
 
@@ -157,8 +177,8 @@ Item {
                             anchors.right: switchText.left
                             anchors.verticalCenter: switchText.verticalCenter
 
-                            checked: routeVisible
-                            onClicked: root.highlightChanged(oid, checked)
+                            checked: routeCard.routeVisible
+                            onClicked: root.highlightChanged(routeCard.oid, checked)
                         }
 
                         Text {

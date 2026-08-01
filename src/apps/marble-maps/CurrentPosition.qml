@@ -3,13 +3,14 @@
 // SPDX-FileCopyrightText: 2016 Dennis Nienhüser <nienhueser@kde.org>
 //
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Window
 import QtQuick.Layouts
 
 import org.kde.ki18n
-import org.kde.marble
 
 Item {
     id: root

@@ -3,14 +3,17 @@
 // SPDX-FileCopyrightText: 2015 Gábor Péterffy <peterffy95@gmail.com>
 //
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Window
 
-import org.kde.marble
 
 Item {
     id: root
 
+    required property MainScreen app
+    required property PlacemarkDialog placemarkDialog
     property alias type: image.type
     property int xPos: 0
     property int yPos: 0
@@ -26,16 +29,16 @@ Item {
         id: image
         onClicked: {
             if (type == "searchResult") {
-                if (placemarkDialog.placemark === placemark) {
-                    placemarkDialog.placemark = null
-                    app.state = "none"
+                if (root.placemarkDialog.placemark === root.placemark) {
+                    root.placemarkDialog.placemark = null
+                    root.app.state = "none"
                 } else {
-                    placemarkDialog.placemark = placemark
-                    app.state = "place"
+                    root.placemarkDialog.placemark = root.placemark
+                    root.app.state = "place"
                 }
             } else {
-                app.currentWaypointIndex = index
-                app.state = "route"
+                root.app.currentWaypointIndex = root.index
+                root.app.state = "route"
             }
         }
         anchors {

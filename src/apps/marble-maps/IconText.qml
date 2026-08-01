@@ -3,13 +3,13 @@
 // SPDX-FileCopyrightText: 2016 Dennis Nienhüser <nienhueser@kde.org>
 //
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as Controls
 
 import org.kde.kirigami as Kirigami
-
-import org.kde.marble
 
 RowLayout {
     id: root
@@ -35,7 +35,7 @@ RowLayout {
         Layout.fillWidth: true
         Layout.alignment: Qt.AlignVCenter
 
-        onLinkActivated: root.linkActivated(link)
+        onLinkActivated: link => root.linkActivated(link)
 
         MouseArea {
             anchors.fill: parent

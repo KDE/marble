@@ -3,9 +3,9 @@
 // SPDX-FileCopyrightText: 2015 Gábor Péterffy <peterffy95@gmail.com>
 //
 
+pragma ComponentBehavior: Bound
 
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Window
 import org.kde.kirigamiaddons.components as Components
 
@@ -18,11 +18,11 @@ Components.FloatingButton {
     Image {
         id: indicator
         anchors {
-            horizontalCenter: button.horizontalCenter
-            verticalCenter: button.verticalCenter
+            horizontalCenter: root.horizontalCenter
+            verticalCenter: root.verticalCenter
         }
-        width: root.contentWidth
-        height: root.contentHeight
+        width: root.implicitContentWidth
+        height: root.implicitContentHeight
         source: Qt.resolvedUrl("images/backdrop.png")
         transform: Rotation {
             origin {

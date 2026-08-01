@@ -3,6 +3,7 @@
 // SPDX-FileCopyrightText: 2015 Gábor Péterffy <peterffy95@gmail.com>
 //
 
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Controls
@@ -73,11 +74,11 @@ Item {
 
     Navigation {
         id: navigation
-        marbleQuickItem: marbleItem
+        marbleQuickItem: root.marbleItem
 
         onVoiceNavigationAnnouncementChanged: {
-            if (root.visible && root.hasRoute && !muteButton.muted) {
-                textToSpeechClient.readText(voiceNavigationAnnouncement);
+            if (root.visible && root.hasRoute && !muteButton.muted && root.tts) {
+                root.tts.readText(voiceNavigationAnnouncement);
             }
         }
     }
