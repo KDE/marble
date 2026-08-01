@@ -5,9 +5,9 @@
 
 pragma ComponentBehavior: Bound
 
-import QtQuick 2.3
-import QtQuick.Window 2.2
-import QtQuick.Layouts 1.3
+import QtQuick
+import QtQuick.Window
+import QtQuick.Layouts
 
 Item {
     id: root
