@@ -11,12 +11,13 @@ import QtQuick.Window
 import QtQuick.Layouts
 
 import org.kde.ki18n
+import org.kde.marble
 
 Item {
     id: root
 
-    property var map
-    property var navigationManager
+    required property MarbleItem map
+    property NavigationManager navigationManager
 
     onNavigationManagerChanged: navigationModeSwitch.checked = navigationManager ? navigationManager.guidanceModeEnabled : false
 

@@ -13,7 +13,7 @@ Routing {
     id: root
 
     required property MainScreen app
-    property var marbleItem: null
+    required property MarbleItem marbleItem
     required property PlacemarkDialog placemarkDialog
 
     marbleMap: marbleItem.marbleMap
@@ -24,11 +24,4 @@ Routing {
         placemarkDialog: root.placemarkDialog
     }
     onRoutingProfileChanged: { updateRoute(); }
-
-    function addSearchResultAsPlacemark(placemark)
-    {
-        if (marbleItem) {
-            root.addSearchResultPlacemark(placemark);
-        }
-    }
 }

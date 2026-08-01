@@ -20,13 +20,13 @@ Components.BottomDrawer {
     id: root
 
     required property MainScreen app
-    property var placemark: null
-    property variant map
+    required property Marble.MarbleItem map
+    property Marble.Placemark placemark: null
     property alias showOsmTags: tagsView.visible
     property bool showAccessibility: false
     property Marble.Bookmarks bookmarks
 
-    onMapChanged: bookmarks.map = root.map
+    onMapChanged: bookmarks.map = map
 
     Kirigami.ScrollablePage {
         leftPadding: Kirigami.Units.mediumSpacing

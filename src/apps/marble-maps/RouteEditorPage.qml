@@ -23,8 +23,8 @@ FormCard.FormCardPage {
 
     property alias currentProfileIcon: profileSelector.profileIcon
 
-    property var routingManager
-    property var marbleMaps
+    required property RoutingManager routingManager
+    required property Marble.MarbleItem marbleMaps
 
     ProfileSelectorMenu {
         id: profileSelector

@@ -26,7 +26,7 @@ Kirigami.ApplicationWindow {
 
     property string state
 
-    property var selectedPlacemark
+    property Marble.Placemark selectedPlacemark
     property bool showOsmTags: false
     property int currentWaypointIndex: 0
 
@@ -493,6 +493,7 @@ Kirigami.ApplicationWindow {
 
             visible: false
             app: app
+            map: marbleMaps
             placemark: app.selectedPlacemark
             bookmarks: bookmarks
             showOsmTags: app.showOsmTags

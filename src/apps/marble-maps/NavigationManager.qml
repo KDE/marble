@@ -13,7 +13,7 @@ import org.kde.marble
 
 Item {
     id: root
-    property var marbleItem: null
+    property MarbleItem marbleItem: null
     property var tts: null
     property alias snappedPositionMarkerScreenPosition: navigation.screenPosition
     property alias screenAccuracy: navigation.screenAccuracy

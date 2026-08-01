@@ -8,6 +8,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Window
 
+import org.kde.marble
 
 Item {
     id: root
@@ -17,7 +18,7 @@ Item {
     property alias type: image.type
     property int xPos: 0
     property int yPos: 0
-    property var placemark: null
+    property Placemark placemark: null
     property int index: -1
 
     width: Screen.pixelDensity * 15

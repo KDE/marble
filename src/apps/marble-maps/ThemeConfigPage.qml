@@ -16,8 +16,6 @@ import org.kde.marble.maps
 Kirigami.ScrollablePage {
     id: root
 
-    property MarbleItem marbleMaps
-
     title: KI18n.i18nc("@title:window", "Themes")
 
     ListView {

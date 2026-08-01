@@ -10,11 +10,12 @@ import QtQuick
 import org.kde.ki18n
 import org.kde.kirigamiaddons.formcard as FormCard
 
+import org.kde.marble
 
 FormCard.FormCardPage {
     id: root
 
-    property var marbleMaps
+    required property MarbleItem marbleMaps
 
     title: KI18n.i18nc("@title:window", "Layer Options")
 
