@@ -1,5 +1,6 @@
 # Translation of marble to Norwegian Nynorsk
 #
+# Karl Ove Hufthammer <karl@huftis.org>, 2007, 2008, 2009, 2010, 2013, 2015, 2016, 2018, 2019, 2022, 2024, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
