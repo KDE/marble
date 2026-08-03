@@ -1,5 +1,6 @@
 # Translation of marble_qt to Norwegian Nynorsk
 #
+# Karl Ove Hufthammer <karl@huftis.org>, 2007, 2008, 2009, 2013, 2015, 2016, 2018, 2019, 2022, 2024.
 # Øystein Steffensen-Alværvik <oysteins.omsetting@protonmail.com>, 2021.
 msgid ""
 msgstr ""
