@@ -6,7 +6,9 @@
     "sdk": "org.kde.Sdk",
     "command": "marble",
     "rename-icon": "marble",
-    "tags": ["nightly"],
+    "tags": [
+        "nightly"
+    ],
     "desktop-file-name-suffix": " (Nightly)",
     "finish-args": [
         "--share=network",
@@ -31,15 +33,27 @@
     "modules": [
         {
             "name": "kirigamiaddons",
-            "config-opts": [ "-DBUILD_TESTING=OFF" ],
+            "config-opts": [
+                "-DBUILD_TESTING=OFF"
+            ],
             "buildsystem": "cmake-ninja",
-            "sources": [ { "type": "git", "url": "https://invent.kde.org/libraries/kirigami-addons.git" } ]
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://invent.kde.org/libraries/kirigami-addons.git"
+                }
+            ]
         },
         {
             "name": "marble",
             "buildsystem": "cmake-ninja",
             "builddir": true,
-            "sources": [ { "type": "dir", "path": "." } ]
+            "sources": [
+                {
+                    "type": "dir",
+                    "path": "."
+                }
+            ]
         }
     ]
 }
