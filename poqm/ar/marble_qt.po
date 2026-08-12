@@ -1808,7 +1808,7 @@ msgctxt "DGML|"
 msgid ""
 "<p>The <i>night sky</i>.</p><p>Displays the stars and constellations at "
 "night.</p>"
-msgstr "<p><i>سماء الليل</i>.</p><p>تعرض النجوم والأبراج ليلاً.</p>"
+msgstr "<p><i>سماء الليل</i>.</p><p>تعرض النجوم والأبراج ليلًا.</p>"
 
 #. file data/legend.html
 msgctxt "Legends|"
@@ -4010,7 +4010,7 @@ msgstr[0] "%n مقعد"
 msgstr[1] "%n مقعد"
 msgstr[2] "%n مقعدين"
 msgstr[3] "%n مقاعد"
-msgstr[4] "%n مقعداً"
+msgstr[4] "%n مقعدًا"
 msgstr[5] "%n مقعد"
 
 #: src/lib/marble/declarative/Placemark.cpp:350
@@ -4373,12 +4373,12 @@ msgstr "التوظيف وورش العمل للمخالفين وذوي الإع�
 #: src/lib/marble/declarative/Placemark.cpp:480
 msgctxt "Marble::Placemark|"
 msgid "Pre-packaged food for free or below market price"
-msgstr "الأغذية المعبئة مجاناً أو بأقل من سعر السوق"
+msgstr "الأغذية المعبئة مجانًا أو بأقل من سعر السوق"
 
 #: src/lib/marble/declarative/Placemark.cpp:484
 msgctxt "Marble::Placemark|"
 msgid "Prepared meals for free or below market price"
-msgstr "الوجبات الجاهزة مجاناً أو بأقل من سعر السوق"
+msgstr "الوجبات الجاهزة مجانًا أو بأقل من سعر السوق"
 
 #: src/lib/marble/declarative/Placemark.cpp:488
 msgctxt "Marble::Placemark|"
@@ -4558,7 +4558,7 @@ msgstr "مهيأ للتزلج على الطراز الكلاسيكي والحر"
 #: src/lib/marble/declarative/Placemark.cpp:556
 msgctxt "Marble::Placemark|"
 msgid "Groomed by a smaller snowmobile"
-msgstr "معدة بعربة ثلج أصغر حجماً"
+msgstr "معدة بعربة ثلج أصغر حجمًا"
 
 #: src/lib/marble/declarative/Placemark.cpp:557
 msgctxt "Marble::Placemark|"
@@ -8176,7 +8176,7 @@ msgstr "#87CEFA"
 #: src/lib/marble/MapWizard.ui:511
 msgctxt "MapWizard|"
 msgid "Select Color"
-msgstr "اختر لوناً"
+msgstr "اختر لونًا"
 
 #: src/lib/marble/MapWizard.ui:554
 msgctxt "MapWizard|"
@@ -10016,7 +10016,7 @@ msgstr ""
 "مؤشر الفأرة المؤشر تمامًا: ونتيجة لذلك، لن يظل القطب الشمالي في الأعلى، مما "
 "قد يؤدي إلى حدوث ارتباك. بشكل مبدئي، يتأكد ماربل من أن الشمال دائمًا في "
 "الأعلى، مما يؤدي إلى سلوك سحب حيث ينفصل الموقع الموجود أسفل مؤشر الفأرة "
-"قليلاً عن المؤشر.</p></body></html>"
+"قليلًا عن المؤشر.</p></body></html>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:58
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10307,7 +10307,7 @@ msgstr ""
 "الخريطة والقوائم وأشرطة الأدوات. </span></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"family:'Sans Serif';\">كما أن بعض الملحقات قد تسمح بتعديل ضبطها قليلاً. </"
+"family:'Sans Serif';\">كما أن بعض الملحقات قد تسمح بتعديل ضبطها قليلًا. </"
 "span></p></body></html>"
 
 #: src/lib/marble/MarblePluginSettingsWidget.ui:26
@@ -10943,7 +10943,7 @@ msgstr "اسم الملف غير صالح"
 #, qt-format
 msgctxt "Marble::MovieCaptureDialog|"
 msgid "This file format is not supported. Please, use %1 instead"
-msgstr "تنسيق الملف هذا غير مدعوم. الرجاء استخدام %1 بدلاً من ذلك"
+msgstr "تنسيق الملف هذا غير مدعوم. الرجاء استخدام %1 بدلًا من ذلك"
 
 #: src/lib/marble/MovieCaptureDialog.cpp:95
 msgctxt "Marble::MovieCaptureDialog|"
@@ -11479,7 +11479,7 @@ msgstr "آخر مزامنة: %1"
 #: src/lib/marble/RemoveItemEditWidget.cpp:34
 msgctxt "Marble::RemoveItemEditWidget|"
 msgid "Choose item:"
-msgstr "اختر عنصراً:"
+msgstr "اختر عنصرًا:"
 
 #: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:29
 msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
@@ -11569,7 +11569,7 @@ msgstr "اتجه إلى اليسار."
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:395
 msgctxt "QObject|"
 msgid "Keep slightly left."
-msgstr "اتجه إلى اليسار قليلاً."
+msgstr "اتجه إلى اليسار قليلًا."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:397
 msgctxt "QObject|"
@@ -11579,7 +11579,7 @@ msgstr "اذهب للأمام مباشرة."
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:399
 msgctxt "QObject|"
 msgid "Keep slightly right."
-msgstr "اتجه إلى اليمين قليلاً."
+msgstr "اتجه إلى اليمين قليلًا."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:401
 msgctxt "QObject|"
@@ -11640,7 +11640,7 @@ msgstr "اتجه يسارًا إلى %1."
 #, qt-format
 msgctxt "QObject|"
 msgid "Keep slightly left on %1."
-msgstr "اتجه إلى اليسار قليلاً على %1."
+msgstr "اتجه إلى اليسار قليلًا على %1."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:432
 #, qt-format
@@ -11652,7 +11652,7 @@ msgstr "تابع على %1."
 #, qt-format
 msgctxt "QObject|"
 msgid "Keep slightly right on %1."
-msgstr "اتجه إلى اليمين قليلاً على %1."
+msgstr "اتجه إلى اليمين قليلًا على %1."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:436
 #, qt-format
@@ -12320,7 +12320,7 @@ msgstr "اسم الملف غير صالح"
 #, qt-format
 msgctxt "Marble::TourCaptureDialog|"
 msgid "This file format is not supported. Please, use %1 instead"
-msgstr "تنسيق الملف هذا غير مدعوم. الرجاء استخدام %1 بدلاً من ذلك"
+msgstr "تنسيق الملف هذا غير مدعوم. الرجاء استخدام %1 بدلًا من ذلك"
 
 #: src/lib/marble/TourCaptureDialog.cpp:100
 #: src/lib/marble/TourCaptureDialog.cpp:120
@@ -13975,7 +13975,7 @@ msgstr "&عرض الملف"
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:65
 msgctxt "Marble::FileViewFloatItem|"
 msgid "A list of currently opened files"
-msgstr "قائمة بالملفات المفتوحة حالياً"
+msgstr "قائمة بالملفات المفتوحة حاليًا"
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:201
 msgctxt "Marble::FileViewFloatItem|"
@@ -16711,17 +16711,17 @@ msgstr "بطيء (10 ميل في الساعة)"
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:46
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "normal (12 mph)"
-msgstr "عادي (12 ميلاً في الساعة)"
+msgstr "عادي (12 ميلًا في الساعة)"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:47
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "fast (15 mph)"
-msgstr "سريع (15 ميلاً في الساعة)"
+msgstr "سريع (15 ميلًا في الساعة)"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:84
 msgctxt "Marble::CycleStreetsPlugin|"
 msgid "This service requires an Internet connection."
-msgstr "تتطلب هذه الخدمة اتصالاً بالإنترنت."
+msgstr "تتطلب هذه الخدمة اتصالًا بالإنترنت."
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:89
 msgctxt "Marble::CycleStreetsPlugin|"
@@ -17252,7 +17252,7 @@ msgstr "مطلوب AppKey لكي يعمل توجيه MapQuest. "
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:19
 msgctxt "Marble::MapQuestPlugin|"
 msgid "This service requires an Internet connection."
-msgstr "تتطلب هذه الخدمة اتصالاً بالإنترنت."
+msgstr "تتطلب هذه الخدمة اتصالًا بالإنترنت."
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:24
 msgctxt "Marble::MapQuestPlugin|"
@@ -17512,7 +17512,7 @@ msgstr ""
 #: src/plugins/runner/open-source-routing-machine/OSRMPlugin.cpp:17
 msgctxt "Marble::OSRMPlugin|"
 msgid "This service requires an Internet connection."
-msgstr "تتطلب هذه الخدمة اتصالاً بالإنترنت."
+msgstr "تتطلب هذه الخدمة اتصالًا بالإنترنت."
 
 #: src/plugins/runner/open-source-routing-machine/OSRMPlugin.cpp:22
 msgctxt "Marble::OSRMPlugin|"
@@ -17569,7 +17569,7 @@ msgstr "تجنب العبارات"
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:19
 msgctxt "Marble::OpenRouteServicePlugin|"
 msgid "This service requires an Internet connection."
-msgstr "تتطلب هذه الخدمة اتصالاً بالإنترنت."
+msgstr "تتطلب هذه الخدمة اتصالًا بالإنترنت."
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:24
 msgctxt "Marble::OpenRouteServicePlugin|"
@@ -17814,7 +17814,7 @@ msgstr "الأقصر"
 #: src/plugins/runner/yours/YoursPlugin.cpp:20
 msgctxt "Marble::YoursPlugin|"
 msgid "This service requires an Internet connection."
-msgstr "تتطلب هذه الخدمة اتصالاً بالإنترنت."
+msgstr "تتطلب هذه الخدمة اتصالًا بالإنترنت."
 
 #: src/plugins/runner/yours/YoursPlugin.cpp:25
 msgctxt "Marble::YoursPlugin|"
