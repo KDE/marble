@@ -217,6 +217,10 @@
   <url type="faq">https://techbase.kde.org/Projects/Marble/FAQ</url>
   <url type="help">https://marble.kde.org/support.php</url>
   <url type="donation">https://www.kde.org/community/donations/?app=marble&amp;source=appdata</url>
+  <custom>
+    <value key="KDE::mailinglist">marble@kde.org</value>
+    <value key="KDE::mailinglist-devel">marble-devel@kde.org</value>
+  </custom>
   <screenshots>
     <screenshot type="default">
       <caption>Earth globe in Marble</caption>
