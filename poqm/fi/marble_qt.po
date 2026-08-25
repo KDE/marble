@@ -4,7 +4,7 @@
 # Niklas Laxström <niklas.laxstrom+kdetrans@gmail.com>, 2007, 2012.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016, 2023.
 # Jiri Grönroos <jiri.gronroos+kde@iki.fi>, 2012, 2013.
-# SPDX-FileCopyrightText: 2012, 2015, 2016, 2018, 2020, 2021, 2022, 2023, 2024, 2025 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2012, 2015, 2016, 2018, 2020, 2021, 2022, 2023, 2024, 2025, 2026 Tommi Nieminen <translator@legisign.org>
 #
 # KDE Finnish translation sprint participants:
 # Author: Artnay
@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2025-10-17 14:26+0300\n"
+"PO-Revision-Date: 2026-08-23 10:50+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -2269,8 +2269,6 @@ msgid "Scutum"
 msgstr "Kilpi"
 
 #. file data/stars/names.csv
-#, fuzzy
-#| msgid "Serpens"
 msgctxt "StarNames|"
 msgid "Serpens"
 msgstr "Käärme"
@@ -6371,12 +6369,9 @@ msgid "Gift Shop"
 msgstr "Lahjakauppa"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:684
-#, fuzzy
-#| msgctxt "Name of a satellite group"
-#| msgid "Geostationary"
 msgctxt "GeoDataPlacemark|"
 msgid "Stationery"
-msgstr "Geostationaariset"
+msgstr "Paperitavara"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:686
 msgctxt "GeoDataPlacemark|"
@@ -6954,12 +6949,12 @@ msgstr "Vetohissi"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:916
 msgctxt "GeoDataPlacemark|"
 msgid "T-Bar"
-msgstr ""
+msgstr "T-palkki"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:918
 msgctxt "GeoDataPlacemark|"
 msgid "J-Bar"
-msgstr ""
+msgstr "J-palkki"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:920
 #, fuzzy
@@ -12228,6 +12223,16 @@ msgid ""
 "seen from Space. The map is based on NASA's beautiful \"Blue Marble Next "
 "Generation\" pictures. Credits: NASA's Earth Observatory</p></body></html>"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style=\" "
+"white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+"weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+"top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+"indent:0; text-indent:0px;\"><span style=\" font-weight:600;"
+"\">Satelliittinäkymä</span></p><p style=\" margin-top:0px; margin-"
+"bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
+"indent:0px;\">Maa avaruudesta nähtynä. Kartta perustuu Nasan kauniisiin "
+"”Seuraavan sukupolven sininen pallo” -kuviin. Kiitokset: NASA Earth "
+"Observatory</p></body></html>"
 
 #: src/lib/marble/TileCreatorDialog.ui:517
 msgctxt "TileCreatorDialog|"
@@ -13844,6 +13849,9 @@ msgid ""
 "you want more information on a specific event, select it and click OK.</p></"
 "body></html>"
 msgstr ""
+"<html><head/><body><p>Marble on havainnut, että seuraavat <span style=\" "
+"font-weight: 600;\">pimennykset</span> tapahtuvat lähitulevaisuudessa. Jos "
+"haluat lisätietoa tapahtumasta, valitse se ja napsauta OK.</p></body></html>"
 
 #: src/plugins/render/eclipses/EclipsesReminderDialog.ui:33
 msgctxt "EclipsesReminderDialog|"
@@ -13881,9 +13889,6 @@ msgid "Track: "
 msgstr "Kappale: "
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:90
-#, fuzzy
-#| msgid ""
-#| "Create a route or load a track from file to view its elevation profile."
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
