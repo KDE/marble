@@ -2711,7 +2711,7 @@ msgstr "Afficha&ge"
 #: src/apps/marble-qt/QtMainWindow.cpp:466
 msgctxt "Marble::MainWindow|"
 msgid "&Info Boxes"
-msgstr "Boîtes d'&information"
+msgstr "Boites d'&information"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:467
 msgctxt "Marble::MainWindow|"
@@ -6048,7 +6048,7 @@ msgstr "Fontaine"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:542
 msgctxt "GeoDataPlacemark|"
 msgid "Night Club"
-msgstr "Boîte de nuit"
+msgstr "Boite de nuit"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:544
 msgctxt "GeoDataPlacemark|"
@@ -6078,7 +6078,7 @@ msgstr "Police"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:554
 msgctxt "GeoDataPlacemark|"
 msgid "Post Box"
-msgstr "Boîte aux lettres"
+msgstr "Boite aux lettres"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:556
 msgctxt "GeoDataPlacemark|"
@@ -10938,7 +10938,7 @@ msgstr "Village"
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:536
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "&Info Boxes"
-msgstr "Boîtes d'&information"
+msgstr "Boites d'&information"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:885
 msgctxt "Marble::MarbleWidgetPopupMenu|"
@@ -14649,7 +14649,7 @@ msgstr "Afficher les notes de cartographie « OpenStreetMap »"
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:14
 msgctxt "OpenCachingCacheDialog|"
 msgid "Dialog"
-msgstr "Boîte de dialogue"
+msgstr "Boite de dialogue"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:24
 msgctxt "OpenCachingCacheDialog|"
@@ -14744,7 +14744,7 @@ msgstr "Suivant"
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:14
 msgctxt "OpenCachingConfigWidget|"
 msgid "Dialog"
-msgstr "Boîte de dialogue"
+msgstr "Boite de dialogue"
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:20
 msgctxt "OpenCachingConfigWidget|"

@@ -1224,7 +1224,7 @@ msgstr "Afficha&ge"
 #: marble_part.rc:36
 #, kde-format
 msgid "&Info Boxes"
-msgstr "Boîtes à &info"
+msgstr "Boites à &info"
 
 #. i18n: ectx: Menu (onlineservices)
 #: marble_part.rc:42
