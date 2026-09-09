@@ -12367,7 +12367,7 @@ msgstr "&Nouvelle date et heure :"
 #: src/lib/marble/TimeControlWidget.ui:36
 msgctxt "TimeControlWidget|"
 msgid "Refresh &interval:"
-msgstr "&Intervalle de rafraîchissement :"
+msgstr "&Intervalle de rafraichissement :"
 
 #: src/lib/marble/TimeControlWidget.ui:46
 msgctxt "TimeControlWidget|"
@@ -12533,7 +12533,7 @@ msgstr "Modifier l'élément %1"
 #: src/lib/marble/TourItemDelegate.cpp:185
 msgctxt "Marble::TourItemDelegate|"
 msgid "Update items"
-msgstr "Rafraîchir les données"
+msgstr "Rafraichir les données"
 
 #: src/lib/marble/TourItemDelegate.cpp:403
 msgctxt "QObject|"
@@ -17595,7 +17595,7 @@ msgstr "Taille"
 #: src/plugins/runner/monav/MonavMapsModel.cpp:49
 msgctxt "Marble::MonavMapsModel|"
 msgid "Update"
-msgstr "Rafraîchir"
+msgstr "Rafraichir"
 
 #: src/plugins/runner/monav/MonavMapsModel.cpp:51
 msgctxt "Marble::MonavMapsModel|"
