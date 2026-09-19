@@ -81,7 +81,7 @@ PopupItem::PopupItem(QObject *parent)
 
 PopupItem::~PopupItem()
 {
-    delete m_widget;
+    m_widget->deleteLater();
 }
 
 bool PopupItem::isPrintButtonVisible() const
