@@ -159,7 +159,15 @@ void MarbleLegendBrowser::loadLegend()
 
     if (d->m_marbleModel) {
         page->toHtml([=](QString document) {
-            d->m_marbleModel->setLegend(new QTextDocument(document));
+            // The callback will *always* be called even if that is during the page's
+            // destructor. Since the page is a child of this, the page will be
+            // destroyed when this has already decayed into a base QObject. Therefore
+            // the d pointer will have already been deleted and it is not safe to
+            // dereference it. The page will pass a null string to the callback in this
+            // situation.
+            if (!document.isNull()) {
+                d->m_marbleModel->setLegend(new QTextDocument(document));
+            }
         });
     }
 #endif
