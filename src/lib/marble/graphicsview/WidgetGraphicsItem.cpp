@@ -115,7 +115,10 @@ bool WidgetGraphicsItem::eventFilter(QObject *object, QEvent *e)
             }
 
             if (child && d->m_activeWidget != child) {
-                QEvent enterEvent(QEvent::Enter);
+                const QPointF localPos = child->mapFrom(d->m_widget, shiftedPos);
+                const QPointF globalPos = child->mapToGlobal(localPos.toPoint());
+
+                QEnterEvent enterEvent{localPos, localPos, globalPos};
                 QApplication::sendEvent(child, &enterEvent);
             }
             d->m_activeWidget = child;
