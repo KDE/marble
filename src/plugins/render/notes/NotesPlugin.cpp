@@ -66,7 +66,7 @@ QString NotesPlugin::description() const
 
 QIcon NotesPlugin::icon() const
 {
-    return QIcon(MarbleDirs::path(QStringLiteral("bitmaps/notes_open.png")));
+    return QIcon(MarbleDirs::dataFilePath(QStringLiteral("bitmaps/notes_open.png")));
 }
 
 #include "moc_NotesPlugin.cpp"

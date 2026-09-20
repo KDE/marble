@@ -985,16 +985,16 @@ void MarbleMapPrivate::updateMapTheme()
                 QList<const GeoScenePalette *> palette = filter->palette();
                 for (const GeoScenePalette *curPalette : std::as_const(palette)) {
                     if (curPalette->type() == QLatin1StringView("sea")) {
-                        seafile = MarbleDirs::path(curPalette->file());
+                        seafile = MarbleDirs::dataFilePath(curPalette->file());
                     } else if (curPalette->type() == QLatin1StringView("land")) {
-                        landfile = MarbleDirs::path(curPalette->file());
+                        landfile = MarbleDirs::dataFilePath(curPalette->file());
                     }
                 }
                 // look up locations if they are empty
                 if (seafile.isEmpty())
-                    seafile = MarbleDirs::path(QStringLiteral("seacolors.leg"));
+                    seafile = MarbleDirs::dataFilePath(QStringLiteral("seacolors.leg"));
                 if (landfile.isEmpty())
-                    landfile = MarbleDirs::path(QStringLiteral("landcolors.leg"));
+                    landfile = MarbleDirs::dataFilePath(QStringLiteral("landcolors.leg"));
             }
         }
 

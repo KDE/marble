@@ -102,7 +102,7 @@ void PluginAboutDialog::setLicense(PluginAboutDialog::LicenseKey license)
         filename = QStringLiteral("lgpl2.txt");
     }
 
-    const QString path = MarbleDirs::path(QLatin1StringView("licenses/") + filename);
+    const QString path = MarbleDirs::dataFilePath(QLatin1StringView("licenses/") + filename);
     QTextBrowser *browser = d->u_dialog.m_pMarbleLicenseBrowser;
     browser->setText(QString());
     if (!path.isEmpty()) {

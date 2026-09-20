@@ -31,7 +31,7 @@ using namespace Marble;
 WikipediaModel::WikipediaModel(const MarbleModel *marbleModel, QObject *parent)
     : AbstractDataPluginModel(QStringLiteral("wikipedia"), marbleModel, parent)
     , m_marbleWidget(nullptr)
-    , m_wikipediaIcon(MarbleDirs::path(QStringLiteral("svg/wikipedia_shadow.svg")))
+    , m_wikipediaIcon(MarbleDirs::dataFilePath(QStringLiteral("svg/wikipedia_shadow.svg")))
     , m_showThumbnail(true)
 {
     m_languageCode = MarbleLocale::languageCode();

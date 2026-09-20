@@ -157,7 +157,7 @@ TileCreator::TileCreator(const QString &sourceDir, const QString &installMap, co
         sourcePath = sourceDir + QLatin1Char('/') + installMap;
         mDebug() << "Trying absolute path*:" << sourcePath;
     } else {
-        sourcePath = MarbleDirs::path(QLatin1StringView("maps/") + sourceDir + QLatin1Char('/') + installMap);
+        sourcePath = MarbleDirs::dataFilePath(QLatin1StringView("maps/") + sourceDir + QLatin1Char('/') + installMap);
         mDebug() << "Trying relative path*:" << QLatin1StringView("maps/") + sourceDir + QLatin1Char('/') + installMap;
     }
 

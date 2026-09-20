@@ -97,35 +97,35 @@ public:
     {
         if (s_iconPath.isEmpty()) {
             // Clouds
-            s_iconPath.insert(WeatherData::ConditionNotAvailable, MarbleDirs::path(QStringLiteral("weather/weather-none-available.png")));
-            s_iconPath.insert(WeatherData::ClearDay, MarbleDirs::path(QStringLiteral("weather/weather-clear.png")));
-            s_iconPath.insert(WeatherData::ClearNight, MarbleDirs::path(QStringLiteral("weather/weather-clear-night.png")));
-            s_iconPath.insert(WeatherData::FewCloudsDay, MarbleDirs::path(QStringLiteral("weather/weather-few-clouds.png")));
-            s_iconPath.insert(WeatherData::FewCloudsNight, MarbleDirs::path(QStringLiteral("weather/weather-few-clouds-night.png")));
-            s_iconPath.insert(WeatherData::PartlyCloudyDay, MarbleDirs::path(QStringLiteral("weather/weather-clouds.png")));
-            s_iconPath.insert(WeatherData::PartlyCloudyNight, MarbleDirs::path(QStringLiteral("weather/weather-clouds-night.png")));
-            s_iconPath.insert(WeatherData::Overcast, MarbleDirs::path(QStringLiteral("weather/weather-many-clouds.png")));
+            s_iconPath.insert(WeatherData::ConditionNotAvailable, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-none-available.png")));
+            s_iconPath.insert(WeatherData::ClearDay, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-clear.png")));
+            s_iconPath.insert(WeatherData::ClearNight, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-clear-night.png")));
+            s_iconPath.insert(WeatherData::FewCloudsDay, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-few-clouds.png")));
+            s_iconPath.insert(WeatherData::FewCloudsNight, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-few-clouds-night.png")));
+            s_iconPath.insert(WeatherData::PartlyCloudyDay, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-clouds.png")));
+            s_iconPath.insert(WeatherData::PartlyCloudyNight, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-clouds-night.png")));
+            s_iconPath.insert(WeatherData::Overcast, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-many-clouds.png")));
 
             // Rain
-            s_iconPath.insert(WeatherData::LightShowersDay, MarbleDirs::path(QStringLiteral("weather/weather-showers-scattered-day.png")));
-            s_iconPath.insert(WeatherData::LightShowersNight, MarbleDirs::path(QStringLiteral("weather/weather-showers-scattered-night.png")));
-            s_iconPath.insert(WeatherData::ShowersDay, MarbleDirs::path(QStringLiteral("weather/weather-showers-day.png")));
-            s_iconPath.insert(WeatherData::ShowersNight, MarbleDirs::path(QStringLiteral("weather/weather-showers-night.png")));
-            s_iconPath.insert(WeatherData::LightRain, MarbleDirs::path(QStringLiteral("weather/weather-showers-scattered.png")));
-            s_iconPath.insert(WeatherData::Rain, MarbleDirs::path(QStringLiteral("weather/weather-showers.png")));
+            s_iconPath.insert(WeatherData::LightShowersDay, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-showers-scattered-day.png")));
+            s_iconPath.insert(WeatherData::LightShowersNight, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-showers-scattered-night.png")));
+            s_iconPath.insert(WeatherData::ShowersDay, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-showers-day.png")));
+            s_iconPath.insert(WeatherData::ShowersNight, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-showers-night.png")));
+            s_iconPath.insert(WeatherData::LightRain, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-showers-scattered.png")));
+            s_iconPath.insert(WeatherData::Rain, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-showers.png")));
 
             // Special
-            s_iconPath.insert(WeatherData::ChanceThunderstormDay, MarbleDirs::path(QStringLiteral("weather/weather-storm-day.png")));
-            s_iconPath.insert(WeatherData::ChanceThunderstormNight, MarbleDirs::path(QStringLiteral("weather/weather-storm-night.png")));
-            s_iconPath.insert(WeatherData::Thunderstorm, MarbleDirs::path(QStringLiteral("weather/weather-storm.png")));
-            s_iconPath.insert(WeatherData::Hail, MarbleDirs::path(QStringLiteral("weather/weather-hail.png")));
-            s_iconPath.insert(WeatherData::ChanceSnowDay, MarbleDirs::path(QStringLiteral("weather/weather-snow-scattered-day.png")));
-            s_iconPath.insert(WeatherData::ChanceSnowNight, MarbleDirs::path(QStringLiteral("weather/weather-snow-scattered-night.png")));
-            s_iconPath.insert(WeatherData::LightSnow, MarbleDirs::path(QStringLiteral("weather/weather-snow-scattered.png")));
-            s_iconPath.insert(WeatherData::Snow, MarbleDirs::path(QStringLiteral("weather/weather-snow.png")));
-            s_iconPath.insert(WeatherData::RainSnow, MarbleDirs::path(QStringLiteral("weather/weather-snow-rain.png")));
-            s_iconPath.insert(WeatherData::Mist, MarbleDirs::path(QStringLiteral("weather/weather-mist.png")));
-            s_iconPath.insert(WeatherData::SandStorm, MarbleDirs::path(QStringLiteral("weather/weather-none-available.png")));
+            s_iconPath.insert(WeatherData::ChanceThunderstormDay, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-storm-day.png")));
+            s_iconPath.insert(WeatherData::ChanceThunderstormNight, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-storm-night.png")));
+            s_iconPath.insert(WeatherData::Thunderstorm, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-storm.png")));
+            s_iconPath.insert(WeatherData::Hail, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-hail.png")));
+            s_iconPath.insert(WeatherData::ChanceSnowDay, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-snow-scattered-day.png")));
+            s_iconPath.insert(WeatherData::ChanceSnowNight, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-snow-scattered-night.png")));
+            s_iconPath.insert(WeatherData::LightSnow, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-snow-scattered.png")));
+            s_iconPath.insert(WeatherData::Snow, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-snow.png")));
+            s_iconPath.insert(WeatherData::RainSnow, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-snow-rain.png")));
+            s_iconPath.insert(WeatherData::Mist, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-mist.png")));
+            s_iconPath.insert(WeatherData::SandStorm, MarbleDirs::dataFilePath(QStringLiteral("weather/weather-none-available.png")));
         }
     }
 
@@ -358,7 +358,7 @@ QImage WeatherData::icon() const
 
 QString WeatherData::iconSource() const
 {
-    QString const invalid = MarbleDirs::path(QStringLiteral("weather/weather-none-available.png"));
+    QString const invalid = MarbleDirs::dataFilePath(QStringLiteral("weather/weather-none-available.png"));
     QString const icon = WeatherDataPrivate::s_iconPath.value(condition());
     return icon == invalid ? QString() : icon;
 }

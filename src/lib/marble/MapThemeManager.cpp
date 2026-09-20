@@ -197,7 +197,7 @@ bool MapThemeManager::Private::deleteDirectory(const QString &directory)
 GeoSceneDocument *MapThemeManager::Private::loadMapThemeFile(const QString &mapThemeStringID)
 {
     const QString mapThemePath = mapDirName + QLatin1Char('/') + mapThemeStringID;
-    const QString dgmlPath = MarbleDirs::path(mapThemePath);
+    const QString dgmlPath = MarbleDirs::dataFilePath(mapThemePath);
 
     // Check whether file exists
     QFile file(dgmlPath);
@@ -332,11 +332,11 @@ QList<QStandardItem *> MapThemeManager::Private::createMapThemeRow(QString const
 
     QString relativePath = mapDirName + QLatin1Char('/') + mapTheme->head()->target() + QLatin1Char('/') + mapTheme->head()->theme() + QLatin1Char('/')
         + mapTheme->head()->icon()->pixmap();
-    themeIconPixmap.load(MarbleDirs::path(relativePath));
+    themeIconPixmap.load(MarbleDirs::dataFilePath(relativePath));
 
     if (themeIconPixmap.isNull()) {
         relativePath = QStringLiteral("svg/application-x-marble-gray.png");
-        themeIconPixmap.load(MarbleDirs::path(relativePath));
+        themeIconPixmap.load(MarbleDirs::dataFilePath(relativePath));
     } else {
         // Make sure we don't keep excessively large previews in memory
         // TODO: Scale the icon down to the default icon size in MarbleSelectView.

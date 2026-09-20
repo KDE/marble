@@ -178,7 +178,7 @@ const QSize GeoSceneTileDataset::tileSize() const
         const TileId id(0, 0, 0, 0);
         QString const fileName = relativeTileFileName(id);
         QFileInfo const dirInfo(fileName);
-        QString const path = dirInfo.isAbsolute() ? fileName : MarbleDirs::path(fileName);
+        QString const path = dirInfo.isAbsolute() ? fileName : MarbleDirs::dataFilePath(fileName);
 
         QImage testTile(path);
 

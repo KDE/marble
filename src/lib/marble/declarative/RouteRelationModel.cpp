@@ -178,9 +178,9 @@ QHash<int, QByteArray> RouteRelationModel::roleNames() const
 QString RouteRelationModel::svgFile(const QString &path)
 {
 #ifdef Q_OS_ANDROID
-    return MarbleDirs::path(QStringLiteral("svg/%1").arg(path));
+    return MarbleDirs::dataFilePath(QStringLiteral("svg/%1").arg(path));
 #else
-    return QStringLiteral("file:///") + MarbleDirs::path(QStringLiteral("svg/%1").arg(path));
+    return QStringLiteral("file:///") + MarbleDirs::dataFilePath(QStringLiteral("svg/%1").arg(path));
 #endif
 }
 

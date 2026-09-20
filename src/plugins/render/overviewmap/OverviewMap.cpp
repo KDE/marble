@@ -291,12 +291,12 @@ void OverviewMap::setSettings(const QHash<QString, QVariant> &settings)
     m_settings.insert(QStringLiteral("height"), settings.value(QStringLiteral("height"), m_defaultSize.toSize().height()));
 
     for (const QString &planet : PlanetFactory::planetList()) {
-        QString mapFile = MarbleDirs::path(QLatin1StringView("svg/") + planet + QLatin1StringView("map.svg"));
+        QString mapFile = MarbleDirs::dataFilePath(QLatin1StringView("svg/") + planet + QLatin1StringView("map.svg"));
 
         if (planet == QLatin1StringView("moon")) {
-            mapFile = MarbleDirs::path(QStringLiteral("svg/lunarmap.svg"));
+            mapFile = MarbleDirs::dataFilePath(QStringLiteral("svg/lunarmap.svg"));
         } else if (planet == QLatin1StringView("earth") || mapFile.isEmpty()) {
-            mapFile = MarbleDirs::path(QStringLiteral("svg/worldmap.svg"));
+            mapFile = MarbleDirs::dataFilePath(QStringLiteral("svg/worldmap.svg"));
         }
 
         const QString id = QLatin1StringView("path_") + planet;
@@ -436,11 +436,11 @@ void OverviewMap::loadPlanetMaps()
 
 void OverviewMap::loadMapSuggestions()
 {
-    QStringList paths = QDir(MarbleDirs::pluginPath(QString())).entryList(QStringList(QStringLiteral("*.svg")), QDir::Files | QDir::NoDotAndDotDot);
+    QStringList paths = QDir(MarbleDirs::pluginFilePath(QString())).entryList(QStringList(QStringLiteral("*.svg")), QDir::Files | QDir::NoDotAndDotDot);
     for (int i = 0; i < paths.size(); ++i) {
-        paths[i] = MarbleDirs::pluginPath(QString()) + QLatin1Char('/') + paths[i];
+        paths[i] = MarbleDirs::pluginFilePath(QString()) + QLatin1Char('/') + paths[i];
     }
-    paths << MarbleDirs::path(QStringLiteral("svg/worldmap.svg")) << MarbleDirs::path(QStringLiteral("svg/lunarmap.svg"));
+    paths << MarbleDirs::dataFilePath(QStringLiteral("svg/worldmap.svg")) << MarbleDirs::dataFilePath(QStringLiteral("svg/lunarmap.svg"));
     ui_configWidget->m_tableWidget->setRowCount(paths.size());
     for (int i = 0; i < paths.size(); ++i) {
         ui_configWidget->m_tableWidget->setCellWidget(i, 0, new QSvgWidget(paths[i]));

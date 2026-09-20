@@ -28,7 +28,7 @@ WikipediaPlugin::WikipediaPlugin()
 
 WikipediaPlugin::WikipediaPlugin(const MarbleModel *marbleModel)
     : AbstractDataPlugin(marbleModel)
-    , m_icon(MarbleDirs::path(QStringLiteral("svg/wikipedia_shadow.svg")))
+    , m_icon(MarbleDirs::dataFilePath(QStringLiteral("svg/wikipedia_shadow.svg")))
     , m_showThumbnails(true)
 {
     // Plugin is enabled by default

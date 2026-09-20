@@ -122,11 +122,11 @@ void MarbleLegendBrowser::loadLegend()
     if (d->m_marbleModel->mapTheme() != nullptr) {
         const GeoSceneDocument *currentMapTheme = d->m_marbleModel->mapTheme();
 
-        legendPath = MarbleDirs::path(QLatin1StringView("maps/") + currentMapTheme->head()->target() + QLatin1Char('/') + currentMapTheme->head()->theme()
-                                      + QLatin1StringView("/legend.html"));
+        legendPath = MarbleDirs::dataFilePath(QLatin1StringView("maps/") + currentMapTheme->head()->target() + QLatin1Char('/')
+                                              + currentMapTheme->head()->theme() + QLatin1StringView("/legend.html"));
     }
     if (legendPath.isEmpty()) {
-        legendPath = MarbleDirs::path(QStringLiteral("legend.html"));
+        legendPath = MarbleDirs::dataFilePath(QStringLiteral("legend.html"));
     }
 
     QString finalHtml = readHtml(QUrl::fromLocalFile(legendPath));
@@ -327,7 +327,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
             int pixmapWidth = 24;
             int pixmapHeight = 12;
             if (!item->icon()->pixmap().isEmpty()) {
-                QString path = MarbleDirs::path(item->icon()->pixmap());
+                QString path = MarbleDirs::dataFilePath(item->icon()->pixmap());
                 const QPixmap oncePixmap(path);
                 pixmapWidth = oncePixmap.width();
                 pixmapHeight = oncePixmap.height();

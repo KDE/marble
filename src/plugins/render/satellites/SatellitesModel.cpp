@@ -194,7 +194,7 @@ void SatellitesModel::parseCatalog(const QString &id, const QByteArray &data)
         if (category == QLatin1StringView("Moons")) {
             style->iconStyle().setIconPath(QStringLiteral(":/icons/moon.png"));
         } else {
-            style->iconStyle().setIconPath(MarbleDirs::path(QStringLiteral("bitmaps/satellite.png")));
+            style->iconStyle().setIconPath(MarbleDirs::dataFilePath(QStringLiteral("bitmaps/satellite.png")));
         }
 
         item->placemark()->setStyle(style);
@@ -245,7 +245,7 @@ void SatellitesModel::parseTLE(const QString &id, const QByteArray &data)
         style->lineStyle().setPenStyle(Qt::SolidLine);
         style->lineStyle().setColor(nextColor());
         style->labelStyle().setGlow(true);
-        style->iconStyle().setIconPath(MarbleDirs::path(QStringLiteral("bitmaps/satellite.png")));
+        style->iconStyle().setIconPath(MarbleDirs::dataFilePath(QStringLiteral("bitmaps/satellite.png")));
         item->placemark()->setStyle(style);
         addItem(item);
     }

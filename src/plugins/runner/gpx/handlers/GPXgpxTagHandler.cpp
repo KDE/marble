@@ -64,7 +64,7 @@ GeoNode *GPXgpxTagHandler::parse(GeoParser &parser) const
     GeoDataStyle::Ptr waypointStyle(new GeoDataStyle);
     waypointStyle->setId(QStringLiteral("waypoint"));
     GeoDataIconStyle iconStyle;
-    iconStyle.setIconPath(MarbleDirs::path(QStringLiteral("bitmaps/flag.png")));
+    iconStyle.setIconPath(MarbleDirs::dataFilePath(QStringLiteral("bitmaps/flag.png")));
     iconStyle.setHotSpot(QPointF(0.12, 0.03), GeoDataHotSpot::Fraction, GeoDataHotSpot::Fraction);
     waypointStyle->setIconStyle(iconStyle);
 

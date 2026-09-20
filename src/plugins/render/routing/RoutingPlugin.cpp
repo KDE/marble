@@ -277,7 +277,7 @@ void RoutingPluginPrivate::updateDestinationInformation()
 
         updateButtonVisibility();
 
-        QString pixmap = MarbleDirs::path(QStringLiteral("bitmaps/routing_step.png"));
+        QString pixmap = MarbleDirs::dataFilePath(QStringLiteral("bitmaps/routing_step.png"));
         pixmapHtml = QStringLiteral("<img src=\"%1\" />").arg(pixmap);
 
         qreal planetRadius = m_marbleWidget->model()->planet()->radius();
