@@ -113,7 +113,7 @@ QString VoiceNavigationModelPrivate::audioFile(const QString &name) const
 
     QString const audioTemplate = QStringLiteral("audio/%1.%2");
     for (const QString &format : formats) {
-        QString const result = MarbleDirs::path(audioTemplate.arg(name, format));
+        QString const result = MarbleDirs::dataFilePath(audioTemplate.arg(name, format));
         if (!result.isEmpty()) {
             return result;
         }
@@ -300,7 +300,7 @@ void VoiceNavigationModel::setSpeaker(const QString &speaker)
     if (speaker != d->m_speaker) {
         QFileInfo speakerDir = QFileInfo(speaker);
         if (!speakerDir.exists()) {
-            d->m_speaker = MarbleDirs::path(QLatin1StringView("/audio/speakers/") + speaker);
+            d->m_speaker = MarbleDirs::dataFilePath(QLatin1StringView("/audio/speakers/") + speaker);
         } else {
             d->m_speaker = speaker;
         }

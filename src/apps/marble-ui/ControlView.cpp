@@ -846,7 +846,7 @@ void ControlView::togglePanelVisibility()
 
 void ControlView::handleTourLinkClicked(const QString &path)
 {
-    const QString tourPath = MarbleDirs::path(path);
+    const QString tourPath = MarbleDirs::dataFilePath(path);
     if (!tourPath.isEmpty()) {
         openTour(tourPath);
     }

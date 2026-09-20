@@ -282,14 +282,14 @@ void MarbleRunnerManagerTest::testSyncParsing_data()
     QTest::addColumn<QString>("fileName");
     QTest::addColumn<int>("resultCount");
 
-    addRow() << MarbleDirs::path("mwdbii/DATELINE.PNT") << 1;
-    addRow() << MarbleDirs::path("mwdbii/PCOAST.PNT") << 1;
-    addRow() << MarbleDirs::path("mwdbii/PLAKEISLAND.PNT") << 1;
-    addRow() << MarbleDirs::path("mwdbii/PDIFFBORDER.PNT") << 1;
-    addRow() << MarbleDirs::path("mwdbii/PISLAND.PNT") << 1;
-    addRow() << MarbleDirs::path("mwdbii/PLAKE.PNT") << 1;
-    addRow() << MarbleDirs::path("mwdbii/PUSA48.DIFF.PNT") << 1;
-    addRow() << MarbleDirs::path("mwdbii/RIVER.PNT") << 1;
+    addRow() << MarbleDirs::dataFilePath("mwdbii/DATELINE.PNT") << 1;
+    addRow() << MarbleDirs::dataFilePath("mwdbii/PCOAST.PNT") << 1;
+    addRow() << MarbleDirs::dataFilePath("mwdbii/PLAKEISLAND.PNT") << 1;
+    addRow() << MarbleDirs::dataFilePath("mwdbii/PDIFFBORDER.PNT") << 1;
+    addRow() << MarbleDirs::dataFilePath("mwdbii/PISLAND.PNT") << 1;
+    addRow() << MarbleDirs::dataFilePath("mwdbii/PLAKE.PNT") << 1;
+    addRow() << MarbleDirs::dataFilePath("mwdbii/PUSA48.DIFF.PNT") << 1;
+    addRow() << MarbleDirs::dataFilePath("mwdbii/RIVER.PNT") << 1;
 
     addNamedRow("cache") << QString(MARBLE_SRC_DIR).append("/data/placemarks/otherplacemarks.cache") << 1;
     addNamedRow("gpx") << QString(MARBLE_SRC_DIR).append("/examples/gpx/mjolby.gpx") << 1;
@@ -301,7 +301,7 @@ void MarbleRunnerManagerTest::testSyncParsing_data()
     addNamedRow("pnt") << QString(MARBLE_SRC_DIR).append("/data/mwdbii/PGLACIER.PNT") << 1;
     // shp
 
-    addNamedRow("svg") << MarbleDirs::path("flags/flag_tv.svg") << 0;
+    addNamedRow("svg") << MarbleDirs::dataFilePath("flags/flag_tv.svg") << 0;
 }
 
 void MarbleRunnerManagerTest::testSyncParsing()
@@ -326,19 +326,19 @@ void MarbleRunnerManagerTest::testAsyncParsing_data()
     QTest::addColumn<QString>("fileName");
     QTest::addColumn<int>("resultCount");
 
-    addRow() << MarbleDirs::path("placemarks/otherplacemarks.cache") << 1;
+    addRow() << MarbleDirs::dataFilePath("placemarks/otherplacemarks.cache") << 1;
 
-    addRow() << MarbleDirs::path("mwdbii/DATELINE.PNT") << 1;
-    addRow() << MarbleDirs::path("mwdbii/PCOAST.PNT") << 1;
-    addRow() << MarbleDirs::path("mwdbii/PGLACIER.PNT") << 1;
-    addRow() << MarbleDirs::path("mwdbii/PLAKEISLAND.PNT") << 1;
-    addRow() << MarbleDirs::path("mwdbii/PDIFFBORDER.PNT") << 1;
-    addRow() << MarbleDirs::path("mwdbii/PISLAND.PNT") << 1;
-    addRow() << MarbleDirs::path("mwdbii/PLAKE.PNT") << 1;
-    addRow() << MarbleDirs::path("mwdbii/PUSA48.DIFF.PNT") << 1;
-    addRow() << MarbleDirs::path("mwdbii/RIVER.PNT") << 1;
+    addRow() << MarbleDirs::dataFilePath("mwdbii/DATELINE.PNT") << 1;
+    addRow() << MarbleDirs::dataFilePath("mwdbii/PCOAST.PNT") << 1;
+    addRow() << MarbleDirs::dataFilePath("mwdbii/PGLACIER.PNT") << 1;
+    addRow() << MarbleDirs::dataFilePath("mwdbii/PLAKEISLAND.PNT") << 1;
+    addRow() << MarbleDirs::dataFilePath("mwdbii/PDIFFBORDER.PNT") << 1;
+    addRow() << MarbleDirs::dataFilePath("mwdbii/PISLAND.PNT") << 1;
+    addRow() << MarbleDirs::dataFilePath("mwdbii/PLAKE.PNT") << 1;
+    addRow() << MarbleDirs::dataFilePath("mwdbii/PUSA48.DIFF.PNT") << 1;
+    addRow() << MarbleDirs::dataFilePath("mwdbii/RIVER.PNT") << 1;
 
-    addRow() << MarbleDirs::path("flags/flag_tv.svg") << 0;
+    addRow() << MarbleDirs::dataFilePath("flags/flag_tv.svg") << 0;
 }
 
 void MarbleRunnerManagerTest::testAsyncParsing()

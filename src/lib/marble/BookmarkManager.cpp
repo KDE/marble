@@ -81,7 +81,7 @@ BookmarkManager::~BookmarkManager()
 
 QString BookmarkManager::bookmarkFile() const
 {
-    return MarbleDirs::path(d->m_bookmarkFileRelativePath);
+    return MarbleDirs::dataFilePath(d->m_bookmarkFileRelativePath);
 }
 
 bool BookmarkManager::loadFile(const QString &relativeFilePath)

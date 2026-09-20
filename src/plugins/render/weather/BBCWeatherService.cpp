@@ -50,7 +50,7 @@ void BBCWeatherService::getAdditionalItems(const GeoDataLatLonAltBox &box, qint3
         m_parsingStarted = true;
 
         m_parser = new StationListParser(this);
-        m_parser->setPath(MarbleDirs::path(QStringLiteral("weather/bbc-stations.xml")));
+        m_parser->setPath(MarbleDirs::dataFilePath(QStringLiteral("weather/bbc-stations.xml")));
         connect(m_parser, SIGNAL(finished()), this, SLOT(fetchStationList()));
         if (m_parser->wait(100)) {
             m_parser->start(QThread::IdlePriority);

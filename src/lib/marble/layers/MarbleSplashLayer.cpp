@@ -32,7 +32,7 @@ bool MarbleSplashLayer::render(GeoPainter *painter, ViewportParams *viewport, co
 
     painter->save();
 
-    QPixmap logoPixmap(MarbleDirs::path(QStringLiteral("svg/marble-logo-inverted-72dpi.png")));
+    QPixmap logoPixmap(MarbleDirs::dataFilePath(QStringLiteral("svg/marble-logo-inverted-72dpi.png")));
 
     if (logoPixmap.width() > viewport->width() * 0.7 || logoPixmap.height() > viewport->height() * 0.7) {
         logoPixmap = logoPixmap.scaled(QSize(viewport->width(), viewport->height()) * 0.7, Qt::KeepAspectRatio, Qt::SmoothTransformation);

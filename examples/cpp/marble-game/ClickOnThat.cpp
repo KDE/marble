@@ -172,7 +172,7 @@ void ClickOnThat::initiateGame()
         GeoDataStyle::Ptr pinStyle(new GeoDataStyle);
         pinStyle->setId(QStringLiteral("answer"));
         GeoDataIconStyle iconStyle;
-        iconStyle.setIconPath(MarbleDirs::path(QStringLiteral("bitmaps/target.png")));
+        iconStyle.setIconPath(MarbleDirs::dataFilePath(QStringLiteral("bitmaps/target.png")));
         pinStyle->setIconStyle(iconStyle);
 
         GeoDataStyleMap styleMap;
@@ -240,7 +240,7 @@ void ClickOnThat::updateSelectPin(bool result, const GeoDataCoordinates &clicked
     QDir dir;
     QString iconPath = dir.absolutePath();
     if (result) {
-        // iconPath = MarbleDirs::path("bitmaps/MapTackRoundHeadGreen.png");
+        // iconPath = MarbleDirs::dataFilePath("bitmaps/MapTackRoundHeadGreen.png");
         iconPath += QLatin1StringView("/MapTackRoundHeadGreen.png");
     } else {
         iconPath += QLatin1StringView("/MapTackRoundHeadRed.png");

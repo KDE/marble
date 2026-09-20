@@ -35,7 +35,7 @@ QString MarbleDeclarativeObject::version() const
 
 QString MarbleDeclarativeObject::resolvePath(const QString &path) const
 {
-    return Marble::MarbleDirs::path(path);
+    return Marble::MarbleDirs::dataFilePath(path);
 }
 
 bool MarbleDeclarativeObject::canExecute(const QString &program) const

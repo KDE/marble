@@ -49,7 +49,7 @@ void AprsObject::setLocation(const GeoAprsCoordinates &location)
 
 void AprsObject::setPixmapId(QString &pixmap)
 {
-    QString pixmapFilename = MarbleDirs::path(pixmap);
+    QString pixmapFilename = MarbleDirs::dataFilePath(pixmap);
     if (QFile(pixmapFilename).exists()) {
         m_havePixmap = true;
         m_pixmapFilename = pixmapFilename;

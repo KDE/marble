@@ -417,7 +417,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogCity(PopupLayer *popup, const Ge
         doc[QStringLiteral("timezone")] = QLatin1Char('+') + dst;
     }
 
-    const QString flagPath = MarbleDirs::path(QLatin1StringView("flags/flag_") + placemark->countryCode().toLower() + QLatin1StringView(".svg"));
+    const QString flagPath = MarbleDirs::dataFilePath(QLatin1StringView("flags/flag_") + placemark->countryCode().toLower() + QLatin1StringView(".svg"));
     doc[QStringLiteral("flag")] = flagPath;
 
     popup->setContent(doc.finalText());
@@ -444,7 +444,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogNation(PopupLayer *popup, const 
     doc[QStringLiteral("population")] = QString::number(index->population());
     doc[QStringLiteral("area")] = QString::number(index->area(), 'f', 2);
 
-    const QString flagPath = MarbleDirs::path(QStringLiteral("flags/flag_%1.svg").arg(index->countryCode().toLower()));
+    const QString flagPath = MarbleDirs::dataFilePath(QStringLiteral("flags/flag_%1.svg").arg(index->countryCode().toLower()));
     doc[QStringLiteral("flag")] = flagPath;
 
     popup->setContent(doc.finalText());

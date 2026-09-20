@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 
     QString lang = QLocale::system().name().section(QLatin1Char('_'), 0, 0);
     QTranslator translator;
-    translator.load(QLatin1StringView("marble-") + lang, MarbleDirs::path(QStringLiteral("lang")));
+    translator.load(QLatin1StringView("marble-") + lang, MarbleDirs::dataFilePath(QStringLiteral("lang")));
     app.installTranslator(&translator);
 
     // For non static builds on mac and win

@@ -208,7 +208,7 @@ GeoDataStyle::Ptr StyleBuilder::Private::createPOIStyle(const QFont &font,
 GeoDataStyle::Ptr
 StyleBuilder::Private::createOsmPOIStyle(const QFont &font, const QString &imagePath, const QColor &textColor, const QColor &color, const QColor &outlineColor)
 {
-    QString const path = MarbleDirs::path(QLatin1StringView("svg/osmcarto/svg/") + imagePath + QLatin1StringView(".svg"));
+    QString const path = MarbleDirs::dataFilePath(QLatin1StringView("svg/osmcarto/svg/") + imagePath + QLatin1StringView(".svg"));
     return createPOIStyle(font, path, textColor, color, outlineColor, false, false);
 }
 
@@ -218,7 +218,7 @@ GeoDataStyle::Ptr StyleBuilder::Private::createOsmPOIRingStyle(const QFont &font
                                                                const QColor &color,
                                                                const QColor &outlineColor)
 {
-    QString const path = MarbleDirs::path(QLatin1StringView("svg/osmcarto/svg/") + imagePath + QLatin1StringView(".svg"));
+    QString const path = MarbleDirs::dataFilePath(QLatin1StringView("svg/osmcarto/svg/") + imagePath + QLatin1StringView(".svg"));
     return createPOIStyle(font, path, textColor, color, outlineColor, false, true);
 }
 
@@ -228,7 +228,7 @@ GeoDataStyle::Ptr StyleBuilder::Private::createOsmPOIAreaStyle(const QFont &font
                                                                const QColor &color,
                                                                const QColor &outlineColor)
 {
-    QString const path = MarbleDirs::path(QLatin1StringView("svg/osmcarto/svg/") + imagePath + QLatin1StringView(".svg"));
+    QString const path = MarbleDirs::dataFilePath(QLatin1StringView("svg/osmcarto/svg/") + imagePath + QLatin1StringView(".svg"));
     return createPOIStyle(font, path, textColor, color, outlineColor, true, false);
 }
 
@@ -283,7 +283,7 @@ GeoDataStyle::Ptr StyleBuilder::Private::createWayStyle(const QColor &color,
 GeoDataStyle::Ptr
 StyleBuilder::Private::createIconWayStyle(const QColor &color, const QFont &font, const QColor &textColor, double lineWidth, const QString &iconPath)
 {
-    auto const path = iconPath.isEmpty() ? iconPath : MarbleDirs::path(iconPath);
+    auto const path = iconPath.isEmpty() ? iconPath : MarbleDirs::dataFilePath(iconPath);
     auto style = createPOIStyle(font, path, textColor, color, color, true, true);
     style->lineStyle().setWidth(float(lineWidth));
     return style;
@@ -459,13 +459,13 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StylePa
             if (tagIter != osmData.tagsEnd()) {
                 const QString &religion = tagIter.value();
                 if (religion == QLatin1StringView("jewish")) {
-                    polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_jewish.png"));
+                    polyStyle.setTexturePath(MarbleDirs::dataFilePath("bitmaps/osmcarto/patterns/grave_yard_jewish.png"));
                     adjustStyle = true;
                 } else if (religion == QLatin1StringView("christian")) {
-                    polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_christian.png"));
+                    polyStyle.setTexturePath(MarbleDirs::dataFilePath("bitmaps/osmcarto/patterns/grave_yard_christian.png"));
                     adjustStyle = true;
                 } else if (religion == QLatin1StringView("INT-generic")) {
-                    polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_generic.png"));
+                    polyStyle.setTexturePath(MarbleDirs::dataFilePath("bitmaps/osmcarto/patterns/grave_yard_generic.png"));
                     adjustStyle = true;
                 }
             }
@@ -775,58 +775,58 @@ void StyleBuilder::Private::initializeDefaultStyles()
 
     m_defaultStyle[GeoDataPlacemark::None] = GeoDataStyle::Ptr(new GeoDataStyle(QString(), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
 
-    m_defaultStyle[GeoDataPlacemark::Default] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/default_location.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::Default] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/default_location.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
 
     m_defaultStyle[GeoDataPlacemark::Unknown] = GeoDataStyle::Ptr(new GeoDataStyle(QString(), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
 
-    m_defaultStyle[GeoDataPlacemark::SmallCity] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/city_4_white.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::SmallCity] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/city_4_white.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
 
-    m_defaultStyle[GeoDataPlacemark::SmallCountyCapital] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/city_4_yellow.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::SmallCountyCapital] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/city_4_yellow.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
 
-    m_defaultStyle[GeoDataPlacemark::SmallStateCapital] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/city_4_orange.png"), QFont(defaultFamily, defaultSize, 50, true), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::SmallStateCapital] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/city_4_orange.png"), QFont(defaultFamily, defaultSize, 50, true), defaultLabelColor));
 
-    m_defaultStyle[GeoDataPlacemark::SmallNationCapital] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/city_4_red.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::SmallNationCapital] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/city_4_red.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
 
-    m_defaultStyle[GeoDataPlacemark::MediumCity] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/city_3_white.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::MediumCity] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/city_3_white.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
 
-    m_defaultStyle[GeoDataPlacemark::MediumCountyCapital] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/city_3_yellow.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::MediumCountyCapital] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/city_3_yellow.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
 
-    m_defaultStyle[GeoDataPlacemark::MediumStateCapital] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/city_3_orange.png"), QFont(defaultFamily, defaultSize, 50, true), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::MediumStateCapital] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/city_3_orange.png"), QFont(defaultFamily, defaultSize, 50, true), defaultLabelColor));
 
-    m_defaultStyle[GeoDataPlacemark::MediumNationCapital] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/city_3_red.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::MediumNationCapital] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/city_3_red.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
 
-    m_defaultStyle[GeoDataPlacemark::BigCity] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/city_2_white.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::BigCity] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/city_2_white.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
 
-    m_defaultStyle[GeoDataPlacemark::BigCountyCapital] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/city_2_yellow.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::BigCountyCapital] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/city_2_yellow.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
 
-    m_defaultStyle[GeoDataPlacemark::BigStateCapital] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/city_2_orange.png"), QFont(defaultFamily, defaultSize, 50, true), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::BigStateCapital] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/city_2_orange.png"), QFont(defaultFamily, defaultSize, 50, true), defaultLabelColor));
 
-    m_defaultStyle[GeoDataPlacemark::BigNationCapital] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/city_2_red.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::BigNationCapital] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/city_2_red.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
 
-    m_defaultStyle[GeoDataPlacemark::LargeCity] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/city_1_white.png"), QFont(defaultFamily, defaultSize, 75, false), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::LargeCity] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/city_1_white.png"), QFont(defaultFamily, defaultSize, 75, false), defaultLabelColor));
 
-    m_defaultStyle[GeoDataPlacemark::LargeCountyCapital] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/city_1_yellow.png"), QFont(defaultFamily, defaultSize, 75, false), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::LargeCountyCapital] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/city_1_yellow.png"), QFont(defaultFamily, defaultSize, 75, false), defaultLabelColor));
 
-    m_defaultStyle[GeoDataPlacemark::LargeStateCapital] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/city_1_orange.png"), QFont(defaultFamily, defaultSize, 75, true), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::LargeStateCapital] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/city_1_orange.png"), QFont(defaultFamily, defaultSize, 75, true), defaultLabelColor));
 
-    m_defaultStyle[GeoDataPlacemark::LargeNationCapital] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/city_1_red.png"), QFont(defaultFamily, defaultSize, 75, false), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::LargeNationCapital] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/city_1_red.png"), QFont(defaultFamily, defaultSize, 75, false), defaultLabelColor));
 
     m_defaultStyle[GeoDataPlacemark::Nation] =
         GeoDataStyle::Ptr(new GeoDataStyle(QString(), QFont(defaultFamily, int(defaultSize * 1.5), 75, false), QColor(0x404040)));
@@ -862,16 +862,16 @@ void StyleBuilder::Private::initializeDefaultStyles()
     }
 
     m_defaultStyle[GeoDataPlacemark::Mountain] = GeoDataStyle::Ptr(
-        new GeoDataStyle(MarbleDirs::path("bitmaps/mountain_1.png"), QFont(defaultFamily, int(defaultSize * 0.9), 50, false), defaultLabelColor));
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/mountain_1.png"), QFont(defaultFamily, int(defaultSize * 0.9), 50, false), defaultLabelColor));
 
     m_defaultStyle[GeoDataPlacemark::Volcano] = GeoDataStyle::Ptr(
-        new GeoDataStyle(MarbleDirs::path("bitmaps/volcano_1.png"), QFont(defaultFamily, int(defaultSize * 0.9), 50, false), defaultLabelColor));
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/volcano_1.png"), QFont(defaultFamily, int(defaultSize * 0.9), 50, false), defaultLabelColor));
 
     m_defaultStyle[GeoDataPlacemark::Mons] = GeoDataStyle::Ptr(
-        new GeoDataStyle(MarbleDirs::path("bitmaps/mountain_1.png"), QFont(defaultFamily, int(defaultSize * 0.9), 50, false), defaultLabelColor));
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/mountain_1.png"), QFont(defaultFamily, int(defaultSize * 0.9), 50, false), defaultLabelColor));
 
-    m_defaultStyle[GeoDataPlacemark::Valley] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/valley.png"), QFont(defaultFamily, int(defaultSize * 0.9), 50, false), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::Valley] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/valley.png"), QFont(defaultFamily, int(defaultSize * 0.9), 50, false), defaultLabelColor));
 
     m_defaultStyle[GeoDataPlacemark::Continent] =
         GeoDataStyle::Ptr(new GeoDataStyle(QString(), QFont(defaultFamily, int(defaultSize * 1.7), 50, false), QColor(0xbf0303)));
@@ -883,11 +883,11 @@ void StyleBuilder::Private::initializeDefaultStyles()
     // Align area labels centered
     m_defaultStyle[GeoDataPlacemark::Ocean]->labelStyle().setAlignment(GeoDataLabelStyle::Center);
 
-    m_defaultStyle[GeoDataPlacemark::OtherTerrain] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/other.png"), QFont(defaultFamily, int(defaultSize * 0.9), 50, false), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::OtherTerrain] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/other.png"), QFont(defaultFamily, int(defaultSize * 0.9), 50, false), defaultLabelColor));
 
-    m_defaultStyle[GeoDataPlacemark::Crater] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/crater.png"), QFont(defaultFamily, int(defaultSize * 0.9), 50, false), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::Crater] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/crater.png"), QFont(defaultFamily, int(defaultSize * 0.9), 50, false), defaultLabelColor));
 
     m_defaultStyle[GeoDataPlacemark::Mare] =
         GeoDataStyle::Ptr(new GeoDataStyle(QString(), QFont(defaultFamily, int(defaultSize * 1.7), 50, false), QColor(0xbf0303)));
@@ -895,40 +895,40 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::Mare]->labelStyle().setAlignment(GeoDataLabelStyle::Center);
 
     m_defaultStyle[GeoDataPlacemark::GeographicPole] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/pole_1.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
+        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/pole_1.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
 
     m_defaultStyle[GeoDataPlacemark::MagneticPole] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/pole_2.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
+        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/pole_2.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
 
     m_defaultStyle[GeoDataPlacemark::ShipWreck] = GeoDataStyle::Ptr(
-        new GeoDataStyle(MarbleDirs::path("bitmaps/shipwreck.png"), QFont(defaultFamily, int(defaultSize * 0.8), 50, false), defaultLabelColor));
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/shipwreck.png"), QFont(defaultFamily, int(defaultSize * 0.8), 50, false), defaultLabelColor));
 
     m_defaultStyle[GeoDataPlacemark::AirPort] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/airport.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
+        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/airport.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
 
-    m_defaultStyle[GeoDataPlacemark::Observatory] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/observatory.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::Observatory] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/observatory.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
 
     m_defaultStyle[GeoDataPlacemark::OsmSite] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/osm.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
+        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/osm.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
 
-    m_defaultStyle[GeoDataPlacemark::Coordinate] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/coordinate.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::Coordinate] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/coordinate.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
 
-    m_defaultStyle[GeoDataPlacemark::MannedLandingSite] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/manned_landing.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::MannedLandingSite] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/manned_landing.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
 
-    m_defaultStyle[GeoDataPlacemark::RoboticRover] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/robotic_rover.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
+    m_defaultStyle[GeoDataPlacemark::RoboticRover] = GeoDataStyle::Ptr(
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/robotic_rover.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
 
     m_defaultStyle[GeoDataPlacemark::UnmannedSoftLandingSite] = GeoDataStyle::Ptr(
-        new GeoDataStyle(MarbleDirs::path("bitmaps/unmanned_soft_landing.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/unmanned_soft_landing.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
 
     m_defaultStyle[GeoDataPlacemark::UnmannedHardLandingSite] = GeoDataStyle::Ptr(
-        new GeoDataStyle(MarbleDirs::path("bitmaps/unmanned_hard_landing.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
+        new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/unmanned_hard_landing.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
 
     m_defaultStyle[GeoDataPlacemark::Bookmark] =
-        createPOIStyle(QFont(defaultFamily, defaultSize, 50, false), MarbleDirs::path("svg/bookmark.svg"), m_defaultLabelColor);
+        createPOIStyle(QFont(defaultFamily, defaultSize, 50, false), MarbleDirs::dataFilePath("svg/bookmark.svg"), m_defaultLabelColor);
     m_defaultStyle[GeoDataPlacemark::Bookmark]->iconStyle().setScale(0.75);
 
     QColor const shopColor(0xac39ac);
@@ -1276,22 +1276,22 @@ void StyleBuilder::Private::initializeDefaultStyles()
                                                                 waterColor.darker(150));
 
     m_defaultStyle[GeoDataPlacemark::AmenityGraveyard] =
-        createWayStyle(0xAACBAF, 0xAACBAF, true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_generic.png"));
+        createWayStyle(0xAACBAF, 0xAACBAF, true, false, Qt::SolidPattern, MarbleDirs::dataFilePath("bitmaps/osmcarto/patterns/grave_yard_generic.png"));
 
     m_defaultStyle[GeoDataPlacemark::NaturalWood] =
-        createWayStyle(0x8DC46C, 0x8DC46C, true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/forest.png"));
+        createWayStyle(0x8DC46C, 0x8DC46C, true, false, Qt::SolidPattern, MarbleDirs::dataFilePath("bitmaps/osmcarto/patterns/forest.png"));
     m_defaultStyle[GeoDataPlacemark::NaturalBeach] =
-        createWayStyle(0xFFF1BA, 0xFFF1BA, true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/beach.png"));
+        createWayStyle(0xFFF1BA, 0xFFF1BA, true, false, Qt::SolidPattern, MarbleDirs::dataFilePath("bitmaps/osmcarto/patterns/beach.png"));
     m_defaultStyle[GeoDataPlacemark::NaturalWetland] =
-        createWayStyle(0xDDECEC, 0xDDECEC, true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/wetland.png"));
+        createWayStyle(0xDDECEC, 0xDDECEC, true, false, Qt::SolidPattern, MarbleDirs::dataFilePath("bitmaps/osmcarto/patterns/wetland.png"));
     m_defaultStyle[GeoDataPlacemark::NaturalGlacier] =
-        createWayStyle(0xDDECEC, 0xDDECEC, true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/glacier.png"));
+        createWayStyle(0xDDECEC, 0xDDECEC, true, false, Qt::SolidPattern, MarbleDirs::dataFilePath("bitmaps/osmcarto/patterns/glacier.png"));
     m_defaultStyle[GeoDataPlacemark::NaturalIceShelf] =
-        createWayStyle(0x8ebebe, 0x8ebebe, true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/glacier.png"));
+        createWayStyle(0x8ebebe, 0x8ebebe, true, false, Qt::SolidPattern, MarbleDirs::dataFilePath("bitmaps/osmcarto/patterns/glacier.png"));
     m_defaultStyle[GeoDataPlacemark::NaturalScrub] =
-        createWayStyle(0xB5E3B5, 0xB5E3B5, true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/scrub.png"));
+        createWayStyle(0xB5E3B5, 0xB5E3B5, true, false, Qt::SolidPattern, MarbleDirs::dataFilePath("bitmaps/osmcarto/patterns/scrub.png"));
     m_defaultStyle[GeoDataPlacemark::NaturalCliff] =
-        createWayStyle(Qt::transparent, Qt::transparent, true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/cliff2.png"));
+        createWayStyle(Qt::transparent, Qt::transparent, true, false, Qt::SolidPattern, MarbleDirs::dataFilePath("bitmaps/osmcarto/patterns/cliff2.png"));
     m_defaultStyle[GeoDataPlacemark::NaturalCave] = createOsmPOIStyle(osmFont, "amenities/cave", amenityColor);
     m_defaultStyle[GeoDataPlacemark::NaturalHeath] = createWayStyle(0xd6d99f, QColor(0xd6d99f).darker(150), true, false);
 
@@ -1308,10 +1308,10 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::LeisureSwimmingPool] = createWayStyle(waterColor, waterColor.darker(150), true, true);
 
     m_defaultStyle[GeoDataPlacemark::LanduseAllotments] =
-        createWayStyle(0xE4C6AA, 0xE4C6AA, true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/allotments.png"));
+        createWayStyle(0xE4C6AA, 0xE4C6AA, true, false, Qt::SolidPattern, MarbleDirs::dataFilePath("bitmaps/osmcarto/patterns/allotments.png"));
     m_defaultStyle[GeoDataPlacemark::LanduseBasin] = createWayStyle(QColor(0xB5, 0xD0, 0xD0, 0x80), QColor(0xB5, 0xD0, 0xD0));
     m_defaultStyle[GeoDataPlacemark::LanduseCemetery] =
-        createWayStyle(0xAACBAF, 0xAACBAF, true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_generic.png"));
+        createWayStyle(0xAACBAF, 0xAACBAF, true, false, Qt::SolidPattern, MarbleDirs::dataFilePath("bitmaps/osmcarto/patterns/grave_yard_generic.png"));
     m_defaultStyle[GeoDataPlacemark::LanduseCommercial] = createWayStyle(0xF2DAD9, 0xD1B2B0, true, true);
     m_defaultStyle[GeoDataPlacemark::LanduseConstruction] = createWayStyle(0xb6b592, 0xb6b592, true, false);
     m_defaultStyle[GeoDataPlacemark::LanduseFarmland] = createWayStyle(0xEDDDC9, 0xC8B69E, true, true);
@@ -1322,20 +1322,20 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::LanduseLandfill] = createWayStyle(0xb6b592, 0xb6b592, true, false);
     m_defaultStyle[GeoDataPlacemark::LanduseMeadow] = createWayStyle(0xcdebb0, 0xcdebb0, true, false);
     m_defaultStyle[GeoDataPlacemark::LanduseMilitary] =
-        createWayStyle(0xF3D8D2, 0xF3D8D2, true, true, Qt::BDiagPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/military_red_hatch.png"));
+        createWayStyle(0xF3D8D2, 0xF3D8D2, true, true, Qt::BDiagPattern, MarbleDirs::dataFilePath("bitmaps/osmcarto/patterns/military_red_hatch.png"));
     m_defaultStyle[GeoDataPlacemark::LanduseQuarry] =
-        createWayStyle(0xC4C2C2, 0xC4C2C2, true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/quarry.png"));
+        createWayStyle(0xC4C2C2, 0xC4C2C2, true, false, Qt::SolidPattern, MarbleDirs::dataFilePath("bitmaps/osmcarto/patterns/quarry.png"));
     m_defaultStyle[GeoDataPlacemark::LanduseRailway] = createWayStyle(0xDED0D5, 0xDED0D5, true, false);
     m_defaultStyle[GeoDataPlacemark::LanduseReservoir] = createWayStyle(waterColor, waterColor, true, false);
     m_defaultStyle[GeoDataPlacemark::LanduseResidential] = createWayStyle(0xDCDCDC, 0xDCDCDC, true, false);
     m_defaultStyle[GeoDataPlacemark::LanduseRetail] = createWayStyle(0xFFD6D1, 0xD99C95, true, true);
     m_defaultStyle[GeoDataPlacemark::LanduseOrchard] =
-        createWayStyle(0xAEDFA3, 0xAEDFA3, true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/orchard.png"));
+        createWayStyle(0xAEDFA3, 0xAEDFA3, true, false, Qt::SolidPattern, MarbleDirs::dataFilePath("bitmaps/osmcarto/patterns/orchard.png"));
     m_defaultStyle[GeoDataPlacemark::LanduseVineyard] =
-        createWayStyle(0xAEDFA3, 0xAEDFA3, true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/vineyard.png"));
+        createWayStyle(0xAEDFA3, 0xAEDFA3, true, false, Qt::SolidPattern, MarbleDirs::dataFilePath("bitmaps/osmcarto/patterns/vineyard.png"));
 
     m_defaultStyle[GeoDataPlacemark::MilitaryDangerArea] =
-        createWayStyle(0xFFC0CB, 0xFFC0CB, true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/danger.png"));
+        createWayStyle(0xFFC0CB, 0xFFC0CB, true, false, Qt::SolidPattern, MarbleDirs::dataFilePath("bitmaps/osmcarto/patterns/danger.png"));
 
     m_defaultStyle[GeoDataPlacemark::RailwayRail] = createStyle(2.0,
                                                                 1.435,
@@ -1538,7 +1538,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
                                                                 QList<qreal>(),
                                                                 osmFont,
                                                                 Qt::transparent,
-                                                                MarbleDirs::path("bitmaps/osmcarto/patterns/ice.png"));
+                                                                MarbleDirs::dataFilePath("bitmaps/osmcarto/patterns/ice.png"));
     m_defaultStyle[GeoDataPlacemark::PisteSkitour] = m_defaultStyle[GeoDataPlacemark::PisteNordic];
     m_defaultStyle[GeoDataPlacemark::PisteSled] = m_defaultStyle[GeoDataPlacemark::PisteNordic];
     m_defaultStyle[GeoDataPlacemark::PisteHike] = m_defaultStyle[GeoDataPlacemark::PisteNordic];
@@ -1586,7 +1586,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
         createStyle(2.0, 0.0, 0x88b3bf, 0x88b3bf, false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QList<qreal>(), osmFont);
 
     m_defaultStyle[GeoDataPlacemark::Satellite] =
-        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/satellite.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
+        GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::dataFilePath("bitmaps/satellite.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
 
     QFont tmp;
 

@@ -68,7 +68,7 @@ JsonParser::JsonParser()
 
     // Set "marker-color": "#7e7e7e" and "marker-size": "medium"
     m_iconStylePoints->setColor(QColor(0x7e, 0x7e, 0x7e, 0xff));
-    m_iconStylePoints->setIconPath(MarbleDirs::path(QStringLiteral("svg/dot-circle-regular.svg")));
+    m_iconStylePoints->setIconPath(MarbleDirs::dataFilePath(QStringLiteral("svg/dot-circle-regular.svg")));
     m_iconStylePoints->setSize(QSize(22, 22), Qt::KeepAspectRatio);
 
     m_iconStyleOther->setIconPath({});

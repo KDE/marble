@@ -33,7 +33,7 @@ PlacemarkTextAnnotation::PlacemarkTextAnnotation(GeoDataPlacemark *placemark)
 {
     if (placemark->style()->iconStyle().iconPath().isNull()) {
         GeoDataStyle::Ptr newStyle(new GeoDataStyle(*placemark->style()));
-        newStyle->iconStyle().setIconPath(MarbleDirs::path(QStringLiteral("bitmaps/redflag_22.png")));
+        newStyle->iconStyle().setIconPath(MarbleDirs::dataFilePath(QStringLiteral("bitmaps/redflag_22.png")));
         placemark->setStyle(newStyle);
     }
     setPaintLayers(QStringList() << QStringLiteral("PlacemarkTextAnnotation"));

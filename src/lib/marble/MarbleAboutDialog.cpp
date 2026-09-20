@@ -51,7 +51,7 @@ MarbleAboutDialog::MarbleAboutDialog(QWidget *parent)
         d->uiWidget.m_pMarbleVersionLabel->hide();
         d->uiWidget.m_pMarbleLogoLabel->hide();
     } else {
-        d->uiWidget.m_pMarbleLogoLabel->setPixmap(QPixmap(MarbleDirs::path(QStringLiteral("svg/marble-logo-72dpi.png"))));
+        d->uiWidget.m_pMarbleLogoLabel->setPixmap(QPixmap(MarbleDirs::dataFilePath(QStringLiteral("svg/marble-logo-72dpi.png"))));
     }
 
     QString const applicationTitle = QObject::tr("Marble Virtual Globe");
@@ -344,7 +344,7 @@ void MarbleAboutDialogPrivate::loadPageContents(int idx)
     if (idx == 3 && !licenseLoaded) {
         licenseLoaded = true;
         QTextBrowser *const browser = uiWidget.m_pMarbleLicenseBrowser;
-        const QString filename = MarbleDirs::path(QStringLiteral("LICENSE.txt"));
+        const QString filename = MarbleDirs::dataFilePath(QStringLiteral("LICENSE.txt"));
         if (!filename.isEmpty()) {
             QFile f(filename);
             if (f.open(QIODevice::ReadOnly)) {

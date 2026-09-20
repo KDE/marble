@@ -160,9 +160,9 @@ bool TestPlugin::render(GeoPainter *painter, ViewportParams *viewport, const QSt
 
     // Example: draw plain pixmaps
 
-    painter->drawPixmap(istanbul, QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/earth_apollo.jpg"))));
+    painter->drawPixmap(istanbul, QPixmap(MarbleDirs::dataFilePath(QStringLiteral("bitmaps/earth_apollo.jpg"))));
 
-    painter->drawImage(brasilia, QImage(MarbleDirs::path(QStringLiteral("bitmaps/earth_apollo.jpg")));
+    painter->drawImage(brasilia, QImage(MarbleDirs::dataFilePath(QStringLiteral("bitmaps/earth_apollo.jpg")));
 
     // Example: draw a plain rectangle and a rounded rectangle
 

@@ -129,7 +129,7 @@ void CountryByFlag::postQuestion(QObject *gameObject)
 
         if (!d->m_continentsAndOceans.contains(placemark->name(), Qt::CaseSensitive)) {
             const QString countryCode = placemark->countryCode().toLower();
-            flagPath = MarbleDirs::path(QLatin1StringView("flags/flag_") + countryCode + QLatin1StringView(".svg"));
+            flagPath = MarbleDirs::dataFilePath(QLatin1StringView("flags/flag_") + countryCode + QLatin1StringView(".svg"));
             QImage flag = QFile::exists(flagPath) ? QImage(flagPath) : QImage();
             if (!flag.isNull()) {
                 flagPath = QLatin1StringView("../../../data/flags/flag_") + countryCode + QLatin1StringView(".svg");
