@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:48+0000\n"
-"PO-Revision-Date: 2026-05-31 20:24-0400\n"
+"PO-Revision-Date: 2026-09-22 18:03+0900\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
-"Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
+"Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -84,7 +84,7 @@ msgstr "© KDE جامائىتى"
 #: main.cpp:54
 #, kde-format
 msgid "Carl Schwan"
-msgstr "Carl Schwan"
+msgstr ""
 
 #: main.cpp:55
 #, kde-format
@@ -151,25 +151,25 @@ msgstr ""
 #: MainScreen.qml:458
 #, kde-format
 msgid "%1 km"
-msgstr "%1 km"
+msgstr ""
 
 #: NavigationInfoBar.qml:20
 #, kde-format
 msgctxt "distance in km"
 msgid "%1 km"
-msgstr "%1 km"
+msgstr ""
 
 #: NavigationInfoBar.qml:22
 #, kde-format
 msgctxt "distance in m"
 msgid "%1 m"
-msgstr "%1 m"
+msgstr ""
 
 #: NavigationInfoBar.qml:24
 #, kde-format
 msgctxt "distance in m with decimals"
 msgid "%1 m"
-msgstr "%1 m"
+msgstr ""
 
 #: Options.qml:20
 #, kde-format
@@ -304,7 +304,7 @@ msgstr ""
 #: SettingsDialog.qml:48
 #, kde-format
 msgid "Network Settings"
-msgstr ""
+msgstr "تور تەڭشىكى"
 
 #: SettingsDialog.qml:53
 #, kde-format

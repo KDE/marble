@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2026-05-31 20:24-0400\n"
+"PO-Revision-Date: 2026-09-22 18:03+0900\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
-"Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
+"Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -274,7 +274,7 @@ msgstr "تېمپېراتۇرا"
 #. file data/maps/sky/nightsky/nightsky.dgml:125
 msgctxt "DGML|"
 msgid "Mountain"
-msgstr ""
+msgstr "تاغ"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:173
 #. ----------
@@ -1605,7 +1605,7 @@ msgstr ""
 #. file data/maps/earth/precip-dec/precip-dec.dgml:228
 msgctxt "DGML|"
 msgid "Precipitation"
-msgstr ""
+msgstr "يېغىن"
 
 #. file data/maps/earth/precip-july/precip-july.dgml:233
 #. ----------
@@ -3312,7 +3312,7 @@ msgstr ""
 #: src/lib/marble/CurrentLocationWidget.cpp:277
 msgctxt "QObject|"
 msgid "m"
-msgstr "m"
+msgstr ""
 
 #: src/lib/marble/CurrentLocationWidget.cpp:259
 msgctxt "QObject|"
@@ -3400,7 +3400,7 @@ msgstr ""
 #: src/lib/marble/CurrentLocationWidget.ui:91
 msgctxt "CurrentLocationWidget|"
 msgid "…"
-msgstr "…"
+msgstr ""
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
 msgctxt "CurrentLocationWidget|"
@@ -3968,7 +3968,7 @@ msgstr ""
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 km/h"
-msgstr "%1 km/h"
+msgstr ""
 
 #: src/lib/marble/declarative/Placemark.cpp:364
 msgctxt "Marble::Placemark|Parking spaces are supervised by guards"
@@ -4721,7 +4721,7 @@ msgctxt ""
 "Marble::Placemark|House number (first argument) and street name (second "
 "argument) in an address"
 msgid "%1 %2"
-msgstr "%1 %2"
+msgstr ""
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:19
 msgctxt "Marble::RouteRelationModel|"
@@ -5087,7 +5087,7 @@ msgstr ""
 #: src/lib/marble/ElevationWidget.ui:26
 msgctxt "ElevationWidget|"
 msgid " m"
-msgstr " m"
+msgstr ""
 
 #: src/lib/marble/ElevationWidget.ui:36
 msgctxt "ElevationWidget|"
@@ -5213,7 +5213,7 @@ msgstr "داۋاملىشىش ۋاقتى:"
 #: src/lib/marble/FlyToEditWidget.cpp:51
 msgctxt "Marble::FlyToEditWidget|seconds"
 msgid " s"
-msgstr " s"
+msgstr ""
 
 #: src/lib/marble/FlyToEditWidget.cpp:57
 msgctxt "Marble::FlyToEditWidget|"
@@ -5273,7 +5273,7 @@ msgstr ""
 #: src/lib/marble/FormattedTextWidget.ui:90
 msgctxt "FormattedTextWidget|"
 msgid "11"
-msgstr "11"
+msgstr ""
 
 #: src/lib/marble/FormattedTextWidget.ui:95
 msgctxt "FormattedTextWidget|"
@@ -5368,12 +5368,12 @@ msgstr "رەڭ"
 #: src/lib/marble/geodata/data/GeoDataCoordinates.cpp:432
 msgctxt "GeoDataCoordinates|"
 msgid "W"
-msgstr "W"
+msgstr ""
 
 #: src/lib/marble/geodata/data/GeoDataCoordinates.cpp:432
 msgctxt "GeoDataCoordinates|"
 msgid "E"
-msgstr "E"
+msgstr ""
 
 #: src/lib/marble/geodata/data/GeoDataCoordinates.cpp:591
 msgctxt "GeoDataCoordinates|"
@@ -5429,7 +5429,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:352
 msgctxt "GeoDataPlacemark|"
 msgid "Mountain"
-msgstr ""
+msgstr "تاغ"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:318
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:326
@@ -7063,43 +7063,43 @@ msgstr ""
 #: src/lib/marble/geodata/data/LonLatParser.cpp:46
 msgctxt "GeoDataCoordinates|North direction terms"
 msgid "*"
-msgstr "*"
+msgstr ""
 
 #. See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Direction_terms
 #: src/lib/marble/geodata/data/LonLatParser.cpp:48
 msgctxt "GeoDataCoordinates|East direction terms"
 msgid "*"
-msgstr "*"
+msgstr ""
 
 #. See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Direction_terms
 #: src/lib/marble/geodata/data/LonLatParser.cpp:50
 msgctxt "GeoDataCoordinates|South direction terms"
 msgid "*"
-msgstr "*"
+msgstr ""
 
 #. See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Direction_terms
 #: src/lib/marble/geodata/data/LonLatParser.cpp:52
 msgctxt "GeoDataCoordinates|West direction terms"
 msgid "*"
-msgstr "*"
+msgstr ""
 
 #. See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Coordinate_symbols
 #: src/lib/marble/geodata/data/LonLatParser.cpp:80
 msgctxt "GeoDataCoordinates|Degree symbol terms"
 msgid "*"
-msgstr "*"
+msgstr ""
 
 #. See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Coordinate_symbols
 #: src/lib/marble/geodata/data/LonLatParser.cpp:82
 msgctxt "GeoDataCoordinates|Minutes symbol terms"
 msgid "*"
-msgstr "*"
+msgstr ""
 
 #. See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Coordinate_symbols
 #: src/lib/marble/geodata/data/LonLatParser.cpp:84
 msgctxt "GeoDataCoordinates|Seconds symbol terms"
 msgid "*"
-msgstr "*"
+msgstr ""
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:211
 msgctxt "GeoLineStringGraphicsItem|"
@@ -7301,7 +7301,7 @@ msgstr ""
 #: src/lib/marble/LatLonBoxWidget.ui:151 src/lib/marble/LatLonBoxWidget.ui:203
 msgctxt "LatLonBoxWidget|"
 msgid "°"
-msgstr "°"
+msgstr ""
 
 #: src/lib/marble/LatLonBoxWidget.ui:66
 msgctxt "LatLonBoxWidget|"
@@ -7341,7 +7341,7 @@ msgstr ""
 #: src/lib/marble/LatLonEdit.cpp:142
 msgctxt "Marble::LatLonEdit|"
 msgid "°"
-msgstr "°"
+msgstr ""
 
 #: src/lib/marble/LatLonEdit.cpp:192 src/lib/marble/LatLonEdit.cpp:351
 msgctxt "Marble::LatLonEdit|"
@@ -7356,12 +7356,12 @@ msgstr ""
 #: src/lib/marble/LatLonEdit.cpp:541
 msgctxt "Marble::LatLonEdit|East, the direction"
 msgid "E"
-msgstr "E"
+msgstr ""
 
 #: src/lib/marble/LatLonEdit.cpp:542
 msgctxt "Marble::LatLonEdit|West, the direction"
 msgid "W"
-msgstr "W"
+msgstr ""
 
 #: src/lib/marble/LatLonEdit.cpp:545
 msgctxt "Marble::LatLonEdit|North, the direction"
@@ -7376,7 +7376,7 @@ msgstr "جەنۇب"
 #: src/lib/marble/LatLonEdit.ui:28
 msgctxt "LatLonEditPrivate|"
 msgid "°"
-msgstr "°"
+msgstr ""
 
 #: src/lib/marble/LatLonEdit.ui:38
 msgctxt "LatLonEditPrivate|"
@@ -7649,7 +7649,7 @@ msgstr ""
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "%1"
-msgstr "%1"
+msgstr ""
 
 #: src/lib/marble/MapWizard.cpp:467
 #, qt-format
@@ -8049,7 +8049,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
 msgctxt "MapWizard|"
 msgid "…"
-msgstr "…"
+msgstr ""
 
 #: src/lib/marble/MapWizard.ui:615
 msgctxt "MapWizard|"
@@ -9219,7 +9219,7 @@ msgstr ""
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:127
 msgctxt "MarbleCacheSettingsWidget|"
 msgid " MB"
-msgstr " MB"
+msgstr ""
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:73
 msgctxt "MarbleCacheSettingsWidget|"
@@ -9375,7 +9375,7 @@ msgstr "تازىلا"
 #: src/lib/marble/MarbleLocale.cpp:115
 msgctxt "QObject|means meter"
 msgid "m"
-msgstr "m"
+msgstr ""
 
 #: src/lib/marble/MarbleLocale.cpp:117
 msgctxt "QObject|means milimeters"
@@ -9577,7 +9577,7 @@ msgstr ""
 #: src/lib/marble/MarbleNavigator.ui:215
 msgctxt "MarbleNavigator|"
 msgid "…"
-msgstr "…"
+msgstr ""
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
 msgctxt "MarbleNavigator|"
@@ -9637,7 +9637,7 @@ msgstr ""
 #: src/lib/marble/MarbleNavigator.ui:163
 msgctxt "MarbleNavigator|"
 msgid "+"
-msgstr "+"
+msgstr ""
 
 #: src/lib/marble/MarbleNavigator.ui:178
 msgctxt "MarbleNavigator|"
@@ -9662,7 +9662,7 @@ msgstr ""
 #: src/lib/marble/MarbleNavigator.ui:221
 msgctxt "MarbleNavigator|"
 msgid "-"
-msgstr "-"
+msgstr ""
 
 #: src/lib/marble/MarblePluginSettingsWidget.cpp:58
 #, qt-format
@@ -11357,7 +11357,7 @@ msgstr ""
 #: src/lib/marble/RoutingRunner.cpp:29
 msgctxt "Marble::RoutingRunner|"
 msgid "m"
-msgstr "m"
+msgstr ""
 
 #: src/lib/marble/RoutingRunner.cpp:34
 msgctxt "Marble::RoutingRunner|"
@@ -11892,7 +11892,7 @@ msgstr ""
 #: src/lib/marble/WaitEditWidget.cpp:41
 msgctxt "Marble::WaitEditWidget|seconds"
 msgid " s"
-msgstr " s"
+msgstr ""
 
 #: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:27
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
@@ -12330,12 +12330,12 @@ msgstr "شىمال"
 #: src/plugins/render/annotate/EditGroundOverlayDialog.ui:194
 msgctxt "UiEditGroundOverlayDialog|"
 msgid "W"
-msgstr "W"
+msgstr ""
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.ui:263
 msgctxt "UiEditGroundOverlayDialog|"
 msgid "E"
-msgstr "E"
+msgstr ""
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.ui:364
 msgctxt "UiEditGroundOverlayDialog|"
@@ -13169,7 +13169,7 @@ msgstr "كىلومېتىر"
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfilePlotAxis.cpp:139
 msgctxt "Marble::ElevationProfilePlotAxis|"
 msgid "m"
-msgstr "m"
+msgstr ""
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfilePlotAxis.cpp:146
 msgctxt "Marble::ElevationProfilePlotAxis|"
@@ -13204,7 +13204,7 @@ msgstr ""
 #: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:134
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "m"
-msgstr "m"
+msgstr ""
 
 #: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:142
 #: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:146
@@ -13297,7 +13297,7 @@ msgstr ""
 #: src/plugins/render/gpsinfo/GpsInfo.cpp:126
 msgctxt "Marble::GpsInfo|"
 msgid "m"
-msgstr "m"
+msgstr ""
 
 #: src/plugins/render/gpsinfo/GpsInfo.cpp:131
 msgctxt "Marble::GpsInfo|"
@@ -13533,7 +13533,7 @@ msgstr "كىلومېتىر"
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:228
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "m"
-msgstr "m"
+msgstr ""
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:233
 msgctxt "Marble::MapScaleFloatItem|"
@@ -14024,7 +14024,7 @@ msgstr "چوڭلۇقى(&S):"
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:97
 msgctxt "OverviewMapConfigWidget|"
 msgid "x"
-msgstr "x"
+msgstr ""
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:178
 msgctxt "OverviewMapConfigWidget|"
@@ -14353,7 +14353,7 @@ msgstr "يىراقلات"
 #: src/plugins/render/routing/RoutingPlugin.ui:190
 msgctxt "RoutingPlugin|"
 msgid "-"
-msgstr "-"
+msgstr ""
 
 #: src/plugins/render/routing/RoutingPlugin.ui:219
 msgctxt "RoutingPlugin|"
@@ -14363,7 +14363,7 @@ msgstr "يېقىنلات"
 #: src/plugins/render/routing/RoutingPlugin.ui:222
 msgctxt "RoutingPlugin|"
 msgid "+"
-msgstr "+"
+msgstr ""
 
 #: src/plugins/render/routing/RoutingPlugin.ui:260
 msgctxt "RoutingPlugin|"
@@ -14541,7 +14541,7 @@ msgstr ""
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:164
 msgctxt "SatellitesConfigDialog|"
 msgid "-"
-msgstr "-"
+msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:104
 msgctxt "SatellitesConfigDialog|"
@@ -14561,7 +14561,7 @@ msgstr ""
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:150
 msgctxt "SatellitesConfigDialog|"
 msgid "+"
-msgstr "+"
+msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:161
 msgctxt "SatellitesConfigDialog|"
@@ -14576,7 +14576,7 @@ msgstr ""
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
 msgctxt "SatellitesConfigDialog|"
 msgid "…"
-msgstr "…"
+msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
 msgctxt "SatellitesConfigDialog|"
@@ -15505,7 +15505,7 @@ msgstr "شەرقتىن شەرقىي شىمالغا"
 #: src/plugins/render/weather/WeatherData.cpp:394
 msgctxt "WeatherData|"
 msgid "E"
-msgstr "E"
+msgstr ""
 
 #: src/plugins/render/weather/WeatherData.cpp:396
 msgctxt "WeatherData|"
@@ -15545,7 +15545,7 @@ msgstr "غەربتىن غەربىي شىمالغا"
 #: src/plugins/render/weather/WeatherData.cpp:410
 msgctxt "WeatherData|"
 msgid "W"
-msgstr "W"
+msgstr ""
 
 #: src/plugins/render/weather/WeatherData.cpp:412
 msgctxt "WeatherData|"
@@ -16625,7 +16625,7 @@ msgstr "چېسلا"
 #, qt-format
 msgctxt "Marble::MonavMapsModel|"
 msgid "%1 MB"
-msgstr "%1 MB"
+msgstr ""
 
 #: src/plugins/runner/monav/MonavPlugin.cpp:217
 msgctxt "Marble::MonavPlugin|"
