@@ -7,13 +7,13 @@
 # H. İbrahim Güngör <ibrahim@pardus.org.tr>, 2011.
 # Hasan Kiran <sunder67@hotmail.com>, 2013.
 # Volkan Gezer <volkangezer@gmail.com>, 2013, 2014, 2017.
-# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025, 2026 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022-2026 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2026-05-02 19:14+0300\n"
+"PO-Revision-Date: 2026-09-27 19:12+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.12.3\n"
+"X-Generator: Lokalize 26.08.0\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -9210,7 +9210,7 @@ msgid ""
 "com</a><br /><i>Project: OSM Annotation</i></p>"
 msgstr ""
 "<p>Andrew Manson <a href=\"mailto:g.real.ate@gmail.com\">g.real.ate@gmail."
-"com</a><br /><i>Proje: OSM bilgi notu</i></p>"
+"com</a><br /><i>Proje: OSM ek açıklamaları</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:231
 msgctxt "QObject|"
@@ -12755,24 +12755,24 @@ msgstr "En yakın WLAN erişim noktası tabanlı geçerli konumu raporlar"
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:125
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Annotation"
-msgstr "Bilgi Notu"
+msgstr "Ek Açıklama"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:130
 msgctxt "Marble::AnnotatePlugin|"
 msgid "&Annotation"
-msgstr "&Bilgi Notu"
+msgstr "&Ek Açıklama"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:140
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Draws annotations on maps with placemarks or polygons."
 msgstr ""
-"Bilgi notlarını, yer işaretleri veya çokgenleri kullanarak harita üzerine "
+"Ek açıklamaları, yer işaretleri veya çokgenleri kullanarak harita üzerine "
 "çizer."
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:183
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Annotations"
-msgstr "Bilgi Notları"
+msgstr "Ek Açıklamalar"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:305
 msgctxt "QObject|"
@@ -12787,18 +12787,18 @@ msgstr "Geçerli ögeyi kaldırmak istediğinizden emin misiniz?"
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:342
 msgctxt "QObject|"
 msgid "Clear all annotations"
-msgstr "Tüm bilgi notlarını temizle"
+msgstr "Tüm ek açıklamaları temizle"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:343
 msgctxt "QObject|"
 msgid "Are you sure you want to clear all annotations?"
-msgstr "Tüm bilgi notlarını temizlemek istediğinizden emin misiniz?"
+msgstr "Tüm ek açıklamaları temizlemek istediğinizden emin misiniz?"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:362
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:895
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Save Annotation File"
-msgstr "Bilgi Notu Dosyasını Kaydet"
+msgstr "Ek Açıklama Dosyasını Kaydet"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:364
 msgctxt "Marble::AnnotatePlugin|"
@@ -12812,7 +12812,7 @@ msgstr ""
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:390
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Open Annotation File"
-msgstr "Bilgi Notu Dosyası Aç"
+msgstr "Ek Açıklama Dosyası Aç"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:392
 msgctxt "Marble::AnnotatePlugin|"
@@ -12820,8 +12820,8 @@ msgid ""
 "All Supported Files (*.kml *.osm);;Kml Annotation file (*.kml);;Open Street "
 "Map file (*.osm)"
 msgstr ""
-"Tüm Desteklenen Dosyalar (*.kml *.osm);;Kml Bilgi Notu dosyası (*.kml);;Open "
-"Street Map dosyası (*.osm)"
+"Tüm desteklenen dosyalar (*.kml *.osm);;Kml ek açıklama dosyası (*.kml);;"
+"OpenStreetMap dosyası (*.osm)"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:750
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:755
@@ -12899,12 +12899,12 @@ msgstr "Öge Sil"
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:892
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Load Annotation File"
-msgstr "Bilgi Notu Dosyasını Yükle"
+msgstr "Ek Açıklama Dosyası Yükle"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:898
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Clear all Annotations"
-msgstr "Tüm Bilgi Notlarını Temizle"
+msgstr "Tüm Ek Açıklamaları Temizle"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:899
 msgctxt "Marble::AnnotatePlugin|"
