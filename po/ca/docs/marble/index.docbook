@@ -431,7 +431,7 @@
 
       <listitem
 ><para
->HostIP: Una geocodificació inversa basada en l'adreça IP, emprant les dades des de <ulink url="https://www.hostip.info"
+>HostIP: Una geocodificació inversa basada en l'adreça IP, emprant les dades d'<ulink url="https://www.hostip.info"
 >HostIP.info</ulink
 >.</para
 ></listitem>
@@ -755,7 +755,7 @@
 >.kml</literal
 >, premeu el botó <guibutton
 >Desa</guibutton
-> a la part inferior de la pestanya Itineraris. El proper diàleg Desa us permetrà triar un nom de fitxer per a desar l'itinerari. Es carreguen de manera similar, començant amb el botó <guibutton
+> a la part inferior de la pestanya Itineraris. El diàleg següent Desa us permetrà triar un nom de fitxer per a desar l'itinerari. Es carreguen de manera similar, començant amb el botó <guibutton
 >Obre</guibutton
 > a la part inferior de la pestanya Itineraris. Seleccioneu en el diàleg el fitxer d'itinerari <literal role="extension"
 >.kml</literal
@@ -898,7 +898,7 @@
 >Regió visible</guilabel
 > per a descarregar els mosaics que corresponen a la regió del mapa visible a la pantalla. A continuació, seleccioneu l'<guilabel
 >Interval de nivells del mosaic:</guilabel
-> (interval d'apropament) que voleu descarregar. El primer camp correspon als més petits, el segon camp correspon al nivell dels mosaics més grans a baixar. També es descarregaran els mosaics en els nivells intermedis. El &marble; mostrarà quants mosaics (imatges) calen descarregar-se i actualitzarà aquest número cada vegada que canvieu la regió o l'interval de nivells del mosaic. </para>
+> (interval d'apropament) que voleu descarregar. El primer camp correspon als més petits, el segon camp correspon al nivell dels mosaics més grans a baixar. També es descarregaran els mosaics en els nivells intermedis. El &marble; mostrarà quants mosaics (imatges) cal descarregar-se i actualitzarà aquest número cada vegada que canvieu la regió o l'interval de nivells del mosaic. </para>
 
     <screenshot>
       <screeninfo
@@ -1877,7 +1877,7 @@
 ></term>
           <listitem
 ><para
->Especifica la notació dels angles en les coordenades: De manera predeterminada, s'utilitza la notació de graus-minuts-segons lloc (&pex; 54°30'00"). Com a alternativa es poden escollir graus decimals (&pex; 54,5°).</para
+>Especifica la notació dels angles en les coordenades: De manera predeterminada, s'utilitza la notació de graus-minuts-segons (&pex; 54°30'00"). Com a alternativa es poden escollir graus decimals (&pex; 54,5°).</para
 ></listitem>
         </varlistentry>
 
