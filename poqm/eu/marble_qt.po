@@ -1,14 +1,14 @@
 # Translation for marble_qt.po to Euskara/Basque (eu)
 # Copyrigth (C) 2021-2025 This file is copyright.
 # This file is distributed under the same licenses as the original file.
-# SPDX-FileCopyrightText: 2024, 2025 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2024-2026 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
 #
 # Translators:
 # Iñigo Salvador Azurmendi <xalba@ni.eus>, 2021, 2023, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2025-08-17 02:20+0200\n"
+"PO-Revision-Date: 2026-10-06 22:32+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
 msgctxt "DGML|"
@@ -9941,7 +9941,7 @@ msgstr "Sinkronizatu orain"
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:147
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Credentials"
-msgstr "Kredentzialak"
+msgstr "Egiaztagiriak"
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:153
 msgctxt "MarbleCloudSyncSettingsWidget|"
