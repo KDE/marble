@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2025-03-04 17:54+0300\n"
-"Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
+"PO-Revision-Date: 2026-10-09 21:36+0200\n"
+"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -712,7 +712,7 @@ msgstr "5000 м"
 #. file data/maps/earth/srtm/srtm.dgml:318
 msgctxt "DGML|"
 msgid "3500 m"
-msgstr "3500 m"
+msgstr "3500 м"
 
 #. file data/maps/earth/srtm/srtm.dgml:322
 msgctxt "DGML|"
@@ -747,7 +747,7 @@ msgstr "0 м"
 #. file data/maps/earth/srtm/srtm.dgml:346
 msgctxt "DGML|"
 msgid "0 m (Water)"
-msgstr "0 m (вода)"
+msgstr "0 м (вода)"
 
 #. file data/maps/earth/srtm/srtm.dgml:350
 msgctxt "DGML|"
@@ -792,7 +792,7 @@ msgid ""
 msgstr ""
 "<p><i>Глобальный атлас автомобильных дорог</i>, созданный в рамках проекта "
 "OpenStreetMap (OSM).</p><p>Открытое сообщество OSM занимается созданием "
-"бесплатных редактируемых карт.</p>"
+"свободно редактируемых карт.</p>"
 
 #. file data/maps/earth/vectorosm-dev/vectorosm-dev.dgml:85
 #. ----------
@@ -832,7 +832,7 @@ msgid ""
 msgstr ""
 "<p><i>Глобальный атлас автомобильных дорог</i>, созданный в рамках проекта "
 "OpenStreetMap (OSM).</p><p>Открытое сообщество OSM занимается созданием "
-"бесплатных редактируемых карт. Графические данные OSM подготовлены с помощью "
+"свободно редактируемых карт. Графические данные OSM подготовлены с помощью "
 "набора инструментов Mapnik.</p>"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:105
@@ -1149,7 +1149,7 @@ msgstr "Пустошь"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:255
 msgctxt "DGML|"
 msgid "Lake, reservoir"
-msgstr "Озёро или водоём"
+msgstr "Озеро или водоём"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:253
 #. ----------
@@ -1373,7 +1373,7 @@ msgstr "Почтовое отделение"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:401
 msgctxt "DGML|"
 msgid "Public building"
-msgstr "Общественные здания"
+msgstr "Общественное здание"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:399
 #. ----------
@@ -1534,7 +1534,7 @@ msgstr "Автозаправочная станция"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:508
 msgctxt "DGML|"
 msgid "Gift"
-msgstr "Магазины подарков"
+msgstr "Магазин подарков"
 
 #. file data/maps/earth/empty/empty.dgml:6
 msgctxt "DGML|"
@@ -1588,7 +1588,7 @@ msgid ""
 msgstr ""
 "<p><i>&laquo;Земное яблоко&raquo;</i> Мартина Бехайма является старейшим "
 "существующим глобусом Земли. <i>Авторские права: Германский национальный "
-"музей, Нюрнберг. Лицензия: CC BY-SA 3,0.</i></p>"
+"музей, Нюрнберг. Лицензия: CC BY-SA 3.0.</i></p>"
 
 #. file data/maps/earth/behaim1492/behaim1492.dgml:181
 msgctxt "DGML|"
@@ -1891,7 +1891,7 @@ msgstr "оранжевым:&nbsp;штатов"
 #. file data/legend.html
 msgctxt "Legends|"
 msgid "Yellow:&nbsp;County"
-msgstr "жёлтым:&nbsp;стран"
+msgstr "жёлтым:&nbsp;округов"
 
 #. file data/legend.html
 msgctxt "Legends|"
@@ -2367,7 +2367,7 @@ msgstr ""
 #: src/apps/marble-qt/QtMainWindow.cpp:265
 msgctxt "Marble::MainWindow|"
 msgid "&Open..."
-msgstr "О&ткрыть..."
+msgstr "О&ткрыть…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:267
 msgctxt "Marble::MainWindow|"
@@ -2377,12 +2377,12 @@ msgstr "Открыть файл для просмотра в Marble"
 #: src/apps/marble-qt/QtMainWindow.cpp:270
 msgctxt "Marble::MainWindow|"
 msgid "&Download Maps..."
-msgstr "&Загрузить данные..."
+msgstr "&Загрузить карты…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:273
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
-msgstr "&Экспорт карты..."
+msgstr "&Экспорт карты…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:275
 msgctxt "Marble::MainWindow|"
@@ -2392,7 +2392,7 @@ msgstr "Сохранить снимок карты"
 #: src/apps/marble-qt/QtMainWindow.cpp:279
 msgctxt "Marble::MainWindow|"
 msgid "Download &Region..."
-msgstr "Загрузить &регион..."
+msgstr "Загрузить &регион…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:280
 msgctxt "Marble::MainWindow|"
@@ -2403,7 +2403,7 @@ msgstr ""
 #: src/apps/marble-qt/QtMainWindow.cpp:283
 msgctxt "Marble::MainWindow|"
 msgid "&Print..."
-msgstr "&Печать..."
+msgstr "&Печать…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:284
 msgctxt "Marble::MainWindow|"
@@ -2419,7 +2419,7 @@ msgstr "Напечатать снимок карты"
 #: src/apps/marble-qt/QtMainWindow.cpp:288
 msgctxt "Marble::MainWindow|"
 msgid "Print Previe&w ..."
-msgstr "Предп&росмотр печати..."
+msgstr "Предп&росмотр печати…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:292
 msgctxt "Marble::MainWindow|"
@@ -2479,7 +2479,7 @@ msgstr "Остановить запись видео о земном шаре"
 #: src/apps/marble-qt/QtMainWindow.cpp:320
 msgctxt "Marble::MainWindow|"
 msgid "&Configure Marble"
-msgstr "&Настроить Marble..."
+msgstr "&Настроить Marble…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:321
 msgctxt "Marble::MainWindow|"
@@ -2489,7 +2489,7 @@ msgstr "Открыть диалог настройки"
 #: src/apps/marble-qt/QtMainWindow.cpp:324
 msgctxt "Marble::MainWindow|"
 msgid "C&opy Coordinates"
-msgstr "Поместить координаты в буфер обмена"
+msgstr "&Скопировать координаты"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:325
 msgctxt "Marble::MainWindow|"
@@ -2504,17 +2504,17 @@ msgstr "&Полноэкранный режим"
 #: src/apps/marble-qt/QtMainWindow.cpp:331
 msgctxt "Marble::MainWindow|"
 msgid "Full Screen Mode"
-msgstr "&Полноэкранный режим"
+msgstr "Полноэкранный режим"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:334
 msgctxt "Marble::MainWindow|"
 msgid "&Show Status Bar"
-msgstr "&Показать строку состояния"
+msgstr "&Показывать строку состояния"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:336
 msgctxt "Marble::MainWindow|"
 msgid "Show Status Bar"
-msgstr "Показать строку состояния"
+msgstr "Показывать строку состояния"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:339
 msgctxt "Marble::MainWindow|"
@@ -2544,17 +2544,17 @@ msgstr "&Работать автономно"
 #: src/apps/marble-qt/QtMainWindow.cpp:353
 msgctxt "Marble::MainWindow|"
 msgid "&Time Control..."
-msgstr "Уп&равление временем..."
+msgstr "Уп&равление временем…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:354
 msgctxt "Marble::MainWindow|"
 msgid "Configure Time Control "
-msgstr "Настроить Time Control"
+msgstr "Настроить управление временем "
 
 #: src/apps/marble-qt/QtMainWindow.cpp:357
 msgctxt "Marble::MainWindow|"
 msgid "S&un Control..."
-msgstr "&Солнце..."
+msgstr "&Солнце…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:358
 msgctxt "Marble::MainWindow|"
@@ -2564,7 +2564,7 @@ msgstr "Настроить управление Солнцем"
 #: src/apps/marble-qt/QtMainWindow.cpp:361
 msgctxt "Marble::MainWindow|"
 msgid "&Redisplay"
-msgstr "Перепоказат&ь"
+msgstr "О&бновить"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:363
 msgctxt "Marble::MainWindow|"
@@ -2640,7 +2640,7 @@ msgstr "&Указать домашнее расположение"
 #: src/apps/marble-qt/QtMainWindow.cpp:398
 msgctxt "Marble::MainWindow|"
 msgid "Show &Bookmarks"
-msgstr "Показать &закладки"
+msgstr "Показывать &закладки"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:399
 msgctxt "Marble::MainWindow|"
@@ -2650,7 +2650,7 @@ msgstr "Показывать закладки"
 #: src/apps/marble-qt/QtMainWindow.cpp:403
 msgctxt "Marble::MainWindow|"
 msgid "&Manage Bookmarks..."
-msgstr "&Изменить закладки..."
+msgstr "&Изменить закладки…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:404
 msgctxt "Marble::MainWindow|"
@@ -2665,12 +2665,12 @@ msgstr "&Создать новую карту…"
 #: src/apps/marble-qt/QtMainWindow.cpp:409
 msgctxt "Marble::MainWindow|"
 msgid "A wizard guides you through the creation of your own map theme."
-msgstr "Мастер поможет вам создать новую тему карты"
+msgstr "Мастер поможет вам создать новую тему карты."
 
 #: src/apps/marble-qt/QtMainWindow.cpp:413
 msgctxt "Marble::MainWindow|"
 msgid "Show Tile Zoom Level"
-msgstr "Показать уровень масштаба тайла"
+msgstr "Показывать уровень масштаба тайлов"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:420
 msgctxt "Marble::MainWindow|"
@@ -2792,7 +2792,7 @@ msgstr "Высота: %1"
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Zoom: %1"
-msgstr "Уровень масштаба клетки: %1"
+msgstr "Уровень масштаба тайлов: %1"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:930
 #: src/apps/marble-qt/QtMainWindow.cpp:1019
@@ -2835,43 +2835,43 @@ msgstr "По умолчанию (изменяемый)"
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC (%1x%2)"
-msgstr "NTSC (%1⨯%2)"
+msgstr "NTSC (%1×%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:273
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL (%1x%2)"
-msgstr "PAL (%1⨯%2)"
+msgstr "PAL (%1×%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:274
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC 16:9 (%1x%2)"
-msgstr "NTSC 16:9 (%1⨯%2)"
+msgstr "NTSC 16:9 (%1×%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:275
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL 16:9 (%1x%2)"
-msgstr "PAL 16:9 (%1⨯%2)"
+msgstr "PAL 16:9 (%1×%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:277
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "DVD (%1x%2p)"
-msgstr "DVD (%1⨯%2p)"
+msgstr "DVD (%1×%2p)"
 
 #: src/apps/marble-ui/ControlView.cpp:279
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "HD (%1x%2p)"
-msgstr "HD (%1⨯%2p)"
+msgstr "HD (%1×%2p)"
 
 #: src/apps/marble-ui/ControlView.cpp:281
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Full HD (%1x%2p)"
-msgstr "Full HD (%1⨯%2p)"
+msgstr "Full HD (%1×%2p)"
 
 #: src/apps/marble-ui/ControlView.cpp:282
 #, qt-format
@@ -2896,13 +2896,14 @@ msgid ""
 "suggested route not to be the most expedient or safest route to your "
 "destination."
 msgstr ""
-"Строительство дороги, погодные условия и другие непредсказуемые условия "
-"могут сделать ваш маршрут не самым ожидаемым или безопасным."
+"Дорожные работы, погодные условия и другие непредвиденные обстоятельства "
+"могут привести к тому, что предложенный маршрут окажется не самым быстрым "
+"или безопасным."
 
 #: src/apps/marble-ui/ControlView.cpp:471
 msgctxt "Marble::ControlView|"
 msgid "Please use common sense while navigating."
-msgstr "Пожалуйста, используйте здравый смысл во время навигации."
+msgstr "Во время движения руководствуйтесь здравым смыслом."
 
 #: src/apps/marble-ui/ControlView.cpp:555
 #, qt-format
@@ -2911,13 +2912,13 @@ msgid ""
 "Unable to start the external editor. Check that %1 is installed or choose a "
 "different external editor in the settings dialog."
 msgstr ""
-"Не удается запустить внешний редактор. Проверьте, что %1 установлен или "
-"укажите другой внешний редактор в диалоге настроек."
+"Не удаётся запустить внешний редактор. Проверьте, установлен ли %1, или "
+"укажите другой внешний редактор в окне настройки."
 
 #: src/apps/marble-ui/ControlView.cpp:557
 msgctxt "Marble::ControlView|"
 msgid "Cannot start external editor"
-msgstr "Не удается запустить внешний редактор"
+msgstr "Не удаётся запустить внешний редактор"
 
 #: src/apps/marble-ui/ControlView.cpp:574
 msgctxt "Marble::ControlView|"
@@ -2994,7 +2995,7 @@ msgstr "&Скрыть"
 #: src/lib/marble/AbstractFloatItem.cpp:239
 msgctxt "Marble::AbstractFloatItem|"
 msgid "&Configure..."
-msgstr "&Настроить..."
+msgstr "&Настроить…"
 
 #: src/lib/marble/AddLinkDialog.cpp:62
 msgctxt "Marble::AddLinkDialog|"
@@ -3069,7 +3070,7 @@ msgstr "Экспортировать закладки"
 #: src/lib/marble/BookmarkManagerDialog.cpp:411
 msgctxt "Marble::BookmarkManagerDialog|"
 msgid "KML files (*.kml)"
-msgstr "файлы KML (*.kml)"
+msgstr "Файлы KML (*.kml)"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:416
 msgctxt "Marble::BookmarkManagerDialog|"
@@ -3357,7 +3358,7 @@ msgstr "Информация о местоположении недоступн�
 #: src/lib/marble/CurrentLocationWidget.cpp:186
 msgctxt "QObject|"
 msgid "Waiting for current location information..."
-msgstr "Ожидание получения информации о текущем местонахождении..."
+msgstr "Ожидание получения информации о текущем местонахождении…"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:192
 msgctxt "QObject|"
@@ -3385,7 +3386,7 @@ msgstr "км"
 #: src/lib/marble/CurrentLocationWidget.cpp:265
 msgctxt "QObject|"
 msgid "m/h"
-msgstr "м/ч"
+msgstr "миль/ч"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:267
 #: src/lib/marble/CurrentLocationWidget.cpp:268
@@ -3401,7 +3402,7 @@ msgstr "узел"
 #: src/lib/marble/CurrentLocationWidget.cpp:278
 msgctxt "QObject|"
 msgid "nm"
-msgstr "нм"
+msgstr "мор. миль"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:330
 msgctxt "QObject|"
@@ -3411,7 +3412,7 @@ msgstr "Метка"
 #: src/lib/marble/CurrentLocationWidget.cpp:367
 msgctxt "QObject|"
 msgid "Save Track"
-msgstr "Сохранить маршрут"
+msgstr "Сохранить траекторию"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:369
 #: src/lib/marble/CurrentLocationWidget.cpp:387
@@ -3422,17 +3423,17 @@ msgstr "Файлы KML (*.kml)"
 #: src/lib/marble/CurrentLocationWidget.cpp:385
 msgctxt "QObject|"
 msgid "Open Track"
-msgstr "Открыть маршрут"
+msgstr "Открыть траекторию"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:398
 msgctxt "QObject|"
 msgid "Clear current track"
-msgstr "Очистить текущий путь"
+msgstr "Очистить текущую траекторию"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:399
 msgctxt "QObject|"
 msgid "Are you sure you want to clear the current track?"
-msgstr "Действительно удалить путь?"
+msgstr "Действительно очистить текущую траекторию?"
 
 #: src/lib/marble/CurrentLocationWidget.ui:14
 msgctxt "CurrentLocationWidget|"
@@ -3447,12 +3448,12 @@ msgstr "Отслеживание местоположения"
 #: src/lib/marble/CurrentLocationWidget.ui:37
 msgctxt "CurrentLocationWidget|"
 msgid "Disabled"
-msgstr "Выключенный"
+msgstr "Отключено"
 
 #: src/lib/marble/CurrentLocationWidget.ui:53
 msgctxt "CurrentLocationWidget|"
 msgid "Show Track"
-msgstr "Показать траекторию"
+msgstr "Показывать траекторию"
 
 #: src/lib/marble/CurrentLocationWidget.ui:66
 msgctxt "CurrentLocationWidget|"
@@ -3517,7 +3518,7 @@ msgstr "Преобразование данных Marble"
 #: src/lib/marble/DataMigration.cpp:91
 msgctxt "Marble::DataMigration|"
 msgid "Converting data ..."
-msgstr "Преобразование данных..."
+msgstr "Преобразование данных…"
 
 #: src/lib/marble/DataMigrationWidget.ui:20
 msgctxt "DataMigrationWidget|"
@@ -3706,17 +3707,17 @@ msgstr "Продажа только органической пищи"
 #: src/lib/marble/declarative/Placemark.cpp:224
 msgctxt "Marble::Placemark|A deli that sells gluten free food"
 msgid "Sells gluten free food"
-msgstr "Продажа пищи без растительного белка"
+msgstr "Продажа безглютеновой пищи"
 
 #: src/lib/marble/declarative/Placemark.cpp:228
 msgctxt "Marble::Placemark|A deli that does not sell gluten free food"
 msgid "Does not sell gluten free food"
-msgstr "Продажа пищи без растительного белка не осуществляется"
+msgstr "Продажа безглютеновой пищи не осуществляется"
 
 #: src/lib/marble/declarative/Placemark.cpp:232
 msgctxt "Marble::Placemark|A deli that only sells gluten free food"
 msgid "Only sells gluten free food"
-msgstr "Продажа только пищи без растительного белка"
+msgstr "Продажа только безглютеновой пищи"
 
 #: src/lib/marble/declarative/Placemark.cpp:237
 msgctxt "Marble::Placemark|A deli that sells lactose free food"
@@ -3811,7 +3812,7 @@ msgstr "Стеклянные бутылки"
 #: src/lib/marble/declarative/Placemark.cpp:289
 msgctxt "Marble::Placemark|"
 msgid "Green waste"
-msgstr "Отходы древесины"
+msgstr "Растительные отходы"
 
 #: src/lib/marble/declarative/Placemark.cpp:290
 msgctxt "Marble::Placemark|"
@@ -3945,7 +3946,7 @@ msgstr "Альтернативная медицина"
 #: src/lib/marble/declarative/Placemark.cpp:323
 msgctxt "Marble::Placemark|"
 msgid "Audiologist"
-msgstr "Отоларинголог"
+msgstr "Сурдолог"
 
 #: src/lib/marble/declarative/Placemark.cpp:324
 msgctxt "Marble::Placemark|"
@@ -4000,7 +4001,7 @@ msgstr "Физиотерапевт"
 #: src/lib/marble/declarative/Placemark.cpp:334
 msgctxt "Marble::Placemark|"
 msgid "Podiatrist"
-msgstr "Врач-ортопед"
+msgstr "Подолог"
 
 #: src/lib/marble/declarative/Placemark.cpp:335
 msgctxt "Marble::Placemark|"
@@ -4156,7 +4157,7 @@ msgctxt ""
 "Marble::Placemark|Reservation is only possible for members of the "
 "organisation running the hut"
 msgid "Only for members"
-msgstr "Только для сотрудников"
+msgstr "Только для членов организации"
 
 #: src/lib/marble/declarative/Placemark.cpp:426
 #, qt-format
@@ -4403,7 +4404,7 @@ msgstr "Бесплатные молочные продукты (согласно
 #: src/lib/marble/declarative/Placemark.cpp:490
 msgctxt "Marble::Placemark|"
 msgid "For abused"
-msgstr "Для жертв злоупотреблений"
+msgstr "Для жертв насилия"
 
 #: src/lib/marble/declarative/Placemark.cpp:491
 msgctxt "Marble::Placemark|"
@@ -4474,7 +4475,7 @@ msgstr "Для жертв преступлений"
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Inscription: %1"
-msgstr "Обозначение: %1"
+msgstr "Надпись: %1"
 
 #: src/lib/marble/declarative/Placemark.cpp:510
 #, qt-format
@@ -4564,15 +4565,14 @@ msgstr "Горнолыжная трасса для могула"
 #: src/lib/marble/declarative/Placemark.cpp:547
 msgctxt "Marble::Placemark|"
 msgid "Groomed for free style or skating"
-msgstr "Обрабатываемая ратраками трасса для фристайла или сноускейта"
+msgstr ""
+"Обрабатываемая ратраками трасса для свободного стиля или конькового хода"
 
 #: src/lib/marble/declarative/Placemark.cpp:551
 #: src/lib/marble/declarative/Placemark.cpp:555
 msgctxt "Marble::Placemark|"
 msgid "Groomed for classic and free style skiing"
-msgstr ""
-"Обрабатываемая ратраками трасса для классических видов лыжного спорта и "
-"фристайла"
+msgstr "Обрабатываемая ратраками трасса для классического и свободного стиля"
 
 #: src/lib/marble/declarative/Placemark.cpp:556
 msgctxt "Marble::Placemark|"
@@ -4603,17 +4603,17 @@ msgstr "Время выемки: %1"
 #: src/lib/marble/declarative/Placemark.cpp:570
 msgctxt "Marble::Placemark|Entry station of an aerialway"
 msgid "Entry"
-msgstr "Станция прибытия"
+msgstr "Станция посадки"
 
 #: src/lib/marble/declarative/Placemark.cpp:571
 msgctxt "Marble::Placemark|Exit station of an aerialway"
 msgid "Exit"
-msgstr "Станция отправления"
+msgstr "Станция высадки"
 
 #: src/lib/marble/declarative/Placemark.cpp:575
 msgctxt "Marble::Placemark|Entry and exit station of an aerialway"
 msgid "Entry and exit"
-msgstr "Станция прибытия и отправления"
+msgstr "Станция посадки и высадки"
 
 #: src/lib/marble/declarative/Placemark.cpp:579
 msgctxt "Marble::Placemark|Transit only station of an aerialway"
@@ -4623,18 +4623,18 @@ msgstr "Транзитная станция"
 #: src/lib/marble/declarative/Placemark.cpp:583
 msgctxt "Marble::Placemark|Entry station of an aerialway during summer"
 msgid "Entry during summer"
-msgstr "Станция прибытия в летнее время"
+msgstr "Станция посадки в летнее время"
 
 #: src/lib/marble/declarative/Placemark.cpp:587
 msgctxt "Marble::Placemark|Exit station of an aerialway during summer"
 msgid "Exit during summer"
-msgstr "Станция отправления в летнее время"
+msgstr "Станция высадки в летнее время"
 
 #: src/lib/marble/declarative/Placemark.cpp:591
 msgctxt ""
 "Marble::Placemark|Entry and exit station of an aerialway during summer"
 msgid "Entry and exit during summer"
-msgstr "Станция прибытия и отправления в летнее время"
+msgstr "Станция посадки и высадки в летнее время"
 
 #: src/lib/marble/declarative/Placemark.cpp:595
 msgctxt "Marble::Placemark|Transit only station of an aerialway during summer"
@@ -4680,7 +4680,7 @@ msgstr "Вход воспрещён"
 #: src/lib/marble/declarative/Placemark.cpp:617
 msgctxt "Marble::Placemark|"
 msgid "no fee"
-msgstr "без комиссии"
+msgstr "бесплатно"
 
 #: src/lib/marble/declarative/Placemark.cpp:619
 #, qt-format
@@ -4914,7 +4914,7 @@ msgstr "Метод выбора"
 #: src/lib/marble/DownloadRegionDialog.cpp:189
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Number of tiles to download:"
-msgstr "Количество клеток для загрузки:"
+msgstr "Количество тайлов для загрузки:"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:238
 msgctxt "Marble::DownloadRegionDialog|"
@@ -4924,17 +4924,17 @@ msgstr "Загрузить область"
 #: src/lib/marble/DownloadRegionDialog.cpp:240
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Tile type to be downloaded:"
-msgstr "Тип клеток для загрузки:"
+msgstr "Тип тайлов для загрузки:"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:242
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Texture tiles"
-msgstr "Клетки текстуры"
+msgstr "Тайлы текстуры"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:243
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Vector tiles"
-msgstr "Векторные клетки"
+msgstr "Векторные тайлы"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:244
 msgctxt "Marble::DownloadRegionDialog|"
@@ -4954,19 +4954,19 @@ msgstr[2] "Количество тайлов для загрузки не дол
 #: src/lib/marble/DownloadRegionDialog.cpp:497
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Approximate size of the tiles to be downloaded"
-msgstr "Примерный размер клеток для загрузки:"
+msgstr "Примерный размер тайлов для загрузки"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:501
 #, qt-format
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Estimated download size: %1 MB"
-msgstr "Примерный размер загрузки: %1 Мб"
+msgstr "Примерный размер загрузки: %1 МБ"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:503
 #, qt-format
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Estimated download size: %1 kB"
-msgstr "Примерный размер загрузки: %1 Кб"
+msgstr "Примерный размер загрузки: %1 КБ"
 
 #: src/lib/marble/EditBookmarkDialog.ui:14
 msgctxt "UiEditBookmarkDialog|"
@@ -5172,13 +5172,13 @@ msgstr "Подчёркнутый"
 #: src/lib/marble/EditPlacemarkDialog.ui:371
 msgctxt "UiEditPlacemarkDialog|"
 msgid "Add image"
-msgstr "Вставить изображение..."
+msgstr "Добавить изображение"
 
 #: src/lib/marble/EditPlacemarkDialog.ui:380
 #: src/lib/marble/EditPlacemarkDialog.ui:383
 msgctxt "UiEditPlacemarkDialog|"
 msgid "Add link"
-msgstr "Вставить ссылку..."
+msgstr "Добавить ссылку"
 
 #: src/lib/marble/ElevationWidget.ui:19
 msgctxt "ElevationWidget|"
@@ -5228,10 +5228,10 @@ msgid ""
 "future. If you want to alter the default map editor later, you can do so in "
 "the Marble Settings."
 msgstr ""
-"Снимите флажок, чтобы в следующий раз отобразился запрос на выбор редактора "
-"карт. В противном случае ваш выбор будет сохранён и автоматически "
-"использован в будущем. Изменить редактор карт, установленный по умолчанию, "
-"возможно в окне настройки Marble."
+"Снимите флажок, чтобы в следующий раз снова появился запрос на выбор "
+"редактора карт. В противном случае ваш выбор будет сохранён и автоматически "
+"использован в будущем. Изменить редактор карт по умолчанию можно в окне "
+"настройки Marble."
 
 #: src/lib/marble/ExternalEditor.ui:51
 msgctxt "ExternalEditor|"
@@ -6384,7 +6384,7 @@ msgstr "Книжный магазин"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:682
 msgctxt "GeoDataPlacemark|"
 msgid "Gift Shop"
-msgstr "Магазины подарков"
+msgstr "Магазин подарков"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:684
 msgctxt "GeoDataPlacemark|"
@@ -6549,7 +6549,7 @@ msgstr "Памятник"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:748
 msgctxt "GeoDataPlacemark|"
 msgid "Aerodrome"
-msgstr "Аэропорт"
+msgstr "Аэродром"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:750
 msgctxt "GeoDataPlacemark|"
@@ -6940,7 +6940,7 @@ msgstr "Опора канатной дороги"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:906
 msgctxt "GeoDataPlacemark|"
 msgid "Cable Car"
-msgstr "Канатный трамвай"
+msgstr "Маятниковая канатная дорога"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:908
 msgctxt "GeoDataPlacemark|"
@@ -6950,7 +6950,7 @@ msgstr "Гондола-кабина (по кругу)"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:910
 msgctxt "GeoDataPlacemark|"
 msgid "Chair Lift"
-msgstr "Ряд кресел"
+msgstr "Кресельный подъёмник"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:912
 msgctxt "GeoDataPlacemark|"
@@ -6960,7 +6960,7 @@ msgstr "Смешанный подъёмник"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:914
 msgctxt "GeoDataPlacemark|"
 msgid "Drag Lift"
-msgstr "Горнолыжный подъёмник"
+msgstr "Бугельный подъёмник"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:916
 msgctxt "GeoDataPlacemark|"
@@ -6980,7 +6980,7 @@ msgstr "Тарельчатый подъёмник"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:922
 msgctxt "GeoDataPlacemark|"
 msgid "Rope Tow"
-msgstr "Бугельный подъёмник"
+msgstr "Верёвочный буксировщик"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:924
 msgctxt "GeoDataPlacemark|"
@@ -6995,7 +6995,7 @@ msgstr "Зиплайн"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:928
 msgctxt "GeoDataPlacemark|"
 msgid "Goods"
-msgstr "Торговая авиалиния"
+msgstr "Грузовая канатная дорога"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:930
 msgctxt "GeoDataPlacemark|"
@@ -7155,7 +7155,7 @@ msgstr "Река"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:992
 msgctxt "GeoDataPlacemark|"
 msgid "Weir"
-msgstr "Плотина"
+msgstr "Водослив"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:994
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:996
@@ -7183,7 +7183,7 @@ msgstr "Внутреннее помещение"
 #: src/lib/marble/geodata/data/LonLatParser.cpp:46
 msgctxt "GeoDataCoordinates|North direction terms"
 msgid "*"
-msgstr "C"
+msgstr "С"
 
 #. See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Direction_terms
 #: src/lib/marble/geodata/data/LonLatParser.cpp:48
@@ -7310,13 +7310,17 @@ msgstr "Санная трасса"
 #, qt-format
 msgctxt "QObject|"
 msgid "Could not convert <maximum> child text content to integer. Was: '%1'"
-msgstr "Невозможно преобразовать текст %1 <maximum> в целое."
+msgstr ""
+"Не удалось преобразовать текстовое содержимое <maximum> в целое число. "
+"Получено: «%1»"
 
 #: src/lib/marble/geodata/handlers/dgml/DgmlMinimumTagHandler.cpp:35
 #, qt-format
 msgctxt "QObject|"
 msgid "Could not convert <minimum> child text content to integer. Was: '%1'"
-msgstr "Невозможно преобразовать текст %1 <minimum> в целое"
+msgstr ""
+"Не удалось преобразовать текстовое содержимое <minimum> в целое число. "
+"Получено: «%1»"
 
 #: src/lib/marble/geodata/parser/GeoParser.cpp:86
 #, qt-format
@@ -7379,7 +7383,7 @@ msgstr "Текущее местоположение: %1"
 #: src/lib/marble/GoToDialog.cpp:199
 msgctxt "Marble::TargetModel|"
 msgid "Home"
-msgstr "Домашняя папка"
+msgstr "Домашнее расположение"
 
 #: src/lib/marble/GoToDialog.cpp:358
 msgctxt "Marble::GoToDialog|"
@@ -7407,7 +7411,7 @@ msgid ""
 "Marble/Search\">Details…</a>"
 msgstr ""
 "Введите поисковый запрос и нажмите клавишу «Ввод». <a href=\"https://"
-"userbase.kde.org/Marble/Search\">Подробнее...</a>"
+"userbase.kde.org/Marble/Search\">Подробнее…</a>"
 
 #: src/lib/marble/GoToDialog.ui:93
 msgctxt "GoTo|"
@@ -7616,7 +7620,7 @@ msgstr "Эквидистантная азимутальная проекция"
 #: src/lib/marble/MapViewWidget.cpp:155
 msgctxt "Marble::MapViewWidget|"
 msgid "Perspective Globe view"
-msgstr "Глобус"
+msgstr "Вертикальная перспективная проекция"
 
 #: src/lib/marble/MapViewWidget.cpp:611
 msgctxt "Marble::MapViewWidget|"
@@ -7631,7 +7635,7 @@ msgstr "&Избранный"
 #: src/lib/marble/MapViewWidget.cpp:619
 msgctxt "Marble::MapViewWidget|"
 msgid "&Create a New Map..."
-msgstr "&Создать новую карту"
+msgstr "&Создать новую карту…"
 
 #: src/lib/marble/MapViewWidget.cpp:621
 msgctxt "Marble::MapViewWidget|"
@@ -7770,7 +7774,7 @@ msgstr "Эскиз изображения"
 #: src/lib/marble/MapWizard.cpp:457
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
-msgstr "Базовая клетка"
+msgstr "Базовый тайл"
 
 #: src/lib/marble/MapWizard.cpp:461
 msgctxt "Marble::MapWizard|"
@@ -7879,7 +7883,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.cpp:928
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
-msgstr "Укажите эскиз изображения"
+msgstr "Укажите изображение для предварительного просмотра."
 
 #: src/lib/marble/MapWizard.cpp:1424
 msgctxt "Marble::MapWizard|"
@@ -7922,7 +7926,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:20
 msgctxt "MapWizard|"
 msgid "Map Theme Creation Wizard"
-msgstr "Мастер создания оформлений карт"
+msgstr "Мастер создания тем карт"
 
 #: src/lib/marble/MapWizard.ui:33
 msgctxt "MapWizard|"
@@ -7965,9 +7969,9 @@ msgstr ""
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
 "p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Мы поможем вам создать "
-"оформление карты для Marble. В результате вы получите собственную карту, "
-"которую возможно будет просмотреть.</p>\n"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Мастер поможет создать "
+"тему карты для Marble. В результате получится собственная карта, которую "
+"можно просматривать в Marble.</p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Укажите источник данных "
 "для темы карты:</p>\n"
@@ -8108,7 +8112,7 @@ msgctxt "MapWizard|"
 msgid ""
 "The order in which multiple layers are selected directly affects their "
 "rendering order."
-msgstr "Порядок выбора слоёв напрямую влияет на порядок их обработки."
+msgstr "Порядок выбора слоёв напрямую влияет на порядок их отрисовки."
 
 #: src/lib/marble/MapWizard.ui:297
 msgctxt "MapWizard|"
@@ -8137,7 +8141,7 @@ msgstr "Проекция тайлов:"
 #: src/lib/marble/MapWizard.ui:321
 msgctxt "MapWizard|"
 msgid "Indicates the projection in which the tiles are rendered."
-msgstr "Определяет проекцию, в которой обрабатываются тайлы."
+msgstr "Определяет проекцию, в которой отрисовываются тайлы."
 
 #: src/lib/marble/MapWizard.ui:344
 msgctxt "MapWizard|"
@@ -8182,7 +8186,7 @@ msgstr "Адрес сервера XYZ"
 #: src/lib/marble/MapWizard.ui:462
 msgctxt "MapWizard|"
 msgid "The XYZ server needs to provide map tiles in Mercator projection."
-msgstr "Серверу XYZ требуется предоставить тайлы карты в проекции Меркатора."
+msgstr "Сервер XYZ должен предоставлять тайлы карты в проекции Меркатора."
 
 #: src/lib/marble/MapWizard.ui:479
 msgctxt "MapWizard|"
@@ -8295,17 +8299,17 @@ msgstr ""
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 "family:'Sans Serif'; font-weight:600;\">Схема URL для индексированных "
-"клеток</span></p>\n"
+"тайлов</span></p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 "family:'Sans Serif';\">Введите URL-адрес, используемый для загрузки "
-"отдельных клеток. Используйте заполнители </span><span style=\" font-"
+"отдельных тайлов. Используйте заполнители </span><span style=\" font-"
 "family:'Sans Serif'; font-style:italic;\">{x}</span><span style=\" font-"
 "family:'Sans Serif';\">, </span><span style=\" font-family:'Sans Serif'; "
 "font-style:italic;\">{y}</span><span style=\" font-family:'Sans Serif';\"> и "
 "</span><span style=\" font-family:'Sans Serif'; font-style:italic;"
 "\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\"> для ссылки "
-"на клетку из индекса.</span></p></body></html>"
+"на тайл из индекса.</span></p></body></html>"
 
 #: src/lib/marble/MapWizard.ui:651
 msgctxt "MapWizard|"
@@ -8332,7 +8336,7 @@ msgid ""
 "span></p></body></html>"
 msgstr ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-"REC-html40/strict.dtd\"> \n"
+"REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -8355,7 +8359,7 @@ msgstr "Заголовок карты:"
 #: src/lib/marble/MapWizard.ui:720
 msgctxt "MapWizard|"
 msgid "A short concise name for your map theme."
-msgstr "Краткое название для создаваемого оформления карты."
+msgstr "Краткое название для создаваемой темы карты."
 
 #: src/lib/marble/MapWizard.ui:727 src/lib/marble/MapWizard.ui:950
 msgctxt "MapWizard|"
@@ -8370,7 +8374,7 @@ msgstr "Идентификатор темы карты в нижнем реги�
 #: src/lib/marble/MapWizard.ui:740
 msgctxt "MapWizard|"
 msgid "The folder name of your new theme."
-msgstr "Имя папки для нового оформления."
+msgstr "Имя папки для новой темы."
 
 #: src/lib/marble/MapWizard.ui:753
 msgctxt "MapWizard|"
@@ -8384,9 +8388,9 @@ msgid ""
 "about the purpose, origin, copyright and license of the data used in your "
 "map theme."
 msgstr ""
-"Краткое описание оформления карты. Здесь вы можете указать информацию о "
-"назначении, происхождении, авторских правах и лицензии на данные, "
-"используемые в вашей теме карты."
+"Краткое описание темы карты. Здесь можно указать информацию о назначении, "
+"происхождении, авторских правах и лицензии на данные, используемые в теме "
+"карты."
 
 #: src/lib/marble/MapWizard.ui:775
 msgctxt "MapWizard|"
@@ -8398,7 +8402,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:788 src/lib/marble/MapWizard.ui:990
 msgctxt "MapWizard|"
 msgid "Preview Image:"
-msgstr "Просмотр изображения:"
+msgstr "Изображение для предпросмотра:"
 
 #: src/lib/marble/MapWizard.ui:803
 msgctxt "MapWizard|"
@@ -8413,7 +8417,7 @@ msgstr "Изменить…"
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
 msgid "<b>Optional: Addition of a Map Key</b>"
-msgstr "<b>Необязательно: добавление ключа карты</b>"
+msgstr "<b>Необязательно: добавление легенды карты</b>"
 
 #: src/lib/marble/MapWizard.ui:864
 msgctxt "MapWizard|"
@@ -8476,12 +8480,12 @@ msgstr "Здесь указывается название карты."
 #: src/lib/marble/MapWizard.ui:970
 msgctxt "MapWizard|"
 msgid "Map Theme:"
-msgstr "Оформление карты:"
+msgstr "Тема карты:"
 
 #: src/lib/marble/MapWizard.ui:977
 msgctxt "MapWizard|"
 msgid "Map theme goes here."
-msgstr "Здесь указывается оформление карты."
+msgstr "Здесь указывается тема карты."
 
 #: src/lib/marble/MapWizard.ui:1002
 msgctxt "MapWizard|"
@@ -8529,8 +8533,8 @@ msgid ""
 "tu-berlin.de</a><br /><i>WMS Support, Mobile, Performance</i></p>"
 msgstr ""
 "<p>Bernhard Beschow <a href=\"mailto:bbeschow@cs.tu-berlin.de\">bbeschow@cs."
-"tu-berlin.de</a><br /><i>Поддержка WMS, исправления производительности, "
-"версия для мобильных</i></p>"
+"tu-berlin.de</a><br /><i>Поддержка WMS, версия для мобильных устройств, "
+"производительность</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:81
 msgctxt "QObject|"
@@ -8548,8 +8552,8 @@ msgid ""
 "<p>Thibaut Gridel <a href=\"mailto:tgridel@free.fr\">tgridel@free.fr</a><br /"
 "><i>Geodata</i></p>"
 msgstr ""
-"<p>Тибо́ Гридель (Thibaut Gridel) <a href=\"mailto:tgridel@free.fr"
-"\">tgridel@free.fr</a><br /><i>Геоданные</i></p>"
+"<p>Thibaut Gridel <a href=\"mailto:tgridel@free.fr\">tgridel@free.fr</a><br /"
+"><i>Геоданные</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:85
 msgctxt "QObject|"
@@ -8630,7 +8634,7 @@ msgid ""
 "de</a><br /><i>Bugfixes</i></p>"
 msgstr ""
 "<p>Eckhart W&ouml;rner <a href=\"mailto:kde@ewsoftware.de\">kde@ewsoftware."
-"de</a> <br /><i>Исправление ошибок</i></p>"
+"de</a><br /><i>Исправление ошибок</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:103
 msgctxt "QObject|"
@@ -8694,7 +8698,7 @@ msgid ""
 "a><br /><i>Original Co-Maintainer</i></p>"
 msgstr ""
 "<p>Inge Wallin <a href=\"mailto:inge@lysator.liu.se\">inge@lysator.liu.se</"
-"a><br /><i>Первоначальный помощник сопровождающего</i></p>"
+"a><br /><i>Один из первых сопровождающих</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:117
 msgctxt "QObject|"
@@ -8751,7 +8755,9 @@ msgctxt "QObject|"
 msgid ""
 "<p> The Marble Team would like to thank its members who participated in ESA "
 "SoCiS for their successful work on Marble:</p>"
-msgstr "<p>Команда Marble благодарит участвовавших в ESA SoCiS:</p>"
+msgstr ""
+"<p> Команда Marble благодарит участников ESA SoCiS за успешную работу над "
+"Marble:</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:129
 #: src/lib/marble/MarbleAboutDialog.cpp:181
@@ -8820,7 +8826,7 @@ msgid ""
 "Marble </i></p>"
 msgstr ""
 "<p>Marek Hakala, <a href=\"mailto:hakala.marek@gmail.com\">hakala."
-"marek@gmail.com</a><br /><i>Проект: просмотр солнечных и лунных затмений в "
+"marek@gmail.com</a><br /><i>Проект: показ солнечных и лунных затмений в "
 "Marble</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:141
@@ -8867,7 +8873,9 @@ msgctxt "QObject|"
 msgid ""
 "<p> The Marble Team would like to thank its members who participated in the "
 "Google Code-in for their successful work on Marble:</p>"
-msgstr "<p>Команда Marble благодарит участвовавших в Google Code-In:</p>"
+msgstr ""
+"<p> Команда Marble благодарит участников Google Code-in за успешную работу "
+"над Marble:</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:153
 #: src/lib/marble/MarbleAboutDialog.cpp:159
@@ -8877,7 +8885,7 @@ msgid ""
 "Ilya Kowalewski <a href=\"mailto:illya.kovalevskyy@gmail.com\">illya."
 "kovalevskyy@gmail.com</a><br />"
 msgstr ""
-"Илья Ковалевский <a href=\"mailto:illya.kovalevskyy@gmail.com\">illya."
+"Ilya Kowalewski <a href=\"mailto:illya.kovalevskyy@gmail.com\">illya."
 "kovalevskyy@gmail.com</a><br />"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:154
@@ -8887,7 +8895,7 @@ msgid ""
 "Mikhail Ivchenko <a href=\"mailto:ematirov@gmail.com\">ematirov@gmail.com</"
 "a><br />"
 msgstr ""
-"Михаил Ивченко <a href=\"mailto:ematirov@gmail.com\">ematirov@gmail.com</"
+"Mikhail Ivchenko <a href=\"mailto:ematirov@gmail.com\">ematirov@gmail.com</"
 "a><br />"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:155
@@ -8896,7 +8904,7 @@ msgid ""
 "Sergey Popov <a href=\"mailto:sergobot256@gmail.com\">sergobot256@gmail.com</"
 "a><br />"
 msgstr ""
-"Сергей Попов <a href=\"mailto:sergobot256@gmail.com\">sergobot256@gmail.com</"
+"Sergey Popov <a href=\"mailto:sergobot256@gmail.com\">sergobot256@gmail.com</"
 "a><br />"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:156
@@ -8930,8 +8938,8 @@ msgid ""
 "Mohammed Nafees <a href=\"mailto:nafees.technocool@gmail.com\">nafees."
 "technocool@gmail.com</a></p><br />"
 msgstr ""
-"Мохаммед Нафиз (Mohammed Nafees )<a href=\"mailto:nafees.technocool@gmail.com"
-"\">nafees.technocool@gmail.com</a></p><br />"
+"Mohammed Nafees <a href=\"mailto:nafees.technocool@gmail.com\">nafees."
+"technocool@gmail.com</a></p><br />"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:166
 msgctxt "QObject|"
@@ -8939,16 +8947,15 @@ msgid ""
 "Mayank Madan <a href=\"mailto:maddiemadan@gmail.com\">maddiemadan@gmail.com</"
 "a><br />"
 msgstr ""
-"Маянк Мадан (Mayank Madan )<a href=\"mailto:maddiemadan@gmail.com"
-"\">maddiemadan@gmail.com</a><br />"
+"Mayank Madan <a href=\"mailto:maddiemadan@gmail.com\">maddiemadan@gmail.com</"
+"a><br />"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:167
 msgctxt "QObject|"
 msgid ""
 "Timothy Lanzi <a href=\"mailto:trlanzi@gmail.com\">trlanzi@gmail.com</a></p>"
 msgstr ""
-"Тимоти Ланци (Timothy Lanzi )<a href=\"mailto:trlanzi@gmail.com"
-"\">trlanzi@gmail.com</a></p>"
+"Timothy Lanzi <a href=\"mailto:trlanzi@gmail.com\">trlanzi@gmail.com</a></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:168
 msgctxt "QObject|"
@@ -9175,7 +9182,7 @@ msgid ""
 "konstantin@gmail.com</a><br /><i>Project: OpenStreetMap Vector Rendering</"
 "i></p>"
 msgstr ""
-"<p>Константин Облаухов <a href=\"oblaukhov.konstantin@gmail.com\">oblaukhov."
+"<p>Konstantin Oblaukhov <a href=\"oblaukhov.konstantin@gmail.com\">oblaukhov."
 "konstantin@gmail.com</a><br /><i>Проект: векторная отрисовка OpenStreetMap</"
 "i></p>"
 
@@ -9218,7 +9225,7 @@ msgid ""
 "\">akssps011@gmail.com</a><br /><i>Project: Turn-by-turn Navigation</i></p>"
 msgstr ""
 "<p>Siddharth Srivastava <a href=\"mailto:akssps011@gmail.com"
-"\">akssps011@gmail.com</a> <br /><i>Проект: Навигация turn-by-turn</i></p>"
+"\">akssps011@gmail.com</a><br /><i>Проект: пошаговая навигация</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:228
 msgctxt "QObject|"
@@ -9255,7 +9262,7 @@ msgid ""
 "a><br /><i>Project: Vector Tiles for Marble</i></p>"
 msgstr ""
 "<p>Patrick Spendrin <a href=\"pspendrin@gmail.com\">pspendrin@gmail.com</"
-"a><br /><i>Проект: векторные клетки для Marble</i></p>"
+"a><br /><i>Проект: векторные тайлы для Marble</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:236
 msgctxt "QObject|"
@@ -9281,8 +9288,8 @@ msgid ""
 "\")</i></p>"
 msgstr ""
 "<p>Carlos Licea <a href=\"mailto:carlos.licea@kdemail.net\">carlos."
-"licea@kdemail.net</a><br /><i>Проект: Равнопромежуточная проекция (\"плоская "
-"карта\")</i></p>"
+"licea@kdemail.net</a><br /><i>Проект: равнопромежуточная проекция («плоская "
+"карта»)</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:241
 msgctxt "QObject|"
@@ -9308,8 +9315,8 @@ msgid ""
 "<p>... and of course we'd like to thank the people at Google Inc. for making "
 "these projects possible.</p>"
 msgstr ""
-"<p>... и, конечно, мы благодарим сотрудников Google Inc. за возможность "
-"существования этих проектов..</p>"
+"<p>… и, конечно, мы благодарим сотрудников Google Inc., благодаря которым "
+"эти проекты стали возможны.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:246
 msgctxt "QObject|"
@@ -9333,8 +9340,8 @@ msgid ""
 "<p> We'd especially like to thank John Layt who provided an important source "
 "of inspiration by creating Marble's predecessor \"Kartographer\".</p>"
 msgstr ""
-"<p>Выражаем особую благодарность John Layt за его проект «Kartographer», "
-"предшественник и источник вдохновения для Marble</p>"
+"<p>Выражаем особую благодарность John Layt за его проект «Kartographer» — "
+"предшественник Marble и важный источник вдохновения.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:259
 msgctxt "QObject|"
@@ -9351,7 +9358,7 @@ msgid ""
 msgstr ""
 "<p><i>Blue Marble Next Generation (500 м/пиксель)</i><br />Обсерватория "
 "Центра космических полётов им. Годдарда, NASA, США <a href=\"http://"
-"earthobservatory.nasa. gov/Newsroom/BlueMarble/\">http://earthobservatory."
+"earthobservatory.nasa.gov/Newsroom/BlueMarble/\">http://earthobservatory."
 "nasa.gov/Newsroom/BlueMarble/</a></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:264
@@ -9361,10 +9368,9 @@ msgid ""
 "and Christopher Elvidge of NOAA NGDC. Image by Craig Mayhew and Robert "
 "Simmon, NASA GSFC.</p>"
 msgstr ""
-"<p><i>Earth's City Lights</i><br />Данные любезно предоставил Марк Имхофф "
-"(Marc Imhoff) из NASA GSFC и Кристофер Элвидж (Christopher Elvidge) из NOAA "
-"NGDC. Фото: Крейг Мейхью (Craig Mayhew) и Роберт Симмон (Robert Simmon), "
-"NASA GSFC.</p>"
+"<p><i>Earth's City Lights</i><br />Данные любезно предоставили Marc Imhoff "
+"(NASA GSFC) и Christopher Elvidge (NOAA NGDC). Изображение: Craig Mayhew и "
+"Robert Simmon, NASA GSFC.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:267
 msgctxt "QObject|"
@@ -9373,9 +9379,9 @@ msgid ""
 "Jet Propulsion Laboratory <a href=\"https://www2.jpl.nasa.gov/srtm/"
 "\">https://www2.jpl.nasa.gov/srtm/</a></p>"
 msgstr ""
-"<p><i>Радиолокационная топографическая миссия шаттла (SRTM30, 1 км/пиксел)</"
-"i><br />Лаборатория реактивного движения НАСА <a href=\"https://www2.jpl."
-"nasa.gov/srtm/\">http://www2.jpl.nasa.gov/srtm/</a></p>"
+"<p><i>Радиолокационная топографическая миссия шаттла (SRTM30, 1 км/пиксель)</"
+"i><br />Лаборатория реактивного движения NASA <a href=\"https://www2.jpl."
+"nasa.gov/srtm/\">https://www2.jpl.nasa.gov/srtm/</a></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:270
 msgctxt "QObject|"
@@ -9383,9 +9389,8 @@ msgid ""
 "<p><i>Micro World Data Bank in Polygons (\"MWDB-POLY / MWDBII\")</i><br /"
 ">CIA ; Global Associates, Ltd.; Fred Pospeschil and Antonio Rivera</p>"
 msgstr ""
-"<p><i>Micro World Data Bank in Polygons (\"MWDB-POLY / MWDBII\")</i><br /"
-">CIA ; Global Associates, Ltd.; Фред Поспешил (Fred Pospeschil) и Антонио "
-"Ривера (Antonio Rivera)</p>"
+"<p><i>Micro World Data Bank in Polygons (&laquo;MWDB-POLY / MWDBII&raquo;)</"
+"i><br />CIA ; Global Associates, Ltd.; Fred Pospeschil и Antonio Rivera</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:272
 msgctxt "QObject|"
@@ -9405,15 +9410,15 @@ msgstr ""
 "<p><i>Карты температуры и осадков (июль и декабрь)</i><br />Комбинация двух "
 "наборов данных:<ul><li>Legates, D.R. и Willmott, C.J. 1989. Среднемесячная "
 "температура приземного слоя воздуха и осадки. Цифровые растровые данные на "
-"географической сетке с шагом в 5 градусов, (широта/долгота, размер 361x721, "
-"центроид рассчитан по 5-ти градусным меридианам) Национальный центр "
-"атмосферных исследований (Боулдер, Колорадо,США). <a href=\"http://www.ngdc."
-"noaa.gov/ecosys/cdroms/ged_iia/datasets/a04/lw.htm\">http://www.ngdc.noaa."
-"gov/ecosys/cdroms/ged_iia/datasets/a04/lw.htm</a></li><li>CRU CL 2.0: New, "
-"M., Lister, D., Hulme, M. and Makin, I., 2002: A high-resolution data set of "
-"surface climate over global land areas. Climate Research 21.<a href="
-"\"https://crudata.uea.ac.uk/cru/data/hrg\">https://crudata.uea.ac.uk/cru/"
-"data/hrg</a></li></ul></p>"
+"географической сетке (широта/долгота) 361×721 с шагом 0,5 градуса (центроиды "
+"привязаны к меридианам через 0,5 градуса). Национальный центр атмосферных "
+"исследований (Боулдер, Колорадо, США). <a href=\"http://www.ngdc.noaa.gov/"
+"ecosys/cdroms/ged_iia/datasets/a04/lw.htm\">http://www.ngdc.noaa.gov/ecosys/"
+"cdroms/ged_iia/datasets/a04/lw.htm</a></li><li>CRU CL 2.0: New, M., Lister, "
+"D., Hulme, M. and Makin, I., 2002: A high-resolution data set of surface "
+"climate over global land areas. Climate Research 21.<a href=\"https://"
+"crudata.uea.ac.uk/cru/data/hrg\">https://crudata.uea.ac.uk/cru/data/hrg</a></"
+"li></ul></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:284
 msgctxt "QObject|"
@@ -9433,7 +9438,7 @@ msgid ""
 msgstr ""
 "<p><i>OpenStreetMap</i><br />Карты улиц, используемые в Marble, взяты с "
 "сайта проекта <a href=\"https://www.openstreetmap.org\">OpenStreetMap</a> "
-"(&laquo;OSM&raquo;). OSM &mdash; открытое сообщество, создающее бесплатные "
+"(&laquo;OSM&raquo;). OSM &mdash; открытое сообщество, создающее свободные "
 "редактируемые карты.<br /><i>Лицензия</i>: информация из OpenStreetMap может "
 "быть использована на условиях лицензии <a href=\"https://wiki.openstreetmap."
 "org/index.php/OpenStreetMap_License\">Creative Commons Attribution-"
@@ -9463,7 +9468,7 @@ msgid ""
 "a> license.</p>"
 msgstr ""
 "<p>Некоторые значки были взяты с ресурса <a href=\"https://fortawesome."
-"github.com/Font-Awesome\">Font Awesome</a>.  Эти значки можно свободно "
+"github.com/Font-Awesome\">Font Awesome</a>. Эти значки можно свободно "
 "использовать на условиях лицензии <a href=\"https://creativecommons.org/"
 "licenses/by/3.0/\">CC BY 3.0</a>.</p>"
 
@@ -9498,7 +9503,7 @@ msgstr ""
 "маршрутов, используемых в Marble, предоставлены проектом <a href=\"http://"
 "project-osrm.org\">Open Source Routing Machine</a> (&laquo;OSRM&raquo;). "
 "<br /><i>Лицензия</i>: данные Open Source Routing Machine могут свободно "
-"использоваться на условиях лицензии<a href=\"https://wiki.openstreetmap.org/"
+"использоваться на условиях лицензии <a href=\"https://wiki.openstreetmap.org/"
 "index.php/OpenStreetMap_License\">Creative Commons Attribution-ShareAlike "
 "2.0</a>.</p>"
 
@@ -9514,15 +9519,15 @@ msgid ""
 "MapQuest routing service is subject to the <a href=\"https://info.mapquest."
 "com/terms-of-use/\">MapQuest terms of use</a>.</p>"
 msgstr ""
-"<p><i>MapQuest</i><br />Некоторые из загружаемых маршрутов, используемых в  "
+"<p><i>MapQuest</i><br />Некоторые из загружаемых маршрутов, используемых в "
 "Marble, предоставлены проектом <a href=\"https://www.mapquest.com/"
-"\">MapQuest</a>, а также API и Web-службами Open Data Map.<br />Направления "
-"любезно предоставлены MapQuest на основе данных OpenStreetMap, свободно "
-"используемых на условиях лицензии <a href=\"https://wiki.openstreetmap.org/"
-"index.php/OpenStreetMap_License\">Creative Commons Attribution-ShareAlike "
-"2.0</a>. Использование маршрутных служб MapQuest регламентируется <a href="
-"\"https://info.mapquest.com/terms-of-use/\">условиями использования "
-"MapQuest</a>.</p>"
+"\">MapQuest</a>, а также API и Web-службами Open Data Map.<br />Указания по "
+"маршруту любезно предоставлены MapQuest на основе данных OpenStreetMap, "
+"свободно используемых на условиях лицензии <a href=\"https://wiki."
+"openstreetmap.org/index.php/OpenStreetMap_License\">Creative Commons "
+"Attribution-ShareAlike 2.0</a>. Использование маршрутных служб MapQuest "
+"регламентируется <a href=\"https://info.mapquest.com/terms-of-use/"
+"\">условиями использования MapQuest</a>.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:319
 msgctxt "QObject|"
@@ -9593,7 +9598,7 @@ msgid ""
 "(1991)<a href=\"https://heasarc.gsfc.nasa.gov/W3Browse/star-catalog/bsc5p."
 "html\"> https://heasarc.gsfc.nasa.gov</a></p>"
 msgstr ""
-"<p><i>Каталог ярких звёзд</i><br />, 5-е издание (предварительная версия). "
+"<p><i>Каталог ярких звёзд</i><br />5-е издание (предварительная версия). "
 "Hoffleit D., Warren Jr W.H., Astronomical Data Center, NSSDC/ADC (1991)<a "
 "href=\"https://heasarc.gsfc.nasa.gov/W3Browse/star-catalog/bsc5p.html\"> "
 "https://heasarc.gsfc.nasa.gov</a></p>"
@@ -9783,12 +9788,12 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">В Marble используется два "
-"типа кэш-памяти: физическая память, необходимая для хранения данных карты в "
-"памяти компьютера, и кэш-память на жёстком диске, используемая для загрузки "
-"содержимого из Интернета (например, статьи из Википедии или сведения об "
-"объектах на карте). Уменьшите второе значение, если хотите сэкономить место "
-"на жёстком диске ценой более частого использования Интернета. </p></body></"
-"html>"
+"кэша: кэш в физической памяти, необходимый для хранения данных карты в "
+"памяти компьютера (чем больше его размер, тем быстрее отклик приложения), и "
+"кэш на жёстком диске, в котором хранится содержимое, загруженное из "
+"Интернета (например, данные Википедии или данные карт). Уменьшите второе "
+"значение, если хотите сэкономить место на жёстком диске и активное "
+"использование Интернета не проблема. </p></body></html>"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:23
 msgctxt "MarbleCacheSettingsWidget|"
@@ -9956,7 +9961,7 @@ msgstr "Пароль:"
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:197
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Test Login"
-msgstr "Тестовый вход"
+msgstr "Проверить вход"
 
 #: src/lib/marble/MarbleGlobal.h:243
 msgctxt "Marble|"
@@ -10055,7 +10060,7 @@ msgstr ""
 "будет в точности следовать за указателем; это может привести, например, к "
 "ситуации, когда северный полюс переместится из верхней части, что создаст "
 "путаницу. По умолчанию в Marble северный полюс всегда находится в верхней "
-"части глобуса, что приводит к модели поведения при перетаскивания, при "
+"части глобуса, что приводит к модели поведения при перетаскивании, при "
 "которой место под указателем мыши слегка &laquo;отделяется&raquo; от "
 "указателя. </p></body></html>"
 
@@ -10116,7 +10121,7 @@ msgstr "Использовать правую кнопку мыши для вр�
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:99
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "&Mouse view rotation"
-msgstr "&Вращение вида мышкой"
+msgstr "&Вращение вида мышью"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:142
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10238,7 +10243,7 @@ msgstr ""
 #: src/lib/marble/MarbleNavigator.ui:109
 msgctxt "MarbleNavigator|"
 msgid "Home"
-msgstr "Домашняя папка"
+msgstr "Домашнее расположение"
 
 #: src/lib/marble/MarbleNavigator.ui:116 src/lib/marble/MarbleNavigator.ui:128
 msgctxt "MarbleNavigator|"
@@ -10346,7 +10351,7 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 "family:'Sans Serif';\">Это &laquo;машинное отделение&raquo; Marble для "
 "продвинутых пользователей. Здесь возможно добавить или убрать "
-"функциоальность, предоставляемую посредством подключаемых модулей. </span></"
+"функциональность, предоставляемую посредством подключаемых модулей. </span></"
 "p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
@@ -10380,7 +10385,7 @@ msgstr "Часовой пояс системы"
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:51
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Choose Time zone"
-msgstr "Настраиваемый часовой пояс:"
+msgstr "Настраиваемый часовой пояс"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:68
 msgctxt "MarbleTimeSettingsWidget|"
@@ -10440,7 +10445,7 @@ msgstr "Вьетнамское время (UTC+7:00)"
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:123
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "China Taiwan Time"
-msgstr "Гонконгское время (UTC+8:00)"
+msgstr "Китайско-тайваньское время (UTC+8:00)"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:128
 msgctxt "MarbleTimeSettingsWidget|"
@@ -10460,7 +10465,7 @@ msgstr "Восточноавстралийское время (UTC+10:00)"
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:143
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Solomon Standard Time"
-msgstr "Норфолкское островное время (UTC+11:00)"
+msgstr "Время Соломоновых островов (UTC+11:00)"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:148
 msgctxt "MarbleTimeSettingsWidget|"
@@ -10470,7 +10475,7 @@ msgstr "Стандартное новозеландское время (UTC+12:0
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:153
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Midway Islands Time"
-msgstr "Стандартное время Самоа (UTC−11:00)"
+msgstr "Время островов Мидуэй (UTC−11:00)"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:158
 msgctxt "MarbleTimeSettingsWidget|"
@@ -10490,7 +10495,7 @@ msgstr "Тихоокеанское время (UTC−8:00)"
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:173
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Phoenix Standard Time"
-msgstr "Время на островах Феникс (UTC+13:00)"
+msgstr "Время Финикса (UTC−7:00)"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:178
 msgctxt "MarbleTimeSettingsWidget|"
@@ -10510,7 +10515,7 @@ msgstr "Североамериканское восточное время (UTC�
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:193
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Indiana Eastern Standard Time"
-msgstr "Североамериканское восточное время (UTC−5:00)"
+msgstr "Восточное время Индианы (UTC−5:00)"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:198
 msgctxt "MarbleTimeSettingsWidget|"
@@ -10627,7 +10632,7 @@ msgstr ""
 "отображения градусов в координатах: по умолчанию используется обозначение в "
 "виде &laquo;градусы-минуты-секунды&raquo; (например, 54°30'00\"). В качестве "
 "альтернативы возможно выбрать десятичные градусы (например, 54,5°).</p></"
-"body></htm>"
+"body></html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:105
 msgctxt "MarbleViewSettingsWidget|"
@@ -10774,25 +10779,25 @@ msgstr ""
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Названия мест на карте "
-"часто имеют различные названия на разных языках. Возможно выбрать "
-"отображение названия либо на языке пользователя, либо в оригинальном виде. </"
-"p></body></html>"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Места часто имеют разные "
+"названия на разных языках. Метка на карте может показывать название на языке "
+"пользователя или на официальном языке этого места, его письменностью. </p></"
+"body></html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:306
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Custom & Native Language"
-msgstr "Настраиваемый и родной языки"
+msgstr "Язык пользователя и местный язык"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:311
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Custom Language"
-msgstr "Настраиваемый язык"
+msgstr "Язык пользователя"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:316
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Native Language"
-msgstr "Родной язык"
+msgstr "Местный язык"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:340
 msgctxt "MarbleViewSettingsWidget|"
@@ -10838,7 +10843,7 @@ msgstr "Скопировать координаты"
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:114
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Copy geo: URL"
-msgstr "Копирование геоданных: URL"
+msgstr "Скопировать URL geo:"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:123
 msgctxt "Marble::MarbleWidgetPopupMenu|"
@@ -10927,7 +10932,7 @@ msgid ""
 "Marble requires additional software in order to create movies. Please get %1 "
 msgstr ""
 "Для создания фильмов Marble требуется дополнительное программное "
-"обеспечение. Загрузите %1"
+"обеспечение. Установите %1 "
 
 #: src/lib/marble/MovieCapture.cpp:62
 msgctxt "Marble::MovieCapture|"
@@ -10942,7 +10947,7 @@ msgstr "Видеофайлы FLV"
 #: src/lib/marble/MovieCapture.cpp:64
 msgctxt "Marble::MovieCapture|"
 msgid "Matroska (h264)"
-msgstr "Видеофайлы Matroska (H-264)"
+msgstr "Видеофайлы Matroska (H.264)"
 
 #: src/lib/marble/MovieCapture.cpp:65
 msgctxt "Marble::MovieCapture|"
@@ -11154,7 +11159,7 @@ msgstr "Связанные теги"
 #: src/lib/marble/osm/OsmTagEditorWidget_p.cpp:30
 msgctxt "QObject|"
 msgid "Add custom tag..."
-msgstr "Добавить пользовательский тег..."
+msgstr "Добавить пользовательский тег…"
 
 #: src/lib/marble/osm/OsmTagEditorWidget_p.cpp:100
 msgctxt "QObject|"
@@ -11285,7 +11290,7 @@ msgstr "Неизвестная планета"
 #, qt-format
 msgctxt "Marble::PluginAboutDialog|"
 msgid "About %1"
-msgstr "О %1"
+msgstr "О модуле %1"
 
 #: src/lib/marble/PluginAboutDialog.cpp:56
 #, qt-format
@@ -11306,7 +11311,7 @@ msgstr "Разработчик"
 #: src/lib/marble/PluginItemDelegate.cpp:301
 msgctxt "Marble::PluginItemDelegate|"
 msgid "About"
-msgstr "О программе"
+msgstr "О модуле"
 
 #: src/lib/marble/PluginItemDelegate.cpp:314
 msgctxt "Marble::PluginItemDelegate|"
@@ -11422,8 +11427,8 @@ msgid ""
 "in structural geology to plot directional data.</p>"
 msgstr ""
 "<p><b>Равновеликая азимутальная проекция Ламберта</b></p><p>Сферы "
-"применения: использование в структурной геологии для построения графиков о "
-"направлении движения.</p>"
+"применения: используется в структурной геологии для нанесения на диаграммы "
+"данных об ориентации.</p>"
 
 #: src/lib/marble/projections/MercatorProjection.cpp:33
 msgctxt "QObject|"
@@ -11466,9 +11471,9 @@ msgid ""
 "<p><b>Stereographic Projection</b> (\"orthogonal\")</p><p>Applications: Used "
 "for planetary cartography, geology and panorama photography.</p>"
 msgstr ""
-"<p><b>Стереографическая проекция</b> (\"orthogonal\")</p><p>Сферы "
-"применения: использование для планетарной картографии, геологии и панорамной "
-"съёмки.</p>"
+"<p><b>Стереографическая проекция</b> (&laquo;ортогональная&raquo;)</"
+"p><p>Сферы применения: использование для планетарной картографии, геологии и "
+"панорамной съёмки.</p>"
 
 #: src/lib/marble/projections/VerticalPerspectiveProjection.cpp:68
 msgctxt "QObject|"
@@ -11509,7 +11514,7 @@ msgstr "Дата и время"
 #: src/lib/marble/QtMarbleConfigDialog.cpp:128
 msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Routing"
-msgstr "Маршрут"
+msgstr "Прокладка маршрутов"
 
 #: src/lib/marble/QtMarbleConfigDialog.cpp:135
 msgctxt "Marble::QtMarbleConfigDialog|"
@@ -11550,7 +11555,7 @@ msgstr "Текущий маршрут"
 #: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:49
 msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
 msgid "Simulates traveling along the current route."
-msgstr "Эмуляция путешествия по текущему маршруту"
+msgstr "Имитация движения по текущему маршруту."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:249
 msgctxt "QObject|"
@@ -11560,13 +11565,13 @@ msgstr "Въезжайте на круг."
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:257
 msgctxt "QObject|"
 msgid "Take the exit."
-msgstr "Выезд"
+msgstr "Съезжайте."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:259
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the exit towards %1."
-msgstr "Выезд по направлению к %1."
+msgstr "Съезжайте в направлении %1."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:263
 msgctxt "QObject|"
@@ -11583,19 +11588,19 @@ msgstr "Сверните на съезд к %1."
 #, qt-format
 msgctxt "QObject|"
 msgid "Follow the road for %1 %2."
-msgstr "Следуйте по дороге на %1 %2"
+msgstr "Следуйте по дороге %1 %2."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:375
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the %1. exit in the roundabout."
-msgstr "%1 съезд с круга."
+msgstr "Сверните на %1-й съезд с круга."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:377
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the %1. exit in the roundabout into %2."
-msgstr "%1 съезд с круга на %2."
+msgstr "Сверните на %1-й съезд с круга на %2."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:385
 msgctxt "QObject|"
@@ -11605,7 +11610,7 @@ msgstr "Продолжайте в этом направлении."
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:387
 msgctxt "QObject|"
 msgid "Merge."
-msgstr "Слить"
+msgstr "Вливайтесь в поток."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:389
 msgctxt "QObject|"
@@ -11650,23 +11655,23 @@ msgstr "Круто поверните направо."
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:405
 msgctxt "QObject|"
 msgid "Exit the roundabout."
-msgstr "Выезжайте с круга"
+msgstr "Выезжайте с круга."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:413
 msgctxt "QObject|"
 msgid "Take the exit to the left."
-msgstr "Левый съезд."
+msgstr "Съезжайте налево."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:415
 msgctxt "QObject|"
 msgid "Take the exit to the right."
-msgstr "Правый съезд"
+msgstr "Съезжайте направо."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:420
 #, qt-format
 msgctxt "QObject|"
 msgid "Continue onto %1."
-msgstr "Продолжайте движение на %1"
+msgstr "Продолжайте движение по %1."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:422
 #, qt-format
@@ -11678,13 +11683,13 @@ msgstr "Вливайтесь в поток на %1."
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn around onto %1."
-msgstr "Поверните на %1."
+msgstr "Развернитесь на %1."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:426
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn sharp left on %1."
-msgstr "Круто поверните налево к %1."
+msgstr "Круто поверните налево на %1."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:428
 #, qt-format
@@ -11702,7 +11707,7 @@ msgstr "Держитесь левой стороны на %1."
 #, qt-format
 msgctxt "QObject|"
 msgid "Continue on %1."
-msgstr "Продолжайте на %1."
+msgstr "Продолжайте движение по %1."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:434
 #, qt-format
@@ -11720,25 +11725,25 @@ msgstr "Поверните направо на %1."
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn sharp right into %1."
-msgstr "Круто поверните направо к %1."
+msgstr "Круто поверните направо на %1."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:440
 #, qt-format
 msgctxt "QObject|"
 msgid "Exit the roundabout into %2."
-msgstr "Выезжайте с круга на %2"
+msgstr "Выезжайте с круга на %2."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:448
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the exit to the left onto %1."
-msgstr "Съезжайте налево на %1"
+msgstr "Съезжайте налево на %1."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:450
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the exit to the right onto %1."
-msgstr "Съезжайте направо на %1"
+msgstr "Съезжайте направо на %1."
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:114
 #, qt-format
@@ -11755,7 +11760,7 @@ msgstr "%2, %3"
 #: src/lib/marble/routing/RoutingInputWidget.cpp:135
 msgctxt "QObject|"
 msgid "Address or search term..."
-msgstr "Адрес или поисковый запрос..."
+msgstr "Адрес или поисковый запрос…"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:166
 msgctxt "QObject|"
@@ -11765,7 +11770,7 @@ msgstr "Удалить промежуточный пункт"
 #: src/lib/marble/routing/RoutingInputWidget.cpp:183
 msgctxt "QObject|"
 msgid "&Center Map here"
-msgstr "&Центрировать карту"
+msgstr "&Центрировать карту здесь"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:186
 msgctxt "QObject|"
@@ -11775,7 +11780,7 @@ msgstr "Текущее &местоположение"
 #: src/lib/marble/routing/RoutingInputWidget.cpp:189
 msgctxt "QObject|"
 msgid "From &Map..."
-msgstr "Из &карты"
+msgstr "С &карты…"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:193
 msgctxt "QObject|"
@@ -11785,12 +11790,12 @@ msgstr "Из &закладки"
 #: src/lib/marble/routing/RoutingInputWidget.cpp:202
 msgctxt "QObject|"
 msgid "&Home"
-msgstr "&Домашняя папка"
+msgstr "&Домашнее расположение"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:307
 msgctxt "Marble::RoutingInputWidget|"
 msgid "Current Location"
-msgstr "Текущее расположение"
+msgstr "Текущее местоположение"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:481
 msgctxt "Marble::RoutingInputWidget|"
@@ -11805,7 +11810,7 @@ msgstr "&Удалить это место назначения"
 #: src/lib/marble/routing/RoutingLayer.cpp:190
 msgctxt "QObject|"
 msgid "&Export Route..."
-msgstr "&Экспорт маршрута..."
+msgstr "&Экспорт маршрута…"
 
 #: src/lib/marble/routing/RoutingLayer.cpp:754
 msgctxt "Marble::RoutingLayer|"
@@ -11829,13 +11834,14 @@ msgid ""
 "suggested route not to be the most expedient or safest route to your "
 "destination."
 msgstr ""
-"Строительство дороги, погодные условия и другие непредсказуемые условия "
-"могут сделать ваш маршрут не самым ожидаемым или безопасным."
+"Дорожные работы, погода и другие непредвиденные обстоятельства могут "
+"привести к тому, что предложенный маршрут окажется не самым быстрым или "
+"безопасным."
 
 #: src/lib/marble/routing/RoutingManager.cpp:511
 msgctxt "Marble::RoutingManager|"
 msgid "Please use common sense while navigating."
-msgstr "Пожалуйста, используйте здравый смысл во время навигации."
+msgstr "Используйте здравый смысл во время навигации."
 
 #: src/lib/marble/routing/RoutingManager.cpp:512
 msgctxt "Marble::RoutingManager|"
@@ -11850,7 +11856,7 @@ msgstr "Режим сопровождения"
 #: src/lib/marble/routing/RoutingManager.cpp:514
 msgctxt "Marble::RoutingManager|"
 msgid "Show again"
-msgstr "Показать снова"
+msgstr "Показывать снова"
 
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:14
 msgctxt "RoutingProfileSettingsDialog|"
@@ -11950,12 +11956,12 @@ msgstr "Переместить &ниже"
 #: src/lib/marble/routing/RoutingWidget.cpp:189
 msgctxt "QObject|"
 msgid "Get Directions"
-msgstr "Получить подсказки"
+msgstr "Проложить маршрут"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:190
 msgctxt "QObject|"
 msgid "Retrieve routing instructions for the selected destinations."
-msgstr "Получить маршруты для выбранных назначений."
+msgstr "Получить указания по маршруту для выбранных пунктов назначения."
 
 #: src/lib/marble/routing/RoutingWidget.cpp:200
 msgctxt "QObject|"
@@ -11986,7 +11992,7 @@ msgstr "Предварительный просмотр маршрута"
 #: src/lib/marble/routing/RoutingWidget.cpp:240
 msgctxt "QObject|"
 msgid "Upload to Cloud"
-msgstr "Загрузка в облако"
+msgstr "Загрузить в облако"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:243
 #: src/lib/marble/routing/RoutingWidget.cpp:244
@@ -12054,12 +12060,12 @@ msgstr "Сохранить маршрут"
 #: src/lib/marble/routing/RoutingWidget.cpp:694
 msgctxt "Marble::RoutingWidget|"
 msgid "KML files (*.kml)"
-msgstr "файлы KML (*.kml)"
+msgstr "Файлы KML (*.kml)"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:712
 msgctxt "Marble::RoutingWidget|"
 msgid "Uploading route..."
-msgstr "Загрузка маршрута..."
+msgstr "Загрузка маршрута…"
 
 #: src/lib/marble/routing/RoutingWidget.ui:46
 msgctxt "RoutingWidget|"
@@ -12130,7 +12136,7 @@ msgstr "нм"
 #, qt-format
 msgctxt "Marble::RoutingRunner|journey duration"
 msgid "%1:%2 h"
-msgstr "%1:%2"
+msgstr "%1:%2 ч"
 
 #: src/lib/marble/SearchInputWidget.cpp:73
 #: src/lib/marble/SearchInputWidget.cpp:96
@@ -12153,22 +12159,22 @@ msgstr "Результаты поиска"
 #, qt-format
 msgctxt "QObject|"
 msgid "Search for '%1'"
-msgstr "Искать для '%1'"
+msgstr "Искать «%1»"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:37
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Audio location"
-msgstr "Аудио расположения"
+msgstr "Расположение аудиофайла"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:67
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Select sound files..."
-msgstr "Выберите звуковые файлы..."
+msgstr "Выбор звуковых файлов…"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:67
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Supported Sound Files (*.mp3 *.ogg *.wav)"
-msgstr "Все поддерживаемые аудиофайлы (*.mp3 *.ogg *.wav)"
+msgstr "Поддерживаемые звуковые файлы (*.mp3 *.ogg *.wav)"
 
 #: src/lib/marble/SunControlWidget.ui:20
 msgctxt "SunControlWidget|"
@@ -12240,10 +12246,10 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"weight:600;\">Внимание: прокрутка карты теперь отключена! </span></p>\n"
+"weight:600;\">Внимание: прокрутка карты отключена. </span></p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Снимите флажок &laquo;"
-"Зафиксировать положение карты в подсолнечной точке &raquo; для разрешения "
+"Зафиксировать положение карты в подсолнечной точке&raquo; для разрешения "
 "просмотра других мест на карте.</p></body></html>"
 
 #: src/lib/marble/TileCreatorDialog.ui:20
@@ -12272,7 +12278,7 @@ msgstr ""
 "спутника</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
 "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Вид на "
 "Землю из космоса. Карта основана на коллекции снимков &laquo;Blue Marble "
-"Next Generation&raquo; агенства НАСА. Авторские права: Обсерватория Земли "
+"Next Generation&raquo; агентства НАСА. Авторские права: Обсерватория Земли "
 "НАСА (NASA Earth Observatory).</p></body></html>"
 
 #: src/lib/marble/TileCreatorDialog.ui:517
@@ -12337,7 +12343,7 @@ msgstr " с"
 #: src/lib/marble/TimeControlWidget.ui:65
 msgctxt "TimeControlWidget|"
 msgid "Now"
-msgstr "Текущие"
+msgstr "Сейчас"
 
 #: src/lib/marble/TimeControlWidget.ui:123
 msgctxt "TimeControlWidget|"
@@ -12421,7 +12427,7 @@ msgstr "Запись видео"
 #: src/lib/marble/TourCaptureDialog.ui:65
 msgctxt "TourCaptureDialog|"
 msgid "Destination video"
-msgstr "Выходной видеофайл:"
+msgstr "Выходной видеофайл"
 
 #: src/lib/marble/TourCaptureDialog.ui:81
 msgctxt "TourCaptureDialog|"
@@ -12689,7 +12695,7 @@ msgstr "FlightGear"
 #: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:47
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
 msgid "Reports the position of running flightgear application."
-msgstr "Сообщает местоположение работающего приложения flightgear"
+msgstr "Сообщает местоположение работающего приложения FlightGear."
 
 #: src/plugins/positionprovider/geoclue/GeoCluePositionProviderPlugin.cpp:14
 msgctxt "Marble::GeoCluePositionProviderPlugin|"
@@ -12704,7 +12710,7 @@ msgstr "GeoClue"
 #: src/plugins/positionprovider/geoclue/GeoCluePositionProviderPlugin.cpp:29
 msgctxt "Marble::GeoCluePositionProviderPlugin|"
 msgid "Reports the position via the GeoClue Location Framework."
-msgstr "Сообщает местоположение при помощи GeoClue Location Framework"
+msgstr "Сообщает местоположение при помощи GeoClue Location Framework."
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:66
 msgctxt "Marble::GpsdConnection|"
@@ -12714,7 +12720,7 @@ msgstr "Внутренняя ошибка gpsd (невозможно получ�
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:69
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (cannot get host entry)"
-msgstr "Внутренняя ошибка gpsd (невозможно получить информацию о хосте)"
+msgstr "Внутренняя ошибка gpsd (невозможно получить информацию об узле)"
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:72
 msgctxt "Marble::GpsdConnection|"
@@ -12739,7 +12745,7 @@ msgstr "Gpsd не нашёл устройств GPS."
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:84
 msgctxt "Marble::GpsdConnection|"
 msgid "Unknown error when opening gpsd connection"
-msgstr "Неизвестная ошибка при установлении соединения gpsd"
+msgstr "Неизвестная ошибка при подключении к gpsd"
 
 #: src/plugins/positionprovider/gpsd/GpsdPositionProviderPlugin.cpp:20
 msgctxt "Marble::GpsdPositionProviderPlugin|"
@@ -12754,7 +12760,7 @@ msgstr "gpsd"
 #: src/plugins/positionprovider/gpsd/GpsdPositionProviderPlugin.cpp:40
 msgctxt "Marble::GpsdPositionProviderPlugin|"
 msgid "Reports the position of a GPS device."
-msgstr "Сообщает местоположение при помощи GPS"
+msgstr "Сообщает местоположение устройства GPS."
 
 #: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:48
 msgctxt "Marble::QtPositioningPositionProviderPlugin|"
@@ -12803,12 +12809,12 @@ msgstr "&Аннотация"
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:140
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Draws annotations on maps with placemarks or polygons."
-msgstr "Отрисовка аннотаций на карте с метками или многоугольниками"
+msgstr "Рисует аннотации на карте с помощью меток или многоугольников."
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:183
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Annotations"
-msgstr "Аннотация"
+msgstr "Аннотации"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:305
 msgctxt "QObject|"
@@ -12856,7 +12862,7 @@ msgid ""
 "All Supported Files (*.kml *.osm);;Kml Annotation file (*.kml);;Open Street "
 "Map file (*.osm)"
 msgstr ""
-"Все поддерживаемые файлы (*.kml *.osm);;файлы примечаний KML (*.kml);;файлы "
+"Все поддерживаемые файлы (*.kml *.osm);;Файлы аннотаций KML (*.kml);;Файлы "
 "Open Street Map (*.osm)"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:750
@@ -12936,7 +12942,7 @@ msgstr "Удалить объект"
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:892
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Load Annotation File"
-msgstr "Загрузить файл примечаний"
+msgstr "Загрузить файл аннотаций"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:898
 msgctxt "Marble::AnnotatePlugin|"
@@ -13273,7 +13279,7 @@ msgstr "Указано недостаточно узлов."
 #: src/plugins/render/annotate/EditPolylineDialog.cpp:267
 msgctxt "Marble::EditPolylineDialog|"
 msgid "Please specify at least 2 nodes for the path by clicking on the map."
-msgstr "Укажите не менее 3 узлов для контура, щёлкнув точки на карте."
+msgstr "Укажите не менее 2 узлов для контура, щёлкнув точки на карте."
 
 #: src/plugins/render/annotate/EditPolylineDialog.ui:14
 msgctxt "UiEditPolylineDialog|"
@@ -13343,7 +13349,7 @@ msgstr "Модуль APRS"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:24
 msgctxt "AprsConfigWidget|"
 msgid "Display"
-msgstr "Отображение"
+msgstr "Показ"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:38
 msgctxt "AprsConfigWidget|"
@@ -13374,12 +13380,12 @@ msgstr "Источники данных APRS"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:94
 msgctxt "AprsConfigWidget|"
 msgid "Should information be gathered from the Internet APRS data source?"
-msgstr "Следует ли получать информацию из сетевого источника данных APRS"
+msgstr "Получать ли информацию из источника данных APRS в Интернете?"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:97
 msgctxt "AprsConfigWidget|"
 msgid "Collect data from an APRS Internet server"
-msgstr "Получать данные с сервера APRS"
+msgstr "Получать данные с сервера APRS в Интернете"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:115
 msgctxt "AprsConfigWidget|"
@@ -13419,7 +13425,7 @@ msgstr "Порт терминала TNC"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:184
 msgctxt "AprsConfigWidget|"
 msgid "Should information be gathered from a serial port?"
-msgstr "Следует ли получать информацию из последовательного порта"
+msgstr "Получать ли информацию из последовательного порта?"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:187
 msgctxt "AprsConfigWidget|"
@@ -13451,7 +13457,7 @@ msgstr "Файл"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:241
 msgctxt "AprsConfigWidget|"
 msgid "Should information be gathered from a file?"
-msgstr "Следует ли получать информацию из файла"
+msgstr "Получать ли информацию из файла?"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:244
 msgctxt "AprsConfigWidget|"
@@ -13466,12 +13472,12 @@ msgstr "Выгружать записи из файла в поток отлад
 #: src/plugins/render/aprs/AprsPlugin.cpp:116
 msgctxt "Marble::AprsPlugin|"
 msgid "Amateur Radio Aprs Plugin"
-msgstr "Модуль любительского радио Arps"
+msgstr "Модуль любительского радио APRS"
 
 #: src/plugins/render/aprs/AprsPlugin.cpp:121
 msgctxt "Marble::AprsPlugin|"
 msgid "Amateur Radio &Aprs Plugin"
-msgstr "Модуль любительского &радио Arps"
+msgstr "Модуль любительского &радио APRS"
 
 #: src/plugins/render/aprs/AprsPlugin.cpp:136
 msgctxt "Marble::AprsPlugin|"
@@ -13479,7 +13485,7 @@ msgid ""
 "This plugin displays APRS data gleaned from the Internet.  APRS is an "
 "Amateur Radio protocol for broadcasting location and other information."
 msgstr ""
-"Этот модуль отображает информацию ARPS из Интернета. ARPS - протокол "
+"Этот модуль показывает данные APRS, полученные из Интернета. APRS — протокол "
 "любительского радио, используемый для широковещательной передачи "
 "местоположения и другой информации."
 
@@ -13496,7 +13502,7 @@ msgstr "Атмос&фера"
 #: src/plugins/render/atmosphere/AtmospherePlugin.cpp:79
 msgctxt "Marble::AtmospherePlugin|"
 msgid "Shows the atmosphere around the earth."
-msgstr "Показывает атмосферу вокруг земли"
+msgstr "Показывает атмосферу вокруг Земли."
 
 #: src/plugins/render/compass/CompassConfigWidget.ui:14
 msgctxt "CompassConfigWidget|"
@@ -13601,7 +13607,7 @@ msgstr "Пере&крестие"
 #: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:91
 msgctxt "Marble::CrosshairsPlugin|"
 msgid "A plugin that shows crosshairs."
-msgstr "Модуль, показывающий курсоры"
+msgstr "Модуль, показывающий перекрестие."
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:14
 msgctxt "EarthquakeConfigWidget|"
@@ -13671,7 +13677,7 @@ msgstr "Землетрясения"
 #: src/plugins/render/earthquake/EarthquakePlugin.cpp:60
 msgctxt "Marble::EarthquakePlugin|"
 msgid "&Earthquakes"
-msgstr "Землетрясения"
+msgstr "&Землетрясения"
 
 #: src/plugins/render/earthquake/EarthquakePlugin.cpp:75
 msgctxt "Marble::EarthquakePlugin|"
@@ -13866,7 +13872,7 @@ msgstr "Данный модуль визуализирует солнечные 
 #: src/plugins/render/eclipses/EclipsesPlugin.cpp:187
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Browse Ecli&pses..."
-msgstr "С&писок затмений..."
+msgstr "С&писок затмений…"
 
 #: src/plugins/render/eclipses/EclipsesPlugin.cpp:329
 msgctxt "Marble::EclipsesPlugin|"
@@ -13914,7 +13920,7 @@ msgstr "Масштабировать область просмотра"
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:29
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Configure..."
-msgstr "&Настроить..."
+msgstr "&Настроить…"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:35
 msgctxt "Marble::ElevationProfileContextMenu|"
@@ -13929,12 +13935,14 @@ msgstr "Маршрут"
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:77
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Track: "
-msgstr "Маршрут: "
+msgstr "Трек: "
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:90
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Create a route or load a track from file to view its elevation profile."
-msgstr "Создать или загрузить маршрут для просмотра его высотного профиля."
+msgstr ""
+"Создайте маршрут или загрузите трек из файла для просмотра его высотного "
+"профиля."
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:95
 msgctxt "Marble::ElevationProfileFloatItem|"
@@ -13954,7 +13962,9 @@ msgstr "Плавающий элемент, показывающий высотн
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:191
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Create a route or load a track from file to view its elevation profile."
-msgstr "Создать или загрузить маршрут для просмотра его высотного профиля."
+msgstr ""
+"Создайте маршрут или загрузите трек из файла для просмотра его высотного "
+"профиля."
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:198
 msgctxt "Marble::ElevationProfileFloatItem|"
@@ -14009,7 +14019,7 @@ msgstr "&Маркёр высотного профиля"
 #: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:85
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "Marks the current elevation of the elevation profile on the map."
-msgstr "Отмечает текущую возвышенность высотного профиля на карте."
+msgstr "Отмечает на карте текущую высоту из высотного профиля."
 
 #: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:134
 msgctxt "Marble::ElevationProfileMarker|"
@@ -14030,7 +14040,7 @@ msgstr "Файлы"
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:55
 msgctxt "Marble::FileViewFloatItem|"
 msgid "&File View"
-msgstr "Открытые файлы"
+msgstr "&Открытые файлы"
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:65
 msgctxt "Marble::FileViewFloatItem|"
@@ -14040,7 +14050,7 @@ msgstr "Список открытых файлов"
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:201
 msgctxt "Marble::FileViewFloatItem|"
 msgid "Open file..."
-msgstr "Открыть файл..."
+msgstr "Открыть файл…"
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:202
 msgctxt "Marble::FileViewFloatItem|"
@@ -14058,8 +14068,8 @@ msgid ""
 "All Supported Files (*.gpx *.kml *.pnt);;GPS Data (*.gpx);;Google Earth KML "
 "(*.kml);PNT Data (*.pnt)"
 msgstr ""
-"Все поддерживаемые файлы (*.gpx *.kml *.pnt *.osm);;Данные GPS (*.gpx);;"
-"Google Earth KML (*.kml);Данные PNT (*.pnt)"
+"Все поддерживаемые файлы (*.gpx *.kml *.pnt);;Данные GPS (*.gpx);;Google "
+"Earth KML (*.kml);Данные PNT (*.pnt)"
 
 #: src/plugins/render/foursquare/FoursquarePlugin.cpp:36
 msgctxt "Marble::FoursquarePlugin|"
@@ -14222,12 +14232,12 @@ msgstr "Координатная &сетка"
 #: src/plugins/render/graticule/GraticulePlugin.cpp:91
 msgctxt "Marble::GraticulePlugin|"
 msgid "A plugin that shows a coordinate grid."
-msgstr "Модуль отображения координатной сетки."
+msgstr "Модуль, показывающий координатную сетку."
 
 #: src/plugins/render/graticule/GraticulePlugin.cpp:200
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the coordinate grid."
-msgstr "Выберите цвет для координатной сетки"
+msgstr "Выберите цвет для координатной сетки."
 
 #: src/plugins/render/graticule/GraticulePlugin.cpp:211
 msgctxt "Marble::GraticulePlugin|"
@@ -14252,7 +14262,7 @@ msgstr "Начальный меридиан"
 #: src/plugins/render/graticule/GraticulePlugin.cpp:299
 msgctxt "Marble::GraticulePlugin|"
 msgid "Antimeridian"
-msgstr "Дополуденный"
+msgstr "Антимеридиан"
 
 #: src/plugins/render/graticule/GraticulePlugin.cpp:365
 msgctxt "Marble::GraticulePlugin|"
@@ -14307,7 +14317,7 @@ msgstr "Настройка модуля масштабной линейки"
 #: src/plugins/render/mapscale/MapScaleConfigWidget.ui:20
 msgctxt "MapScaleConfigWidget|"
 msgid "Show Ratio Scale"
-msgstr "Показывать шкалу пропорции"
+msgstr "Показывать численный масштаб"
 
 #: src/plugins/render/mapscale/MapScaleConfigWidget.ui:30
 msgctxt "MapScaleConfigWidget|"
@@ -14363,12 +14373,12 @@ msgstr "нм"
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:349
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Configure..."
-msgstr "&Настроить..."
+msgstr "&Настроить…"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:355
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Ratio Scale"
-msgstr "&Шкала пропорции"
+msgstr "&Численный масштаб"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:14
 msgctxt "MeasureConfigDialog|"
@@ -14400,7 +14410,7 @@ msgstr "Подписи к отрезкам"
 #: src/plugins/render/measure/MeasureConfigDialog.ui:60
 msgctxt "MeasureConfigDialog|"
 msgid "Distance "
-msgstr "Расстояние"
+msgstr "Расстояние "
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:70
 msgctxt "MeasureConfigDialog|"
@@ -14558,17 +14568,17 @@ msgstr "&Навигация"
 #: src/plugins/render/navigation/NavigationFloatItem.cpp:80
 msgctxt "Marble::NavigationFloatItem|"
 msgid "A mouse control to zoom and move the map"
-msgstr "Использовать мышь для изменения масштаба и перемещения карты"
+msgstr "Элемент управления мышью для масштабирования и перемещения карты"
 
 #: src/plugins/render/navigation/NavigationFloatItem.cpp:233
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Current Location Button"
-msgstr "Кнопка текущего расположения"
+msgstr "Кнопка текущего местоположения"
 
 #: src/plugins/render/navigation/NavigationFloatItem.cpp:234
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Home Button"
-msgstr "Кнопка перехода в домашнюю папку"
+msgstr "Кнопка перехода к домашнему расположению"
 
 #: src/plugins/render/notes/NotesItem.cpp:97
 msgctxt "Marble::NotesItem|The author name is not known"
@@ -14583,7 +14593,7 @@ msgstr "Заметки OSM Mapper"
 #: src/plugins/render/notes/NotesPlugin.cpp:64
 msgctxt "Marble::NotesPlugin|"
 msgid "Display OpenStreetMap Mapper Notes."
-msgstr "Отображение заметок OpenStreetMap Mapper."
+msgstr "Показывает заметки OpenStreetMap Mapper."
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:14
 msgctxt "OpenCachingCacheDialog|"
@@ -14598,7 +14608,7 @@ msgstr "Общее"
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:36
 msgctxt "OpenCachingCacheDialog|"
 msgid "Cache name:"
-msgstr "Имя кэша:"
+msgstr "Название тайника:"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:56
 msgctxt "OpenCachingCacheDialog|"
@@ -14740,7 +14750,7 @@ msgstr "<tr><td align=\"right\">Имя пользователя</td><td>"
 #: src/plugins/render/opencaching/OpenCachingItem.cpp:177
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Date hidden</td><td>"
-msgstr "<tr><td align=\"right\">Дата</td><td>"
+msgstr "<tr><td align=\"right\">Дата сокрытия</td><td>"
 
 #: src/plugins/render/opencaching/OpenCachingItem.cpp:179
 msgctxt "Marble::OpenCachingItem|"
@@ -14780,7 +14790,7 @@ msgstr "Настройка модуля OpenDesktop"
 #: src/plugins/render/opendesktop/OpenDesktopConfigWidget.ui:22
 msgctxt "OpenDesktopConfigWidget|"
 msgid "Number of displayed items on the screen:"
-msgstr "Число отображаемых объектов на экране:"
+msgstr "Число объектов, показываемых на экране:"
 
 #: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:46
 msgctxt "Marble::OpenDesktopPlugin|"
@@ -14812,12 +14822,12 @@ msgstr "&Обзор карты"
 #: src/plugins/render/overviewmap/OverviewMap.cpp:91
 msgctxt "Marble::OverviewMap|"
 msgid "This is a float item that provides an overview map."
-msgstr "Это - плавающий элемент, показывающий обзор карты."
+msgstr "Плавающий элемент, показывающий обзор карты."
 
 #: src/plugins/render/overviewmap/OverviewMap.cpp:453
 msgctxt "Marble::OverviewMap|"
 msgid "Choose Overview Map"
-msgstr "Обзор карты"
+msgstr "Выбор обзорной карты"
 
 #: src/plugins/render/overviewmap/OverviewMap.cpp:482
 msgctxt "Marble::OverviewMap|"
@@ -14884,7 +14894,8 @@ msgctxt "Marble::PanoramioPlugin|"
 msgid ""
 "Automatically downloads images from around the world in preference to their "
 "popularity"
-msgstr "Автоматическая загрузка изображений со всего света"
+msgstr ""
+"Автоматическая загрузка изображений со всего света с учётом их популярности"
 
 #: src/plugins/render/photo/CoordinatesParser.cpp:31
 #: src/plugins/render/photo/FlickrParser.cpp:36
@@ -14928,7 +14939,8 @@ msgctxt "Marble::PhotoPlugin|"
 msgid ""
 "Automatically downloads images from around the world in preference to their "
 "popularity"
-msgstr "Автоматическая загрузка изображений со всего света"
+msgstr ""
+"Автоматическая загрузка изображений со всего света с учётом их популярности"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:111
 msgctxt "Marble::PhotoPlugin|"
@@ -15113,7 +15125,7 @@ msgstr "Воспроизводить звук"
 #: src/plugins/render/routing/RoutingConfigDialog.ui:62
 msgctxt "RoutingConfigDialog|"
 msgid "Use this speaker"
-msgstr "Использовать данные звуки"
+msgstr "Использовать этот голос"
 
 #: src/plugins/render/routing/RoutingConfigDialog.ui:88
 msgctxt "RoutingConfigDialog|"
@@ -15122,12 +15134,12 @@ msgid ""
 "speakers</a>"
 msgstr ""
 "<a href=\"https://userbase.kde.org/Marble/CustomSpeakers\">Получить другие "
-"звуки</a>"
+"голоса</a>"
 
 #: src/plugins/render/routing/RoutingPlugin.cpp:235
 msgctxt "QObject|"
 msgid "Starting guidance mode, please wait..."
-msgstr "Инициализация режима сопровождения..."
+msgstr "Запуск режима сопровождения…"
 
 #: src/plugins/render/routing/RoutingPlugin.cpp:289
 msgctxt "QObject|"
@@ -15137,7 +15149,7 @@ msgstr "Рассчитайте маршрут для получения подс
 #: src/plugins/render/routing/RoutingPlugin.cpp:292
 msgctxt "QObject|"
 msgid "Route left."
-msgstr "Поверните налево."
+msgstr "Отклонение от маршрута."
 
 #: src/plugins/render/routing/RoutingPlugin.cpp:295
 msgctxt "QObject|"
@@ -15154,7 +15166,7 @@ msgstr ""
 #: src/plugins/render/routing/RoutingPlugin.cpp:440
 msgctxt "Marble::RoutingPlugin|"
 msgid "Routing"
-msgstr "Маршрут"
+msgstr "Прокладка маршрутов"
 
 #: src/plugins/render/routing/RoutingPlugin.cpp:445
 msgctxt "Marble::RoutingPlugin|"
@@ -15339,7 +15351,7 @@ msgstr "Все файлы (*.*)"
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:262
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Open Satellite Data File"
-msgstr "Файл данных Open Satellite"
+msgstr "Открыть файл данных о спутниках"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:289
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -15475,7 +15487,7 @@ msgstr "Показать орбиту"
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:44
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Keep centered"
-msgstr "Держитесь центра"
+msgstr "Удерживать в центре"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:76
 msgctxt "Marble::SatellitesPlugin|"
@@ -15735,12 +15747,12 @@ msgstr "&Спидометр"
 #: src/plugins/render/speedometer/Speedometer.cpp:69
 msgctxt "Marble::Speedometer|"
 msgid "Display the current cruising speed."
-msgstr "Отображение текущей крейсерской скорости."
+msgstr "Показывает текущую крейсерскую скорость."
 
 #: src/plugins/render/speedometer/Speedometer.cpp:120
 msgctxt "Marble::Speedometer|"
 msgid "mph"
-msgstr "мили/ч"
+msgstr "миль/ч"
 
 #: src/plugins/render/speedometer/Speedometer.cpp:126
 msgctxt "Marble::Speedometer|"
@@ -15931,7 +15943,7 @@ msgstr "З&вёзды"
 #: src/plugins/render/stars/StarsPlugin.cpp:129
 msgctxt "Marble::StarsPlugin|"
 msgid "A plugin that shows the Starry Sky and the Sun."
-msgstr "Модуль, показывающий  звёздное небо и Солнце"
+msgstr "Модуль, показывающий звёздное небо и Солнце."
 
 #: src/plugins/render/stars/StarsPlugin.cpp:447
 msgctxt "Marble::StarsPlugin|"
@@ -15941,12 +15953,12 @@ msgstr "Выберите цвет для линий созвездий."
 #: src/plugins/render/stars/StarsPlugin.cpp:458
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the constellation labels."
-msgstr "Выберите цвет для названий созвездий"
+msgstr "Выберите цвет для названий созвездий."
 
 #: src/plugins/render/stars/StarsPlugin.cpp:469
 msgctxt "Marble::StarsPlugin|"
 msgid "Please choose the color for the dso labels."
-msgstr "Выберите цвет для названий объектов глубокого космоса"
+msgstr "Выберите цвет для названий объектов глубокого космоса."
 
 #: src/plugins/render/stars/StarsPlugin.cpp:480
 msgctxt "Marble::StarsPlugin|"
@@ -15987,7 +15999,7 @@ msgstr "Показывать объекты гл&убокого космоса"
 #: src/plugins/render/stars/StarsPlugin.cpp:1401
 msgctxt "Marble::StarsPlugin|"
 msgid "&Configure..."
-msgstr "&Настроить..."
+msgstr "&Настроить…"
 
 #: src/plugins/render/sun/SunPlugin.cpp:48
 #: src/plugins/render/sun/SunPlugin.cpp:53
@@ -16013,7 +16025,7 @@ msgstr "&twitter"
 #: src/plugins/render/twitter/twitterPlugin.cpp:56
 msgctxt "Marble::twitterPlugin|"
 msgid "show public twitts in their places"
-msgstr "показать публичные твиты в этом месте"
+msgstr "показывает публичные твиты в местах их публикации"
 
 #: src/plugins/render/weather/BBCParser.cpp:238
 msgctxt "QObject|"
@@ -16026,8 +16038,8 @@ msgid ""
 "Supported by <a href=\"https://www.bbc.co.uk/blogs/bbcbackstage\" target="
 "\"_BLANK\">backstage.bbc.co.uk</a>.<br>Weather data from UK MET Office"
 msgstr ""
-"При поддержке <a href=\"https://backstage.bbc.co.uk\" target=\"_BLANK"
-"\">backstage.bbc.co.uk</a>.<br>Сведения о погоде от UK MET Office"
+"При поддержке <a href=\"https://www.bbc.co.uk/blogs/bbcbackstage\" target="
+"\"_BLANK\">backstage.bbc.co.uk</a>.<br>Сведения о погоде от UK MET Office"
 
 #: src/plugins/render/weather/GeoNamesWeatherItem.cpp:30
 msgctxt "Marble::GeoNamesWeatherItem|"
@@ -16069,10 +16081,10 @@ msgstr ""
 "\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
 "family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
 "style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Здесь возможно указать, "
-"следует ли отображать погодные условия (например, показывать или не "
-"показывать облака). Marble покажет сведения об условиях только в том случае, "
-"если доступна информация о них.</p></body></html>\n"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Здесь можно указать, "
+"следует ли показывать погодные условия (например, облачность или ясное "
+"небо). Marble покажет сведения об условиях только в том случае, если "
+"доступна информация о них.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:33
 msgctxt "WeatherConfigWidget|"
@@ -16095,8 +16107,8 @@ msgstr ""
 "family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
 "style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Установите флажок для "
-"отображения температуры. Сведения о температуре будут показаны только для "
-"тех станций, для которых они доступны.</p></body></html>\n"
+"показа температуры. Сведения о температуре будут показаны только для тех "
+"станций, для которых они доступны.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:44
 #: src/plugins/render/weather/WeatherConfigWidget.ui:84
@@ -16120,8 +16132,8 @@ msgstr ""
 "family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
 "style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Установите флажок для "
-"отображения направления ветра. Сведения о направлении будут показаны только "
-"для тех станций, для которых они доступны.</p></body></html>\n"
+"показа направления ветра. Сведения о направлении будут показаны только для "
+"тех станций, для которых они доступны.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:55
 msgctxt "WeatherConfigWidget|"
@@ -16144,8 +16156,8 @@ msgstr ""
 "family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
 "style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Установите флажок для "
-"отображения скорости ветра. Сведения о скорости будут показаны только для "
-"тех станций, для которых они доступны.</p></body></html>\n"
+"показа скорости ветра. Сведения о скорости будут показаны только для тех "
+"станций, для которых они доступны.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:66
 #: src/plugins/render/weather/WeatherConfigWidget.ui:113
@@ -16302,7 +16314,7 @@ msgstr "солнечно"
 #: src/plugins/render/weather/WeatherData.cpp:299
 msgctxt "WeatherData|"
 msgid "clear"
-msgstr "очистить"
+msgstr "ясно"
 
 #: src/plugins/render/weather/WeatherData.cpp:302
 msgctxt "WeatherData|"
@@ -16322,12 +16334,12 @@ msgstr "сплошная облачность"
 #: src/plugins/render/weather/WeatherData.cpp:310
 msgctxt "WeatherData|"
 msgid "light showers"
-msgstr "небольшие осадки"
+msgstr "небольшой ливневый дождь"
 
 #: src/plugins/render/weather/WeatherData.cpp:313
 msgctxt "WeatherData|"
 msgid "showers"
-msgstr "обильные осадки"
+msgstr "ливневый дождь"
 
 #: src/plugins/render/weather/WeatherData.cpp:315
 msgctxt "WeatherData|"
@@ -16377,7 +16389,7 @@ msgstr "дождь со снегом"
 #: src/plugins/render/weather/WeatherData.cpp:335
 msgctxt "WeatherData|"
 msgid "mist"
-msgstr "туман"
+msgstr "дымка"
 
 #: src/plugins/render/weather/WeatherData.cpp:337
 msgctxt "WeatherData|"
@@ -16402,7 +16414,7 @@ msgstr "СВ"
 #: src/plugins/render/weather/WeatherData.cpp:392
 msgctxt "WeatherData|"
 msgid "ENE"
-msgstr "СВВ"
+msgstr "ВСВ"
 
 #: src/plugins/render/weather/WeatherData.cpp:394
 msgctxt "WeatherData|"
@@ -16422,7 +16434,7 @@ msgstr "ЮВ"
 #: src/plugins/render/weather/WeatherData.cpp:400
 msgctxt "WeatherData|"
 msgid "ESE"
-msgstr "ЮВВ"
+msgstr "ВЮВ"
 
 #: src/plugins/render/weather/WeatherData.cpp:402
 msgctxt "WeatherData|"
@@ -16442,7 +16454,7 @@ msgstr "СЗ"
 #: src/plugins/render/weather/WeatherData.cpp:408
 msgctxt "WeatherData|"
 msgid "WNW"
-msgstr "СЗЗ"
+msgstr "ЗСЗ"
 
 #: src/plugins/render/weather/WeatherData.cpp:410
 msgctxt "WeatherData|"
@@ -16462,7 +16474,7 @@ msgstr "ЮЗ"
 #: src/plugins/render/weather/WeatherData.cpp:416
 msgctxt "WeatherData|"
 msgid "WSW"
-msgstr "ЮЗЗ"
+msgstr "ЗЮЗ"
 
 #: src/plugins/render/weather/WeatherData.cpp:527
 msgctxt "QObject|"
@@ -16546,13 +16558,13 @@ msgstr "Температура: %1<br>"
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Max temperature: %1<br>"
-msgstr "Максимальная температура: %1 <br>а: %1 <br>"
+msgstr "Максимальная температура: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:755
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Min temperature: %1<br>"
-msgstr "Минимальная температура: %1 <br>"
+msgstr "Минимальная температура: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:758
 #, qt-format
@@ -16661,7 +16673,7 @@ msgstr "П&огода"
 msgctxt "Marble::WeatherPlugin|"
 msgid ""
 "Download weather information from many weather stations all around the world"
-msgstr "Сведения о погоде со множества метеостанций по всему миру"
+msgstr "Загружает сведения о погоде с множества метеостанций по всему миру"
 
 #: src/plugins/render/weather/WeatherPlugin.cpp:109
 msgctxt "Marble::WeatherPlugin|"
@@ -16669,7 +16681,7 @@ msgid ""
 "Supported by backstage.bbc.co.uk.\n"
 "Weather data from UK MET Office"
 msgstr ""
-"Получено с backstage.bbc.co.uk.\n"
+"При поддержке backstage.bbc.co.uk.\n"
 "Сведения о погоде от UK MET Office"
 
 #: src/plugins/render/wikipedia/GeonamesParser.cpp:36
@@ -16716,7 +16728,8 @@ msgid ""
 "Automatically downloads Wikipedia articles and shows them on the right "
 "position on the map"
 msgstr ""
-"Автоматически загружать статьи из Википедии и показывать их на карте справа."
+"Автоматически загружает статьи из Википедии и показывает их в "
+"соответствующих местах на карте"
 
 #: src/plugins/render/wikipedia/WikipediaPlugin.cpp:96
 msgctxt "Marble::WikipediaPlugin|"
@@ -16740,7 +16753,7 @@ msgstr "Создать документ геоданных из файлов к�
 #: src/plugins/runner/cache/CachePlugin.cpp:48
 msgctxt "Marble::CachePlugin|"
 msgid "Marble Cache Files"
-msgstr "Файлы кеша Marble"
+msgstr "Файлы кэша Marble"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsConfigWidget.ui:20
 msgctxt "CycleStreetsConfigWidget|"
@@ -16800,7 +16813,7 @@ msgstr "высокая (15 миль/ч)"
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:84
 msgctxt "Marble::CycleStreetsPlugin|"
 msgid "This service requires an Internet connection."
-msgstr "Эта служба требует подключение к Интернету."
+msgstr "Для работы этой службы требуется подключение к Интернету."
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:89
 msgctxt "Marble::CycleStreetsPlugin|"
@@ -16903,7 +16916,7 @@ msgstr "Hostip.info"
 msgctxt "Marble::HostipPlugin|"
 msgid "Host name and IP geolocation search using the hostip.info service"
 msgstr ""
-"Поиск имени хоста и геолокация по IP с использованием службы hostip.info"
+"Поиск имени узла и геолокация по IP с использованием службы hostip.info"
 
 #: src/plugins/runner/json/JsonPlugin.cpp:21
 msgctxt "Marble::JsonPlugin|"
@@ -16973,7 +16986,7 @@ msgstr "отель"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:73
 msgctxt "QObject|"
 msgid "motel"
-msgstr "турбаза"
+msgstr "мотель"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:75
 msgctxt "QObject|"
@@ -17008,7 +17021,7 @@ msgstr "бар"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:87
 msgctxt "QObject|"
 msgid "biergarten"
-msgstr "пивной паб"
+msgstr "пивной сад"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:89
 msgctxt "QObject|"
@@ -17033,12 +17046,12 @@ msgstr "ресторан"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:97
 msgctxt "QObject|"
 msgid "doctor"
-msgstr "доктор"
+msgstr "врач"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:99
 msgctxt "QObject|"
 msgid "hospital"
-msgstr "госпиталь"
+msgstr "больница"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:101
 msgctxt "QObject|"
@@ -17148,7 +17161,7 @@ msgstr "автобусная остановка"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:143
 msgctxt "QObject|"
 msgid "car share"
-msgstr "авторынок"
+msgstr "каршеринг"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:145
 msgctxt "QObject|"
@@ -17188,7 +17201,7 @@ msgstr "прокат машин"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:159
 msgctxt "QObject|"
 msgid "speed camera"
-msgstr "скоростная камера"
+msgstr "камера контроля скорости"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:161
 msgctxt "QObject|"
@@ -17279,7 +17292,7 @@ msgstr "Анализатор файлов журналов TangoGPS"
 #: src/plugins/runner/log/LogPlugin.cpp:33
 msgctxt "Marble::LogfilePlugin|"
 msgid "Allows loading of TangoGPS log files."
-msgstr "Позволяет загрузку файлов журналов TangoGPS"
+msgstr "Позволяет загружать файлы журналов TangoGPS."
 
 #: src/plugins/runner/log/LogPlugin.cpp:48
 msgctxt "Marble::LogfilePlugin|"
@@ -17329,13 +17342,14 @@ msgid ""
 "business_edition_free/register\">here</a>."
 msgstr ""
 "Для работы службы прокладки маршрутов MapQuest требуется AppKey. "
-"Зарегистрировать его возможно <a href=\"http://developer.mapquest.com/web/"
-"products/open\">здесь</a>."
+"Зарегистрировать его можно <a href=\"https://developer.mapquest.com/"
+"plan_purchase/steps/business_edition/business_edition_free/register\">здесь</"
+"a>."
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:19
 msgctxt "Marble::MapQuestPlugin|"
 msgid "This service requires an Internet connection."
-msgstr "Эта служба требует подключение к Интернету."
+msgstr "Для работы этой службы требуется подключение к Интернету."
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:24
 msgctxt "Marble::MapQuestPlugin|"
@@ -17399,7 +17413,7 @@ msgstr "Отдавать предпочтение"
 #, qt-format
 msgctxt "QObject|"
 msgid "Downloading %1"
-msgstr "Загрузка %1."
+msgstr "Загрузка %1"
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:506
 #, qt-format
@@ -17547,7 +17561,8 @@ msgstr "Автономные карты ещё не установлены."
 #: src/plugins/runner/monav/MonavPlugin.cpp:220
 msgctxt "Marble::MonavPlugin|"
 msgid "The monav routing daemon does not seem to be installed on your system."
-msgstr "Monav не установлен в вашей системе."
+msgstr ""
+"Служба прокладки маршрутов monav, по-видимому, не установлена в системе."
 
 #: src/plugins/runner/monav/MonavPlugin.cpp:233
 msgctxt "Marble::MonavPlugin|"
@@ -17579,7 +17594,7 @@ msgstr "OpenStreetMap Nominatim"
 msgctxt "Marble::NominatimPlugin|"
 msgid "Online reverse geocoding using the OpenStreetMap Nominatim service"
 msgstr ""
-"Автономное обратное геокодирование с использованием службы OpenStreetMap "
+"Обратное геокодирование через Интернет с использованием службы OpenStreetMap "
 "Nominatim"
 
 #: src/plugins/runner/nominatim-search/NominatimSearchPlugin.cpp:22
@@ -17590,12 +17605,12 @@ msgstr "Поиск с помощью OpenStreetMap Nominatim"
 #: src/plugins/runner/nominatim-search/NominatimSearchPlugin.cpp:42
 msgctxt "Marble::NominatimPlugin|"
 msgid "Online search for placemarks using the OpenStreetMap Nominatim service"
-msgstr "Искать метки в интернет с помощью сервиса OpenStreetMap Nominatim"
+msgstr "Поиск меток через Интернет с помощью службы OpenStreetMap Nominatim"
 
 #: src/plugins/runner/open-source-routing-machine/OSRMPlugin.cpp:17
 msgctxt "Marble::OSRMPlugin|"
 msgid "This service requires an Internet connection."
-msgstr "Эта служба требует подключение к Интернету."
+msgstr "Для работы этой службы требуется подключение к Интернету."
 
 #: src/plugins/runner/open-source-routing-machine/OSRMPlugin.cpp:22
 msgctxt "Marble::OSRMPlugin|"
@@ -17654,7 +17669,7 @@ msgstr "Избегать паромных переправ"
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:19
 msgctxt "Marble::OpenRouteServicePlugin|"
 msgid "This service requires an Internet connection."
-msgstr "Эта служба требует подключение к Интернету."
+msgstr "Для работы этой службы требуется подключение к Интернету."
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:24
 msgctxt "Marble::OpenRouteServicePlugin|"
@@ -17794,7 +17809,7 @@ msgstr "Routino"
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:44
 msgctxt "Marble::RoutinoPlugin|"
 msgid "Retrieves routes from routino"
-msgstr "Получить маршруты с routino"
+msgstr "Получает маршруты от Routino"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:73
 msgctxt "Marble::RoutinoConfigWidget|"
@@ -17899,7 +17914,7 @@ msgstr "Самый короткий"
 #: src/plugins/runner/yours/YoursPlugin.cpp:20
 msgctxt "Marble::YoursPlugin|"
 msgid "This service requires an Internet connection."
-msgstr "Эта служба требует подключение к Интернету."
+msgstr "Для работы этой службы требуется подключение к Интернету."
 
 # прокладка? seriously? --aspotashev
 #: src/plugins/runner/yours/YoursPlugin.cpp:25
