@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2026-09-27 19:12+0300\n"
+"PO-Revision-Date: 2026-10-16 20:02+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -7288,14 +7288,14 @@ msgstr "Kızak İzi"
 msgctxt "QObject|"
 msgid "Could not convert <maximum> child text content to integer. Was: '%1'"
 msgstr ""
-"<maximum>, alt kademe yazı içeriği tamsayıya çevirilemedi. İçerik: “%1”"
+"<maximum>, alt kademe yazı içeriği tam sayıya çevirilemedi. İçerik: “%1”"
 
 #: src/lib/marble/geodata/handlers/dgml/DgmlMinimumTagHandler.cpp:35
 #, qt-format
 msgctxt "QObject|"
 msgid "Could not convert <minimum> child text content to integer. Was: '%1'"
 msgstr ""
-"<minimum>, alt kademe yazı içeriği tamsayıya çevirilemedi. İçerik: “%1”"
+"<minimum>, alt kademe yazı içeriği tam sayıya çevirilemedi. İçerik: “%1”"
 
 #: src/lib/marble/geodata/parser/GeoParser.cpp:86
 #, qt-format
