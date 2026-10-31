@@ -13800,7 +13800,7 @@ msgstr "Penombra del &sud"
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:144
 msgctxt "EclipsesConfigDialog|"
 msgid "Penumbra with 60% Ma&gnitude"
-msgstr "Penombra de ma&gnitud 60%"
+msgstr "Penombra de ma&gnitud 60 %"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:171
 msgctxt "EclipsesConfigDialog|"
@@ -14407,7 +14407,7 @@ msgstr "&Relació d'escala"
 #: src/plugins/render/measure/MeasureConfigDialog.ui:14
 msgctxt "MeasureConfigDialog|"
 msgid "Measure Tool Configuration"
-msgstr "Configureu l'eina de mesura"
+msgstr "Configureu l'eina «Mesura»"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:20
 msgctxt "MeasureConfigDialog|"
