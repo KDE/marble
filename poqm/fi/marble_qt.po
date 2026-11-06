@@ -13013,8 +13013,7 @@ msgid ""
 "and try again."
 msgstr ""
 "Valitulla alueella on liikaa tietoa. Valitse pienempi alue ja yritä "
-"uudelleen.Valitulla alueella on liikaa tietoa. Valitse pienempi alue ja "
-"yritä uudelleen."
+"uudelleen."
 
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:119
 msgctxt "Marble::DownloadOsmDialog|"
@@ -13027,7 +13026,6 @@ msgid ""
 "Sorry, a network error occurred. Please check your internet connection or "
 "try again later."
 msgstr ""
-"Sattui verkkovirhe. Tarkista internetyhteys tai yritä myöhemmin uudelleen."
 "Sattui verkkovirhe. Tarkista internetyhteys tai yritä myöhemmin uudelleen."
 
 #: src/plugins/render/annotate/DownloadOsmDialog.ui:14
