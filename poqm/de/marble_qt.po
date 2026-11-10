@@ -13,20 +13,21 @@
 # SPDX-FileCopyrightText: 2016-2017 Dennis Nienhüser <nienhueser@kde.org>
 # SPDX-FileCopyrightText: 2021 Alois Spitzbart <spitz234@hotmail.com>
 # SPDX-FileCopyrightText: 2024 Flori G <Renner03@protonmail.com>
+# SPDX-FileCopyrightText: 2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-07-17 21:30+0200\n"
-"Last-Translator: Flori G <Renner03@protonmail.com>\n"
+"PO-Revision-Date: 2026-11-04 00:52+0100\n"
+"Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 26.08.2\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -2368,7 +2369,7 @@ msgstr ""
 #: src/apps/marble-qt/QtMainWindow.cpp:265
 msgctxt "Marble::MainWindow|"
 msgid "&Open..."
-msgstr "Öff&nen ..."
+msgstr "Öff&nen …"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:267
 msgctxt "Marble::MainWindow|"
@@ -2378,12 +2379,12 @@ msgstr "Eine Datei zur Ansicht in Marble öffnen"
 #: src/apps/marble-qt/QtMainWindow.cpp:270
 msgctxt "Marble::MainWindow|"
 msgid "&Download Maps..."
-msgstr "&Karten herunterladen ..."
+msgstr "&Karten herunterladen …"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:273
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
-msgstr "Karte &exportieren ..."
+msgstr "Karte &exportieren …"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:275
 msgctxt "Marble::MainWindow|"
@@ -2393,7 +2394,7 @@ msgstr "Speichert ein Bildschirmfoto der Karte."
 #: src/apps/marble-qt/QtMainWindow.cpp:279
 msgctxt "Marble::MainWindow|"
 msgid "Download &Region..."
-msgstr "&Region herunterladen ..."
+msgstr "&Region herunterladen …"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:280
 msgctxt "Marble::MainWindow|"
@@ -2405,7 +2406,7 @@ msgstr ""
 #: src/apps/marble-qt/QtMainWindow.cpp:283
 msgctxt "Marble::MainWindow|"
 msgid "&Print..."
-msgstr "&Drucken ..."
+msgstr "&Drucken …"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:284
 msgctxt "Marble::MainWindow|"
@@ -2421,7 +2422,7 @@ msgstr "Ein Bildschirmfoto der Karte drucken."
 #: src/apps/marble-qt/QtMainWindow.cpp:288
 msgctxt "Marble::MainWindow|"
 msgid "Print Previe&w ..."
-msgstr "Druck&vorschau ..."
+msgstr "Druck&vorschau …"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:292
 msgctxt "Marble::MainWindow|"
@@ -2449,12 +2450,9 @@ msgid "Copy a screenshot of the map"
 msgstr "Ein Bildschirmfoto der Karte in die Zwischenablage kopieren."
 
 #: src/apps/marble-qt/QtMainWindow.cpp:302
-#, fuzzy
-#| msgctxt "Marble::MainWindow|"
-#| msgid "&Edit Map"
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
-msgstr "Karte &Bearbeiten"
+msgstr "Karte &bearbeiten …"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:304
 msgctxt "Marble::MainWindow|"
@@ -2551,7 +2549,7 @@ msgstr "&Offline arbeiten"
 #: src/apps/marble-qt/QtMainWindow.cpp:353
 msgctxt "Marble::MainWindow|"
 msgid "&Time Control..."
-msgstr "&Zeiteinstellung ..."
+msgstr "&Zeiteinstellung …"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:354
 msgctxt "Marble::MainWindow|"
@@ -2561,7 +2559,7 @@ msgstr "Zeitregulierung einrichten "
 #: src/apps/marble-qt/QtMainWindow.cpp:357
 msgctxt "Marble::MainWindow|"
 msgid "S&un Control..."
-msgstr "Sonnenreg&ulierung ..."
+msgstr "Sonnenreg&ulierung …"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:358
 msgctxt "Marble::MainWindow|"
@@ -2581,12 +2579,12 @@ msgstr "Aktuelle Karte neu laden"
 #: src/apps/marble-qt/QtMainWindow.cpp:366
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe &Handbook"
-msgstr "&Handbuch zu Marble - Virtueller Globus"
+msgstr "&Handbuch zu Marble – Virtueller Globus"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:368
 msgctxt "Marble::MainWindow|"
 msgid "Show the Handbook for Marble Virtual Globe"
-msgstr "Das Handbuch zu Marble - Virtueller Globus anzeigen"
+msgstr "Das Handbuch zu Marble – Virtueller Globus anzeigen"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:371
 msgctxt "Marble::MainWindow|"
@@ -2611,7 +2609,7 @@ msgstr "Besuchen Sie das Forum der Marble-Gemeinschaft"
 #: src/apps/marble-qt/QtMainWindow.cpp:380
 msgctxt "Marble::MainWindow|"
 msgid "&About Marble Virtual Globe"
-msgstr "Ü&ber Marble - Virtueller Globus"
+msgstr "Ü&ber Marble – Virtueller Globus"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:381
 msgctxt "Marble::MainWindow|"
@@ -2629,12 +2627,9 @@ msgid "Show the Qt library's About box"
 msgstr "Zeigt die Informationen zur Qt-Bibliothek"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:389
-#, fuzzy
-#| msgctxt "Marble::MarbleWidgetPopupMenu|"
-#| msgid "Add &Bookmark"
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
-msgstr "&Lesezeichen hinzufügen"
+msgstr "&Lesezeichen hinzufügen …"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:391
 msgctxt "Marble::MainWindow|"
@@ -2658,12 +2653,9 @@ msgid "Toggle display of Bookmarks"
 msgstr "Anzeige der Lesezeichen ein-/ausschalten"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:403
-#, fuzzy
-#| msgctxt "Marble::MainWindow|"
-#| msgid "&Manage Bookmarks"
 msgctxt "Marble::MainWindow|"
 msgid "&Manage Bookmarks..."
-msgstr "&Lesezeichen verwalten"
+msgstr "&Lesezeichen verwalten …"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:404
 msgctxt "Marble::MainWindow|"
@@ -2673,7 +2665,7 @@ msgstr "Lesezeichen bearbeiten"
 #: src/apps/marble-qt/QtMainWindow.cpp:408
 msgctxt "Marble::MainWindow|"
 msgid "&Create a New Map..."
-msgstr "&Neue Karte erstellen ..."
+msgstr "Eine &neue Karte erstellen …"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:409
 msgctxt "Marble::MainWindow|"
@@ -2784,7 +2776,7 @@ msgstr "Beim Speichern der Datei ist ein Fehler aufgetreten.\n"
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe %1"
-msgstr "Marble - Virtueller Globus %1"
+msgstr "Marble – Virtueller Globus %1"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:921
 #: src/apps/marble-qt/QtMainWindow.cpp:998
@@ -3011,7 +3003,7 @@ msgstr "&Ausblenden"
 #: src/lib/marble/AbstractFloatItem.cpp:239
 msgctxt "Marble::AbstractFloatItem|"
 msgid "&Configure..."
-msgstr "&Einrichten ..."
+msgstr "&Einrichten …"
 
 #: src/lib/marble/AddLinkDialog.cpp:62
 msgctxt "Marble::AddLinkDialog|"
@@ -3168,20 +3160,14 @@ msgid "Bookmark Manager"
 msgstr "Lesezeichen-Verwaltung"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:25
-#, fuzzy
-#| msgctxt "Marble::BookmarkManagerDialog|"
-#| msgid "Import Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Import Bookmarks…"
-msgstr "Lesezeichen importieren"
+msgstr "Lesezeichen importieren …"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
-#, fuzzy
-#| msgctxt "Marble::BookmarkManagerDialog|"
-#| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Export Bookmarks…"
-msgstr "Lesezeichen exportieren "
+msgstr "Lesezeichen exportieren …"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
@@ -3191,15 +3177,12 @@ msgstr "Ordner"
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
 msgid "New…"
-msgstr ""
+msgstr "Neu …"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
-#, fuzzy
-#| msgctxt "UiBookmarkManagerDialog|"
-#| msgid "Rename"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Rename…"
-msgstr "Umbenennen"
+msgstr "Umbenennen …"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
 #: src/lib/marble/BookmarkManagerDialog.ui:151
@@ -3384,7 +3367,7 @@ msgstr "Keine Position verfügbar."
 #: src/lib/marble/CurrentLocationWidget.cpp:186
 msgctxt "QObject|"
 msgid "Waiting for current location information..."
-msgstr "Es wird auf die Informationen zum aktuellen Standort gewartet ..."
+msgstr "Es wird auf die Informationen zum aktuellen Standort gewartet …"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:192
 msgctxt "QObject|"
@@ -3488,12 +3471,9 @@ msgstr "Weg leeren"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "CurrentLocationWidget|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
 msgctxt "CurrentLocationWidget|"
@@ -3548,7 +3528,7 @@ msgstr "Marble-Datenumwandlung"
 #: src/lib/marble/DataMigration.cpp:91
 msgctxt "Marble::DataMigration|"
 msgid "Converting data ..."
-msgstr "Daten werden konvertiert ..."
+msgstr "Daten werden konvertiert …"
 
 #: src/lib/marble/DataMigrationWidget.ui:20
 msgctxt "DataMigrationWidget|"
@@ -5004,12 +4984,9 @@ msgid "Edit Bookmark"
 msgstr "Lesezeichen bearbeiten"
 
 #: src/lib/marble/EditBookmarkDialog.ui:25
-#, fuzzy
-#| msgctxt "UiEditBookmarkDialog|"
-#| msgid "&Description"
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Description:"
-msgstr "&Beschreibung"
+msgstr "&Beschreibung:"
 
 #: src/lib/marble/EditBookmarkDialog.ui:41
 msgctxt "UiEditBookmarkDialog|"
@@ -5057,12 +5034,9 @@ msgstr ""
 "family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
 
 #: src/lib/marble/EditBookmarkDialog.ui:57
-#, fuzzy
-#| msgctxt "UiEditBookmarkDialog|"
-#| msgid "&Folder"
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Folder:"
-msgstr "&Ordner"
+msgstr "&Ordner:"
 
 #: src/lib/marble/EditBookmarkDialog.ui:79
 #, fuzzy
@@ -7233,12 +7207,12 @@ msgstr "Bahnübergang"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:1002
 msgctxt "GeoDataPlacemark|"
 msgid "Door"
-msgstr ""
+msgstr "Tür"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:1006
 msgctxt "GeoDataPlacemark|"
 msgid "Room"
-msgstr ""
+msgstr "Raum"
 
 #. See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Direction_terms
 #: src/lib/marble/geodata/data/LonLatParser.cpp:46
@@ -7457,11 +7431,9 @@ msgstr[0] "Ein Ergebnis gefunden."
 msgstr[1] "%n Ergebnisse gefunden."
 
 #: src/lib/marble/GoToDialog.ui:14
-#, fuzzy
-#| msgid "Go To"
 msgctxt "GoTo|"
 msgid "Go To…"
-msgstr "Gehe zu"
+msgstr "Gehe zu …"
 
 #: src/lib/marble/GoToDialog.ui:78
 #, fuzzy
@@ -7699,7 +7671,7 @@ msgstr "&Favorit"
 #: src/lib/marble/MapViewWidget.cpp:619
 msgctxt "Marble::MapViewWidget|"
 msgid "&Create a New Map..."
-msgstr "&Neue Karte erstellen ..."
+msgstr "&Neue Karte erstellen …"
 
 #: src/lib/marble/MapViewWidget.cpp:621
 msgctxt "Marble::MapViewWidget|"
@@ -7860,12 +7832,10 @@ msgid "Legend Image"
 msgstr "Legendenbild:"
 
 #: src/lib/marble/MapWizard.cpp:467 src/lib/marble/MapWizard.cpp:477
-#, fuzzy, qt-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "%1"
-msgstr "%1 m"
+msgstr "%1"
 
 #: src/lib/marble/MapWizard.cpp:467
 #, fuzzy, qt-format
@@ -8210,12 +8180,9 @@ msgid "Choose your Layer(s):"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:266
-#, fuzzy
-#| msgctxt "SearchField|"
-#| msgid "Search"
 msgctxt "MapWizard|"
 msgid "Search:"
-msgstr "Suchen"
+msgstr "Suchen:"
 
 #: src/lib/marble/MapWizard.ui:288
 msgctxt "MapWizard|"
@@ -8311,9 +8278,6 @@ msgid "The XYZ server needs to provide map tiles in Mercator projection."
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:479
-#, fuzzy
-#| msgctxt "FormattedTextWidget|"
-#| msgid "Color"
 msgctxt "MapWizard|"
 msgid "Color"
 msgstr "Farbe"
@@ -8324,12 +8288,9 @@ msgid "#87CEFA"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:511
-#, fuzzy
-#| msgctxt "UiEditPlacemarkDialog|"
-#| msgid "Style, Color"
 msgctxt "MapWizard|"
 msgid "Select Color"
-msgstr "Stil, Farbe"
+msgstr "Farbe auswählen"
 
 #: src/lib/marble/MapWizard.ui:554
 msgctxt "MapWizard|"
@@ -8601,7 +8562,7 @@ msgstr "Design der Karte steht hier."
 #: src/lib/marble/MapWizard.ui:1002
 msgctxt "MapWizard|"
 msgid "Thumbnail"
-msgstr ""
+msgstr "Vorschaubild"
 
 #: src/lib/marble/MapWizard.ui:1012
 msgctxt "MapWizard|"
@@ -9423,8 +9384,8 @@ msgid ""
 "<p>... and of course we'd like to thank the people at Google Inc. for making "
 "these projects possible.</p>"
 msgstr ""
-"<p>... und natürlich danken wir den Leuten bei Google Inc., die diese "
-"Projekte ermöglicht haben.</p>"
+"<p>… und natürlich danken wir den Leuten bei Google Inc., die diese Projekte "
+"ermöglicht haben.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:246
 msgctxt "QObject|"
@@ -11167,12 +11128,9 @@ msgid "Destination video:"
 msgstr "Zielvideo:"
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
-#, fuzzy
-#| msgctxt "Marble::RouteItemDelegate|"
-#| msgid "Open"
 msgctxt "MovieCaptureDialog|"
 msgid "Open…"
-msgstr "Öffnen"
+msgstr "Öffnen …"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -11185,12 +11143,9 @@ msgid "New Bookmark Folder"
 msgstr "Neuer Lesezeichenordner"
 
 #: src/lib/marble/NewBookmarkFolderDialog.ui:22
-#, fuzzy
-#| msgctxt "UiNewBookmarkFolderDialog|"
-#| msgid "&Folder Name"
 msgctxt "UiNewBookmarkFolderDialog|"
 msgid "&Folder name:"
-msgstr "&Ordnername"
+msgstr "&Ordnername:"
 
 #: src/lib/marble/NewstuffModel.cpp:739 src/lib/marble/NewstuffModel.cpp:748
 msgctxt "Marble::NewstuffModel|"
@@ -11311,7 +11266,7 @@ msgstr "Verwandte Stichwörter"
 #: src/lib/marble/osm/OsmTagEditorWidget_p.cpp:30
 msgctxt "QObject|"
 msgid "Add custom tag..."
-msgstr "Eigenes Stichwort hinzufügen ..."
+msgstr "Benutzerdefiniertes Stichwort hinzufügen …"
 
 #: src/lib/marble/osm/OsmTagEditorWidget_p.cpp:100
 msgctxt "QObject|"
@@ -11329,12 +11284,9 @@ msgid "All Supported Files (*.png)"
 msgstr "Alle unterstützten Dateien (*.png)"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
-#, fuzzy
-#| msgctxt "GoTo|"
-#| msgid "Browse"
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Browse…"
-msgstr "Durchsuchen"
+msgstr "Durchsuchen …"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -11902,7 +11854,7 @@ msgstr "%2, %3"
 #: src/lib/marble/routing/RoutingInputWidget.cpp:135
 msgctxt "QObject|"
 msgid "Address or search term..."
-msgstr "Adresse oder Suchbegriff ..."
+msgstr "Adresse oder Suchbegriff …"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:166
 msgctxt "QObject|"
@@ -11922,7 +11874,7 @@ msgstr "Aktue&ller Standort"
 #: src/lib/marble/routing/RoutingInputWidget.cpp:189
 msgctxt "QObject|"
 msgid "From &Map..."
-msgstr "Von &Karte ..."
+msgstr "Von &Karte …"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:193
 msgctxt "QObject|"
@@ -11953,12 +11905,9 @@ msgid "&Remove this Destination"
 msgstr "Dieses Ziel entfe&rnen"
 
 #: src/lib/marble/routing/RoutingLayer.cpp:190
-#, fuzzy
-#| msgctxt "QObject|"
-#| msgid "&Export route..."
 msgctxt "QObject|"
 msgid "&Export Route..."
-msgstr "Route &exportieren ..."
+msgstr "Route &exportieren …"
 
 #: src/lib/marble/routing/RoutingLayer.cpp:754
 msgctxt "Marble::RoutingLayer|"
@@ -12218,7 +12167,7 @@ msgstr "KML-Dateien (*.kml)"
 #: src/lib/marble/routing/RoutingWidget.cpp:712
 msgctxt "Marble::RoutingWidget|"
 msgid "Uploading route..."
-msgstr "Route wird hochgeladen ..."
+msgstr "Route wird hochgeladen …"
 
 #: src/lib/marble/routing/RoutingWidget.ui:46
 msgctxt "RoutingWidget|"
@@ -12325,7 +12274,7 @@ msgstr "Beziehung hinzufügen"
 #: src/lib/marble/SoundCueEditWidget.cpp:67
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Select sound files..."
-msgstr "Audiodateien auswählen ..."
+msgstr "Audiodateien auswählen …"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:67
 msgctxt "Marble::SoundCueEditWidget|"
@@ -12576,12 +12525,9 @@ msgid "Destination video"
 msgstr "Zielvideo"
 
 #: src/lib/marble/TourCaptureDialog.ui:81
-#, fuzzy
-#| msgctxt "Marble::RouteItemDelegate|"
-#| msgid "Open"
 msgctxt "TourCaptureDialog|"
 msgid "Open…"
-msgstr "Öffnen"
+msgstr "Öffnen …"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
@@ -13848,12 +13794,9 @@ msgid "Show eclipses for year:"
 msgstr "Finsternisse anzeigen für das Jahr:"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
-#, fuzzy
-#| msgctxt "Marble::MainWindow|"
-#| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
 msgid "&Settings…"
-msgstr "&Einstellungen"
+msgstr "&Einstellungen …"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 msgctxt "EclipsesBrowserDialog|"
@@ -14077,7 +14020,7 @@ msgstr "An Bildausschnitt anpassen"
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:29
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Configure..."
-msgstr "&Einrichten ..."
+msgstr "&Einrichten …"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:35
 msgctxt "Marble::ElevationProfileContextMenu|"
@@ -14208,7 +14151,7 @@ msgstr "Zeigt eine Liste der aktuell geöffneten Dateien"
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:201
 msgctxt "Marble::FileViewFloatItem|"
 msgid "Open file..."
-msgstr "Datei öffnen ..."
+msgstr "Datei öffnen …"
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:202
 msgctxt "Marble::FileViewFloatItem|"
@@ -14531,7 +14474,7 @@ msgstr "sm"
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:349
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Configure..."
-msgstr "&Einrichten ..."
+msgstr "&Einrichten …"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:355
 msgctxt "Marble::MapScaleFloatItem|"
@@ -15293,7 +15236,7 @@ msgstr ""
 #: src/plugins/render/routing/RoutingPlugin.cpp:235
 msgctxt "QObject|"
 msgid "Starting guidance mode, please wait..."
-msgstr "Geführter Modus wird gestartet, bitte warten ..."
+msgstr "Geführter Modus wird gestartet, bitte warten …"
 
 #: src/plugins/render/routing/RoutingPlugin.cpp:289
 msgctxt "QObject|"
@@ -15581,12 +15524,9 @@ msgid "Remove selected data source."
 msgstr "Entfernt die ausgewählte Datenquelle."
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
-#, fuzzy
-#| msgctxt "LatLonEditPrivate|"
-#| msgid "′"
 msgctxt "SatellitesConfigDialog|"
 msgid "…"
-msgstr "′"
+msgstr "…"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
 msgctxt "SatellitesConfigDialog|"
@@ -16158,7 +16098,7 @@ msgstr "&Deep-Sky-Objekte anzeigen"
 #: src/plugins/render/stars/StarsPlugin.cpp:1401
 msgctxt "Marble::StarsPlugin|"
 msgid "&Configure..."
-msgstr "&Einrichten ..."
+msgstr "&Einrichten …"
 
 #: src/plugins/render/sun/SunPlugin.cpp:48
 #: src/plugins/render/sun/SunPlugin.cpp:53
@@ -16242,7 +16182,7 @@ msgstr ""
 "family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
 "style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Hier können Sie auswählen, "
-"ob die Wetterbedingungen (z. B Wolken oder klarer Himmel) angezeigt werden "
+"ob die Wetterbedingungen (z. B. Wolken oder klarer Himmel) angezeigt werden "
 "sollen. Marble wird die Bedingungen nur anzeigen, falls diese Informationen "
 "verfügbar sind.</p></body></html>\n"
 
@@ -16266,10 +16206,9 @@ msgstr ""
 "\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
 "family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
 "style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Wählen Sie dies aus, falls "
-"die Temperatur angezeigt werden soll. Die Temperatur wird nur angezeigt "
-"werden, falls sie für die jeweiligen Stationen verfügbar ist.</p></body></"
-"html>\n"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Wählen Sie dies aus, wenn "
+"die Temperatur angezeigt werden soll. Die Temperatur wird nur für die "
+"Stationen angezeigt, für die sie verfügbar ist.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:44
 #: src/plugins/render/weather/WeatherConfigWidget.ui:84
@@ -16292,10 +16231,9 @@ msgstr ""
 "\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
 "family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
 "style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Wählen Sie dies aus, falls "
-"die Windrichtung angezeigt werden soll. Die Windrichtung wird nur angezeigt "
-"werden, falls sie für die jeweilige Station verfügbar ist.</p></body></"
-"html>\n"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Wählen Sie dies aus, wenn "
+"die Windrichtung angezeigt werden soll. Die Windrichtung wird nur für die "
+"Stationen angezeigt, für die sie verfügbar ist.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:55
 msgctxt "WeatherConfigWidget|"
@@ -16317,10 +16255,10 @@ msgstr ""
 "\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
 "family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
 "style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Wählen Sie dies aus, falls "
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Wählen Sie dies aus, wenn "
 "die Windgeschwindigkeit angezeigt werden soll. Die Windgeschwindigkeit wird "
-"nur angezeigt werden, falls sie für die jeweilige Station verfügbar ist.</"
-"p></body></html>\n"
+"nur für die Stationen angezeigt, für die sie verfügbar ist.</p></body></"
+"html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:66
 #: src/plugins/render/weather/WeatherConfigWidget.ui:113
@@ -17590,7 +17528,7 @@ msgstr "%1 wird installiert"
 #, qt-format
 msgctxt "Marble::MonavConfigWidget|"
 msgid "%1/%2 MB"
-msgstr ""
+msgstr "%1/%2 MB"
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:610
 msgctxt "QObject|"
@@ -17719,7 +17657,7 @@ msgstr "Datum"
 #, qt-format
 msgctxt "Marble::MonavMapsModel|"
 msgid "%1 MB"
-msgstr ""
+msgstr "%1 MB"
 
 #: src/plugins/runner/monav/MonavPlugin.cpp:217
 msgctxt "Marble::MonavPlugin|"
