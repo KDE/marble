@@ -8,20 +8,21 @@
 # SPDX-FileCopyrightText: 2010 Panagiotis Papadopoulos <pano_90@gmx.net>
 # SPDX-FileCopyrightText: 2010 Peter Rüthemann <peter.ruethemann@gmail.com>
 # SPDX-FileCopyrightText: 2011 Rolf Eike Beer <kde@opensource.sf-tec.de>
+# SPDX-FileCopyrightText: 2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:48+0000\n"
-"PO-Revision-Date: 2023-04-26 19:51+0200\n"
-"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
+"PO-Revision-Date: 2026-10-19 22:34+0200\n"
+"Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.07.70\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -46,7 +47,7 @@ msgstr "Ein Weltatlas"
 #: kdemain.cpp:89
 #, kde-format
 msgid "(c) 2007-%1"
-msgstr "(c) 2007-%1"
+msgstr "© 2007-%1"
 
 #: kdemain.cpp:94 kdemain.cpp:209
 #, kde-format
@@ -755,7 +756,7 @@ msgstr "Die allgemeine Schriftart der Karte."
 #: marble.kcfg:159
 #, kde-format
 msgid "The last directory that was opened by File->Open."
-msgstr "Der letzte Ordner, der mit Datei -> Öffnen geöffnet wurde."
+msgstr "Der letzte Ordner, der mit Datei → Öffnen geöffnet wurde."
 
 #. i18n: ectx: label, entry, group (Navigation)
 #: marble.kcfg:179
@@ -913,8 +914,7 @@ msgid "Export Map"
 msgstr "Karte exportieren"
 
 #: marble_part.cpp:267
-#, fuzzy, kde-format
-#| msgid "Images (*.jpg *.png)"
+#, kde-format
 msgid "Images (*.jpg *.png)"
 msgstr "Bilder (*.jpg *.png)"
 
@@ -938,13 +938,13 @@ msgstr "Unbenannt"
 #, kde-format
 msgctxt "Action for downloading an entire region of a map"
 msgid "Download Region..."
-msgstr "Region herunterladen ..."
+msgstr "Region herunterladen …"
 
 #: marble_part.cpp:693
 #, kde-format
 msgctxt "Action for saving the map to a file"
 msgid "&Export Map..."
-msgstr "Karte &exportieren ..."
+msgstr "Karte &exportieren …"
 
 #: marble_part.cpp:701
 #, kde-format
@@ -968,13 +968,13 @@ msgstr "Koordinaten k&opieren"
 #, kde-format
 msgctxt "Action for opening a file"
 msgid "&Open..."
-msgstr "Öff&nen ..."
+msgstr "Öff&nen …"
 
 #: marble_part.cpp:726
 #, kde-format
 msgctxt "Action for downloading maps (GHNS)"
 msgid "Download Maps..."
-msgstr "Karten herunterladen ..."
+msgstr "Karten herunterladen …"
 
 #: marble_part.cpp:729
 #, kde-format
@@ -986,7 +986,7 @@ msgstr "Neue Karten herunterladen"
 #, kde-format
 msgctxt "Action for creating new maps"
 msgid "&Create a New Map..."
-msgstr "&Neue Karte erstellen ..."
+msgstr "&Neue Karte erstellen …"
 
 #: marble_part.cpp:737
 #, kde-format
@@ -1004,13 +1004,13 @@ msgstr "&Wolken"
 #, kde-format
 msgctxt "Action for sun control dialog"
 msgid "S&un Control..."
-msgstr "Sonneneinstell&ung ..."
+msgstr "Sonneneinstell&ung …"
 
 #: marble_part.cpp:776
 #, kde-format
 msgctxt "Action for time control dialog"
 msgid "&Time Control..."
-msgstr "&Zeiteinstellung ..."
+msgstr "&Zeiteinstellung …"
 
 #: marble_part.cpp:782
 #, kde-format
@@ -1067,7 +1067,7 @@ msgstr "Globus auf subsolarem Punkt einrasten"
 #, kde-format
 msgctxt "Add Bookmark"
 msgid "Add &Bookmark..."
-msgstr "&Lesezeichen hinzufügen ..."
+msgstr "&Lesezeichen hinzufügen …"
 
 #: marble_part.cpp:830
 #, kde-format
@@ -1089,13 +1089,13 @@ msgstr "&Heimatort setzen"
 #, kde-format
 msgctxt "Manage Bookmarks"
 msgid "&Manage Bookmarks..."
-msgstr "&Lesezeichen verwalten ..."
+msgstr "&Lesezeichen verwalten …"
 
 #: marble_part.cpp:853
 #, kde-format
 msgctxt "Edit the map in an external application"
 msgid "&Edit Map..."
-msgstr "Karte &bearbeiten ..."
+msgstr "Karte &bearbeiten …"
 
 #: marble_part.cpp:859
 #, kde-format
