@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2026-10-09 21:36+0200\n"
+"PO-Revision-Date: 2026-11-11 20:46+0200\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
@@ -13777,7 +13777,7 @@ msgstr "Юж&ная полутень"
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:144
 msgctxt "EclipsesConfigDialog|"
 msgid "Penumbra with 60% Ma&gnitude"
-msgstr "Полутень с м&агнитудой 60%"
+msgstr "Полутень с м&агнитудой 60 %"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:171
 msgctxt "EclipsesConfigDialog|"
