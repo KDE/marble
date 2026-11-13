@@ -1,0 +1,2713 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+ <!ENTITY % addindex "IGNORE">
+ <!ENTITY % Arabic "INCLUDE"
+><!-- change language only here -->
+ ]>
+
+<book id="marble" lang="&language;">
+
+  <bookinfo>
+    <title
+>دليل ماربل</title>
+
+    <authorgroup>
+      <author
+><firstname
+>Torsten</firstname
+> <surname
+>Rahn</surname
+> <affiliation
+> <address
+>&Torsten.Rahn.mail;</address>
+        </affiliation>
+      </author>
+      <author
+><firstname
+>Dennis</firstname
+> <surname
+>Nienhüser</surname
+> <affiliation
+> <address
+>&Dennis.Nienhueser.mail;</address>
+        </affiliation>
+      </author>
+
+      <othercredit role="translator"
+><firstname
+>زايد</firstname
+><surname
+>السعيدي</surname
+><affiliation
+><address
+><email
+>zayed.alsaidi@gmail.com</email
+></address
+></affiliation
+><contrib
+>التّرجمة العربيّة</contrib
+></othercredit
+> 
+    </authorgroup>
+
+    <copyright>
+      <year
+>2005</year>
+      <year
+>2006</year>
+      <year
+>2007</year>
+      <holder
+>&Torsten.Rahn;</holder>
+    </copyright>
+    <copyright>
+      <year
+>2010</year>
+      <year
+>2013</year>
+      <holder
+>&Dennis.Nienhueser;</holder>
+    </copyright>
+
+    <legalnotice
+>&FDLNotice;</legalnotice>
+
+    <date
+>2021-10-17</date>
+    <releaseinfo
+>2.2 (ترس كيدي 21.08)</releaseinfo>
+
+    <abstract>
+      <para
+>ماربل هو أطلس جغرافي وكرة أرضية افتراضية تتيح لك استكشاف الأماكن على كوكبنا بسرعة. يمكنك استخدام ماربل للبحث عن العناوين، وإنشاء الخرائط بسهولة، وقياس المسافات، واسترجاع معلومات مفصلة عن المواقع التي سمعت عنها للتو في الأخبار أو على الإنترنت. واجهة المستخدم نظيفة وبسيطة وسهلة الاستخدام. </para>
+    </abstract>
+
+    <keywordset>
+      <keyword
+>كيدي</keyword>
+      <keyword
+>تعليم</keyword>
+      <keyword
+>الأرض</keyword>
+      <keyword
+>الكرة الأرضية</keyword>
+      <keyword
+>جغرافيا</keyword>
+      <keyword
+>ماربل</keyword>
+    </keywordset>
+
+  </bookinfo>
+
+  <chapter id="introduction">
+  <title
+>مقدمة</title>
+    <screenshot>
+      <screeninfo
+>شعار ماربل</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="logo-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>شعار ماربل</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>مرحبًا بك في ماربل، الكرة الأرضية التفاعلية الصغيرة والأطلس الجغرافي الذي يضع العالم بين يديك. تمامًا مثل الأطلس الحقيقي أو الكرة الأرضية التقليدية، يتيح لك ماربل التحرك بحرية عبر خريطته والبحث عن الأماكن. علاوة على ذلك، يتيح لك ماربل تكبير العرض والحصول على العديد من المناظير المختلفة لسطح <guilabel
+>الأرض</guilabel
+> أو <guilabel
+>القمر</guilabel
+>. في تهيئته الافتراضية، يقدم ماربل 15 منظورًا مختلفًا: <guilabel
+>الأطلس</guilabel
+>، <guilabel
+>خريطة الشارع المفتوحة</guilabel
+>، <guilabel
+>منظور القمر الصناعي</guilabel
+>، <guilabel
+>الأرض ليلًا</guilabel
+>، <guilabel
+>كرة بيهيم 1492</guilabel
+>، <guilabel
+>خريطة القمر الصناعي سنتينل 2</guilabel
+>، <guilabel
+>الخريطة التاريخية 1689</guilabel
+>، <guilabel
+>الخريطة السياسية</guilabel
+>، <guilabel
+>خريطة بسيطة</guilabel
+>، <guilabel
+>الهطول (ديسمبر)</guilabel
+>، <guilabel
+>الهطول (يوليو)</guilabel
+>، <guilabel
+>درجة الحرارة (ديسمبر)</guilabel
+>، <guilabel
+>درجة الحرارة (يوليو)</guilabel
+>، <guilabel
+>ناقل OSM</guilabel
+> و <guilabel
+>القمر</guilabel
+>. </para>
+
+    <para
+>يأتي ماربل مع قاعدة بيانات صغيرة تضم أكثر من 12,000 موقع (مدن، جبال، براكين) يمكن البحث عنها وهي متكاملة مع ويكيبيديا. بالإضافة إلى ذلك، يمكنك قياس المسافات باستخدام ماربل بين نقاط قياس متعددة يمكن ضبطها بحرية. </para>
+
+    <para
+>ماربل برمجية حرة ومرخص بموجب رخصة جنو العمومية الصغرى. </para>
+
+  </chapter>
+
+  <chapter id="quick-start">
+  <title
+>دليل البدء السريع لماربل: التنقل</title>
+
+  <para
+>هذا هو ماربل عند تشغيله للمرة الأولى، إما عبر <menuchoice
+><guimenu
+>التطبيقات</guimenu
+> <guisubmenu
+>التعليم</guisubmenu
+> <guimenuitem
+>كيدي ماربل (الكرة الأرضية الافتراضية)</guimenuitem
+></menuchoice
+> من القائمة العامة أو عبر <keycombo action="simul"
+>&Alt;<keycap
+>F2</keycap
+></keycombo
+> وإدخال الأمر <command
+>marble</command
+> في حقل الإدخال.</para>
+
+    <screenshot>
+      <screeninfo
+>نافذة ماربل الرئيسة</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="quick-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>نافذة ماربل الرئيسة</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>على اليمين يمكنك رؤية خريطة طوبوغرافية لكوكبنا الجميل. للسماح بتوجيه أفضل، توفر الخريطة شريط مقياس في الزاوية السفلية اليسرى بالإضافة إلى وردة الرياح في الأعلى على اليمين. للتنقل والتحكم في العرض، يمكنك استخدام الأدوات الموجودة في مربع معلومات <guilabel
+>التنقل</guilabel
+> على اليمين: اضغط على أزرار الأسهم لتدوير الكرة الأرضية. ستميل أزرار السهمين <guibutton
+>لأعلى</guibutton
+> و<guibutton
+>لأسفل</guibutton
+> محور الأرض للأمام وللخلف. ستجعل أزرار السهمين <guibutton
+>لليسار</guibutton
+> و<guibutton
+>لليمين</guibutton
+> الأرض تدور حول محورها الفيزيائي. </para>
+
+    <para
+>يمكنك تحقيق السلوك نفسه بالضغط بزر الفأرة الأيسر في مكان ما على الكرة الأرضية وتحريك الفأرة مع الاستمرار في الضغط. سيسمح لك استخدام أسلوب السحب والإفلات هذا في التنقل بضبط زاوية العرض بشكل أسهل وأكثر دقة. توفر مفاتيح الأسهم على لوحة المفاتيح طريقة بديلة أخرى لتغيير الاتجاهات بسرعة. </para>
+
+    <para
+>قرب العرض وأبعده بتحريك المنزلق العمودي للأعلى وللأسفل. إذا كانت فأرتك تحتوي على عجلة، فيمكنك استخدامها بدلًا من ذلك - أو الضغط باستمرار على زر الفأرة الأيسر والأيمن معًا أثناء تحريك الفأرة للأعلى وللأسفل. يمكن تغيير مستوى التقريب خطوة بخطوة عبر زرّي <guibutton
+>قرب</guibutton
+> و<guibutton
+>أبعد</guibutton
+> الموجودين فوق منزلق التقريب وتحته (أو استخدام مفتاحي <keycap
+>+</keycap
+> و<keycap
+>-</keycap
+> على لوحة المفاتيح). </para>
+
+    <para
+>بناءً على ميز الخريطة، سيوفر لك التقريب مزيدًا من التفاصيل. ستظهر المدن الصغيرة، وباستخدام الخريطة الطوبوغرافية قد تلاحظ أن الخطوط الساحلية مقدمة كرسوميات متجهية. </para>
+
+    <para
+>في حال تاه بك المسار، يمكنك دائمًا إعادة ضبط زاوية العرض ومستوى التقريب إلى النقطة التي بدأنا منها: فقط اضغط على زر <guibutton
+>البداية</guibutton
+> (أو زر Home على لوحة المفاتيح). لضبط موقع البداية على الموضع الحالي (مركز الخريطة)، اختر عنصر القائمة <menuchoice
+><guimenu
+>العلامات</guimenu
+> <guimenuitem
+>اضبط موقع البداية</guimenuitem
+></menuchoice
+>. </para>
+
+    <para
+>تؤدي النقرة على شريط الحالة باستخدام زر الفأرة الأيمن إلى ظهور قائمة تتيح لك تخصيص مظهر شريط الحالة. يمكنك إظهار الموقع، والارتفاع، ومستوى البلاطة الحالي ومؤشر تقدم يعرض حالة تنزيل بيانات الخريطة. </para>
+  </chapter>
+
+  <chapter id="map-views">
+  <title
+>اختيار مناظر خرائط مختلفة لماربل</title>
+
+    <para
+>يأتي ماربل مع 15 عرضًا مختلفًا: <guilabel
+>أطلس</guilabel
+>، <guilabel
+>OpenStreetMap</guilabel
+>، <guilabel
+>منظور القمر الصناعي</guilabel
+>، <guilabel
+>الأرض في الليل</guilabel
+>، <guilabel
+>كرة بهايم 1492</guilabel
+>، <guilabel
+>خريطة Sentinel2 الصناعية</guilabel
+>، <guilabel
+>خريطة تاريخية 1689</guilabel
+>، <guilabel
+>خريطة سياسية</guilabel
+>، <guilabel
+>خريطة بسيطة</guilabel
+>، <guilabel
+>هطول الأمطار (ديسمبر)</guilabel
+>، <guilabel
+>هطول الأمطار (يوليو)</guilabel
+>، <guilabel
+>درجة الحرارة (ديسمبر)</guilabel
+>، <guilabel
+>درجة الحرارة (يوليو)</guilabel
+>، <guilabel
+>OpenStreetMap المتجهية</guilabel
+> و<guilabel
+>القمر</guilabel
+>. يمكنك الاختيار من بينها بالضغط على لسان تبويب <guilabel
+>عرض الخريطة</guilabel
+> في أعلى صندوق أدوات ماربل: </para>
+
+    <screenshot>
+      <screeninfo
+>مناظر خرائط ماربل</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="mapview-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>مناظر خرائط ماربل</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <itemizedlist>
+      <listitem
+><para
+><guilabel
+>أطلس</guilabel
+>: خريطة طوبوغرافية كلاسيكية. تستخدم خطوطًا متجهية ( "MicroWorldDataBase II" ) لتحديد الخطوط الساحلية وحدود الدول وغير ذلك، ورسوميات نقطية ( "SRTM30" ) لإنشاء تضاريس الارتفاع.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>OpenStreetMap</guilabel
+>: خريطة طرق عالمية أنشأها مشروع OpenStreetMap (OSM). إن OSM هو مجتمع مفتوح ينشئ خرائط حرة قابلة للتحرير. صُيرت بيانات OSM باستخدام Mapnik.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>عرض القمر الاصطناعي</guilabel
+>: الأرض كما تُرى من الفضاء. تعتمد الخريطة على صور وكالة ناسا الجميلة <ulink url="https://earthobservatory.nasa.gov/features/BlueMarble/"
+>الرخامة الزرقاء: الجيل القادم</ulink
+>. الحقوق: مرصد الأرض التابع لناسا</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>الأرض ليلًا</guilabel
+>: أُنشئت هذه الصورة لأضواء مدن الأرض باستخدام بيانات من نظام المسح الخطي التشغيلي (OLS) التابع لبرنامج الأقمار الاصطناعية للأرصاد الجوية الدفاعية (DMSP).</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>مجسم بيهايم 1492</guilabel
+>: أنتجه مارتن بيهايم بين عامي 1490-1492، وهو أقدم مجسم أرضي باقٍ حتى الآن.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>خريطة القمر الاصطناعي سنتينل 2</guilabel
+>: بناءً على بيانات سنتينل، طالع المزيد من المعلومات <ulink url="https://community.kde.org/Marble/Sentinel2MapTheme"
+>هنا</ulink
+>.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>خريطة تاريخية 1689</guilabel
+>: خريطة عالم تاريخية من عام 1689 أنشأها ج. فان شاغن في أمستردام.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>خريطة سياسية</guilabel
+>: خريطة بسيطة تعرض الحدود الحالية للدول.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>خريطة بسيطة</guilabel
+>: خريطة مجردة. تستخدم خطوطًا شعاعية لتحديد الخطوط الساحلية وحدود الدول وما إلى ذلك.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>الهطول (ديسمبر)</guilabel
+>: خريطة تُظهر متوسط الهطول في شهر ديسمبر.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>الهطول (يوليو)</guilabel
+>: خريطة تُظهر متوسط الهطول (مطر، ثلج، بَرَد، إلخ) في شهر يوليو.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>درجة الحرارة (ديسمبر)</guilabel
+>: خريطة تُظهر متوسط درجة الحرارة في ديسمبر.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>درجة الحرارة (يوليو)</guilabel
+>: خريطة تُظهر متوسط درجة الحرارة في يوليو.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>خريطة OSM شعاعية</guilabel
+>: خريطة شعاعية من <ulink url="https://www.openstreetmap.org/"
+>مشروع خريطة الشارع المفتوحة</ulink
+>.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>القمر</guilabel
+>: خريطة للقمر. تعتمد الخريطة على بيانات من مهمة كليمنتين القمرية. الحقوق: NASA/SDIO، بإذن من برنامج أبحاث الجيولوجيا الفلكية USGS.</para
+></listitem>
+    </itemizedlist>
+  </chapter>
+
+  <chapter id="search-places">
+  <title
+>البحث عن الأماكن باستخدام ماربل</title>
+
+    <para
+>يأتي ماربل مزودًا بقاعدة بيانات صغيرة تضم أكثر من 12,000 مدينة (من <ulink url="https://www.populationdata.net/monde/"
+></ulink
+>) وبعض الجبال والبراكين. يمكنك العثور على موقع عن طريق إدخال اسمه في سطر البحث أعلى صندوق الأدوات (يستخدم ماربل دائمًا الاسم الأصلي بالأحرف اللاتينية). عندما تبدأ في الكتابة، ستظهر اقتراحات أسفل سطر البحث. </para>
+
+    <screenshot>
+      <screeninfo
+>البحث عن الأماكن في ماربل</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="search-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>البحث عن الأماكن في ماربل</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>عند ضغطك على مفتاح &Enter;، ستقوم مشغلات ماربل بالاستعلام عبر البحث المتصل وغير المتصل لتعيد لك المزيد من البيانات المفيدة. </para>
+
+    <para
+>تتوفر مشغلات البحث عبر الإنترنت التالية:</para>
+
+    <itemizedlist>
+      <listitem
+><para
+>نوميناتيم (Nominatim): خدمة بحث وترميز جغرافي عكسي متصلة، تستخدم بيانات من <ulink url="https://www.openstreetmap.org"
+></ulink
+></para
+></listitem>
+
+      <listitem
+><para
+>HostIP: ترميز جغرافي عكسي يعتمد على عنوان IP، باستخدام بيانات من <ulink url="https://www.hostip.info"
+></ulink
+></para
+></listitem>
+    </itemizedlist>
+
+    <para
+>تتوفر أيضًا مشغلات البحث غير المتصلة التالية، اعتمادًا على البرمجيات والبيانات الإضافية المثبتة:</para>
+
+    <itemizedlist>
+      <listitem
+><para
+>قاعدة البيانات المحلية: سيبحث في جميع علامات المواقع في كل المستندات المفتوحة. يتضمن هذا علاماتك المرجعية بالطبع.</para
+></listitem>
+
+      <listitem
+><para
+>Monav: خدمة بحث غير متصلة تستخدم بيانات من معلومات توجيه Monav، بناءً على بيانات OSM</para
+></listitem>
+
+      <listitem
+><para
+>Gosmore: خدمة ترميز جغرافي عكسي غير متصلة تستخدم البيانات من إعداد gosmore</para
+></listitem>
+
+    </itemizedlist>
+
+    <para
+>بمجرد العثور على بحثك على الخريطة، يمكنك النقر على لحيقتها أو رمزها باستخدام زر الفأرة الأيسر. بعد النقر على اسم الموقع، ستظهر ورقة بيانات، مثل هذه: </para>
+
+    <screenshot>
+      <screeninfo
+>ورقة بيانات ماربل</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="search-2.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>ورقة بيانات ماربل</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>في اللسان الأول من الحوار، تُوفر بعض البيانات الأساسية، مثل الاسم، والإحداثيات، وعلم الدولة التي يتبع لها المكان. بالإضافة إلى ذلك، تُعرض أعداد السكان للمدن، وارتفاع الجبال. إذا كان حاسوبك متصلًا بالإنترنت، سيحاول ماربل الاتصال بموسوعة "ويكيبيديا" الشهيرة. إذا توفر مقال مطابق، سيعرضه ماربل في ورقة البيانات. </para>
+
+    <note
+><para
+>يمكن تفعيل مصادر البيانات الإضافية باستخدام القائمة الفرعية <menuchoice
+><guimenu
+>عرض</guimenu
+><guisubmenu
+>خدمات الإنترنت</guisubmenu
+></menuchoice
+>. على سبيل المثال، يجب تحديد عنصر القائمة <guimenuitem
+>ويكيبيديا</guimenuitem
+> لرؤية المقالات.</para
+></note>
+  </chapter>
+
+  <chapter id="routing">
+  <title
+>جد طريقك مع ماربل</title>
+
+    <para
+>إلى جانب البحث عن الأماكن، يمكن لماربل عرض المسارات المحتملة بين مكانين أو أكثر. هل تريد تخطيط جولة بالدراجة في الغابة المجاورة؟ هل تحتاج إلى تعليمات القيادة للوصول إلى عنوان في مدينة غريبة؟ حدد لسان <guilabel
+>التوجيه</guilabel
+> في الجزء العلوي من صندوق أدوات ماربل لبدء تخطيط رحلتك. </para>
+
+    <sect1 id="routing-route-new">
+    <title
+>إنشاء مسار جديد</title>
+
+      <para
+>في لسان <guilabel
+>التوجيه</guilabel
+>، سترى أيقونتين خضراوين <guibutton
+>A</guibutton
+> و <guibutton
+>B</guibutton
+>. أدخل عنوان البداية في حقل الإدخال بجانب الزر <guibutton
+>A</guibutton
+>، وهو حقل إدخال بداية المسار. اضغط &Enter; أو زر <guibutton
+>بحث</guibutton
+> للعثور على العلامات المطابقة. ستظهر رسوم متحركة للتقدم لتقليل وقت انتظارك أثناء تشغيل البحث. باستخدام مصطلح البحث "Weavers Lane, London"، ستشبه النتيجة لقطة الشاشة أدناه: </para>
+
+      <screenshot>
+        <screeninfo
+>البحث عن العناوين في ماربل</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-1.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>البحث عن العناوين في ماربل</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>تُصف العلامات المطابقة في القائمة الموجودة أسفل حقول الإدخال، وتُعرض أيضًا في الخريطة. يُختار النتيجة الأولى آليًا كبداية للمسار. في الخريطة، يُشار إلى هذا الموقع باستخدام نفس أيقونة <guiicon
+>A</guiicon
+> الموجودة بجوار حقل إدخال البداية. إذا لم تكن النتيجة الأولى هي البداية المطلوبة، انقر على أي نتيجة أخرى لجعلها موقع البداية الجديد. يمكنك النقر عليها في قائمة النتائج أو على أيقونتها في الخريطة. يُشار دائمًا إلى بداية المسار المختارة حاليًا بأيقونة <guiicon
+>A</guiicon
+>. </para>
+
+      <para
+>بعد تحديد بداية المسار، لننتقل إلى إدخال وجهة رحلتنا. الإجراء نفسه: أدخل عنوان الوجهة في حقل الإدخال بجوار الزر <guibutton
+>B</guibutton
+>، واضغط &Enter; ثم اختر العنصر المطلوب من قائمة النتائج. </para>
+
+      <para
+>هل لاحظت أن زر <guilabel
+>بحث</guilabel
+> قد اختفى وحل محله زر <guilabel
+>احصل على الاتجاهات</guilabel
+>؟ يشير ماربل بذلك إلى أن جميع المعلومات اللازمة لحساب المسار أُدخلت بشكل صحيح. اضغط على زر <guilabel
+>احصل على الاتجاهات</guilabel
+> لجلب المسار المناسب الآن. إذا كان مصطلح بحث الوجهة هو "Sun Walk, London"، فستشبه النتيجة لقطة الشاشة هذه: </para>
+
+      <screenshot>
+        <screeninfo
+>نتيجة المسار في ماربل</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-2.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>عرض مسار في ماربل</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>إذا كان موقع البداية (أو الوجهة) مرئيًا بالفعل على الشاشة، فقد تجد أنه من المريح تحديده مباشرة من الخريطة. للقيام بذلك، اضغط على الزر <guibutton
+>A</guibutton
+> (أو <guibutton
+>B</guibutton
+>) بجوار حقل الإدخال. اختر <guilabel
+>من الخريطة</guilabel
+> في القائمة التي ستظهر. بمجرد الضغط، يُفعل وضع إدخال الخريطة: النقرة التالية على أي موقع في الخريطة ستصبح هي البداية (أو النهاية) لرحلتك. يتحول مؤشر الفأرة إلى تقاطع لتسهيل الاختيار الدقيق. سيدرج الموقع المختار في المسار ويُعلم على الخريطة. لإلغاء الاختيار، اضغط على الزر مرة أخرى أو اضغط مفتاح &Esc;. </para>
+
+      <para
+>يُوفر خيار بديل لاختيار بداية المسار ووجهته عبر قائمة السياق في الخريطة: انقر بزر الفأرة الأيمن على الموقع المطلوب واختر <guilabel
+>الاتجاهات من هنا</guilabel
+> أو <guilabel
+>الاتجاهات إلى هنا</guilabel
+>، حسب الحالة. </para>
+    </sect1>
+
+    <sect1 id="routing-profiles">
+    <title
+>تشكيلات المسار</title>
+
+      <para
+>يعتمد اختيار المسار على نوع المركبة التي تنوي استخدامها. يمكنك إخبار ماربل بذلك وبالتفضيلات الأخرى باستخدام تشكيلات المسار. تحتوي كل تشكيلة على إعدادات لسيناريو توجيه معين. عند التشغيل الأول، ينشئ ماربل أربع تشكيلات عامة لك: <guilabel
+>سيارة (الأسرع)</guilabel
+>، <guilabel
+>سيارة (الأقصر)</guilabel
+>، <guilabel
+>دراجة</guilabel
+>، و <guilabel
+>مشاة</guilabel
+>. </para>
+
+      <para
+>استخدمت الأمثلة في الأقسام السابقة تشكيلة <guilabel
+>سيارة (الأسرع)</guilabel
+>. لنراجع المسار الأخير بتشكيلة مختلفة: اختر خيار <guilabel
+>مشاة</guilabel
+> في مربع خيارات <guilabel
+>تشكيلة</guilabel
+>. سيبدو المسار الآن هكذا: </para>
+
+      <screenshot>
+        <screeninfo
+>توجيه المشاة في ماربل</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-5.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>توجيه المشاة في ماربل</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>أصبح المسار المقترح أقصر لأن ممرات المشاة أُدرجت الآن عند حساب أفضل مسار. </para>
+
+      <para
+>إذا أردت ضبط إحدى التشكيلات المبدئية بشكل أدق، اخترها من مربع خيارات <guilabel
+>تشكيلة</guilabel
+> وانقر على رابط <guilabel
+>اضبط</guilabel
+>. ستفتح نافذة جديدة. </para>
+
+      <screenshot>
+        <screeninfo
+>ضبط تشكيلة مسار ماربل</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-6.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>ضبط تشكيلة مسار ماربل</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>يسمح لك الجانب الأيسر بضبط أي خلفيات توجيه سيُستعلم منها عن المسارات. يدعم ماربل ثمانية خلفيات أو أكثر، بعضها يعمل عبر الإنترنت والبعض الآخر يعمل دون اتصال. يتطلب التوجيه المتصل اتصالًا بالإنترنت للاستعلام عن مسار. يعمل التوجيه غير المتصل بدون اتصال بالإنترنت، لكنه يتطلب منك تنزيل وتثبيت خرائط التوجيه غير المتصلة مسبقًا. الخلفيات المدعومة هي </para>
+
+      <itemizedlist>
+        <listitem
+><para
+>CycleStreets: توجيه الدراجات للمملكة المتحدة باستخدام cyclestreets.net</para
+></listitem>
+
+        <listitem
+><para
+>Gosmore: موجه غير متصل يعمل أيضًا كخلفية لموجه Yours المتصل</para
+></listitem>
+
+        <listitem
+><para
+>MapQuest: موجه متصل يوفر تعليمات تفصيلية متقدمة للانعطافات</para>
+
+          <note
+><para
+>مفتاح التطبيق (AppKey) مطلوب لعمل توجيه MapQuest. يمكنك تسجيل مفتاح التطبيق <ulink url="https://developer.mapquest.com/plan_purchase/steps/business_edition/business_edition_free/register"
+>هنا</ulink
+>.</para
+></note
+></listitem>
+
+        <listitem
+><para
+>Monav: موجه غير متصل سريع جدًا حتى عند حساب مسارات كبيرة جدًا</para
+></listitem>
+
+        <listitem
+><para
+>OSRM: موجه متصل سريع جدًا حتى عند حساب مسارات كبيرة جدًا</para
+></listitem>
+
+        <listitem
+><para
+>OpenRouteService: موجه متصل يولد أيضًا تعليمات القيادة، يقتصر على أوروبا</para
+></listitem>
+
+        <listitem
+><para
+>Routino: موجه بدون اتصال بتهيئة مرنة جدًا</para
+></listitem>
+
+        <listitem
+><para
+>Yours: موجه متصل يعمل عالميًا، لكنه يفتقر إلى تعليمات القيادة</para
+></listitem>
+      </itemizedlist>
+
+      <para
+>بمجرد اختيار وتفعيل خلفية توجيه على اليسار لإدراجها في استعلامات التوجيه، يمكنك تعديل إعداداتها على الجانب الأيمن. الإعدادات خاصة بكل خلفية. </para>
+
+      <para
+>بالإضافة إلى ضبط التشكيلات الأربع المبدئية، يمكنك إضافة تشكيلات جديدة وحذف الموجودة في إعدادات ماربل في صفحة <guilabel
+>التوجيه</guilabel
+>. </para>
+    </sect1>
+
+    <sect1 id="routing-route-adjustments">
+    <title
+>تعديل المسارات</title>
+
+      <para
+>يسمح لك ماربل بتعديل عدة جوانب من المسار للضبط الدقيق: تغيير خيارات المسار، إدراج نقاط عبور، تحريك أو إزالة النقاط الموجودة. نُوقش تعديل خيارات المسار في القسم السابق؛ سنركز الآن على إدارة النقاط. </para>
+
+      <para
+>يُدرج نقاط عبور بالسحب والإفلات في الخريطة. في كل مرة تحرك فيها مؤشر الفأرة فوق أي جزء من المسار (باستثناء فوق نقاط الرحلة الموجودة)، تظهر أيقونة علم أخضر لتشير إلى إمكانية إدراج نقطة عبور. لبدء عملية الإدراج، انقر بزر الفأرة الأيسر. حرك مؤشر الفأرة إلى الموقع الجديد المطلوب مع الاستمرار بالضغط على زر الفأرة الأيسر. ستظهر خطوط زرقاء من نقاط العبور المجاورة إلى الموقع الجديد: </para>
+
+      <screenshot>
+        <screeninfo
+>إضافة نقاط عبور للمسار في ماربل</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-3.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>إدراج نقطة عبور في ماربل</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>تُدرج نقطة العبور الجديدة بين نقاط العبور المجاورة الموجودة بمجرد إفلات زر الفأرة الأيسر. في الوقت نفسه، يُرسم المسار الحالي بخط منقط للإشارة إلى أنه يحتوي على معلومات قديمة. في الخلفية، يُحضر مسار جديد سيحل محل القديم آليًا. </para>
+
+      <para
+>من الممكن أيضًا إضافة نقاط عبور قبل البداية أو بعد نهاية المسار. للقيام بذلك، اتبع التعليمات أعلاه لإدراج نقطة عبور جديدة، ولكن اضغط مفتاح &Ctrl; أثناء تحريك الفأرة. سيظهر خط أزرق واحد من بداية المسار أو نهايته. يشير أصله إلى المكان الذي ستُلحق فيه نقطة العبور الجديدة. </para>
+
+      <para
+>يمكن تحريك نقاط العبور الموجودة بحرية عبر الخريطة. حرك مؤشر الفأرة فوق نقطة عبور واسحبها إلى موقعها الجديد. بمجرد الإفلات، سيُحدث المسار آليًا. </para>
+
+      <para
+>لاستبعاد نقاط عبور من المسار، أزلها. يمكن القيام بذلك إما باستخدام زر <guibutton
+>إزالة</guibutton
+> بجوار حقل إدخال نقطة العبور أو بالنقر بزر الفأرة الأيمن على نقطة العبور في الخريطة. في قائمة السياق، اختر <guimenuitem
+>أزل هذه الوجهة</guimenuitem
+>. لبدء مسار جديد تمامًا، أزل كل نقاط العبور. </para>
+    </sect1>
+
+    <sect1 id="routing-route-export">
+    <title
+>تحميل وحفظ وتصدير المسارات</title>
+
+      <para
+>يمكنك حفظ المسارات بتنسيق <acronym
+>kml</acronym
+> وتحميلها مرة أخرى في وقت لاحق - على نفس الحاسوب أو جهاز آخر يشغل ماربل، أو مشاركتها مع أصدقائك أو تطبيقات أخرى قادرة على قراءة ملفات kml. لحفظ مسار في ملف <literal role="extension"
+>.kml</literal
+>، اضغط على زر <guibutton
+>حفظ</guibutton
+> في أسفل لسان التوجيه. يسمح لك حوار الحفظ باختيار اسم للملف. وبالمثل، يُبدأ تحميل المسار بزر <guibutton
+>فتح</guibutton
+> في أسفل لسان التوجيه. اختر ملف المسار لتحميله وسيقوم ماربل بفتحه. </para>
+
+      <para
+>المسارات المخططة في ماربل يمكن استخدامها في تطبيقات أخرى أو أجهزة ملاحة تدعم تنسيق <acronym
+>gpx</acronym
+> أو التنسيقات المكافئة. إذا كان جهاز الملاحة الخاص بك لا يدعم <acronym
+>gpx</acronym
+> مباشرة، يمكنك استخدام أداة تحويل مثل <command
+>gpsbabel</command
+> لتحويل ملف <acronym
+>gpx</acronym
+> المصدر من ماربل إلى تنسيق مناسب. يُبدأ تصدير المسار في ماربل من قائمة سياق التوجيه في الخريطة. انقر بزر الفأرة الأيمن على أي نقطة في المسار، وفي القائمة التي تظهر، اختر <guimenuitem
+>صادر المسار...</guimenuitem
+>: </para>
+
+      <screenshot>
+        <screeninfo
+>تصدير المسار في ماربل</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-4.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>تصدير مسار في ماربل</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>أدخل اسم الملف المطلوب في حوار الحفظ. يجب أن يكون امتداد الملف <literal role="extension"
+>gpx</literal
+> للتخزين بتنسيق <acronym
+>gpx</acronym
+> أو <literal role="extension"
+>kml</literal
+> للتخزين بتنسيق <acronym
+>kml</acronym
+>. لاحظ أن التنسيق الداخلي لماربل هو <acronym
+>kml</acronym
+>؛ عند الشك احفظ المسارات كـ <acronym
+>kml</acronym
+> واستخدم <acronym
+>gpx</acronym
+> فقط لمشاركة المسارات مع التطبيقات غير القادرة على قراءة ملفات <acronym
+>kml</acronym
+>. </para>
+    </sect1>
+  </chapter>
+
+  <chapter id="measure-distances">
+  <title
+>قياس المسافات باستخدام ماربل</title>
+
+    <para
+>كما ذكرنا سابقًا، يعرض ماربل دائمًا شريط مقياس ديناميكي في أسفل اليسار لتقدير المسافات على الخريطة. تتوفر هذه التراكبات، جنبًا إلى جنب مع وردة الرياح في الزاوية العلوية اليمنى، لتوجيه أفضل. ولكن هناك المزيد: يتيح لك ماربل قياس المسافات بين نقطتين أو أكثر على الأرض. للقيام بذلك، انقر على النقاط المعنية بالترتيب الصحيح على الكرة الأرضية باستخدام زر الفأرة الأيمن. عند كل نقرة، ستظهر قائمة منبثقة تتيح لك إضافة نقطة قياس (<guimenuitem
+>إضافة نقطة قياس</guimenuitem
+>) أو إزالة جميع نقاط القياس تمامًا (<guimenuitem
+>إزالة نقاط القياس</guimenuitem
+>): </para>
+
+    <screenshot>
+      <screeninfo
+>القياس في ماربل</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="measure-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>قياس المسافات في ماربل</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>بمجرد إضافة نقطتي قياس على الأقل، سيتم عرض المسافة الإجمالية في الزاوية العلوية اليسرى من الخريطة. سيفترض ماربل أن الأرض كروية في جميع القياسات، وهو أمر دقيق بما يكفي لمعظم الحالات. </para>
+
+    <tip
+><para
+>يمكن تهيئة عرض المسافات والاتجاهات للأجزاء المقاسة باستخدام <link linkend="measure-tool-config"
+>مربع حوار تهيئة أداة القياس</link
+>.</para
+></tip>
+  </chapter>
+
+  <chapter id="download-region">
+  <title
+>تنزيل مناطق الخريطة</title>
+
+    <para
+>يأتي ماربل مزودًا بمجموعة من الخرائط المثبتة مسبقًا، وهو جاهز للاستخدام. عندما تقوم بتكبير العرض في أماكن معينة، يتم تنزيل أجزاء أكثر تفصيلًا من سمة الخريطة الحالية في الخلفية. يعمل هذا بشكل ممتاز متى توفر اتصال بالإنترنت. ولكن، ماذا تفعل عند السفر إلى مدينة أجنبية حيث لا يتوفر اتصال دائم بالإنترنت لتنزيل الخرائط؟ خطط مسبقًا وقم بتنزيل مناطق الخريطة التي ستستخدمها. </para>
+
+    <para
+>لفهم ما يجب تنزيله لعرض أجزاء معينة من الخريطة دون اتصال، دعونا نلقي نظرة موجزة على مفهوم "البلاطات" (tiles) التي يستخدمها ماربل داخليًا. البلاطة هي صورة تقابل جزءًا معينًا من الخريطة. يرتب ماربل هذه البلاطات بجانب بعضها البعض لتشكيل صورة الخريطة التي تظهر لك. اعتمادًا على وضع الإسقاط المحدد، تُرتب البلاطات لتشكل مستطيلًا (إسقاط الخريطة المسطحة، يسارًا) أو كرة (إسقاط الكرة الأرضية، يمينًا): </para>
+
+    <screenshot>
+      <screeninfo
+>إسقاطات ماربل</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="download-region-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>البلاطات في المستوى 1 في إسقاط الخريطة المسطحة (يسار) وإسقاط الكرة الأرضية (يمين)</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>عند التقريب في هذا العرض، يلزم عرض المزيد من التفاصيل. تكون البلاطات المعروضة في لقطتي الشاشة أعلاه خشنة جدًا؛ يتعرف ماربل على هذا آليًا وينتقل إلى مستوى البلاطات التالي حيث توفر الصور تفاصيل أكثر. يستمر هذا: كلما زاد التقريب، ارتفع مستوى البلاطات. يوضح الرسم التخطيطي التالي عدد البلاطات المختلف (الملون) المطابق لنفس منطقة الخريطة في مستويات بلاطات مختلفة: </para>
+
+    <screenshot>
+      <screeninfo
+>مستويات بلاطات ماربل</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="download-region-2.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>مستويات بلاطات مختلفة في ماربل</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>عند تنزيل منطقة خريطة للاستخدام غير المتصل، ستحتاج إلى تنزيل جميع البلاطات في المنطقة المطلوبة لكل مستويات البلاطات التي تنوي استخدامها. نظرًا للارتباط بين مستويات البلاطات ومستويات التقريب، يمكنك اعتبار ذلك تنزيلًا لجميع البلاطات في مستويات التقريب التي تخطط لاستخدامها. </para>
+
+    <para
+>لتحقيق ذلك لمنطقة معينة، اجعل تلك المنطقة مرئية على الشاشة عن طريق تقريب وتحريك المجسم. الآن اختر عنصر القائمة <menuchoice
+><guilabel
+>ملف</guilabel
+> <guilabel
+>نزل منطقة...</guilabel
+></menuchoice
+> لفتح حوار <guilabel
+>تنزيل المنطقة</guilabel
+>. أبقِ خيار <guilabel
+>المنطقة المرئية</guilabel
+> محددًا لتنزيل تلك البلاطات التي تتوافق مع منطقة الخريطة المرئية على الشاشة. بعد ذلك، حدد <guilabel
+>نطاق مستوى البلاطة:</guilabel
+> (نطاق التقريب) الذي ترغب في تنزيله. الحقل الأول يوافق أصغر مستوى بلاطة، والحقل الثاني يوافق أكبر مستوى سيُنزل. ستنزل مستويات البلاطات البينية أيضًا. يعرض ماربل عدد البلاطات (الصور) التي يجب تنزيلها ويحدث هذا الرقم كلما غيرت المنطقة أو نطاق مستوى البلاطة. </para>
+
+    <screenshot>
+      <screeninfo
+>مربع حوار تنزيل المنطقة في ماربل</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="download-region-3.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>حوار تنزيل المنطقة في ماربل</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>يُعرض مستوى البلاطة المطابق لمستوى التقريب الحالي في شريط الحالة بالأسفل. يرجى ملاحظة أنه قد تضطر إلى ضبط ماربل لإظهار تلك المعلومات: انقر بزر الفأرة الأيمن على شريط الحالة واختر <guilabel
+>أظهر مستوى تقريب البلاطة</guilabel
+>. </para>
+
+    <para
+>اختر <guibutton
+>موافق</guibutton
+> لبدء تنزيل منطقة الخريطة. سيعرض شريط التقدم في ماربل تقدم التنزيل (إذا كان مُفعلًا). </para>
+
+    <para
+>في حال كنت تعرف إحداثيات منطقة الخريطة المراد تنزيلها، يمكنك إدخالها بالنقر على خيار <guilabel
+>حدد المنطقة</guilabel
+>. ستُتجاهل منطقة الخريطة المرئية على الشاشة في هذه الحالة. </para>
+
+    <para
+>يمكنك الاستمرار في استخدام ماربل أثناء فتح حوار <guilabel
+>تنزيل المنطقة</guilabel
+>. هذا مفيد لجدولة عدة تنزيلات لمناطق مختلفة أو نطاقات بلاطات مختلفة. فقط اختر <guibutton
+>تطبيق</guibutton
+> بدلًا من <guibutton
+>موافق</guibutton
+> لبدء تنزيل منطقة الخريطة. </para>
+  </chapter>
+
+  <chapter id="recording-movie">
+  <title
+>تسجيل فيلم باستخدام ماربل</title>
+
+    <sect1 id="recording-movie-recording">
+    <title
+>تسجيل فيلم باستخدام ماربل</title>
+
+      <para
+>لتسجيل فيلم باستخدام ماربل، استخدم وظيفة التسجيل هذه. </para>
+
+      <para
+>ابدأ التسجيل من عنصر القائمة <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>تحرير</guimenu
+> <guimenuitem
+>سجل فيلمًا</guimenuitem
+></menuchoice
+> لفتح حوار <guilabel
+>سجل فيلمًا</guilabel
+>. سترى حوارًا مثل هذا: </para>
+
+      <screenshot>
+        <screeninfo
+>حوار تسجيل فيلم ماربل</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="movie-1.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>حوار تسجيل فيلم ماربل</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>اضغط على زر <guibutton
+>افتح...</guibutton
+> لاختيار اسم الفيلم ومجلد الوجهة. كما يمكنك تغيير عدد الإطارات في الثانية (FPS) للفيلم بين 1 و 60. </para>
+
+      <para
+>عندما يصبح كل شيء جاهزًا، يمكنك بدء التسجيل. للبدء، اضغط على زر <guibutton
+>ابدأ</guibutton
+>. بمجرد القيام بذلك، يمكنك التقريب والتحريك وسيقوم ماربل بالتقاط فيديو لرحلتك عبر المجسم. </para>
+
+      <para
+>لإيقاف تسجيل الفيلم وحفظه، اختر عنصر القائمة <menuchoice
+><guimenu
+>تحرير</guimenu
+> <guimenuitem
+>أوقف التسجيل</guimenuitem
+></menuchoice
+>. </para>
+
+      <sect2 id="recording-movie-troubleshooting">
+      <title
+>استكشاف الأخطاء وإصلاحها</title>
+
+        <para
+>قد تظهر رسالة خطأ بسبب عدم تثبيت avconv أو ffmpeg. نزلها من <ulink url="https://ffmpeg.org/download.html"
+>صفحة تنزيلات ffmpeg</ulink
+> و <ulink url="https://libav.org/download.html"
+>صفحة تنزيلات avconv</ulink
+> أو استخدم الحزم من توزيعتك. </para>
+      </sect2>
+    </sect1>
+  </chapter>
+
+  <chapter id="commands">
+  <title
+>مرجع الأوامر</title>
+
+    <sect1 id="marble-mainwindow">
+    <title
+>القوائم ومفاتيح الاختصار</title>
+
+      <sect2>
+      <title
+>قائمة ملف</title>
+
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>افتح...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يفتح</action
+> ملف خريطة.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>ملف</guimenu
+> <guimenuitem
+>افتح الأخير</guimenuitem
+> </menuchoice
+></term>
+            <listitem
+><para
+>هذا اختصار لفتح الخرائط المفتوحة مؤخرًا. يؤدي النقر فوق هذا العنصر إلى فتح قائمة بجانب القائمة تحتوي على العديد من الملفات التي فُتحت مؤخرًا. يؤدي النقر فوق ملف معين إلى فتحه في ماربل - إذا كان الملف لا يزال موجودًا في نفس الموقع.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>نزل خرائط...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يعرض</action
+> حوار <guilabel
+>احصل على أشياء جديدة ساخنة!</guilabel
+> لتنزيل خرائط إضافية لماربل، من بينها خرائط للمريخ والزهرة.</para
+></listitem>
+          </varlistentry>
+
+         <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>ملف</guimenu
+> <guimenuitem
+>أنشئ خريطة جديدة...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يعرض</action
+> حوار <guilabel
+>معالج إنشاء سمة خريطة ماربل</guilabel
+> لإنشاء خريطة جديدة باستخدام بيانات خدمة خرائط الويب، أو ملف صورتك الخاص أو بلاطات خريطة الشارع المفتوحة المفهرسة.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>ملف</guimenu
+> <guimenuitem
+>نزل منطقة...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يعرض</action
+> حوار <guilabel
+>تنزيل المنطقة</guilabel
+> لتنزيل بيانات الخريطة في مستويات تقريب مختلفة للاستخدام غير المتصل. انظر <link linkend="download-region"
+>تنزيل مناطق الخريطة</link
+> للتفاصيل.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>صادر الخريطة...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يصدر</action
+> لقطة شاشة لخريطة ماربل إلى ملف صورة.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>اطبع...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يطبع</action
+> لقطة شاشة لخريطة ماربل.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>ملف</guimenu
+> <guimenuitem
+>معاينة الطباعة</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>يفتح نافذة تعرض معاينة للخريطة المطبوعة.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>ملف</guimenu
+> <guimenuitem
+>اعمل دون اتصال</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>إذا حُدد هذا الخيار، فلن يقوم ماربل بتنزيل بيانات الخريطة من الإنترنت. تُقيد ميزة البحث في قاعدة البيانات المحلية، ولا يمكن جلب مسارات جديدة.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>أنهِ</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يخرج</action
+> من ماربل.</para
+></listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+
+      <sect2>
+      <title
+>قائمة حرر</title>
+
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>تحرير</guimenu
+> <guimenuitem
+>انسخ الخريطة</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>ينسخ</action
+> لقطة شاشة لخريطة ماربل إلى الحافظة العالمية.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>تحرير</guimenu
+> <guimenuitem
+>انسخ الإحداثيات</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>ينسخ</action
+> الإحداثيات الحالية إلى الحافظة العالمية.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>تحرير</guimenu
+> <guimenuitem
+>حرر الخريطة...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يسمح</action
+> لك بفتح الخريطة الحالية في محرر خرائط خارجي. تدعم النسخة الحالية محررات Potlatch (في متصفح الويب)، و Merkaartor و JOSM.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>تحرير</guimenu
+> <guimenuitem
+>سجل فيلمًا</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يسجل</action
+> فيلمًا باستخدام ماربل.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>تحرير</guimenu
+> <guimenuitem
+>أوقف التسجيل</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يوقف</action
+> تسجيل الفيلم الحالي.</para
+></listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+
+      <sect2>
+      <title
+>قائمة عرض</title>
+
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>عرض</guimenu
+> <guimenuitem
+>الموقع الحالي</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يبدل</action
+> عرض صفحة الموقع في اللوحة اليسرى. إذا وُصل جهاز GPS بحاسوبك، سيعرض ماربل خطوط الطول والعرض لموقعك الحالي.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>عرض</guimenu
+> <guimenuitem
+>مؤشر التصويب</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يبدل</action
+> عرض مؤشر تصويب بسيط في وسط الخريطة.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycap
+>F5</keycap
+></shortcut
+> <guimenu
+>عرض</guimenu
+> <guimenuitem
+>حدث</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>يُنزل الجزء المرئي حاليًا من الخريطة مرة أخرى ويُحدث على الشاشة.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>عرض</guimenu
+> <guisubmenu
+>صناديق المعلومات</guisubmenu
+></menuchoice
+></term>
+            <listitem
+><para
+>في هذه القائمة الفرعية، يمكنك قفل موضع صناديق المعلومات وإظهار أو إخفاء الملحقات التي فعلتها في صفحة <link linkend="configplugins"
+>الملحقات</link
+> في حوار ضبط ماربل.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>عرض</guimenu
+> <guimenuitem
+>خدمات الإنترنت</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>يعرض ملحق <guimenuitem
+>ويكيبيديا</guimenuitem
+> مقالات ويكيبيديا المرتبطة جغرافيًا كأيقونة على الخريطة. تفتح النقرة على الأيقونة نافذة متصفح تعرض الموقع المذكور. تُوفر البيانات عبر خدمة ويب من خلال GeoNames.org. وبالمثل، يوفر ملحق <guimenuitem
+>صور</guimenuitem
+> حاليًا صورًا عبر موقع مشاركة الصور FlickR.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>عرض</guimenu
+> <guimenuitem
+>سحب</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يعرض</action
+> الغطاء السحابي في الوقت الفعلي. خريطة سحب فورية تُحدث كل 3 ساعات. تستخدم صور الأقمار الاصطناعية GOES و METEOSAT و GMS المنزلة من صفحة صور الأقمار الاصطناعية المستقرة جغرافيًا في جامعة دندي. الحقوق: هاري ناير، مشروع Xplanet.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>عرض</guimenu
+> <guimenuitem
+>الغلاف الجوي</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يعرض</action
+> الانعكاس المنتشر للغلاف الجوي حول الأرض.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>عرض</guimenu
+> <guimenuitem
+>نجوم</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يعرض</action
+> خريطة النجوم كما تُرى من النظام الشمسي.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>عرض</guimenu
+> <guimenuitem
+>التحكم في الشمس...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يعرض</action
+> <guilabel
+>التحكم في الشمس</guilabel
+> حيث يمكنك ضبط <guilabel
+>تظليل الشمس</guilabel
+> وتوسيط الخريطة على موقع النقطة الواقعة تحت الشمس.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>عرض</guimenu
+> <guimenuitem
+>التحكم في الوقت...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يعرض</action
+> حوار <guilabel
+>التحكم في الوقت</guilabel
+> حيث يمكنك ضبط التاريخ والوقت وسرعة زمن المحاكاة.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>عرض</guimenu
+> <guisubmenu
+>الكسوف والخسوف في عام <replaceable
+>السنة</replaceable
+></guisubmenu
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يعرض</action
+> قائمة بالكسوف والخسوف للسنة المختارة باستخدام عنصر القائمة <menuchoice
+><guimenu
+>عرض</guimenu
+> <guimenuitem
+>تصفح الكسوف والخسوف...</guimenuitem
+></menuchoice
+>.</para>
+
+            <para
+>سيعرض عنصر القائمة هذا فقط عند تفعيل ملحق <link linkend="eclipsesplugin"
+>الكسوف والخسوف</link
+>.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>عرض</guimenu
+> <guimenuitem
+>تصفح الكسوف والخسوف...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يعرض</action
+> حوار <guilabel
+>متصفح الكسوف والخسوف</guilabel
+> حيث يمكنك ضبط السنة، وفتح حوار إعدادات الملحق، وعرض بيانات البداية والنهاية والنوع والقدر. اختر عنصرًا واضغط <guibutton
+>اذهب إلى الكسوف المختار</guibutton
+> لعرض الموقع على المجسم.</para>
+
+            <para
+>سيعرض عنصر القائمة هذا فقط عند تفعيل ملحق <link linkend="eclipsesplugin"
+>الكسوف والخسوف</link
+>.</para
+></listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+
+      <sect2>
+      <title
+>قائمة العلامات</title>
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl; <keycap
+>B</keycap
+></keycombo
+></shortcut
+> <guimenu
+>العلامات</guimenu
+> <guimenuitem
+>أضف علامة</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يفتح حوار <guilabel
+>حرر العلامة المرجعية</guilabel
+></action
+> لإدارة علامة مرجعية.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>علامات مرجعية</guimenu
+> <guimenuitem
+>أظهر العلامات المرجعية</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>مربع اختيار لـ <action
+>تفعيل تصور العلامات المرجعية على الخريطة.</action
+></para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>علامات مرجعية</guimenu
+> <guimenuitem
+>عين موقع المنزل</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يعين الموقع الحالي كمنزلك.</action
+></para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>علامات مرجعية</guimenu
+> <guimenuitem
+>أدر العلامات المرجعية...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يفتح حوار <guilabel
+>إدارة العلامات المرجعية</guilabel
+></action
+> لإدارة جميع العلامات المرجعية.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>علامات مرجعية</guimenu
+> <guisubmenu
+>مبدئية</guisubmenu
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>تعرض هذه القائمة الفرعية مواقعك المبدئية.</action
+></para
+></listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+
+      <sect2>
+      <title
+>قائمة الإعدادات</title>
+
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>إعدادات</guimenu
+> <guimenuitem
+>أظهر شريط الأدوات</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يبدل</action
+> عرض شريط الأدوات.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>إعدادات</guimenu
+> <guimenuitem
+>أظهر شريط الحالة</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يبدل</action
+> عرض شريط الحالة.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>إعدادات</guimenu
+> <guisubmenu
+>لوحات</guisubmenu
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يبدل</action
+> عرض لوحات ماربل.</para>
+
+            <tip
+><para
+>يمكنك جعل ماربل يخفي جميع اللوحات أو يظهرها باختيار عنصر القائمة <menuchoice
+><guimenu
+>إعدادات</guimenu
+> <guisubmenu
+>لوحات</guisubmenu
+> <guimenuitem
+>أخفِ كل اللوحات/أظهر كل اللوحات</guimenuitem
+></menuchoice
+> أو بالضغط على مفتاح <keycap
+>F9</keycap
+>.</para
+></tip
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>إعدادات</guimenu
+> <guisubmenu
+>حجم العرض</guisubmenu
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>ينتقل بين أحجام مختلفة لمنطقة خريطة ماربل.</action
+> يمكنك اختيار حجم مناسب لالتقاط إطارات لتسجيل الشاشة أو إبقاء المنطقة قابلة لتغيير الحجم (<guimenuitem
+>المبدئي (قابل لتغيير الحجم)</guimenuitem
+>).</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>إعدادات</guimenu
+> <guimenuitem
+>وضع ملء الشاشة</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>ينتقل بين العرض العادي ووضع ملء الشاشة.</action
+> في وضع ملء الشاشة، يُخفى شريط العنوان ويُغير حجم نافذة التطبيق لتشمل الشاشة بالكامل.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>إعدادات</guimenu
+> <guimenuitem
+>اضبط مجسم ماربل الافتراضي...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>يعرض</action
+> حوار <link linkend="configure"
+>ضبط ماربل</link
+>.</para
+></listitem>
+          </varlistentry>
+
+        </variablelist>
+
+      </sect2>
+
+      <sect2>
+      <title
+>قائمة مساعدة</title>
+
+        <para
+>يحتوي ماربل على قائمة <guimenu
+>مساعدة</guimenu
+> كيدي الشائعة، للمزيد من المعلومات اقرأ القسم المتعلق بـ <ulink url="help:/fundamentals/menus.html#menus-help"
+>قائمة المساعدة</ulink
+> في أساسيات كيدي. </para>
+      </sect2>
+    </sect1>
+  </chapter>
+
+  <chapter id="configure">
+  <title
+>ضبط ماربل</title>
+
+    <sect1 id="configview">
+    <title
+>ضبط العرض</title>
+
+      <screenshot>
+        <screeninfo
+>حوار ضبط العرض</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-view.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>حوار ضبط العرض</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>المسافة:</guilabel
+></term>
+          <listitem
+><para
+>الوحدة المستخدمة لقياس الارتفاع والأطوال والمسافات (مثلًا كم، ميل، قدم).</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>الزاوية:</guilabel
+></term>
+          <listitem
+><para
+>يحدد تدوين الزوايا في الإحداثيات: يُستخدم تدوين درجة-دقيقة-ثانية (مثلًا 54°30'00") مبدئيًا. كبديل يمكنك اختيار الدرجات العشرية (مثلًا 54.5°).</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>صورة ثابتة:</guilabel
+></term>
+          <listitem
+><para
+>يحدد جودة الخريطة التي تُعرض في حال عدم وجود مدخلات من المستخدم. عادةً ما يسمح هذا بجودة خريطة عالية لأن السرعة ليست مصدر قلق حينها.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>خلال التحريك:</guilabel
+></term>
+          <listitem
+><para
+>يحدد جودة الخريطة المعروضة أثناء الرسوم المتحركة (مثلًا عند سحب المجسم). يُنصح بضبط هذا الخيار على <guilabel
+>جودة منخفضة</guilabel
+> على الأجهزة البطيئة للحصول على سرعة أفضل.</para
+></listitem>
+        </varlistentry>
+
+<!--         <varlistentry>
+          <term
+><guilabel
+>Place names:</guilabel
+></term>
+          <listitem
+><para
+>Places often have different names in different languages. The label on the map can show the name in the user's language. Alternatively it can display the name in the official language and glyphs of that place.</para
+></listitem>
+        </varlistentry
+>-->
+
+        <varlistentry>
+          <term
+><guilabel
+>خط الخريطة المبدئي:</guilabel
+></term>
+          <listitem
+><para
+>الخط المبدئي المستخدم في الخريطة.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="confignavigation">
+    <title
+>ضبط الملاحة</title>
+
+      <screenshot>
+        <screeninfo
+>حوار ضبط الملاحة</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-navigation.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>حوار ضبط الملاحة</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+<!--        <varlistentry>
+          <term
+><guilabel
+>Drag location:</guilabel
+></term>
+          <listitem
+><para
+>While dragging the mouse there are two standard behaviors when dealing with a virtual globe: The location below mouse pointer will follow the cursor exactly: As a result &eg; the north pole will not stay at the top which can lead to confusion. By default &marble; makes sure that north is always up which results in a dragging behavior where the location below the mouse pointer slightly "detaches" from the cursor.</para
+></listitem>
+        </varlistentry
+>-->
+
+        <varlistentry>
+          <term
+><guilabel
+>دوران الكرة الأرضية بالقصور الذاتي</guilabel
+></term>
+          <listitem
+><para
+>يستخدم ماربل الدوران الحركي مبدئيًا عند سحب الخريطة. يمكنك إيقاف هذا السلوك باستخدام مربع الاختيار هذا.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>تحريك الرحلة إلى الهدف</guilabel
+></term>
+          <listitem
+><para
+>عند البحث عن موقع، يمكن لماربل الانتقال فورًا إلى الموقع الجديد أو إظهار رسوم متحركة للانتقال من المكان السابق إلى المكان الجديد.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>تدوير عرض الفأرة</guilabel
+></term>
+          <listitem
+><para
+>تتم محاذاة حركة الخريطة والفأرة أثناء التحريك.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>عند البدء:</guilabel
+></term>
+          <listitem
+><para
+>يعرض ماربل موقع المنزل فور بدء التطبيق مبدئيًا. كبديل، يمكنه أيضًا إظهار آخر موضع كان نشطًا عندما غادر المستخدم التطبيق.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>محرّر خارجي:</guilabel
+></term>
+          <listitem
+><para
+>هنا، يمكنك تحديد المحرر المبدئي للخرائط أو اختيار <guilabel
+>اسأل دائمًا</guilabel
+> ليطلب منك ماربل الاختيار قبل تشغيل المحرر الخارجي.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configcacheproxy">
+    <title
+>ضبط الخبيئة والوكيل</title>
+
+      <screenshot>
+        <screeninfo
+>حوار ضبط الخبيئة والوكيل</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-cacheproxy.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>حوار ضبط الخبيئة والوكيل</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>الخبيئة</guilabel
+></term>
+          <listitem
+><para
+>تُستخدم خبيئتان في ماربل: <guilabel
+>الذاكرة الفيزيائية:</guilabel
+> وهي لازمة لإبقاء بيانات الخريطة في ذاكرة الحاسوب. تزيد زيادة القيمة من استجابة التطبيق. خبيئة <guilabel
+>القرص الصلب:</guilabel
+> تُستخدم لتخزين المحتويات المنزلة من الإنترنت (مثل بيانات ويكيبيديا أو بيانات الخرائط). قلل هذه القيمة إذا أردت توفير مساحة على القرص الصلب وكان الاستخدام العالي للإنترنت لا يمثل مشكلة.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>الوكيل</guilabel
+></term>
+          <listitem
+><para
+>إعدادات الوكيل لشبكتك المحلية. يرجى تركها فارغة في حال عدم وجود وكيل.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configdatetime">
+    <title
+>ضبط التاريخ والوقت</title>
+
+      <screenshot>
+        <screeninfo
+>حوار ضبط التاريخ والوقت</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-dateandtime.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>حوار ضبط التاريخ والوقت</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>المنطقة الزمنيّة</guilabel
+></term>
+          <listitem
+><para
+>هنا يمكنك اختيار منطقة زمنية لماربل: التوقيت العالمي المنسق (UTC)، أو منطقة زمنية للنظام، أو اختيار منطقة زمنية مخصصة. يغير الخيار المختار عرض الخريطة فقط إذا كانت الخريطة قادرة على عرض ظروف الإضاءة على السطح.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>عندما يبدأ ماربل</guilabel
+></term>
+          <listitem
+><para
+>هنا يمكنك اختيار التاريخ والوقت اللذين سيُستخدمان عند بدء ماربل: وقت النظام أو وقت الجلسة الأخيرة.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configsynchronization">
+    <title
+>ضبط المزامنة</title>
+
+      <para
+>يمكن لماربل رفع بيانات المسارات والعلامات المرجعية إلى خادم ownCloud ومزامنتها بين نسخ ماربل المثبتة على أجهزة مختلفة. </para>
+
+      <screenshot>
+        <screeninfo
+>حوار ضبط المزامنة</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-synchronization.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>حوار ضبط المزامنة</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>مكن المزامنة</guilabel
+></term>
+          <listitem
+><para
+>يمكن تفعيل أو تعطيل المزامنة باستخدام هذا العنصر. عند تفعيل المزامنة، يمكنك اختيار مزامنة بيانات المسارات والعلامات المرجعية باستخدام مربعات الاختيار، أو الضغط على زر <guibutton
+>زامن الآن</guibutton
+> لبدء المزامنة فورًا.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>بيانات الاعتماد</guilabel
+></term>
+          <listitem
+><para
+>هنا يمكنك إدخال بيانات اعتماد ownCloud الخاصة بك. يمكن العثور على مزيد من المعلومات حول ضبط ownCloud على الموقع الرسمي لـ ownCloud.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configrouting">
+    <title
+>ضبط التوجيه</title>
+
+      <screenshot>
+        <screeninfo
+>حوار ضبط التوجيه</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-routing.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>حوار ضبط التوجيه</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guibutton
+>أضف...</guibutton
+></term>
+          <listitem
+><para
+>يفتح نافذة حيث يمكنك إضافة تشكيلة توجيه جديدة.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guibutton
+>اضبط...</guibutton
+></term>
+          <listitem
+><para
+>يفتح نافذة حيث يمكن ضبط تشكيلة التوجيه المختارة حاليًا.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guibutton
+>أزل</guibutton
+></term>
+          <listitem
+><para
+>يحذف تشكيلة التوجيه المختارة.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guibutton
+>انقل لأعلى</guibutton
+></term>
+          <listitem
+><para
+>تُنقل تشكيلة التوجيه المختارة خطوة واحدة للأعلى، وستظهر قبل التشكيلة التي كانت فوقها.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guibutton
+>انقل لأسفل</guibutton
+></term>
+          <listitem
+><para
+>تُنقل تشكيلة التوجيه المختارة خطوة واحدة للأسفل، وستظهر بعد التشكيلة التي كانت تحتها.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configplugins">
+    <title
+>ضبط الملحقات</title>
+
+      <para
+>ودجت <guilabel
+>ضبط الملحقات</guilabel
+> هي المكان المناسب لتفعيل (أو تعطيل) صناديق المعلومات وخدمات الإنترنت والملحقات الأخرى التي تؤثر على مظهر ماربل. تظهر الملحقات النشطة في قائمة <guilabel
+>عرض</guilabel
+> حيث يمكنك تبديل رؤيتها. </para>
+
+      <screenshot>
+        <screeninfo
+>حوار ضبط الملحقات</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-plugins.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>حوار ضبط الملحقات</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>يمكن تفعيل وتعطيل كل ملحق باستخدام مربع الاختيار على اليسار. توفر بعض الملحقات خيارات ضبط إضافية يمكن الوصول إليها بالنقر على أيقونة الأداة على اليمين. </para>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>ملحق هواة الراديو اللاسلكي Aprs</guilabel
+></term>
+          <listitem
+><para
+>يجلب البيانات من نظام الإبلاغ التلقائي عن الحزم عبر الإنترنت أو ملف أو جهاز تسلسلي. يُعرض موقع وحالة مرسلي البيانات على الخريطة وتُحدث في الوقت الفعلي.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>شرح</guilabel
+></term>
+          <listitem
+><para
+>يسمح لك بإضافة تعليقات توضيحية على الخرائط.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>غلاف جوي</guilabel
+></term>
+          <listitem
+><para
+>يعرض تأثيرات الغلاف الجوي.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>بوصلة</guilabel
+></term>
+          <listitem
+><para
+>يظهر بوصلة في الخريطة.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>شبكة الإحداثيات</guilabel
+></term>
+          <listitem
+><para
+>يعرض شبكة إحداثيات (يمكنك اختيار ألوان خطوط الشبكة).</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>شعرتان متقاطعتان</guilabel
+></term>
+          <listitem
+><para
+>فعل هذا لعرض مؤشر تصويب صغير في وسط الخريطة.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>مؤشر تقدم التحميل</guilabel
+></term>
+          <listitem
+><para
+>مخطط دائري فوق الخريطة يوضح تقدم التنزيلات الجارية.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>الزلازل</guilabel
+></term>
+          <listitem
+><para
+>يعرض علامات الزلازل على الخريطة.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry id="eclipsesplugin">
+          <term
+><guilabel
+>كسوف</guilabel
+></term>
+          <listitem
+><para
+>يعرض بيانات حول كسوف الشمس وخسوف القمر.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>ملف تعريف الارتفاع</guilabel
+></term>
+          <listitem
+><para
+>يعرض تراكب ملف تعريف الارتفاع لـ <link linkend="routing"
+>المسارات على الخريطة</link
+>.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>معلم ملف تعريف الارتفاع</guilabel
+></term>
+          <listitem
+><para
+>يحدد الارتفاع الحالي لملف تعريف الارتفاع على الخريطة.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>معلومات نظام تحديد المواقع العالمي (GPS)</guilabel
+></term>
+          <listitem
+><para
+>يعرض عنصرًا عائمًا يوفر معلومات نظام تحديد المواقع العالمي (GPS).</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>الرخصة</guilabel
+></term>
+          <listitem
+><para
+>يعرض عنصرًا عائمًا يوفر معلومات حقوق النشر.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry id="measure-tool-config">
+          <term
+><guilabel
+>أداة القياس</guilabel
+></term>
+          <listitem
+><para
+>ملحق لـ <link linkend="measure-distances"
+>قياس المسافات بين نقطتين أو أكثر</link
+>.</para>
+
+          <para
+>يمكن ضبط عرض المسافة والاتجاه بين النقاط بعد الضغط على أيقونة الأداة. يكفي تحديد العنصر المقابل ليظهر ماربل اللصائق أو إلغاء تحديده لإخفائها.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>التّنقّل</guilabel
+></term>
+          <listitem
+><para
+>يعرض التحكم في الفأرة للتقريب والتحريك كعنصر عائم على الخريطة.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>ملاحظات مخططي OSM</guilabel
+></term>
+          <listitem
+><para
+>تنفيذ ملاحظات الترميز الجغرافي.</para
+></listitem>
+        </varlistentry>
+
+<!--        <varlistentry>
+          <term
+><guilabel
+>OpenCaching.com</guilabel
+></term>
+          <listitem
+><para
+>Displays the <ulink url="https://en.wikipedia.org/wiki/Geocaching"
+>geocaching</ulink
+> markers on the map.</para
+></listitem>
+        </varlistentry
+>-->
+
+        <varlistentry>
+          <term
+><guilabel
+>عناصر OpenDesktop</guilabel
+></term>
+          <listitem
+><para
+>يظهر الصور الرمزية لمستخدمي OpenDesktop وبعض المعلومات الإضافية عنهم على الخريطة.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>الخريطة العامّة</guilabel
+></term>
+          <listitem
+><para
+>هذا عنصر عائم يوفر خريطة عامة.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>الصور</guilabel
+></term>
+          <listitem
+><para
+>ينزل الصور آليًّا من جميع أنحاء العالم وفقًا لشهرتها.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>الأماكن</guilabel
+></term>
+          <listitem
+><para
+>يعرض أماكن فورسكوير (Foursquare) الرائجة.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>علامة موضع</guilabel
+></term>
+          <listitem
+><para
+>يرسم علامة عند موقع GPS الحالي.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>الرموز البريدية</guilabel
+></term>
+          <listitem
+><para
+>يظهر الرموز البريدية للمنطقة على الخريطة.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>التوجيه</guilabel
+></term>
+          <listitem
+><para
+>يعرض معلومات التوجيه وعناصر التحكم في الملاحة.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>الأقمار الصناعية</guilabel
+></term>
+          <listitem
+><para
+>يعرض الأقمار الطبيعية والاصطناعية للأرض والكواكب الأخرى ومداراتها.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>شريط المقياس</guilabel
+></term>
+          <listitem
+><para
+>هذا عنصر عائم يوفر مقياس الخريطة.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>عداد سرعة</guilabel
+></term>
+          <listitem
+><para
+>يعرض سرعة الانطلاق الحالية. يحتاج إلى بعض بيانات نظام تحديد المواقع العالمي (GPS).</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>النجوم</guilabel
+></term>
+          <listitem
+><para
+>ملحق يظهر السماء المرصعة بالنجوم.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>الشمس</guilabel
+></term>
+          <listitem
+><para
+>ملحق يعرض الشمس</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>الطقس</guilabel
+></term>
+          <listitem
+><para
+>ينزل معلومات الطقس الحالية للمدن ويعرضها على الخريطة.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>مقالات ويكيبيديا</guilabel
+></term>
+          <listitem
+><para
+>ينزل مقالات ويكيبيديا آليًّا ويظهرها في الموضع الصحيح على الخريطة.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+  </chapter>
+
+  <chapter id="faq">
+  <title
+>أسئلة وأجوبة</title>
+
+    <qandaset id="faqlist">
+      <qandaentry>
+        <question>
+          <para
+>لا أستطيع رؤية منزلي على الخريطة / لماذا يجب أن أستخدم ماربل في وجود جوجل إيرث بالفعل؟</para>
+        </question>
+        <answer>
+          <para
+>يهدف ماربل إلى أن يكون متصفحًا جغرافيًا تعليميًا خفيفًا وسريعًا يعمل بسهولة على أي منصة مدعومة من Qt. في حين أن الخرائط عالية الدقة ستكون جيدة، إلا أنها ليست ضرورية لكل مستخدم وكل حالة استخدام (تمامًا مثلما لا تستخدم معالج نصوص كامل في كل مرة تحتاج فيها إلى محرر بسيط). لاحظ أيضًا أن ماربل برمجية حرة ويعتمد على بيانات يمكن إعادة توزيعها بحرية بنفس الطريقة التي تنطبق على البرمجيات الحرة.</para>
+        </answer>
+      </qandaentry>
+
+      <qandaentry>
+        <question>
+          <para
+>لماذا ماربل سريع جدًا رغم أنني لم أفعل تسريع العتاد؟ / لماذا لا يعمل ماربل بسلاسة على بطاقة الرسوميات ثلاثية الأبعاد الباهظة الخاصة بي؟</para>
+        </question>
+        <answer>
+          <para
+>على الرغم من تصوير الأرض ككرة، لا يستخدم ماربل أي تسريع عتادي ثلاثي الأبعاد. يمنحه هذا ميزة العمل بسرعة جيدة على أي منصة أو عتاد يدعمه Qt. ومع ذلك، فإن عيبه هو أنه لا يعمل بالسلاسة التي يمكن أن يحققها لو استخدم OpenGL المسرع عتاديًا. يستخدم ماربل رسوميات ثنائية الأبعاد بسيطة، وبالتالي يتطلب محول رسوميات سريعًا في رسم الرسوميات ثنائية الأبعاد. نخطط لإضافة واجهة خلفية اختيارية لـ OpenGL في المستقبل.</para>
+        </answer>
+      </qandaentry>
+
+      <qandaentry>
+        <question>
+          <para
+>هل سيتعين عليّ الدفع مقابل ماربل يومًا ما؟</para>
+        </question>
+        <answer>
+          <para
+>لا، أبدًا. لكن المؤلفين يرحبون دائمًا بالتعليقات. ماربل مرخص بموجب رخصة LGPL، لذا لن تضطر أبدًا لدفع ثمن هذا البرنامج.</para>
+        </answer>
+      </qandaentry>
+
+      <qandaentry>
+        <question>
+          <para
+>كيف يمكنني المساهمة؟</para>
+        </question>
+        <answer>
+          <para
+>ماربل ليس مجرد تطبيق ولكنه أيضًا مشروع برمجيات حرة. وبناءً على ذلك، من السهل الانضمام إليه: ما عليك سوى الاتصال بنا عبر القائمة البريدية لـ marble-devel ‏(marble-devel@kde.org).</para>
+        </answer>
+      </qandaentry>
+    </qandaset>
+  </chapter>
+
+  <chapter id="credits">
+  <title
+>الحقوق والترخيص</title>
+
+    <para
+>ماربل</para>
+
+    <para
+>حقوق نشر البرنامج، 2005-2007 &Torsten.Rahn; &Torsten.Rahn.mail;</para>
+
+    <para
+>المساهمون:</para>
+
+    <itemizedlist>
+      <listitem
+><para
+>&Torsten.Rahn; &Torsten.Rahn.mail;</para
+></listitem>
+      <listitem
+><para
+>Inge Wallin <email
+>inge@lysator.liu.se</email
+></para
+></listitem>
+    </itemizedlist>
+
+    <para
+>الترجمة: زايد السعيدي <email
+>zayed.alsaidi@gmail.com</email
+></para
+> &underFDL; &underLGPL; </chapter>
+
+  &documentation.index;
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+// vim:ts=2:sw=2:tw=78:noet:noai
+-->
