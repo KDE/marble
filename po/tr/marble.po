@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kdeedu-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:48+0000\n"
-"PO-Revision-Date: 2026-09-27 19:10+0300\n"
+"PO-Revision-Date: 2026-11-15 18:55+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 26.08.0\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -752,7 +752,7 @@ msgstr "Etiketlerin yerelleştirmesi."
 #: marble.kcfg:155
 #, kde-format
 msgid "The general font used on the map."
-msgstr "Harita üzerinde genel yazıtipini kullan."
+msgstr "Harita üzerinde genel yazı tipini kullan."
 
 #. i18n: ectx: label, entry (lastFileOpenDir), group (View)
 #: marble.kcfg:159
