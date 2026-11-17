@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2026-11-15 18:55+0300\n"
+"PO-Revision-Date: 2026-11-16 22:18+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -2407,7 +2407,7 @@ msgstr "Haritanın ekran görüntüsünü yazdır"
 #: src/apps/marble-qt/QtMainWindow.cpp:288
 msgctxt "Marble::MainWindow|"
 msgid "Print Previe&w ..."
-msgstr "Yazdırma &Önizleme…"
+msgstr "Yazdırma Ö&n İzlemesi…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:292
 msgctxt "Marble::MainWindow|"
@@ -5225,7 +5225,7 @@ msgstr "Düzenleyici Ayrıntıları"
 #: src/lib/marble/ExternalEditor.ui:81
 msgctxt "ExternalEditor|"
 msgid "Editor Preview"
-msgstr "Düzenleyici Önizleme"
+msgstr "Düzenleyici Ön İzleme"
 
 #: src/lib/marble/ExternalEditor.ui:103
 msgctxt "ExternalEditor|"
@@ -7692,7 +7692,7 @@ msgstr "Burada, farklı konuardan tercih edilmiş haritaları seçebilirsiniz."
 #: src/lib/marble/MapWizard.cpp:168
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
-msgstr "Harita Önizleme"
+msgstr "Harita Ön İzleme"
 
 #: src/lib/marble/MapWizard.cpp:287 src/lib/marble/MapWizard.cpp:291
 msgctxt "Marble::MapWizard|"
@@ -7740,7 +7740,7 @@ msgstr "Matris kümesi:"
 #: src/lib/marble/MapWizard.cpp:453 src/lib/marble/MapWizard.cpp:928
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
-msgstr "Görseli Önizle"
+msgstr "Görseli Ön İzle"
 
 #: src/lib/marble/MapWizard.cpp:457
 msgctxt "Marble::MapWizard|"
@@ -7856,7 +7856,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.cpp:928
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
-msgstr "Lütfen bir önizleme görseli belirtin."
+msgstr "Lütfen bir ön izleme görseli belirtin."
 
 #: src/lib/marble/MapWizard.cpp:1424
 msgctxt "Marble::MapWizard|"
@@ -8379,12 +8379,12 @@ msgstr "Bir ipucu balonu, HTML biçimlendirilmiş metin içerebilir."
 #: src/lib/marble/MapWizard.ui:788 src/lib/marble/MapWizard.ui:990
 msgctxt "MapWizard|"
 msgid "Preview Image:"
-msgstr "Görseli önizle:"
+msgstr "Görseli ön izle:"
 
 #: src/lib/marble/MapWizard.ui:803
 msgctxt "MapWizard|"
 msgid "preview image"
-msgstr "önizleme görseli"
+msgstr "ön izleme görseli"
 
 #: src/lib/marble/MapWizard.ui:825
 msgctxt "MapWizard|"
@@ -8472,7 +8472,7 @@ msgstr "Küçük Görsel"
 #: src/lib/marble/MapWizard.ui:1012
 msgctxt "MapWizard|"
 msgid "Preview Map"
-msgstr "Harita Önizleme"
+msgstr "Harita Ön İzleme"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:57
 msgctxt "QObject|"
@@ -13723,7 +13723,7 @@ msgstr "Tam &Yarıgölge"
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:124
 msgctxt "EclipsesConfigDialog|"
 msgid "Sunrise and Sunset &Boundaries"
-msgstr "Gündoğumu ve Günbatımı &Sınırları"
+msgstr "Gün Doğumu ve Gün Batımı &Sınırları"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:134
 msgctxt "EclipsesConfigDialog|"
@@ -14816,7 +14816,7 @@ msgstr "x"
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:178
 msgctxt "OverviewMapConfigWidget|"
 msgid "Preview"
-msgstr "Önizleme"
+msgstr "Ön İzleme"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:183
 msgctxt "OverviewMapConfigWidget|"
