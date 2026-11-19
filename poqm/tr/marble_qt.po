@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2026-11-16 22:18+0300\n"
+"PO-Revision-Date: 2026-11-18 19:24+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -2407,12 +2407,12 @@ msgstr "Haritanın ekran görüntüsünü yazdır"
 #: src/apps/marble-qt/QtMainWindow.cpp:288
 msgctxt "Marble::MainWindow|"
 msgid "Print Previe&w ..."
-msgstr "Yazdırma Ö&n İzlemesi…"
+msgstr "&Baskı Ön İzleme…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:292
 msgctxt "Marble::MainWindow|"
 msgid "&Quit"
-msgstr "&Çık"
+msgstr "Çı&k"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:293
 msgctxt "Marble::MainWindow|"
@@ -17500,7 +17500,7 @@ msgstr "Henüz bir çevrim dışı harita kurulmamış."
 #: src/plugins/runner/monav/MonavPlugin.cpp:220
 msgctxt "Marble::MonavPlugin|"
 msgid "The monav routing daemon does not seem to be installed on your system."
-msgstr "Monav rotalama ardalan süreci, sisteminizde kurulu görünmüyor."
+msgstr "Monav rotalama art alan süreci, sisteminizde kurulu görünmüyor."
 
 #: src/plugins/runner/monav/MonavPlugin.cpp:233
 msgctxt "Marble::MonavPlugin|"
@@ -17515,7 +17515,7 @@ msgstr "Monav"
 #: src/plugins/runner/monav/MonavPlugin.cpp:253
 msgctxt "Marble::MonavPlugin|"
 msgid "Offline routing using the monav daemon"
-msgstr "Monav ardalan sürecini kullanarak çevrim dışı rotalama"
+msgstr "Monav art alan sürecini kullanarak çevrim dışı rotalama"
 
 #: src/plugins/runner/nominatim-reversegeocoding/NominatimReverseGeocodingPlugin.cpp:22
 msgctxt "Marble::NominatimPlugin|"
