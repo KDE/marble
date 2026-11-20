@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2026-11-18 19:24+0300\n"
+"PO-Revision-Date: 2026-11-19 19:40+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -9756,9 +9756,9 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Bilye için kullanılan iki "
-"önbellek vardır: Harita verilerini bilgisayarın belleğinde tutmak için "
+"ön bellek vardır: Harita verilerini bilgisayarın belleğinde tutmak için "
 "gereken fiziksel bellek. Değeri artırmak, uygulamanın daha hızlı tepki "
-"verecektir. Sabit disk önbellekleri, İnternet’ten içeriği indirerek "
+"verecektir. Sabit disk ön bellekleri, İnternet’ten içeriği indirerek "
 "kullanılır (ör. Vikipedi verileri veya harita verileri). Sabit diskte yerden "
 "tasarruf etmek istiyorsanız ve İnternet’in yüksek kullanımı bir sorun "
 "değilse bu değeri azaltın.</p></body></html>"
@@ -9766,7 +9766,7 @@ msgstr ""
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:23
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "C&ache"
-msgstr "Ön&bellek"
+msgstr "Ö&n Bellek"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:41
 msgctxt "MarbleCacheSettingsWidget|"
@@ -11465,7 +11465,7 @@ msgstr "Dolaşım"
 #: src/lib/marble/QtMarbleConfigDialog.cpp:116
 msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Cache and Proxy"
-msgstr "Önbellek ve Vekil Sunucu"
+msgstr "Ön Bellek ve Vekil Sunucu"
 
 #: src/lib/marble/QtMarbleConfigDialog.cpp:124
 msgctxt "Marble::QtMarbleConfigDialog|"
@@ -14562,7 +14562,7 @@ msgstr "Genel"
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:36
 msgctxt "OpenCachingCacheDialog|"
 msgid "Cache name:"
-msgstr "Önbellek adı:"
+msgstr "Ön bellek adı:"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:56
 msgctxt "OpenCachingCacheDialog|"
@@ -14692,7 +14692,7 @@ msgstr "Bitiş:"
 #: src/plugins/render/opencaching/OpenCachingItem.cpp:173
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Cache name</td>"
-msgstr "<tr><td align=\"right\">Önbellek adı</td>"
+msgstr "<tr><td align=\"right\">Ön bellek adı</td>"
 
 #: src/plugins/render/opencaching/OpenCachingItem.cpp:174
 msgctxt "Marble::OpenCachingItem|"
@@ -14717,7 +14717,7 @@ msgstr "<tr><td align=\"right\">Boyut</td><td>"
 #: src/plugins/render/opencaching/OpenCachingPlugin.cpp:23
 msgctxt "Marble::OpenCachingPlugin|"
 msgid "Cache positions by opencaching.de."
-msgstr "Opencaching.de tarafından sağlanan önbellek konumları"
+msgstr "Opencaching.de tarafından sağlanan ön bellek konumları"
 
 #: src/plugins/render/opencaching/OpenCachingPlugin.cpp:46
 msgctxt "Marble::OpenCachingPlugin|"
@@ -14732,7 +14732,7 @@ msgstr "&OpenCaching"
 #: src/plugins/render/opencaching/OpenCachingPlugin.cpp:56
 msgctxt "Marble::OpenCachingPlugin|"
 msgid "Shows caches from OpenCaching.de on the screen."
-msgstr "OpenCachin.de üzerindeki önbellekleri ekranda göster."
+msgstr "OpenCachin.de üzerindeki ön bellekleri ekranda gösterin."
 
 #: src/plugins/render/opendesktop/OpenDesktopConfigWidget.ui:14
 msgctxt "OpenDesktopConfigWidget|"
@@ -16685,17 +16685,17 @@ msgstr ""
 #: src/plugins/runner/cache/CachePlugin.cpp:18
 msgctxt "Marble::CachePlugin|"
 msgid "Cache File Parser"
-msgstr "Önbellek Dosyası Ayrıştırıcı"
+msgstr "Ön Bellek Dosyası Ayrıştırıcı"
 
 #: src/plugins/runner/cache/CachePlugin.cpp:33
 msgctxt "Marble::CachePlugin|"
 msgid "Create GeoDataDocument from Cache Files"
-msgstr "Önbellek Dosyasından GeoDataDocument Oluştur"
+msgstr "Ön Bellek Dosyasından GeoDataDocument Oluştur"
 
 #: src/plugins/runner/cache/CachePlugin.cpp:48
 msgctxt "Marble::CachePlugin|"
 msgid "Marble Cache Files"
-msgstr "Bilye Önbellek Dosyaları"
+msgstr "Bilye Ön Bellek Dosyaları"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsConfigWidget.ui:20
 msgctxt "CycleStreetsConfigWidget|"
