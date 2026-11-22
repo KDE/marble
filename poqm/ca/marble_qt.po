@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2026-09-06 17:22+0200\n"
+"PO-Revision-Date: 2026-11-21 19:27+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -8124,7 +8124,7 @@ msgid ""
 "Ctrl, Ctrl+A, …)"
 msgstr ""
 "Activeu-ho per a seleccionar múltiples capes sense dreceres de teclat "
-"(Majúscules, Ctrl, Ctrl+A,…)"
+"(Majúscules, Ctrl, Ctrl+A…)"
 
 #: src/lib/marble/MapWizard.ui:300
 msgctxt "MapWizard|"
@@ -10445,7 +10445,7 @@ msgstr "Hora estàndard de Bangladesh"
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:118
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Vietnam Standard Time"
-msgstr "Hora estàndard de Vietnam"
+msgstr "Hora estàndard del Vietnam"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:123
 msgctxt "MarbleTimeSettingsWidget|"
@@ -10535,7 +10535,7 @@ msgstr "Hora de Newfoundland canadenc"
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:208
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Argentina Standard Time"
-msgstr "Hora estàndard d'Argentina"
+msgstr "Hora estàndard de l'Argentina"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:213
 msgctxt "MarbleTimeSettingsWidget|"
