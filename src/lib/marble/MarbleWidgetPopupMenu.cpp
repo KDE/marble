@@ -48,6 +48,7 @@
 #include <QApplication>
 #include <QClipboard>
 #include <QFile>
+#include <QLocale>
 #include <QMenu>
 #include <QMessageBox>
 #include <QMimeData>
@@ -398,7 +399,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogCity(PopupLayer *popup, const Ge
     doc[QStringLiteral("latitude")] = location.latToString();
     doc[QStringLiteral("longitude")] = location.lonToString();
     doc[QStringLiteral("elevation")] = QString::number(location.altitude(), 'f', 2);
-    doc[QStringLiteral("population")] = QString::number(placemark->population());
+    doc[QStringLiteral("population")] = QLocale().toString(placemark->population()).toHtmlEscaped();
     doc[QStringLiteral("country")] = placemark->countryCode();
     doc[QStringLiteral("state")] = placemark->state();
 
